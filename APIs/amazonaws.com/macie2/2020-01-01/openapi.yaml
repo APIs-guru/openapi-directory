@@ -333,7 +333,7 @@ paths:
                   items:
                     $ref: '#/components/schemas/__string'
                 description:
-                  description: A custom description of the job. The description can contain as many as 512 characters.
+                  description: A custom description of the job. The description can contain as many as 200 characters.
                   type: string
                 initialRun:
                   description: 'Specifies whether to run the job immediately, after it''s created.'
@@ -345,7 +345,7 @@ paths:
                     - ONE_TIME
                     - SCHEDULED
                 name:
-                  description: A custom name for the job. The name must contain at least 3 characters and can contain as many as 64 characters.
+                  description: A custom name for the job. The name can contain as many as 500 characters.
                   type: string
                 s3JobDefinition:
                   description: 'Specifies which S3 buckets contain the objects that a classification job analyzes, and the scope of that analysis.'
@@ -356,7 +356,7 @@ paths:
                       description: 'An array of objects, one for each bucket that contains objects to analyze.'
                     scoping:
                       $ref: '#/components/schemas/Scoping'
-                      description: A JobScopeTerm object that specifies conditions for including or excluding objects from the job.
+                      description: The property- and tag-based conditions that determine which objects to include or exclude from the analysis.
                 samplingPercentage:
                   description: 'The sampling depth, as a percentage, to apply when processing objects. This value determines the percentage of eligible objects that the job analyzes. If the value is less than 100, Amazon Macie randomly selects the objects to analyze, up to the specified percentage.'
                   type: integer
@@ -366,13 +366,13 @@ paths:
                   properties:
                     dailySchedule:
                       $ref: '#/components/schemas/DailySchedule'
-                      description: 'Run the job once a day, every day. If specified, this is an empty object.'
+                      description: Specifies a daily recurrence pattern for running the job.
                     monthlySchedule:
                       $ref: '#/components/schemas/MonthlySchedule'
-                      description: 'Run the job once a month, on a specific day of the month. This value can be an integer from 1 through 30.'
+                      description: Specifies a monthly recurrence pattern for running the job.
                     weeklySchedule:
                       $ref: '#/components/schemas/WeeklySchedule'
-                      description: 'Run the job once a week, on a specific day of the week. Valid values are: MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, and SUNDAY.'
+                      description: Specifies a weekly recurrence pattern for running the job.
                 tags:
                   description: 'A string-to-string map of key-value pairs that specifies the tags (keys and values) for a classification job, custom data identifier, findings filter, or member account.'
                   type: object
@@ -451,7 +451,7 @@ paths:
                   description: 'A unique, case-sensitive token that you provide to ensure the idempotency of the request.'
                   type: string
                 description:
-                  description: '<p>A custom description of the custom data identifier. The description can contain up to 120 characters.</p> <p>We strongly recommend that you avoid including any sensitive data in the description of a custom data identifier. Other users of your account might be able to see the identifier''s description, depending on the actions that they''re allowed to perform in Amazon Macie.</p>'
+                  description: '<p>A custom description of the custom data identifier. The description can contain as many as 512 characters.</p> <p>We strongly recommend that you avoid including any sensitive data in the description of a custom data identifier. Other users of your account might be able to see the identifier''s description, depending on the actions that they''re allowed to perform in Amazon Macie.</p>'
                   type: string
                 ignoreWords:
                   description: 'An array that lists specific character sequences (ignore words) to exclude from the results. If the text matched by the regular expression is the same as any string in this array, Amazon Macie ignores it. The array can contain as many as 10 ignore words. Each ignore word can contain 4 - 90 characters.'
@@ -467,10 +467,10 @@ paths:
                   description: The maximum number of characters that can exist between text that matches the regex pattern and the character sequences specified by the keywords array. Macie includes or excludes a result based on the proximity of a keyword to text that matches the regex pattern. The distance can be 1 - 300 characters. The default value is 50.
                   type: integer
                 name:
-                  description: '<p>A custom name for the custom data identifier. The name can contain as many as 120 characters.</p> <p>We strongly recommend that you avoid including any sensitive data in the name of a custom data identifier. Other users of your account might be able to see the identifier''s name, depending on the actions that they''re allowed to perform in Amazon Macie.</p>'
+                  description: '<p>A custom name for the custom data identifier. The name can contain as many as 128 characters.</p> <p>We strongly recommend that you avoid including any sensitive data in the name of a custom data identifier. Other users of your account might be able to see the identifier''s name, depending on the actions that they''re allowed to perform in Amazon Macie.</p>'
                   type: string
                 regex:
-                  description: The regular expression (regex) that defines the pattern to match. The expression can contain as many as 500 characters.
+                  description: The regular expression (<i>regex</i>) that defines the pattern to match. The expression can contain as many as 512 characters.
                   type: string
                 tags:
                   description: 'A string-to-string map of key-value pairs that specifies the tags (keys and values) for a classification job, custom data identifier, findings filter, or member account.'
@@ -1116,7 +1116,7 @@ paths:
   '/custom-data-identifiers/{id}':
     delete:
       operationId: DeleteCustomDataIdentifier
-      description: Deletes a custom data identifier.
+      description: Soft deletes a custom data identifier.
       responses:
         '200':
           description: Success
@@ -1711,7 +1711,19 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ConflictException'
-      parameters: []
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
       requestBody:
         required: true
         content:
@@ -1885,7 +1897,7 @@ paths:
                 - jobStatus
               properties:
                 jobStatus:
-                  description: 'The current status of a classification job. Valid values are:'
+                  description: 'The current status of a classification job. Possible values are:'
                   type: string
                   enum:
                     - RUNNING
@@ -2911,7 +2923,7 @@ paths:
                   description: The maximum number of items to include in each page of the response.
                   type: integer
                 sortCriteria:
-                  description: Specifies criteria for sorting the results of a query for information about findings.
+                  description: Specifies criteria for sorting the results of a query that retrieves aggregated statistical data about findings.
                   type: object
                   properties:
                     attributeName:
@@ -3191,7 +3203,19 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ConflictException'
-      parameters: []
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
       requestBody:
         required: true
         content:
@@ -3293,7 +3317,7 @@ paths:
   /jobs/list:
     post:
       operationId: ListClassificationJobs
-      description: Retrieves information about the status and settings for one or more classification jobs.
+      description: Retrieves a subset of information about one or more classification jobs.
       responses:
         '200':
           description: Success
@@ -3343,7 +3367,19 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ConflictException'
-      parameters: []
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
       requestBody:
         required: true
         content:
@@ -3438,7 +3474,19 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ConflictException'
-      parameters: []
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
       requestBody:
         required: true
         content:
@@ -3513,7 +3561,19 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ConflictException'
-      parameters: []
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
       requestBody:
         required: true
         content:
@@ -3687,7 +3747,7 @@ paths:
                   description: The maximum number of characters that can exist between text that matches the regex pattern and the character sequences specified by the keywords array. Macie includes or excludes a result based on the proximity of a keyword to text that matches the regex pattern. The distance can be 1 - 300 characters. The default value is 50.
                   type: integer
                 regex:
-                  description: The regular expression (regex) that defines the pattern to match. The expression can contain as many as 500 characters.
+                  description: The regular expression (<i>regex</i>) that defines the pattern to match. The expression can contain as many as 512 characters.
                   type: string
                 sampleText:
                   description: 'The sample text to inspect by using the custom data identifier. The text can contain as many as 1,000 characters.'
@@ -3908,29 +3968,29 @@ components:
       properties:
         excludes:
           $ref: '#/components/schemas/JobScopingBlock'
-          description: Reserved for future use.
+          description: The property- or tag-based conditions that determine which objects to exclude from the analysis.
         includes:
           $ref: '#/components/schemas/JobScopingBlock'
-          description: Reserved for future use.
-      description: An object that specifies conditions for including or excluding objects from the job.
+          description: The property- or tag-based conditions that determine which objects to include in the analysis.
+      description: Specifies one or more property- and tag-based conditions that refine the scope of a classification job. These conditions define criteria that determine which objects a job analyzes.
     DailySchedule:
       type: object
       properties: {}
-      description: 'Run the job once a day, every day. If specified, this is an empty object.'
+      description: 'Specifies that a classification job runs once a day, every day. This is an empty object.'
     MonthlySchedule:
       type: object
       properties:
         dayOfMonth:
           $ref: '#/components/schemas/__integer'
-          description: 'Run the job once a month, on a specific day of the month. This value can be an integer from 1 through 30.'
-      description: 'Run the job once a month, on a specific day of the month. This value can be an integer from 1 through 30.'
+          description: The numeric day of the month when Amazon Macie runs the job. This value can be an integer from 1 through 30.
+      description: Specifies a monthly recurrence pattern for running a classification job.
     WeeklySchedule:
       type: object
       properties:
         dayOfWeek:
           $ref: '#/components/schemas/DayOfWeek'
-          description: 'Run the job once a week, on a specific day of the week. Valid values are: MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, and SUNDAY.'
-      description: Reserved for future use.
+          description: The day of the week when Amazon Macie runs the job.
+      description: Specifies a weekly recurrence pattern for running a classification job.
     CreateCustomDataIdentifierResponse:
       type: object
       properties:
@@ -4066,10 +4126,10 @@ components:
           description: The unique identifier for the job.
         jobStatus:
           $ref: '#/components/schemas/JobStatus'
-          description: '<p>The current status of the job. Possible value are:</p> <ul><li><p>CANCELLED - The job was cancelled by you or a user of the master account for your organization. A job might also be cancelled if ownership of an S3 bucket changed while the job was running, and that change affected the job''s access to the bucket.</p></li> <li><p>COMPLETE - Amazon Macie finished processing all the data specified for the job.</p></li> <li><p>IDLE - For a recurring job, the previous scheduled run is complete and the next scheduled run is pending. This value doesn''t apply to jobs that occur only once.</p></li> <li><p>PAUSED - Amazon Macie started the job, but completion of the job would exceed one or more quotas for your account.</p></li> <li><p>RUNNING - The job is in progress.</p></li></ul>'
+          description: '<p>The current status of the job. Possible values are:</p> <ul><li><p>CANCELLED - The job was cancelled by you or a user of the master account for your organization. A job might also be cancelled if ownership of an S3 bucket changed while the job was running, and that change affected the job''s access to the bucket.</p></li> <li><p>COMPLETE - Amazon Macie finished processing all the data specified for the job.</p></li> <li><p>IDLE - For a recurring job, the previous scheduled run is complete and the next scheduled run is pending. This value doesn''t apply to jobs that occur only once.</p></li> <li><p>PAUSED - Amazon Macie started the job, but completion of the job would exceed one or more quotas for your account.</p></li> <li><p>RUNNING - The job is in progress.</p></li></ul>'
         jobType:
           $ref: '#/components/schemas/JobType'
-          description: '<p>The schedule for running the job. Possible value are:</p> <ul><li><p>ONE_TIME - The job ran or will run only once.</p></li> <li><p>SCHEDULED - The job runs on a daily, weekly, or monthly basis. The scheduleFrequency property indicates the recurrence pattern for the job.</p></li></ul>'
+          description: '<p>The schedule for running the job. Possible values are:</p> <ul><li><p>ONE_TIME - The job ran or will run only once.</p></li> <li><p>SCHEDULED - The job runs on a daily, weekly, or monthly basis. The scheduleFrequency property indicates the recurrence pattern for the job.</p></li></ul>'
         lastRunTime:
           $ref: '#/components/schemas/__timestampIso8601'
           description: 'The date and time, in UTC and extended ISO 8601 format, when the job last ran.'
@@ -4084,7 +4144,7 @@ components:
           description: 'The sampling depth, as a percentage, that the job applies when it processes objects.'
         scheduleFrequency:
           $ref: '#/components/schemas/JobScheduleFrequency'
-          description: 'The recurrence pattern for running the job. If the job is configured to run every day, this value is an empty dailySchedule object. If the job is configured to run only once, this value is null.'
+          description: 'The recurrence pattern for running the job. If the job is configured to run only once, this value is null.'
         statistics:
           $ref: '#/components/schemas/Statistics'
           description: The number of times that the job has run and processing statistics for the job's most recent run.
@@ -4126,16 +4186,16 @@ components:
           description: The total number of buckets.
         bucketCountByEffectivePermission:
           $ref: '#/components/schemas/BucketCountByEffectivePermission'
-          description: 'The total number of buckets that are publicly accessible, based on a combination of permissions settings for each bucket.'
+          description: The total number of buckets that are publicly accessible based on a combination of permissions settings for each bucket.
         bucketCountByEncryptionType:
           $ref: '#/components/schemas/BucketCountByEncryptionType'
           description: 'The total number of buckets, grouped by server-side encryption type. This object also reports the total number of buckets that aren''t encrypted.'
         bucketCountBySharedAccessType:
           $ref: '#/components/schemas/BucketCountBySharedAccessType'
-          description: The total number of buckets that are shared with another AWS account or configured to support cross-origin resource sharing (CORS).
+          description: The total number of buckets that are shared with another AWS account.
         classifiableObjectCount:
           $ref: '#/components/schemas/__long'
-          description: 'The total number of objects that Amazon Macie can monitor and analyze in all the buckets. These objects use a file format, file extension, or content type that Amazon Macie supports.'
+          description: 'The total number of objects that Amazon Macie can analyze in all the buckets. These objects use a file format, file extension, or content type that Amazon Macie supports.'
         lastUpdated:
           $ref: '#/components/schemas/__timestampIso8601'
           description: 'The date and time, in UTC and extended ISO 8601 format, when Amazon Macie last analyzed the buckets.'
@@ -4186,7 +4246,7 @@ components:
           description: The custom name of the custom data identifier.
         regex:
           $ref: '#/components/schemas/__string'
-          description: The regular expression (regex) that defines the pattern to match.
+          description: The regular expression (<i>regex</i>) that defines the pattern to match.
         tags:
           $ref: '#/components/schemas/TagMap'
           description: A map of key-value pairs that identifies the tags (keys and values) that are associated with the custom data identifier.
@@ -4252,7 +4312,7 @@ components:
           description: The frequency with which Amazon Macie publishes updates to policy findings for the account. This includes publishing updates to AWS Security Hub and Amazon EventBridge (formerly called Amazon CloudWatch Events).
         serviceRole:
           $ref: '#/components/schemas/__string'
-          description: The Amazon Resource Name (ARN) of the service-level role that allows Amazon Macie to monitor and analyze data in AWS resources for the account.
+          description: The Amazon Resource Name (ARN) of the service-linked role that allows Amazon Macie to monitor and analyze data in AWS resources for the account.
         status:
           $ref: '#/components/schemas/MacieStatus'
           description: 'The current status of the Amazon Macie account. Possible values are: PAUSED, the account is enabled but all Amazon Macie activities are suspended (paused) for the account; and, ENABLED, the account is enabled and all Amazon Macie activities are enabled for the account.'
@@ -4316,7 +4376,7 @@ components:
       enum:
         - accountId
         - total
-      description: The field to use to sort the results of a query for account quotas and usage data.
+      description: 'The field to use to sort the results of a query for account quotas and usage data. Valid values are:'
     GetUsageTotalsResponse:
       type: object
       properties:
@@ -4424,7 +4484,7 @@ components:
           description: The path prefix to use in the path to the location in the bucket. This prefix specifies where to store classification results in the bucket.
         kmsKeyArn:
           $ref: '#/components/schemas/__string'
-          description: The Amazon Resource Name (ARN) of the AWS Key Management Service customer master key (CMK) to use for encryption of the results. This must be the ARN of an existing CMK that's in the same AWS Region as the bucket.
+          description: The Amazon Resource Name (ARN) of the AWS Key Management Service (AWS KMS) customer master key (CMK) to use for encryption of the results. This must be the ARN of an existing CMK that's in the same AWS Region as the bucket.
       description: 'Specifies an S3 bucket to store data classification results in, and the encryption settings to use when storing results in that bucket.'
     TagResourceResponse:
       type: object
@@ -4544,17 +4604,17 @@ components:
       properties:
         api:
           $ref: '#/components/schemas/__string'
-          description: Reserved for future use.
+          description: The name of the operation that was invoked most recently and produced the finding.
         apiServiceName:
           $ref: '#/components/schemas/__string'
-          description: Reserved for future use.
+          description: 'The URL of the AWS service that provides the operation, for example: s3.amazonaws.com.'
         firstSeen:
           $ref: '#/components/schemas/__timestampIso8601'
-          description: Reserved for future use.
+          description: 'The first date and time, in UTC and extended ISO 8601 format, when any operation was invoked and produced the finding.'
         lastSeen:
           $ref: '#/components/schemas/__timestampIso8601'
-          description: Reserved for future use.
-      description: Reserved for future use.
+          description: 'The most recent date and time, in UTC and extended ISO 8601 format, when the specified operation (api) was invoked and produced the finding.'
+      description: Provides information about an API operation that an entity invoked for an affected resource.
     SessionContext:
       type: object
       properties:
@@ -4563,44 +4623,44 @@ components:
           description: 'The date and time when the credentials were issued, and whether the credentials were authenticated with a multi-factor authentication (MFA) device.'
         sessionIssuer:
           $ref: '#/components/schemas/SessionIssuer'
-          description: The source and type of credentials that the entity obtained.
+          description: The source and type of credentials that were issued to the entity.
       description: Provides information about a session that was created for an entity that performed an action by using temporary security credentials.
     AssumedRole:
       type: object
       properties:
         accessKeyId:
           $ref: '#/components/schemas/__string'
-          description: Reserved for future use.
+          description: The AWS access key ID that identifies the credentials.
         accountId:
           $ref: '#/components/schemas/__string'
-          description: Reserved for future use.
+          description: The unique identifier for the AWS account that owns the entity that was used to get the credentials.
         arn:
           $ref: '#/components/schemas/__string'
-          description: Reserved for future use.
+          description: The Amazon Resource Name (ARN) of the entity that was used to get the credentials.
         principalId:
           $ref: '#/components/schemas/__string'
-          description: Reserved for future use.
+          description: The unique identifier for the entity that was used to get the credentials.
         sessionContext:
           $ref: '#/components/schemas/SessionContext'
-          description: Reserved for future use.
-      description: Reserved for future use.
+          description: 'The details of the session that was created for the credentials, including the entity that issued the session.'
+      description: Provides information about an identity that performed an action on an affected resource by using temporary security credentials. The credentials were obtained using the AssumeRole operation of the AWS Security Token Service (AWS STS) API.
     AwsAccount:
       type: object
       properties:
         accountId:
           $ref: '#/components/schemas/__string'
-          description: Reserved for future use.
+          description: The unique identifier for the AWS account.
         principalId:
           $ref: '#/components/schemas/__string'
-          description: Reserved for future use.
-      description: Reserved for future use.
+          description: The unique identifier for the entity that performed the action.
+      description: Provides information about an AWS account and entity that performed an action on an affected resource. The action was performed using the credentials for an AWS account other than your own account.
     AwsService:
       type: object
       properties:
         invokedBy:
           $ref: '#/components/schemas/__string'
-          description: Reserved for future use.
-      description: Reserved for future use.
+          description: The name of the AWS service that performed the action.
+      description: Provides information about an AWS service that performed an action on an affected resource.
     BatchGetCustomDataIdentifierSummary:
       type: object
       properties:
@@ -4645,40 +4705,40 @@ components:
       properties:
         publiclyAccessible:
           $ref: '#/components/schemas/__long'
-          description: Reserved for future use.
+          description: The total number of buckets that allow the general public to have read or write access to the bucket.
         publiclyReadable:
           $ref: '#/components/schemas/__long'
-          description: Reserved for future use.
+          description: The total number of buckets that allow the general public to have read access to the bucket.
         publiclyWritable:
           $ref: '#/components/schemas/__long'
-          description: Reserved for future use.
-      description: 'The total number of buckets that are publicly accessible, based on a combination of permissions settings for each bucket.'
+          description: The total number of buckets that allow the general public to have write access to the bucket.
+      description: Provides information about the number of S3 buckets that are publicly accessible based on a combination of permissions settings for each bucket.
     BucketCountByEncryptionType:
       type: object
       properties:
         kmsManaged:
           $ref: '#/components/schemas/__long'
-          description: Reserved for future use.
+          description: ' <p>The total number of buckets that use an AWS Key Management Service (AWS KMS) customer master key (CMK) to encrypt objects. These buckets use AWS KMS AWS-managed (AWS-KMS) encryption or AWS KMS customer-managed (SSE-KMS) encryption.</p>'
         s3Managed:
           $ref: '#/components/schemas/__long'
-          description: Reserved for future use.
+          description: The total number of buckets that use an Amazon S3-managed key to encrypt objects. These buckets use Amazon S3-managed (SSE-S3) encryption.
         unencrypted:
           $ref: '#/components/schemas/__long'
-          description: Reserved for future use.
-      description: 'The total number of buckets, grouped by server-side encryption type. This object also reports the total number of buckets that aren''t encrypted.'
+          description: The total number of buckets that don't encrypt objects by default. Default encryption is disabled for these buckets.
+      description: Provides information about the number of S3 buckets that use certain types of server-side encryption or don't encrypt objects by default.
     BucketCountBySharedAccessType:
       type: object
       properties:
         external:
           $ref: '#/components/schemas/__long'
-          description: Reserved for future use.
+          description: The total number of buckets that are shared with an AWS account that isn't part of the same Amazon Macie organization.
         internal:
           $ref: '#/components/schemas/__long'
-          description: Reserved for future use.
+          description: The total number of buckets that are shared with an AWS account that's part of the same Amazon Macie organization.
         notShared:
           $ref: '#/components/schemas/__long'
-          description: Reserved for future use.
-      description: The total number of buckets that are shared with another AWS account or configured to support cross-origin resource sharing (CORS).
+          description: The total number of buckets that aren't shared with any other AWS accounts.
+      description: Provides information about the number of S3 buckets that are shared with other AWS accounts.
     BucketCriteria:
       type: object
       description: 'Specifies, as a map, one or more attribute-based conditions that filter the results of a query for information about S3 buckets.'
@@ -4773,7 +4833,7 @@ components:
           description: The name of the bucket.
         classifiableObjectCount:
           $ref: '#/components/schemas/__long'
-          description: 'The total number of objects that Amazon Macie can monitor and analyze in the bucket. These objects use a file format, file extension, or content type that Amazon Macie supports.'
+          description: 'The total number of objects that Amazon Macie can analyze in the bucket. These objects use a file format, file extension, or content type that Amazon Macie supports.'
         lastUpdated:
           $ref: '#/components/schemas/__timestampIso8601'
           description: 'The date and time, in UTC and extended ISO 8601 format, when Amazon Macie last analyzed the bucket.'
@@ -4794,7 +4854,7 @@ components:
           description: 'Specifies whether the bucket is configured to replicate one or more objects to buckets for other AWS accounts and, if so, which accounts.'
         sharedAccess:
           $ref: '#/components/schemas/SharedAccess'
-          description: '<p>Specifies whether the bucket is shared with another AWS account or configured to support cross-origin resource sharing (CORS). Valid values are:</p> <ul><li><p>EXTERNAL - The bucket is shared with an AWS account that isn’t part of the Amazon Macie organization.</p></li> <li><p>INTERNAL - The bucket is shared with an AWS account that''s part of the Amazon Macie organization.</p></li> <li><p>NOT_SHARED - The bucket isn''t shared with other AWS accounts.</p></li></ul>'
+          description: '<p>Specifies whether the bucket is shared with another AWS account. Valid values are:</p> <ul><li><p>EXTERNAL - The bucket is shared with an AWS account that isn’t part of the same Amazon Macie organization.</p></li> <li><p>INTERNAL - The bucket is shared with an AWS account that''s part of the same Amazon Macie organization.</p></li> <li><p>NOT_SHARED - The bucket isn''t shared with other AWS accounts.</p></li></ul>'
         sizeInBytes:
           $ref: '#/components/schemas/__long'
           description: 'The total storage size, in bytes, of the bucket.'
@@ -4817,7 +4877,7 @@ components:
         bucketLevelPermissions:
           $ref: '#/components/schemas/BucketLevelPermissions'
           description: The bucket-level permissions settings for the bucket.
-      description: 'The account-level and bucket-level permissions settings for an S3 bucket, or the bucket that contains an object.'
+      description: The account-level and bucket-level permissions settings for an S3 bucket.
     EffectivePermission:
       type: string
       enum:
@@ -4851,7 +4911,7 @@ components:
         status:
           $ref: '#/components/schemas/ClassificationResultStatus'
           description: The status of the finding.
-      description: 'Provides detailed information about a sensitive data finding, including the types and number of occurrences of the data that was found.'
+      description: 'Provides detailed information about a sensitive data finding, including the types and number of occurrences of the sensitive data that was found.'
     ClassificationDetails:
       type: object
       properties:
@@ -4880,7 +4940,7 @@ components:
       properties:
         detections:
           $ref: '#/components/schemas/CustomDetections'
-          description: 'The names of the custom data identifiers that detected the data, and the number of occurrences of the data that each identifier detected.'
+          description: 'The custom data identifiers that detected the data, and the number of occurrences of the data that each identifier detected.'
         totalCount:
           $ref: '#/components/schemas/__long'
           description: The total number of occurrences of the data that was detected by the custom data identifiers and produced the finding.
@@ -4914,7 +4974,7 @@ components:
           description: 'An array of objects, one for each bucket that contains objects to analyze.'
         scoping:
           $ref: '#/components/schemas/Scoping'
-          description: A JobScopeTerm object that specifies conditions for including or excluding objects from the job.
+          description: The property- and tag-based conditions that determine which objects to include or exclude from the analysis.
       description: 'Specifies which S3 buckets contain the objects that a classification job analyzes, and the scope of that analysis.'
     __integer:
       type: integer
@@ -4923,13 +4983,13 @@ components:
       properties:
         dailySchedule:
           $ref: '#/components/schemas/DailySchedule'
-          description: 'Run the job once a day, every day. If specified, this is an empty object.'
+          description: Specifies a daily recurrence pattern for running the job.
         monthlySchedule:
           $ref: '#/components/schemas/MonthlySchedule'
-          description: 'Run the job once a month, on a specific day of the month. This value can be an integer from 1 through 30.'
+          description: Specifies a monthly recurrence pattern for running the job.
         weeklySchedule:
           $ref: '#/components/schemas/WeeklySchedule'
-          description: 'Run the job once a week, on a specific day of the week. Valid values are: MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, and SUNDAY.'
+          description: Specifies a weekly recurrence pattern for running the job.
       description: Specifies the recurrence pattern for running a classification job.
     TagMap:
       type: object
@@ -4953,7 +5013,7 @@ components:
           description: The custom data identifiers to use for data analysis and classification.
         description:
           $ref: '#/components/schemas/__string'
-          description: A custom description of the job. The description can contain as many as 512 characters.
+          description: A custom description of the job. The description can contain as many as 200 characters.
         initialRun:
           $ref: '#/components/schemas/__boolean'
           description: 'Specifies whether to run the job immediately, after it''s created.'
@@ -4962,7 +5022,7 @@ components:
           description: '<p>The schedule for running the job. Valid values are:</p> <ul><li><p>ONE_TIME - Run the job only once. If you specify this value, don''t specify a value for the scheduleFrequency property.</p></li> <li><p>SCHEDULED - Run the job on a daily, weekly, or monthly basis. If you specify this value, use the scheduleFrequency property to define the recurrence pattern for the job.</p></li></ul>'
         name:
           $ref: '#/components/schemas/__string'
-          description: A custom name for the job. The name must contain at least 3 characters and can contain as many as 64 characters.
+          description: A custom name for the job. The name can contain as many as 500 characters.
         s3JobDefinition:
           $ref: '#/components/schemas/S3JobDefinition'
           description: 'The S3 buckets that contain the objects to analyze, and the scope of that analysis.'
@@ -4984,7 +5044,7 @@ components:
           description: 'A unique, case-sensitive token that you provide to ensure the idempotency of the request.'
         description:
           $ref: '#/components/schemas/__string'
-          description: '<p>A custom description of the custom data identifier. The description can contain up to 120 characters.</p> <p>We strongly recommend that you avoid including any sensitive data in the description of a custom data identifier. Other users of your account might be able to see the identifier''s description, depending on the actions that they''re allowed to perform in Amazon Macie.</p>'
+          description: '<p>A custom description of the custom data identifier. The description can contain as many as 512 characters.</p> <p>We strongly recommend that you avoid including any sensitive data in the description of a custom data identifier. Other users of your account might be able to see the identifier''s description, depending on the actions that they''re allowed to perform in Amazon Macie.</p>'
         ignoreWords:
           $ref: '#/components/schemas/__listOf__string'
           description: 'An array that lists specific character sequences (ignore words) to exclude from the results. If the text matched by the regular expression is the same as any string in this array, Amazon Macie ignores it. The array can contain as many as 10 ignore words. Each ignore word can contain 4 - 90 characters.'
@@ -4996,10 +5056,10 @@ components:
           description: The maximum number of characters that can exist between text that matches the regex pattern and the character sequences specified by the keywords array. Macie includes or excludes a result based on the proximity of a keyword to text that matches the regex pattern. The distance can be 1 - 300 characters. The default value is 50.
         name:
           $ref: '#/components/schemas/__string'
-          description: '<p>A custom name for the custom data identifier. The name can contain as many as 120 characters.</p> <p>We strongly recommend that you avoid including any sensitive data in the name of a custom data identifier. Other users of your account might be able to see the identifier''s name, depending on the actions that they''re allowed to perform in Amazon Macie.</p>'
+          description: '<p>A custom name for the custom data identifier. The name can contain as many as 128 characters.</p> <p>We strongly recommend that you avoid including any sensitive data in the name of a custom data identifier. Other users of your account might be able to see the identifier''s name, depending on the actions that they''re allowed to perform in Amazon Macie.</p>'
         regex:
           $ref: '#/components/schemas/__string'
-          description: The regular expression (regex) that defines the pattern to match. The expression can contain as many as 500 characters.
+          description: The regular expression (<i>regex</i>) that defines the pattern to match. The expression can contain as many as 512 characters.
         tags:
           $ref: '#/components/schemas/TagMap'
           description: <p>A map of key-value pairs that specifies the tags to associate with the custom data identifier.</p> <p>A custom data identifier can have a maximum of 50 tags. Each tag consists of a required tag key and an associated tag value. The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256 characters.</p>
@@ -5135,7 +5195,7 @@ components:
       description: Provides information about a custom data identifier.
     CustomDetections:
       type: array
-      description: Reserved for future use.
+      description: 'Provides information about custom data identifiers that produced a sensitive data finding, and the number of occurrences of the data that each identifier detected.'
       items:
         $ref: '#/components/schemas/CustomDetection'
     CustomDetection:
@@ -5179,10 +5239,10 @@ components:
         type:
           $ref: '#/components/schemas/__string'
           description: 'The type of data that was detected. For example, AWS_CREDENTIALS, PHONE_NUMBER, or ADDRESS.'
-      description: Provides information about sensitive data that was detected by managed data identifiers and produced a finding.
+      description: Provides information about sensitive data that was detected by managed data identifiers and produced a sensitive data finding.
     DefaultDetections:
       type: array
-      description: Reserved for future use.
+      description: 'Provides information about sensitive data that was detected by managed data identifiers and produced a sensitive data finding, and the number of occurrences of each type of sensitive data that was detected.'
       items:
         $ref: '#/components/schemas/DefaultDetection'
     DeleteCustomDataIdentifierRequest:
@@ -5238,7 +5298,7 @@ components:
         - CANCELLED
         - COMPLETE
         - IDLE
-      description: 'The current status of a classification job. Valid values are:'
+      description: 'The current status of a classification job. Possible values are:'
     Statistics:
       type: object
       properties:
@@ -5274,8 +5334,8 @@ components:
       properties:
         domainName:
           $ref: '#/components/schemas/__string'
-          description: Reserved for future use.
-      description: The DNS name of the entity that performed the action on the affected resource.
+          description: The name of the domain.
+      description: Provides information about the domain name of the device that an entity used to perform an action on an affected resource.
     FindingPublishingFrequency:
       type: string
       enum:
@@ -5321,7 +5381,7 @@ components:
         - AES256
         - 'aws:kms'
         - UNKNOWN
-      description: 'The server-side encryption algorithm that''s used when storing the S3 bucket or object. Valid values are:'
+      description: 'The type of server-side encryption that''s used to encrypt objects in the S3 bucket. Valid values are:'
     ErrorCode:
       type: string
       enum:
@@ -5333,20 +5393,20 @@ components:
       properties:
         accessKeyId:
           $ref: '#/components/schemas/__string'
-          description: Reserved for future use.
+          description: The AWS access key ID that identifies the credentials.
         accountId:
           $ref: '#/components/schemas/__string'
-          description: Reserved for future use.
+          description: The unique identifier for the AWS account that owns the entity that was used to get the credentials.
         arn:
           $ref: '#/components/schemas/__string'
-          description: Reserved for future use.
+          description: The Amazon Resource Name (ARN) of the entity that was used to get the credentials.
         principalId:
           $ref: '#/components/schemas/__string'
-          description: Reserved for future use.
+          description: The unique identifier for the entity that was used to get the credentials.
         sessionContext:
           $ref: '#/components/schemas/SessionContext'
-          description: Reserved for future use.
-      description: Reserved for future use.
+          description: 'The details of the session that was created for the credentials, including the entity that issued the session.'
+      description: Provides information about an identity that performed an action on an affected resource by using temporary security credentials. The credentials were obtained using the GetFederationToken operation of the AWS Security Token Service (AWS STS) API.
     FindingCategory:
       type: string
       enum:
@@ -5358,11 +5418,11 @@ components:
       properties:
         action:
           $ref: '#/components/schemas/FindingAction'
-          description: The action that occurred and produced the finding.
+          description: The action that produced the finding.
         actor:
           $ref: '#/components/schemas/FindingActor'
           description: The entity that performed the action that produced the finding.
-      description: Provides detailed information about a policy finding.
+      description: Provides the details of a policy finding.
     ResourcesAffected:
       type: object
       properties:
@@ -5388,7 +5448,7 @@ components:
       properties:
         accountId:
           $ref: '#/components/schemas/__string'
-          description: The identifier for the AWS account that the finding applies to. This is typically the account that owns the affected resource.
+          description: The unique identifier for the AWS account that the finding applies to. This is typically the account that owns the affected resource.
         archived:
           $ref: '#/components/schemas/__boolean'
           description: Specifies whether the finding is archived.
@@ -5445,7 +5505,7 @@ components:
       type: string
       enum:
         - AWS_API_CALL
-      description: The type of action that occurred for the resource and produced the policy finding.
+      description: 'The type of action that occurred for the resource and produced the policy finding:'
     FindingAction:
       type: object
       properties:
@@ -5454,57 +5514,64 @@ components:
           description: 'The type of action that occurred for the affected resource. This value is typically AWS_API_CALL, which indicates that an entity invoked an API operation for the resource.'
         apiCallDetails:
           $ref: '#/components/schemas/ApiCallDetails'
-          description: '<p>For the affected resource:</p> <ul><li><p>The name of the operation that was invoked most recently and produced the finding (api).</p></li> <li><p>The first date and time when any operation was invoked and produced the finding (firstSeen).</p></li> <li><p>The most recent date and time when the specified operation was invoked and produced the finding (lastSeen).</p></li></ul> <p>All date and time values are in UTC and extended ISO 8601 format.</p>'
+          description: 'The invocation details of the API operation that an entity invoked for the affected resource, if the value for the actionType property is AWS_API_CALL.'
       description: Provides information about an action that occurred for a resource and produced a policy finding.
     IpAddressDetails:
       type: object
       properties:
         ipAddressV4:
           $ref: '#/components/schemas/__string'
-          description: Reserved for future use.
+          description: The Internet Protocol version 4 (IPv4) address of the device.
         ipCity:
           $ref: '#/components/schemas/IpCity'
-          description: Reserved for future use.
+          description: The city that the IP address originated from.
         ipCountry:
           $ref: '#/components/schemas/IpCountry'
-          description: Reserved for future use.
+          description: The country that the IP address originated from.
         ipGeoLocation:
           $ref: '#/components/schemas/IpGeoLocation'
-          description: Reserved for future use.
+          description: The geographic coordinates of the location that the IP address originated from.
         ipOwner:
           $ref: '#/components/schemas/IpOwner'
-          description: Reserved for future use.
-      description: The IP address of the device that the entity used to perform the action on the affected resource. This object also provides information such as the owner and geographical location for the IP address.
+          description: The registered owner of the IP address.
+      description: Provides information about the IP address of the device that an entity used to perform an action on an affected resource.
     UserIdentity:
       type: object
       properties:
         assumedRole:
           $ref: '#/components/schemas/AssumedRole'
+          description: 'If the action was performed with temporary security credentials that were obtained using the AssumeRole operation of the AWS Security Token Service (AWS STS) API, the identifiers, session context, and other details about the identity.'
         awsAccount:
           $ref: '#/components/schemas/AwsAccount'
+          description: 'If the action was performed using the credentials for another AWS account, the details of that account.'
         awsService:
           $ref: '#/components/schemas/AwsService'
+          description: 'If the action was performed by an AWS account that belongs to an AWS service, the name of the service.'
         federatedUser:
           $ref: '#/components/schemas/FederatedUser'
+          description: 'If the action was performed with temporary security credentials that were obtained using the GetFederationToken operation of the AWS Security Token Service (AWS STS) API, the identifiers, session context, and other details about the identity.'
         iamUser:
           $ref: '#/components/schemas/IamUser'
+          description: 'If the action was performed using the credentials for an AWS Identity and Access Management (IAM) user, the name and other details about the user.'
         root:
           $ref: '#/components/schemas/UserIdentityRoot'
+          description: 'If the action was performed using the credentials for your AWS account, the details of your account.'
         type:
           $ref: '#/components/schemas/UserIdentityType'
-      description: The name and type of entity who performed the action on the affected resource.
+          description: The type of entity that performed the action.
+      description: Provides information about the type and other characteristics of an entity that performed an action on an affected resource.
     FindingActor:
       type: object
       properties:
         domainDetails:
           $ref: '#/components/schemas/DomainDetails'
-          description: The DNS name of the entity that performed the action on the affected resource.
+          description: The domain name of the device that the entity used to perform the action on the affected resource.
         ipAddressDetails:
           $ref: '#/components/schemas/IpAddressDetails'
-          description: The IP address of the device that the entity used to perform the action on the affected resource. This object also provides information such as the owner and geographical location for the IP address.
+          description: The IP address of the device that the entity used to perform the action on the affected resource. This object also provides information such as the owner and geographic location for the IP address.
         userIdentity:
           $ref: '#/components/schemas/UserIdentity'
-          description: The name and type of entity that performed the action on the affected resource.
+          description: The type and other characteristics of the entity that performed the action on the affected resource.
       description: Provides information about an entity that performed an action that produced a policy finding for a resource.
     FindingStatisticsSortCriteria:
       type: object
@@ -5515,10 +5582,13 @@ components:
         orderBy:
           $ref: '#/components/schemas/OrderBy'
           description: 'The sort order to apply to the results, based on the value for the property specified by the attributeName property. Valid values are: ASC, sort the results in ascending order; and, DESC, sort the results in descending order.'
-      description: Specifies criteria for sorting the results of a query for information about findings.
+      description: Specifies criteria for sorting the results of a query that retrieves aggregated statistical data about findings.
     FindingsFilterListItem:
       type: object
       properties:
+        action:
+          $ref: '#/components/schemas/FindingsFilterAction'
+          description: 'The action that''s performed on findings that meet the filter criteria. Possible values are: ARCHIVE, suppress (automatically archive) the findings; and, NOOP, don''t perform any action on the findings.'
         arn:
           $ref: '#/components/schemas/__string'
           description: The Amazon Resource Name (ARN) of the filter.
@@ -5649,6 +5719,8 @@ components:
         - Resigned
         - EmailVerificationInProgress
         - EmailVerificationFailed
+        - RegionDisabled
+        - AccountSuspended
       description: 'The current status of the relationship between an account and an associated Amazon Macie master account (<i>inviter account</i>). Possible values are:'
     __listOfUsageStatisticsFilter:
       type: array
@@ -5701,66 +5773,66 @@ components:
         groupKey:
           $ref: '#/components/schemas/__string'
           description: 'The name of the property that defines the group in the query results, as specified by the groupBy property in the query request.'
-      description: Provides a group of results for a query that retrieved information about findings.
+      description: Provides a group of results for a query that retrieved aggregated statistical data about findings.
     IamUser:
       type: object
       properties:
         accountId:
           $ref: '#/components/schemas/__string'
-          description: Reserved for future use.
+          description: The unique identifier for the AWS account that's associated with the IAM user who performed the action.
         arn:
           $ref: '#/components/schemas/__string'
-          description: Reserved for future use.
+          description: The Amazon Resource Name (ARN) of the principal that performed the action. The last section of the ARN contains the name of the user who performed the action.
         principalId:
           $ref: '#/components/schemas/__string'
-          description: Reserved for future use.
+          description: The unique identifier for the IAM user who performed the action.
         userName:
           $ref: '#/components/schemas/__string'
-          description: Reserved for future use.
-      description: Reserved for future use.
+          description: The user name of the IAM user who performed the action.
+      description: Provides information about an AWS Identity and Access Management (IAM) user who performed an action on an affected resource.
     IpCity:
       type: object
       properties:
         name:
           $ref: '#/components/schemas/__string'
-          description: Reserved for future use.
-      description: Reserved for future use.
+          description: The name of the city.
+      description: Provides information about the city that an IP address originated from.
     IpCountry:
       type: object
       properties:
         code:
           $ref: '#/components/schemas/__string'
-          description: Reserved for future use.
+          description: 'The two-character code, in ISO 3166-1 alpha-2 format, for the country that the IP address originated from. For example, US for the United States.'
         name:
           $ref: '#/components/schemas/__string'
-          description: Reserved for future use.
-      description: Reserved for future use.
+          description: The name of the country that the IP address originated from.
+      description: Provides information about the country that an IP address originated from.
     IpGeoLocation:
       type: object
       properties:
         lat:
           $ref: '#/components/schemas/__double'
-          description: Reserved for future use.
+          description: 'The latitude coordinate of the location, rounded to four decimal places.'
         lon:
           $ref: '#/components/schemas/__double'
-          description: Reserved for future use.
-      description: Reserved for future use.
+          description: 'The longitude coordinate of the location, rounded to four decimal places.'
+      description: Provides geographic coordinates that indicate where a specified IP address originated from.
     IpOwner:
       type: object
       properties:
         asn:
           $ref: '#/components/schemas/__string'
-          description: Reserved for future use.
+          description: The autonomous system number (ASN) for the autonomous system that included the IP address.
         asnOrg:
           $ref: '#/components/schemas/__string'
-          description: Reserved for future use.
+          description: The organization identifier that's associated with the autonomous system number (ASN) for the autonomous system that included the IP address.
         isp:
           $ref: '#/components/schemas/__string'
-          description: Reserved for future use.
+          description: The name of the internet service provider (ISP) that owned the IP address.
         org:
           $ref: '#/components/schemas/__string'
-          description: Reserved for future use.
-      description: Reserved for future use.
+          description: The name of the organization that owned the IP address.
+      description: Provides information about the registered owner of an IP address.
     __double:
       type: number
       format: double
@@ -5809,11 +5881,11 @@ components:
       properties:
         simpleScopeTerm:
           $ref: '#/components/schemas/SimpleScopeTerm'
-          description: 'A property-based condition that defines a property, operator, and one or more values for including or excluding an object from a job.'
+          description: 'A property-based condition that defines a property, operator, and one or more values for including or excluding an object from the job.'
         tagScopeTerm:
           $ref: '#/components/schemas/TagScopeTerm'
-          description: 'A tag-based condition that defines a property, operator, and one or more values for including or excluding an object from a job.'
-      description: Specifies one or more conditions that determine which objects a classification job analyzes.
+          description: A tag-based condition that defines the operator and a tag key or tag keys and values for including or excluding an object from the job.
+      description: Specifies a property- or tag-based condition that defines criteria for including or excluding objects from a classification job.
     __listOfJobScopeTerm:
       type: array
       items:
@@ -5823,8 +5895,8 @@ components:
       properties:
         and:
           $ref: '#/components/schemas/__listOfJobScopeTerm'
-          description: Reserved for future use.
-      description: Reserved for future use.
+          description: 'An array of conditions, one for each condition that determines which objects to include or exclude from the job.'
+      description: Specifies one or more property- and tag-based conditions that define criteria for including or excluding objects from a classification job.
     JobSummary:
       type: object
       properties:
@@ -5839,10 +5911,10 @@ components:
           description: The unique identifier for the job.
         jobStatus:
           $ref: '#/components/schemas/JobStatus'
-          description: '<p>The current status of the job. Possible value are:</p> <ul><li><p>CANCELLED - The job was cancelled by you or a user of the master account for your organization. A job might also be cancelled if ownership of an S3 bucket changed while the job was running, and that change affected the job''s access to the bucket.</p></li> <li><p>COMPLETE - Amazon Macie finished processing all the data specified for the job.</p></li> <li><p>IDLE - For a recurring job, the previous scheduled run is complete and the next scheduled run is pending. This value doesn''t apply to jobs that occur only once.</p></li> <li><p>PAUSED - Amazon Macie started the job, but completion of the job would exceed one or more quotas for your account.</p></li> <li><p>RUNNING - The job is in progress.</p></li></ul>'
+          description: '<p>The current status of the job. Possible values are:</p> <ul><li><p>CANCELLED - The job was cancelled by you or a user of the master account for your organization. A job might also be cancelled if ownership of an S3 bucket changed while the job was running, and that change affected the job''s access to the bucket.</p></li> <li><p>COMPLETE - Amazon Macie finished processing all the data specified for the job.</p></li> <li><p>IDLE - For a recurring job, the previous scheduled run is complete and the next scheduled run is pending. This value doesn''t apply to jobs that occur only once.</p></li> <li><p>PAUSED - Amazon Macie started the job, but completion of the job would exceed one or more quotas for your account.</p></li> <li><p>RUNNING - The job is in progress.</p></li></ul>'
         jobType:
           $ref: '#/components/schemas/JobType'
-          description: '<p>The schedule for running the job. Possible value are:</p> <ul><li><p>ONE_TIME - The job ran or will run only once.</p></li> <li><p>SCHEDULED - The job runs on a daily, weekly, or monthly basis.</p></li></ul>'
+          description: '<p>The schedule for running the job. Possible values are:</p> <ul><li><p>ONE_TIME - The job ran or will run only once.</p></li> <li><p>SCHEDULED - The job runs on a daily, weekly, or monthly basis.</p></li></ul>'
         name:
           $ref: '#/components/schemas/__string'
           description: The custom name of the job.
@@ -5859,7 +5931,7 @@ components:
       description: Provides information about the tags that are associated with an S3 bucket or object. Each tag consists of a required tag key and an associated tag value.
     KeyValuePairList:
       type: array
-      description: Reserved for future use.
+      description: Provides information about the tags that are associated with an S3 bucket or object. Each tag consists of a required tag key and an associated tag value.
       items:
         $ref: '#/components/schemas/KeyValuePair'
     ListJobsFilterCriteria:
@@ -6135,7 +6207,7 @@ components:
         - DEEP_ARCHIVE
         - ONEZONE_IA
         - GLACIER
-      description: 'The storage class of the S3 bucket or object. Valid values are:'
+      description: 'The storage class of the S3 bucket or object. Possible values are:'
     ScopeFilterKey:
       type: string
       enum:
@@ -6165,7 +6237,7 @@ components:
         - PERSONAL_INFORMATION
         - CREDENTIALS
         - CUSTOM_IDENTIFIER
-      description: The category of sensitive data that was detected and produced the finding.
+      description: 'The category of sensitive data that was detected and produced the finding. Possible values are:'
     Unit:
       type: string
       enum:
@@ -6188,7 +6260,7 @@ components:
       properties:
         creationDate:
           $ref: '#/components/schemas/__timestampIso8601'
-          description: 'The date and time, in ISO 8601 format, when the credentials were issued.'
+          description: 'The date and time, in UTC and ISO 8601 format, when the credentials were issued.'
         mfaAuthenticated:
           $ref: '#/components/schemas/__boolean'
           description: Specifies whether the credentials were authenticated with a multi-factor authentication (MFA) device.
@@ -6198,13 +6270,13 @@ components:
       properties:
         accountId:
           $ref: '#/components/schemas/__string'
-          description: The account that owns the entity that was used to get the credentials.
+          description: The unique identifier for the AWS account that owns the entity that was used to get the credentials.
         arn:
           $ref: '#/components/schemas/__string'
           description: 'The Amazon Resource Name (ARN) of the source account, IAM user, or role that was used to get the credentials.'
         principalId:
           $ref: '#/components/schemas/__string'
-          description: The internal identifier for the entity that was used to get the credentials.
+          description: The unique identifier for the entity that was used to get the credentials.
         type:
           $ref: '#/components/schemas/__string'
           description: 'The source of the temporary security credentials, such as Root, IAMUser, or Role.'
@@ -6218,7 +6290,7 @@ components:
         - Low
         - Medium
         - High
-      description: 'The textual representation of the finding''s severity. Valid values are:'
+      description: 'The textual representation of the finding''s severity. Possible values are:'
     TagResourceRequest:
       type: object
       required:
@@ -6265,7 +6337,7 @@ components:
           description: The maximum number of characters that can exist between text that matches the regex pattern and the character sequences specified by the keywords array. Macie includes or excludes a result based on the proximity of a keyword to text that matches the regex pattern. The distance can be 1 - 300 characters. The default value is 50.
         regex:
           $ref: '#/components/schemas/__string'
-          description: The regular expression (regex) that defines the pattern to match. The expression can contain as many as 500 characters.
+          description: The regular expression (<i>regex</i>) that defines the pattern to match. The expression can contain as many as 512 characters.
         sampleText:
           $ref: '#/components/schemas/__string'
           description: 'The sample text to inspect by using the custom data identifier. The text can contain as many as 1,000 characters.'
@@ -6373,7 +6445,7 @@ components:
       properties:
         accountId:
           $ref: '#/components/schemas/__string'
-          description: The AWS account ID for the account that the data applies to.
+          description: The unique identifier for the AWS account that the data applies to.
         freeTrialStartDate:
           $ref: '#/components/schemas/__timestampIso8601'
           description: 'The date and time, in UTC and extended ISO 8601 format, when the free trial period started for the account. This value is null if the account didn''t participate in the free trial.'
@@ -6385,7 +6457,7 @@ components:
       type: string
       enum:
         - accountId
-      description: The field to use to filter the results of a query for account quotas and usage data.
+      description: 'The field to use to filter the results of a query for account quotas and usage data:'
     UsageTotal:
       type: object
       properties:
@@ -6404,14 +6476,14 @@ components:
       properties:
         accountId:
           $ref: '#/components/schemas/__string'
-          description: Reserved for future use.
+          description: The unique identifier for the AWS account.
         arn:
           $ref: '#/components/schemas/__string'
-          description: Reserved for future use.
+          description: The Amazon Resource Name (ARN) of the principal that performed the action. The last section of the ARN contains the name of the user or role that performed the action.
         principalId:
           $ref: '#/components/schemas/__string'
-          description: Reserved for future use.
-      description: Reserved for future use.
+          description: The unique identifier for the entity that performed the action.
+      description: Provides information about an AWS account and entity that performed an action on an affected resource. The action was performed using the credentials for your AWS account.
     UserIdentityType:
       type: string
       enum:
@@ -6421,6 +6493,6 @@ components:
         - Root
         - AWSAccount
         - AWSService
-      description: Reserved for future use.
+      description: 'The type of entity that performed the action on the affected resource. Possible values are:'
 security:
   - hmac: []

@@ -2706,6 +2706,18 @@ paths:
             schema:
               $ref: '#/components/schemas/DescribeEnvironmentManagedActionHistoryRequest'
       parameters:
+        - name: MaxItems
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: Action
           in: query
           required: true
@@ -3758,6 +3770,18 @@ paths:
             schema:
               $ref: '#/components/schemas/ListPlatformVersionsRequest'
       parameters:
+        - name: MaxRecords
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: Action
           in: query
           required: true
