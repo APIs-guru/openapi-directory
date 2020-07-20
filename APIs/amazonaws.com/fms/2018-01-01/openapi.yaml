@@ -159,6 +159,53 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSFMS_20180101.DeleteAppsList':
+    post:
+      operationId: DeleteAppsList
+      description: Permanently deletes an AWS Firewall Manager applications list.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InvalidOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidOperationException'
+        '482':
+          description: InternalErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteAppsListRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSFMS_20180101.DeleteAppsList
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=AWSFMS_20180101.DeleteNotificationChannel':
     post:
       operationId: DeleteNotificationChannel
@@ -245,6 +292,53 @@ paths:
             type: string
             enum:
               - AWSFMS_20180101.DeletePolicy
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSFMS_20180101.DeleteProtocolsList':
+    post:
+      operationId: DeleteProtocolsList
+      description: Permanently deletes an AWS Firewall Manager protocols list.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InvalidOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidOperationException'
+        '482':
+          description: InternalErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteProtocolsListRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSFMS_20180101.DeleteProtocolsList
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -351,6 +445,57 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSFMS_20180101.GetAppsList':
+    post:
+      operationId: GetAppsList
+      description: Returns information about the specified AWS Firewall Manager applications list.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAppsListResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InvalidOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidOperationException'
+        '482':
+          description: InternalErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetAppsListRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSFMS_20180101.GetAppsList
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=AWSFMS_20180101.GetComplianceDetail':
     post:
       operationId: GetComplianceDetail
@@ -374,6 +519,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalErrorException'
+        '482':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '483':
+          description: InvalidOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidOperationException'
       requestBody:
         required: true
         content:
@@ -555,10 +712,169 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSFMS_20180101.GetProtocolsList':
+    post:
+      operationId: GetProtocolsList
+      description: Returns information about the specified AWS Firewall Manager protocols list.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetProtocolsListResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InvalidOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidOperationException'
+        '482':
+          description: InternalErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetProtocolsListRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSFMS_20180101.GetProtocolsList
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSFMS_20180101.GetViolationDetails':
+    post:
+      operationId: GetViolationDetails
+      description: Retrieves violations for a resource based on the specified AWS Firewall Manager policy and AWS account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetViolationDetailsResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: InternalErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetViolationDetailsRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSFMS_20180101.GetViolationDetails
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSFMS_20180101.ListAppsLists':
+    post:
+      operationId: ListAppsLists
+      description: Returns an array of <code>AppsListDataSummary</code> objects.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListAppsListsResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InvalidOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidOperationException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: InternalErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListAppsListsRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSFMS_20180101.ListAppsLists
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=AWSFMS_20180101.ListComplianceStatus':
     post:
       operationId: ListComplianceStatus
-      description: 'Returns an array of <code>PolicyComplianceStatus</code> objects in the response. Use <code>PolicyComplianceStatus</code> to get a summary of which member accounts are protected by the specified policy. '
+      description: 'Returns an array of <code>PolicyComplianceStatus</code> objects. Use <code>PolicyComplianceStatus</code> to get a summary of which member accounts are protected by the specified policy. '
       responses:
         '200':
           description: Success
@@ -672,7 +988,7 @@ paths:
   '/#X-Amz-Target=AWSFMS_20180101.ListPolicies':
     post:
       operationId: ListPolicies
-      description: Returns an array of <code>PolicySummary</code> objects in the response.
+      description: Returns an array of <code>PolicySummary</code> objects.
       responses:
         '200':
           description: Success
@@ -738,6 +1054,57 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSFMS_20180101.ListProtocolsLists':
+    post:
+      operationId: ListProtocolsLists
+      description: Returns an array of <code>ProtocolsListDataSummary</code> objects.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListProtocolsListsResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InvalidOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidOperationException'
+        '482':
+          description: InternalErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListProtocolsListsRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSFMS_20180101.ListProtocolsLists
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=AWSFMS_20180101.ListTagsForResource':
     post:
       operationId: ListTagsForResource
@@ -787,6 +1154,69 @@ paths:
             type: string
             enum:
               - AWSFMS_20180101.ListTagsForResource
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSFMS_20180101.PutAppsList':
+    post:
+      operationId: PutAppsList
+      description: Creates an AWS Firewall Manager applications list.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutAppsListResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InvalidOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidOperationException'
+        '482':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '483':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '484':
+          description: InternalErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutAppsListRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSFMS_20180101.PutAppsList
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -903,6 +1333,69 @@ paths:
             type: string
             enum:
               - AWSFMS_20180101.PutPolicy
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSFMS_20180101.PutProtocolsList':
+    post:
+      operationId: PutProtocolsList
+      description: Creates an AWS Firewall Manager protocols list.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutProtocolsListResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InvalidOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidOperationException'
+        '482':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '483':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '484':
+          description: InternalErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutProtocolsListRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSFMS_20180101.PutProtocolsList
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1096,6 +1589,15 @@ components:
     InvalidInputException: {}
     ResourceNotFoundException: {}
     InternalErrorException: {}
+    DeleteAppsListRequest:
+      type: object
+      required:
+        - ListId
+      title: DeleteAppsListRequest
+      properties:
+        ListId:
+          $ref: '#/components/schemas/ListId'
+          description: 'The ID of the applications list that you want to delete. You can retrieve this ID from <code>PutAppsList</code>, <code>ListAppsLists</code>, and <code>GetAppsList</code>.'
     DeleteNotificationChannelRequest:
       type: object
       title: DeleteNotificationChannelRequest
@@ -1108,10 +1610,19 @@ components:
       properties:
         PolicyId:
           $ref: '#/components/schemas/PolicyId'
-          description: The ID of the policy that you want to delete. <code>PolicyId</code> is returned by <code>PutPolicy</code> and by <code>ListPolicies</code>.
+          description: The ID of the policy that you want to delete. You can retrieve this ID from <code>PutPolicy</code> and <code>ListPolicies</code>.
         DeleteAllPolicyResources:
           $ref: '#/components/schemas/Boolean'
           description: '<p>If <code>True</code>, the request performs cleanup according to the policy type. </p> <p>For AWS WAF and Shield Advanced policies, the cleanup does the following:</p> <ul> <li> <p>Deletes rule groups created by AWS Firewall Manager</p> </li> <li> <p>Removes web ACLs from in-scope resources</p> </li> <li> <p>Deletes web ACLs that contain no rules or rule groups</p> </li> </ul> <p>For security group policies, the cleanup does the following for each security group in the policy:</p> <ul> <li> <p>Disassociates the security group from in-scope resources </p> </li> <li> <p>Deletes the security group if it was created through Firewall Manager and if it''s no longer associated with any resources through another policy</p> </li> </ul> <p>After the cleanup, in-scope resources are no longer protected by web ACLs in this policy. Protection of out-of-scope resources remains unchanged. Scope is determined by tags that you create and accounts that you associate with the policy. When creating the policy, if you specify that only resources in specific accounts or with specific tags are in scope of the policy, those accounts and resources are handled by the policy. All others are out of scope. If you don''t specify tags or accounts, all resources are in scope. </p>'
+    DeleteProtocolsListRequest:
+      type: object
+      required:
+        - ListId
+      title: DeleteProtocolsListRequest
+      properties:
+        ListId:
+          $ref: '#/components/schemas/ListId'
+          description: 'The ID of the protocols list that you want to delete. You can retrieve this ID from <code>PutProtocolsList</code>, <code>ListProtocolsLists</code>, and <code>GetProtocolsLost</code>.'
     DisassociateAdminAccountRequest:
       type: object
       title: DisassociateAdminAccountRequest
@@ -1129,6 +1640,27 @@ components:
       type: object
       title: GetAdminAccountRequest
       properties: {}
+    GetAppsListResponse:
+      type: object
+      properties:
+        AppsList:
+          $ref: '#/components/schemas/AppsListData'
+          description: Information about the specified AWS Firewall Manager applications list.
+        AppsListArn:
+          $ref: '#/components/schemas/ResourceArn'
+          description: The Amazon Resource Name (ARN) of the applications list.
+    GetAppsListRequest:
+      type: object
+      required:
+        - ListId
+      title: GetAppsListRequest
+      properties:
+        ListId:
+          $ref: '#/components/schemas/ListId'
+          description: The ID of the AWS Firewall Manager applications list that you want the details for.
+        DefaultList:
+          $ref: '#/components/schemas/Boolean'
+          description: Specifies whether the list to retrieve is a default list owned by AWS Firewall Manager.
     GetComplianceDetailResponse:
       type: object
       properties:
@@ -1219,6 +1751,79 @@ components:
         MaxResults:
           $ref: '#/components/schemas/PaginationMaxResults'
           description: 'Specifies the number of objects that you want AWS Firewall Manager to return for this request. If you have more objects than the number that you specify for <code>MaxResults</code>, the response includes a <code>NextToken</code> value that you can use to get another batch of objects.'
+    GetProtocolsListResponse:
+      type: object
+      properties:
+        ProtocolsList:
+          $ref: '#/components/schemas/ProtocolsListData'
+          description: Information about the specified AWS Firewall Manager protocols list.
+        ProtocolsListArn:
+          $ref: '#/components/schemas/ResourceArn'
+          description: The Amazon Resource Name (ARN) of the specified protocols list.
+    GetProtocolsListRequest:
+      type: object
+      required:
+        - ListId
+      title: GetProtocolsListRequest
+      properties:
+        ListId:
+          $ref: '#/components/schemas/ListId'
+          description: The ID of the AWS Firewall Manager protocols list that you want the details for.
+        DefaultList:
+          $ref: '#/components/schemas/Boolean'
+          description: Specifies whether the list to retrieve is a default list owned by AWS Firewall Manager.
+    GetViolationDetailsResponse:
+      type: object
+      properties:
+        ViolationDetail:
+          $ref: '#/components/schemas/ViolationDetail'
+          description: Violation detail for a resource.
+    GetViolationDetailsRequest:
+      type: object
+      required:
+        - PolicyId
+        - MemberAccount
+        - ResourceId
+        - ResourceType
+      title: GetViolationDetailsRequest
+      properties:
+        PolicyId:
+          $ref: '#/components/schemas/PolicyId'
+          description: The ID of the AWS Firewall Manager policy that you want the details for. This currently only supports security group content audit policies.
+        MemberAccount:
+          $ref: '#/components/schemas/AWSAccountId'
+          description: The AWS account ID that you want the details for.
+        ResourceId:
+          $ref: '#/components/schemas/ResourceId'
+          description: The ID of the resource that has violations.
+        ResourceType:
+          $ref: '#/components/schemas/ResourceType'
+          description: 'The resource type. This is in the format shown in the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html">AWS Resource Types Reference</a>. Supported resource types are: <code>AWS::EC2::Instance</code>, <code>AWS::EC2::NetworkInterface</code>, or <code>AWS::EC2::SecurityGroup</code>. '
+    ListAppsListsResponse:
+      type: object
+      properties:
+        AppsLists:
+          $ref: '#/components/schemas/AppsListsData'
+          description: An array of <code>AppsListDataSummary</code> objects.
+        NextToken:
+          $ref: '#/components/schemas/PaginationToken'
+          description: 'If you specify a value for <code>MaxResults</code> in your list request, and you have more objects than the maximum, AWS Firewall Manager returns this token in the response. You can use this token in subsequent requests to retrieve the next batch of objects.'
+    ListAppsListsRequest:
+      type: object
+      required:
+        - MaxResults
+      title: ListAppsListsRequest
+      properties:
+        DefaultLists:
+          $ref: '#/components/schemas/Boolean'
+          description: Specifies whether the lists to retrieve are default lists owned by AWS Firewall Manager.
+        NextToken:
+          $ref: '#/components/schemas/PaginationToken'
+          description: 'If you specify a value for <code>MaxResults</code> in your list request, and you have more objects than the maximum, AWS Firewall Manager returns this token in the response. For all but the first request, you provide the token returned by the prior request in the request parameters, to retrieve the next batch of objects.'
+        MaxResults:
+          $ref: '#/components/schemas/PaginationMaxResults'
+          description: '<p>The maximum number of objects that you want AWS Firewall Manager to return for this request. If more objects are available, in the response, AWS Firewall Manager provides a <code>NextToken</code> value that you can use in a subsequent call to get the next batch of objects.</p> <p>If you don''t specify this, AWS Firewall Manager returns all available objects.</p>'
+    LimitExceededException: {}
     ListComplianceStatusResponse:
       type: object
       properties:
@@ -1281,7 +1886,30 @@ components:
         MaxResults:
           $ref: '#/components/schemas/PaginationMaxResults'
           description: 'Specifies the number of <code>PolicySummary</code> objects that you want AWS Firewall Manager to return for this request. If you have more <code>PolicySummary</code> objects than the number that you specify for <code>MaxResults</code>, the response includes a <code>NextToken</code> value that you can use to get another batch of <code>PolicySummary</code> objects.'
-    LimitExceededException: {}
+    ListProtocolsListsResponse:
+      type: object
+      properties:
+        ProtocolsLists:
+          $ref: '#/components/schemas/ProtocolsListsData'
+          description: An array of <code>ProtocolsListDataSummary</code> objects.
+        NextToken:
+          $ref: '#/components/schemas/PaginationToken'
+          description: 'If you specify a value for <code>MaxResults</code> in your list request, and you have more objects than the maximum, AWS Firewall Manager returns this token in the response. You can use this token in subsequent requests to retrieve the next batch of objects.'
+    ListProtocolsListsRequest:
+      type: object
+      required:
+        - MaxResults
+      title: ListProtocolsListsRequest
+      properties:
+        DefaultLists:
+          $ref: '#/components/schemas/Boolean'
+          description: Specifies whether the lists to retrieve are default lists owned by AWS Firewall Manager.
+        NextToken:
+          $ref: '#/components/schemas/PaginationToken'
+          description: 'If you specify a value for <code>MaxResults</code> in your list request, and you have more objects than the maximum, AWS Firewall Manager returns this token in the response. For all but the first request, you provide the token returned by the prior request in the request parameters, to retrieve the next batch of objects.'
+        MaxResults:
+          $ref: '#/components/schemas/PaginationMaxResults'
+          description: '<p>The maximum number of objects that you want AWS Firewall Manager to return for this request. If more objects are available, in the response, AWS Firewall Manager provides a <code>NextToken</code> value that you can use in a subsequent call to get the next batch of objects.</p> <p>If you don''t specify this, AWS Firewall Manager returns all available objects.</p>'
     ListTagsForResourceResponse:
       type: object
       properties:
@@ -1296,7 +1924,28 @@ components:
       properties:
         ResourceArn:
           $ref: '#/components/schemas/ResourceArn'
-          description: 'The Amazon Resource Name (ARN) of the resource to return tags for. The Firewall Manager policy is the only AWS resource that supports tagging, so this ARN is a policy ARN..'
+          description: 'The Amazon Resource Name (ARN) of the resource to return tags for. The AWS Firewall Manager resources that support tagging are policies, applications lists, and protocols lists. '
+    PutAppsListResponse:
+      type: object
+      properties:
+        AppsList:
+          $ref: '#/components/schemas/AppsListData'
+          description: The details of the AWS Firewall Manager applications list.
+        AppsListArn:
+          $ref: '#/components/schemas/ResourceArn'
+          description: The Amazon Resource Name (ARN) of the applications list.
+    PutAppsListRequest:
+      type: object
+      required:
+        - AppsList
+      title: PutAppsListRequest
+      properties:
+        AppsList:
+          $ref: '#/components/schemas/AppsListData'
+          description: The details of the AWS Firewall Manager applications list to be created.
+        TagList:
+          $ref: '#/components/schemas/TagList'
+          description: The tags associated with the resource.
     PutNotificationChannelRequest:
       type: object
       required:
@@ -1315,10 +1964,10 @@ components:
       properties:
         Policy:
           $ref: '#/components/schemas/Policy'
-          description: The details of the AWS Firewall Manager policy that was created.
+          description: The details of the AWS Firewall Manager policy.
         PolicyArn:
           $ref: '#/components/schemas/ResourceArn'
-          description: The Amazon Resource Name (ARN) of the policy that was created.
+          description: The Amazon Resource Name (ARN) of the policy.
     PutPolicyRequest:
       type: object
       required:
@@ -1331,6 +1980,27 @@ components:
         TagList:
           $ref: '#/components/schemas/TagList'
           description: The tags to add to the AWS resource.
+    PutProtocolsListResponse:
+      type: object
+      properties:
+        ProtocolsList:
+          $ref: '#/components/schemas/ProtocolsListData'
+          description: The details of the AWS Firewall Manager protocols list.
+        ProtocolsListArn:
+          $ref: '#/components/schemas/ResourceArn'
+          description: The Amazon Resource Name (ARN) of the protocols list.
+    PutProtocolsListRequest:
+      type: object
+      required:
+        - ProtocolsList
+      title: PutProtocolsListRequest
+      properties:
+        ProtocolsList:
+          $ref: '#/components/schemas/ProtocolsListData'
+          description: The details of the AWS Firewall Manager protocols list to be created.
+        TagList:
+          $ref: '#/components/schemas/TagList'
+          description: The tags associated with the resource.
     TagResourceResponse:
       type: object
       properties: {}
@@ -1343,7 +2013,7 @@ components:
       properties:
         ResourceArn:
           $ref: '#/components/schemas/ResourceArn'
-          description: 'The Amazon Resource Name (ARN) of the resource. The Firewall Manager policy is the only AWS resource that supports tagging, so this ARN is a policy ARN.'
+          description: 'The Amazon Resource Name (ARN) of the resource to return tags for. The AWS Firewall Manager resources that support tagging are policies, applications lists, and protocols lists. '
         TagList:
           $ref: '#/components/schemas/TagList'
           description: The tags to add to the resource.
@@ -1359,7 +2029,7 @@ components:
       properties:
         ResourceArn:
           $ref: '#/components/schemas/ResourceArn'
-          description: 'The Amazon Resource Name (ARN) of the resource. The Firewall Manager policy is the only AWS resource that supports tagging, so this ARN is a policy ARN.'
+          description: 'The Amazon Resource Name (ARN) of the resource to return tags for. The AWS Firewall Manager resources that support tagging are policies, applications lists, and protocols lists. '
         TagKeys:
           $ref: '#/components/schemas/TagKeyList'
           description: 'The keys of the tags to remove from the resource. '
@@ -1376,8 +2046,179 @@ components:
         - PENDING_DELETION
         - DELETING
         - DELETED
+    ResourceName:
+      type: string
+      pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+      minLength: 1
+      maxLength: 128
+    Protocol:
+      type: string
+      pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+      minLength: 1
+      maxLength: 20
+    IPPortNumber:
+      type: integer
+      minimum: 0
+      maximum: 65535
+    App:
+      type: object
+      required:
+        - AppName
+        - Protocol
+        - Port
+      properties:
+        AppName:
+          $ref: '#/components/schemas/ResourceName'
+          description: The application's name.
+        Protocol:
+          $ref: '#/components/schemas/Protocol'
+          description: 'The IP protocol name or number. The name can be one of <code>tcp</code>, <code>udp</code>, or <code>icmp</code>. For information on possible numbers, see <a href="https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml">Protocol Numbers</a>.'
+        Port:
+          $ref: '#/components/schemas/IPPortNumber'
+          description: 'The application''s port number, for example <code>80</code>.'
+      description: An individual AWS Firewall Manager application.
+    AppsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/App'
+    ListId:
+      type: string
+      pattern: '^[a-z0-9A-Z-]{36}$'
+      minLength: 36
+      maxLength: 36
+    UpdateToken:
+      type: string
+      pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+      minLength: 1
+      maxLength: 1024
+    TimeStamp:
+      type: string
+      format: date-time
+    PreviousAppsList:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/AppsList'
+    AppsListData:
+      type: object
+      required:
+        - ListName
+        - AppsList
+      properties:
+        ListId:
+          $ref: '#/components/schemas/ListId'
+          description: The ID of the AWS Firewall Manager applications list.
+        ListName:
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the AWS Firewall Manager applications list.
+        ListUpdateToken:
+          $ref: '#/components/schemas/UpdateToken'
+          description: 'A unique identifier for each update to the list. When you update the list, the update token must match the token of the current version of the application list. You can retrieve the update token by getting the list. '
+        CreateTime:
+          $ref: '#/components/schemas/TimeStamp'
+          description: The time that the AWS Firewall Manager applications list was created.
+        LastUpdateTime:
+          $ref: '#/components/schemas/TimeStamp'
+          description: The time that the AWS Firewall Manager applications list was last updated.
+        AppsList:
+          $ref: '#/components/schemas/AppsList'
+          description: An array of applications in the AWS Firewall Manager applications list.
+        PreviousAppsList:
+          $ref: '#/components/schemas/PreviousAppsList'
+          description: A map of previous version numbers to their corresponding <code>App</code> object arrays.
+      description: An AWS Firewall Manager applications list.
+    ResourceArn:
+      type: string
+      pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+      minLength: 1
+      maxLength: 1024
+    AppsListDataSummary:
+      type: object
+      properties:
+        ListArn:
+          $ref: '#/components/schemas/ResourceArn'
+          description: The Amazon Resource Name (ARN) of the applications list.
+        ListId:
+          $ref: '#/components/schemas/ListId'
+          description: The ID of the applications list.
+        ListName:
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the applications list.
+        AppsList:
+          $ref: '#/components/schemas/AppsList'
+          description: An array of <code>App</code> objects in the AWS Firewall Manager applications list.
+      description: Details of the AWS Firewall Manager applications list.
+    AppsListsData:
+      type: array
+      items:
+        $ref: '#/components/schemas/AppsListDataSummary'
+    ViolationTarget:
+      type: string
+      pattern: .*
+      minLength: 0
+      maxLength: 1024
+    AwsEc2NetworkInterfaceViolations:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsEc2NetworkInterfaceViolation'
+    AwsEc2InstanceViolation:
+      type: object
+      properties:
+        ViolationTarget:
+          $ref: '#/components/schemas/ViolationTarget'
+          description: The resource ID of the EC2 instance.
+        AwsEc2NetworkInterfaceViolations:
+          $ref: '#/components/schemas/AwsEc2NetworkInterfaceViolations'
+          description: Violations for network interfaces associated with the EC2 instance.
+      description: Violations for an EC2 instance resource.
+    ResourceIdList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ResourceId'
+    AwsEc2NetworkInterfaceViolation:
+      type: object
+      properties:
+        ViolationTarget:
+          $ref: '#/components/schemas/ViolationTarget'
+          description: The resource ID of the network interface.
+        ViolatingSecurityGroups:
+          $ref: '#/components/schemas/ResourceIdList'
+          description: List of security groups that violate the rules specified in the master security group of the AWS Firewall Manager policy.
+      description: Violations for network interfaces associated with an EC2 instance.
+    LengthBoundedString:
+      type: string
+      minLength: 0
+      maxLength: 1024
+    PartialMatches:
+      type: array
+      items:
+        $ref: '#/components/schemas/PartialMatch'
+    SecurityGroupRemediationActions:
+      type: array
+      items:
+        $ref: '#/components/schemas/SecurityGroupRemediationAction'
+    AwsVPCSecurityGroupViolation:
+      type: object
+      properties:
+        ViolationTarget:
+          $ref: '#/components/schemas/ViolationTarget'
+          description: The security group rule that is being evaluated.
+        ViolationTargetDescription:
+          $ref: '#/components/schemas/LengthBoundedString'
+          description: A description of the security group that violates the policy.
+        PartialMatches:
+          $ref: '#/components/schemas/PartialMatches'
+          description: List of rules specified in the security group of the AWS Firewall Manager policy that partially match the <code>ViolationTarget</code> rule.
+        PossibleSecurityGroupRemediationActions:
+          $ref: '#/components/schemas/SecurityGroupRemediationActions'
+          description: Remediation options for the rule specified in the <code>ViolationTarget</code>.
+      description: Details of the rule violation in a security group when compared to the master security group of the AWS Firewall Manager policy.
     Boolean:
       type: boolean
+    CIDR:
+      type: string
+      pattern: '[a-f0-9:./]+'
+      minLength: 0
+      maxLength: 256
     ResourceId:
       type: string
       pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
@@ -1502,11 +2343,6 @@ components:
           $ref: '#/components/schemas/IssueInfoMap'
           description: 'Details about problems with dependent services, such as AWS WAF or AWS Config, that are causing a resource to be noncompliant. The details include the name of the dependent service and the error message received that indicates the problem with the service.'
       description: 'Describes the noncompliant resources in a member account for a specific AWS Firewall Manager policy. A maximum of 100 entries are displayed. If more than 100 resources are noncompliant, <code>EvaluationLimitExceeded</code> is set to <code>True</code>.'
-    ResourceArn:
-      type: string
-      pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
-      minLength: 1
-      maxLength: 1024
     Policy:
       type: object
       required:
@@ -1521,7 +2357,7 @@ components:
           description: The ID of the AWS Firewall Manager policy.
         PolicyName:
           $ref: '#/components/schemas/ResourceName'
-          description: The friendly name of the AWS Firewall Manager policy.
+          description: The name of the AWS Firewall Manager policy.
         PolicyUpdateToken:
           $ref: '#/components/schemas/PolicyUpdateToken'
           description: 'A unique identifier for each update to the policy. When issuing a <code>PutPolicy</code> request, the <code>PolicyUpdateToken</code> in the request must match the <code>PolicyUpdateToken</code> of the current policy version. To get the <code>PolicyUpdateToken</code> of the current policy version, use a <code>GetPolicy</code> request.'
@@ -1550,9 +2386,6 @@ components:
           $ref: '#/components/schemas/CustomerPolicyScopeMap'
           description: '<p>Specifies the AWS account IDs and AWS Organizations organizational units (OUs) to exclude from the policy. Specifying an OU is the equivalent of specifying all accounts in the OU and in any of its child OUs, including any child OUs and accounts that are added at a later time.</p> <p>You can specify inclusions or exclusions, but not both. If you specify an <code>IncludeMap</code>, AWS Firewall Manager applies the policy to all accounts specified by the <code>IncludeMap</code>, and does not evaluate any <code>ExcludeMap</code> specifications. If you do not specify an <code>IncludeMap</code>, then Firewall Manager applies the policy to all accounts except for those specified by the <code>ExcludeMap</code>.</p> <p>You can specify account IDs, OUs, or a combination: </p> <ul> <li> <p>Specify account IDs by setting the key to <code>ACCOUNT</code>. For example, the following is a valid map: <code>{“ACCOUNT” : [“accountID1”, “accountID2”]}</code>.</p> </li> <li> <p>Specify OUs by setting the key to <code>ORG_UNIT</code>. For example, the following is a valid map: <code>{“ORG_UNIT” : [“ouid111”, “ouid112”]}</code>.</p> </li> <li> <p>Specify accounts and OUs together in a single map, separated with a comma. For example, the following is a valid map: <code>{“ACCOUNT” : [“accountID1”, “accountID2”], “ORG_UNIT” : [“ouid111”, “ouid112”]}</code>.</p> </li> </ul>'
       description: An AWS Firewall Manager policy.
-    TimeStamp:
-      type: string
-      format: date-time
     PaginationToken:
       type: string
       pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
@@ -1573,6 +2406,65 @@ components:
         - SECURITY_GROUPS_USAGE_AUDIT
     ProtectionData:
       type: string
+    ProtocolsListData:
+      type: object
+      required:
+        - ListName
+        - ProtocolsList
+      properties:
+        ListId:
+          $ref: '#/components/schemas/ListId'
+          description: The ID of the AWS Firewall Manager protocols list.
+        ListName:
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the AWS Firewall Manager protocols list.
+        ListUpdateToken:
+          $ref: '#/components/schemas/UpdateToken'
+          description: 'A unique identifier for each update to the list. When you update the list, the update token must match the token of the current version of the application list. You can retrieve the update token by getting the list. '
+        CreateTime:
+          $ref: '#/components/schemas/TimeStamp'
+          description: The time that the AWS Firewall Manager protocols list was created.
+        LastUpdateTime:
+          $ref: '#/components/schemas/TimeStamp'
+          description: The time that the AWS Firewall Manager protocols list was last updated.
+        ProtocolsList:
+          $ref: '#/components/schemas/ProtocolsList'
+          description: An array of protocols in the AWS Firewall Manager protocols list.
+        PreviousProtocolsList:
+          $ref: '#/components/schemas/PreviousProtocolsList'
+          description: A map of previous version numbers to their corresponding protocol arrays.
+      description: An AWS Firewall Manager protocols list.
+    ViolationDetail:
+      type: object
+      required:
+        - PolicyId
+        - MemberAccount
+        - ResourceId
+        - ResourceType
+        - ResourceViolations
+      properties:
+        PolicyId:
+          $ref: '#/components/schemas/PolicyId'
+          description: The ID of the AWS Firewall Manager policy that the violation details were requested for.
+        MemberAccount:
+          $ref: '#/components/schemas/AWSAccountId'
+          description: The AWS account that the violation details were requested for.
+        ResourceId:
+          $ref: '#/components/schemas/ResourceId'
+          description: The resource ID that the violation details were requested for.
+        ResourceType:
+          $ref: '#/components/schemas/ResourceType'
+          description: The resource type that the violation details were requested for.
+        ResourceViolations:
+          $ref: '#/components/schemas/ResourceViolations'
+          description: List of violations for the requested resource.
+        ResourceTags:
+          $ref: '#/components/schemas/TagList'
+          description: The <code>ResourceTag</code> objects associated with the resource.
+        ResourceDescription:
+          $ref: '#/components/schemas/LengthBoundedString'
+          description: Brief description for the requested resource.
+      description: Violations for a resource based on the specified AWS Firewall Manager policy and AWS account.
     IssueInfoMap:
       type: object
       additionalProperties:
@@ -1589,6 +2481,10 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/PolicySummary'
+    ProtocolsListsData:
+      type: array
+      items:
+        $ref: '#/components/schemas/ProtocolsListDataSummary'
     TagList:
       type: array
       items:
@@ -1600,11 +2496,22 @@ components:
       pattern: .*
       minLength: 1
       maxLength: 4096
-    ResourceName:
+    ReferenceRule:
       type: string
-      pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
-      minLength: 1
-      maxLength: 128
+    TargetViolationReasons:
+      type: array
+      items:
+        $ref: '#/components/schemas/TargetViolationReason'
+    PartialMatch:
+      type: object
+      properties:
+        Reference:
+          $ref: '#/components/schemas/ReferenceRule'
+          description: The reference rule from the master security group of the AWS Firewall Manager policy.
+        TargetViolationReasons:
+          $ref: '#/components/schemas/TargetViolationReasons'
+          description: The violation reason.
+      description: The reference rule that partially matches the <code>ViolationTarget</code> rule and violation reason.
     PolicyUpdateToken:
       type: string
       pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
@@ -1620,7 +2527,7 @@ components:
           description: 'The service that the policy is using to protect the resources. This specifies the type of policy that is created, either an AWS WAF policy, a Shield Advanced policy, or a security group policy. For security group policies, Firewall Manager supports one security group for each common policy and for each content audit policy. This is an adjustable limit that you can increase by contacting AWS Support.'
         ManagedServiceData:
           $ref: '#/components/schemas/ManagedServiceData'
-          description: '<p>Details about the service that are specific to the service type, in JSON format. For service type <code>SHIELD_ADVANCED</code>, this is an empty string.</p> <ul> <li> <p>Example: <code>WAFV2</code> </p> <p> <code>"ManagedServiceData": "{\"type\":\"WAFV2\",\"defaultAction\":{\"type\":\"ALLOW\"},\"preProcessRuleGroups\":[{\"managedRuleGroupIdentifier\":null,\"ruleGroupArn\":\"rulegrouparn\",\"overrideAction\":{\"type\":\"COUNT\"},\"excludedRules\":[{\"name\":\"EntityName\"}],\"ruleGroupType\":\"RuleGroup\"}],\"postProcessRuleGroups\":[{\"managedRuleGroupIdentifier\":{\"managedRuleGroupName\":\"AWSManagedRulesAdminProtectionRuleSet\",\"vendor\":\"AWS\"},\"ruleGroupArn\":\"rulegrouparn\",\"overrideAction\":{\"type\":\"NONE\"},\"excludedRules\":[],\"ruleGroupType\":\"ManagedRuleGroup\"}],\"overrideCustomerWebACLAssociation\":false}"</code> </p> </li> <li> <p>Example: <code>WAF Classic</code> </p> <p> <code>"ManagedServiceData": "{\"type\": \"WAF\", \"ruleGroups\": [{\"id\": \"12345678-1bcd-9012-efga-0987654321ab\", \"overrideAction\" : {\"type\": \"COUNT\"}}], \"defaultAction\": {\"type\": \"BLOCK\"}}</code> </p> </li> <li> <p>Example: <code>SECURITY_GROUPS_COMMON</code> </p> <p> <code>"SecurityServicePolicyData":{"Type":"SECURITY_GROUPS_COMMON","ManagedServiceData":"{\"type\":\"SECURITY_GROUPS_COMMON\",\"revertManualSecurityGroupChanges\":false,\"exclusiveResourceSecurityGroupManagement\":false, \"applyToAllEC2InstanceENIs\":false,\"securityGroups\":[{\"id\":\" sg-000e55995d61a06bd\"}]}"},"RemediationEnabled":false,"ResourceType":"AWS::EC2::NetworkInterface"}</code> </p> </li> <li> <p>Example: <code>SECURITY_GROUPS_CONTENT_AUDIT</code> </p> <p> <code>"SecurityServicePolicyData":{"Type":"SECURITY_GROUPS_CONTENT_AUDIT","ManagedServiceData":"{\"type\":\"SECURITY_GROUPS_CONTENT_AUDIT\",\"securityGroups\":[{\"id\":\" sg-000e55995d61a06bd \"}],\"securityGroupAction\":{\"type\":\"ALLOW\"}}"},"RemediationEnabled":false,"ResourceType":"AWS::EC2::NetworkInterface"}</code> </p> <p>The security group action for content audit can be <code>ALLOW</code> or <code>DENY</code>. For <code>ALLOW</code>, all in-scope security group rules must be within the allowed range of the policy''s security group rules. For <code>DENY</code>, all in-scope security group rules must not contain a value or a range that matches a rule value or range in the policy security group.</p> </li> <li> <p>Example: <code>SECURITY_GROUPS_USAGE_AUDIT</code> </p> <p> <code>"SecurityServicePolicyData":{"Type":"SECURITY_GROUPS_USAGE_AUDIT","ManagedServiceData":"{\"type\":\"SECURITY_GROUPS_USAGE_AUDIT\",\"deleteUnusedSecurityGroups\":true,\"coalesceRedundantSecurityGroups\":true}"},"RemediationEnabled":false,"Resou rceType":"AWS::EC2::SecurityGroup"}</code> </p> </li> </ul>'
+          description: '<p>Details about the service that are specific to the service type, in JSON format. For service type <code>SHIELD_ADVANCED</code>, this is an empty string.</p> <ul> <li> <p>Example: <code>WAFV2</code> </p> <p> <code>"ManagedServiceData": "{\"type\":\"WAFV2\",\"defaultAction\":{\"type\":\"ALLOW\"},\"preProcessRuleGroups\":[{\"managedRuleGroupIdentifier\":null,\"ruleGroupArn\":\"rulegrouparn\",\"overrideAction\":{\"type\":\"COUNT\"},\"excludeRules\":[{\"name\":\"EntityName\"}],\"ruleGroupType\":\"RuleGroup\"}],\"postProcessRuleGroups\":[{\"managedRuleGroupIdentifier\":{\"managedRuleGroupName\":\"AWSManagedRulesAdminProtectionRuleSet\",\"vendorName\":\"AWS\"},\"ruleGroupArn\":\"rulegrouparn\",\"overrideAction\":{\"type\":\"NONE\"},\"excludeRules\":[],\"ruleGroupType\":\"ManagedRuleGroup\"}],\"overrideCustomerWebACLAssociation\":false}"</code> </p> </li> <li> <p>Example: <code>WAF Classic</code> </p> <p> <code>"ManagedServiceData": "{\"type\": \"WAF\", \"ruleGroups\": [{\"id\": \"12345678-1bcd-9012-efga-0987654321ab\", \"overrideAction\" : {\"type\": \"COUNT\"}}], \"defaultAction\": {\"type\": \"BLOCK\"}}</code> </p> </li> <li> <p>Example: <code>SECURITY_GROUPS_COMMON</code> </p> <p> <code>"SecurityServicePolicyData":{"Type":"SECURITY_GROUPS_COMMON","ManagedServiceData":"{\"type\":\"SECURITY_GROUPS_COMMON\",\"revertManualSecurityGroupChanges\":false,\"exclusiveResourceSecurityGroupManagement\":false, \"applyToAllEC2InstanceENIs\":false,\"securityGroups\":[{\"id\":\" sg-000e55995d61a06bd\"}]}"},"RemediationEnabled":false,"ResourceType":"AWS::EC2::NetworkInterface"}</code> </p> </li> <li> <p>Example: <code>SECURITY_GROUPS_CONTENT_AUDIT</code> </p> <p> <code>"SecurityServicePolicyData":{"Type":"SECURITY_GROUPS_CONTENT_AUDIT","ManagedServiceData":"{\"type\":\"SECURITY_GROUPS_CONTENT_AUDIT\",\"securityGroups\":[{\"id\":\" sg-000e55995d61a06bd \"}],\"securityGroupAction\":{\"type\":\"ALLOW\"}}"},"RemediationEnabled":false,"ResourceType":"AWS::EC2::NetworkInterface"}</code> </p> <p>The security group action for content audit can be <code>ALLOW</code> or <code>DENY</code>. For <code>ALLOW</code>, all in-scope security group rules must be within the allowed range of the policy''s security group rules. For <code>DENY</code>, all in-scope security group rules must not contain a value or a range that matches a rule value or range in the policy security group.</p> </li> <li> <p>Example: <code>SECURITY_GROUPS_USAGE_AUDIT</code> </p> <p> <code>"SecurityServicePolicyData":{"Type":"SECURITY_GROUPS_USAGE_AUDIT","ManagedServiceData":"{\"type\":\"SECURITY_GROUPS_USAGE_AUDIT\",\"deleteUnusedSecurityGroups\":true,\"coalesceRedundantSecurityGroups\":true}"},"RemediationEnabled":false,"Resou rceType":"AWS::EC2::SecurityGroup"}</code> </p> </li> </ul>'
       description: Details about the security service that is being used to protect the resources.
     ResourceTypeList:
       type: array
@@ -1643,7 +2550,7 @@ components:
           description: The ID of the AWS Firewall Manager policy.
         PolicyName:
           $ref: '#/components/schemas/ResourceName'
-          description: The friendly name of the AWS Firewall Manager policy.
+          description: The name of the AWS Firewall Manager policy.
         MemberAccount:
           $ref: '#/components/schemas/AWSAccountId'
           description: The member account ID.
@@ -1668,7 +2575,7 @@ components:
           description: The ID of the specified policy.
         PolicyName:
           $ref: '#/components/schemas/ResourceName'
-          description: The friendly name of the specified policy.
+          description: The name of the specified policy.
         ResourceType:
           $ref: '#/components/schemas/ResourceType'
           description: 'The type of resource protected by or in scope of the policy. This is in the format shown in the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html">AWS Resource Types Reference</a>. For AWS WAF and Shield Advanced, examples include <code>AWS::ElasticLoadBalancingV2::LoadBalancer</code> and <code>AWS::CloudFront::Distribution</code>. For a security group common policy, valid values are <code>AWS::EC2::NetworkInterface</code> and <code>AWS::EC2::Instance</code>. For a security group content audit policy, valid values are <code>AWS::EC2::SecurityGroup</code>, <code>AWS::EC2::NetworkInterface</code>, and <code>AWS::EC2::Instance</code>. For a security group usage audit policy, the value is <code>AWS::EC2::SecurityGroup</code>. '
@@ -1679,6 +2586,45 @@ components:
           $ref: '#/components/schemas/Boolean'
           description: Indicates if the policy should be automatically applied to new resources.
       description: 'Details of the AWS Firewall Manager policy. '
+    PreviousListVersion:
+      type: string
+      pattern: '^\d{1,2}$'
+      minLength: 1
+      maxLength: 2
+    ProtocolsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Protocol'
+    PreviousProtocolsList:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/ProtocolsList'
+    ProtocolsListDataSummary:
+      type: object
+      properties:
+        ListArn:
+          $ref: '#/components/schemas/ResourceArn'
+          description: The Amazon Resource Name (ARN) of the specified protocols list.
+        ListId:
+          $ref: '#/components/schemas/ListId'
+          description: The ID of the specified protocols list.
+        ListName:
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the specified protocols list.
+        ProtocolsList:
+          $ref: '#/components/schemas/ProtocolsList'
+          description: An array of protocols in the AWS Firewall Manager protocols list.
+      description: Details of the AWS Firewall Manager protocols list.
+    RemediationActionDescription:
+      type: string
+      pattern: .*
+      minLength: 0
+      maxLength: 1024
+    RemediationActionType:
+      type: string
+      enum:
+        - REMOVE
+        - MODIFY
     ResourceTagKey:
       type: string
       pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
@@ -1700,6 +2646,61 @@ components:
           $ref: '#/components/schemas/ResourceTagValue'
           description: The resource tag value.
       description: 'The resource tags that AWS Firewall Manager uses to determine if a particular resource should be included or excluded from the AWS Firewall Manager policy. Tags enable you to categorize your AWS resources in different ways, for example, by purpose, owner, or environment. Each tag consists of a key and an optional value. Firewall Manager combines the tags with "AND" so that, if you add more than one tag to a policy scope, a resource must have all the specified tags to be included or excluded. For more information, see <a href="https://docs.aws.amazon.com/awsconsolehelpdocs/latest/gsg/tag-editor.html">Working with Tag Editor</a>.'
+    ResourceViolation:
+      type: object
+      properties:
+        AwsVPCSecurityGroupViolation:
+          $ref: '#/components/schemas/AwsVPCSecurityGroupViolation'
+          description: Violation details for security groups.
+        AwsEc2NetworkInterfaceViolation:
+          $ref: '#/components/schemas/AwsEc2NetworkInterfaceViolation'
+          description: Violation details for network interface.
+        AwsEc2InstanceViolation:
+          $ref: '#/components/schemas/AwsEc2InstanceViolation'
+          description: Violation details for an EC2 instance.
+      description: Violation detail based on resource type.
+    ResourceViolations:
+      type: array
+      items:
+        $ref: '#/components/schemas/ResourceViolation'
+    SecurityGroupRuleDescription:
+      type: object
+      properties:
+        IPV4Range:
+          $ref: '#/components/schemas/CIDR'
+          description: The IPv4 ranges for the security group rule.
+        IPV6Range:
+          $ref: '#/components/schemas/CIDR'
+          description: The IPv6 ranges for the security group rule.
+        PrefixListId:
+          $ref: '#/components/schemas/ResourceId'
+          description: The ID of the prefix list for the security group rule.
+        Protocol:
+          $ref: '#/components/schemas/LengthBoundedString'
+          description: 'The IP protocol name (<code>tcp</code>, <code>udp</code>, <code>icmp</code>, <code>icmpv6</code>) or number.'
+        FromPort:
+          $ref: '#/components/schemas/IPPortNumber'
+          description: 'The start of the port range for the TCP and UDP protocols, or an ICMP/ICMPv6 type number. A value of <code>-1</code> indicates all ICMP/ICMPv6 types.'
+        ToPort:
+          $ref: '#/components/schemas/IPPortNumber'
+          description: 'The end of the port range for the TCP and UDP protocols, or an ICMP/ICMPv6 code. A value of <code>-1</code> indicates all ICMP/ICMPv6 codes.'
+      description: Describes a set of permissions for a security group rule.
+    SecurityGroupRemediationAction:
+      type: object
+      properties:
+        RemediationActionType:
+          $ref: '#/components/schemas/RemediationActionType'
+          description: The remediation action that will be performed.
+        Description:
+          $ref: '#/components/schemas/RemediationActionDescription'
+          description: Brief description of the action that will be performed.
+        RemediationResult:
+          $ref: '#/components/schemas/SecurityGroupRuleDescription'
+          description: The final state of the rule specified in the <code>ViolationTarget</code> after it is remediated.
+        IsDefaultAction:
+          $ref: '#/components/schemas/Boolean'
+          description: Indicates if the current action is the default action.
+      description: Remediation option for the rule specified in the <code>ViolationTarget</code>.
     TagKey:
       type: string
       pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
@@ -1729,5 +2730,10 @@ components:
         $ref: '#/components/schemas/TagKey'
       minItems: 0
       maxItems: 200
+    TargetViolationReason:
+      type: string
+      pattern: \w+
+      minLength: 0
+      maxLength: 256
 security:
   - hmac: []

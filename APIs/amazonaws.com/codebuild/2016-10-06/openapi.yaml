@@ -2383,7 +2383,7 @@ components:
           description: ' During a previous call, the maximum number of items that can be returned is the value specified in <code>maxResults</code>. If there more items in the list, then a unique string called a <i>nextToken</i> is returned. To get the next batch of items in the list, call this operation again, adding the next token to the call. To get all of the items in the list, keep calling this operation with each subsequent next token that is returned, until no more next tokens are returned. '
         reports:
           $ref: '#/components/schemas/ReportArns'
-          description: ' The list of returned report group ARNs. '
+          description: ' The list of report ARNs. '
     ListReportsForReportGroupInput:
       type: object
       required:
@@ -2583,6 +2583,9 @@ components:
         imagePullCredentialsTypeOverride:
           $ref: '#/components/schemas/ImagePullCredentialsType'
           description: '<p> The type of credentials AWS CodeBuild uses to pull images in your build. There are two valid values: </p> <ul> <li> <p> <code>CODEBUILD</code> specifies that AWS CodeBuild uses its own credentials. This requires that you modify your ECR repository policy to trust AWS CodeBuild''s service principal.</p> </li> <li> <p> <code>SERVICE_ROLE</code> specifies that AWS CodeBuild uses your build project''s service role. </p> </li> </ul> <p> When using a cross-account or private registry image, you must use SERVICE_ROLE credentials. When using an AWS CodeBuild curated image, you must use CODEBUILD credentials. </p>'
+        debugSessionEnabled:
+          $ref: '#/components/schemas/WrapperBoolean'
+          description: 'Specifies if session debugging is enabled for this build. For more information, see <a href="https://docs.aws.amazon.com/codebuild/latest/userguide/session-manager.html">Viewing a running build in Session Manager</a>.'
     StopBuildOutput:
       type: object
       properties:
@@ -2995,6 +2998,16 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ProjectFileSystemLocation'
+    DebugSession:
+      type: object
+      properties:
+        sessionEnabled:
+          $ref: '#/components/schemas/WrapperBoolean'
+          description: Specifies if session debugging is enabled for this build.
+        sessionTarget:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: 'Contains the identifier of the Session Manager session used for the build. To work with the paused build, you open this session to examine, control, and resume the build.'
+      description: 'Contains information about the debug session for a build. For more information, see <a href="https://docs.aws.amazon.com/codebuild/latest/userguide/session-manager.html">Viewing a running build in Session Manager</a>.'
     Build:
       type: object
       properties:
@@ -3088,6 +3101,9 @@ components:
         fileSystemLocations:
           $ref: '#/components/schemas/ProjectFileSystemLocations'
           description: ' An array of <code>ProjectFileSystemLocation</code> objects for a CodeBuild build project. A <code>ProjectFileSystemLocation</code> object specifies the <code>identifier</code>, <code>location</code>, <code>mountOptions</code>, <code>mountPoint</code>, and <code>type</code> of a file system created using Amazon Elastic File System. '
+        debugSession:
+          $ref: '#/components/schemas/DebugSession'
+          description: Contains information about the debug session for this build.
       description: Information about a build.
     WrapperBoolean:
       type: boolean
@@ -3495,6 +3511,7 @@ components:
         - LINUX_CONTAINER
         - LINUX_GPU_CONTAINER
         - ARM_CONTAINER
+        - WINDOWS_SERVER_2019_CONTAINER
     EnvironmentVariableType:
       type: string
       enum:

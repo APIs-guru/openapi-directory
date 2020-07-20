@@ -135,6 +135,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
       requestBody:
         required: true
         content:
@@ -186,6 +192,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
       requestBody:
         required: true
         content:
@@ -243,6 +255,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
       requestBody:
         required: true
         content:
@@ -265,10 +283,61 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSHawksNestServiceFacade.CreateModel':
+    post:
+      operationId: CreateModel
+      description: Creates a model using the specified model type.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateModelResult'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateModelRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSHawksNestServiceFacade.CreateModel
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=AWSHawksNestServiceFacade.CreateModelVersion':
     post:
       operationId: CreateModelVersion
-      description: 'Creates a version of the model using the specified model type. '
+      description: 'Creates a version of the model using the specified model type and model id. '
       responses:
         '200':
           description: Success
@@ -289,17 +358,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/ResourceNotFoundException'
         '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
           description: InternalServerException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalServerException'
-        '483':
-          description: ThrottlingException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ThrottlingException'
       requestBody:
         required: true
         content:
@@ -351,6 +420,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
       requestBody:
         required: true
         content:
@@ -402,6 +477,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
       requestBody:
         required: true
         content:
@@ -459,6 +540,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
       requestBody:
         required: true
         content:
@@ -522,6 +609,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ConflictException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
       requestBody:
         required: true
         content:
@@ -567,6 +660,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
       requestBody:
         required: true
         content:
@@ -589,17 +688,17 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSHawksNestServiceFacade.DeleteRuleVersion':
+  '/#X-Amz-Target=AWSHawksNestServiceFacade.DeleteRule':
     post:
-      operationId: DeleteRuleVersion
-      description: Deletes the rule version. You cannot delete a rule version if it is used by an <code>ACTIVE</code> or <code>INACTIVE</code> detector version.
+      operationId: DeleteRule
+      description: Deletes the rule. You cannot delete a rule if it is used by an <code>ACTIVE</code> or <code>INACTIVE</code> detector version.
       responses:
         '200':
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DeleteRuleVersionResult'
+                $ref: '#/components/schemas/DeleteRuleResult'
         '480':
           description: ConflictException
           content:
@@ -624,12 +723,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/DeleteRuleVersionRequest'
+              $ref: '#/components/schemas/DeleteRuleRequest'
       parameters:
         - name: X-Amz-Target
           in: header
@@ -637,7 +742,7 @@ paths:
           schema:
             type: string
             enum:
-              - AWSHawksNestServiceFacade.DeleteRuleVersion
+              - AWSHawksNestServiceFacade.DeleteRule
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -681,6 +786,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
       requestBody:
         required: true
         content:
@@ -733,11 +844,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/InternalServerException'
         '483':
-          description: ThrottlingException
+          description: AccessDeniedException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ThrottlingException'
+                $ref: '#/components/schemas/AccessDeniedException'
       requestBody:
         required: true
         content:
@@ -807,6 +918,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
       requestBody:
         required: true
         content:
@@ -832,7 +949,7 @@ paths:
   '/#X-Amz-Target=AWSHawksNestServiceFacade.GetDetectors':
     post:
       operationId: GetDetectors
-      description: 'Gets all of detectors. This is a paginated API. If you provide a null <code>maxSizePerPage</code>, this actions retrieves a maximum of 10 records per page. If you provide a <code>maxSizePerPage</code>, the value must be between 5 and 10. To get the next page results, provide the pagination token from the <code>GetEventTypesResponse</code> as part of your request. A null pagination token fetches the records from the beginning. '
+      description: 'Gets all detectors or a single detector if a <code>detectorId</code> is specified. This is a paginated API. If you provide a null <code>maxResults</code>, this action retrieves a maximum of 10 records per page. If you provide a <code>maxResults</code>, the value must be between 5 and 10. To get the next page results, provide the pagination token from the <code>GetDetectorsResponse</code> as part of your request. A null pagination token fetches the records from the beginning. '
       responses:
         '200':
           description: Success
@@ -864,6 +981,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
       requestBody:
         required: true
         content:
@@ -898,10 +1021,211 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSHawksNestServiceFacade.GetEntityTypes':
+    post:
+      operationId: GetEntityTypes
+      description: 'Gets all entity types or a specific entity type if a name is specified. This is a paginated API. If you provide a null <code>maxResults</code>, this action retrieves a maximum of 10 records per page. If you provide a <code>maxResults</code>, the value must be between 5 and 10. To get the next page results, provide the pagination token from the <code>GetEntityTypesResponse</code> as part of your request. A null pagination token fetches the records from the beginning. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetEntityTypesResult'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetEntityTypesRequest'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSHawksNestServiceFacade.GetEntityTypes
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSHawksNestServiceFacade.GetEventPrediction':
+    post:
+      operationId: GetEventPrediction
+      description: 'Evaluates an event against a detector version. If a version ID is not provided, the detector’s (<code>ACTIVE</code>) version is used.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetEventPredictionResult'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetEventPredictionRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSHawksNestServiceFacade.GetEventPrediction
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSHawksNestServiceFacade.GetEventTypes':
+    post:
+      operationId: GetEventTypes
+      description: 'Gets all event types or a specific event type if name is provided. This is a paginated API. If you provide a null <code>maxResults</code>, this action retrieves a maximum of 10 records per page. If you provide a <code>maxResults</code>, the value must be between 5 and 10. To get the next page results, provide the pagination token from the <code>GetEventTypesResponse</code> as part of your request. A null pagination token fetches the records from the beginning. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetEventTypesResult'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetEventTypesRequest'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSHawksNestServiceFacade.GetEventTypes
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=AWSHawksNestServiceFacade.GetExternalModels':
     post:
       operationId: GetExternalModels
-      description: 'Gets the details for one or more Amazon SageMaker models that have been imported into the service. This is a paginated API. If you provide a null <code>maxSizePerPage</code>, this actions retrieves a maximum of 10 records per page. If you provide a <code>maxSizePerPage</code>, the value must be between 5 and 10. To get the next page results, provide the pagination token from the <code>GetExternalModelsResult</code> as part of your request. A null pagination token fetches the records from the beginning. '
+      description: 'Gets the details for one or more Amazon SageMaker models that have been imported into the service. This is a paginated API. If you provide a null <code>maxResults</code>, this actions retrieves a maximum of 10 records per page. If you provide a <code>maxResults</code>, the value must be between 5 and 10. To get the next page results, provide the pagination token from the <code>GetExternalModelsResult</code> as part of your request. A null pagination token fetches the records from the beginning. '
       responses:
         '200':
           description: Success
@@ -933,6 +1257,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
       requestBody:
         required: true
         content:
@@ -967,10 +1297,124 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSHawksNestServiceFacade.GetKMSEncryptionKey':
+    post:
+      operationId: GetKMSEncryptionKey
+      description: Gets the encryption key if a Key Management Service (KMS) customer master key (CMK) has been specified to be used to encrypt content in Amazon Fraud Detector.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetKMSEncryptionKeyResult'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSHawksNestServiceFacade.GetKMSEncryptionKey
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSHawksNestServiceFacade.GetLabels':
+    post:
+      operationId: GetLabels
+      description: 'Gets all labels or a specific label if name is provided. This is a paginated API. If you provide a null <code>maxResults</code>, this action retrieves a maximum of 50 records per page. If you provide a <code>maxResults</code>, the value must be between 10 and 50. To get the next page results, provide the pagination token from the <code>GetGetLabelsResponse</code> as part of your request. A null pagination token fetches the records from the beginning. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetLabelsResult'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetLabelsRequest'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSHawksNestServiceFacade.GetLabels
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=AWSHawksNestServiceFacade.GetModelVersion':
     post:
       operationId: GetModelVersion
-      description: 'Gets a model version. '
+      description: Gets the details of the specified model version.
       responses:
         '200':
           description: Success
@@ -997,11 +1441,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/InternalServerException'
         '483':
-          description: ThrottlingException
+          description: AccessDeniedException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ThrottlingException'
+                $ref: '#/components/schemas/AccessDeniedException'
       requestBody:
         required: true
         content:
@@ -1027,7 +1471,7 @@ paths:
   '/#X-Amz-Target=AWSHawksNestServiceFacade.GetModels':
     post:
       operationId: GetModels
-      description: 'Gets all of the models for the AWS account, or the specified model type, or gets a single model for the specified model type, model ID combination. '
+      description: '<p>Gets one or more models. Gets all models for the AWS account if no model type and no model id provided. Gets all models for the AWS account and model type, if the model type is specified but model id is not provided. Gets a specific model if (model type, model id) tuple is specified. </p> <p>This is a paginated API. If you provide a null <code>maxResults</code>, this action retrieves a maximum of 10 records per page. If you provide a <code>maxResults</code>, the value must be between 1 and 10. To get the next page results, provide the pagination token from the response as part of your request. A null pagination token fetches the records from the beginning.</p>'
       responses:
         '200':
           description: Success
@@ -1054,11 +1498,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/InternalServerException'
         '483':
-          description: ThrottlingException
+          description: AccessDeniedException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ThrottlingException'
+                $ref: '#/components/schemas/AccessDeniedException'
       requestBody:
         required: true
         content:
@@ -1096,7 +1540,7 @@ paths:
   '/#X-Amz-Target=AWSHawksNestServiceFacade.GetOutcomes':
     post:
       operationId: GetOutcomes
-      description: 'Gets one or more outcomes. This is a paginated API. If you provide a null <code>maxSizePerPage</code>, this actions retrieves a maximum of 10 records per page. If you provide a <code>maxSizePerPage</code>, the value must be between 50 and 100. To get the next page results, provide the pagination token from the <code>GetOutcomesResult</code> as part of your request. A null pagination token fetches the records from the beginning. '
+      description: 'Gets one or more outcomes. This is a paginated API. If you provide a null <code>maxResults</code>, this actions retrieves a maximum of 100 records per page. If you provide a <code>maxResults</code>, the value must be between 50 and 100. To get the next page results, provide the pagination token from the <code>GetOutcomesResult</code> as part of your request. A null pagination token fetches the records from the beginning. '
       responses:
         '200':
           description: Success
@@ -1128,6 +1572,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
       requestBody:
         required: true
         content:
@@ -1197,6 +1647,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
       requestBody:
         required: true
         content:
@@ -1222,7 +1678,7 @@ paths:
   '/#X-Amz-Target=AWSHawksNestServiceFacade.GetRules':
     post:
       operationId: GetRules
-      description: Gets all rules available for the specified detector.
+      description: '<p>Get all rules for a detector (paginated) if <code>ruleId</code> and <code>ruleVersion</code> are not specified. Gets all rules for the detector and the <code>ruleId</code> if present (paginated). Gets a specific rule if both the <code>ruleId</code> and the <code>ruleVersion</code> are specified.</p> <p>This is a paginated API. Providing null maxResults results in retrieving maximum of 100 records per page. If you provide maxResults the value must be between 50 and 100. To get the next page result, a provide a pagination token from GetRulesResult as part of your request. Null pagination token fetches the records from the beginning.</p>'
       responses:
         '200':
           description: Success
@@ -1254,6 +1710,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
       requestBody:
         required: true
         content:
@@ -1323,6 +1785,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
       requestBody:
         required: true
         content:
@@ -1349,6 +1817,69 @@ paths:
             type: string
             enum:
               - AWSHawksNestServiceFacade.GetVariables
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSHawksNestServiceFacade.ListTagsForResource':
+    post:
+      operationId: ListTagsForResource
+      description: 'Lists all tags associated with the resource. This is a paginated API. To get the next page results, provide the pagination token from the response as part of your request. A null pagination token fetches the records from the beginning. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsForResourceResult'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListTagsForResourceRequest'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSHawksNestServiceFacade.ListTagsForResource
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1386,6 +1917,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
       requestBody:
         required: true
         content:
@@ -1400,6 +1937,108 @@ paths:
             type: string
             enum:
               - AWSHawksNestServiceFacade.PutDetector
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSHawksNestServiceFacade.PutEntityType':
+    post:
+      operationId: PutEntityType
+      description: 'Creates or updates an entity type. An entity represents who is performing the event. As part of a fraud prediction, you pass the entity ID to indicate the specific entity who performed the event. An entity type classifies the entity. Example classifications include customer, merchant, or account.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutEntityTypeResult'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutEntityTypeRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSHawksNestServiceFacade.PutEntityType
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSHawksNestServiceFacade.PutEventType':
+    post:
+      operationId: PutEventType
+      description: 'Creates or updates an event type. An event is a business activity that is evaluated for fraud risk. With Amazon Fraud Detector, you generate fraud predictions for events. An event type defines the structure for an event sent to Amazon Fraud Detector. This includes the variables sent as part of the event, the entity performing the event (such as a customer), and the labels that classify the event. Example event types include online payment transactions, account registrations, and authentications.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutEventTypeResult'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutEventTypeRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSHawksNestServiceFacade.PutEventType
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1437,6 +2076,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
       requestBody:
         required: true
         content:
@@ -1459,17 +2104,74 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSHawksNestServiceFacade.PutModel':
+  '/#X-Amz-Target=AWSHawksNestServiceFacade.PutKMSEncryptionKey':
     post:
-      operationId: PutModel
-      description: 'Creates or updates a model. '
+      operationId: PutKMSEncryptionKey
+      description: Specifies the Key Management Service (KMS) customer master key (CMK) to be used to encrypt content in Amazon Fraud Detector.
       responses:
         '200':
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PutModelResult'
+                $ref: '#/components/schemas/PutKMSEncryptionKeyResult'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutKMSEncryptionKeyRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSHawksNestServiceFacade.PutKMSEncryptionKey
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSHawksNestServiceFacade.PutLabel':
+    post:
+      operationId: PutLabel
+      description: 'Creates or updates label. A label classifies an event as fraudulent or legitimate. Labels are associated with event types and used to train supervised machine learning models in Amazon Fraud Detector. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutLabelResult'
         '480':
           description: ValidationException
           content:
@@ -1483,17 +2185,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/InternalServerException'
         '482':
-          description: ThrottlingException
+          description: AccessDeniedException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ThrottlingException'
+                $ref: '#/components/schemas/AccessDeniedException'
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/PutModelRequest'
+              $ref: '#/components/schemas/PutLabelRequest'
       parameters:
         - name: X-Amz-Target
           in: header
@@ -1501,7 +2203,7 @@ paths:
           schema:
             type: string
             enum:
-              - AWSHawksNestServiceFacade.PutModel
+              - AWSHawksNestServiceFacade.PutLabel
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1539,6 +2241,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
       requestBody:
         required: true
         content:
@@ -1561,10 +2269,112 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSHawksNestServiceFacade.TagResource':
+    post:
+      operationId: TagResource
+      description: Assigns tags to a resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagResourceResult'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TagResourceRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSHawksNestServiceFacade.TagResource
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSHawksNestServiceFacade.UntagResource':
+    post:
+      operationId: UntagResource
+      description: Removes tags from a resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UntagResourceResult'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UntagResourceRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSHawksNestServiceFacade.UntagResource
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=AWSHawksNestServiceFacade.UpdateDetectorVersion':
     post:
       operationId: UpdateDetectorVersion
-      description: ' Updates a detector version. The detector version attributes that you can update include models, external model endpoints, rules, and description. You can only update a <code>DRAFT</code> detector version.'
+      description: ' Updates a detector version. The detector version attributes that you can update include models, external model endpoints, rules, rule execution mode, and description. You can only update a <code>DRAFT</code> detector version.'
       responses:
         '200':
           description: Success
@@ -1596,6 +2406,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
       requestBody:
         required: true
         content:
@@ -1647,6 +2463,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
       requestBody:
         required: true
         content:
@@ -1704,6 +2526,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
       requestBody:
         required: true
         content:
@@ -1726,10 +2554,67 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSHawksNestServiceFacade.UpdateModel':
+    post:
+      operationId: UpdateModel
+      description: Updates a model. You can update the description attribute using this action.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateModelResult'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateModelRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSHawksNestServiceFacade.UpdateModel
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=AWSHawksNestServiceFacade.UpdateModelVersion':
     post:
       operationId: UpdateModelVersion
-      description: '<p>Updates a model version. You can update the description and status attributes using this action. You can perform the following status updates: </p> <ol> <li> <p>Change the <code>TRAINING_COMPLETE</code> status to <code>ACTIVE</code> </p> </li> <li> <p>Change <code>ACTIVE</code> back to <code>TRAINING_COMPLETE</code> </p> </li> </ol>'
+      description: 'Updates a model version. Updating a model version retrains an existing model version using updated training data and produces a new minor version of the model. You can update the training data set location and data access role attributes using this action. This action creates and trains a new minor version of the model, for example version 1.01, 1.02, 1.03.'
       responses:
         '200':
           description: Success
@@ -1750,17 +2635,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/ResourceNotFoundException'
         '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
           description: InternalServerException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalServerException'
-        '483':
-          description: ThrottlingException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ThrottlingException'
       requestBody:
         required: true
         content:
@@ -1783,10 +2668,67 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSHawksNestServiceFacade.UpdateModelVersionStatus':
+    post:
+      operationId: UpdateModelVersionStatus
+      description: '<p>Updates the status of a model version.</p> <p>You can perform the following status updates:</p> <ol> <li> <p>Change the <code>TRAINING_COMPLETE</code> status to <code>ACTIVE</code>.</p> </li> <li> <p>Change <code>ACTIVE</code>to <code>INACTIVE</code>.</p> </li> </ol>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateModelVersionStatusResult'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateModelVersionStatusRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSHawksNestServiceFacade.UpdateModelVersionStatus
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=AWSHawksNestServiceFacade.UpdateRuleMetadata':
     post:
       operationId: UpdateRuleMetadata
-      description: 'Updates a rule''s metadata. '
+      description: Updates a rule's metadata. The description attribute can be updated.
       responses:
         '200':
           description: Success
@@ -1818,6 +2760,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
       requestBody:
         required: true
         content:
@@ -1843,7 +2791,7 @@ paths:
   '/#X-Amz-Target=AWSHawksNestServiceFacade.UpdateRuleVersion':
     post:
       operationId: UpdateRuleVersion
-      description: 'Updates a rule version resulting in a new rule version. '
+      description: 'Updates a rule version resulting in a new rule version. Updates a rule version resulting in a new rule version (version 1, 2, 3 ...). '
       responses:
         '200':
           description: Success
@@ -1875,6 +2823,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
       requestBody:
         required: true
         content:
@@ -1932,6 +2886,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
       requestBody:
         required: true
         content:
@@ -2021,9 +2981,13 @@ components:
         variableEntries:
           $ref: '#/components/schemas/VariableEntryList'
           description: The list of variables for the batch create variable request.
+        tags:
+          $ref: '#/components/schemas/tagList'
+          description: A collection of key and value pairs.
     ValidationException: {}
     InternalServerException: {}
     ThrottlingException: {}
+    AccessDeniedException: {}
     BatchGetVariableResult:
       type: object
       properties:
@@ -2079,19 +3043,48 @@ components:
         ruleExecutionMode:
           $ref: '#/components/schemas/RuleExecutionMode'
           description: '<p>The rule execution mode for the rules included in the detector version.</p> <p>You can define and edit the rule mode at the detector version level, when it is in draft status.</p> <p>If you specify <code>FIRST_MATCHED</code>, Amazon Fraud Detector evaluates rules sequentially, first to last, stopping at the first matched rule. Amazon Fraud dectector then provides the outcomes for that single rule.</p> <p>If you specifiy <code>ALL_MATCHED</code>, Amazon Fraud Detector evaluates all rules and returns the outcomes for all matched rules. </p> <p>The default behavior is <code>FIRST_MATCHED</code>.</p>'
+        tags:
+          $ref: '#/components/schemas/tagList'
+          description: A collection of key and value pairs.
     ResourceNotFoundException: {}
+    CreateModelResult:
+      type: object
+      properties: {}
+    CreateModelRequest:
+      type: object
+      required:
+        - modelId
+        - modelType
+        - eventTypeName
+      title: CreateModelRequest
+      properties:
+        modelId:
+          $ref: '#/components/schemas/identifier'
+          description: The model ID.
+        modelType:
+          $ref: '#/components/schemas/ModelTypeEnum'
+          description: 'The model type. '
+        description:
+          $ref: '#/components/schemas/description'
+          description: 'The model description. '
+        eventTypeName:
+          $ref: '#/components/schemas/string'
+          description: The name of the event type.
+        tags:
+          $ref: '#/components/schemas/tagList'
+          description: A collection of key and value pairs.
     CreateModelVersionResult:
       type: object
       properties:
         modelId:
           $ref: '#/components/schemas/identifier'
-          description: 'The model ID. '
+          description: The model ID.
         modelType:
           $ref: '#/components/schemas/ModelTypeEnum'
           description: The model type.
         modelVersionNumber:
           $ref: '#/components/schemas/nonEmptyString'
-          description: 'The version of the model. '
+          description: The model version number of the model version created.
         status:
           $ref: '#/components/schemas/string'
           description: 'The model version status. '
@@ -2100,6 +3093,8 @@ components:
       required:
         - modelId
         - modelType
+        - trainingDataSource
+        - trainingDataSchema
       title: CreateModelVersionRequest
       properties:
         modelId:
@@ -2108,9 +3103,18 @@ components:
         modelType:
           $ref: '#/components/schemas/ModelTypeEnum'
           description: The model type.
-        description:
-          $ref: '#/components/schemas/description'
-          description: The model version description.
+        trainingDataSource:
+          $ref: '#/components/schemas/TrainingDataSourceEnum'
+          description: 'The training data source location in Amazon S3. '
+        trainingDataSchema:
+          $ref: '#/components/schemas/TrainingDataSchema'
+          description: The training data schema.
+        externalEventsDetail:
+          $ref: '#/components/schemas/ExternalEventsDetail'
+          description: Details for the external events data used for model version training. Required if <code>trainingDataSource</code> is <code>EXTERNAL_EVENTS</code>.
+        tags:
+          $ref: '#/components/schemas/tagList'
+          description: A collection of key and value pairs.
     CreateRuleResult:
       type: object
       properties:
@@ -2145,6 +3149,9 @@ components:
         outcomes:
           $ref: '#/components/schemas/NonEmptyListOfStrings'
           description: The outcome or outcomes returned when the rule expression matches.
+        tags:
+          $ref: '#/components/schemas/tagList'
+          description: A collection of key and value pairs.
     CreateVariableResult:
       type: object
       properties: {}
@@ -2174,7 +3181,10 @@ components:
           description: The description.
         variableType:
           $ref: '#/components/schemas/string'
-          description: The variable type.
+          description: '<p>The variable type.</p> <p>Valid Values: <code>AUTH_CODE | AVS | BILLING_ADDRESS_L1 | BILLING_ADDRESS_L2 | BILLING_CITY | BILLING_COUNTRY | BILLING_NAME | BILLING_PHONE | BILLING_STATE | BILLING_ZIP | CARD_BIN | CATEGORICAL | CURRENCY_CODE | EMAIL_ADDRESS | FINGERPRINT | FRAUD_LABEL | FREE_FORM_TEXT | IP_ADDRESS | NUMERIC | ORDER_ID | PAYMENT_TYPE | PHONE_NUMBER | PRICE | PRODUCT_CATEGORY | SHIPPING_ADDRESS_L1 | SHIPPING_ADDRESS_L2 | SHIPPING_CITY | SHIPPING_COUNTRY | SHIPPING_NAME | SHIPPING_PHONE | SHIPPING_STATE | SHIPPING_ZIP | USERAGENT | SHIPPING_ZIP | USERAGENT</code> </p>'
+        tags:
+          $ref: '#/components/schemas/tagList'
+          description: A collection of key and value pairs.
     DeleteDetectorResult:
       type: object
       properties: {}
@@ -2202,7 +3212,7 @@ components:
           $ref: '#/components/schemas/identifier'
           description: The ID of the parent detector for the detector version to delete.
         detectorVersionId:
-          $ref: '#/components/schemas/nonEmptyString'
+          $ref: '#/components/schemas/wholeNumberVersionString'
           description: The ID of the detector version to delete.
     DeleteEventResult:
       type: object
@@ -2211,31 +3221,26 @@ components:
       type: object
       required:
         - eventId
+        - eventTypeName
       title: DeleteEventRequest
       properties:
         eventId:
           $ref: '#/components/schemas/string'
           description: The ID of the event to delete.
-    DeleteRuleVersionResult:
+        eventTypeName:
+          $ref: '#/components/schemas/string'
+          description: The name of the event type.
+    DeleteRuleResult:
       type: object
       properties: {}
-    DeleteRuleVersionRequest:
+    DeleteRuleRequest:
       type: object
       required:
-        - detectorId
-        - ruleId
-        - ruleVersion
-      title: DeleteRuleVersionRequest
+        - rule
+      title: DeleteRuleRequest
       properties:
-        detectorId:
-          $ref: '#/components/schemas/identifier'
-          description: The ID of the detector that includes the rule version to delete.
-        ruleId:
-          $ref: '#/components/schemas/identifier'
-          description: The rule ID of the rule version to delete.
-        ruleVersion:
-          $ref: '#/components/schemas/nonEmptyString'
-          description: The rule version to delete.
+        rule:
+          $ref: '#/components/schemas/Rule'
     DescribeDetectorResult:
       type: object
       properties:
@@ -2248,6 +3253,9 @@ components:
         nextToken:
           $ref: '#/components/schemas/string'
           description: The next token to be used for subsequent requests.
+        arn:
+          $ref: '#/components/schemas/fraudDetectorArn'
+          description: The detector ARN.
     DescribeDetectorRequest:
       type: object
       required:
@@ -2267,7 +3275,7 @@ components:
       type: object
       properties:
         modelVersionDetails:
-          $ref: '#/components/schemas/ModelVersionDetailList'
+          $ref: '#/components/schemas/modelVersionDetailList'
           description: The model version details.
         nextToken:
           $ref: '#/components/schemas/string'
@@ -2280,8 +3288,8 @@ components:
           $ref: '#/components/schemas/identifier'
           description: The model ID.
         modelVersionNumber:
-          $ref: '#/components/schemas/nonEmptyString'
-          description: 'The model version. '
+          $ref: '#/components/schemas/floatVersionString'
+          description: The model version number.
         modelType:
           $ref: '#/components/schemas/ModelTypeEnum'
           description: The model type.
@@ -2289,7 +3297,7 @@ components:
           $ref: '#/components/schemas/string'
           description: The next token from the previous results.
         maxResults:
-          $ref: '#/components/schemas/MaxResults'
+          $ref: '#/components/schemas/modelsMaxPageSize'
           description: The maximum number of results to return.
     GetDetectorVersionResult:
       type: object
@@ -2298,7 +3306,7 @@ components:
           $ref: '#/components/schemas/identifier'
           description: The detector ID.
         detectorVersionId:
-          $ref: '#/components/schemas/nonEmptyString'
+          $ref: '#/components/schemas/wholeNumberVersionString'
           description: The detector version ID.
         description:
           $ref: '#/components/schemas/description'
@@ -2324,6 +3332,9 @@ components:
         ruleExecutionMode:
           $ref: '#/components/schemas/RuleExecutionMode'
           description: '<p>The execution mode of the rule in the dectector</p> <p> <code>FIRST_MATCHED</code> indicates that Amazon Fraud Detector evaluates rules sequentially, first to last, stopping at the first matched rule. Amazon Fraud dectector then provides the outcomes for that single rule.</p> <p> <code>ALL_MATCHED</code> indicates that Amazon Fraud Detector evaluates all rules and returns the outcomes for all matched rules. You can define and edit the rule mode at the detector version level, when it is in draft status.</p>'
+        arn:
+          $ref: '#/components/schemas/fraudDetectorArn'
+          description: The detector version ARN.
     GetDetectorVersionRequest:
       type: object
       required:
@@ -2335,7 +3346,7 @@ components:
           $ref: '#/components/schemas/identifier'
           description: The detector ID.
         detectorVersionId:
-          $ref: '#/components/schemas/nonEmptyString'
+          $ref: '#/components/schemas/wholeNumberVersionString'
           description: The detector version ID.
     GetDetectorsResult:
       type: object
@@ -2359,6 +3370,94 @@ components:
         maxResults:
           $ref: '#/components/schemas/DetectorsMaxResults'
           description: The maximum number of objects to return for the request.
+    GetEntityTypesResult:
+      type: object
+      properties:
+        entityTypes:
+          $ref: '#/components/schemas/entityTypeList'
+          description: An array of entity types.
+        nextToken:
+          $ref: '#/components/schemas/string'
+          description: The next page token.
+    GetEntityTypesRequest:
+      type: object
+      title: GetEntityTypesRequest
+      properties:
+        name:
+          $ref: '#/components/schemas/identifier'
+          description: The name.
+        nextToken:
+          $ref: '#/components/schemas/string'
+          description: The next token for the subsequent request.
+        maxResults:
+          $ref: '#/components/schemas/entityTypesMaxResults'
+          description: The maximum number of objects to return for the request.
+    GetEventPredictionResult:
+      type: object
+      properties:
+        modelScores:
+          $ref: '#/components/schemas/ListOfModelScores'
+          description: 'The model scores. Amazon Fraud Detector generates model scores between 0 and 1000, where 0 is low fraud risk and 1000 is high fraud risk. Model scores are directly related to the false positive rate (FPR). For example, a score of 600 corresponds to an estimated 10% false positive rate whereas a score of 900 corresponds to an estimated 2% false positive rate.'
+        ruleResults:
+          $ref: '#/components/schemas/ListOfRuleResults'
+          description: The results.
+    GetEventPredictionRequest:
+      type: object
+      required:
+        - detectorId
+        - eventId
+        - eventTypeName
+        - entities
+        - eventTimestamp
+        - eventVariables
+      title: GetEventPredictionRequest
+      properties:
+        detectorId:
+          $ref: '#/components/schemas/string'
+          description: The detector ID.
+        detectorVersionId:
+          $ref: '#/components/schemas/string'
+          description: The detector version ID.
+        eventId:
+          $ref: '#/components/schemas/string'
+          description: The unique ID used to identify the event.
+        eventTypeName:
+          $ref: '#/components/schemas/string'
+          description: The event type associated with the detector specified for the prediction.
+        entities:
+          $ref: '#/components/schemas/listOfEntities'
+          description: 'The entity type (associated with the detector''s event type) and specific entity ID representing who performed the event. If an entity id is not available, use "UNKNOWN."'
+        eventTimestamp:
+          $ref: '#/components/schemas/string'
+          description: Timestamp that defines when the event under evaluation occurred.
+        eventVariables:
+          $ref: '#/components/schemas/EventVariableMap'
+          description: Names of the event type's variables you defined in Amazon Fraud Detector to represent data elements and their corresponding values for the event you are sending for evaluation.
+        externalModelEndpointDataBlobs:
+          $ref: '#/components/schemas/ExternalModelEndpointDataBlobMap'
+          description: The Amazon SageMaker model endpoint input data blobs.
+    GetEventTypesResult:
+      type: object
+      properties:
+        eventTypes:
+          $ref: '#/components/schemas/eventTypeList'
+          description: An array of event types.
+        nextToken:
+          $ref: '#/components/schemas/string'
+          description: The next page token.
+    GetEventTypesRequest:
+      type: object
+      title: GetEventTypesRequest
+      properties:
+        name:
+          $ref: '#/components/schemas/identifier'
+          description: The name.
+        nextToken:
+          $ref: '#/components/schemas/string'
+          description: The next token for the subsequent request.
+        maxResults:
+          $ref: '#/components/schemas/eventTypesMaxResults'
+          description: The maximum number of objects to return for the request.
     GetExternalModelsResult:
       type: object
       properties:
@@ -2381,24 +3480,61 @@ components:
         maxResults:
           $ref: '#/components/schemas/ExternalModelsMaxResults'
           description: The maximum number of objects to return for the request.
+    GetKMSEncryptionKeyResult:
+      type: object
+      properties:
+        kmsKey:
+          $ref: '#/components/schemas/KMSKey'
+          description: The KMS encryption key.
+    GetLabelsResult:
+      type: object
+      properties:
+        labels:
+          $ref: '#/components/schemas/labelList'
+          description: An array of labels.
+        nextToken:
+          $ref: '#/components/schemas/string'
+          description: The next page token.
+    GetLabelsRequest:
+      type: object
+      title: GetLabelsRequest
+      properties:
+        name:
+          $ref: '#/components/schemas/identifier'
+          description: The name of the label or labels to get.
+        nextToken:
+          $ref: '#/components/schemas/string'
+          description: The next token for the subsequent request.
+        maxResults:
+          $ref: '#/components/schemas/labelsMaxResults'
+          description: The maximum number of objects to return for the request.
     GetModelVersionResult:
       type: object
       properties:
         modelId:
           $ref: '#/components/schemas/identifier'
-          description: 'The model ID. '
+          description: The model ID.
         modelType:
           $ref: '#/components/schemas/ModelTypeEnum'
-          description: 'The model type. '
+          description: The model type.
         modelVersionNumber:
-          $ref: '#/components/schemas/nonEmptyString'
-          description: 'The model version. '
-        description:
-          $ref: '#/components/schemas/description'
-          description: The model version description.
+          $ref: '#/components/schemas/floatVersionString'
+          description: The model version number.
+        trainingDataSource:
+          $ref: '#/components/schemas/TrainingDataSourceEnum'
+          description: The training data source.
+        trainingDataSchema:
+          $ref: '#/components/schemas/TrainingDataSchema'
+          description: The training data schema.
+        externalEventsDetail:
+          $ref: '#/components/schemas/ExternalEventsDetail'
+          description: The event details.
         status:
           $ref: '#/components/schemas/string'
-          description: 'The model version status. '
+          description: The model version status.
+        arn:
+          $ref: '#/components/schemas/fraudDetectorArn'
+          description: The model version ARN.
     GetModelVersionRequest:
       type: object
       required:
@@ -2409,38 +3545,38 @@ components:
       properties:
         modelId:
           $ref: '#/components/schemas/identifier'
-          description: 'The model ID. '
+          description: The model ID.
         modelType:
           $ref: '#/components/schemas/ModelTypeEnum'
-          description: 'The model type. '
+          description: The model type.
         modelVersionNumber:
-          $ref: '#/components/schemas/nonEmptyString'
-          description: 'The model version. '
+          $ref: '#/components/schemas/floatVersionString'
+          description: The model version number.
     GetModelsResult:
       type: object
       properties:
         nextToken:
           $ref: '#/components/schemas/string'
-          description: 'The next token for subsequent requests. '
+          description: The next page token to be used in subsequent requests.
         models:
-          $ref: '#/components/schemas/ModelList'
-          description: 'The returned models. '
+          $ref: '#/components/schemas/modelList'
+          description: The array of models.
     GetModelsRequest:
       type: object
       title: GetModelsRequest
       properties:
-        modelType:
-          $ref: '#/components/schemas/ModelTypeEnum'
-          description: The model type.
         modelId:
           $ref: '#/components/schemas/identifier'
           description: The model ID.
+        modelType:
+          $ref: '#/components/schemas/ModelTypeEnum'
+          description: The model type.
         nextToken:
           $ref: '#/components/schemas/string'
-          description: The next token for the request.
+          description: The next token for the subsequent request.
         maxResults:
-          $ref: '#/components/schemas/MaxResults'
-          description: The maximum results to return for the request.
+          $ref: '#/components/schemas/modelsMaxPageSize'
+          description: 'The maximum number of objects to return for the request. '
     GetOutcomesResult:
       type: object
       properties:
@@ -2519,7 +3655,7 @@ components:
           $ref: '#/components/schemas/identifier'
           description: The detector ID.
         ruleVersion:
-          $ref: '#/components/schemas/nonEmptyString'
+          $ref: '#/components/schemas/wholeNumberVersionString'
           description: The rule version.
         nextToken:
           $ref: '#/components/schemas/string'
@@ -2549,6 +3685,30 @@ components:
         maxResults:
           $ref: '#/components/schemas/VariablesMaxResults'
           description: 'The max size per page determined for the get variable request. '
+    ListTagsForResourceResult:
+      type: object
+      properties:
+        tags:
+          $ref: '#/components/schemas/tagList'
+          description: A collection of key and value pairs.
+        nextToken:
+          $ref: '#/components/schemas/string'
+          description: 'The next token for subsequent requests. '
+    ListTagsForResourceRequest:
+      type: object
+      required:
+        - resourceARN
+      title: ListTagsForResourceRequest
+      properties:
+        resourceARN:
+          $ref: '#/components/schemas/fraudDetectorArn'
+          description: The ARN that specifies the resource whose tags you want to list.
+        nextToken:
+          $ref: '#/components/schemas/string'
+          description: The next token from the previous results.
+        maxResults:
+          $ref: '#/components/schemas/TagsMaxResults'
+          description: 'The maximum number of objects to return for the request. '
     PutDetectorResult:
       type: object
       properties: {}
@@ -2556,6 +3716,7 @@ components:
       type: object
       required:
         - detectorId
+        - eventTypeName
       title: PutDetectorRequest
       properties:
         detectorId:
@@ -2564,6 +3725,59 @@ components:
         description:
           $ref: '#/components/schemas/description'
           description: The description of the detector.
+        eventTypeName:
+          $ref: '#/components/schemas/identifier'
+          description: The name of the event type.
+        tags:
+          $ref: '#/components/schemas/tagList'
+          description: A collection of key and value pairs.
+    PutEntityTypeResult:
+      type: object
+      properties: {}
+    PutEntityTypeRequest:
+      type: object
+      required:
+        - name
+      title: PutEntityTypeRequest
+      properties:
+        name:
+          $ref: '#/components/schemas/identifier'
+          description: The name of the entity type.
+        description:
+          $ref: '#/components/schemas/description'
+          description: The description.
+        tags:
+          $ref: '#/components/schemas/tagList'
+          description: A collection of key and value pairs.
+    PutEventTypeResult:
+      type: object
+      properties: {}
+    PutEventTypeRequest:
+      type: object
+      required:
+        - name
+        - eventVariables
+        - entityTypes
+      title: PutEventTypeRequest
+      properties:
+        name:
+          $ref: '#/components/schemas/identifier'
+          description: The name.
+        description:
+          $ref: '#/components/schemas/description'
+          description: The description of the event type.
+        eventVariables:
+          $ref: '#/components/schemas/NonEmptyListOfStrings'
+          description: The event type variables.
+        labels:
+          $ref: '#/components/schemas/ListOfStrings'
+          description: The event type labels.
+        entityTypes:
+          $ref: '#/components/schemas/NonEmptyListOfStrings'
+          description: 'The entity type for the event type. Example entity types: customer, merchant, account.'
+        tags:
+          $ref: '#/components/schemas/tagList'
+          description: A collection of key and value pairs.
     PutExternalModelResult:
       type: object
       properties: {}
@@ -2579,8 +3793,11 @@ components:
       title: PutExternalModelRequest
       properties:
         modelEndpoint:
-          $ref: '#/components/schemas/string'
+          $ref: '#/components/schemas/sageMakerEndpointIdentifier'
           description: The model endpoints name.
+        eventTypeName:
+          $ref: '#/components/schemas/identifier'
+          description: The event type name.
         modelSource:
           $ref: '#/components/schemas/ModelSource'
           description: The source of the model.
@@ -2596,37 +3813,39 @@ components:
         modelEndpointStatus:
           $ref: '#/components/schemas/ModelEndpointStatus'
           description: The model endpoint’s status in Amazon Fraud Detector.
-    PutModelResult:
+        tags:
+          $ref: '#/components/schemas/tagList'
+          description: A collection of key and value pairs.
+    PutKMSEncryptionKeyResult:
       type: object
       properties: {}
-    PutModelRequest:
+    PutKMSEncryptionKeyRequest:
       type: object
       required:
-        - modelId
-        - modelType
-        - trainingDataSource
-        - modelVariables
-        - labelSchema
-      title: PutModelRequest
+        - kmsEncryptionKeyArn
+      title: PutKMSEncryptionKeyRequest
       properties:
-        modelId:
+        kmsEncryptionKeyArn:
+          $ref: '#/components/schemas/KmsEncryptionKeyArn'
+          description: The KMS encryption key ARN.
+    PutLabelResult:
+      type: object
+      properties: {}
+    PutLabelRequest:
+      type: object
+      required:
+        - name
+      title: PutLabelRequest
+      properties:
+        name:
           $ref: '#/components/schemas/identifier'
-          description: The model ID.
-        modelType:
-          $ref: '#/components/schemas/ModelTypeEnum'
-          description: 'The model type. '
+          description: The label name.
         description:
           $ref: '#/components/schemas/description'
-          description: 'The model description. '
-        trainingDataSource:
-          $ref: '#/components/schemas/TrainingDataSource'
-          description: 'The training data source location in Amazon S3. '
-        modelVariables:
-          $ref: '#/components/schemas/ModelVariablesList'
-          description: The model input variables.
-        labelSchema:
-          $ref: '#/components/schemas/LabelSchema'
-          description: The label schema.
+          description: The label description.
+        tags:
+          $ref: '#/components/schemas/tagList'
+          description: <p/>
     PutOutcomeResult:
       type: object
       properties: {}
@@ -2642,6 +3861,41 @@ components:
         description:
           $ref: '#/components/schemas/description'
           description: The outcome description.
+        tags:
+          $ref: '#/components/schemas/tagList'
+          description: A collection of key and value pairs.
+    TagResourceResult:
+      type: object
+      properties: {}
+    TagResourceRequest:
+      type: object
+      required:
+        - resourceARN
+        - tags
+      title: TagResourceRequest
+      properties:
+        resourceARN:
+          $ref: '#/components/schemas/fraudDetectorArn'
+          description: The resource ARN.
+        tags:
+          $ref: '#/components/schemas/tagList'
+          description: The tags to assign to the resource.
+    UntagResourceResult:
+      type: object
+      properties: {}
+    UntagResourceRequest:
+      type: object
+      required:
+        - resourceARN
+        - tagKeys
+      title: UntagResourceRequest
+      properties:
+        resourceARN:
+          $ref: '#/components/schemas/fraudDetectorArn'
+          description: The ARN of the resource from which to remove the tag.
+        tagKeys:
+          $ref: '#/components/schemas/tagKeyList'
+          description: The resource ARN.
     UpdateDetectorVersionResult:
       type: object
       properties: {}
@@ -2658,7 +3912,7 @@ components:
           $ref: '#/components/schemas/identifier'
           description: The parent detector ID for the detector version you want to update.
         detectorVersionId:
-          $ref: '#/components/schemas/nonEmptyString'
+          $ref: '#/components/schemas/wholeNumberVersionString'
           description: 'The detector version ID. '
         externalModelEndpoints:
           $ref: '#/components/schemas/ListOfStrings'
@@ -2690,7 +3944,7 @@ components:
           $ref: '#/components/schemas/identifier'
           description: The detector ID.
         detectorVersionId:
-          $ref: '#/components/schemas/nonEmptyString'
+          $ref: '#/components/schemas/wholeNumberVersionString'
           description: 'The detector version ID. '
         description:
           $ref: '#/components/schemas/description'
@@ -2710,23 +3964,32 @@ components:
           $ref: '#/components/schemas/identifier'
           description: 'The detector ID. '
         detectorVersionId:
-          $ref: '#/components/schemas/nonEmptyString'
+          $ref: '#/components/schemas/wholeNumberVersionString'
           description: 'The detector version ID. '
         status:
           $ref: '#/components/schemas/DetectorVersionStatus'
           description: The new status.
-    UpdateModelVersionResult:
+    UpdateModelResult:
       type: object
       properties: {}
-    UpdateModelVersionRequest:
+    UpdateModelRequest:
       type: object
       required:
         - modelId
         - modelType
-        - modelVersionNumber
-        - description
-        - status
-      title: UpdateModelVersionRequest
+      title: UpdateModelRequest
+      properties:
+        modelId:
+          $ref: '#/components/schemas/identifier'
+          description: The model ID.
+        modelType:
+          $ref: '#/components/schemas/ModelTypeEnum'
+          description: The model type.
+        description:
+          $ref: '#/components/schemas/description'
+          description: The new model description.
+    UpdateModelVersionResult:
+      type: object
       properties:
         modelId:
           $ref: '#/components/schemas/identifier'
@@ -2735,14 +3998,58 @@ components:
           $ref: '#/components/schemas/ModelTypeEnum'
           description: The model type.
         modelVersionNumber:
-          $ref: '#/components/schemas/nonEmptyString'
-          description: The model version.
-        description:
-          $ref: '#/components/schemas/description'
-          description: The model description.
+          $ref: '#/components/schemas/floatVersionString'
+          description: The model version number of the model version updated.
+        status:
+          $ref: '#/components/schemas/string'
+          description: The status of the updated model version.
+    UpdateModelVersionRequest:
+      type: object
+      required:
+        - modelId
+        - modelType
+        - majorVersionNumber
+      title: UpdateModelVersionRequest
+      properties:
+        modelId:
+          $ref: '#/components/schemas/identifier'
+          description: The model ID.
+        modelType:
+          $ref: '#/components/schemas/ModelTypeEnum'
+          description: The model type.
+        majorVersionNumber:
+          $ref: '#/components/schemas/wholeNumberVersionString'
+          description: The major version number.
+        externalEventsDetail:
+          $ref: '#/components/schemas/ExternalEventsDetail'
+          description: The event details.
+        tags:
+          $ref: '#/components/schemas/tagList'
+          description: A collection of key and value pairs.
+    UpdateModelVersionStatusResult:
+      type: object
+      properties: {}
+    UpdateModelVersionStatusRequest:
+      type: object
+      required:
+        - modelId
+        - modelType
+        - modelVersionNumber
+        - status
+      title: UpdateModelVersionStatusRequest
+      properties:
+        modelId:
+          $ref: '#/components/schemas/identifier'
+          description: The model ID of the model version to update.
+        modelType:
+          $ref: '#/components/schemas/ModelTypeEnum'
+          description: The model type.
+        modelVersionNumber:
+          $ref: '#/components/schemas/floatVersionString'
+          description: The model version number.
         status:
           $ref: '#/components/schemas/ModelVersionStatus'
-          description: The new model status.
+          description: The model version status.
     UpdateRuleMetadataResult:
       type: object
       properties: {}
@@ -2789,6 +4096,9 @@ components:
         outcomes:
           $ref: '#/components/schemas/NonEmptyListOfStrings'
           description: The outcomes.
+        tags:
+          $ref: '#/components/schemas/tagList'
+          description: The tags to assign to the rule version.
     UpdateVariableResult:
       type: object
       properties: {}
@@ -2837,6 +4147,12 @@ components:
         $ref: '#/components/schemas/VariableEntry'
       minItems: 1
       maxItems: 25
+    tagList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Tag'
+      minItems: 0
+      maxItems: 200
     BatchGetVariableError:
       type: object
       properties:
@@ -2903,10 +4219,40 @@ components:
       type: string
       enum:
         - ONLINE_FRAUD_INSIGHTS
+    TrainingDataSourceEnum:
+      type: string
+      enum:
+        - EXTERNAL_EVENTS
+    TrainingDataSchema:
+      type: object
+      required:
+        - modelVariables
+        - labelSchema
+      properties:
+        modelVariables:
+          $ref: '#/components/schemas/ListOfStrings'
+          description: The training data schema variables.
+        labelSchema:
+          $ref: '#/components/schemas/LabelSchema'
+      description: The training data schema.
+    ExternalEventsDetail:
+      type: object
+      required:
+        - dataLocation
+        - dataAccessRoleArn
+      properties:
+        dataLocation:
+          $ref: '#/components/schemas/s3BucketLocation'
+          description: The Amazon S3 bucket location for the data.
+        dataAccessRoleArn:
+          $ref: '#/components/schemas/iamRoleArn'
+          description: The ARN of the role that provides Amazon Fraud Detector access to the data location.
+      description: Details for the external events data used for model version training.
     ruleExpression:
       type: string
       minLength: 1
       maxLength: 4096
+      format: password
     Language:
       type: string
       enum:
@@ -2930,7 +4276,7 @@ components:
           $ref: '#/components/schemas/identifier'
           description: The rule ID.
         ruleVersion:
-          $ref: '#/components/schemas/nonEmptyString'
+          $ref: '#/components/schemas/wholeNumberVersionString'
           description: The rule version.
       description: A rule.
     DataType:
@@ -2950,6 +4296,27 @@ components:
       type: object
       additionalProperties:
         $ref: '#/components/schemas/string'
+    fileValidationMessageList:
+      type: array
+      items:
+        $ref: '#/components/schemas/FileValidationMessage'
+    fieldValidationMessageList:
+      type: array
+      items:
+        $ref: '#/components/schemas/FieldValidationMessage'
+    DataValidationMetrics:
+      type: object
+      properties:
+        fileLevelMessages:
+          $ref: '#/components/schemas/fileValidationMessageList'
+          description: The file-specific model training validation messages.
+        fieldLevelMessages:
+          $ref: '#/components/schemas/fieldValidationMessageList'
+          description: The field-specific model training validation messages.
+      description: The model training validation messages.
+    wholeNumberVersionString:
+      type: string
+      pattern: '^([1-9][0-9]*)$'
     DetectorVersionMaxResults:
       type: integer
       minimum: 1000
@@ -2958,11 +4325,19 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/DetectorVersionSummary'
-    MaxResults:
+    fraudDetectorArn:
+      type: string
+      pattern: '^arn\:aws[a-z-]{0,15}\:frauddetector\:[a-z0-9-]{3,20}\:[0-9]{12}\:[^\s]{2,128}$'
+      minLength: 1
+      maxLength: 256
+    floatVersionString:
+      type: string
+      pattern: '^[1-9][0-9]{0,3}\.[0-9]{1,2}$'
+    modelsMaxPageSize:
       type: integer
       minimum: 1
       maximum: 10
-    ModelVersionDetailList:
+    modelVersionDetailList:
       type: array
       items:
         $ref: '#/components/schemas/ModelVersionDetail'
@@ -2977,12 +4352,18 @@ components:
         description:
           $ref: '#/components/schemas/description'
           description: The detector description.
+        eventTypeName:
+          $ref: '#/components/schemas/identifier'
+          description: The name of the event type.
         lastUpdatedTime:
           $ref: '#/components/schemas/time'
           description: Timestamp of when the detector was last updated.
         createdTime:
           $ref: '#/components/schemas/time'
           description: Timestamp of when the detector was created.
+        arn:
+          $ref: '#/components/schemas/fraudDetectorArn'
+          description: The detector ARN.
       description: The detector.
     DetectorList:
       type: array
@@ -3008,6 +4389,35 @@ components:
       type: integer
       minimum: 5
       maximum: 10
+    Entity:
+      type: object
+      properties:
+        entityType:
+          $ref: '#/components/schemas/string'
+          description: The entity type.
+        entityId:
+          $ref: '#/components/schemas/identifier'
+          description: 'The entity ID. If you do not know the <code>entityId</code>, you can pass <code>unknown</code>, which is areserved string literal.'
+      description: 'The entity details. '
+    EntityType:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/string'
+          description: The entity type name.
+        description:
+          $ref: '#/components/schemas/description'
+          description: The entity type description.
+        lastUpdatedTime:
+          $ref: '#/components/schemas/time'
+          description: Timestamp of when the entity type was last updated.
+        createdTime:
+          $ref: '#/components/schemas/time'
+          description: Timestamp of when the entity type was created.
+        arn:
+          $ref: '#/components/schemas/fraudDetectorArn'
+          description: The entity type ARN.
+      description: The entity type details.
     attributeValue:
       type: string
       minLength: 1
@@ -3017,6 +4427,54 @@ components:
       type: object
       additionalProperties:
         $ref: '#/components/schemas/attributeValue'
+    EventType:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/string'
+          description: The event type name.
+        description:
+          $ref: '#/components/schemas/description'
+          description: The event type description.
+        eventVariables:
+          $ref: '#/components/schemas/ListOfStrings'
+          description: The event type event variables.
+        labels:
+          $ref: '#/components/schemas/ListOfStrings'
+          description: The event type labels.
+        entityTypes:
+          $ref: '#/components/schemas/NonEmptyListOfStrings'
+          description: The event type entity types.
+        lastUpdatedTime:
+          $ref: '#/components/schemas/time'
+          description: Timestamp of when the event type was last updated.
+        createdTime:
+          $ref: '#/components/schemas/time'
+          description: Timestamp of when the event type was created.
+        arn:
+          $ref: '#/components/schemas/fraudDetectorArn'
+          description: The entity type ARN.
+      description: The event type details.
+    variableValue:
+      type: string
+      minLength: 1
+      maxLength: 256
+      format: password
+    EventVariableMap:
+      type: object
+      minProperties: 1
+      additionalProperties:
+        $ref: '#/components/schemas/variableValue'
+    s3BucketLocation:
+      type: string
+      pattern: '^s3:\/\/(.+)$'
+      minLength: 1
+      maxLength: 512
+    iamRoleArn:
+      type: string
+      pattern: '^arn\:aws[a-z-]{0,15}\:iam\:\:[0-9]{12}\:role\/[^\s]{2,64}$'
+      minLength: 1
+      maxLength: 256
     ModelSource:
       type: string
       enum:
@@ -3037,21 +4495,21 @@ components:
     ModelInputConfiguration:
       type: object
       required:
-        - isOpaque
+        - useEventVariables
       properties:
         format:
           $ref: '#/components/schemas/ModelInputDataFormat'
           description: ' The format of the model input configuration. The format differs depending on if it is passed through to SageMaker or constructed by Amazon Fraud Detector.'
-        isOpaque:
-          $ref: '#/components/schemas/IsOpaque'
-          description: ' For an opaque-model, the input to the model will be a ByteBuffer blob provided in the getPrediction request, and will be passed to SageMaker as-is. For non-opaque models, the input will be constructed by Amazon Fraud Detector based on the model-configuration. '
+        useEventVariables:
+          $ref: '#/components/schemas/UseEventVariables'
+          description: The event variables.
         jsonInputTemplate:
           $ref: '#/components/schemas/string'
           description: ' Template for constructing the JSON input-data sent to SageMaker. At event-evaluation, the placeholders for variable names in the template will be replaced with the variable values before being sent to SageMaker. '
         csvInputTemplate:
           $ref: '#/components/schemas/string'
           description: ' Template for constructing the CSV input-data sent to SageMaker. At event-evaluation, the placeholders for variable-names in the template will be replaced with the variable values before being sent to SageMaker. '
-      description: The model input configuration.
+      description: The Amazon SageMaker model input configuration.
     ModelOutputConfiguration:
       type: object
       required:
@@ -3066,7 +4524,7 @@ components:
         csvIndexToVariableMap:
           $ref: '#/components/schemas/CsvIndexToVariableMap'
           description: 'A map of CSV index values in the SageMaker response to the Amazon Fraud Detector variables. '
-      description: Provides the model output configuration.
+      description: Provides the Amazon Sagemaker model output configuration.
     ModelEndpointStatus:
       type: string
       enum:
@@ -3078,6 +4536,9 @@ components:
         modelEndpoint:
           $ref: '#/components/schemas/string'
           description: The Amazon SageMaker model endpoints.
+        eventTypeName:
+          $ref: '#/components/schemas/identifier'
+          description: The event type names.
         modelSource:
           $ref: '#/components/schemas/ModelSource'
           description: The source of the model.
@@ -3099,6 +4560,9 @@ components:
         createdTime:
           $ref: '#/components/schemas/time'
           description: Timestamp of when the model was last created.
+        arn:
+          $ref: '#/components/schemas/fraudDetectorArn'
+          description: The model ARN.
       description: The Amazon SageMaker model.
     ModelEndpointDataBlob:
       type: object
@@ -3122,7 +4586,82 @@ components:
       type: integer
       minimum: 5
       maximum: 10
-    ModelList:
+    FieldValidationMessage:
+      type: object
+      properties:
+        fieldName:
+          $ref: '#/components/schemas/string'
+          description: The field name.
+        identifier:
+          $ref: '#/components/schemas/string'
+          description: The message ID.
+        title:
+          $ref: '#/components/schemas/string'
+          description: The message title.
+        content:
+          $ref: '#/components/schemas/string'
+          description: The message content.
+        type:
+          $ref: '#/components/schemas/string'
+          description: The message type.
+      description: The message details.
+    FileValidationMessage:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/string'
+          description: The message title.
+        content:
+          $ref: '#/components/schemas/string'
+          description: The message content.
+        type:
+          $ref: '#/components/schemas/string'
+          description: The message type.
+      description: The message details.
+    entityTypesMaxResults:
+      type: integer
+      minimum: 5
+      maximum: 10
+    entityTypeList:
+      type: array
+      items:
+        $ref: '#/components/schemas/EntityType'
+    listOfEntities:
+      type: array
+      items:
+        $ref: '#/components/schemas/Entity'
+    ListOfModelScores:
+      type: array
+      items:
+        $ref: '#/components/schemas/ModelScores'
+    ListOfRuleResults:
+      type: array
+      items:
+        $ref: '#/components/schemas/RuleResult'
+    eventTypesMaxResults:
+      type: integer
+      minimum: 5
+      maximum: 10
+    eventTypeList:
+      type: array
+      items:
+        $ref: '#/components/schemas/EventType'
+    KMSKey:
+      type: object
+      properties:
+        kmsEncryptionKeyArn:
+          $ref: '#/components/schemas/KmsEncryptionKeyArn'
+          description: The encryption key ARN.
+      description: The KMS key details.
+    labelsMaxResults:
+      type: integer
+      minimum: 10
+      maximum: 50
+    labelList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Label'
+    modelList:
       type: array
       items:
         $ref: '#/components/schemas/Model'
@@ -3134,14 +4673,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Outcome'
-    ListOfModelScores:
-      type: array
-      items:
-        $ref: '#/components/schemas/ModelScores'
-    ListOfRuleResults:
-      type: array
-      items:
-        $ref: '#/components/schemas/RuleResult'
     RulesMaxResults:
       type: integer
       minimum: 50
@@ -3154,28 +4685,46 @@ components:
       type: integer
       minimum: 50
       maximum: 100
-    IsOpaque:
-      type: boolean
     JsonKeyToVariableMap:
       type: object
       additionalProperties:
         $ref: '#/components/schemas/string'
-    LabelMapper:
+    KmsEncryptionKeyArn:
+      type: string
+      pattern: '^\w{8}-\w{4}-\w{4}-\w{4}-\w{12}$|DEFAULT|arn:[a-zA-Z0-9-]+:kms:[a-zA-Z0-9-]+:\d{12}:key:[a-zA-Z0-9-_]+|[a-zA-Z0-9-_]\S+'
+      minLength: 7
+      maxLength: 80
+    Label:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/string'
+          description: The label name.
+        description:
+          $ref: '#/components/schemas/description'
+          description: The label description.
+        lastUpdatedTime:
+          $ref: '#/components/schemas/time'
+          description: Timestamp of when the label was last updated.
+        createdTime:
+          $ref: '#/components/schemas/time'
+          description: Timestamp of when the event type was created.
+        arn:
+          $ref: '#/components/schemas/fraudDetectorArn'
+          description: The label ARN.
+      description: The label details.
+    labelMapper:
       type: object
       additionalProperties:
         $ref: '#/components/schemas/ListOfStrings'
     LabelSchema:
       type: object
       required:
-        - labelKey
         - labelMapper
       properties:
-        labelKey:
-          $ref: '#/components/schemas/string'
-          description: The label key.
         labelMapper:
-          $ref: '#/components/schemas/LabelMapper'
-          description: 'The label mapper maps the Amazon Fraud Detector supported label to the appropriate source labels. For example, if <code>"FRAUD"</code> and <code>"LEGIT"</code> are Amazon Fraud Detector supported labels, this mapper could be: <code>{"FRAUD" =&gt; ["0"]</code>, "LEGIT" =&gt; ["1"]} or <code>{"FRAUD" =&gt; ["false"], "LEGIT" =&gt; ["true"]}</code> or <code>{"FRAUD" =&gt; ["fraud", "abuse"], "LEGIT" =&gt; ["legit", "safe"]}</code>. The value part of the mapper is a list, because you may have multiple variants for a single Amazon Fraud Detector label. '
+          $ref: '#/components/schemas/labelMapper'
+          description: 'The label mapper maps the Amazon Fraud Detector supported model classification labels (<code>FRAUD</code>, <code>LEGIT</code>) to the appropriate event type labels. For example, if "<code>FRAUD</code>" and "<code>LEGIT</code>" are Amazon Fraud Detector supported labels, this mapper could be: <code>{"FRAUD" =&gt; ["0"]</code>, <code>"LEGIT" =&gt; ["1"]}</code> or <code>{"FRAUD" =&gt; ["false"]</code>, <code>"LEGIT" =&gt; ["true"]}</code> or <code>{"FRAUD" =&gt; ["fraud", "abuse"]</code>, <code>"LEGIT" =&gt; ["legit", "safe"]}</code>. The value part of the mapper is a list, because you may have multiple label variants from your event type for a single Amazon Fraud Detector label. '
       description: The label schema.
     ModelScores:
       type: object
@@ -3196,13 +4745,16 @@ components:
       properties:
         modelId:
           $ref: '#/components/schemas/identifier'
-          description: The parent model ID.
+          description: The model ID.
         modelType:
           $ref: '#/components/schemas/ModelTypeEnum'
           description: The model type.
         modelVersionNumber:
           $ref: '#/components/schemas/nonEmptyString'
-          description: The model version.
+          description: The model version number.
+        arn:
+          $ref: '#/components/schemas/fraudDetectorArn'
+          description: The model version ARN.
       description: The model version.
     RuleResult:
       type: object
@@ -3214,27 +4766,29 @@ components:
           $ref: '#/components/schemas/ListOfStrings'
           description: 'The outcomes of the matched rule, based on the rule execution mode.'
       description: The rule results.
-    MetricsMap:
+    TagsMaxResults:
+      type: integer
+      minimum: 50
+      maximum: 50
+    float:
+      type: number
+      format: float
+    MetricDataPoint:
       type: object
-      additionalProperties:
-        $ref: '#/components/schemas/string'
-    TrainingDataSource:
-      type: object
-      required:
-        - dataLocation
-        - dataAccessRoleArn
       properties:
-        dataLocation:
-          $ref: '#/components/schemas/s3BucketLocation'
-          description: The data location of the training data source.
-        dataAccessRoleArn:
-          $ref: '#/components/schemas/iamRoleArn'
-          description: The data access role ARN for the training data source.
-      description: The training data source.
-    ModelVariablesList:
-      type: array
-      items:
-        $ref: '#/components/schemas/ModelVariable'
+        fpr:
+          $ref: '#/components/schemas/float'
+          description: The false positive rate. This is the percentage of total legitimate events that are incorrectly predicted as fraud.
+        precision:
+          $ref: '#/components/schemas/float'
+          description: The percentage of fraud events correctly predicted as fraudulent as compared to all events predicted as fraudulent.
+        tpr:
+          $ref: '#/components/schemas/float'
+          description: The true positive rate. This is the percentage of total fraud the model detects. Also known as capture rate.
+        threshold:
+          $ref: '#/components/schemas/float'
+          description: 'The model threshold that specifies an acceptable fraud capture rate. For example, a threshold of 500 means any model score 500 or above is labeled as fraud.'
+      description: Model performance metrics data points.
     Model:
       type: object
       properties:
@@ -3247,21 +4801,18 @@ components:
         description:
           $ref: '#/components/schemas/description'
           description: The model description.
-        trainingDataSource:
-          $ref: '#/components/schemas/TrainingDataSource'
-          description: The model training data source in Amazon S3.
-        modelVariables:
-          $ref: '#/components/schemas/ModelVariablesList'
-          description: The model input variables.
-        labelSchema:
-          $ref: '#/components/schemas/LabelSchema'
-          description: The model label schema.
-        lastUpdatedTime:
-          $ref: '#/components/schemas/time'
-          description: Timestamp of last time the model was updated.
+        eventTypeName:
+          $ref: '#/components/schemas/string'
+          description: The name of the event type.
         createdTime:
           $ref: '#/components/schemas/time'
           description: Timestamp of when the model was created.
+        lastUpdatedTime:
+          $ref: '#/components/schemas/time'
+          description: Timestamp of last time the model was updated.
+        arn:
+          $ref: '#/components/schemas/fraudDetectorArn'
+          description: The ARN of the model.
       description: The model.
     blob:
       type: string
@@ -3274,32 +4825,27 @@ components:
       enum:
         - TEXT_CSV
         - APPLICATION_JSON
+    UseEventVariables:
+      type: boolean
     ModelOutputDataFormat:
       type: string
       enum:
         - TEXT_CSV
         - APPLICATION_JSONLINES
-    float:
-      type: number
-      format: float
     ModelPredictionMap:
       type: object
       additionalProperties:
         $ref: '#/components/schemas/float'
-    ModelVariableIndex:
-      type: integer
-    ModelVariable:
+    TrainingResult:
       type: object
-      required:
-        - name
       properties:
-        name:
-          $ref: '#/components/schemas/string'
-          description: The model variable's name.&gt;
-        index:
-          $ref: '#/components/schemas/ModelVariableIndex'
-          description: The model variable's index.&gt;
-      description: The model variable.&gt;
+        dataValidationMetrics:
+          $ref: '#/components/schemas/DataValidationMetrics'
+          description: The validation metrics.
+        trainingMetrics:
+          $ref: '#/components/schemas/TrainingMetrics'
+          description: The training metric details.
+      description: The training result details.
     ModelVersionDetail:
       type: object
       properties:
@@ -3310,36 +4856,33 @@ components:
           $ref: '#/components/schemas/ModelTypeEnum'
           description: The model type.
         modelVersionNumber:
-          $ref: '#/components/schemas/nonEmptyString'
-          description: The model version.
-        description:
-          $ref: '#/components/schemas/description'
-          description: The model description.
+          $ref: '#/components/schemas/floatVersionString'
+          description: The model version number.
         status:
           $ref: '#/components/schemas/string'
-          description: The model status.
+          description: The status of the model version.
         trainingDataSource:
-          $ref: '#/components/schemas/TrainingDataSource'
-          description: The model training data source.
-        modelVariables:
-          $ref: '#/components/schemas/ModelVariablesList'
-          description: The model variables.
-        labelSchema:
-          $ref: '#/components/schemas/LabelSchema'
-          description: The model label schema.
-        validationMetrics:
-          $ref: '#/components/schemas/MetricsMap'
-          description: The model validation metrics.
-        trainingMetrics:
-          $ref: '#/components/schemas/MetricsMap'
-          description: The model training metrics.
+          $ref: '#/components/schemas/TrainingDataSourceEnum'
+          description: The model version training data source.
+        trainingDataSchema:
+          $ref: '#/components/schemas/TrainingDataSchema'
+          description: The training data schema.
+        externalEventsDetail:
+          $ref: '#/components/schemas/ExternalEventsDetail'
+          description: The event details.
+        trainingResult:
+          $ref: '#/components/schemas/TrainingResult'
+          description: The training results.
         lastUpdatedTime:
           $ref: '#/components/schemas/time'
           description: The timestamp when the model was last updated.
         createdTime:
           $ref: '#/components/schemas/time'
           description: The timestamp when the model was created.
-      description: 'Provides the model version details. '
+        arn:
+          $ref: '#/components/schemas/fraudDetectorArn'
+          description: The model version ARN.
+      description: The details of the model version.
     ModelVersionStatus:
       type: string
       enum:
@@ -3350,6 +4893,8 @@ components:
         - ACTIVE
         - INACTIVATE_IN_PROGRESS
         - INACTIVE
+        - DELETE_REQUESTED
+        - DELETE_IN_PROGRESS
         - ERROR
     Outcome:
       type: object
@@ -3366,7 +4911,15 @@ components:
         createdTime:
           $ref: '#/components/schemas/time'
           description: The timestamp when the outcome was created.
+        arn:
+          $ref: '#/components/schemas/fraudDetectorArn'
+          description: The outcome ARN.
       description: The outcome.
+    sageMakerEndpointIdentifier:
+      type: string
+      pattern: '^[0-9A-Za-z_-]+$'
+      minLength: 1
+      maxLength: 63
     RuleDetail:
       type: object
       properties:
@@ -3380,7 +4933,7 @@ components:
           $ref: '#/components/schemas/identifier'
           description: The detector for which the rule is associated.
         ruleVersion:
-          $ref: '#/components/schemas/nonEmptyString'
+          $ref: '#/components/schemas/wholeNumberVersionString'
           description: The rule version.
         expression:
           $ref: '#/components/schemas/ruleExpression'
@@ -3397,17 +4950,52 @@ components:
         createdTime:
           $ref: '#/components/schemas/time'
           description: The timestamp of when the rule was created.
+        arn:
+          $ref: '#/components/schemas/fraudDetectorArn'
+          description: The rule ARN.
       description: The details of the rule.
-    s3BucketLocation:
+    tagKey:
       type: string
-      pattern: '^s3:\/\/(.+)$'
+      pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
       minLength: 1
-      maxLength: 512
-    iamRoleArn:
+      maxLength: 128
+    tagValue:
       type: string
-      pattern: '^arn\:aws\:iam\:\:[0-9]{12}\:role\/[^\s]{2,64}$'
-      minLength: 1
+      minLength: 0
       maxLength: 256
+    Tag:
+      type: object
+      required:
+        - key
+        - value
+      properties:
+        key:
+          $ref: '#/components/schemas/tagKey'
+          description: A tag key.
+        value:
+          $ref: '#/components/schemas/tagValue'
+          description: A value assigned to a tag key.
+      description: 'A key and value pair. '
+    metricDataPointsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/MetricDataPoint'
+    TrainingMetrics:
+      type: object
+      properties:
+        auc:
+          $ref: '#/components/schemas/float'
+          description: 'The area under the curve. This summarizes true positive rate (TPR) and false positive rate (FPR) across all possible model score thresholds. A model with no predictive power has an AUC of 0.5, whereas a perfect model has a score of 1.0.'
+        metricDataPoints:
+          $ref: '#/components/schemas/metricDataPointsList'
+          description: The data points details.
+      description: The training metric details.
+    tagKeyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/tagKey'
+      minItems: 0
+      maxItems: 50
     Variable:
       type: object
       properties:
@@ -3428,37 +5016,44 @@ components:
           description: 'The description of the variable. '
         variableType:
           $ref: '#/components/schemas/string'
-          description: The variable type of the variable.
+          description: '<p>The variable type of the variable.</p> <p>Valid Values: <code>AUTH_CODE | AVS | BILLING_ADDRESS_L1 | BILLING_ADDRESS_L2 | BILLING_CITY | BILLING_COUNTRY | BILLING_NAME | BILLING_PHONE | BILLING_STATE | BILLING_ZIP | CARD_BIN | CATEGORICAL | CURRENCY_CODE | EMAIL_ADDRESS | FINGERPRINT | FRAUD_LABEL | FREE_FORM_TEXT | IP_ADDRESS | NUMERIC | ORDER_ID | PAYMENT_TYPE | PHONE_NUMBER | PRICE | PRODUCT_CATEGORY | SHIPPING_ADDRESS_L1 | SHIPPING_ADDRESS_L2 | SHIPPING_CITY | SHIPPING_COUNTRY | SHIPPING_NAME | SHIPPING_PHONE | SHIPPING_STATE | SHIPPING_ZIP | USERAGENT | SHIPPING_ZIP | USERAGENT</code> </p>'
         lastUpdatedTime:
           $ref: '#/components/schemas/time'
           description: The time when variable was last updated.
         createdTime:
           $ref: '#/components/schemas/time'
           description: The time when the variable was created.
+        arn:
+          $ref: '#/components/schemas/fraudDetectorArn'
+          description: The ARN of the variable.
       description: The variable.
     VariableEntry:
       type: object
       properties:
         name:
           $ref: '#/components/schemas/string'
-          description: The name of the variable entry.
+          description: The name of the variable.
         dataType:
           $ref: '#/components/schemas/string'
-          description: The data type of the variable entry.
+          description: The data type of the variable.
         dataSource:
           $ref: '#/components/schemas/string'
-          description: The data source of the variable entry.
+          description: The data source of the variable.
         defaultValue:
           $ref: '#/components/schemas/string'
-          description: The default value of the variable entry.
+          description: The default value of the variable.
         description:
           $ref: '#/components/schemas/string'
-          description: The description of the variable entry.
+          description: The description of the variable.
         variableType:
           $ref: '#/components/schemas/string'
-          description: The type of the variable entry.
-      description: The variable entry in a list.
+          description: '<p>The type of the variable.</p> <p>Valid Values: <code>AUTH_CODE | AVS | BILLING_ADDRESS_L1 | BILLING_ADDRESS_L2 | BILLING_CITY | BILLING_COUNTRY | BILLING_NAME | BILLING_PHONE | BILLING_STATE | BILLING_ZIP | CARD_BIN | CATEGORICAL | CURRENCY_CODE | EMAIL_ADDRESS | FINGERPRINT | FRAUD_LABEL | FREE_FORM_TEXT | IP_ADDRESS | NUMERIC | ORDER_ID | PAYMENT_TYPE | PHONE_NUMBER | PRICE | PRODUCT_CATEGORY | SHIPPING_ADDRESS_L1 | SHIPPING_ADDRESS_L2 | SHIPPING_CITY | SHIPPING_COUNTRY | SHIPPING_NAME | SHIPPING_PHONE | SHIPPING_STATE | SHIPPING_ZIP | USERAGENT | SHIPPING_ZIP | USERAGENT</code> </p>'
+      description: A variable in the list of variables for the batch create variable request.
     attributeKey:
+      type: string
+      minLength: 1
+      maxLength: 64
+    variableName:
       type: string
       minLength: 1
       maxLength: 64

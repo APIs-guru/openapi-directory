@@ -6587,6 +6587,14 @@ paths:
           description: The ID of the VPC.
           schema:
             type: string
+        - name: TagSpecification
+          in: query
+          required: false
+          description: The tags to assign to the route table.
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/TagSpecification'
         - name: Action
           in: query
           required: true
@@ -8767,6 +8775,14 @@ paths:
           description: '<p>The Region code for the accepter VPC, if the accepter VPC is located in a Region other than the Region in which you make the request.</p> <p>Default: The Region in which you make the request.</p>'
           schema:
             type: string
+        - name: TagSpecification
+          in: query
+          required: false
+          description: The tags to assign to the peering connection.
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/TagSpecification'
         - name: Action
           in: query
           required: true
@@ -45509,6 +45525,10 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/CoipAddressUsage'
+    ResourceArn:
+      type: string
+      minLength: 1
+      maxLength: 1283
     CoipPool:
       type: object
       properties:
@@ -45524,6 +45544,9 @@ components:
         Tags:
           $ref: '#/components/schemas/TagList'
           description: The tags.
+        PoolArn:
+          $ref: '#/components/schemas/ResourceArn'
+          description: The ARN of the address pool.
       description: Describes a customer-owned address pool.
     CoipPoolIdSet:
       type: array
@@ -47388,6 +47411,9 @@ components:
         VpcId:
           $ref: '#/components/schemas/VpcId'
           description: The ID of the VPC.
+        TagSpecifications:
+          $ref: '#/components/schemas/TagSpecificationList'
+          description: The tags to assign to the route table.
     RouteTable:
       type: object
       properties:
@@ -48378,6 +48404,9 @@ components:
         PeerRegion:
           $ref: '#/components/schemas/String'
           description: '<p>The Region code for the accepter VPC, if the accepter VPC is located in a Region other than the Region in which you make the request.</p> <p>Default: The Region in which you make the request.</p>'
+        TagSpecifications:
+          $ref: '#/components/schemas/TagSpecificationList'
+          description: The tags to assign to the peering connection.
     CreateVpcRequest:
       type: object
       required:
@@ -57126,10 +57155,6 @@ components:
         - delete-in-progress
         - delete-complete
         - delete-failed
-    ResourceArn:
-      type: string
-      minLength: 1
-      maxLength: 1283
     MaxIpv4AddrPerInterface:
       type: integer
     MaxIpv6AddrPerInterface:

@@ -1580,6 +1580,9 @@ components:
         targetEirp:
           $ref: '#/components/schemas/Eirp'
           description: EIRP of the target.
+        transmitDisabled:
+          $ref: '#/components/schemas/Boolean'
+          description: Whether or not uplink transmit is disabled.
       description: Information about the uplink <code>Config</code> of an antenna.
     DataflowEndpointConfig:
       type: object
@@ -1657,6 +1660,9 @@ components:
         contactStatus:
           $ref: '#/components/schemas/ContactStatus'
           description: Status of a contact.
+        dataflowList:
+          $ref: '#/components/schemas/DataflowList'
+          description: List describing source and destination details for each dataflow edge.
         endTime:
           $ref: '#/components/schemas/Timestamp'
           description: End time of a contact.
@@ -1898,6 +1904,13 @@ components:
       enum:
         - DEGREE_ANGLE
         - RADIAN
+    AntennaDemodDecodeDetails:
+      type: object
+      properties:
+        outputNode:
+          $ref: '#/components/schemas/String'
+          description: Name of an antenna demod decode output node used in a contact.
+      description: Details about an antenna demod decode <code>Config</code> used in a contact.
     SpectrumConfig:
       type: object
       required:
@@ -1906,13 +1919,13 @@ components:
       properties:
         bandwidth:
           $ref: '#/components/schemas/FrequencyBandwidth'
-          description: Bandwidth of a spectral <code>Config</code>.
+          description: '<p>Bandwidth of a spectral <code>Config</code>. AWS Ground Station currently has the following bandwidth limitations:</p> <ul> <li> <p>For <code>AntennaDownlinkDemodDecodeconfig</code>, valid values are between 125 kHz to 650 MHz.</p> </li> <li> <p>For <code>AntennaDownlinkconfig</code> valid values are between 10 kHz to 54 MHz.</p> </li> <li> <p>For <code>AntennaUplinkConfig</code>, valid values are between 10 kHz to 54 MHz.</p> </li> </ul>'
         centerFrequency:
           $ref: '#/components/schemas/Frequency'
-          description: Center frequency of a spectral <code>Config</code>.
+          description: Center frequency of a spectral <code>Config</code>. Valid values are between 2200 to 2300 MHz and 7750 to 8400 MHz for downlink and 2025 to 2120 MHz for uplink.
         polarization:
           $ref: '#/components/schemas/Polarization'
-          description: Polarization of a spectral <code>Config</code>.
+          description: Polarization of a spectral <code>Config</code>. Capturing both <code>"RIGHT_HAND"</code> and <code>"LEFT_HAND"</code> polarization requires two separate configs.
       description: Object that describes a spectral <code>Config</code>.
     DecodeConfig:
       type: object
@@ -1939,10 +1952,10 @@ components:
       properties:
         centerFrequency:
           $ref: '#/components/schemas/Frequency'
-          description: Center frequency of an uplink spectral <code>Config</code>.
+          description: Center frequency of an uplink spectral <code>Config</code>. Valid values are between 2025 to 2120 MHz.
         polarization:
           $ref: '#/components/schemas/Polarization'
-          description: Polarization of an uplink spectral <code>Config</code>.
+          description: Polarization of an uplink spectral <code>Config</code>. Capturing both <code>"RIGHT_HAND"</code> and <code>"LEFT_HAND"</code> polarization requires two separate configs.
       description: Information about the uplink spectral <code>Config</code>.
     Eirp:
       type: object
@@ -1955,16 +1968,16 @@ components:
           description: Units of an EIRP.
         value:
           $ref: '#/components/schemas/Double'
-          description: Value of an EIRP.
+          description: Value of an EIRP. Valid values are between 20.0 to 50.0 dBW.
       description: Object that represents EIRP.
+    Boolean:
+      type: boolean
     BandwidthUnits:
       type: string
       enum:
         - GHz
         - MHz
         - kHz
-    Boolean:
-      type: boolean
     CancelContactRequest:
       type: object
       title: CancelContactRequest
@@ -1981,6 +1994,15 @@ components:
         - dataflow-endpoint
         - tracking
         - uplink-echo
+    ConfigDetails:
+      type: object
+      properties:
+        antennaDemodDecodeDetails:
+          $ref: '#/components/schemas/AntennaDemodDecodeDetails'
+          description: Details for antenna demod decode <code>Config</code> in a contact.
+        endpointDetails:
+          $ref: '#/components/schemas/EndpointDetails'
+      description: Details for certain <code>Config</code> object types in a contact.
     ConfigListItem:
       type: object
       properties:
@@ -2178,6 +2200,46 @@ components:
         - PREFERRED
         - REMOVED
         - REQUIRED
+    Destination:
+      type: object
+      properties:
+        configDetails:
+          $ref: '#/components/schemas/ConfigDetails'
+          description: 'Additional details for a <code>Config</code>, if type is dataflow endpoint or antenna demod decode.'
+        configId:
+          $ref: '#/components/schemas/String'
+          description: UUID of a <code>Config</code>.
+        configType:
+          $ref: '#/components/schemas/ConfigCapabilityType'
+          description: Type of a <code>Config</code>.
+        dataflowDestinationRegion:
+          $ref: '#/components/schemas/String'
+          description: Region of a dataflow destination.
+      description: Dataflow details for the destination side.
+    Source:
+      type: object
+      properties:
+        configDetails:
+          $ref: '#/components/schemas/ConfigDetails'
+          description: 'Additional details for a <code>Config</code>, if type is dataflow endpoint or antenna demod decode.'
+        configId:
+          $ref: '#/components/schemas/String'
+          description: UUID of a <code>Config</code>.
+        configType:
+          $ref: '#/components/schemas/ConfigCapabilityType'
+          description: Type of a <code>Config</code>.
+        dataflowSourceRegion:
+          $ref: '#/components/schemas/String'
+          description: Region of a dataflow source.
+      description: Dataflow details for the source side.
+    DataflowDetail:
+      type: object
+      properties:
+        destination:
+          $ref: '#/components/schemas/Destination'
+        source:
+          $ref: '#/components/schemas/Source'
+      description: Information about a dataflow edge used in a contact.
     SocketAddress:
       type: object
       required:
@@ -2191,6 +2253,10 @@ components:
           $ref: '#/components/schemas/Integer'
           description: Port of a socket address.
       description: Information about the socket address.
+    DataflowEndpointmtuInteger:
+      type: integer
+      minimum: 1400
+      maximum: 1500
     EndpointStatus:
       type: string
       enum:
@@ -2205,6 +2271,9 @@ components:
         address:
           $ref: '#/components/schemas/SocketAddress'
           description: Socket address of a dataflow endpoint.
+        mtu:
+          $ref: '#/components/schemas/DataflowEndpointmtuInteger'
+          description: Maximum transmission unit (MTU) size in bytes of a dataflow endpoint.
         name:
           $ref: '#/components/schemas/SafeName'
           description: Name of a dataflow endpoint.
@@ -2228,6 +2297,10 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/DataflowEndpointListItem'
+    DataflowList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DataflowDetail'
     JsonString:
       type: string
       pattern: '^[{}\[\]:.,"0-9A-z\-_\s]{2,8192}$'
@@ -2294,7 +2367,7 @@ components:
           description: Frequency units.
         value:
           $ref: '#/components/schemas/Double'
-          description: Frequency value.
+          description: Frequency value. Valid values are between 2200 to 2300 MHz and 7750 to 8400 MHz for downlink and 2025 to 2120 MHz for uplink.
       description: Object that describes the frequency.
     FrequencyBandwidth:
       type: object
@@ -2307,8 +2380,8 @@ components:
           description: Frequency bandwidth units.
         value:
           $ref: '#/components/schemas/Double'
-          description: Frequency bandwidth value.
-      description: Object that describes the frequency bandwidth.
+          description: '<p>Frequency bandwidth value. AWS Ground Station currently has the following bandwidth limitations:</p> <ul> <li> <p>For <code>AntennaDownlinkDemodDecodeconfig</code>, valid values are between 125 kHz to 650 MHz.</p> </li> <li> <p>For <code>AntennaDownlinkconfig</code>, valid values are between 10 kHz to 54 MHz.</p> </li> <li> <p>For <code>AntennaUplinkConfig</code>, valid values are between 10 kHz to 54 MHz.</p> </li> </ul>'
+      description: 'Object that describes the frequency bandwidth. '
     GetConfigRequest:
       type: object
       title: GetConfigRequest

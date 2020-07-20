@@ -23513,6 +23513,12 @@ components:
         Status:
           $ref: '#/components/schemas/String'
           description: 'The status of the DB engine version, either <code>available</code> or <code>deprecated</code>.'
+        SupportsParallelQuery:
+          $ref: '#/components/schemas/Boolean'
+          description: A value that indicates whether you can use Aurora parallel query with a specific DB engine version.
+        SupportsGlobalDatabases:
+          $ref: '#/components/schemas/Boolean'
+          description: A value that indicates whether you can use Aurora global databases with a specific DB engine version.
       description: ' This data type is used as a response element in the action <code>DescribeDBEngineVersions</code>. '
     DBEngineVersionList:
       type: array
@@ -25930,6 +25936,9 @@ components:
         OutpostCapable:
           $ref: '#/components/schemas/Boolean'
           description: '<p>Whether a DB instance supports RDS on Outposts.</p> <p>For more information about RDS on Outposts, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html">Amazon RDS on AWS Outposts</a> in the <i>Amazon RDS User Guide.</i> </p>'
+        SupportsGlobalDatabases:
+          $ref: '#/components/schemas/Boolean'
+          description: A value that indicates whether you can use Aurora global databases with a specific combination of other DB engine attributes.
       description: <p>Contains a list of available options for a DB instance.</p> <p> This data type is used as a response element in the <code>DescribeOrderableDBInstanceOptions</code> action. </p>
     OrderableDBInstanceOptionsList:
       type: array
