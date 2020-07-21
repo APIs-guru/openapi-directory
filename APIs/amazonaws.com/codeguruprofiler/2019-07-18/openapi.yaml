@@ -391,7 +391,6 @@ paths:
                 fleetInstanceId:
                   description: ' A universally unique identifier (UUID) for a profiling instance. For example, if the profiling instance is an Amazon EC2 instance, it is the instance ID. If it is an AWS Fargate container, it is the container''s task ID. '
                   type: string
-                  pattern: '^[\w-.:/]+$'
                   minLength: 1
                   maxLength: 255
                 metadata:
@@ -486,6 +485,11 @@ paths:
                   pattern: '^[\w-]+$'
                   minLength: 1
                   maxLength: 255
+                tags:
+                  description: ' A list of tags to add to the created profiling group. '
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/String'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1176,6 +1180,99 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/tags/{resourceArn}':
+    get:
+      operationId: ListTagsForResource
+      description: ' Returns a list of the tags that are assigned to a specified resource. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsForResourceResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: ' The Amazon Resource Name (ARN) of the resource that contains the tags to return. '
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: TagResource
+      description: ' Use to assign one or more tags to a resource. '
+      responses:
+        '204':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagResourceResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: ' The Amazon Resource Name (ARN) of the resource that the tags are added to. '
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - tags
+              properties:
+                tags:
+                  description: ' The list of tags that are added to the specified resource. '
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/String'
   '/profilingGroups/{profilingGroupName}/agentProfile#Content-Type':
     post:
       operationId: PostAgentProfile
@@ -1555,6 +1652,58 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/tags/{resourceArn}#tagKeys':
+    delete:
+      operationId: UntagResource
+      description: ' Use to remove one or more tags from a resource. '
+      responses:
+        '204':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UntagResourceResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: ' The Amazon Resource Name (ARN) of the resource that contains the tags to remove. '
+          schema:
+            type: string
+        - name: tagKeys
+          in: query
+          required: true
+          description: ' A list of tag keys. Existing tags of resources with keys in this list are removed from the specified resource. '
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/String'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
 components:
   parameters:
     X-Amz-Content-Sha256:
@@ -1824,6 +1973,12 @@ components:
           $ref: '#/components/schemas/ProfilingGroupDescriptions'
           description: ' A returned list <a href="https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ProfilingGroupDescription.html"> <code>ProfilingGroupDescription</code> </a> objects. A list of <a href="https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ProfilingGroupDescription.html"> <code>ProfilingGroupDescription</code> </a> objects is returned only if <code>includeDescription</code> is <code>true</code>, otherwise a list of profiling group names is returned. '
       description: The structure representing the listProfilingGroupsResponse.
+    ListTagsForResourceResponse:
+      type: object
+      properties:
+        tags:
+          $ref: '#/components/schemas/TagsMap'
+          description: ' The list of tags assigned to the specified resource. This is the list of tags returned in the response. '
     PostAgentProfileResponse:
       type: object
       properties: {}
@@ -1867,6 +2022,12 @@ components:
       type: object
       properties: {}
       description: The structure representing the SubmitFeedbackResponse.
+    TagResourceResponse:
+      type: object
+      properties: {}
+    UntagResourceResponse:
+      type: object
+      properties: {}
     UpdateProfilingGroupResponse:
       type: object
       required:
@@ -2095,7 +2256,6 @@ components:
         - Default
     FleetInstanceId:
       type: string
-      pattern: '^[\w-.:/]+$'
       minLength: 1
       maxLength: 255
     Metadata:
@@ -2113,6 +2273,10 @@ components:
           $ref: '#/components/schemas/Metadata'
           description: '<p> Metadata captured about the compute platform the agent is running on. It includes information about sampling and reporting. The valid fields are:</p> <ul> <li> <p> <code>COMPUTE_PLATFORM</code> - The compute platform on which the agent is running </p> </li> <li> <p> <code>AGENT_ID</code> - The ID for an agent instance. </p> </li> <li> <p> <code>AWS_REQUEST_ID</code> - The AWS request ID of a Lambda invocation. </p> </li> <li> <p> <code>EXECUTION_ENVIRONMENT</code> - The execution environment a Lambda function is running on. </p> </li> <li> <p> <code>LAMBDA_FUNCTION_ARN</code> - The Amazon Resource Name (ARN) that is used to invoke a Lambda function. </p> </li> <li> <p> <code>LAMBDA_MEMORY_LIMIT_IN_MB</code> - The memory allocated to a Lambda function. </p> </li> <li> <p> <code>LAMBDA_REMAINING_TIME_IN_MILLISECONDS</code> - The time in milliseconds before execution of a Lambda function times out. </p> </li> <li> <p> <code>LAMBDA_TIME_GAP_BETWEEN_INVOKES_IN_MILLISECONDS</code> - The time in milliseconds between two invocations of a Lambda function. </p> </li> <li> <p> <code>LAMBDA_PREVIOUS_EXECUTION_TIME_IN_MILLISECONDS</code> - The time in milliseconds for the previous Lambda invocation. </p> </li> </ul>'
       description: The structure representing the configureAgentRequest.
+    TagsMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/String'
     CreateProfilingGroupRequest:
       type: object
       required:
@@ -2128,6 +2292,9 @@ components:
         profilingGroupName:
           $ref: '#/components/schemas/ProfilingGroupName'
           description: The name of the profiling group to create.
+        tags:
+          $ref: '#/components/schemas/TagsMap'
+          description: ' A list of tags to add to the created profiling group. '
       description: The structure representing the createProfiliingGroupRequest.
     ProfilingGroupDescription:
       type: object
@@ -2150,6 +2317,9 @@ components:
         profilingStatus:
           $ref: '#/components/schemas/ProfilingStatus'
           description: ' A <a href="https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ProfilingStatus.html"> <code>ProfilingStatus</code> </a> object that includes information about the last time a profile agent pinged back, the last time a profile was received, and the aggregation period and start time for the most recent aggregated profile. '
+        tags:
+          $ref: '#/components/schemas/TagsMap'
+          description: ' A list of the tags that belong to this profiling group. '
         updatedAt:
           $ref: '#/components/schemas/Timestamp'
           description: ' The date and time when the profiling group was last updated. Specify using the ISO 8601 format. For example, 2020-06-01T13:15:02.001Z represents 1 millisecond past June 1, 2020 1:15:02 PM UTC. '
@@ -2315,6 +2485,12 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ProfilingGroupDescription'
+    ProfilingGroupArn:
+      type: string
+    ListTagsForResourceRequest:
+      type: object
+      title: ListTagsForResourceRequest
+      properties: {}
     Match:
       type: object
       properties:
@@ -2405,8 +2581,6 @@ components:
           $ref: '#/components/schemas/Timestamp'
           description: 'The start time of a profile. It is specified using the ISO 8601 format. For example, 2020-06-01T13:15:02.001Z represents 1 millisecond past June 1, 2020 1:15:02 PM UTC.'
       description: ' Contains the start time of a profile. '
-    ProfilingGroupArn:
-      type: string
     ProfilingStatus:
       type: object
       properties:
@@ -2485,10 +2659,27 @@ components:
           $ref: '#/components/schemas/FeedbackType'
           description: ' The feedback tpye. Thee are two valid values, <code>Positive</code> and <code>Negative</code>. '
       description: The structure representing the SubmitFeedbackRequest.
+    TagKeys:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    TagResourceRequest:
+      type: object
+      required:
+        - tags
+      title: TagResourceRequest
+      properties:
+        tags:
+          $ref: '#/components/schemas/TagsMap'
+          description: ' The list of tags that are added to the specified resource. '
     TargetFrame:
       type: array
       items:
         $ref: '#/components/schemas/String'
+    UntagResourceRequest:
+      type: object
+      title: UntagResourceRequest
+      properties: {}
     UpdateProfilingGroupRequest:
       type: object
       required:
