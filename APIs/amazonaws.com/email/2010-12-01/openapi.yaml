@@ -51,13 +51,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The Amazon SES multi-region endpoint
   - url: 'https://email.{region}.amazonaws.com'
@@ -77,13 +81,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The Amazon SES multi-region endpoint
   - url: 'http://email.{region}.amazonaws.com.cn'
@@ -106,7 +114,7 @@ servers:
     description: The Amazon SES endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
-  '/#Action=CloneReceiptRuleSet':
+  /#Action=CloneReceiptRuleSet:
     get:
       x-aws-operation-name: CloneReceiptRuleSet
       operationId: GET_CloneReceiptRuleSet
@@ -220,7 +228,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=CreateConfigurationSet':
+  /#Action=CreateConfigurationSet:
     get:
       x-aws-operation-name: CreateConfigurationSet
       operationId: GET_CreateConfigurationSet
@@ -335,7 +343,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=CreateConfigurationSetEventDestination':
+  /#Action=CreateConfigurationSetEventDestination:
     get:
       x-aws-operation-name: CreateConfigurationSetEventDestination
       operationId: GET_CreateConfigurationSetEventDestination
@@ -508,7 +516,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=CreateConfigurationSetTrackingOptions':
+  /#Action=CreateConfigurationSetTrackingOptions:
     get:
       x-aws-operation-name: CreateConfigurationSetTrackingOptions
       operationId: GET_CreateConfigurationSetTrackingOptions
@@ -627,7 +635,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=CreateCustomVerificationEmailTemplate':
+  /#Action=CreateCustomVerificationEmailTemplate:
     get:
       x-aws-operation-name: CreateCustomVerificationEmailTemplate
       operationId: GET_CreateCustomVerificationEmailTemplate
@@ -769,7 +777,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=CreateReceiptFilter':
+  /#Action=CreateReceiptFilter:
     get:
       x-aws-operation-name: CreateReceiptFilter
       operationId: GET_CreateReceiptFilter
@@ -876,7 +884,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=CreateReceiptRule':
+  /#Action=CreateReceiptRule:
     get:
       x-aws-operation-name: CreateReceiptRule
       operationId: GET_CreateReceiptRule
@@ -1066,7 +1074,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=CreateReceiptRuleSet':
+  /#Action=CreateReceiptRuleSet:
     get:
       x-aws-operation-name: CreateReceiptRuleSet
       operationId: GET_CreateReceiptRuleSet
@@ -1162,7 +1170,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=CreateTemplate':
+  /#Action=CreateTemplate:
     get:
       x-aws-operation-name: CreateTemplate
       operationId: GET_CreateTemplate
@@ -1286,7 +1294,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=DeleteConfigurationSet':
+  /#Action=DeleteConfigurationSet:
     get:
       x-aws-operation-name: DeleteConfigurationSet
       operationId: GET_DeleteConfigurationSet
@@ -1370,7 +1378,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=DeleteConfigurationSetEventDestination':
+  /#Action=DeleteConfigurationSetEventDestination:
     get:
       x-aws-operation-name: DeleteConfigurationSetEventDestination
       operationId: GET_DeleteConfigurationSetEventDestination
@@ -1472,7 +1480,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=DeleteConfigurationSetTrackingOptions':
+  /#Action=DeleteConfigurationSetTrackingOptions:
     get:
       x-aws-operation-name: DeleteConfigurationSetTrackingOptions
       operationId: GET_DeleteConfigurationSetTrackingOptions
@@ -1568,7 +1576,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=DeleteCustomVerificationEmailTemplate':
+  /#Action=DeleteCustomVerificationEmailTemplate:
     get:
       x-aws-operation-name: DeleteCustomVerificationEmailTemplate
       operationId: GET_DeleteCustomVerificationEmailTemplate
@@ -1632,7 +1640,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=DeleteIdentity':
+  /#Action=DeleteIdentity:
     get:
       x-aws-operation-name: DeleteIdentity
       operationId: GET_DeleteIdentity
@@ -1704,7 +1712,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=DeleteIdentityPolicy':
+  /#Action=DeleteIdentityPolicy:
     get:
       x-aws-operation-name: DeleteIdentityPolicy
       operationId: GET_DeleteIdentityPolicy
@@ -1784,7 +1792,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=DeleteReceiptFilter':
+  /#Action=DeleteReceiptFilter:
     get:
       x-aws-operation-name: DeleteReceiptFilter
       operationId: GET_DeleteReceiptFilter
@@ -1856,7 +1864,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=DeleteReceiptRule':
+  /#Action=DeleteReceiptRule:
     get:
       x-aws-operation-name: DeleteReceiptRule
       operationId: GET_DeleteReceiptRule
@@ -1946,7 +1954,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=DeleteReceiptRuleSet':
+  /#Action=DeleteReceiptRuleSet:
     get:
       x-aws-operation-name: DeleteReceiptRuleSet
       operationId: GET_DeleteReceiptRuleSet
@@ -2030,7 +2038,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=DeleteTemplate':
+  /#Action=DeleteTemplate:
     get:
       x-aws-operation-name: DeleteTemplate
       operationId: GET_DeleteTemplate
@@ -2102,7 +2110,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=DeleteVerifiedEmailAddress':
+  /#Action=DeleteVerifiedEmailAddress:
     get:
       x-aws-operation-name: DeleteVerifiedEmailAddress
       operationId: GET_DeleteVerifiedEmailAddress
@@ -2166,7 +2174,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=DescribeActiveReceiptRuleSet':
+  /#Action=DescribeActiveReceiptRuleSet:
     get:
       x-aws-operation-name: DescribeActiveReceiptRuleSet
       operationId: GET_DescribeActiveReceiptRuleSet
@@ -2232,7 +2240,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=DescribeConfigurationSet':
+  /#Action=DescribeConfigurationSet:
     get:
       x-aws-operation-name: DescribeConfigurationSet
       operationId: GET_DescribeConfigurationSet
@@ -2324,7 +2332,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=DescribeReceiptRule':
+  /#Action=DescribeReceiptRule:
     get:
       x-aws-operation-name: DescribeReceiptRule
       operationId: GET_DescribeReceiptRule
@@ -2426,7 +2434,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=DescribeReceiptRuleSet':
+  /#Action=DescribeReceiptRuleSet:
     get:
       x-aws-operation-name: DescribeReceiptRuleSet
       operationId: GET_DescribeReceiptRuleSet
@@ -2510,7 +2518,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=GetAccountSendingEnabled':
+  /#Action=GetAccountSendingEnabled:
     get:
       x-aws-operation-name: GetAccountSendingEnabled
       operationId: GET_GetAccountSendingEnabled
@@ -2571,7 +2579,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=GetCustomVerificationEmailTemplate':
+  /#Action=GetCustomVerificationEmailTemplate:
     get:
       x-aws-operation-name: GetCustomVerificationEmailTemplate
       operationId: GET_GetCustomVerificationEmailTemplate
@@ -2655,7 +2663,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=GetIdentityDkimAttributes':
+  /#Action=GetIdentityDkimAttributes:
     get:
       x-aws-operation-name: GetIdentityDkimAttributes
       operationId: GET_GetIdentityDkimAttributes
@@ -2729,7 +2737,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=GetIdentityMailFromDomainAttributes':
+  /#Action=GetIdentityMailFromDomainAttributes:
     get:
       x-aws-operation-name: GetIdentityMailFromDomainAttributes
       operationId: GET_GetIdentityMailFromDomainAttributes
@@ -2803,7 +2811,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=GetIdentityNotificationAttributes':
+  /#Action=GetIdentityNotificationAttributes:
     get:
       x-aws-operation-name: GetIdentityNotificationAttributes
       operationId: GET_GetIdentityNotificationAttributes
@@ -2877,7 +2885,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=GetIdentityPolicies':
+  /#Action=GetIdentityPolicies:
     get:
       x-aws-operation-name: GetIdentityPolicies
       operationId: GET_GetIdentityPolicies
@@ -2957,7 +2965,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=GetIdentityVerificationAttributes':
+  /#Action=GetIdentityVerificationAttributes:
     get:
       x-aws-operation-name: GetIdentityVerificationAttributes
       operationId: GET_GetIdentityVerificationAttributes
@@ -3031,7 +3039,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=GetSendQuota':
+  /#Action=GetSendQuota:
     get:
       x-aws-operation-name: GetSendQuota
       operationId: GET_GetSendQuota
@@ -3092,7 +3100,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=GetSendStatistics':
+  /#Action=GetSendStatistics:
     get:
       x-aws-operation-name: GetSendStatistics
       operationId: GET_GetSendStatistics
@@ -3153,7 +3161,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=GetTemplate':
+  /#Action=GetTemplate:
     get:
       x-aws-operation-name: GetTemplate
       operationId: GET_GetTemplate
@@ -3237,7 +3245,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=ListConfigurationSets':
+  /#Action=ListConfigurationSets:
     get:
       x-aws-operation-name: ListConfigurationSets
       operationId: GET_ListConfigurationSets
@@ -3315,7 +3323,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=ListCustomVerificationEmailTemplates':
+  /#Action=ListCustomVerificationEmailTemplates:
     get:
       x-aws-operation-name: ListCustomVerificationEmailTemplates
       operationId: GET_ListCustomVerificationEmailTemplates
@@ -3407,7 +3415,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=ListIdentities':
+  /#Action=ListIdentities:
     get:
       x-aws-operation-name: ListIdentities
       operationId: GET_ListIdentities
@@ -3506,7 +3514,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=ListIdentityPolicies':
+  /#Action=ListIdentityPolicies:
     get:
       x-aws-operation-name: ListIdentityPolicies
       operationId: GET_ListIdentityPolicies
@@ -3578,7 +3586,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=ListReceiptFilters':
+  /#Action=ListReceiptFilters:
     get:
       x-aws-operation-name: ListReceiptFilters
       operationId: GET_ListReceiptFilters
@@ -3644,7 +3652,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=ListReceiptRuleSets':
+  /#Action=ListReceiptRuleSets:
     get:
       x-aws-operation-name: ListReceiptRuleSets
       operationId: GET_ListReceiptRuleSets
@@ -3716,7 +3724,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=ListTemplates':
+  /#Action=ListTemplates:
     get:
       x-aws-operation-name: ListTemplates
       operationId: GET_ListTemplates
@@ -3794,7 +3802,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=ListVerifiedEmailAddresses':
+  /#Action=ListVerifiedEmailAddresses:
     get:
       x-aws-operation-name: ListVerifiedEmailAddresses
       operationId: GET_ListVerifiedEmailAddresses
@@ -3855,7 +3863,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=PutConfigurationSetDeliveryOptions':
+  /#Action=PutConfigurationSetDeliveryOptions:
     get:
       x-aws-operation-name: PutConfigurationSetDeliveryOptions
       operationId: GET_PutConfigurationSetDeliveryOptions
@@ -3962,7 +3970,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=PutIdentityPolicy':
+  /#Action=PutIdentityPolicy:
     get:
       x-aws-operation-name: PutIdentityPolicy
       operationId: GET_PutIdentityPolicy
@@ -4061,7 +4069,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=ReorderReceiptRuleSet':
+  /#Action=ReorderReceiptRuleSet:
     get:
       x-aws-operation-name: ReorderReceiptRuleSet
       operationId: GET_ReorderReceiptRuleSet
@@ -4165,7 +4173,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=SendBounce':
+  /#Action=SendBounce:
     get:
       x-aws-operation-name: SendBounce
       operationId: GET_SendBounce
@@ -4294,7 +4302,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=SendBulkTemplatedEmail':
+  /#Action=SendBulkTemplatedEmail:
     get:
       x-aws-operation-name: SendBulkTemplatedEmail
       operationId: GET_SendBulkTemplatedEmail
@@ -4505,7 +4513,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=SendCustomVerificationEmail':
+  /#Action=SendCustomVerificationEmail:
     get:
       x-aws-operation-name: SendCustomVerificationEmail
       operationId: GET_SendCustomVerificationEmail
@@ -4649,7 +4657,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=SendEmail':
+  /#Action=SendEmail:
     get:
       x-aws-operation-name: SendEmail
       operationId: GET_SendEmail
@@ -4855,7 +4863,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=SendRawEmail':
+  /#Action=SendRawEmail:
     get:
       x-aws-operation-name: SendRawEmail
       operationId: GET_SendRawEmail
@@ -5040,7 +5048,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=SendTemplatedEmail':
+  /#Action=SendTemplatedEmail:
     get:
       x-aws-operation-name: SendTemplatedEmail
       operationId: GET_SendTemplatedEmail
@@ -5260,7 +5268,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=SetActiveReceiptRuleSet':
+  /#Action=SetActiveReceiptRuleSet:
     get:
       x-aws-operation-name: SetActiveReceiptRuleSet
       operationId: GET_SetActiveReceiptRuleSet
@@ -5344,7 +5352,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=SetIdentityDkimEnabled':
+  /#Action=SetIdentityDkimEnabled:
     get:
       x-aws-operation-name: SetIdentityDkimEnabled
       operationId: GET_SetIdentityDkimEnabled
@@ -5422,7 +5430,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=SetIdentityFeedbackForwardingEnabled':
+  /#Action=SetIdentityFeedbackForwardingEnabled:
     get:
       x-aws-operation-name: SetIdentityFeedbackForwardingEnabled
       operationId: GET_SetIdentityFeedbackForwardingEnabled
@@ -5500,7 +5508,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=SetIdentityHeadersInNotificationsEnabled':
+  /#Action=SetIdentityHeadersInNotificationsEnabled:
     get:
       x-aws-operation-name: SetIdentityHeadersInNotificationsEnabled
       operationId: GET_SetIdentityHeadersInNotificationsEnabled
@@ -5588,7 +5596,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=SetIdentityMailFromDomain':
+  /#Action=SetIdentityMailFromDomain:
     get:
       x-aws-operation-name: SetIdentityMailFromDomain
       operationId: GET_SetIdentityMailFromDomain
@@ -5675,7 +5683,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=SetIdentityNotificationTopic':
+  /#Action=SetIdentityNotificationTopic:
     get:
       x-aws-operation-name: SetIdentityNotificationTopic
       operationId: GET_SetIdentityNotificationTopic
@@ -5763,7 +5771,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=SetReceiptRulePosition':
+  /#Action=SetReceiptRulePosition:
     get:
       x-aws-operation-name: SetReceiptRulePosition
       operationId: GET_SetReceiptRulePosition
@@ -5871,7 +5879,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=TestRenderTemplate':
+  /#Action=TestRenderTemplate:
     get:
       x-aws-operation-name: TestRenderTemplate
       operationId: GET_TestRenderTemplate
@@ -5986,7 +5994,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=UpdateAccountSendingEnabled':
+  /#Action=UpdateAccountSendingEnabled:
     get:
       x-aws-operation-name: UpdateAccountSendingEnabled
       operationId: GET_UpdateAccountSendingEnabled
@@ -6050,7 +6058,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=UpdateConfigurationSetEventDestination':
+  /#Action=UpdateConfigurationSetEventDestination:
     get:
       x-aws-operation-name: UpdateConfigurationSetEventDestination
       operationId: GET_UpdateConfigurationSetEventDestination
@@ -6211,7 +6219,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=UpdateConfigurationSetReputationMetricsEnabled':
+  /#Action=UpdateConfigurationSetReputationMetricsEnabled:
     get:
       x-aws-operation-name: UpdateConfigurationSetReputationMetricsEnabled
       operationId: GET_UpdateConfigurationSetReputationMetricsEnabled
@@ -6293,7 +6301,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=UpdateConfigurationSetSendingEnabled':
+  /#Action=UpdateConfigurationSetSendingEnabled:
     get:
       x-aws-operation-name: UpdateConfigurationSetSendingEnabled
       operationId: GET_UpdateConfigurationSetSendingEnabled
@@ -6375,7 +6383,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=UpdateConfigurationSetTrackingOptions':
+  /#Action=UpdateConfigurationSetTrackingOptions:
     get:
       x-aws-operation-name: UpdateConfigurationSetTrackingOptions
       operationId: GET_UpdateConfigurationSetTrackingOptions
@@ -6494,7 +6502,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=UpdateCustomVerificationEmailTemplate':
+  /#Action=UpdateCustomVerificationEmailTemplate:
     get:
       x-aws-operation-name: UpdateCustomVerificationEmailTemplate
       operationId: GET_UpdateCustomVerificationEmailTemplate
@@ -6624,7 +6632,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=UpdateReceiptRule':
+  /#Action=UpdateReceiptRule:
     get:
       x-aws-operation-name: UpdateReceiptRule
       operationId: GET_UpdateReceiptRule
@@ -6796,7 +6804,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=UpdateTemplate':
+  /#Action=UpdateTemplate:
     get:
       x-aws-operation-name: UpdateTemplate
       operationId: GET_UpdateTemplate
@@ -6908,7 +6916,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=VerifyDomainDkim':
+  /#Action=VerifyDomainDkim:
     get:
       x-aws-operation-name: VerifyDomainDkim
       operationId: GET_VerifyDomainDkim
@@ -6980,7 +6988,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=VerifyDomainIdentity':
+  /#Action=VerifyDomainIdentity:
     get:
       x-aws-operation-name: VerifyDomainIdentity
       operationId: GET_VerifyDomainIdentity
@@ -7052,7 +7060,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=VerifyEmailAddress':
+  /#Action=VerifyEmailAddress:
     get:
       x-aws-operation-name: VerifyEmailAddress
       operationId: GET_VerifyEmailAddress
@@ -7116,7 +7124,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=VerifyEmailIdentity':
+  /#Action=VerifyEmailIdentity:
     get:
       x-aws-operation-name: VerifyEmailIdentity
       operationId: GET_VerifyEmailIdentity

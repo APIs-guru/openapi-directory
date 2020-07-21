@@ -51,13 +51,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The Pinpoint Email multi-region endpoint
   - url: 'https://email.{region}.amazonaws.com'
@@ -77,13 +81,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The Pinpoint Email multi-region endpoint
   - url: 'http://email.{region}.amazonaws.com.cn'
@@ -1063,7 +1071,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/v1/email/deliverability-dashboard/blacklist-report#BlacklistItemNames':
+  /v1/email/deliverability-dashboard/blacklist-report#BlacklistItemNames:
     get:
       operationId: GetBlacklistReports
       description: Retrieve a list of the blacklists that your dedicated IP addresses appear on.
@@ -1574,7 +1582,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/v1/email/tags#ResourceArn':
+  /v1/email/tags#ResourceArn:
     get:
       operationId: ListTagsForResource
       description: "Retrieve a list of the tags (keys and values) that are associated with a specified resource. A\_<i>tag</i>\_is a label that you optionally define and associate with a resource in Amazon Pinpoint. Each tag consists of a required\_<i>tag key</i>\_and an optional associated\_<i>tag value</i>. A tag key is a general label that acts as a category for more specific tag values. A tag value acts as a descriptor within a tag key."
@@ -2395,7 +2403,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/v1/email/tags#ResourceArn&TagKeys':
+  /v1/email/tags#ResourceArn&TagKeys:
     delete:
       operationId: UntagResource
       description: Remove one or more tags (keys and values) from a specified resource.

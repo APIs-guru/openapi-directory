@@ -51,13 +51,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The AWS Auto Scaling Plans multi-region endpoint
   - url: 'https://autoscaling-plans.{region}.amazonaws.com'
@@ -77,13 +81,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The AWS Auto Scaling Plans multi-region endpoint
   - url: 'http://autoscaling-plans.{region}.amazonaws.com.cn'
@@ -106,7 +114,7 @@ servers:
     description: The AWS Auto Scaling Plans endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
-  '/#X-Amz-Target=AnyScaleScalingPlannerFrontendService.CreateScalingPlan':
+  /#X-Amz-Target=AnyScaleScalingPlannerFrontendService.CreateScalingPlan:
     post:
       operationId: CreateScalingPlan
       description: Creates a scaling plan.
@@ -163,7 +171,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AnyScaleScalingPlannerFrontendService.DeleteScalingPlan':
+  /#X-Amz-Target=AnyScaleScalingPlannerFrontendService.DeleteScalingPlan:
     post:
       operationId: DeleteScalingPlan
       description: '<p>Deletes the specified scaling plan.</p> <p>Deleting a scaling plan deletes the underlying <a>ScalingInstruction</a> for all of the scalable resources that are covered by the plan.</p> <p>If the plan has launched resources or has scaling activities in progress, you must delete those resources separately.</p>'
@@ -220,7 +228,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AnyScaleScalingPlannerFrontendService.DescribeScalingPlanResources':
+  /#X-Amz-Target=AnyScaleScalingPlannerFrontendService.DescribeScalingPlanResources:
     post:
       operationId: DescribeScalingPlanResources
       description: Describes the scalable resources in the specified scaling plan.
@@ -277,7 +285,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AnyScaleScalingPlannerFrontendService.DescribeScalingPlans':
+  /#X-Amz-Target=AnyScaleScalingPlannerFrontendService.DescribeScalingPlans:
     post:
       operationId: DescribeScalingPlans
       description: Describes one or more of your scaling plans.
@@ -334,7 +342,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AnyScaleScalingPlannerFrontendService.GetScalingPlanResourceForecastData':
+  /#X-Amz-Target=AnyScaleScalingPlannerFrontendService.GetScalingPlanResourceForecastData:
     post:
       operationId: GetScalingPlanResourceForecastData
       description: '<p>Retrieves the forecast data for a scalable resource.</p> <p>Capacity forecasts are represented as predicted values, or data points, that are calculated using historical data points from a specified CloudWatch load metric. Data points are available for up to 56 days. </p>'
@@ -379,7 +387,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AnyScaleScalingPlannerFrontendService.UpdateScalingPlan':
+  /#X-Amz-Target=AnyScaleScalingPlannerFrontendService.UpdateScalingPlan:
     post:
       operationId: UpdateScalingPlan
       description: '<p>Updates the specified scaling plan.</p> <p>You cannot update a scaling plan if it is in the process of being created, updated, or deleted.</p>'

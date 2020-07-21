@@ -51,13 +51,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The Amazon AppStream multi-region endpoint
   - url: 'https://appstream2.{region}.amazonaws.com'
@@ -77,13 +81,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The Amazon AppStream multi-region endpoint
   - url: 'http://appstream2.{region}.amazonaws.com.cn'
@@ -106,7 +114,7 @@ servers:
     description: The Amazon AppStream endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
-  '/#X-Amz-Target=PhotonAdminProxyService.AssociateFleet':
+  /#X-Amz-Target=PhotonAdminProxyService.AssociateFleet:
     post:
       operationId: AssociateFleet
       description: Associates the specified fleet with the specified stack.
@@ -175,7 +183,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=PhotonAdminProxyService.BatchAssociateUserStack':
+  /#X-Amz-Target=PhotonAdminProxyService.BatchAssociateUserStack:
     post:
       operationId: BatchAssociateUserStack
       description: Associates the specified users with the specified stacks. Users in a user pool cannot be assigned to stacks with fleets that are joined to an Active Directory domain.
@@ -214,7 +222,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=PhotonAdminProxyService.BatchDisassociateUserStack':
+  /#X-Amz-Target=PhotonAdminProxyService.BatchDisassociateUserStack:
     post:
       operationId: BatchDisassociateUserStack
       description: Disassociates the specified users from the specified stacks.
@@ -247,7 +255,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=PhotonAdminProxyService.CopyImage':
+  /#X-Amz-Target=PhotonAdminProxyService.CopyImage:
     post:
       operationId: CopyImage
       description: Copies the image within the same region or to a new region within the same AWS account. Note that any tags you added to the image will not be copied.
@@ -316,7 +324,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=PhotonAdminProxyService.CreateDirectoryConfig':
+  /#X-Amz-Target=PhotonAdminProxyService.CreateDirectoryConfig:
     post:
       operationId: CreateDirectoryConfig
       description: Creates a Directory Config object in AppStream 2.0. This object includes the configuration information required to join fleets and image builders to Microsoft Active Directory domains.
@@ -367,7 +375,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=PhotonAdminProxyService.CreateFleet':
+  /#X-Amz-Target=PhotonAdminProxyService.CreateFleet:
     post:
       operationId: CreateFleet
       description: Creates a fleet. A fleet consists of streaming instances that run a specified image.
@@ -460,7 +468,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=PhotonAdminProxyService.CreateImageBuilder':
+  /#X-Amz-Target=PhotonAdminProxyService.CreateImageBuilder:
     post:
       operationId: CreateImageBuilder
       description: '<p>Creates an image builder. An image builder is a virtual machine that is used to create an image.</p> <p>The initial state of the builder is <code>PENDING</code>. When it is ready, the state is <code>RUNNING</code>.</p>'
@@ -553,7 +561,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=PhotonAdminProxyService.CreateImageBuilderStreamingURL':
+  /#X-Amz-Target=PhotonAdminProxyService.CreateImageBuilderStreamingURL:
     post:
       operationId: CreateImageBuilderStreamingURL
       description: Creates a URL to start an image builder streaming session.
@@ -598,7 +606,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=PhotonAdminProxyService.CreateStack':
+  /#X-Amz-Target=PhotonAdminProxyService.CreateStack:
     post:
       operationId: CreateStack
       description: 'Creates a stack to start streaming applications to users. A stack consists of an associated fleet, user access policies, and storage configurations. '
@@ -673,7 +681,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=PhotonAdminProxyService.CreateStreamingURL':
+  /#X-Amz-Target=PhotonAdminProxyService.CreateStreamingURL:
     post:
       operationId: CreateStreamingURL
       description: 'Creates a temporary URL to start an AppStream 2.0 streaming session for the specified user. A streaming URL enables application streaming to be tested without user setup. '
@@ -730,7 +738,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=PhotonAdminProxyService.CreateUsageReportSubscription':
+  /#X-Amz-Target=PhotonAdminProxyService.CreateUsageReportSubscription:
     post:
       operationId: CreateUsageReportSubscription
       description: Creates a usage report subscription. Usage reports are generated daily.
@@ -781,7 +789,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=PhotonAdminProxyService.CreateUser':
+  /#X-Amz-Target=PhotonAdminProxyService.CreateUser:
     post:
       operationId: CreateUser
       description: Creates a new user in the user pool.
@@ -844,7 +852,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=PhotonAdminProxyService.DeleteDirectoryConfig':
+  /#X-Amz-Target=PhotonAdminProxyService.DeleteDirectoryConfig:
     post:
       operationId: DeleteDirectoryConfig
       description: Deletes the specified Directory Config object from AppStream 2.0. This object includes the information required to join streaming instances to an Active Directory domain.
@@ -889,7 +897,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=PhotonAdminProxyService.DeleteFleet':
+  /#X-Amz-Target=PhotonAdminProxyService.DeleteFleet:
     post:
       operationId: DeleteFleet
       description: Deletes the specified fleet.
@@ -940,7 +948,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=PhotonAdminProxyService.DeleteImage':
+  /#X-Amz-Target=PhotonAdminProxyService.DeleteImage:
     post:
       operationId: DeleteImage
       description: 'Deletes the specified image. You cannot delete an image when it is in use. After you delete an image, you cannot provision new capacity using the image.'
@@ -997,7 +1005,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=PhotonAdminProxyService.DeleteImageBuilder':
+  /#X-Amz-Target=PhotonAdminProxyService.DeleteImageBuilder:
     post:
       operationId: DeleteImageBuilder
       description: Deletes the specified image builder and releases the capacity.
@@ -1048,7 +1056,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=PhotonAdminProxyService.DeleteImagePermissions':
+  /#X-Amz-Target=PhotonAdminProxyService.DeleteImagePermissions:
     post:
       operationId: DeleteImagePermissions
       description: 'Deletes permissions for the specified private image. After you delete permissions for an image, AWS accounts to which you previously granted these permissions can no longer use the image.'
@@ -1093,7 +1101,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=PhotonAdminProxyService.DeleteStack':
+  /#X-Amz-Target=PhotonAdminProxyService.DeleteStack:
     post:
       operationId: DeleteStack
       description: 'Deletes the specified stack. After the stack is deleted, the application streaming environment provided by the stack is no longer available to users. Also, any reservations made for application streaming sessions for the stack are released.'
@@ -1144,7 +1152,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=PhotonAdminProxyService.DeleteUsageReportSubscription':
+  /#X-Amz-Target=PhotonAdminProxyService.DeleteUsageReportSubscription:
     post:
       operationId: DeleteUsageReportSubscription
       description: Disables usage report generation.
@@ -1189,7 +1197,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=PhotonAdminProxyService.DeleteUser':
+  /#X-Amz-Target=PhotonAdminProxyService.DeleteUser:
     post:
       operationId: DeleteUser
       description: Deletes a user from the user pool.
@@ -1228,7 +1236,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=PhotonAdminProxyService.DescribeDirectoryConfigs':
+  /#X-Amz-Target=PhotonAdminProxyService.DescribeDirectoryConfigs:
     post:
       operationId: DescribeDirectoryConfigs
       description: '<p>Retrieves a list that describes one or more specified Directory Config objects for AppStream 2.0, if the names for these objects are provided. Otherwise, all Directory Config objects in the account are described. These objects include the configuration information required to join fleets and image builders to Microsoft Active Directory domains. </p> <p>Although the response syntax in this topic includes the account password, this password is not returned in the actual response.</p>'
@@ -1267,7 +1275,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=PhotonAdminProxyService.DescribeFleets':
+  /#X-Amz-Target=PhotonAdminProxyService.DescribeFleets:
     post:
       operationId: DescribeFleets
       description: 'Retrieves a list that describes one or more specified fleets, if the fleet names are provided. Otherwise, all fleets in the account are described.'
@@ -1306,7 +1314,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=PhotonAdminProxyService.DescribeImageBuilders':
+  /#X-Amz-Target=PhotonAdminProxyService.DescribeImageBuilders:
     post:
       operationId: DescribeImageBuilders
       description: 'Retrieves a list that describes one or more specified image builders, if the image builder names are provided. Otherwise, all image builders in the account are described.'
@@ -1345,7 +1353,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=PhotonAdminProxyService.DescribeImagePermissions':
+  /#X-Amz-Target=PhotonAdminProxyService.DescribeImagePermissions:
     post:
       operationId: DescribeImagePermissions
       description: 'Retrieves a list that describes the permissions for shared AWS account IDs on a private image that you own. '
@@ -1396,7 +1404,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=PhotonAdminProxyService.DescribeImages':
+  /#X-Amz-Target=PhotonAdminProxyService.DescribeImages:
     post:
       operationId: DescribeImages
       description: 'Retrieves a list that describes one or more specified images, if the image names or image ARNs are provided. Otherwise, all images in the account are described.'
@@ -1453,7 +1461,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=PhotonAdminProxyService.DescribeSessions':
+  /#X-Amz-Target=PhotonAdminProxyService.DescribeSessions:
     post:
       operationId: DescribeSessions
       description: 'Retrieves a list that describes the streaming sessions for a specified stack and fleet. If a UserId is provided for the stack and fleet, only streaming sessions for that user are described. If an authentication type is not provided, the default is to authenticate users using a streaming URL.'
@@ -1492,7 +1500,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=PhotonAdminProxyService.DescribeStacks':
+  /#X-Amz-Target=PhotonAdminProxyService.DescribeStacks:
     post:
       operationId: DescribeStacks
       description: 'Retrieves a list that describes one or more specified stacks, if the stack names are provided. Otherwise, all stacks in the account are described.'
@@ -1531,7 +1539,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=PhotonAdminProxyService.DescribeUsageReportSubscriptions':
+  /#X-Amz-Target=PhotonAdminProxyService.DescribeUsageReportSubscriptions:
     post:
       operationId: DescribeUsageReportSubscriptions
       description: Retrieves a list that describes one or more usage report subscriptions.
@@ -1576,7 +1584,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=PhotonAdminProxyService.DescribeUserStackAssociations':
+  /#X-Amz-Target=PhotonAdminProxyService.DescribeUserStackAssociations:
     post:
       operationId: DescribeUserStackAssociations
       description: '<p>Retrieves a list that describes the UserStackAssociation objects. You must specify either or both of the following:</p> <ul> <li> <p>The stack name</p> </li> <li> <p>The user name (email address of the user associated with the stack) and the authentication type for the user</p> </li> </ul>'
@@ -1615,7 +1623,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=PhotonAdminProxyService.DescribeUsers':
+  /#X-Amz-Target=PhotonAdminProxyService.DescribeUsers:
     post:
       operationId: DescribeUsers
       description: Retrieves a list that describes one or more specified users in the user pool.
@@ -1660,7 +1668,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=PhotonAdminProxyService.DisableUser':
+  /#X-Amz-Target=PhotonAdminProxyService.DisableUser:
     post:
       operationId: DisableUser
       description: 'Disables the specified user in the user pool. Users can''t sign in to AppStream 2.0 until they are re-enabled. This action does not delete the user. '
@@ -1699,7 +1707,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=PhotonAdminProxyService.DisassociateFleet':
+  /#X-Amz-Target=PhotonAdminProxyService.DisassociateFleet:
     post:
       operationId: DisassociateFleet
       description: Disassociates the specified fleet from the specified stack.
@@ -1750,7 +1758,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=PhotonAdminProxyService.EnableUser':
+  /#X-Amz-Target=PhotonAdminProxyService.EnableUser:
     post:
       operationId: EnableUser
       description: 'Enables a user in the user pool. After being enabled, users can sign in to AppStream 2.0 and open applications from the stacks to which they are assigned.'
@@ -1795,7 +1803,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=PhotonAdminProxyService.ExpireSession':
+  /#X-Amz-Target=PhotonAdminProxyService.ExpireSession:
     post:
       operationId: ExpireSession
       description: Immediately stops the specified streaming session.
@@ -1828,7 +1836,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=PhotonAdminProxyService.ListAssociatedFleets':
+  /#X-Amz-Target=PhotonAdminProxyService.ListAssociatedFleets:
     post:
       operationId: ListAssociatedFleets
       description: Retrieves the name of the fleet that is associated with the specified stack.
@@ -1861,7 +1869,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=PhotonAdminProxyService.ListAssociatedStacks':
+  /#X-Amz-Target=PhotonAdminProxyService.ListAssociatedStacks:
     post:
       operationId: ListAssociatedStacks
       description: Retrieves the name of the stack with which the specified fleet is associated.
@@ -1894,7 +1902,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=PhotonAdminProxyService.ListTagsForResource':
+  /#X-Amz-Target=PhotonAdminProxyService.ListTagsForResource:
     post:
       operationId: ListTagsForResource
       description: '<p>Retrieves a list of all tags for the specified AppStream 2.0 resource. You can tag AppStream 2.0 image builders, images, fleets, and stacks.</p> <p>For more information about tags, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>'
@@ -1933,7 +1941,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=PhotonAdminProxyService.StartFleet':
+  /#X-Amz-Target=PhotonAdminProxyService.StartFleet:
     post:
       operationId: StartFleet
       description: Starts the specified fleet.
@@ -2008,7 +2016,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=PhotonAdminProxyService.StartImageBuilder':
+  /#X-Amz-Target=PhotonAdminProxyService.StartImageBuilder:
     post:
       operationId: StartImageBuilder
       description: Starts the specified image builder.
@@ -2071,7 +2079,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=PhotonAdminProxyService.StopFleet':
+  /#X-Amz-Target=PhotonAdminProxyService.StopFleet:
     post:
       operationId: StopFleet
       description: Stops the specified fleet.
@@ -2116,7 +2124,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=PhotonAdminProxyService.StopImageBuilder':
+  /#X-Amz-Target=PhotonAdminProxyService.StopImageBuilder:
     post:
       operationId: StopImageBuilder
       description: Stops the specified image builder.
@@ -2167,7 +2175,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=PhotonAdminProxyService.TagResource':
+  /#X-Amz-Target=PhotonAdminProxyService.TagResource:
     post:
       operationId: TagResource
       description: '<p>Adds or overwrites one or more tags for the specified AppStream 2.0 resource. You can tag AppStream 2.0 image builders, images, fleets, and stacks.</p> <p>Each tag consists of a key and an optional value. If a resource already has a tag with the same key, this operation updates its value.</p> <p>To list the current tags for your resources, use <a>ListTagsForResource</a>. To disassociate tags from your resources, use <a>UntagResource</a>.</p> <p>For more information about tags, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>'
@@ -2218,7 +2226,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=PhotonAdminProxyService.UntagResource':
+  /#X-Amz-Target=PhotonAdminProxyService.UntagResource:
     post:
       operationId: UntagResource
       description: '<p>Disassociates one or more specified tags from the specified AppStream 2.0 resource.</p> <p>To list the current tags for your resources, use <a>ListTagsForResource</a>.</p> <p>For more information about tags, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>'
@@ -2257,7 +2265,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=PhotonAdminProxyService.UpdateDirectoryConfig':
+  /#X-Amz-Target=PhotonAdminProxyService.UpdateDirectoryConfig:
     post:
       operationId: UpdateDirectoryConfig
       description: Updates the specified Directory Config object in AppStream 2.0. This object includes the configuration information required to join fleets and image builders to Microsoft Active Directory domains.
@@ -2308,7 +2316,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=PhotonAdminProxyService.UpdateFleet':
+  /#X-Amz-Target=PhotonAdminProxyService.UpdateFleet:
     post:
       operationId: UpdateFleet
       description: '<p>Updates the specified fleet.</p> <p>If the fleet is in the <code>STOPPED</code> state, you can update any attribute except the fleet name. If the fleet is in the <code>RUNNING</code> state, you can update the <code>DisplayName</code>, <code>ComputeCapacity</code>, <code>ImageARN</code>, <code>ImageName</code>, <code>IdleDisconnectTimeoutInSeconds</code>, and <code>DisconnectTimeoutInSeconds</code> attributes. If the fleet is in the <code>STARTING</code> or <code>STOPPING</code> state, you can''t update it.</p>'
@@ -2401,7 +2409,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=PhotonAdminProxyService.UpdateImagePermissions':
+  /#X-Amz-Target=PhotonAdminProxyService.UpdateImagePermissions:
     post:
       operationId: UpdateImagePermissions
       description: 'Adds or updates permissions for the specified private image. '
@@ -2452,7 +2460,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=PhotonAdminProxyService.UpdateStack':
+  /#X-Amz-Target=PhotonAdminProxyService.UpdateStack:
     post:
       operationId: UpdateStack
       description: Updates the specified fields for the specified stack.

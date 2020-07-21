@@ -51,13 +51,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The Amazon Augmented AI Runtime multi-region endpoint
   - url: 'https://a2i-runtime.sagemaker.{region}.amazonaws.com'
@@ -77,13 +81,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The Amazon Augmented AI Runtime multi-region endpoint
   - url: 'http://a2i-runtime.sagemaker.{region}.amazonaws.com.cn'
@@ -203,7 +211,7 @@ paths:
             pattern: '^[a-z0-9](-*[a-z0-9])*$'
             minLength: 1
             maxLength: 63
-  '/human-loops#FlowDefinitionArn':
+  /human-loops#FlowDefinitionArn:
     get:
       operationId: ListHumanLoops
       description: 'Returns information about human loops, given the specified parameters. If a human loop was deleted, it will not be included.'

@@ -51,13 +51,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The Amazon Translate multi-region endpoint
   - url: 'https://translate.{region}.amazonaws.com'
@@ -77,13 +81,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The Amazon Translate multi-region endpoint
   - url: 'http://translate.{region}.amazonaws.com.cn'
@@ -106,7 +114,7 @@ servers:
     description: The Amazon Translate endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
-  '/#X-Amz-Target=AWSShineFrontendService_20170701.DeleteTerminology':
+  /#X-Amz-Target=AWSShineFrontendService_20170701.DeleteTerminology:
     post:
       operationId: DeleteTerminology
       description: A synchronous action that deletes a custom terminology.
@@ -153,7 +161,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSShineFrontendService_20170701.DescribeTextTranslationJob':
+  /#X-Amz-Target=AWSShineFrontendService_20170701.DescribeTextTranslationJob:
     post:
       operationId: DescribeTextTranslationJob
       description: 'Gets the properties associated with an asycnhronous batch translation job including name, ID, status, source and target languages, input/output S3 buckets, and so on.'
@@ -204,7 +212,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSShineFrontendService_20170701.GetTerminology':
+  /#X-Amz-Target=AWSShineFrontendService_20170701.GetTerminology:
     post:
       operationId: GetTerminology
       description: Retrieves a custom terminology.
@@ -261,7 +269,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSShineFrontendService_20170701.ImportTerminology':
+  /#X-Amz-Target=AWSShineFrontendService_20170701.ImportTerminology:
     post:
       operationId: ImportTerminology
       description: '<p>Creates or updates a custom terminology, depending on whether or not one already exists for the given terminology name. Importing a terminology with the same name as an existing one will merge the terminologies based on the chosen merge strategy. Currently, the only supported merge strategy is OVERWRITE, and so the imported terminology will overwrite an existing terminology of the same name.</p> <p>If you import a terminology that overwrites an existing one, the new terminology take up to 10 minutes to fully propagate and be available for use in a translation due to cache policies with the DataPlane service that performs the translations.</p>'
@@ -318,7 +326,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSShineFrontendService_20170701.ListTerminologies':
+  /#X-Amz-Target=AWSShineFrontendService_20170701.ListTerminologies:
     post:
       operationId: ListTerminologies
       description: Provides a list of custom terminologies associated with your account.
@@ -381,7 +389,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSShineFrontendService_20170701.ListTextTranslationJobs':
+  /#X-Amz-Target=AWSShineFrontendService_20170701.ListTextTranslationJobs:
     post:
       operationId: ListTextTranslationJobs
       description: Gets a list of the batch translation jobs that you have submitted.
@@ -450,7 +458,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSShineFrontendService_20170701.StartTextTranslationJob':
+  /#X-Amz-Target=AWSShineFrontendService_20170701.StartTextTranslationJob:
     post:
       operationId: StartTextTranslationJob
       description: '<p>Starts an asynchronous batch translation job. Batch translation jobs can be used to translate large volumes of text across multiple documents at once. For more information, see <a>async</a>.</p> <p>Batch translation jobs can be described with the <a>DescribeTextTranslationJob</a> operation, listed with the <a>ListTextTranslationJobs</a> operation, and stopped with the <a>StopTextTranslationJob</a> operation.</p> <note> <p>Amazon Translate does not support batch translation of multiple source languages at once.</p> </note>'
@@ -513,7 +521,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSShineFrontendService_20170701.StopTextTranslationJob':
+  /#X-Amz-Target=AWSShineFrontendService_20170701.StopTextTranslationJob:
     post:
       operationId: StopTextTranslationJob
       description: '<p>Stops an asynchronous batch translation job that is in progress.</p> <p>If the job''s state is <code>IN_PROGRESS</code>, the job will be marked for termination and put into the <code>STOP_REQUESTED</code> state. If the job completes before it can be stopped, it is put into the <code>COMPLETED</code> state. Otherwise, the job is put into the <code>STOPPED</code> state.</p> <p>Asynchronous batch translation jobs are started with the <a>StartTextTranslationJob</a> operation. You can use the <a>DescribeTextTranslationJob</a> or <a>ListTextTranslationJobs</a> operations to get a batch translation job''s <code>JobId</code>.</p>'
@@ -564,7 +572,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSShineFrontendService_20170701.TranslateText':
+  /#X-Amz-Target=AWSShineFrontendService_20170701.TranslateText:
     post:
       operationId: TranslateText
       description: 'Translates input text from the source language to the target language. For a list of available languages and language codes, see <a>what-is-languages</a>.'

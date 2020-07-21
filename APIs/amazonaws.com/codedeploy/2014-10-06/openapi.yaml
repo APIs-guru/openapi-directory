@@ -51,13 +51,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The CodeDeploy multi-region endpoint
   - url: 'https://codedeploy.{region}.amazonaws.com'
@@ -77,13 +81,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The CodeDeploy multi-region endpoint
   - url: 'http://codedeploy.{region}.amazonaws.com.cn'
@@ -106,7 +114,7 @@ servers:
     description: The CodeDeploy endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
-  '/#X-Amz-Target=CodeDeploy_20141006.AddTagsToOnPremisesInstances':
+  /#X-Amz-Target=CodeDeploy_20141006.AddTagsToOnPremisesInstances:
     post:
       operationId: AddTagsToOnPremisesInstances
       description: Adds tags to on-premises instances.
@@ -177,7 +185,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeDeploy_20141006.BatchGetApplicationRevisions':
+  /#X-Amz-Target=CodeDeploy_20141006.BatchGetApplicationRevisions:
     post:
       operationId: BatchGetApplicationRevisions
       description: Gets information about one or more application revisions. The maximum number of application revisions that can be returned is 25.
@@ -246,7 +254,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeDeploy_20141006.BatchGetApplications':
+  /#X-Amz-Target=CodeDeploy_20141006.BatchGetApplications:
     post:
       operationId: BatchGetApplications
       description: Gets information about one or more applications. The maximum number of applications that can be returned is 100.
@@ -303,7 +311,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeDeploy_20141006.BatchGetDeploymentGroups':
+  /#X-Amz-Target=CodeDeploy_20141006.BatchGetDeploymentGroups:
     post:
       operationId: BatchGetDeploymentGroups
       description: Gets information about one or more deployment groups.
@@ -378,7 +386,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeDeploy_20141006.BatchGetDeploymentInstances':
+  /#X-Amz-Target=CodeDeploy_20141006.BatchGetDeploymentInstances:
     post:
       deprecated: true
       operationId: BatchGetDeploymentInstances
@@ -454,7 +462,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeDeploy_20141006.BatchGetDeploymentTargets':
+  /#X-Amz-Target=CodeDeploy_20141006.BatchGetDeploymentTargets:
     post:
       operationId: BatchGetDeploymentTargets
       description: '<p> Returns an array of one or more targets associated with a deployment. This method works with all compute types and should be used instead of the deprecated <code>BatchGetDeploymentInstances</code>. The maximum number of targets that can be returned is 25.</p> <p> The type of targets returned depends on the deployment''s compute platform or deployment method: </p> <ul> <li> <p> <b>EC2/On-premises</b>: Information about EC2 instance targets. </p> </li> <li> <p> <b>AWS Lambda</b>: Information about Lambda functions targets. </p> </li> <li> <p> <b>Amazon ECS</b>: Information about Amazon ECS service targets. </p> </li> <li> <p> <b>CloudFormation</b>: Information about targets of blue/green deployments initiated by a CloudFormation stack update.</p> </li> </ul>'
@@ -541,7 +549,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeDeploy_20141006.BatchGetDeployments':
+  /#X-Amz-Target=CodeDeploy_20141006.BatchGetDeployments:
     post:
       operationId: BatchGetDeployments
       description: Gets information about one or more deployments. The maximum number of deployments that can be returned is 25.
@@ -592,7 +600,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeDeploy_20141006.BatchGetOnPremisesInstances':
+  /#X-Amz-Target=CodeDeploy_20141006.BatchGetOnPremisesInstances:
     post:
       operationId: BatchGetOnPremisesInstances
       description: Gets information about one or more on-premises instances. The maximum number of on-premises instances that can be returned is 25.
@@ -643,7 +651,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeDeploy_20141006.ContinueDeployment':
+  /#X-Amz-Target=CodeDeploy_20141006.ContinueDeployment:
     post:
       operationId: ContinueDeployment
       description: 'For a blue/green deployment, starts the process of rerouting traffic from instances in the original environment to instances in the replacement environment without waiting for a specified wait time to elapse. (Traffic rerouting, which is achieved by registering instances in the replacement environment with the load balancer, can start as soon as all instances have a status of Ready.) '
@@ -720,7 +728,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeDeploy_20141006.CreateApplication':
+  /#X-Amz-Target=CodeDeploy_20141006.CreateApplication:
     post:
       operationId: CreateApplication
       description: Creates an application.
@@ -789,7 +797,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeDeploy_20141006.CreateDeployment':
+  /#X-Amz-Target=CodeDeploy_20141006.CreateDeployment:
     post:
       operationId: CreateDeployment
       description: Deploys an application revision through the specified deployment group.
@@ -966,7 +974,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeDeploy_20141006.CreateDeploymentConfig':
+  /#X-Amz-Target=CodeDeploy_20141006.CreateDeploymentConfig:
     post:
       operationId: CreateDeploymentConfig
       description: ' Creates a deployment configuration. '
@@ -1041,7 +1049,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeDeploy_20141006.CreateDeploymentGroup':
+  /#X-Amz-Target=CodeDeploy_20141006.CreateDeploymentGroup:
     post:
       operationId: CreateDeploymentGroup
       description: Creates a deployment group to which application revisions are deployed.
@@ -1272,7 +1280,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeDeploy_20141006.DeleteApplication':
+  /#X-Amz-Target=CodeDeploy_20141006.DeleteApplication:
     post:
       operationId: DeleteApplication
       description: Deletes an application.
@@ -1319,7 +1327,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeDeploy_20141006.DeleteDeploymentConfig':
+  /#X-Amz-Target=CodeDeploy_20141006.DeleteDeploymentConfig:
     post:
       operationId: DeleteDeploymentConfig
       description: <p>Deletes a deployment configuration.</p> <note> <p>A deployment configuration cannot be deleted if it is currently in use. Predefined configurations cannot be deleted.</p> </note>
@@ -1372,7 +1380,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeDeploy_20141006.DeleteDeploymentGroup':
+  /#X-Amz-Target=CodeDeploy_20141006.DeleteDeploymentGroup:
     post:
       operationId: DeleteDeploymentGroup
       description: Deletes a deployment group.
@@ -1435,7 +1443,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeDeploy_20141006.DeleteGitHubAccountToken':
+  /#X-Amz-Target=CodeDeploy_20141006.DeleteGitHubAccountToken:
     post:
       operationId: DeleteGitHubAccountToken
       description: Deletes a GitHub account connection.
@@ -1498,7 +1506,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeDeploy_20141006.DeleteResourcesByExternalId':
+  /#X-Amz-Target=CodeDeploy_20141006.DeleteResourcesByExternalId:
     post:
       operationId: DeleteResourcesByExternalId
       description: Deletes resources linked to an external ID.
@@ -1531,7 +1539,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeDeploy_20141006.DeregisterOnPremisesInstance':
+  /#X-Amz-Target=CodeDeploy_20141006.DeregisterOnPremisesInstance:
     post:
       operationId: DeregisterOnPremisesInstance
       description: Deregisters an on-premises instance.
@@ -1572,7 +1580,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeDeploy_20141006.GetApplication':
+  /#X-Amz-Target=CodeDeploy_20141006.GetApplication:
     post:
       operationId: GetApplication
       description: Gets information about an application.
@@ -1623,7 +1631,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeDeploy_20141006.GetApplicationRevision':
+  /#X-Amz-Target=CodeDeploy_20141006.GetApplicationRevision:
     post:
       operationId: GetApplicationRevision
       description: Gets information about an application revision.
@@ -1692,7 +1700,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeDeploy_20141006.GetDeployment':
+  /#X-Amz-Target=CodeDeploy_20141006.GetDeployment:
     post:
       operationId: GetDeployment
       description: <p>Gets information about a deployment.</p> <note> <p> The <code>content</code> property of the <code>appSpecContent</code> object in the returned revision is always null. Use <code>GetApplicationRevision</code> and the <code>sha256</code> property of the returned <code>appSpecContent</code> object to get the content of the deployment’s AppSpec file. </p> </note>
@@ -1743,7 +1751,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeDeploy_20141006.GetDeploymentConfig':
+  /#X-Amz-Target=CodeDeploy_20141006.GetDeploymentConfig:
     post:
       operationId: GetDeploymentConfig
       description: Gets information about a deployment configuration.
@@ -1800,7 +1808,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeDeploy_20141006.GetDeploymentGroup':
+  /#X-Amz-Target=CodeDeploy_20141006.GetDeploymentGroup:
     post:
       operationId: GetDeploymentGroup
       description: Gets information about a deployment group.
@@ -1875,7 +1883,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeDeploy_20141006.GetDeploymentInstance':
+  /#X-Amz-Target=CodeDeploy_20141006.GetDeploymentInstance:
     post:
       deprecated: true
       operationId: GetDeploymentInstance
@@ -1951,7 +1959,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeDeploy_20141006.GetDeploymentTarget':
+  /#X-Amz-Target=CodeDeploy_20141006.GetDeploymentTarget:
     post:
       operationId: GetDeploymentTarget
       description: ' Returns information about a deployment target. '
@@ -2032,7 +2040,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeDeploy_20141006.GetOnPremisesInstance':
+  /#X-Amz-Target=CodeDeploy_20141006.GetOnPremisesInstance:
     post:
       operationId: GetOnPremisesInstance
       description: ' Gets information about an on-premises instance. '
@@ -2083,7 +2091,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeDeploy_20141006.ListApplicationRevisions':
+  /#X-Amz-Target=CodeDeploy_20141006.ListApplicationRevisions:
     post:
       operationId: ListApplicationRevisions
       description: Lists information about revisions for an application.
@@ -2182,7 +2190,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeDeploy_20141006.ListApplications':
+  /#X-Amz-Target=CodeDeploy_20141006.ListApplications:
     post:
       operationId: ListApplications
       description: Lists the applications registered with the IAM user or AWS account.
@@ -2227,7 +2235,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeDeploy_20141006.ListDeploymentConfigs':
+  /#X-Amz-Target=CodeDeploy_20141006.ListDeploymentConfigs:
     post:
       operationId: ListDeploymentConfigs
       description: Lists the deployment configurations with the IAM user or AWS account.
@@ -2272,7 +2280,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeDeploy_20141006.ListDeploymentGroups':
+  /#X-Amz-Target=CodeDeploy_20141006.ListDeploymentGroups:
     post:
       operationId: ListDeploymentGroups
       description: Lists the deployment groups for an application registered with the IAM user or AWS account.
@@ -2335,7 +2343,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeDeploy_20141006.ListDeploymentInstances':
+  /#X-Amz-Target=CodeDeploy_20141006.ListDeploymentInstances:
     post:
       deprecated: true
       operationId: ListDeploymentInstances
@@ -2435,7 +2443,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeDeploy_20141006.ListDeploymentTargets':
+  /#X-Amz-Target=CodeDeploy_20141006.ListDeploymentTargets:
     post:
       operationId: ListDeploymentTargets
       description: ' Returns an array of target IDs that are associated a deployment. '
@@ -2516,7 +2524,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeDeploy_20141006.ListDeployments':
+  /#X-Amz-Target=CodeDeploy_20141006.ListDeployments:
     post:
       operationId: ListDeployments
       description: Lists the deployments in a deployment group for an application registered with the IAM user or AWS account.
@@ -2621,7 +2629,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeDeploy_20141006.ListGitHubAccountTokenNames':
+  /#X-Amz-Target=CodeDeploy_20141006.ListGitHubAccountTokenNames:
     post:
       operationId: ListGitHubAccountTokenNames
       description: Lists the names of stored connections to GitHub accounts.
@@ -2672,7 +2680,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeDeploy_20141006.ListOnPremisesInstances':
+  /#X-Amz-Target=CodeDeploy_20141006.ListOnPremisesInstances:
     post:
       operationId: ListOnPremisesInstances
       description: '<p>Gets a list of names for one or more on-premises instances.</p> <p>Unless otherwise specified, both registered and deregistered on-premises instance names are listed. To list only registered or deregistered on-premises instance names, use the registration status parameter.</p>'
@@ -2723,7 +2731,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeDeploy_20141006.ListTagsForResource':
+  /#X-Amz-Target=CodeDeploy_20141006.ListTagsForResource:
     post:
       operationId: ListTagsForResource
       description: ' Returns a list of tags for the resource identified by a specified Amazon Resource Name (ARN). Tags are used to organize and categorize your CodeDeploy resources. '
@@ -2774,7 +2782,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeDeploy_20141006.PutLifecycleEventHookExecutionStatus':
+  /#X-Amz-Target=CodeDeploy_20141006.PutLifecycleEventHookExecutionStatus:
     post:
       operationId: PutLifecycleEventHookExecutionStatus
       description: ' Sets the result of a Lambda validation function. The function validates lifecycle hooks during a deployment that uses the AWS Lambda or Amazon ECS compute platform. For AWS Lambda deployments, the available lifecycle hooks are <code>BeforeAllowTraffic</code> and <code>AfterAllowTraffic</code>. For Amazon ECS deployments, the available lifecycle hooks are <code>BeforeInstall</code>, <code>AfterInstall</code>, <code>AfterAllowTestTraffic</code>, <code>BeforeAllowTraffic</code>, and <code>AfterAllowTraffic</code>. Lambda validation functions return <code>Succeeded</code> or <code>Failed</code>. For more information, see <a href="https://docs.aws.amazon.com/codedeploy/latest/userguide/reference-appspec-file-structure-hooks.html#appspec-hooks-lambda">AppSpec ''hooks'' Section for an AWS Lambda Deployment </a> and <a href="https://docs.aws.amazon.com/codedeploy/latest/userguide/reference-appspec-file-structure-hooks.html#appspec-hooks-ecs">AppSpec ''hooks'' Section for an Amazon ECS Deployment</a>.'
@@ -2849,7 +2857,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeDeploy_20141006.RegisterApplicationRevision':
+  /#X-Amz-Target=CodeDeploy_20141006.RegisterApplicationRevision:
     post:
       operationId: RegisterApplicationRevision
       description: Registers with AWS CodeDeploy a revision for the specified application.
@@ -2914,7 +2922,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeDeploy_20141006.RegisterOnPremisesInstance':
+  /#X-Amz-Target=CodeDeploy_20141006.RegisterOnPremisesInstance:
     post:
       operationId: RegisterOnPremisesInstance
       description: <p>Registers an on-premises instance.</p> <note> <p>Only one IAM ARN (an IAM session ARN or IAM user ARN) is supported in the request. You cannot use both.</p> </note>
@@ -3003,7 +3011,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeDeploy_20141006.RemoveTagsFromOnPremisesInstances':
+  /#X-Amz-Target=CodeDeploy_20141006.RemoveTagsFromOnPremisesInstances:
     post:
       operationId: RemoveTagsFromOnPremisesInstances
       description: Removes one or more tags from one or more on-premises instances.
@@ -3074,7 +3082,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeDeploy_20141006.SkipWaitTimeForInstanceTermination':
+  /#X-Amz-Target=CodeDeploy_20141006.SkipWaitTimeForInstanceTermination:
     post:
       deprecated: true
       operationId: SkipWaitTimeForInstanceTermination
@@ -3140,7 +3148,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeDeploy_20141006.StopDeployment':
+  /#X-Amz-Target=CodeDeploy_20141006.StopDeployment:
     post:
       operationId: StopDeployment
       description: Attempts to stop an ongoing deployment.
@@ -3209,7 +3217,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeDeploy_20141006.TagResource':
+  /#X-Amz-Target=CodeDeploy_20141006.TagResource:
     post:
       operationId: TagResource
       description: ' Associates the list of tags in the input <code>Tags</code> parameter with the resource identified by the <code>ResourceArn</code> input parameter. '
@@ -3290,7 +3298,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeDeploy_20141006.UntagResource':
+  /#X-Amz-Target=CodeDeploy_20141006.UntagResource:
     post:
       operationId: UntagResource
       description: ' Disassociates a resource from a list of tags. The resource is identified by the <code>ResourceArn</code> input parameter. The tags are identified by the list of keys in the <code>TagKeys</code> input parameter. '
@@ -3371,7 +3379,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeDeploy_20141006.UpdateApplication':
+  /#X-Amz-Target=CodeDeploy_20141006.UpdateApplication:
     post:
       operationId: UpdateApplication
       description: Changes the name of an application.
@@ -3424,7 +3432,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeDeploy_20141006.UpdateDeploymentGroup':
+  /#X-Amz-Target=CodeDeploy_20141006.UpdateDeploymentGroup:
     post:
       operationId: UpdateDeploymentGroup
       description: Changes information about a deployment group.

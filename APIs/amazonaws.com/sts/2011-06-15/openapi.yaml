@@ -75,7 +75,7 @@ servers:
     description: The AWS STS endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
-  '/#Action=AssumeRole':
+  /#Action=AssumeRole:
     get:
       x-aws-operation-name: AssumeRole
       operationId: GET_AssumeRole
@@ -265,7 +265,7 @@ paths:
             type: string
             enum:
               - '2011-06-15'
-  '/#Action=AssumeRoleWithSAML':
+  /#Action=AssumeRoleWithSAML:
     get:
       x-aws-operation-name: AssumeRoleWithSAML
       operationId: GET_AssumeRoleWithSAML
@@ -455,7 +455,7 @@ paths:
             type: string
             enum:
               - '2011-06-15'
-  '/#Action=AssumeRoleWithWebIdentity':
+  /#Action=AssumeRoleWithWebIdentity:
     get:
       x-aws-operation-name: AssumeRoleWithWebIdentity
       operationId: GET_AssumeRoleWithWebIdentity
@@ -665,7 +665,7 @@ paths:
             type: string
             enum:
               - '2011-06-15'
-  '/#Action=DecodeAuthorizationMessage':
+  /#Action=DecodeAuthorizationMessage:
     get:
       x-aws-operation-name: DecodeAuthorizationMessage
       operationId: GET_DecodeAuthorizationMessage
@@ -751,7 +751,7 @@ paths:
             type: string
             enum:
               - '2011-06-15'
-  '/#Action=GetAccessKeyInfo':
+  /#Action=GetAccessKeyInfo:
     get:
       x-aws-operation-name: GetAccessKeyInfo
       operationId: GET_GetAccessKeyInfo
@@ -826,7 +826,7 @@ paths:
             type: string
             enum:
               - '2011-06-15'
-  '/#Action=GetCallerIdentity':
+  /#Action=GetCallerIdentity:
     get:
       x-aws-operation-name: GetCallerIdentity
       operationId: GET_GetCallerIdentity
@@ -892,7 +892,7 @@ paths:
             type: string
             enum:
               - '2011-06-15'
-  '/#Action=GetFederationToken':
+  /#Action=GetFederationToken:
     get:
       x-aws-operation-name: GetFederationToken
       operationId: GET_GetFederationToken
@@ -1037,7 +1037,7 @@ paths:
             type: string
             enum:
               - '2011-06-15'
-  '/#Action=GetSessionToken':
+  /#Action=GetSessionToken:
     get:
       x-aws-operation-name: GetSessionToken
       operationId: GET_GetSessionToken

@@ -51,13 +51,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The Amazon CloudSearch multi-region endpoint
   - url: 'https://cloudsearch.{region}.amazonaws.com'
@@ -77,13 +81,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The Amazon CloudSearch multi-region endpoint
   - url: 'http://cloudsearch.{region}.amazonaws.com.cn'
@@ -106,7 +114,7 @@ servers:
     description: The Amazon CloudSearch endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
-  '/#Action=CreateDomain':
+  /#Action=CreateDomain:
     get:
       x-aws-operation-name: CreateDomain
       operationId: GET_CreateDomain
@@ -224,7 +232,7 @@ paths:
             type: string
             enum:
               - '2011-02-01'
-  '/#Action=DefineIndexField':
+  /#Action=DefineIndexField:
     get:
       x-aws-operation-name: DefineIndexField
       operationId: GET_DefineIndexField
@@ -371,7 +379,7 @@ paths:
             type: string
             enum:
               - '2011-02-01'
-  '/#Action=DefineRankExpression':
+  /#Action=DefineRankExpression:
     get:
       x-aws-operation-name: DefineRankExpression
       operationId: GET_DefineRankExpression
@@ -506,7 +514,7 @@ paths:
             type: string
             enum:
               - '2011-02-01'
-  '/#Action=DeleteDomain':
+  /#Action=DeleteDomain:
     get:
       x-aws-operation-name: DeleteDomain
       operationId: GET_DeleteDomain
@@ -610,7 +618,7 @@ paths:
             type: string
             enum:
               - '2011-02-01'
-  '/#Action=DeleteIndexField':
+  /#Action=DeleteIndexField:
     get:
       x-aws-operation-name: DeleteIndexField
       operationId: GET_DeleteIndexField
@@ -738,7 +746,7 @@ paths:
             type: string
             enum:
               - '2011-02-01'
-  '/#Action=DeleteRankExpression':
+  /#Action=DeleteRankExpression:
     get:
       x-aws-operation-name: DeleteRankExpression
       operationId: GET_DeleteRankExpression
@@ -866,7 +874,7 @@ paths:
             type: string
             enum:
               - '2011-02-01'
-  '/#Action=DescribeAvailabilityOptions':
+  /#Action=DescribeAvailabilityOptions:
     get:
       x-aws-operation-name: DescribeAvailabilityOptions
       operationId: GET_DescribeAvailabilityOptions
@@ -984,7 +992,7 @@ paths:
             type: string
             enum:
               - '2011-02-01'
-  '/#Action=DescribeDefaultSearchField':
+  /#Action=DescribeDefaultSearchField:
     get:
       x-aws-operation-name: DescribeDefaultSearchField
       operationId: GET_DescribeDefaultSearchField
@@ -1102,7 +1110,7 @@ paths:
             type: string
             enum:
               - '2011-02-01'
-  '/#Action=DescribeDomains':
+  /#Action=DescribeDomains:
     get:
       x-aws-operation-name: DescribeDomains
       operationId: GET_DescribeDomains
@@ -1205,7 +1213,7 @@ paths:
             type: string
             enum:
               - '2011-02-01'
-  '/#Action=DescribeIndexFields':
+  /#Action=DescribeIndexFields:
     get:
       x-aws-operation-name: DescribeIndexFields
       operationId: GET_DescribeIndexFields
@@ -1331,7 +1339,7 @@ paths:
             type: string
             enum:
               - '2011-02-01'
-  '/#Action=DescribeRankExpressions':
+  /#Action=DescribeRankExpressions:
     get:
       x-aws-operation-name: DescribeRankExpressions
       operationId: GET_DescribeRankExpressions
@@ -1457,7 +1465,7 @@ paths:
             type: string
             enum:
               - '2011-02-01'
-  '/#Action=DescribeServiceAccessPolicies':
+  /#Action=DescribeServiceAccessPolicies:
     get:
       x-aws-operation-name: DescribeServiceAccessPolicies
       operationId: GET_DescribeServiceAccessPolicies
@@ -1575,7 +1583,7 @@ paths:
             type: string
             enum:
               - '2011-02-01'
-  '/#Action=DescribeStemmingOptions':
+  /#Action=DescribeStemmingOptions:
     get:
       x-aws-operation-name: DescribeStemmingOptions
       operationId: GET_DescribeStemmingOptions
@@ -1693,7 +1701,7 @@ paths:
             type: string
             enum:
               - '2011-02-01'
-  '/#Action=DescribeStopwordOptions':
+  /#Action=DescribeStopwordOptions:
     get:
       x-aws-operation-name: DescribeStopwordOptions
       operationId: GET_DescribeStopwordOptions
@@ -1811,7 +1819,7 @@ paths:
             type: string
             enum:
               - '2011-02-01'
-  '/#Action=DescribeSynonymOptions':
+  /#Action=DescribeSynonymOptions:
     get:
       x-aws-operation-name: DescribeSynonymOptions
       operationId: GET_DescribeSynonymOptions
@@ -1929,7 +1937,7 @@ paths:
             type: string
             enum:
               - '2011-02-01'
-  '/#Action=IndexDocuments':
+  /#Action=IndexDocuments:
     get:
       x-aws-operation-name: IndexDocuments
       operationId: GET_IndexDocuments
@@ -2047,7 +2055,7 @@ paths:
             type: string
             enum:
               - '2011-02-01'
-  '/#Action=UpdateAvailabilityOptions':
+  /#Action=UpdateAvailabilityOptions:
     get:
       x-aws-operation-name: UpdateAvailabilityOptions
       operationId: GET_UpdateAvailabilityOptions
@@ -2171,7 +2179,7 @@ paths:
             type: string
             enum:
               - '2011-02-01'
-  '/#Action=UpdateDefaultSearchField':
+  /#Action=UpdateDefaultSearchField:
     get:
       x-aws-operation-name: UpdateDefaultSearchField
       operationId: GET_UpdateDefaultSearchField
@@ -2295,7 +2303,7 @@ paths:
             type: string
             enum:
               - '2011-02-01'
-  '/#Action=UpdateServiceAccessPolicies':
+  /#Action=UpdateServiceAccessPolicies:
     get:
       x-aws-operation-name: UpdateServiceAccessPolicies
       operationId: GET_UpdateServiceAccessPolicies
@@ -2420,7 +2428,7 @@ paths:
             type: string
             enum:
               - '2011-02-01'
-  '/#Action=UpdateStemmingOptions':
+  /#Action=UpdateStemmingOptions:
     get:
       x-aws-operation-name: UpdateStemmingOptions
       operationId: GET_UpdateStemmingOptions
@@ -2545,7 +2553,7 @@ paths:
             type: string
             enum:
               - '2011-02-01'
-  '/#Action=UpdateStopwordOptions':
+  /#Action=UpdateStopwordOptions:
     get:
       x-aws-operation-name: UpdateStopwordOptions
       operationId: GET_UpdateStopwordOptions
@@ -2670,7 +2678,7 @@ paths:
             type: string
             enum:
               - '2011-02-01'
-  '/#Action=UpdateSynonymOptions':
+  /#Action=UpdateSynonymOptions:
     get:
       x-aws-operation-name: UpdateSynonymOptions
       operationId: GET_UpdateSynonymOptions

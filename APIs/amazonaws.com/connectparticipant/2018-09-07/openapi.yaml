@@ -51,13 +51,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The Amazon Connect Participant multi-region endpoint
   - url: 'https://participant.connect.{region}.amazonaws.com'
@@ -77,13 +81,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The Amazon Connect Participant multi-region endpoint
   - url: 'http://participant.connect.{region}.amazonaws.com.cn'
@@ -105,7 +113,7 @@ servers:
         default: cn-north-1
     description: The Amazon Connect Participant endpoint for China (Beijing) and China (Ningxia)
 paths:
-  '/participant/connection#X-Amz-Bearer':
+  /participant/connection#X-Amz-Bearer:
     post:
       operationId: CreateParticipantConnection
       description: '<p>Creates the participant''s connection. Note that ParticipantToken is used for invoking this API instead of ConnectionToken.</p> <p>The participant token is valid for the lifetime of the participant – until the they are part of a contact.</p> <p>The response URL for <code>WEBSOCKET</code> Type has a connect expiry timeout of 100s. Clients must manually connect to the returned websocket URL and subscribe to the desired topic. </p> <p>For chat, you need to publish the following on the established websocket connection:</p> <p> <code>{"topic":"aws/subscribe","content":{"topics":["aws/chat"]}}</code> </p> <p>Upon websocket URL expiry, as specified in the response ConnectionExpiry parameter, clients need to call this API again to obtain a new websocket URL and perform the same steps as before.</p>'
@@ -172,7 +180,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/participant/disconnect#X-Amz-Bearer':
+  /participant/disconnect#X-Amz-Bearer:
     post:
       operationId: DisconnectParticipant
       description: Disconnects a participant. Note that ConnectionToken is used for invoking this API instead of ParticipantToken.
@@ -235,7 +243,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/participant/transcript#X-Amz-Bearer':
+  /participant/transcript#X-Amz-Bearer:
     post:
       operationId: GetTranscript
       description: Retrieves a transcript of the session. Note that ConnectionToken is used for invoking this API instead of ParticipantToken.
@@ -346,7 +354,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/participant/event#X-Amz-Bearer':
+  /participant/event#X-Amz-Bearer:
     post:
       operationId: SendEvent
       description: Sends an event. Note that ConnectionToken is used for invoking this API instead of ParticipantToken.
@@ -421,7 +429,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/participant/message#X-Amz-Bearer':
+  /participant/message#X-Amz-Bearer:
     post:
       operationId: SendMessage
       description: Sends a message. Note that ConnectionToken is used for invoking this API instead of ParticipantToken.

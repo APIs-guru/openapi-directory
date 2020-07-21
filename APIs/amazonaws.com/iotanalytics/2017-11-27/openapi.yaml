@@ -51,13 +51,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The AWS IoT Analytics multi-region endpoint
   - url: 'https://iotanalytics.{region}.amazonaws.com'
@@ -77,13 +81,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The AWS IoT Analytics multi-region endpoint
   - url: 'http://iotanalytics.{region}.amazonaws.com.cn'
@@ -1943,7 +1951,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/tags#resourceArn':
+  /tags#resourceArn:
     get:
       operationId: ListTagsForResource
       description: Lists the tags (metadata) which you have assigned to the resource.
@@ -2334,7 +2342,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/tags#resourceArn&tagKeys':
+  /tags#resourceArn&tagKeys:
     delete:
       operationId: UntagResource
       description: Removes the given tags (metadata) from the resource.

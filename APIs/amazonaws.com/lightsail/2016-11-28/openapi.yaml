@@ -51,13 +51,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The Amazon Lightsail multi-region endpoint
   - url: 'https://lightsail.{region}.amazonaws.com'
@@ -77,13 +81,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The Amazon Lightsail multi-region endpoint
   - url: 'http://lightsail.{region}.amazonaws.com.cn'
@@ -106,7 +114,7 @@ servers:
     description: The Amazon Lightsail endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
-  '/#X-Amz-Target=Lightsail_20161128.AllocateStaticIp':
+  /#X-Amz-Target=Lightsail_20161128.AllocateStaticIp:
     post:
       operationId: AllocateStaticIp
       description: Allocates a static IP address.
@@ -181,7 +189,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.AttachDisk':
+  /#X-Amz-Target=Lightsail_20161128.AttachDisk:
     post:
       operationId: AttachDisk
       description: '<p>Attaches a block storage disk to a running or stopped Lightsail instance and exposes it to the instance with the specified disk name.</p> <p>The <code>attach disk</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>disk name</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
@@ -256,7 +264,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.AttachInstancesToLoadBalancer':
+  /#X-Amz-Target=Lightsail_20161128.AttachInstancesToLoadBalancer:
     post:
       operationId: AttachInstancesToLoadBalancer
       description: '<p>Attaches one or more Lightsail instances to a load balancer.</p> <p>After some time, the instances are attached to the load balancer and the health check status is available.</p> <p>The <code>attach instances to load balancer</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>load balancer name</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
@@ -331,7 +339,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.AttachLoadBalancerTlsCertificate':
+  /#X-Amz-Target=Lightsail_20161128.AttachLoadBalancerTlsCertificate:
     post:
       operationId: AttachLoadBalancerTlsCertificate
       description: '<p>Attaches a Transport Layer Security (TLS) certificate to your load balancer. TLS is just an updated, more secure version of Secure Socket Layer (SSL).</p> <p>Once you create and validate your certificate, you can attach it to your load balancer. You can also use this API to rotate the certificates on your account. Use the <code>AttachLoadBalancerTlsCertificate</code> action with the non-attached certificate, and it will replace the existing one and become the attached certificate.</p> <p>The <code>AttachLoadBalancerTlsCertificate</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>load balancer name</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
@@ -406,7 +414,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.AttachStaticIp':
+  /#X-Amz-Target=Lightsail_20161128.AttachStaticIp:
     post:
       operationId: AttachStaticIp
       description: Attaches a static IP address to a specific Amazon Lightsail instance.
@@ -481,7 +489,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.CloseInstancePublicPorts':
+  /#X-Amz-Target=Lightsail_20161128.CloseInstancePublicPorts:
     post:
       operationId: CloseInstancePublicPorts
       description: '<p>Closes ports for a specific Amazon Lightsail instance.</p> <p>The <code>CloseInstancePublicPorts</code> action supports tag-based access control via resource tags applied to the resource identified by <code>instanceName</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
@@ -556,7 +564,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.CopySnapshot':
+  /#X-Amz-Target=Lightsail_20161128.CopySnapshot:
     post:
       operationId: CopySnapshot
       description: '<p>Copies a manual snapshot of an instance or disk as another manual snapshot, or copies an automatic snapshot of an instance or disk as a manual snapshot. This operation can also be used to copy a manual or automatic snapshot of an instance or a disk from one AWS Region to another in Amazon Lightsail.</p> <p>When copying a <i>manual snapshot</i>, be sure to define the <code>source region</code>, <code>source snapshot name</code>, and <code>target snapshot name</code> parameters.</p> <p>When copying an <i>automatic snapshot</i>, be sure to define the <code>source region</code>, <code>source resource name</code>, <code>target snapshot name</code>, and either the <code>restore date</code> or the <code>use latest restorable auto snapshot</code> parameters.</p>'
@@ -631,7 +639,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.CreateCloudFormationStack':
+  /#X-Amz-Target=Lightsail_20161128.CreateCloudFormationStack:
     post:
       operationId: CreateCloudFormationStack
       description: '<p>Creates an AWS CloudFormation stack, which creates a new Amazon EC2 instance from an exported Amazon Lightsail snapshot. This operation results in a CloudFormation stack record that can be used to track the AWS CloudFormation stack created. Use the <code>get cloud formation stack records</code> operation to get a list of the CloudFormation stacks created.</p> <important> <p>Wait until after your new Amazon EC2 instance is created before running the <code>create cloud formation stack</code> operation again with the same export snapshot record.</p> </important>'
@@ -706,7 +714,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.CreateContactMethod':
+  /#X-Amz-Target=Lightsail_20161128.CreateContactMethod:
     post:
       operationId: CreateContactMethod
       description: '<p>Creates an email or SMS text message contact method.</p> <p>A contact method is used to send you notifications about your Amazon Lightsail resources. You can add one email address and one mobile phone number contact method in each AWS Region. However, SMS text messaging is not supported in some AWS Regions, and SMS text messages cannot be sent to some countries/regions. For more information, see <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-notifications">Notifications in Amazon Lightsail</a>.</p>'
@@ -775,7 +783,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.CreateDisk':
+  /#X-Amz-Target=Lightsail_20161128.CreateDisk:
     post:
       operationId: CreateDisk
       description: '<p>Creates a block storage disk that can be attached to an Amazon Lightsail instance in the same Availability Zone (e.g., <code>us-east-2a</code>).</p> <p>The <code>create disk</code> operation supports tag-based access control via request tags. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
@@ -850,7 +858,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.CreateDiskFromSnapshot':
+  /#X-Amz-Target=Lightsail_20161128.CreateDiskFromSnapshot:
     post:
       operationId: CreateDiskFromSnapshot
       description: '<p>Creates a block storage disk from a manual or automatic snapshot of a disk. The resulting disk can be attached to an Amazon Lightsail instance in the same Availability Zone (e.g., <code>us-east-2a</code>).</p> <p>The <code>create disk from snapshot</code> operation supports tag-based access control via request tags and resource tags applied to the resource identified by <code>disk snapshot name</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
@@ -925,7 +933,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.CreateDiskSnapshot':
+  /#X-Amz-Target=Lightsail_20161128.CreateDiskSnapshot:
     post:
       operationId: CreateDiskSnapshot
       description: '<p>Creates a snapshot of a block storage disk. You can use snapshots for backups, to make copies of disks, and to save data before shutting down a Lightsail instance.</p> <p>You can take a snapshot of an attached disk that is in use; however, snapshots only capture data that has been written to your disk at the time the snapshot command is issued. This may exclude any data that has been cached by any applications or the operating system. If you can pause any file systems on the disk long enough to take a snapshot, your snapshot should be complete. Nevertheless, if you cannot pause all file writes to the disk, you should unmount the disk from within the Lightsail instance, issue the create disk snapshot command, and then remount the disk to ensure a consistent and complete snapshot. You may remount and use your disk while the snapshot status is pending.</p> <p>You can also use this operation to create a snapshot of an instance''s system volume. You might want to do this, for example, to recover data from the system volume of a botched instance or to create a backup of the system volume like you would for a block storage disk. To create a snapshot of a system volume, just define the <code>instance name</code> parameter when issuing the snapshot command, and a snapshot of the defined instance''s system volume will be created. After the snapshot is available, you can create a block storage disk from the snapshot and attach it to a running instance to access the data on the disk.</p> <p>The <code>create disk snapshot</code> operation supports tag-based access control via request tags. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
@@ -1000,7 +1008,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.CreateDomain':
+  /#X-Amz-Target=Lightsail_20161128.CreateDomain:
     post:
       operationId: CreateDomain
       description: '<p>Creates a domain resource for the specified domain (e.g., example.com).</p> <p>The <code>create domain</code> operation supports tag-based access control via request tags. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
@@ -1075,7 +1083,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.CreateDomainEntry':
+  /#X-Amz-Target=Lightsail_20161128.CreateDomainEntry:
     post:
       operationId: CreateDomainEntry
       description: '<p>Creates one of the following entry records associated with the domain: Address (A), canonical name (CNAME), mail exchanger (MX), name server (NS), start of authority (SOA), service locator (SRV), or text (TXT).</p> <p>The <code>create domain entry</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>domain name</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
@@ -1150,7 +1158,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.CreateInstanceSnapshot':
+  /#X-Amz-Target=Lightsail_20161128.CreateInstanceSnapshot:
     post:
       operationId: CreateInstanceSnapshot
       description: '<p>Creates a snapshot of a specific virtual private server, or <i>instance</i>. You can use a snapshot to create a new instance that is based on that snapshot.</p> <p>The <code>create instance snapshot</code> operation supports tag-based access control via request tags. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
@@ -1225,7 +1233,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.CreateInstances':
+  /#X-Amz-Target=Lightsail_20161128.CreateInstances:
     post:
       operationId: CreateInstances
       description: '<p>Creates one or more Amazon Lightsail instances.</p> <p>The <code>create instances</code> operation supports tag-based access control via request tags. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
@@ -1300,7 +1308,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.CreateInstancesFromSnapshot':
+  /#X-Amz-Target=Lightsail_20161128.CreateInstancesFromSnapshot:
     post:
       operationId: CreateInstancesFromSnapshot
       description: '<p>Creates one or more new instances from a manual or automatic snapshot of an instance.</p> <p>The <code>create instances from snapshot</code> operation supports tag-based access control via request tags and resource tags applied to the resource identified by <code>instance snapshot name</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
@@ -1375,7 +1383,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.CreateKeyPair':
+  /#X-Amz-Target=Lightsail_20161128.CreateKeyPair:
     post:
       operationId: CreateKeyPair
       description: '<p>Creates an SSH key pair.</p> <p>The <code>create key pair</code> operation supports tag-based access control via request tags. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
@@ -1450,7 +1458,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.CreateLoadBalancer':
+  /#X-Amz-Target=Lightsail_20161128.CreateLoadBalancer:
     post:
       operationId: CreateLoadBalancer
       description: '<p>Creates a Lightsail load balancer. To learn more about deciding whether to load balance your application, see <a href="https://lightsail.aws.amazon.com/ls/docs/how-to/article/configure-lightsail-instances-for-load-balancing">Configure your Lightsail instances for load balancing</a>. You can create up to 5 load balancers per AWS Region in your account.</p> <p>When you create a load balancer, you can specify a unique name and port settings. To change additional load balancer settings, use the <code>UpdateLoadBalancerAttribute</code> operation.</p> <p>The <code>create load balancer</code> operation supports tag-based access control via request tags. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
@@ -1525,7 +1533,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.CreateLoadBalancerTlsCertificate':
+  /#X-Amz-Target=Lightsail_20161128.CreateLoadBalancerTlsCertificate:
     post:
       operationId: CreateLoadBalancerTlsCertificate
       description: '<p>Creates a Lightsail load balancer TLS certificate.</p> <p>TLS is just an updated, more secure version of Secure Socket Layer (SSL).</p> <p>The <code>CreateLoadBalancerTlsCertificate</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>load balancer name</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
@@ -1600,7 +1608,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.CreateRelationalDatabase':
+  /#X-Amz-Target=Lightsail_20161128.CreateRelationalDatabase:
     post:
       operationId: CreateRelationalDatabase
       description: '<p>Creates a new database in Amazon Lightsail.</p> <p>The <code>create relational database</code> operation supports tag-based access control via request tags. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
@@ -1675,7 +1683,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.CreateRelationalDatabaseFromSnapshot':
+  /#X-Amz-Target=Lightsail_20161128.CreateRelationalDatabaseFromSnapshot:
     post:
       operationId: CreateRelationalDatabaseFromSnapshot
       description: '<p>Creates a new database from an existing database snapshot in Amazon Lightsail.</p> <p>You can create a new database from a snapshot in if something goes wrong with your original database, or to change it to a different plan, such as a high availability or standard plan.</p> <p>The <code>create relational database from snapshot</code> operation supports tag-based access control via request tags and resource tags applied to the resource identified by relationalDatabaseSnapshotName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
@@ -1750,7 +1758,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.CreateRelationalDatabaseSnapshot':
+  /#X-Amz-Target=Lightsail_20161128.CreateRelationalDatabaseSnapshot:
     post:
       operationId: CreateRelationalDatabaseSnapshot
       description: '<p>Creates a snapshot of your database in Amazon Lightsail. You can use snapshots for backups, to make copies of a database, and to save data before deleting a database.</p> <p>The <code>create relational database snapshot</code> operation supports tag-based access control via request tags. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
@@ -1825,7 +1833,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.DeleteAlarm':
+  /#X-Amz-Target=Lightsail_20161128.DeleteAlarm:
     post:
       operationId: DeleteAlarm
       description: '<p>Deletes an alarm.</p> <p>An alarm is used to monitor a single metric for one of your resources. When a metric condition is met, the alarm can notify you by email, SMS text message, and a banner displayed on the Amazon Lightsail console. For more information, see <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-alarms">Alarms in Amazon Lightsail</a>.</p>'
@@ -1894,7 +1902,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.DeleteAutoSnapshot':
+  /#X-Amz-Target=Lightsail_20161128.DeleteAutoSnapshot:
     post:
       operationId: DeleteAutoSnapshot
       description: 'Deletes an automatic snapshot of an instance or disk. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots">Lightsail Dev Guide</a>.'
@@ -1963,7 +1971,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.DeleteContactMethod':
+  /#X-Amz-Target=Lightsail_20161128.DeleteContactMethod:
     post:
       operationId: DeleteContactMethod
       description: '<p>Deletes a contact method.</p> <p>A contact method is used to send you notifications about your Amazon Lightsail resources. You can add one email address and one mobile phone number contact method in each AWS Region. However, SMS text messaging is not supported in some AWS Regions, and SMS text messages cannot be sent to some countries/regions. For more information, see <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-notifications">Notifications in Amazon Lightsail</a>.</p>'
@@ -2032,7 +2040,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.DeleteDisk':
+  /#X-Amz-Target=Lightsail_20161128.DeleteDisk:
     post:
       operationId: DeleteDisk
       description: '<p>Deletes the specified block storage disk. The disk must be in the <code>available</code> state (not attached to a Lightsail instance).</p> <note> <p>The disk may remain in the <code>deleting</code> state for several minutes.</p> </note> <p>The <code>delete disk</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>disk name</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
@@ -2107,7 +2115,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.DeleteDiskSnapshot':
+  /#X-Amz-Target=Lightsail_20161128.DeleteDiskSnapshot:
     post:
       operationId: DeleteDiskSnapshot
       description: '<p>Deletes the specified disk snapshot.</p> <p>When you make periodic snapshots of a disk, the snapshots are incremental, and only the blocks on the device that have changed since your last snapshot are saved in the new snapshot. When you delete a snapshot, only the data not needed for any other snapshot is removed. So regardless of which prior snapshots have been deleted, all active snapshots will have access to all the information needed to restore the disk.</p> <p>The <code>delete disk snapshot</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>disk snapshot name</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
@@ -2182,7 +2190,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.DeleteDomain':
+  /#X-Amz-Target=Lightsail_20161128.DeleteDomain:
     post:
       operationId: DeleteDomain
       description: '<p>Deletes the specified domain recordset and all of its domain records.</p> <p>The <code>delete domain</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>domain name</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
@@ -2257,7 +2265,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.DeleteDomainEntry':
+  /#X-Amz-Target=Lightsail_20161128.DeleteDomainEntry:
     post:
       operationId: DeleteDomainEntry
       description: '<p>Deletes a specific domain entry.</p> <p>The <code>delete domain entry</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>domain name</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
@@ -2332,7 +2340,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.DeleteInstance':
+  /#X-Amz-Target=Lightsail_20161128.DeleteInstance:
     post:
       operationId: DeleteInstance
       description: '<p>Deletes an Amazon Lightsail instance.</p> <p>The <code>delete instance</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>instance name</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
@@ -2407,7 +2415,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.DeleteInstanceSnapshot':
+  /#X-Amz-Target=Lightsail_20161128.DeleteInstanceSnapshot:
     post:
       operationId: DeleteInstanceSnapshot
       description: '<p>Deletes a specific snapshot of a virtual private server (or <i>instance</i>).</p> <p>The <code>delete instance snapshot</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>instance snapshot name</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
@@ -2482,7 +2490,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.DeleteKeyPair':
+  /#X-Amz-Target=Lightsail_20161128.DeleteKeyPair:
     post:
       operationId: DeleteKeyPair
       description: '<p>Deletes a specific SSH key pair.</p> <p>The <code>delete key pair</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>key pair name</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
@@ -2557,7 +2565,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.DeleteKnownHostKeys':
+  /#X-Amz-Target=Lightsail_20161128.DeleteKnownHostKeys:
     post:
       operationId: DeleteKnownHostKeys
       description: '<p>Deletes the known host key or certificate used by the Amazon Lightsail browser-based SSH or RDP clients to authenticate an instance. This operation enables the Lightsail browser-based SSH or RDP clients to connect to the instance after a host key mismatch.</p> <important> <p>Perform this operation only if you were expecting the host key or certificate mismatch or if you are familiar with the new host key or certificate on the instance. For more information, see <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-troubleshooting-browser-based-ssh-rdp-client-connection">Troubleshooting connection issues when using the Amazon Lightsail browser-based SSH or RDP client</a>.</p> </important>'
@@ -2632,7 +2640,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.DeleteLoadBalancer':
+  /#X-Amz-Target=Lightsail_20161128.DeleteLoadBalancer:
     post:
       operationId: DeleteLoadBalancer
       description: '<p>Deletes a Lightsail load balancer and all its associated SSL/TLS certificates. Once the load balancer is deleted, you will need to create a new load balancer, create a new certificate, and verify domain ownership again.</p> <p>The <code>delete load balancer</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>load balancer name</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
@@ -2707,7 +2715,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.DeleteLoadBalancerTlsCertificate':
+  /#X-Amz-Target=Lightsail_20161128.DeleteLoadBalancerTlsCertificate:
     post:
       operationId: DeleteLoadBalancerTlsCertificate
       description: '<p>Deletes an SSL/TLS certificate associated with a Lightsail load balancer.</p> <p>The <code>DeleteLoadBalancerTlsCertificate</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>load balancer name</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
@@ -2782,7 +2790,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.DeleteRelationalDatabase':
+  /#X-Amz-Target=Lightsail_20161128.DeleteRelationalDatabase:
     post:
       operationId: DeleteRelationalDatabase
       description: '<p>Deletes a database in Amazon Lightsail.</p> <p>The <code>delete relational database</code> operation supports tag-based access control via resource tags applied to the resource identified by relationalDatabaseName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
@@ -2857,7 +2865,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.DeleteRelationalDatabaseSnapshot':
+  /#X-Amz-Target=Lightsail_20161128.DeleteRelationalDatabaseSnapshot:
     post:
       operationId: DeleteRelationalDatabaseSnapshot
       description: '<p>Deletes a database snapshot in Amazon Lightsail.</p> <p>The <code>delete relational database snapshot</code> operation supports tag-based access control via resource tags applied to the resource identified by relationalDatabaseName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
@@ -2932,7 +2940,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.DetachDisk':
+  /#X-Amz-Target=Lightsail_20161128.DetachDisk:
     post:
       operationId: DetachDisk
       description: '<p>Detaches a stopped block storage disk from a Lightsail instance. Make sure to unmount any file systems on the device within your operating system before stopping the instance and detaching the disk.</p> <p>The <code>detach disk</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>disk name</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
@@ -3007,7 +3015,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.DetachInstancesFromLoadBalancer':
+  /#X-Amz-Target=Lightsail_20161128.DetachInstancesFromLoadBalancer:
     post:
       operationId: DetachInstancesFromLoadBalancer
       description: '<p>Detaches the specified instances from a Lightsail load balancer.</p> <p>This operation waits until the instances are no longer needed before they are detached from the load balancer.</p> <p>The <code>detach instances from load balancer</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>load balancer name</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
@@ -3082,7 +3090,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.DetachStaticIp':
+  /#X-Amz-Target=Lightsail_20161128.DetachStaticIp:
     post:
       operationId: DetachStaticIp
       description: Detaches a static IP from the Amazon Lightsail instance to which it is attached.
@@ -3157,7 +3165,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.DisableAddOn':
+  /#X-Amz-Target=Lightsail_20161128.DisableAddOn:
     post:
       operationId: DisableAddOn
       description: 'Disables an add-on for an Amazon Lightsail resource. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots">Lightsail Dev Guide</a>.'
@@ -3226,7 +3234,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.DownloadDefaultKeyPair':
+  /#X-Amz-Target=Lightsail_20161128.DownloadDefaultKeyPair:
     post:
       operationId: DownloadDefaultKeyPair
       description: Downloads the default SSH key pair from the user's account.
@@ -3301,7 +3309,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.EnableAddOn':
+  /#X-Amz-Target=Lightsail_20161128.EnableAddOn:
     post:
       operationId: EnableAddOn
       description: 'Enables or modifies an add-on for an Amazon Lightsail resource. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots">Lightsail Dev Guide</a>.'
@@ -3370,7 +3378,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.ExportSnapshot':
+  /#X-Amz-Target=Lightsail_20161128.ExportSnapshot:
     post:
       operationId: ExportSnapshot
       description: '<p>Exports an Amazon Lightsail instance or block storage disk snapshot to Amazon Elastic Compute Cloud (Amazon EC2). This operation results in an export snapshot record that can be used with the <code>create cloud formation stack</code> operation to create new Amazon EC2 instances.</p> <p>Exported instance snapshots appear in Amazon EC2 as Amazon Machine Images (AMIs), and the instance system disk appears as an Amazon Elastic Block Store (Amazon EBS) volume. Exported disk snapshots appear in Amazon EC2 as Amazon EBS volumes. Snapshots are exported to the same Amazon Web Services Region in Amazon EC2 as the source Lightsail snapshot.</p> <p/> <p>The <code>export snapshot</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>source snapshot name</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p> <note> <p>Use the <code>get instance snapshots</code> or <code>get disk snapshots</code> operations to get a list of snapshots that you can export to Amazon EC2.</p> </note>'
@@ -3445,7 +3453,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.GetActiveNames':
+  /#X-Amz-Target=Lightsail_20161128.GetActiveNames:
     post:
       operationId: GetActiveNames
       description: Returns the names of all active (not deleted) resources.
@@ -3520,7 +3528,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.GetAlarms':
+  /#X-Amz-Target=Lightsail_20161128.GetAlarms:
     post:
       operationId: GetAlarms
       description: '<p>Returns information about the configured alarms. Specify an alarm name in your request to return information about a specific alarm, or specify a monitored resource name to return information about all alarms for a specific resource.</p> <p>An alarm is used to monitor a single metric for one of your resources. When a metric condition is met, the alarm can notify you by email, SMS text message, and a banner displayed on the Amazon Lightsail console. For more information, see <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-alarms">Alarms in Amazon Lightsail</a>.</p>'
@@ -3589,7 +3597,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.GetAutoSnapshots':
+  /#X-Amz-Target=Lightsail_20161128.GetAutoSnapshots:
     post:
       operationId: GetAutoSnapshots
       description: 'Returns the available automatic snapshots for an instance or disk. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots">Lightsail Dev Guide</a>.'
@@ -3658,7 +3666,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.GetBlueprints':
+  /#X-Amz-Target=Lightsail_20161128.GetBlueprints:
     post:
       operationId: GetBlueprints
       description: '<p>Returns the list of available instance images, or <i>blueprints</i>. You can use a blueprint to create a new instance already running a specific operating system, as well as a preinstalled app or development stack. The software each instance is running depends on the blueprint image you choose.</p> <note> <p>Use active blueprints when creating new instances. Inactive blueprints are listed to support customers with existing instances and are not necessarily available to create new instances. Blueprints are marked inactive when they become outdated due to operating system updates or new application releases.</p> </note>'
@@ -3733,7 +3741,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.GetBundles':
+  /#X-Amz-Target=Lightsail_20161128.GetBundles:
     post:
       operationId: GetBundles
       description: Returns the list of bundles that are available for purchase. A bundle describes the specs for your virtual private server (or <i>instance</i>).
@@ -3808,7 +3816,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.GetCloudFormationStackRecords':
+  /#X-Amz-Target=Lightsail_20161128.GetCloudFormationStackRecords:
     post:
       operationId: GetCloudFormationStackRecords
       description: <p>Returns the CloudFormation stack record created as a result of the <code>create cloud formation stack</code> operation.</p> <p>An AWS CloudFormation stack is used to create a new Amazon EC2 instance from an exported Lightsail snapshot.</p>
@@ -3883,7 +3891,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.GetContactMethods':
+  /#X-Amz-Target=Lightsail_20161128.GetContactMethods:
     post:
       operationId: GetContactMethods
       description: '<p>Returns information about the configured contact methods. Specify a protocol in your request to return information about a specific contact method.</p> <p>A contact method is used to send you notifications about your Amazon Lightsail resources. You can add one email address and one mobile phone number contact method in each AWS Region. However, SMS text messaging is not supported in some AWS Regions, and SMS text messages cannot be sent to some countries/regions. For more information, see <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-notifications">Notifications in Amazon Lightsail</a>.</p>'
@@ -3952,7 +3960,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.GetDisk':
+  /#X-Amz-Target=Lightsail_20161128.GetDisk:
     post:
       operationId: GetDisk
       description: Returns information about a specific block storage disk.
@@ -4027,7 +4035,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.GetDiskSnapshot':
+  /#X-Amz-Target=Lightsail_20161128.GetDiskSnapshot:
     post:
       operationId: GetDiskSnapshot
       description: Returns information about a specific block storage disk snapshot.
@@ -4102,7 +4110,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.GetDiskSnapshots':
+  /#X-Amz-Target=Lightsail_20161128.GetDiskSnapshots:
     post:
       operationId: GetDiskSnapshots
       description: Returns information about all block storage disk snapshots in your AWS account and region.
@@ -4177,7 +4185,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.GetDisks':
+  /#X-Amz-Target=Lightsail_20161128.GetDisks:
     post:
       operationId: GetDisks
       description: Returns information about all block storage disks in your AWS account and region.
@@ -4252,7 +4260,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.GetDomain':
+  /#X-Amz-Target=Lightsail_20161128.GetDomain:
     post:
       operationId: GetDomain
       description: Returns information about a specific domain recordset.
@@ -4327,7 +4335,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.GetDomains':
+  /#X-Amz-Target=Lightsail_20161128.GetDomains:
     post:
       operationId: GetDomains
       description: Returns a list of all domains in the user's account.
@@ -4402,7 +4410,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.GetExportSnapshotRecords':
+  /#X-Amz-Target=Lightsail_20161128.GetExportSnapshotRecords:
     post:
       operationId: GetExportSnapshotRecords
       description: <p>Returns the export snapshot record created as a result of the <code>export snapshot</code> operation.</p> <p>An export snapshot record can be used to create a new Amazon EC2 instance and its related resources with the <code>create cloud formation stack</code> operation.</p>
@@ -4477,7 +4485,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.GetInstance':
+  /#X-Amz-Target=Lightsail_20161128.GetInstance:
     post:
       operationId: GetInstance
       description: 'Returns information about a specific Amazon Lightsail instance, which is a virtual private server.'
@@ -4552,7 +4560,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.GetInstanceAccessDetails':
+  /#X-Amz-Target=Lightsail_20161128.GetInstanceAccessDetails:
     post:
       operationId: GetInstanceAccessDetails
       description: '<p>Returns temporary SSH keys you can use to connect to a specific virtual private server, or <i>instance</i>.</p> <p>The <code>get instance access details</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>instance name</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
@@ -4627,7 +4635,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.GetInstanceMetricData':
+  /#X-Amz-Target=Lightsail_20161128.GetInstanceMetricData:
     post:
       operationId: GetInstanceMetricData
       description: '<p>Returns the data points for the specified Amazon Lightsail instance metric, given an instance name.</p> <p>Metrics report the utilization of your resources, and the error counts generated by them. Monitor and collect metric data regularly to maintain the reliability, availability, and performance of your resources.</p>'
@@ -4702,7 +4710,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.GetInstancePortStates':
+  /#X-Amz-Target=Lightsail_20161128.GetInstancePortStates:
     post:
       operationId: GetInstancePortStates
       description: 'Returns the firewall port states for a specific Amazon Lightsail instance, the IP addresses allowed to connect to the instance through the ports, and the protocol.'
@@ -4777,7 +4785,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.GetInstanceSnapshot':
+  /#X-Amz-Target=Lightsail_20161128.GetInstanceSnapshot:
     post:
       operationId: GetInstanceSnapshot
       description: Returns information about a specific instance snapshot.
@@ -4852,7 +4860,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.GetInstanceSnapshots':
+  /#X-Amz-Target=Lightsail_20161128.GetInstanceSnapshots:
     post:
       operationId: GetInstanceSnapshots
       description: Returns all instance snapshots for the user's account.
@@ -4927,7 +4935,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.GetInstanceState':
+  /#X-Amz-Target=Lightsail_20161128.GetInstanceState:
     post:
       operationId: GetInstanceState
       description: Returns the state of a specific instance. Works on one instance at a time.
@@ -5002,7 +5010,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.GetInstances':
+  /#X-Amz-Target=Lightsail_20161128.GetInstances:
     post:
       operationId: GetInstances
       description: 'Returns information about all Amazon Lightsail virtual private servers, or <i>instances</i>.'
@@ -5077,7 +5085,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.GetKeyPair':
+  /#X-Amz-Target=Lightsail_20161128.GetKeyPair:
     post:
       operationId: GetKeyPair
       description: Returns information about a specific key pair.
@@ -5152,7 +5160,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.GetKeyPairs':
+  /#X-Amz-Target=Lightsail_20161128.GetKeyPairs:
     post:
       operationId: GetKeyPairs
       description: Returns information about all key pairs in the user's account.
@@ -5227,7 +5235,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.GetLoadBalancer':
+  /#X-Amz-Target=Lightsail_20161128.GetLoadBalancer:
     post:
       operationId: GetLoadBalancer
       description: Returns information about the specified Lightsail load balancer.
@@ -5302,7 +5310,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.GetLoadBalancerMetricData':
+  /#X-Amz-Target=Lightsail_20161128.GetLoadBalancerMetricData:
     post:
       operationId: GetLoadBalancerMetricData
       description: '<p>Returns information about health metrics for your Lightsail load balancer.</p> <p>Metrics report the utilization of your resources, and the error counts generated by them. Monitor and collect metric data regularly to maintain the reliability, availability, and performance of your resources.</p>'
@@ -5377,7 +5385,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.GetLoadBalancerTlsCertificates':
+  /#X-Amz-Target=Lightsail_20161128.GetLoadBalancerTlsCertificates:
     post:
       operationId: GetLoadBalancerTlsCertificates
       description: '<p>Returns information about the TLS certificates that are associated with the specified Lightsail load balancer.</p> <p>TLS is just an updated, more secure version of Secure Socket Layer (SSL).</p> <p>You can have a maximum of 2 certificates associated with a Lightsail load balancer. One is active and the other is inactive.</p>'
@@ -5452,7 +5460,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.GetLoadBalancers':
+  /#X-Amz-Target=Lightsail_20161128.GetLoadBalancers:
     post:
       operationId: GetLoadBalancers
       description: Returns information about all load balancers in an account.
@@ -5527,7 +5535,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.GetOperation':
+  /#X-Amz-Target=Lightsail_20161128.GetOperation:
     post:
       operationId: GetOperation
       description: 'Returns information about a specific operation. Operations include events such as when you create an instance, allocate a static IP, attach a static IP, and so on.'
@@ -5602,7 +5610,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.GetOperations':
+  /#X-Amz-Target=Lightsail_20161128.GetOperations:
     post:
       operationId: GetOperations
       description: '<p>Returns information about all operations.</p> <p>Results are returned from oldest to newest, up to a maximum of 200. Results can be paged by making each subsequent call to <code>GetOperations</code> use the maximum (last) <code>statusChangedAt</code> value from the previous request.</p>'
@@ -5677,7 +5685,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.GetOperationsForResource':
+  /#X-Amz-Target=Lightsail_20161128.GetOperationsForResource:
     post:
       operationId: GetOperationsForResource
       description: 'Gets operations for a specific resource (e.g., an instance or a static IP).'
@@ -5752,7 +5760,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.GetRegions':
+  /#X-Amz-Target=Lightsail_20161128.GetRegions:
     post:
       operationId: GetRegions
       description: Returns a list of all valid regions for Amazon Lightsail. Use the <code>include availability zones</code> parameter to also return the Availability Zones in a region.
@@ -5827,7 +5835,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.GetRelationalDatabase':
+  /#X-Amz-Target=Lightsail_20161128.GetRelationalDatabase:
     post:
       operationId: GetRelationalDatabase
       description: Returns information about a specific database in Amazon Lightsail.
@@ -5902,7 +5910,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.GetRelationalDatabaseBlueprints':
+  /#X-Amz-Target=Lightsail_20161128.GetRelationalDatabaseBlueprints:
     post:
       operationId: GetRelationalDatabaseBlueprints
       description: <p>Returns a list of available database blueprints in Amazon Lightsail. A blueprint describes the major engine version of a database.</p> <p>You can use a blueprint ID to create a new database that runs a specific database engine.</p>
@@ -5977,7 +5985,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.GetRelationalDatabaseBundles':
+  /#X-Amz-Target=Lightsail_20161128.GetRelationalDatabaseBundles:
     post:
       operationId: GetRelationalDatabaseBundles
       description: <p>Returns the list of bundles that are available in Amazon Lightsail. A bundle describes the performance specifications for a database.</p> <p>You can use a bundle ID to create a new database with explicit performance specifications.</p>
@@ -6052,7 +6060,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.GetRelationalDatabaseEvents':
+  /#X-Amz-Target=Lightsail_20161128.GetRelationalDatabaseEvents:
     post:
       operationId: GetRelationalDatabaseEvents
       description: Returns a list of events for a specific database in Amazon Lightsail.
@@ -6127,7 +6135,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.GetRelationalDatabaseLogEvents':
+  /#X-Amz-Target=Lightsail_20161128.GetRelationalDatabaseLogEvents:
     post:
       operationId: GetRelationalDatabaseLogEvents
       description: Returns a list of log events for a database in Amazon Lightsail.
@@ -6202,7 +6210,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.GetRelationalDatabaseLogStreams':
+  /#X-Amz-Target=Lightsail_20161128.GetRelationalDatabaseLogStreams:
     post:
       operationId: GetRelationalDatabaseLogStreams
       description: Returns a list of available log streams for a specific database in Amazon Lightsail.
@@ -6277,7 +6285,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.GetRelationalDatabaseMasterUserPassword':
+  /#X-Amz-Target=Lightsail_20161128.GetRelationalDatabaseMasterUserPassword:
     post:
       operationId: GetRelationalDatabaseMasterUserPassword
       description: '<p>Returns the current, previous, or pending versions of the master user password for a Lightsail database.</p> <p>The <code>GetRelationalDatabaseMasterUserPassword</code> operation supports tag-based access control via resource tags applied to the resource identified by relationalDatabaseName.</p>'
@@ -6352,7 +6360,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.GetRelationalDatabaseMetricData':
+  /#X-Amz-Target=Lightsail_20161128.GetRelationalDatabaseMetricData:
     post:
       operationId: GetRelationalDatabaseMetricData
       description: '<p>Returns the data points of the specified metric for a database in Amazon Lightsail.</p> <p>Metrics report the utilization of your resources, and the error counts generated by them. Monitor and collect metric data regularly to maintain the reliability, availability, and performance of your resources.</p>'
@@ -6427,7 +6435,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.GetRelationalDatabaseParameters':
+  /#X-Amz-Target=Lightsail_20161128.GetRelationalDatabaseParameters:
     post:
       operationId: GetRelationalDatabaseParameters
       description: '<p>Returns all of the runtime parameters offered by the underlying database software, or engine, for a specific database in Amazon Lightsail.</p> <p>In addition to the parameter names and values, this operation returns other information about each parameter. This information includes whether changes require a reboot, whether the parameter is modifiable, the allowed values, and the data types.</p>'
@@ -6502,7 +6510,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.GetRelationalDatabaseSnapshot':
+  /#X-Amz-Target=Lightsail_20161128.GetRelationalDatabaseSnapshot:
     post:
       operationId: GetRelationalDatabaseSnapshot
       description: Returns information about a specific database snapshot in Amazon Lightsail.
@@ -6577,7 +6585,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.GetRelationalDatabaseSnapshots':
+  /#X-Amz-Target=Lightsail_20161128.GetRelationalDatabaseSnapshots:
     post:
       operationId: GetRelationalDatabaseSnapshots
       description: Returns information about all of your database snapshots in Amazon Lightsail.
@@ -6652,7 +6660,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.GetRelationalDatabases':
+  /#X-Amz-Target=Lightsail_20161128.GetRelationalDatabases:
     post:
       operationId: GetRelationalDatabases
       description: Returns information about all of your databases in Amazon Lightsail.
@@ -6727,7 +6735,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.GetStaticIp':
+  /#X-Amz-Target=Lightsail_20161128.GetStaticIp:
     post:
       operationId: GetStaticIp
       description: Returns information about a specific static IP.
@@ -6802,7 +6810,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.GetStaticIps':
+  /#X-Amz-Target=Lightsail_20161128.GetStaticIps:
     post:
       operationId: GetStaticIps
       description: Returns information about all static IPs in the user's account.
@@ -6877,7 +6885,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.ImportKeyPair':
+  /#X-Amz-Target=Lightsail_20161128.ImportKeyPair:
     post:
       operationId: ImportKeyPair
       description: Imports a public SSH key from a specific key pair.
@@ -6952,7 +6960,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.IsVpcPeered':
+  /#X-Amz-Target=Lightsail_20161128.IsVpcPeered:
     post:
       operationId: IsVpcPeered
       description: Returns a Boolean value indicating whether your Lightsail VPC is peered.
@@ -7027,7 +7035,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.OpenInstancePublicPorts':
+  /#X-Amz-Target=Lightsail_20161128.OpenInstancePublicPorts:
     post:
       operationId: OpenInstancePublicPorts
       description: '<p>Opens ports for a specific Amazon Lightsail instance, and specifies the IP addresses allowed to connect to the instance through the ports, and the protocol.</p> <p>The <code>OpenInstancePublicPorts</code> action supports tag-based access control via resource tags applied to the resource identified by <code>instanceName</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
@@ -7102,7 +7110,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.PeerVpc':
+  /#X-Amz-Target=Lightsail_20161128.PeerVpc:
     post:
       operationId: PeerVpc
       description: Tries to peer the Lightsail VPC with the user's default VPC.
@@ -7177,7 +7185,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.PutAlarm':
+  /#X-Amz-Target=Lightsail_20161128.PutAlarm:
     post:
       operationId: PutAlarm
       description: '<p>Creates or updates an alarm, and associates it with the specified metric.</p> <p>An alarm is used to monitor a single metric for one of your resources. When a metric condition is met, the alarm can notify you by email, SMS text message, and a banner displayed on the Amazon Lightsail console. For more information, see <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-alarms">Alarms in Amazon Lightsail</a>.</p> <p>When this action creates an alarm, the alarm state is immediately set to <code>INSUFFICIENT_DATA</code>. The alarm is then evaluated and its state is set appropriately. Any actions associated with the new state are then executed.</p> <p>When you update an existing alarm, its state is left unchanged, but the update completely overwrites the previous configuration of the alarm. The alarm is then evaluated with the updated configuration.</p>'
@@ -7246,7 +7254,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.PutInstancePublicPorts':
+  /#X-Amz-Target=Lightsail_20161128.PutInstancePublicPorts:
     post:
       operationId: PutInstancePublicPorts
       description: '<p>Opens ports for a specific Amazon Lightsail instance, and specifies the IP addresses allowed to connect to the instance through the ports, and the protocol. This action also closes all currently open ports that are not included in the request. Include all of the ports and the protocols you want to open in your <code>PutInstancePublicPorts</code>request. Or use the <code>OpenInstancePublicPorts</code> action to open ports without closing currently open ports.</p> <p>The <code>PutInstancePublicPorts</code> action supports tag-based access control via resource tags applied to the resource identified by <code>instanceName</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
@@ -7321,7 +7329,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.RebootInstance':
+  /#X-Amz-Target=Lightsail_20161128.RebootInstance:
     post:
       operationId: RebootInstance
       description: '<p>Restarts a specific instance.</p> <p>The <code>reboot instance</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>instance name</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
@@ -7396,7 +7404,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.RebootRelationalDatabase':
+  /#X-Amz-Target=Lightsail_20161128.RebootRelationalDatabase:
     post:
       operationId: RebootRelationalDatabase
       description: '<p>Restarts a specific database in Amazon Lightsail.</p> <p>The <code>reboot relational database</code> operation supports tag-based access control via resource tags applied to the resource identified by relationalDatabaseName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
@@ -7471,7 +7479,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.ReleaseStaticIp':
+  /#X-Amz-Target=Lightsail_20161128.ReleaseStaticIp:
     post:
       operationId: ReleaseStaticIp
       description: Deletes a specific static IP from your account.
@@ -7546,7 +7554,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.SendContactMethodVerification':
+  /#X-Amz-Target=Lightsail_20161128.SendContactMethodVerification:
     post:
       operationId: SendContactMethodVerification
       description: '<p>Sends a verification request to an email contact method to ensure it''s owned by the requester. SMS contact methods don''t need to be verified.</p> <p>A contact method is used to send you notifications about your Amazon Lightsail resources. You can add one email address and one mobile phone number contact method in each AWS Region. However, SMS text messaging is not supported in some AWS Regions, and SMS text messages cannot be sent to some countries/regions. For more information, see <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-notifications">Notifications in Amazon Lightsail</a>.</p> <p>A verification request is sent to the contact method when you initially create it. Use this action to send another verification request if a previous verification request was deleted, or has expired.</p> <important> <p>Notifications are not sent to an email contact method until after it is verified, and confirmed as valid.</p> </important>'
@@ -7615,7 +7623,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.StartInstance':
+  /#X-Amz-Target=Lightsail_20161128.StartInstance:
     post:
       operationId: StartInstance
       description: '<p>Starts a specific Amazon Lightsail instance from a stopped state. To restart an instance, use the <code>reboot instance</code> operation.</p> <note> <p>When you start a stopped instance, Lightsail assigns a new public IP address to the instance. To use the same IP address after stopping and starting an instance, create a static IP address and attach it to the instance. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/lightsail-create-static-ip">Lightsail Dev Guide</a>.</p> </note> <p>The <code>start instance</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>instance name</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
@@ -7690,7 +7698,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.StartRelationalDatabase':
+  /#X-Amz-Target=Lightsail_20161128.StartRelationalDatabase:
     post:
       operationId: StartRelationalDatabase
       description: '<p>Starts a specific database from a stopped state in Amazon Lightsail. To restart a database, use the <code>reboot relational database</code> operation.</p> <p>The <code>start relational database</code> operation supports tag-based access control via resource tags applied to the resource identified by relationalDatabaseName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
@@ -7765,7 +7773,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.StopInstance':
+  /#X-Amz-Target=Lightsail_20161128.StopInstance:
     post:
       operationId: StopInstance
       description: '<p>Stops a specific Amazon Lightsail instance that is currently running.</p> <note> <p>When you start a stopped instance, Lightsail assigns a new public IP address to the instance. To use the same IP address after stopping and starting an instance, create a static IP address and attach it to the instance. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/lightsail-create-static-ip">Lightsail Dev Guide</a>.</p> </note> <p>The <code>stop instance</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>instance name</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
@@ -7840,7 +7848,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.StopRelationalDatabase':
+  /#X-Amz-Target=Lightsail_20161128.StopRelationalDatabase:
     post:
       operationId: StopRelationalDatabase
       description: '<p>Stops a specific database that is currently running in Amazon Lightsail.</p> <p>The <code>stop relational database</code> operation supports tag-based access control via resource tags applied to the resource identified by relationalDatabaseName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
@@ -7915,7 +7923,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.TagResource':
+  /#X-Amz-Target=Lightsail_20161128.TagResource:
     post:
       operationId: TagResource
       description: '<p>Adds one or more tags to the specified Amazon Lightsail resource. Each resource can have a maximum of 50 tags. Each tag consists of a key and an optional value. Tag keys must be unique per resource. For more information about tags, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags">Lightsail Dev Guide</a>.</p> <p>The <code>tag resource</code> operation supports tag-based access control via request tags and resource tags applied to the resource identified by <code>resource name</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
@@ -7990,7 +7998,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.TestAlarm':
+  /#X-Amz-Target=Lightsail_20161128.TestAlarm:
     post:
       operationId: TestAlarm
       description: '<p>Tests an alarm by displaying a banner on the Amazon Lightsail console. If a notification trigger is configured for the specified alarm, the test also sends a notification to the notification protocol (<code>Email</code> and/or <code>SMS</code>) configured for the alarm.</p> <p>An alarm is used to monitor a single metric for one of your resources. When a metric condition is met, the alarm can notify you by email, SMS text message, and a banner displayed on the Amazon Lightsail console. For more information, see <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-alarms">Alarms in Amazon Lightsail</a>.</p>'
@@ -8059,7 +8067,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.UnpeerVpc':
+  /#X-Amz-Target=Lightsail_20161128.UnpeerVpc:
     post:
       operationId: UnpeerVpc
       description: Attempts to unpeer the Lightsail VPC from the user's default VPC.
@@ -8134,7 +8142,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.UntagResource':
+  /#X-Amz-Target=Lightsail_20161128.UntagResource:
     post:
       operationId: UntagResource
       description: '<p>Deletes the specified set of tag keys and their values from the specified Amazon Lightsail resource.</p> <p>The <code>untag resource</code> operation supports tag-based access control via request tags and resource tags applied to the resource identified by <code>resource name</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
@@ -8209,7 +8217,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.UpdateDomainEntry':
+  /#X-Amz-Target=Lightsail_20161128.UpdateDomainEntry:
     post:
       operationId: UpdateDomainEntry
       description: '<p>Updates a domain recordset after it is created.</p> <p>The <code>update domain entry</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>domain name</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
@@ -8284,7 +8292,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.UpdateLoadBalancerAttribute':
+  /#X-Amz-Target=Lightsail_20161128.UpdateLoadBalancerAttribute:
     post:
       operationId: UpdateLoadBalancerAttribute
       description: '<p>Updates the specified attribute for a load balancer. You can only update one attribute at a time.</p> <p>The <code>update load balancer attribute</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>load balancer name</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
@@ -8359,7 +8367,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.UpdateRelationalDatabase':
+  /#X-Amz-Target=Lightsail_20161128.UpdateRelationalDatabase:
     post:
       operationId: UpdateRelationalDatabase
       description: '<p>Allows the update of one or more attributes of a database in Amazon Lightsail.</p> <p>Updates are applied immediately, or in cases where the updates could result in an outage, are applied during the database''s predefined maintenance window.</p> <p>The <code>update relational database</code> operation supports tag-based access control via resource tags applied to the resource identified by relationalDatabaseName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
@@ -8434,7 +8442,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Lightsail_20161128.UpdateRelationalDatabaseParameters':
+  /#X-Amz-Target=Lightsail_20161128.UpdateRelationalDatabaseParameters:
     post:
       operationId: UpdateRelationalDatabaseParameters
       description: '<p>Allows the update of one or more parameters of a database in Amazon Lightsail.</p> <p>Parameter updates don''t cause outages; therefore, their application is not subject to the preferred maintenance window. However, there are two ways in which parameter updates are applied: <code>dynamic</code> or <code>pending-reboot</code>. Parameters marked with a <code>dynamic</code> apply type are applied immediately. Parameters marked with a <code>pending-reboot</code> apply type are applied only after the database is rebooted using the <code>reboot relational database</code> operation.</p> <p>The <code>update relational database parameters</code> operation supports tag-based access control via resource tags applied to the resource identified by relationalDatabaseName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'

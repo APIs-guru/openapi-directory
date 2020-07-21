@@ -51,13 +51,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The Amazon SQS multi-region endpoint
   - url: 'https://sqs.{region}.amazonaws.com'
@@ -77,13 +81,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The Amazon SQS multi-region endpoint
   - url: 'http://sqs.{region}.amazonaws.com.cn'
@@ -181,7 +189,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#Action=AddPermission':
+  /#Action=AddPermission:
     post:
       x-aws-operation-name: AddPermission
       operationId: POST_AddPermission
@@ -290,7 +298,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#Action=ChangeMessageVisibility':
+  /#Action=ChangeMessageVisibility:
     post:
       x-aws-operation-name: ChangeMessageVisibility
       operationId: POST_ChangeMessageVisibility
@@ -419,7 +427,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#Action=ChangeMessageVisibilityBatch':
+  /#Action=ChangeMessageVisibilityBatch:
     post:
       x-aws-operation-name: ChangeMessageVisibilityBatch
       operationId: POST_ChangeMessageVisibilityBatch
@@ -483,7 +491,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#Action=CreateQueue':
+  /#Action=CreateQueue:
     get:
       x-aws-operation-name: CreateQueue
       operationId: GET_CreateQueue
@@ -660,7 +668,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#Action=DeleteMessage':
+  /#Action=DeleteMessage:
     post:
       x-aws-operation-name: DeleteMessage
       operationId: POST_DeleteMessage
@@ -789,7 +797,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#Action=DeleteMessageBatch':
+  /#Action=DeleteMessageBatch:
     post:
       x-aws-operation-name: DeleteMessageBatch
       operationId: POST_DeleteMessageBatch
@@ -896,7 +904,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#Action=DeleteQueue':
+  /#Action=DeleteQueue:
     post:
       x-aws-operation-name: DeleteQueue
       operationId: POST_DeleteQueue
@@ -995,7 +1003,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#Action=GetQueueAttributes':
+  /#Action=GetQueueAttributes:
     post:
       x-aws-operation-name: GetQueueAttributes
       operationId: POST_GetQueueAttributes
@@ -1041,7 +1049,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#Action=GetQueueUrl':
+  /#Action=GetQueueUrl:
     get:
       x-aws-operation-name: GetQueueUrl
       operationId: GET_GetQueueUrl
@@ -1196,7 +1204,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#Action=ListDeadLetterSourceQueues':
+  /#Action=ListDeadLetterSourceQueues:
     post:
       x-aws-operation-name: ListDeadLetterSourceQueues
       operationId: POST_ListDeadLetterSourceQueues
@@ -1301,7 +1309,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#Action=ListQueueTags':
+  /#Action=ListQueueTags:
     post:
       x-aws-operation-name: ListQueueTags
       operationId: POST_ListQueueTags
@@ -1341,7 +1349,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#Action=ListQueues':
+  /#Action=ListQueues:
     get:
       x-aws-operation-name: ListQueues
       operationId: GET_ListQueues
@@ -1492,7 +1500,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#Action=PurgeQueue':
+  /#Action=PurgeQueue:
     post:
       x-aws-operation-name: PurgeQueue
       operationId: POST_PurgeQueue
@@ -1637,7 +1645,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#Action=ReceiveMessage':
+  /#Action=ReceiveMessage:
     post:
       x-aws-operation-name: ReceiveMessage
       operationId: POST_ReceiveMessage
@@ -1732,7 +1740,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#Action=RemovePermission':
+  /#Action=RemovePermission:
     post:
       x-aws-operation-name: RemovePermission
       operationId: POST_RemovePermission
@@ -1871,7 +1879,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#Action=SendMessage':
+  /#Action=SendMessage:
     post:
       x-aws-operation-name: SendMessage
       operationId: POST_SendMessage
@@ -2016,7 +2024,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#Action=SendMessageBatch':
+  /#Action=SendMessageBatch:
     post:
       x-aws-operation-name: SendMessageBatch
       operationId: POST_SendMessageBatch
@@ -2151,7 +2159,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#Action=SetQueueAttributes':
+  /#Action=SetQueueAttributes:
     post:
       x-aws-operation-name: SetQueueAttributes
       operationId: POST_SetQueueAttributes
@@ -2246,7 +2254,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#Action=TagQueue':
+  /#Action=TagQueue:
     post:
       x-aws-operation-name: TagQueue
       operationId: POST_TagQueue
@@ -2335,7 +2343,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#Action=UntagQueue':
+  /#Action=UntagQueue:
     post:
       x-aws-operation-name: UntagQueue
       operationId: POST_UntagQueue

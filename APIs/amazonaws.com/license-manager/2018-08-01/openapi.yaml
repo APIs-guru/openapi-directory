@@ -51,13 +51,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The AWS License Manager multi-region endpoint
   - url: 'https://license-manager.{region}.amazonaws.com'
@@ -77,13 +81,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The AWS License Manager multi-region endpoint
   - url: 'http://license-manager.{region}.amazonaws.com.cn'
@@ -106,7 +114,7 @@ servers:
     description: The AWS License Manager endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
-  '/#X-Amz-Target=AWSLicenseManager.CreateLicenseConfiguration':
+  /#X-Amz-Target=AWSLicenseManager.CreateLicenseConfiguration:
     post:
       operationId: CreateLicenseConfiguration
       description: '<p>Creates a license configuration.</p> <p>A license configuration is an abstraction of a customer license agreement that can be consumed and enforced by License Manager. Components include specifications for the license type (licensing by instance, socket, CPU, or vCPU), allowed tenancy (shared tenancy, Dedicated Instance, Dedicated Host, or all of these), host affinity (how long a VM must be associated with a host), and the number of licenses purchased and used.</p>'
@@ -175,7 +183,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSLicenseManager.DeleteLicenseConfiguration':
+  /#X-Amz-Target=AWSLicenseManager.DeleteLicenseConfiguration:
     post:
       operationId: DeleteLicenseConfiguration
       description: <p>Deletes the specified license configuration.</p> <p>You cannot delete a license configuration that is in use.</p>
@@ -238,7 +246,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSLicenseManager.GetLicenseConfiguration':
+  /#X-Amz-Target=AWSLicenseManager.GetLicenseConfiguration:
     post:
       operationId: GetLicenseConfiguration
       description: Gets detailed information about the specified license configuration.
@@ -301,7 +309,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSLicenseManager.GetServiceSettings':
+  /#X-Amz-Target=AWSLicenseManager.GetServiceSettings:
     post:
       operationId: GetServiceSettings
       description: Gets the License Manager settings for the current Region.
@@ -358,7 +366,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSLicenseManager.ListAssociationsForLicenseConfiguration':
+  /#X-Amz-Target=AWSLicenseManager.ListAssociationsForLicenseConfiguration:
     post:
       operationId: ListAssociationsForLicenseConfiguration
       description: '<p>Lists the resource associations for the specified license configuration.</p> <p>Resource associations need not consume licenses from a license configuration. For example, an AMI or a stopped instance might not consume a license (depending on the license rules).</p>'
@@ -427,7 +435,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSLicenseManager.ListFailuresForLicenseConfigurationOperations':
+  /#X-Amz-Target=AWSLicenseManager.ListFailuresForLicenseConfigurationOperations:
     post:
       operationId: ListFailuresForLicenseConfigurationOperations
       description: Lists the license configuration operations that failed.
@@ -490,7 +498,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSLicenseManager.ListLicenseConfigurations':
+  /#X-Amz-Target=AWSLicenseManager.ListLicenseConfigurations:
     post:
       operationId: ListLicenseConfigurations
       description: Lists the license configurations for your account.
@@ -559,7 +567,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSLicenseManager.ListLicenseSpecificationsForResource':
+  /#X-Amz-Target=AWSLicenseManager.ListLicenseSpecificationsForResource:
     post:
       operationId: ListLicenseSpecificationsForResource
       description: Describes the license configurations for the specified resource.
@@ -622,7 +630,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSLicenseManager.ListResourceInventory':
+  /#X-Amz-Target=AWSLicenseManager.ListResourceInventory:
     post:
       operationId: ListResourceInventory
       description: Lists resources managed using Systems Manager inventory.
@@ -697,7 +705,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSLicenseManager.ListTagsForResource':
+  /#X-Amz-Target=AWSLicenseManager.ListTagsForResource:
     post:
       operationId: ListTagsForResource
       description: Lists the tags for the specified license configuration.
@@ -760,7 +768,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSLicenseManager.ListUsageForLicenseConfiguration':
+  /#X-Amz-Target=AWSLicenseManager.ListUsageForLicenseConfiguration:
     post:
       operationId: ListUsageForLicenseConfiguration
       description: 'Lists all license usage records for a license configuration, displaying license consumption details by resource at a selected point in time. Use this action to audit the current license consumption for any license inventory and configuration.'
@@ -829,7 +837,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSLicenseManager.TagResource':
+  /#X-Amz-Target=AWSLicenseManager.TagResource:
     post:
       operationId: TagResource
       description: Adds the specified tags to the specified license configuration.
@@ -892,7 +900,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSLicenseManager.UntagResource':
+  /#X-Amz-Target=AWSLicenseManager.UntagResource:
     post:
       operationId: UntagResource
       description: Removes the specified tags from the specified license configuration.
@@ -955,7 +963,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSLicenseManager.UpdateLicenseConfiguration':
+  /#X-Amz-Target=AWSLicenseManager.UpdateLicenseConfiguration:
     post:
       operationId: UpdateLicenseConfiguration
       description: '<p>Modifies the attributes of an existing license configuration.</p> <p>A license configuration is an abstraction of a customer license agreement that can be consumed and enforced by License Manager. Components include specifications for the license type (licensing by instance, socket, CPU, or vCPU), allowed tenancy (shared tenancy, Dedicated Instance, Dedicated Host, or all of these), host affinity (how long a VM must be associated with a host), and the number of licenses purchased and used.</p>'
@@ -1018,7 +1026,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSLicenseManager.UpdateLicenseSpecificationsForResource':
+  /#X-Amz-Target=AWSLicenseManager.UpdateLicenseSpecificationsForResource:
     post:
       operationId: UpdateLicenseSpecificationsForResource
       description: '<p>Adds or removes the specified license configurations for the specified AWS resource.</p> <p>You can update the license specifications of AMIs, instances, and hosts. You cannot update the license specifications for launch templates and AWS CloudFormation templates, as they send license configurations to the operation that creates the resource.</p>'
@@ -1093,7 +1101,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSLicenseManager.UpdateServiceSettings':
+  /#X-Amz-Target=AWSLicenseManager.UpdateServiceSettings:
     post:
       operationId: UpdateServiceSettings
       description: Updates License Manager settings for the current Region.

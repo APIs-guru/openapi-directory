@@ -51,13 +51,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The AWS Device Farm multi-region endpoint
   - url: 'https://devicefarm.{region}.amazonaws.com'
@@ -77,13 +81,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The AWS Device Farm multi-region endpoint
   - url: 'http://devicefarm.{region}.amazonaws.com.cn'
@@ -106,7 +114,7 @@ servers:
     description: The AWS Device Farm endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
-  '/#X-Amz-Target=DeviceFarm_20150623.CreateDevicePool':
+  /#X-Amz-Target=DeviceFarm_20150623.CreateDevicePool:
     post:
       operationId: CreateDevicePool
       description: Creates a device pool.
@@ -163,7 +171,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=DeviceFarm_20150623.CreateInstanceProfile':
+  /#X-Amz-Target=DeviceFarm_20150623.CreateInstanceProfile:
     post:
       operationId: CreateInstanceProfile
       description: Creates a profile that can be applied to one or more private fleet device instances.
@@ -220,7 +228,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=DeviceFarm_20150623.CreateNetworkProfile':
+  /#X-Amz-Target=DeviceFarm_20150623.CreateNetworkProfile:
     post:
       operationId: CreateNetworkProfile
       description: Creates a network profile.
@@ -277,7 +285,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=DeviceFarm_20150623.CreateProject':
+  /#X-Amz-Target=DeviceFarm_20150623.CreateProject:
     post:
       operationId: CreateProject
       description: Creates a project.
@@ -340,7 +348,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=DeviceFarm_20150623.CreateRemoteAccessSession':
+  /#X-Amz-Target=DeviceFarm_20150623.CreateRemoteAccessSession:
     post:
       operationId: CreateRemoteAccessSession
       description: Specifies and starts a remote access session.
@@ -397,7 +405,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=DeviceFarm_20150623.CreateTestGridProject':
+  /#X-Amz-Target=DeviceFarm_20150623.CreateTestGridProject:
     post:
       operationId: CreateTestGridProject
       description: Creates a Selenium testing project. Projects are used to track <a>TestGridSession</a> instances.
@@ -436,7 +444,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=DeviceFarm_20150623.CreateTestGridUrl':
+  /#X-Amz-Target=DeviceFarm_20150623.CreateTestGridUrl:
     post:
       operationId: CreateTestGridUrl
       description: 'Creates a signed, short-term URL that can be passed to a Selenium <code>RemoteWebDriver</code> constructor.'
@@ -487,7 +495,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=DeviceFarm_20150623.CreateUpload':
+  /#X-Amz-Target=DeviceFarm_20150623.CreateUpload:
     post:
       operationId: CreateUpload
       description: Uploads an app or test scripts.
@@ -544,7 +552,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=DeviceFarm_20150623.CreateVPCEConfiguration':
+  /#X-Amz-Target=DeviceFarm_20150623.CreateVPCEConfiguration:
     post:
       operationId: CreateVPCEConfiguration
       description: Creates a configuration record in Device Farm for your Amazon Virtual Private Cloud (VPC) endpoint.
@@ -595,7 +603,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=DeviceFarm_20150623.DeleteDevicePool':
+  /#X-Amz-Target=DeviceFarm_20150623.DeleteDevicePool:
     post:
       operationId: DeleteDevicePool
       description: Deletes a device pool given the pool ARN. Does not allow deletion of curated pools owned by the system.
@@ -652,7 +660,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=DeviceFarm_20150623.DeleteInstanceProfile':
+  /#X-Amz-Target=DeviceFarm_20150623.DeleteInstanceProfile:
     post:
       operationId: DeleteInstanceProfile
       description: Deletes a profile that can be applied to one or more private device instances.
@@ -709,7 +717,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=DeviceFarm_20150623.DeleteNetworkProfile':
+  /#X-Amz-Target=DeviceFarm_20150623.DeleteNetworkProfile:
     post:
       operationId: DeleteNetworkProfile
       description: Deletes a network profile.
@@ -766,7 +774,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=DeviceFarm_20150623.DeleteProject':
+  /#X-Amz-Target=DeviceFarm_20150623.DeleteProject:
     post:
       operationId: DeleteProject
       description: '<p>Deletes an AWS Device Farm project, given the project ARN.</p> <p> Deleting this resource does not stop an in-progress run.</p>'
@@ -823,7 +831,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=DeviceFarm_20150623.DeleteRemoteAccessSession':
+  /#X-Amz-Target=DeviceFarm_20150623.DeleteRemoteAccessSession:
     post:
       operationId: DeleteRemoteAccessSession
       description: Deletes a completed remote access session and its results.
@@ -880,7 +888,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=DeviceFarm_20150623.DeleteRun':
+  /#X-Amz-Target=DeviceFarm_20150623.DeleteRun:
     post:
       operationId: DeleteRun
       description: '<p>Deletes the run, given the run ARN.</p> <p> Deleting this resource does not stop an in-progress run.</p>'
@@ -937,7 +945,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=DeviceFarm_20150623.DeleteTestGridProject':
+  /#X-Amz-Target=DeviceFarm_20150623.DeleteTestGridProject:
     post:
       operationId: DeleteTestGridProject
       description: <p> Deletes a Selenium testing project and all content generated under it. </p> <important> <p>You cannot undo this operation.</p> </important> <note> <p>You cannot delete a project if it has active sessions.</p> </note>
@@ -994,7 +1002,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=DeviceFarm_20150623.DeleteUpload':
+  /#X-Amz-Target=DeviceFarm_20150623.DeleteUpload:
     post:
       operationId: DeleteUpload
       description: Deletes an upload given the upload ARN.
@@ -1051,7 +1059,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=DeviceFarm_20150623.DeleteVPCEConfiguration':
+  /#X-Amz-Target=DeviceFarm_20150623.DeleteVPCEConfiguration:
     post:
       operationId: DeleteVPCEConfiguration
       description: Deletes a configuration for your Amazon Virtual Private Cloud (VPC) endpoint.
@@ -1108,7 +1116,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=DeviceFarm_20150623.GetAccountSettings':
+  /#X-Amz-Target=DeviceFarm_20150623.GetAccountSettings:
     post:
       operationId: GetAccountSettings
       description: Returns the number of unmetered iOS or unmetered Android devices that have been purchased by the account.
@@ -1165,7 +1173,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=DeviceFarm_20150623.GetDevice':
+  /#X-Amz-Target=DeviceFarm_20150623.GetDevice:
     post:
       operationId: GetDevice
       description: Gets information about a unique device type.
@@ -1222,7 +1230,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=DeviceFarm_20150623.GetDeviceInstance':
+  /#X-Amz-Target=DeviceFarm_20150623.GetDeviceInstance:
     post:
       operationId: GetDeviceInstance
       description: Returns information about a device instance that belongs to a private device fleet.
@@ -1279,7 +1287,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=DeviceFarm_20150623.GetDevicePool':
+  /#X-Amz-Target=DeviceFarm_20150623.GetDevicePool:
     post:
       operationId: GetDevicePool
       description: Gets information about a device pool.
@@ -1336,7 +1344,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=DeviceFarm_20150623.GetDevicePoolCompatibility':
+  /#X-Amz-Target=DeviceFarm_20150623.GetDevicePoolCompatibility:
     post:
       operationId: GetDevicePoolCompatibility
       description: Gets information about compatibility with a device pool.
@@ -1393,7 +1401,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=DeviceFarm_20150623.GetInstanceProfile':
+  /#X-Amz-Target=DeviceFarm_20150623.GetInstanceProfile:
     post:
       operationId: GetInstanceProfile
       description: Returns information about the specified instance profile.
@@ -1450,7 +1458,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=DeviceFarm_20150623.GetJob':
+  /#X-Amz-Target=DeviceFarm_20150623.GetJob:
     post:
       operationId: GetJob
       description: Gets information about a job.
@@ -1507,7 +1515,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=DeviceFarm_20150623.GetNetworkProfile':
+  /#X-Amz-Target=DeviceFarm_20150623.GetNetworkProfile:
     post:
       operationId: GetNetworkProfile
       description: Returns information about a network profile.
@@ -1564,7 +1572,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=DeviceFarm_20150623.GetOfferingStatus':
+  /#X-Amz-Target=DeviceFarm_20150623.GetOfferingStatus:
     post:
       operationId: GetOfferingStatus
       description: 'Gets the current status and future status of all offerings purchased by an AWS account. The response indicates how many offerings are currently available and the offerings that will be available in the next period. The API returns a <code>NotEligible</code> error if the user is not permitted to invoke the operation. If you must be able to invoke this operation, contact <a href="mailto:aws-devicefarm-support@amazon.com">aws-devicefarm-support@amazon.com</a>.'
@@ -1633,7 +1641,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=DeviceFarm_20150623.GetProject':
+  /#X-Amz-Target=DeviceFarm_20150623.GetProject:
     post:
       operationId: GetProject
       description: Gets information about a project.
@@ -1690,7 +1698,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=DeviceFarm_20150623.GetRemoteAccessSession':
+  /#X-Amz-Target=DeviceFarm_20150623.GetRemoteAccessSession:
     post:
       operationId: GetRemoteAccessSession
       description: Returns a link to a currently running remote access session.
@@ -1747,7 +1755,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=DeviceFarm_20150623.GetRun':
+  /#X-Amz-Target=DeviceFarm_20150623.GetRun:
     post:
       operationId: GetRun
       description: Gets information about a run.
@@ -1804,7 +1812,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=DeviceFarm_20150623.GetSuite':
+  /#X-Amz-Target=DeviceFarm_20150623.GetSuite:
     post:
       operationId: GetSuite
       description: Gets information about a suite.
@@ -1861,7 +1869,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=DeviceFarm_20150623.GetTest':
+  /#X-Amz-Target=DeviceFarm_20150623.GetTest:
     post:
       operationId: GetTest
       description: Gets information about a test.
@@ -1918,7 +1926,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=DeviceFarm_20150623.GetTestGridProject':
+  /#X-Amz-Target=DeviceFarm_20150623.GetTestGridProject:
     post:
       operationId: GetTestGridProject
       description: Retrieves information about a Selenium testing project.
@@ -1969,7 +1977,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=DeviceFarm_20150623.GetTestGridSession':
+  /#X-Amz-Target=DeviceFarm_20150623.GetTestGridSession:
     post:
       operationId: GetTestGridSession
       description: '<p>A session is an instance of a browser created through a <code>RemoteWebDriver</code> with the URL from <a>CreateTestGridUrlResult$url</a>. You can use the following to look up sessions:</p> <ul> <li> <p>The session ARN (<a>GetTestGridSessionRequest$sessionArn</a>).</p> </li> <li> <p>The project ARN and a session ID (<a>GetTestGridSessionRequest$projectArn</a> and <a>GetTestGridSessionRequest$sessionId</a>).</p> </li> </ul> <p/>'
@@ -2020,7 +2028,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=DeviceFarm_20150623.GetUpload':
+  /#X-Amz-Target=DeviceFarm_20150623.GetUpload:
     post:
       operationId: GetUpload
       description: Gets information about an upload.
@@ -2077,7 +2085,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=DeviceFarm_20150623.GetVPCEConfiguration':
+  /#X-Amz-Target=DeviceFarm_20150623.GetVPCEConfiguration:
     post:
       operationId: GetVPCEConfiguration
       description: Returns information about the configuration settings for your Amazon Virtual Private Cloud (VPC) endpoint.
@@ -2128,7 +2136,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=DeviceFarm_20150623.InstallToRemoteAccessSession':
+  /#X-Amz-Target=DeviceFarm_20150623.InstallToRemoteAccessSession:
     post:
       operationId: InstallToRemoteAccessSession
       description: 'Installs an application to the device in a remote access session. For Android applications, the file must be in .apk format. For iOS applications, the file must be in .ipa format.'
@@ -2185,7 +2193,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=DeviceFarm_20150623.ListArtifacts':
+  /#X-Amz-Target=DeviceFarm_20150623.ListArtifacts:
     post:
       operationId: ListArtifacts
       description: Gets information about artifacts.
@@ -2248,7 +2256,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=DeviceFarm_20150623.ListDeviceInstances':
+  /#X-Amz-Target=DeviceFarm_20150623.ListDeviceInstances:
     post:
       operationId: ListDeviceInstances
       description: Returns information about the private device instances associated with one or more AWS accounts.
@@ -2305,7 +2313,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=DeviceFarm_20150623.ListDevicePools':
+  /#X-Amz-Target=DeviceFarm_20150623.ListDevicePools:
     post:
       operationId: ListDevicePools
       description: Gets information about device pools.
@@ -2368,7 +2376,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=DeviceFarm_20150623.ListDevices':
+  /#X-Amz-Target=DeviceFarm_20150623.ListDevices:
     post:
       operationId: ListDevices
       description: Gets information about unique device types.
@@ -2431,7 +2439,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=DeviceFarm_20150623.ListInstanceProfiles':
+  /#X-Amz-Target=DeviceFarm_20150623.ListInstanceProfiles:
     post:
       operationId: ListInstanceProfiles
       description: Returns information about all the instance profiles in an AWS account.
@@ -2488,7 +2496,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=DeviceFarm_20150623.ListJobs':
+  /#X-Amz-Target=DeviceFarm_20150623.ListJobs:
     post:
       operationId: ListJobs
       description: Gets information about jobs for a given test run.
@@ -2551,7 +2559,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=DeviceFarm_20150623.ListNetworkProfiles':
+  /#X-Amz-Target=DeviceFarm_20150623.ListNetworkProfiles:
     post:
       operationId: ListNetworkProfiles
       description: Returns the list of available network profiles.
@@ -2608,7 +2616,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=DeviceFarm_20150623.ListOfferingPromotions':
+  /#X-Amz-Target=DeviceFarm_20150623.ListOfferingPromotions:
     post:
       operationId: ListOfferingPromotions
       description: 'Returns a list of offering promotions. Each offering promotion record contains the ID and description of the promotion. The API returns a <code>NotEligible</code> error if the caller is not permitted to invoke the operation. Contact <a href="mailto:aws-devicefarm-support@amazon.com">aws-devicefarm-support@amazon.com</a> if you must be able to invoke this operation.'
@@ -2671,7 +2679,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=DeviceFarm_20150623.ListOfferingTransactions':
+  /#X-Amz-Target=DeviceFarm_20150623.ListOfferingTransactions:
     post:
       operationId: ListOfferingTransactions
       description: 'Returns a list of all historical purchases, renewals, and system renewal transactions for an AWS account. The list is paginated and ordered by a descending timestamp (most recent transactions are first). The API returns a <code>NotEligible</code> error if the user is not permitted to invoke the operation. If you must be able to invoke this operation, contact <a href="mailto:aws-devicefarm-support@amazon.com">aws-devicefarm-support@amazon.com</a>.'
@@ -2740,7 +2748,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=DeviceFarm_20150623.ListOfferings':
+  /#X-Amz-Target=DeviceFarm_20150623.ListOfferings:
     post:
       operationId: ListOfferings
       description: 'Returns a list of products or offerings that the user can manage through the API. Each offering record indicates the recurring price per unit and the frequency for that offering. The API returns a <code>NotEligible</code> error if the user is not permitted to invoke the operation. If you must be able to invoke this operation, contact <a href="mailto:aws-devicefarm-support@amazon.com">aws-devicefarm-support@amazon.com</a>.'
@@ -2809,7 +2817,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=DeviceFarm_20150623.ListProjects':
+  /#X-Amz-Target=DeviceFarm_20150623.ListProjects:
     post:
       operationId: ListProjects
       description: Gets information about projects.
@@ -2872,7 +2880,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=DeviceFarm_20150623.ListRemoteAccessSessions':
+  /#X-Amz-Target=DeviceFarm_20150623.ListRemoteAccessSessions:
     post:
       operationId: ListRemoteAccessSessions
       description: Returns a list of all currently running remote access sessions.
@@ -2929,7 +2937,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=DeviceFarm_20150623.ListRuns':
+  /#X-Amz-Target=DeviceFarm_20150623.ListRuns:
     post:
       operationId: ListRuns
       description: 'Gets information about runs, given an AWS Device Farm project ARN.'
@@ -2992,7 +3000,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=DeviceFarm_20150623.ListSamples':
+  /#X-Amz-Target=DeviceFarm_20150623.ListSamples:
     post:
       operationId: ListSamples
       description: 'Gets information about samples, given an AWS Device Farm job ARN.'
@@ -3055,7 +3063,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=DeviceFarm_20150623.ListSuites':
+  /#X-Amz-Target=DeviceFarm_20150623.ListSuites:
     post:
       operationId: ListSuites
       description: Gets information about test suites for a given job.
@@ -3118,7 +3126,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=DeviceFarm_20150623.ListTagsForResource':
+  /#X-Amz-Target=DeviceFarm_20150623.ListTagsForResource:
     post:
       operationId: ListTagsForResource
       description: List the tags for an AWS Device Farm resource.
@@ -3169,7 +3177,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=DeviceFarm_20150623.ListTestGridProjects':
+  /#X-Amz-Target=DeviceFarm_20150623.ListTestGridProjects:
     post:
       operationId: ListTestGridProjects
       description: Gets a list of all Selenium testing projects in your account.
@@ -3226,7 +3234,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=DeviceFarm_20150623.ListTestGridSessionActions':
+  /#X-Amz-Target=DeviceFarm_20150623.ListTestGridSessionActions:
     post:
       operationId: ListTestGridSessionActions
       description: Returns a list of the actions taken in a <a>TestGridSession</a>.
@@ -3289,7 +3297,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=DeviceFarm_20150623.ListTestGridSessionArtifacts':
+  /#X-Amz-Target=DeviceFarm_20150623.ListTestGridSessionArtifacts:
     post:
       operationId: ListTestGridSessionArtifacts
       description: Retrieves a list of artifacts created during the session.
@@ -3352,7 +3360,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=DeviceFarm_20150623.ListTestGridSessions':
+  /#X-Amz-Target=DeviceFarm_20150623.ListTestGridSessions:
     post:
       operationId: ListTestGridSessions
       description: Retrieves a list of sessions for a <a>TestGridProject</a>.
@@ -3415,7 +3423,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=DeviceFarm_20150623.ListTests':
+  /#X-Amz-Target=DeviceFarm_20150623.ListTests:
     post:
       operationId: ListTests
       description: Gets information about tests in a given test suite.
@@ -3478,7 +3486,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=DeviceFarm_20150623.ListUniqueProblems':
+  /#X-Amz-Target=DeviceFarm_20150623.ListUniqueProblems:
     post:
       operationId: ListUniqueProblems
       description: '<p>Gets information about unique problems, such as exceptions or crashes.</p> <p>Unique problems are defined as a single instance of an error across a run, job, or suite. For example, if a call in your application consistently raises an exception (<code>OutOfBoundsException in MyActivity.java:386</code>), <code>ListUniqueProblems</code> returns a single entry instead of many individual entries for that exception.</p>'
@@ -3541,7 +3549,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=DeviceFarm_20150623.ListUploads':
+  /#X-Amz-Target=DeviceFarm_20150623.ListUploads:
     post:
       operationId: ListUploads
       description: 'Gets information about uploads, given an AWS Device Farm project ARN.'
@@ -3604,7 +3612,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=DeviceFarm_20150623.ListVPCEConfigurations':
+  /#X-Amz-Target=DeviceFarm_20150623.ListVPCEConfigurations:
     post:
       operationId: ListVPCEConfigurations
       description: Returns information about all Amazon Virtual Private Cloud (VPC) endpoint configurations in the AWS account.
@@ -3649,7 +3657,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=DeviceFarm_20150623.PurchaseOffering':
+  /#X-Amz-Target=DeviceFarm_20150623.PurchaseOffering:
     post:
       operationId: PurchaseOffering
       description: 'Immediately purchases offerings for an AWS account. Offerings renew with the latest total purchased quantity for an offering, unless the renewal was overridden. The API returns a <code>NotEligible</code> error if the user is not permitted to invoke the operation. If you must be able to invoke this operation, contact <a href="mailto:aws-devicefarm-support@amazon.com">aws-devicefarm-support@amazon.com</a>.'
@@ -3712,7 +3720,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=DeviceFarm_20150623.RenewOffering':
+  /#X-Amz-Target=DeviceFarm_20150623.RenewOffering:
     post:
       operationId: RenewOffering
       description: 'Explicitly sets the quantity of devices to renew for an offering, starting from the <code>effectiveDate</code> of the next period. The API returns a <code>NotEligible</code> error if the user is not permitted to invoke the operation. If you must be able to invoke this operation, contact <a href="mailto:aws-devicefarm-support@amazon.com">aws-devicefarm-support@amazon.com</a>.'
@@ -3775,7 +3783,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=DeviceFarm_20150623.ScheduleRun':
+  /#X-Amz-Target=DeviceFarm_20150623.ScheduleRun:
     post:
       operationId: ScheduleRun
       description: Schedules a run.
@@ -3838,7 +3846,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=DeviceFarm_20150623.StopJob':
+  /#X-Amz-Target=DeviceFarm_20150623.StopJob:
     post:
       operationId: StopJob
       description: 'Initiates a stop request for the current job. AWS Device Farm immediately stops the job on the device where tests have not started. You are not billed for this device. On the device where tests have started, setup suite and teardown suite tests run to completion on the device. You are billed for setup, teardown, and any tests that were in progress or already completed.'
@@ -3895,7 +3903,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=DeviceFarm_20150623.StopRemoteAccessSession':
+  /#X-Amz-Target=DeviceFarm_20150623.StopRemoteAccessSession:
     post:
       operationId: StopRemoteAccessSession
       description: Ends a specified remote access session.
@@ -3952,7 +3960,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=DeviceFarm_20150623.StopRun':
+  /#X-Amz-Target=DeviceFarm_20150623.StopRun:
     post:
       operationId: StopRun
       description: 'Initiates a stop request for the current test run. AWS Device Farm immediately stops the run on devices where tests have not started. You are not billed for these devices. On devices where tests have started executing, setup suite and teardown suite tests run to completion on those devices. You are billed for setup, teardown, and any tests that were in progress or already completed.'
@@ -4009,7 +4017,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=DeviceFarm_20150623.TagResource':
+  /#X-Amz-Target=DeviceFarm_20150623.TagResource:
     post:
       operationId: TagResource
       description: 'Associates the specified tags to a resource with the specified <code>resourceArn</code>. If existing tags on a resource are not specified in the request parameters, they are not changed. When a resource is deleted, the tags associated with that resource are also deleted.'
@@ -4072,7 +4080,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=DeviceFarm_20150623.UntagResource':
+  /#X-Amz-Target=DeviceFarm_20150623.UntagResource:
     post:
       operationId: UntagResource
       description: Deletes the specified tags from a resource.
@@ -4123,7 +4131,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=DeviceFarm_20150623.UpdateDeviceInstance':
+  /#X-Amz-Target=DeviceFarm_20150623.UpdateDeviceInstance:
     post:
       operationId: UpdateDeviceInstance
       description: Updates information about a private device instance.
@@ -4180,7 +4188,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=DeviceFarm_20150623.UpdateDevicePool':
+  /#X-Amz-Target=DeviceFarm_20150623.UpdateDevicePool:
     post:
       operationId: UpdateDevicePool
       description: 'Modifies the name, description, and rules in a device pool given the attributes and the pool ARN. Rule updates are all-or-nothing, meaning they can only be updated as a whole (or not at all).'
@@ -4237,7 +4245,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=DeviceFarm_20150623.UpdateInstanceProfile':
+  /#X-Amz-Target=DeviceFarm_20150623.UpdateInstanceProfile:
     post:
       operationId: UpdateInstanceProfile
       description: Updates information about an existing private device instance profile.
@@ -4294,7 +4302,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=DeviceFarm_20150623.UpdateNetworkProfile':
+  /#X-Amz-Target=DeviceFarm_20150623.UpdateNetworkProfile:
     post:
       operationId: UpdateNetworkProfile
       description: Updates the network profile.
@@ -4351,7 +4359,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=DeviceFarm_20150623.UpdateProject':
+  /#X-Amz-Target=DeviceFarm_20150623.UpdateProject:
     post:
       operationId: UpdateProject
       description: 'Modifies the specified project name, given the project ARN and a new name.'
@@ -4408,7 +4416,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=DeviceFarm_20150623.UpdateTestGridProject':
+  /#X-Amz-Target=DeviceFarm_20150623.UpdateTestGridProject:
     post:
       operationId: UpdateTestGridProject
       description: Change details of a project.
@@ -4459,7 +4467,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=DeviceFarm_20150623.UpdateUpload':
+  /#X-Amz-Target=DeviceFarm_20150623.UpdateUpload:
     post:
       operationId: UpdateUpload
       description: Updates an uploaded test spec.
@@ -4516,7 +4524,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=DeviceFarm_20150623.UpdateVPCEConfiguration':
+  /#X-Amz-Target=DeviceFarm_20150623.UpdateVPCEConfiguration:
     post:
       operationId: UpdateVPCEConfiguration
       description: Updates information about an Amazon Virtual Private Cloud (VPC) endpoint configuration.

@@ -51,13 +51,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The CodeArtifact multi-region endpoint
   - url: 'https://codeartifact.{region}.amazonaws.com'
@@ -77,13 +81,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The CodeArtifact multi-region endpoint
   - url: 'http://codeartifact.{region}.amazonaws.com.cn'
@@ -106,7 +114,7 @@ servers:
     description: The CodeArtifact endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
-  '/v1/repository/external-connection#domain&repository&external-connection':
+  /v1/repository/external-connection#domain&repository&external-connection:
     post:
       operationId: AssociateExternalConnection
       description: '<p>Adds an existing external connection to a repository. One external connection is allowed per repository.</p> <note> <p>A repository can have one or more upstream repositories, or an external connection.</p> </note>'
@@ -289,7 +297,7 @@ paths:
           schema:
             type: string
             pattern: '[A-Za-z0-9][A-Za-z0-9._\-:]{1,99}'
-  '/v1/package/versions/copy#domain&source-repository&destination-repository&format&package':
+  /v1/package/versions/copy#domain&source-repository&destination-repository&format&package:
     post:
       operationId: CopyPackageVersions
       description: <p> Copies package versions from one repository to another repository in the same domain. </p> <note> <p> You must specify <code>versions</code> or <code>versionRevisions</code>. You cannot specify both. </p> </note>
@@ -438,7 +446,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/v1/domain#domain':
+  /v1/domain#domain:
     post:
       operationId: CreateDomain
       description: '<p> Creates a domain. CodeArtifact <i>domains</i> make it easier to manage multiple repositories across an organization. You can use a domain to apply permissions across many repositories owned by different AWS accounts. An asset is stored only once in a domain, even if it''s in multiple repositories. </p> <p>Although you can have multiple domains, we recommend a single production domain that contains all published artifacts so that your development teams can find and share packages. You can use a second pre-production domain to test changes to the production domain configuration. </p>'
@@ -646,7 +654,7 @@ paths:
             pattern: '[0-9]{12}'
             minLength: 12
             maxLength: 12
-  '/v1/repository#domain&repository':
+  /v1/repository#domain&repository:
     post:
       operationId: CreateRepository
       description: ' Creates a repository. '
@@ -991,7 +999,7 @@ paths:
                   type: array
                   items:
                     $ref: '#/components/schemas/UpstreamRepository'
-  '/v1/domain/permissions/policy#domain':
+  /v1/domain/permissions/policy#domain:
     delete:
       operationId: DeleteDomainPermissionsPolicy
       description: ' Deletes the resource policy set on a domain. '
@@ -1133,7 +1141,7 @@ paths:
             pattern: '[0-9]{12}'
             minLength: 12
             maxLength: 12
-  '/v1/package/versions/delete#domain&repository&format&package':
+  /v1/package/versions/delete#domain&repository&format&package:
     post:
       operationId: DeletePackageVersions
       description: ' Deletes one or more versions of a package. A deleted package version cannot be restored in your repository. If you want to remove a package version from your repository and be able to restore it later, set its status to <code>Archived</code>. Archived packages cannot be downloaded from a repository and don''t show up with list package APIs (for example, <code> <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListPackageVersions.html">ListackageVersions</a> </code>), but you can restore them using <code> <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_UpdatePackageVersionsStatus.html">UpdatePackageVersionsStatus</a> </code>. '
@@ -1268,7 +1276,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/v1/repository/permissions/policies#domain&repository':
+  /v1/repository/permissions/policies#domain&repository:
     delete:
       operationId: DeleteRepositoryPermissionsPolicy
       description: '<p> Deletes the resource policy that is set on a repository. After a resource policy is deleted, the permissions allowed and denied by the deleted policy are removed. The effect of deleting a resource policy might not be immediate. </p> <important> <p> Use <code>DeleteRepositoryPermissionsPolicy</code> with caution. After a policy is deleted, AWS users, roles, and accounts lose permissions to perform the repository actions granted by the deleted policy. </p> </important>'
@@ -1360,7 +1368,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/v1/package/version#domain&repository&format&package&version':
+  /v1/package/version#domain&repository&format&package&version:
     get:
       operationId: DescribePackageVersion
       description: ' Returns a <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageVersionDescription.html"> <code>PackageVersionDescription</code> </a> object that contains information about the requested package version. '
@@ -1480,7 +1488,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/v1/package/versions/dispose#domain&repository&format&package':
+  /v1/package/versions/dispose#domain&repository&format&package:
     post:
       operationId: DisposePackageVersions
       description: '<p> Deletes the assets in package versions and sets the package versions'' status to <code>Disposed</code>. A disposed package version cannot be restored in your repository because its assets are deleted. </p> <p> To view all disposed package versions in a repository, use <code> <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListPackageVersions.html">ListackageVersions</a> </code> and set the <code> <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListPackageVersions.html#API_ListPackageVersions_RequestSyntax">status</a> </code> parameter to <code>Disposed</code>. </p> <p> To view information about a disposed package version, use <code> <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListPackageVersions.html">ListPackageVersions</a> </code> and set the <code> <a href="https://docs.aws.amazon.com/API_ListPackageVersions.html#codeartifact-ListPackageVersions-response-status">status</a> </code> parameter to <code>Disposed</code>. </p>'
@@ -1620,7 +1628,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/v1/authorization-token#domain':
+  /v1/authorization-token#domain:
     post:
       operationId: GetAuthorizationToken
       description: '<p> Generates a temporary authentication token for accessing repositories in the domain. This API requires the <code>codeartifact:GetAuthorizationToken</code> and <code>sts:GetServiceBearerToken</code> permissions. </p> <note> <p>CodeArtifact authorization tokens are valid for a period of 12 hours when created with the <code>login</code> command. You can call <code>login</code> periodically to refresh the token. When you create an authorization token with the <code>GetAuthorizationToken</code> API, you can set a custom authorization period, up to a maximum of 12 hours, with the <code>durationSeconds</code> parameter.</p> <p>The authorization period begins after <code>login</code> or <code>GetAuthorizationToken</code> is called. If <code>login</code> or <code>GetAuthorizationToken</code> is called while assuming a role, the token lifetime is independent of the maximum session duration of the role. For example, if you call <code>sts assume-role</code> and specify a session duration of 15 minutes, then generate a CodeArtifact authorization token, the token will be valid for the full authorization period even though this is longer than the 15-minute session duration.</p> <p>See <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html">Using IAM Roles</a> for more information on controlling session duration. </p> </note>'
@@ -1696,7 +1704,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/v1/package/version/asset#domain&repository&format&package&version&asset':
+  /v1/package/version/asset#domain&repository&format&package&version&asset:
     get:
       operationId: GetPackageVersionAsset
       description: ' Returns an asset (or file) that is in a package. For example, for a Maven package version, use <code>GetPackageVersionAsset</code> to download a <code>JAR</code> file, a <code>POM</code> file, or any other assets in the package version. '
@@ -1828,7 +1836,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/v1/package/version/readme#domain&repository&format&package&version':
+  /v1/package/version/readme#domain&repository&format&package&version:
     get:
       operationId: GetPackageVersionReadme
       description: '<p> Gets the readme file or descriptive text for a package version. For packages that do not contain a readme file, CodeArtifact extracts a description from a metadata file. For example, from the <code>&lt;description&gt;</code> element in the <code>pom.xml</code> file of a Maven package. </p> <p> The returned text might contain formatting. For example, it might contain formatting for Markdown or reStructuredText. </p>'
@@ -1942,7 +1950,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/v1/repository/endpoint#domain&repository&format':
+  /v1/repository/endpoint#domain&repository&format:
     get:
       operationId: GetRepositoryEndpoint
       description: '<p> Returns the endpoint of a repository for a specific package format. A repository has one endpoint for each package format: </p> <ul> <li> <p> <code>npm</code> </p> </li> <li> <p> <code>pypi</code> </p> </li> <li> <p> <code>maven</code> </p> </li> </ul>'
@@ -2029,7 +2037,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/v1/repository/permissions/policy#domain&repository':
+  /v1/repository/permissions/policy#domain&repository:
     get:
       operationId: GetRepositoryPermissionsPolicy
       description: ' Returns the resource policy that is set on a repository. '
@@ -2280,7 +2288,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/v1/package/version/assets#domain&repository&format&package&version':
+  /v1/package/version/assets#domain&repository&format&package&version:
     post:
       operationId: ListPackageVersionAssets
       description: ' Returns a list of <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_AssetSummary.html"> <code>AssetSummary</code> </a> objects for assets in a package version. '
@@ -2423,7 +2431,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/v1/package/version/dependencies#domain&repository&format&package&version':
+  /v1/package/version/dependencies#domain&repository&format&package&version:
     post:
       operationId: ListPackageVersionDependencies
       description: ' Returns the direct dependencies for a package version. The dependencies are returned as <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageDependency.html"> <code>PackageDependency</code> </a> objects. CodeArtifact extracts the dependencies for a package version from the metadata file for the package format (for example, the <code>package.json</code> file for npm packages and the <code>pom.xml</code> file for Maven). Any package version dependencies that are not listed in the configuration file are not returned. '
@@ -2546,7 +2554,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/v1/package/versions#domain&repository&format&package':
+  /v1/package/versions#domain&repository&format&package:
     post:
       operationId: ListPackageVersions
       description: ' Returns a list of <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageVersionSummary.html"> <code>PackageVersionSummary</code> </a> objects for package versions in a repository that match the request parameters. '
@@ -2701,7 +2709,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/v1/packages#domain&repository':
+  /v1/packages#domain&repository:
     post:
       operationId: ListPackages
       description: ' Returns a list of <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageSummary.html"> <code>PackageSummary</code> </a> objects for packages in a repository that match the request parameters. '
@@ -2917,7 +2925,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/v1/domain/repositories#domain':
+  /v1/domain/repositories#domain:
     post:
       operationId: ListRepositoriesInDomain
       description: ' Returns a list of <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_RepositorySummary.html"> <code>RepositorySummary</code> </a> objects. Each <code>RepositorySummary</code> contains information about a repository in the specified domain and that matches the input parameters. '
@@ -3127,7 +3135,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/v1/package/versions/update_status#domain&repository&format&package':
+  /v1/package/versions/update_status#domain&repository&format&package:
     post:
       operationId: UpdatePackageVersionsStatus
       description: ' Updates the status of one or more versions of a package. '

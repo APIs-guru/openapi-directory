@@ -51,13 +51,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The Elastic Load Balancing v2 multi-region endpoint
   - url: 'https://elasticloadbalancing.{region}.amazonaws.com'
@@ -77,13 +81,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The Elastic Load Balancing v2 multi-region endpoint
   - url: 'http://elasticloadbalancing.amazonaws.com'
@@ -112,7 +120,7 @@ servers:
     description: The Elastic Load Balancing v2 endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
-  '/#Action=AddListenerCertificates':
+  /#Action=AddListenerCertificates:
     get:
       x-aws-operation-name: AddListenerCertificates
       operationId: GET_AddListenerCertificates
@@ -228,7 +236,7 @@ paths:
             type: string
             enum:
               - '2015-12-01'
-  '/#Action=AddTags':
+  /#Action=AddTags:
     get:
       x-aws-operation-name: AddTags
       operationId: GET_AddTags
@@ -359,7 +367,7 @@ paths:
             type: string
             enum:
               - '2015-12-01'
-  '/#Action=CreateListener':
+  /#Action=CreateListener:
     get:
       x-aws-operation-name: CreateListener
       operationId: GET_CreateListener
@@ -686,7 +694,7 @@ paths:
             type: string
             enum:
               - '2015-12-01'
-  '/#Action=CreateLoadBalancer':
+  /#Action=CreateLoadBalancer:
     get:
       x-aws-operation-name: CreateLoadBalancer
       operationId: GET_CreateLoadBalancer
@@ -974,7 +982,7 @@ paths:
             type: string
             enum:
               - '2015-12-01'
-  '/#Action=CreateRule':
+  /#Action=CreateRule:
     get:
       x-aws-operation-name: CreateRule
       operationId: GET_CreateRule
@@ -1238,7 +1246,7 @@ paths:
             type: string
             enum:
               - '2015-12-01'
-  '/#Action=CreateTargetGroup':
+  /#Action=CreateTargetGroup:
     get:
       x-aws-operation-name: CreateTargetGroup
       operationId: GET_CreateTargetGroup
@@ -1461,7 +1469,7 @@ paths:
             type: string
             enum:
               - '2015-12-01'
-  '/#Action=DeleteListener':
+  /#Action=DeleteListener:
     get:
       x-aws-operation-name: DeleteListener
       operationId: GET_DeleteListener
@@ -1545,7 +1553,7 @@ paths:
             type: string
             enum:
               - '2015-12-01'
-  '/#Action=DeleteLoadBalancer':
+  /#Action=DeleteLoadBalancer:
     get:
       x-aws-operation-name: DeleteLoadBalancer
       operationId: GET_DeleteLoadBalancer
@@ -1653,7 +1661,7 @@ paths:
             type: string
             enum:
               - '2015-12-01'
-  '/#Action=DeleteRule':
+  /#Action=DeleteRule:
     get:
       x-aws-operation-name: DeleteRule
       operationId: GET_DeleteRule
@@ -1749,7 +1757,7 @@ paths:
             type: string
             enum:
               - '2015-12-01'
-  '/#Action=DeleteTargetGroup':
+  /#Action=DeleteTargetGroup:
     get:
       x-aws-operation-name: DeleteTargetGroup
       operationId: GET_DeleteTargetGroup
@@ -1833,7 +1841,7 @@ paths:
             type: string
             enum:
               - '2015-12-01'
-  '/#Action=DeregisterTargets':
+  /#Action=DeregisterTargets:
     get:
       x-aws-operation-name: DeregisterTargets
       operationId: GET_DeregisterTargets
@@ -1937,7 +1945,7 @@ paths:
             type: string
             enum:
               - '2015-12-01'
-  '/#Action=DescribeAccountLimits':
+  /#Action=DescribeAccountLimits:
     get:
       x-aws-operation-name: DescribeAccountLimits
       operationId: GET_DescribeAccountLimits
@@ -2017,7 +2025,7 @@ paths:
             type: string
             enum:
               - '2015-12-01'
-  '/#Action=DescribeListenerCertificates':
+  /#Action=DescribeListenerCertificates:
     get:
       x-aws-operation-name: DescribeListenerCertificates
       operationId: GET_DescribeListenerCertificates
@@ -2115,7 +2123,7 @@ paths:
             type: string
             enum:
               - '2015-12-01'
-  '/#Action=DescribeListeners':
+  /#Action=DescribeListeners:
     get:
       x-aws-operation-name: DescribeListeners
       operationId: GET_DescribeListeners
@@ -2251,7 +2259,7 @@ paths:
             type: string
             enum:
               - '2015-12-01'
-  '/#Action=DescribeLoadBalancerAttributes':
+  /#Action=DescribeLoadBalancerAttributes:
     get:
       x-aws-operation-name: DescribeLoadBalancerAttributes
       operationId: GET_DescribeLoadBalancerAttributes
@@ -2335,7 +2343,7 @@ paths:
             type: string
             enum:
               - '2015-12-01'
-  '/#Action=DescribeLoadBalancers':
+  /#Action=DescribeLoadBalancers:
     get:
       x-aws-operation-name: DescribeLoadBalancers
       operationId: GET_DescribeLoadBalancers
@@ -2449,7 +2457,7 @@ paths:
             type: string
             enum:
               - '2015-12-01'
-  '/#Action=DescribeRules':
+  /#Action=DescribeRules:
     get:
       x-aws-operation-name: DescribeRules
       operationId: GET_DescribeRules
@@ -2579,7 +2587,7 @@ paths:
             type: string
             enum:
               - '2015-12-01'
-  '/#Action=DescribeSSLPolicies':
+  /#Action=DescribeSSLPolicies:
     get:
       x-aws-operation-name: DescribeSSLPolicies
       operationId: GET_DescribeSSLPolicies
@@ -2679,7 +2687,7 @@ paths:
             type: string
             enum:
               - '2015-12-01'
-  '/#Action=DescribeTags':
+  /#Action=DescribeTags:
     get:
       x-aws-operation-name: DescribeTags
       operationId: GET_DescribeTags
@@ -2801,7 +2809,7 @@ paths:
             type: string
             enum:
               - '2015-12-01'
-  '/#Action=DescribeTargetGroupAttributes':
+  /#Action=DescribeTargetGroupAttributes:
     get:
       x-aws-operation-name: DescribeTargetGroupAttributes
       operationId: GET_DescribeTargetGroupAttributes
@@ -2885,7 +2893,7 @@ paths:
             type: string
             enum:
               - '2015-12-01'
-  '/#Action=DescribeTargetGroups':
+  /#Action=DescribeTargetGroups:
     get:
       x-aws-operation-name: DescribeTargetGroups
       operationId: GET_DescribeTargetGroups
@@ -3017,7 +3025,7 @@ paths:
             type: string
             enum:
               - '2015-12-01'
-  '/#Action=DescribeTargetHealth':
+  /#Action=DescribeTargetHealth:
     get:
       x-aws-operation-name: DescribeTargetHealth
       operationId: GET_DescribeTargetHealth
@@ -3133,7 +3141,7 @@ paths:
             type: string
             enum:
               - '2015-12-01'
-  '/#Action=ModifyListener':
+  /#Action=ModifyListener:
     get:
       x-aws-operation-name: ModifyListener
       operationId: GET_ModifyListener
@@ -3460,7 +3468,7 @@ paths:
             type: string
             enum:
               - '2015-12-01'
-  '/#Action=ModifyLoadBalancerAttributes':
+  /#Action=ModifyLoadBalancerAttributes:
     get:
       x-aws-operation-name: ModifyLoadBalancerAttributes
       operationId: GET_ModifyLoadBalancerAttributes
@@ -3565,7 +3573,7 @@ paths:
             type: string
             enum:
               - '2015-12-01'
-  '/#Action=ModifyRule':
+  /#Action=ModifyRule:
     get:
       x-aws-operation-name: ModifyRule
       operationId: GET_ModifyRule
@@ -3785,7 +3793,7 @@ paths:
             type: string
             enum:
               - '2015-12-01'
-  '/#Action=ModifyTargetGroup':
+  /#Action=ModifyTargetGroup:
     get:
       x-aws-operation-name: ModifyTargetGroup
       operationId: GET_ModifyTargetGroup
@@ -3959,7 +3967,7 @@ paths:
             type: string
             enum:
               - '2015-12-01'
-  '/#Action=ModifyTargetGroupAttributes':
+  /#Action=ModifyTargetGroupAttributes:
     get:
       x-aws-operation-name: ModifyTargetGroupAttributes
       operationId: GET_ModifyTargetGroupAttributes
@@ -4063,7 +4071,7 @@ paths:
             type: string
             enum:
               - '2015-12-01'
-  '/#Action=RegisterTargets':
+  /#Action=RegisterTargets:
     get:
       x-aws-operation-name: RegisterTargets
       operationId: GET_RegisterTargets
@@ -4191,7 +4199,7 @@ paths:
             type: string
             enum:
               - '2015-12-01'
-  '/#Action=RemoveListenerCertificates':
+  /#Action=RemoveListenerCertificates:
     get:
       x-aws-operation-name: RemoveListenerCertificates
       operationId: GET_RemoveListenerCertificates
@@ -4295,7 +4303,7 @@ paths:
             type: string
             enum:
               - '2015-12-01'
-  '/#Action=RemoveTags':
+  /#Action=RemoveTags:
     get:
       x-aws-operation-name: RemoveTags
       operationId: GET_RemoveTags
@@ -4437,7 +4445,7 @@ paths:
             type: string
             enum:
               - '2015-12-01'
-  '/#Action=SetIpAddressType':
+  /#Action=SetIpAddressType:
     get:
       x-aws-operation-name: SetIpAddressType
       operationId: GET_SetIpAddressType
@@ -4554,7 +4562,7 @@ paths:
             type: string
             enum:
               - '2015-12-01'
-  '/#Action=SetRulePriorities':
+  /#Action=SetRulePriorities:
     get:
       x-aws-operation-name: SetRulePriorities
       operationId: GET_SetRulePriorities
@@ -4664,7 +4672,7 @@ paths:
             type: string
             enum:
               - '2015-12-01'
-  '/#Action=SetSecurityGroups':
+  /#Action=SetSecurityGroups:
     get:
       x-aws-operation-name: SetSecurityGroups
       operationId: GET_SetSecurityGroups
@@ -4780,7 +4788,7 @@ paths:
             type: string
             enum:
               - '2015-12-01'
-  '/#Action=SetSubnets':
+  /#Action=SetSubnets:
     get:
       x-aws-operation-name: SetSubnets
       operationId: GET_SetSubnets
@@ -6775,7 +6783,7 @@ components:
         Values:
           $ref: '#/components/schemas/QueryStringKeyValuePairList'
           description: '<p>One or more key/value pairs or values to find in the query string. The maximum size of each string is 128 characters. The comparison is case insensitive. The following wildcard characters are supported: * (matches 0 or more characters) and ? (matches exactly 1 character). To search for a literal ''*'' or ''?'' character in a query string, you must escape these characters in <code>Values</code> using a ''\'' character.</p> <p>If you specify multiple key/value pairs or values, the condition is satisfied if one of them is found in the query string.</p>'
-      description: '<p>Information about a query string condition.</p> <p>The query string component of a URI starts after the first ''?'' character and is terminated by either a ''#'' character or the end of the URI. A typical query string contains key/value pairs separated by ''&amp;'' characters. The allowed characters are specified by RFC 3986. Any character can be percentage encoded.</p>'
+      description: <p>Information about a query string condition.</p> <p>The query string component of a URI starts after the first '?' character and is terminated by either a '#' character or the end of the URI. A typical query string contains key/value pairs separated by '&amp;' characters. The allowed characters are specified by RFC 3986. Any character can be percentage encoded.</p>
     QueryStringKeyValuePair:
       type: object
       properties:

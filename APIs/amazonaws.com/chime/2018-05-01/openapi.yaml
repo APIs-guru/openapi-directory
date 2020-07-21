@@ -643,7 +643,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/phone-numbers#operation=batch-delete':
+  /phone-numbers#operation=batch-delete:
     post:
       operationId: BatchDeletePhoneNumber
       description: <p>Moves phone numbers into the <b>Deletion queue</b>. Phone numbers must be disassociated from any users or Amazon Chime Voice Connectors before they can be deleted.</p> <p>Phone numbers remain in the <b>Deletion queue</b> for 7 days before they are deleted permanently.</p>
@@ -909,7 +909,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/phone-numbers#operation=batch-update':
+  /phone-numbers#operation=batch-update:
     post:
       operationId: BatchUpdatePhoneNumber
       description: '<p>Updates phone number product types or calling names. You can update one attribute at a time for each <code>UpdatePhoneNumberRequestItem</code>. For example, you can update either the product type or the calling name.</p> <p>For product types, choose from Amazon Chime Business Calling and Amazon Chime Voice Connector. For toll-free numbers, you must use the Amazon Chime Voice Connector product type.</p> <p>Updates to outbound calling names can take up to 72 hours to complete. Pending updates to outbound calling names must be complete before you can request another update.</p>'
@@ -1896,7 +1896,7 @@ paths:
             type: string
           description: Pagination token
           required: false
-  '/meetings#operation=create-attendees':
+  /meetings#operation=create-attendees:
     post:
       operationId: CreateMeetingWithAttendees
       description: 'Creates a new Amazon Chime SDK meeting in the specified media Region, with attendees. For more information about specifying media Regions, see <a href="https://docs.aws.amazon.com/chime/latest/dg/chime-sdk-meetings-regions.html">Amazon Chime SDK Media Regions</a> in the <i>Amazon Chime Developer Guide</i>. For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i>.'
@@ -8314,7 +8314,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/tags#arn':
+  /tags#arn:
     get:
       operationId: ListTagsForResource
       description: Lists the tags applied to an Amazon Chime SDK meeting resource.
@@ -9044,7 +9044,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/search#type=phone-numbers':
+  /search#type=phone-numbers:
     get:
       operationId: SearchAvailablePhoneNumbers
       description: Searches phone numbers that can be ordered.
@@ -9355,7 +9355,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/tags#operation=tag-resource':
+  /tags#operation=tag-resource:
     post:
       operationId: TagResource
       description: Applies the specified tags to the specified Amazon Chime SDK meeting resource.
@@ -9621,7 +9621,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/tags#operation=untag-resource':
+  /tags#operation=untag-resource:
     post:
       operationId: UntagResource
       description: Untags the specified tags from the specified Amazon Chime SDK meeting resource.

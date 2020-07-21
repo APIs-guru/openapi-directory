@@ -51,13 +51,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The AWS Cloud9 multi-region endpoint
   - url: 'https://cloud9.{region}.amazonaws.com'
@@ -77,13 +81,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The AWS Cloud9 multi-region endpoint
   - url: 'http://cloud9.{region}.amazonaws.com.cn'
@@ -106,7 +114,7 @@ servers:
     description: The AWS Cloud9 endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
-  '/#X-Amz-Target=AWSCloud9WorkspaceManagementService.CreateEnvironmentEC2':
+  /#X-Amz-Target=AWSCloud9WorkspaceManagementService.CreateEnvironmentEC2:
     post:
       operationId: CreateEnvironmentEC2
       description: 'Creates an AWS Cloud9 development environment, launches an Amazon Elastic Compute Cloud (Amazon EC2) instance, and then connects from the instance to the environment.'
@@ -181,7 +189,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSCloud9WorkspaceManagementService.CreateEnvironmentMembership':
+  /#X-Amz-Target=AWSCloud9WorkspaceManagementService.CreateEnvironmentMembership:
     post:
       operationId: CreateEnvironmentMembership
       description: Adds an environment member to an AWS Cloud9 development environment.
@@ -256,7 +264,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSCloud9WorkspaceManagementService.DeleteEnvironment':
+  /#X-Amz-Target=AWSCloud9WorkspaceManagementService.DeleteEnvironment:
     post:
       operationId: DeleteEnvironment
       description: 'Deletes an AWS Cloud9 development environment. If an Amazon EC2 instance is connected to the environment, also terminates the instance.'
@@ -331,7 +339,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSCloud9WorkspaceManagementService.DeleteEnvironmentMembership':
+  /#X-Amz-Target=AWSCloud9WorkspaceManagementService.DeleteEnvironmentMembership:
     post:
       operationId: DeleteEnvironmentMembership
       description: Deletes an environment member from an AWS Cloud9 development environment.
@@ -406,7 +414,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSCloud9WorkspaceManagementService.DescribeEnvironmentMemberships':
+  /#X-Amz-Target=AWSCloud9WorkspaceManagementService.DescribeEnvironmentMemberships:
     post:
       operationId: DescribeEnvironmentMemberships
       description: Gets information about environment members for an AWS Cloud9 development environment.
@@ -493,7 +501,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSCloud9WorkspaceManagementService.DescribeEnvironmentStatus':
+  /#X-Amz-Target=AWSCloud9WorkspaceManagementService.DescribeEnvironmentStatus:
     post:
       operationId: DescribeEnvironmentStatus
       description: Gets status information for an AWS Cloud9 development environment.
@@ -568,7 +576,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSCloud9WorkspaceManagementService.DescribeEnvironments':
+  /#X-Amz-Target=AWSCloud9WorkspaceManagementService.DescribeEnvironments:
     post:
       operationId: DescribeEnvironments
       description: Gets information about AWS Cloud9 development environments.
@@ -643,7 +651,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSCloud9WorkspaceManagementService.ListEnvironments':
+  /#X-Amz-Target=AWSCloud9WorkspaceManagementService.ListEnvironments:
     post:
       operationId: ListEnvironments
       description: Gets a list of AWS Cloud9 development environment identifiers.
@@ -730,7 +738,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSCloud9WorkspaceManagementService.ListTagsForResource':
+  /#X-Amz-Target=AWSCloud9WorkspaceManagementService.ListTagsForResource:
     post:
       operationId: ListTagsForResource
       description: Gets a list of the tags associated with an AWS Cloud9 development environment.
@@ -781,7 +789,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSCloud9WorkspaceManagementService.TagResource':
+  /#X-Amz-Target=AWSCloud9WorkspaceManagementService.TagResource:
     post:
       operationId: TagResource
       description: <p>Adds tags to an AWS Cloud9 development environment.</p> <important> <p>Tags that you add to an AWS Cloud9 environment by using this method will NOT be automatically propagated to underlying resources.</p> </important>
@@ -832,7 +840,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSCloud9WorkspaceManagementService.UntagResource':
+  /#X-Amz-Target=AWSCloud9WorkspaceManagementService.UntagResource:
     post:
       operationId: UntagResource
       description: Removes tags from an AWS Cloud9 development environment.
@@ -883,7 +891,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSCloud9WorkspaceManagementService.UpdateEnvironment':
+  /#X-Amz-Target=AWSCloud9WorkspaceManagementService.UpdateEnvironment:
     post:
       operationId: UpdateEnvironment
       description: Changes the settings of an existing AWS Cloud9 development environment.
@@ -958,7 +966,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSCloud9WorkspaceManagementService.UpdateEnvironmentMembership':
+  /#X-Amz-Target=AWSCloud9WorkspaceManagementService.UpdateEnvironmentMembership:
     post:
       operationId: UpdateEnvironmentMembership
       description: Changes the settings of an existing environment member for an AWS Cloud9 development environment.

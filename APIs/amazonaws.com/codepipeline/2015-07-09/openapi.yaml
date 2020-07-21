@@ -51,13 +51,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The CodePipeline multi-region endpoint
   - url: 'https://codepipeline.{region}.amazonaws.com'
@@ -77,13 +81,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The CodePipeline multi-region endpoint
   - url: 'http://codepipeline.{region}.amazonaws.com.cn'
@@ -106,7 +114,7 @@ servers:
     description: The CodePipeline endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
-  '/#X-Amz-Target=CodePipeline_20150709.AcknowledgeJob':
+  /#X-Amz-Target=CodePipeline_20150709.AcknowledgeJob:
     post:
       operationId: AcknowledgeJob
       description: Returns information about a specified job and whether that job has been received by the job worker. Used for custom actions only.
@@ -157,7 +165,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodePipeline_20150709.AcknowledgeThirdPartyJob':
+  /#X-Amz-Target=CodePipeline_20150709.AcknowledgeThirdPartyJob:
     post:
       operationId: AcknowledgeThirdPartyJob
       description: Confirms a job worker has received the specified job. Used for partner actions only.
@@ -214,7 +222,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodePipeline_20150709.CreateCustomActionType':
+  /#X-Amz-Target=CodePipeline_20150709.CreateCustomActionType:
     post:
       operationId: CreateCustomActionType
       description: Creates a new custom action that can be used in all pipelines associated with the AWS account. Only used for custom actions.
@@ -277,7 +285,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodePipeline_20150709.CreatePipeline':
+  /#X-Amz-Target=CodePipeline_20150709.CreatePipeline:
     post:
       operationId: CreatePipeline
       description: '<p>Creates a pipeline.</p> <note> <p>In the pipeline structure, you must include either <code>artifactStore</code> or <code>artifactStores</code> in your pipeline, but you cannot use both. If you create a cross-region action in your pipeline, you must use <code>artifactStores</code>.</p> </note>'
@@ -370,7 +378,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodePipeline_20150709.DeleteCustomActionType':
+  /#X-Amz-Target=CodePipeline_20150709.DeleteCustomActionType:
     post:
       operationId: DeleteCustomActionType
       description: '<p>Marks a custom action as deleted. <code>PollForJobs</code> for the custom action fails after the action is marked for deletion. Used for custom actions only.</p> <important> <p>To re-create a custom action after it has been deleted you must use a string in the version field that has never been used before. This string can be an incremented version number, for example. To restore a deleted custom action, use a JSON file that is identical to the deleted action, including the original string in the version field.</p> </important>'
@@ -411,7 +419,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodePipeline_20150709.DeletePipeline':
+  /#X-Amz-Target=CodePipeline_20150709.DeletePipeline:
     post:
       operationId: DeletePipeline
       description: Deletes the specified pipeline.
@@ -452,7 +460,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodePipeline_20150709.DeleteWebhook':
+  /#X-Amz-Target=CodePipeline_20150709.DeleteWebhook:
     post:
       operationId: DeleteWebhook
       description: 'Deletes a previously created webhook by name. Deleting the webhook stops AWS CodePipeline from starting a pipeline every time an external event occurs. The API returns successfully when trying to delete a webhook that is already deleted. If a deleted webhook is re-created by calling PutWebhook with the same name, it will have a different URL.'
@@ -497,7 +505,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodePipeline_20150709.DeregisterWebhookWithThirdParty':
+  /#X-Amz-Target=CodePipeline_20150709.DeregisterWebhookWithThirdParty:
     post:
       operationId: DeregisterWebhookWithThirdParty
       description: Removes the connection between the webhook that was created by CodePipeline and the external tool with events to be detected. Currently supported only for webhooks that target an action type of GitHub.
@@ -542,7 +550,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodePipeline_20150709.DisableStageTransition':
+  /#X-Amz-Target=CodePipeline_20150709.DisableStageTransition:
     post:
       operationId: DisableStageTransition
       description: Prevents artifacts in a pipeline from transitioning to the next stage in the pipeline.
@@ -589,7 +597,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodePipeline_20150709.EnableStageTransition':
+  /#X-Amz-Target=CodePipeline_20150709.EnableStageTransition:
     post:
       operationId: EnableStageTransition
       description: Enables artifacts in a pipeline to transition to a stage in a pipeline.
@@ -636,7 +644,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodePipeline_20150709.GetJobDetails':
+  /#X-Amz-Target=CodePipeline_20150709.GetJobDetails:
     post:
       operationId: GetJobDetails
       description: '<p>Returns information about a job. Used for custom actions only.</p> <important> <p>When this API is called, AWS CodePipeline returns temporary credentials for the S3 bucket used to store artifacts for the pipeline, if the action requires access to that S3 bucket for input or output artifacts. This API also returns any secret values defined for the action.</p> </important>'
@@ -681,7 +689,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodePipeline_20150709.GetPipeline':
+  /#X-Amz-Target=CodePipeline_20150709.GetPipeline:
     post:
       operationId: GetPipeline
       description: 'Returns the metadata, structure, stages, and actions of a pipeline. Can be used to return the entire structure of a pipeline in JSON format, which can then be modified and used to update the pipeline structure with <a>UpdatePipeline</a>.'
@@ -732,7 +740,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodePipeline_20150709.GetPipelineExecution':
+  /#X-Amz-Target=CodePipeline_20150709.GetPipelineExecution:
     post:
       operationId: GetPipelineExecution
       description: 'Returns information about an execution of a pipeline, including details about artifacts, the pipeline execution ID, and the name, version, and status of the pipeline.'
@@ -783,7 +791,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodePipeline_20150709.GetPipelineState':
+  /#X-Amz-Target=CodePipeline_20150709.GetPipelineState:
     post:
       operationId: GetPipelineState
       description: '<p>Returns information about the state of a pipeline, including the stages and actions.</p> <note> <p>Values returned in the <code>revisionId</code> and <code>revisionUrl</code> fields indicate the source revision information, such as the commit ID, for the current state.</p> </note>'
@@ -828,7 +836,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodePipeline_20150709.GetThirdPartyJobDetails':
+  /#X-Amz-Target=CodePipeline_20150709.GetThirdPartyJobDetails:
     post:
       operationId: GetThirdPartyJobDetails
       description: '<p>Requests the details of a job for a third party action. Used for partner actions only.</p> <important> <p>When this API is called, AWS CodePipeline returns temporary credentials for the S3 bucket used to store artifacts for the pipeline, if the action requires access to that S3 bucket for input or output artifacts. This API also returns any secret values defined for the action.</p> </important>'
@@ -885,7 +893,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodePipeline_20150709.ListActionExecutions':
+  /#X-Amz-Target=CodePipeline_20150709.ListActionExecutions:
     post:
       operationId: ListActionExecutions
       description: Lists the action executions that have occurred in a pipeline.
@@ -954,7 +962,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodePipeline_20150709.ListActionTypes':
+  /#X-Amz-Target=CodePipeline_20150709.ListActionTypes:
     post:
       operationId: ListActionTypes
       description: Gets a summary of all AWS CodePipeline action types associated with your account.
@@ -1005,7 +1013,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodePipeline_20150709.ListPipelineExecutions':
+  /#X-Amz-Target=CodePipeline_20150709.ListPipelineExecutions:
     post:
       operationId: ListPipelineExecutions
       description: Gets a summary of the most recent executions for a pipeline.
@@ -1068,7 +1076,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodePipeline_20150709.ListPipelines':
+  /#X-Amz-Target=CodePipeline_20150709.ListPipelines:
     post:
       operationId: ListPipelines
       description: Gets a summary of all of the pipelines associated with your account.
@@ -1119,7 +1127,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodePipeline_20150709.ListTagsForResource':
+  /#X-Amz-Target=CodePipeline_20150709.ListTagsForResource:
     post:
       operationId: ListTagsForResource
       description: Gets the set of key-value pairs (metadata) that are used to manage the resource.
@@ -1188,7 +1196,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodePipeline_20150709.ListWebhooks':
+  /#X-Amz-Target=CodePipeline_20150709.ListWebhooks:
     post:
       operationId: ListWebhooks
       description: Gets a listing of all the webhooks in this AWS Region for this account. The output lists all webhooks and includes the webhook URL and ARN and the configuration for each webhook.
@@ -1245,7 +1253,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodePipeline_20150709.PollForJobs':
+  /#X-Amz-Target=CodePipeline_20150709.PollForJobs:
     post:
       operationId: PollForJobs
       description: '<p>Returns information about any jobs for AWS CodePipeline to act on. <code>PollForJobs</code> is valid only for action types with "Custom" in the owner field. If the action type contains "AWS" or "ThirdParty" in the owner field, the <code>PollForJobs</code> action returns an error.</p> <important> <p>When this API is called, AWS CodePipeline returns temporary credentials for the S3 bucket used to store artifacts for the pipeline, if the action requires access to that S3 bucket for input or output artifacts. This API also returns any secret values defined for the action.</p> </important>'
@@ -1290,7 +1298,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodePipeline_20150709.PollForThirdPartyJobs':
+  /#X-Amz-Target=CodePipeline_20150709.PollForThirdPartyJobs:
     post:
       operationId: PollForThirdPartyJobs
       description: '<p>Determines whether there are any third party jobs for a job worker to act on. Used for partner actions only.</p> <important> <p>When this API is called, AWS CodePipeline returns temporary credentials for the S3 bucket used to store artifacts for the pipeline, if the action requires access to that S3 bucket for input or output artifacts.</p> </important>'
@@ -1335,7 +1343,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodePipeline_20150709.PutActionRevision':
+  /#X-Amz-Target=CodePipeline_20150709.PutActionRevision:
     post:
       operationId: PutActionRevision
       description: Provides information to AWS CodePipeline about new revisions to a source.
@@ -1392,7 +1400,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodePipeline_20150709.PutApprovalResult':
+  /#X-Amz-Target=CodePipeline_20150709.PutApprovalResult:
     post:
       operationId: PutApprovalResult
       description: Provides the response to a manual approval request to AWS CodePipeline. Valid responses include Approved and Rejected.
@@ -1461,7 +1469,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodePipeline_20150709.PutJobFailureResult':
+  /#X-Amz-Target=CodePipeline_20150709.PutJobFailureResult:
     post:
       operationId: PutJobFailureResult
       description: Represents the failure of a job as returned to the pipeline by a job worker. Used for custom actions only.
@@ -1508,7 +1516,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodePipeline_20150709.PutJobSuccessResult':
+  /#X-Amz-Target=CodePipeline_20150709.PutJobSuccessResult:
     post:
       operationId: PutJobSuccessResult
       description: Represents the success of a job as returned to the pipeline by a job worker. Used for custom actions only.
@@ -1561,7 +1569,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodePipeline_20150709.PutThirdPartyJobFailureResult':
+  /#X-Amz-Target=CodePipeline_20150709.PutThirdPartyJobFailureResult:
     post:
       operationId: PutThirdPartyJobFailureResult
       description: Represents the failure of a third party job as returned to the pipeline by a job worker. Used for partner actions only.
@@ -1614,7 +1622,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodePipeline_20150709.PutThirdPartyJobSuccessResult':
+  /#X-Amz-Target=CodePipeline_20150709.PutThirdPartyJobSuccessResult:
     post:
       operationId: PutThirdPartyJobSuccessResult
       description: Represents the success of a third party job as returned to the pipeline by a job worker. Used for partner actions only.
@@ -1667,7 +1675,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodePipeline_20150709.PutWebhook':
+  /#X-Amz-Target=CodePipeline_20150709.PutWebhook:
     post:
       operationId: PutWebhook
       description: 'Defines a webhook and returns a unique webhook URL generated by CodePipeline. This URL can be supplied to third party source hosting providers to call every time there''s a code change. When CodePipeline receives a POST request on this URL, the pipeline defined in the webhook is started as long as the POST request satisfied the authentication and filtering requirements supplied when defining the webhook. RegisterWebhookWithThirdParty and DeregisterWebhookWithThirdParty APIs can be used to automatically configure supported third parties to call the generated webhook URL.'
@@ -1748,7 +1756,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodePipeline_20150709.RegisterWebhookWithThirdParty':
+  /#X-Amz-Target=CodePipeline_20150709.RegisterWebhookWithThirdParty:
     post:
       operationId: RegisterWebhookWithThirdParty
       description: Configures a connection between the webhook that was created and the external tool with events to be detected.
@@ -1793,7 +1801,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodePipeline_20150709.RetryStageExecution':
+  /#X-Amz-Target=CodePipeline_20150709.RetryStageExecution:
     post:
       operationId: RetryStageExecution
       description: 'Resumes the pipeline execution by retrying the last failed actions in a stage. You can retry a stage immediately if any of the actions in the stage fail. When you retry, all actions that are still in progress continue working, and failed actions are triggered again.'
@@ -1856,7 +1864,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodePipeline_20150709.StartPipelineExecution':
+  /#X-Amz-Target=CodePipeline_20150709.StartPipelineExecution:
     post:
       operationId: StartPipelineExecution
       description: 'Starts the specified pipeline. Specifically, it begins processing the latest commit to the source location specified as part of the pipeline.'
@@ -1901,7 +1909,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodePipeline_20150709.StopPipelineExecution':
+  /#X-Amz-Target=CodePipeline_20150709.StopPipelineExecution:
     post:
       operationId: StopPipelineExecution
       description: 'Stops the specified pipeline execution. You choose to either stop the pipeline execution by completing in-progress actions without starting subsequent actions, or by abandoning in-progress actions. While completing or abandoning in-progress actions, the pipeline execution is in a <code>Stopping</code> state. After all in-progress actions are completed or abandoned, the pipeline execution is in a <code>Stopped</code> state.'
@@ -1958,7 +1966,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodePipeline_20150709.TagResource':
+  /#X-Amz-Target=CodePipeline_20150709.TagResource:
     post:
       operationId: TagResource
       description: 'Adds to or modifies the tags of the given resource. Tags are metadata that can be used to manage a resource. '
@@ -2027,7 +2035,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodePipeline_20150709.UntagResource':
+  /#X-Amz-Target=CodePipeline_20150709.UntagResource:
     post:
       operationId: UntagResource
       description: Removes tags from an AWS resource.
@@ -2090,7 +2098,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodePipeline_20150709.UpdatePipeline':
+  /#X-Amz-Target=CodePipeline_20150709.UpdatePipeline:
     post:
       operationId: UpdatePipeline
       description: Updates a specified pipeline with edits or changes to its structure. Use a JSON file with the pipeline structure and <code>UpdatePipeline</code> to provide the full structure of the pipeline. Updating the pipeline increases the version number of the pipeline by 1.

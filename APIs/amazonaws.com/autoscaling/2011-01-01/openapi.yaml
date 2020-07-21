@@ -51,13 +51,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The Auto Scaling multi-region endpoint
   - url: 'https://autoscaling.{region}.amazonaws.com'
@@ -77,13 +81,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The Auto Scaling multi-region endpoint
   - url: 'http://autoscaling.amazonaws.com'
@@ -112,7 +120,7 @@ servers:
     description: The Auto Scaling endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
-  '/#Action=AttachInstances':
+  /#Action=AttachInstances:
     get:
       x-aws-operation-name: AttachInstances
       operationId: GET_AttachInstances
@@ -211,7 +219,7 @@ paths:
             type: string
             enum:
               - '2011-01-01'
-  '/#Action=AttachLoadBalancerTargetGroups':
+  /#Action=AttachLoadBalancerTargetGroups:
     get:
       x-aws-operation-name: AttachLoadBalancerTargetGroups
       operationId: GET_AttachLoadBalancerTargetGroups
@@ -318,7 +326,7 @@ paths:
             type: string
             enum:
               - '2011-01-01'
-  '/#Action=AttachLoadBalancers':
+  /#Action=AttachLoadBalancers:
     get:
       x-aws-operation-name: AttachLoadBalancers
       operationId: GET_AttachLoadBalancers
@@ -425,7 +433,7 @@ paths:
             type: string
             enum:
               - '2011-01-01'
-  '/#Action=BatchDeleteScheduledAction':
+  /#Action=BatchDeleteScheduledAction:
     get:
       x-aws-operation-name: BatchDeleteScheduledAction
       operationId: GET_BatchDeleteScheduledAction
@@ -520,7 +528,7 @@ paths:
             type: string
             enum:
               - '2011-01-01'
-  '/#Action=BatchPutScheduledUpdateGroupAction':
+  /#Action=BatchPutScheduledUpdateGroupAction:
     get:
       x-aws-operation-name: BatchPutScheduledUpdateGroupAction
       operationId: GET_BatchPutScheduledUpdateGroupAction
@@ -639,7 +647,7 @@ paths:
             type: string
             enum:
               - '2011-01-01'
-  '/#Action=CancelInstanceRefresh':
+  /#Action=CancelInstanceRefresh:
     get:
       x-aws-operation-name: CancelInstanceRefresh
       operationId: GET_CancelInstanceRefresh
@@ -750,7 +758,7 @@ paths:
             type: string
             enum:
               - '2011-01-01'
-  '/#Action=CompleteLifecycleAction':
+  /#Action=CompleteLifecycleAction:
     get:
       x-aws-operation-name: CompleteLifecycleAction
       operationId: GET_CompleteLifecycleAction
@@ -869,7 +877,7 @@ paths:
             type: string
             enum:
               - '2011-01-01'
-  '/#Action=CreateAutoScalingGroup':
+  /#Action=CreateAutoScalingGroup:
     get:
       x-aws-operation-name: CreateAutoScalingGroup
       operationId: GET_CreateAutoScalingGroup
@@ -1160,7 +1168,7 @@ paths:
             type: string
             enum:
               - '2011-01-01'
-  '/#Action=CreateLaunchConfiguration':
+  /#Action=CreateLaunchConfiguration:
     get:
       x-aws-operation-name: CreateLaunchConfiguration
       operationId: GET_CreateLaunchConfiguration
@@ -1407,7 +1415,7 @@ paths:
             type: string
             enum:
               - '2011-01-01'
-  '/#Action=CreateOrUpdateTags':
+  /#Action=CreateOrUpdateTags:
     get:
       x-aws-operation-name: CreateOrUpdateTags
       operationId: GET_CreateOrUpdateTags
@@ -1521,7 +1529,7 @@ paths:
             type: string
             enum:
               - '2011-01-01'
-  '/#Action=DeleteAutoScalingGroup':
+  /#Action=DeleteAutoScalingGroup:
     get:
       x-aws-operation-name: DeleteAutoScalingGroup
       operationId: GET_DeleteAutoScalingGroup
@@ -1630,7 +1638,7 @@ paths:
             type: string
             enum:
               - '2011-01-01'
-  '/#Action=DeleteLaunchConfiguration':
+  /#Action=DeleteLaunchConfiguration:
     get:
       x-aws-operation-name: DeleteLaunchConfiguration
       operationId: GET_DeleteLaunchConfiguration
@@ -1721,7 +1729,7 @@ paths:
             type: string
             enum:
               - '2011-01-01'
-  '/#Action=DeleteLifecycleHook':
+  /#Action=DeleteLifecycleHook:
     get:
       x-aws-operation-name: DeleteLifecycleHook
       operationId: GET_DeleteLifecycleHook
@@ -1817,7 +1825,7 @@ paths:
             type: string
             enum:
               - '2011-01-01'
-  '/#Action=DeleteNotificationConfiguration':
+  /#Action=DeleteNotificationConfiguration:
     get:
       x-aws-operation-name: DeleteNotificationConfiguration
       operationId: GET_DeleteNotificationConfiguration
@@ -1905,7 +1913,7 @@ paths:
             type: string
             enum:
               - '2011-01-01'
-  '/#Action=DeletePolicy':
+  /#Action=DeletePolicy:
     get:
       x-aws-operation-name: DeletePolicy
       operationId: GET_DeletePolicy
@@ -2005,7 +2013,7 @@ paths:
             type: string
             enum:
               - '2011-01-01'
-  '/#Action=DeleteScheduledAction':
+  /#Action=DeleteScheduledAction:
     get:
       x-aws-operation-name: DeleteScheduledAction
       operationId: GET_DeleteScheduledAction
@@ -2093,7 +2101,7 @@ paths:
             type: string
             enum:
               - '2011-01-01'
-  '/#Action=DeleteTags':
+  /#Action=DeleteTags:
     get:
       x-aws-operation-name: DeleteTags
       operationId: GET_DeleteTags
@@ -2183,7 +2191,7 @@ paths:
             type: string
             enum:
               - '2011-01-01'
-  '/#Action=DescribeAccountLimits':
+  /#Action=DescribeAccountLimits:
     get:
       x-aws-operation-name: DescribeAccountLimits
       operationId: GET_DescribeAccountLimits
@@ -2256,7 +2264,7 @@ paths:
             type: string
             enum:
               - '2011-01-01'
-  '/#Action=DescribeAdjustmentTypes':
+  /#Action=DescribeAdjustmentTypes:
     get:
       x-aws-operation-name: DescribeAdjustmentTypes
       operationId: GET_DescribeAdjustmentTypes
@@ -2329,7 +2337,7 @@ paths:
             type: string
             enum:
               - '2011-01-01'
-  '/#Action=DescribeAutoScalingGroups':
+  /#Action=DescribeAutoScalingGroups:
     get:
       x-aws-operation-name: DescribeAutoScalingGroups
       operationId: GET_DescribeAutoScalingGroups
@@ -2452,7 +2460,7 @@ paths:
             type: string
             enum:
               - '2011-01-01'
-  '/#Action=DescribeAutoScalingInstances':
+  /#Action=DescribeAutoScalingInstances:
     get:
       x-aws-operation-name: DescribeAutoScalingInstances
       operationId: GET_DescribeAutoScalingInstances
@@ -2575,7 +2583,7 @@ paths:
             type: string
             enum:
               - '2011-01-01'
-  '/#Action=DescribeAutoScalingNotificationTypes':
+  /#Action=DescribeAutoScalingNotificationTypes:
     get:
       x-aws-operation-name: DescribeAutoScalingNotificationTypes
       operationId: GET_DescribeAutoScalingNotificationTypes
@@ -2648,7 +2656,7 @@ paths:
             type: string
             enum:
               - '2011-01-01'
-  '/#Action=DescribeInstanceRefreshes':
+  /#Action=DescribeInstanceRefreshes:
     get:
       x-aws-operation-name: DescribeInstanceRefreshes
       operationId: GET_DescribeInstanceRefreshes
@@ -2768,7 +2776,7 @@ paths:
             type: string
             enum:
               - '2011-01-01'
-  '/#Action=DescribeLaunchConfigurations':
+  /#Action=DescribeLaunchConfigurations:
     get:
       x-aws-operation-name: DescribeLaunchConfigurations
       operationId: GET_DescribeLaunchConfigurations
@@ -2891,7 +2899,7 @@ paths:
             type: string
             enum:
               - '2011-01-01'
-  '/#Action=DescribeLifecycleHookTypes':
+  /#Action=DescribeLifecycleHookTypes:
     get:
       x-aws-operation-name: DescribeLifecycleHookTypes
       operationId: GET_DescribeLifecycleHookTypes
@@ -2964,7 +2972,7 @@ paths:
             type: string
             enum:
               - '2011-01-01'
-  '/#Action=DescribeLifecycleHooks':
+  /#Action=DescribeLifecycleHooks:
     get:
       x-aws-operation-name: DescribeLifecycleHooks
       operationId: GET_DescribeLifecycleHooks
@@ -3060,7 +3068,7 @@ paths:
             type: string
             enum:
               - '2011-01-01'
-  '/#Action=DescribeLoadBalancerTargetGroups':
+  /#Action=DescribeLoadBalancerTargetGroups:
     get:
       x-aws-operation-name: DescribeLoadBalancerTargetGroups
       operationId: GET_DescribeLoadBalancerTargetGroups
@@ -3160,7 +3168,7 @@ paths:
             type: string
             enum:
               - '2011-01-01'
-  '/#Action=DescribeLoadBalancers':
+  /#Action=DescribeLoadBalancers:
     get:
       x-aws-operation-name: DescribeLoadBalancers
       operationId: GET_DescribeLoadBalancers
@@ -3260,7 +3268,7 @@ paths:
             type: string
             enum:
               - '2011-01-01'
-  '/#Action=DescribeMetricCollectionTypes':
+  /#Action=DescribeMetricCollectionTypes:
     get:
       x-aws-operation-name: DescribeMetricCollectionTypes
       operationId: GET_DescribeMetricCollectionTypes
@@ -3333,7 +3341,7 @@ paths:
             type: string
             enum:
               - '2011-01-01'
-  '/#Action=DescribeNotificationConfigurations':
+  /#Action=DescribeNotificationConfigurations:
     get:
       x-aws-operation-name: DescribeNotificationConfigurations
       operationId: GET_DescribeNotificationConfigurations
@@ -3456,7 +3464,7 @@ paths:
             type: string
             enum:
               - '2011-01-01'
-  '/#Action=DescribePolicies':
+  /#Action=DescribePolicies:
     get:
       x-aws-operation-name: DescribePolicies
       operationId: GET_DescribePolicies
@@ -3608,7 +3616,7 @@ paths:
             type: string
             enum:
               - '2011-01-01'
-  '/#Action=DescribeScalingActivities':
+  /#Action=DescribeScalingActivities:
     get:
       x-aws-operation-name: DescribeScalingActivities
       operationId: GET_DescribeScalingActivities
@@ -3740,7 +3748,7 @@ paths:
             type: string
             enum:
               - '2011-01-01'
-  '/#Action=DescribeScalingProcessTypes':
+  /#Action=DescribeScalingProcessTypes:
     get:
       x-aws-operation-name: DescribeScalingProcessTypes
       operationId: GET_DescribeScalingProcessTypes
@@ -3813,7 +3821,7 @@ paths:
             type: string
             enum:
               - '2011-01-01'
-  '/#Action=DescribeScheduledActions':
+  /#Action=DescribeScheduledActions:
     get:
       x-aws-operation-name: DescribeScheduledActions
       operationId: GET_DescribeScheduledActions
@@ -3959,7 +3967,7 @@ paths:
             type: string
             enum:
               - '2011-01-01'
-  '/#Action=DescribeTags':
+  /#Action=DescribeTags:
     get:
       x-aws-operation-name: DescribeTags
       operationId: GET_DescribeTags
@@ -4082,7 +4090,7 @@ paths:
             type: string
             enum:
               - '2011-01-01'
-  '/#Action=DescribeTerminationPolicyTypes':
+  /#Action=DescribeTerminationPolicyTypes:
     get:
       x-aws-operation-name: DescribeTerminationPolicyTypes
       operationId: GET_DescribeTerminationPolicyTypes
@@ -4155,7 +4163,7 @@ paths:
             type: string
             enum:
               - '2011-01-01'
-  '/#Action=DetachInstances':
+  /#Action=DetachInstances:
     get:
       x-aws-operation-name: DetachInstances
       operationId: GET_DetachInstances
@@ -4256,7 +4264,7 @@ paths:
             type: string
             enum:
               - '2011-01-01'
-  '/#Action=DetachLoadBalancerTargetGroups':
+  /#Action=DetachLoadBalancerTargetGroups:
     get:
       x-aws-operation-name: DetachLoadBalancerTargetGroups
       operationId: GET_DetachLoadBalancerTargetGroups
@@ -4351,7 +4359,7 @@ paths:
             type: string
             enum:
               - '2011-01-01'
-  '/#Action=DetachLoadBalancers':
+  /#Action=DetachLoadBalancers:
     get:
       x-aws-operation-name: DetachLoadBalancers
       operationId: GET_DetachLoadBalancers
@@ -4446,7 +4454,7 @@ paths:
             type: string
             enum:
               - '2011-01-01'
-  '/#Action=DisableMetricsCollection':
+  /#Action=DisableMetricsCollection:
     get:
       x-aws-operation-name: DisableMetricsCollection
       operationId: GET_DisableMetricsCollection
@@ -4533,7 +4541,7 @@ paths:
             type: string
             enum:
               - '2011-01-01'
-  '/#Action=EnableMetricsCollection':
+  /#Action=EnableMetricsCollection:
     get:
       x-aws-operation-name: EnableMetricsCollection
       operationId: GET_EnableMetricsCollection
@@ -4629,7 +4637,7 @@ paths:
             type: string
             enum:
               - '2011-01-01'
-  '/#Action=EnterStandby':
+  /#Action=EnterStandby:
     get:
       x-aws-operation-name: EnterStandby
       operationId: GET_EnterStandby
@@ -4730,7 +4738,7 @@ paths:
             type: string
             enum:
               - '2011-01-01'
-  '/#Action=ExecutePolicy':
+  /#Action=ExecutePolicy:
     get:
       x-aws-operation-name: ExecutePolicy
       operationId: GET_ExecutePolicy
@@ -4850,7 +4858,7 @@ paths:
             type: string
             enum:
               - '2011-01-01'
-  '/#Action=ExitStandby':
+  /#Action=ExitStandby:
     get:
       x-aws-operation-name: ExitStandby
       operationId: GET_ExitStandby
@@ -4945,7 +4953,7 @@ paths:
             type: string
             enum:
               - '2011-01-01'
-  '/#Action=PutLifecycleHook':
+  /#Action=PutLifecycleHook:
     get:
       x-aws-operation-name: PutLifecycleHook
       operationId: GET_PutLifecycleHook
@@ -5098,7 +5106,7 @@ paths:
             type: string
             enum:
               - '2011-01-01'
-  '/#Action=PutNotificationConfiguration':
+  /#Action=PutNotificationConfiguration:
     get:
       x-aws-operation-name: PutNotificationConfiguration
       operationId: GET_PutNotificationConfiguration
@@ -5218,7 +5226,7 @@ paths:
             type: string
             enum:
               - '2011-01-01'
-  '/#Action=PutScalingPolicy':
+  /#Action=PutScalingPolicy:
     get:
       x-aws-operation-name: PutScalingPolicy
       operationId: GET_PutScalingPolicy
@@ -5432,7 +5440,7 @@ paths:
             type: string
             enum:
               - '2011-01-01'
-  '/#Action=PutScheduledUpdateGroupAction':
+  /#Action=PutScheduledUpdateGroupAction:
     get:
       x-aws-operation-name: PutScheduledUpdateGroupAction
       operationId: GET_PutScheduledUpdateGroupAction
@@ -5592,7 +5600,7 @@ paths:
             type: string
             enum:
               - '2011-01-01'
-  '/#Action=RecordLifecycleActionHeartbeat':
+  /#Action=RecordLifecycleActionHeartbeat:
     get:
       x-aws-operation-name: RecordLifecycleActionHeartbeat
       operationId: GET_RecordLifecycleActionHeartbeat
@@ -5705,7 +5713,7 @@ paths:
             type: string
             enum:
               - '2011-01-01'
-  '/#Action=ResumeProcesses':
+  /#Action=ResumeProcesses:
     get:
       x-aws-operation-name: ResumeProcesses
       operationId: GET_ResumeProcesses
@@ -5804,7 +5812,7 @@ paths:
             type: string
             enum:
               - '2011-01-01'
-  '/#Action=SetDesiredCapacity':
+  /#Action=SetDesiredCapacity:
     get:
       x-aws-operation-name: SetDesiredCapacity
       operationId: GET_SetDesiredCapacity
@@ -5907,7 +5915,7 @@ paths:
             type: string
             enum:
               - '2011-01-01'
-  '/#Action=SetInstanceHealth':
+  /#Action=SetInstanceHealth:
     get:
       x-aws-operation-name: SetInstanceHealth
       operationId: GET_SetInstanceHealth
@@ -6001,7 +6009,7 @@ paths:
             type: string
             enum:
               - '2011-01-01'
-  '/#Action=SetInstanceProtection':
+  /#Action=SetInstanceProtection:
     get:
       x-aws-operation-name: SetInstanceProtection
       operationId: GET_SetInstanceProtection
@@ -6114,7 +6122,7 @@ paths:
             type: string
             enum:
               - '2011-01-01'
-  '/#Action=StartInstanceRefresh':
+  /#Action=StartInstanceRefresh:
     get:
       x-aws-operation-name: StartInstanceRefresh
       operationId: GET_StartInstanceRefresh
@@ -6247,7 +6255,7 @@ paths:
             type: string
             enum:
               - '2011-01-01'
-  '/#Action=SuspendProcesses':
+  /#Action=SuspendProcesses:
     get:
       x-aws-operation-name: SuspendProcesses
       operationId: GET_SuspendProcesses
@@ -6346,7 +6354,7 @@ paths:
             type: string
             enum:
               - '2011-01-01'
-  '/#Action=TerminateInstanceInAutoScalingGroup':
+  /#Action=TerminateInstanceInAutoScalingGroup:
     get:
       x-aws-operation-name: TerminateInstanceInAutoScalingGroup
       operationId: GET_TerminateInstanceInAutoScalingGroup
@@ -6451,7 +6459,7 @@ paths:
             type: string
             enum:
               - '2011-01-01'
-  '/#Action=UpdateAutoScalingGroup':
+  /#Action=UpdateAutoScalingGroup:
     get:
       x-aws-operation-name: UpdateAutoScalingGroup
       operationId: GET_UpdateAutoScalingGroup

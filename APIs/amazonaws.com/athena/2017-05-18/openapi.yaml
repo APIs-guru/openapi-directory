@@ -51,13 +51,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The Amazon Athena multi-region endpoint
   - url: 'https://athena.{region}.amazonaws.com'
@@ -77,13 +81,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The Amazon Athena multi-region endpoint
   - url: 'http://athena.{region}.amazonaws.com.cn'
@@ -106,7 +114,7 @@ servers:
     description: The Amazon Athena endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
-  '/#X-Amz-Target=AmazonAthena.BatchGetNamedQuery':
+  /#X-Amz-Target=AmazonAthena.BatchGetNamedQuery:
     post:
       operationId: BatchGetNamedQuery
       description: 'Returns the details of a single named query or a list of up to 50 queries, which you provide as an array of query ID strings. Requires you to have access to the workgroup in which the queries were saved. Use <a>ListNamedQueriesInput</a> to get the list of named query IDs in the specified workgroup. If information could not be retrieved for a submitted query ID, information about the query ID submitted is listed under <a>UnprocessedNamedQueryId</a>. Named queries differ from executed queries. Use <a>BatchGetQueryExecutionInput</a> to get details about each unique query execution, and <a>ListQueryExecutionsInput</a> to get a list of query execution IDs.'
@@ -151,7 +159,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AmazonAthena.BatchGetQueryExecution':
+  /#X-Amz-Target=AmazonAthena.BatchGetQueryExecution:
     post:
       operationId: BatchGetQueryExecution
       description: 'Returns the details of a single query execution or a list of up to 50 query executions, which you provide as an array of query execution ID strings. Requires you to have access to the workgroup in which the queries ran. To get a list of query execution IDs, use <a>ListQueryExecutionsInput$WorkGroup</a>. Query executions differ from named (saved) queries. Use <a>BatchGetNamedQueryInput</a> to get details about named queries.'
@@ -196,7 +204,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AmazonAthena.CreateDataCatalog':
+  /#X-Amz-Target=AmazonAthena.CreateDataCatalog:
     post:
       operationId: CreateDataCatalog
       description: Creates (registers) a data catalog with the specified name and properties. Catalogs created are visible to all users of the same AWS account.
@@ -241,7 +249,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AmazonAthena.CreateNamedQuery':
+  /#X-Amz-Target=AmazonAthena.CreateNamedQuery:
     post:
       operationId: CreateNamedQuery
       description: '<p>Creates a named query in the specified workgroup. Requires that you have access to the workgroup.</p> <p>For code samples using the AWS SDK for Java, see <a href="http://docs.aws.amazon.com/athena/latest/ug/code-samples.html">Examples and Code Samples</a> in the <i>Amazon Athena User Guide</i>.</p>'
@@ -286,7 +294,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AmazonAthena.CreateWorkGroup':
+  /#X-Amz-Target=AmazonAthena.CreateWorkGroup:
     post:
       operationId: CreateWorkGroup
       description: Creates a workgroup with the specified name.
@@ -331,7 +339,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AmazonAthena.DeleteDataCatalog':
+  /#X-Amz-Target=AmazonAthena.DeleteDataCatalog:
     post:
       operationId: DeleteDataCatalog
       description: Deletes a data catalog.
@@ -376,7 +384,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AmazonAthena.DeleteNamedQuery':
+  /#X-Amz-Target=AmazonAthena.DeleteNamedQuery:
     post:
       operationId: DeleteNamedQuery
       description: '<p>Deletes the named query if you have access to the workgroup in which the query was saved.</p> <p>For code samples using the AWS SDK for Java, see <a href="http://docs.aws.amazon.com/athena/latest/ug/code-samples.html">Examples and Code Samples</a> in the <i>Amazon Athena User Guide</i>.</p>'
@@ -421,7 +429,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AmazonAthena.DeleteWorkGroup':
+  /#X-Amz-Target=AmazonAthena.DeleteWorkGroup:
     post:
       operationId: DeleteWorkGroup
       description: Deletes the workgroup with the specified name. The primary workgroup cannot be deleted.
@@ -466,7 +474,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AmazonAthena.GetDataCatalog':
+  /#X-Amz-Target=AmazonAthena.GetDataCatalog:
     post:
       operationId: GetDataCatalog
       description: Returns the specified data catalog.
@@ -511,7 +519,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AmazonAthena.GetDatabase':
+  /#X-Amz-Target=AmazonAthena.GetDatabase:
     post:
       operationId: GetDatabase
       description: Returns a database object for the specfied database and data catalog.
@@ -562,7 +570,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AmazonAthena.GetNamedQuery':
+  /#X-Amz-Target=AmazonAthena.GetNamedQuery:
     post:
       operationId: GetNamedQuery
       description: Returns information about a single query. Requires that you have access to the workgroup in which the query was saved.
@@ -607,7 +615,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AmazonAthena.GetQueryExecution':
+  /#X-Amz-Target=AmazonAthena.GetQueryExecution:
     post:
       operationId: GetQueryExecution
       description: 'Returns information about a single execution of a query if you have access to the workgroup in which the query ran. Each time a query executes, information about the query execution is saved with a unique ID.'
@@ -652,7 +660,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AmazonAthena.GetQueryResults':
+  /#X-Amz-Target=AmazonAthena.GetQueryResults:
     post:
       operationId: GetQueryResults
       description: '<p>Streams the results of a single query execution specified by <code>QueryExecutionId</code> from the Athena query results location in Amazon S3. For more information, see <a href="https://docs.aws.amazon.com/athena/latest/ug/querying.html">Query Results</a> in the <i>Amazon Athena User Guide</i>. This request does not execute the query but returns results. Use <a>StartQueryExecution</a> to run a query.</p> <p>To stream query results successfully, the IAM principal with permission to call <code>GetQueryResults</code> also must have permissions to the Amazon S3 <code>GetObject</code> action for the Athena query results location.</p> <important> <p>IAM principals with permission to the Amazon S3 <code>GetObject</code> action for the query results location are able to retrieve query results from Amazon S3 even if permission to the <code>GetQueryResults</code> action is denied. To restrict user or role access, ensure that Amazon S3 permissions to the Athena query location are denied.</p> </important>'
@@ -709,7 +717,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AmazonAthena.GetTableMetadata':
+  /#X-Amz-Target=AmazonAthena.GetTableMetadata:
     post:
       operationId: GetTableMetadata
       description: 'Returns table metadata for the specified catalog, database, and table.'
@@ -760,7 +768,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AmazonAthena.GetWorkGroup':
+  /#X-Amz-Target=AmazonAthena.GetWorkGroup:
     post:
       operationId: GetWorkGroup
       description: Returns information about the workgroup with the specified name.
@@ -805,7 +813,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AmazonAthena.ListDataCatalogs':
+  /#X-Amz-Target=AmazonAthena.ListDataCatalogs:
     post:
       operationId: ListDataCatalogs
       description: Lists the data catalogs in the current AWS account.
@@ -862,7 +870,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AmazonAthena.ListDatabases':
+  /#X-Amz-Target=AmazonAthena.ListDatabases:
     post:
       operationId: ListDatabases
       description: Lists the databases in the specified data catalog.
@@ -925,7 +933,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AmazonAthena.ListNamedQueries':
+  /#X-Amz-Target=AmazonAthena.ListNamedQueries:
     post:
       operationId: ListNamedQueries
       description: '<p>Provides a list of available query IDs only for queries saved in the specified workgroup. Requires that you have access to the specified workgroup. If a workgroup is not specified, lists the saved queries for the primary workgroup.</p> <p>For code samples using the AWS SDK for Java, see <a href="http://docs.aws.amazon.com/athena/latest/ug/code-samples.html">Examples and Code Samples</a> in the <i>Amazon Athena User Guide</i>.</p>'
@@ -982,7 +990,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AmazonAthena.ListQueryExecutions':
+  /#X-Amz-Target=AmazonAthena.ListQueryExecutions:
     post:
       operationId: ListQueryExecutions
       description: '<p>Provides a list of available query execution IDs for the queries in the specified workgroup. If a workgroup is not specified, returns a list of query execution IDs for the primary workgroup. Requires you to have access to the workgroup in which the queries ran.</p> <p>For code samples using the AWS SDK for Java, see <a href="http://docs.aws.amazon.com/athena/latest/ug/code-samples.html">Examples and Code Samples</a> in the <i>Amazon Athena User Guide</i>.</p>'
@@ -1039,7 +1047,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AmazonAthena.ListTableMetadata':
+  /#X-Amz-Target=AmazonAthena.ListTableMetadata:
     post:
       operationId: ListTableMetadata
       description: Lists the metadata for the tables in the specified data catalog database.
@@ -1102,7 +1110,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AmazonAthena.ListTagsForResource':
+  /#X-Amz-Target=AmazonAthena.ListTagsForResource:
     post:
       operationId: ListTagsForResource
       description: Lists the tags associated with an Athena workgroup or data catalog resource.
@@ -1165,7 +1173,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AmazonAthena.ListWorkGroups':
+  /#X-Amz-Target=AmazonAthena.ListWorkGroups:
     post:
       operationId: ListWorkGroups
       description: Lists available workgroups for the account.
@@ -1222,7 +1230,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AmazonAthena.StartQueryExecution':
+  /#X-Amz-Target=AmazonAthena.StartQueryExecution:
     post:
       operationId: StartQueryExecution
       description: 'Runs the SQL query statements contained in the <code>Query</code>. Requires you to have access to the workgroup in which the query ran. Running queries against an external catalog requires <a>GetDataCatalog</a> permission to the catalog. For code samples using the AWS SDK for Java, see <a href="http://docs.aws.amazon.com/athena/latest/ug/code-samples.html">Examples and Code Samples</a> in the <i>Amazon Athena User Guide</i>.'
@@ -1273,7 +1281,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AmazonAthena.StopQueryExecution':
+  /#X-Amz-Target=AmazonAthena.StopQueryExecution:
     post:
       operationId: StopQueryExecution
       description: '<p>Stops a query execution. Requires you to have access to the workgroup in which the query ran.</p> <p>For code samples using the AWS SDK for Java, see <a href="http://docs.aws.amazon.com/athena/latest/ug/code-samples.html">Examples and Code Samples</a> in the <i>Amazon Athena User Guide</i>.</p>'
@@ -1318,7 +1326,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AmazonAthena.TagResource':
+  /#X-Amz-Target=AmazonAthena.TagResource:
     post:
       operationId: TagResource
       description: 'Adds one or more tags to an Athena resource. A tag is a label that you assign to a resource. In Athena, a resource can be a workgroup or data catalog. Each tag consists of a key and an optional value, both of which you define. For example, you can use tags to categorize Athena workgroups or data catalogs by purpose, owner, or environment. Use a consistent set of tag keys to make it easier to search and filter workgroups or data catalogs in your account. For best practices, see <a href="https://aws.amazon.com/answers/account-management/aws-tagging-strategies/">Tagging Best Practices</a>. Tag keys can be from 1 to 128 UTF-8 Unicode characters, and tag values can be from 0 to 256 UTF-8 Unicode characters. Tags can use letters and numbers representable in UTF-8, and the following characters: + - = . _ : / @. Tag keys and values are case-sensitive. Tag keys must be unique per resource. If you specify more than one tag, separate them by commas.'
@@ -1369,7 +1377,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AmazonAthena.UntagResource':
+  /#X-Amz-Target=AmazonAthena.UntagResource:
     post:
       operationId: UntagResource
       description: Removes one or more tags from a data catalog or workgroup resource.
@@ -1420,7 +1428,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AmazonAthena.UpdateDataCatalog':
+  /#X-Amz-Target=AmazonAthena.UpdateDataCatalog:
     post:
       operationId: UpdateDataCatalog
       description: Updates the data catalog that has the specified name.
@@ -1465,7 +1473,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AmazonAthena.UpdateWorkGroup':
+  /#X-Amz-Target=AmazonAthena.UpdateWorkGroup:
     post:
       operationId: UpdateWorkGroup
       description: Updates the workgroup with the specified name. The workgroup's name cannot be changed.

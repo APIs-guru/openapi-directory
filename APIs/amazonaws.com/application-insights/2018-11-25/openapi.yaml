@@ -51,13 +51,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The Application Insights multi-region endpoint
   - url: 'https://applicationinsights.{region}.amazonaws.com'
@@ -77,13 +81,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The Application Insights multi-region endpoint
   - url: 'http://applicationinsights.{region}.amazonaws.com.cn'
@@ -106,7 +114,7 @@ servers:
     description: The Application Insights endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
-  '/#X-Amz-Target=EC2WindowsBarleyService.CreateApplication':
+  /#X-Amz-Target=EC2WindowsBarleyService.CreateApplication:
     post:
       operationId: CreateApplication
       description: Adds an application that is created from a resource group.
@@ -169,7 +177,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=EC2WindowsBarleyService.CreateComponent':
+  /#X-Amz-Target=EC2WindowsBarleyService.CreateComponent:
     post:
       operationId: CreateComponent
       description: Creates a custom component by grouping similar standalone instances to monitor.
@@ -226,7 +234,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=EC2WindowsBarleyService.CreateLogPattern':
+  /#X-Amz-Target=EC2WindowsBarleyService.CreateLogPattern:
     post:
       operationId: CreateLogPattern
       description: Adds an log pattern to a <code>LogPatternSet</code>.
@@ -283,7 +291,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=EC2WindowsBarleyService.DeleteApplication':
+  /#X-Amz-Target=EC2WindowsBarleyService.DeleteApplication:
     post:
       operationId: DeleteApplication
       description: Removes the specified application from monitoring. Does not delete the application.
@@ -340,7 +348,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=EC2WindowsBarleyService.DeleteComponent':
+  /#X-Amz-Target=EC2WindowsBarleyService.DeleteComponent:
     post:
       operationId: DeleteComponent
       description: 'Ungroups a custom component. When you ungroup custom components, all applicable monitors that are set up for the component are removed and the instances revert to their standalone status.'
@@ -391,7 +399,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=EC2WindowsBarleyService.DeleteLogPattern':
+  /#X-Amz-Target=EC2WindowsBarleyService.DeleteLogPattern:
     post:
       operationId: DeleteLogPattern
       description: Removes the specified log pattern from a <code>LogPatternSet</code>.
@@ -448,7 +456,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=EC2WindowsBarleyService.DescribeApplication':
+  /#X-Amz-Target=EC2WindowsBarleyService.DescribeApplication:
     post:
       operationId: DescribeApplication
       description: Describes the application.
@@ -499,7 +507,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=EC2WindowsBarleyService.DescribeComponent':
+  /#X-Amz-Target=EC2WindowsBarleyService.DescribeComponent:
     post:
       operationId: DescribeComponent
       description: Describes a component and lists the resources that are grouped together in a component.
@@ -550,7 +558,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=EC2WindowsBarleyService.DescribeComponentConfiguration':
+  /#X-Amz-Target=EC2WindowsBarleyService.DescribeComponentConfiguration:
     post:
       operationId: DescribeComponentConfiguration
       description: Describes the monitoring configuration of the component.
@@ -601,7 +609,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=EC2WindowsBarleyService.DescribeComponentConfigurationRecommendation':
+  /#X-Amz-Target=EC2WindowsBarleyService.DescribeComponentConfigurationRecommendation:
     post:
       operationId: DescribeComponentConfigurationRecommendation
       description: Describes the recommended monitoring configuration of the component.
@@ -652,7 +660,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=EC2WindowsBarleyService.DescribeLogPattern':
+  /#X-Amz-Target=EC2WindowsBarleyService.DescribeLogPattern:
     post:
       operationId: DescribeLogPattern
       description: Describe a specific log pattern from a <code>LogPatternSet</code>.
@@ -703,7 +711,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=EC2WindowsBarleyService.DescribeObservation':
+  /#X-Amz-Target=EC2WindowsBarleyService.DescribeObservation:
     post:
       operationId: DescribeObservation
       description: Describes an anomaly or error with the application.
@@ -754,7 +762,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=EC2WindowsBarleyService.DescribeProblem':
+  /#X-Amz-Target=EC2WindowsBarleyService.DescribeProblem:
     post:
       operationId: DescribeProblem
       description: Describes an application problem.
@@ -805,7 +813,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=EC2WindowsBarleyService.DescribeProblemObservations':
+  /#X-Amz-Target=EC2WindowsBarleyService.DescribeProblemObservations:
     post:
       operationId: DescribeProblemObservations
       description: Describes the anomalies or errors associated with the problem.
@@ -856,7 +864,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=EC2WindowsBarleyService.ListApplications':
+  /#X-Amz-Target=EC2WindowsBarleyService.ListApplications:
     post:
       operationId: ListApplications
       description: 'Lists the IDs of the applications that you are monitoring. '
@@ -913,7 +921,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=EC2WindowsBarleyService.ListComponents':
+  /#X-Amz-Target=EC2WindowsBarleyService.ListComponents:
     post:
       operationId: ListComponents
       description: 'Lists the auto-grouped, standalone, and custom components of the application.'
@@ -976,7 +984,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=EC2WindowsBarleyService.ListConfigurationHistory':
+  /#X-Amz-Target=EC2WindowsBarleyService.ListConfigurationHistory:
     post:
       operationId: ListConfigurationHistory
       description: '<p> Lists the INFO, WARN, and ERROR events for periodic configuration updates performed by Application Insights. Examples of events represented are: </p> <ul> <li> <p>INFO: creating a new alarm or updating an alarm threshold.</p> </li> <li> <p>WARN: alarm not created due to insufficient data points used to predict thresholds.</p> </li> <li> <p>ERROR: alarm not created due to permission errors or exceeding quotas. </p> </li> </ul>'
@@ -1039,7 +1047,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=EC2WindowsBarleyService.ListLogPatternSets':
+  /#X-Amz-Target=EC2WindowsBarleyService.ListLogPatternSets:
     post:
       operationId: ListLogPatternSets
       description: Lists the log pattern sets in the specific application.
@@ -1102,7 +1110,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=EC2WindowsBarleyService.ListLogPatterns':
+  /#X-Amz-Target=EC2WindowsBarleyService.ListLogPatterns:
     post:
       operationId: ListLogPatterns
       description: Lists the log patterns in the specific log <code>LogPatternSet</code>.
@@ -1165,7 +1173,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=EC2WindowsBarleyService.ListProblems':
+  /#X-Amz-Target=EC2WindowsBarleyService.ListProblems:
     post:
       operationId: ListProblems
       description: Lists the problems with your application.
@@ -1228,7 +1236,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=EC2WindowsBarleyService.ListTagsForResource':
+  /#X-Amz-Target=EC2WindowsBarleyService.ListTagsForResource:
     post:
       operationId: ListTagsForResource
       description: Retrieve a list of the tags (keys and values) that are associated with a specified application. A <i>tag</i> is a label that you optionally define and associate with an application. Each tag consists of a required <i>tag key</i> and an optional associated <i>tag value</i>. A tag key is a general label that acts as a category for more specific tag values. A tag value acts as a descriptor within a tag key.
@@ -1273,7 +1281,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=EC2WindowsBarleyService.TagResource':
+  /#X-Amz-Target=EC2WindowsBarleyService.TagResource:
     post:
       operationId: TagResource
       description: '<p>Add one or more tags (keys and values) to a specified application. A <i>tag</i> is a label that you optionally define and associate with an application. Tags can help you categorize and manage application in different ways, such as by purpose, owner, environment, or other criteria. </p> <p>Each tag consists of a required <i>tag key</i> and an associated <i>tag value</i>, both of which you define. A tag key is a general label that acts as a category for more specific tag values. A tag value acts as a descriptor within a tag key.</p>'
@@ -1324,7 +1332,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=EC2WindowsBarleyService.UntagResource':
+  /#X-Amz-Target=EC2WindowsBarleyService.UntagResource:
     post:
       operationId: UntagResource
       description: Remove one or more tags (keys and values) from a specified application.
@@ -1369,7 +1377,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=EC2WindowsBarleyService.UpdateApplication':
+  /#X-Amz-Target=EC2WindowsBarleyService.UpdateApplication:
     post:
       operationId: UpdateApplication
       description: Updates the application.
@@ -1420,7 +1428,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=EC2WindowsBarleyService.UpdateComponent':
+  /#X-Amz-Target=EC2WindowsBarleyService.UpdateComponent:
     post:
       operationId: UpdateComponent
       description: Updates the custom component name and/or the list of resources that make up the component.
@@ -1477,7 +1485,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=EC2WindowsBarleyService.UpdateComponentConfiguration':
+  /#X-Amz-Target=EC2WindowsBarleyService.UpdateComponentConfiguration:
     post:
       operationId: UpdateComponentConfiguration
       description: 'Updates the monitoring configurations for the component. The configuration input parameter is an escaped JSON of the configuration and should match the schema of what is returned by <code>DescribeComponentConfigurationRecommendation</code>. '
@@ -1528,7 +1536,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=EC2WindowsBarleyService.UpdateLogPattern':
+  /#X-Amz-Target=EC2WindowsBarleyService.UpdateLogPattern:
     post:
       operationId: UpdateLogPattern
       description: Adds a log pattern to a <code>LogPatternSet</code>.

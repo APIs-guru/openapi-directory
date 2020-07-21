@@ -51,13 +51,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The kendra multi-region endpoint
   - url: 'https://kendra.{region}.amazonaws.com'
@@ -77,13 +81,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The kendra multi-region endpoint
   - url: 'http://kendra.{region}.amazonaws.com.cn'
@@ -106,7 +114,7 @@ servers:
     description: The kendra endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
-  '/#X-Amz-Target=AWSKendraFrontendService.BatchDeleteDocument':
+  /#X-Amz-Target=AWSKendraFrontendService.BatchDeleteDocument:
     post:
       operationId: BatchDeleteDocument
       description: <p>Removes one or more documents from an index. The documents must have been added with the <a>BatchPutDocument</a> operation.</p> <p>The documents are deleted asynchronously. You can see the progress of the deletion by using AWS CloudWatch. Any error messages releated to the processing of the batch are sent to you CloudWatch log.</p>
@@ -175,7 +183,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSKendraFrontendService.BatchPutDocument':
+  /#X-Amz-Target=AWSKendraFrontendService.BatchPutDocument:
     post:
       operationId: BatchPutDocument
       description: '<p>Adds one or more documents to an index.</p> <p>The <code>BatchPutDocument</code> operation enables you to ingest inline documents or a set of documents stored in an Amazon S3 bucket. Use this operation to ingest your text and unstructured text into an index, add custom attributes to the documents, and to attach an access control list to the documents added to the index.</p> <p>The documents are indexed asynchronously. You can see the progress of the batch using AWS CloudWatch. Any error messages related to processing the batch are sent to your AWS CloudWatch log.</p>'
@@ -250,7 +258,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSKendraFrontendService.CreateDataSource':
+  /#X-Amz-Target=AWSKendraFrontendService.CreateDataSource:
     post:
       operationId: CreateDataSource
       description: '<p>Creates a data source that you use to with an Amazon Kendra index. </p> <p>You specify a name, connector type and description for your data source. You can choose between an S3 connector, a SharePoint Online connector, and a database connector.</p> <p>You also specify configuration information such as document metadata (author, source URI, and so on) and user context information.</p> <p> <code>CreateDataSource</code> is a synchronous operation. The operation returns 200 if the data source was successfully created. Otherwise, an exception is raised.</p>'
@@ -331,7 +339,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSKendraFrontendService.CreateFaq':
+  /#X-Amz-Target=AWSKendraFrontendService.CreateFaq:
     post:
       operationId: CreateFaq
       description: Creates an new set of frequently asked question (FAQ) questions and answers.
@@ -406,7 +414,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSKendraFrontendService.CreateIndex':
+  /#X-Amz-Target=AWSKendraFrontendService.CreateIndex:
     post:
       operationId: CreateIndex
       description: '<p>Creates a new Amazon Kendra index. Index creation is an asynchronous operation. To determine if index creation has completed, check the <code>Status</code> field returned from a call to . The <code>Status</code> field is set to <code>ACTIVE</code> when the index is ready to use.</p> <p>Once the index is active you can index your documents using the operation or using one of the supported data sources. </p>'
@@ -481,7 +489,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSKendraFrontendService.DeleteDataSource':
+  /#X-Amz-Target=AWSKendraFrontendService.DeleteDataSource:
     post:
       operationId: DeleteDataSource
       description: 'Deletes an Amazon Kendra data source. An exception is not thrown if the data source is already being deleted. While the data source is being deleted, the <code>Status</code> field returned by a call to the operation is set to <code>DELETING</code>. For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/delete-data-source.html">Deleting Data Sources</a>.'
@@ -546,7 +554,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSKendraFrontendService.DeleteFaq':
+  /#X-Amz-Target=AWSKendraFrontendService.DeleteFaq:
     post:
       operationId: DeleteFaq
       description: Removes an FAQ from an index.
@@ -611,7 +619,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSKendraFrontendService.DeleteIndex':
+  /#X-Amz-Target=AWSKendraFrontendService.DeleteIndex:
     post:
       operationId: DeleteIndex
       description: 'Deletes an existing Amazon Kendra index. An exception is not thrown if the index is already being deleted. While the index is being deleted, the <code>Status</code> field returned by a call to the <a>DescribeIndex</a> operation is set to <code>DELETING</code>.'
@@ -676,7 +684,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSKendraFrontendService.DescribeDataSource':
+  /#X-Amz-Target=AWSKendraFrontendService.DescribeDataSource:
     post:
       operationId: DescribeDataSource
       description: Gets information about a Amazon Kendra data source.
@@ -739,7 +747,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSKendraFrontendService.DescribeFaq':
+  /#X-Amz-Target=AWSKendraFrontendService.DescribeFaq:
     post:
       operationId: DescribeFaq
       description: Gets information about an FAQ list.
@@ -802,7 +810,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSKendraFrontendService.DescribeIndex':
+  /#X-Amz-Target=AWSKendraFrontendService.DescribeIndex:
     post:
       operationId: DescribeIndex
       description: Describes an existing Amazon Kendra index
@@ -865,7 +873,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSKendraFrontendService.ListDataSourceSyncJobs':
+  /#X-Amz-Target=AWSKendraFrontendService.ListDataSourceSyncJobs:
     post:
       operationId: ListDataSourceSyncJobs
       description: Gets statistics about synchronizing Amazon Kendra with a data source.
@@ -946,7 +954,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSKendraFrontendService.ListDataSources':
+  /#X-Amz-Target=AWSKendraFrontendService.ListDataSources:
     post:
       operationId: ListDataSources
       description: Lists the data sources that you have created.
@@ -1021,7 +1029,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSKendraFrontendService.ListFaqs':
+  /#X-Amz-Target=AWSKendraFrontendService.ListFaqs:
     post:
       operationId: ListFaqs
       description: Gets a list of FAQ lists associated with an index.
@@ -1084,7 +1092,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSKendraFrontendService.ListIndices':
+  /#X-Amz-Target=AWSKendraFrontendService.ListIndices:
     post:
       operationId: ListIndices
       description: Lists the Amazon Kendra indexes that you have created.
@@ -1153,7 +1161,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSKendraFrontendService.ListTagsForResource':
+  /#X-Amz-Target=AWSKendraFrontendService.ListTagsForResource:
     post:
       operationId: ListTagsForResource
       description: 'Gets a list of tags associated with a specified resource. Indexes, FAQs, and data sources can have tags associated with them.'
@@ -1216,7 +1224,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSKendraFrontendService.Query':
+  /#X-Amz-Target=AWSKendraFrontendService.Query:
     post:
       operationId: Query
       description: <p>Searches an active index. Use this API to search your documents using query. The <code>Query</code> operation enables to do faceted search and to filter results based on document attributes.</p> <p>It also enables you to provide user context that Amazon Kendra uses to enforce document access control in the search results. </p> <p>Amazon Kendra searches your index for text content and question and answer (FAQ) content. By default the response contains three types of results.</p> <ul> <li> <p>Relevant passages</p> </li> <li> <p>Matching FAQs</p> </li> <li> <p>Relevant documents</p> </li> </ul> <p>You can specify that the query return only one type of result using the <code>QueryResultTypeConfig</code> parameter.</p>
@@ -1291,7 +1299,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSKendraFrontendService.StartDataSourceSyncJob':
+  /#X-Amz-Target=AWSKendraFrontendService.StartDataSourceSyncJob:
     post:
       operationId: StartDataSourceSyncJob
       description: 'Starts a synchronization job for a data source. If a synchronization job is already in progress, Amazon Kendra returns a <code>ResourceInUseException</code> exception.'
@@ -1366,7 +1374,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSKendraFrontendService.StopDataSourceSyncJob':
+  /#X-Amz-Target=AWSKendraFrontendService.StopDataSourceSyncJob:
     post:
       operationId: StopDataSourceSyncJob
       description: Stops a running synchronization job. You can't stop a scheduled synchronization job.
@@ -1425,7 +1433,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSKendraFrontendService.SubmitFeedback':
+  /#X-Amz-Target=AWSKendraFrontendService.SubmitFeedback:
     post:
       operationId: SubmitFeedback
       description: 'Enables you to provide feedback to Amazon Kendra to improve the performance of the service. '
@@ -1490,7 +1498,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSKendraFrontendService.TagResource':
+  /#X-Amz-Target=AWSKendraFrontendService.TagResource:
     post:
       operationId: TagResource
       description: 'Adds the specified tag to the specified index, FAQ, or data source resource. If the tag already exists, the existing value is replaced with the new value.'
@@ -1553,7 +1561,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSKendraFrontendService.UntagResource':
+  /#X-Amz-Target=AWSKendraFrontendService.UntagResource:
     post:
       operationId: UntagResource
       description: 'Removes a tag from an index, FAQ, or a data source.'
@@ -1616,7 +1624,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSKendraFrontendService.UpdateDataSource':
+  /#X-Amz-Target=AWSKendraFrontendService.UpdateDataSource:
     post:
       operationId: UpdateDataSource
       description: Updates an existing Amazon Kendra data source.
@@ -1681,7 +1689,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSKendraFrontendService.UpdateIndex':
+  /#X-Amz-Target=AWSKendraFrontendService.UpdateIndex:
     post:
       operationId: UpdateIndex
       description: Updates an existing Amazon Kendra index.

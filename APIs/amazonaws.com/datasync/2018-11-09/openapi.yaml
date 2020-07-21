@@ -51,13 +51,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The DataSync multi-region endpoint
   - url: 'https://datasync.{region}.amazonaws.com'
@@ -77,13 +81,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The DataSync multi-region endpoint
   - url: 'http://datasync.{region}.amazonaws.com.cn'
@@ -106,7 +114,7 @@ servers:
     description: The DataSync endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
-  '/#X-Amz-Target=FmrsService.CancelTaskExecution':
+  /#X-Amz-Target=FmrsService.CancelTaskExecution:
     post:
       operationId: CancelTaskExecution
       description: '<p>Cancels execution of a task. </p> <p>When you cancel a task execution, the transfer of some files are abruptly interrupted. The contents of files that are transferred to the destination might be incomplete or inconsistent with the source files. However, if you start a new task execution on the same task and you allow the task execution to complete, file content on the destination is complete and consistent. This applies to other unexpected failures that interrupt a task execution. In all of these cases, AWS DataSync successfully complete the transfer when you start the next task execution.</p>'
@@ -151,7 +159,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=FmrsService.CreateAgent':
+  /#X-Amz-Target=FmrsService.CreateAgent:
     post:
       operationId: CreateAgent
       description: '<p>Activates an AWS DataSync agent that you have deployed on your host. The activation process associates your agent with your account. In the activation process, you specify information such as the AWS Region that you want to activate the agent in. You activate the agent in the AWS Region where your target locations (in Amazon S3 or Amazon EFS) reside. Your tasks are created in this AWS Region.</p> <p>You can activate the agent in a VPC (Virtual private Cloud) or provide the agent access to a VPC endpoint so you can run tasks without going over the public Internet.</p> <p>You can use an agent for more than one location. If a task uses multiple agents, all of them need to have status AVAILABLE for the task to run. If you use multiple agents for a source location, the status of all the agents must be AVAILABLE for the task to run. </p> <p>Agents are automatically updated by AWS on a regular basis, using a mechanism that ensures minimal interruption to your tasks.</p> <p/>'
@@ -196,7 +204,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=FmrsService.CreateLocationEfs':
+  /#X-Amz-Target=FmrsService.CreateLocationEfs:
     post:
       operationId: CreateLocationEfs
       description: Creates an endpoint for an Amazon EFS file system.
@@ -241,7 +249,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=FmrsService.CreateLocationFsxWindows':
+  /#X-Amz-Target=FmrsService.CreateLocationFsxWindows:
     post:
       operationId: CreateLocationFsxWindows
       description: Creates an endpoint for an Amazon FSx for Windows file system.
@@ -286,7 +294,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=FmrsService.CreateLocationNfs':
+  /#X-Amz-Target=FmrsService.CreateLocationNfs:
     post:
       operationId: CreateLocationNfs
       description: Defines a file system on a Network File System (NFS) server that can be read from or written to
@@ -331,7 +339,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=FmrsService.CreateLocationS3':
+  /#X-Amz-Target=FmrsService.CreateLocationS3:
     post:
       operationId: CreateLocationS3
       description: '<p>Creates an endpoint for an Amazon S3 bucket.</p> <p>For AWS DataSync to access a destination S3 bucket, it needs an AWS Identity and Access Management (IAM) role that has the required permissions. You can set up the required permissions by creating an IAM policy that grants the required permissions and attaching the policy to the role. An example of such a policy is shown in the examples section.</p> <p>For more information, see https://docs.aws.amazon.com/datasync/latest/userguide/working-with-locations.html#create-s3-location in the <i>AWS DataSync User Guide.</i> </p>'
@@ -376,7 +384,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=FmrsService.CreateLocationSmb':
+  /#X-Amz-Target=FmrsService.CreateLocationSmb:
     post:
       operationId: CreateLocationSmb
       description: Defines a file system on an Server Message Block (SMB) server that can be read from or written to.
@@ -421,7 +429,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=FmrsService.CreateTask':
+  /#X-Amz-Target=FmrsService.CreateTask:
     post:
       operationId: CreateTask
       description: '<p>Creates a task. A task is a set of two locations (source and destination) and a set of Options that you use to control the behavior of a task. If you don''t specify Options when you create a task, AWS DataSync populates them with service defaults.</p> <p>When you create a task, it first enters the CREATING state. During CREATING AWS DataSync attempts to mount the on-premises Network File System (NFS) location. The task transitions to the AVAILABLE state without waiting for the AWS location to become mounted. If required, AWS DataSync mounts the AWS location before each task execution.</p> <p>If an agent that is associated with a source (NFS) location goes offline, the task transitions to the UNAVAILABLE status. If the status of the task remains in the CREATING status for more than a few minutes, it means that your agent might be having trouble mounting the source NFS file system. Check the task''s ErrorCode and ErrorDetail. Mount issues are often caused by either a misconfigured firewall or a mistyped NFS server host name.</p>'
@@ -466,7 +474,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=FmrsService.DeleteAgent':
+  /#X-Amz-Target=FmrsService.DeleteAgent:
     post:
       operationId: DeleteAgent
       description: 'Deletes an agent. To specify which agent to delete, use the Amazon Resource Name (ARN) of the agent in your request. The operation disassociates the agent from your AWS account. However, it doesn''t delete the agent virtual machine (VM) from your on-premises environment.'
@@ -511,7 +519,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=FmrsService.DeleteLocation':
+  /#X-Amz-Target=FmrsService.DeleteLocation:
     post:
       operationId: DeleteLocation
       description: 'Deletes the configuration of a location used by AWS DataSync. '
@@ -556,7 +564,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=FmrsService.DeleteTask':
+  /#X-Amz-Target=FmrsService.DeleteTask:
     post:
       operationId: DeleteTask
       description: Deletes a task.
@@ -601,7 +609,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=FmrsService.DescribeAgent':
+  /#X-Amz-Target=FmrsService.DescribeAgent:
     post:
       operationId: DescribeAgent
       description: 'Returns metadata such as the name, the network interfaces, and the status (that is, whether the agent is running or not) for an agent. To specify which agent to describe, use the Amazon Resource Name (ARN) of the agent in your request. '
@@ -646,7 +654,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=FmrsService.DescribeLocationEfs':
+  /#X-Amz-Target=FmrsService.DescribeLocationEfs:
     post:
       operationId: DescribeLocationEfs
       description: 'Returns metadata, such as the path information about an Amazon EFS location.'
@@ -691,7 +699,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=FmrsService.DescribeLocationFsxWindows':
+  /#X-Amz-Target=FmrsService.DescribeLocationFsxWindows:
     post:
       operationId: DescribeLocationFsxWindows
       description: 'Returns metadata, such as the path information about an Amazon FSx for Windows location.'
@@ -736,7 +744,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=FmrsService.DescribeLocationNfs':
+  /#X-Amz-Target=FmrsService.DescribeLocationNfs:
     post:
       operationId: DescribeLocationNfs
       description: 'Returns metadata, such as the path information, about a NFS location.'
@@ -781,7 +789,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=FmrsService.DescribeLocationS3':
+  /#X-Amz-Target=FmrsService.DescribeLocationS3:
     post:
       operationId: DescribeLocationS3
       description: 'Returns metadata, such as bucket name, about an Amazon S3 bucket location.'
@@ -826,7 +834,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=FmrsService.DescribeLocationSmb':
+  /#X-Amz-Target=FmrsService.DescribeLocationSmb:
     post:
       operationId: DescribeLocationSmb
       description: 'Returns metadata, such as the path and user information about a SMB location.'
@@ -871,7 +879,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=FmrsService.DescribeTask':
+  /#X-Amz-Target=FmrsService.DescribeTask:
     post:
       operationId: DescribeTask
       description: Returns metadata about a task.
@@ -916,7 +924,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=FmrsService.DescribeTaskExecution':
+  /#X-Amz-Target=FmrsService.DescribeTaskExecution:
     post:
       operationId: DescribeTaskExecution
       description: Returns detailed metadata about a task that is being executed.
@@ -961,7 +969,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=FmrsService.ListAgents':
+  /#X-Amz-Target=FmrsService.ListAgents:
     post:
       operationId: ListAgents
       description: '<p>Returns a list of agents owned by an AWS account in the AWS Region specified in the request. The returned list is ordered by agent Amazon Resource Name (ARN).</p> <p>By default, this operation returns a maximum of 100 agents. This operation supports pagination that enables you to optionally reduce the number of agents returned in a response.</p> <p>If you have more agents than are returned in a response (that is, the response returns only a truncated list of your agents), the response contains a marker that you can specify in your next request to fetch the next page of agents.</p>'
@@ -1018,7 +1026,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=FmrsService.ListLocations':
+  /#X-Amz-Target=FmrsService.ListLocations:
     post:
       operationId: ListLocations
       description: '<p>Returns a lists of source and destination locations.</p> <p>If you have more locations than are returned in a response (that is, the response returns only a truncated list of your agents), the response contains a token that you can specify in your next request to fetch the next page of locations.</p>'
@@ -1075,7 +1083,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=FmrsService.ListTagsForResource':
+  /#X-Amz-Target=FmrsService.ListTagsForResource:
     post:
       operationId: ListTagsForResource
       description: 'Returns all the tags associated with a specified resources. '
@@ -1132,7 +1140,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=FmrsService.ListTaskExecutions':
+  /#X-Amz-Target=FmrsService.ListTaskExecutions:
     post:
       operationId: ListTaskExecutions
       description: Returns a list of executed tasks.
@@ -1189,7 +1197,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=FmrsService.ListTasks':
+  /#X-Amz-Target=FmrsService.ListTasks:
     post:
       operationId: ListTasks
       description: Returns a list of all the tasks.
@@ -1246,7 +1254,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=FmrsService.StartTaskExecution':
+  /#X-Amz-Target=FmrsService.StartTaskExecution:
     post:
       operationId: StartTaskExecution
       description: '<p>Starts a specific invocation of a task. A <code>TaskExecution</code> value represents an individual run of a task. Each task can have at most one <code>TaskExecution</code> at a time.</p> <p> <code>TaskExecution</code> has the following transition phases: INITIALIZING | PREPARING | TRANSFERRING | VERIFYING | SUCCESS/FAILURE. </p> <p>For detailed information, see the Task Execution section in the Components and Terminology topic in the <i>AWS DataSync User Guide</i>.</p>'
@@ -1291,7 +1299,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=FmrsService.TagResource':
+  /#X-Amz-Target=FmrsService.TagResource:
     post:
       operationId: TagResource
       description: Applies a key-value pair to an AWS resource.
@@ -1336,7 +1344,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=FmrsService.UntagResource':
+  /#X-Amz-Target=FmrsService.UntagResource:
     post:
       operationId: UntagResource
       description: Removes a tag from an AWS resource.
@@ -1381,7 +1389,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=FmrsService.UpdateAgent':
+  /#X-Amz-Target=FmrsService.UpdateAgent:
     post:
       operationId: UpdateAgent
       description: Updates the name of an agent.
@@ -1426,7 +1434,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=FmrsService.UpdateTask':
+  /#X-Amz-Target=FmrsService.UpdateTask:
     post:
       operationId: UpdateTask
       description: Updates the metadata associated with a task.

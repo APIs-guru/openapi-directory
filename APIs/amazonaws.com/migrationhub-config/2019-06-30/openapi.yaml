@@ -51,13 +51,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The AWS Migration Hub Config multi-region endpoint
   - url: 'https://migrationhub-config.{region}.amazonaws.com'
@@ -77,13 +81,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The AWS Migration Hub Config multi-region endpoint
   - url: 'http://migrationhub-config.{region}.amazonaws.com.cn'
@@ -106,7 +114,7 @@ servers:
     description: The AWS Migration Hub Config endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
-  '/#X-Amz-Target=AWSMigrationHubMultiAccountService.CreateHomeRegionControl':
+  /#X-Amz-Target=AWSMigrationHubMultiAccountService.CreateHomeRegionControl:
     post:
       operationId: CreateHomeRegionControl
       description: This API sets up the home region for the calling account only.
@@ -175,7 +183,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSMigrationHubMultiAccountService.DescribeHomeRegionControls':
+  /#X-Amz-Target=AWSMigrationHubMultiAccountService.DescribeHomeRegionControls:
     post:
       operationId: DescribeHomeRegionControls
       description: This API permits filtering on the <code>ControlId</code> and <code>HomeRegion</code> fields.
@@ -250,7 +258,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSMigrationHubMultiAccountService.GetHomeRegion':
+  /#X-Amz-Target=AWSMigrationHubMultiAccountService.GetHomeRegion:
     post:
       operationId: GetHomeRegion
       description: 'Returns the calling account’s home region, if configured. This API is used by other AWS services to determine the regional endpoint for calling AWS Application Discovery Service and Migration Hub. You must call <code>GetHomeRegion</code> at least once before you call any other AWS Application Discovery Service and AWS Migration Hub APIs, to obtain the account''s Migration Hub home region.'

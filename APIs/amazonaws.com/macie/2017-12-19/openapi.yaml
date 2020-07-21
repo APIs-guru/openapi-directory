@@ -51,13 +51,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The Amazon Macie multi-region endpoint
   - url: 'https://macie.{region}.amazonaws.com'
@@ -77,13 +81,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The Amazon Macie multi-region endpoint
   - url: 'http://macie.{region}.amazonaws.com.cn'
@@ -106,7 +114,7 @@ servers:
     description: The Amazon Macie endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
-  '/#X-Amz-Target=MacieService.AssociateMemberAccount':
+  /#X-Amz-Target=MacieService.AssociateMemberAccount:
     post:
       operationId: AssociateMemberAccount
       description: Associates a specified AWS account with Amazon Macie Classic as a member account.
@@ -153,7 +161,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=MacieService.AssociateS3Resources':
+  /#X-Amz-Target=MacieService.AssociateS3Resources:
     post:
       operationId: AssociateS3Resources
       description: 'Associates specified S3 resources with Amazon Macie Classic for monitoring and data classification. If memberAccountId isn''t specified, the action associates specified S3 resources with Macie Classic for the current master account. If memberAccountId is specified, the action associates specified S3 resources with Macie Classic for the specified member account. '
@@ -210,7 +218,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=MacieService.DisassociateMemberAccount':
+  /#X-Amz-Target=MacieService.DisassociateMemberAccount:
     post:
       operationId: DisassociateMemberAccount
       description: Removes the specified member account from Amazon Macie Classic.
@@ -251,7 +259,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=MacieService.DisassociateS3Resources':
+  /#X-Amz-Target=MacieService.DisassociateS3Resources:
     post:
       operationId: DisassociateS3Resources
       description: 'Removes specified S3 resources from being monitored by Amazon Macie Classic. If memberAccountId isn''t specified, the action removes specified S3 resources from Macie Classic for the current master account. If memberAccountId is specified, the action removes specified S3 resources from Macie Classic for the specified member account.'
@@ -302,7 +310,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=MacieService.ListMemberAccounts':
+  /#X-Amz-Target=MacieService.ListMemberAccounts:
     post:
       operationId: ListMemberAccounts
       description: Lists all Amazon Macie Classic member accounts for the current Amazon Macie Classic master account.
@@ -359,7 +367,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=MacieService.ListS3Resources':
+  /#X-Amz-Target=MacieService.ListS3Resources:
     post:
       operationId: ListS3Resources
       description: 'Lists all the S3 resources associated with Amazon Macie Classic. If memberAccountId isn''t specified, the action lists the S3 resources associated with Amazon Macie Classic for the current master account. If memberAccountId is specified, the action lists the S3 resources associated with Amazon Macie Classic for the specified member account. '
@@ -422,7 +430,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=MacieService.UpdateS3Resources':
+  /#X-Amz-Target=MacieService.UpdateS3Resources:
     post:
       operationId: UpdateS3Resources
       description: 'Updates the classification types for the specified S3 resources. If memberAccountId isn''t specified, the action updates the classification types of the S3 resources associated with Amazon Macie Classic for the current master account. If memberAccountId is specified, the action updates the classification types of the S3 resources associated with Amazon Macie Classic for the specified member account. '

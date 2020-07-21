@@ -51,13 +51,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The AWS IoT multi-region endpoint
   - url: 'https://iot.{region}.amazonaws.com'
@@ -77,13 +81,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The AWS IoT multi-region endpoint
   - url: 'http://iot.{region}.amazonaws.com.cn'
@@ -8266,7 +8274,7 @@ paths:
           description: The ARN of the topic rule destination.
           schema:
             type: string
-  '/v2LoggingLevel#targetType&targetName':
+  /v2LoggingLevel#targetType&targetName:
     delete:
       operationId: DeleteV2LoggingLevel
       description: Deletes a logging level.
@@ -10056,7 +10064,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/audit/mitigationactions/executions#taskId&findingId':
+  /audit/mitigationactions/executions#taskId&findingId:
     get:
       operationId: ListAuditMitigationActionsExecutions
       description: Gets the status of audit mitigation action tasks that were executed.
@@ -10139,7 +10147,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/audit/mitigationactions/tasks#startTime&endTime':
+  /audit/mitigationactions/tasks#startTime&endTime:
     get:
       operationId: ListAuditMitigationActionsTasks
       description: Gets a list of audit mitigation action tasks that match the specified filters.
@@ -10234,7 +10242,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/audit/tasks#startTime&endTime':
+  /audit/tasks#startTime&endTime:
     get:
       operationId: ListAuditTasks
       description: Lists the Device Defender audits that have been performed during a given time period.
@@ -11351,7 +11359,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/policy-principals#x-amzn-iot-policy':
+  /policy-principals#x-amzn-iot-policy:
     get:
       deprecated: true
       operationId: ListPolicyPrincipals
@@ -11438,7 +11446,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/principal-policies#x-amzn-iot-principal':
+  /principal-policies#x-amzn-iot-principal:
     get:
       deprecated: true
       operationId: ListPrincipalPolicies
@@ -11522,7 +11530,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/principals/things#x-amzn-principal':
+  /principals/things#x-amzn-principal:
     get:
       operationId: ListPrincipalThings
       description: 'Lists the things associated with the specified principal. A principal can be X.509 certificates, IAM users, groups, and roles, Amazon Cognito identities or federated identities. '
@@ -11788,7 +11796,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/security-profiles-for-target#securityProfileTargetArn':
+  /security-profiles-for-target#securityProfileTargetArn:
     get:
       operationId: ListSecurityProfilesForTarget
       description: Lists the Device Defender security profiles attached to a target (thing group).
@@ -11928,7 +11936,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/tags#resourceArn':
+  /tags#resourceArn:
     get:
       operationId: ListTagsForResource
       description: Lists the tags (metadata) you have assigned to the resource.
@@ -13107,7 +13115,7 @@ paths:
                     - ERROR
                     - WARN
                     - DISABLED
-  '/violation-events#startTime&endTime':
+  /violation-events#startTime&endTime:
     get:
       operationId: ListViolationEvents
       description: 'Lists the Device Defender security profile violations discovered during the given time period. You can use filters to limit the results to those alerts issued for a particular security profile, behavior, or thing (device).'

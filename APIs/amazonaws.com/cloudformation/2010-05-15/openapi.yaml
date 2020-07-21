@@ -51,13 +51,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The AWS CloudFormation multi-region endpoint
   - url: 'https://cloudformation.{region}.amazonaws.com'
@@ -77,13 +81,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The AWS CloudFormation multi-region endpoint
   - url: 'http://cloudformation.{region}.amazonaws.com.cn'
@@ -106,7 +114,7 @@ servers:
     description: The AWS CloudFormation endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
-  '/#Action=CancelUpdateStack':
+  /#Action=CancelUpdateStack:
     get:
       x-aws-operation-name: CancelUpdateStack
       operationId: GET_CancelUpdateStack
@@ -191,7 +199,7 @@ paths:
             type: string
             enum:
               - '2010-05-15'
-  '/#Action=ContinueUpdateRollback':
+  /#Action=ContinueUpdateRollback:
     get:
       x-aws-operation-name: ContinueUpdateRollback
       operationId: GET_ContinueUpdateRollback
@@ -302,7 +310,7 @@ paths:
             type: string
             enum:
               - '2010-05-15'
-  '/#Action=CreateChangeSet':
+  /#Action=CreateChangeSet:
     get:
       x-aws-operation-name: CreateChangeSet
       operationId: GET_CreateChangeSet
@@ -541,7 +549,7 @@ paths:
             type: string
             enum:
               - '2010-05-15'
-  '/#Action=CreateStack':
+  /#Action=CreateStack:
     get:
       x-aws-operation-name: CreateStack
       operationId: GET_CreateStack
@@ -794,7 +802,7 @@ paths:
             type: string
             enum:
               - '2010-05-15'
-  '/#Action=CreateStackInstances':
+  /#Action=CreateStackInstances:
     get:
       x-aws-operation-name: CreateStackInstances
       operationId: GET_CreateStackInstances
@@ -1008,7 +1016,7 @@ paths:
             type: string
             enum:
               - '2010-05-15'
-  '/#Action=CreateStackSet':
+  /#Action=CreateStackSet:
     get:
       x-aws-operation-name: CreateStackSet
       operationId: GET_CreateStackSet
@@ -1213,7 +1221,7 @@ paths:
             type: string
             enum:
               - '2010-05-15'
-  '/#Action=DeleteChangeSet':
+  /#Action=DeleteChangeSet:
     get:
       x-aws-operation-name: DeleteChangeSet
       operationId: GET_DeleteChangeSet
@@ -1308,7 +1316,7 @@ paths:
             type: string
             enum:
               - '2010-05-15'
-  '/#Action=DeleteStack':
+  /#Action=DeleteStack:
     get:
       x-aws-operation-name: DeleteStack
       operationId: GET_DeleteStack
@@ -1409,7 +1417,7 @@ paths:
             type: string
             enum:
               - '2010-05-15'
-  '/#Action=DeleteStackInstances':
+  /#Action=DeleteStackInstances:
     get:
       x-aws-operation-name: DeleteStackInstances
       operationId: GET_DeleteStackInstances
@@ -1609,7 +1617,7 @@ paths:
             type: string
             enum:
               - '2010-05-15'
-  '/#Action=DeleteStackSet':
+  /#Action=DeleteStackSet:
     get:
       x-aws-operation-name: DeleteStackSet
       operationId: GET_DeleteStackSet
@@ -1705,7 +1713,7 @@ paths:
             type: string
             enum:
               - '2010-05-15'
-  '/#Action=DeregisterType':
+  /#Action=DeregisterType:
     get:
       x-aws-operation-name: DeregisterType
       operationId: GET_DeregisterType
@@ -1829,7 +1837,7 @@ paths:
             type: string
             enum:
               - '2010-05-15'
-  '/#Action=DescribeAccountLimits':
+  /#Action=DescribeAccountLimits:
     get:
       x-aws-operation-name: DescribeAccountLimits
       operationId: GET_DescribeAccountLimits
@@ -1909,7 +1917,7 @@ paths:
             type: string
             enum:
               - '2010-05-15'
-  '/#Action=DescribeChangeSet':
+  /#Action=DescribeChangeSet:
     get:
       x-aws-operation-name: DescribeChangeSet
       operationId: GET_DescribeChangeSet
@@ -2012,7 +2020,7 @@ paths:
             type: string
             enum:
               - '2010-05-15'
-  '/#Action=DescribeStackDriftDetectionStatus':
+  /#Action=DescribeStackDriftDetectionStatus:
     get:
       x-aws-operation-name: DescribeStackDriftDetectionStatus
       operationId: GET_DescribeStackDriftDetectionStatus
@@ -2086,7 +2094,7 @@ paths:
             type: string
             enum:
               - '2010-05-15'
-  '/#Action=DescribeStackEvents':
+  /#Action=DescribeStackEvents:
     get:
       x-aws-operation-name: DescribeStackEvents
       operationId: GET_DescribeStackEvents
@@ -2172,7 +2180,7 @@ paths:
             type: string
             enum:
               - '2010-05-15'
-  '/#Action=DescribeStackInstance':
+  /#Action=DescribeStackInstance:
     get:
       x-aws-operation-name: DescribeStackInstance
       operationId: GET_DescribeStackInstance
@@ -2282,7 +2290,7 @@ paths:
             type: string
             enum:
               - '2010-05-15'
-  '/#Action=DescribeStackResource':
+  /#Action=DescribeStackResource:
     get:
       x-aws-operation-name: DescribeStackResource
       operationId: GET_DescribeStackResource
@@ -2360,7 +2368,7 @@ paths:
             type: string
             enum:
               - '2010-05-15'
-  '/#Action=DescribeStackResourceDrifts':
+  /#Action=DescribeStackResourceDrifts:
     get:
       x-aws-operation-name: DescribeStackResourceDrifts
       operationId: GET_DescribeStackResourceDrifts
@@ -2472,7 +2480,7 @@ paths:
             type: string
             enum:
               - '2010-05-15'
-  '/#Action=DescribeStackResources':
+  /#Action=DescribeStackResources:
     get:
       x-aws-operation-name: DescribeStackResources
       operationId: GET_DescribeStackResources
@@ -2556,7 +2564,7 @@ paths:
             type: string
             enum:
               - '2010-05-15'
-  '/#Action=DescribeStackSet':
+  /#Action=DescribeStackSet:
     get:
       x-aws-operation-name: DescribeStackSet
       operationId: GET_DescribeStackSet
@@ -2640,7 +2648,7 @@ paths:
             type: string
             enum:
               - '2010-05-15'
-  '/#Action=DescribeStackSetOperation':
+  /#Action=DescribeStackSetOperation:
     get:
       x-aws-operation-name: DescribeStackSetOperation
       operationId: GET_DescribeStackSetOperation
@@ -2745,7 +2753,7 @@ paths:
             type: string
             enum:
               - '2010-05-15'
-  '/#Action=DescribeStacks':
+  /#Action=DescribeStacks:
     get:
       x-aws-operation-name: DescribeStacks
       operationId: GET_DescribeStacks
@@ -2831,7 +2839,7 @@ paths:
             type: string
             enum:
               - '2010-05-15'
-  '/#Action=DescribeType':
+  /#Action=DescribeType:
     get:
       x-aws-operation-name: DescribeType
       operationId: GET_DescribeType
@@ -2955,7 +2963,7 @@ paths:
             type: string
             enum:
               - '2010-05-15'
-  '/#Action=DescribeTypeRegistration':
+  /#Action=DescribeTypeRegistration:
     get:
       x-aws-operation-name: DescribeTypeRegistration
       operationId: GET_DescribeTypeRegistration
@@ -3042,7 +3050,7 @@ paths:
             type: string
             enum:
               - '2010-05-15'
-  '/#Action=DetectStackDrift':
+  /#Action=DetectStackDrift:
     get:
       x-aws-operation-name: DetectStackDrift
       operationId: GET_DetectStackDrift
@@ -3126,7 +3134,7 @@ paths:
             type: string
             enum:
               - '2010-05-15'
-  '/#Action=DetectStackResourceDrift':
+  /#Action=DetectStackResourceDrift:
     get:
       x-aws-operation-name: DetectStackResourceDrift
       operationId: GET_DetectStackResourceDrift
@@ -3206,7 +3214,7 @@ paths:
             type: string
             enum:
               - '2010-05-15'
-  '/#Action=DetectStackSetDrift':
+  /#Action=DetectStackSetDrift:
     get:
       x-aws-operation-name: DetectStackSetDrift
       operationId: GET_DetectStackSetDrift
@@ -3347,7 +3355,7 @@ paths:
             type: string
             enum:
               - '2010-05-15'
-  '/#Action=EstimateTemplateCost':
+  /#Action=EstimateTemplateCost:
     get:
       x-aws-operation-name: EstimateTemplateCost
       operationId: GET_EstimateTemplateCost
@@ -3436,7 +3444,7 @@ paths:
             type: string
             enum:
               - '2010-05-15'
-  '/#Action=ExecuteChangeSet':
+  /#Action=ExecuteChangeSet:
     get:
       x-aws-operation-name: ExecuteChangeSet
       operationId: GET_ExecuteChangeSet
@@ -3576,7 +3584,7 @@ paths:
             type: string
             enum:
               - '2010-05-15'
-  '/#Action=GetStackPolicy':
+  /#Action=GetStackPolicy:
     get:
       x-aws-operation-name: GetStackPolicy
       operationId: GET_GetStackPolicy
@@ -3648,7 +3656,7 @@ paths:
             type: string
             enum:
               - '2010-05-15'
-  '/#Action=GetTemplate':
+  /#Action=GetTemplate:
     get:
       x-aws-operation-name: GetTemplate
       operationId: GET_GetTemplate
@@ -3750,7 +3758,7 @@ paths:
             type: string
             enum:
               - '2010-05-15'
-  '/#Action=GetTemplateSummary':
+  /#Action=GetTemplateSummary:
     get:
       x-aws-operation-name: GetTemplateSummary
       operationId: GET_GetTemplateSummary
@@ -3858,7 +3866,7 @@ paths:
             type: string
             enum:
               - '2010-05-15'
-  '/#Action=ListChangeSets':
+  /#Action=ListChangeSets:
     get:
       x-aws-operation-name: ListChangeSets
       operationId: GET_ListChangeSets
@@ -3946,7 +3954,7 @@ paths:
             type: string
             enum:
               - '2010-05-15'
-  '/#Action=ListExports':
+  /#Action=ListExports:
     get:
       x-aws-operation-name: ListExports
       operationId: GET_ListExports
@@ -4026,7 +4034,7 @@ paths:
             type: string
             enum:
               - '2010-05-15'
-  '/#Action=ListImports':
+  /#Action=ListImports:
     get:
       x-aws-operation-name: ListImports
       operationId: GET_ListImports
@@ -4112,7 +4120,7 @@ paths:
             type: string
             enum:
               - '2010-05-15'
-  '/#Action=ListStackInstances':
+  /#Action=ListStackInstances:
     get:
       x-aws-operation-name: ListStackInstances
       operationId: GET_ListStackInstances
@@ -4247,7 +4255,7 @@ paths:
             type: string
             enum:
               - '2010-05-15'
-  '/#Action=ListStackResources':
+  /#Action=ListStackResources:
     get:
       x-aws-operation-name: ListStackResources
       operationId: GET_ListStackResources
@@ -4333,7 +4341,7 @@ paths:
             type: string
             enum:
               - '2010-05-15'
-  '/#Action=ListStackSetOperationResults':
+  /#Action=ListStackSetOperationResults:
     get:
       x-aws-operation-name: ListStackSetOperationResults
       operationId: GET_ListStackSetOperationResults
@@ -4466,7 +4474,7 @@ paths:
             type: string
             enum:
               - '2010-05-15'
-  '/#Action=ListStackSetOperations':
+  /#Action=ListStackSetOperations:
     get:
       x-aws-operation-name: ListStackSetOperations
       operationId: GET_ListStackSetOperations
@@ -4578,7 +4586,7 @@ paths:
             type: string
             enum:
               - '2010-05-15'
-  '/#Action=ListStackSets':
+  /#Action=ListStackSets:
     get:
       x-aws-operation-name: ListStackSets
       operationId: GET_ListStackSets
@@ -4681,7 +4689,7 @@ paths:
             type: string
             enum:
               - '2010-05-15'
-  '/#Action=ListStacks':
+  /#Action=ListStacks:
     get:
       x-aws-operation-name: ListStacks
       operationId: GET_ListStacks
@@ -4769,7 +4777,7 @@ paths:
             type: string
             enum:
               - '2010-05-15'
-  '/#Action=ListTypeRegistrations':
+  /#Action=ListTypeRegistrations:
     get:
       x-aws-operation-name: ListTypeRegistrations
       operationId: GET_ListTypeRegistrations
@@ -4910,7 +4918,7 @@ paths:
             type: string
             enum:
               - '2010-05-15'
-  '/#Action=ListTypeVersions':
+  /#Action=ListTypeVersions:
     get:
       x-aws-operation-name: ListTypeVersions
       operationId: GET_ListTypeVersions
@@ -5050,7 +5058,7 @@ paths:
             type: string
             enum:
               - '2010-05-15'
-  '/#Action=ListTypes':
+  /#Action=ListTypes:
     get:
       x-aws-operation-name: ListTypes
       operationId: GET_ListTypes
@@ -5184,7 +5192,7 @@ paths:
             type: string
             enum:
               - '2010-05-15'
-  '/#Action=RecordHandlerProgress':
+  /#Action=RecordHandlerProgress:
     get:
       x-aws-operation-name: RecordHandlerProgress
       operationId: GET_RecordHandlerProgress
@@ -5349,7 +5357,7 @@ paths:
             type: string
             enum:
               - '2010-05-15'
-  '/#Action=RegisterType':
+  /#Action=RegisterType:
     get:
       x-aws-operation-name: RegisterType
       operationId: GET_RegisterType
@@ -5487,7 +5495,7 @@ paths:
             type: string
             enum:
               - '2010-05-15'
-  '/#Action=SetStackPolicy':
+  /#Action=SetStackPolicy:
     get:
       x-aws-operation-name: SetStackPolicy
       operationId: GET_SetStackPolicy
@@ -5567,7 +5575,7 @@ paths:
             type: string
             enum:
               - '2010-05-15'
-  '/#Action=SetTypeDefaultVersion':
+  /#Action=SetTypeDefaultVersion:
     get:
       x-aws-operation-name: SetTypeDefaultVersion
       operationId: GET_SetTypeDefaultVersion
@@ -5691,7 +5699,7 @@ paths:
             type: string
             enum:
               - '2010-05-15'
-  '/#Action=SignalResource':
+  /#Action=SignalResource:
     get:
       x-aws-operation-name: SignalResource
       operationId: GET_SignalResource
@@ -5780,7 +5788,7 @@ paths:
             type: string
             enum:
               - '2010-05-15'
-  '/#Action=StopStackSetOperation':
+  /#Action=StopStackSetOperation:
     get:
       x-aws-operation-name: StopStackSetOperation
       operationId: GET_StopStackSetOperation
@@ -5897,7 +5905,7 @@ paths:
             type: string
             enum:
               - '2010-05-15'
-  '/#Action=UpdateStack':
+  /#Action=UpdateStack:
     get:
       x-aws-operation-name: UpdateStack
       operationId: GET_UpdateStack
@@ -6119,7 +6127,7 @@ paths:
             type: string
             enum:
               - '2010-05-15'
-  '/#Action=UpdateStackInstances':
+  /#Action=UpdateStackInstances:
     get:
       x-aws-operation-name: UpdateStackInstances
       operationId: GET_UpdateStackInstances
@@ -6334,7 +6342,7 @@ paths:
             type: string
             enum:
               - '2010-05-15'
-  '/#Action=UpdateStackSet':
+  /#Action=UpdateStackSet:
     get:
       x-aws-operation-name: UpdateStackSet
       operationId: GET_UpdateStackSet
@@ -6634,7 +6642,7 @@ paths:
             type: string
             enum:
               - '2010-05-15'
-  '/#Action=UpdateTerminationProtection':
+  /#Action=UpdateTerminationProtection:
     get:
       x-aws-operation-name: UpdateTerminationProtection
       operationId: GET_UpdateTerminationProtection
@@ -6714,7 +6722,7 @@ paths:
             type: string
             enum:
               - '2010-05-15'
-  '/#Action=ValidateTemplate':
+  /#Action=ValidateTemplate:
     get:
       x-aws-operation-name: ValidateTemplate
       operationId: GET_ValidateTemplate

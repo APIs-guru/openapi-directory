@@ -60,7 +60,7 @@ servers:
     description: The AWS Import/Export endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
-  '/#Operation=CancelJob&Action=CancelJob':
+  /#Operation=CancelJob&Action=CancelJob:
     get:
       x-aws-operation-name: CancelJob
       operationId: GET_CancelJob
@@ -238,7 +238,7 @@ paths:
             type: string
             enum:
               - '2010-06-01'
-  '/#Operation=CreateJob&Action=CreateJob':
+  /#Operation=CreateJob&Action=CreateJob:
     get:
       x-aws-operation-name: CreateJob
       operationId: GET_CreateJob
@@ -580,7 +580,7 @@ paths:
             type: string
             enum:
               - '2010-06-01'
-  '/#Operation=GetShippingLabel&Action=GetShippingLabel':
+  /#Operation=GetShippingLabel&Action=GetShippingLabel:
     get:
       x-aws-operation-name: GetShippingLabel
       operationId: GET_GetShippingLabel
@@ -843,7 +843,7 @@ paths:
             type: string
             enum:
               - '2010-06-01'
-  '/#Operation=GetStatus&Action=GetStatus':
+  /#Operation=GetStatus&Action=GetStatus:
     get:
       x-aws-operation-name: GetStatus
       operationId: GET_GetStatus
@@ -1007,7 +1007,7 @@ paths:
             type: string
             enum:
               - '2010-06-01'
-  '/#Operation=ListJobs&Action=ListJobs':
+  /#Operation=ListJobs&Action=ListJobs:
     get:
       x-aws-operation-name: ListJobs
       operationId: GET_ListJobs
@@ -1162,7 +1162,7 @@ paths:
             type: string
             enum:
               - '2010-06-01'
-  '/#Operation=UpdateJob&Action=UpdateJob':
+  /#Operation=UpdateJob&Action=UpdateJob:
     get:
       x-aws-operation-name: UpdateJob
       operationId: GET_UpdateJob

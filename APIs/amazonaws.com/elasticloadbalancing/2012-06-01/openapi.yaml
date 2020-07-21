@@ -51,13 +51,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The Elastic Load Balancing multi-region endpoint
   - url: 'https://elasticloadbalancing.{region}.amazonaws.com'
@@ -77,13 +81,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The Elastic Load Balancing multi-region endpoint
   - url: 'http://elasticloadbalancing.amazonaws.com'
@@ -112,7 +120,7 @@ servers:
     description: The Elastic Load Balancing endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
-  '/#Action=AddTags':
+  /#Action=AddTags:
     get:
       x-aws-operation-name: AddTags
       operationId: GET_AddTags
@@ -231,7 +239,7 @@ paths:
             type: string
             enum:
               - '2012-06-01'
-  '/#Action=ApplySecurityGroupsToLoadBalancer':
+  /#Action=ApplySecurityGroupsToLoadBalancer:
     get:
       x-aws-operation-name: ApplySecurityGroupsToLoadBalancer
       operationId: GET_ApplySecurityGroupsToLoadBalancer
@@ -347,7 +355,7 @@ paths:
             type: string
             enum:
               - '2012-06-01'
-  '/#Action=AttachLoadBalancerToSubnets':
+  /#Action=AttachLoadBalancerToSubnets:
     get:
       x-aws-operation-name: AttachLoadBalancerToSubnets
       operationId: GET_AttachLoadBalancerToSubnets
@@ -475,7 +483,7 @@ paths:
             type: string
             enum:
               - '2012-06-01'
-  '/#Action=ConfigureHealthCheck':
+  /#Action=ConfigureHealthCheck:
     get:
       x-aws-operation-name: ConfigureHealthCheck
       operationId: GET_ConfigureHealthCheck
@@ -588,7 +596,7 @@ paths:
             type: string
             enum:
               - '2012-06-01'
-  '/#Action=CreateAppCookieStickinessPolicy':
+  /#Action=CreateAppCookieStickinessPolicy:
     get:
       x-aws-operation-name: CreateAppCookieStickinessPolicy
       operationId: GET_CreateAppCookieStickinessPolicy
@@ -720,7 +728,7 @@ paths:
             type: string
             enum:
               - '2012-06-01'
-  '/#Action=CreateLBCookieStickinessPolicy':
+  /#Action=CreateLBCookieStickinessPolicy:
     get:
       x-aws-operation-name: CreateLBCookieStickinessPolicy
       operationId: GET_CreateLBCookieStickinessPolicy
@@ -852,7 +860,7 @@ paths:
             type: string
             enum:
               - '2012-06-01'
-  '/#Action=CreateLoadBalancer':
+  /#Action=CreateLoadBalancer:
     get:
       x-aws-operation-name: CreateLoadBalancer
       operationId: GET_CreateLoadBalancer
@@ -1115,7 +1123,7 @@ paths:
             type: string
             enum:
               - '2012-06-01'
-  '/#Action=CreateLoadBalancerListeners':
+  /#Action=CreateLoadBalancerListeners:
     get:
       x-aws-operation-name: CreateLoadBalancerListeners
       operationId: GET_CreateLoadBalancerListeners
@@ -1255,7 +1263,7 @@ paths:
             type: string
             enum:
               - '2012-06-01'
-  '/#Action=CreateLoadBalancerPolicy':
+  /#Action=CreateLoadBalancerPolicy:
     get:
       x-aws-operation-name: CreateLoadBalancerPolicy
       operationId: GET_CreateLoadBalancerPolicy
@@ -1407,7 +1415,7 @@ paths:
             type: string
             enum:
               - '2012-06-01'
-  '/#Action=DeleteLoadBalancer':
+  /#Action=DeleteLoadBalancer:
     get:
       x-aws-operation-name: DeleteLoadBalancer
       operationId: GET_DeleteLoadBalancer
@@ -1479,7 +1487,7 @@ paths:
             type: string
             enum:
               - '2012-06-01'
-  '/#Action=DeleteLoadBalancerListeners':
+  /#Action=DeleteLoadBalancerListeners:
     get:
       x-aws-operation-name: DeleteLoadBalancerListeners
       operationId: GET_DeleteLoadBalancerListeners
@@ -1571,7 +1579,7 @@ paths:
             type: string
             enum:
               - '2012-06-01'
-  '/#Action=DeleteLoadBalancerPolicy':
+  /#Action=DeleteLoadBalancerPolicy:
     get:
       x-aws-operation-name: DeleteLoadBalancerPolicy
       operationId: GET_DeleteLoadBalancerPolicy
@@ -1673,7 +1681,7 @@ paths:
             type: string
             enum:
               - '2012-06-01'
-  '/#Action=DeregisterInstancesFromLoadBalancer':
+  /#Action=DeregisterInstancesFromLoadBalancer:
     get:
       x-aws-operation-name: DeregisterInstancesFromLoadBalancer
       operationId: GET_DeregisterInstancesFromLoadBalancer
@@ -1777,7 +1785,7 @@ paths:
             type: string
             enum:
               - '2012-06-01'
-  '/#Action=DescribeAccountLimits':
+  /#Action=DescribeAccountLimits:
     get:
       x-aws-operation-name: DescribeAccountLimits
       operationId: GET_DescribeAccountLimits
@@ -1857,7 +1865,7 @@ paths:
             type: string
             enum:
               - '2012-06-01'
-  '/#Action=DescribeInstanceHealth':
+  /#Action=DescribeInstanceHealth:
     get:
       x-aws-operation-name: DescribeInstanceHealth
       operationId: GET_DescribeInstanceHealth
@@ -1961,7 +1969,7 @@ paths:
             type: string
             enum:
               - '2012-06-01'
-  '/#Action=DescribeLoadBalancerAttributes':
+  /#Action=DescribeLoadBalancerAttributes:
     get:
       x-aws-operation-name: DescribeLoadBalancerAttributes
       operationId: GET_DescribeLoadBalancerAttributes
@@ -2057,7 +2065,7 @@ paths:
             type: string
             enum:
               - '2012-06-01'
-  '/#Action=DescribeLoadBalancerPolicies':
+  /#Action=DescribeLoadBalancerPolicies:
     get:
       x-aws-operation-name: DescribeLoadBalancerPolicies
       operationId: GET_DescribeLoadBalancerPolicies
@@ -2161,7 +2169,7 @@ paths:
             type: string
             enum:
               - '2012-06-01'
-  '/#Action=DescribeLoadBalancerPolicyTypes':
+  /#Action=DescribeLoadBalancerPolicyTypes:
     get:
       x-aws-operation-name: DescribeLoadBalancerPolicyTypes
       operationId: GET_DescribeLoadBalancerPolicyTypes
@@ -2247,7 +2255,7 @@ paths:
             type: string
             enum:
               - '2012-06-01'
-  '/#Action=DescribeLoadBalancers':
+  /#Action=DescribeLoadBalancers:
     get:
       x-aws-operation-name: DescribeLoadBalancers
       operationId: GET_DescribeLoadBalancers
@@ -2365,7 +2373,7 @@ paths:
             type: string
             enum:
               - '2012-06-01'
-  '/#Action=DescribeTags':
+  /#Action=DescribeTags:
     get:
       x-aws-operation-name: DescribeTags
       operationId: GET_DescribeTags
@@ -2453,7 +2461,7 @@ paths:
             type: string
             enum:
               - '2012-06-01'
-  '/#Action=DetachLoadBalancerFromSubnets':
+  /#Action=DetachLoadBalancerFromSubnets:
     get:
       x-aws-operation-name: DetachLoadBalancerFromSubnets
       operationId: GET_DetachLoadBalancerFromSubnets
@@ -2557,7 +2565,7 @@ paths:
             type: string
             enum:
               - '2012-06-01'
-  '/#Action=DisableAvailabilityZonesForLoadBalancer':
+  /#Action=DisableAvailabilityZonesForLoadBalancer:
     get:
       x-aws-operation-name: DisableAvailabilityZonesForLoadBalancer
       operationId: GET_DisableAvailabilityZonesForLoadBalancer
@@ -2661,7 +2669,7 @@ paths:
             type: string
             enum:
               - '2012-06-01'
-  '/#Action=EnableAvailabilityZonesForLoadBalancer':
+  /#Action=EnableAvailabilityZonesForLoadBalancer:
     get:
       x-aws-operation-name: EnableAvailabilityZonesForLoadBalancer
       operationId: GET_EnableAvailabilityZonesForLoadBalancer
@@ -2753,7 +2761,7 @@ paths:
             type: string
             enum:
               - '2012-06-01'
-  '/#Action=ModifyLoadBalancerAttributes':
+  /#Action=ModifyLoadBalancerAttributes:
     get:
       x-aws-operation-name: ModifyLoadBalancerAttributes
       operationId: GET_ModifyLoadBalancerAttributes
@@ -2884,7 +2892,7 @@ paths:
             type: string
             enum:
               - '2012-06-01'
-  '/#Action=RegisterInstancesWithLoadBalancer':
+  /#Action=RegisterInstancesWithLoadBalancer:
     get:
       x-aws-operation-name: RegisterInstancesWithLoadBalancer
       operationId: GET_RegisterInstancesWithLoadBalancer
@@ -2988,7 +2996,7 @@ paths:
             type: string
             enum:
               - '2012-06-01'
-  '/#Action=RemoveTags':
+  /#Action=RemoveTags:
     get:
       x-aws-operation-name: RemoveTags
       operationId: GET_RemoveTags
@@ -3083,7 +3091,7 @@ paths:
             type: string
             enum:
               - '2012-06-01'
-  '/#Action=SetLoadBalancerListenerSSLCertificate':
+  /#Action=SetLoadBalancerListenerSSLCertificate:
     get:
       x-aws-operation-name: SetLoadBalancerListenerSSLCertificate
       operationId: GET_SetLoadBalancerListenerSSLCertificate
@@ -3227,7 +3235,7 @@ paths:
             type: string
             enum:
               - '2012-06-01'
-  '/#Action=SetLoadBalancerPoliciesForBackendServer':
+  /#Action=SetLoadBalancerPoliciesForBackendServer:
     get:
       x-aws-operation-name: SetLoadBalancerPoliciesForBackendServer
       operationId: GET_SetLoadBalancerPoliciesForBackendServer
@@ -3349,7 +3357,7 @@ paths:
             type: string
             enum:
               - '2012-06-01'
-  '/#Action=SetLoadBalancerPoliciesOfListener':
+  /#Action=SetLoadBalancerPoliciesOfListener:
     get:
       x-aws-operation-name: SetLoadBalancerPoliciesOfListener
       operationId: GET_SetLoadBalancerPoliciesOfListener

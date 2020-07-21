@@ -51,13 +51,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The CodeStar multi-region endpoint
   - url: 'https://codestar.{region}.amazonaws.com'
@@ -77,13 +81,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The CodeStar multi-region endpoint
   - url: 'http://codestar.{region}.amazonaws.com.cn'
@@ -106,7 +114,7 @@ servers:
     description: The CodeStar endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
-  '/#X-Amz-Target=CodeStar_20170419.AssociateTeamMember':
+  /#X-Amz-Target=CodeStar_20170419.AssociateTeamMember:
     post:
       operationId: AssociateTeamMember
       description: Adds an IAM user to the team for an AWS CodeStar project.
@@ -181,7 +189,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeStar_20170419.CreateProject':
+  /#X-Amz-Target=CodeStar_20170419.CreateProject:
     post:
       operationId: CreateProject
       description: 'Creates a project, including project resources. This action creates a project based on a submitted project request. A set of source code files and a toolchain template file can be included with the project request. If these are not provided, an empty project is created.'
@@ -256,7 +264,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeStar_20170419.CreateUserProfile':
+  /#X-Amz-Target=CodeStar_20170419.CreateUserProfile:
     post:
       operationId: CreateUserProfile
       description: 'Creates a profile for a user that includes user preferences, such as the display name and email address assocciated with the user, in AWS CodeStar. The user profile is not project-specific. Information in the user profile is displayed wherever the user''s information appears to other users in AWS CodeStar.'
@@ -301,7 +309,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeStar_20170419.DeleteProject':
+  /#X-Amz-Target=CodeStar_20170419.DeleteProject:
     post:
       operationId: DeleteProject
       description: 'Deletes a project, including project resources. Does not delete users associated with the project, but does delete the IAM roles that allowed access to the project.'
@@ -352,7 +360,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeStar_20170419.DeleteUserProfile':
+  /#X-Amz-Target=CodeStar_20170419.DeleteUserProfile:
     post:
       operationId: DeleteUserProfile
       description: 'Deletes a user profile in AWS CodeStar, including all personal preference data associated with that profile, such as display name and email address. It does not delete the history of that user, for example the history of commits made by that user.'
@@ -391,7 +399,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeStar_20170419.DescribeProject':
+  /#X-Amz-Target=CodeStar_20170419.DescribeProject:
     post:
       operationId: DescribeProject
       description: Describes a project and its resources.
@@ -454,7 +462,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeStar_20170419.DescribeUserProfile':
+  /#X-Amz-Target=CodeStar_20170419.DescribeUserProfile:
     post:
       operationId: DescribeUserProfile
       description: Describes a user in AWS CodeStar and the user attributes across all projects.
@@ -499,7 +507,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeStar_20170419.DisassociateTeamMember':
+  /#X-Amz-Target=CodeStar_20170419.DisassociateTeamMember:
     post:
       operationId: DisassociateTeamMember
       description: Removes a user from a project. Removing a user from a project also removes the IAM policies from that user that allowed access to the project and its resources. Disassociating a team member does not remove that user's profile from AWS CodeStar. It does not remove the user from IAM.
@@ -556,7 +564,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeStar_20170419.ListProjects':
+  /#X-Amz-Target=CodeStar_20170419.ListProjects:
     post:
       operationId: ListProjects
       description: Lists all projects in AWS CodeStar associated with your AWS account.
@@ -601,7 +609,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeStar_20170419.ListResources':
+  /#X-Amz-Target=CodeStar_20170419.ListResources:
     post:
       operationId: ListResources
       description: Lists resources associated with a project in AWS CodeStar.
@@ -652,7 +660,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeStar_20170419.ListTagsForProject':
+  /#X-Amz-Target=CodeStar_20170419.ListTagsForProject:
     post:
       operationId: ListTagsForProject
       description: Gets the tags for a project.
@@ -703,7 +711,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeStar_20170419.ListTeamMembers':
+  /#X-Amz-Target=CodeStar_20170419.ListTeamMembers:
     post:
       operationId: ListTeamMembers
       description: Lists all team members associated with a project.
@@ -754,7 +762,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeStar_20170419.ListUserProfiles':
+  /#X-Amz-Target=CodeStar_20170419.ListUserProfiles:
     post:
       operationId: ListUserProfiles
       description: Lists all the user profiles configured for your AWS account in AWS CodeStar.
@@ -799,7 +807,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeStar_20170419.TagProject':
+  /#X-Amz-Target=CodeStar_20170419.TagProject:
     post:
       operationId: TagProject
       description: Adds tags to a project.
@@ -856,7 +864,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeStar_20170419.UntagProject':
+  /#X-Amz-Target=CodeStar_20170419.UntagProject:
     post:
       operationId: UntagProject
       description: Removes tags from a project.
@@ -913,7 +921,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeStar_20170419.UpdateProject':
+  /#X-Amz-Target=CodeStar_20170419.UpdateProject:
     post:
       operationId: UpdateProject
       description: Updates a project in AWS CodeStar.
@@ -958,7 +966,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeStar_20170419.UpdateTeamMember':
+  /#X-Amz-Target=CodeStar_20170419.UpdateTeamMember:
     post:
       operationId: UpdateTeamMember
       description: 'Updates a team member''s attributes in an AWS CodeStar project. For example, you can change a team member''s role in the project, or change whether they have remote access to project resources.'
@@ -1033,7 +1041,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeStar_20170419.UpdateUserProfile':
+  /#X-Amz-Target=CodeStar_20170419.UpdateUserProfile:
     post:
       operationId: UpdateUserProfile
       description: 'Updates a user''s profile in AWS CodeStar. The user profile is not project-specific. Information in the user profile is displayed wherever the user''s information appears to other users in AWS CodeStar. '

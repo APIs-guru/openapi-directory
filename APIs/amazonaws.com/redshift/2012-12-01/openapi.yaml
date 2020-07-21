@@ -51,13 +51,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The Amazon Redshift multi-region endpoint
   - url: 'https://redshift.{region}.amazonaws.com'
@@ -77,13 +81,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The Amazon Redshift multi-region endpoint
   - url: 'http://redshift.{region}.amazonaws.com.cn'
@@ -106,7 +114,7 @@ servers:
     description: The Amazon Redshift endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
-  '/#Action=AcceptReservedNodeExchange':
+  /#Action=AcceptReservedNodeExchange:
     get:
       x-aws-operation-name: AcceptReservedNodeExchange
       operationId: GET_AcceptReservedNodeExchange
@@ -268,7 +276,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=AuthorizeClusterSecurityGroupIngress':
+  /#Action=AuthorizeClusterSecurityGroupIngress:
     get:
       x-aws-operation-name: AuthorizeClusterSecurityGroupIngress
       operationId: GET_AuthorizeClusterSecurityGroupIngress
@@ -406,7 +414,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=AuthorizeSnapshotAccess':
+  /#Action=AuthorizeSnapshotAccess:
     get:
       x-aws-operation-name: AuthorizeSnapshotAccess
       operationId: GET_AuthorizeSnapshotAccess
@@ -562,7 +570,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=BatchDeleteClusterSnapshots':
+  /#Action=BatchDeleteClusterSnapshots:
     get:
       x-aws-operation-name: BatchDeleteClusterSnapshots
       operationId: GET_BatchDeleteClusterSnapshots
@@ -648,7 +656,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=BatchModifyClusterSnapshots':
+  /#Action=BatchModifyClusterSnapshots:
     get:
       x-aws-operation-name: BatchModifyClusterSnapshots
       operationId: GET_BatchModifyClusterSnapshots
@@ -758,7 +766,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=CancelResize':
+  /#Action=CancelResize:
     get:
       x-aws-operation-name: CancelResize
       operationId: GET_CancelResize
@@ -878,7 +886,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=CopyClusterSnapshot':
+  /#Action=CopyClusterSnapshot:
     get:
       x-aws-operation-name: CopyClusterSnapshot
       operationId: GET_CopyClusterSnapshot
@@ -1028,7 +1036,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=CreateCluster':
+  /#Action=CreateCluster:
     get:
       x-aws-operation-name: CreateCluster
       operationId: GET_CreateCluster
@@ -1546,7 +1554,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=CreateClusterParameterGroup':
+  /#Action=CreateClusterParameterGroup:
     get:
       x-aws-operation-name: CreateClusterParameterGroup
       operationId: GET_CreateClusterParameterGroup
@@ -1686,7 +1694,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=CreateClusterSecurityGroup':
+  /#Action=CreateClusterSecurityGroup:
     get:
       x-aws-operation-name: CreateClusterSecurityGroup
       operationId: GET_CreateClusterSecurityGroup
@@ -1820,7 +1828,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=CreateClusterSnapshot':
+  /#Action=CreateClusterSnapshot:
     get:
       x-aws-operation-name: CreateClusterSnapshot
       operationId: GET_CreateClusterSnapshot
@@ -1996,7 +2004,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=CreateClusterSubnetGroup':
+  /#Action=CreateClusterSubnetGroup:
     get:
       x-aws-operation-name: CreateClusterSubnetGroup
       operationId: GET_CreateClusterSubnetGroup
@@ -2186,7 +2194,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=CreateEventSubscription':
+  /#Action=CreateEventSubscription:
     get:
       x-aws-operation-name: CreateEventSubscription
       operationId: GET_CreateEventSubscription
@@ -2438,7 +2446,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=CreateHsmClientCertificate':
+  /#Action=CreateHsmClientCertificate:
     get:
       x-aws-operation-name: CreateHsmClientCertificate
       operationId: GET_CreateHsmClientCertificate
@@ -2566,7 +2574,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=CreateHsmConfiguration':
+  /#Action=CreateHsmConfiguration:
     get:
       x-aws-operation-name: CreateHsmConfiguration
       operationId: GET_CreateHsmConfiguration
@@ -2724,7 +2732,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=CreateScheduledAction':
+  /#Action=CreateScheduledAction:
     get:
       x-aws-operation-name: CreateScheduledAction
       operationId: GET_CreateScheduledAction
@@ -2923,7 +2931,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=CreateSnapshotCopyGrant':
+  /#Action=CreateSnapshotCopyGrant:
     get:
       x-aws-operation-name: CreateSnapshotCopyGrant
       operationId: GET_CreateSnapshotCopyGrant
@@ -3081,7 +3089,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=CreateSnapshotSchedule':
+  /#Action=CreateSnapshotSchedule:
     get:
       x-aws-operation-name: CreateSnapshotSchedule
       operationId: GET_CreateSnapshotSchedule
@@ -3247,7 +3255,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=CreateTags':
+  /#Action=CreateTags:
     get:
       x-aws-operation-name: CreateTags
       operationId: GET_CreateTags
@@ -3355,7 +3363,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=CreateUsageLimit':
+  /#Action=CreateUsageLimit:
     get:
       x-aws-operation-name: CreateUsageLimit
       operationId: GET_CreateUsageLimit
@@ -3563,7 +3571,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=DeleteCluster':
+  /#Action=DeleteCluster:
     get:
       x-aws-operation-name: DeleteCluster
       operationId: GET_DeleteCluster
@@ -3713,7 +3721,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=DeleteClusterParameterGroup':
+  /#Action=DeleteClusterParameterGroup:
     get:
       x-aws-operation-name: DeleteClusterParameterGroup
       operationId: GET_DeleteClusterParameterGroup
@@ -3801,7 +3809,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=DeleteClusterSecurityGroup':
+  /#Action=DeleteClusterSecurityGroup:
     get:
       x-aws-operation-name: DeleteClusterSecurityGroup
       operationId: GET_DeleteClusterSecurityGroup
@@ -3889,7 +3897,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=DeleteClusterSnapshot':
+  /#Action=DeleteClusterSnapshot:
     get:
       x-aws-operation-name: DeleteClusterSnapshot
       operationId: GET_DeleteClusterSnapshot
@@ -3991,7 +3999,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=DeleteClusterSubnetGroup':
+  /#Action=DeleteClusterSubnetGroup:
     get:
       x-aws-operation-name: DeleteClusterSubnetGroup
       operationId: GET_DeleteClusterSubnetGroup
@@ -4091,7 +4099,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=DeleteEventSubscription':
+  /#Action=DeleteEventSubscription:
     get:
       x-aws-operation-name: DeleteEventSubscription
       operationId: GET_DeleteEventSubscription
@@ -4179,7 +4187,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=DeleteHsmClientCertificate':
+  /#Action=DeleteHsmClientCertificate:
     get:
       x-aws-operation-name: DeleteHsmClientCertificate
       operationId: GET_DeleteHsmClientCertificate
@@ -4267,7 +4275,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=DeleteHsmConfiguration':
+  /#Action=DeleteHsmConfiguration:
     get:
       x-aws-operation-name: DeleteHsmConfiguration
       operationId: GET_DeleteHsmConfiguration
@@ -4355,7 +4363,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=DeleteScheduledAction':
+  /#Action=DeleteScheduledAction:
     get:
       x-aws-operation-name: DeleteScheduledAction
       operationId: GET_DeleteScheduledAction
@@ -4443,7 +4451,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=DeleteSnapshotCopyGrant':
+  /#Action=DeleteSnapshotCopyGrant:
     get:
       x-aws-operation-name: DeleteSnapshotCopyGrant
       operationId: GET_DeleteSnapshotCopyGrant
@@ -4531,7 +4539,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=DeleteSnapshotSchedule':
+  /#Action=DeleteSnapshotSchedule:
     get:
       x-aws-operation-name: DeleteSnapshotSchedule
       operationId: GET_DeleteSnapshotSchedule
@@ -4619,7 +4627,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=DeleteTags':
+  /#Action=DeleteTags:
     get:
       x-aws-operation-name: DeleteTags
       operationId: GET_DeleteTags
@@ -4715,7 +4723,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=DeleteUsageLimit':
+  /#Action=DeleteUsageLimit:
     get:
       x-aws-operation-name: DeleteUsageLimit
       operationId: GET_DeleteUsageLimit
@@ -4803,7 +4811,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=DescribeAccountAttributes':
+  /#Action=DescribeAccountAttributes:
     get:
       x-aws-operation-name: DescribeAccountAttributes
       operationId: GET_DescribeAccountAttributes
@@ -4877,7 +4885,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=DescribeClusterDbRevisions':
+  /#Action=DescribeClusterDbRevisions:
     get:
       x-aws-operation-name: DescribeClusterDbRevisions
       operationId: GET_DescribeClusterDbRevisions
@@ -4985,7 +4993,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=DescribeClusterParameterGroups':
+  /#Action=DescribeClusterParameterGroups:
     get:
       x-aws-operation-name: DescribeClusterParameterGroups
       operationId: GET_DescribeClusterParameterGroups
@@ -5121,7 +5129,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=DescribeClusterParameters':
+  /#Action=DescribeClusterParameters:
     get:
       x-aws-operation-name: DescribeClusterParameters
       operationId: GET_DescribeClusterParameters
@@ -5235,7 +5243,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=DescribeClusterSecurityGroups':
+  /#Action=DescribeClusterSecurityGroups:
     get:
       x-aws-operation-name: DescribeClusterSecurityGroups
       operationId: GET_DescribeClusterSecurityGroups
@@ -5371,7 +5379,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=DescribeClusterSnapshots':
+  /#Action=DescribeClusterSnapshots:
     get:
       x-aws-operation-name: DescribeClusterSnapshots
       operationId: GET_DescribeClusterSnapshots
@@ -5565,7 +5573,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=DescribeClusterSubnetGroups':
+  /#Action=DescribeClusterSubnetGroups:
     get:
       x-aws-operation-name: DescribeClusterSubnetGroups
       operationId: GET_DescribeClusterSubnetGroups
@@ -5701,7 +5709,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=DescribeClusterTracks':
+  /#Action=DescribeClusterTracks:
     get:
       x-aws-operation-name: DescribeClusterTracks
       operationId: GET_DescribeClusterTracks
@@ -5809,7 +5817,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=DescribeClusterVersions':
+  /#Action=DescribeClusterVersions:
     get:
       x-aws-operation-name: DescribeClusterVersions
       operationId: GET_DescribeClusterVersions
@@ -5911,7 +5919,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=DescribeClusters':
+  /#Action=DescribeClusters:
     get:
       x-aws-operation-name: DescribeClusters
       operationId: GET_DescribeClusters
@@ -6047,7 +6055,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=DescribeDefaultClusterParameters':
+  /#Action=DescribeDefaultClusterParameters:
     get:
       x-aws-operation-name: DescribeDefaultClusterParameters
       operationId: GET_DescribeDefaultClusterParameters
@@ -6143,7 +6151,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=DescribeEventCategories':
+  /#Action=DescribeEventCategories:
     get:
       x-aws-operation-name: DescribeEventCategories
       operationId: GET_DescribeEventCategories
@@ -6215,7 +6223,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=DescribeEventSubscriptions':
+  /#Action=DescribeEventSubscriptions:
     get:
       x-aws-operation-name: DescribeEventSubscriptions
       operationId: GET_DescribeEventSubscriptions
@@ -6351,7 +6359,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=DescribeEvents':
+  /#Action=DescribeEvents:
     get:
       x-aws-operation-name: DescribeEvents
       operationId: GET_DescribeEvents
@@ -6479,7 +6487,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=DescribeHsmClientCertificates':
+  /#Action=DescribeHsmClientCertificates:
     get:
       x-aws-operation-name: DescribeHsmClientCertificates
       operationId: GET_DescribeHsmClientCertificates
@@ -6615,7 +6623,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=DescribeHsmConfigurations':
+  /#Action=DescribeHsmConfigurations:
     get:
       x-aws-operation-name: DescribeHsmConfigurations
       operationId: GET_DescribeHsmConfigurations
@@ -6751,7 +6759,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=DescribeLoggingStatus':
+  /#Action=DescribeLoggingStatus:
     get:
       x-aws-operation-name: DescribeLoggingStatus
       operationId: GET_DescribeLoggingStatus
@@ -6835,7 +6843,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=DescribeNodeConfigurationOptions':
+  /#Action=DescribeNodeConfigurationOptions:
     get:
       x-aws-operation-name: DescribeNodeConfigurationOptions
       operationId: GET_DescribeNodeConfigurationOptions
@@ -7009,7 +7017,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=DescribeOrderableClusterOptions':
+  /#Action=DescribeOrderableClusterOptions:
     get:
       x-aws-operation-name: DescribeOrderableClusterOptions
       operationId: GET_DescribeOrderableClusterOptions
@@ -7111,7 +7119,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=DescribeReservedNodeOfferings':
+  /#Action=DescribeReservedNodeOfferings:
     get:
       x-aws-operation-name: DescribeReservedNodeOfferings
       operationId: GET_DescribeReservedNodeOfferings
@@ -7243,7 +7251,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=DescribeReservedNodes':
+  /#Action=DescribeReservedNodes:
     get:
       x-aws-operation-name: DescribeReservedNodes
       operationId: GET_DescribeReservedNodes
@@ -7363,7 +7371,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=DescribeResize':
+  /#Action=DescribeResize:
     get:
       x-aws-operation-name: DescribeResize
       operationId: GET_DescribeResize
@@ -7459,7 +7467,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=DescribeScheduledActions':
+  /#Action=DescribeScheduledActions:
     get:
       x-aws-operation-name: DescribeScheduledActions
       operationId: GET_DescribeScheduledActions
@@ -7617,7 +7625,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=DescribeSnapshotCopyGrants':
+  /#Action=DescribeSnapshotCopyGrants:
     get:
       x-aws-operation-name: DescribeSnapshotCopyGrants
       operationId: GET_DescribeSnapshotCopyGrants
@@ -7741,7 +7749,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=DescribeSnapshotSchedules':
+  /#Action=DescribeSnapshotSchedules:
     get:
       x-aws-operation-name: DescribeSnapshotSchedules
       operationId: GET_DescribeSnapshotSchedules
@@ -7847,7 +7855,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=DescribeStorage':
+  /#Action=DescribeStorage:
     get:
       x-aws-operation-name: DescribeStorage
       operationId: GET_DescribeStorage
@@ -7908,7 +7916,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=DescribeTableRestoreStatus':
+  /#Action=DescribeTableRestoreStatus:
     get:
       x-aws-operation-name: DescribeTableRestoreStatus
       operationId: GET_DescribeTableRestoreStatus
@@ -8022,7 +8030,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=DescribeTags':
+  /#Action=DescribeTags:
     get:
       x-aws-operation-name: DescribeTags
       operationId: GET_DescribeTags
@@ -8152,7 +8160,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=DescribeUsageLimits':
+  /#Action=DescribeUsageLimits:
     get:
       x-aws-operation-name: DescribeUsageLimits
       operationId: GET_DescribeUsageLimits
@@ -8303,7 +8311,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=DisableLogging':
+  /#Action=DisableLogging:
     get:
       x-aws-operation-name: DisableLogging
       operationId: GET_DisableLogging
@@ -8387,7 +8395,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=DisableSnapshotCopy':
+  /#Action=DisableSnapshotCopy:
     get:
       x-aws-operation-name: DisableSnapshotCopy
       operationId: GET_DisableSnapshotCopy
@@ -8507,7 +8515,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=EnableLogging':
+  /#Action=EnableLogging:
     get:
       x-aws-operation-name: EnableLogging
       operationId: GET_EnableLogging
@@ -8663,7 +8671,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=EnableSnapshotCopy':
+  /#Action=EnableSnapshotCopy:
     get:
       x-aws-operation-name: EnableSnapshotCopy
       operationId: GET_EnableSnapshotCopy
@@ -8891,7 +8899,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=GetClusterCredentials':
+  /#Action=GetClusterCredentials:
     get:
       x-aws-operation-name: GetClusterCredentials
       operationId: GET_GetClusterCredentials
@@ -9019,7 +9027,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=GetReservedNodeExchangeOfferings':
+  /#Action=GetReservedNodeExchangeOfferings:
     get:
       x-aws-operation-name: GetReservedNodeExchangeOfferings
       operationId: GET_GetReservedNodeExchangeOfferings
@@ -9175,7 +9183,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=ModifyCluster':
+  /#Action=ModifyCluster:
     get:
       x-aws-operation-name: ModifyCluster
       operationId: GET_ModifyCluster
@@ -9605,7 +9613,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=ModifyClusterDbRevision':
+  /#Action=ModifyClusterDbRevision:
     get:
       x-aws-operation-name: ModifyClusterDbRevision
       operationId: GET_ModifyClusterDbRevision
@@ -9719,7 +9727,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=ModifyClusterIamRoles':
+  /#Action=ModifyClusterIamRoles:
     get:
       x-aws-operation-name: ModifyClusterIamRoles
       operationId: GET_ModifyClusterIamRoles
@@ -9831,7 +9839,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=ModifyClusterMaintenance':
+  /#Action=ModifyClusterMaintenance:
     get:
       x-aws-operation-name: ModifyClusterMaintenance
       operationId: GET_ModifyClusterMaintenance
@@ -9959,7 +9967,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=ModifyClusterParameterGroup':
+  /#Action=ModifyClusterParameterGroup:
     get:
       x-aws-operation-name: ModifyClusterParameterGroup
       operationId: GET_ModifyClusterParameterGroup
@@ -10063,7 +10071,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=ModifyClusterSnapshot':
+  /#Action=ModifyClusterSnapshot:
     get:
       x-aws-operation-name: ModifyClusterSnapshot
       operationId: GET_ModifyClusterSnapshot
@@ -10183,7 +10191,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=ModifyClusterSnapshotSchedule':
+  /#Action=ModifyClusterSnapshotSchedule:
     get:
       x-aws-operation-name: ModifyClusterSnapshotSchedule
       operationId: GET_ModifyClusterSnapshotSchedule
@@ -10295,7 +10303,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=ModifyClusterSubnetGroup':
+  /#Action=ModifyClusterSubnetGroup:
     get:
       x-aws-operation-name: ModifyClusterSubnetGroup
       operationId: GET_ModifyClusterSubnetGroup
@@ -10453,7 +10461,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=ModifyEventSubscription':
+  /#Action=ModifyEventSubscription:
     get:
       x-aws-operation-name: ModifyEventSubscription
       operationId: GET_ModifyEventSubscription
@@ -10673,7 +10681,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=ModifyScheduledAction':
+  /#Action=ModifyScheduledAction:
     get:
       x-aws-operation-name: ModifyScheduledAction
       operationId: GET_ModifyScheduledAction
@@ -10860,7 +10868,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=ModifySnapshotCopyRetentionPeriod':
+  /#Action=ModifySnapshotCopyRetentionPeriod:
     get:
       x-aws-operation-name: ModifySnapshotCopyRetentionPeriod
       operationId: GET_ModifySnapshotCopyRetentionPeriod
@@ -11004,7 +11012,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=ModifySnapshotSchedule':
+  /#Action=ModifySnapshotSchedule:
     get:
       x-aws-operation-name: ModifySnapshotSchedule
       operationId: GET_ModifySnapshotSchedule
@@ -11120,7 +11128,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=ModifyUsageLimit':
+  /#Action=ModifyUsageLimit:
     get:
       x-aws-operation-name: ModifyUsageLimit
       operationId: GET_ModifyUsageLimit
@@ -11244,7 +11252,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=PauseCluster':
+  /#Action=PauseCluster:
     get:
       x-aws-operation-name: PauseCluster
       operationId: GET_PauseCluster
@@ -11340,7 +11348,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=PurchaseReservedNodeOffering':
+  /#Action=PurchaseReservedNodeOffering:
     get:
       x-aws-operation-name: PurchaseReservedNodeOffering
       operationId: GET_PurchaseReservedNodeOffering
@@ -11466,7 +11474,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=RebootCluster':
+  /#Action=RebootCluster:
     get:
       x-aws-operation-name: RebootCluster
       operationId: GET_RebootCluster
@@ -11562,7 +11570,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=ResetClusterParameterGroup':
+  /#Action=ResetClusterParameterGroup:
     get:
       x-aws-operation-name: ResetClusterParameterGroup
       operationId: GET_ResetClusterParameterGroup
@@ -11672,7 +11680,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=ResizeCluster':
+  /#Action=ResizeCluster:
     get:
       x-aws-operation-name: ResizeCluster
       operationId: GET_ResizeCluster
@@ -11876,7 +11884,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=RestoreFromClusterSnapshot':
+  /#Action=RestoreFromClusterSnapshot:
     get:
       x-aws-operation-name: RestoreFromClusterSnapshot
       operationId: GET_RestoreFromClusterSnapshot
@@ -12404,7 +12412,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=RestoreTableFromClusterSnapshot':
+  /#Action=RestoreTableFromClusterSnapshot:
     get:
       x-aws-operation-name: RestoreTableFromClusterSnapshot
       operationId: GET_RestoreTableFromClusterSnapshot
@@ -12602,7 +12610,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=ResumeCluster':
+  /#Action=ResumeCluster:
     get:
       x-aws-operation-name: ResumeCluster
       operationId: GET_ResumeCluster
@@ -12698,7 +12706,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=RevokeClusterSecurityGroupIngress':
+  /#Action=RevokeClusterSecurityGroupIngress:
     get:
       x-aws-operation-name: RevokeClusterSecurityGroupIngress
       operationId: GET_RevokeClusterSecurityGroupIngress
@@ -12824,7 +12832,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=RevokeSnapshotAccess':
+  /#Action=RevokeSnapshotAccess:
     get:
       x-aws-operation-name: RevokeSnapshotAccess
       operationId: GET_RevokeSnapshotAccess
@@ -12944,7 +12952,7 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  '/#Action=RotateEncryptionKey':
+  /#Action=RotateEncryptionKey:
     get:
       x-aws-operation-name: RotateEncryptionKey
       operationId: GET_RotateEncryptionKey

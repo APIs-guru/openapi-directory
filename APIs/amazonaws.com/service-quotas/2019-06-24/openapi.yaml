@@ -51,13 +51,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The Service Quotas multi-region endpoint
   - url: 'https://servicequotas.{region}.amazonaws.com'
@@ -77,13 +81,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The Service Quotas multi-region endpoint
   - url: 'http://servicequotas.{region}.amazonaws.com.cn'
@@ -106,7 +114,7 @@ servers:
     description: The Service Quotas endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
-  '/#X-Amz-Target=ServiceQuotasV20190624.AssociateServiceQuotaTemplate':
+  /#X-Amz-Target=ServiceQuotasV20190624.AssociateServiceQuotaTemplate:
     post:
       operationId: AssociateServiceQuotaTemplate
       description: 'Associates the Service Quotas template with your organization so that when new accounts are created in your organization, the template submits increase requests for the specified service quotas. Use the Service Quotas template to request an increase for any adjustable quota value. After you define the Service Quotas template, use this operation to associate, or enable, the template. '
@@ -187,7 +195,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=ServiceQuotasV20190624.DeleteServiceQuotaIncreaseRequestFromTemplate':
+  /#X-Amz-Target=ServiceQuotasV20190624.DeleteServiceQuotaIncreaseRequestFromTemplate:
     post:
       operationId: DeleteServiceQuotaIncreaseRequestFromTemplate
       description: 'Removes a service quota increase request from the Service Quotas template. '
@@ -274,7 +282,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=ServiceQuotasV20190624.DisassociateServiceQuotaTemplate':
+  /#X-Amz-Target=ServiceQuotasV20190624.DisassociateServiceQuotaTemplate:
     post:
       operationId: DisassociateServiceQuotaTemplate
       description: '<p>Disables the Service Quotas template. Once the template is disabled, it does not request quota increases for new accounts in your organization. Disabling the quota template does not apply the quota increase requests from the template. </p> <p> <b>Related operations</b> </p> <ul> <li> <p>To enable the quota template, call <a>AssociateServiceQuotaTemplate</a>. </p> </li> <li> <p>To delete a specific service quota from the template, use <a>DeleteServiceQuotaIncreaseRequestFromTemplate</a>.</p> </li> </ul>'
@@ -355,7 +363,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=ServiceQuotasV20190624.GetAWSDefaultServiceQuota':
+  /#X-Amz-Target=ServiceQuotasV20190624.GetAWSDefaultServiceQuota:
     post:
       operationId: GetAWSDefaultServiceQuota
       description: 'Retrieves the default service quotas values. The Value returned for each quota is the AWS default value, even if the quotas have been increased.. '
@@ -418,7 +426,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=ServiceQuotasV20190624.GetAssociationForServiceQuotaTemplate':
+  /#X-Amz-Target=ServiceQuotasV20190624.GetAssociationForServiceQuotaTemplate:
     post:
       operationId: GetAssociationForServiceQuotaTemplate
       description: 'Retrieves the <code>ServiceQuotaTemplateAssociationStatus</code> value from the service. Use this action to determine if the Service Quota template is associated, or enabled. '
@@ -499,7 +507,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=ServiceQuotasV20190624.GetRequestedServiceQuotaChange':
+  /#X-Amz-Target=ServiceQuotasV20190624.GetRequestedServiceQuotaChange:
     post:
       operationId: GetRequestedServiceQuotaChange
       description: 'Retrieves the details for a particular increase request. '
@@ -562,7 +570,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=ServiceQuotasV20190624.GetServiceQuota':
+  /#X-Amz-Target=ServiceQuotasV20190624.GetServiceQuota:
     post:
       operationId: GetServiceQuota
       description: 'Returns the details for the specified service quota. This operation provides a different Value than the <code>GetAWSDefaultServiceQuota</code> operation. This operation returns the applied value for each quota. <code>GetAWSDefaultServiceQuota</code> returns the default AWS value for each quota. '
@@ -625,7 +633,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=ServiceQuotasV20190624.GetServiceQuotaIncreaseRequestFromTemplate':
+  /#X-Amz-Target=ServiceQuotasV20190624.GetServiceQuotaIncreaseRequestFromTemplate:
     post:
       operationId: GetServiceQuotaIncreaseRequestFromTemplate
       description: Returns the details of the service quota increase request in your template.
@@ -712,7 +720,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=ServiceQuotasV20190624.ListAWSDefaultServiceQuotas':
+  /#X-Amz-Target=ServiceQuotasV20190624.ListAWSDefaultServiceQuotas:
     post:
       operationId: ListAWSDefaultServiceQuotas
       description: '<p>Lists all default service quotas for the specified AWS service or all AWS services. ListAWSDefaultServiceQuotas is similar to <a>ListServiceQuotas</a> except for the Value object. The Value object returned by <code>ListAWSDefaultServiceQuotas</code> is the default value assigned by AWS. This request returns a list of all service quotas for the specified service. The listing of each you''ll see the default values are the values that AWS provides for the quotas. </p> <note> <p>Always check the <code>NextToken</code> response parameter when calling any of the <code>List*</code> operations. These operations can return an unexpected list of results, even when there are more results available. When this happens, the <code>NextToken</code> response parameter contains a value to pass the next call to the same API to request the next part of the list.</p> </note>'
@@ -793,7 +801,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=ServiceQuotasV20190624.ListRequestedServiceQuotaChangeHistory':
+  /#X-Amz-Target=ServiceQuotasV20190624.ListRequestedServiceQuotaChangeHistory:
     post:
       operationId: ListRequestedServiceQuotaChangeHistory
       description: Requests a list of the changes to quotas for a service.
@@ -874,7 +882,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=ServiceQuotasV20190624.ListRequestedServiceQuotaChangeHistoryByQuota':
+  /#X-Amz-Target=ServiceQuotasV20190624.ListRequestedServiceQuotaChangeHistoryByQuota:
     post:
       operationId: ListRequestedServiceQuotaChangeHistoryByQuota
       description: 'Requests a list of the changes to specific service quotas. This command provides additional granularity over the <code>ListRequestedServiceQuotaChangeHistory</code> command. Once a quota change request has reached <code>CASE_CLOSED, APPROVED,</code> or <code>DENIED</code>, the history has been kept for 90 days.'
@@ -955,7 +963,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=ServiceQuotasV20190624.ListServiceQuotaIncreaseRequestsInTemplate':
+  /#X-Amz-Target=ServiceQuotasV20190624.ListServiceQuotaIncreaseRequestsInTemplate:
     post:
       operationId: ListServiceQuotaIncreaseRequestsInTemplate
       description: 'Returns a list of the quota increase requests in the template. '
@@ -1048,7 +1056,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=ServiceQuotasV20190624.ListServiceQuotas':
+  /#X-Amz-Target=ServiceQuotasV20190624.ListServiceQuotas:
     post:
       operationId: ListServiceQuotas
       description: '<p>Lists all service quotas for the specified AWS service. This request returns a list of the service quotas for the specified service. you''ll see the default values are the values that AWS provides for the quotas. </p> <note> <p>Always check the <code>NextToken</code> response parameter when calling any of the <code>List*</code> operations. These operations can return an unexpected list of results, even when there are more results available. When this happens, the <code>NextToken</code> response parameter contains a value to pass the next call to the same API to request the next part of the list.</p> </note>'
@@ -1129,7 +1137,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=ServiceQuotasV20190624.ListServices':
+  /#X-Amz-Target=ServiceQuotasV20190624.ListServices:
     post:
       operationId: ListServices
       description: 'Lists the AWS services available in Service Quotas. Not all AWS services are available in Service Quotas. To list the see the list of the service quotas for a specific service, use <a>ListServiceQuotas</a>.'
@@ -1204,7 +1212,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=ServiceQuotasV20190624.PutServiceQuotaIncreaseRequestIntoTemplate':
+  /#X-Amz-Target=ServiceQuotasV20190624.PutServiceQuotaIncreaseRequestIntoTemplate:
     post:
       operationId: PutServiceQuotaIncreaseRequestIntoTemplate
       description: 'Defines and adds a quota to the service quota template. To add a quota to the template, you must provide the <code>ServiceCode</code>, <code>QuotaCode</code>, <code>AwsRegion</code>, and <code>DesiredValue</code>. Once you add a quota to the template, use <a>ListServiceQuotaIncreaseRequestsInTemplate</a> to see the list of quotas in the template.'
@@ -1297,7 +1305,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=ServiceQuotasV20190624.RequestServiceQuotaIncrease':
+  /#X-Amz-Target=ServiceQuotasV20190624.RequestServiceQuotaIncrease:
     post:
       operationId: RequestServiceQuotaIncrease
       description: 'Retrieves the details of a service quota increase request. The response to this command provides the details in the <a>RequestedServiceQuotaChange</a> object. '

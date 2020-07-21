@@ -51,13 +51,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The Amazon CloudDirectory multi-region endpoint
   - url: 'https://clouddirectory.{region}.amazonaws.com'
@@ -77,13 +81,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The Amazon CloudDirectory multi-region endpoint
   - url: 'http://clouddirectory.{region}.amazonaws.com.cn'
@@ -105,7 +113,7 @@ servers:
         default: cn-north-1
     description: The Amazon CloudDirectory endpoint for China (Beijing) and China (Ningxia)
 paths:
-  '/amazonclouddirectory/2017-01-11/object/facets#x-amz-data-partition':
+  /amazonclouddirectory/2017-01-11/object/facets#x-amz-data-partition:
     put:
       operationId: AddFacetToObject
       description: Adds a new <a>Facet</a> to an object. An object can have more than one facet applied on it.
@@ -217,7 +225,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/amazonclouddirectory/2017-01-11/schema/apply#x-amz-data-partition':
+  /amazonclouddirectory/2017-01-11/schema/apply#x-amz-data-partition:
     put:
       operationId: ApplySchema
       description: 'Copies the input published schema, at the specified version, into the <a>Directory</a> with the same name and version as that of the published schema.'
@@ -303,7 +311,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/amazonclouddirectory/2017-01-11/object/attach#x-amz-data-partition':
+  /amazonclouddirectory/2017-01-11/object/attach#x-amz-data-partition:
     put:
       operationId: AttachObject
       description: '<p>Attaches an existing object to another object. An object can be accessed in two ways:</p> <ol> <li> <p>Using the path</p> </li> <li> <p>Using <code>ObjectIdentifier</code> </p> </li> </ol>'
@@ -432,7 +440,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/amazonclouddirectory/2017-01-11/policy/attach#x-amz-data-partition':
+  /amazonclouddirectory/2017-01-11/policy/attach#x-amz-data-partition:
     put:
       operationId: AttachPolicy
       description: Attaches a policy object to a regular object. An object can have a limited number of attached policies.
@@ -536,7 +544,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/amazonclouddirectory/2017-01-11/index/attach#x-amz-data-partition':
+  /amazonclouddirectory/2017-01-11/index/attach#x-amz-data-partition:
     put:
       operationId: AttachToIndex
       description: Attaches the specified object to the specified index.
@@ -658,7 +666,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/amazonclouddirectory/2017-01-11/typedlink/attach#x-amz-data-partition':
+  /amazonclouddirectory/2017-01-11/typedlink/attach#x-amz-data-partition:
     put:
       operationId: AttachTypedLink
       description: 'Attaches a typed link to a specified source and target object. For more information, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink">Typed link</a>.'
@@ -791,7 +799,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/amazonclouddirectory/2017-01-11/batchread#x-amz-data-partition':
+  /amazonclouddirectory/2017-01-11/batchread#x-amz-data-partition:
     post:
       operationId: BatchRead
       description: 'Performs all the read operations in a batch. '
@@ -882,7 +890,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/amazonclouddirectory/2017-01-11/batchwrite#x-amz-data-partition':
+  /amazonclouddirectory/2017-01-11/batchwrite#x-amz-data-partition:
     put:
       operationId: BatchWrite
       description: Performs all the write operations in a batch. Either all the operations succeed or none.
@@ -970,7 +978,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/amazonclouddirectory/2017-01-11/directory/create#x-amz-data-partition':
+  /amazonclouddirectory/2017-01-11/directory/create#x-amz-data-partition:
     put:
       operationId: CreateDirectory
       description: Creates a <a>Directory</a> by copying the published schema into the directory. A directory cannot be created without a schema.
@@ -1059,7 +1067,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/amazonclouddirectory/2017-01-11/facet/create#x-amz-data-partition':
+  /amazonclouddirectory/2017-01-11/facet/create#x-amz-data-partition:
     put:
       operationId: CreateFacet
       description: Creates a new <a>Facet</a> in a schema. Facet creation is allowed only in development or applied schemas.
@@ -1174,7 +1182,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/amazonclouddirectory/2017-01-11/index#x-amz-data-partition':
+  /amazonclouddirectory/2017-01-11/index#x-amz-data-partition:
     put:
       operationId: CreateIndex
       description: 'Creates an index object. See <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_indexing.html">Indexing</a> for more information.'
@@ -1297,7 +1305,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/amazonclouddirectory/2017-01-11/object#x-amz-data-partition':
+  /amazonclouddirectory/2017-01-11/object#x-amz-data-partition:
     put:
       operationId: CreateObject
       description: 'Creates an object in a <a>Directory</a>. Additionally attaches the object to a parent, if a parent reference and <code>LinkName</code> is specified. An object is simply a collection of <a>Facet</a> attributes. You can also use this API call to create a policy object, if the facet from which you create the object is a policy facet. '
@@ -1504,7 +1512,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/amazonclouddirectory/2017-01-11/typedlink/facet/create#x-amz-data-partition':
+  /amazonclouddirectory/2017-01-11/typedlink/facet/create#x-amz-data-partition:
     put:
       operationId: CreateTypedLinkFacet
       description: 'Creates a <a>TypedLinkFacet</a>. For more information, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink">Typed link</a>.'
@@ -1612,7 +1620,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/amazonclouddirectory/2017-01-11/directory#x-amz-data-partition':
+  /amazonclouddirectory/2017-01-11/directory#x-amz-data-partition:
     put:
       operationId: DeleteDirectory
       description: Deletes a directory. Only disabled directories can be deleted. A deleted directory cannot be undone. Exercise extreme caution when deleting directories.
@@ -1692,7 +1700,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/amazonclouddirectory/2017-01-11/facet/delete#x-amz-data-partition':
+  /amazonclouddirectory/2017-01-11/facet/delete#x-amz-data-partition:
     put:
       operationId: DeleteFacet
       description: Deletes a given <a>Facet</a>. All attributes and <a>Rule</a>s that are associated with the facet will be deleted. Only development schema facets are allowed deletion.
@@ -1787,7 +1795,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/amazonclouddirectory/2017-01-11/object/delete#x-amz-data-partition':
+  /amazonclouddirectory/2017-01-11/object/delete#x-amz-data-partition:
     put:
       operationId: DeleteObject
       description: Deletes an object and its associated attributes. Only objects with no children and no parents can be deleted.
@@ -1883,7 +1891,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/amazonclouddirectory/2017-01-11/schema#x-amz-data-partition':
+  /amazonclouddirectory/2017-01-11/schema#x-amz-data-partition:
     put:
       operationId: DeleteSchema
       description: 'Deletes a given schema. Schemas in a development and published state can only be deleted. '
@@ -1957,7 +1965,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/amazonclouddirectory/2017-01-11/typedlink/facet/delete#x-amz-data-partition':
+  /amazonclouddirectory/2017-01-11/typedlink/facet/delete#x-amz-data-partition:
     put:
       operationId: DeleteTypedLinkFacet
       description: 'Deletes a <a>TypedLinkFacet</a>. For more information, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink">Typed link</a>.'
@@ -2044,7 +2052,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/amazonclouddirectory/2017-01-11/index/detach#x-amz-data-partition':
+  /amazonclouddirectory/2017-01-11/index/detach#x-amz-data-partition:
     put:
       operationId: DetachFromIndex
       description: Detaches the specified object from the specified index.
@@ -2154,7 +2162,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/amazonclouddirectory/2017-01-11/object/detach#x-amz-data-partition':
+  /amazonclouddirectory/2017-01-11/object/detach#x-amz-data-partition:
     put:
       operationId: DetachObject
       description: Detaches a given object from the parent object. The object that is to be detached from the parent is specified by the link name.
@@ -2257,7 +2265,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/amazonclouddirectory/2017-01-11/policy/detach#x-amz-data-partition':
+  /amazonclouddirectory/2017-01-11/policy/detach#x-amz-data-partition:
     put:
       operationId: DetachPolicy
       description: Detaches a policy from an object.
@@ -2361,7 +2369,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/amazonclouddirectory/2017-01-11/typedlink/detach#x-amz-data-partition':
+  /amazonclouddirectory/2017-01-11/typedlink/detach#x-amz-data-partition:
     put:
       operationId: DetachTypedLink
       description: 'Detaches a typed link from a specified source and target object. For more information, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink">Typed link</a>.'
@@ -2462,7 +2470,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/amazonclouddirectory/2017-01-11/directory/disable#x-amz-data-partition':
+  /amazonclouddirectory/2017-01-11/directory/disable#x-amz-data-partition:
     put:
       operationId: DisableDirectory
       description: Disables the specified directory. Disabled directories cannot be read or written to. Only enabled directories can be disabled. Disabled directories may be reenabled.
@@ -2536,7 +2544,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/amazonclouddirectory/2017-01-11/directory/enable#x-amz-data-partition':
+  /amazonclouddirectory/2017-01-11/directory/enable#x-amz-data-partition:
     put:
       operationId: EnableDirectory
       description: 'Enables the specified directory. Only disabled directories can be enabled. Once enabled, the directory can then be read and written to.'
@@ -2684,7 +2692,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/amazonclouddirectory/2017-01-11/directory/get#x-amz-data-partition':
+  /amazonclouddirectory/2017-01-11/directory/get#x-amz-data-partition:
     post:
       operationId: GetDirectory
       description: Retrieves metadata about a directory.
@@ -2746,7 +2754,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/amazonclouddirectory/2017-01-11/facet#x-amz-data-partition':
+  /amazonclouddirectory/2017-01-11/facet#x-amz-data-partition:
     post:
       operationId: GetFacet
       description: 'Gets details of the <a>Facet</a>, such as facet name, attributes, <a>Rule</a>s, or <code>ObjectType</code>. You can call this on all kinds of schema facets -- published, development, or applied.'
@@ -2940,7 +2948,7 @@ paths:
                     - LEAF_NODE
                     - POLICY
                     - INDEX
-  '/amazonclouddirectory/2017-01-11/typedlink/attributes/get#x-amz-data-partition':
+  /amazonclouddirectory/2017-01-11/typedlink/attributes/get#x-amz-data-partition:
     post:
       operationId: GetLinkAttributes
       description: Retrieves attributes that are associated with a typed link.
@@ -3057,7 +3065,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/amazonclouddirectory/2017-01-11/object/attributes/get#x-amz-data-partition':
+  /amazonclouddirectory/2017-01-11/object/attributes/get#x-amz-data-partition:
     post:
       operationId: GetObjectAttributes
       description: Retrieves attributes within a facet that are associated with an object.
@@ -3179,7 +3187,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/amazonclouddirectory/2017-01-11/object/information#x-amz-data-partition':
+  /amazonclouddirectory/2017-01-11/object/information#x-amz-data-partition:
     post:
       operationId: GetObjectInformation
       description: Retrieves metadata about an object.
@@ -3278,7 +3286,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/amazonclouddirectory/2017-01-11/schema/json#x-amz-data-partition':
+  /amazonclouddirectory/2017-01-11/schema/json#x-amz-data-partition:
     post:
       operationId: GetSchemaAsJson
       description: 'Retrieves a JSON representation of the schema. See <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_schemas.html#jsonformat">JSON Schema Format</a> for more information.'
@@ -3429,7 +3437,7 @@ paths:
                 Document:
                   description: The replacement JSON schema.
                   type: string
-  '/amazonclouddirectory/2017-01-11/typedlink/facet/get#x-amz-data-partition':
+  /amazonclouddirectory/2017-01-11/typedlink/facet/get#x-amz-data-partition:
     post:
       operationId: GetTypedLinkFacetInformation
       description: 'Returns the identity attribute order for a specific <a>TypedLinkFacet</a>. For more information, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink">Typed link</a>.'
@@ -3624,7 +3632,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/amazonclouddirectory/2017-01-11/object/indices#x-amz-data-partition':
+  /amazonclouddirectory/2017-01-11/object/indices#x-amz-data-partition:
     post:
       operationId: ListAttachedIndices
       description: Lists indices attached to the specified object.
@@ -3931,7 +3939,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/amazonclouddirectory/2017-01-11/facet/attributes#x-amz-data-partition':
+  /amazonclouddirectory/2017-01-11/facet/attributes#x-amz-data-partition:
     post:
       operationId: ListFacetAttributes
       description: Retrieves attributes attached to the facet.
@@ -4045,7 +4053,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/amazonclouddirectory/2017-01-11/facet/list#x-amz-data-partition':
+  /amazonclouddirectory/2017-01-11/facet/list#x-amz-data-partition:
     post:
       operationId: ListFacetNames
       description: Retrieves the names of facets that exist in a schema.
@@ -4145,7 +4153,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/amazonclouddirectory/2017-01-11/typedlink/incoming#x-amz-data-partition':
+  /amazonclouddirectory/2017-01-11/typedlink/incoming#x-amz-data-partition:
     post:
       operationId: ListIncomingTypedLinks
       description: 'Returns a paginated list of all the incoming <a>TypedLinkSpecifier</a> information for an object. It also supports filtering by typed link facet and identity attributes. For more information, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink">Typed link</a>.'
@@ -4275,7 +4283,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/amazonclouddirectory/2017-01-11/index/targets#x-amz-data-partition':
+  /amazonclouddirectory/2017-01-11/index/targets#x-amz-data-partition:
     post:
       operationId: ListIndex
       description: Lists objects attached to the specified index.
@@ -4416,7 +4424,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/amazonclouddirectory/2017-01-11/object/attributes#x-amz-data-partition':
+  /amazonclouddirectory/2017-01-11/object/attributes#x-amz-data-partition:
     post:
       operationId: ListObjectAttributes
       description: 'Lists all attributes that are associated with an object. '
@@ -4556,7 +4564,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/amazonclouddirectory/2017-01-11/object/children#x-amz-data-partition':
+  /amazonclouddirectory/2017-01-11/object/children#x-amz-data-partition:
     post:
       operationId: ListObjectChildren
       description: Returns a paginated list of child objects that are associated with a given object.
@@ -4686,7 +4694,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/amazonclouddirectory/2017-01-11/object/parentpaths#x-amz-data-partition':
+  /amazonclouddirectory/2017-01-11/object/parentpaths#x-amz-data-partition:
     post:
       operationId: ListObjectParentPaths
       description: '<p>Retrieves all available parent paths for any object type such as node, leaf node, policy node, and index node objects. For more information about objects, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#dirstructure">Directory Structure</a>.</p> <p>Use this API to evaluate all parents for an object. The call returns all objects from the root of the directory up to the requested object. The API returns the number of paths based on user-defined <code>MaxResults</code>, in case there are multiple paths to the parent. The order of the paths and nodes returned is consistent among multiple API calls unless the objects are deleted or moved. Paths not leading to the directory root are ignored from the target object.</p>'
@@ -4801,7 +4809,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/amazonclouddirectory/2017-01-11/object/parent#x-amz-data-partition':
+  /amazonclouddirectory/2017-01-11/object/parent#x-amz-data-partition:
     post:
       operationId: ListObjectParents
       description: Lists parent objects that are associated with a given object in pagination fashion.
@@ -4931,7 +4939,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/amazonclouddirectory/2017-01-11/object/policy#x-amz-data-partition':
+  /amazonclouddirectory/2017-01-11/object/policy#x-amz-data-partition:
     post:
       operationId: ListObjectPolicies
       description: Returns policies attached to an object in pagination fashion.
@@ -5055,7 +5063,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/amazonclouddirectory/2017-01-11/typedlink/outgoing#x-amz-data-partition':
+  /amazonclouddirectory/2017-01-11/typedlink/outgoing#x-amz-data-partition:
     post:
       operationId: ListOutgoingTypedLinks
       description: 'Returns a paginated list of all the outgoing <a>TypedLinkSpecifier</a> information for an object. It also supports filtering by typed link facet and identity attributes. For more information, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink">Typed link</a>.'
@@ -5185,7 +5193,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/amazonclouddirectory/2017-01-11/policy/attachment#x-amz-data-partition':
+  /amazonclouddirectory/2017-01-11/policy/attachment#x-amz-data-partition:
     post:
       operationId: ListPolicyAttachments
       description: Returns all of the <code>ObjectIdentifiers</code> to which a given policy is attached.
@@ -5511,7 +5519,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/amazonclouddirectory/2017-01-11/typedlink/facet/attributes#x-amz-data-partition':
+  /amazonclouddirectory/2017-01-11/typedlink/facet/attributes#x-amz-data-partition:
     post:
       operationId: ListTypedLinkFacetAttributes
       description: 'Returns a paginated list of all attribute definitions for a particular <a>TypedLinkFacet</a>. For more information, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink">Typed link</a>.'
@@ -5623,7 +5631,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/amazonclouddirectory/2017-01-11/typedlink/facet/list#x-amz-data-partition':
+  /amazonclouddirectory/2017-01-11/typedlink/facet/list#x-amz-data-partition:
     post:
       operationId: ListTypedLinkFacetNames
       description: 'Returns a paginated list of <code>TypedLink</code> facet names for a particular schema. For more information, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink">Typed link</a>.'
@@ -5723,7 +5731,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/amazonclouddirectory/2017-01-11/policy/lookup#x-amz-data-partition':
+  /amazonclouddirectory/2017-01-11/policy/lookup#x-amz-data-partition:
     post:
       operationId: LookupPolicy
       description: 'Lists all policies from the root of the <a>Directory</a> to the object specified. If there are no policies present, an empty list is returned. If policies are present, and if some objects don''t have the policies attached, it returns the <code>ObjectIdentifier</code> for such objects. If policies are present, it returns <code>ObjectIdentifier</code>, <code>policyId</code>, and <code>policyType</code>. Paths that don''t lead to the root from the target object are ignored. For more information, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#policies">Policies</a>.'
@@ -5838,7 +5846,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/amazonclouddirectory/2017-01-11/schema/publish#x-amz-data-partition':
+  /amazonclouddirectory/2017-01-11/schema/publish#x-amz-data-partition:
     put:
       operationId: PublishSchema
       description: Publishes a development schema with a major version and a recommended minor version.
@@ -5939,7 +5947,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/amazonclouddirectory/2017-01-11/object/facets/delete#x-amz-data-partition':
+  /amazonclouddirectory/2017-01-11/object/facets/delete#x-amz-data-partition:
     put:
       operationId: RemoveFacetFromObject
       description: Removes the specified facet from the specified object.
@@ -6218,7 +6226,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/amazonclouddirectory/2017-01-11/typedlink/attributes/update#x-amz-data-partition':
+  /amazonclouddirectory/2017-01-11/typedlink/attributes/update#x-amz-data-partition:
     post:
       operationId: UpdateLinkAttributes
       description: 'Updates a given typed link’s attributes. Attributes to be updated must not contribute to the typed link’s identity, as defined by its <code>IdentityAttributeOrder</code>.'
@@ -6329,7 +6337,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/amazonclouddirectory/2017-01-11/object/update#x-amz-data-partition':
+  /amazonclouddirectory/2017-01-11/object/update#x-amz-data-partition:
     put:
       operationId: UpdateObjectAttributes
       description: Updates a given object's attributes.
@@ -6437,7 +6445,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/amazonclouddirectory/2017-01-11/schema/update#x-amz-data-partition':
+  /amazonclouddirectory/2017-01-11/schema/update#x-amz-data-partition:
     put:
       operationId: UpdateSchema
       description: Updates the schema name with a new name. Only development schema names can be updated.
@@ -6520,7 +6528,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/amazonclouddirectory/2017-01-11/typedlink/facet#x-amz-data-partition':
+  /amazonclouddirectory/2017-01-11/typedlink/facet#x-amz-data-partition:
     put:
       operationId: UpdateTypedLinkFacet
       description: 'Updates a <a>TypedLinkFacet</a>. For more information, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink">Typed link</a>.'

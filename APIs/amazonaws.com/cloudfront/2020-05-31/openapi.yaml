@@ -711,7 +711,7 @@ paths:
           description: The maximum number of distributions you want in the response body.
           schema:
             type: string
-  '/2020-05-31/distribution#WithTags':
+  /2020-05-31/distribution#WithTags:
     post:
       operationId: CreateDistributionWithTags2020_05_31
       description: Create a new distribution with tags.
@@ -1832,7 +1832,7 @@ paths:
           description: The value that you provided for the <code>MaxItems</code> request parameter.
           schema:
             type: string
-  '/2020-05-31/streaming-distribution#WithTags':
+  /2020-05-31/streaming-distribution#WithTags:
     post:
       operationId: CreateStreamingDistributionWithTags2020_05_31
       description: Create a new streaming distribution with tags.
@@ -4351,7 +4351,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/2020-05-31/tagging#Resource':
+  /2020-05-31/tagging#Resource:
     get:
       operationId: ListTagsForResource2020_05_31
       description: List tags for a CloudFront resource.
@@ -4402,7 +4402,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/2020-05-31/tagging#Operation=Tag&Resource':
+  /2020-05-31/tagging#Operation=Tag&Resource:
     post:
       operationId: TagResource2020_05_31
       description: Add tags to a CloudFront resource.
@@ -4472,7 +4472,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/2020-05-31/tagging#Operation=Untag&Resource':
+  /2020-05-31/tagging#Operation=Untag&Resource:
     post:
       operationId: UntagResource2020_05_31
       description: Remove tags from a CloudFront resource.

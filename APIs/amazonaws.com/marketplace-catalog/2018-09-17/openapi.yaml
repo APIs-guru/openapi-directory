@@ -51,13 +51,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The AWS Marketplace Catalog multi-region endpoint
   - url: 'https://catalog.marketplace.{region}.amazonaws.com'
@@ -77,13 +81,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The AWS Marketplace Catalog multi-region endpoint
   - url: 'http://catalog.marketplace.{region}.amazonaws.com.cn'
@@ -105,7 +113,7 @@ servers:
         default: cn-north-1
     description: The AWS Marketplace Catalog endpoint for China (Beijing) and China (Ningxia)
 paths:
-  '/CancelChangeSet#catalog&changeSetId':
+  /CancelChangeSet#catalog&changeSetId:
     patch:
       operationId: CancelChangeSet
       description: 'Used to cancel an open change request. Must be sent before the status of the request changes to <code>APPLYING</code>, the final stage of completing your change request. You can describe a change during the 60-day request history retention period for API calls.'
@@ -179,7 +187,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/DescribeChangeSet#catalog&changeSetId':
+  /DescribeChangeSet#catalog&changeSetId:
     get:
       operationId: DescribeChangeSet
       description: Provides information about a given change set.
@@ -247,7 +255,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/DescribeEntity#catalog&entityId':
+  /DescribeEntity#catalog&entityId:
     get:
       operationId: DescribeEntity
       description: Returns the metadata and content of the entity.

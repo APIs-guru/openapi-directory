@@ -51,13 +51,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The AWS S3 Control multi-region endpoint
   - url: 'https://s3-control.{region}.amazonaws.com'
@@ -77,13 +81,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The AWS S3 Control multi-region endpoint
   - url: 'http://s3-control.{region}.amazonaws.com.cn'
@@ -224,7 +232,7 @@ paths:
             type: string
             minLength: 3
             maxLength: 50
-  '/v20180820/jobs#x-amz-account-id':
+  /v20180820/jobs#x-amz-account-id:
     post:
       operationId: CreateJob
       description: '<p>You can use Amazon S3 Batch Operations to perform large-scale Batch Operations on Amazon S3 objects. Amazon S3 Batch Operations can execute a single operation or action on lists of Amazon S3 objects that you specify. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-basics.html">Amazon S3 Batch Operations</a> in the Amazon Simple Storage Service Developer Guide.</p> <p>Related actions include:</p> <ul> <li> <p> <a>DescribeJob</a> </p> </li> <li> <p> <a>ListJobs</a> </p> </li> <li> <p> <a>UpdateJobPriority</a> </p> </li> <li> <p> <a>UpdateJobStatus</a> </p> </li> </ul>'
@@ -706,7 +714,7 @@ paths:
                   type: array
                   items:
                     $ref: '#/components/schemas/S3Tag'
-  '/v20180820/configuration/publicAccessBlock#x-amz-account-id':
+  /v20180820/configuration/publicAccessBlock#x-amz-account-id:
     delete:
       operationId: DeletePublicAccessBlock
       description: Removes the <code>PublicAccessBlock</code> configuration for an Amazon Web Services account.
@@ -892,7 +900,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/v20180820/accesspoint#x-amz-account-id':
+  /v20180820/accesspoint#x-amz-account-id:
     get:
       operationId: ListAccessPoints
       description: 'Returns a list of the access points currently associated with the specified bucket. You can retrieve up to 1000 access points per call. If the specified bucket has more than 1,000 access points (or the number specified in <code>maxResults</code>, whichever is less), the response will include a continuation token that you can use to list the additional access points.'

@@ -51,13 +51,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The Elastic Beanstalk multi-region endpoint
   - url: 'https://elasticbeanstalk.{region}.amazonaws.com'
@@ -77,13 +81,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The Elastic Beanstalk multi-region endpoint
   - url: 'http://elasticbeanstalk.{region}.amazonaws.com.cn'
@@ -106,7 +114,7 @@ servers:
     description: The Elastic Beanstalk endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
-  '/#Action=AbortEnvironmentUpdate':
+  /#Action=AbortEnvironmentUpdate:
     get:
       x-aws-operation-name: AbortEnvironmentUpdate
       operationId: GET_AbortEnvironmentUpdate
@@ -190,7 +198,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=ApplyEnvironmentManagedAction':
+  /#Action=ApplyEnvironmentManagedAction:
     get:
       x-aws-operation-name: ApplyEnvironmentManagedAction
       operationId: GET_ApplyEnvironmentManagedAction
@@ -298,7 +306,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=AssociateEnvironmentOperationsRole':
+  /#Action=AssociateEnvironmentOperationsRole:
     get:
       x-aws-operation-name: AssociateEnvironmentOperationsRole
       operationId: GET_AssociateEnvironmentOperationsRole
@@ -384,7 +392,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=CheckDNSAvailability':
+  /#Action=CheckDNSAvailability:
     get:
       x-aws-operation-name: CheckDNSAvailability
       operationId: GET_CheckDNSAvailability
@@ -458,7 +466,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=ComposeEnvironments':
+  /#Action=ComposeEnvironments:
     get:
       x-aws-operation-name: ComposeEnvironments
       operationId: GET_ComposeEnvironments
@@ -572,7 +580,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=CreateApplication':
+  /#Action=CreateApplication:
     get:
       x-aws-operation-name: CreateApplication
       operationId: GET_CreateApplication
@@ -687,7 +695,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=CreateApplicationVersion':
+  /#Action=CreateApplicationVersion:
     get:
       x-aws-operation-name: CreateApplicationVersion
       operationId: GET_CreateApplicationVersion
@@ -917,7 +925,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=CreateConfigurationTemplate':
+  /#Action=CreateConfigurationTemplate:
     get:
       x-aws-operation-name: CreateConfigurationTemplate
       operationId: GET_CreateConfigurationTemplate
@@ -1090,7 +1098,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=CreateEnvironment':
+  /#Action=CreateEnvironment:
     get:
       x-aws-operation-name: CreateEnvironment
       operationId: GET_CreateEnvironment
@@ -1296,7 +1304,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=CreatePlatformVersion':
+  /#Action=CreatePlatformVersion:
     get:
       x-aws-operation-name: CreatePlatformVersion
       operationId: GET_CreatePlatformVersion
@@ -1448,7 +1456,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=CreateStorageLocation':
+  /#Action=CreateStorageLocation:
     get:
       x-aws-operation-name: CreateStorageLocation
       operationId: GET_CreateStorageLocation
@@ -1545,7 +1553,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=DeleteApplication':
+  /#Action=DeleteApplication:
     get:
       x-aws-operation-name: DeleteApplication
       operationId: GET_DeleteApplication
@@ -1629,7 +1637,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=DeleteApplicationVersion':
+  /#Action=DeleteApplicationVersion:
     get:
       x-aws-operation-name: DeleteApplicationVersion
       operationId: GET_DeleteApplicationVersion
@@ -1757,7 +1765,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=DeleteConfigurationTemplate':
+  /#Action=DeleteConfigurationTemplate:
     get:
       x-aws-operation-name: DeleteConfigurationTemplate
       operationId: GET_DeleteConfigurationTemplate
@@ -1843,7 +1851,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=DeleteEnvironmentConfiguration':
+  /#Action=DeleteEnvironmentConfiguration:
     get:
       x-aws-operation-name: DeleteEnvironmentConfiguration
       operationId: GET_DeleteEnvironmentConfiguration
@@ -1917,7 +1925,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=DeletePlatformVersion':
+  /#Action=DeletePlatformVersion:
     get:
       x-aws-operation-name: DeletePlatformVersion
       operationId: GET_DeletePlatformVersion
@@ -2037,7 +2045,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=DescribeAccountAttributes':
+  /#Action=DescribeAccountAttributes:
     get:
       x-aws-operation-name: DescribeAccountAttributes
       operationId: GET_DescribeAccountAttributes
@@ -2110,7 +2118,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=DescribeApplicationVersions':
+  /#Action=DescribeApplicationVersions:
     get:
       x-aws-operation-name: DescribeApplicationVersions
       operationId: GET_DescribeApplicationVersions
@@ -2206,7 +2214,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=DescribeApplications':
+  /#Action=DescribeApplications:
     get:
       x-aws-operation-name: DescribeApplications
       operationId: GET_DescribeApplications
@@ -2280,7 +2288,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=DescribeConfigurationOptions':
+  /#Action=DescribeConfigurationOptions:
     get:
       x-aws-operation-name: DescribeConfigurationOptions
       operationId: GET_DescribeConfigurationOptions
@@ -2402,7 +2410,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=DescribeConfigurationSettings':
+  /#Action=DescribeConfigurationSettings:
     get:
       x-aws-operation-name: DescribeConfigurationSettings
       operationId: GET_DescribeConfigurationSettings
@@ -2504,7 +2512,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=DescribeEnvironmentHealth':
+  /#Action=DescribeEnvironmentHealth:
     get:
       x-aws-operation-name: DescribeEnvironmentHealth
       operationId: GET_DescribeEnvironmentHealth
@@ -2616,7 +2624,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=DescribeEnvironmentManagedActionHistory':
+  /#Action=DescribeEnvironmentManagedActionHistory:
     get:
       x-aws-operation-name: DescribeEnvironmentManagedActionHistory
       operationId: GET_DescribeEnvironmentManagedActionHistory
@@ -2732,7 +2740,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=DescribeEnvironmentManagedActions':
+  /#Action=DescribeEnvironmentManagedActions:
     get:
       x-aws-operation-name: DescribeEnvironmentManagedActions
       operationId: GET_DescribeEnvironmentManagedActions
@@ -2833,7 +2841,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=DescribeEnvironmentResources':
+  /#Action=DescribeEnvironmentResources:
     get:
       x-aws-operation-name: DescribeEnvironmentResources
       operationId: GET_DescribeEnvironmentResources
@@ -2925,7 +2933,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=DescribeEnvironments':
+  /#Action=DescribeEnvironments:
     get:
       x-aws-operation-name: DescribeEnvironments
       operationId: GET_DescribeEnvironments
@@ -3050,7 +3058,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=DescribeEvents':
+  /#Action=DescribeEvents:
     get:
       x-aws-operation-name: DescribeEvents
       operationId: GET_DescribeEvents
@@ -3219,7 +3227,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=DescribeInstancesHealth':
+  /#Action=DescribeInstancesHealth:
     get:
       x-aws-operation-name: DescribeInstancesHealth
       operationId: GET_DescribeInstancesHealth
@@ -3339,7 +3347,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=DescribePlatformVersion':
+  /#Action=DescribePlatformVersion:
     get:
       x-aws-operation-name: DescribePlatformVersion
       operationId: GET_DescribePlatformVersion
@@ -3435,7 +3443,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=DisassociateEnvironmentOperationsRole':
+  /#Action=DisassociateEnvironmentOperationsRole:
     get:
       x-aws-operation-name: DisassociateEnvironmentOperationsRole
       operationId: GET_DisassociateEnvironmentOperationsRole
@@ -3513,7 +3521,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=ListAvailableSolutionStacks':
+  /#Action=ListAvailableSolutionStacks:
     get:
       x-aws-operation-name: ListAvailableSolutionStacks
       operationId: GET_ListAvailableSolutionStacks
@@ -3574,7 +3582,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=ListPlatformBranches':
+  /#Action=ListPlatformBranches:
     get:
       x-aws-operation-name: ListPlatformBranches
       operationId: GET_ListPlatformBranches
@@ -3673,7 +3681,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=ListPlatformVersions':
+  /#Action=ListPlatformVersions:
     get:
       x-aws-operation-name: ListPlatformVersions
       operationId: GET_ListPlatformVersions
@@ -3796,7 +3804,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=ListTagsForResource':
+  /#Action=ListTagsForResource:
     get:
       x-aws-operation-name: ListTagsForResource
       operationId: GET_ListTagsForResource
@@ -3904,7 +3912,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=RebuildEnvironment':
+  /#Action=RebuildEnvironment:
     get:
       x-aws-operation-name: RebuildEnvironment
       operationId: GET_RebuildEnvironment
@@ -3988,7 +3996,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=RequestEnvironmentInfo':
+  /#Action=RequestEnvironmentInfo:
     get:
       x-aws-operation-name: RequestEnvironmentInfo
       operationId: GET_RequestEnvironmentInfo
@@ -4069,7 +4077,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=RestartAppServer':
+  /#Action=RestartAppServer:
     get:
       x-aws-operation-name: RestartAppServer
       operationId: GET_RestartAppServer
@@ -4141,7 +4149,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=RetrieveEnvironmentInfo':
+  /#Action=RetrieveEnvironmentInfo:
     get:
       x-aws-operation-name: RetrieveEnvironmentInfo
       operationId: GET_RetrieveEnvironmentInfo
@@ -4230,7 +4238,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=SwapEnvironmentCNAMEs':
+  /#Action=SwapEnvironmentCNAMEs:
     get:
       x-aws-operation-name: SwapEnvironmentCNAMEs
       operationId: GET_SwapEnvironmentCNAMEs
@@ -4316,7 +4324,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=TerminateEnvironment':
+  /#Action=TerminateEnvironment:
     get:
       x-aws-operation-name: TerminateEnvironment
       operationId: GET_TerminateEnvironment
@@ -4420,7 +4428,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=UpdateApplication':
+  /#Action=UpdateApplication:
     get:
       x-aws-operation-name: UpdateApplication
       operationId: GET_UpdateApplication
@@ -4501,7 +4509,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=UpdateApplicationResourceLifecycle':
+  /#Action=UpdateApplicationResourceLifecycle:
     get:
       x-aws-operation-name: UpdateApplicationResourceLifecycle
       operationId: GET_UpdateApplicationResourceLifecycle
@@ -4601,7 +4609,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=UpdateApplicationVersion':
+  /#Action=UpdateApplicationVersion:
     get:
       x-aws-operation-name: UpdateApplicationVersion
       operationId: GET_UpdateApplicationVersion
@@ -4690,7 +4698,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=UpdateConfigurationTemplate':
+  /#Action=UpdateConfigurationTemplate:
     get:
       x-aws-operation-name: UpdateConfigurationTemplate
       operationId: GET_UpdateConfigurationTemplate
@@ -4819,7 +4827,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=UpdateEnvironment':
+  /#Action=UpdateEnvironment:
     get:
       x-aws-operation-name: UpdateEnvironment
       operationId: GET_UpdateEnvironment
@@ -5007,7 +5015,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=UpdateTagsForResource':
+  /#Action=UpdateTagsForResource:
     get:
       x-aws-operation-name: UpdateTagsForResource
       operationId: GET_UpdateTagsForResource
@@ -5147,7 +5155,7 @@ paths:
             type: string
             enum:
               - '2010-12-01'
-  '/#Action=ValidateConfigurationSettings':
+  /#Action=ValidateConfigurationSettings:
     get:
       x-aws-operation-name: ValidateConfigurationSettings
       operationId: GET_ValidateConfigurationSettings

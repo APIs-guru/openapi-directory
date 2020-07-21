@@ -51,13 +51,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The CodeCommit multi-region endpoint
   - url: 'https://codecommit.{region}.amazonaws.com'
@@ -77,13 +81,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The CodeCommit multi-region endpoint
   - url: 'http://codecommit.{region}.amazonaws.com.cn'
@@ -106,7 +114,7 @@ servers:
     description: The CodeCommit endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
-  '/#X-Amz-Target=CodeCommit_20150413.AssociateApprovalRuleTemplateWithRepository':
+  /#X-Amz-Target=CodeCommit_20150413.AssociateApprovalRuleTemplateWithRepository:
     post:
       operationId: AssociateApprovalRuleTemplateWithRepository
       description: 'Creates an association between an approval rule template and a specified repository. Then, the next time a pull request is created in the repository where the destination reference (if specified) matches the destination reference (branch) for the pull request, an approval rule that matches the template conditions is automatically created for that pull request. If no destination references are specified in the template, an approval rule that matches the template contents is created for all pull requests in that repository.'
@@ -207,7 +215,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeCommit_20150413.BatchAssociateApprovalRuleTemplateWithRepositories':
+  /#X-Amz-Target=CodeCommit_20150413.BatchAssociateApprovalRuleTemplateWithRepositories:
     post:
       operationId: BatchAssociateApprovalRuleTemplateWithRepositories
       description: 'Creates an association between an approval rule template and one or more specified repositories. '
@@ -300,7 +308,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeCommit_20150413.BatchDescribeMergeConflicts':
+  /#X-Amz-Target=CodeCommit_20150413.BatchDescribeMergeConflicts:
     post:
       operationId: BatchDescribeMergeConflicts
       description: Returns information about one or more merge conflicts in the attempted merge of two commit specifiers using the squash or three-way merge strategy.
@@ -459,7 +467,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeCommit_20150413.BatchDisassociateApprovalRuleTemplateFromRepositories':
+  /#X-Amz-Target=CodeCommit_20150413.BatchDisassociateApprovalRuleTemplateFromRepositories:
     post:
       operationId: BatchDisassociateApprovalRuleTemplateFromRepositories
       description: 'Removes the association between an approval rule template and one or more specified repositories. '
@@ -552,7 +560,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeCommit_20150413.BatchGetCommits':
+  /#X-Amz-Target=CodeCommit_20150413.BatchGetCommits:
     post:
       operationId: BatchGetCommits
       description: Returns information about the contents of one or more commits in a repository.
@@ -645,7 +653,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeCommit_20150413.BatchGetRepositories':
+  /#X-Amz-Target=CodeCommit_20150413.BatchGetRepositories:
     post:
       operationId: BatchGetRepositories
       description: <p>Returns information about one or more repositories.</p> <note> <p>The description field for a repository accepts all HTML characters and all valid Unicode characters. Applications that do not HTML-encode the description and display it in a webpage can expose users to potentially malicious code. Make sure that you HTML-encode the description field in any application that uses this API to display the repository description on a webpage.</p> </note>
@@ -726,7 +734,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeCommit_20150413.CreateApprovalRuleTemplate':
+  /#X-Amz-Target=CodeCommit_20150413.CreateApprovalRuleTemplate:
     post:
       operationId: CreateApprovalRuleTemplate
       description: 'Creates a template for approval rules that can then be associated with one or more repositories in your AWS account. When you associate a template with a repository, AWS CodeCommit creates an approval rule that matches the conditions of the template for all pull requests that meet the conditions of the template. For more information, see <a>AssociateApprovalRuleTemplateWithRepository</a>.'
@@ -801,7 +809,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeCommit_20150413.CreateBranch':
+  /#X-Amz-Target=CodeCommit_20150413.CreateBranch:
     post:
       operationId: CreateBranch
       description: '<p>Creates a branch in a repository and points the branch to a commit.</p> <note> <p>Calling the create branch operation does not set a repository''s default branch. To do this, call the update default branch operation.</p> </note>'
@@ -914,7 +922,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeCommit_20150413.CreateCommit':
+  /#X-Amz-Target=CodeCommit_20150413.CreateCommit:
     post:
       operationId: CreateCommit
       description: Creates a commit for a repository on the tip of a specified branch.
@@ -1175,7 +1183,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeCommit_20150413.CreatePullRequest':
+  /#X-Amz-Target=CodeCommit_20150413.CreatePullRequest:
     post:
       operationId: CreatePullRequest
       description: Creates a pull request in the specified repository.
@@ -1358,7 +1366,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeCommit_20150413.CreatePullRequestApprovalRule':
+  /#X-Amz-Target=CodeCommit_20150413.CreatePullRequestApprovalRule:
     post:
       operationId: CreatePullRequestApprovalRule
       description: Creates an approval rule for a pull request.
@@ -1481,7 +1489,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeCommit_20150413.CreateRepository':
+  /#X-Amz-Target=CodeCommit_20150413.CreateRepository:
     post:
       operationId: CreateRepository
       description: 'Creates a new, empty repository.'
@@ -1598,7 +1606,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeCommit_20150413.CreateUnreferencedMergeCommit':
+  /#X-Amz-Target=CodeCommit_20150413.CreateUnreferencedMergeCommit:
     post:
       operationId: CreateUnreferencedMergeCommit
       description: '<p>Creates an unreferenced commit that represents the result of merging two branches using a specified merge strategy. This can help you determine the outcome of a potential merge. This API cannot be used with the fast-forward merge strategy because that strategy does not create a merge commit.</p> <note> <p>This unreferenced merge commit can only be accessed using the GetCommit API or through git commands such as git fetch. To retrieve this commit, you must specify its commit ID or otherwise reference it.</p> </note>'
@@ -1847,7 +1855,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeCommit_20150413.DeleteApprovalRuleTemplate':
+  /#X-Amz-Target=CodeCommit_20150413.DeleteApprovalRuleTemplate:
     post:
       operationId: DeleteApprovalRuleTemplate
       description: Deletes a specified approval rule template. Deleting a template does not remove approval rules on pull requests already created with the template.
@@ -1898,7 +1906,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeCommit_20150413.DeleteBranch':
+  /#X-Amz-Target=CodeCommit_20150413.DeleteBranch:
     post:
       operationId: DeleteBranch
       description: 'Deletes a branch from a repository, unless that branch is the default branch for the repository. '
@@ -1997,7 +2005,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeCommit_20150413.DeleteCommentContent':
+  /#X-Amz-Target=CodeCommit_20150413.DeleteCommentContent:
     post:
       operationId: DeleteCommentContent
       description: 'Deletes the content of a comment made on a change, file, or commit in a repository.'
@@ -2054,7 +2062,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeCommit_20150413.DeleteFile':
+  /#X-Amz-Target=CodeCommit_20150413.DeleteFile:
     post:
       operationId: DeleteFile
       description: Deletes a specified file from a specified branch. A commit is created on the branch that contains the revision. The file still exists in the commits earlier to the commit that contains the deletion.
@@ -2219,7 +2227,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeCommit_20150413.DeletePullRequestApprovalRule':
+  /#X-Amz-Target=CodeCommit_20150413.DeletePullRequestApprovalRule:
     post:
       operationId: DeletePullRequestApprovalRule
       description: 'Deletes an approval rule from a specified pull request. Approval rules can be deleted from a pull request only if the pull request is open, and if the approval rule was created specifically for a pull request and not generated from an approval rule template associated with the repository where the pull request was created. You cannot delete an approval rule from a merged or closed pull request.'
@@ -2324,7 +2332,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeCommit_20150413.DeleteRepository':
+  /#X-Amz-Target=CodeCommit_20150413.DeleteRepository:
     post:
       operationId: DeleteRepository
       description: '<p>Deletes a repository. If a specified repository was already deleted, a null repository ID is returned.</p> <important> <p>Deleting a repository also deletes all associated objects and metadata. After a repository is deleted, all future push calls to the deleted repository fail.</p> </important>'
@@ -2399,7 +2407,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeCommit_20150413.DescribeMergeConflicts':
+  /#X-Amz-Target=CodeCommit_20150413.DescribeMergeConflicts:
     post:
       operationId: DescribeMergeConflicts
       description: 'Returns information about one or more merge conflicts in the attempted merge of two commit specifiers using the squash or three-way merge strategy. If the merge option for the attempted merge is specified as FAST_FORWARD_MERGE, an exception is thrown.'
@@ -2582,7 +2590,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeCommit_20150413.DescribePullRequestEvents':
+  /#X-Amz-Target=CodeCommit_20150413.DescribePullRequestEvents:
     post:
       operationId: DescribePullRequestEvents
       description: Returns information about one or more pull request events.
@@ -2705,7 +2713,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeCommit_20150413.DisassociateApprovalRuleTemplateFromRepository':
+  /#X-Amz-Target=CodeCommit_20150413.DisassociateApprovalRuleTemplateFromRepository:
     post:
       operationId: DisassociateApprovalRuleTemplateFromRepository
       description: Removes the association between a template and a repository so that approval rules based on the template are not automatically created when pull requests are created in the specified repository. This does not delete any approval rules previously created for pull requests through the template association.
@@ -2800,7 +2808,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeCommit_20150413.EvaluatePullRequestApprovalRules':
+  /#X-Amz-Target=CodeCommit_20150413.EvaluatePullRequestApprovalRules:
     post:
       operationId: EvaluatePullRequestApprovalRules
       description: Evaluates whether a pull request has met all the conditions specified in its associated approval rules.
@@ -2899,7 +2907,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeCommit_20150413.GetApprovalRuleTemplate':
+  /#X-Amz-Target=CodeCommit_20150413.GetApprovalRuleTemplate:
     post:
       operationId: GetApprovalRuleTemplate
       description: Returns information about a specified approval rule template.
@@ -2950,7 +2958,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeCommit_20150413.GetBlob':
+  /#X-Amz-Target=CodeCommit_20150413.GetBlob:
     post:
       operationId: GetBlob
       description: Returns the base-64 encoded content of an individual blob in a repository.
@@ -3055,7 +3063,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeCommit_20150413.GetBranch':
+  /#X-Amz-Target=CodeCommit_20150413.GetBranch:
     post:
       operationId: GetBranch
       description: 'Returns information about a repository branch, including its name and the last commit ID.'
@@ -3154,7 +3162,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeCommit_20150413.GetComment':
+  /#X-Amz-Target=CodeCommit_20150413.GetComment:
     post:
       operationId: GetComment
       description: '<p>Returns the content of a comment made on a change, file, or commit in a repository. </p> <note> <p>Reaction counts might include numbers from user identities who were deleted after the reaction was made. For a count of reactions from active identities, use GetCommentReactions.</p> </note>'
@@ -3241,7 +3249,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeCommit_20150413.GetCommentReactions':
+  /#X-Amz-Target=CodeCommit_20150413.GetCommentReactions:
     post:
       operationId: GetCommentReactions
       description: Returns information about reactions to a specified comment ID. Reactions from users who have been deleted will not be included in the count.
@@ -3328,7 +3336,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeCommit_20150413.GetCommentsForComparedCommit':
+  /#X-Amz-Target=CodeCommit_20150413.GetCommentsForComparedCommit:
     post:
       operationId: GetCommentsForComparedCommit
       description: '<p>Returns information about comments made on the comparison between two commits.</p> <note> <p>Reaction counts might include numbers from user identities who were deleted after the reaction was made. For a count of reactions from active identities, use GetCommentReactions.</p> </note>'
@@ -3451,7 +3459,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeCommit_20150413.GetCommentsForPullRequest':
+  /#X-Amz-Target=CodeCommit_20150413.GetCommentsForPullRequest:
     post:
       operationId: GetCommentsForPullRequest
       description: '<p>Returns comments made on a pull request.</p> <note> <p>Reaction counts might include numbers from user identities who were deleted after the reaction was made. For a count of reactions from active identities, use GetCommentReactions.</p> </note>'
@@ -3598,7 +3606,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeCommit_20150413.GetCommit':
+  /#X-Amz-Target=CodeCommit_20150413.GetCommit:
     post:
       operationId: GetCommit
       description: 'Returns information about a commit, including commit message and committer information.'
@@ -3697,7 +3705,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeCommit_20150413.GetDifferences':
+  /#X-Amz-Target=CodeCommit_20150413.GetDifferences:
     post:
       operationId: GetDifferences
       description: 'Returns information about the differences in a valid commit specifier (such as a branch, tag, HEAD, commit ID, or other fully qualified reference). Results can be limited to a specified path.'
@@ -3838,7 +3846,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeCommit_20150413.GetFile':
+  /#X-Amz-Target=CodeCommit_20150413.GetFile:
     post:
       operationId: GetFile
       description: Returns the base-64 encoded contents of a specified file and its metadata.
@@ -3955,7 +3963,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeCommit_20150413.GetFolder':
+  /#X-Amz-Target=CodeCommit_20150413.GetFolder:
     post:
       operationId: GetFolder
       description: Returns the contents of a specified folder in a repository.
@@ -4066,7 +4074,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeCommit_20150413.GetMergeCommit':
+  /#X-Amz-Target=CodeCommit_20150413.GetMergeCommit:
     post:
       operationId: GetMergeCommit
       description: Returns information about a specified merge commit.
@@ -4177,7 +4185,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeCommit_20150413.GetMergeConflicts':
+  /#X-Amz-Target=CodeCommit_20150413.GetMergeConflicts:
     post:
       operationId: GetMergeConflicts
       description: Returns information about merge conflicts between the before and after commit IDs for a pull request in a repository.
@@ -4354,7 +4362,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeCommit_20150413.GetMergeOptions':
+  /#X-Amz-Target=CodeCommit_20150413.GetMergeOptions:
     post:
       operationId: GetMergeOptions
       description: 'Returns information about the merge options available for merging two specified branches. For details about why a merge option is not available, use GetMergeConflicts or DescribeMergeConflicts.'
@@ -4483,7 +4491,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeCommit_20150413.GetPullRequest':
+  /#X-Amz-Target=CodeCommit_20150413.GetPullRequest:
     post:
       operationId: GetPullRequest
       description: Gets information about a pull request in a specified repository.
@@ -4564,7 +4572,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeCommit_20150413.GetPullRequestApprovalStates':
+  /#X-Amz-Target=CodeCommit_20150413.GetPullRequestApprovalStates:
     post:
       operationId: GetPullRequestApprovalStates
       description: Gets information about the approval states for a specified pull request. Approval states only apply to pull requests that have one or more approval rules applied to them.
@@ -4657,7 +4665,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeCommit_20150413.GetPullRequestOverrideState':
+  /#X-Amz-Target=CodeCommit_20150413.GetPullRequestOverrideState:
     post:
       operationId: GetPullRequestOverrideState
       description: 'Returns information about whether approval rules have been set aside (overridden) for a pull request, and if so, the Amazon Resource Name (ARN) of the user or identity that overrode the rules and their requirements for the pull request.'
@@ -4750,7 +4758,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeCommit_20150413.GetRepository':
+  /#X-Amz-Target=CodeCommit_20150413.GetRepository:
     post:
       operationId: GetRepository
       description: <p>Returns information about a repository.</p> <note> <p>The description field for a repository accepts all HTML characters and all valid Unicode characters. Applications that do not HTML-encode the description and display it in a webpage can expose users to potentially malicious code. Make sure that you HTML-encode the description field in any application that uses this API to display the repository description on a webpage.</p> </note>
@@ -4831,7 +4839,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeCommit_20150413.GetRepositoryTriggers':
+  /#X-Amz-Target=CodeCommit_20150413.GetRepositoryTriggers:
     post:
       operationId: GetRepositoryTriggers
       description: Gets information about triggers configured for a repository.
@@ -4912,7 +4920,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeCommit_20150413.ListApprovalRuleTemplates':
+  /#X-Amz-Target=CodeCommit_20150413.ListApprovalRuleTemplates:
     post:
       operationId: ListApprovalRuleTemplates
       description: 'Lists all approval rule templates in the specified AWS Region in your AWS account. If an AWS Region is not specified, the AWS Region where you are signed in is used.'
@@ -4969,7 +4977,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeCommit_20150413.ListAssociatedApprovalRuleTemplatesForRepository':
+  /#X-Amz-Target=CodeCommit_20150413.ListAssociatedApprovalRuleTemplatesForRepository:
     post:
       operationId: ListAssociatedApprovalRuleTemplatesForRepository
       description: Lists all approval rule templates that are associated with a specified repository.
@@ -5074,7 +5082,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeCommit_20150413.ListBranches':
+  /#X-Amz-Target=CodeCommit_20150413.ListBranches:
     post:
       operationId: ListBranches
       description: Gets information about one or more branches in a repository.
@@ -5167,7 +5175,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeCommit_20150413.ListPullRequests':
+  /#X-Amz-Target=CodeCommit_20150413.ListPullRequests:
     post:
       operationId: ListPullRequests
       description: Returns a list of pull requests for a specified repository. The return list can be refined by pull request status or pull request author ARN.
@@ -5290,7 +5298,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeCommit_20150413.ListRepositories':
+  /#X-Amz-Target=CodeCommit_20150413.ListRepositories:
     post:
       operationId: ListRepositories
       description: Gets information about one or more repositories.
@@ -5347,7 +5355,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeCommit_20150413.ListRepositoriesForApprovalRuleTemplate':
+  /#X-Amz-Target=CodeCommit_20150413.ListRepositoriesForApprovalRuleTemplate:
     post:
       operationId: ListRepositoriesForApprovalRuleTemplate
       description: Lists all repositories associated with the specified approval rule template.
@@ -5452,7 +5460,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeCommit_20150413.ListTagsForResource':
+  /#X-Amz-Target=CodeCommit_20150413.ListTagsForResource:
     post:
       operationId: ListTagsForResource
       description: 'Gets information about AWS tags for a specified Amazon Resource Name (ARN) in AWS CodeCommit. For a list of valid resources in AWS CodeCommit, see <a href="https://docs.aws.amazon.com/codecommit/latest/userguide/auth-and-access-control-iam-access-control-identity-based.html#arn-formats">CodeCommit Resources and Operations</a> in the<i> AWS CodeCommit User Guide</i>.'
@@ -5509,7 +5517,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeCommit_20150413.MergeBranchesByFastForward':
+  /#X-Amz-Target=CodeCommit_20150413.MergeBranchesByFastForward:
     post:
       operationId: MergeBranchesByFastForward
       description: Merges two branches using the fast-forward merge strategy.
@@ -5656,7 +5664,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeCommit_20150413.MergeBranchesBySquash':
+  /#X-Amz-Target=CodeCommit_20150413.MergeBranchesBySquash:
     post:
       operationId: MergeBranchesBySquash
       description: Merges two branches using the squash merge strategy.
@@ -5923,7 +5931,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeCommit_20150413.MergeBranchesByThreeWay':
+  /#X-Amz-Target=CodeCommit_20150413.MergeBranchesByThreeWay:
     post:
       operationId: MergeBranchesByThreeWay
       description: Merges two specified branches using the three-way merge strategy.
@@ -6190,7 +6198,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeCommit_20150413.MergePullRequestByFastForward':
+  /#X-Amz-Target=CodeCommit_20150413.MergePullRequestByFastForward:
     post:
       operationId: MergePullRequestByFastForward
       description: 'Attempts to merge the source commit of a pull request into the specified destination branch for that pull request at the specified commit using the fast-forward merge strategy. If the merge is successful, it closes the pull request.'
@@ -6337,7 +6345,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeCommit_20150413.MergePullRequestBySquash':
+  /#X-Amz-Target=CodeCommit_20150413.MergePullRequestBySquash:
     post:
       operationId: MergePullRequestBySquash
       description: 'Attempts to merge the source commit of a pull request into the specified destination branch for that pull request at the specified commit using the squash merge strategy. If the merge is successful, it closes the pull request.'
@@ -6598,7 +6606,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeCommit_20150413.MergePullRequestByThreeWay':
+  /#X-Amz-Target=CodeCommit_20150413.MergePullRequestByThreeWay:
     post:
       operationId: MergePullRequestByThreeWay
       description: 'Attempts to merge the source commit of a pull request into the specified destination branch for that pull request at the specified commit using the three-way merge strategy. If the merge is successful, it closes the pull request.'
@@ -6859,7 +6867,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeCommit_20150413.OverridePullRequestApprovalRules':
+  /#X-Amz-Target=CodeCommit_20150413.OverridePullRequestApprovalRules:
     post:
       operationId: OverridePullRequestApprovalRules
       description: Sets aside (overrides) all approval rule requirements for a specified pull request.
@@ -6978,7 +6986,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeCommit_20150413.PostCommentForComparedCommit':
+  /#X-Amz-Target=CodeCommit_20150413.PostCommentForComparedCommit:
     post:
       operationId: PostCommentForComparedCommit
       description: Posts a comment on the comparison between two commits.
@@ -7155,7 +7163,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeCommit_20150413.PostCommentForPullRequest':
+  /#X-Amz-Target=CodeCommit_20150413.PostCommentForPullRequest:
     post:
       operationId: PostCommentForPullRequest
       description: Posts a comment on a pull request.
@@ -7356,7 +7364,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeCommit_20150413.PostCommentReply':
+  /#X-Amz-Target=CodeCommit_20150413.PostCommentReply:
     post:
       operationId: PostCommentReply
       description: Posts a comment in reply to an existing comment on a comparison between commits or a pull request.
@@ -7437,7 +7445,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeCommit_20150413.PutCommentReaction':
+  /#X-Amz-Target=CodeCommit_20150413.PutCommentReaction:
     post:
       operationId: PutCommentReaction
       description: 'Adds or updates a reaction to a specified comment for the user whose identity is used to make the request. You can only add or update a reaction for yourself. You cannot add, modify, or delete a reaction for another user.'
@@ -7508,7 +7516,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeCommit_20150413.PutFile':
+  /#X-Amz-Target=CodeCommit_20150413.PutFile:
     post:
       operationId: PutFile
       description: 'Adds or updates a file in a branch in an AWS CodeCommit repository, and generates a commit for the addition in the specified branch.'
@@ -7721,7 +7729,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeCommit_20150413.PutRepositoryTriggers':
+  /#X-Amz-Target=CodeCommit_20150413.PutRepositoryTriggers:
     post:
       operationId: PutRepositoryTriggers
       description: Replaces all triggers for a repository. Used to create or delete triggers.
@@ -7880,7 +7888,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeCommit_20150413.TagResource':
+  /#X-Amz-Target=CodeCommit_20150413.TagResource:
     post:
       operationId: TagResource
       description: 'Adds or updates tags for a resource in AWS CodeCommit. For a list of valid resources in AWS CodeCommit, see <a href="https://docs.aws.amazon.com/codecommit/latest/userguide/auth-and-access-control-iam-access-control-identity-based.html#arn-formats">CodeCommit Resources and Operations</a> in the <i>AWS CodeCommit User Guide</i>.'
@@ -7963,7 +7971,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeCommit_20150413.TestRepositoryTriggers':
+  /#X-Amz-Target=CodeCommit_20150413.TestRepositoryTriggers:
     post:
       operationId: TestRepositoryTriggers
       description: 'Tests the functionality of repository triggers by sending information to the trigger target. If real data is available in the repository, the test sends data from the last commit. If no data is available, sample data is generated.'
@@ -8122,7 +8130,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeCommit_20150413.UntagResource':
+  /#X-Amz-Target=CodeCommit_20150413.UntagResource:
     post:
       operationId: UntagResource
       description: 'Removes tags for a resource in AWS CodeCommit. For a list of valid resources in AWS CodeCommit, see <a href="https://docs.aws.amazon.com/codecommit/latest/userguide/auth-and-access-control-iam-access-control-identity-based.html#arn-formats">CodeCommit Resources and Operations</a> in the <i>AWS CodeCommit User Guide</i>.'
@@ -8205,7 +8213,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeCommit_20150413.UpdateApprovalRuleTemplateContent':
+  /#X-Amz-Target=CodeCommit_20150413.UpdateApprovalRuleTemplateContent:
     post:
       operationId: UpdateApprovalRuleTemplateContent
       description: 'Updates the content of an approval rule template. You can change the number of required approvals, the membership of the approval rule, and whether an approval pool is defined.'
@@ -8274,7 +8282,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeCommit_20150413.UpdateApprovalRuleTemplateDescription':
+  /#X-Amz-Target=CodeCommit_20150413.UpdateApprovalRuleTemplateDescription:
     post:
       operationId: UpdateApprovalRuleTemplateDescription
       description: Updates the description for a specified approval rule template.
@@ -8331,7 +8339,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeCommit_20150413.UpdateApprovalRuleTemplateName':
+  /#X-Amz-Target=CodeCommit_20150413.UpdateApprovalRuleTemplateName:
     post:
       operationId: UpdateApprovalRuleTemplateName
       description: Updates the name of a specified approval rule template.
@@ -8388,7 +8396,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeCommit_20150413.UpdateComment':
+  /#X-Amz-Target=CodeCommit_20150413.UpdateComment:
     post:
       operationId: UpdateComment
       description: Replaces the contents of a comment.
@@ -8463,7 +8471,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeCommit_20150413.UpdateDefaultBranch':
+  /#X-Amz-Target=CodeCommit_20150413.UpdateDefaultBranch:
     post:
       operationId: UpdateDefaultBranch
       description: '<p>Sets or changes the default branch name for the specified repository.</p> <note> <p>If you use this operation to change the default branch name to the current default branch name, a success message is returned even though the default branch did not change.</p> </note>'
@@ -8558,7 +8566,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeCommit_20150413.UpdatePullRequestApprovalRuleContent':
+  /#X-Amz-Target=CodeCommit_20150413.UpdatePullRequestApprovalRuleContent:
     post:
       operationId: UpdatePullRequestApprovalRuleContent
       description: 'Updates the structure of an approval rule created specifically for a pull request. For example, you can change the number of required approvers and the approval pool for approvers. '
@@ -8687,7 +8695,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeCommit_20150413.UpdatePullRequestApprovalState':
+  /#X-Amz-Target=CodeCommit_20150413.UpdatePullRequestApprovalState:
     post:
       operationId: UpdatePullRequestApprovalState
       description: Updates the state of a user's approval on a pull request. The user is derived from the signed-in account when the request is made.
@@ -8812,7 +8820,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeCommit_20150413.UpdatePullRequestDescription':
+  /#X-Amz-Target=CodeCommit_20150413.UpdatePullRequestDescription:
     post:
       operationId: UpdatePullRequestDescription
       description: Replaces the contents of the description of a pull request.
@@ -8875,7 +8883,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeCommit_20150413.UpdatePullRequestStatus':
+  /#X-Amz-Target=CodeCommit_20150413.UpdatePullRequestStatus:
     post:
       operationId: UpdatePullRequestStatus
       description: 'Updates the status of a pull request. '
@@ -8974,7 +8982,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeCommit_20150413.UpdatePullRequestTitle':
+  /#X-Amz-Target=CodeCommit_20150413.UpdatePullRequestTitle:
     post:
       operationId: UpdatePullRequestTitle
       description: Replaces the title of a pull request.
@@ -9043,7 +9051,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeCommit_20150413.UpdateRepositoryDescription':
+  /#X-Amz-Target=CodeCommit_20150413.UpdateRepositoryDescription:
     post:
       operationId: UpdateRepositoryDescription
       description: <p>Sets or changes the comment or description for a repository.</p> <note> <p>The description field for a repository accepts all HTML characters and all valid Unicode characters. Applications that do not HTML-encode the description and display it in a webpage can expose users to potentially malicious code. Make sure that you HTML-encode the description field in any application that uses this API to display the repository description on a webpage.</p> </note>
@@ -9126,7 +9134,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeCommit_20150413.UpdateRepositoryName':
+  /#X-Amz-Target=CodeCommit_20150413.UpdateRepositoryName:
     post:
       operationId: UpdateRepositoryName
       description: 'Renames a repository. The repository name must be unique across the calling AWS account. Repository names are limited to 100 alphanumeric, dash, and underscore characters, and cannot include certain characters. The suffix .git is prohibited. For more information about the limits on repository names, see <a href="https://docs.aws.amazon.com/codecommit/latest/userguide/limits.html">Limits</a> in the AWS CodeCommit User Guide.'

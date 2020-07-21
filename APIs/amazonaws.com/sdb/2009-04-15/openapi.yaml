@@ -56,13 +56,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-2
     description: The Amazon SimpleDB multi-region endpoint
   - url: 'https://sdb.{region}.amazonaws.com'
@@ -81,13 +85,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-2
     description: The Amazon SimpleDB multi-region endpoint
   - url: 'http://sdb.{region}.amazonaws.com.cn'
@@ -110,7 +118,7 @@ servers:
     description: The Amazon SimpleDB endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
-  '/#Action=BatchDeleteAttributes':
+  /#Action=BatchDeleteAttributes:
     get:
       x-aws-operation-name: BatchDeleteAttributes
       operationId: GET_BatchDeleteAttributes
@@ -184,7 +192,7 @@ paths:
             type: string
             enum:
               - '2009-04-15'
-  '/#Action=BatchPutAttributes':
+  /#Action=BatchPutAttributes:
     get:
       x-aws-operation-name: BatchPutAttributes
       operationId: GET_BatchPutAttributes
@@ -286,7 +294,7 @@ paths:
             type: string
             enum:
               - '2009-04-15'
-  '/#Action=CreateDomain':
+  /#Action=CreateDomain:
     get:
       x-aws-operation-name: CreateDomain
       operationId: GET_CreateDomain
@@ -378,7 +386,7 @@ paths:
             type: string
             enum:
               - '2009-04-15'
-  '/#Action=DeleteAttributes':
+  /#Action=DeleteAttributes:
     get:
       x-aws-operation-name: DeleteAttributes
       operationId: GET_DeleteAttributes
@@ -503,7 +511,7 @@ paths:
             type: string
             enum:
               - '2009-04-15'
-  '/#Action=DeleteDomain':
+  /#Action=DeleteDomain:
     get:
       x-aws-operation-name: DeleteDomain
       operationId: GET_DeleteDomain
@@ -581,7 +589,7 @@ paths:
             type: string
             enum:
               - '2009-04-15'
-  '/#Action=DomainMetadata':
+  /#Action=DomainMetadata:
     get:
       x-aws-operation-name: DomainMetadata
       operationId: GET_DomainMetadata
@@ -667,7 +675,7 @@ paths:
             type: string
             enum:
               - '2009-04-15'
-  '/#Action=GetAttributes':
+  /#Action=GetAttributes:
     get:
       x-aws-operation-name: GetAttributes
       operationId: GET_GetAttributes
@@ -775,7 +783,7 @@ paths:
             type: string
             enum:
               - '2009-04-15'
-  '/#Action=ListDomains':
+  /#Action=ListDomains:
     get:
       x-aws-operation-name: ListDomains
       operationId: GET_ListDomains
@@ -879,7 +887,7 @@ paths:
             type: string
             enum:
               - '2009-04-15'
-  '/#Action=PutAttributes':
+  /#Action=PutAttributes:
     get:
       x-aws-operation-name: PutAttributes
       operationId: GET_PutAttributes
@@ -1018,7 +1026,7 @@ paths:
             type: string
             enum:
               - '2009-04-15'
-  '/#Action=Select':
+  /#Action=Select:
     get:
       x-aws-operation-name: Select
       operationId: GET_Select

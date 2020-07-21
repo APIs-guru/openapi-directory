@@ -51,13 +51,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The Amazon EMR multi-region endpoint
   - url: 'https://elasticmapreduce.{region}.amazonaws.com'
@@ -77,13 +81,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The Amazon EMR multi-region endpoint
   - url: 'http://elasticmapreduce.amazonaws.com'
@@ -112,7 +120,7 @@ servers:
     description: The Amazon EMR endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
-  '/#X-Amz-Target=ElasticMapReduce.AddInstanceFleet':
+  /#X-Amz-Target=ElasticMapReduce.AddInstanceFleet:
     post:
       operationId: AddInstanceFleet
       description: '<p>Adds an instance fleet to a running cluster.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x.</p> </note>'
@@ -157,7 +165,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=ElasticMapReduce.AddInstanceGroups':
+  /#X-Amz-Target=ElasticMapReduce.AddInstanceGroups:
     post:
       operationId: AddInstanceGroups
       description: Adds one or more instance groups to a running cluster.
@@ -196,7 +204,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=ElasticMapReduce.AddJobFlowSteps':
+  /#X-Amz-Target=ElasticMapReduce.AddJobFlowSteps:
     post:
       operationId: AddJobFlowSteps
       description: '<p>AddJobFlowSteps adds new steps to a running cluster. A maximum of 256 steps are allowed in each job flow.</p> <p>If your cluster is long-running (such as a Hive data warehouse) or complex, you may require more than 256 steps to process your data. You can bypass the 256-step limitation in various ways, including using SSH to connect to the master node and submitting queries directly to the software running on the master node, such as Hive and Hadoop. For more information on how to do this, see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/AddMoreThan256Steps.html">Add More than 256 Steps to a Cluster</a> in the <i>Amazon EMR Management Guide</i>.</p> <p>A step specifies the location of a JAR file stored either on the master node of the cluster or in Amazon S3. Each step is performed by the main function of the main class of the JAR file. The main class can be specified either in the manifest of the JAR or by using the MainFunction parameter of the step.</p> <p>Amazon EMR executes each step in the order listed. For a step to be considered complete, the main function must exit with a zero exit code and all Hadoop jobs started while the step was running must have completed and run successfully.</p> <p>You can only add steps to a cluster that is in one of the following states: STARTING, BOOTSTRAPPING, RUNNING, or WAITING.</p>'
@@ -235,7 +243,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=ElasticMapReduce.AddTags':
+  /#X-Amz-Target=ElasticMapReduce.AddTags:
     post:
       operationId: AddTags
       description: 'Adds tags to an Amazon EMR resource. Tags make it easier to associate clusters in various ways, such as grouping clusters to track your Amazon EMR resource allocation costs. For more information, see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html">Tag Clusters</a>. '
@@ -280,7 +288,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=ElasticMapReduce.CancelSteps':
+  /#X-Amz-Target=ElasticMapReduce.CancelSteps:
     post:
       operationId: CancelSteps
       description: 'Cancels a pending step or steps in a running cluster. Available only in Amazon EMR versions 4.8.0 and later, excluding version 5.0.0. A maximum of 256 steps are allowed in each CancelSteps request. CancelSteps is idempotent but asynchronous; it does not guarantee a step will be canceled, even if the request is successfully submitted. You can only cancel steps that are in a <code>PENDING</code> state.'
@@ -325,7 +333,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=ElasticMapReduce.CreateSecurityConfiguration':
+  /#X-Amz-Target=ElasticMapReduce.CreateSecurityConfiguration:
     post:
       operationId: CreateSecurityConfiguration
       description: 'Creates a security configuration, which is stored in the service and can be specified when a cluster is created.'
@@ -370,7 +378,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=ElasticMapReduce.DeleteSecurityConfiguration':
+  /#X-Amz-Target=ElasticMapReduce.DeleteSecurityConfiguration:
     post:
       operationId: DeleteSecurityConfiguration
       description: Deletes a security configuration.
@@ -415,7 +423,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=ElasticMapReduce.DescribeCluster':
+  /#X-Amz-Target=ElasticMapReduce.DescribeCluster:
     post:
       operationId: DescribeCluster
       description: 'Provides cluster-level details including status, hardware and software configuration, VPC settings, and so on. '
@@ -460,7 +468,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=ElasticMapReduce.DescribeJobFlows':
+  /#X-Amz-Target=ElasticMapReduce.DescribeJobFlows:
     post:
       deprecated: true
       operationId: DescribeJobFlows
@@ -500,7 +508,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=ElasticMapReduce.DescribeSecurityConfiguration':
+  /#X-Amz-Target=ElasticMapReduce.DescribeSecurityConfiguration:
     post:
       operationId: DescribeSecurityConfiguration
       description: Provides the details of a security configuration by returning the configuration JSON.
@@ -545,7 +553,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=ElasticMapReduce.DescribeStep':
+  /#X-Amz-Target=ElasticMapReduce.DescribeStep:
     post:
       operationId: DescribeStep
       description: Provides more detail about the cluster step.
@@ -590,7 +598,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=ElasticMapReduce.GetBlockPublicAccessConfiguration':
+  /#X-Amz-Target=ElasticMapReduce.GetBlockPublicAccessConfiguration:
     post:
       operationId: GetBlockPublicAccessConfiguration
       description: 'Returns the Amazon EMR block public access configuration for your AWS account in the current Region. For more information see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/configure-block-public-access.html">Configure Block Public Access for Amazon EMR</a> in the <i>Amazon EMR Management Guide</i>.'
@@ -635,7 +643,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=ElasticMapReduce.GetManagedScalingPolicy':
+  /#X-Amz-Target=ElasticMapReduce.GetManagedScalingPolicy:
     post:
       operationId: GetManagedScalingPolicy
       description: ' Fetches the attached managed scaling policy for an Amazon EMR cluster. '
@@ -668,7 +676,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=ElasticMapReduce.ListBootstrapActions':
+  /#X-Amz-Target=ElasticMapReduce.ListBootstrapActions:
     post:
       operationId: ListBootstrapActions
       description: Provides information about the bootstrap actions associated with a cluster.
@@ -719,7 +727,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=ElasticMapReduce.ListClusters':
+  /#X-Amz-Target=ElasticMapReduce.ListClusters:
     post:
       operationId: ListClusters
       description: 'Provides the status of all clusters visible to this AWS account. Allows you to filter the list of clusters based on certain criteria; for example, filtering by cluster creation date and time or by status. This call returns a maximum of 50 clusters per call, but returns a marker to track the paging of the cluster list across multiple ListClusters calls.'
@@ -770,7 +778,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=ElasticMapReduce.ListInstanceFleets':
+  /#X-Amz-Target=ElasticMapReduce.ListInstanceFleets:
     post:
       operationId: ListInstanceFleets
       description: '<p>Lists all available details about the instance fleets in a cluster.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions.</p> </note>'
@@ -821,7 +829,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=ElasticMapReduce.ListInstanceGroups':
+  /#X-Amz-Target=ElasticMapReduce.ListInstanceGroups:
     post:
       operationId: ListInstanceGroups
       description: Provides all available details about the instance groups in a cluster.
@@ -872,7 +880,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=ElasticMapReduce.ListInstances':
+  /#X-Amz-Target=ElasticMapReduce.ListInstances:
     post:
       operationId: ListInstances
       description: 'Provides information for all active EC2 instances and EC2 instances terminated in the last 30 days, up to a maximum of 2,000. EC2 instances in any of the following states are considered active: AWAITING_FULFILLMENT, PROVISIONING, BOOTSTRAPPING, RUNNING.'
@@ -923,7 +931,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=ElasticMapReduce.ListSecurityConfigurations':
+  /#X-Amz-Target=ElasticMapReduce.ListSecurityConfigurations:
     post:
       operationId: ListSecurityConfigurations
       description: 'Lists all the security configurations visible to this account, providing their creation dates and times, and their names. This call returns a maximum of 50 clusters per call, but returns a marker to track the paging of the cluster list across multiple ListSecurityConfigurations calls.'
@@ -974,7 +982,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=ElasticMapReduce.ListSteps':
+  /#X-Amz-Target=ElasticMapReduce.ListSteps:
     post:
       operationId: ListSteps
       description: Provides a list of steps for the cluster in reverse order unless you specify <code>stepIds</code> with the request of filter by <code>StepStates</code>. You can specify a maximum of ten <code>stepIDs</code>.
@@ -1025,7 +1033,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=ElasticMapReduce.ModifyCluster':
+  /#X-Amz-Target=ElasticMapReduce.ModifyCluster:
     post:
       operationId: ModifyCluster
       description: Modifies the number of steps that can be executed concurrently for the cluster specified using ClusterID.
@@ -1070,7 +1078,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=ElasticMapReduce.ModifyInstanceFleet':
+  /#X-Amz-Target=ElasticMapReduce.ModifyInstanceFleet:
     post:
       operationId: ModifyInstanceFleet
       description: '<p>Modifies the target On-Demand and target Spot capacities for the instance fleet with the specified InstanceFleetID within the cluster specified using ClusterID. The call either succeeds or fails atomically.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions.</p> </note>'
@@ -1111,7 +1119,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=ElasticMapReduce.ModifyInstanceGroups':
+  /#X-Amz-Target=ElasticMapReduce.ModifyInstanceGroups:
     post:
       operationId: ModifyInstanceGroups
       description: ModifyInstanceGroups modifies the number of nodes and configuration settings of an instance group. The input parameters include the new target instance count for the group and the instance group ID. The call will either succeed or fail atomically.
@@ -1146,7 +1154,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=ElasticMapReduce.PutAutoScalingPolicy':
+  /#X-Amz-Target=ElasticMapReduce.PutAutoScalingPolicy:
     post:
       operationId: PutAutoScalingPolicy
       description: Creates or updates an automatic scaling policy for a core instance group or task instance group in an Amazon EMR cluster. The automatic scaling policy defines how an instance group dynamically adds and terminates EC2 instances in response to the value of a CloudWatch metric.
@@ -1179,7 +1187,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=ElasticMapReduce.PutBlockPublicAccessConfiguration':
+  /#X-Amz-Target=ElasticMapReduce.PutBlockPublicAccessConfiguration:
     post:
       operationId: PutBlockPublicAccessConfiguration
       description: 'Creates or updates an Amazon EMR block public access configuration for your AWS account in the current Region. For more information see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/configure-block-public-access.html">Configure Block Public Access for Amazon EMR</a> in the <i>Amazon EMR Management Guide</i>.'
@@ -1224,7 +1232,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=ElasticMapReduce.PutManagedScalingPolicy':
+  /#X-Amz-Target=ElasticMapReduce.PutManagedScalingPolicy:
     post:
       operationId: PutManagedScalingPolicy
       description: ' Creates or updates a managed scaling policy for an Amazon EMR cluster. The managed scaling policy defines the limits for resources, such as EC2 instances that can be added or terminated from a cluster. The policy only applies to the core and task nodes. The master node cannot be scaled after initial configuration. '
@@ -1257,7 +1265,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=ElasticMapReduce.RemoveAutoScalingPolicy':
+  /#X-Amz-Target=ElasticMapReduce.RemoveAutoScalingPolicy:
     post:
       operationId: RemoveAutoScalingPolicy
       description: Removes an automatic scaling policy from a specified instance group within an EMR cluster.
@@ -1290,7 +1298,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=ElasticMapReduce.RemoveManagedScalingPolicy':
+  /#X-Amz-Target=ElasticMapReduce.RemoveManagedScalingPolicy:
     post:
       operationId: RemoveManagedScalingPolicy
       description: ' Removes a managed scaling policy from a specified EMR cluster. '
@@ -1323,7 +1331,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=ElasticMapReduce.RemoveTags':
+  /#X-Amz-Target=ElasticMapReduce.RemoveTags:
     post:
       operationId: RemoveTags
       description: '<p>Removes tags from an Amazon EMR resource. Tags make it easier to associate clusters in various ways, such as grouping clusters to track your Amazon EMR resource allocation costs. For more information, see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html">Tag Clusters</a>. </p> <p>The following example removes the stack tag with value Prod from a cluster:</p>'
@@ -1368,7 +1376,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=ElasticMapReduce.RunJobFlow':
+  /#X-Amz-Target=ElasticMapReduce.RunJobFlow:
     post:
       operationId: RunJobFlow
       description: '<p>RunJobFlow creates and starts running a new cluster (job flow). The cluster runs the steps specified. After the steps complete, the cluster stops and the HDFS partition is lost. To prevent loss of data, configure the last step of the job flow to store results in Amazon S3. If the <a>JobFlowInstancesConfig</a> <code>KeepJobFlowAliveWhenNoSteps</code> parameter is set to <code>TRUE</code>, the cluster transitions to the WAITING state rather than shutting down after the steps have completed. </p> <p>For additional protection, you can set the <a>JobFlowInstancesConfig</a> <code>TerminationProtected</code> parameter to <code>TRUE</code> to lock the cluster and prevent it from being terminated by API call, user intervention, or in the event of a job flow error.</p> <p>A maximum of 256 steps are allowed in each job flow.</p> <p>If your cluster is long-running (such as a Hive data warehouse) or complex, you may require more than 256 steps to process your data. You can bypass the 256-step limitation in various ways, including using the SSH shell to connect to the master node and submitting queries directly to the software running on the master node, such as Hive and Hadoop. For more information on how to do this, see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/AddMoreThan256Steps.html">Add More than 256 Steps to a Cluster</a> in the <i>Amazon EMR Management Guide</i>.</p> <p>For long running clusters, we recommend that you periodically store your results.</p> <note> <p>The instance fleets configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions. The RunJobFlow request can contain InstanceFleets parameters or InstanceGroups parameters, but not both.</p> </note>'
@@ -1407,7 +1415,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=ElasticMapReduce.SetTerminationProtection':
+  /#X-Amz-Target=ElasticMapReduce.SetTerminationProtection:
     post:
       operationId: SetTerminationProtection
       description: '<p>SetTerminationProtection locks a cluster (job flow) so the EC2 instances in the cluster cannot be terminated by user intervention, an API call, or in the event of a job-flow error. The cluster still terminates upon successful completion of the job flow. Calling <code>SetTerminationProtection</code> on a cluster is similar to calling the Amazon EC2 <code>DisableAPITermination</code> API on all EC2 instances in a cluster.</p> <p> <code>SetTerminationProtection</code> is used to prevent accidental termination of a cluster and to ensure that in the event of an error, the instances persist so that you can recover any data stored in their ephemeral instance storage.</p> <p> To terminate a cluster that has been locked by setting <code>SetTerminationProtection</code> to <code>true</code>, you must first unlock the job flow by a subsequent call to <code>SetTerminationProtection</code> in which you set the value to <code>false</code>. </p> <p> For more information, see<a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/UsingEMR_TerminationProtection.html">Managing Cluster Termination</a> in the <i>Amazon EMR Management Guide</i>. </p>'
@@ -1442,7 +1450,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=ElasticMapReduce.SetVisibleToAllUsers':
+  /#X-Amz-Target=ElasticMapReduce.SetVisibleToAllUsers:
     post:
       operationId: SetVisibleToAllUsers
       description: 'Sets the <a>Cluster$VisibleToAllUsers</a> value, which determines whether the cluster is visible to all IAM users of the AWS account associated with the cluster. Only the IAM user who created the cluster or the AWS account root user can call this action. The default value, <code>true</code>, indicates that all IAM users in the AWS account can perform cluster actions if they have the proper IAM policy permissions. If set to <code>false</code>, only the IAM user that created the cluster can perform actions. This action works on running clusters. You can override the default <code>true</code> setting when you create a cluster by using the <code>VisibleToAllUsers</code> parameter with <code>RunJobFlow</code>.'
@@ -1477,7 +1485,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=ElasticMapReduce.TerminateJobFlows':
+  /#X-Amz-Target=ElasticMapReduce.TerminateJobFlows:
     post:
       operationId: TerminateJobFlows
       description: '<p>TerminateJobFlows shuts a list of clusters (job flows) down. When a job flow is shut down, any step not yet completed is canceled and the EC2 instances on which the cluster is running are stopped. Any log files not already saved are uploaded to Amazon S3 if a LogUri was specified when the cluster was created.</p> <p>The maximum number of clusters allowed is 10. The call to <code>TerminateJobFlows</code> is asynchronous. Depending on the configuration of the cluster, it may take up to 1-5 minutes for the cluster to completely terminate and release allocated resources, such as Amazon EC2 instances.</p>'

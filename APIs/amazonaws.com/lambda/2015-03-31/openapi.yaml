@@ -51,13 +51,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The AWS Lambda multi-region endpoint
   - url: 'https://lambda.{region}.amazonaws.com'
@@ -77,13 +81,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The AWS Lambda multi-region endpoint
   - url: 'http://lambda.{region}.amazonaws.com.cn'
@@ -2492,7 +2500,7 @@ paths:
                   items:
                     $ref: '#/components/schemas/FileSystemConfig'
                   maxItems: 1
-  '/2018-10-31/layers#find=LayerVersion&Arn':
+  /2018-10-31/layers#find=LayerVersion&Arn:
     get:
       operationId: GetLayerVersionByArn
       description: 'Returns information about a version of an <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">AWS Lambda layer</a>, with a link to download the layer archive that''s valid for 10 minutes.'

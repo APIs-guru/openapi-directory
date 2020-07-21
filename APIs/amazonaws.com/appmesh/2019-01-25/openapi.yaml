@@ -64,13 +64,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The AWS App Mesh multi-region endpoint
   - url: 'https://appmesh.{region}.amazonaws.com'
@@ -90,13 +94,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The AWS App Mesh multi-region endpoint
   - url: 'http://appmesh.{region}.amazonaws.com.cn'
@@ -3660,7 +3668,7 @@ paths:
                       description: |-
                         The App Mesh object that is acting as the provider for a virtual service. You can specify
                                  a single virtual node or virtual router.
-  '/v20190125/tags#resourceArn':
+  /v20190125/tags#resourceArn:
     get:
       operationId: ListTagsForResource
       description: List the tags for an App Mesh resource.
@@ -3748,7 +3756,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/v20190125/tag#resourceArn':
+  /v20190125/tag#resourceArn:
     put:
       operationId: TagResource
       description: |-
@@ -3839,7 +3847,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/v20190125/untag#resourceArn':
+  /v20190125/untag#resourceArn:
     put:
       operationId: UntagResource
       description: Deletes specified tags from a resource.

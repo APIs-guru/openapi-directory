@@ -51,13 +51,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The MediaStore multi-region endpoint
   - url: 'https://mediastore.{region}.amazonaws.com'
@@ -77,13 +81,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The MediaStore multi-region endpoint
   - url: 'http://mediastore.{region}.amazonaws.com.cn'
@@ -106,7 +114,7 @@ servers:
     description: The MediaStore endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
-  '/#X-Amz-Target=MediaStore_20170901.CreateContainer':
+  /#X-Amz-Target=MediaStore_20170901.CreateContainer:
     post:
       operationId: CreateContainer
       description: Creates a storage container to hold objects. A container is similar to a bucket in the Amazon S3 service.
@@ -157,7 +165,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=MediaStore_20170901.DeleteContainer':
+  /#X-Amz-Target=MediaStore_20170901.DeleteContainer:
     post:
       operationId: DeleteContainer
       description: 'Deletes the specified container. Before you make a <code>DeleteContainer</code> request, delete any objects in the container or in any folders in the container. You can delete only empty containers. '
@@ -208,7 +216,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=MediaStore_20170901.DeleteContainerPolicy':
+  /#X-Amz-Target=MediaStore_20170901.DeleteContainerPolicy:
     post:
       operationId: DeleteContainerPolicy
       description: Deletes the access policy that is associated with the specified container.
@@ -265,7 +273,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=MediaStore_20170901.DeleteCorsPolicy':
+  /#X-Amz-Target=MediaStore_20170901.DeleteCorsPolicy:
     post:
       operationId: DeleteCorsPolicy
       description: '<p>Deletes the cross-origin resource sharing (CORS) configuration information that is set for the container.</p> <p>To use this operation, you must have permission to perform the <code>MediaStore:DeleteCorsPolicy</code> action. The container owner has this permission by default and can grant this permission to others.</p>'
@@ -322,7 +330,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=MediaStore_20170901.DeleteLifecyclePolicy':
+  /#X-Amz-Target=MediaStore_20170901.DeleteLifecyclePolicy:
     post:
       operationId: DeleteLifecyclePolicy
       description: Removes an object lifecycle policy from a container. It takes up to 20 minutes for the change to take effect.
@@ -379,7 +387,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=MediaStore_20170901.DeleteMetricPolicy':
+  /#X-Amz-Target=MediaStore_20170901.DeleteMetricPolicy:
     post:
       operationId: DeleteMetricPolicy
       description: 'Deletes the metric policy that is associated with the specified container. If there is no metric policy associated with the container, MediaStore doesn''t send metrics to CloudWatch.'
@@ -436,7 +444,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=MediaStore_20170901.DescribeContainer':
+  /#X-Amz-Target=MediaStore_20170901.DescribeContainer:
     post:
       operationId: DescribeContainer
       description: 'Retrieves the properties of the requested container. This request is commonly used to retrieve the endpoint of a container. An endpoint is a value assigned by the service when a new container is created. A container''s endpoint does not change after it has been assigned. The <code>DescribeContainer</code> request returns a single <code>Container</code> object based on <code>ContainerName</code>. To return all <code>Container</code> objects that are associated with a specified AWS account, use <a>ListContainers</a>.'
@@ -481,7 +489,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=MediaStore_20170901.GetContainerPolicy':
+  /#X-Amz-Target=MediaStore_20170901.GetContainerPolicy:
     post:
       operationId: GetContainerPolicy
       description: 'Retrieves the access policy for the specified container. For information about the data that is included in an access policy, see the <a href="https://aws.amazon.com/documentation/iam/">AWS Identity and Access Management User Guide</a>.'
@@ -538,7 +546,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=MediaStore_20170901.GetCorsPolicy':
+  /#X-Amz-Target=MediaStore_20170901.GetCorsPolicy:
     post:
       operationId: GetCorsPolicy
       description: '<p>Returns the cross-origin resource sharing (CORS) configuration information that is set for the container.</p> <p>To use this operation, you must have permission to perform the <code>MediaStore:GetCorsPolicy</code> action. By default, the container owner has this permission and can grant it to others.</p>'
@@ -595,7 +603,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=MediaStore_20170901.GetLifecyclePolicy':
+  /#X-Amz-Target=MediaStore_20170901.GetLifecyclePolicy:
     post:
       operationId: GetLifecyclePolicy
       description: Retrieves the object lifecycle policy that is assigned to a container.
@@ -652,7 +660,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=MediaStore_20170901.GetMetricPolicy':
+  /#X-Amz-Target=MediaStore_20170901.GetMetricPolicy:
     post:
       operationId: GetMetricPolicy
       description: 'Returns the metric policy for the specified container. '
@@ -709,7 +717,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=MediaStore_20170901.ListContainers':
+  /#X-Amz-Target=MediaStore_20170901.ListContainers:
     post:
       operationId: ListContainers
       description: '<p>Lists the properties of all containers in AWS Elemental MediaStore. </p> <p>You can query to receive all the containers in one response. Or you can include the <code>MaxResults</code> parameter to receive a limited number of containers in each response. In this case, the response includes a token. To get the next set of containers, send the command again, this time with the <code>NextToken</code> parameter (with the returned token as its value). The next set of responses appears, with a token if there are still more containers to receive. </p> <p>See also <a>DescribeContainer</a>, which gets the properties of one container. </p>'
@@ -760,7 +768,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=MediaStore_20170901.ListTagsForResource':
+  /#X-Amz-Target=MediaStore_20170901.ListTagsForResource:
     post:
       operationId: ListTagsForResource
       description: 'Returns a list of the tags assigned to the specified container. '
@@ -811,7 +819,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=MediaStore_20170901.PutContainerPolicy':
+  /#X-Amz-Target=MediaStore_20170901.PutContainerPolicy:
     post:
       operationId: PutContainerPolicy
       description: '<p>Creates an access policy for the specified container to restrict the users and clients that can access it. For information about the data that is included in an access policy, see the <a href="https://aws.amazon.com/documentation/iam/">AWS Identity and Access Management User Guide</a>.</p> <p>For this release of the REST API, you can create only one policy for a container. If you enter <code>PutContainerPolicy</code> twice, the second command modifies the existing policy. </p>'
@@ -862,7 +870,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=MediaStore_20170901.PutCorsPolicy':
+  /#X-Amz-Target=MediaStore_20170901.PutCorsPolicy:
     post:
       operationId: PutCorsPolicy
       description: '<p>Sets the cross-origin resource sharing (CORS) configuration on a container so that the container can service cross-origin requests. For example, you might want to enable a request whose origin is http://www.example.com to access your AWS Elemental MediaStore container at my.example.container.com by using the browser''s XMLHttpRequest capability.</p> <p>To enable CORS on a container, you attach a CORS policy to the container. In the CORS policy, you configure rules that identify origins and the HTTP methods that can be executed on your container. The policy can contain up to 398,000 characters. You can add up to 100 rules to a CORS policy. If more than one rule applies, the service uses the first applicable rule listed.</p> <p>To learn more about CORS, see <a href="https://docs.aws.amazon.com/mediastore/latest/ug/cors-policy.html">Cross-Origin Resource Sharing (CORS) in AWS Elemental MediaStore</a>.</p>'
@@ -913,7 +921,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=MediaStore_20170901.PutLifecyclePolicy':
+  /#X-Amz-Target=MediaStore_20170901.PutLifecyclePolicy:
     post:
       operationId: PutLifecyclePolicy
       description: '<p>Writes an object lifecycle policy to a container. If the container already has an object lifecycle policy, the service replaces the existing policy with the new policy. It takes up to 20 minutes for the change to take effect.</p> <p>For information about how to construct an object lifecycle policy, see <a href="https://docs.aws.amazon.com/mediastore/latest/ug/policies-object-lifecycle-components.html">Components of an Object Lifecycle Policy</a>.</p>'
@@ -964,7 +972,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=MediaStore_20170901.PutMetricPolicy':
+  /#X-Amz-Target=MediaStore_20170901.PutMetricPolicy:
     post:
       operationId: PutMetricPolicy
       description: The metric policy that you want to add to the container. A metric policy allows AWS Elemental MediaStore to send metrics to Amazon CloudWatch. It takes up to 20 minutes for the new policy to take effect.
@@ -1015,7 +1023,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=MediaStore_20170901.StartAccessLogging':
+  /#X-Amz-Target=MediaStore_20170901.StartAccessLogging:
     post:
       operationId: StartAccessLogging
       description: 'Starts access logging on the specified container. When you enable access logging on a container, MediaStore delivers access logs for objects stored in that container to Amazon CloudWatch Logs.'
@@ -1066,7 +1074,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=MediaStore_20170901.StopAccessLogging':
+  /#X-Amz-Target=MediaStore_20170901.StopAccessLogging:
     post:
       operationId: StopAccessLogging
       description: 'Stops access logging on the specified container. When you stop access logging on a container, MediaStore stops sending access logs to Amazon CloudWatch Logs. These access logs are not saved and are not retrievable.'
@@ -1117,7 +1125,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=MediaStore_20170901.TagResource':
+  /#X-Amz-Target=MediaStore_20170901.TagResource:
     post:
       operationId: TagResource
       description: 'Adds tags to the specified AWS Elemental MediaStore container. Tags are key:value pairs that you can associate with AWS resources. For example, the tag key might be "customer" and the tag value might be "companyA." You can specify one or more tags to add to each container. You can add up to 50 tags to each container. For more information about tagging, including naming and usage conventions, see <a href="https://docs.aws.amazon.com/mediastore/latest/ug/tagging.html">Tagging Resources in MediaStore</a>.'
@@ -1168,7 +1176,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=MediaStore_20170901.UntagResource':
+  /#X-Amz-Target=MediaStore_20170901.UntagResource:
     post:
       operationId: UntagResource
       description: 'Removes tags from the specified container. You can specify one or more tags to remove. '

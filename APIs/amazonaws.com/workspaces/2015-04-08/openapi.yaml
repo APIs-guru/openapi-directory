@@ -51,13 +51,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The Amazon WorkSpaces multi-region endpoint
   - url: 'https://workspaces.{region}.amazonaws.com'
@@ -77,13 +81,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The Amazon WorkSpaces multi-region endpoint
   - url: 'http://workspaces.{region}.amazonaws.com.cn'
@@ -106,7 +114,7 @@ servers:
     description: The Amazon WorkSpaces endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
-  '/#X-Amz-Target=WorkspacesService.AssociateIpGroups':
+  /#X-Amz-Target=WorkspacesService.AssociateIpGroups:
     post:
       operationId: AssociateIpGroups
       description: Associates the specified IP access control group with the specified directory.
@@ -175,7 +183,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=WorkspacesService.AuthorizeIpRules':
+  /#X-Amz-Target=WorkspacesService.AuthorizeIpRules:
     post:
       operationId: AuthorizeIpRules
       description: <p>Adds one or more rules to the specified IP access control group.</p> <p>This action gives users permission to access their WorkSpaces from the CIDR address ranges specified in the rules.</p>
@@ -238,7 +246,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=WorkspacesService.CopyWorkspaceImage':
+  /#X-Amz-Target=WorkspacesService.CopyWorkspaceImage:
     post:
       operationId: CopyWorkspaceImage
       description: Copies the specified image from the specified Region to the current Region.
@@ -313,7 +321,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=WorkspacesService.CreateIpGroup':
+  /#X-Amz-Target=WorkspacesService.CreateIpGroup:
     post:
       operationId: CreateIpGroup
       description: '<p>Creates an IP access control group.</p> <p>An IP access control group provides you with the ability to control the IP addresses from which users are allowed to access their WorkSpaces. To specify the CIDR address ranges, add rules to your IP access control group and then associate the group with your directory. You can add rules when you create the group or at any time using <a>AuthorizeIpRules</a>.</p> <p>There is a default IP access control group associated with your directory. If you don''t associate an IP access control group with your directory, the default group is used. The default group includes a default rule that allows users to access their WorkSpaces from anywhere. You cannot modify the default IP access control group for your directory.</p>'
@@ -376,7 +384,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=WorkspacesService.CreateTags':
+  /#X-Amz-Target=WorkspacesService.CreateTags:
     post:
       operationId: CreateTags
       description: Creates the specified tags for the specified WorkSpaces resource.
@@ -427,7 +435,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=WorkspacesService.CreateWorkspaces':
+  /#X-Amz-Target=WorkspacesService.CreateWorkspaces:
     post:
       operationId: CreateWorkspaces
       description: <p>Creates one or more WorkSpaces.</p> <p>This operation is asynchronous and returns before the WorkSpaces are created.</p>
@@ -472,7 +480,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=WorkspacesService.DeleteIpGroup':
+  /#X-Amz-Target=WorkspacesService.DeleteIpGroup:
     post:
       operationId: DeleteIpGroup
       description: <p>Deletes the specified IP access control group.</p> <p>You cannot delete an IP access control group that is associated with a directory.</p>
@@ -529,7 +537,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=WorkspacesService.DeleteTags':
+  /#X-Amz-Target=WorkspacesService.DeleteTags:
     post:
       operationId: DeleteTags
       description: Deletes the specified tags from the specified WorkSpaces resource.
@@ -574,7 +582,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=WorkspacesService.DeleteWorkspaceImage':
+  /#X-Amz-Target=WorkspacesService.DeleteWorkspaceImage:
     post:
       operationId: DeleteWorkspaceImage
       description: 'Deletes the specified image from your account. To delete an image, you must first delete any bundles that are associated with the image and un-share the image if it is shared with other accounts. '
@@ -625,7 +633,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=WorkspacesService.DeregisterWorkspaceDirectory':
+  /#X-Amz-Target=WorkspacesService.DeregisterWorkspaceDirectory:
     post:
       operationId: DeregisterWorkspaceDirectory
       description: 'Deregisters the specified directory. This operation is asynchronous and returns before the WorkSpace directory is deregistered. If any WorkSpaces are registered to this directory, you must remove them before you can deregister the directory.'
@@ -688,7 +696,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=WorkspacesService.DescribeAccount':
+  /#X-Amz-Target=WorkspacesService.DescribeAccount:
     post:
       operationId: DescribeAccount
       description: Retrieves a list that describes the configuration of Bring Your Own License (BYOL) for the specified account.
@@ -727,7 +735,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=WorkspacesService.DescribeAccountModifications':
+  /#X-Amz-Target=WorkspacesService.DescribeAccountModifications:
     post:
       operationId: DescribeAccountModifications
       description: Retrieves a list that describes modifications to the configuration of Bring Your Own License (BYOL) for the specified account.
@@ -766,7 +774,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=WorkspacesService.DescribeClientProperties':
+  /#X-Amz-Target=WorkspacesService.DescribeClientProperties:
     post:
       operationId: DescribeClientProperties
       description: Retrieves a list that describes one or more specified Amazon WorkSpaces clients.
@@ -817,7 +825,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=WorkspacesService.DescribeIpGroups':
+  /#X-Amz-Target=WorkspacesService.DescribeIpGroups:
     post:
       operationId: DescribeIpGroups
       description: Describes one or more of your IP access control groups.
@@ -862,7 +870,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=WorkspacesService.DescribeTags':
+  /#X-Amz-Target=WorkspacesService.DescribeTags:
     post:
       operationId: DescribeTags
       description: Describes the specified tags for the specified WorkSpaces resource.
@@ -901,7 +909,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=WorkspacesService.DescribeWorkspaceBundles':
+  /#X-Amz-Target=WorkspacesService.DescribeWorkspaceBundles:
     post:
       operationId: DescribeWorkspaceBundles
       description: '<p>Retrieves a list that describes the available WorkSpace bundles.</p> <p>You can filter the results using either bundle ID or owner, but not both.</p>'
@@ -946,7 +954,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=WorkspacesService.DescribeWorkspaceDirectories':
+  /#X-Amz-Target=WorkspacesService.DescribeWorkspaceDirectories:
     post:
       operationId: DescribeWorkspaceDirectories
       description: Describes the available directories that are registered with Amazon WorkSpaces.
@@ -991,7 +999,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=WorkspacesService.DescribeWorkspaceImages':
+  /#X-Amz-Target=WorkspacesService.DescribeWorkspaceImages:
     post:
       operationId: DescribeWorkspaceImages
       description: 'Retrieves a list that describes one or more specified images, if the image identifiers are provided. Otherwise, all images in the account are described. '
@@ -1030,7 +1038,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=WorkspacesService.DescribeWorkspaceSnapshots':
+  /#X-Amz-Target=WorkspacesService.DescribeWorkspaceSnapshots:
     post:
       operationId: DescribeWorkspaceSnapshots
       description: Describes the snapshots for the specified WorkSpace.
@@ -1081,7 +1089,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=WorkspacesService.DescribeWorkspaces':
+  /#X-Amz-Target=WorkspacesService.DescribeWorkspaces:
     post:
       operationId: DescribeWorkspaces
       description: '<p>Describes the specified WorkSpaces.</p> <p>You can filter the results by using the bundle identifier, directory identifier, or owner, but you can specify only one filter at a time.</p>'
@@ -1138,7 +1146,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=WorkspacesService.DescribeWorkspacesConnectionStatus':
+  /#X-Amz-Target=WorkspacesService.DescribeWorkspacesConnectionStatus:
     post:
       operationId: DescribeWorkspacesConnectionStatus
       description: Describes the connection status of the specified WorkSpaces.
@@ -1177,7 +1185,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=WorkspacesService.DisassociateIpGroups':
+  /#X-Amz-Target=WorkspacesService.DisassociateIpGroups:
     post:
       operationId: DisassociateIpGroups
       description: Disassociates the specified IP access control group from the specified directory.
@@ -1234,7 +1242,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=WorkspacesService.ImportWorkspaceImage':
+  /#X-Amz-Target=WorkspacesService.ImportWorkspaceImage:
     post:
       operationId: ImportWorkspaceImage
       description: 'Imports the specified Windows 7 or Windows 10 Bring Your Own License (BYOL) image into Amazon WorkSpaces. The image must be an already licensed EC2 image that is in your AWS account, and you must own the image. '
@@ -1303,7 +1311,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=WorkspacesService.ListAvailableManagementCidrRanges':
+  /#X-Amz-Target=WorkspacesService.ListAvailableManagementCidrRanges:
     post:
       operationId: ListAvailableManagementCidrRanges
       description: '<p>Retrieves a list of IP address ranges, specified as IPv4 CIDR blocks, that you can use for the network management interface when you enable Bring Your Own License (BYOL). </p> <p>The management network interface is connected to a secure Amazon WorkSpaces management network. It is used for interactive streaming of the WorkSpace desktop to Amazon WorkSpaces clients, and to allow Amazon WorkSpaces to manage the WorkSpace.</p>'
@@ -1348,7 +1356,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=WorkspacesService.MigrateWorkspace':
+  /#X-Amz-Target=WorkspacesService.MigrateWorkspace:
     post:
       operationId: MigrateWorkspace
       description: '<p>Migrates a WorkSpace from one operating system or bundle type to another, while retaining the data on the user volume.</p> <p>The migration process recreates the WorkSpace by using a new root volume from the target bundle image and the user volume from the last available snapshot of the original WorkSpace. During migration, the original <code>D:\Users\%USERNAME%</code> user profile folder is renamed to <code>D:\Users\%USERNAME%MMddyyTHHmmss%.NotMigrated</code>. A new <code>D:\Users\%USERNAME%\</code> folder is generated by the new OS. Certain files in the old user profile are moved to the new user profile.</p> <p>For available migration scenarios, details about what happens during migration, and best practices, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/migrate-workspaces.html">Migrate a WorkSpace</a>.</p>'
@@ -1417,7 +1425,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=WorkspacesService.ModifyAccount':
+  /#X-Amz-Target=WorkspacesService.ModifyAccount:
     post:
       operationId: ModifyAccount
       description: Modifies the configuration of Bring Your Own License (BYOL) for the specified account.
@@ -1480,7 +1488,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=WorkspacesService.ModifyClientProperties':
+  /#X-Amz-Target=WorkspacesService.ModifyClientProperties:
     post:
       operationId: ModifyClientProperties
       description: Modifies the properties of the specified Amazon WorkSpaces clients.
@@ -1531,7 +1539,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=WorkspacesService.ModifySelfservicePermissions':
+  /#X-Amz-Target=WorkspacesService.ModifySelfservicePermissions:
     post:
       operationId: ModifySelfservicePermissions
       description: 'Modifies the self-service WorkSpace management capabilities for your users. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/enable-user-self-service-workspace-management.html">Enable Self-Service WorkSpace Management Capabilities for Your Users</a>.'
@@ -1582,7 +1590,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=WorkspacesService.ModifyWorkspaceAccessProperties':
+  /#X-Amz-Target=WorkspacesService.ModifyWorkspaceAccessProperties:
     post:
       operationId: ModifyWorkspaceAccessProperties
       description: 'Specifies which devices and operating systems users can use to access their WorkSpaces. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/update-directory-details.html#control-device-access"> Control Device Access</a>.'
@@ -1627,7 +1635,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=WorkspacesService.ModifyWorkspaceCreationProperties':
+  /#X-Amz-Target=WorkspacesService.ModifyWorkspaceCreationProperties:
     post:
       operationId: ModifyWorkspaceCreationProperties
       description: Modify the default properties used to create WorkSpaces.
@@ -1678,7 +1686,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=WorkspacesService.ModifyWorkspaceProperties':
+  /#X-Amz-Target=WorkspacesService.ModifyWorkspaceProperties:
     post:
       operationId: ModifyWorkspaceProperties
       description: Modifies the specified WorkSpace properties.
@@ -1753,7 +1761,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=WorkspacesService.ModifyWorkspaceState':
+  /#X-Amz-Target=WorkspacesService.ModifyWorkspaceState:
     post:
       operationId: ModifyWorkspaceState
       description: '<p>Sets the state of the specified WorkSpace.</p> <p>To maintain a WorkSpace without being interrupted, set the WorkSpace state to <code>ADMIN_MAINTENANCE</code>. WorkSpaces in this state do not respond to requests to reboot, stop, start, rebuild, or restore. An AutoStop WorkSpace in this state is not stopped. Users cannot log into a WorkSpace in the <code>ADMIN_MAINTENANCE</code> state.</p>'
@@ -1804,7 +1812,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=WorkspacesService.RebootWorkspaces':
+  /#X-Amz-Target=WorkspacesService.RebootWorkspaces:
     post:
       operationId: RebootWorkspaces
       description: <p>Reboots the specified WorkSpaces.</p> <p>You cannot reboot a WorkSpace unless its state is <code>AVAILABLE</code> or <code>UNHEALTHY</code>.</p> <p>This operation is asynchronous and returns before the WorkSpaces have rebooted.</p>
@@ -1837,7 +1845,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=WorkspacesService.RebuildWorkspaces':
+  /#X-Amz-Target=WorkspacesService.RebuildWorkspaces:
     post:
       operationId: RebuildWorkspaces
       description: '<p>Rebuilds the specified WorkSpace.</p> <p>You cannot rebuild a WorkSpace unless its state is <code>AVAILABLE</code>, <code>ERROR</code>, <code>UNHEALTHY</code>, or <code>STOPPED</code>.</p> <p>Rebuilding a WorkSpace is a potentially destructive action that can result in the loss of data. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/reset-workspace.html">Rebuild a WorkSpace</a>.</p> <p>This operation is asynchronous and returns before the WorkSpaces have been completely rebuilt.</p>'
@@ -1870,7 +1878,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=WorkspacesService.RegisterWorkspaceDirectory':
+  /#X-Amz-Target=WorkspacesService.RegisterWorkspaceDirectory:
     post:
       operationId: RegisterWorkspaceDirectory
       description: 'Registers the specified directory. This operation is asynchronous and returns before the WorkSpace directory is registered. If this is the first time you are registering a directory, you will need to create the workspaces_DefaultRole role before you can register a directory. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/workspaces-access-control.html#create-default-role"> Creating the workspaces_DefaultRole Role</a>.'
@@ -1951,7 +1959,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=WorkspacesService.RestoreWorkspace':
+  /#X-Amz-Target=WorkspacesService.RestoreWorkspace:
     post:
       operationId: RestoreWorkspace
       description: '<p>Restores the specified WorkSpace to its last known healthy state.</p> <p>You cannot restore a WorkSpace unless its state is <code> AVAILABLE</code>, <code>ERROR</code>, <code>UNHEALTHY</code>, or <code>STOPPED</code>.</p> <p>Restoring a WorkSpace is a potentially destructive action that can result in the loss of data. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/restore-workspace.html">Restore a WorkSpace</a>.</p> <p>This operation is asynchronous and returns before the WorkSpace is completely restored.</p>'
@@ -2002,7 +2010,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=WorkspacesService.RevokeIpRules':
+  /#X-Amz-Target=WorkspacesService.RevokeIpRules:
     post:
       operationId: RevokeIpRules
       description: Removes one or more rules from the specified IP access control group.
@@ -2059,7 +2067,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=WorkspacesService.StartWorkspaces':
+  /#X-Amz-Target=WorkspacesService.StartWorkspaces:
     post:
       operationId: StartWorkspaces
       description: <p>Starts the specified WorkSpaces.</p> <p>You cannot start a WorkSpace unless it has a running mode of <code>AutoStop</code> and a state of <code>STOPPED</code>.</p>
@@ -2092,7 +2100,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=WorkspacesService.StopWorkspaces':
+  /#X-Amz-Target=WorkspacesService.StopWorkspaces:
     post:
       operationId: StopWorkspaces
       description: '<p> Stops the specified WorkSpaces.</p> <p>You cannot stop a WorkSpace unless it has a running mode of <code>AutoStop</code> and a state of <code>AVAILABLE</code>, <code>IMPAIRED</code>, <code>UNHEALTHY</code>, or <code>ERROR</code>.</p>'
@@ -2125,7 +2133,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=WorkspacesService.TerminateWorkspaces':
+  /#X-Amz-Target=WorkspacesService.TerminateWorkspaces:
     post:
       operationId: TerminateWorkspaces
       description: '<p>Terminates the specified WorkSpaces.</p> <p>Terminating a WorkSpace is a permanent action and cannot be undone. The user''s data is destroyed. If you need to archive any user data, contact Amazon Web Services before terminating the WorkSpace.</p> <p>You can terminate a WorkSpace that is in any state except <code>SUSPENDED</code>.</p> <p>This operation is asynchronous and returns before the WorkSpaces have been completely terminated.</p>'
@@ -2158,7 +2166,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=WorkspacesService.UpdateRulesOfIpGroup':
+  /#X-Amz-Target=WorkspacesService.UpdateRulesOfIpGroup:
     post:
       operationId: UpdateRulesOfIpGroup
       description: Replaces the current rules of the specified IP access control group with the specified rules.

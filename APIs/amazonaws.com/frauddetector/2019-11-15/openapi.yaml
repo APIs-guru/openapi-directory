@@ -51,13 +51,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The Amazon Fraud Detector multi-region endpoint
   - url: 'https://frauddetector.{region}.amazonaws.com'
@@ -77,13 +81,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The Amazon Fraud Detector multi-region endpoint
   - url: 'http://frauddetector.{region}.amazonaws.com.cn'
@@ -106,7 +114,7 @@ servers:
     description: The Amazon Fraud Detector endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
-  '/#X-Amz-Target=AWSHawksNestServiceFacade.BatchCreateVariable':
+  /#X-Amz-Target=AWSHawksNestServiceFacade.BatchCreateVariable:
     post:
       operationId: BatchCreateVariable
       description: Creates a batch of variables.
@@ -163,7 +171,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSHawksNestServiceFacade.BatchGetVariable':
+  /#X-Amz-Target=AWSHawksNestServiceFacade.BatchGetVariable:
     post:
       operationId: BatchGetVariable
       description: Gets a batch of variables.
@@ -220,7 +228,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSHawksNestServiceFacade.CreateDetectorVersion':
+  /#X-Amz-Target=AWSHawksNestServiceFacade.CreateDetectorVersion:
     post:
       operationId: CreateDetectorVersion
       description: Creates a detector version. The detector version starts in a <code>DRAFT</code> status.
@@ -283,7 +291,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSHawksNestServiceFacade.CreateModel':
+  /#X-Amz-Target=AWSHawksNestServiceFacade.CreateModel:
     post:
       operationId: CreateModel
       description: Creates a model using the specified model type.
@@ -334,7 +342,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSHawksNestServiceFacade.CreateModelVersion':
+  /#X-Amz-Target=AWSHawksNestServiceFacade.CreateModelVersion:
     post:
       operationId: CreateModelVersion
       description: 'Creates a version of the model using the specified model type and model id. '
@@ -391,7 +399,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSHawksNestServiceFacade.CreateRule':
+  /#X-Amz-Target=AWSHawksNestServiceFacade.CreateRule:
     post:
       operationId: CreateRule
       description: 'Creates a rule for use with the specified detector. '
@@ -448,7 +456,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSHawksNestServiceFacade.CreateVariable':
+  /#X-Amz-Target=AWSHawksNestServiceFacade.CreateVariable:
     post:
       operationId: CreateVariable
       description: Creates a variable.
@@ -505,7 +513,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSHawksNestServiceFacade.DeleteDetector':
+  /#X-Amz-Target=AWSHawksNestServiceFacade.DeleteDetector:
     post:
       operationId: DeleteDetector
       description: 'Deletes the detector. Before deleting a detector, you must first delete all detector versions and rule versions associated with the detector.'
@@ -568,7 +576,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSHawksNestServiceFacade.DeleteDetectorVersion':
+  /#X-Amz-Target=AWSHawksNestServiceFacade.DeleteDetectorVersion:
     post:
       operationId: DeleteDetectorVersion
       description: Deletes the detector version. You cannot delete detector versions that are in <code>ACTIVE</code> status.
@@ -637,7 +645,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSHawksNestServiceFacade.DeleteEvent':
+  /#X-Amz-Target=AWSHawksNestServiceFacade.DeleteEvent:
     post:
       operationId: DeleteEvent
       description: Deletes the specified event.
@@ -688,7 +696,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSHawksNestServiceFacade.DeleteRule':
+  /#X-Amz-Target=AWSHawksNestServiceFacade.DeleteRule:
     post:
       operationId: DeleteRule
       description: Deletes the rule. You cannot delete a rule if it is used by an <code>ACTIVE</code> or <code>INACTIVE</code> detector version.
@@ -751,7 +759,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSHawksNestServiceFacade.DescribeDetector':
+  /#X-Amz-Target=AWSHawksNestServiceFacade.DescribeDetector:
     post:
       operationId: DescribeDetector
       description: Gets all versions for a specified detector.
@@ -814,7 +822,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSHawksNestServiceFacade.DescribeModelVersions':
+  /#X-Amz-Target=AWSHawksNestServiceFacade.DescribeModelVersions:
     post:
       operationId: DescribeModelVersions
       description: 'Gets all of the model versions for the specified model type or for the specified model type and model ID. You can also get details for a single, specified model version. '
@@ -883,7 +891,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSHawksNestServiceFacade.GetDetectorVersion':
+  /#X-Amz-Target=AWSHawksNestServiceFacade.GetDetectorVersion:
     post:
       operationId: GetDetectorVersion
       description: 'Gets a particular detector version. '
@@ -946,7 +954,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSHawksNestServiceFacade.GetDetectors':
+  /#X-Amz-Target=AWSHawksNestServiceFacade.GetDetectors:
     post:
       operationId: GetDetectors
       description: 'Gets all detectors or a single detector if a <code>detectorId</code> is specified. This is a paginated API. If you provide a null <code>maxResults</code>, this action retrieves a maximum of 10 records per page. If you provide a <code>maxResults</code>, the value must be between 5 and 10. To get the next page results, provide the pagination token from the <code>GetDetectorsResponse</code> as part of your request. A null pagination token fetches the records from the beginning. '
@@ -1021,7 +1029,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSHawksNestServiceFacade.GetEntityTypes':
+  /#X-Amz-Target=AWSHawksNestServiceFacade.GetEntityTypes:
     post:
       operationId: GetEntityTypes
       description: 'Gets all entity types or a specific entity type if a name is specified. This is a paginated API. If you provide a null <code>maxResults</code>, this action retrieves a maximum of 10 records per page. If you provide a <code>maxResults</code>, the value must be between 5 and 10. To get the next page results, provide the pagination token from the <code>GetEntityTypesResponse</code> as part of your request. A null pagination token fetches the records from the beginning. '
@@ -1090,7 +1098,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSHawksNestServiceFacade.GetEventPrediction':
+  /#X-Amz-Target=AWSHawksNestServiceFacade.GetEventPrediction:
     post:
       operationId: GetEventPrediction
       description: 'Evaluates an event against a detector version. If a version ID is not provided, the detector’s (<code>ACTIVE</code>) version is used.'
@@ -1153,7 +1161,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSHawksNestServiceFacade.GetEventTypes':
+  /#X-Amz-Target=AWSHawksNestServiceFacade.GetEventTypes:
     post:
       operationId: GetEventTypes
       description: 'Gets all event types or a specific event type if name is provided. This is a paginated API. If you provide a null <code>maxResults</code>, this action retrieves a maximum of 10 records per page. If you provide a <code>maxResults</code>, the value must be between 5 and 10. To get the next page results, provide the pagination token from the <code>GetEventTypesResponse</code> as part of your request. A null pagination token fetches the records from the beginning. '
@@ -1222,7 +1230,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSHawksNestServiceFacade.GetExternalModels':
+  /#X-Amz-Target=AWSHawksNestServiceFacade.GetExternalModels:
     post:
       operationId: GetExternalModels
       description: 'Gets the details for one or more Amazon SageMaker models that have been imported into the service. This is a paginated API. If you provide a null <code>maxResults</code>, this actions retrieves a maximum of 10 records per page. If you provide a <code>maxResults</code>, the value must be between 5 and 10. To get the next page results, provide the pagination token from the <code>GetExternalModelsResult</code> as part of your request. A null pagination token fetches the records from the beginning. '
@@ -1297,7 +1305,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSHawksNestServiceFacade.GetKMSEncryptionKey':
+  /#X-Amz-Target=AWSHawksNestServiceFacade.GetKMSEncryptionKey:
     post:
       operationId: GetKMSEncryptionKey
       description: Gets the encryption key if a Key Management Service (KMS) customer master key (CMK) has been specified to be used to encrypt content in Amazon Fraud Detector.
@@ -1342,7 +1350,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSHawksNestServiceFacade.GetLabels':
+  /#X-Amz-Target=AWSHawksNestServiceFacade.GetLabels:
     post:
       operationId: GetLabels
       description: 'Gets all labels or a specific label if name is provided. This is a paginated API. If you provide a null <code>maxResults</code>, this action retrieves a maximum of 50 records per page. If you provide a <code>maxResults</code>, the value must be between 10 and 50. To get the next page results, provide the pagination token from the <code>GetGetLabelsResponse</code> as part of your request. A null pagination token fetches the records from the beginning. '
@@ -1411,7 +1419,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSHawksNestServiceFacade.GetModelVersion':
+  /#X-Amz-Target=AWSHawksNestServiceFacade.GetModelVersion:
     post:
       operationId: GetModelVersion
       description: Gets the details of the specified model version.
@@ -1468,7 +1476,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSHawksNestServiceFacade.GetModels':
+  /#X-Amz-Target=AWSHawksNestServiceFacade.GetModels:
     post:
       operationId: GetModels
       description: '<p>Gets one or more models. Gets all models for the AWS account if no model type and no model id provided. Gets all models for the AWS account and model type, if the model type is specified but model id is not provided. Gets a specific model if (model type, model id) tuple is specified. </p> <p>This is a paginated API. If you provide a null <code>maxResults</code>, this action retrieves a maximum of 10 records per page. If you provide a <code>maxResults</code>, the value must be between 1 and 10. To get the next page results, provide the pagination token from the response as part of your request. A null pagination token fetches the records from the beginning.</p>'
@@ -1537,7 +1545,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSHawksNestServiceFacade.GetOutcomes':
+  /#X-Amz-Target=AWSHawksNestServiceFacade.GetOutcomes:
     post:
       operationId: GetOutcomes
       description: 'Gets one or more outcomes. This is a paginated API. If you provide a null <code>maxResults</code>, this actions retrieves a maximum of 100 records per page. If you provide a <code>maxResults</code>, the value must be between 50 and 100. To get the next page results, provide the pagination token from the <code>GetOutcomesResult</code> as part of your request. A null pagination token fetches the records from the beginning. '
@@ -1612,7 +1620,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSHawksNestServiceFacade.GetPrediction':
+  /#X-Amz-Target=AWSHawksNestServiceFacade.GetPrediction:
     post:
       operationId: GetPrediction
       description: 'Evaluates an event against a detector version. If a version ID is not provided, the detector’s (<code>ACTIVE</code>) version is used. '
@@ -1675,7 +1683,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSHawksNestServiceFacade.GetRules':
+  /#X-Amz-Target=AWSHawksNestServiceFacade.GetRules:
     post:
       operationId: GetRules
       description: '<p>Get all rules for a detector (paginated) if <code>ruleId</code> and <code>ruleVersion</code> are not specified. Gets all rules for the detector and the <code>ruleId</code> if present (paginated). Gets a specific rule if both the <code>ruleId</code> and the <code>ruleVersion</code> are specified.</p> <p>This is a paginated API. Providing null maxResults results in retrieving maximum of 100 records per page. If you provide maxResults the value must be between 50 and 100. To get the next page result, a provide a pagination token from GetRulesResult as part of your request. Null pagination token fetches the records from the beginning.</p>'
@@ -1750,7 +1758,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSHawksNestServiceFacade.GetVariables':
+  /#X-Amz-Target=AWSHawksNestServiceFacade.GetVariables:
     post:
       operationId: GetVariables
       description: 'Gets all of the variables or the specific variable. This is a paginated API. Providing null <code>maxSizePerPage</code> results in retrieving maximum of 100 records per page. If you provide <code>maxSizePerPage</code> the value must be between 50 and 100. To get the next page result, a provide a pagination token from <code>GetVariablesResult</code> as part of your request. Null pagination token fetches the records from the beginning. '
@@ -1825,7 +1833,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSHawksNestServiceFacade.ListTagsForResource':
+  /#X-Amz-Target=AWSHawksNestServiceFacade.ListTagsForResource:
     post:
       operationId: ListTagsForResource
       description: 'Lists all tags associated with the resource. This is a paginated API. To get the next page results, provide the pagination token from the response as part of your request. A null pagination token fetches the records from the beginning. '
@@ -1888,7 +1896,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSHawksNestServiceFacade.PutDetector':
+  /#X-Amz-Target=AWSHawksNestServiceFacade.PutDetector:
     post:
       operationId: PutDetector
       description: 'Creates or updates a detector. '
@@ -1945,7 +1953,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSHawksNestServiceFacade.PutEntityType':
+  /#X-Amz-Target=AWSHawksNestServiceFacade.PutEntityType:
     post:
       operationId: PutEntityType
       description: 'Creates or updates an entity type. An entity represents who is performing the event. As part of a fraud prediction, you pass the entity ID to indicate the specific entity who performed the event. An entity type classifies the entity. Example classifications include customer, merchant, or account.'
@@ -1996,7 +2004,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSHawksNestServiceFacade.PutEventType':
+  /#X-Amz-Target=AWSHawksNestServiceFacade.PutEventType:
     post:
       operationId: PutEventType
       description: 'Creates or updates an event type. An event is a business activity that is evaluated for fraud risk. With Amazon Fraud Detector, you generate fraud predictions for events. An event type defines the structure for an event sent to Amazon Fraud Detector. This includes the variables sent as part of the event, the entity performing the event (such as a customer), and the labels that classify the event. Example event types include online payment transactions, account registrations, and authentications.'
@@ -2047,7 +2055,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSHawksNestServiceFacade.PutExternalModel':
+  /#X-Amz-Target=AWSHawksNestServiceFacade.PutExternalModel:
     post:
       operationId: PutExternalModel
       description: 'Creates or updates an Amazon SageMaker model endpoint. You can also use this action to update the configuration of the model endpoint, including the IAM role and/or the mapped variables. '
@@ -2104,7 +2112,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSHawksNestServiceFacade.PutKMSEncryptionKey':
+  /#X-Amz-Target=AWSHawksNestServiceFacade.PutKMSEncryptionKey:
     post:
       operationId: PutKMSEncryptionKey
       description: Specifies the Key Management Service (KMS) customer master key (CMK) to be used to encrypt content in Amazon Fraud Detector.
@@ -2161,7 +2169,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSHawksNestServiceFacade.PutLabel':
+  /#X-Amz-Target=AWSHawksNestServiceFacade.PutLabel:
     post:
       operationId: PutLabel
       description: 'Creates or updates label. A label classifies an event as fraudulent or legitimate. Labels are associated with event types and used to train supervised machine learning models in Amazon Fraud Detector. '
@@ -2212,7 +2220,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSHawksNestServiceFacade.PutOutcome':
+  /#X-Amz-Target=AWSHawksNestServiceFacade.PutOutcome:
     post:
       operationId: PutOutcome
       description: 'Creates or updates an outcome. '
@@ -2269,7 +2277,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSHawksNestServiceFacade.TagResource':
+  /#X-Amz-Target=AWSHawksNestServiceFacade.TagResource:
     post:
       operationId: TagResource
       description: Assigns tags to a resource.
@@ -2320,7 +2328,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSHawksNestServiceFacade.UntagResource':
+  /#X-Amz-Target=AWSHawksNestServiceFacade.UntagResource:
     post:
       operationId: UntagResource
       description: Removes tags from a resource.
@@ -2371,7 +2379,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSHawksNestServiceFacade.UpdateDetectorVersion':
+  /#X-Amz-Target=AWSHawksNestServiceFacade.UpdateDetectorVersion:
     post:
       operationId: UpdateDetectorVersion
       description: ' Updates a detector version. The detector version attributes that you can update include models, external model endpoints, rules, rule execution mode, and description. You can only update a <code>DRAFT</code> detector version.'
@@ -2434,7 +2442,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSHawksNestServiceFacade.UpdateDetectorVersionMetadata':
+  /#X-Amz-Target=AWSHawksNestServiceFacade.UpdateDetectorVersionMetadata:
     post:
       operationId: UpdateDetectorVersionMetadata
       description: 'Updates the detector version''s description. You can update the metadata for any detector version (<code>DRAFT, ACTIVE,</code> or <code>INACTIVE</code>). '
@@ -2491,7 +2499,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSHawksNestServiceFacade.UpdateDetectorVersionStatus':
+  /#X-Amz-Target=AWSHawksNestServiceFacade.UpdateDetectorVersionStatus:
     post:
       operationId: UpdateDetectorVersionStatus
       description: 'Updates the detector version’s status. You can perform the following promotions or demotions using <code>UpdateDetectorVersionStatus</code>: <code>DRAFT</code> to <code>ACTIVE</code>, <code>ACTIVE</code> to <code>INACTIVE</code>, and <code>INACTIVE</code> to <code>ACTIVE</code>.'
@@ -2554,7 +2562,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSHawksNestServiceFacade.UpdateModel':
+  /#X-Amz-Target=AWSHawksNestServiceFacade.UpdateModel:
     post:
       operationId: UpdateModel
       description: Updates a model. You can update the description attribute using this action.
@@ -2611,7 +2619,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSHawksNestServiceFacade.UpdateModelVersion':
+  /#X-Amz-Target=AWSHawksNestServiceFacade.UpdateModelVersion:
     post:
       operationId: UpdateModelVersion
       description: 'Updates a model version. Updating a model version retrains an existing model version using updated training data and produces a new minor version of the model. You can update the training data set location and data access role attributes using this action. This action creates and trains a new minor version of the model, for example version 1.01, 1.02, 1.03.'
@@ -2668,7 +2676,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSHawksNestServiceFacade.UpdateModelVersionStatus':
+  /#X-Amz-Target=AWSHawksNestServiceFacade.UpdateModelVersionStatus:
     post:
       operationId: UpdateModelVersionStatus
       description: '<p>Updates the status of a model version.</p> <p>You can perform the following status updates:</p> <ol> <li> <p>Change the <code>TRAINING_COMPLETE</code> status to <code>ACTIVE</code>.</p> </li> <li> <p>Change <code>ACTIVE</code>to <code>INACTIVE</code>.</p> </li> </ol>'
@@ -2725,7 +2733,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSHawksNestServiceFacade.UpdateRuleMetadata':
+  /#X-Amz-Target=AWSHawksNestServiceFacade.UpdateRuleMetadata:
     post:
       operationId: UpdateRuleMetadata
       description: Updates a rule's metadata. The description attribute can be updated.
@@ -2788,7 +2796,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSHawksNestServiceFacade.UpdateRuleVersion':
+  /#X-Amz-Target=AWSHawksNestServiceFacade.UpdateRuleVersion:
     post:
       operationId: UpdateRuleVersion
       description: 'Updates a rule version resulting in a new rule version. Updates a rule version resulting in a new rule version (version 1, 2, 3 ...). '
@@ -2851,7 +2859,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSHawksNestServiceFacade.UpdateVariable':
+  /#X-Amz-Target=AWSHawksNestServiceFacade.UpdateVariable:
     post:
       operationId: UpdateVariable
       description: Updates a variable.

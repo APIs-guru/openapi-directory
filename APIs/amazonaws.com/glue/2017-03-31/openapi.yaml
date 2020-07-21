@@ -51,13 +51,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The AWS Glue multi-region endpoint
   - url: 'https://glue.{region}.amazonaws.com'
@@ -77,13 +81,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The AWS Glue multi-region endpoint
   - url: 'http://glue.{region}.amazonaws.com.cn'
@@ -106,7 +114,7 @@ servers:
     description: The AWS Glue endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
-  '/#X-Amz-Target=AWSGlue.BatchCreatePartition':
+  /#X-Amz-Target=AWSGlue.BatchCreatePartition:
     post:
       operationId: BatchCreatePartition
       description: Creates one or more partitions in a batch operation.
@@ -181,7 +189,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.BatchDeleteConnection':
+  /#X-Amz-Target=AWSGlue.BatchDeleteConnection:
     post:
       operationId: BatchDeleteConnection
       description: Deletes a list of connection definitions from the Data Catalog.
@@ -226,7 +234,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.BatchDeletePartition':
+  /#X-Amz-Target=AWSGlue.BatchDeletePartition:
     post:
       operationId: BatchDeletePartition
       description: Deletes one or more partitions in a batch operation.
@@ -283,7 +291,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.BatchDeleteTable':
+  /#X-Amz-Target=AWSGlue.BatchDeleteTable:
     post:
       operationId: BatchDeleteTable
       description: '<p>Deletes multiple tables at once.</p> <note> <p>After completing this operation, you no longer have access to the table versions and partitions that belong to the deleted table. AWS Glue deletes these "orphaned" resources asynchronously in a timely manner, at the discretion of the service.</p> <p>To ensure the immediate deletion of all related resources, before calling <code>BatchDeleteTable</code>, use <code>DeleteTableVersion</code> or <code>BatchDeleteTableVersion</code>, and <code>DeletePartition</code> or <code>BatchDeletePartition</code>, to delete any resources that belong to the table.</p> </note>'
@@ -340,7 +348,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.BatchDeleteTableVersion':
+  /#X-Amz-Target=AWSGlue.BatchDeleteTableVersion:
     post:
       operationId: BatchDeleteTableVersion
       description: Deletes a specified batch of versions of a table.
@@ -397,7 +405,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.BatchGetCrawlers':
+  /#X-Amz-Target=AWSGlue.BatchGetCrawlers:
     post:
       operationId: BatchGetCrawlers
       description: 'Returns a list of resource metadata for a given list of crawler names. After calling the <code>ListCrawlers</code> operation, you can call this operation to access the data to which you have been granted permissions. This operation supports all IAM permissions, including permission conditions that uses tags.'
@@ -442,7 +450,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.BatchGetDevEndpoints':
+  /#X-Amz-Target=AWSGlue.BatchGetDevEndpoints:
     post:
       operationId: BatchGetDevEndpoints
       description: 'Returns a list of resource metadata for a given list of development endpoint names. After calling the <code>ListDevEndpoints</code> operation, you can call this operation to access the data to which you have been granted permissions. This operation supports all IAM permissions, including permission conditions that uses tags.'
@@ -499,7 +507,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.BatchGetJobs':
+  /#X-Amz-Target=AWSGlue.BatchGetJobs:
     post:
       operationId: BatchGetJobs
       description: 'Returns a list of resource metadata for a given list of job names. After calling the <code>ListJobs</code> operation, you can call this operation to access the data to which you have been granted permissions. This operation supports all IAM permissions, including permission conditions that uses tags. '
@@ -550,7 +558,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.BatchGetPartition':
+  /#X-Amz-Target=AWSGlue.BatchGetPartition:
     post:
       operationId: BatchGetPartition
       description: Retrieves partitions in a batch request.
@@ -613,7 +621,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.BatchGetTriggers':
+  /#X-Amz-Target=AWSGlue.BatchGetTriggers:
     post:
       operationId: BatchGetTriggers
       description: 'Returns a list of resource metadata for a given list of trigger names. After calling the <code>ListTriggers</code> operation, you can call this operation to access the data to which you have been granted permissions. This operation supports all IAM permissions, including permission conditions that uses tags.'
@@ -664,7 +672,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.BatchGetWorkflows':
+  /#X-Amz-Target=AWSGlue.BatchGetWorkflows:
     post:
       operationId: BatchGetWorkflows
       description: 'Returns a list of resource metadata for a given list of workflow names. After calling the <code>ListWorkflows</code> operation, you can call this operation to access the data to which you have been granted permissions. This operation supports all IAM permissions, including permission conditions that uses tags.'
@@ -715,7 +723,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.BatchStopJobRun':
+  /#X-Amz-Target=AWSGlue.BatchStopJobRun:
     post:
       operationId: BatchStopJobRun
       description: Stops one or more job runs for a specified job definition.
@@ -766,7 +774,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.CancelMLTaskRun':
+  /#X-Amz-Target=AWSGlue.CancelMLTaskRun:
     post:
       operationId: CancelMLTaskRun
       description: 'Cancels (stops) a task run. Machine learning task runs are asynchronous tasks that AWS Glue runs on your behalf as part of various machine learning workflows. You can cancel a machine learning task run at any time by calling <code>CancelMLTaskRun</code> with a task run''s parent transform''s <code>TransformID</code> and the task run''s <code>TaskRunId</code>. '
@@ -823,7 +831,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.CreateClassifier':
+  /#X-Amz-Target=AWSGlue.CreateClassifier:
     post:
       operationId: CreateClassifier
       description: 'Creates a classifier in the user''s account. This can be a <code>GrokClassifier</code>, an <code>XMLClassifier</code>, a <code>JsonClassifier</code>, or a <code>CsvClassifier</code>, depending on which field of the request is present.'
@@ -874,7 +882,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.CreateConnection':
+  /#X-Amz-Target=AWSGlue.CreateConnection:
     post:
       operationId: CreateConnection
       description: Creates a connection definition in the Data Catalog.
@@ -937,7 +945,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.CreateCrawler':
+  /#X-Amz-Target=AWSGlue.CreateCrawler:
     post:
       operationId: CreateCrawler
       description: 'Creates a new crawler with specified targets, role, configuration, and optional schedule. At least one crawl target must be specified, in the <code>s3Targets</code> field, the <code>jdbcTargets</code> field, or the <code>DynamoDBTargets</code> field.'
@@ -994,7 +1002,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.CreateDatabase':
+  /#X-Amz-Target=AWSGlue.CreateDatabase:
     post:
       operationId: CreateDatabase
       description: Creates a new database in a Data Catalog.
@@ -1063,7 +1071,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.CreateDevEndpoint':
+  /#X-Amz-Target=AWSGlue.CreateDevEndpoint:
     post:
       operationId: CreateDevEndpoint
       description: Creates a new development endpoint.
@@ -1144,7 +1152,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.CreateJob':
+  /#X-Amz-Target=AWSGlue.CreateJob:
     post:
       operationId: CreateJob
       description: Creates a new job definition.
@@ -1219,7 +1227,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.CreateMLTransform':
+  /#X-Amz-Target=AWSGlue.CreateMLTransform:
     post:
       operationId: CreateMLTransform
       description: '<p>Creates an AWS Glue machine learning transform. This operation creates the transform and all the necessary parameters to train it.</p> <p>Call this operation as the first step in the process of using a machine learning transform (such as the <code>FindMatches</code> transform) for deduplicating data. You can provide an optional <code>Description</code>, in addition to the parameters that you want to use for your algorithm.</p> <p>You must also specify certain parameters for the tasks that AWS Glue runs on your behalf as part of learning from your data and creating a high-quality machine learning transform. These parameters include <code>Role</code>, and optionally, <code>AllocatedCapacity</code>, <code>Timeout</code>, and <code>MaxRetries</code>. For more information, see <a href="https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-jobs-job.html">Jobs</a>.</p>'
@@ -1294,7 +1302,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.CreatePartition':
+  /#X-Amz-Target=AWSGlue.CreatePartition:
     post:
       operationId: CreatePartition
       description: Creates a new partition.
@@ -1369,7 +1377,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.CreateScript':
+  /#X-Amz-Target=AWSGlue.CreateScript:
     post:
       operationId: CreateScript
       description: Transforms a directed acyclic graph (DAG) into code.
@@ -1420,7 +1428,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.CreateSecurityConfiguration':
+  /#X-Amz-Target=AWSGlue.CreateSecurityConfiguration:
     post:
       operationId: CreateSecurityConfiguration
       description: 'Creates a new security configuration. A security configuration is a set of security properties that can be used by AWS Glue. You can use a security configuration to encrypt data at rest. For information about using security configurations in AWS Glue, see <a href="https://docs.aws.amazon.com/glue/latest/dg/encryption-security-configuration.html">Encrypting Data Written by Crawlers, Jobs, and Development Endpoints</a>.'
@@ -1483,7 +1491,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.CreateTable':
+  /#X-Amz-Target=AWSGlue.CreateTable:
     post:
       operationId: CreateTable
       description: Creates a new table definition in the Data Catalog.
@@ -1558,7 +1566,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.CreateTrigger':
+  /#X-Amz-Target=AWSGlue.CreateTrigger:
     post:
       operationId: CreateTrigger
       description: Creates a new trigger.
@@ -1639,7 +1647,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.CreateUserDefinedFunction':
+  /#X-Amz-Target=AWSGlue.CreateUserDefinedFunction:
     post:
       operationId: CreateUserDefinedFunction
       description: Creates a new function definition in the Data Catalog.
@@ -1714,7 +1722,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.CreateWorkflow':
+  /#X-Amz-Target=AWSGlue.CreateWorkflow:
     post:
       operationId: CreateWorkflow
       description: Creates a new workflow.
@@ -1783,7 +1791,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.DeleteClassifier':
+  /#X-Amz-Target=AWSGlue.DeleteClassifier:
     post:
       operationId: DeleteClassifier
       description: Removes a classifier from the Data Catalog.
@@ -1828,7 +1836,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.DeleteColumnStatisticsForPartition':
+  /#X-Amz-Target=AWSGlue.DeleteColumnStatisticsForPartition:
     post:
       operationId: DeleteColumnStatisticsForPartition
       description: Delete the partition column statistics of a column.
@@ -1891,7 +1899,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.DeleteColumnStatisticsForTable':
+  /#X-Amz-Target=AWSGlue.DeleteColumnStatisticsForTable:
     post:
       operationId: DeleteColumnStatisticsForTable
       description: Retrieves table statistics of columns.
@@ -1954,7 +1962,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.DeleteConnection':
+  /#X-Amz-Target=AWSGlue.DeleteConnection:
     post:
       operationId: DeleteConnection
       description: Deletes a connection from the Data Catalog.
@@ -1999,7 +2007,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.DeleteCrawler':
+  /#X-Amz-Target=AWSGlue.DeleteCrawler:
     post:
       operationId: DeleteCrawler
       description: 'Removes a specified crawler from the AWS Glue Data Catalog, unless the crawler state is <code>RUNNING</code>.'
@@ -2056,7 +2064,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.DeleteDatabase':
+  /#X-Amz-Target=AWSGlue.DeleteDatabase:
     post:
       operationId: DeleteDatabase
       description: '<p>Removes a specified database from a Data Catalog.</p> <note> <p>After completing this operation, you no longer have access to the tables (and all table versions and partitions that might belong to the tables) and the user-defined functions in the deleted database. AWS Glue deletes these "orphaned" resources asynchronously in a timely manner, at the discretion of the service.</p> <p>To ensure the immediate deletion of all related resources, before calling <code>DeleteDatabase</code>, use <code>DeleteTableVersion</code> or <code>BatchDeleteTableVersion</code>, <code>DeletePartition</code> or <code>BatchDeletePartition</code>, <code>DeleteUserDefinedFunction</code>, and <code>DeleteTable</code> or <code>BatchDeleteTable</code>, to delete any resources that belong to the database.</p> </note>'
@@ -2113,7 +2121,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.DeleteDevEndpoint':
+  /#X-Amz-Target=AWSGlue.DeleteDevEndpoint:
     post:
       operationId: DeleteDevEndpoint
       description: Deletes a specified development endpoint.
@@ -2170,7 +2178,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.DeleteJob':
+  /#X-Amz-Target=AWSGlue.DeleteJob:
     post:
       operationId: DeleteJob
       description: 'Deletes a specified job definition. If the job definition is not found, no exception is thrown.'
@@ -2221,7 +2229,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.DeleteMLTransform':
+  /#X-Amz-Target=AWSGlue.DeleteMLTransform:
     post:
       operationId: DeleteMLTransform
       description: 'Deletes an AWS Glue machine learning transform. Machine learning transforms are a special type of transform that use machine learning to learn the details of the transformation to be performed by learning from examples provided by humans. These transformations are then saved by AWS Glue. If you no longer need a transform, you can delete it by calling <code>DeleteMLTransforms</code>. However, any AWS Glue jobs that still reference the deleted transform will no longer succeed.'
@@ -2278,7 +2286,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.DeletePartition':
+  /#X-Amz-Target=AWSGlue.DeletePartition:
     post:
       operationId: DeletePartition
       description: Deletes a specified partition.
@@ -2335,7 +2343,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.DeleteResourcePolicy':
+  /#X-Amz-Target=AWSGlue.DeleteResourcePolicy:
     post:
       operationId: DeleteResourcePolicy
       description: Deletes a specified policy.
@@ -2398,7 +2406,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.DeleteSecurityConfiguration':
+  /#X-Amz-Target=AWSGlue.DeleteSecurityConfiguration:
     post:
       operationId: DeleteSecurityConfiguration
       description: Deletes a specified security configuration.
@@ -2455,7 +2463,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.DeleteTable':
+  /#X-Amz-Target=AWSGlue.DeleteTable:
     post:
       operationId: DeleteTable
       description: '<p>Removes a table definition from the Data Catalog.</p> <note> <p>After completing this operation, you no longer have access to the table versions and partitions that belong to the deleted table. AWS Glue deletes these "orphaned" resources asynchronously in a timely manner, at the discretion of the service.</p> <p>To ensure the immediate deletion of all related resources, before calling <code>DeleteTable</code>, use <code>DeleteTableVersion</code> or <code>BatchDeleteTableVersion</code>, and <code>DeletePartition</code> or <code>BatchDeletePartition</code>, to delete any resources that belong to the table.</p> </note>'
@@ -2512,7 +2520,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.DeleteTableVersion':
+  /#X-Amz-Target=AWSGlue.DeleteTableVersion:
     post:
       operationId: DeleteTableVersion
       description: Deletes a specified version of a table.
@@ -2569,7 +2577,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.DeleteTrigger':
+  /#X-Amz-Target=AWSGlue.DeleteTrigger:
     post:
       operationId: DeleteTrigger
       description: 'Deletes a specified trigger. If the trigger is not found, no exception is thrown.'
@@ -2626,7 +2634,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.DeleteUserDefinedFunction':
+  /#X-Amz-Target=AWSGlue.DeleteUserDefinedFunction:
     post:
       operationId: DeleteUserDefinedFunction
       description: Deletes an existing function definition from the Data Catalog.
@@ -2683,7 +2691,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.DeleteWorkflow':
+  /#X-Amz-Target=AWSGlue.DeleteWorkflow:
     post:
       operationId: DeleteWorkflow
       description: Deletes a workflow.
@@ -2740,7 +2748,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.GetCatalogImportStatus':
+  /#X-Amz-Target=AWSGlue.GetCatalogImportStatus:
     post:
       operationId: GetCatalogImportStatus
       description: Retrieves the status of a migration operation.
@@ -2785,7 +2793,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.GetClassifier':
+  /#X-Amz-Target=AWSGlue.GetClassifier:
     post:
       operationId: GetClassifier
       description: Retrieve a classifier by name.
@@ -2830,7 +2838,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.GetClassifiers':
+  /#X-Amz-Target=AWSGlue.GetClassifiers:
     post:
       operationId: GetClassifiers
       description: Lists all classifier objects in the Data Catalog.
@@ -2881,7 +2889,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.GetColumnStatisticsForPartition':
+  /#X-Amz-Target=AWSGlue.GetColumnStatisticsForPartition:
     post:
       operationId: GetColumnStatisticsForPartition
       description: Retrieves partition statistics of columns.
@@ -2944,7 +2952,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.GetColumnStatisticsForTable':
+  /#X-Amz-Target=AWSGlue.GetColumnStatisticsForTable:
     post:
       operationId: GetColumnStatisticsForTable
       description: Retrieves table statistics of columns.
@@ -3007,7 +3015,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.GetConnection':
+  /#X-Amz-Target=AWSGlue.GetConnection:
     post:
       operationId: GetConnection
       description: Retrieves a connection definition from the Data Catalog.
@@ -3064,7 +3072,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.GetConnections':
+  /#X-Amz-Target=AWSGlue.GetConnections:
     post:
       operationId: GetConnections
       description: Retrieves a list of connection definitions from the Data Catalog.
@@ -3133,7 +3141,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.GetCrawler':
+  /#X-Amz-Target=AWSGlue.GetCrawler:
     post:
       operationId: GetCrawler
       description: Retrieves metadata for a specified crawler.
@@ -3178,7 +3186,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.GetCrawlerMetrics':
+  /#X-Amz-Target=AWSGlue.GetCrawlerMetrics:
     post:
       operationId: GetCrawlerMetrics
       description: Retrieves metrics about specified crawlers.
@@ -3229,7 +3237,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.GetCrawlers':
+  /#X-Amz-Target=AWSGlue.GetCrawlers:
     post:
       operationId: GetCrawlers
       description: Retrieves metadata for all crawlers defined in the customer account.
@@ -3280,7 +3288,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.GetDataCatalogEncryptionSettings':
+  /#X-Amz-Target=AWSGlue.GetDataCatalogEncryptionSettings:
     post:
       operationId: GetDataCatalogEncryptionSettings
       description: Retrieves the security configuration for a specified catalog.
@@ -3331,7 +3339,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.GetDatabase':
+  /#X-Amz-Target=AWSGlue.GetDatabase:
     post:
       operationId: GetDatabase
       description: Retrieves the definition of a specified database.
@@ -3394,7 +3402,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.GetDatabases':
+  /#X-Amz-Target=AWSGlue.GetDatabases:
     post:
       operationId: GetDatabases
       description: Retrieves all databases defined in a given Data Catalog.
@@ -3463,7 +3471,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.GetDataflowGraph':
+  /#X-Amz-Target=AWSGlue.GetDataflowGraph:
     post:
       operationId: GetDataflowGraph
       description: 'Transforms a Python script into a directed acyclic graph (DAG). '
@@ -3514,7 +3522,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.GetDevEndpoint':
+  /#X-Amz-Target=AWSGlue.GetDevEndpoint:
     post:
       operationId: GetDevEndpoint
       description: '<p>Retrieves information about a specified development endpoint.</p> <note> <p>When you create a development endpoint in a virtual private cloud (VPC), AWS Glue returns only a private IP address, and the public IP address field is not populated. When you create a non-VPC development endpoint, AWS Glue returns only a public IP address.</p> </note>'
@@ -3571,7 +3579,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.GetDevEndpoints':
+  /#X-Amz-Target=AWSGlue.GetDevEndpoints:
     post:
       operationId: GetDevEndpoints
       description: '<p>Retrieves all the development endpoints in this AWS account.</p> <note> <p>When you create a development endpoint in a virtual private cloud (VPC), AWS Glue returns only a private IP address and the public IP address field is not populated. When you create a non-VPC development endpoint, AWS Glue returns only a public IP address.</p> </note>'
@@ -3640,7 +3648,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.GetJob':
+  /#X-Amz-Target=AWSGlue.GetJob:
     post:
       operationId: GetJob
       description: Retrieves an existing job definition.
@@ -3697,7 +3705,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.GetJobBookmark':
+  /#X-Amz-Target=AWSGlue.GetJobBookmark:
     post:
       operationId: GetJobBookmark
       description: Returns information on a job bookmark entry.
@@ -3760,7 +3768,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.GetJobRun':
+  /#X-Amz-Target=AWSGlue.GetJobRun:
     post:
       operationId: GetJobRun
       description: Retrieves the metadata for a given job run.
@@ -3817,7 +3825,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.GetJobRuns':
+  /#X-Amz-Target=AWSGlue.GetJobRuns:
     post:
       operationId: GetJobRuns
       description: Retrieves metadata for all runs of a given job definition.
@@ -3886,7 +3894,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.GetJobs':
+  /#X-Amz-Target=AWSGlue.GetJobs:
     post:
       operationId: GetJobs
       description: Retrieves all current job definitions.
@@ -3955,7 +3963,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.GetMLTaskRun':
+  /#X-Amz-Target=AWSGlue.GetMLTaskRun:
     post:
       operationId: GetMLTaskRun
       description: Gets details for a specific task run on a machine learning transform. Machine learning task runs are asynchronous tasks that AWS Glue runs on your behalf as part of various machine learning workflows. You can check the stats of any task run by calling <code>GetMLTaskRun</code> with the <code>TaskRunID</code> and its parent transform's <code>TransformID</code>.
@@ -4012,7 +4020,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.GetMLTaskRuns':
+  /#X-Amz-Target=AWSGlue.GetMLTaskRuns:
     post:
       operationId: GetMLTaskRuns
       description: '<p>Gets a list of runs for a machine learning transform. Machine learning task runs are asynchronous tasks that AWS Glue runs on your behalf as part of various machine learning workflows. You can get a sortable, filterable list of machine learning task runs by calling <code>GetMLTaskRuns</code> with their parent transform''s <code>TransformID</code> and other optional parameters as documented in this section.</p> <p>This operation returns a list of historic runs and must be paginated.</p>'
@@ -4081,7 +4089,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.GetMLTransform':
+  /#X-Amz-Target=AWSGlue.GetMLTransform:
     post:
       operationId: GetMLTransform
       description: Gets an AWS Glue machine learning transform artifact and all its corresponding metadata. Machine learning transforms are a special type of transform that use machine learning to learn the details of the transformation to be performed by learning from examples provided by humans. These transformations are then saved by AWS Glue. You can retrieve their metadata by calling <code>GetMLTransform</code>.
@@ -4138,7 +4146,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.GetMLTransforms':
+  /#X-Amz-Target=AWSGlue.GetMLTransforms:
     post:
       operationId: GetMLTransforms
       description: 'Gets a sortable, filterable list of existing AWS Glue machine learning transforms. Machine learning transforms are a special type of transform that use machine learning to learn the details of the transformation to be performed by learning from examples provided by humans. These transformations are then saved by AWS Glue, and you can retrieve their metadata by calling <code>GetMLTransforms</code>.'
@@ -4207,7 +4215,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.GetMapping':
+  /#X-Amz-Target=AWSGlue.GetMapping:
     post:
       operationId: GetMapping
       description: Creates mappings.
@@ -4264,7 +4272,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.GetPartition':
+  /#X-Amz-Target=AWSGlue.GetPartition:
     post:
       operationId: GetPartition
       description: Retrieves information about a specified partition.
@@ -4327,7 +4335,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.GetPartitions':
+  /#X-Amz-Target=AWSGlue.GetPartitions:
     post:
       operationId: GetPartitions
       description: Retrieves information about the partitions in a table.
@@ -4402,7 +4410,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.GetPlan':
+  /#X-Amz-Target=AWSGlue.GetPlan:
     post:
       operationId: GetPlan
       description: Gets code to perform a specified mapping.
@@ -4453,7 +4461,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.GetResourcePolicies':
+  /#X-Amz-Target=AWSGlue.GetResourcePolicies:
     post:
       operationId: GetResourcePolicies
       description: 'Retrieves the security configurations for the resource policies set on individual resources, and also the account-level policy.'
@@ -4510,7 +4518,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.GetResourcePolicy':
+  /#X-Amz-Target=AWSGlue.GetResourcePolicy:
     post:
       operationId: GetResourcePolicy
       description: Retrieves a specified resource policy.
@@ -4567,7 +4575,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.GetSecurityConfiguration':
+  /#X-Amz-Target=AWSGlue.GetSecurityConfiguration:
     post:
       operationId: GetSecurityConfiguration
       description: Retrieves a specified security configuration.
@@ -4624,7 +4632,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.GetSecurityConfigurations':
+  /#X-Amz-Target=AWSGlue.GetSecurityConfigurations:
     post:
       operationId: GetSecurityConfigurations
       description: Retrieves a list of all security configurations.
@@ -4693,7 +4701,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.GetTable':
+  /#X-Amz-Target=AWSGlue.GetTable:
     post:
       operationId: GetTable
       description: Retrieves the <code>Table</code> definition in a Data Catalog for a specified table.
@@ -4756,7 +4764,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.GetTableVersion':
+  /#X-Amz-Target=AWSGlue.GetTableVersion:
     post:
       operationId: GetTableVersion
       description: Retrieves a specified version of a table.
@@ -4819,7 +4827,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.GetTableVersions':
+  /#X-Amz-Target=AWSGlue.GetTableVersions:
     post:
       operationId: GetTableVersions
       description: Retrieves a list of strings that identify available versions of a specified table.
@@ -4894,7 +4902,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.GetTables':
+  /#X-Amz-Target=AWSGlue.GetTables:
     post:
       operationId: GetTables
       description: Retrieves the definitions of some or all of the tables in a given <code>Database</code>.
@@ -4969,7 +4977,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.GetTags':
+  /#X-Amz-Target=AWSGlue.GetTags:
     post:
       operationId: GetTags
       description: Retrieves a list of tags associated with a resource.
@@ -5026,7 +5034,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.GetTrigger':
+  /#X-Amz-Target=AWSGlue.GetTrigger:
     post:
       operationId: GetTrigger
       description: Retrieves the definition of a trigger.
@@ -5083,7 +5091,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.GetTriggers':
+  /#X-Amz-Target=AWSGlue.GetTriggers:
     post:
       operationId: GetTriggers
       description: Gets all the triggers associated with a job.
@@ -5152,7 +5160,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.GetUserDefinedFunction':
+  /#X-Amz-Target=AWSGlue.GetUserDefinedFunction:
     post:
       operationId: GetUserDefinedFunction
       description: Retrieves a specified function definition from the Data Catalog.
@@ -5215,7 +5223,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.GetUserDefinedFunctions':
+  /#X-Amz-Target=AWSGlue.GetUserDefinedFunctions:
     post:
       operationId: GetUserDefinedFunctions
       description: Retrieves multiple function definitions from the Data Catalog.
@@ -5290,7 +5298,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.GetWorkflow':
+  /#X-Amz-Target=AWSGlue.GetWorkflow:
     post:
       operationId: GetWorkflow
       description: Retrieves resource metadata for a workflow.
@@ -5347,7 +5355,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.GetWorkflowRun':
+  /#X-Amz-Target=AWSGlue.GetWorkflowRun:
     post:
       operationId: GetWorkflowRun
       description: 'Retrieves the metadata for a given workflow run. '
@@ -5404,7 +5412,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.GetWorkflowRunProperties':
+  /#X-Amz-Target=AWSGlue.GetWorkflowRunProperties:
     post:
       operationId: GetWorkflowRunProperties
       description: Retrieves the workflow run properties which were set during the run.
@@ -5461,7 +5469,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.GetWorkflowRuns':
+  /#X-Amz-Target=AWSGlue.GetWorkflowRuns:
     post:
       operationId: GetWorkflowRuns
       description: Retrieves metadata for all runs of a given workflow.
@@ -5530,7 +5538,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.ImportCatalogToGlue':
+  /#X-Amz-Target=AWSGlue.ImportCatalogToGlue:
     post:
       operationId: ImportCatalogToGlue
       description: Imports an existing Amazon Athena Data Catalog to AWS Glue
@@ -5575,7 +5583,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.ListCrawlers':
+  /#X-Amz-Target=AWSGlue.ListCrawlers:
     post:
       operationId: ListCrawlers
       description: '<p>Retrieves the names of all crawler resources in this AWS account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names.</p> <p>This operation takes the optional <code>Tags</code> field, which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag are retrieved.</p>'
@@ -5626,7 +5634,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.ListDevEndpoints':
+  /#X-Amz-Target=AWSGlue.ListDevEndpoints:
     post:
       operationId: ListDevEndpoints
       description: '<p>Retrieves the names of all <code>DevEndpoint</code> resources in this AWS account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names.</p> <p>This operation takes the optional <code>Tags</code> field, which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag are retrieved.</p>'
@@ -5695,7 +5703,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.ListJobs':
+  /#X-Amz-Target=AWSGlue.ListJobs:
     post:
       operationId: ListJobs
       description: '<p>Retrieves the names of all job resources in this AWS account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names.</p> <p>This operation takes the optional <code>Tags</code> field, which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag are retrieved.</p>'
@@ -5764,7 +5772,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.ListMLTransforms':
+  /#X-Amz-Target=AWSGlue.ListMLTransforms:
     post:
       operationId: ListMLTransforms
       description: ' Retrieves a sortable, filterable list of existing AWS Glue machine learning transforms in this AWS account, or the resources with the specified tag. This operation takes the optional <code>Tags</code> field, which you can use as a filter of the responses so that tagged resources can be retrieved as a group. If you choose to use tag filtering, only resources with the tags are retrieved. '
@@ -5833,7 +5841,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.ListTriggers':
+  /#X-Amz-Target=AWSGlue.ListTriggers:
     post:
       operationId: ListTriggers
       description: '<p>Retrieves the names of all trigger resources in this AWS account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names.</p> <p>This operation takes the optional <code>Tags</code> field, which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag are retrieved.</p>'
@@ -5902,7 +5910,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.ListWorkflows':
+  /#X-Amz-Target=AWSGlue.ListWorkflows:
     post:
       operationId: ListWorkflows
       description: Lists names of workflows created in the account.
@@ -5965,7 +5973,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.PutDataCatalogEncryptionSettings':
+  /#X-Amz-Target=AWSGlue.PutDataCatalogEncryptionSettings:
     post:
       operationId: PutDataCatalogEncryptionSettings
       description: 'Sets the security configuration for a specified catalog. After the configuration has been set, the specified encryption is applied to every catalog write thereafter.'
@@ -6016,7 +6024,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.PutResourcePolicy':
+  /#X-Amz-Target=AWSGlue.PutResourcePolicy:
     post:
       operationId: PutResourcePolicy
       description: Sets the Data Catalog resource policy for access control.
@@ -6079,7 +6087,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.PutWorkflowRunProperties':
+  /#X-Amz-Target=AWSGlue.PutWorkflowRunProperties:
     post:
       operationId: PutWorkflowRunProperties
       description: 'Puts the specified workflow run properties for the given workflow run. If a property already exists for the specified run, then it overrides the value otherwise adds the property to existing properties.'
@@ -6154,7 +6162,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.ResetJobBookmark':
+  /#X-Amz-Target=AWSGlue.ResetJobBookmark:
     post:
       operationId: ResetJobBookmark
       description: Resets a bookmark entry.
@@ -6211,7 +6219,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.SearchTables':
+  /#X-Amz-Target=AWSGlue.SearchTables:
     post:
       operationId: SearchTables
       description: '<p>Searches a set of tables based on properties in the table metadata as well as on the parent database. You can search against text or filter conditions. </p> <p>You can only get tables that you have access to based on the security policies defined in Lake Formation. You need at least a read-only access to the table for it to be returned. If you do not have access to all the columns in the table, these columns will not be searched against when returning the list of tables back to you. If you have access to the columns but not the data in the columns, those columns and the associated metadata for those columns will be included in the search. </p>'
@@ -6274,7 +6282,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.StartCrawler':
+  /#X-Amz-Target=AWSGlue.StartCrawler:
     post:
       operationId: StartCrawler
       description: 'Starts a crawl using the specified crawler, regardless of what is scheduled. If the crawler is already running, returns a <a href="https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-exceptions.html#aws-glue-api-exceptions-CrawlerRunningException">CrawlerRunningException</a>.'
@@ -6325,7 +6333,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.StartCrawlerSchedule':
+  /#X-Amz-Target=AWSGlue.StartCrawlerSchedule:
     post:
       operationId: StartCrawlerSchedule
       description: 'Changes the schedule state of the specified crawler to <code>SCHEDULED</code>, unless the crawler is already running or the schedule state is already <code>SCHEDULED</code>.'
@@ -6388,7 +6396,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.StartExportLabelsTaskRun':
+  /#X-Amz-Target=AWSGlue.StartExportLabelsTaskRun:
     post:
       operationId: StartExportLabelsTaskRun
       description: 'Begins an asynchronous task to export all labeled data for a particular transform. This task is the only label-related API call that is not part of the typical active learning workflow. You typically use <code>StartExportLabelsTaskRun</code> when you want to work with all of your existing labels at the same time, such as when you want to remove or change labels that were previously submitted as truth. This API operation accepts the <code>TransformId</code> whose labels you want to export and an Amazon Simple Storage Service (Amazon S3) path to export the labels to. The operation returns a <code>TaskRunId</code>. You can check on the status of your task run by calling the <code>GetMLTaskRun</code> API.'
@@ -6445,7 +6453,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.StartImportLabelsTaskRun':
+  /#X-Amz-Target=AWSGlue.StartImportLabelsTaskRun:
     post:
       operationId: StartImportLabelsTaskRun
       description: '<p>Enables you to provide additional labels (examples of truth) to be used to teach the machine learning transform and improve its quality. This API operation is generally used as part of the active learning workflow that starts with the <code>StartMLLabelingSetGenerationTaskRun</code> call and that ultimately results in improving the quality of your machine learning transform. </p> <p>After the <code>StartMLLabelingSetGenerationTaskRun</code> finishes, AWS Glue machine learning will have generated a series of questions for humans to answer. (Answering these questions is often called ''labeling'' in the machine learning workflows). In the case of the <code>FindMatches</code> transform, these questions are of the form, “What is the correct way to group these rows together into groups composed entirely of matching records?” After the labeling process is finished, users upload their answers/labels with a call to <code>StartImportLabelsTaskRun</code>. After <code>StartImportLabelsTaskRun</code> finishes, all future runs of the machine learning transform use the new and improved labels and perform a higher-quality transformation.</p> <p>By default, <code>StartMLLabelingSetGenerationTaskRun</code> continually learns from and combines all labels that you upload unless you set <code>Replace</code> to true. If you set <code>Replace</code> to true, <code>StartImportLabelsTaskRun</code> deletes and forgets all previously uploaded labels and learns only from the exact set that you upload. Replacing labels can be helpful if you realize that you previously uploaded incorrect labels, and you believe that they are having a negative effect on your transform quality.</p> <p>You can check on the status of your task run by calling the <code>GetMLTaskRun</code> operation. </p>'
@@ -6508,7 +6516,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.StartJobRun':
+  /#X-Amz-Target=AWSGlue.StartJobRun:
     post:
       operationId: StartJobRun
       description: Starts a job run using a job definition.
@@ -6577,7 +6585,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.StartMLEvaluationTaskRun':
+  /#X-Amz-Target=AWSGlue.StartMLEvaluationTaskRun:
     post:
       operationId: StartMLEvaluationTaskRun
       description: '<p>Starts a task to estimate the quality of the transform. </p> <p>When you provide label sets as examples of truth, AWS Glue machine learning uses some of those examples to learn from them. The rest of the labels are used as a test to estimate quality.</p> <p>Returns a unique identifier for the run. You can call <code>GetMLTaskRun</code> to get more information about the stats of the <code>EvaluationTaskRun</code>.</p>'
@@ -6646,7 +6654,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.StartMLLabelingSetGenerationTaskRun':
+  /#X-Amz-Target=AWSGlue.StartMLLabelingSetGenerationTaskRun:
     post:
       operationId: StartMLLabelingSetGenerationTaskRun
       description: '<p>Starts the active learning workflow for your machine learning transform to improve the transform''s quality by generating label sets and adding labels.</p> <p>When the <code>StartMLLabelingSetGenerationTaskRun</code> finishes, AWS Glue will have generated a "labeling set" or a set of questions for humans to answer.</p> <p>In the case of the <code>FindMatches</code> transform, these questions are of the form, “What is the correct way to group these rows together into groups composed entirely of matching records?” </p> <p>After the labeling process is finished, you can upload your labels with a call to <code>StartImportLabelsTaskRun</code>. After <code>StartImportLabelsTaskRun</code> finishes, all future runs of the machine learning transform will use the new and improved labels and perform a higher-quality transformation.</p>'
@@ -6709,7 +6717,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.StartTrigger':
+  /#X-Amz-Target=AWSGlue.StartTrigger:
     post:
       operationId: StartTrigger
       description: 'Starts an existing trigger. See <a href="https://docs.aws.amazon.com/glue/latest/dg/trigger-job.html">Triggering Jobs</a> for information about how different types of trigger are started.'
@@ -6778,7 +6786,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.StartWorkflowRun':
+  /#X-Amz-Target=AWSGlue.StartWorkflowRun:
     post:
       operationId: StartWorkflowRun
       description: Starts a new run of the specified workflow.
@@ -6847,7 +6855,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.StopCrawler':
+  /#X-Amz-Target=AWSGlue.StopCrawler:
     post:
       operationId: StopCrawler
       description: 'If the specified crawler is running, stops the crawl.'
@@ -6904,7 +6912,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.StopCrawlerSchedule':
+  /#X-Amz-Target=AWSGlue.StopCrawlerSchedule:
     post:
       operationId: StopCrawlerSchedule
       description: 'Sets the schedule state of the specified crawler to <code>NOT_SCHEDULED</code>, but does not stop the crawler if it is already running.'
@@ -6961,7 +6969,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.StopTrigger':
+  /#X-Amz-Target=AWSGlue.StopTrigger:
     post:
       operationId: StopTrigger
       description: Stops a specified trigger.
@@ -7024,7 +7032,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.StopWorkflowRun':
+  /#X-Amz-Target=AWSGlue.StopWorkflowRun:
     post:
       operationId: StopWorkflowRun
       description: Stops the execution of the specified workflow run.
@@ -7087,7 +7095,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.TagResource':
+  /#X-Amz-Target=AWSGlue.TagResource:
     post:
       operationId: TagResource
       description: 'Adds tags to a resource. A tag is a label you can assign to an AWS resource. In AWS Glue, you can tag only certain resources. For information about what resources you can tag, see <a href="https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html">AWS Tags in AWS Glue</a>.'
@@ -7144,7 +7152,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.UntagResource':
+  /#X-Amz-Target=AWSGlue.UntagResource:
     post:
       operationId: UntagResource
       description: Removes tags from a resource.
@@ -7201,7 +7209,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.UpdateClassifier':
+  /#X-Amz-Target=AWSGlue.UpdateClassifier:
     post:
       operationId: UpdateClassifier
       description: 'Modifies an existing classifier (a <code>GrokClassifier</code>, an <code>XMLClassifier</code>, a <code>JsonClassifier</code>, or a <code>CsvClassifier</code>, depending on which field is present).'
@@ -7258,7 +7266,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.UpdateColumnStatisticsForPartition':
+  /#X-Amz-Target=AWSGlue.UpdateColumnStatisticsForPartition:
     post:
       operationId: UpdateColumnStatisticsForPartition
       description: Creates or updates partition statistics of columns.
@@ -7321,7 +7329,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.UpdateColumnStatisticsForTable':
+  /#X-Amz-Target=AWSGlue.UpdateColumnStatisticsForTable:
     post:
       operationId: UpdateColumnStatisticsForTable
       description: Creates or updates table statistics of columns.
@@ -7384,7 +7392,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.UpdateConnection':
+  /#X-Amz-Target=AWSGlue.UpdateConnection:
     post:
       operationId: UpdateConnection
       description: Updates a connection definition in the Data Catalog.
@@ -7447,7 +7455,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.UpdateCrawler':
+  /#X-Amz-Target=AWSGlue.UpdateCrawler:
     post:
       operationId: UpdateCrawler
       description: 'Updates a crawler. If a crawler is running, you must stop it using <code>StopCrawler</code> before updating it.'
@@ -7510,7 +7518,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.UpdateCrawlerSchedule':
+  /#X-Amz-Target=AWSGlue.UpdateCrawlerSchedule:
     post:
       operationId: UpdateCrawlerSchedule
       description: 'Updates the schedule of a crawler using a <code>cron</code> expression. '
@@ -7573,7 +7581,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.UpdateDatabase':
+  /#X-Amz-Target=AWSGlue.UpdateDatabase:
     post:
       operationId: UpdateDatabase
       description: Updates an existing database definition in a Data Catalog.
@@ -7636,7 +7644,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.UpdateDevEndpoint':
+  /#X-Amz-Target=AWSGlue.UpdateDevEndpoint:
     post:
       operationId: UpdateDevEndpoint
       description: Updates a specified development endpoint.
@@ -7699,7 +7707,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.UpdateJob':
+  /#X-Amz-Target=AWSGlue.UpdateJob:
     post:
       operationId: UpdateJob
       description: Updates an existing job definition.
@@ -7762,7 +7770,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.UpdateMLTransform':
+  /#X-Amz-Target=AWSGlue.UpdateMLTransform:
     post:
       operationId: UpdateMLTransform
       description: '<p>Updates an existing machine learning transform. Call this operation to tune the algorithm parameters to achieve better results.</p> <p>After calling this operation, you can call the <code>StartMLEvaluationTaskRun</code> operation to assess how well your new parameters achieved your goals (such as improving the quality of your machine learning transform, or making it more cost-effective).</p>'
@@ -7825,7 +7833,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.UpdatePartition':
+  /#X-Amz-Target=AWSGlue.UpdatePartition:
     post:
       operationId: UpdatePartition
       description: Updates a partition.
@@ -7888,7 +7896,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.UpdateTable':
+  /#X-Amz-Target=AWSGlue.UpdateTable:
     post:
       operationId: UpdateTable
       description: Updates a metadata table in the Data Catalog.
@@ -7963,7 +7971,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.UpdateTrigger':
+  /#X-Amz-Target=AWSGlue.UpdateTrigger:
     post:
       operationId: UpdateTrigger
       description: Updates a trigger definition.
@@ -8026,7 +8034,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.UpdateUserDefinedFunction':
+  /#X-Amz-Target=AWSGlue.UpdateUserDefinedFunction:
     post:
       operationId: UpdateUserDefinedFunction
       description: Updates an existing function definition in the Data Catalog.
@@ -8089,7 +8097,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=AWSGlue.UpdateWorkflow':
+  /#X-Amz-Target=AWSGlue.UpdateWorkflow:
     post:
       operationId: UpdateWorkflow
       description: Updates an existing workflow.

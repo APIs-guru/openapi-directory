@@ -51,13 +51,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The Amazon EC2 multi-region endpoint
   - url: 'https://ec2.{region}.amazonaws.com'
@@ -77,13 +81,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The Amazon EC2 multi-region endpoint
   - url: 'http://ec2.amazonaws.com'
@@ -112,7 +120,7 @@ servers:
     description: The Amazon EC2 endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
-  '/#Action=AcceptReservedInstancesExchangeQuote':
+  /#Action=AcceptReservedInstancesExchangeQuote:
     get:
       x-aws-operation-name: AcceptReservedInstancesExchangeQuote
       operationId: GET_AcceptReservedInstancesExchangeQuote
@@ -191,7 +199,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=AcceptTransitGatewayPeeringAttachment':
+  /#Action=AcceptTransitGatewayPeeringAttachment:
     get:
       x-aws-operation-name: AcceptTransitGatewayPeeringAttachment
       operationId: GET_AcceptTransitGatewayPeeringAttachment
@@ -260,7 +268,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=AcceptTransitGatewayVpcAttachment':
+  /#Action=AcceptTransitGatewayVpcAttachment:
     get:
       x-aws-operation-name: AcceptTransitGatewayVpcAttachment
       operationId: GET_AcceptTransitGatewayVpcAttachment
@@ -329,7 +337,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=AcceptVpcEndpointConnections':
+  /#Action=AcceptVpcEndpointConnections:
     get:
       x-aws-operation-name: AcceptVpcEndpointConnections
       operationId: GET_AcceptVpcEndpointConnections
@@ -406,7 +414,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=AcceptVpcPeeringConnection':
+  /#Action=AcceptVpcPeeringConnection:
     get:
       x-aws-operation-name: AcceptVpcPeeringConnection
       operationId: GET_AcceptVpcPeeringConnection
@@ -475,7 +483,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=AdvertiseByoipCidr':
+  /#Action=AdvertiseByoipCidr:
     get:
       x-aws-operation-name: AdvertiseByoipCidr
       operationId: GET_AdvertiseByoipCidr
@@ -544,7 +552,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=AllocateAddress':
+  /#Action=AllocateAddress:
     get:
       x-aws-operation-name: AllocateAddress
       operationId: GET_AllocateAddress
@@ -640,7 +648,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=AllocateHosts':
+  /#Action=AllocateHosts:
     get:
       x-aws-operation-name: AllocateHosts
       operationId: GET_AllocateHosts
@@ -753,7 +761,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=ApplySecurityGroupsToClientVpnTargetNetwork':
+  /#Action=ApplySecurityGroupsToClientVpnTargetNetwork:
     get:
       x-aws-operation-name: ApplySecurityGroupsToClientVpnTargetNetwork
       operationId: GET_ApplySecurityGroupsToClientVpnTargetNetwork
@@ -836,7 +844,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=AssignIpv6Addresses':
+  /#Action=AssignIpv6Addresses:
     get:
       x-aws-operation-name: AssignIpv6Addresses
       operationId: GET_AssignIpv6Addresses
@@ -913,7 +921,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=AssignPrivateIpAddresses':
+  /#Action=AssignPrivateIpAddresses:
     get:
       x-aws-operation-name: AssignPrivateIpAddresses
       operationId: GET_AssignPrivateIpAddresses
@@ -996,7 +1004,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=AssociateAddress':
+  /#Action=AssociateAddress:
     get:
       x-aws-operation-name: AssociateAddress
       operationId: GET_AssociateAddress
@@ -1095,7 +1103,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=AssociateClientVpnTargetNetwork':
+  /#Action=AssociateClientVpnTargetNetwork:
     get:
       x-aws-operation-name: AssociateClientVpnTargetNetwork
       operationId: GET_AssociateClientVpnTargetNetwork
@@ -1176,7 +1184,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=AssociateDhcpOptions':
+  /#Action=AssociateDhcpOptions:
     get:
       x-aws-operation-name: AssociateDhcpOptions
       operationId: GET_AssociateDhcpOptions
@@ -1249,7 +1257,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=AssociateIamInstanceProfile':
+  /#Action=AssociateIamInstanceProfile:
     get:
       x-aws-operation-name: AssociateIamInstanceProfile
       operationId: GET_AssociateIamInstanceProfile
@@ -1326,7 +1334,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=AssociateRouteTable':
+  /#Action=AssociateRouteTable:
     get:
       x-aws-operation-name: AssociateRouteTable
       operationId: GET_AssociateRouteTable
@@ -1407,7 +1415,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=AssociateSubnetCidrBlock':
+  /#Action=AssociateSubnetCidrBlock:
     get:
       x-aws-operation-name: AssociateSubnetCidrBlock
       operationId: GET_AssociateSubnetCidrBlock
@@ -1476,7 +1484,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=AssociateTransitGatewayMulticastDomain':
+  /#Action=AssociateTransitGatewayMulticastDomain:
     get:
       x-aws-operation-name: AssociateTransitGatewayMulticastDomain
       operationId: GET_AssociateTransitGatewayMulticastDomain
@@ -1559,7 +1567,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=AssociateTransitGatewayRouteTable':
+  /#Action=AssociateTransitGatewayRouteTable:
     get:
       x-aws-operation-name: AssociateTransitGatewayRouteTable
       operationId: GET_AssociateTransitGatewayRouteTable
@@ -1634,7 +1642,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=AssociateVpcCidrBlock':
+  /#Action=AssociateVpcCidrBlock:
     get:
       x-aws-operation-name: AssociateVpcCidrBlock
       operationId: GET_AssociateVpcCidrBlock
@@ -1727,7 +1735,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=AttachClassicLinkVpc':
+  /#Action=AttachClassicLinkVpc:
     get:
       x-aws-operation-name: AttachClassicLinkVpc
       operationId: GET_AttachClassicLinkVpc
@@ -1810,7 +1818,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=AttachInternetGateway':
+  /#Action=AttachInternetGateway:
     get:
       x-aws-operation-name: AttachInternetGateway
       operationId: GET_AttachInternetGateway
@@ -1883,7 +1891,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=AttachNetworkInterface':
+  /#Action=AttachNetworkInterface:
     get:
       x-aws-operation-name: AttachNetworkInterface
       operationId: GET_AttachNetworkInterface
@@ -1964,7 +1972,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=AttachVolume':
+  /#Action=AttachVolume:
     get:
       x-aws-operation-name: AttachVolume
       operationId: GET_AttachVolume
@@ -2045,7 +2053,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=AttachVpnGateway':
+  /#Action=AttachVpnGateway:
     get:
       x-aws-operation-name: AttachVpnGateway
       operationId: GET_AttachVpnGateway
@@ -2120,7 +2128,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=AuthorizeClientVpnIngress':
+  /#Action=AuthorizeClientVpnIngress:
     get:
       x-aws-operation-name: AuthorizeClientVpnIngress
       operationId: GET_AuthorizeClientVpnIngress
@@ -2219,7 +2227,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=AuthorizeSecurityGroupEgress':
+  /#Action=AuthorizeSecurityGroupEgress:
     get:
       x-aws-operation-name: AuthorizeSecurityGroupEgress
       operationId: GET_AuthorizeSecurityGroupEgress
@@ -2330,7 +2338,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=AuthorizeSecurityGroupIngress':
+  /#Action=AuthorizeSecurityGroupIngress:
     get:
       x-aws-operation-name: AuthorizeSecurityGroupIngress
       operationId: GET_AuthorizeSecurityGroupIngress
@@ -2447,7 +2455,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=BundleInstance':
+  /#Action=BundleInstance:
     get:
       x-aws-operation-name: BundleInstance
       operationId: GET_BundleInstance
@@ -2527,7 +2535,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=CancelBundleTask':
+  /#Action=CancelBundleTask:
     get:
       x-aws-operation-name: CancelBundleTask
       operationId: GET_CancelBundleTask
@@ -2596,7 +2604,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=CancelCapacityReservation':
+  /#Action=CancelCapacityReservation:
     get:
       x-aws-operation-name: CancelCapacityReservation
       operationId: GET_CancelCapacityReservation
@@ -2665,7 +2673,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=CancelConversionTask':
+  /#Action=CancelConversionTask:
     get:
       x-aws-operation-name: CancelConversionTask
       operationId: GET_CancelConversionTask
@@ -2738,7 +2746,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=CancelExportTask':
+  /#Action=CancelExportTask:
     get:
       x-aws-operation-name: CancelExportTask
       operationId: GET_CancelExportTask
@@ -2799,7 +2807,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=CancelImportTask':
+  /#Action=CancelImportTask:
     get:
       x-aws-operation-name: CancelImportTask
       operationId: GET_CancelImportTask
@@ -2874,7 +2882,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=CancelReservedInstancesListing':
+  /#Action=CancelReservedInstancesListing:
     get:
       x-aws-operation-name: CancelReservedInstancesListing
       operationId: GET_CancelReservedInstancesListing
@@ -2937,7 +2945,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=CancelSpotFleetRequests':
+  /#Action=CancelSpotFleetRequests:
     get:
       x-aws-operation-name: CancelSpotFleetRequests
       operationId: GET_CancelSpotFleetRequests
@@ -3014,7 +3022,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=CancelSpotInstanceRequests':
+  /#Action=CancelSpotInstanceRequests:
     get:
       x-aws-operation-name: CancelSpotInstanceRequests
       operationId: GET_CancelSpotInstanceRequests
@@ -3085,7 +3093,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=ConfirmProductInstance':
+  /#Action=ConfirmProductInstance:
     get:
       x-aws-operation-name: ConfirmProductInstance
       operationId: GET_ConfirmProductInstance
@@ -3160,7 +3168,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=CopyFpgaImage':
+  /#Action=CopyFpgaImage:
     get:
       x-aws-operation-name: CopyFpgaImage
       operationId: GET_CopyFpgaImage
@@ -3253,7 +3261,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=CopyImage':
+  /#Action=CopyImage:
     get:
       x-aws-operation-name: CopyImage
       operationId: GET_CopyImage
@@ -3358,7 +3366,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=CopySnapshot':
+  /#Action=CopySnapshot:
     get:
       x-aws-operation-name: CopySnapshot
       operationId: GET_CopySnapshot
@@ -3471,7 +3479,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=CreateCapacityReservation':
+  /#Action=CreateCapacityReservation:
     get:
       x-aws-operation-name: CreateCapacityReservation
       operationId: GET_CreateCapacityReservation
@@ -3636,7 +3644,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=CreateClientVpnEndpoint':
+  /#Action=CreateClientVpnEndpoint:
     get:
       x-aws-operation-name: CreateClientVpnEndpoint
       operationId: GET_CreateClientVpnEndpoint
@@ -3799,7 +3807,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=CreateClientVpnRoute':
+  /#Action=CreateClientVpnRoute:
     get:
       x-aws-operation-name: CreateClientVpnRoute
       operationId: GET_CreateClientVpnRoute
@@ -3892,7 +3900,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=CreateCustomerGateway':
+  /#Action=CreateCustomerGateway:
     get:
       x-aws-operation-name: CreateCustomerGateway
       operationId: GET_CreateCustomerGateway
@@ -3987,7 +3995,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=CreateDefaultSubnet':
+  /#Action=CreateDefaultSubnet:
     get:
       x-aws-operation-name: CreateDefaultSubnet
       operationId: GET_CreateDefaultSubnet
@@ -4056,7 +4064,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=CreateDefaultVpc':
+  /#Action=CreateDefaultVpc:
     get:
       x-aws-operation-name: CreateDefaultVpc
       operationId: GET_CreateDefaultVpc
@@ -4119,7 +4127,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=CreateDhcpOptions':
+  /#Action=CreateDhcpOptions:
     get:
       x-aws-operation-name: CreateDhcpOptions
       operationId: GET_CreateDhcpOptions
@@ -4198,7 +4206,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=CreateEgressOnlyInternetGateway':
+  /#Action=CreateEgressOnlyInternetGateway:
     get:
       x-aws-operation-name: CreateEgressOnlyInternetGateway
       operationId: GET_CreateEgressOnlyInternetGateway
@@ -4281,7 +4289,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=CreateFleet':
+  /#Action=CreateFleet:
     get:
       x-aws-operation-name: CreateFleet
       operationId: GET_CreateFleet
@@ -4489,7 +4497,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=CreateFlowLogs':
+  /#Action=CreateFlowLogs:
     get:
       x-aws-operation-name: CreateFlowLogs
       operationId: GET_CreateFlowLogs
@@ -4633,7 +4641,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=CreateFpgaImage':
+  /#Action=CreateFpgaImage:
     get:
       x-aws-operation-name: CreateFpgaImage
       operationId: GET_CreateFpgaImage
@@ -4750,7 +4758,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=CreateImage':
+  /#Action=CreateImage:
     get:
       x-aws-operation-name: CreateImage
       operationId: GET_CreateImage
@@ -4845,7 +4853,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=CreateInstanceExportTask':
+  /#Action=CreateInstanceExportTask:
     get:
       x-aws-operation-name: CreateInstanceExportTask
       operationId: GET_CreateInstanceExportTask
@@ -4952,7 +4960,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=CreateInternetGateway':
+  /#Action=CreateInternetGateway:
     get:
       x-aws-operation-name: CreateInternetGateway
       operationId: GET_CreateInternetGateway
@@ -5023,7 +5031,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=CreateKeyPair':
+  /#Action=CreateKeyPair:
     get:
       x-aws-operation-name: CreateKeyPair
       operationId: GET_CreateKeyPair
@@ -5100,7 +5108,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=CreateLaunchTemplate':
+  /#Action=CreateLaunchTemplate:
     get:
       x-aws-operation-name: CreateLaunchTemplate
       operationId: GET_CreateLaunchTemplate
@@ -5279,7 +5287,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=CreateLaunchTemplateVersion':
+  /#Action=CreateLaunchTemplateVersion:
     get:
       x-aws-operation-name: CreateLaunchTemplateVersion
       operationId: GET_CreateLaunchTemplateVersion
@@ -5462,7 +5470,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=CreateLocalGatewayRoute':
+  /#Action=CreateLocalGatewayRoute:
     get:
       x-aws-operation-name: CreateLocalGatewayRoute
       operationId: GET_CreateLocalGatewayRoute
@@ -5543,7 +5551,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=CreateLocalGatewayRouteTableVpcAssociation':
+  /#Action=CreateLocalGatewayRouteTableVpcAssociation:
     get:
       x-aws-operation-name: CreateLocalGatewayRouteTableVpcAssociation
       operationId: GET_CreateLocalGatewayRouteTableVpcAssociation
@@ -5626,7 +5634,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=CreateManagedPrefixList':
+  /#Action=CreateManagedPrefixList:
     get:
       x-aws-operation-name: CreateManagedPrefixList
       operationId: GET_CreateManagedPrefixList
@@ -5731,7 +5739,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=CreateNatGateway':
+  /#Action=CreateNatGateway:
     get:
       x-aws-operation-name: CreateNatGateway
       operationId: GET_CreateNatGateway
@@ -5820,7 +5828,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=CreateNetworkAcl':
+  /#Action=CreateNetworkAcl:
     get:
       x-aws-operation-name: CreateNetworkAcl
       operationId: GET_CreateNetworkAcl
@@ -5897,7 +5905,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=CreateNetworkAclEntry':
+  /#Action=CreateNetworkAclEntry:
     get:
       x-aws-operation-name: CreateNetworkAclEntry
       operationId: GET_CreateNetworkAclEntry
@@ -6031,7 +6039,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=CreateNetworkInterface':
+  /#Action=CreateNetworkInterface:
     get:
       x-aws-operation-name: CreateNetworkInterface
       operationId: GET_CreateNetworkInterface
@@ -6164,7 +6172,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=CreateNetworkInterfacePermission':
+  /#Action=CreateNetworkInterfacePermission:
     get:
       x-aws-operation-name: CreateNetworkInterfacePermission
       operationId: GET_CreateNetworkInterfacePermission
@@ -6254,7 +6262,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=CreatePlacementGroup':
+  /#Action=CreatePlacementGroup:
     get:
       x-aws-operation-name: CreatePlacementGroup
       operationId: GET_CreatePlacementGroup
@@ -6347,7 +6355,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=CreateReservedInstancesListing':
+  /#Action=CreateReservedInstancesListing:
     get:
       x-aws-operation-name: CreateReservedInstancesListing
       operationId: GET_CreateReservedInstancesListing
@@ -6430,7 +6438,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=CreateRoute':
+  /#Action=CreateRoute:
     get:
       x-aws-operation-name: CreateRoute
       operationId: GET_CreateRoute
@@ -6565,7 +6573,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=CreateRouteTable':
+  /#Action=CreateRouteTable:
     get:
       x-aws-operation-name: CreateRouteTable
       operationId: GET_CreateRouteTable
@@ -6642,7 +6650,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=CreateSecurityGroup':
+  /#Action=CreateSecurityGroup:
     get:
       x-aws-operation-name: CreateSecurityGroup
       operationId: GET_CreateSecurityGroup
@@ -6731,7 +6739,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=CreateSnapshot':
+  /#Action=CreateSnapshot:
     get:
       x-aws-operation-name: CreateSnapshot
       operationId: GET_CreateSnapshot
@@ -6814,7 +6822,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=CreateSnapshots':
+  /#Action=CreateSnapshots:
     get:
       x-aws-operation-name: CreateSnapshots
       operationId: GET_CreateSnapshots
@@ -6913,7 +6921,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=CreateSpotDatafeedSubscription':
+  /#Action=CreateSpotDatafeedSubscription:
     get:
       x-aws-operation-name: CreateSpotDatafeedSubscription
       operationId: GET_CreateSpotDatafeedSubscription
@@ -6988,7 +6996,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=CreateSubnet':
+  /#Action=CreateSubnet:
     get:
       x-aws-operation-name: CreateSubnet
       operationId: GET_CreateSubnet
@@ -7095,7 +7103,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=CreateTags':
+  /#Action=CreateTags:
     get:
       x-aws-operation-name: CreateTags
       operationId: GET_CreateTags
@@ -7172,7 +7180,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=CreateTrafficMirrorFilter':
+  /#Action=CreateTrafficMirrorFilter:
     get:
       x-aws-operation-name: CreateTrafficMirrorFilter
       operationId: GET_CreateTrafficMirrorFilter
@@ -7255,7 +7263,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=CreateTrafficMirrorFilterRule':
+  /#Action=CreateTrafficMirrorFilterRule:
     get:
       x-aws-operation-name: CreateTrafficMirrorFilterRule
       operationId: GET_CreateTrafficMirrorFilterRule
@@ -7406,7 +7414,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=CreateTrafficMirrorSession':
+  /#Action=CreateTrafficMirrorSession:
     get:
       x-aws-operation-name: CreateTrafficMirrorSession
       operationId: GET_CreateTrafficMirrorSession
@@ -7525,7 +7533,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=CreateTrafficMirrorTarget':
+  /#Action=CreateTrafficMirrorTarget:
     get:
       x-aws-operation-name: CreateTrafficMirrorTarget
       operationId: GET_CreateTrafficMirrorTarget
@@ -7620,7 +7628,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=CreateTransitGateway':
+  /#Action=CreateTransitGateway:
     get:
       x-aws-operation-name: CreateTransitGateway
       operationId: GET_CreateTransitGateway
@@ -7726,7 +7734,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=CreateTransitGatewayMulticastDomain':
+  /#Action=CreateTransitGatewayMulticastDomain:
     get:
       x-aws-operation-name: CreateTransitGatewayMulticastDomain
       operationId: GET_CreateTransitGatewayMulticastDomain
@@ -7803,7 +7811,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=CreateTransitGatewayPeeringAttachment':
+  /#Action=CreateTransitGatewayPeeringAttachment:
     get:
       x-aws-operation-name: CreateTransitGatewayPeeringAttachment
       operationId: GET_CreateTransitGatewayPeeringAttachment
@@ -7898,7 +7906,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=CreateTransitGatewayRoute':
+  /#Action=CreateTransitGatewayRoute:
     get:
       x-aws-operation-name: CreateTransitGatewayRoute
       operationId: GET_CreateTransitGatewayRoute
@@ -7985,7 +7993,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=CreateTransitGatewayRouteTable':
+  /#Action=CreateTransitGatewayRouteTable:
     get:
       x-aws-operation-name: CreateTransitGatewayRouteTable
       operationId: GET_CreateTransitGatewayRouteTable
@@ -8062,7 +8070,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=CreateTransitGatewayVpcAttachment':
+  /#Action=CreateTransitGatewayVpcAttachment:
     get:
       x-aws-operation-name: CreateTransitGatewayVpcAttachment
       operationId: GET_CreateTransitGatewayVpcAttachment
@@ -8167,7 +8175,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=CreateVolume':
+  /#Action=CreateVolume:
     get:
       x-aws-operation-name: CreateVolume
       operationId: GET_CreateVolume
@@ -8298,7 +8306,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=CreateVpc':
+  /#Action=CreateVpc:
     get:
       x-aws-operation-name: CreateVpc
       operationId: GET_CreateVpc
@@ -8409,7 +8417,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=CreateVpcEndpoint':
+  /#Action=CreateVpcEndpoint:
     get:
       x-aws-operation-name: CreateVpcEndpoint
       operationId: GET_CreateVpcEndpoint
@@ -8543,7 +8551,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=CreateVpcEndpointConnectionNotification':
+  /#Action=CreateVpcEndpointConnectionNotification:
     get:
       x-aws-operation-name: CreateVpcEndpointConnectionNotification
       operationId: GET_CreateVpcEndpointConnectionNotification
@@ -8638,7 +8646,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=CreateVpcEndpointServiceConfiguration':
+  /#Action=CreateVpcEndpointServiceConfiguration:
     get:
       x-aws-operation-name: CreateVpcEndpointServiceConfiguration
       operationId: GET_CreateVpcEndpointServiceConfiguration
@@ -8735,7 +8743,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=CreateVpcPeeringConnection':
+  /#Action=CreateVpcPeeringConnection:
     get:
       x-aws-operation-name: CreateVpcPeeringConnection
       operationId: GET_CreateVpcPeeringConnection
@@ -8830,7 +8838,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=CreateVpnConnection':
+  /#Action=CreateVpnConnection:
     get:
       x-aws-operation-name: CreateVpnConnection
       operationId: GET_CreateVpnConnection
@@ -8934,7 +8942,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=CreateVpnConnectionRoute':
+  /#Action=CreateVpnConnectionRoute:
     get:
       x-aws-operation-name: CreateVpnConnectionRoute
       operationId: GET_CreateVpnConnectionRoute
@@ -9001,7 +9009,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=CreateVpnGateway':
+  /#Action=CreateVpnGateway:
     get:
       x-aws-operation-name: CreateVpnGateway
       operationId: GET_CreateVpnGateway
@@ -9084,7 +9092,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DeleteClientVpnEndpoint':
+  /#Action=DeleteClientVpnEndpoint:
     get:
       x-aws-operation-name: DeleteClientVpnEndpoint
       operationId: GET_DeleteClientVpnEndpoint
@@ -9153,7 +9161,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DeleteClientVpnRoute':
+  /#Action=DeleteClientVpnRoute:
     get:
       x-aws-operation-name: DeleteClientVpnRoute
       operationId: GET_DeleteClientVpnRoute
@@ -9234,7 +9242,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DeleteCustomerGateway':
+  /#Action=DeleteCustomerGateway:
     get:
       x-aws-operation-name: DeleteCustomerGateway
       operationId: GET_DeleteCustomerGateway
@@ -9301,7 +9309,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DeleteDhcpOptions':
+  /#Action=DeleteDhcpOptions:
     get:
       x-aws-operation-name: DeleteDhcpOptions
       operationId: GET_DeleteDhcpOptions
@@ -9368,7 +9376,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DeleteEgressOnlyInternetGateway':
+  /#Action=DeleteEgressOnlyInternetGateway:
     get:
       x-aws-operation-name: DeleteEgressOnlyInternetGateway
       operationId: GET_DeleteEgressOnlyInternetGateway
@@ -9437,7 +9445,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DeleteFleets':
+  /#Action=DeleteFleets:
     get:
       x-aws-operation-name: DeleteFleets
       operationId: GET_DeleteFleets
@@ -9514,7 +9522,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DeleteFlowLogs':
+  /#Action=DeleteFlowLogs:
     get:
       x-aws-operation-name: DeleteFlowLogs
       operationId: GET_DeleteFlowLogs
@@ -9585,7 +9593,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DeleteFpgaImage':
+  /#Action=DeleteFpgaImage:
     get:
       x-aws-operation-name: DeleteFpgaImage
       operationId: GET_DeleteFpgaImage
@@ -9654,7 +9662,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DeleteInternetGateway':
+  /#Action=DeleteInternetGateway:
     get:
       x-aws-operation-name: DeleteInternetGateway
       operationId: GET_DeleteInternetGateway
@@ -9721,7 +9729,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DeleteKeyPair':
+  /#Action=DeleteKeyPair:
     get:
       x-aws-operation-name: DeleteKeyPair
       operationId: GET_DeleteKeyPair
@@ -9794,7 +9802,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DeleteLaunchTemplate':
+  /#Action=DeleteLaunchTemplate:
     get:
       x-aws-operation-name: DeleteLaunchTemplate
       operationId: GET_DeleteLaunchTemplate
@@ -9872,7 +9880,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DeleteLaunchTemplateVersions':
+  /#Action=DeleteLaunchTemplateVersions:
     get:
       x-aws-operation-name: DeleteLaunchTemplateVersions
       operationId: GET_DeleteLaunchTemplateVersions
@@ -9958,7 +9966,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DeleteLocalGatewayRoute':
+  /#Action=DeleteLocalGatewayRoute:
     get:
       x-aws-operation-name: DeleteLocalGatewayRoute
       operationId: GET_DeleteLocalGatewayRoute
@@ -10033,7 +10041,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DeleteLocalGatewayRouteTableVpcAssociation':
+  /#Action=DeleteLocalGatewayRouteTableVpcAssociation:
     get:
       x-aws-operation-name: DeleteLocalGatewayRouteTableVpcAssociation
       operationId: GET_DeleteLocalGatewayRouteTableVpcAssociation
@@ -10102,7 +10110,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DeleteManagedPrefixList':
+  /#Action=DeleteManagedPrefixList:
     get:
       x-aws-operation-name: DeleteManagedPrefixList
       operationId: GET_DeleteManagedPrefixList
@@ -10171,7 +10179,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DeleteNatGateway':
+  /#Action=DeleteNatGateway:
     get:
       x-aws-operation-name: DeleteNatGateway
       operationId: GET_DeleteNatGateway
@@ -10240,7 +10248,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DeleteNetworkAcl':
+  /#Action=DeleteNetworkAcl:
     get:
       x-aws-operation-name: DeleteNetworkAcl
       operationId: GET_DeleteNetworkAcl
@@ -10307,7 +10315,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DeleteNetworkAclEntry':
+  /#Action=DeleteNetworkAclEntry:
     get:
       x-aws-operation-name: DeleteNetworkAclEntry
       operationId: GET_DeleteNetworkAclEntry
@@ -10386,7 +10394,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DeleteNetworkInterface':
+  /#Action=DeleteNetworkInterface:
     get:
       x-aws-operation-name: DeleteNetworkInterface
       operationId: GET_DeleteNetworkInterface
@@ -10453,7 +10461,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DeleteNetworkInterfacePermission':
+  /#Action=DeleteNetworkInterfacePermission:
     get:
       x-aws-operation-name: DeleteNetworkInterfacePermission
       operationId: GET_DeleteNetworkInterfacePermission
@@ -10528,7 +10536,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DeletePlacementGroup':
+  /#Action=DeletePlacementGroup:
     get:
       x-aws-operation-name: DeletePlacementGroup
       operationId: GET_DeletePlacementGroup
@@ -10595,7 +10603,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DeleteQueuedReservedInstances':
+  /#Action=DeleteQueuedReservedInstances:
     get:
       x-aws-operation-name: DeleteQueuedReservedInstances
       operationId: GET_DeleteQueuedReservedInstances
@@ -10668,7 +10676,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DeleteRoute':
+  /#Action=DeleteRoute:
     get:
       x-aws-operation-name: DeleteRoute
       operationId: GET_DeleteRoute
@@ -10753,7 +10761,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DeleteRouteTable':
+  /#Action=DeleteRouteTable:
     get:
       x-aws-operation-name: DeleteRouteTable
       operationId: GET_DeleteRouteTable
@@ -10820,7 +10828,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DeleteSecurityGroup':
+  /#Action=DeleteSecurityGroup:
     get:
       x-aws-operation-name: DeleteSecurityGroup
       operationId: GET_DeleteSecurityGroup
@@ -10893,7 +10901,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DeleteSnapshot':
+  /#Action=DeleteSnapshot:
     get:
       x-aws-operation-name: DeleteSnapshot
       operationId: GET_DeleteSnapshot
@@ -10960,7 +10968,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DeleteSpotDatafeedSubscription':
+  /#Action=DeleteSpotDatafeedSubscription:
     get:
       x-aws-operation-name: DeleteSpotDatafeedSubscription
       operationId: GET_DeleteSpotDatafeedSubscription
@@ -11021,7 +11029,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DeleteSubnet':
+  /#Action=DeleteSubnet:
     get:
       x-aws-operation-name: DeleteSubnet
       operationId: GET_DeleteSubnet
@@ -11088,7 +11096,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DeleteTags':
+  /#Action=DeleteTags:
     get:
       x-aws-operation-name: DeleteTags
       operationId: GET_DeleteTags
@@ -11165,7 +11173,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DeleteTrafficMirrorFilter':
+  /#Action=DeleteTrafficMirrorFilter:
     get:
       x-aws-operation-name: DeleteTrafficMirrorFilter
       operationId: GET_DeleteTrafficMirrorFilter
@@ -11234,7 +11242,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DeleteTrafficMirrorFilterRule':
+  /#Action=DeleteTrafficMirrorFilterRule:
     get:
       x-aws-operation-name: DeleteTrafficMirrorFilterRule
       operationId: GET_DeleteTrafficMirrorFilterRule
@@ -11303,7 +11311,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DeleteTrafficMirrorSession':
+  /#Action=DeleteTrafficMirrorSession:
     get:
       x-aws-operation-name: DeleteTrafficMirrorSession
       operationId: GET_DeleteTrafficMirrorSession
@@ -11372,7 +11380,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DeleteTrafficMirrorTarget':
+  /#Action=DeleteTrafficMirrorTarget:
     get:
       x-aws-operation-name: DeleteTrafficMirrorTarget
       operationId: GET_DeleteTrafficMirrorTarget
@@ -11441,7 +11449,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DeleteTransitGateway':
+  /#Action=DeleteTransitGateway:
     get:
       x-aws-operation-name: DeleteTransitGateway
       operationId: GET_DeleteTransitGateway
@@ -11510,7 +11518,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DeleteTransitGatewayMulticastDomain':
+  /#Action=DeleteTransitGatewayMulticastDomain:
     get:
       x-aws-operation-name: DeleteTransitGatewayMulticastDomain
       operationId: GET_DeleteTransitGatewayMulticastDomain
@@ -11579,7 +11587,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DeleteTransitGatewayPeeringAttachment':
+  /#Action=DeleteTransitGatewayPeeringAttachment:
     get:
       x-aws-operation-name: DeleteTransitGatewayPeeringAttachment
       operationId: GET_DeleteTransitGatewayPeeringAttachment
@@ -11648,7 +11656,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DeleteTransitGatewayRoute':
+  /#Action=DeleteTransitGatewayRoute:
     get:
       x-aws-operation-name: DeleteTransitGatewayRoute
       operationId: GET_DeleteTransitGatewayRoute
@@ -11723,7 +11731,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DeleteTransitGatewayRouteTable':
+  /#Action=DeleteTransitGatewayRouteTable:
     get:
       x-aws-operation-name: DeleteTransitGatewayRouteTable
       operationId: GET_DeleteTransitGatewayRouteTable
@@ -11792,7 +11800,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DeleteTransitGatewayVpcAttachment':
+  /#Action=DeleteTransitGatewayVpcAttachment:
     get:
       x-aws-operation-name: DeleteTransitGatewayVpcAttachment
       operationId: GET_DeleteTransitGatewayVpcAttachment
@@ -11861,7 +11869,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DeleteVolume':
+  /#Action=DeleteVolume:
     get:
       x-aws-operation-name: DeleteVolume
       operationId: GET_DeleteVolume
@@ -11928,7 +11936,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DeleteVpc':
+  /#Action=DeleteVpc:
     get:
       x-aws-operation-name: DeleteVpc
       operationId: GET_DeleteVpc
@@ -11995,7 +12003,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DeleteVpcEndpointConnectionNotifications':
+  /#Action=DeleteVpcEndpointConnectionNotifications:
     get:
       x-aws-operation-name: DeleteVpcEndpointConnectionNotifications
       operationId: GET_DeleteVpcEndpointConnectionNotifications
@@ -12066,7 +12074,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DeleteVpcEndpointServiceConfigurations':
+  /#Action=DeleteVpcEndpointServiceConfigurations:
     get:
       x-aws-operation-name: DeleteVpcEndpointServiceConfigurations
       operationId: GET_DeleteVpcEndpointServiceConfigurations
@@ -12137,7 +12145,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DeleteVpcEndpoints':
+  /#Action=DeleteVpcEndpoints:
     get:
       x-aws-operation-name: DeleteVpcEndpoints
       operationId: GET_DeleteVpcEndpoints
@@ -12208,7 +12216,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DeleteVpcPeeringConnection':
+  /#Action=DeleteVpcPeeringConnection:
     get:
       x-aws-operation-name: DeleteVpcPeeringConnection
       operationId: GET_DeleteVpcPeeringConnection
@@ -12277,7 +12285,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DeleteVpnConnection':
+  /#Action=DeleteVpnConnection:
     get:
       x-aws-operation-name: DeleteVpnConnection
       operationId: GET_DeleteVpnConnection
@@ -12344,7 +12352,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DeleteVpnConnectionRoute':
+  /#Action=DeleteVpnConnectionRoute:
     get:
       x-aws-operation-name: DeleteVpnConnectionRoute
       operationId: GET_DeleteVpnConnectionRoute
@@ -12411,7 +12419,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DeleteVpnGateway':
+  /#Action=DeleteVpnGateway:
     get:
       x-aws-operation-name: DeleteVpnGateway
       operationId: GET_DeleteVpnGateway
@@ -12478,7 +12486,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DeprovisionByoipCidr':
+  /#Action=DeprovisionByoipCidr:
     get:
       x-aws-operation-name: DeprovisionByoipCidr
       operationId: GET_DeprovisionByoipCidr
@@ -12547,7 +12555,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DeregisterImage':
+  /#Action=DeregisterImage:
     get:
       x-aws-operation-name: DeregisterImage
       operationId: GET_DeregisterImage
@@ -12614,7 +12622,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DeregisterInstanceEventNotificationAttributes':
+  /#Action=DeregisterInstanceEventNotificationAttributes:
     get:
       x-aws-operation-name: DeregisterInstanceEventNotificationAttributes
       operationId: GET_DeregisterInstanceEventNotificationAttributes
@@ -12691,7 +12699,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DeregisterTransitGatewayMulticastGroupMembers':
+  /#Action=DeregisterTransitGatewayMulticastGroupMembers:
     get:
       x-aws-operation-name: DeregisterTransitGatewayMulticastGroupMembers
       operationId: GET_DeregisterTransitGatewayMulticastGroupMembers
@@ -12774,7 +12782,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DeregisterTransitGatewayMulticastGroupSources':
+  /#Action=DeregisterTransitGatewayMulticastGroupSources:
     get:
       x-aws-operation-name: DeregisterTransitGatewayMulticastGroupSources
       operationId: GET_DeregisterTransitGatewayMulticastGroupSources
@@ -12857,7 +12865,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeAccountAttributes':
+  /#Action=DescribeAccountAttributes:
     get:
       x-aws-operation-name: DescribeAccountAttributes
       operationId: GET_DescribeAccountAttributes
@@ -12928,7 +12936,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeAddresses':
+  /#Action=DescribeAddresses:
     get:
       x-aws-operation-name: DescribeAddresses
       operationId: GET_DescribeAddresses
@@ -13015,7 +13023,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeAggregateIdFormat':
+  /#Action=DescribeAggregateIdFormat:
     get:
       x-aws-operation-name: DescribeAggregateIdFormat
       operationId: GET_DescribeAggregateIdFormat
@@ -13078,7 +13086,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeAvailabilityZones':
+  /#Action=DescribeAvailabilityZones:
     get:
       x-aws-operation-name: DescribeAvailabilityZones
       operationId: GET_DescribeAvailabilityZones
@@ -13171,7 +13179,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeBundleTasks':
+  /#Action=DescribeBundleTasks:
     get:
       x-aws-operation-name: DescribeBundleTasks
       operationId: GET_DescribeBundleTasks
@@ -13250,7 +13258,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeByoipCidrs':
+  /#Action=DescribeByoipCidrs:
     get:
       x-aws-operation-name: DescribeByoipCidrs
       operationId: GET_DescribeByoipCidrs
@@ -13339,7 +13347,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeCapacityReservations':
+  /#Action=DescribeCapacityReservations:
     get:
       x-aws-operation-name: DescribeCapacityReservations
       operationId: GET_DescribeCapacityReservations
@@ -13444,7 +13452,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeClassicLinkInstances':
+  /#Action=DescribeClassicLinkInstances:
     get:
       x-aws-operation-name: DescribeClassicLinkInstances
       operationId: GET_DescribeClassicLinkInstances
@@ -13549,7 +13557,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeClientVpnAuthorizationRules':
+  /#Action=DescribeClientVpnAuthorizationRules:
     get:
       x-aws-operation-name: DescribeClientVpnAuthorizationRules
       operationId: GET_DescribeClientVpnAuthorizationRules
@@ -13652,7 +13660,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeClientVpnConnections':
+  /#Action=DescribeClientVpnConnections:
     get:
       x-aws-operation-name: DescribeClientVpnConnections
       operationId: GET_DescribeClientVpnConnections
@@ -13755,7 +13763,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeClientVpnEndpoints':
+  /#Action=DescribeClientVpnEndpoints:
     get:
       x-aws-operation-name: DescribeClientVpnEndpoints
       operationId: GET_DescribeClientVpnEndpoints
@@ -13860,7 +13868,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeClientVpnRoutes':
+  /#Action=DescribeClientVpnRoutes:
     get:
       x-aws-operation-name: DescribeClientVpnRoutes
       operationId: GET_DescribeClientVpnRoutes
@@ -13963,7 +13971,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeClientVpnTargetNetworks':
+  /#Action=DescribeClientVpnTargetNetworks:
     get:
       x-aws-operation-name: DescribeClientVpnTargetNetworks
       operationId: GET_DescribeClientVpnTargetNetworks
@@ -14074,7 +14082,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeCoipPools':
+  /#Action=DescribeCoipPools:
     get:
       x-aws-operation-name: DescribeCoipPools
       operationId: GET_DescribeCoipPools
@@ -14179,7 +14187,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeConversionTasks':
+  /#Action=DescribeConversionTasks:
     get:
       x-aws-operation-name: DescribeConversionTasks
       operationId: GET_DescribeConversionTasks
@@ -14250,7 +14258,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeCustomerGateways':
+  /#Action=DescribeCustomerGateways:
     get:
       x-aws-operation-name: DescribeCustomerGateways
       operationId: GET_DescribeCustomerGateways
@@ -14329,7 +14337,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeDhcpOptions':
+  /#Action=DescribeDhcpOptions:
     get:
       x-aws-operation-name: DescribeDhcpOptions
       operationId: GET_DescribeDhcpOptions
@@ -14434,7 +14442,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeEgressOnlyInternetGateways':
+  /#Action=DescribeEgressOnlyInternetGateways:
     get:
       x-aws-operation-name: DescribeEgressOnlyInternetGateways
       operationId: GET_DescribeEgressOnlyInternetGateways
@@ -14539,7 +14547,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeElasticGpus':
+  /#Action=DescribeElasticGpus:
     get:
       x-aws-operation-name: DescribeElasticGpus
       operationId: GET_DescribeElasticGpus
@@ -14632,7 +14640,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeExportImageTasks':
+  /#Action=DescribeExportImageTasks:
     get:
       x-aws-operation-name: DescribeExportImageTasks
       operationId: GET_DescribeExportImageTasks
@@ -14737,7 +14745,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeExportTasks':
+  /#Action=DescribeExportTasks:
     get:
       x-aws-operation-name: DescribeExportTasks
       operationId: GET_DescribeExportTasks
@@ -14810,7 +14818,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeFastSnapshotRestores':
+  /#Action=DescribeFastSnapshotRestores:
     get:
       x-aws-operation-name: DescribeFastSnapshotRestores
       operationId: GET_DescribeFastSnapshotRestores
@@ -14907,7 +14915,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeFleetHistory':
+  /#Action=DescribeFleetHistory:
     get:
       x-aws-operation-name: DescribeFleetHistory
       operationId: GET_DescribeFleetHistory
@@ -15005,7 +15013,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeFleetInstances':
+  /#Action=DescribeFleetInstances:
     get:
       x-aws-operation-name: DescribeFleetInstances
       operationId: GET_DescribeFleetInstances
@@ -15094,7 +15102,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeFleets':
+  /#Action=DescribeFleets:
     get:
       x-aws-operation-name: DescribeFleets
       operationId: GET_DescribeFleets
@@ -15197,7 +15205,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeFlowLogs':
+  /#Action=DescribeFlowLogs:
     get:
       x-aws-operation-name: DescribeFlowLogs
       operationId: GET_DescribeFlowLogs
@@ -15300,7 +15308,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeFpgaImageAttribute':
+  /#Action=DescribeFpgaImageAttribute:
     get:
       x-aws-operation-name: DescribeFpgaImageAttribute
       operationId: GET_DescribeFpgaImageAttribute
@@ -15380,7 +15388,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeFpgaImages':
+  /#Action=DescribeFpgaImages:
     get:
       x-aws-operation-name: DescribeFpgaImages
       operationId: GET_DescribeFpgaImages
@@ -15493,7 +15501,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeHostReservationOfferings':
+  /#Action=DescribeHostReservationOfferings:
     get:
       x-aws-operation-name: DescribeHostReservationOfferings
       operationId: GET_DescribeHostReservationOfferings
@@ -15602,7 +15610,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeHostReservations':
+  /#Action=DescribeHostReservations:
     get:
       x-aws-operation-name: DescribeHostReservations
       operationId: GET_DescribeHostReservations
@@ -15699,7 +15707,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeHosts':
+  /#Action=DescribeHosts:
     get:
       x-aws-operation-name: DescribeHosts
       operationId: GET_DescribeHosts
@@ -15796,7 +15804,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeIamInstanceProfileAssociations':
+  /#Action=DescribeIamInstanceProfileAssociations:
     get:
       x-aws-operation-name: DescribeIamInstanceProfileAssociations
       operationId: GET_DescribeIamInstanceProfileAssociations
@@ -15895,7 +15903,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeIdFormat':
+  /#Action=DescribeIdFormat:
     get:
       x-aws-operation-name: DescribeIdFormat
       operationId: GET_DescribeIdFormat
@@ -15958,7 +15966,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeIdentityIdFormat':
+  /#Action=DescribeIdentityIdFormat:
     get:
       x-aws-operation-name: DescribeIdentityIdFormat
       operationId: GET_DescribeIdentityIdFormat
@@ -16027,7 +16035,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeImageAttribute':
+  /#Action=DescribeImageAttribute:
     get:
       x-aws-operation-name: DescribeImageAttribute
       operationId: GET_DescribeImageAttribute
@@ -16110,7 +16118,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeImages':
+  /#Action=DescribeImages:
     get:
       x-aws-operation-name: DescribeImages
       operationId: GET_DescribeImages
@@ -16205,7 +16213,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeImportImageTasks':
+  /#Action=DescribeImportImageTasks:
     get:
       x-aws-operation-name: DescribeImportImageTasks
       operationId: GET_DescribeImportImageTasks
@@ -16308,7 +16316,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeImportSnapshotTasks':
+  /#Action=DescribeImportSnapshotTasks:
     get:
       x-aws-operation-name: DescribeImportSnapshotTasks
       operationId: GET_DescribeImportSnapshotTasks
@@ -16411,7 +16419,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeInstanceAttribute':
+  /#Action=DescribeInstanceAttribute:
     get:
       x-aws-operation-name: DescribeInstanceAttribute
       operationId: GET_DescribeInstanceAttribute
@@ -16501,7 +16509,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeInstanceCreditSpecifications':
+  /#Action=DescribeInstanceCreditSpecifications:
     get:
       x-aws-operation-name: DescribeInstanceCreditSpecifications
       operationId: GET_DescribeInstanceCreditSpecifications
@@ -16606,7 +16614,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeInstanceEventNotificationAttributes':
+  /#Action=DescribeInstanceEventNotificationAttributes:
     get:
       x-aws-operation-name: DescribeInstanceEventNotificationAttributes
       operationId: GET_DescribeInstanceEventNotificationAttributes
@@ -16669,7 +16677,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeInstanceStatus':
+  /#Action=DescribeInstanceStatus:
     get:
       x-aws-operation-name: DescribeInstanceStatus
       operationId: GET_DescribeInstanceStatus
@@ -16778,7 +16786,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeInstanceTypeOfferings':
+  /#Action=DescribeInstanceTypeOfferings:
     get:
       x-aws-operation-name: DescribeInstanceTypeOfferings
       operationId: GET_DescribeInstanceTypeOfferings
@@ -16885,7 +16893,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeInstanceTypes':
+  /#Action=DescribeInstanceTypes:
     get:
       x-aws-operation-name: DescribeInstanceTypes
       operationId: GET_DescribeInstanceTypes
@@ -16991,7 +16999,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeInstances':
+  /#Action=DescribeInstances:
     get:
       x-aws-operation-name: DescribeInstances
       operationId: GET_DescribeInstances
@@ -17094,7 +17102,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeInternetGateways':
+  /#Action=DescribeInternetGateways:
     get:
       x-aws-operation-name: DescribeInternetGateways
       operationId: GET_DescribeInternetGateways
@@ -17199,7 +17207,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeIpv6Pools':
+  /#Action=DescribeIpv6Pools:
     get:
       x-aws-operation-name: DescribeIpv6Pools
       operationId: GET_DescribeIpv6Pools
@@ -17304,7 +17312,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeKeyPairs':
+  /#Action=DescribeKeyPairs:
     get:
       x-aws-operation-name: DescribeKeyPairs
       operationId: GET_DescribeKeyPairs
@@ -17391,7 +17399,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeLaunchTemplateVersions':
+  /#Action=DescribeLaunchTemplateVersions:
     get:
       x-aws-operation-name: DescribeLaunchTemplateVersions
       operationId: GET_DescribeLaunchTemplateVersions
@@ -17521,7 +17529,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeLaunchTemplates':
+  /#Action=DescribeLaunchTemplates:
     get:
       x-aws-operation-name: DescribeLaunchTemplates
       operationId: GET_DescribeLaunchTemplates
@@ -17634,7 +17642,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociations':
+  /#Action=DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociations:
     get:
       x-aws-operation-name: DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociations
       operationId: GET_DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociations
@@ -17739,7 +17747,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeLocalGatewayRouteTableVpcAssociations':
+  /#Action=DescribeLocalGatewayRouteTableVpcAssociations:
     get:
       x-aws-operation-name: DescribeLocalGatewayRouteTableVpcAssociations
       operationId: GET_DescribeLocalGatewayRouteTableVpcAssociations
@@ -17844,7 +17852,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeLocalGatewayRouteTables':
+  /#Action=DescribeLocalGatewayRouteTables:
     get:
       x-aws-operation-name: DescribeLocalGatewayRouteTables
       operationId: GET_DescribeLocalGatewayRouteTables
@@ -17949,7 +17957,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeLocalGatewayVirtualInterfaceGroups':
+  /#Action=DescribeLocalGatewayVirtualInterfaceGroups:
     get:
       x-aws-operation-name: DescribeLocalGatewayVirtualInterfaceGroups
       operationId: GET_DescribeLocalGatewayVirtualInterfaceGroups
@@ -18054,7 +18062,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeLocalGatewayVirtualInterfaces':
+  /#Action=DescribeLocalGatewayVirtualInterfaces:
     get:
       x-aws-operation-name: DescribeLocalGatewayVirtualInterfaces
       operationId: GET_DescribeLocalGatewayVirtualInterfaces
@@ -18159,7 +18167,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeLocalGateways':
+  /#Action=DescribeLocalGateways:
     get:
       x-aws-operation-name: DescribeLocalGateways
       operationId: GET_DescribeLocalGateways
@@ -18264,7 +18272,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeManagedPrefixLists':
+  /#Action=DescribeManagedPrefixLists:
     get:
       x-aws-operation-name: DescribeManagedPrefixLists
       operationId: GET_DescribeManagedPrefixLists
@@ -18369,7 +18377,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeMovingAddresses':
+  /#Action=DescribeMovingAddresses:
     get:
       x-aws-operation-name: DescribeMovingAddresses
       operationId: GET_DescribeMovingAddresses
@@ -18474,7 +18482,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeNatGateways':
+  /#Action=DescribeNatGateways:
     get:
       x-aws-operation-name: DescribeNatGateways
       operationId: GET_DescribeNatGateways
@@ -18579,7 +18587,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeNetworkAcls':
+  /#Action=DescribeNetworkAcls:
     get:
       x-aws-operation-name: DescribeNetworkAcls
       operationId: GET_DescribeNetworkAcls
@@ -18684,7 +18692,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeNetworkInterfaceAttribute':
+  /#Action=DescribeNetworkInterfaceAttribute:
     get:
       x-aws-operation-name: DescribeNetworkInterfaceAttribute
       operationId: GET_DescribeNetworkInterfaceAttribute
@@ -18764,7 +18772,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeNetworkInterfacePermissions':
+  /#Action=DescribeNetworkInterfacePermissions:
     get:
       x-aws-operation-name: DescribeNetworkInterfacePermissions
       operationId: GET_DescribeNetworkInterfacePermissions
@@ -18863,7 +18871,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeNetworkInterfaces':
+  /#Action=DescribeNetworkInterfaces:
     get:
       x-aws-operation-name: DescribeNetworkInterfaces
       operationId: GET_DescribeNetworkInterfaces
@@ -18968,7 +18976,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribePlacementGroups':
+  /#Action=DescribePlacementGroups:
     get:
       x-aws-operation-name: DescribePlacementGroups
       operationId: GET_DescribePlacementGroups
@@ -19055,7 +19063,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribePrefixLists':
+  /#Action=DescribePrefixLists:
     get:
       x-aws-operation-name: DescribePrefixLists
       operationId: GET_DescribePrefixLists
@@ -19158,7 +19166,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribePrincipalIdFormat':
+  /#Action=DescribePrincipalIdFormat:
     get:
       x-aws-operation-name: DescribePrincipalIdFormat
       operationId: GET_DescribePrincipalIdFormat
@@ -19255,7 +19263,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribePublicIpv4Pools':
+  /#Action=DescribePublicIpv4Pools:
     get:
       x-aws-operation-name: DescribePublicIpv4Pools
       operationId: GET_DescribePublicIpv4Pools
@@ -19354,7 +19362,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeRegions':
+  /#Action=DescribeRegions:
     get:
       x-aws-operation-name: DescribeRegions
       operationId: GET_DescribeRegions
@@ -19439,7 +19447,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeReservedInstances':
+  /#Action=DescribeReservedInstances:
     get:
       x-aws-operation-name: DescribeReservedInstances
       operationId: GET_DescribeReservedInstances
@@ -19540,7 +19548,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeReservedInstancesListings':
+  /#Action=DescribeReservedInstancesListings:
     get:
       x-aws-operation-name: DescribeReservedInstancesListings
       operationId: GET_DescribeReservedInstancesListings
@@ -19617,7 +19625,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeReservedInstancesModifications':
+  /#Action=DescribeReservedInstancesModifications:
     get:
       x-aws-operation-name: DescribeReservedInstancesModifications
       operationId: GET_DescribeReservedInstancesModifications
@@ -19702,7 +19710,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeReservedInstancesOfferings':
+  /#Action=DescribeReservedInstancesOfferings:
     get:
       x-aws-operation-name: DescribeReservedInstancesOfferings
       operationId: GET_DescribeReservedInstancesOfferings
@@ -20192,7 +20200,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeRouteTables':
+  /#Action=DescribeRouteTables:
     get:
       x-aws-operation-name: DescribeRouteTables
       operationId: GET_DescribeRouteTables
@@ -20297,7 +20305,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeScheduledInstanceAvailability':
+  /#Action=DescribeScheduledInstanceAvailability:
     get:
       x-aws-operation-name: DescribeScheduledInstanceAvailability
       operationId: GET_DescribeScheduledInstanceAvailability
@@ -20446,7 +20454,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeScheduledInstances':
+  /#Action=DescribeScheduledInstances:
     get:
       x-aws-operation-name: DescribeScheduledInstances
       operationId: GET_DescribeScheduledInstances
@@ -20563,7 +20571,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeSecurityGroupReferences':
+  /#Action=DescribeSecurityGroupReferences:
     get:
       x-aws-operation-name: DescribeSecurityGroupReferences
       operationId: GET_DescribeSecurityGroupReferences
@@ -20634,7 +20642,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeSecurityGroups':
+  /#Action=DescribeSecurityGroups:
     get:
       x-aws-operation-name: DescribeSecurityGroups
       operationId: GET_DescribeSecurityGroups
@@ -20747,7 +20755,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeSnapshotAttribute':
+  /#Action=DescribeSnapshotAttribute:
     get:
       x-aws-operation-name: DescribeSnapshotAttribute
       operationId: GET_DescribeSnapshotAttribute
@@ -20825,7 +20833,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeSnapshots':
+  /#Action=DescribeSnapshots:
     get:
       x-aws-operation-name: DescribeSnapshots
       operationId: GET_DescribeSnapshots
@@ -20944,7 +20952,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeSpotDatafeedSubscription':
+  /#Action=DescribeSpotDatafeedSubscription:
     get:
       x-aws-operation-name: DescribeSpotDatafeedSubscription
       operationId: GET_DescribeSpotDatafeedSubscription
@@ -21007,7 +21015,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeSpotFleetInstances':
+  /#Action=DescribeSpotFleetInstances:
     get:
       x-aws-operation-name: DescribeSpotFleetInstances
       operationId: GET_DescribeSpotFleetInstances
@@ -21090,7 +21098,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeSpotFleetRequestHistory':
+  /#Action=DescribeSpotFleetRequestHistory:
     get:
       x-aws-operation-name: DescribeSpotFleetRequestHistory
       operationId: GET_DescribeSpotFleetRequestHistory
@@ -21191,7 +21199,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeSpotFleetRequests':
+  /#Action=DescribeSpotFleetRequests:
     get:
       x-aws-operation-name: DescribeSpotFleetRequests
       operationId: GET_DescribeSpotFleetRequests
@@ -21286,7 +21294,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeSpotInstanceRequests':
+  /#Action=DescribeSpotInstanceRequests:
     get:
       x-aws-operation-name: DescribeSpotInstanceRequests
       operationId: GET_DescribeSpotInstanceRequests
@@ -21389,7 +21397,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeSpotPriceHistory':
+  /#Action=DescribeSpotPriceHistory:
     get:
       x-aws-operation-name: DescribeSpotPriceHistory
       operationId: GET_DescribeSpotPriceHistory
@@ -21520,7 +21528,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeStaleSecurityGroups':
+  /#Action=DescribeStaleSecurityGroups:
     get:
       x-aws-operation-name: DescribeStaleSecurityGroups
       operationId: GET_DescribeStaleSecurityGroups
@@ -21617,7 +21625,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeSubnets':
+  /#Action=DescribeSubnets:
     get:
       x-aws-operation-name: DescribeSubnets
       operationId: GET_DescribeSubnets
@@ -21722,7 +21730,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeTags':
+  /#Action=DescribeTags:
     get:
       x-aws-operation-name: DescribeTags
       operationId: GET_DescribeTags
@@ -21817,7 +21825,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeTrafficMirrorFilters':
+  /#Action=DescribeTrafficMirrorFilters:
     get:
       x-aws-operation-name: DescribeTrafficMirrorFilters
       operationId: GET_DescribeTrafficMirrorFilters
@@ -21922,7 +21930,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeTrafficMirrorSessions':
+  /#Action=DescribeTrafficMirrorSessions:
     get:
       x-aws-operation-name: DescribeTrafficMirrorSessions
       operationId: GET_DescribeTrafficMirrorSessions
@@ -22027,7 +22035,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeTrafficMirrorTargets':
+  /#Action=DescribeTrafficMirrorTargets:
     get:
       x-aws-operation-name: DescribeTrafficMirrorTargets
       operationId: GET_DescribeTrafficMirrorTargets
@@ -22132,7 +22140,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeTransitGatewayAttachments':
+  /#Action=DescribeTransitGatewayAttachments:
     get:
       x-aws-operation-name: DescribeTransitGatewayAttachments
       operationId: GET_DescribeTransitGatewayAttachments
@@ -22237,7 +22245,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeTransitGatewayMulticastDomains':
+  /#Action=DescribeTransitGatewayMulticastDomains:
     get:
       x-aws-operation-name: DescribeTransitGatewayMulticastDomains
       operationId: GET_DescribeTransitGatewayMulticastDomains
@@ -22342,7 +22350,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeTransitGatewayPeeringAttachments':
+  /#Action=DescribeTransitGatewayPeeringAttachments:
     get:
       x-aws-operation-name: DescribeTransitGatewayPeeringAttachments
       operationId: GET_DescribeTransitGatewayPeeringAttachments
@@ -22447,7 +22455,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeTransitGatewayRouteTables':
+  /#Action=DescribeTransitGatewayRouteTables:
     get:
       x-aws-operation-name: DescribeTransitGatewayRouteTables
       operationId: GET_DescribeTransitGatewayRouteTables
@@ -22552,7 +22560,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeTransitGatewayVpcAttachments':
+  /#Action=DescribeTransitGatewayVpcAttachments:
     get:
       x-aws-operation-name: DescribeTransitGatewayVpcAttachments
       operationId: GET_DescribeTransitGatewayVpcAttachments
@@ -22657,7 +22665,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeTransitGateways':
+  /#Action=DescribeTransitGateways:
     get:
       x-aws-operation-name: DescribeTransitGateways
       operationId: GET_DescribeTransitGateways
@@ -22762,7 +22770,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeVolumeAttribute':
+  /#Action=DescribeVolumeAttribute:
     get:
       x-aws-operation-name: DescribeVolumeAttribute
       operationId: GET_DescribeVolumeAttribute
@@ -22840,7 +22848,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeVolumeStatus':
+  /#Action=DescribeVolumeStatus:
     get:
       x-aws-operation-name: DescribeVolumeStatus
       operationId: GET_DescribeVolumeStatus
@@ -22943,7 +22951,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeVolumes':
+  /#Action=DescribeVolumes:
     get:
       x-aws-operation-name: DescribeVolumes
       operationId: GET_DescribeVolumes
@@ -23046,7 +23054,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeVolumesModifications':
+  /#Action=DescribeVolumesModifications:
     get:
       x-aws-operation-name: DescribeVolumesModifications
       operationId: GET_DescribeVolumesModifications
@@ -23149,7 +23157,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeVpcAttribute':
+  /#Action=DescribeVpcAttribute:
     get:
       x-aws-operation-name: DescribeVpcAttribute
       operationId: GET_DescribeVpcAttribute
@@ -23227,7 +23235,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeVpcClassicLink':
+  /#Action=DescribeVpcClassicLink:
     get:
       x-aws-operation-name: DescribeVpcClassicLink
       operationId: GET_DescribeVpcClassicLink
@@ -23306,7 +23314,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeVpcClassicLinkDnsSupport':
+  /#Action=DescribeVpcClassicLinkDnsSupport:
     get:
       x-aws-operation-name: DescribeVpcClassicLinkDnsSupport
       operationId: GET_DescribeVpcClassicLinkDnsSupport
@@ -23399,7 +23407,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeVpcEndpointConnectionNotifications':
+  /#Action=DescribeVpcEndpointConnectionNotifications:
     get:
       x-aws-operation-name: DescribeVpcEndpointConnectionNotifications
       operationId: GET_DescribeVpcEndpointConnectionNotifications
@@ -23500,7 +23508,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeVpcEndpointConnections':
+  /#Action=DescribeVpcEndpointConnections:
     get:
       x-aws-operation-name: DescribeVpcEndpointConnections
       operationId: GET_DescribeVpcEndpointConnections
@@ -23595,7 +23603,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeVpcEndpointServiceConfigurations':
+  /#Action=DescribeVpcEndpointServiceConfigurations:
     get:
       x-aws-operation-name: DescribeVpcEndpointServiceConfigurations
       operationId: GET_DescribeVpcEndpointServiceConfigurations
@@ -23698,7 +23706,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeVpcEndpointServicePermissions':
+  /#Action=DescribeVpcEndpointServicePermissions:
     get:
       x-aws-operation-name: DescribeVpcEndpointServicePermissions
       operationId: GET_DescribeVpcEndpointServicePermissions
@@ -23799,7 +23807,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeVpcEndpointServices':
+  /#Action=DescribeVpcEndpointServices:
     get:
       x-aws-operation-name: DescribeVpcEndpointServices
       operationId: GET_DescribeVpcEndpointServices
@@ -23890,7 +23898,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeVpcEndpoints':
+  /#Action=DescribeVpcEndpoints:
     get:
       x-aws-operation-name: DescribeVpcEndpoints
       operationId: GET_DescribeVpcEndpoints
@@ -23993,7 +24001,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeVpcPeeringConnections':
+  /#Action=DescribeVpcPeeringConnections:
     get:
       x-aws-operation-name: DescribeVpcPeeringConnections
       operationId: GET_DescribeVpcPeeringConnections
@@ -24098,7 +24106,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeVpcs':
+  /#Action=DescribeVpcs:
     get:
       x-aws-operation-name: DescribeVpcs
       operationId: GET_DescribeVpcs
@@ -24203,7 +24211,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeVpnConnections':
+  /#Action=DescribeVpnConnections:
     get:
       x-aws-operation-name: DescribeVpnConnections
       operationId: GET_DescribeVpnConnections
@@ -24282,7 +24290,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DescribeVpnGateways':
+  /#Action=DescribeVpnGateways:
     get:
       x-aws-operation-name: DescribeVpnGateways
       operationId: GET_DescribeVpnGateways
@@ -24361,7 +24369,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DetachClassicLinkVpc':
+  /#Action=DetachClassicLinkVpc:
     get:
       x-aws-operation-name: DetachClassicLinkVpc
       operationId: GET_DetachClassicLinkVpc
@@ -24436,7 +24444,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DetachInternetGateway':
+  /#Action=DetachInternetGateway:
     get:
       x-aws-operation-name: DetachInternetGateway
       operationId: GET_DetachInternetGateway
@@ -24509,7 +24517,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DetachNetworkInterface':
+  /#Action=DetachNetworkInterface:
     get:
       x-aws-operation-name: DetachNetworkInterface
       operationId: GET_DetachNetworkInterface
@@ -24582,7 +24590,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DetachVolume':
+  /#Action=DetachVolume:
     get:
       x-aws-operation-name: DetachVolume
       operationId: GET_DetachVolume
@@ -24669,7 +24677,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DetachVpnGateway':
+  /#Action=DetachVpnGateway:
     get:
       x-aws-operation-name: DetachVpnGateway
       operationId: GET_DetachVpnGateway
@@ -24742,7 +24750,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DisableEbsEncryptionByDefault':
+  /#Action=DisableEbsEncryptionByDefault:
     get:
       x-aws-operation-name: DisableEbsEncryptionByDefault
       operationId: GET_DisableEbsEncryptionByDefault
@@ -24805,7 +24813,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DisableFastSnapshotRestores':
+  /#Action=DisableFastSnapshotRestores:
     get:
       x-aws-operation-name: DisableFastSnapshotRestores
       operationId: GET_DisableFastSnapshotRestores
@@ -24884,7 +24892,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DisableTransitGatewayRouteTablePropagation':
+  /#Action=DisableTransitGatewayRouteTablePropagation:
     get:
       x-aws-operation-name: DisableTransitGatewayRouteTablePropagation
       operationId: GET_DisableTransitGatewayRouteTablePropagation
@@ -24959,7 +24967,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DisableVgwRoutePropagation':
+  /#Action=DisableVgwRoutePropagation:
     get:
       x-aws-operation-name: DisableVgwRoutePropagation
       operationId: GET_DisableVgwRoutePropagation
@@ -25032,7 +25040,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DisableVpcClassicLink':
+  /#Action=DisableVpcClassicLink:
     get:
       x-aws-operation-name: DisableVpcClassicLink
       operationId: GET_DisableVpcClassicLink
@@ -25101,7 +25109,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DisableVpcClassicLinkDnsSupport':
+  /#Action=DisableVpcClassicLinkDnsSupport:
     get:
       x-aws-operation-name: DisableVpcClassicLinkDnsSupport
       operationId: GET_DisableVpcClassicLinkDnsSupport
@@ -25164,7 +25172,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DisassociateAddress':
+  /#Action=DisassociateAddress:
     get:
       x-aws-operation-name: DisassociateAddress
       operationId: GET_DisassociateAddress
@@ -25237,7 +25245,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DisassociateClientVpnTargetNetwork':
+  /#Action=DisassociateClientVpnTargetNetwork:
     get:
       x-aws-operation-name: DisassociateClientVpnTargetNetwork
       operationId: GET_DisassociateClientVpnTargetNetwork
@@ -25312,7 +25320,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DisassociateIamInstanceProfile':
+  /#Action=DisassociateIamInstanceProfile:
     get:
       x-aws-operation-name: DisassociateIamInstanceProfile
       operationId: GET_DisassociateIamInstanceProfile
@@ -25375,7 +25383,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DisassociateRouteTable':
+  /#Action=DisassociateRouteTable:
     get:
       x-aws-operation-name: DisassociateRouteTable
       operationId: GET_DisassociateRouteTable
@@ -25442,7 +25450,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DisassociateSubnetCidrBlock':
+  /#Action=DisassociateSubnetCidrBlock:
     get:
       x-aws-operation-name: DisassociateSubnetCidrBlock
       operationId: GET_DisassociateSubnetCidrBlock
@@ -25505,7 +25513,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DisassociateTransitGatewayMulticastDomain':
+  /#Action=DisassociateTransitGatewayMulticastDomain:
     get:
       x-aws-operation-name: DisassociateTransitGatewayMulticastDomain
       operationId: GET_DisassociateTransitGatewayMulticastDomain
@@ -25588,7 +25596,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DisassociateTransitGatewayRouteTable':
+  /#Action=DisassociateTransitGatewayRouteTable:
     get:
       x-aws-operation-name: DisassociateTransitGatewayRouteTable
       operationId: GET_DisassociateTransitGatewayRouteTable
@@ -25663,7 +25671,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=DisassociateVpcCidrBlock':
+  /#Action=DisassociateVpcCidrBlock:
     get:
       x-aws-operation-name: DisassociateVpcCidrBlock
       operationId: GET_DisassociateVpcCidrBlock
@@ -25726,7 +25734,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=EnableEbsEncryptionByDefault':
+  /#Action=EnableEbsEncryptionByDefault:
     get:
       x-aws-operation-name: EnableEbsEncryptionByDefault
       operationId: GET_EnableEbsEncryptionByDefault
@@ -25789,7 +25797,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=EnableFastSnapshotRestores':
+  /#Action=EnableFastSnapshotRestores:
     get:
       x-aws-operation-name: EnableFastSnapshotRestores
       operationId: GET_EnableFastSnapshotRestores
@@ -25868,7 +25876,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=EnableTransitGatewayRouteTablePropagation':
+  /#Action=EnableTransitGatewayRouteTablePropagation:
     get:
       x-aws-operation-name: EnableTransitGatewayRouteTablePropagation
       operationId: GET_EnableTransitGatewayRouteTablePropagation
@@ -25943,7 +25951,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=EnableVgwRoutePropagation':
+  /#Action=EnableVgwRoutePropagation:
     get:
       x-aws-operation-name: EnableVgwRoutePropagation
       operationId: GET_EnableVgwRoutePropagation
@@ -26016,7 +26024,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=EnableVolumeIO':
+  /#Action=EnableVolumeIO:
     get:
       x-aws-operation-name: EnableVolumeIO
       operationId: GET_EnableVolumeIO
@@ -26083,7 +26091,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=EnableVpcClassicLink':
+  /#Action=EnableVpcClassicLink:
     get:
       x-aws-operation-name: EnableVpcClassicLink
       operationId: GET_EnableVpcClassicLink
@@ -26152,7 +26160,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=EnableVpcClassicLinkDnsSupport':
+  /#Action=EnableVpcClassicLinkDnsSupport:
     get:
       x-aws-operation-name: EnableVpcClassicLinkDnsSupport
       operationId: GET_EnableVpcClassicLinkDnsSupport
@@ -26215,7 +26223,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=ExportClientVpnClientCertificateRevocationList':
+  /#Action=ExportClientVpnClientCertificateRevocationList:
     get:
       x-aws-operation-name: ExportClientVpnClientCertificateRevocationList
       operationId: GET_ExportClientVpnClientCertificateRevocationList
@@ -26284,7 +26292,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=ExportClientVpnClientConfiguration':
+  /#Action=ExportClientVpnClientConfiguration:
     get:
       x-aws-operation-name: ExportClientVpnClientConfiguration
       operationId: GET_ExportClientVpnClientConfiguration
@@ -26353,7 +26361,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=ExportImage':
+  /#Action=ExportImage:
     get:
       x-aws-operation-name: ExportImage
       operationId: GET_ExportImage
@@ -26474,7 +26482,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=ExportTransitGatewayRoutes':
+  /#Action=ExportTransitGatewayRoutes:
     get:
       x-aws-operation-name: ExportTransitGatewayRoutes
       operationId: GET_ExportTransitGatewayRoutes
@@ -26557,7 +26565,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=GetAssociatedIpv6PoolCidrs':
+  /#Action=GetAssociatedIpv6PoolCidrs:
     get:
       x-aws-operation-name: GetAssociatedIpv6PoolCidrs
       operationId: GET_GetAssociatedIpv6PoolCidrs
@@ -26652,7 +26660,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=GetCapacityReservationUsage':
+  /#Action=GetCapacityReservationUsage:
     get:
       x-aws-operation-name: GetCapacityReservationUsage
       operationId: GET_GetCapacityReservationUsage
@@ -26735,7 +26743,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=GetCoipPoolUsage':
+  /#Action=GetCoipPoolUsage:
     get:
       x-aws-operation-name: GetCoipPoolUsage
       operationId: GET_GetCoipPoolUsage
@@ -26826,7 +26834,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=GetConsoleOutput':
+  /#Action=GetConsoleOutput:
     get:
       x-aws-operation-name: GetConsoleOutput
       operationId: GET_GetConsoleOutput
@@ -26901,7 +26909,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=GetConsoleScreenshot':
+  /#Action=GetConsoleScreenshot:
     get:
       x-aws-operation-name: GetConsoleScreenshot
       operationId: GET_GetConsoleScreenshot
@@ -26976,7 +26984,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=GetDefaultCreditSpecification':
+  /#Action=GetDefaultCreditSpecification:
     get:
       x-aws-operation-name: GetDefaultCreditSpecification
       operationId: GET_GetDefaultCreditSpecification
@@ -27049,7 +27057,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=GetEbsDefaultKmsKeyId':
+  /#Action=GetEbsDefaultKmsKeyId:
     get:
       x-aws-operation-name: GetEbsDefaultKmsKeyId
       operationId: GET_GetEbsDefaultKmsKeyId
@@ -27112,7 +27120,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=GetEbsEncryptionByDefault':
+  /#Action=GetEbsEncryptionByDefault:
     get:
       x-aws-operation-name: GetEbsEncryptionByDefault
       operationId: GET_GetEbsEncryptionByDefault
@@ -27175,7 +27183,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=GetHostReservationPurchasePreview':
+  /#Action=GetHostReservationPurchasePreview:
     get:
       x-aws-operation-name: GetHostReservationPurchasePreview
       operationId: GET_GetHostReservationPurchasePreview
@@ -27246,7 +27254,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=GetLaunchTemplateData':
+  /#Action=GetLaunchTemplateData:
     get:
       x-aws-operation-name: GetLaunchTemplateData
       operationId: GET_GetLaunchTemplateData
@@ -27315,7 +27323,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=GetManagedPrefixListAssociations':
+  /#Action=GetManagedPrefixListAssociations:
     get:
       x-aws-operation-name: GetManagedPrefixListAssociations
       operationId: GET_GetManagedPrefixListAssociations
@@ -27410,7 +27418,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=GetManagedPrefixListEntries':
+  /#Action=GetManagedPrefixListEntries:
     get:
       x-aws-operation-name: GetManagedPrefixListEntries
       operationId: GET_GetManagedPrefixListEntries
@@ -27511,7 +27519,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=GetPasswordData':
+  /#Action=GetPasswordData:
     get:
       x-aws-operation-name: GetPasswordData
       operationId: GET_GetPasswordData
@@ -27580,7 +27588,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=GetReservedInstancesExchangeQuote':
+  /#Action=GetReservedInstancesExchangeQuote:
     get:
       x-aws-operation-name: GetReservedInstancesExchangeQuote
       operationId: GET_GetReservedInstancesExchangeQuote
@@ -27659,7 +27667,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=GetTransitGatewayAttachmentPropagations':
+  /#Action=GetTransitGatewayAttachmentPropagations:
     get:
       x-aws-operation-name: GetTransitGatewayAttachmentPropagations
       operationId: GET_GetTransitGatewayAttachmentPropagations
@@ -27762,7 +27770,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=GetTransitGatewayMulticastDomainAssociations':
+  /#Action=GetTransitGatewayMulticastDomainAssociations:
     get:
       x-aws-operation-name: GetTransitGatewayMulticastDomainAssociations
       operationId: GET_GetTransitGatewayMulticastDomainAssociations
@@ -27865,7 +27873,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=GetTransitGatewayRouteTableAssociations':
+  /#Action=GetTransitGatewayRouteTableAssociations:
     get:
       x-aws-operation-name: GetTransitGatewayRouteTableAssociations
       operationId: GET_GetTransitGatewayRouteTableAssociations
@@ -27968,7 +27976,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=GetTransitGatewayRouteTablePropagations':
+  /#Action=GetTransitGatewayRouteTablePropagations:
     get:
       x-aws-operation-name: GetTransitGatewayRouteTablePropagations
       operationId: GET_GetTransitGatewayRouteTablePropagations
@@ -28071,7 +28079,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=ImportClientVpnClientCertificateRevocationList':
+  /#Action=ImportClientVpnClientCertificateRevocationList:
     get:
       x-aws-operation-name: ImportClientVpnClientCertificateRevocationList
       operationId: GET_ImportClientVpnClientCertificateRevocationList
@@ -28146,7 +28154,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=ImportImage':
+  /#Action=ImportImage:
     get:
       x-aws-operation-name: ImportImage
       operationId: GET_ImportImage
@@ -28307,7 +28315,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=ImportInstance':
+  /#Action=ImportInstance:
     get:
       x-aws-operation-name: ImportInstance
       operationId: GET_ImportInstance
@@ -28433,7 +28441,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=ImportKeyPair':
+  /#Action=ImportKeyPair:
     get:
       x-aws-operation-name: ImportKeyPair
       operationId: GET_ImportKeyPair
@@ -28516,7 +28524,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=ImportSnapshot':
+  /#Action=ImportSnapshot:
     get:
       x-aws-operation-name: ImportSnapshot
       operationId: GET_ImportSnapshot
@@ -28657,7 +28665,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=ImportVolume':
+  /#Action=ImportVolume:
     get:
       x-aws-operation-name: ImportVolume
       operationId: GET_ImportVolume
@@ -28766,7 +28774,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=ModifyAvailabilityZoneGroup':
+  /#Action=ModifyAvailabilityZoneGroup:
     get:
       x-aws-operation-name: ModifyAvailabilityZoneGroup
       operationId: GET_ModifyAvailabilityZoneGroup
@@ -28844,7 +28852,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=ModifyCapacityReservation':
+  /#Action=ModifyCapacityReservation:
     get:
       x-aws-operation-name: ModifyCapacityReservation
       operationId: GET_ModifyCapacityReservation
@@ -28935,7 +28943,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=ModifyClientVpnEndpoint':
+  /#Action=ModifyClientVpnEndpoint:
     get:
       x-aws-operation-name: ModifyClientVpnEndpoint
       operationId: GET_ModifyClientVpnEndpoint
@@ -29073,7 +29081,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=ModifyDefaultCreditSpecification':
+  /#Action=ModifyDefaultCreditSpecification:
     get:
       x-aws-operation-name: ModifyDefaultCreditSpecification
       operationId: GET_ModifyDefaultCreditSpecification
@@ -29152,7 +29160,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=ModifyEbsDefaultKmsKeyId':
+  /#Action=ModifyEbsDefaultKmsKeyId:
     get:
       x-aws-operation-name: ModifyEbsDefaultKmsKeyId
       operationId: GET_ModifyEbsDefaultKmsKeyId
@@ -29221,7 +29229,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=ModifyFleet':
+  /#Action=ModifyFleet:
     get:
       x-aws-operation-name: ModifyFleet
       operationId: GET_ModifyFleet
@@ -29321,7 +29329,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=ModifyFpgaImageAttribute':
+  /#Action=ModifyFpgaImageAttribute:
     get:
       x-aws-operation-name: ModifyFpgaImageAttribute
       operationId: GET_ModifyFpgaImageAttribute
@@ -29460,7 +29468,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=ModifyHosts':
+  /#Action=ModifyHosts:
     get:
       x-aws-operation-name: ModifyHosts
       operationId: GET_ModifyHosts
@@ -29555,7 +29563,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=ModifyIdFormat':
+  /#Action=ModifyIdFormat:
     get:
       x-aws-operation-name: ModifyIdFormat
       operationId: GET_ModifyIdFormat
@@ -29622,7 +29630,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=ModifyIdentityIdFormat':
+  /#Action=ModifyIdentityIdFormat:
     get:
       x-aws-operation-name: ModifyIdentityIdFormat
       operationId: GET_ModifyIdentityIdFormat
@@ -29695,7 +29703,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=ModifyImageAttribute':
+  /#Action=ModifyImageAttribute:
     get:
       x-aws-operation-name: ModifyImageAttribute
       operationId: GET_ModifyImageAttribute
@@ -29832,7 +29840,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=ModifyInstanceAttribute':
+  /#Action=ModifyInstanceAttribute:
     get:
       x-aws-operation-name: ModifyInstanceAttribute
       operationId: GET_ModifyInstanceAttribute
@@ -30050,7 +30058,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=ModifyInstanceCapacityReservationAttributes':
+  /#Action=ModifyInstanceCapacityReservationAttributes:
     get:
       x-aws-operation-name: ModifyInstanceCapacityReservationAttributes
       operationId: GET_ModifyInstanceCapacityReservationAttributes
@@ -30133,7 +30141,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=ModifyInstanceCreditSpecification':
+  /#Action=ModifyInstanceCreditSpecification:
     get:
       x-aws-operation-name: ModifyInstanceCreditSpecification
       operationId: GET_ModifyInstanceCreditSpecification
@@ -30210,7 +30218,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=ModifyInstanceEventStartTime':
+  /#Action=ModifyInstanceEventStartTime:
     get:
       x-aws-operation-name: ModifyInstanceEventStartTime
       operationId: GET_ModifyInstanceEventStartTime
@@ -30292,7 +30300,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=ModifyInstanceMetadataOptions':
+  /#Action=ModifyInstanceMetadataOptions:
     get:
       x-aws-operation-name: ModifyInstanceMetadataOptions
       operationId: GET_ModifyInstanceMetadataOptions
@@ -30385,7 +30393,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=ModifyInstancePlacement':
+  /#Action=ModifyInstancePlacement:
     get:
       x-aws-operation-name: ModifyInstancePlacement
       operationId: GET_ModifyInstancePlacement
@@ -30490,7 +30498,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=ModifyLaunchTemplate':
+  /#Action=ModifyLaunchTemplate:
     get:
       x-aws-operation-name: ModifyLaunchTemplate
       operationId: GET_ModifyLaunchTemplate
@@ -30580,7 +30588,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=ModifyManagedPrefixList':
+  /#Action=ModifyManagedPrefixList:
     get:
       x-aws-operation-name: ModifyManagedPrefixList
       operationId: GET_ModifyManagedPrefixList
@@ -30681,7 +30689,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=ModifyNetworkInterfaceAttribute':
+  /#Action=ModifyNetworkInterfaceAttribute:
     get:
       x-aws-operation-name: ModifyNetworkInterfaceAttribute
       operationId: GET_ModifyNetworkInterfaceAttribute
@@ -30792,7 +30800,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=ModifyReservedInstances':
+  /#Action=ModifyReservedInstances:
     get:
       x-aws-operation-name: ModifyReservedInstances
       operationId: GET_ModifyReservedInstances
@@ -30871,7 +30879,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=ModifySnapshotAttribute':
+  /#Action=ModifySnapshotAttribute:
     get:
       x-aws-operation-name: ModifySnapshotAttribute
       operationId: GET_ModifySnapshotAttribute
@@ -30986,7 +30994,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=ModifySpotFleetRequest':
+  /#Action=ModifySpotFleetRequest:
     get:
       x-aws-operation-name: ModifySpotFleetRequest
       operationId: GET_ModifySpotFleetRequest
@@ -31070,7 +31078,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=ModifySubnetAttribute':
+  /#Action=ModifySubnetAttribute:
     get:
       x-aws-operation-name: ModifySubnetAttribute
       operationId: GET_ModifySubnetAttribute
@@ -31170,7 +31178,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=ModifyTrafficMirrorFilterNetworkServices':
+  /#Action=ModifyTrafficMirrorFilterNetworkServices:
     get:
       x-aws-operation-name: ModifyTrafficMirrorFilterNetworkServices
       operationId: GET_ModifyTrafficMirrorFilterNetworkServices
@@ -31255,7 +31263,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=ModifyTrafficMirrorFilterRule':
+  /#Action=ModifyTrafficMirrorFilterRule:
     get:
       x-aws-operation-name: ModifyTrafficMirrorFilterRule
       operationId: GET_ModifyTrafficMirrorFilterRule
@@ -31408,7 +31416,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=ModifyTrafficMirrorSession':
+  /#Action=ModifyTrafficMirrorSession:
     get:
       x-aws-operation-name: ModifyTrafficMirrorSession
       operationId: GET_ModifyTrafficMirrorSession
@@ -31521,7 +31529,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=ModifyTransitGatewayVpcAttachment':
+  /#Action=ModifyTransitGatewayVpcAttachment:
     get:
       x-aws-operation-name: ModifyTransitGatewayVpcAttachment
       operationId: GET_ModifyTransitGatewayVpcAttachment
@@ -31620,7 +31628,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=ModifyVolume':
+  /#Action=ModifyVolume:
     get:
       x-aws-operation-name: ModifyVolume
       operationId: GET_ModifyVolume
@@ -31713,7 +31721,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=ModifyVolumeAttribute':
+  /#Action=ModifyVolumeAttribute:
     get:
       x-aws-operation-name: ModifyVolumeAttribute
       operationId: GET_ModifyVolumeAttribute
@@ -31791,7 +31799,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=ModifyVpcAttribute':
+  /#Action=ModifyVpcAttribute:
     get:
       x-aws-operation-name: ModifyVpcAttribute
       operationId: GET_ModifyVpcAttribute
@@ -31874,7 +31882,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=ModifyVpcEndpoint':
+  /#Action=ModifyVpcEndpoint:
     get:
       x-aws-operation-name: ModifyVpcEndpoint
       operationId: GET_ModifyVpcEndpoint
@@ -32009,7 +32017,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=ModifyVpcEndpointConnectionNotification':
+  /#Action=ModifyVpcEndpointConnectionNotification:
     get:
       x-aws-operation-name: ModifyVpcEndpointConnectionNotification
       operationId: GET_ModifyVpcEndpointConnectionNotification
@@ -32092,7 +32100,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=ModifyVpcEndpointServiceConfiguration':
+  /#Action=ModifyVpcEndpointServiceConfiguration:
     get:
       x-aws-operation-name: ModifyVpcEndpointServiceConfiguration
       operationId: GET_ModifyVpcEndpointServiceConfiguration
@@ -32195,7 +32203,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=ModifyVpcEndpointServicePermissions':
+  /#Action=ModifyVpcEndpointServicePermissions:
     get:
       x-aws-operation-name: ModifyVpcEndpointServicePermissions
       operationId: GET_ModifyVpcEndpointServicePermissions
@@ -32280,7 +32288,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=ModifyVpcPeeringConnectionOptions':
+  /#Action=ModifyVpcPeeringConnectionOptions:
     get:
       x-aws-operation-name: ModifyVpcPeeringConnectionOptions
       operationId: GET_ModifyVpcPeeringConnectionOptions
@@ -32383,7 +32391,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=ModifyVpcTenancy':
+  /#Action=ModifyVpcTenancy:
     get:
       x-aws-operation-name: ModifyVpcTenancy
       operationId: GET_ModifyVpcTenancy
@@ -32460,7 +32468,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=ModifyVpnConnection':
+  /#Action=ModifyVpnConnection:
     get:
       x-aws-operation-name: ModifyVpnConnection
       operationId: GET_ModifyVpnConnection
@@ -32547,7 +32555,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=ModifyVpnTunnelCertificate':
+  /#Action=ModifyVpnTunnelCertificate:
     get:
       x-aws-operation-name: ModifyVpnTunnelCertificate
       operationId: GET_ModifyVpnTunnelCertificate
@@ -32622,7 +32630,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=ModifyVpnTunnelOptions':
+  /#Action=ModifyVpnTunnelOptions:
     get:
       x-aws-operation-name: ModifyVpnTunnelOptions
       operationId: GET_ModifyVpnTunnelOptions
@@ -32750,7 +32758,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=MonitorInstances':
+  /#Action=MonitorInstances:
     get:
       x-aws-operation-name: MonitorInstances
       operationId: GET_MonitorInstances
@@ -32821,7 +32829,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=MoveAddressToVpc':
+  /#Action=MoveAddressToVpc:
     get:
       x-aws-operation-name: MoveAddressToVpc
       operationId: GET_MoveAddressToVpc
@@ -32890,7 +32898,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=ProvisionByoipCidr':
+  /#Action=ProvisionByoipCidr:
     get:
       x-aws-operation-name: ProvisionByoipCidr
       operationId: GET_ProvisionByoipCidr
@@ -32996,7 +33004,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=PurchaseHostReservation':
+  /#Action=PurchaseHostReservation:
     get:
       x-aws-operation-name: PurchaseHostReservation
       operationId: GET_PurchaseHostReservation
@@ -33095,7 +33103,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=PurchaseReservedInstancesOffering':
+  /#Action=PurchaseReservedInstancesOffering:
     get:
       x-aws-operation-name: PurchaseReservedInstancesOffering
       operationId: GET_PurchaseReservedInstancesOffering
@@ -33191,7 +33199,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=PurchaseScheduledInstances':
+  /#Action=PurchaseScheduledInstances:
     get:
       x-aws-operation-name: PurchaseScheduledInstances
       operationId: GET_PurchaseScheduledInstances
@@ -33269,7 +33277,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=RebootInstances':
+  /#Action=RebootInstances:
     get:
       x-aws-operation-name: RebootInstances
       operationId: GET_RebootInstances
@@ -33338,7 +33346,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=RegisterImage':
+  /#Action=RegisterImage:
     get:
       x-aws-operation-name: RegisterImage
       operationId: GET_RegisterImage
@@ -33481,7 +33489,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=RegisterInstanceEventNotificationAttributes':
+  /#Action=RegisterInstanceEventNotificationAttributes:
     get:
       x-aws-operation-name: RegisterInstanceEventNotificationAttributes
       operationId: GET_RegisterInstanceEventNotificationAttributes
@@ -33558,7 +33566,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=RegisterTransitGatewayMulticastGroupMembers':
+  /#Action=RegisterTransitGatewayMulticastGroupMembers:
     get:
       x-aws-operation-name: RegisterTransitGatewayMulticastGroupMembers
       operationId: GET_RegisterTransitGatewayMulticastGroupMembers
@@ -33641,7 +33649,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=RegisterTransitGatewayMulticastGroupSources':
+  /#Action=RegisterTransitGatewayMulticastGroupSources:
     get:
       x-aws-operation-name: RegisterTransitGatewayMulticastGroupSources
       operationId: GET_RegisterTransitGatewayMulticastGroupSources
@@ -33724,7 +33732,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=RejectTransitGatewayPeeringAttachment':
+  /#Action=RejectTransitGatewayPeeringAttachment:
     get:
       x-aws-operation-name: RejectTransitGatewayPeeringAttachment
       operationId: GET_RejectTransitGatewayPeeringAttachment
@@ -33793,7 +33801,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=RejectTransitGatewayVpcAttachment':
+  /#Action=RejectTransitGatewayVpcAttachment:
     get:
       x-aws-operation-name: RejectTransitGatewayVpcAttachment
       operationId: GET_RejectTransitGatewayVpcAttachment
@@ -33862,7 +33870,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=RejectVpcEndpointConnections':
+  /#Action=RejectVpcEndpointConnections:
     get:
       x-aws-operation-name: RejectVpcEndpointConnections
       operationId: GET_RejectVpcEndpointConnections
@@ -33939,7 +33947,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=RejectVpcPeeringConnection':
+  /#Action=RejectVpcPeeringConnection:
     get:
       x-aws-operation-name: RejectVpcPeeringConnection
       operationId: GET_RejectVpcPeeringConnection
@@ -34008,7 +34016,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=ReleaseAddress':
+  /#Action=ReleaseAddress:
     get:
       x-aws-operation-name: ReleaseAddress
       operationId: GET_ReleaseAddress
@@ -34087,7 +34095,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=ReleaseHosts':
+  /#Action=ReleaseHosts:
     get:
       x-aws-operation-name: ReleaseHosts
       operationId: GET_ReleaseHosts
@@ -34152,7 +34160,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=ReplaceIamInstanceProfileAssociation':
+  /#Action=ReplaceIamInstanceProfileAssociation:
     get:
       x-aws-operation-name: ReplaceIamInstanceProfileAssociation
       operationId: GET_ReplaceIamInstanceProfileAssociation
@@ -34229,7 +34237,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=ReplaceNetworkAclAssociation':
+  /#Action=ReplaceNetworkAclAssociation:
     get:
       x-aws-operation-name: ReplaceNetworkAclAssociation
       operationId: GET_ReplaceNetworkAclAssociation
@@ -34304,7 +34312,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=ReplaceNetworkAclEntry':
+  /#Action=ReplaceNetworkAclEntry:
     get:
       x-aws-operation-name: ReplaceNetworkAclEntry
       operationId: GET_ReplaceNetworkAclEntry
@@ -34438,7 +34446,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=ReplaceRoute':
+  /#Action=ReplaceRoute:
     get:
       x-aws-operation-name: ReplaceRoute
       operationId: GET_ReplaceRoute
@@ -34577,7 +34585,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=ReplaceRouteTableAssociation':
+  /#Action=ReplaceRouteTableAssociation:
     get:
       x-aws-operation-name: ReplaceRouteTableAssociation
       operationId: GET_ReplaceRouteTableAssociation
@@ -34652,7 +34660,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=ReplaceTransitGatewayRoute':
+  /#Action=ReplaceTransitGatewayRoute:
     get:
       x-aws-operation-name: ReplaceTransitGatewayRoute
       operationId: GET_ReplaceTransitGatewayRoute
@@ -34739,7 +34747,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=ReportInstanceStatus':
+  /#Action=ReportInstanceStatus:
     get:
       x-aws-operation-name: ReportInstanceStatus
       operationId: GET_ReportInstanceStatus
@@ -34845,7 +34853,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=RequestSpotFleet':
+  /#Action=RequestSpotFleet:
     get:
       x-aws-operation-name: RequestSpotFleet
       operationId: GET_RequestSpotFleet
@@ -34988,7 +34996,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=RequestSpotInstances':
+  /#Action=RequestSpotInstances:
     get:
       x-aws-operation-name: RequestSpotInstances
       operationId: GET_RequestSpotInstances
@@ -35184,7 +35192,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=ResetEbsDefaultKmsKeyId':
+  /#Action=ResetEbsDefaultKmsKeyId:
     get:
       x-aws-operation-name: ResetEbsDefaultKmsKeyId
       operationId: GET_ResetEbsDefaultKmsKeyId
@@ -35247,7 +35255,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=ResetFpgaImageAttribute':
+  /#Action=ResetFpgaImageAttribute:
     get:
       x-aws-operation-name: ResetFpgaImageAttribute
       operationId: GET_ResetFpgaImageAttribute
@@ -35324,7 +35332,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=ResetImageAttribute':
+  /#Action=ResetImageAttribute:
     get:
       x-aws-operation-name: ResetImageAttribute
       operationId: GET_ResetImageAttribute
@@ -35399,7 +35407,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=ResetInstanceAttribute':
+  /#Action=ResetInstanceAttribute:
     get:
       x-aws-operation-name: ResetInstanceAttribute
       operationId: GET_ResetInstanceAttribute
@@ -35487,7 +35495,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=ResetNetworkInterfaceAttribute':
+  /#Action=ResetNetworkInterfaceAttribute:
     get:
       x-aws-operation-name: ResetNetworkInterfaceAttribute
       operationId: GET_ResetNetworkInterfaceAttribute
@@ -35560,7 +35568,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=ResetSnapshotAttribute':
+  /#Action=ResetSnapshotAttribute:
     get:
       x-aws-operation-name: ResetSnapshotAttribute
       operationId: GET_ResetSnapshotAttribute
@@ -35636,7 +35644,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=RestoreAddressToClassic':
+  /#Action=RestoreAddressToClassic:
     get:
       x-aws-operation-name: RestoreAddressToClassic
       operationId: GET_RestoreAddressToClassic
@@ -35705,7 +35713,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=RestoreManagedPrefixListVersion':
+  /#Action=RestoreManagedPrefixListVersion:
     get:
       x-aws-operation-name: RestoreManagedPrefixListVersion
       operationId: GET_RestoreManagedPrefixListVersion
@@ -35786,7 +35794,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=RevokeClientVpnIngress':
+  /#Action=RevokeClientVpnIngress:
     get:
       x-aws-operation-name: RevokeClientVpnIngress
       operationId: GET_RevokeClientVpnIngress
@@ -35873,7 +35881,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=RevokeSecurityGroupEgress':
+  /#Action=RevokeSecurityGroupEgress:
     get:
       x-aws-operation-name: RevokeSecurityGroupEgress
       operationId: GET_RevokeSecurityGroupEgress
@@ -35984,7 +35992,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=RevokeSecurityGroupIngress':
+  /#Action=RevokeSecurityGroupIngress:
     get:
       x-aws-operation-name: RevokeSecurityGroupIngress
       operationId: GET_RevokeSecurityGroupIngress
@@ -36101,7 +36109,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=RunInstances':
+  /#Action=RunInstances:
     get:
       x-aws-operation-name: RunInstances
       operationId: GET_RunInstances
@@ -36802,7 +36810,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=RunScheduledInstances':
+  /#Action=RunScheduledInstances:
     get:
       x-aws-operation-name: RunScheduledInstances
       operationId: GET_RunScheduledInstances
@@ -36935,7 +36943,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=SearchLocalGatewayRoutes':
+  /#Action=SearchLocalGatewayRoutes:
     get:
       x-aws-operation-name: SearchLocalGatewayRoutes
       operationId: GET_SearchLocalGatewayRoutes
@@ -37036,7 +37044,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=SearchTransitGatewayMulticastGroups':
+  /#Action=SearchTransitGatewayMulticastGroups:
     get:
       x-aws-operation-name: SearchTransitGatewayMulticastGroups
       operationId: GET_SearchTransitGatewayMulticastGroups
@@ -37139,7 +37147,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=SearchTransitGatewayRoutes':
+  /#Action=SearchTransitGatewayRoutes:
     get:
       x-aws-operation-name: SearchTransitGatewayRoutes
       operationId: GET_SearchTransitGatewayRoutes
@@ -37224,7 +37232,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=SendDiagnosticInterrupt':
+  /#Action=SendDiagnosticInterrupt:
     get:
       x-aws-operation-name: SendDiagnosticInterrupt
       operationId: GET_SendDiagnosticInterrupt
@@ -37291,7 +37299,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=StartInstances':
+  /#Action=StartInstances:
     get:
       x-aws-operation-name: StartInstances
       operationId: GET_StartInstances
@@ -37368,7 +37376,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=StartVpcEndpointServicePrivateDnsVerification':
+  /#Action=StartVpcEndpointServicePrivateDnsVerification:
     get:
       x-aws-operation-name: StartVpcEndpointServicePrivateDnsVerification
       operationId: GET_StartVpcEndpointServicePrivateDnsVerification
@@ -37437,7 +37445,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=StopInstances':
+  /#Action=StopInstances:
     get:
       x-aws-operation-name: StopInstances
       operationId: GET_StopInstances
@@ -37520,7 +37528,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=TerminateClientVpnConnections':
+  /#Action=TerminateClientVpnConnections:
     get:
       x-aws-operation-name: TerminateClientVpnConnections
       operationId: GET_TerminateClientVpnConnections
@@ -37601,7 +37609,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=TerminateInstances':
+  /#Action=TerminateInstances:
     get:
       x-aws-operation-name: TerminateInstances
       operationId: GET_TerminateInstances
@@ -37672,7 +37680,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=UnassignIpv6Addresses':
+  /#Action=UnassignIpv6Addresses:
     get:
       x-aws-operation-name: UnassignIpv6Addresses
       operationId: GET_UnassignIpv6Addresses
@@ -37743,7 +37751,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=UnassignPrivateIpAddresses':
+  /#Action=UnassignPrivateIpAddresses:
     get:
       x-aws-operation-name: UnassignPrivateIpAddresses
       operationId: GET_UnassignPrivateIpAddresses
@@ -37812,7 +37820,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=UnmonitorInstances':
+  /#Action=UnmonitorInstances:
     get:
       x-aws-operation-name: UnmonitorInstances
       operationId: GET_UnmonitorInstances
@@ -37883,7 +37891,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=UpdateSecurityGroupRuleDescriptionsEgress':
+  /#Action=UpdateSecurityGroupRuleDescriptionsEgress:
     get:
       x-aws-operation-name: UpdateSecurityGroupRuleDescriptionsEgress
       operationId: GET_UpdateSecurityGroupRuleDescriptionsEgress
@@ -37966,7 +37974,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=UpdateSecurityGroupRuleDescriptionsIngress':
+  /#Action=UpdateSecurityGroupRuleDescriptionsIngress:
     get:
       x-aws-operation-name: UpdateSecurityGroupRuleDescriptionsIngress
       operationId: GET_UpdateSecurityGroupRuleDescriptionsIngress
@@ -38049,7 +38057,7 @@ paths:
             type: string
             enum:
               - '2016-11-15'
-  '/#Action=WithdrawByoipCidr':
+  /#Action=WithdrawByoipCidr:
     get:
       x-aws-operation-name: WithdrawByoipCidr
       operationId: GET_WithdrawByoipCidr

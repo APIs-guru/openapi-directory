@@ -51,13 +51,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The CloudWatch multi-region endpoint
   - url: 'https://monitoring.{region}.amazonaws.com'
@@ -77,13 +81,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The CloudWatch multi-region endpoint
   - url: 'http://monitoring.{region}.amazonaws.com.cn'
@@ -106,7 +114,7 @@ servers:
     description: The CloudWatch endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
-  '/#Action=DeleteAlarms':
+  /#Action=DeleteAlarms:
     get:
       x-aws-operation-name: DeleteAlarms
       operationId: GET_DeleteAlarms
@@ -185,7 +193,7 @@ paths:
             type: string
             enum:
               - '2010-08-01'
-  '/#Action=DeleteAnomalyDetector':
+  /#Action=DeleteAnomalyDetector:
     get:
       x-aws-operation-name: DeleteAnomalyDetector
       operationId: GET_DeleteAnomalyDetector
@@ -332,7 +340,7 @@ paths:
             type: string
             enum:
               - '2010-08-01'
-  '/#Action=DeleteDashboards':
+  /#Action=DeleteDashboards:
     get:
       x-aws-operation-name: DeleteDashboards
       operationId: GET_DeleteDashboards
@@ -442,7 +450,7 @@ paths:
             type: string
             enum:
               - '2010-08-01'
-  '/#Action=DeleteInsightRules':
+  /#Action=DeleteInsightRules:
     get:
       x-aws-operation-name: DeleteInsightRules
       operationId: GET_DeleteInsightRules
@@ -540,7 +548,7 @@ paths:
             type: string
             enum:
               - '2010-08-01'
-  '/#Action=DescribeAlarmHistory':
+  /#Action=DescribeAlarmHistory:
     get:
       x-aws-operation-name: DescribeAlarmHistory
       operationId: GET_DescribeAlarmHistory
@@ -693,7 +701,7 @@ paths:
             type: string
             enum:
               - '2010-08-01'
-  '/#Action=DescribeAlarms':
+  /#Action=DescribeAlarms:
     get:
       x-aws-operation-name: DescribeAlarms
       operationId: GET_DescribeAlarms
@@ -856,7 +864,7 @@ paths:
             type: string
             enum:
               - '2010-08-01'
-  '/#Action=DescribeAlarmsForMetric':
+  /#Action=DescribeAlarmsForMetric:
     get:
       x-aws-operation-name: DescribeAlarmsForMetric
       operationId: GET_DescribeAlarmsForMetric
@@ -1008,7 +1016,7 @@ paths:
             type: string
             enum:
               - '2010-08-01'
-  '/#Action=DescribeAnomalyDetectors':
+  /#Action=DescribeAnomalyDetectors:
     get:
       x-aws-operation-name: DescribeAnomalyDetectors
       operationId: GET_DescribeAnomalyDetectors
@@ -1149,7 +1157,7 @@ paths:
             type: string
             enum:
               - '2010-08-01'
-  '/#Action=DescribeInsightRules':
+  /#Action=DescribeInsightRules:
     get:
       x-aws-operation-name: DescribeInsightRules
       operationId: GET_DescribeInsightRules
@@ -1253,7 +1261,7 @@ paths:
             type: string
             enum:
               - '2010-08-01'
-  '/#Action=DisableAlarmActions':
+  /#Action=DisableAlarmActions:
     get:
       x-aws-operation-name: DisableAlarmActions
       operationId: GET_DisableAlarmActions
@@ -1320,7 +1328,7 @@ paths:
             type: string
             enum:
               - '2010-08-01'
-  '/#Action=DisableInsightRules':
+  /#Action=DisableInsightRules:
     get:
       x-aws-operation-name: DisableInsightRules
       operationId: GET_DisableInsightRules
@@ -1418,7 +1426,7 @@ paths:
             type: string
             enum:
               - '2010-08-01'
-  '/#Action=EnableAlarmActions':
+  /#Action=EnableAlarmActions:
     get:
       x-aws-operation-name: EnableAlarmActions
       operationId: GET_EnableAlarmActions
@@ -1485,7 +1493,7 @@ paths:
             type: string
             enum:
               - '2010-08-01'
-  '/#Action=EnableInsightRules':
+  /#Action=EnableInsightRules:
     get:
       x-aws-operation-name: EnableInsightRules
       operationId: GET_EnableInsightRules
@@ -1595,7 +1603,7 @@ paths:
             type: string
             enum:
               - '2010-08-01'
-  '/#Action=GetDashboard':
+  /#Action=GetDashboard:
     get:
       x-aws-operation-name: GetDashboard
       operationId: GET_GetDashboard
@@ -1703,7 +1711,7 @@ paths:
             type: string
             enum:
               - '2010-08-01'
-  '/#Action=GetInsightRuleReport':
+  /#Action=GetInsightRuleReport:
     get:
       x-aws-operation-name: GetInsightRuleReport
       operationId: GET_GetInsightRuleReport
@@ -1858,7 +1866,7 @@ paths:
             type: string
             enum:
               - '2010-08-01'
-  '/#Action=GetMetricData':
+  /#Action=GetMetricData:
     get:
       x-aws-operation-name: GetMetricData
       operationId: GET_GetMetricData
@@ -1991,7 +1999,7 @@ paths:
             type: string
             enum:
               - '2010-08-01'
-  '/#Action=GetMetricStatistics':
+  /#Action=GetMetricStatistics:
     get:
       x-aws-operation-name: GetMetricStatistics
       operationId: GET_GetMetricStatistics
@@ -2206,7 +2214,7 @@ paths:
             type: string
             enum:
               - '2010-08-01'
-  '/#Action=GetMetricWidgetImage':
+  /#Action=GetMetricWidgetImage:
     get:
       x-aws-operation-name: GetMetricWidgetImage
       operationId: GET_GetMetricWidgetImage
@@ -2284,7 +2292,7 @@ paths:
             type: string
             enum:
               - '2010-08-01'
-  '/#Action=ListDashboards':
+  /#Action=ListDashboards:
     get:
       x-aws-operation-name: ListDashboards
       operationId: GET_ListDashboards
@@ -2392,7 +2400,7 @@ paths:
             type: string
             enum:
               - '2010-08-01'
-  '/#Action=ListMetrics':
+  /#Action=ListMetrics:
     get:
       x-aws-operation-name: ListMetrics
       operationId: GET_ListMetrics
@@ -2520,7 +2528,7 @@ paths:
             type: string
             enum:
               - '2010-08-01'
-  '/#Action=ListTagsForResource':
+  /#Action=ListTagsForResource:
     get:
       x-aws-operation-name: ListTagsForResource
       operationId: GET_ListTagsForResource
@@ -2630,7 +2638,7 @@ paths:
             type: string
             enum:
               - '2010-08-01'
-  '/#Action=PutAnomalyDetector':
+  /#Action=PutAnomalyDetector:
     get:
       x-aws-operation-name: PutAnomalyDetector
       operationId: GET_PutAnomalyDetector
@@ -2791,7 +2799,7 @@ paths:
             type: string
             enum:
               - '2010-08-01'
-  '/#Action=PutCompositeAlarm':
+  /#Action=PutCompositeAlarm:
     get:
       x-aws-operation-name: PutCompositeAlarm
       operationId: GET_PutCompositeAlarm
@@ -2926,7 +2934,7 @@ paths:
             type: string
             enum:
               - '2010-08-01'
-  '/#Action=PutDashboard':
+  /#Action=PutDashboard:
     get:
       x-aws-operation-name: PutDashboard
       operationId: GET_PutDashboard
@@ -3028,7 +3036,7 @@ paths:
             type: string
             enum:
               - '2010-08-01'
-  '/#Action=PutInsightRule':
+  /#Action=PutInsightRule:
     get:
       x-aws-operation-name: PutInsightRule
       operationId: GET_PutInsightRule
@@ -3165,7 +3173,7 @@ paths:
             type: string
             enum:
               - '2010-08-01'
-  '/#Action=PutMetricAlarm':
+  /#Action=PutMetricAlarm:
     get:
       x-aws-operation-name: PutMetricAlarm
       operationId: GET_PutMetricAlarm
@@ -3445,7 +3453,7 @@ paths:
             type: string
             enum:
               - '2010-08-01'
-  '/#Action=PutMetricData':
+  /#Action=PutMetricData:
     get:
       x-aws-operation-name: PutMetricData
       operationId: GET_PutMetricData
@@ -3568,7 +3576,7 @@ paths:
             type: string
             enum:
               - '2010-08-01'
-  '/#Action=SetAlarmState':
+  /#Action=SetAlarmState:
     get:
       x-aws-operation-name: SetAlarmState
       operationId: GET_SetAlarmState
@@ -3684,7 +3692,7 @@ paths:
             type: string
             enum:
               - '2010-08-01'
-  '/#Action=TagResource':
+  /#Action=TagResource:
     get:
       x-aws-operation-name: TagResource
       operationId: GET_TagResource
@@ -3814,7 +3822,7 @@ paths:
             type: string
             enum:
               - '2010-08-01'
-  '/#Action=UntagResource':
+  /#Action=UntagResource:
     get:
       x-aws-operation-name: UntagResource
       operationId: GET_UntagResource

@@ -51,13 +51,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The ComprehendMedical multi-region endpoint
   - url: 'https://comprehendmedical.{region}.amazonaws.com'
@@ -77,13 +81,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The ComprehendMedical multi-region endpoint
   - url: 'http://comprehendmedical.{region}.amazonaws.com.cn'
@@ -106,7 +114,7 @@ servers:
     description: The ComprehendMedical endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
-  '/#X-Amz-Target=ComprehendMedical_20181030.DescribeEntitiesDetectionV2Job':
+  /#X-Amz-Target=ComprehendMedical_20181030.DescribeEntitiesDetectionV2Job:
     post:
       operationId: DescribeEntitiesDetectionV2Job
       description: Gets the properties associated with a medical entities detection job. Use this operation to get the status of a detection job.
@@ -163,7 +171,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=ComprehendMedical_20181030.DescribeICD10CMInferenceJob':
+  /#X-Amz-Target=ComprehendMedical_20181030.DescribeICD10CMInferenceJob:
     post:
       operationId: DescribeICD10CMInferenceJob
       description: Gets the properties associated with an InferICD10CM job. Use this operation to get the status of an inference job.
@@ -220,7 +228,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=ComprehendMedical_20181030.DescribePHIDetectionJob':
+  /#X-Amz-Target=ComprehendMedical_20181030.DescribePHIDetectionJob:
     post:
       operationId: DescribePHIDetectionJob
       description: Gets the properties associated with a protected health information (PHI) detection job. Use this operation to get the status of a detection job.
@@ -277,7 +285,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=ComprehendMedical_20181030.DescribeRxNormInferenceJob':
+  /#X-Amz-Target=ComprehendMedical_20181030.DescribeRxNormInferenceJob:
     post:
       operationId: DescribeRxNormInferenceJob
       description: Gets the properties associated with an InferRxNorm job. Use this operation to get the status of an inference job.
@@ -334,7 +342,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=ComprehendMedical_20181030.DetectEntities':
+  /#X-Amz-Target=ComprehendMedical_20181030.DetectEntities:
     post:
       deprecated: true
       operationId: DetectEntities
@@ -404,7 +412,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=ComprehendMedical_20181030.DetectEntitiesV2':
+  /#X-Amz-Target=ComprehendMedical_20181030.DetectEntitiesV2:
     post:
       operationId: DetectEntitiesV2
       description: '<p>Inspects the clinical text for a variety of medical entities and returns specific information about them such as entity category, location, and confidence score on that information. Amazon Comprehend Medical only detects medical entities in English language texts.</p> <p>The <code>DetectEntitiesV2</code> operation replaces the <a>DetectEntities</a> operation. This new action uses a different model for determining the entities in your medical text and changes the way that some entities are returned in the output. You should use the <code>DetectEntitiesV2</code> operation in all new applications.</p> <p>The <code>DetectEntitiesV2</code> operation returns the <code>Acuity</code> and <code>Direction</code> entities as attributes instead of types. </p>'
@@ -473,7 +481,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=ComprehendMedical_20181030.DetectPHI':
+  /#X-Amz-Target=ComprehendMedical_20181030.DetectPHI:
     post:
       operationId: DetectPHI
       description: ' Inspects the clinical text for protected health information (PHI) entities and returns the entity category, location, and confidence score for each entity. Amazon Comprehend Medical only detects entities in English language texts.'
@@ -542,7 +550,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=ComprehendMedical_20181030.InferICD10CM':
+  /#X-Amz-Target=ComprehendMedical_20181030.InferICD10CM:
     post:
       operationId: InferICD10CM
       description: InferICD10CM detects medical conditions as entities listed in a patient record and links those entities to normalized concept identifiers in the ICD-10-CM knowledge base from the Centers for Disease Control. Amazon Comprehend Medical only detects medical entities in English language texts.
@@ -611,7 +619,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=ComprehendMedical_20181030.InferRxNorm':
+  /#X-Amz-Target=ComprehendMedical_20181030.InferRxNorm:
     post:
       operationId: InferRxNorm
       description: InferRxNorm detects medications as entities listed in a patient record and links to the normalized concept identifiers in the RxNorm database from the National Library of Medicine. Amazon Comprehend Medical only detects medical entities in English language texts.
@@ -680,7 +688,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=ComprehendMedical_20181030.ListEntitiesDetectionV2Jobs':
+  /#X-Amz-Target=ComprehendMedical_20181030.ListEntitiesDetectionV2Jobs:
     post:
       operationId: ListEntitiesDetectionV2Jobs
       description: Gets a list of medical entity detection jobs that you have submitted.
@@ -737,7 +745,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=ComprehendMedical_20181030.ListICD10CMInferenceJobs':
+  /#X-Amz-Target=ComprehendMedical_20181030.ListICD10CMInferenceJobs:
     post:
       operationId: ListICD10CMInferenceJobs
       description: Gets a list of InferICD10CM jobs that you have submitted.
@@ -794,7 +802,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=ComprehendMedical_20181030.ListPHIDetectionJobs':
+  /#X-Amz-Target=ComprehendMedical_20181030.ListPHIDetectionJobs:
     post:
       operationId: ListPHIDetectionJobs
       description: Gets a list of protected health information (PHI) detection jobs that you have submitted.
@@ -851,7 +859,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=ComprehendMedical_20181030.ListRxNormInferenceJobs':
+  /#X-Amz-Target=ComprehendMedical_20181030.ListRxNormInferenceJobs:
     post:
       operationId: ListRxNormInferenceJobs
       description: Gets a list of InferRxNorm jobs that you have submitted.
@@ -908,7 +916,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=ComprehendMedical_20181030.StartEntitiesDetectionV2Job':
+  /#X-Amz-Target=ComprehendMedical_20181030.StartEntitiesDetectionV2Job:
     post:
       operationId: StartEntitiesDetectionV2Job
       description: Starts an asynchronous medical entity detection job for a collection of documents. Use the <code>DescribeEntitiesDetectionV2Job</code> operation to track the status of a job.
@@ -965,7 +973,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=ComprehendMedical_20181030.StartICD10CMInferenceJob':
+  /#X-Amz-Target=ComprehendMedical_20181030.StartICD10CMInferenceJob:
     post:
       operationId: StartICD10CMInferenceJob
       description: Starts an asynchronous job to detect medical conditions and link them to the ICD-10-CM ontology. Use the <code>DescribeICD10CMInferenceJob</code> operation to track the status of a job.
@@ -1022,7 +1030,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=ComprehendMedical_20181030.StartPHIDetectionJob':
+  /#X-Amz-Target=ComprehendMedical_20181030.StartPHIDetectionJob:
     post:
       operationId: StartPHIDetectionJob
       description: Starts an asynchronous job to detect protected health information (PHI). Use the <code>DescribePHIDetectionJob</code> operation to track the status of a job.
@@ -1079,7 +1087,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=ComprehendMedical_20181030.StartRxNormInferenceJob':
+  /#X-Amz-Target=ComprehendMedical_20181030.StartRxNormInferenceJob:
     post:
       operationId: StartRxNormInferenceJob
       description: Starts an asynchronous job to detect medication entities and link them to the RxNorm ontology. Use the <code>DescribeRxNormInferenceJob</code> operation to track the status of a job.
@@ -1136,7 +1144,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=ComprehendMedical_20181030.StopEntitiesDetectionV2Job':
+  /#X-Amz-Target=ComprehendMedical_20181030.StopEntitiesDetectionV2Job:
     post:
       operationId: StopEntitiesDetectionV2Job
       description: Stops a medical entities detection job in progress.
@@ -1187,7 +1195,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=ComprehendMedical_20181030.StopICD10CMInferenceJob':
+  /#X-Amz-Target=ComprehendMedical_20181030.StopICD10CMInferenceJob:
     post:
       operationId: StopICD10CMInferenceJob
       description: Stops an InferICD10CM inference job in progress.
@@ -1238,7 +1246,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=ComprehendMedical_20181030.StopPHIDetectionJob':
+  /#X-Amz-Target=ComprehendMedical_20181030.StopPHIDetectionJob:
     post:
       operationId: StopPHIDetectionJob
       description: Stops a protected health information (PHI) detection job in progress.
@@ -1289,7 +1297,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=ComprehendMedical_20181030.StopRxNormInferenceJob':
+  /#X-Amz-Target=ComprehendMedical_20181030.StopRxNormInferenceJob:
     post:
       operationId: StopRxNormInferenceJob
       description: Stops an InferRxNorm inference job in progress.

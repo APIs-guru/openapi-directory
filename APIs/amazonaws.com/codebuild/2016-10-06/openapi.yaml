@@ -51,13 +51,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The AWS CodeBuild multi-region endpoint
   - url: 'https://codebuild.{region}.amazonaws.com'
@@ -77,13 +81,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The AWS CodeBuild multi-region endpoint
   - url: 'http://codebuild.{region}.amazonaws.com.cn'
@@ -106,7 +114,7 @@ servers:
     description: The AWS CodeBuild endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
-  '/#X-Amz-Target=CodeBuild_20161006.BatchDeleteBuilds':
+  /#X-Amz-Target=CodeBuild_20161006.BatchDeleteBuilds:
     post:
       operationId: BatchDeleteBuilds
       description: Deletes one or more builds.
@@ -145,7 +153,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeBuild_20161006.BatchGetBuilds':
+  /#X-Amz-Target=CodeBuild_20161006.BatchGetBuilds:
     post:
       operationId: BatchGetBuilds
       description: Gets information about one or more builds.
@@ -184,7 +192,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeBuild_20161006.BatchGetProjects':
+  /#X-Amz-Target=CodeBuild_20161006.BatchGetProjects:
     post:
       operationId: BatchGetProjects
       description: Gets information about one or more build projects.
@@ -223,7 +231,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeBuild_20161006.BatchGetReportGroups':
+  /#X-Amz-Target=CodeBuild_20161006.BatchGetReportGroups:
     post:
       operationId: BatchGetReportGroups
       description: ' Returns an array of report groups. '
@@ -262,7 +270,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeBuild_20161006.BatchGetReports':
+  /#X-Amz-Target=CodeBuild_20161006.BatchGetReports:
     post:
       operationId: BatchGetReports
       description: ' Returns an array of reports. '
@@ -301,7 +309,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeBuild_20161006.CreateProject':
+  /#X-Amz-Target=CodeBuild_20161006.CreateProject:
     post:
       operationId: CreateProject
       description: Creates a build project.
@@ -352,7 +360,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeBuild_20161006.CreateReportGroup':
+  /#X-Amz-Target=CodeBuild_20161006.CreateReportGroup:
     post:
       operationId: CreateReportGroup
       description: ' Creates a report group. A report group contains a collection of reports. '
@@ -403,7 +411,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeBuild_20161006.CreateWebhook':
+  /#X-Amz-Target=CodeBuild_20161006.CreateWebhook:
     post:
       operationId: CreateWebhook
       description: '<p>For an existing AWS CodeBuild build project that has its source code stored in a GitHub or Bitbucket repository, enables AWS CodeBuild to start rebuilding the source code every time a code change is pushed to the repository.</p> <important> <p>If you enable webhooks for an AWS CodeBuild project, and the project is used as a build step in AWS CodePipeline, then two identical builds are created for each commit. One build is triggered through webhooks, and one through AWS CodePipeline. Because billing is on a per-build basis, you are billed for both builds. Therefore, if you are using AWS CodePipeline, we recommend that you disable webhooks in AWS CodeBuild. In the AWS CodeBuild console, clear the Webhook box. For more information, see step 5 in <a href="https://docs.aws.amazon.com/codebuild/latest/userguide/change-project.html#change-project-console">Change a Build Project''s Settings</a>.</p> </important>'
@@ -460,7 +468,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeBuild_20161006.DeleteProject':
+  /#X-Amz-Target=CodeBuild_20161006.DeleteProject:
     post:
       operationId: DeleteProject
       description: ' Deletes a build project. When you delete a project, its builds are not deleted. '
@@ -499,7 +507,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeBuild_20161006.DeleteReport':
+  /#X-Amz-Target=CodeBuild_20161006.DeleteReport:
     post:
       operationId: DeleteReport
       description: ' Deletes a report. '
@@ -538,7 +546,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeBuild_20161006.DeleteReportGroup':
+  /#X-Amz-Target=CodeBuild_20161006.DeleteReportGroup:
     post:
       operationId: DeleteReportGroup
       description: ' <code>DeleteReportGroup</code>: Deletes a report group. Before you delete a report group, you must delete its reports. Use <a href="https://docs.aws.amazon.com/codebuild/latest/APIReference/API_ListReportsForReportGroup.html">ListReportsForReportGroup</a> to get the reports in a report group. Use <a href="https://docs.aws.amazon.com/codebuild/latest/APIReference/API_DeleteReport.html">DeleteReport</a> to delete the reports. If you call <code>DeleteReportGroup</code> for a report group that contains one or more reports, an exception is thrown. '
@@ -577,7 +585,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeBuild_20161006.DeleteResourcePolicy':
+  /#X-Amz-Target=CodeBuild_20161006.DeleteResourcePolicy:
     post:
       operationId: DeleteResourcePolicy
       description: ' Deletes a resource policy that is identified by its resource ARN. '
@@ -616,7 +624,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeBuild_20161006.DeleteSourceCredentials':
+  /#X-Amz-Target=CodeBuild_20161006.DeleteSourceCredentials:
     post:
       operationId: DeleteSourceCredentials
       description: ' Deletes a set of GitHub, GitHub Enterprise, or Bitbucket source credentials. '
@@ -661,7 +669,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeBuild_20161006.DeleteWebhook':
+  /#X-Amz-Target=CodeBuild_20161006.DeleteWebhook:
     post:
       operationId: DeleteWebhook
       description: 'For an existing AWS CodeBuild build project that has its source code stored in a GitHub or Bitbucket repository, stops AWS CodeBuild from rebuilding the source code every time a code change is pushed to the repository.'
@@ -712,7 +720,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeBuild_20161006.DescribeTestCases':
+  /#X-Amz-Target=CodeBuild_20161006.DescribeTestCases:
     post:
       operationId: DescribeTestCases
       description: ' Returns a list of details about test cases for a report. '
@@ -769,7 +777,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeBuild_20161006.GetResourcePolicy':
+  /#X-Amz-Target=CodeBuild_20161006.GetResourcePolicy:
     post:
       operationId: GetResourcePolicy
       description: ' Gets a resource policy that is identified by its resource ARN. '
@@ -814,7 +822,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeBuild_20161006.ImportSourceCredentials':
+  /#X-Amz-Target=CodeBuild_20161006.ImportSourceCredentials:
     post:
       operationId: ImportSourceCredentials
       description: ' Imports the source repository credentials for an AWS CodeBuild project that has its source code stored in a GitHub, GitHub Enterprise, or Bitbucket repository. '
@@ -865,7 +873,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeBuild_20161006.InvalidateProjectCache':
+  /#X-Amz-Target=CodeBuild_20161006.InvalidateProjectCache:
     post:
       operationId: InvalidateProjectCache
       description: Resets the cache for a project.
@@ -910,7 +918,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeBuild_20161006.ListBuilds':
+  /#X-Amz-Target=CodeBuild_20161006.ListBuilds:
     post:
       operationId: ListBuilds
       description: 'Gets a list of build IDs, with each build ID representing a single build.'
@@ -955,7 +963,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeBuild_20161006.ListBuildsForProject':
+  /#X-Amz-Target=CodeBuild_20161006.ListBuildsForProject:
     post:
       operationId: ListBuildsForProject
       description: 'Gets a list of build IDs for the specified build project, with each build ID representing a single build.'
@@ -1006,7 +1014,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeBuild_20161006.ListCuratedEnvironmentImages':
+  /#X-Amz-Target=CodeBuild_20161006.ListCuratedEnvironmentImages:
     post:
       operationId: ListCuratedEnvironmentImages
       description: Gets information about Docker images that are managed by AWS CodeBuild.
@@ -1039,7 +1047,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeBuild_20161006.ListProjects':
+  /#X-Amz-Target=CodeBuild_20161006.ListProjects:
     post:
       operationId: ListProjects
       description: 'Gets a list of build project names, with each build project name representing a single build project.'
@@ -1084,7 +1092,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeBuild_20161006.ListReportGroups':
+  /#X-Amz-Target=CodeBuild_20161006.ListReportGroups:
     post:
       operationId: ListReportGroups
       description: ' Gets a list ARNs for the report groups in the current AWS account. '
@@ -1135,7 +1143,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeBuild_20161006.ListReports':
+  /#X-Amz-Target=CodeBuild_20161006.ListReports:
     post:
       operationId: ListReports
       description: ' Returns a list of ARNs for the reports in the current AWS account. '
@@ -1186,7 +1194,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeBuild_20161006.ListReportsForReportGroup':
+  /#X-Amz-Target=CodeBuild_20161006.ListReportsForReportGroup:
     post:
       operationId: ListReportsForReportGroup
       description: ' Returns a list of ARNs for the reports that belong to a <code>ReportGroup</code>. '
@@ -1243,7 +1251,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeBuild_20161006.ListSharedProjects':
+  /#X-Amz-Target=CodeBuild_20161006.ListSharedProjects:
     post:
       operationId: ListSharedProjects
       description: ' Gets a list of projects that are shared with other AWS accounts or users. '
@@ -1294,7 +1302,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeBuild_20161006.ListSharedReportGroups':
+  /#X-Amz-Target=CodeBuild_20161006.ListSharedReportGroups:
     post:
       operationId: ListSharedReportGroups
       description: ' Gets a list of report groups that are shared with other AWS accounts or users. '
@@ -1345,7 +1353,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeBuild_20161006.ListSourceCredentials':
+  /#X-Amz-Target=CodeBuild_20161006.ListSourceCredentials:
     post:
       operationId: ListSourceCredentials
       description: ' Returns a list of <code>SourceCredentialsInfo</code> objects. '
@@ -1378,7 +1386,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeBuild_20161006.PutResourcePolicy':
+  /#X-Amz-Target=CodeBuild_20161006.PutResourcePolicy:
     post:
       operationId: PutResourcePolicy
       description: ' Stores a resource policy for the ARN of a <code>Project</code> or <code>ReportGroup</code> object. '
@@ -1423,7 +1431,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeBuild_20161006.StartBuild':
+  /#X-Amz-Target=CodeBuild_20161006.StartBuild:
     post:
       operationId: StartBuild
       description: Starts running a build.
@@ -1474,7 +1482,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeBuild_20161006.StopBuild':
+  /#X-Amz-Target=CodeBuild_20161006.StopBuild:
     post:
       operationId: StopBuild
       description: Attempts to stop running a build.
@@ -1519,7 +1527,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeBuild_20161006.UpdateProject':
+  /#X-Amz-Target=CodeBuild_20161006.UpdateProject:
     post:
       operationId: UpdateProject
       description: Changes the settings of a build project.
@@ -1564,7 +1572,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeBuild_20161006.UpdateReportGroup':
+  /#X-Amz-Target=CodeBuild_20161006.UpdateReportGroup:
     post:
       operationId: UpdateReportGroup
       description: ' Updates a report group. '
@@ -1609,7 +1617,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=CodeBuild_20161006.UpdateWebhook':
+  /#X-Amz-Target=CodeBuild_20161006.UpdateWebhook:
     post:
       operationId: UpdateWebhook
       description: '<p> Updates the webhook associated with an AWS CodeBuild build project. </p> <note> <p> If you use Bitbucket for your repository, <code>rotateSecret</code> is ignored. </p> </note>'

@@ -51,13 +51,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The CloudHSM V2 multi-region endpoint
   - url: 'https://cloudhsmv2.{region}.amazonaws.com'
@@ -77,13 +81,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The CloudHSM V2 multi-region endpoint
   - url: 'http://cloudhsmv2.{region}.amazonaws.com.cn'
@@ -106,7 +114,7 @@ servers:
     description: The CloudHSM V2 endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
-  '/#X-Amz-Target=BaldrApiService.CopyBackupToRegion':
+  /#X-Amz-Target=BaldrApiService.CopyBackupToRegion:
     post:
       operationId: CopyBackupToRegion
       description: Copy an AWS CloudHSM cluster backup to a different region.
@@ -175,7 +183,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=BaldrApiService.CreateCluster':
+  /#X-Amz-Target=BaldrApiService.CreateCluster:
     post:
       operationId: CreateCluster
       description: Creates a new AWS CloudHSM cluster.
@@ -244,7 +252,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=BaldrApiService.CreateHsm':
+  /#X-Amz-Target=BaldrApiService.CreateHsm:
     post:
       operationId: CreateHsm
       description: Creates a new hardware security module (HSM) in the specified AWS CloudHSM cluster.
@@ -307,7 +315,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=BaldrApiService.DeleteBackup':
+  /#X-Amz-Target=BaldrApiService.DeleteBackup:
     post:
       operationId: DeleteBackup
       description: 'Deletes a specified AWS CloudHSM backup. A backup can be restored up to 7 days after the DeleteBackup request is made. For more information on restoring a backup, see <a>RestoreBackup</a>.'
@@ -370,7 +378,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=BaldrApiService.DeleteCluster':
+  /#X-Amz-Target=BaldrApiService.DeleteCluster:
     post:
       operationId: DeleteCluster
       description: 'Deletes the specified AWS CloudHSM cluster. Before you can delete a cluster, you must delete all HSMs in the cluster. To see if the cluster contains any HSMs, use <a>DescribeClusters</a>. To delete an HSM, use <a>DeleteHsm</a>.'
@@ -439,7 +447,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=BaldrApiService.DeleteHsm':
+  /#X-Amz-Target=BaldrApiService.DeleteHsm:
     post:
       operationId: DeleteHsm
       description: 'Deletes the specified HSM. To specify an HSM, you can use its identifier (ID), the IP address of the HSM''s elastic network interface (ENI), or the ID of the HSM''s ENI. You need to specify only one of these values. To find these values, use <a>DescribeClusters</a>.'
@@ -502,7 +510,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=BaldrApiService.DescribeBackups':
+  /#X-Amz-Target=BaldrApiService.DescribeBackups:
     post:
       operationId: DescribeBackups
       description: '<p>Gets information about backups of AWS CloudHSM clusters.</p> <p>This is a paginated operation, which means that each response might contain only a subset of all the backups. When the response contains only a subset of backups, it includes a <code>NextToken</code> value. Use this value in a subsequent <code>DescribeBackups</code> request to get more backups. When you receive a response with no <code>NextToken</code> (or an empty or null value), that means there are no more backups to get.</p>'
@@ -583,7 +591,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=BaldrApiService.DescribeClusters':
+  /#X-Amz-Target=BaldrApiService.DescribeClusters:
     post:
       operationId: DescribeClusters
       description: '<p>Gets information about AWS CloudHSM clusters.</p> <p>This is a paginated operation, which means that each response might contain only a subset of all the clusters. When the response contains only a subset of clusters, it includes a <code>NextToken</code> value. Use this value in a subsequent <code>DescribeClusters</code> request to get more clusters. When you receive a response with no <code>NextToken</code> (or an empty or null value), that means there are no more clusters to get.</p>'
@@ -658,7 +666,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=BaldrApiService.InitializeCluster':
+  /#X-Amz-Target=BaldrApiService.InitializeCluster:
     post:
       operationId: InitializeCluster
       description: 'Claims an AWS CloudHSM cluster by submitting the cluster certificate issued by your issuing certificate authority (CA) and the CA''s root certificate. Before you can claim a cluster, you must sign the cluster''s certificate signing request (CSR) with your issuing CA. To get the cluster''s CSR, use <a>DescribeClusters</a>.'
@@ -721,7 +729,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=BaldrApiService.ListTags':
+  /#X-Amz-Target=BaldrApiService.ListTags:
     post:
       operationId: ListTags
       description: '<p>Gets a list of tags for the specified AWS CloudHSM cluster.</p> <p>This is a paginated operation, which means that each response might contain only a subset of all the tags. When the response contains only a subset of tags, it includes a <code>NextToken</code> value. Use this value in a subsequent <code>ListTags</code> request to get more tags. When you receive a response with no <code>NextToken</code> (or an empty or null value), that means there are no more tags to get.</p>'
@@ -802,7 +810,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=BaldrApiService.RestoreBackup':
+  /#X-Amz-Target=BaldrApiService.RestoreBackup:
     post:
       operationId: RestoreBackup
       description: 'Restores a specified AWS CloudHSM backup that is in the <code>PENDING_DELETION</code> state. For mor information on deleting a backup, see <a>DeleteBackup</a>.'
@@ -865,7 +873,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=BaldrApiService.TagResource':
+  /#X-Amz-Target=BaldrApiService.TagResource:
     post:
       operationId: TagResource
       description: Adds or overwrites one or more tags for the specified AWS CloudHSM cluster.
@@ -934,7 +942,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=BaldrApiService.UntagResource':
+  /#X-Amz-Target=BaldrApiService.UntagResource:
     post:
       operationId: UntagResource
       description: Removes the specified tag or tags from the specified AWS CloudHSM cluster.

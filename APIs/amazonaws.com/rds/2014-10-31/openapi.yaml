@@ -51,13 +51,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The Amazon RDS multi-region endpoint
   - url: 'https://rds.{region}.amazonaws.com'
@@ -77,13 +81,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The Amazon RDS multi-region endpoint
   - url: 'http://rds.amazonaws.com'
@@ -112,7 +120,7 @@ servers:
     description: The Amazon RDS endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
-  '/#Action=AddRoleToDBCluster':
+  /#Action=AddRoleToDBCluster:
     get:
       x-aws-operation-name: AddRoleToDBCluster
       operationId: GET_AddRoleToDBCluster
@@ -236,7 +244,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=AddRoleToDBInstance':
+  /#Action=AddRoleToDBInstance:
     get:
       x-aws-operation-name: AddRoleToDBInstance
       operationId: GET_AddRoleToDBInstance
@@ -360,7 +368,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=AddSourceIdentifierToSubscription':
+  /#Action=AddSourceIdentifierToSubscription:
     get:
       x-aws-operation-name: AddSourceIdentifierToSubscription
       operationId: GET_AddSourceIdentifierToSubscription
@@ -462,7 +470,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=AddTagsToResource':
+  /#Action=AddTagsToResource:
     get:
       x-aws-operation-name: AddTagsToResource
       operationId: GET_AddTagsToResource
@@ -595,7 +603,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=ApplyPendingMaintenanceAction':
+  /#Action=ApplyPendingMaintenanceAction:
     get:
       x-aws-operation-name: ApplyPendingMaintenanceAction
       operationId: GET_ApplyPendingMaintenanceAction
@@ -715,7 +723,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=AuthorizeDBSecurityGroupIngress':
+  /#Action=AuthorizeDBSecurityGroupIngress:
     get:
       x-aws-operation-name: AuthorizeDBSecurityGroupIngress
       operationId: GET_AuthorizeDBSecurityGroupIngress
@@ -859,7 +867,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=BacktrackDBCluster':
+  /#Action=BacktrackDBCluster:
     get:
       x-aws-operation-name: BacktrackDBCluster
       operationId: GET_BacktrackDBCluster
@@ -974,7 +982,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=CancelExportTask':
+  /#Action=CancelExportTask:
     get:
       x-aws-operation-name: CancelExportTask
       operationId: GET_CancelExportTask
@@ -1070,7 +1078,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=CopyDBClusterParameterGroup':
+  /#Action=CopyDBClusterParameterGroup:
     get:
       x-aws-operation-name: CopyDBClusterParameterGroup
       operationId: GET_CopyDBClusterParameterGroup
@@ -1199,7 +1207,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=CopyDBClusterSnapshot':
+  /#Action=CopyDBClusterSnapshot:
     get:
       x-aws-operation-name: CopyDBClusterSnapshot
       operationId: GET_CopyDBClusterSnapshot
@@ -1382,7 +1390,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=CopyDBParameterGroup':
+  /#Action=CopyDBParameterGroup:
     get:
       x-aws-operation-name: CopyDBParameterGroup
       operationId: GET_CopyDBParameterGroup
@@ -1511,7 +1519,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=CopyDBSnapshot':
+  /#Action=CopyDBSnapshot:
     get:
       x-aws-operation-name: CopyDBSnapshot
       operationId: GET_CopyDBSnapshot
@@ -1688,7 +1696,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=CopyOptionGroup':
+  /#Action=CopyOptionGroup:
     get:
       x-aws-operation-name: CopyOptionGroup
       operationId: GET_CopyOptionGroup
@@ -1817,7 +1825,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=CreateCustomAvailabilityZone':
+  /#Action=CreateCustomAvailabilityZone:
     get:
       x-aws-operation-name: CreateCustomAvailabilityZone
       operationId: GET_CreateCustomAvailabilityZone
@@ -1943,7 +1951,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=CreateDBCluster':
+  /#Action=CreateDBCluster:
     get:
       x-aws-operation-name: CreateDBCluster
       operationId: GET_CreateDBCluster
@@ -2455,7 +2463,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=CreateDBClusterEndpoint':
+  /#Action=CreateDBClusterEndpoint:
     get:
       x-aws-operation-name: CreateDBClusterEndpoint
       operationId: GET_CreateDBClusterEndpoint
@@ -2636,7 +2644,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=CreateDBClusterParameterGroup':
+  /#Action=CreateDBClusterParameterGroup:
     get:
       x-aws-operation-name: CreateDBClusterParameterGroup
       operationId: GET_CreateDBClusterParameterGroup
@@ -2753,7 +2761,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=CreateDBClusterSnapshot':
+  /#Action=CreateDBClusterSnapshot:
     get:
       x-aws-operation-name: CreateDBClusterSnapshot
       operationId: GET_CreateDBClusterSnapshot
@@ -2900,7 +2908,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=CreateDBInstance':
+  /#Action=CreateDBInstance:
     get:
       x-aws-operation-name: CreateDBInstance
       operationId: GET_CreateDBInstance
@@ -3481,7 +3489,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=CreateDBInstanceReadReplica':
+  /#Action=CreateDBInstanceReadReplica:
     get:
       x-aws-operation-name: CreateDBInstanceReadReplica
       operationId: GET_CreateDBInstanceReadReplica
@@ -3970,7 +3978,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=CreateDBParameterGroup':
+  /#Action=CreateDBParameterGroup:
     get:
       x-aws-operation-name: CreateDBParameterGroup
       operationId: GET_CreateDBParameterGroup
@@ -4087,7 +4095,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=CreateDBProxy':
+  /#Action=CreateDBProxy:
     get:
       x-aws-operation-name: CreateDBProxy
       operationId: GET_CreateDBProxy
@@ -4261,7 +4269,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=CreateDBSecurityGroup':
+  /#Action=CreateDBSecurityGroup:
     get:
       x-aws-operation-name: CreateDBSecurityGroup
       operationId: GET_CreateDBSecurityGroup
@@ -4384,7 +4392,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=CreateDBSnapshot':
+  /#Action=CreateDBSnapshot:
     get:
       x-aws-operation-name: CreateDBSnapshot
       operationId: GET_CreateDBSnapshot
@@ -4519,7 +4527,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=CreateDBSubnetGroup':
+  /#Action=CreateDBSubnetGroup:
     get:
       x-aws-operation-name: CreateDBSubnetGroup
       operationId: GET_CreateDBSubnetGroup
@@ -4674,7 +4682,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=CreateEventSubscription':
+  /#Action=CreateEventSubscription:
     get:
       x-aws-operation-name: CreateEventSubscription
       operationId: GET_CreateEventSubscription
@@ -4873,7 +4881,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=CreateGlobalCluster':
+  /#Action=CreateGlobalCluster:
     get:
       x-aws-operation-name: CreateGlobalCluster
       operationId: GET_CreateGlobalCluster
@@ -5029,7 +5037,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=CreateOptionGroup':
+  /#Action=CreateOptionGroup:
     get:
       x-aws-operation-name: CreateOptionGroup
       operationId: GET_CreateOptionGroup
@@ -5152,7 +5160,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=DeleteCustomAvailabilityZone':
+  /#Action=DeleteCustomAvailabilityZone:
     get:
       x-aws-operation-name: DeleteCustomAvailabilityZone
       operationId: GET_DeleteCustomAvailabilityZone
@@ -5248,7 +5256,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=DeleteDBCluster':
+  /#Action=DeleteDBCluster:
     get:
       x-aws-operation-name: DeleteDBCluster
       operationId: GET_DeleteDBCluster
@@ -5392,7 +5400,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=DeleteDBClusterEndpoint':
+  /#Action=DeleteDBClusterEndpoint:
     get:
       x-aws-operation-name: DeleteDBClusterEndpoint
       operationId: GET_DeleteDBClusterEndpoint
@@ -5500,7 +5508,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=DeleteDBClusterParameterGroup':
+  /#Action=DeleteDBClusterParameterGroup:
     get:
       x-aws-operation-name: DeleteDBClusterParameterGroup
       operationId: GET_DeleteDBClusterParameterGroup
@@ -5588,7 +5596,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=DeleteDBClusterSnapshot':
+  /#Action=DeleteDBClusterSnapshot:
     get:
       x-aws-operation-name: DeleteDBClusterSnapshot
       operationId: GET_DeleteDBClusterSnapshot
@@ -5684,7 +5692,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=DeleteDBInstance':
+  /#Action=DeleteDBInstance:
     get:
       x-aws-operation-name: DeleteDBInstance
       operationId: GET_DeleteDBInstance
@@ -5846,7 +5854,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=DeleteDBInstanceAutomatedBackup':
+  /#Action=DeleteDBInstanceAutomatedBackup:
     get:
       x-aws-operation-name: DeleteDBInstanceAutomatedBackup
       operationId: GET_DeleteDBInstanceAutomatedBackup
@@ -5942,7 +5950,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=DeleteDBParameterGroup':
+  /#Action=DeleteDBParameterGroup:
     get:
       x-aws-operation-name: DeleteDBParameterGroup
       operationId: GET_DeleteDBParameterGroup
@@ -6030,7 +6038,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=DeleteDBProxy':
+  /#Action=DeleteDBProxy:
     get:
       x-aws-operation-name: DeleteDBProxy
       operationId: GET_DeleteDBProxy
@@ -6126,7 +6134,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=DeleteDBSecurityGroup':
+  /#Action=DeleteDBSecurityGroup:
     get:
       x-aws-operation-name: DeleteDBSecurityGroup
       operationId: GET_DeleteDBSecurityGroup
@@ -6214,7 +6222,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=DeleteDBSnapshot':
+  /#Action=DeleteDBSnapshot:
     get:
       x-aws-operation-name: DeleteDBSnapshot
       operationId: GET_DeleteDBSnapshot
@@ -6310,7 +6318,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=DeleteDBSubnetGroup':
+  /#Action=DeleteDBSubnetGroup:
     get:
       x-aws-operation-name: DeleteDBSubnetGroup
       operationId: GET_DeleteDBSubnetGroup
@@ -6410,7 +6418,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=DeleteEventSubscription':
+  /#Action=DeleteEventSubscription:
     get:
       x-aws-operation-name: DeleteEventSubscription
       operationId: GET_DeleteEventSubscription
@@ -6506,7 +6514,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=DeleteGlobalCluster':
+  /#Action=DeleteGlobalCluster:
     get:
       x-aws-operation-name: DeleteGlobalCluster
       operationId: GET_DeleteGlobalCluster
@@ -6602,7 +6610,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=DeleteInstallationMedia':
+  /#Action=DeleteInstallationMedia:
     get:
       x-aws-operation-name: DeleteInstallationMedia
       operationId: GET_DeleteInstallationMedia
@@ -6686,7 +6694,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=DeleteOptionGroup':
+  /#Action=DeleteOptionGroup:
     get:
       x-aws-operation-name: DeleteOptionGroup
       operationId: GET_DeleteOptionGroup
@@ -6774,7 +6782,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=DeregisterDBProxyTargets':
+  /#Action=DeregisterDBProxyTargets:
     get:
       x-aws-operation-name: DeregisterDBProxyTargets
       operationId: GET_DeregisterDBProxyTargets
@@ -6916,7 +6924,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=DescribeAccountAttributes':
+  /#Action=DescribeAccountAttributes:
     get:
       x-aws-operation-name: DescribeAccountAttributes
       operationId: GET_DescribeAccountAttributes
@@ -6982,7 +6990,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=DescribeCertificates':
+  /#Action=DescribeCertificates:
     get:
       x-aws-operation-name: DescribeCertificates
       operationId: GET_DescribeCertificates
@@ -7098,7 +7106,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=DescribeCustomAvailabilityZones':
+  /#Action=DescribeCustomAvailabilityZones:
     get:
       x-aws-operation-name: DescribeCustomAvailabilityZones
       operationId: GET_DescribeCustomAvailabilityZones
@@ -7214,7 +7222,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=DescribeDBClusterBacktracks':
+  /#Action=DescribeDBClusterBacktracks:
     get:
       x-aws-operation-name: DescribeDBClusterBacktracks
       operationId: GET_DescribeDBClusterBacktracks
@@ -7348,7 +7356,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=DescribeDBClusterEndpoints':
+  /#Action=DescribeDBClusterEndpoints:
     get:
       x-aws-operation-name: DescribeDBClusterEndpoints
       operationId: GET_DescribeDBClusterEndpoints
@@ -7470,7 +7478,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=DescribeDBClusterParameterGroups':
+  /#Action=DescribeDBClusterParameterGroups:
     get:
       x-aws-operation-name: DescribeDBClusterParameterGroups
       operationId: GET_DescribeDBClusterParameterGroups
@@ -7586,7 +7594,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=DescribeDBClusterParameters':
+  /#Action=DescribeDBClusterParameters:
     get:
       x-aws-operation-name: DescribeDBClusterParameters
       operationId: GET_DescribeDBClusterParameters
@@ -7708,7 +7716,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=DescribeDBClusterSnapshotAttributes':
+  /#Action=DescribeDBClusterSnapshotAttributes:
     get:
       x-aws-operation-name: DescribeDBClusterSnapshotAttributes
       operationId: GET_DescribeDBClusterSnapshotAttributes
@@ -7792,7 +7800,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=DescribeDBClusterSnapshots':
+  /#Action=DescribeDBClusterSnapshots:
     get:
       x-aws-operation-name: DescribeDBClusterSnapshots
       operationId: GET_DescribeDBClusterSnapshots
@@ -7932,7 +7940,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=DescribeDBClusters':
+  /#Action=DescribeDBClusters:
     get:
       x-aws-operation-name: DescribeDBClusters
       operationId: GET_DescribeDBClusters
@@ -8054,7 +8062,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=DescribeDBEngineVersions':
+  /#Action=DescribeDBEngineVersions:
     get:
       x-aws-operation-name: DescribeDBEngineVersions
       operationId: GET_DescribeDBEngineVersions
@@ -8194,7 +8202,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=DescribeDBInstanceAutomatedBackups':
+  /#Action=DescribeDBInstanceAutomatedBackups:
     get:
       x-aws-operation-name: DescribeDBInstanceAutomatedBackups
       operationId: GET_DescribeDBInstanceAutomatedBackups
@@ -8316,7 +8324,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=DescribeDBInstances':
+  /#Action=DescribeDBInstances:
     get:
       x-aws-operation-name: DescribeDBInstances
       operationId: GET_DescribeDBInstances
@@ -8432,7 +8440,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=DescribeDBLogFiles':
+  /#Action=DescribeDBLogFiles:
     get:
       x-aws-operation-name: DescribeDBLogFiles
       operationId: GET_DescribeDBLogFiles
@@ -8566,7 +8574,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=DescribeDBParameterGroups':
+  /#Action=DescribeDBParameterGroups:
     get:
       x-aws-operation-name: DescribeDBParameterGroups
       operationId: GET_DescribeDBParameterGroups
@@ -8682,7 +8690,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=DescribeDBParameters':
+  /#Action=DescribeDBParameters:
     get:
       x-aws-operation-name: DescribeDBParameters
       operationId: GET_DescribeDBParameters
@@ -8804,7 +8812,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=DescribeDBProxies':
+  /#Action=DescribeDBProxies:
     get:
       x-aws-operation-name: DescribeDBProxies
       operationId: GET_DescribeDBProxies
@@ -8922,7 +8930,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=DescribeDBProxyTargetGroups':
+  /#Action=DescribeDBProxyTargetGroups:
     get:
       x-aws-operation-name: DescribeDBProxyTargetGroups
       operationId: GET_DescribeDBProxyTargetGroups
@@ -9070,7 +9078,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=DescribeDBProxyTargets':
+  /#Action=DescribeDBProxyTargets:
     get:
       x-aws-operation-name: DescribeDBProxyTargets
       operationId: GET_DescribeDBProxyTargets
@@ -9230,7 +9238,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=DescribeDBSecurityGroups':
+  /#Action=DescribeDBSecurityGroups:
     get:
       x-aws-operation-name: DescribeDBSecurityGroups
       operationId: GET_DescribeDBSecurityGroups
@@ -9346,7 +9354,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=DescribeDBSnapshotAttributes':
+  /#Action=DescribeDBSnapshotAttributes:
     get:
       x-aws-operation-name: DescribeDBSnapshotAttributes
       operationId: GET_DescribeDBSnapshotAttributes
@@ -9430,7 +9438,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=DescribeDBSnapshots':
+  /#Action=DescribeDBSnapshots:
     get:
       x-aws-operation-name: DescribeDBSnapshots
       operationId: GET_DescribeDBSnapshots
@@ -9576,7 +9584,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=DescribeDBSubnetGroups':
+  /#Action=DescribeDBSubnetGroups:
     get:
       x-aws-operation-name: DescribeDBSubnetGroups
       operationId: GET_DescribeDBSubnetGroups
@@ -9692,7 +9700,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=DescribeEngineDefaultClusterParameters':
+  /#Action=DescribeEngineDefaultClusterParameters:
     get:
       x-aws-operation-name: DescribeEngineDefaultClusterParameters
       operationId: GET_DescribeEngineDefaultClusterParameters
@@ -9784,7 +9792,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=DescribeEngineDefaultParameters':
+  /#Action=DescribeEngineDefaultParameters:
     get:
       x-aws-operation-name: DescribeEngineDefaultParameters
       operationId: GET_DescribeEngineDefaultParameters
@@ -9888,7 +9896,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=DescribeEventCategories':
+  /#Action=DescribeEventCategories:
     get:
       x-aws-operation-name: DescribeEventCategories
       operationId: GET_DescribeEventCategories
@@ -9968,7 +9976,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=DescribeEventSubscriptions':
+  /#Action=DescribeEventSubscriptions:
     get:
       x-aws-operation-name: DescribeEventSubscriptions
       operationId: GET_DescribeEventSubscriptions
@@ -10084,7 +10092,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=DescribeEvents':
+  /#Action=DescribeEvents:
     get:
       x-aws-operation-name: DescribeEvents
       operationId: GET_DescribeEvents
@@ -10229,7 +10237,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=DescribeExportTasks':
+  /#Action=DescribeExportTasks:
     get:
       x-aws-operation-name: DescribeExportTasks
       operationId: GET_DescribeExportTasks
@@ -10353,7 +10361,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=DescribeGlobalClusters':
+  /#Action=DescribeGlobalClusters:
     get:
       x-aws-operation-name: DescribeGlobalClusters
       operationId: GET_DescribeGlobalClusters
@@ -10469,7 +10477,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=DescribeInstallationMedia':
+  /#Action=DescribeInstallationMedia:
     get:
       x-aws-operation-name: DescribeInstallationMedia
       operationId: GET_DescribeInstallationMedia
@@ -10585,7 +10593,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=DescribeOptionGroupOptions':
+  /#Action=DescribeOptionGroupOptions:
     get:
       x-aws-operation-name: DescribeOptionGroupOptions
       operationId: GET_DescribeOptionGroupOptions
@@ -10695,7 +10703,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=DescribeOptionGroups':
+  /#Action=DescribeOptionGroups:
     get:
       x-aws-operation-name: DescribeOptionGroups
       operationId: GET_DescribeOptionGroups
@@ -10823,7 +10831,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=DescribeOrderableDBInstanceOptions':
+  /#Action=DescribeOrderableDBInstanceOptions:
     get:
       x-aws-operation-name: DescribeOrderableDBInstanceOptions
       operationId: GET_DescribeOrderableDBInstanceOptions
@@ -10957,7 +10965,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=DescribePendingMaintenanceActions':
+  /#Action=DescribePendingMaintenanceActions:
     get:
       x-aws-operation-name: DescribePendingMaintenanceActions
       operationId: GET_DescribePendingMaintenanceActions
@@ -11073,7 +11081,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=DescribeReservedDBInstances':
+  /#Action=DescribeReservedDBInstances:
     get:
       x-aws-operation-name: DescribeReservedDBInstances
       operationId: GET_DescribeReservedDBInstances
@@ -11231,7 +11239,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=DescribeReservedDBInstancesOfferings':
+  /#Action=DescribeReservedDBInstancesOfferings:
     get:
       x-aws-operation-name: DescribeReservedDBInstancesOfferings
       operationId: GET_DescribeReservedDBInstancesOfferings
@@ -11377,7 +11385,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=DescribeSourceRegions':
+  /#Action=DescribeSourceRegions:
     get:
       x-aws-operation-name: DescribeSourceRegions
       operationId: GET_DescribeSourceRegions
@@ -11481,7 +11489,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=DescribeValidDBInstanceModifications':
+  /#Action=DescribeValidDBInstanceModifications:
     get:
       x-aws-operation-name: DescribeValidDBInstanceModifications
       operationId: GET_DescribeValidDBInstanceModifications
@@ -11577,7 +11585,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=DownloadDBLogFilePortion':
+  /#Action=DownloadDBLogFilePortion:
     get:
       x-aws-operation-name: DownloadDBLogFilePortion
       operationId: GET_DownloadDBLogFilePortion
@@ -11703,7 +11711,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=FailoverDBCluster':
+  /#Action=FailoverDBCluster:
     get:
       x-aws-operation-name: FailoverDBCluster
       operationId: GET_FailoverDBCluster
@@ -11817,7 +11825,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=ImportInstallationMedia':
+  /#Action=ImportInstallationMedia:
     get:
       x-aws-operation-name: ImportInstallationMedia
       operationId: GET_ImportInstallationMedia
@@ -11937,7 +11945,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=ListTagsForResource':
+  /#Action=ListTagsForResource:
     get:
       x-aws-operation-name: ListTagsForResource
       operationId: GET_ListTagsForResource
@@ -12077,7 +12085,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=ModifyCertificates':
+  /#Action=ModifyCertificates:
     get:
       x-aws-operation-name: ModifyCertificates
       operationId: GET_ModifyCertificates
@@ -12167,7 +12175,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=ModifyCurrentDBClusterCapacity':
+  /#Action=ModifyCurrentDBClusterCapacity:
     get:
       x-aws-operation-name: ModifyCurrentDBClusterCapacity
       operationId: GET_ModifyCurrentDBClusterCapacity
@@ -12293,7 +12301,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=ModifyDBCluster':
+  /#Action=ModifyDBCluster:
     get:
       x-aws-operation-name: ModifyDBCluster
       operationId: GET_ModifyDBCluster
@@ -12674,7 +12682,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=ModifyDBClusterEndpoint':
+  /#Action=ModifyDBClusterEndpoint:
     get:
       x-aws-operation-name: ModifyDBClusterEndpoint
       operationId: GET_ModifyDBClusterEndpoint
@@ -12828,7 +12836,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=ModifyDBClusterParameterGroup':
+  /#Action=ModifyDBClusterParameterGroup:
     get:
       x-aws-operation-name: ModifyDBClusterParameterGroup
       operationId: GET_ModifyDBClusterParameterGroup
@@ -12932,7 +12940,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=ModifyDBClusterSnapshotAttribute':
+  /#Action=ModifyDBClusterSnapshotAttribute:
     get:
       x-aws-operation-name: ModifyDBClusterSnapshotAttribute
       operationId: GET_ModifyDBClusterSnapshotAttribute
@@ -13062,7 +13070,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=ModifyDBInstance':
+  /#Action=ModifyDBInstance:
     get:
       x-aws-operation-name: ModifyDBInstance
       operationId: GET_ModifyDBInstance
@@ -13622,7 +13630,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=ModifyDBParameterGroup':
+  /#Action=ModifyDBParameterGroup:
     get:
       x-aws-operation-name: ModifyDBParameterGroup
       operationId: GET_ModifyDBParameterGroup
@@ -13726,7 +13734,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=ModifyDBProxy':
+  /#Action=ModifyDBProxy:
     get:
       x-aws-operation-name: ModifyDBProxy
       operationId: GET_ModifyDBProxy
@@ -13880,7 +13888,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=ModifyDBProxyTargetGroup':
+  /#Action=ModifyDBProxyTargetGroup:
     get:
       x-aws-operation-name: ModifyDBProxyTargetGroup
       operationId: GET_ModifyDBProxyTargetGroup
@@ -14023,7 +14031,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=ModifyDBSnapshot':
+  /#Action=ModifyDBSnapshot:
     get:
       x-aws-operation-name: ModifyDBSnapshot
       operationId: GET_ModifyDBSnapshot
@@ -14119,7 +14127,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=ModifyDBSnapshotAttribute':
+  /#Action=ModifyDBSnapshotAttribute:
     get:
       x-aws-operation-name: ModifyDBSnapshotAttribute
       operationId: GET_ModifyDBSnapshotAttribute
@@ -14249,7 +14257,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=ModifyDBSubnetGroup':
+  /#Action=ModifyDBSubnetGroup:
     get:
       x-aws-operation-name: ModifyDBSubnetGroup
       operationId: GET_ModifyDBSubnetGroup
@@ -14395,7 +14403,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=ModifyEventSubscription':
+  /#Action=ModifyEventSubscription:
     get:
       x-aws-operation-name: ModifyEventSubscription
       operationId: GET_ModifyEventSubscription
@@ -14565,7 +14573,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=ModifyGlobalCluster':
+  /#Action=ModifyGlobalCluster:
     get:
       x-aws-operation-name: ModifyGlobalCluster
       operationId: GET_ModifyGlobalCluster
@@ -14673,7 +14681,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=ModifyOptionGroup':
+  /#Action=ModifyOptionGroup:
     get:
       x-aws-operation-name: ModifyOptionGroup
       operationId: GET_ModifyOptionGroup
@@ -14791,7 +14799,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=PromoteReadReplica':
+  /#Action=PromoteReadReplica:
     get:
       x-aws-operation-name: PromoteReadReplica
       operationId: GET_PromoteReadReplica
@@ -14899,7 +14907,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=PromoteReadReplicaDBCluster':
+  /#Action=PromoteReadReplicaDBCluster:
     get:
       x-aws-operation-name: PromoteReadReplicaDBCluster
       operationId: GET_PromoteReadReplicaDBCluster
@@ -14995,7 +15003,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=PurchaseReservedDBInstancesOffering':
+  /#Action=PurchaseReservedDBInstancesOffering:
     get:
       x-aws-operation-name: PurchaseReservedDBInstancesOffering
       operationId: GET_PurchaseReservedDBInstancesOffering
@@ -15124,7 +15132,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=RebootDBInstance':
+  /#Action=RebootDBInstance:
     get:
       x-aws-operation-name: RebootDBInstance
       operationId: GET_RebootDBInstance
@@ -15226,7 +15234,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=RegisterDBProxyTargets':
+  /#Action=RegisterDBProxyTargets:
     get:
       x-aws-operation-name: RegisterDBProxyTargets
       operationId: GET_RegisterDBProxyTargets
@@ -15416,7 +15424,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=RemoveFromGlobalCluster':
+  /#Action=RemoveFromGlobalCluster:
     get:
       x-aws-operation-name: RemoveFromGlobalCluster
       operationId: GET_RemoveFromGlobalCluster
@@ -15530,7 +15538,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=RemoveRoleFromDBCluster':
+  /#Action=RemoveRoleFromDBCluster:
     get:
       x-aws-operation-name: RemoveRoleFromDBCluster
       operationId: GET_RemoveRoleFromDBCluster
@@ -15642,7 +15650,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=RemoveRoleFromDBInstance':
+  /#Action=RemoveRoleFromDBInstance:
     get:
       x-aws-operation-name: RemoveRoleFromDBInstance
       operationId: GET_RemoveRoleFromDBInstance
@@ -15754,7 +15762,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=RemoveSourceIdentifierFromSubscription':
+  /#Action=RemoveSourceIdentifierFromSubscription:
     get:
       x-aws-operation-name: RemoveSourceIdentifierFromSubscription
       operationId: GET_RemoveSourceIdentifierFromSubscription
@@ -15856,7 +15864,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=RemoveTagsFromResource':
+  /#Action=RemoveTagsFromResource:
     get:
       x-aws-operation-name: RemoveTagsFromResource
       operationId: GET_RemoveTagsFromResource
@@ -15988,7 +15996,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=ResetDBClusterParameterGroup':
+  /#Action=ResetDBClusterParameterGroup:
     get:
       x-aws-operation-name: ResetDBClusterParameterGroup
       operationId: GET_ResetDBClusterParameterGroup
@@ -16098,7 +16106,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=ResetDBParameterGroup':
+  /#Action=ResetDBParameterGroup:
     get:
       x-aws-operation-name: ResetDBParameterGroup
       operationId: GET_ResetDBParameterGroup
@@ -16208,7 +16216,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=RestoreDBClusterFromS3':
+  /#Action=RestoreDBClusterFromS3:
     get:
       x-aws-operation-name: RestoreDBClusterFromS3
       operationId: GET_RestoreDBClusterFromS3
@@ -16637,7 +16645,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=RestoreDBClusterFromSnapshot':
+  /#Action=RestoreDBClusterFromSnapshot:
     get:
       x-aws-operation-name: RestoreDBClusterFromSnapshot
       operationId: GET_RestoreDBClusterFromSnapshot
@@ -17089,7 +17097,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=RestoreDBClusterToPointInTime':
+  /#Action=RestoreDBClusterToPointInTime:
     get:
       x-aws-operation-name: RestoreDBClusterToPointInTime
       operationId: GET_RestoreDBClusterToPointInTime
@@ -17493,7 +17501,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=RestoreDBInstanceFromDBSnapshot':
+  /#Action=RestoreDBInstanceFromDBSnapshot:
     get:
       x-aws-operation-name: RestoreDBInstanceFromDBSnapshot
       operationId: GET_RestoreDBInstanceFromDBSnapshot
@@ -17976,7 +17984,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=RestoreDBInstanceFromS3':
+  /#Action=RestoreDBInstanceFromS3:
     get:
       x-aws-operation-name: RestoreDBInstanceFromS3
       operationId: GET_RestoreDBInstanceFromS3
@@ -18515,7 +18523,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=RestoreDBInstanceToPointInTime':
+  /#Action=RestoreDBInstanceToPointInTime:
     get:
       x-aws-operation-name: RestoreDBInstanceToPointInTime
       operationId: GET_RestoreDBInstanceToPointInTime
@@ -19041,7 +19049,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=RevokeDBSecurityGroupIngress':
+  /#Action=RevokeDBSecurityGroupIngress:
     get:
       x-aws-operation-name: RevokeDBSecurityGroupIngress
       operationId: GET_RevokeDBSecurityGroupIngress
@@ -19173,7 +19181,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=StartActivityStream':
+  /#Action=StartActivityStream:
     get:
       x-aws-operation-name: StartActivityStream
       operationId: GET_StartActivityStream
@@ -19338,7 +19346,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=StartDBCluster':
+  /#Action=StartDBCluster:
     get:
       x-aws-operation-name: StartDBCluster
       operationId: GET_StartDBCluster
@@ -19446,7 +19454,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=StartDBInstance':
+  /#Action=StartDBInstance:
     get:
       x-aws-operation-name: StartDBInstance
       operationId: GET_StartDBInstance
@@ -19650,7 +19658,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=StartExportTask':
+  /#Action=StartExportTask:
     get:
       x-aws-operation-name: StartExportTask
       operationId: GET_StartExportTask
@@ -19868,7 +19876,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=StopActivityStream':
+  /#Action=StopActivityStream:
     get:
       x-aws-operation-name: StopActivityStream
       operationId: GET_StopActivityStream
@@ -20006,7 +20014,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=StopDBCluster':
+  /#Action=StopDBCluster:
     get:
       x-aws-operation-name: StopDBCluster
       operationId: GET_StopDBCluster
@@ -20114,7 +20122,7 @@ paths:
             type: string
             enum:
               - '2014-10-31'
-  '/#Action=StopDBInstance':
+  /#Action=StopDBInstance:
     get:
       x-aws-operation-name: StopDBInstance
       operationId: GET_StopDBInstance

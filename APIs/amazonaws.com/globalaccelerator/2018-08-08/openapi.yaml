@@ -51,13 +51,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The AWS Global Accelerator multi-region endpoint
   - url: 'https://globalaccelerator.{region}.amazonaws.com'
@@ -77,13 +81,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The AWS Global Accelerator multi-region endpoint
   - url: 'http://globalaccelerator.{region}.amazonaws.com.cn'
@@ -106,7 +114,7 @@ servers:
     description: The AWS Global Accelerator endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
-  '/#X-Amz-Target=GlobalAccelerator_V20180706.AdvertiseByoipCidr':
+  /#X-Amz-Target=GlobalAccelerator_V20180706.AdvertiseByoipCidr:
     post:
       operationId: AdvertiseByoipCidr
       description: '<p>Advertises an IPv4 address range that is provisioned for use with your AWS resources through bring your own IP addresses (BYOIP). It can take a few minutes before traffic to the specified addresses starts routing to AWS because of propagation delays. To see an AWS CLI example of advertising an address range, scroll down to <b>Example</b>.</p> <p>To stop advertising the BYOIP address range, use <a href="https://docs.aws.amazon.com/global-accelerator/latest/api/WithdrawByoipCidr.html"> WithdrawByoipCidr</a>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html">Bring Your Own IP Addresses (BYOIP)</a> in the <i>AWS Global Accelerator Developer Guide</i>.</p>'
@@ -169,7 +177,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=GlobalAccelerator_V20180706.CreateAccelerator':
+  /#X-Amz-Target=GlobalAccelerator_V20180706.CreateAccelerator:
     post:
       operationId: CreateAccelerator
       description: '<p>Create an accelerator. An accelerator includes one or more listeners that process inbound connections and direct traffic to one or more endpoint groups, each of which includes endpoints, such as Network Load Balancers. To see an AWS CLI example of creating an accelerator, scroll down to <b>Example</b>.</p> <p>If you bring your own IP address ranges to AWS Global Accelerator (BYOIP), you can assign IP addresses from your own pool to your accelerator as the static IP address entry points. Only one IP address from each of your IP address ranges can be used for each accelerator.</p> <important> <p>You must specify the US West (Oregon) Region to create or update accelerators.</p> </important>'
@@ -220,7 +228,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=GlobalAccelerator_V20180706.CreateEndpointGroup':
+  /#X-Amz-Target=GlobalAccelerator_V20180706.CreateEndpointGroup:
     post:
       operationId: CreateEndpointGroup
       description: 'Create an endpoint group for the specified listener. An endpoint group is a collection of endpoints in one AWS Region. To see an AWS CLI example of creating an endpoint group, scroll down to <b>Example</b>.'
@@ -295,7 +303,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=GlobalAccelerator_V20180706.CreateListener':
+  /#X-Amz-Target=GlobalAccelerator_V20180706.CreateListener:
     post:
       operationId: CreateListener
       description: 'Create a listener to process inbound connections from clients to an accelerator. Connections arrive to assigned static IP addresses on a port, port range, or list of port ranges that you specify. To see an AWS CLI example of creating a listener, scroll down to <b>Example</b>.'
@@ -358,7 +366,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=GlobalAccelerator_V20180706.DeleteAccelerator':
+  /#X-Amz-Target=GlobalAccelerator_V20180706.DeleteAccelerator:
     post:
       operationId: DeleteAccelerator
       description: '<p>Delete an accelerator. Before you can delete an accelerator, you must disable it and remove all dependent resources (listeners and endpoint groups). To disable the accelerator, update the accelerator to set <code>Enabled</code> to false.</p> <important> <p>When you create an accelerator, by default, Global Accelerator provides you with a set of two static IP addresses. Alternatively, you can bring your own IP address ranges to Global Accelerator and assign IP addresses from those ranges. </p> <p>The IP addresses are assigned to your accelerator for as long as it exists, even if you disable the accelerator and it no longer accepts or routes traffic. However, when you <i>delete</i> an accelerator, you lose the static IP addresses that are assigned to the accelerator, so you can no longer route traffic by using them. As a best practice, ensure that you have permissions in place to avoid inadvertently deleting accelerators. You can use IAM policies with Global Accelerator to limit the users who have permissions to delete an accelerator. For more information, see <a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/auth-and-access-control.html">Authentication and Access Control</a> in the <i>AWS Global Accelerator Developer Guide</i>.</p> </important>'
@@ -417,7 +425,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=GlobalAccelerator_V20180706.DeleteEndpointGroup':
+  /#X-Amz-Target=GlobalAccelerator_V20180706.DeleteEndpointGroup:
     post:
       operationId: DeleteEndpointGroup
       description: Delete an endpoint group from a listener.
@@ -464,7 +472,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=GlobalAccelerator_V20180706.DeleteListener':
+  /#X-Amz-Target=GlobalAccelerator_V20180706.DeleteListener:
     post:
       operationId: DeleteListener
       description: Delete a listener from an accelerator.
@@ -517,7 +525,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=GlobalAccelerator_V20180706.DeprovisionByoipCidr':
+  /#X-Amz-Target=GlobalAccelerator_V20180706.DeprovisionByoipCidr:
     post:
       operationId: DeprovisionByoipCidr
       description: '<p>Releases the specified address range that you provisioned to use with your AWS resources through bring your own IP addresses (BYOIP) and deletes the corresponding address pool. To see an AWS CLI example of deprovisioning an address range, scroll down to <b>Example</b>.</p> <p>Before you can release an address range, you must stop advertising it by using <a href="https://docs.aws.amazon.com/global-accelerator/latest/api/WithdrawByoipCidr.html">WithdrawByoipCidr</a> and you must not have any accelerators that are using static IP addresses allocated from its address range. </p> <p>For more information, see <a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html">Bring Your Own IP Addresses (BYOIP)</a> in the <i>AWS Global Accelerator Developer Guide</i>.</p>'
@@ -580,7 +588,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=GlobalAccelerator_V20180706.DescribeAccelerator':
+  /#X-Amz-Target=GlobalAccelerator_V20180706.DescribeAccelerator:
     post:
       operationId: DescribeAccelerator
       description: 'Describe an accelerator. To see an AWS CLI example of describing an accelerator, scroll down to <b>Example</b>.'
@@ -631,7 +639,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=GlobalAccelerator_V20180706.DescribeAcceleratorAttributes':
+  /#X-Amz-Target=GlobalAccelerator_V20180706.DescribeAcceleratorAttributes:
     post:
       operationId: DescribeAcceleratorAttributes
       description: 'Describe the attributes of an accelerator. To see an AWS CLI example of describing the attributes of an accelerator, scroll down to <b>Example</b>.'
@@ -682,7 +690,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=GlobalAccelerator_V20180706.DescribeEndpointGroup':
+  /#X-Amz-Target=GlobalAccelerator_V20180706.DescribeEndpointGroup:
     post:
       operationId: DescribeEndpointGroup
       description: 'Describe an endpoint group. To see an AWS CLI example of describing an endpoint group, scroll down to <b>Example</b>.'
@@ -733,7 +741,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=GlobalAccelerator_V20180706.DescribeListener':
+  /#X-Amz-Target=GlobalAccelerator_V20180706.DescribeListener:
     post:
       operationId: DescribeListener
       description: 'Describe a listener. To see an AWS CLI example of describing a listener, scroll down to <b>Example</b>.'
@@ -784,7 +792,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=GlobalAccelerator_V20180706.ListAccelerators':
+  /#X-Amz-Target=GlobalAccelerator_V20180706.ListAccelerators:
     post:
       operationId: ListAccelerators
       description: 'List the accelerators for an AWS account. To see an AWS CLI example of listing the accelerators for an AWS account, scroll down to <b>Example</b>.'
@@ -835,7 +843,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=GlobalAccelerator_V20180706.ListByoipCidrs':
+  /#X-Amz-Target=GlobalAccelerator_V20180706.ListByoipCidrs:
     post:
       operationId: ListByoipCidrs
       description: '<p>Lists the IP address ranges that were specified in calls to <a href="https://docs.aws.amazon.com/global-accelerator/latest/api/ProvisionByoipCidr.html">ProvisionByoipCidr</a>, including the current state and a history of state changes.</p> <p>To see an AWS CLI example of listing BYOIP CIDR addresses, scroll down to <b>Example</b>.</p>'
@@ -892,7 +900,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=GlobalAccelerator_V20180706.ListEndpointGroups':
+  /#X-Amz-Target=GlobalAccelerator_V20180706.ListEndpointGroups:
     post:
       operationId: ListEndpointGroups
       description: 'List the endpoint groups that are associated with a listener. To see an AWS CLI example of listing the endpoint groups for listener, scroll down to <b>Example</b>.'
@@ -949,7 +957,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=GlobalAccelerator_V20180706.ListListeners':
+  /#X-Amz-Target=GlobalAccelerator_V20180706.ListListeners:
     post:
       operationId: ListListeners
       description: 'List the listeners for an accelerator. To see an AWS CLI example of listing the listeners for an accelerator, scroll down to <b>Example</b>.'
@@ -1006,7 +1014,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=GlobalAccelerator_V20180706.ListTagsForResource':
+  /#X-Amz-Target=GlobalAccelerator_V20180706.ListTagsForResource:
     post:
       operationId: ListTagsForResource
       description: '<p>List all tags for an accelerator. To see an AWS CLI example of listing tags for an accelerator, scroll down to <b>Example</b>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/tagging-in-global-accelerator.html">Tagging in AWS Global Accelerator</a> in the <i>AWS Global Accelerator Developer Guide</i>. </p>'
@@ -1057,7 +1065,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=GlobalAccelerator_V20180706.ProvisionByoipCidr':
+  /#X-Amz-Target=GlobalAccelerator_V20180706.ProvisionByoipCidr:
     post:
       operationId: ProvisionByoipCidr
       description: '<p>Provisions an IP address range to use with your AWS resources through bring your own IP addresses (BYOIP) and creates a corresponding address pool. After the address range is provisioned, it is ready to be advertised using <a href="https://docs.aws.amazon.com/global-accelerator/latest/api/AdvertiseByoipCidr.html"> AdvertiseByoipCidr</a>.</p> <p>To see an AWS CLI example of provisioning an address range for BYOIP, scroll down to <b>Example</b>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html">Bring Your Own IP Addresses (BYOIP)</a> in the <i>AWS Global Accelerator Developer Guide</i>.</p>'
@@ -1120,7 +1128,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=GlobalAccelerator_V20180706.TagResource':
+  /#X-Amz-Target=GlobalAccelerator_V20180706.TagResource:
     post:
       operationId: TagResource
       description: '<p>Add tags to an accelerator resource. To see an AWS CLI example of adding tags to an accelerator, scroll down to <b>Example</b>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/tagging-in-global-accelerator.html">Tagging in AWS Global Accelerator</a> in the <i>AWS Global Accelerator Developer Guide</i>. </p>'
@@ -1171,7 +1179,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=GlobalAccelerator_V20180706.UntagResource':
+  /#X-Amz-Target=GlobalAccelerator_V20180706.UntagResource:
     post:
       operationId: UntagResource
       description: '<p>Remove tags from a Global Accelerator resource. When you specify a tag key, the action removes both that key and its associated value. To see an AWS CLI example of removing tags from an accelerator, scroll down to <b>Example</b>. The operation succeeds even if you attempt to remove tags from an accelerator that was already removed.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/tagging-in-global-accelerator.html">Tagging in AWS Global Accelerator</a> in the <i>AWS Global Accelerator Developer Guide</i>.</p>'
@@ -1222,7 +1230,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=GlobalAccelerator_V20180706.UpdateAccelerator':
+  /#X-Amz-Target=GlobalAccelerator_V20180706.UpdateAccelerator:
     post:
       operationId: UpdateAccelerator
       description: '<p>Update an accelerator. To see an AWS CLI example of updating an accelerator, scroll down to <b>Example</b>.</p> <important> <p>You must specify the US West (Oregon) Region to create or update accelerators.</p> </important>'
@@ -1273,7 +1281,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=GlobalAccelerator_V20180706.UpdateAcceleratorAttributes':
+  /#X-Amz-Target=GlobalAccelerator_V20180706.UpdateAcceleratorAttributes:
     post:
       operationId: UpdateAcceleratorAttributes
       description: 'Update the attributes for an accelerator. To see an AWS CLI example of updating an accelerator to enable flow logs, scroll down to <b>Example</b>.'
@@ -1330,7 +1338,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=GlobalAccelerator_V20180706.UpdateEndpointGroup':
+  /#X-Amz-Target=GlobalAccelerator_V20180706.UpdateEndpointGroup:
     post:
       operationId: UpdateEndpointGroup
       description: 'Update an endpoint group. To see an AWS CLI example of updating an endpoint group, scroll down to <b>Example</b>.'
@@ -1393,7 +1401,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=GlobalAccelerator_V20180706.UpdateListener':
+  /#X-Amz-Target=GlobalAccelerator_V20180706.UpdateListener:
     post:
       operationId: UpdateListener
       description: 'Update a listener. To see an AWS CLI example of updating listener, scroll down to <b>Example</b>.'
@@ -1456,7 +1464,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=GlobalAccelerator_V20180706.WithdrawByoipCidr':
+  /#X-Amz-Target=GlobalAccelerator_V20180706.WithdrawByoipCidr:
     post:
       operationId: WithdrawByoipCidr
       description: '<p>Stops advertising an address range that is provisioned as an address pool. You can perform this operation at most once every 10 seconds, even if you specify different address ranges each time. To see an AWS CLI example of withdrawing an address range for BYOIP so it will no longer be advertised by AWS, scroll down to <b>Example</b>.</p> <p>It can take a few minutes before traffic to the specified addresses stops routing to AWS because of propagation delays.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html">Bring Your Own IP Addresses (BYOIP)</a> in the <i>AWS Global Accelerator Developer Guide</i>.</p>'

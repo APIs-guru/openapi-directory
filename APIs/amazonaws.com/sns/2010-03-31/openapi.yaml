@@ -51,13 +51,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The Amazon SNS multi-region endpoint
   - url: 'https://sns.{region}.amazonaws.com'
@@ -77,13 +81,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The Amazon SNS multi-region endpoint
   - url: 'http://sns.{region}.amazonaws.com.cn'
@@ -106,7 +114,7 @@ servers:
     description: The Amazon SNS endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
-  '/#Action=AddPermission':
+  /#Action=AddPermission:
     get:
       x-aws-operation-name: AddPermission
       operationId: GET_AddPermission
@@ -240,7 +248,7 @@ paths:
             type: string
             enum:
               - '2010-03-31'
-  '/#Action=CheckIfPhoneNumberIsOptedOut':
+  /#Action=CheckIfPhoneNumberIsOptedOut:
     get:
       x-aws-operation-name: CheckIfPhoneNumberIsOptedOut
       operationId: GET_CheckIfPhoneNumberIsOptedOut
@@ -360,7 +368,7 @@ paths:
             type: string
             enum:
               - '2010-03-31'
-  '/#Action=ConfirmSubscription':
+  /#Action=ConfirmSubscription:
     get:
       x-aws-operation-name: ConfirmSubscription
       operationId: GET_ConfirmSubscription
@@ -516,7 +524,7 @@ paths:
             type: string
             enum:
               - '2010-03-31'
-  '/#Action=CreatePlatformApplication':
+  /#Action=CreatePlatformApplication:
     get:
       x-aws-operation-name: CreatePlatformApplication
       operationId: GET_CreatePlatformApplication
@@ -638,7 +646,7 @@ paths:
             type: string
             enum:
               - '2010-03-31'
-  '/#Action=CreatePlatformEndpoint':
+  /#Action=CreatePlatformEndpoint:
     get:
       x-aws-operation-name: CreatePlatformEndpoint
       operationId: GET_CreatePlatformEndpoint
@@ -778,7 +786,7 @@ paths:
             type: string
             enum:
               - '2010-03-31'
-  '/#Action=CreateTopic':
+  /#Action=CreateTopic:
     get:
       x-aws-operation-name: CreateTopic
       operationId: GET_CreateTopic
@@ -974,7 +982,7 @@ paths:
             type: string
             enum:
               - '2010-03-31'
-  '/#Action=DeleteEndpoint':
+  /#Action=DeleteEndpoint:
     get:
       x-aws-operation-name: DeleteEndpoint
       operationId: GET_DeleteEndpoint
@@ -1074,7 +1082,7 @@ paths:
             type: string
             enum:
               - '2010-03-31'
-  '/#Action=DeletePlatformApplication':
+  /#Action=DeletePlatformApplication:
     get:
       x-aws-operation-name: DeletePlatformApplication
       operationId: GET_DeletePlatformApplication
@@ -1174,7 +1182,7 @@ paths:
             type: string
             enum:
               - '2010-03-31'
-  '/#Action=DeleteTopic':
+  /#Action=DeleteTopic:
     get:
       x-aws-operation-name: DeleteTopic
       operationId: GET_DeleteTopic
@@ -1322,7 +1330,7 @@ paths:
             type: string
             enum:
               - '2010-03-31'
-  '/#Action=GetEndpointAttributes':
+  /#Action=GetEndpointAttributes:
     get:
       x-aws-operation-name: GetEndpointAttributes
       operationId: GET_GetEndpointAttributes
@@ -1442,7 +1450,7 @@ paths:
             type: string
             enum:
               - '2010-03-31'
-  '/#Action=GetPlatformApplicationAttributes':
+  /#Action=GetPlatformApplicationAttributes:
     get:
       x-aws-operation-name: GetPlatformApplicationAttributes
       operationId: GET_GetPlatformApplicationAttributes
@@ -1562,7 +1570,7 @@ paths:
             type: string
             enum:
               - '2010-03-31'
-  '/#Action=GetSMSAttributes':
+  /#Action=GetSMSAttributes:
     get:
       x-aws-operation-name: GetSMSAttributes
       operationId: GET_GetSMSAttributes
@@ -1684,7 +1692,7 @@ paths:
             type: string
             enum:
               - '2010-03-31'
-  '/#Action=GetSubscriptionAttributes':
+  /#Action=GetSubscriptionAttributes:
     get:
       x-aws-operation-name: GetSubscriptionAttributes
       operationId: GET_GetSubscriptionAttributes
@@ -1804,7 +1812,7 @@ paths:
             type: string
             enum:
               - '2010-03-31'
-  '/#Action=GetTopicAttributes':
+  /#Action=GetTopicAttributes:
     get:
       x-aws-operation-name: GetTopicAttributes
       operationId: GET_GetTopicAttributes
@@ -1936,7 +1944,7 @@ paths:
             type: string
             enum:
               - '2010-03-31'
-  '/#Action=ListEndpointsByPlatformApplication':
+  /#Action=ListEndpointsByPlatformApplication:
     get:
       x-aws-operation-name: ListEndpointsByPlatformApplication
       operationId: GET_ListEndpointsByPlatformApplication
@@ -2068,7 +2076,7 @@ paths:
             type: string
             enum:
               - '2010-03-31'
-  '/#Action=ListPhoneNumbersOptedOut':
+  /#Action=ListPhoneNumbersOptedOut:
     get:
       x-aws-operation-name: ListPhoneNumbersOptedOut
       operationId: GET_ListPhoneNumbersOptedOut
@@ -2188,7 +2196,7 @@ paths:
             type: string
             enum:
               - '2010-03-31'
-  '/#Action=ListPlatformApplications':
+  /#Action=ListPlatformApplications:
     get:
       x-aws-operation-name: ListPlatformApplications
       operationId: GET_ListPlatformApplications
@@ -2302,7 +2310,7 @@ paths:
             type: string
             enum:
               - '2010-03-31'
-  '/#Action=ListSubscriptions':
+  /#Action=ListSubscriptions:
     get:
       x-aws-operation-name: ListSubscriptions
       operationId: GET_ListSubscriptions
@@ -2416,7 +2424,7 @@ paths:
             type: string
             enum:
               - '2010-03-31'
-  '/#Action=ListSubscriptionsByTopic':
+  /#Action=ListSubscriptionsByTopic:
     get:
       x-aws-operation-name: ListSubscriptionsByTopic
       operationId: GET_ListSubscriptionsByTopic
@@ -2548,7 +2556,7 @@ paths:
             type: string
             enum:
               - '2010-03-31'
-  '/#Action=ListTagsForResource':
+  /#Action=ListTagsForResource:
     get:
       x-aws-operation-name: ListTagsForResource
       operationId: GET_ListTagsForResource
@@ -2682,7 +2690,7 @@ paths:
             type: string
             enum:
               - '2010-03-31'
-  '/#Action=ListTopics':
+  /#Action=ListTopics:
     get:
       x-aws-operation-name: ListTopics
       operationId: GET_ListTopics
@@ -2796,7 +2804,7 @@ paths:
             type: string
             enum:
               - '2010-03-31'
-  '/#Action=OptInPhoneNumber':
+  /#Action=OptInPhoneNumber:
     get:
       x-aws-operation-name: OptInPhoneNumber
       operationId: GET_OptInPhoneNumber
@@ -2916,7 +2924,7 @@ paths:
             type: string
             enum:
               - '2010-03-31'
-  '/#Action=Publish':
+  /#Action=Publish:
     get:
       x-aws-operation-name: Publish
       operationId: GET_Publish
@@ -3194,7 +3202,7 @@ paths:
             type: string
             enum:
               - '2010-03-31'
-  '/#Action=RemovePermission':
+  /#Action=RemovePermission:
     get:
       x-aws-operation-name: RemovePermission
       operationId: GET_RemovePermission
@@ -3312,7 +3320,7 @@ paths:
             type: string
             enum:
               - '2010-03-31'
-  '/#Action=SetEndpointAttributes':
+  /#Action=SetEndpointAttributes:
     get:
       x-aws-operation-name: SetEndpointAttributes
       operationId: GET_SetEndpointAttributes
@@ -3432,7 +3440,7 @@ paths:
             type: string
             enum:
               - '2010-03-31'
-  '/#Action=SetPlatformApplicationAttributes':
+  /#Action=SetPlatformApplicationAttributes:
     get:
       x-aws-operation-name: SetPlatformApplicationAttributes
       operationId: GET_SetPlatformApplicationAttributes
@@ -3552,7 +3560,7 @@ paths:
             type: string
             enum:
               - '2010-03-31'
-  '/#Action=SetSMSAttributes':
+  /#Action=SetSMSAttributes:
     get:
       x-aws-operation-name: SetSMSAttributes
       operationId: GET_SetSMSAttributes
@@ -3674,7 +3682,7 @@ paths:
             type: string
             enum:
               - '2010-03-31'
-  '/#Action=SetSubscriptionAttributes':
+  /#Action=SetSubscriptionAttributes:
     get:
       x-aws-operation-name: SetSubscriptionAttributes
       operationId: GET_SetSubscriptionAttributes
@@ -3810,7 +3818,7 @@ paths:
             type: string
             enum:
               - '2010-03-31'
-  '/#Action=SetTopicAttributes':
+  /#Action=SetTopicAttributes:
     get:
       x-aws-operation-name: SetTopicAttributes
       operationId: GET_SetTopicAttributes
@@ -3946,7 +3954,7 @@ paths:
             type: string
             enum:
               - '2010-03-31'
-  '/#Action=Subscribe':
+  /#Action=Subscribe:
     get:
       x-aws-operation-name: Subscribe
       operationId: GET_Subscribe
@@ -4128,7 +4136,7 @@ paths:
             type: string
             enum:
               - '2010-03-31'
-  '/#Action=TagResource':
+  /#Action=TagResource:
     get:
       x-aws-operation-name: TagResource
       operationId: GET_TagResource
@@ -4294,7 +4302,7 @@ paths:
             type: string
             enum:
               - '2010-03-31'
-  '/#Action=Unsubscribe':
+  /#Action=Unsubscribe:
     get:
       x-aws-operation-name: Unsubscribe
       operationId: GET_Unsubscribe
@@ -4418,7 +4426,7 @@ paths:
             type: string
             enum:
               - '2010-03-31'
-  '/#Action=UntagResource':
+  /#Action=UntagResource:
     get:
       x-aws-operation-name: UntagResource
       operationId: GET_UntagResource

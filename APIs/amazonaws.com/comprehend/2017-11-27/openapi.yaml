@@ -51,13 +51,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The Amazon Comprehend multi-region endpoint
   - url: 'https://comprehend.{region}.amazonaws.com'
@@ -77,13 +81,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The Amazon Comprehend multi-region endpoint
   - url: 'http://comprehend.{region}.amazonaws.com.cn'
@@ -106,7 +114,7 @@ servers:
     description: The Amazon Comprehend endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
-  '/#X-Amz-Target=Comprehend_20171127.BatchDetectDominantLanguage':
+  /#X-Amz-Target=Comprehend_20171127.BatchDetectDominantLanguage:
     post:
       operationId: BatchDetectDominantLanguage
       description: 'Determines the dominant language of the input text for a batch of documents. For a list of languages that Amazon Comprehend can detect, see <a href="https://docs.aws.amazon.com/comprehend/latest/dg/how-languages.html">Amazon Comprehend Supported Languages</a>. '
@@ -163,7 +171,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Comprehend_20171127.BatchDetectEntities':
+  /#X-Amz-Target=Comprehend_20171127.BatchDetectEntities:
     post:
       operationId: BatchDetectEntities
       description: 'Inspects the text of a batch of documents for named entities and returns information about them. For more information about named entities, see <a>how-entities</a> '
@@ -226,7 +234,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Comprehend_20171127.BatchDetectKeyPhrases':
+  /#X-Amz-Target=Comprehend_20171127.BatchDetectKeyPhrases:
     post:
       operationId: BatchDetectKeyPhrases
       description: Detects the key noun phrases found in a batch of documents.
@@ -289,7 +297,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Comprehend_20171127.BatchDetectSentiment':
+  /#X-Amz-Target=Comprehend_20171127.BatchDetectSentiment:
     post:
       operationId: BatchDetectSentiment
       description: 'Inspects a batch of documents and returns an inference of the prevailing sentiment, <code>POSITIVE</code>, <code>NEUTRAL</code>, <code>MIXED</code>, or <code>NEGATIVE</code>, in each one.'
@@ -352,7 +360,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Comprehend_20171127.BatchDetectSyntax':
+  /#X-Amz-Target=Comprehend_20171127.BatchDetectSyntax:
     post:
       operationId: BatchDetectSyntax
       description: 'Inspects the text of a batch of documents for the syntax and part of speech of the words in the document and returns information about them. For more information, see <a>how-syntax</a>.'
@@ -415,7 +423,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Comprehend_20171127.ClassifyDocument':
+  /#X-Amz-Target=Comprehend_20171127.ClassifyDocument:
     post:
       operationId: ClassifyDocument
       description: 'Creates a new document classification request to analyze a single document in real-time, using a previously created and trained custom model and an endpoint.'
@@ -472,7 +480,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Comprehend_20171127.CreateDocumentClassifier':
+  /#X-Amz-Target=Comprehend_20171127.CreateDocumentClassifier:
     post:
       operationId: CreateDocumentClassifier
       description: 'Creates a new document classifier that you can use to categorize documents. To create a classifier, you provide a set of training documents that labeled with the categories that you want to use. After the classifier is trained you can use it to categorize a set of labeled documents into the categories. For more information, see <a>how-document-classification</a>.'
@@ -553,7 +561,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Comprehend_20171127.CreateEndpoint':
+  /#X-Amz-Target=Comprehend_20171127.CreateEndpoint:
     post:
       operationId: CreateEndpoint
       description: 'Creates a model-specific endpoint for synchronous inference for a previously trained custom model '
@@ -634,7 +642,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Comprehend_20171127.CreateEntityRecognizer':
+  /#X-Amz-Target=Comprehend_20171127.CreateEntityRecognizer:
     post:
       operationId: CreateEntityRecognizer
       description: 'Creates an entity recognizer using submitted files. After your <code>CreateEntityRecognizer</code> request is submitted, you can check job status using the API. '
@@ -715,7 +723,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Comprehend_20171127.DeleteDocumentClassifier':
+  /#X-Amz-Target=Comprehend_20171127.DeleteDocumentClassifier:
     post:
       operationId: DeleteDocumentClassifier
       description: '<p>Deletes a previously created document classifier</p> <p>Only those classifiers that are in terminated states (IN_ERROR, TRAINED) will be deleted. If an active inference job is using the model, a <code>ResourceInUseException</code> will be returned.</p> <p>This is an asynchronous action that puts the classifier into a DELETING state, and it is then removed by a background job. Once removed, the classifier disappears from your account and is no longer available for use. </p>'
@@ -784,7 +792,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Comprehend_20171127.DeleteEndpoint':
+  /#X-Amz-Target=Comprehend_20171127.DeleteEndpoint:
     post:
       operationId: DeleteEndpoint
       description: Deletes a model-specific endpoint for a previously-trained custom model. All endpoints must be deleted in order for the model to be deleted.
@@ -847,7 +855,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Comprehend_20171127.DeleteEntityRecognizer':
+  /#X-Amz-Target=Comprehend_20171127.DeleteEntityRecognizer:
     post:
       operationId: DeleteEntityRecognizer
       description: '<p>Deletes an entity recognizer.</p> <p>Only those recognizers that are in terminated states (IN_ERROR, TRAINED) will be deleted. If an active inference job is using the model, a <code>ResourceInUseException</code> will be returned.</p> <p>This is an asynchronous action that puts the recognizer into a DELETING state, and it is then removed by a background job. Once removed, the recognizer disappears from your account and is no longer available for use. </p>'
@@ -916,7 +924,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Comprehend_20171127.DescribeDocumentClassificationJob':
+  /#X-Amz-Target=Comprehend_20171127.DescribeDocumentClassificationJob:
     post:
       operationId: DescribeDocumentClassificationJob
       description: Gets the properties associated with a document classification job. Use this operation to get the status of a classification job.
@@ -973,7 +981,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Comprehend_20171127.DescribeDocumentClassifier':
+  /#X-Amz-Target=Comprehend_20171127.DescribeDocumentClassifier:
     post:
       operationId: DescribeDocumentClassifier
       description: Gets the properties associated with a document classifier.
@@ -1030,7 +1038,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Comprehend_20171127.DescribeDominantLanguageDetectionJob':
+  /#X-Amz-Target=Comprehend_20171127.DescribeDominantLanguageDetectionJob:
     post:
       operationId: DescribeDominantLanguageDetectionJob
       description: Gets the properties associated with a dominant language detection job. Use this operation to get the status of a detection job.
@@ -1087,7 +1095,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Comprehend_20171127.DescribeEndpoint':
+  /#X-Amz-Target=Comprehend_20171127.DescribeEndpoint:
     post:
       operationId: DescribeEndpoint
       description: Gets the properties associated with a specific endpoint. Use this operation to get the status of an endpoint.
@@ -1144,7 +1152,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Comprehend_20171127.DescribeEntitiesDetectionJob':
+  /#X-Amz-Target=Comprehend_20171127.DescribeEntitiesDetectionJob:
     post:
       operationId: DescribeEntitiesDetectionJob
       description: Gets the properties associated with an entities detection job. Use this operation to get the status of a detection job.
@@ -1201,7 +1209,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Comprehend_20171127.DescribeEntityRecognizer':
+  /#X-Amz-Target=Comprehend_20171127.DescribeEntityRecognizer:
     post:
       operationId: DescribeEntityRecognizer
       description: 'Provides details about an entity recognizer including status, S3 buckets containing training data, recognizer metadata, metrics, and so on.'
@@ -1258,7 +1266,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Comprehend_20171127.DescribeKeyPhrasesDetectionJob':
+  /#X-Amz-Target=Comprehend_20171127.DescribeKeyPhrasesDetectionJob:
     post:
       operationId: DescribeKeyPhrasesDetectionJob
       description: Gets the properties associated with a key phrases detection job. Use this operation to get the status of a detection job.
@@ -1315,7 +1323,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Comprehend_20171127.DescribeSentimentDetectionJob':
+  /#X-Amz-Target=Comprehend_20171127.DescribeSentimentDetectionJob:
     post:
       operationId: DescribeSentimentDetectionJob
       description: Gets the properties associated with a sentiment detection job. Use this operation to get the status of a detection job.
@@ -1372,7 +1380,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Comprehend_20171127.DescribeTopicsDetectionJob':
+  /#X-Amz-Target=Comprehend_20171127.DescribeTopicsDetectionJob:
     post:
       operationId: DescribeTopicsDetectionJob
       description: Gets the properties associated with a topic detection job. Use this operation to get the status of a detection job.
@@ -1429,7 +1437,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Comprehend_20171127.DetectDominantLanguage':
+  /#X-Amz-Target=Comprehend_20171127.DetectDominantLanguage:
     post:
       operationId: DetectDominantLanguage
       description: 'Determines the dominant language of the input text. For a list of languages that Amazon Comprehend can detect, see <a href="https://docs.aws.amazon.com/comprehend/latest/dg/how-languages.html">Amazon Comprehend Supported Languages</a>. '
@@ -1480,7 +1488,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Comprehend_20171127.DetectEntities':
+  /#X-Amz-Target=Comprehend_20171127.DetectEntities:
     post:
       operationId: DetectEntities
       description: 'Inspects text for named entities, and returns information about them. For more information, about named entities, see <a>how-entities</a>. '
@@ -1543,7 +1551,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Comprehend_20171127.DetectKeyPhrases':
+  /#X-Amz-Target=Comprehend_20171127.DetectKeyPhrases:
     post:
       operationId: DetectKeyPhrases
       description: 'Detects the key noun phrases found in the text. '
@@ -1600,7 +1608,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Comprehend_20171127.DetectSentiment':
+  /#X-Amz-Target=Comprehend_20171127.DetectSentiment:
     post:
       operationId: DetectSentiment
       description: 'Inspects text and returns an inference of the prevailing sentiment (<code>POSITIVE</code>, <code>NEUTRAL</code>, <code>MIXED</code>, or <code>NEGATIVE</code>). '
@@ -1657,7 +1665,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Comprehend_20171127.DetectSyntax':
+  /#X-Amz-Target=Comprehend_20171127.DetectSyntax:
     post:
       operationId: DetectSyntax
       description: 'Inspects text for syntax and the part of speech of words in the document. For more information, <a>how-syntax</a>.'
@@ -1714,7 +1722,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Comprehend_20171127.ListDocumentClassificationJobs':
+  /#X-Amz-Target=Comprehend_20171127.ListDocumentClassificationJobs:
     post:
       operationId: ListDocumentClassificationJobs
       description: Gets a list of the documentation classification jobs that you have submitted.
@@ -1783,7 +1791,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Comprehend_20171127.ListDocumentClassifiers':
+  /#X-Amz-Target=Comprehend_20171127.ListDocumentClassifiers:
     post:
       operationId: ListDocumentClassifiers
       description: Gets a list of the document classifiers that you have created.
@@ -1852,7 +1860,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Comprehend_20171127.ListDominantLanguageDetectionJobs':
+  /#X-Amz-Target=Comprehend_20171127.ListDominantLanguageDetectionJobs:
     post:
       operationId: ListDominantLanguageDetectionJobs
       description: Gets a list of the dominant language detection jobs that you have submitted.
@@ -1921,7 +1929,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Comprehend_20171127.ListEndpoints':
+  /#X-Amz-Target=Comprehend_20171127.ListEndpoints:
     post:
       operationId: ListEndpoints
       description: Gets a list of all existing endpoints that you've created.
@@ -1972,7 +1980,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Comprehend_20171127.ListEntitiesDetectionJobs':
+  /#X-Amz-Target=Comprehend_20171127.ListEntitiesDetectionJobs:
     post:
       operationId: ListEntitiesDetectionJobs
       description: Gets a list of the entity detection jobs that you have submitted.
@@ -2041,7 +2049,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Comprehend_20171127.ListEntityRecognizers':
+  /#X-Amz-Target=Comprehend_20171127.ListEntityRecognizers:
     post:
       operationId: ListEntityRecognizers
       description: '<p>Gets a list of the properties of all entity recognizers that you created, including recognizers currently in training. Allows you to filter the list of recognizers based on criteria such as status and submission time. This call returns up to 500 entity recognizers in the list, with a default number of 100 recognizers in the list.</p> <p>The results of this list are not in any particular order. Please get the list and sort locally if needed.</p>'
@@ -2110,7 +2118,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Comprehend_20171127.ListKeyPhrasesDetectionJobs':
+  /#X-Amz-Target=Comprehend_20171127.ListKeyPhrasesDetectionJobs:
     post:
       operationId: ListKeyPhrasesDetectionJobs
       description: Get a list of key phrase detection jobs that you have submitted.
@@ -2179,7 +2187,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Comprehend_20171127.ListSentimentDetectionJobs':
+  /#X-Amz-Target=Comprehend_20171127.ListSentimentDetectionJobs:
     post:
       operationId: ListSentimentDetectionJobs
       description: Gets a list of sentiment detection jobs that you have submitted.
@@ -2248,7 +2256,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Comprehend_20171127.ListTagsForResource':
+  /#X-Amz-Target=Comprehend_20171127.ListTagsForResource:
     post:
       operationId: ListTagsForResource
       description: 'Lists all tags associated with a given Amazon Comprehend resource. '
@@ -2299,7 +2307,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Comprehend_20171127.ListTopicsDetectionJobs':
+  /#X-Amz-Target=Comprehend_20171127.ListTopicsDetectionJobs:
     post:
       operationId: ListTopicsDetectionJobs
       description: Gets a list of the topic detection jobs that you have submitted.
@@ -2368,7 +2376,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Comprehend_20171127.StartDocumentClassificationJob':
+  /#X-Amz-Target=Comprehend_20171127.StartDocumentClassificationJob:
     post:
       operationId: StartDocumentClassificationJob
       description: Starts an asynchronous document classification job. Use the operation to track the progress of the job.
@@ -2437,7 +2445,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Comprehend_20171127.StartDominantLanguageDetectionJob':
+  /#X-Amz-Target=Comprehend_20171127.StartDominantLanguageDetectionJob:
     post:
       operationId: StartDominantLanguageDetectionJob
       description: Starts an asynchronous dominant language detection job for a collection of documents. Use the operation to track the status of a job.
@@ -2494,7 +2502,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Comprehend_20171127.StartEntitiesDetectionJob':
+  /#X-Amz-Target=Comprehend_20171127.StartEntitiesDetectionJob:
     post:
       operationId: StartEntitiesDetectionJob
       description: '<p>Starts an asynchronous entity detection job for a collection of documents. Use the operation to track the status of a job.</p> <p>This API can be used for either standard entity detection or custom entity recognition. In order to be used for custom entity recognition, the optional <code>EntityRecognizerArn</code> must be used in order to provide access to the recognizer being used to detect the custom entity.</p>'
@@ -2563,7 +2571,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Comprehend_20171127.StartKeyPhrasesDetectionJob':
+  /#X-Amz-Target=Comprehend_20171127.StartKeyPhrasesDetectionJob:
     post:
       operationId: StartKeyPhrasesDetectionJob
       description: Starts an asynchronous key phrase detection job for a collection of documents. Use the operation to track the status of a job.
@@ -2620,7 +2628,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Comprehend_20171127.StartSentimentDetectionJob':
+  /#X-Amz-Target=Comprehend_20171127.StartSentimentDetectionJob:
     post:
       operationId: StartSentimentDetectionJob
       description: Starts an asynchronous sentiment detection job for a collection of documents. use the operation to track the status of a job.
@@ -2677,7 +2685,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Comprehend_20171127.StartTopicsDetectionJob':
+  /#X-Amz-Target=Comprehend_20171127.StartTopicsDetectionJob:
     post:
       operationId: StartTopicsDetectionJob
       description: Starts an asynchronous topic detection job. Use the <code>DescribeTopicDetectionJob</code> operation to track the status of a job.
@@ -2734,7 +2742,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Comprehend_20171127.StopDominantLanguageDetectionJob':
+  /#X-Amz-Target=Comprehend_20171127.StopDominantLanguageDetectionJob:
     post:
       operationId: StopDominantLanguageDetectionJob
       description: '<p>Stops a dominant language detection job in progress.</p> <p>If the job state is <code>IN_PROGRESS</code> the job is marked for termination and put into the <code>STOP_REQUESTED</code> state. If the job completes before it can be stopped, it is put into the <code>COMPLETED</code> state; otherwise the job is stopped and put into the <code>STOPPED</code> state.</p> <p>If the job is in the <code>COMPLETED</code> or <code>FAILED</code> state when you call the <code>StopDominantLanguageDetectionJob</code> operation, the operation returns a 400 Internal Request Exception. </p> <p>When a job is stopped, any documents already processed are written to the output location.</p>'
@@ -2785,7 +2793,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Comprehend_20171127.StopEntitiesDetectionJob':
+  /#X-Amz-Target=Comprehend_20171127.StopEntitiesDetectionJob:
     post:
       operationId: StopEntitiesDetectionJob
       description: '<p>Stops an entities detection job in progress.</p> <p>If the job state is <code>IN_PROGRESS</code> the job is marked for termination and put into the <code>STOP_REQUESTED</code> state. If the job completes before it can be stopped, it is put into the <code>COMPLETED</code> state; otherwise the job is stopped and put into the <code>STOPPED</code> state.</p> <p>If the job is in the <code>COMPLETED</code> or <code>FAILED</code> state when you call the <code>StopDominantLanguageDetectionJob</code> operation, the operation returns a 400 Internal Request Exception. </p> <p>When a job is stopped, any documents already processed are written to the output location.</p>'
@@ -2836,7 +2844,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Comprehend_20171127.StopKeyPhrasesDetectionJob':
+  /#X-Amz-Target=Comprehend_20171127.StopKeyPhrasesDetectionJob:
     post:
       operationId: StopKeyPhrasesDetectionJob
       description: '<p>Stops a key phrases detection job in progress.</p> <p>If the job state is <code>IN_PROGRESS</code> the job is marked for termination and put into the <code>STOP_REQUESTED</code> state. If the job completes before it can be stopped, it is put into the <code>COMPLETED</code> state; otherwise the job is stopped and put into the <code>STOPPED</code> state.</p> <p>If the job is in the <code>COMPLETED</code> or <code>FAILED</code> state when you call the <code>StopDominantLanguageDetectionJob</code> operation, the operation returns a 400 Internal Request Exception. </p> <p>When a job is stopped, any documents already processed are written to the output location.</p>'
@@ -2887,7 +2895,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Comprehend_20171127.StopSentimentDetectionJob':
+  /#X-Amz-Target=Comprehend_20171127.StopSentimentDetectionJob:
     post:
       operationId: StopSentimentDetectionJob
       description: '<p>Stops a sentiment detection job in progress.</p> <p>If the job state is <code>IN_PROGRESS</code> the job is marked for termination and put into the <code>STOP_REQUESTED</code> state. If the job completes before it can be stopped, it is put into the <code>COMPLETED</code> state; otherwise the job is be stopped and put into the <code>STOPPED</code> state.</p> <p>If the job is in the <code>COMPLETED</code> or <code>FAILED</code> state when you call the <code>StopDominantLanguageDetectionJob</code> operation, the operation returns a 400 Internal Request Exception. </p> <p>When a job is stopped, any documents already processed are written to the output location.</p>'
@@ -2938,7 +2946,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Comprehend_20171127.StopTrainingDocumentClassifier':
+  /#X-Amz-Target=Comprehend_20171127.StopTrainingDocumentClassifier:
     post:
       operationId: StopTrainingDocumentClassifier
       description: '<p>Stops a document classifier training job while in progress.</p> <p>If the training job state is <code>TRAINING</code>, the job is marked for termination and put into the <code>STOP_REQUESTED</code> state. If the training job completes before it can be stopped, it is put into the <code>TRAINED</code>; otherwise the training job is stopped and put into the <code>STOPPED</code> state and the service sends back an HTTP 200 response with an empty HTTP body. </p>'
@@ -2995,7 +3003,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Comprehend_20171127.StopTrainingEntityRecognizer':
+  /#X-Amz-Target=Comprehend_20171127.StopTrainingEntityRecognizer:
     post:
       operationId: StopTrainingEntityRecognizer
       description: '<p>Stops an entity recognizer training job while in progress.</p> <p>If the training job state is <code>TRAINING</code>, the job is marked for termination and put into the <code>STOP_REQUESTED</code> state. If the training job completes before it can be stopped, it is put into the <code>TRAINED</code>; otherwise the training job is stopped and putted into the <code>STOPPED</code> state and the service sends back an HTTP 200 response with an empty HTTP body.</p>'
@@ -3052,7 +3060,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Comprehend_20171127.TagResource':
+  /#X-Amz-Target=Comprehend_20171127.TagResource:
     post:
       operationId: TagResource
       description: 'Associates a specific tag with an Amazon Comprehend resource. A tag is a key-value pair that adds as a metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department. '
@@ -3115,7 +3123,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Comprehend_20171127.UntagResource':
+  /#X-Amz-Target=Comprehend_20171127.UntagResource:
     post:
       operationId: UntagResource
       description: 'Removes a specific tag associated with an Amazon Comprehend resource. '
@@ -3178,7 +3186,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/#X-Amz-Target=Comprehend_20171127.UpdateEndpoint':
+  /#X-Amz-Target=Comprehend_20171127.UpdateEndpoint:
     post:
       operationId: UpdateEndpoint
       description: Updates information about the specified endpoint.

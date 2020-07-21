@@ -51,13 +51,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The Amazon ElastiCache multi-region endpoint
   - url: 'https://elasticache.{region}.amazonaws.com'
@@ -77,13 +81,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The Amazon ElastiCache multi-region endpoint
   - url: 'http://elasticache.{region}.amazonaws.com.cn'
@@ -106,7 +114,7 @@ servers:
     description: The Amazon ElastiCache endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
-  '/#Action=AddTagsToResource':
+  /#Action=AddTagsToResource:
     get:
       x-aws-operation-name: AddTagsToResource
       operationId: GET_AddTagsToResource
@@ -234,7 +242,7 @@ paths:
             type: string
             enum:
               - '2015-02-02'
-  '/#Action=AuthorizeCacheSecurityGroupIngress':
+  /#Action=AuthorizeCacheSecurityGroupIngress:
     get:
       x-aws-operation-name: AuthorizeCacheSecurityGroupIngress
       operationId: GET_AuthorizeCacheSecurityGroupIngress
@@ -378,7 +386,7 @@ paths:
             type: string
             enum:
               - '2015-02-02'
-  '/#Action=BatchApplyUpdateAction':
+  /#Action=BatchApplyUpdateAction:
     get:
       x-aws-operation-name: BatchApplyUpdateAction
       operationId: GET_BatchApplyUpdateAction
@@ -492,7 +500,7 @@ paths:
             type: string
             enum:
               - '2015-02-02'
-  '/#Action=BatchStopUpdateAction':
+  /#Action=BatchStopUpdateAction:
     get:
       x-aws-operation-name: BatchStopUpdateAction
       operationId: GET_BatchStopUpdateAction
@@ -606,7 +614,7 @@ paths:
             type: string
             enum:
               - '2015-02-02'
-  '/#Action=CompleteMigration':
+  /#Action=CompleteMigration:
     get:
       x-aws-operation-name: CompleteMigration
       operationId: GET_CompleteMigration
@@ -720,7 +728,7 @@ paths:
             type: string
             enum:
               - '2015-02-02'
-  '/#Action=CopySnapshot':
+  /#Action=CopySnapshot:
     get:
       x-aws-operation-name: CopySnapshot
       operationId: GET_CopySnapshot
@@ -882,7 +890,7 @@ paths:
             type: string
             enum:
               - '2015-02-02'
-  '/#Action=CreateCacheCluster':
+  /#Action=CreateCacheCluster:
     get:
       x-aws-operation-name: CreateCacheCluster
       operationId: GET_CreateCacheCluster
@@ -1267,7 +1275,7 @@ paths:
             type: string
             enum:
               - '2015-02-02'
-  '/#Action=CreateCacheParameterGroup':
+  /#Action=CreateCacheParameterGroup:
     get:
       x-aws-operation-name: CreateCacheParameterGroup
       operationId: GET_CreateCacheParameterGroup
@@ -1411,7 +1419,7 @@ paths:
             type: string
             enum:
               - '2015-02-02'
-  '/#Action=CreateCacheSecurityGroup':
+  /#Action=CreateCacheSecurityGroup:
     get:
       x-aws-operation-name: CreateCacheSecurityGroup
       operationId: GET_CreateCacheSecurityGroup
@@ -1537,7 +1545,7 @@ paths:
             type: string
             enum:
               - '2015-02-02'
-  '/#Action=CreateCacheSubnetGroup':
+  /#Action=CreateCacheSubnetGroup:
     get:
       x-aws-operation-name: CreateCacheSubnetGroup
       operationId: GET_CreateCacheSubnetGroup
@@ -1671,7 +1679,7 @@ paths:
             type: string
             enum:
               - '2015-02-02'
-  '/#Action=CreateGlobalReplicationGroup':
+  /#Action=CreateGlobalReplicationGroup:
     get:
       x-aws-operation-name: CreateGlobalReplicationGroup
       operationId: GET_CreateGlobalReplicationGroup
@@ -1815,7 +1823,7 @@ paths:
             type: string
             enum:
               - '2015-02-02'
-  '/#Action=CreateReplicationGroup':
+  /#Action=CreateReplicationGroup:
     get:
       x-aws-operation-name: CreateReplicationGroup
       operationId: GET_CreateReplicationGroup
@@ -2283,7 +2291,7 @@ paths:
             type: string
             enum:
               - '2015-02-02'
-  '/#Action=CreateSnapshot':
+  /#Action=CreateSnapshot:
     get:
       x-aws-operation-name: CreateSnapshot
       operationId: GET_CreateSnapshot
@@ -2481,7 +2489,7 @@ paths:
             type: string
             enum:
               - '2015-02-02'
-  '/#Action=DecreaseNodeGroupsInGlobalReplicationGroup':
+  /#Action=DecreaseNodeGroupsInGlobalReplicationGroup:
     get:
       x-aws-operation-name: DecreaseNodeGroupsInGlobalReplicationGroup
       operationId: GET_DecreaseNodeGroupsInGlobalReplicationGroup
@@ -2629,7 +2637,7 @@ paths:
             type: string
             enum:
               - '2015-02-02'
-  '/#Action=DecreaseReplicaCount':
+  /#Action=DecreaseReplicaCount:
     get:
       x-aws-operation-name: DecreaseReplicaCount
       operationId: GET_DecreaseReplicaCount
@@ -2873,7 +2881,7 @@ paths:
             type: string
             enum:
               - '2015-02-02'
-  '/#Action=DeleteCacheCluster':
+  /#Action=DeleteCacheCluster:
     get:
       x-aws-operation-name: DeleteCacheCluster
       operationId: GET_DeleteCacheCluster
@@ -3035,7 +3043,7 @@ paths:
             type: string
             enum:
               - '2015-02-02'
-  '/#Action=DeleteCacheParameterGroup':
+  /#Action=DeleteCacheParameterGroup:
     get:
       x-aws-operation-name: DeleteCacheParameterGroup
       operationId: GET_DeleteCacheParameterGroup
@@ -3147,7 +3155,7 @@ paths:
             type: string
             enum:
               - '2015-02-02'
-  '/#Action=DeleteCacheSecurityGroup':
+  /#Action=DeleteCacheSecurityGroup:
     get:
       x-aws-operation-name: DeleteCacheSecurityGroup
       operationId: GET_DeleteCacheSecurityGroup
@@ -3259,7 +3267,7 @@ paths:
             type: string
             enum:
               - '2015-02-02'
-  '/#Action=DeleteCacheSubnetGroup':
+  /#Action=DeleteCacheSubnetGroup:
     get:
       x-aws-operation-name: DeleteCacheSubnetGroup
       operationId: GET_DeleteCacheSubnetGroup
@@ -3347,7 +3355,7 @@ paths:
             type: string
             enum:
               - '2015-02-02'
-  '/#Action=DeleteGlobalReplicationGroup':
+  /#Action=DeleteGlobalReplicationGroup:
     get:
       x-aws-operation-name: DeleteGlobalReplicationGroup
       operationId: GET_DeleteGlobalReplicationGroup
@@ -3461,7 +3469,7 @@ paths:
             type: string
             enum:
               - '2015-02-02'
-  '/#Action=DeleteReplicationGroup':
+  /#Action=DeleteReplicationGroup:
     get:
       x-aws-operation-name: DeleteReplicationGroup
       operationId: GET_DeleteReplicationGroup
@@ -3629,7 +3637,7 @@ paths:
             type: string
             enum:
               - '2015-02-02'
-  '/#Action=DeleteSnapshot':
+  /#Action=DeleteSnapshot:
     get:
       x-aws-operation-name: DeleteSnapshot
       operationId: GET_DeleteSnapshot
@@ -3749,7 +3757,7 @@ paths:
             type: string
             enum:
               - '2015-02-02'
-  '/#Action=DescribeCacheClusters':
+  /#Action=DescribeCacheClusters:
     get:
       x-aws-operation-name: DescribeCacheClusters
       operationId: GET_DescribeCacheClusters
@@ -3893,7 +3901,7 @@ paths:
             type: string
             enum:
               - '2015-02-02'
-  '/#Action=DescribeCacheEngineVersions':
+  /#Action=DescribeCacheEngineVersions:
     get:
       x-aws-operation-name: DescribeCacheEngineVersions
       operationId: GET_DescribeCacheEngineVersions
@@ -4007,7 +4015,7 @@ paths:
             type: string
             enum:
               - '2015-02-02'
-  '/#Action=DescribeCacheParameterGroups':
+  /#Action=DescribeCacheParameterGroups:
     get:
       x-aws-operation-name: DescribeCacheParameterGroups
       operationId: GET_DescribeCacheParameterGroups
@@ -4139,7 +4147,7 @@ paths:
             type: string
             enum:
               - '2015-02-02'
-  '/#Action=DescribeCacheParameters':
+  /#Action=DescribeCacheParameters:
     get:
       x-aws-operation-name: DescribeCacheParameters
       operationId: GET_DescribeCacheParameters
@@ -4277,7 +4285,7 @@ paths:
             type: string
             enum:
               - '2015-02-02'
-  '/#Action=DescribeCacheSecurityGroups':
+  /#Action=DescribeCacheSecurityGroups:
     get:
       x-aws-operation-name: DescribeCacheSecurityGroups
       operationId: GET_DescribeCacheSecurityGroups
@@ -4409,7 +4417,7 @@ paths:
             type: string
             enum:
               - '2015-02-02'
-  '/#Action=DescribeCacheSubnetGroups':
+  /#Action=DescribeCacheSubnetGroups:
     get:
       x-aws-operation-name: DescribeCacheSubnetGroups
       operationId: GET_DescribeCacheSubnetGroups
@@ -4517,7 +4525,7 @@ paths:
             type: string
             enum:
               - '2015-02-02'
-  '/#Action=DescribeEngineDefaultParameters':
+  /#Action=DescribeEngineDefaultParameters:
     get:
       x-aws-operation-name: DescribeEngineDefaultParameters
       operationId: GET_DescribeEngineDefaultParameters
@@ -4637,7 +4645,7 @@ paths:
             type: string
             enum:
               - '2015-02-02'
-  '/#Action=DescribeEvents':
+  /#Action=DescribeEvents:
     get:
       x-aws-operation-name: DescribeEvents
       operationId: GET_DescribeEvents
@@ -4789,7 +4797,7 @@ paths:
             type: string
             enum:
               - '2015-02-02'
-  '/#Action=DescribeGlobalReplicationGroups':
+  /#Action=DescribeGlobalReplicationGroups:
     get:
       x-aws-operation-name: DescribeGlobalReplicationGroups
       operationId: GET_DescribeGlobalReplicationGroups
@@ -4927,7 +4935,7 @@ paths:
             type: string
             enum:
               - '2015-02-02'
-  '/#Action=DescribeReplicationGroups':
+  /#Action=DescribeReplicationGroups:
     get:
       x-aws-operation-name: DescribeReplicationGroups
       operationId: GET_DescribeReplicationGroups
@@ -5059,7 +5067,7 @@ paths:
             type: string
             enum:
               - '2015-02-02'
-  '/#Action=DescribeReservedCacheNodes':
+  /#Action=DescribeReservedCacheNodes:
     get:
       x-aws-operation-name: DescribeReservedCacheNodes
       operationId: GET_DescribeReservedCacheNodes
@@ -5221,7 +5229,7 @@ paths:
             type: string
             enum:
               - '2015-02-02'
-  '/#Action=DescribeReservedCacheNodesOfferings':
+  /#Action=DescribeReservedCacheNodesOfferings:
     get:
       x-aws-operation-name: DescribeReservedCacheNodesOfferings
       operationId: GET_DescribeReservedCacheNodesOfferings
@@ -5377,7 +5385,7 @@ paths:
             type: string
             enum:
               - '2015-02-02'
-  '/#Action=DescribeServiceUpdates':
+  /#Action=DescribeServiceUpdates:
     get:
       x-aws-operation-name: DescribeServiceUpdates
       operationId: GET_DescribeServiceUpdates
@@ -5518,7 +5526,7 @@ paths:
             type: string
             enum:
               - '2015-02-02'
-  '/#Action=DescribeSnapshots':
+  /#Action=DescribeSnapshots:
     get:
       x-aws-operation-name: DescribeSnapshots
       operationId: GET_DescribeSnapshots
@@ -5686,7 +5694,7 @@ paths:
             type: string
             enum:
               - '2015-02-02'
-  '/#Action=DescribeUpdateActions':
+  /#Action=DescribeUpdateActions:
     get:
       x-aws-operation-name: DescribeUpdateActions
       operationId: GET_DescribeUpdateActions
@@ -5868,7 +5876,7 @@ paths:
             type: string
             enum:
               - '2015-02-02'
-  '/#Action=DisassociateGlobalReplicationGroup':
+  /#Action=DisassociateGlobalReplicationGroup:
     get:
       x-aws-operation-name: DisassociateGlobalReplicationGroup
       operationId: GET_DisassociateGlobalReplicationGroup
@@ -6000,7 +6008,7 @@ paths:
             type: string
             enum:
               - '2015-02-02'
-  '/#Action=FailoverGlobalReplicationGroup':
+  /#Action=FailoverGlobalReplicationGroup:
     get:
       x-aws-operation-name: FailoverGlobalReplicationGroup
       operationId: GET_FailoverGlobalReplicationGroup
@@ -6132,7 +6140,7 @@ paths:
             type: string
             enum:
               - '2015-02-02'
-  '/#Action=IncreaseNodeGroupsInGlobalReplicationGroup':
+  /#Action=IncreaseNodeGroupsInGlobalReplicationGroup:
     get:
       x-aws-operation-name: IncreaseNodeGroupsInGlobalReplicationGroup
       operationId: GET_IncreaseNodeGroupsInGlobalReplicationGroup
@@ -6260,7 +6268,7 @@ paths:
             type: string
             enum:
               - '2015-02-02'
-  '/#Action=IncreaseReplicaCount':
+  /#Action=IncreaseReplicaCount:
     get:
       x-aws-operation-name: IncreaseReplicaCount
       operationId: GET_IncreaseReplicaCount
@@ -6496,7 +6504,7 @@ paths:
             type: string
             enum:
               - '2015-02-02'
-  '/#Action=ListAllowedNodeTypeModifications':
+  /#Action=ListAllowedNodeTypeModifications:
     get:
       x-aws-operation-name: ListAllowedNodeTypeModifications
       operationId: GET_ListAllowedNodeTypeModifications
@@ -6622,7 +6630,7 @@ paths:
             type: string
             enum:
               - '2015-02-02'
-  '/#Action=ListTagsForResource':
+  /#Action=ListTagsForResource:
     get:
       x-aws-operation-name: ListTagsForResource
       operationId: GET_ListTagsForResource
@@ -6730,7 +6738,7 @@ paths:
             type: string
             enum:
               - '2015-02-02'
-  '/#Action=ModifyCacheCluster':
+  /#Action=ModifyCacheCluster:
     get:
       x-aws-operation-name: ModifyCacheCluster
       operationId: GET_ModifyCacheCluster
@@ -7056,7 +7064,7 @@ paths:
             type: string
             enum:
               - '2015-02-02'
-  '/#Action=ModifyCacheParameterGroup':
+  /#Action=ModifyCacheParameterGroup:
     get:
       x-aws-operation-name: ModifyCacheParameterGroup
       operationId: GET_ModifyCacheParameterGroup
@@ -7196,7 +7204,7 @@ paths:
             type: string
             enum:
               - '2015-02-02'
-  '/#Action=ModifyCacheSubnetGroup':
+  /#Action=ModifyCacheSubnetGroup:
     get:
       x-aws-operation-name: ModifyCacheSubnetGroup
       operationId: GET_ModifyCacheSubnetGroup
@@ -7330,7 +7338,7 @@ paths:
             type: string
             enum:
               - '2015-02-02'
-  '/#Action=ModifyGlobalReplicationGroup':
+  /#Action=ModifyGlobalReplicationGroup:
     get:
       x-aws-operation-name: ModifyGlobalReplicationGroup
       operationId: GET_ModifyGlobalReplicationGroup
@@ -7468,7 +7476,7 @@ paths:
             type: string
             enum:
               - '2015-02-02'
-  '/#Action=ModifyReplicationGroup':
+  /#Action=ModifyReplicationGroup:
     get:
       x-aws-operation-name: ModifyReplicationGroup
       operationId: GET_ModifyReplicationGroup
@@ -7835,7 +7843,7 @@ paths:
             type: string
             enum:
               - '2015-02-02'
-  '/#Action=ModifyReplicationGroupShardConfiguration':
+  /#Action=ModifyReplicationGroupShardConfiguration:
     get:
       x-aws-operation-name: ModifyReplicationGroupShardConfiguration
       operationId: GET_ModifyReplicationGroupShardConfiguration
@@ -8063,7 +8071,7 @@ paths:
             type: string
             enum:
               - '2015-02-02'
-  '/#Action=PurchaseReservedCacheNodesOffering':
+  /#Action=PurchaseReservedCacheNodesOffering:
     get:
       x-aws-operation-name: PurchaseReservedCacheNodesOffering
       operationId: GET_PurchaseReservedCacheNodesOffering
@@ -8207,7 +8215,7 @@ paths:
             type: string
             enum:
               - '2015-02-02'
-  '/#Action=RebalanceSlotsInGlobalReplicationGroup':
+  /#Action=RebalanceSlotsInGlobalReplicationGroup:
     get:
       x-aws-operation-name: RebalanceSlotsInGlobalReplicationGroup
       operationId: GET_RebalanceSlotsInGlobalReplicationGroup
@@ -8321,7 +8329,7 @@ paths:
             type: string
             enum:
               - '2015-02-02'
-  '/#Action=RebootCacheCluster':
+  /#Action=RebootCacheCluster:
     get:
       x-aws-operation-name: RebootCacheCluster
       operationId: GET_RebootCacheCluster
@@ -8425,7 +8433,7 @@ paths:
             type: string
             enum:
               - '2015-02-02'
-  '/#Action=RemoveTagsFromResource':
+  /#Action=RemoveTagsFromResource:
     get:
       x-aws-operation-name: RemoveTagsFromResource
       operationId: GET_RemoveTagsFromResource
@@ -8553,7 +8561,7 @@ paths:
             type: string
             enum:
               - '2015-02-02'
-  '/#Action=ResetCacheParameterGroup':
+  /#Action=ResetCacheParameterGroup:
     get:
       x-aws-operation-name: ResetCacheParameterGroup
       operationId: GET_ResetCacheParameterGroup
@@ -8699,7 +8707,7 @@ paths:
             type: string
             enum:
               - '2015-02-02'
-  '/#Action=RevokeCacheSecurityGroupIngress':
+  /#Action=RevokeCacheSecurityGroupIngress:
     get:
       x-aws-operation-name: RevokeCacheSecurityGroupIngress
       operationId: GET_RevokeCacheSecurityGroupIngress
@@ -8843,7 +8851,7 @@ paths:
             type: string
             enum:
               - '2015-02-02'
-  '/#Action=StartMigration':
+  /#Action=StartMigration:
     get:
       x-aws-operation-name: StartMigration
       operationId: GET_StartMigration
@@ -8971,7 +8979,7 @@ paths:
             type: string
             enum:
               - '2015-02-02'
-  '/#Action=TestFailover':
+  /#Action=TestFailover:
     get:
       x-aws-operation-name: TestFailover
       operationId: GET_TestFailover

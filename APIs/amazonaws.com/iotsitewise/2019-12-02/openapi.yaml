@@ -51,13 +51,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The AWS IoT SiteWise multi-region endpoint
   - url: 'https://iotsitewise.{region}.amazonaws.com'
@@ -77,13 +81,17 @@ servers:
           - eu-west-2
           - eu-west-3
           - eu-central-1
+          - eu-south-1
+          - af-south-1
           - ap-northeast-1
           - ap-northeast-2
           - ap-northeast-3
           - ap-southeast-1
           - ap-southeast-2
+          - ap-east-1
           - ap-south-1
           - sa-east-1
+          - me-south-1
         default: us-east-1
     description: The AWS IoT SiteWise multi-region endpoint
   - url: 'http://iotsitewise.{region}.amazonaws.com.cn'
@@ -3105,7 +3113,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/properties/aggregates#aggregateTypes&resolution&startDate&endDate':
+  /properties/aggregates#aggregateTypes&resolution&startDate&endDate:
     get:
       operationId: GetAssetPropertyAggregates
       description: '<p>Gets aggregated values for an asset property. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/query-industrial-data.html#aggregates">Querying Aggregated Property Values</a> in the <i>AWS IoT SiteWise User Guide</i>.</p> <p>To identify an asset property, you must specify one of the following:</p> <ul> <li> <p>The <code>assetId</code> and <code>propertyId</code> of an asset property.</p> </li> <li> <p>A <code>propertyAlias</code>, which is a data stream alias (for example, <code>/company/windfarm/3/turbine/7/temperature</code>). To define an asset property''s alias, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html">UpdateAssetProperty</a>.</p> </li> </ul>'
@@ -3533,7 +3541,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/dashboards#projectId':
+  /dashboards#projectId:
     get:
       operationId: ListDashboards
       description: Retrieves a paginated list of dashboards for an AWS IoT SiteWise Monitor project.
@@ -3661,7 +3669,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/projects#portalId':
+  /projects#portalId:
     get:
       operationId: ListProjects
       description: Retrieves a paginated list of projects for an AWS IoT SiteWise Monitor portal.
@@ -3725,7 +3733,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/tags#resourceArn':
+  /tags#resourceArn:
     get:
       operationId: ListTagsForResource
       description: Retrieves the list of tags for an AWS IoT SiteWise resource.
@@ -3842,7 +3850,7 @@ paths:
                   maxProperties: 50
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
-  '/tags#resourceArn&tagKeys':
+  /tags#resourceArn&tagKeys:
     delete:
       operationId: UntagResource
       description: Removes a tag from an AWS IoT SiteWise resource.
