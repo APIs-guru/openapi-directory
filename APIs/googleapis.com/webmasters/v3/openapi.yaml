@@ -1,35 +1,37 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://www.googleapis.com/webmasters/v3'
+  - url: https://www.googleapis.com/webmasters/v3
 info:
   contact:
     name: Google
-    url: 'https://google.com'
+    url: https://google.com
+    x-twitter: youtube
   description: View Google Search Console data for your verified sites.
   license:
     name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
-  title: Search Console
+    url: http://creativecommons.org/licenses/by/3.0/
+  termsOfService: https://developers.google.com/terms/
+  title: Search Console API
   version: v3
   x-apiClientRegistration:
-    url: 'https://console.developers.google.com'
+    url: https://console.developers.google.com
   x-apisguru-categories:
-    - search
+    - analytics
+    - media
   x-logo:
-    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.31
       format: google
-      url: 'https://www.googleapis.com/discovery/v1/apis/webmasters/v3/rest'
+      url: https://www.googleapis.com/discovery/v1/apis/webmasters/v3/rest
       version: v1
   x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: webmasters
 externalDocs:
-  url: 'https://developers.google.com/webmaster-tools/'
+  url: https://developers.google.com/webmaster-tools/
 tags:
   - name: searchanalytics
   - name: sitemaps
@@ -40,88 +42,88 @@ paths:
       description: Lists the user's Search Console sites.
       operationId: webmasters.sites.list
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/SitesListResponse'
+                $ref: "#/components/schemas/SitesListResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/webmasters'
+            - https://www.googleapis.com/auth/webmasters
           Oauth2c:
-            - 'https://www.googleapis.com/auth/webmasters'
+            - https://www.googleapis.com/auth/webmasters
         - Oauth2:
-            - 'https://www.googleapis.com/auth/webmasters.readonly'
+            - https://www.googleapis.com/auth/webmasters.readonly
           Oauth2c:
-            - 'https://www.googleapis.com/auth/webmasters.readonly'
+            - https://www.googleapis.com/auth/webmasters.readonly
       tags:
         - sites
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
-  '/sites/{siteUrl}':
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
+  "/sites/{siteUrl}":
     delete:
       description: Removes a site from the set of the user's Search Console sites.
       operationId: webmasters.sites.delete
       parameters:
-        - description: 'The URI of the property as defined in Search Console. Examples: http://www.example.com/ or android-app://com.example/ Note: for property-sets, use the URI that starts with sc-set: which is used in Search Console URLs.'
+        - description: "The URI of the property as defined in Search Console. Examples: http://www.example.com/ or android-app://com.example/ Note: for property-sets, use the URI that starts with sc-set: which is used in Search Console URLs."
           in: path
           name: siteUrl
           required: true
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/webmasters'
+            - https://www.googleapis.com/auth/webmasters
           Oauth2c:
-            - 'https://www.googleapis.com/auth/webmasters'
+            - https://www.googleapis.com/auth/webmasters
       tags:
         - sites
     get:
       description: Retrieves information about specific site.
       operationId: webmasters.sites.get
       parameters:
-        - description: 'The URI of the property as defined in Search Console. Examples: http://www.example.com/ or android-app://com.example/ Note: for property-sets, use the URI that starts with sc-set: which is used in Search Console URLs.'
+        - description: "The URI of the property as defined in Search Console. Examples: http://www.example.com/ or android-app://com.example/ Note: for property-sets, use the URI that starts with sc-set: which is used in Search Console URLs."
           in: path
           name: siteUrl
           required: true
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/WmxSite'
+                $ref: "#/components/schemas/WmxSite"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/webmasters'
+            - https://www.googleapis.com/auth/webmasters
           Oauth2c:
-            - 'https://www.googleapis.com/auth/webmasters'
+            - https://www.googleapis.com/auth/webmasters
         - Oauth2:
-            - 'https://www.googleapis.com/auth/webmasters.readonly'
+            - https://www.googleapis.com/auth/webmasters.readonly
           Oauth2c:
-            - 'https://www.googleapis.com/auth/webmasters.readonly'
+            - https://www.googleapis.com/auth/webmasters.readonly
       tags:
         - sites
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
     put:
       description: Adds a site to the set of the user's sites in Search Console.
       operationId: webmasters.sites.add
@@ -133,32 +135,33 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/webmasters'
+            - https://www.googleapis.com/auth/webmasters
           Oauth2c:
-            - 'https://www.googleapis.com/auth/webmasters'
+            - https://www.googleapis.com/auth/webmasters
       tags:
         - sites
-  '/sites/{siteUrl}/searchAnalytics/query':
+  "/sites/{siteUrl}/searchAnalytics/query":
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
     post:
-      description: |-
+      description: >-
         Query your data with filters and parameters that you define. Returns zero or more rows grouped by the row keys that you define. You must define a date range of one or more days.
+
 
         When date is one of the group by values, any days without data are omitted from the result list. If you need to know which days have data, issue a broad date range query grouped by date for any metric, and see which day rows are returned.
       operationId: webmasters.searchanalytics.query
       parameters:
-        - description: 'The site''s URL, including protocol. For example: http://www.example.com/'
+        - description: "The site's URL, including protocol. For example: http://www.example.com/"
           in: path
           name: siteUrl
           required: true
@@ -168,160 +171,160 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SearchAnalyticsQueryRequest'
+              $ref: "#/components/schemas/SearchAnalyticsQueryRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/SearchAnalyticsQueryResponse'
+                $ref: "#/components/schemas/SearchAnalyticsQueryResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/webmasters'
+            - https://www.googleapis.com/auth/webmasters
           Oauth2c:
-            - 'https://www.googleapis.com/auth/webmasters'
+            - https://www.googleapis.com/auth/webmasters
         - Oauth2:
-            - 'https://www.googleapis.com/auth/webmasters.readonly'
+            - https://www.googleapis.com/auth/webmasters.readonly
           Oauth2c:
-            - 'https://www.googleapis.com/auth/webmasters.readonly'
+            - https://www.googleapis.com/auth/webmasters.readonly
       tags:
         - searchanalytics
-  '/sites/{siteUrl}/sitemaps':
+  "/sites/{siteUrl}/sitemaps":
     get:
-      description: 'Lists the sitemaps-entries submitted for this site, or included in the sitemap index file (if sitemapIndex is specified in the request).'
+      description: Lists the sitemaps-entries submitted for this site, or included in the sitemap index file (if sitemapIndex is specified in the request).
       operationId: webmasters.sitemaps.list
       parameters:
-        - description: 'The site''s URL, including protocol. For example: http://www.example.com/'
+        - description: "The site's URL, including protocol. For example: http://www.example.com/"
           in: path
           name: siteUrl
           required: true
           schema:
             type: string
-        - description: 'A URL of a site''s sitemap index. For example: http://www.example.com/sitemapindex.xml'
+        - description: "A URL of a site's sitemap index. For example: http://www.example.com/sitemapindex.xml"
           in: query
           name: sitemapIndex
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/SitemapsListResponse'
+                $ref: "#/components/schemas/SitemapsListResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/webmasters'
+            - https://www.googleapis.com/auth/webmasters
           Oauth2c:
-            - 'https://www.googleapis.com/auth/webmasters'
+            - https://www.googleapis.com/auth/webmasters
         - Oauth2:
-            - 'https://www.googleapis.com/auth/webmasters.readonly'
+            - https://www.googleapis.com/auth/webmasters.readonly
           Oauth2c:
-            - 'https://www.googleapis.com/auth/webmasters.readonly'
+            - https://www.googleapis.com/auth/webmasters.readonly
       tags:
         - sitemaps
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
-  '/sites/{siteUrl}/sitemaps/{feedpath}':
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
+  "/sites/{siteUrl}/sitemaps/{feedpath}":
     delete:
       description: Deletes a sitemap from this site.
       operationId: webmasters.sitemaps.delete
       parameters:
-        - description: 'The site''s URL, including protocol. For example: http://www.example.com/'
+        - description: "The site's URL, including protocol. For example: http://www.example.com/"
           in: path
           name: siteUrl
           required: true
           schema:
             type: string
-        - description: 'The URL of the actual sitemap. For example: http://www.example.com/sitemap.xml'
+        - description: "The URL of the actual sitemap. For example: http://www.example.com/sitemap.xml"
           in: path
           name: feedpath
           required: true
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/webmasters'
+            - https://www.googleapis.com/auth/webmasters
           Oauth2c:
-            - 'https://www.googleapis.com/auth/webmasters'
+            - https://www.googleapis.com/auth/webmasters
       tags:
         - sitemaps
     get:
       description: Retrieves information about a specific sitemap.
       operationId: webmasters.sitemaps.get
       parameters:
-        - description: 'The site''s URL, including protocol. For example: http://www.example.com/'
+        - description: "The site's URL, including protocol. For example: http://www.example.com/"
           in: path
           name: siteUrl
           required: true
           schema:
             type: string
-        - description: 'The URL of the actual sitemap. For example: http://www.example.com/sitemap.xml'
+        - description: "The URL of the actual sitemap. For example: http://www.example.com/sitemap.xml"
           in: path
           name: feedpath
           required: true
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/WmxSitemap'
+                $ref: "#/components/schemas/WmxSitemap"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/webmasters'
+            - https://www.googleapis.com/auth/webmasters
           Oauth2c:
-            - 'https://www.googleapis.com/auth/webmasters'
+            - https://www.googleapis.com/auth/webmasters
         - Oauth2:
-            - 'https://www.googleapis.com/auth/webmasters.readonly'
+            - https://www.googleapis.com/auth/webmasters.readonly
           Oauth2c:
-            - 'https://www.googleapis.com/auth/webmasters.readonly'
+            - https://www.googleapis.com/auth/webmasters.readonly
       tags:
         - sitemaps
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
     put:
       description: Submits a sitemap for a site.
       operationId: webmasters.sitemaps.submit
       parameters:
-        - description: 'The site''s URL, including protocol. For example: http://www.example.com/'
+        - description: "The site's URL, including protocol. For example: http://www.example.com/"
           in: path
           name: siteUrl
           required: true
           schema:
             type: string
-        - description: 'The URL of the sitemap to add. For example: http://www.example.com/sitemap.xml'
+        - description: "The URL of the sitemap to add. For example: http://www.example.com/sitemap.xml"
           in: path
           name: feedpath
           required: true
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/webmasters'
+            - https://www.googleapis.com/auth/webmasters
           Oauth2c:
-            - 'https://www.googleapis.com/auth/webmasters'
+            - https://www.googleapis.com/auth/webmasters
       tags:
         - sitemaps
 components:
@@ -331,7 +334,6 @@ components:
       in: query
       name: alt
       schema:
-        default: json
         enum:
           - json
         type: string
@@ -342,7 +344,7 @@ components:
       schema:
         type: string
     key:
-      description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -358,7 +360,6 @@ components:
       in: query
       name: prettyPrint
       schema:
-        default: true
         type: boolean
     quotaUser:
       description: An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
@@ -405,7 +406,7 @@ components:
       properties:
         filters:
           items:
-            $ref: '#/components/schemas/ApiDimensionFilter'
+            $ref: "#/components/schemas/ApiDimensionFilter"
           type: array
         groupType:
           type: string
@@ -413,43 +414,45 @@ components:
     SearchAnalyticsQueryRequest:
       properties:
         aggregationType:
-          description: |-
+          description: >-
             [Optional; Default is "auto"] How data is aggregated. If aggregated by property, all data for the same property is aggregated; if aggregated by page, all data is aggregated by canonical URI. If you filter or group by page, choose AUTO; otherwise you can aggregate either by property or by page, depending on how you want your data calculated; see  the help documentation to learn how data is calculated differently by site versus by page.
 
+
             Note: If you group or filter by page, you cannot aggregate by property.
+
 
             If you specify any value other than AUTO, the aggregation type in the result will match the requested type, or if you request an invalid type, you will get an error. The API will never change your aggregation type if the requested type is invalid.
           type: string
         dimensionFilterGroups:
-          description: '[Optional] Zero or more filters to apply to the dimension grouping values; for example, ''query contains "buy"'' to see only data where the query string contains the substring "buy" (not case-sensitive). You can filter by a dimension without grouping by it.'
+          description: "[Optional] Zero or more filters to apply to the dimension grouping values; for example, 'query contains \"buy\"' to see only data where the query string contains the substring \"buy\" (not case-sensitive). You can filter by a dimension without grouping by it."
           items:
-            $ref: '#/components/schemas/ApiDimensionFilterGroup'
+            $ref: "#/components/schemas/ApiDimensionFilterGroup"
           type: array
         dimensions:
-          description: '[Optional] Zero or more dimensions to group results by. Dimensions are the group-by values in the Search Analytics page. Dimensions are combined to create a unique row key for each row. Results are grouped in the order that you supply these dimensions.'
+          description: "[Optional] Zero or more dimensions to group results by. Dimensions are the group-by values in the Search Analytics page. Dimensions are combined to create a unique row key for each row. Results are grouped in the order that you supply these dimensions."
           items:
             type: string
           type: array
         endDate:
-          description: '[Required] End date of the requested date range, in YYYY-MM-DD format, in PST (UTC - 8:00). Must be greater than or equal to the start date. This value is included in the range.'
+          description: "[Required] End date of the requested date range, in YYYY-MM-DD format, in PST (UTC - 8:00). Must be greater than or equal to the start date. This value is included in the range."
           type: string
         rowLimit:
-          description: '[Optional; Default is 1000] The maximum number of rows to return. Must be a number from 1 to 5,000 (inclusive).'
+          description: "[Optional; Default is 1000] The maximum number of rows to return. Must be a number from 1 to 5,000 (inclusive)."
           format: int32
           type: integer
         searchType:
           description: '[Optional; Default is "web"] The search type to filter for.'
           type: string
         startDate:
-          description: '[Required] Start date of the requested date range, in YYYY-MM-DD format, in PST time (UTC - 8:00). Must be less than or equal to the end date. This value is included in the range.'
+          description: "[Required] Start date of the requested date range, in YYYY-MM-DD format, in PST time (UTC - 8:00). Must be less than or equal to the end date. This value is included in the range."
           type: string
         startRow:
-          description: '[Optional; Default is 0] Zero-based index of the first row in the response. Must be a non-negative number.'
+          description: "[Optional; Default is 0] Zero-based index of the first row in the response. Must be a non-negative number."
           format: int32
           type: integer
       type: object
     SearchAnalyticsQueryResponse:
-      description: 'A list of rows, one per result, grouped by key. Metrics in each row are aggregated for all data grouped by that key either by page or property, as specified by the aggregation type parameter.'
+      description: A list of rows, one per result, grouped by key. Metrics in each row are aggregated for all data grouped by that key either by page or property, as specified by the aggregation type parameter.
       properties:
         responseAggregationType:
           description: How the results were aggregated.
@@ -457,7 +460,7 @@ components:
         rows:
           description: A list of rows grouped by the key values in the order given in the query.
           items:
-            $ref: '#/components/schemas/ApiDataRow'
+            $ref: "#/components/schemas/ApiDataRow"
           type: array
       type: object
     SitemapsListResponse:
@@ -466,20 +469,20 @@ components:
         sitemap:
           description: Contains detailed information about a specific URL submitted as a sitemap.
           items:
-            $ref: '#/components/schemas/WmxSitemap'
+            $ref: "#/components/schemas/WmxSitemap"
           type: array
       type: object
     SitesListResponse:
       description: List of sites with access level information.
       properties:
         siteEntry:
-          description: 'Contains permission level information about a Search Console site. For more information, see Permissions in Search Console.'
+          description: Contains permission level information about a Search Console site. For more information, see Permissions in Search Console.
           items:
-            $ref: '#/components/schemas/WmxSite'
+            $ref: "#/components/schemas/WmxSite"
           type: array
       type: object
     WmxSite:
-      description: 'Contains permission level information about a Search Console site. For more information, see  Permissions in Search Console.'
+      description: Contains permission level information about a Search Console site. For more information, see  Permissions in Search Console.
       properties:
         permissionLevel:
           description: The user's permission level for the site.
@@ -494,17 +497,17 @@ components:
         contents:
           description: The various content types in the sitemap.
           items:
-            $ref: '#/components/schemas/WmxSitemapContent'
+            $ref: "#/components/schemas/WmxSitemapContent"
           type: array
         errors:
           description: Number of errors in the sitemap. These are issues with the sitemap itself that need to be fixed before it can be processed correctly.
           format: int64
           type: string
         isPending:
-          description: 'If true, the sitemap has not been processed.'
+          description: If true, the sitemap has not been processed.
           type: boolean
         isSitemapsIndex:
-          description: 'If true, the sitemap is a collection of sitemaps.'
+          description: If true, the sitemap is a collection of sitemaps.
           type: boolean
         lastDownloaded:
           description: Date & time in which this sitemap was last downloaded. Date format is in RFC 3339 format (yyyy-mm-dd).
@@ -518,7 +521,7 @@ components:
           description: The url of the sitemap.
           type: string
         type:
-          description: 'The type of the sitemap. For example: rssFeed.'
+          description: "The type of the sitemap. For example: rssFeed."
           type: string
         warnings:
           description: Number of warnings for the sitemap. These are generally non-critical issues with URLs in the sitemaps.
@@ -537,7 +540,7 @@ components:
           format: int64
           type: string
         type:
-          description: 'The specific type of content in this sitemap. For example: web.'
+          description: "The specific type of content in this sitemap. For example: web."
           type: string
       type: object
   securitySchemes:
@@ -545,18 +548,18 @@ components:
       description: Oauth 2.0 implicit authentication
       flows:
         implicit:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            'https://www.googleapis.com/auth/webmasters': View and manage Search Console data for your verified sites
-            'https://www.googleapis.com/auth/webmasters.readonly': View Search Console data for your verified sites
+            https://www.googleapis.com/auth/webmasters: View and manage Search Console data for your verified sites
+            https://www.googleapis.com/auth/webmasters.readonly: View Search Console data for your verified sites
       type: oauth2
     Oauth2c:
-      description: Oauth 2.0 accessCode authentication
+      description: Oauth 2.0 authorizationCode authentication
       flows:
         authorizationCode:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            'https://www.googleapis.com/auth/webmasters': View and manage Search Console data for your verified sites
-            'https://www.googleapis.com/auth/webmasters.readonly': View Search Console data for your verified sites
-          tokenUrl: 'https://accounts.google.com/o/oauth2/token'
+            https://www.googleapis.com/auth/webmasters: View and manage Search Console data for your verified sites
+            https://www.googleapis.com/auth/webmasters.readonly: View Search Console data for your verified sites
+          tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

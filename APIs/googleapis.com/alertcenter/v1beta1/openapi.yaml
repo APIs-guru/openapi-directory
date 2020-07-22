@@ -1,120 +1,143 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://alertcenter.googleapis.com/'
+  - url: https://alertcenter.googleapis.com/
 info:
   contact:
     name: Google
-    url: 'https://google.com'
+    url: https://google.com
+    x-twitter: youtube
   description: Manages alerts on issues affecting your domain.
   license:
     name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
-  title: G Suite Alert Center
+    url: http://creativecommons.org/licenses/by/3.0/
+  termsOfService: https://developers.google.com/terms/
+  title: G Suite Alert Center API
   version: v1beta1
   x-apiClientRegistration:
-    url: 'https://console.developers.google.com'
+    url: https://console.developers.google.com
+  x-apisguru-categories:
+    - analytics
+    - media
   x-logo:
-    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.31
       format: google
-      url: 'https://alertcenter.googleapis.com/$discovery/rest?version=v1beta1'
+      url: https://alertcenter.googleapis.com/$discovery/rest?version=v1beta1
       version: v1
   x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: alertcenter
 externalDocs:
-  url: 'https://developers.google.com/admin-sdk/alertcenter/'
+  url: https://developers.google.com/admin-sdk/alertcenter/
 tags:
-  - name: v1beta1
   - name: alerts
+  - name: v1beta1
 paths:
   /v1beta1/alerts:
     get:
       description: Lists the alerts.
       operationId: alertcenter.alerts.list
       parameters:
-        - description: |-
+        - description: >-
             Optional. The unique identifier of the G Suite organization account of the
+
             customer the alerts are associated with.
+
             Inferred from the caller identity if not provided.
           in: query
           name: customerId
           schema:
             type: string
-        - description: |-
+        - description: >-
             Optional. A query string for filtering alert results.
+
             For more details, see [Query
+
             filters](/admin-sdk/alertcenter/guides/query-filters) and [Supported
+
             query filter
+
             fields](/admin-sdk/alertcenter/reference/filter-fields#alerts.list).
           in: query
           name: filter
           schema:
             type: string
-        - description: |-
+        - description: >-
             Optional. The sort order of the list results.
+
             If not specified results may be returned in arbitrary order.
+
             You can sort the results in descending order based on the creation
+
             timestamp using `order_by="create_time desc"`.
+
             Currently, supported sorting are `create_time asc`, `create_time desc`,
+
             `update_time desc`
           in: query
           name: orderBy
           schema:
             type: string
-        - description: |-
+        - description: >-
             Optional. The requested page size. Server may return fewer items than
+
             requested. If unspecified, server picks an appropriate default.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: |-
+        - description: >-
             Optional. A token identifying a page of results the server should return.
+
             If empty, a new iteration is started. To continue an iteration, pass in
+
             the value from the previous ListAlertsResponse's
+
             next_page_token field.
           in: query
           name: pageToken
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ListAlertsResponse'
+                $ref: "#/components/schemas/ListAlertsResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/apps.alerts'
+            - https://www.googleapis.com/auth/apps.alerts
           Oauth2c:
-            - 'https://www.googleapis.com/auth/apps.alerts'
+            - https://www.googleapis.com/auth/apps.alerts
       tags:
         - alerts
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-  '/v1beta1/alerts/{alertId}':
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+  "/v1beta1/alerts/{alertId}":
     delete:
-      description: |-
+      description: >-
         Marks the specified alert for deletion. An alert that has been marked for
+
         deletion is removed from Alert Center after 30 days.
+
         Marking an alert for deletion has no effect on an alert which has
+
         already been marked for deletion. Attempting to mark a nonexistent alert
+
         for deletion results in a `NOT_FOUND` error.
       operationId: alertcenter.alerts.delete
       parameters:
@@ -124,31 +147,34 @@ paths:
           required: true
           schema:
             type: string
-        - description: |-
+        - description: >-
             Optional. The unique identifier of the G Suite organization account of the
+
             customer the alert is associated with.
+
             Inferred from the caller identity if not provided.
           in: query
           name: customerId
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Empty'
+                $ref: "#/components/schemas/Empty"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/apps.alerts'
+            - https://www.googleapis.com/auth/apps.alerts
           Oauth2c:
-            - 'https://www.googleapis.com/auth/apps.alerts'
+            - https://www.googleapis.com/auth/apps.alerts
       tags:
         - alerts
     get:
-      description: |-
+      description: >-
         Gets the specified alert. Attempting to get a nonexistent alert returns
+
         `NOT_FOUND` error.
       operationId: alertcenter.alerts.get
       parameters:
@@ -158,104 +184,117 @@ paths:
           required: true
           schema:
             type: string
-        - description: |-
+        - description: >-
             Optional. The unique identifier of the G Suite organization account of the
+
             customer the alert is associated with.
+
             Inferred from the caller identity if not provided.
           in: query
           name: customerId
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Alert'
+                $ref: "#/components/schemas/Alert"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/apps.alerts'
+            - https://www.googleapis.com/auth/apps.alerts
           Oauth2c:
-            - 'https://www.googleapis.com/auth/apps.alerts'
+            - https://www.googleapis.com/auth/apps.alerts
       tags:
         - alerts
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-  '/v1beta1/alerts/{alertId}/feedback':
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+  "/v1beta1/alerts/{alertId}/feedback":
     get:
-      description: |-
+      description: >-
         Lists all the feedback for an alert. Attempting to list feedbacks for
+
         a non-existent alert returns `NOT_FOUND` error.
       operationId: alertcenter.alerts.feedback.list
       parameters:
-        - description: |-
+        - description: >-
             Required. The alert identifier.
+
             The "-" wildcard could be used to represent all alerts.
           in: path
           name: alertId
           required: true
           schema:
             type: string
-        - description: |-
+        - description: >-
             Optional. The unique identifier of the G Suite organization account of the
+
             customer the alert feedback are associated with.
+
             Inferred from the caller identity if not provided.
           in: query
           name: customerId
           schema:
             type: string
-        - description: |-
+        - description: >-
             Optional. A query string for filtering alert feedback results.
+
             For more details, see [Query
+
             filters](/admin-sdk/alertcenter/guides/query-filters) and [Supported
+
             query filter
+
             fields](/admin-sdk/alertcenter/reference/filter-fields#alerts.feedback.list).
           in: query
           name: filter
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ListAlertFeedbackResponse'
+                $ref: "#/components/schemas/ListAlertFeedbackResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/apps.alerts'
+            - https://www.googleapis.com/auth/apps.alerts
           Oauth2c:
-            - 'https://www.googleapis.com/auth/apps.alerts'
+            - https://www.googleapis.com/auth/apps.alerts
       tags:
         - alerts
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
     post:
-      description: |-
+      description: >-
         Creates new feedback for an alert. Attempting to create a feedback for
+
         a non-existent alert returns `NOT_FOUND` error. Attempting to create a
+
         feedback for an alert that is marked for deletion returns
+
         `FAILED_PRECONDITION' error.
       operationId: alertcenter.alerts.feedback.create
       parameters:
@@ -265,9 +304,11 @@ paths:
           required: true
           schema:
             type: string
-        - description: |-
+        - description: >-
             Optional. The unique identifier of the G Suite organization account of the
+
             customer the alert is associated with.
+
             Inferred from the caller identity if not provided.
           in: query
           name: customerId
@@ -277,25 +318,26 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AlertFeedback'
+              $ref: "#/components/schemas/AlertFeedback"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/AlertFeedback'
+                $ref: "#/components/schemas/AlertFeedback"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/apps.alerts'
+            - https://www.googleapis.com/auth/apps.alerts
           Oauth2c:
-            - 'https://www.googleapis.com/auth/apps.alerts'
+            - https://www.googleapis.com/auth/apps.alerts
       tags:
         - alerts
-  '/v1beta1/alerts/{alertId}/metadata':
+  "/v1beta1/alerts/{alertId}/metadata":
     get:
-      description: |-
+      description: >-
         Returns the metadata of an alert. Attempting to get metadata for
+
         a non-existent alert returns `NOT_FOUND` error.
       operationId: alertcenter.alerts.getMetadata
       parameters:
@@ -305,59 +347,65 @@ paths:
           required: true
           schema:
             type: string
-        - description: |-
+        - description: >-
             Optional. The unique identifier of the G Suite organization account of the
+
             customer the alert metadata is associated with.
+
             Inferred from the caller identity if not provided.
           in: query
           name: customerId
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/AlertMetadata'
+                $ref: "#/components/schemas/AlertMetadata"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/apps.alerts'
+            - https://www.googleapis.com/auth/apps.alerts
           Oauth2c:
-            - 'https://www.googleapis.com/auth/apps.alerts'
+            - https://www.googleapis.com/auth/apps.alerts
       tags:
         - alerts
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-  '/v1beta1/alerts/{alertId}:undelete':
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+  "/v1beta1/alerts/{alertId}:undelete":
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
     post:
-      description: |-
+      description: >-
         Restores, or "undeletes", an alert that was marked for deletion within the
+
         past 30 days. Attempting to undelete an alert which was marked for deletion
+
         over 30 days ago (which has been removed from the Alert Center database) or
+
         a nonexistent alert returns a `NOT_FOUND` error. Attempting to
+
         undelete an alert which has not been marked for deletion has no effect.
       operationId: alertcenter.alerts.undelete
       parameters:
@@ -371,34 +419,34 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UndeleteAlertRequest'
+              $ref: "#/components/schemas/UndeleteAlertRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Alert'
+                $ref: "#/components/schemas/Alert"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/apps.alerts'
+            - https://www.googleapis.com/auth/apps.alerts
           Oauth2c:
-            - 'https://www.googleapis.com/auth/apps.alerts'
+            - https://www.googleapis.com/auth/apps.alerts
       tags:
         - alerts
-  '/v1beta1/alerts:batchDelete':
+  /v1beta1/alerts:batchDelete:
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
     post:
       description: Performs batch delete operation on alerts.
       operationId: alertcenter.alerts.batchDelete
@@ -406,34 +454,34 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/BatchDeleteAlertsRequest'
+              $ref: "#/components/schemas/BatchDeleteAlertsRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/BatchDeleteAlertsResponse'
+                $ref: "#/components/schemas/BatchDeleteAlertsResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/apps.alerts'
+            - https://www.googleapis.com/auth/apps.alerts
           Oauth2c:
-            - 'https://www.googleapis.com/auth/apps.alerts'
+            - https://www.googleapis.com/auth/apps.alerts
       tags:
         - alerts
-  '/v1beta1/alerts:batchUndelete':
+  /v1beta1/alerts:batchUndelete:
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
     post:
       description: Performs batch undelete operation on alerts.
       operationId: alertcenter.alerts.batchUndelete
@@ -441,19 +489,19 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/BatchUndeleteAlertsRequest'
+              $ref: "#/components/schemas/BatchUndeleteAlertsRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/BatchUndeleteAlertsResponse'
+                $ref: "#/components/schemas/BatchUndeleteAlertsResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/apps.alerts'
+            - https://www.googleapis.com/auth/apps.alerts
           Oauth2c:
-            - 'https://www.googleapis.com/auth/apps.alerts'
+            - https://www.googleapis.com/auth/apps.alerts
       tags:
         - alerts
   /v1beta1/settings:
@@ -461,47 +509,51 @@ paths:
       description: Returns customer-level settings.
       operationId: alertcenter.getSettings
       parameters:
-        - description: |-
+        - description: >-
             Optional. The unique identifier of the G Suite organization account of the
+
             customer the alert settings are associated with.
+
             Inferred from the caller identity if not provided.
           in: query
           name: customerId
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Settings'
+                $ref: "#/components/schemas/Settings"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/apps.alerts'
+            - https://www.googleapis.com/auth/apps.alerts
           Oauth2c:
-            - 'https://www.googleapis.com/auth/apps.alerts'
+            - https://www.googleapis.com/auth/apps.alerts
       tags:
         - v1beta1
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
     patch:
       description: Updates the customer-level settings.
       operationId: alertcenter.updateSettings
       parameters:
-        - description: |-
+        - description: >-
             Optional. The unique identifier of the G Suite organization account of the
+
             customer the alert settings are associated with.
+
             Inferred from the caller identity if not provided.
           in: query
           name: customerId
@@ -511,19 +563,19 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Settings'
+              $ref: "#/components/schemas/Settings"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Settings'
+                $ref: "#/components/schemas/Settings"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/apps.alerts'
+            - https://www.googleapis.com/auth/apps.alerts
           Oauth2c:
-            - 'https://www.googleapis.com/auth/apps.alerts'
+            - https://www.googleapis.com/auth/apps.alerts
       tags:
         - v1beta1
 components:
@@ -534,8 +586,8 @@ components:
       name: $.xgafv
       schema:
         enum:
-          - '1'
-          - '2'
+          - "1"
+          - "2"
         type: string
     access_token:
       description: OAuth access token.
@@ -548,7 +600,6 @@ components:
       in: query
       name: alt
       schema:
-        default: json
         enum:
           - json
           - media
@@ -567,7 +618,7 @@ components:
       schema:
         type: string
     key:
-      description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -583,22 +634,21 @@ components:
       in: query
       name: prettyPrint
       schema:
-        default: true
         type: boolean
     quotaUser:
-      description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.'
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
       in: query
       name: quotaUser
       schema:
         type: string
     uploadType:
-      description: 'Legacy upload protocol for media (e.g. "media", "multipart").'
+      description: Legacy upload protocol for media (e.g. "media", "multipart").
       in: query
       name: uploadType
       schema:
         type: string
     upload_protocol:
-      description: 'Upload protocol for media (e.g. "raw", "multipart").'
+      description: Upload protocol for media (e.g. "raw", "multipart").
       in: query
       name: upload_protocol
       schema:
@@ -611,14 +661,19 @@ components:
           description: Required. The email of the user that this event belongs to.
           type: string
         loginDetails:
-          $ref: '#/components/schemas/LoginDetails'
-          description: |-
+          $ref: "#/components/schemas/LoginDetails"
+          description: >-
             Optional. Details of the login action associated with the warning event.
+
             This is only available for:
 
+
             * Suspicious login
+
             * Suspicious login (less secure app)
+
             * Suspicious programmatic login
+
             * User suspended (suspicious activity)
       type: object
     ActivityRule:
@@ -646,28 +701,35 @@ components:
           description: Query that is used to get the data from the associated source.
           type: string
         supersededAlerts:
-          description: |-
+          description: >-
             List of alert IDs superseded by this alert. It is used to indicate that
+
             this alert is essentially extension of superseded alerts and we found the
+
             relationship after creating these alerts.
           items:
             type: string
           type: array
         supersedingAlert:
-          description: |-
+          description: >-
             Alert ID superseding this alert. It is used to indicate that superseding
+
             alert is essentially extension of this alert and we found the relationship
+
             after creating both alerts.
           type: string
         threshold:
           description: Alert threshold is for example “COUNT > 5”.
           type: string
         triggerSource:
-          description: |-
+          description: >-
             The trigger sources for this rule.
 
+
             * GMAIL_EVENTS
+
             * DEVICE_EVENTS
+
             * USER_EVENTS
           type: string
         updateTime:
@@ -695,67 +757,92 @@ components:
         data:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
-          description: |-
+          description: >-
             Optional. The data associated with this alert, for example
+
             google.apps.alertcenter.type.DeviceCompromised.
           type: object
         deleted:
           description: Output only. `True` if this alert is marked for deletion.
           type: boolean
         endTime:
-          description: |-
+          description: >-
             Optional. The time the event that caused this alert ceased being active.
+
             If provided, the end time must not be earlier than the start time.
+
             If not provided, it indicates an ongoing alert.
           format: google-datetime
           type: string
         etag:
-          description: |-
+          description: >-
             Optional. `etag` is used for optimistic concurrency control as a way to help
+
             prevent simultaneous updates of an alert from overwriting each other.
+
             It is strongly suggested that systems make use of the `etag` in the
+
             read-modify-write cycle to perform alert updates in order to avoid race
+
             conditions: An `etag` is returned in the response which contains alerts,
+
             and systems are expected to put that etag in the request to update alert to
+
             ensure that their change will be applied to the same version of the alert.
 
+
             If no `etag` is provided in the call to update alert, then the existing
+
             alert is overwritten blindly.
           type: string
         metadata:
-          $ref: '#/components/schemas/AlertMetadata'
+          $ref: "#/components/schemas/AlertMetadata"
           description: Output only. The metadata associated with this alert.
         securityInvestigationToolLink:
-          description: |-
+          description: >-
             Output only. An optional
+
             [Security Investigation Tool](https://support.google.com/a/answer/7575955)
+
             query for this alert.
           type: string
         source:
-          description: |-
+          description: >-
             Required. A unique identifier for the system that reported the alert.
+
             This is output only after alert is created.
+
 
             Supported sources are any of the following:
 
+
             * Google Operations
+
             * Mobile device management
+
             * Gmail phishing
+
             * Domain wide takeout
+
             * State sponsored attack
+
             * Google identity
           type: string
         startTime:
-          description: |-
+          description: >-
             Required. The time the event that caused this alert was started or
+
             detected.
           format: google-datetime
           type: string
         type:
-          description: |-
+          description: >-
             Required. The type of the alert.
+
             This is output only after alert is created.
+
             For a list of available alert types see
+
             [G Suite Alert types](/admin-sdk/alertcenter/reference/alert-types).
           type: string
         updateTime:
@@ -804,37 +891,56 @@ components:
           description: Output only. The unique identifier of the Google account of the customer.
           type: string
         etag:
-          description: |-
+          description: >-
             Optional. `etag` is used for optimistic concurrency control as a way to
+
             help prevent simultaneous updates of an alert metadata from overwriting
+
             each other. It is strongly suggested that systems make use of the `etag` in
+
             the read-modify-write cycle to perform metatdata updates in order to avoid
+
             race conditions: An `etag` is returned in the response which contains alert
+
             metadata, and systems are expected to put that etag in the request to
+
             update alert metadata to ensure that their change will be applied to the
+
             same version of the alert metadata.
 
+
             If no `etag` is provided in the call to update alert metadata, then the
+
             existing alert metadata is overwritten blindly.
           type: string
         severity:
-          description: |-
+          description: >-
             The severity value of the alert. Alert Center will set this field at alert
+
             creation time, default's to an empty string when it could not be
+
             determined.
+
             The supported values for update actions on this field are the following:
 
+
             * HIGH
+
             * MEDIUM
+
             * LOW
           type: string
         status:
-          description: |-
+          description: >-
             The current status of the alert.
+
             The supported values are the following:
 
+
             * NOT_STARTED
+
             * IN_PROGRESS
+
             * CLOSED
           type: string
         updateTime:
@@ -848,35 +954,37 @@ components:
         requestInfo:
           description: List of applications with requests for default SQL set up.
           items:
-            $ref: '#/components/schemas/RequestInfo'
+            $ref: "#/components/schemas/RequestInfo"
           type: array
       type: object
     Attachment:
       description: Attachment with application-specific information about an alert.
       properties:
         csv:
-          $ref: '#/components/schemas/Csv'
+          $ref: "#/components/schemas/Csv"
           description: A CSV file attachment.
       type: object
     BadWhitelist:
-      description: |-
+      description: >-
         Alert for setting the domain or IP that malicious email comes from as
+
         whitelisted domain or IP in Gmail advanced settings.
       properties:
         domainId:
-          $ref: '#/components/schemas/DomainId'
+          $ref: "#/components/schemas/DomainId"
           description: The domain ID.
         maliciousEntity:
-          $ref: '#/components/schemas/MaliciousEntity'
+          $ref: "#/components/schemas/MaliciousEntity"
           description: The entity whose actions triggered a Gmail phishing alert.
         messages:
           description: The list of messages contained by this alert.
           items:
-            $ref: '#/components/schemas/GmailMessageInfo'
+            $ref: "#/components/schemas/GmailMessageInfo"
           type: array
         sourceIp:
-          description: |-
+          description: >-
             The source IP address of the malicious email, for example,
+
             `127.0.0.1`.
           type: string
       type: object
@@ -889,8 +997,9 @@ components:
             type: string
           type: array
         customerId:
-          description: |-
+          description: >-
             Optional. The unique identifier of the G Suite organization account of the
+
             customer the alerts are associated with.
           type: string
       type: object
@@ -899,7 +1008,7 @@ components:
       properties:
         failedAlertStatus:
           additionalProperties:
-            $ref: '#/components/schemas/Status'
+            $ref: "#/components/schemas/Status"
           description: The status details for each failed alert_id.
           type: object
         successAlertIds:
@@ -917,8 +1026,9 @@ components:
             type: string
           type: array
         customerId:
-          description: |-
+          description: >-
             Optional. The unique identifier of the G Suite organization account of the
+
             customer the alerts are associated with.
           type: string
       type: object
@@ -927,7 +1037,7 @@ components:
       properties:
         failedAlertStatus:
           additionalProperties:
-            $ref: '#/components/schemas/Status'
+            $ref: "#/components/schemas/Status"
           description: The status details for each failed alert_id.
           type: object
         successAlertIds:
@@ -937,38 +1047,44 @@ components:
           type: array
       type: object
     CloudPubsubTopic:
-      description: |-
+      description: >-
         A reference to a Cloud Pubsub topic.
 
+
         To register for notifications, the owner of the topic must grant
+
         `alerts-api-push-notifications@system.gserviceaccount.com` the
          `projects.topics.publish` permission.
       properties:
         payloadFormat:
-          description: |-
+          description: >-
             Optional. The format of the payload that would be sent.
+
             If not specified the format will be JSON.
           enum:
             - PAYLOAD_FORMAT_UNSPECIFIED
             - JSON
           type: string
         topicName:
-          description: |-
+          description: >-
             The `name` field of a Cloud Pubsub [Topic]
+
             (https://cloud.google.com/pubsub/docs/reference/rest/v1/projects.topics#Topic).
           type: string
       type: object
     Csv:
-      description: |-
+      description: >-
         A representation of a CSV file attachment, as a list of column headers and
+
         a list of data rows.
       properties:
         dataRows:
-          description: |-
+          description: >-
             The list of data rows in a CSV file, as string arrays rather than as a
+
             single comma-separated string.
           items:
-            $ref: '#/components/schemas/CsvRow'
+            $ref: "#/components/schemas/CsvRow"
           type: array
         headers:
           description: The list of headers for data columns in a CSV file.
@@ -980,8 +1096,9 @@ components:
       description: A representation of a single data row in a CSV file.
       properties:
         entries:
-          description: |-
+          description: >-
             The data entries in a CSV file row, as a string array rather than a
+
             single comma-separated string.
           items:
             type: string
@@ -996,15 +1113,16 @@ components:
         events:
           description: Required. The list of security events.
           items:
-            $ref: '#/components/schemas/DeviceCompromisedSecurityDetail'
+            $ref: "#/components/schemas/DeviceCompromisedSecurityDetail"
           type: array
       type: object
     DeviceCompromisedSecurityDetail:
       description: Detailed information of a single MDM device compromised event.
       properties:
         deviceCompromisedState:
-          description: |-
+          description: >-
             The device compromised state. Possible values are "`Compromised`" or
+
             "`Not Compromised`".
           type: string
         deviceId:
@@ -1017,7 +1135,7 @@ components:
           description: The type of the device.
           type: string
         iosVendorId:
-          description: 'Required for iOS, empty for others.'
+          description: Required for iOS, empty for others.
           type: string
         resourceId:
           description: The device resource ID.
@@ -1030,13 +1148,17 @@ components:
       description: Alerts that get triggered on violations of Data Loss Prevention (DLP) rules.
       properties:
         ruleViolationInfo:
-          $ref: '#/components/schemas/RuleViolationInfo'
-          description: |-
+          $ref: "#/components/schemas/RuleViolationInfo"
+          description: >-
             Details about the violated DLP rule.
 
+
             Admins can use the predefined detectors provided by Google Cloud DLP
+
             https://cloud.google.com/dlp/ when setting up a DLP rule. Matched Cloud DLP
+
             detectors in this violation if any will be captured in the
+
             MatchInfo.predefined_detector.
       type: object
     DomainId:
@@ -1047,8 +1169,9 @@ components:
           type: string
       type: object
     DomainWideTakeoutInitiated:
-      description: |-
+      description: >-
         A takeout operation for the entire domain was initiated by an admin. Derived
+
         from audit logs.
       properties:
         email:
@@ -1059,9 +1182,11 @@ components:
           type: string
       type: object
     Empty:
-      description: |-
+      description: >-
         A generic empty message that you can re-use to avoid defining duplicated
+
         empty messages in your APIs. A typical example is to use it as the request
+
         or the response type of an API method. For instance:
 
             service Foo {
@@ -1106,20 +1231,23 @@ components:
       description: An incident reported by Google Operations for a G Suite application.
       properties:
         affectedUserEmails:
-          description: |-
+          description: >-
             The list of emails which correspond to the users directly affected by the
+
             incident.
           items:
             type: string
           type: array
         attachmentData:
-          $ref: '#/components/schemas/Attachment'
-          description: |-
+          $ref: "#/components/schemas/Attachment"
+          description: >-
             Optional. Application-specific data for an incident, provided when the
+
             G Suite application which reported the incident cannot be completely
+
             restored to a valid state.
         description:
-          description: 'A detailed, freeform incident description.'
+          description: A detailed, freeform incident description.
           type: string
         title:
           description: A one-line incident description.
@@ -1129,11 +1257,12 @@ components:
       description: Response message for an alert feedback listing request.
       properties:
         feedback:
-          description: |-
+          description: >-
             The list of alert feedback.
+
             Feedback entries for each alert are ordered by creation time descending.
           items:
-            $ref: '#/components/schemas/AlertFeedback'
+            $ref: "#/components/schemas/AlertFeedback"
           type: array
       type: object
     ListAlertsResponse:
@@ -1142,13 +1271,16 @@ components:
         alerts:
           description: The list of alerts.
           items:
-            $ref: '#/components/schemas/Alert'
+            $ref: "#/components/schemas/Alert"
           type: array
         nextPageToken:
-          description: |-
+          description: >-
             The token for the next page. If not empty, indicates that there may be more
+
             alerts that match the listing request; this value can be used in a
+
             subsequent ListAlertsRequest to get alerts continuing from last result
+
             of the current list call.
           type: string
       type: object
@@ -1156,42 +1288,51 @@ components:
       description: The details of the login action.
       properties:
         ipAddress:
-          description: |-
+          description: >-
             Optional. The human-readable IP address (for example,
+
             `11.22.33.44`) that is associated with the warning event.
           type: string
         loginTime:
-          description: |-
+          description: >-
             Optional. The successful login time that is associated with the warning
+
             event. This isn't present for blocked login attempts.
           format: google-datetime
           type: string
       type: object
     MailPhishing:
-      description: |-
+      description: >-
         Proto for all phishing alerts with common payload.
+
         Supported types are any of the following:
 
+
         * User reported phishing
+
         * User reported spam spike
+
         * Suspicious message reported
+
         * Phishing reclassification
+
         * Malware reclassification
+
         * Gmail potential employee spoofing
       properties:
         domainId:
-          $ref: '#/components/schemas/DomainId'
+          $ref: "#/components/schemas/DomainId"
           description: The domain ID.
         isInternal:
-          description: 'If `true`, the email originated from within the organization.'
+          description: If `true`, the email originated from within the organization.
           type: boolean
         maliciousEntity:
-          $ref: '#/components/schemas/MaliciousEntity'
+          $ref: "#/components/schemas/MaliciousEntity"
           description: The entity whose actions triggered a Gmail phishing alert.
         messages:
           description: The list of messages contained by this alert.
           items:
-            $ref: '#/components/schemas/GmailMessageInfo'
+            $ref: "#/components/schemas/GmailMessageInfo"
           type: array
         systemActionType:
           description: System actions on the messages.
@@ -1208,7 +1349,7 @@ components:
           description: The header from display name.
           type: string
         entity:
-          $ref: '#/components/schemas/User'
+          $ref: "#/components/schemas/User"
           description: The actor who triggered a gmail phishing alert.
         fromHeader:
           description: The sender email address.
@@ -1218,42 +1359,47 @@ components:
       description: Proto that contains match information from the condition part of the rule.
       properties:
         predefinedDetector:
-          $ref: '#/components/schemas/PredefinedDetectorInfo'
+          $ref: "#/components/schemas/PredefinedDetectorInfo"
           description: For matched detector predefined by Google.
         userDefinedDetector:
-          $ref: '#/components/schemas/UserDefinedDetectorInfo'
+          $ref: "#/components/schemas/UserDefinedDetectorInfo"
           description: For matched detector defined by administrators.
       type: object
     Notification:
-      description: |-
+      description: >-
         Settings for callback notifications.
+
         For more details see [G Suite Alert
+
         Notification](/admin-sdk/alertcenter/guides/notifications).
       properties:
         cloudPubsubTopic:
-          $ref: '#/components/schemas/CloudPubsubTopic'
+          $ref: "#/components/schemas/CloudPubsubTopic"
           description: A Google Cloud Pub/sub topic destination.
       type: object
     PhishingSpike:
-      description: |-
+      description: >-
         Alert for a spike in user reported phishing.
+
         <aside class="warning"><b>Warning</b>: This type has been deprecated. Use
+
         [MailPhishing](/admin-sdk/alertcenter/reference/rest/v1beta1/MailPhishing)
+
         instead.</aside>
       properties:
         domainId:
-          $ref: '#/components/schemas/DomainId'
+          $ref: "#/components/schemas/DomainId"
           description: The domain ID.
         isInternal:
-          description: 'If `true`, the email originated from within the organization.'
+          description: If `true`, the email originated from within the organization.
           type: boolean
         maliciousEntity:
-          $ref: '#/components/schemas/MaliciousEntity'
+          $ref: "#/components/schemas/MaliciousEntity"
           description: The entity whose actions triggered a Gmail phishing alert.
         messages:
           description: The list of messages contained by this alert.
           items:
-            $ref: '#/components/schemas/GmailMessageInfo'
+            $ref: "#/components/schemas/GmailMessageInfo"
           type: array
       type: object
     PredefinedDetectorInfo:
@@ -1267,8 +1413,9 @@ components:
       description: Requests for one application that needs default SQL setup.
       properties:
         appDeveloperEmail:
-          description: |-
+          description: >-
             List of app developers who triggered notifications for above
+
             application.
           items:
             type: string
@@ -1277,8 +1424,9 @@ components:
           description: Required. The application that requires the SQL setup.
           type: string
         numberOfRequests:
-          description: |-
+          description: >-
             Required. Number of requests sent for this application to set up default
+
             SQL instance.
           format: int64
           type: string
@@ -1290,7 +1438,7 @@ components:
           description: Drive file ID.
           type: string
         resourceTitle:
-          description: 'Title of the resource, for example email subject, or document title.'
+          description: Title of the resource, for example email subject, or document title.
           type: string
       type: object
     RuleInfo:
@@ -1304,8 +1452,9 @@ components:
           type: string
       type: object
     RuleViolationInfo:
-      description: |-
+      description: >-
         Common alert information about violated rules that are configured by G Suite
+
         administrators.
       properties:
         dataSource:
@@ -1317,27 +1466,33 @@ components:
         matchInfo:
           description: List of matches that were found in the resource content.
           items:
-            $ref: '#/components/schemas/MatchInfo'
+            $ref: "#/components/schemas/MatchInfo"
           type: array
         recipients:
-          description: |-
+          description: >-
             Resource recipients.
 
+
             For Drive, they are grantees that the Drive file was shared with at the
+
             time of rule triggering. Valid values include user emails, group emails,
+
             domains, or 'anyone' if the file was publicly accessible. If the file was
+
             private the recipients list will be empty.
 
+
             For Gmail, they are emails of the users or groups that the Gmail message
+
             was sent to.
           items:
             type: string
           type: array
         resourceInfo:
-          $ref: '#/components/schemas/ResourceInfo'
+          $ref: "#/components/schemas/ResourceInfo"
           description: Details of the resource which violated the rule.
         ruleInfo:
-          $ref: '#/components/schemas/RuleInfo'
+          $ref: "#/components/schemas/RuleInfo"
           description: Details of the violated rule.
         suppressedActionTypes:
           description: Actions suppressed due to other actions with higher priority.
@@ -1366,8 +1521,9 @@ components:
             type: string
           type: array
         triggeringUserEmail:
-          description: |-
+          description: >-
             Email of the user who caused the violation. Value could be empty if not
+
             applicable, for example, a violation found by drive continuous scan.
           type: string
       type: object
@@ -1377,7 +1533,7 @@ components:
         notifications:
           description: The list of notifications.
           items:
-            $ref: '#/components/schemas/Notification'
+            $ref: "#/components/schemas/Notification"
           type: array
       type: object
     StateSponsoredAttack:
@@ -1388,22 +1544,28 @@ components:
           type: string
       type: object
     Status:
-      description: |-
+      description: >-
         The `Status` type defines a logical error model that is suitable for
+
         different programming environments, including REST APIs and RPC APIs. It is
+
         used by [gRPC](https://github.com/grpc). Each `Status` message contains
+
         three pieces of data: error code, error message, and error details.
 
+
         You can find out more about this error model and how to work with it in the
+
         [API Design Guide](https://cloud.google.com/apis/design/errors).
       properties:
         code:
-          description: 'The status code, which should be an enum value of google.rpc.Code.'
+          description: The status code, which should be an enum value of google.rpc.Code.
           format: int32
           type: integer
         details:
-          description: |-
+          description: >-
             A list of messages that carry the error details.  There is a common set of
+
             message types for APIs to use.
           items:
             additionalProperties:
@@ -1411,9 +1573,11 @@ components:
             type: object
           type: array
         message:
-          description: |-
+          description: >-
             A developer-facing error message, which should be in English. Any
+
             user-facing error message should be localized and sent in the
+
             google.rpc.Status.details field, or localized by the client.
           type: string
       type: object
@@ -1426,7 +1590,7 @@ components:
         events:
           description: Required. The list of security events.
           items:
-            $ref: '#/components/schemas/SuspiciousActivitySecurityDetail'
+            $ref: "#/components/schemas/SuspiciousActivitySecurityDetail"
           type: array
       type: object
     SuspiciousActivitySecurityDetail:
@@ -1445,7 +1609,7 @@ components:
           description: The type of the device.
           type: string
         iosVendorId:
-          description: 'Required for iOS, empty for others.'
+          description: Required for iOS, empty for others.
           type: string
         newValue:
           description: The new value of the device property after the change.
@@ -1464,9 +1628,11 @@ components:
       description: A request to undelete a specific alert that was marked for deletion.
       properties:
         customerId:
-          description: |-
+          description: >-
             Optional. The unique identifier of the G Suite organization account of the
+
             customer the alert is associated with.
+
             Inferred from the caller identity if not provided.
           type: string
       type: object
@@ -1495,16 +1661,16 @@ components:
       description: Oauth 2.0 implicit authentication
       flows:
         implicit:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            'https://www.googleapis.com/auth/apps.alerts': 'See and delete your domain''s G Suite alerts, and send alert feedback'
+            https://www.googleapis.com/auth/apps.alerts: See and delete your domain's G Suite alerts, and send alert feedback
       type: oauth2
     Oauth2c:
-      description: Oauth 2.0 accessCode authentication
+      description: Oauth 2.0 authorizationCode authentication
       flows:
         authorizationCode:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            'https://www.googleapis.com/auth/apps.alerts': 'See and delete your domain''s G Suite alerts, and send alert feedback'
-          tokenUrl: 'https://accounts.google.com/o/oauth2/token'
+            https://www.googleapis.com/auth/apps.alerts: See and delete your domain's G Suite alerts, and send alert feedback
+          tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

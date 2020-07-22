@@ -1,127 +1,153 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://cloudbilling.googleapis.com/'
+  - url: https://cloudbilling.googleapis.com/
 info:
   contact:
     name: Google
-    url: 'https://google.com'
-  description: |-
+    url: https://google.com
+    x-twitter: youtube
+  description: >-
     Allows developers to manage billing for their Google Cloud Platform projects
         programmatically.
   license:
     name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
-  title: Cloud Billing
+    url: http://creativecommons.org/licenses/by/3.0/
+  termsOfService: https://developers.google.com/terms/
+  title: Cloud Billing API
   version: v1
   x-apiClientRegistration:
-    url: 'https://console.developers.google.com'
+    url: https://console.developers.google.com
+  x-apisguru-categories:
+    - analytics
+    - media
   x-logo:
-    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.31
       format: google
-      url: 'https://cloudbilling.googleapis.com/$discovery/rest?version=v1'
+      url: https://cloudbilling.googleapis.com/$discovery/rest?version=v1
       version: v1
   x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: cloudbilling
 externalDocs:
-  url: 'https://cloud.google.com/billing/'
+  url: https://cloud.google.com/billing/
 tags:
-  - name: billingAccounts
-  - name: services
   - name: projects
+  - name: services
+  - name: billingAccounts
 paths:
   /v1/billingAccounts:
     get:
-      description: |-
+      description: >-
         Lists the billing accounts that the current authenticated user has
+
         permission to
+
         [view](https://cloud.google.com/billing/docs/how-to/billing-access).
       operationId: cloudbilling.billingAccounts.list
       parameters:
-        - description: |-
+        - description: >-
             Options for how to filter the returned billing accounts.
+
             Currently this only supports filtering for
+
             [subaccounts](https://cloud.google.com/billing/docs/concepts) under a
+
             single provided reseller billing account.
+
             (e.g. "master_billing_account=billingAccounts/012345-678901-ABCDEF").
+
             Boolean algebra and other fields are not currently supported.
           in: query
           name: filter
           schema:
             type: string
-        - description: |-
+        - description: >-
             Requested page size. The maximum page size is 100; this is also the
+
             default.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: |-
+        - description: >-
             A token identifying a page of results to return. This should be a
+
             `next_page_token` value returned from a previous `ListBillingAccounts`
+
             call. If unspecified, the first page of results is returned.
           in: query
           name: pageToken
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ListBillingAccountsResponse'
+                $ref: "#/components/schemas/ListBillingAccountsResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - billingAccounts
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
     post:
-      description: |-
+      description: >-
         Creates a billing account.
+
         This method can only be used to create
+
         [billing subaccounts](https://cloud.google.com/billing/docs/concepts)
+
         by GCP resellers.
+
         When creating a subaccount, the current authenticated user must have the
+
         `billing.accounts.update` IAM permission on the master account, which is
+
         typically given to billing account
+
         [administrators](https://cloud.google.com/billing/docs/how-to/billing-access).
+
         This method will return an error if the master account has not been
+
         provisioned as a reseller account.
       operationId: cloudbilling.billingAccounts.create
       requestBody:
-        $ref: '#/components/requestBodies/BillingAccount'
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BillingAccount"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/BillingAccount'
+                $ref: "#/components/schemas/BillingAccount"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - billingAccounts
   /v1/services:
@@ -134,90 +160,99 @@ paths:
           name: pageSize
           schema:
             type: integer
-        - description: |-
+        - description: >-
             A token identifying a page of results to return. This should be a
+
             `next_page_token` value returned from a previous `ListServices`
+
             call. If unspecified, the first page of results is returned.
           in: query
           name: pageToken
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ListServicesResponse'
+                $ref: "#/components/schemas/ListServicesResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - services
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-  '/v1/{name}':
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
+  "/v1/{name}":
     get:
-      description: |-
+      description: >-
         Gets information about a billing account. The current authenticated user
+
         must be a [viewer of the billing
+
         account](https://cloud.google.com/billing/docs/how-to/billing-access).
       operationId: cloudbilling.billingAccounts.get
       parameters:
-        - description: |-
+        - description: >-
             Required. The resource name of the billing account to retrieve. For example,
+
             `billingAccounts/012345-567890-ABCDEF`.
           in: path
           name: name
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/BillingAccount'
+                $ref: "#/components/schemas/BillingAccount"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - billingAccounts
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
     patch:
-      description: |-
+      description: >-
         Updates a billing account's fields.
+
         Currently the only field that can be edited is `display_name`.
+
         The current authenticated user must have the `billing.accounts.update`
+
         IAM permission, which is typically given to the
+
         [administrator](https://cloud.google.com/billing/docs/how-to/billing-access)
+
         of the billing account.
       operationId: cloudbilling.billingAccounts.patch
       parameters:
@@ -227,9 +262,9 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
-        - description: |-
+        - description: >-
             The update mask applied to the resource.
+
             Only "display_name" is currently supported.
           in: query
           name: updateMask
@@ -239,215 +274,257 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/BillingAccount'
+              $ref: "#/components/schemas/BillingAccount"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/BillingAccount'
+                $ref: "#/components/schemas/BillingAccount"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - billingAccounts
-  '/v1/{name}/billingInfo':
+  "/v1/{name}/billingInfo":
     get:
-      description: |-
+      description: >-
         Gets the billing information for a project. The current authenticated user
+
         must have [permission to view the
+
         project](https://cloud.google.com/docs/permissions-overview#h.bgs0oxofvnoo
+
         ).
       operationId: cloudbilling.projects.getBillingInfo
       parameters:
-        - description: |-
+        - description: >-
             Required. The resource name of the project for which billing information is
+
             retrieved. For example, `projects/tokyo-rain-123`.
           in: path
           name: name
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ProjectBillingInfo'
+                $ref: "#/components/schemas/ProjectBillingInfo"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
     put:
-      description: |-
+      description: >-
         Sets or updates the billing account associated with a project. You specify
+
         the new billing account by setting the `billing_account_name` in the
+
         `ProjectBillingInfo` resource to the resource name of a billing account.
+
         Associating a project with an open billing account enables billing on the
+
         project and allows charges for resource usage. If the project already had a
+
         billing account, this method changes the billing account used for resource
+
         usage charges.
 
+
         *Note:* Incurred charges that have not yet been reported in the transaction
+
         history of the GCP Console might be billed to the new billing
+
         account, even if the charge occurred before the new billing account was
+
         assigned to the project.
 
+
         The current authenticated user must have ownership privileges for both the
+
         [project](https://cloud.google.com/docs/permissions-overview#h.bgs0oxofvnoo
+
         ) and the [billing
+
         account](https://cloud.google.com/billing/docs/how-to/billing-access).
 
+
         You can disable billing on the project by setting the
+
         `billing_account_name` field to empty. This action disassociates the
+
         current billing account from the project. Any billable activity of your
+
         in-use services will stop, and your application could stop functioning as
+
         expected. Any unbilled charges to date will be billed to the previously
+
         associated account. The current authenticated user must be either an owner
+
         of the project or an owner of the billing account for the project.
 
+
         Note that associating a project with a *closed* billing account will have
+
         much the same effect as disabling billing on the project: any paid
+
         resources used by the project will be shut down. Thus, unless you wish to
+
         disable billing, you should always call this method with the name of an
+
         *open* billing account.
       operationId: cloudbilling.projects.updateBillingInfo
       parameters:
-        - description: |-
+        - description: >-
             Required. The resource name of the project associated with the billing information
+
             that you want to update. For example, `projects/tokyo-rain-123`.
           in: path
           name: name
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ProjectBillingInfo'
+              $ref: "#/components/schemas/ProjectBillingInfo"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ProjectBillingInfo'
+                $ref: "#/components/schemas/ProjectBillingInfo"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1/{name}/projects':
+  "/v1/{name}/projects":
     get:
-      description: |-
+      description: >-
         Lists the projects associated with a billing account. The current
+
         authenticated user must have the `billing.resourceAssociations.list` IAM
+
         permission, which is often given to billing account
+
         [viewers](https://cloud.google.com/billing/docs/how-to/billing-access).
       operationId: cloudbilling.billingAccounts.projects.list
       parameters:
-        - description: |-
+        - description: >-
             Required. The resource name of the billing account associated with the projects that
+
             you want to list. For example, `billingAccounts/012345-567890-ABCDEF`.
           in: path
           name: name
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
-        - description: |-
+        - description: >-
             Requested page size. The maximum page size is 100; this is also the
+
             default.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: |-
+        - description: >-
             A token identifying a page of results to be returned. This should be a
+
             `next_page_token` value returned from a previous `ListProjectBillingInfo`
+
             call. If unspecified, the first page of results is returned.
           in: query
           name: pageToken
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ListProjectBillingInfoResponse'
+                $ref: "#/components/schemas/ListProjectBillingInfoResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - billingAccounts
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-  '/v1/{parent}/skus':
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
+  "/v1/{parent}/skus":
     get:
       description: Lists all publicly available SKUs for a given cloud service.
       operationId: cloudbilling.services.skus.list
       parameters:
-        - description: |-
+        - description: >-
             Required. The name of the service.
+
             Example: "services/DA34-426B-A397"
           in: path
           name: parent
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
-        - description: |-
+        - description: >-
             The ISO 4217 currency code for the pricing info in the response proto.
+
             Will use the conversion rate as of start_time.
+
             Optional. If not specified USD will be used.
           in: query
           name: currencyCode
           schema:
             type: string
-        - description: |-
+        - description: >-
             Optional exclusive end time of the time range for which the pricing
+
             versions will be returned. Timestamps in the future are not allowed.
+
             The time range has to be within a single calendar month in
+
             America/Los_Angeles timezone. Time range as a whole is optional. If not
+
             specified, the latest pricing will be returned (up to 12 hours old at
+
             most).
           in: query
           name: endTime
@@ -458,204 +535,232 @@ paths:
           name: pageSize
           schema:
             type: integer
-        - description: |-
+        - description: >-
             A token identifying a page of results to return. This should be a
+
             `next_page_token` value returned from a previous `ListSkus`
+
             call. If unspecified, the first page of results is returned.
           in: query
           name: pageToken
           schema:
             type: string
-        - description: |-
+        - description: >-
             Optional inclusive start time of the time range for which the pricing
+
             versions will be returned. Timestamps in the future are not allowed.
+
             The time range has to be within a single calendar month in
+
             America/Los_Angeles timezone. Time range as a whole is optional. If not
+
             specified, the latest pricing will be returned (up to 12 hours old at
+
             most).
           in: query
           name: startTime
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ListSkusResponse'
+                $ref: "#/components/schemas/ListSkusResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - services
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-  '/v1/{resource}:getIamPolicy':
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
+  "/v1/{resource}:getIamPolicy":
     get:
-      description: |-
+      description: >-
         Gets the access control policy for a billing account.
+
         The caller must have the `billing.accounts.getIamPolicy` permission on the
+
         account, which is often given to billing account
+
         [viewers](https://cloud.google.com/billing/docs/how-to/billing-access).
       operationId: cloudbilling.billingAccounts.getIamPolicy
       parameters:
-        - description: |-
+        - description: >-
             REQUIRED: The resource for which the policy is being requested.
+
             See the operation documentation for the appropriate value for this field.
           in: path
           name: resource
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
-        - description: |-
+        - description: >-
             Optional. The policy format version to be returned.
 
+
             Valid values are 0, 1, and 3. Requests specifying an invalid value will be
+
             rejected.
 
+
             Requests for policies with any conditional bindings must specify version 3.
+
             Policies without any conditional bindings may specify any valid value or
+
             leave the field unset.
+
+
+            To learn which resources support conditions in their IAM policies, see the
+
+            [IAM
+
+            documentation](https://cloud.google.com/iam/help/conditions/resource-policies).
           in: query
           name: options.requestedPolicyVersion
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Policy'
+                $ref: "#/components/schemas/Policy"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - billingAccounts
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-  '/v1/{resource}:setIamPolicy':
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
+  "/v1/{resource}:setIamPolicy":
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
     post:
-      description: |-
+      description: >-
         Sets the access control policy for a billing account. Replaces any existing
+
         policy.
+
         The caller must have the `billing.accounts.setIamPolicy` permission on the
+
         account, which is often given to billing account
+
         [administrators](https://cloud.google.com/billing/docs/how-to/billing-access).
       operationId: cloudbilling.billingAccounts.setIamPolicy
       parameters:
-        - description: |-
+        - description: >-
             REQUIRED: The resource for which the policy is being specified.
+
             See the operation documentation for the appropriate value for this field.
           in: path
           name: resource
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SetIamPolicyRequest'
+              $ref: "#/components/schemas/SetIamPolicyRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Policy'
+                $ref: "#/components/schemas/Policy"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - billingAccounts
-  '/v1/{resource}:testIamPermissions':
+  "/v1/{resource}:testIamPermissions":
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
     post:
-      description: |-
+      description: >-
         Tests the access control policy for a billing account. This method takes
+
         the resource and a set of permissions as input and returns the subset of
+
         the input permissions that the caller is allowed for that resource.
       operationId: cloudbilling.billingAccounts.testIamPermissions
       parameters:
-        - description: |-
+        - description: >-
             REQUIRED: The resource for which the policy detail is being requested.
+
             See the operation documentation for the appropriate value for this field.
           in: path
           name: resource
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/TestIamPermissionsRequest'
+              $ref: "#/components/schemas/TestIamPermissionsRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/TestIamPermissionsResponse'
+                $ref: "#/components/schemas/TestIamPermissionsResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - billingAccounts
 components:
@@ -666,8 +771,8 @@ components:
       name: $.xgafv
       schema:
         enum:
-          - '1'
-          - '2'
+          - "1"
+          - "2"
         type: string
     access_token:
       description: OAuth access token.
@@ -680,7 +785,6 @@ components:
       in: query
       name: alt
       schema:
-        default: json
         enum:
           - json
           - media
@@ -699,7 +803,7 @@ components:
       schema:
         type: string
     key:
-      description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -715,40 +819,35 @@ components:
       in: query
       name: prettyPrint
       schema:
-        default: true
         type: boolean
     quotaUser:
-      description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.'
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
       in: query
       name: quotaUser
       schema:
         type: string
     uploadType:
-      description: 'Legacy upload protocol for media (e.g. "media", "multipart").'
+      description: Legacy upload protocol for media (e.g. "media", "multipart").
       in: query
       name: uploadType
       schema:
         type: string
     upload_protocol:
-      description: 'Upload protocol for media (e.g. "raw", "multipart").'
+      description: Upload protocol for media (e.g. "raw", "multipart").
       in: query
       name: upload_protocol
       schema:
         type: string
-  requestBodies:
-    BillingAccount:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/BillingAccount'
   schemas:
     AggregationInfo:
       description: Represents the aggregation level and interval for pricing of a single SKU.
       properties:
         aggregationCount:
-          description: |-
+          description: >-
             The number of intervals to aggregate over.
+
             Example: If aggregation_level is "DAILY" and aggregation_count is 14,
+
             aggregation will be over 14 days.
           format: int32
           type: integer
@@ -766,23 +865,31 @@ components:
           type: string
       type: object
     AuditConfig:
-      description: |-
+      description: >-
         Specifies the audit configuration for a service.
+
         The configuration determines which permission types are logged, and what
+
         identities, if any, are exempted from logging.
+
         An AuditConfig must have one or more AuditLogConfigs.
 
+
         If there are AuditConfigs for both `allServices` and a specific service,
+
         the union of the two AuditConfigs is used for that service: the log_types
+
         specified in each AuditConfig are enabled, and the exempted_members in each
+
         AuditLogConfig are exempted.
+
 
         Example Policy with multiple AuditConfigs:
 
             {
               "audit_configs": [
                 {
-                  "service": "allServices"
+                  "service": "allServices",
                   "audit_log_configs": [
                     {
                       "log_type": "DATA_READ",
@@ -791,18 +898,18 @@ components:
                       ]
                     },
                     {
-                      "log_type": "DATA_WRITE",
+                      "log_type": "DATA_WRITE"
                     },
                     {
-                      "log_type": "ADMIN_READ",
+                      "log_type": "ADMIN_READ"
                     }
                   ]
                 },
                 {
-                  "service": "sampleservice.googleapis.com"
+                  "service": "sampleservice.googleapis.com",
                   "audit_log_configs": [
                     {
-                      "log_type": "DATA_READ",
+                      "log_type": "DATA_READ"
                     },
                     {
                       "log_type": "DATA_WRITE",
@@ -816,24 +923,29 @@ components:
             }
 
         For sampleservice, this policy enables DATA_READ, DATA_WRITE and ADMIN_READ
+
         logging. It also exempts jose@example.com from DATA_READ logging, and
+
         aliya@example.com from DATA_WRITE logging.
       properties:
         auditLogConfigs:
           description: The configuration for logging of each type of permission.
           items:
-            $ref: '#/components/schemas/AuditLogConfig'
+            $ref: "#/components/schemas/AuditLogConfig"
           type: array
         service:
-          description: |-
+          description: >-
             Specifies a service that will be enabled for audit logging.
+
             For example, `storage.googleapis.com`, `cloudsql.googleapis.com`.
+
             `allServices` is a special value that covers all services.
           type: string
       type: object
     AuditLogConfig:
-      description: |-
+      description: >-
         Provides the configuration for logging a type of permissions.
+
         Example:
 
             {
@@ -845,18 +957,21 @@ components:
                   ]
                 },
                 {
-                  "log_type": "DATA_WRITE",
+                  "log_type": "DATA_WRITE"
                 }
               ]
             }
 
         This enables 'DATA_READ' and 'DATA_WRITE' logging, while exempting
+
         jose@example.com from DATA_READ logging.
       properties:
         exemptedMembers:
-          description: |-
+          description: >-
             Specifies the identities that do not cause logging for this type of
+
             permission.
+
             Follows the same format of Binding.members.
           items:
             type: string
@@ -871,34 +986,45 @@ components:
           type: string
       type: object
     BillingAccount:
-      description: |-
+      description: >-
         A billing account in [GCP Console](https://console.cloud.google.com/).
+
         You can assign a billing account to one or more projects.
       properties:
         displayName:
-          description: |-
+          description: >-
             The display name given to the billing account, such as `My Billing
+
             Account`. This name is displayed in the GCP Console.
           type: string
         masterBillingAccount:
-          description: |-
+          description: >-
             If this account is a
+
             [subaccount](https://cloud.google.com/billing/docs/concepts), then this
+
             will be the resource name of the master billing account that it is being
+
             resold through.
+
             Otherwise this will be empty.
           type: string
         name:
-          description: |-
+          description: >-
             The resource name of the billing account. The resource name has the form
+
             `billingAccounts/{billing_account_id}`. For example,
+
             `billingAccounts/012345-567890-ABCDEF` would be the resource name for
+
             billing account `012345-567890-ABCDEF`.
           type: string
         open:
-          description: |-
+          description: >-
             Output only. True if the billing account is open, and will therefore be charged for any
+
             usage on associated projects. False if the billing account is closed, and
+
             therefore projects associated with it will be unable to use paid services.
           type: boolean
       type: object
@@ -906,16 +1032,34 @@ components:
       description: Associates `members` with a `role`.
       properties:
         condition:
-          $ref: '#/components/schemas/Expr'
-          description: |-
+          $ref: "#/components/schemas/Expr"
+          description: >-
             The condition that is associated with this binding.
-            NOTE: An unsatisfied condition will not allow user access via current
-            binding. Different bindings, including their conditions, are examined
-            independently.
+
+
+            If the condition evaluates to `true`, then this binding applies to the
+
+            current request.
+
+
+            If the condition evaluates to `false`, then this binding does not apply to
+
+            the current request. However, a different role binding might grant the same
+
+            role to one or more of the members in this binding.
+
+
+            To learn which resources support conditions in their IAM policies, see the
+
+            [IAM
+
+            documentation](https://cloud.google.com/iam/help/conditions/resource-policies).
         members:
-          description: |+
+          description: >+
             Specifies the identities requesting access for a Cloud Platform resource.
+
             `members` can have the following values:
+
 
             * `allUsers`: A special identifier that represents anyone who is
                on the internet; with or without a Google account.
@@ -954,15 +1098,15 @@ components:
                recovered group retains the role in the binding.
 
 
-            * `domain:{domain}`: The G Suite domain (primary) that represents all the
-               users of that domain. For example, `google.com` or `example.com`.
+            * `domain:{domain}`: The G Suite domain (primary) that represents all the    users of that domain. For example, `google.com` or `example.com`.
 
           items:
             type: string
           type: array
         role:
-          description: |-
+          description: >-
             Role that is assigned to `members`.
+
             For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
           type: string
       type: object
@@ -970,29 +1114,35 @@ components:
       description: Represents the category hierarchy of a SKU.
       properties:
         resourceFamily:
-          description: |-
+          description: >-
             The type of product the SKU refers to.
+
             Example: "Compute", "Storage", "Network", "ApplicationServices" etc.
           type: string
         resourceGroup:
-          description: |-
+          description: >-
             A group classification for related SKUs.
+
             Example: "RAM", "GPU", "Prediction", "Ops", "GoogleEgress" etc.
           type: string
         serviceDisplayName:
           description: The display name of the service this SKU belongs to.
           type: string
         usageType:
-          description: |-
+          description: >-
             Represents how the SKU is consumed.
+
             Example: "OnDemand", "Preemptible", "Commit1Mo", "Commit1Yr" etc.
           type: string
       type: object
     Expr:
-      description: |-
+      description: >-
         Represents a textual expression in the Common Expression Language (CEL)
+
         syntax. CEL is a C-like expression language. The syntax and semantics of CEL
+
         are documented at https://github.com/google/cel-spec.
+
 
         Example (Comparison):
 
@@ -1019,29 +1169,56 @@ components:
             expression: "'New message received at ' + string(document.create_time)"
 
         The exact variables and functions that may be referenced within an expression
+
         are determined by the service that evaluates it. See the service
+
         documentation for additional information.
       properties:
         description:
-          description: |-
+          description: >-
             Optional. Description of the expression. This is a longer text which
+
             describes the expression, e.g. when hovered over it in a UI.
           type: string
         expression:
-          description: |-
+          description: >-
             Textual representation of an expression in Common Expression Language
+
             syntax.
           type: string
         location:
-          description: |-
+          description: >-
             Optional. String indicating the location of the expression for error
+
             reporting, e.g. a file name and a position in the file.
           type: string
         title:
-          description: |-
+          description: >-
             Optional. Title for the expression, i.e. a short string describing
+
             its purpose. This can be used e.g. in UIs which allow to enter the
+
             expression.
+          type: string
+      type: object
+    GeoTaxonomy:
+      description: Encapsulates the geographic taxonomy data for a sku.
+      properties:
+        regions:
+          description: >-
+            The list of regions associated with a sku. Empty for Global skus, which are
+
+            associated with all GCP regions.
+          items:
+            type: string
+          type: array
+        type:
+          description: "The type of Geo Taxonomy: GLOBAL, REGIONAL, or MULTI_REGIONAL."
+          enum:
+            - TYPE_UNSPECIFIED
+            - GLOBAL
+            - REGIONAL
+            - MULTI_REGIONAL
           type: string
       type: object
     ListBillingAccountsResponse:
@@ -1050,12 +1227,14 @@ components:
         billingAccounts:
           description: A list of billing accounts.
           items:
-            $ref: '#/components/schemas/BillingAccount'
+            $ref: "#/components/schemas/BillingAccount"
           type: array
         nextPageToken:
-          description: |-
+          description: >-
             A token to retrieve the next page of results. To retrieve the next page,
+
             call `ListBillingAccounts` again with the `page_token` field set to this
+
             value. This field is empty if there are no more results to retrieve.
           type: string
       type: object
@@ -1063,47 +1242,54 @@ components:
       description: Request message for `ListProjectBillingInfoResponse`.
       properties:
         nextPageToken:
-          description: |-
+          description: >-
             A token to retrieve the next page of results. To retrieve the next page,
+
             call `ListProjectBillingInfo` again with the `page_token` field set to this
+
             value. This field is empty if there are no more results to retrieve.
           type: string
         projectBillingInfo:
-          description: |-
+          description: >-
             A list of `ProjectBillingInfo` resources representing the projects
+
             associated with the billing account.
           items:
-            $ref: '#/components/schemas/ProjectBillingInfo'
+            $ref: "#/components/schemas/ProjectBillingInfo"
           type: array
       type: object
     ListServicesResponse:
       description: Response message for `ListServices`.
       properties:
         nextPageToken:
-          description: |-
+          description: >-
             A token to retrieve the next page of results. To retrieve the next page,
+
             call `ListServices` again with the `page_token` field set to this
+
             value. This field is empty if there are no more results to retrieve.
           type: string
         services:
           description: A list of services.
           items:
-            $ref: '#/components/schemas/Service'
+            $ref: "#/components/schemas/Service"
           type: array
       type: object
     ListSkusResponse:
       description: Response message for `ListSkus`.
       properties:
         nextPageToken:
-          description: |-
+          description: >-
             A token to retrieve the next page of results. To retrieve the next page,
+
             call `ListSkus` again with the `page_token` field set to this
+
             value. This field is empty if there are no more results to retrieve.
           type: string
         skus:
           description: The list of public SKUs of the given service.
           items:
-            $ref: '#/components/schemas/Sku'
+            $ref: "#/components/schemas/Sku"
           type: array
       type: object
     Money:
@@ -1113,38 +1299,59 @@ components:
           description: The 3-letter currency code defined in ISO 4217.
           type: string
         nanos:
-          description: |-
+          description: >-
             Number of nano (10^-9) units of the amount.
+
             The value must be between -999,999,999 and +999,999,999 inclusive.
+
             If `units` is positive, `nanos` must be positive or zero.
+
             If `units` is zero, `nanos` can be positive, zero, or negative.
+
             If `units` is negative, `nanos` must be negative or zero.
+
             For example $-1.75 is represented as `units`=-1 and `nanos`=-750,000,000.
           format: int32
           type: integer
         units:
-          description: |-
+          description: >-
             The whole units of the amount.
+
             For example if `currencyCode` is `"USD"`, then 1 unit is one US dollar.
           format: int64
           type: string
       type: object
     Policy:
-      description: |-
+      description: >-
         An Identity and Access Management (IAM) policy, which specifies access
+
         controls for Google Cloud resources.
 
 
+
         A `Policy` is a collection of `bindings`. A `binding` binds one or more
+
         `members` to a single `role`. Members can be user accounts, service accounts,
+
         Google groups, and domains (such as G Suite). A `role` is a named list of
+
         permissions; each `role` can be an IAM predefined role or a user-created
+
         custom role.
 
-        Optionally, a `binding` can specify a `condition`, which is a logical
-        expression that allows access to a resource only if the expression evaluates
-        to `true`. A condition can add constraints based on attributes of the
-        request, the resource, or both.
+
+        For some types of Google Cloud resources, a `binding` can also specify a
+
+        `condition`, which is a logical expression that allows access to a resource
+
+        only if the expression evaluates to `true`. A condition can add constraints
+
+        based on attributes of the request, the resource, or both. To learn which
+
+        resources support conditions in their IAM policies, see the
+
+        [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies).
+
 
         **JSON example:**
 
@@ -1161,7 +1368,9 @@ components:
                 },
                 {
                   "role": "roles/resourcemanager.organizationViewer",
-                  "members": ["user:eve@example.com"],
+                  "members": [
+                    "user:eve@example.com"
+                  ],
                   "condition": {
                     "title": "expirable access",
                     "description": "Does not grant access after Sep 2020",
@@ -1193,123 +1402,175 @@ components:
             - version: 3
 
         For a description of IAM and its features, see the
+
         [IAM documentation](https://cloud.google.com/iam/docs/).
       properties:
         auditConfigs:
           description: Specifies cloud audit logging configuration for this policy.
           items:
-            $ref: '#/components/schemas/AuditConfig'
+            $ref: "#/components/schemas/AuditConfig"
           type: array
         bindings:
-          description: |-
+          description: >-
             Associates a list of `members` to a `role`. Optionally, may specify a
+
             `condition` that determines how and when the `bindings` are applied. Each
+
             of the `bindings` must contain at least one member.
           items:
-            $ref: '#/components/schemas/Binding'
+            $ref: "#/components/schemas/Binding"
           type: array
         etag:
-          description: |-
+          description: >-
             `etag` is used for optimistic concurrency control as a way to help
+
             prevent simultaneous updates of a policy from overwriting each other.
+
             It is strongly suggested that systems make use of the `etag` in the
+
             read-modify-write cycle to perform policy updates in order to avoid race
+
             conditions: An `etag` is returned in the response to `getIamPolicy`, and
+
             systems are expected to put that etag in the request to `setIamPolicy` to
+
             ensure that their change will be applied to the same version of the policy.
 
+
             **Important:** If you use IAM Conditions, you must include the `etag` field
+
             whenever you call `setIamPolicy`. If you omit this field, then IAM allows
+
             you to overwrite a version `3` policy with a version `1` policy, and all of
+
             the conditions in the version `3` policy are lost.
           format: byte
           type: string
         version:
-          description: |-
+          description: >-
             Specifies the format of the policy.
 
+
             Valid values are `0`, `1`, and `3`. Requests that specify an invalid value
+
             are rejected.
 
+
             Any operation that affects conditional role bindings must specify version
+
             `3`. This requirement applies to the following operations:
 
+
             * Getting a policy that includes a conditional role binding
+
             * Adding a conditional role binding to a policy
+
             * Changing a conditional role binding in a policy
+
             * Removing any role binding, with or without a condition, from a policy
               that includes conditions
 
             **Important:** If you use IAM Conditions, you must include the `etag` field
+
             whenever you call `setIamPolicy`. If you omit this field, then IAM allows
+
             you to overwrite a version `3` policy with a version `1` policy, and all of
+
             the conditions in the version `3` policy are lost.
 
+
             If a policy does not include any conditions, operations on that policy may
+
             specify any valid version or leave the field unset.
+
+
+            To learn which resources support conditions in their IAM policies, see the
+
+            [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies).
           format: int32
           type: integer
       type: object
     PricingExpression:
-      description: |-
+      description: >-
         Expresses a mathematical pricing formula. For Example:-
 
+
         `usage_unit: GBy`
+
         `tiered_rates:`
            `[start_usage_amount: 20, unit_price: $10]`
            `[start_usage_amount: 100, unit_price: $5]`
 
         The above expresses a pricing formula where the first 20GB is free, the
+
         next 80GB is priced at $10 per GB followed by $5 per GB for additional
+
         usage.
       properties:
         baseUnit:
-          description: |-
+          description: >-
             The base unit for the SKU which is the unit used in usage exports.
+
             Example: "By"
           type: string
         baseUnitConversionFactor:
-          description: |-
+          description: >-
             Conversion factor for converting from price per usage_unit to price per
+
             base_unit, and start_usage_amount to start_usage_amount in base_unit.
+
             unit_price / base_unit_conversion_factor = price per base_unit.
+
             start_usage_amount * base_unit_conversion_factor = start_usage_amount in
+
             base_unit.
           format: double
           type: number
         baseUnitDescription:
-          description: |-
+          description: >-
             The base unit in human readable form.
+
             Example: "byte".
           type: string
         displayQuantity:
-          description: |-
+          description: >-
             The recommended quantity of units for displaying pricing info. When
+
             displaying pricing info it is recommended to display:
+
             (unit_price * display_quantity) per display_quantity usage_unit.
+
             This field does not affect the pricing formula and is for display purposes
+
             only.
+
             Example: If the unit_price is "0.0001 USD", the usage_unit is "GB" and
+
             the display_quantity is "1000" then the recommended way of displaying the
+
             pricing info is "0.10 USD per 1000 GB"
           format: double
           type: number
         tieredRates:
-          description: |-
+          description: >-
             The list of tiered rates for this pricing. The total cost is computed by
+
             applying each of the tiered rates on usage. This repeated list is sorted
+
             by ascending order of start_usage_amount.
           items:
-            $ref: '#/components/schemas/TierRate'
+            $ref: "#/components/schemas/TierRate"
           type: array
         usageUnit:
-          description: |-
+          description: >-
             The short hand for unit of usage this pricing is specified in.
+
             Example: usage_unit of "GiBy" means that usage is specified in "Gibi Byte".
           type: string
         usageUnitDescription:
-          description: |-
+          description: >-
             The unit of usage in human readable form.
+
             Example: "gibi byte".
           type: string
       type: object
@@ -1317,67 +1578,89 @@ components:
       description: Represents the pricing information for a SKU at a single point of time.
       properties:
         aggregationInfo:
-          $ref: '#/components/schemas/AggregationInfo'
-          description: |-
+          $ref: "#/components/schemas/AggregationInfo"
+          description: >-
             Aggregation Info. This can be left unspecified if the pricing expression
+
             doesn't require aggregation.
         currencyConversionRate:
-          description: |-
+          description: >-
             Conversion rate used for currency conversion, from USD to the currency
+
             specified in the request. This includes any surcharge collected for billing
+
             in non USD currency. If a currency is not specified in the request this
+
             defaults to 1.0.
+
             Example: USD * currency_conversion_rate = JPY
           format: double
           type: number
         effectiveTime:
-          description: |-
+          description: >-
             The timestamp from which this pricing was effective within the requested
+
             time range. This is guaranteed to be greater than or equal to the
+
             start_time field in the request and less than the end_time field in the
+
             request. If a time range was not specified in the request this field will
+
             be equivalent to a time within the last 12 hours, indicating the latest
+
             pricing info.
           format: google-datetime
           type: string
         pricingExpression:
-          $ref: '#/components/schemas/PricingExpression'
+          $ref: "#/components/schemas/PricingExpression"
           description: Expresses the pricing formula. See `PricingExpression` for an example.
         summary:
-          description: |-
+          description: >-
             An optional human readable summary of the pricing information, has a
+
             maximum length of 256 characters.
           type: string
       type: object
     ProjectBillingInfo:
-      description: |-
+      description: >-
         Encapsulation of billing information for a GCP Console project. A project
+
         has at most one associated billing account at a time (but a billing account
+
         can be assigned to multiple projects).
       properties:
         billingAccountName:
-          description: |-
+          description: >-
             The resource name of the billing account associated with the project, if
+
             any. For example, `billingAccounts/012345-567890-ABCDEF`.
           type: string
         billingEnabled:
-          description: |-
+          description: >-
             True if the project is associated with an open billing account, to which
+
             usage on the project is charged. False if the project is associated with a
+
             closed billing account, or no billing account at all, and therefore cannot
+
             use paid services. This field is read-only.
           type: boolean
         name:
-          description: |-
+          description: >-
             The resource name for the `ProjectBillingInfo`; has the form
+
             `projects/{project_id}/billingInfo`. For example, the resource name for the
+
             billing information for project `tokyo-rain-123` would be
+
             `projects/tokyo-rain-123/billingInfo`. This field is read-only.
           type: string
         projectId:
-          description: |-
+          description: >-
             The ID of the project that this `ProjectBillingInfo` represents, such as
+
             `tokyo-rain-123`. This is a convenience field so that you don't need to
+
             parse the `name` field to obtain a project ID. This field is read-only.
           type: string
       type: object
@@ -1385,21 +1668,24 @@ components:
       description: Encapsulates a single service in Google Cloud Platform.
       properties:
         businessEntityName:
-          description: |-
+          description: >-
             The business under which the service is offered.
+
             Ex. "businessEntities/GCP", "businessEntities/Maps"
           type: string
         displayName:
           description: A human readable display name for this service.
           type: string
         name:
-          description: |-
+          description: >-
             The resource name for the service.
+
             Example: "services/DA34-426B-A397"
           type: string
         serviceId:
-          description: |-
+          description: >-
             The identifier for the service.
+
             Example: "DA34-426B-A397"
           type: string
       type: object
@@ -1407,19 +1693,25 @@ components:
       description: Request message for `SetIamPolicy` method.
       properties:
         policy:
-          $ref: '#/components/schemas/Policy'
-          description: |-
+          $ref: "#/components/schemas/Policy"
+          description: >-
             REQUIRED: The complete policy to be applied to the `resource`. The size of
+
             the policy is limited to a few 10s of KB. An empty policy is a
+
             valid policy but certain Cloud Platform services (such as Projects)
+
             might reject them.
         updateMask:
-          description: |-
+          description: >-
             OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
+
             the fields in the mask will be modified. If no mask is provided, the
+
             following default mask is used:
-            paths: "bindings, etag"
-            This field is only used by Cloud IAM.
+
+
+            `paths: "bindings, etag"`
           format: google-fieldmask
           type: string
       type: object
@@ -1427,39 +1719,48 @@ components:
       description: Encapsulates a single SKU in Google Cloud Platform
       properties:
         category:
-          $ref: '#/components/schemas/Category'
-          description: 'The category hierarchy of this SKU, purely for organizational purpose.'
+          $ref: "#/components/schemas/Category"
+          description: The category hierarchy of this SKU, purely for organizational purpose.
         description:
-          description: |-
+          description: >-
             A human readable description of the SKU, has a maximum length of 256
+
             characters.
           type: string
+        geoTaxonomy:
+          $ref: "#/components/schemas/GeoTaxonomy"
+          description: The geographic taxonomy for this sku.
         name:
-          description: |-
+          description: >-
             The resource name for the SKU.
+
             Example: "services/DA34-426B-A397/skus/AA95-CD31-42FE"
           type: string
         pricingInfo:
           description: A timeline of pricing info for this SKU in chronological order.
           items:
-            $ref: '#/components/schemas/PricingInfo'
+            $ref: "#/components/schemas/PricingInfo"
           type: array
         serviceProviderName:
-          description: |-
+          description: >-
             Identifies the service provider.
+
             This is 'Google' for first party services in Google Cloud Platform.
           type: string
         serviceRegions:
-          description: |-
+          description: >-
             List of service regions this SKU is offered at.
+
             Example: "asia-east1"
+
             Service regions can be found at https://cloud.google.com/about/locations/
           items:
             type: string
           type: array
         skuId:
-          description: |-
+          description: >-
             The identifier for the SKU.
+
             Example: "AA95-CD31-42FE"
           type: string
       type: object
@@ -1467,10 +1768,13 @@ components:
       description: Request message for `TestIamPermissions` method.
       properties:
         permissions:
-          description: |-
+          description: >-
             The set of permissions to check for the `resource`. Permissions with
+
             wildcards (such as '*' or 'storage.*') are not allowed. For more
+
             information see
+
             [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
           items:
             type: string
@@ -1480,8 +1784,9 @@ components:
       description: Response message for `TestIamPermissions` method.
       properties:
         permissions:
-          description: |-
+          description: >-
             A subset of `TestPermissionsRequest.permissions` that the caller is
+
             allowed.
           items:
             type: string
@@ -1491,16 +1796,19 @@ components:
       description: The price rate indicating starting usage and its corresponding price.
       properties:
         startUsageAmount:
-          description: |-
+          description: >-
             Usage is priced at this rate only after this amount.
+
             Example: start_usage_amount of 10 indicates that the usage will be priced
+
             at the unit_price after the first 10 usage_units.
           format: double
           type: number
         unitPrice:
-          $ref: '#/components/schemas/Money'
-          description: |-
+          $ref: "#/components/schemas/Money"
+          description: >-
             The price per unit of usage.
+
             Example: unit_price of amount $10 indicates that each unit will cost $10.
       type: object
   securitySchemes:
@@ -1508,16 +1816,16 @@ components:
       description: Oauth 2.0 implicit authentication
       flows:
         implicit:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
       type: oauth2
     Oauth2c:
-      description: Oauth 2.0 accessCode authentication
+      description: Oauth 2.0 authorizationCode authentication
       flows:
         authorizationCode:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-          tokenUrl: 'https://accounts.google.com/o/oauth2/token'
+            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+          tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

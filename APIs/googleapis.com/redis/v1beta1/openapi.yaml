@@ -1,44 +1,49 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://redis.googleapis.com/'
+  - url: https://redis.googleapis.com/
 info:
   contact:
     name: Google
-    url: 'https://google.com'
+    url: https://google.com
+    x-twitter: youtube
   description: Creates and manages Redis instances on the Google Cloud Platform.
   license:
     name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
-  title: Google Cloud Memorystore for Redis
+    url: http://creativecommons.org/licenses/by/3.0/
+  termsOfService: https://developers.google.com/terms/
+  title: Google Cloud Memorystore for Redis API
   version: v1beta1
   x-apiClientRegistration:
-    url: 'https://console.developers.google.com'
+    url: https://console.developers.google.com
+  x-apisguru-categories:
+    - analytics
+    - media
   x-logo:
-    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.31
       format: google
-      url: 'https://redis.googleapis.com/$discovery/rest?version=v1beta1'
+      url: https://redis.googleapis.com/$discovery/rest?version=v1beta1
       version: v1
   x-preferred: false
   x-providerName: googleapis.com
   x-serviceName: redis
 externalDocs:
-  url: 'https://cloud.google.com/memorystore/docs/redis/'
+  url: https://cloud.google.com/memorystore/docs/redis/
 tags:
   - name: projects
 paths:
-  '/v1beta1/{name}':
+  "/v1beta1/{name}":
     delete:
-      description: |-
+      description: >-
         Deletes a specific Redis instance.  Instance stops serving and data is
+
         deleted.
       operationId: redis.projects.locations.instances.delete
       parameters:
-        - description: |-
+        - description: >-
             Required. Redis instance resource name using the form:
                 `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
             where `location_id` refers to a GCP region.
@@ -47,26 +52,25 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
     get:
       description: Gets the details of a specific Redis instance.
       operationId: redis.projects.locations.instances.get
       parameters:
-        - description: |-
+        - description: >-
             Required. Redis instance resource name using the form:
                 `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
             where `location_id` refers to a GCP region.
@@ -75,61 +79,69 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Instance'
+                $ref: "#/components/schemas/Instance"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/upload_protocol"
     patch:
-      description: |-
+      description: >-
         Updates the metadata and configuration of a specific Redis instance.
 
+
         Completed longrunning.Operation will contain the new instance object
+
         in the response field. The returned operation is automatically deleted
+
         after a few hours, so there is no need to call DeleteOperation.
       operationId: redis.projects.locations.instances.patch
       parameters:
-        - description: |-
+        - description: >-
             Required. Unique name of the resource in this scope including project and
+
             location using the form:
                 `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
 
             Note: Redis instances are managed and addressed at regional level so
+
             location_id here refers to a GCP region; however, users may choose which
+
             specific zone (or collection of zones for cross-zone instances) an instance
+
             should be provisioned in. Refer to location_id and
+
             alternative_location_id fields for more details.
           in: path
           name: name
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
-        - description: |-
+        - description: >-
             Required. Mask of fields to update. At least one path must be supplied in
+
             this field. The elements of the repeated paths field may only include these
+
             fields from Instance:
 
              *   `displayName`
@@ -144,33 +156,32 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Instance'
+              $ref: "#/components/schemas/Instance"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1beta1/{name}/locations':
+  "/v1beta1/{name}/locations":
     get:
       description: Lists information about the supported locations for this service.
       operationId: redis.projects.locations.list
       parameters:
-        - description: 'The resource that owns the locations collection, if applicable.'
+        - description: The resource that owns the locations collection, if applicable.
           in: path
           name: name
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
         - description: The standard list filter.
           in: query
           name: filter
@@ -187,43 +198,51 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ListLocationsResponse'
+                $ref: "#/components/schemas/ListLocationsResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-  '/v1beta1/{name}/operations':
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/upload_protocol"
+  "/v1beta1/{name}/operations":
     get:
-      description: |-
+      description: >-
         Lists operations that match the specified filter in the request. If the
+
         server doesn't support this method, it returns `UNIMPLEMENTED`.
 
+
         NOTE: the `name` binding allows API services to override the binding
+
         to use different resource name schemes, such as `users/*/operations`. To
+
         override the binding, API services can add a binding such as
+
         `"/v1/{name=users/*}/operations"` to their service configuration.
+
         For backwards compatibility, the default name includes the operations
+
         collection id, however overriding users must ensure the name binding
+
         is the parent resource, without the operations collection id.
       operationId: redis.projects.locations.operations.list
       parameters:
@@ -233,7 +252,6 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
         - description: The standard list filter.
           in: query
           name: filter
@@ -250,55 +268,64 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ListOperationsResponse'
+                $ref: "#/components/schemas/ListOperationsResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-  '/v1beta1/{name}:cancel':
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/upload_protocol"
+  "/v1beta1/{name}:cancel":
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
-      description: |-
+      description: >-
         Starts asynchronous cancellation on a long-running operation.  The server
+
         makes a best effort to cancel the operation, but success is not
+
         guaranteed.  If the server doesn't support this method, it returns
+
         `google.rpc.Code.UNIMPLEMENTED`.  Clients can use
+
         Operations.GetOperation or
+
         other methods to check whether the cancellation succeeded or whether the
+
         operation completed despite cancellation. On successful cancellation,
+
         the operation is not deleted; instead, it becomes an operation with
+
         an Operation.error value with a google.rpc.Status.code of 1,
+
         corresponding to `Code.CANCELLED`.
       operationId: redis.projects.locations.operations.cancel
       parameters:
@@ -308,45 +335,47 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Empty'
+                $ref: "#/components/schemas/Empty"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1beta1/{name}:export':
+  "/v1beta1/{name}:export":
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
-      description: |-
+      description: >-
         Export Redis instance data into a Redis RDB format file in Cloud Storage.
+
 
         Redis will continue serving during this operation.
 
+
         The returned operation is automatically deleted after a few hours, so
+
         there is no need to call DeleteOperation.
       operationId: redis.projects.locations.instances.export
       parameters:
-        - description: |-
+        - description: >-
             Required. Redis instance resource name using the form:
                 `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
             where `location_id` refers to a GCP region.
@@ -355,46 +384,46 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ExportInstanceRequest'
+              $ref: "#/components/schemas/ExportInstanceRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1beta1/{name}:failover':
+  "/v1beta1/{name}:failover":
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
-      description: |-
+      description: >-
         Initiates a failover of the master node to current replica node for a
+
         specific STANDARD tier Cloud Memorystore for Redis instance.
       operationId: redis.projects.locations.instances.failover
       parameters:
-        - description: |-
+        - description: >-
             Required. Redis instance resource name using the form:
                 `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
             where `location_id` refers to a GCP region.
@@ -403,52 +432,56 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/FailoverInstanceRequest'
+              $ref: "#/components/schemas/FailoverInstanceRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1beta1/{name}:import':
+  "/v1beta1/{name}:import":
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
-      description: |-
+      description: >-
         Import a Redis RDB snapshot file from Cloud Storage into a Redis instance.
 
+
         Redis may stop serving during this operation. Instance state will be
+
         IMPORTING for entire operation. When complete, the instance will contain
+
         only data from the imported file.
 
+
         The returned operation is automatically deleted after a few hours, so
+
         there is no need to call DeleteOperation.
       operationId: redis.projects.locations.instances.import
       parameters:
-        - description: |-
+        - description: >-
             Required. Redis instance resource name using the form:
                 `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
             where `location_id` refers to a GCP region.
@@ -457,46 +490,46 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ImportInstanceRequest'
+              $ref: "#/components/schemas/ImportInstanceRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1beta1/{name}:upgrade':
+  "/v1beta1/{name}:upgrade":
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
-      description: |-
+      description: >-
         Upgrades Redis instance to the newer Redis version specified in the
+
         request.
       operationId: redis.projects.locations.instances.upgrade
       parameters:
-        - description: |-
+        - description: >-
             Required. Redis instance resource name using the form:
                 `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
             where `location_id` refers to a GCP region.
@@ -505,41 +538,45 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpgradeInstanceRequest'
+              $ref: "#/components/schemas/UpgradeInstanceRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1beta1/{parent}/instances':
+  "/v1beta1/{parent}/instances":
     get:
-      description: |-
+      description: >-
         Lists all Redis instances owned by a project in either the specified
+
         location (region) or all locations.
+
 
         The location should have the following format:
 
+
         * `projects/{project_id}/locations/{location_id}`
 
+
         If `location_id` is specified as `-` (wildcard), then all regions
+
         available to the project are queried, and the results are aggregated.
       operationId: redis.projects.locations.instances.list
       parameters:
-        - description: |-
+        - description: >-
             Required. The resource name of the instance location using the form:
                 `projects/{project_id}/locations/{location_id}`
             where `location_id` refers to a GCP region.
@@ -548,69 +585,82 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
-        - description: |-
+        - description: >-
             The maximum number of items to return.
 
+
             If not specified, a default value of 1000 will be used by the service.
+
             Regardless of the page_size value, the response may include a partial list
+
             and a caller should only rely on response's
+
             `next_page_token`
+
             to determine if there are more instances left to be queried.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: |-
+        - description: >-
             The `next_page_token` value returned from a previous
+
             ListInstances request, if any.
           in: query
           name: pageToken
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ListInstancesResponse'
+                $ref: "#/components/schemas/ListInstancesResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
-      description: |-
+      description: >-
         Creates a Redis instance based on the specified tier and memory size.
 
+
         By default, the instance is accessible from the project's
-        [default network](/compute/docs/networks-and-firewalls#networks).
+
+        [default network](https://cloud.google.com/vpc/docs/vpc).
+
 
         The creation is executed asynchronously and callers may check the returned
+
         operation to track its progress. Once the operation is completed the Redis
+
         instance will be fully functional. Completed longrunning.Operation will
+
         contain the new instance object in the response field.
 
+
         The returned operation is automatically deleted after a few hours, so there
+
         is no need to call DeleteOperation.
       operationId: redis.projects.locations.instances.create
       parameters:
-        - description: |-
+        - description: >-
             Required. The resource name of the instance location using the form:
                 `projects/{project_id}/locations/{location_id}`
             where `location_id` refers to a GCP region.
@@ -619,15 +669,20 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
-        - description: |-
+        - description: >-
             Required. The logical name of the Redis instance in the customer project
+
             with the following restrictions:
 
+
             * Must contain only lowercase letters, numbers, and hyphens.
+
             * Must start with a letter.
+
             * Must be between 1-40 characters.
+
             * Must end with a number or a letter.
+
             * Must be unique within the customer project / location
           in: query
           name: instanceId
@@ -637,19 +692,19 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Instance'
+              $ref: "#/components/schemas/Instance"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
 components:
@@ -660,8 +715,8 @@ components:
       name: $.xgafv
       schema:
         enum:
-          - '1'
-          - '2'
+          - "1"
+          - "2"
         type: string
     access_token:
       description: OAuth access token.
@@ -674,7 +729,6 @@ components:
       in: query
       name: alt
       schema:
-        default: json
         enum:
           - json
           - media
@@ -693,7 +747,7 @@ components:
       schema:
         type: string
     key:
-      description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -709,37 +763,32 @@ components:
       in: query
       name: prettyPrint
       schema:
-        default: true
         type: boolean
     quotaUser:
-      description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.'
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
       in: query
       name: quotaUser
       schema:
         type: string
     uploadType:
-      description: 'Legacy upload protocol for media (e.g. "media", "multipart").'
+      description: Legacy upload protocol for media (e.g. "media", "multipart").
       in: query
       name: uploadType
       schema:
         type: string
     upload_protocol:
-      description: 'Upload protocol for media (e.g. "raw", "multipart").'
+      description: Upload protocol for media (e.g. "raw", "multipart").
       in: query
       name: upload_protocol
       schema:
         type: string
-  requestBodies:
-    Instance:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Instance'
   schemas:
     Empty:
-      description: |-
+      description: >-
         A generic empty message that you can re-use to avoid defining duplicated
+
         empty messages in your APIs. A typical example is to use it as the request
+
         or the response type of an API method. For instance:
 
             service Foo {
@@ -753,15 +802,16 @@ components:
       description: Request for Export.
       properties:
         outputConfig:
-          $ref: '#/components/schemas/OutputConfig'
+          $ref: "#/components/schemas/OutputConfig"
           description: Required. Specify data to be exported.
       type: object
     FailoverInstanceRequest:
       description: Request for Failover.
       properties:
         dataProtectionMode:
-          description: |-
+          description: >-
             Optional. Available data protection modes that the user can choose. If it's
+
             unspecified, data protection mode will be LIMITED_DATA_LOSS by default.
           enum:
             - DATA_PROTECTION_MODE_UNSPECIFIED
@@ -773,8 +823,9 @@ components:
       description: The Cloud Storage location for the output content
       properties:
         uri:
-          description: |-
+          description: >-
             Required. Data destination URI (e.g.
+
             'gs://my_bucket/my_object'). Existing files will be overwritten.
           type: string
       type: object
@@ -782,60 +833,70 @@ components:
       description: The Cloud Storage location for the input content
       properties:
         uri:
-          description: 'Required. Source data URI. (e.g. ''gs://my_bucket/my_object'').'
+          description: Required. Source data URI. (e.g. 'gs://my_bucket/my_object').
           type: string
       type: object
     GoogleCloudCommonOperationMetadata:
       description: Represents the metadata of the long-running operation.
       properties:
         apiVersion:
-          description: '[Output only] API version used to start the operation.'
+          description: "[Output only] API version used to start the operation."
           type: string
         cancelRequested:
-          description: |-
+          description: >-
             [Output only] Identifies whether the user has requested cancellation
+
             of the operation. Operations that have successfully been cancelled
+
             have Operation.error value with a google.rpc.Status.code of 1,
+
             corresponding to `Code.CANCELLED`.
           type: boolean
         createTime:
-          description: '[Output only] The time the operation was created.'
+          description: "[Output only] The time the operation was created."
           format: google-datetime
           type: string
         endTime:
-          description: '[Output only] The time the operation finished running.'
+          description: "[Output only] The time the operation finished running."
           format: google-datetime
           type: string
         statusDetail:
-          description: '[Output only] Human-readable status of the operation, if any.'
+          description: "[Output only] Human-readable status of the operation, if any."
           type: string
         target:
-          description: '[Output only] Server-defined resource path for the target of the operation.'
+          description: "[Output only] Server-defined resource path for the target of the operation."
           type: string
         verb:
-          description: '[Output only] Name of the verb executed by the operation.'
+          description: "[Output only] Name of the verb executed by the operation."
           type: string
       type: object
     GoogleCloudRedisV1beta1LocationMetadata:
-      description: |-
+      description: >-
         This location metadata represents additional configuration options for a
+
         given location where a Redis instance may be created. All fields are output
+
         only. It is returned as content of the
+
         `google.cloud.location.Location.metadata` field.
       properties:
         availableZones:
           additionalProperties:
-            $ref: '#/components/schemas/GoogleCloudRedisV1beta1ZoneMetadata'
-          description: |-
+            $ref: "#/components/schemas/GoogleCloudRedisV1beta1ZoneMetadata"
+          description: >-
             Output only. The set of available zones in the location. The map is keyed
+
             by the lowercase ID of each zone, as defined by GCE. These keys can be
+
             specified in `location_id` or `alternative_location_id` fields when
+
             creating a Redis instance.
           type: object
       type: object
     GoogleCloudRedisV1beta1ZoneMetadata:
-      description: |-
+      description: >-
         Defines specific information for a particular zone. Currently empty and
+
         reserved for future use only.
       properties: {}
       type: object
@@ -843,35 +904,41 @@ components:
       description: Request for Import.
       properties:
         inputConfig:
-          $ref: '#/components/schemas/InputConfig'
+          $ref: "#/components/schemas/InputConfig"
           description: Required. Specify data to be imported.
       type: object
     InputConfig:
       description: The input content
       properties:
         gcsSource:
-          $ref: '#/components/schemas/GcsSource'
+          $ref: "#/components/schemas/GcsSource"
           description: Google Cloud Storage location where input content is located.
       type: object
     Instance:
       description: A Google Cloud Redis instance.
       properties:
         alternativeLocationId:
-          description: |-
+          description: >-
             Optional. Only applicable to STANDARD_HA tier which protects the instance
+
             against zonal failures by provisioning it across two zones. If provided, it
+
             must be a different zone from the one provided in location_id.
           type: string
         authorizedNetwork:
-          description: |-
+          description: >-
             Optional. The full name of the Google Compute Engine
-            [network](/compute/docs/networks-and-firewalls#networks) to which the
+
+            [network](https://cloud.google.com/vpc/docs/vpc) to which the
+
             instance is connected. If left unspecified, the `default` network
+
             will be used.
           type: string
         connectMode:
-          description: |-
+          description: >-
             Optional. The network connect mode of the Redis instance.
+
             If not provided, the connect mode defaults to DIRECT_PEERING.
           enum:
             - CONNECT_MODE_UNSPECIFIED
@@ -883,19 +950,24 @@ components:
           format: google-datetime
           type: string
         currentLocationId:
-          description: |-
+          description: >-
             Output only. The current zone where the Redis endpoint is placed. For Basic
+
             Tier instances, this will always be the same as the location_id
+
             provided by the user at creation time. For Standard Tier instances,
+
             this can be either location_id or alternative_location_id and can
+
             change after a failover event.
           type: string
         displayName:
           description: An arbitrary and optional user-provided name for the instance.
           type: string
         host:
-          description: |-
+          description: >-
             Output only. Hostname or IP address of the exposed Redis endpoint used by
+
             clients to connect to the service.
           type: string
         labels:
@@ -904,11 +976,15 @@ components:
           description: Resource labels to represent user provided metadata
           type: object
         locationId:
-          description: |-
+          description: >-
             Optional. The zone where the instance will be provisioned. If not provided,
+
             the service will choose a zone for the instance. For STANDARD_HA tier,
+
             instances will be created across two zones for protection against zonal
+
             failures. If alternative_location_id is also provided, it must be
+
             different from location_id.
           type: string
         memorySizeGb:
@@ -916,23 +992,32 @@ components:
           format: int32
           type: integer
         name:
-          description: |-
+          description: >-
             Required. Unique name of the resource in this scope including project and
+
             location using the form:
                 `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
 
             Note: Redis instances are managed and addressed at regional level so
+
             location_id here refers to a GCP region; however, users may choose which
+
             specific zone (or collection of zones for cross-zone instances) an instance
+
             should be provisioned in. Refer to location_id and
+
             alternative_location_id fields for more details.
           type: string
         persistenceIamIdentity:
-          description: |-
+          description: >-
             Output only. Cloud IAM identity used by import / export operations to
+
             transfer data to/from Cloud Storage. Format is
+
             "serviceAccount:<service_account_email>". The value may change over time
+
             for a given instance so should be checked before each import/export
+
             operation.
           type: string
         port:
@@ -942,9 +1027,11 @@ components:
         redisConfigs:
           additionalProperties:
             type: string
-          description: |-
+          description: >-
             Optional. Redis configuration parameters, according to
+
             http://redis.io/topics/config. Currently, the only supported parameters
+
             are:
 
              Redis version 3.2 and newer:
@@ -965,9 +1052,11 @@ components:
              *   stream-node-max-entries
           type: object
         redisVersion:
-          description: |-
+          description: >-
             Optional. The version of Redis software.
+
             If not provided, latest supported version will be used. Currently, the
+
             supported values are:
 
              *   `REDIS_3_2` for Redis 3.2 compatibility
@@ -975,10 +1064,13 @@ components:
              *   `REDIS_5_0` for Redis 5.0 compatibility
           type: string
         reservedIpRange:
-          description: |-
+          description: >-
             Optional. The CIDR range of internal addresses that are reserved for this
+
             instance. If not provided, the service will choose an unused /29 block,
+
             for example, 10.0.0.0/29 or 192.168.0.0/29. Ranges must be unique
+
             and non-overlapping with existing subnets in an authorized network.
           type: string
         state:
@@ -995,8 +1087,9 @@ components:
             - FAILING_OVER
           type: string
         statusMessage:
-          description: |-
+          description: >-
             Output only. Additional information about the current status of this
+
             instance, if available.
           type: string
         tier:
@@ -1011,23 +1104,32 @@ components:
       description: Response for ListInstances.
       properties:
         instances:
-          description: |-
+          description: >-
             A list of Redis instances in the project in the specified location,
+
             or across all locations.
 
+
             If the `location_id` in the parent field of the request is "-", all regions
+
             available to the project are queried, and the results aggregated.
+
             If in such an aggregated query a location is unavailable, a dummy Redis
+
             entry is included in the response with the `name` field set to a value of
+
             the form `projects/{project_id}/locations/{location_id}/instances/`- and
+
             the `status` field set to ERROR and `status_message` field set to "location
+
             not available for ListInstances".
           items:
-            $ref: '#/components/schemas/Instance'
+            $ref: "#/components/schemas/Instance"
           type: array
         nextPageToken:
-          description: |-
+          description: >-
             Token to retrieve the next page of results, or empty if there are no more
+
             results in the list.
           type: string
         unreachable:
@@ -1042,7 +1144,7 @@ components:
         locations:
           description: A list of locations that matches the specified filter in the request.
           items:
-            $ref: '#/components/schemas/Location'
+            $ref: "#/components/schemas/Location"
           type: array
         nextPageToken:
           description: The standard List next-page token.
@@ -1057,21 +1159,22 @@ components:
         operations:
           description: A list of operations that matches the specified filter in the request.
           items:
-            $ref: '#/components/schemas/Operation'
+            $ref: "#/components/schemas/Operation"
           type: array
       type: object
     Location:
       description: A resource that represents Google Cloud Platform location.
       properties:
         displayName:
-          description: |-
+          description: >-
             The friendly name for this location, typically a nearby city name.
+
             For example, "Tokyo".
           type: string
         labels:
           additionalProperties:
             type: string
-          description: |-
+          description: >-
             Cross-service attributes for the location. For example
 
                 {"cloud.googleapis.com/region": "us-east1"}
@@ -1082,65 +1185,85 @@ components:
         metadata:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
-          description: 'Output only. The set of available zones in the location. The map is keyed by the lowercase ID of each zone, as defined by Compute Engine. These keys can be specified in `location_id` or `alternative_location_id` fields when creating a Redis instance.'
+          description: Output only. The set of available zones in the location. The map is keyed by the lowercase ID of each zone, as defined by Compute Engine. These keys can be specified in `location_id` or `alternative_location_id` fields when creating a Redis instance.
           type: object
         name:
           description: 'Full resource name for the region. For example: "projects/example-project/locations/us-east1".'
           type: string
       type: object
     Operation:
-      description: |-
+      description: >-
         This resource represents a long-running operation that is the result of a
+
         network API call.
       properties:
         done:
-          description: |-
+          description: >-
             If the value is `false`, it means the operation is still in progress.
+
             If `true`, the operation is completed, and either `error` or `response` is
+
             available.
           type: boolean
         error:
-          $ref: '#/components/schemas/Status'
+          $ref: "#/components/schemas/Status"
           description: The error result of the operation in case of failure or cancellation.
         metadata:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
-          description: |-
+          description: >-
             {
+
 
             `createTime`: The time the operation was created.
 
+
             `endTime`: The time the operation finished running.
+
 
             `target`: Server-defined resource path for the target of the operation.
 
+
             `verb`: Name of the verb executed by the operation.
+
 
             `statusDetail`: Human-readable status of the operation, if any.
 
+
             `cancelRequested`: Identifies whether the user has requested cancellation of the operation. Operations that have successfully been cancelled have Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.
 
+
             `apiVersion`: API version used to start the operation.
+
 
             }
           type: object
         name:
-          description: |-
+          description: >-
             The server-assigned name, which is only unique within the same service that
+
             originally returns it. If you use the default HTTP mapping, the
+
             `name` should be a resource name ending with `operations/{unique_id}`.
           type: string
         response:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
-          description: |-
+          description: >-
             The normal response of the operation in case of success.  If the original
+
             method returns no data on success, such as `Delete`, the response is
+
             `google.protobuf.Empty`.  If the original method is standard
+
             `Get`/`Create`/`Update`, the response should be the resource.  For other
+
             methods, the response should have the type `XxxResponse`, where `Xxx`
+
             is the original method name.  For example, if the original method name
+
             is `TakeSnapshot()`, the inferred response type is
+
             `TakeSnapshotResponse`.
           type: object
       type: object
@@ -1148,26 +1271,32 @@ components:
       description: The output content
       properties:
         gcsDestination:
-          $ref: '#/components/schemas/GcsDestination'
+          $ref: "#/components/schemas/GcsDestination"
           description: Google Cloud Storage destination for output content.
       type: object
     Status:
-      description: |-
+      description: >-
         The `Status` type defines a logical error model that is suitable for
+
         different programming environments, including REST APIs and RPC APIs. It is
+
         used by [gRPC](https://github.com/grpc). Each `Status` message contains
+
         three pieces of data: error code, error message, and error details.
 
+
         You can find out more about this error model and how to work with it in the
+
         [API Design Guide](https://cloud.google.com/apis/design/errors).
       properties:
         code:
-          description: 'The status code, which should be an enum value of google.rpc.Code.'
+          description: The status code, which should be an enum value of google.rpc.Code.
           format: int32
           type: integer
         details:
-          description: |-
+          description: >-
             A list of messages that carry the error details.  There is a common set of
+
             message types for APIs to use.
           items:
             additionalProperties:
@@ -1175,9 +1304,11 @@ components:
             type: object
           type: array
         message:
-          description: |-
+          description: >-
             A developer-facing error message, which should be in English. Any
+
             user-facing error message should be localized and sent in the
+
             google.rpc.Status.details field, or localized by the client.
           type: string
       type: object
@@ -1193,16 +1324,16 @@ components:
       description: Oauth 2.0 implicit authentication
       flows:
         implicit:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
       type: oauth2
     Oauth2c:
-      description: Oauth 2.0 accessCode authentication
+      description: Oauth 2.0 authorizationCode authentication
       flows:
         authorizationCode:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-          tokenUrl: 'https://accounts.google.com/o/oauth2/token'
+            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+          tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

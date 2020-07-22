@@ -1,42 +1,49 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://securitycenter.googleapis.com/'
+  - url: https://securitycenter.googleapis.com/
 info:
   contact:
     name: Google
-    url: 'https://google.com'
+    url: https://google.com
+    x-twitter: youtube
   description: Security Command Center API provides access to temporal views of assets and findings within an organization.
   license:
     name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
-  title: Security Command Center
+    url: http://creativecommons.org/licenses/by/3.0/
+  termsOfService: https://developers.google.com/terms/
+  title: Security Command Center API
   version: v1beta1
   x-apiClientRegistration:
-    url: 'https://console.developers.google.com'
+    url: https://console.developers.google.com
+  x-apisguru-categories:
+    - analytics
+    - media
   x-logo:
-    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.31
       format: google
-      url: 'https://securitycenter.googleapis.com/$discovery/rest?version=v1beta1'
+      url: https://securitycenter.googleapis.com/$discovery/rest?version=v1beta1
       version: v1
   x-preferred: false
   x-providerName: googleapis.com
   x-serviceName: securitycenter
 externalDocs:
-  url: 'https://console.cloud.google.com/apis/api/securitycenter.googleapis.com/overview'
+  url: https://console.cloud.google.com/apis/api/securitycenter.googleapis.com/overview
 tags:
   - name: organizations
 paths:
-  '/v1beta1/{name}':
+  "/v1beta1/{name}":
     delete:
-      description: |-
+      description: >-
         Deletes a long-running operation. This method indicates that the client is
+
         no longer interested in the operation result. It does not cancel the
+
         operation. If the server doesn't support this method, it returns
+
         `google.rpc.Code.UNIMPLEMENTED`.
       operationId: securitycenter.organizations.operations.delete
       parameters:
@@ -46,77 +53,78 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Empty'
+                $ref: "#/components/schemas/Empty"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
     get:
-      description: |-
-        Gets the latest state of a long-running operation.  Clients can use this
-        method to poll the operation result at intervals as recommended by the API
-        service.
-      operationId: securitycenter.organizations.operations.get
+      description: Gets a source.
+      operationId: securitycenter.organizations.sources.get
       parameters:
-        - description: The name of the operation resource.
+        - description: >-
+            Required. Relative resource name of the source. Its format is
+
+            "organizations/[organization_id]/source/[source_id]".
           in: path
           name: name
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Source"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
     patch:
       description: Updates security marks.
       operationId: securitycenter.organizations.sources.findings.updateSecurityMarks
       parameters:
-        - description: |-
+        - description: >-
             The relative resource name of the SecurityMarks. See:
+
             https://cloud.google.com/apis/design/resource_names#relative_resource_name
+
             Examples:
+
             "organizations/{organization_id}/assets/{asset_id}/securityMarks"
+
             "organizations/{organization_id}/sources/{source_id}/findings/{finding_id}/securityMarks".
           in: path
           name: name
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
         - description: The time at which the updated SecurityMarks take effect.
           in: query
           name: startTime
@@ -131,45 +139,54 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/GoogleCloudSecuritycenterV1beta1SecurityMarks'
+              $ref: "#/components/schemas/GoogleCloudSecuritycenterV1beta1SecurityMarks"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/GoogleCloudSecuritycenterV1beta1SecurityMarks'
+                $ref: "#/components/schemas/GoogleCloudSecuritycenterV1beta1SecurityMarks"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  '/v1beta1/{name}:cancel':
+  "/v1beta1/{name}:cancel":
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
     post:
-      description: |-
+      description: >-
         Starts asynchronous cancellation on a long-running operation.  The server
+
         makes a best effort to cancel the operation, but success is not
+
         guaranteed.  If the server doesn't support this method, it returns
+
         `google.rpc.Code.UNIMPLEMENTED`.  Clients can use
+
         Operations.GetOperation or
+
         other methods to check whether the cancellation succeeded or whether the
+
         operation completed despite cancellation. On successful cancellation,
+
         the operation is not deleted; instead, it becomes an operation with
+
         an Operation.error value with a google.rpc.Status.code of 1,
+
         corresponding to `Code.CANCELLED`.
       operationId: securitycenter.organizations.operations.cancel
       parameters:
@@ -179,100 +196,111 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CancelOperationRequest'
+              $ref: "#/components/schemas/CancelOperationRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Empty'
+                $ref: "#/components/schemas/Empty"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  '/v1beta1/{name}:setState':
+  "/v1beta1/{name}:setState":
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: Updates the state of a finding.
       operationId: securitycenter.organizations.sources.findings.setState
       parameters:
-        - description: |-
+        - description: >-
             Required. The relative resource name of the finding. See:
+
             https://cloud.google.com/apis/design/resource_names#relative_resource_name
+
             Example:
+
             "organizations/{organization_id}/sources/{source_id}/finding/{finding_id}".
           in: path
           name: name
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SetFindingStateRequest'
+              $ref: "#/components/schemas/SetFindingStateRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/GoogleCloudSecuritycenterV1beta1Finding'
+                $ref: "#/components/schemas/GoogleCloudSecuritycenterV1beta1Finding"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  '/v1beta1/{parent}/assets':
+  "/v1beta1/{parent}/assets":
     get:
       description: Lists an organization's assets.
       operationId: securitycenter.organizations.assets.list
       parameters:
-        - description: |-
+        - description: >-
             Required. Name of the organization assets should belong to. Its format is
+
             "organizations/[organization_id]".
           in: path
           name: parent
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
-        - description: |-
+        - description: >-
             When compare_duration is set, the ListAssetResult's "state" attribute is
+
             updated to indicate whether the asset was added, removed, or remained
+
             present during the compare_duration period of time that precedes the
+
             read_time. This is the time between (read_time -
+
             compare_duration) and read_time.
 
+
             The state value is derived based on the presence of the asset at the two
+
             points in time. Intermediate state changes between the two times don't
+
             affect the result. For example, the results aren't affected if the asset is
+
             removed and re-created again.
 
+
             Possible "state" values when compare_duration is specified:
+
 
             * "ADDED": indicates that the asset was not present before
                          compare_duration, but present at read_time.
@@ -283,246 +311,296 @@ paths:
                          compare_duration and read_time.
 
             If compare_duration is not specified, then the only possible state is
+
             "UNUSED", which indicates that the asset is present at read_time.
           in: query
           name: compareDuration
           schema:
             type: string
-        - description: |-
+        - description: >-
             Optional. A field mask to specify the ListAssetsResult fields to be listed in the
+
             response.
+
             An empty field mask will list all fields.
           in: query
           name: fieldMask
           schema:
             type: string
-        - description: |-
+        - description: >-
             Expression that defines the filter to apply across assets.
+
             The expression is a list of zero or more restrictions combined via logical
+
             operators `AND` and `OR`.
+
             Parentheses are not supported, and `OR` has higher precedence than `AND`.
 
+
             Restrictions have the form `<field> <operator> <value>` and may have a `-`
+
             character in front of them to indicate negation. The fields map to those
+
             defined in the Asset resource. Examples include:
 
+
             * name
+
             * security_center_properties.resource_name
+
             * resource_properties.a_property
+
             * security_marks.marks.marka
+
 
             The supported operators are:
 
+
             * `=` for all value types.
+
             * `>`, `<`, `>=`, `<=` for integer values.
+
             * `:`, meaning substring matching, for strings.
+
 
             The supported value types are:
 
+
             * string literals in quotes.
+
             * integer literals without quotes.
+
             * boolean literals `true` and `false` without quotes.
+
 
             For example, `resource_properties.size = 100` is a valid filter string.
           in: query
           name: filter
           schema:
             type: string
-        - description: |-
+        - description: >-
             Expression that defines what fields and order to use for sorting. The
+
             string value should follow SQL syntax: comma separated list of fields. For
+
             example: "name,resource_properties.a_property". The default sorting order
+
             is ascending. To specify descending order for a field, a suffix " desc"
+
             should be appended to the field name. For example: "name
+
             desc,resource_properties.a_property". Redundant space characters in the
+
             syntax are insignificant. "name desc,resource_properties.a_property" and "
+
             name     desc  ,   resource_properties.a_property  " are equivalent.
           in: query
           name: orderBy
           schema:
             type: string
-        - description: |-
+        - description: >-
             The maximum number of results to return in a single response. Default is
+
             10, minimum is 1, maximum is 1000.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: |-
+        - description: >-
             The value returned by the last `ListAssetsResponse`; indicates
+
             that this is a continuation of a prior `ListAssets` call, and
+
             that the system should return the next page of data.
           in: query
           name: pageToken
           schema:
             type: string
-        - description: |-
+        - description: >-
             Time used as a reference point when filtering assets. The filter is limited
+
             to assets existing at the supplied time and their values are those at that
+
             specific time. Absence of this field will default to the API's version of
+
             NOW.
           in: query
           name: readTime
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ListAssetsResponse'
+                $ref: "#/components/schemas/ListAssetsResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-  '/v1beta1/{parent}/assets:group':
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
+  "/v1beta1/{parent}/assets:group":
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
     post:
-      description: |-
+      description: >-
         Filters an organization's assets and  groups them by their specified
+
         properties.
       operationId: securitycenter.organizations.assets.group
       parameters:
-        - description: |-
+        - description: >-
             Required. Name of the organization to groupBy. Its format is
+
             "organizations/[organization_id]".
           in: path
           name: parent
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/GroupAssetsRequest'
+              $ref: "#/components/schemas/GroupAssetsRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/GroupAssetsResponse'
+                $ref: "#/components/schemas/GroupAssetsResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  '/v1beta1/{parent}/assets:runDiscovery':
+  "/v1beta1/{parent}/assets:runDiscovery":
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
     post:
-      description: |-
+      description: >-
         Runs asset discovery. The discovery is tracked with a long-running
+
         operation.
 
+
         This API can only be called with limited frequency for an organization. If
+
         it is called too frequently the caller will receive a TOO_MANY_REQUESTS
+
         error.
       operationId: securitycenter.organizations.assets.runDiscovery
       parameters:
-        - description: |-
+        - description: >-
             Required. Name of the organization to run asset discovery for. Its format is
+
             "organizations/[organization_id]".
           in: path
           name: parent
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RunAssetDiscoveryRequest'
+              $ref: "#/components/schemas/RunAssetDiscoveryRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  '/v1beta1/{parent}/findings':
+  "/v1beta1/{parent}/findings":
     get:
-      description: |-
+      description: >-
         Lists an organization or source's findings.
 
+
         To list across all sources provide a `-` as the source id.
+
         Example: /v1beta1/organizations/{organization_id}/sources/-/findings
       operationId: securitycenter.organizations.sources.findings.list
       parameters:
-        - description: |-
+        - description: >-
             Required. Name of the source the findings belong to. Its format is
+
             "organizations/[organization_id]/sources/[source_id]". To list across all
+
             sources provide a source_id of `-`. For example:
+
             organizations/{organization_id}/sources/-
           in: path
           name: parent
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
-        - description: |-
+        - description: >-
             Optional. A field mask to specify the Finding fields to be listed in the response.
+
             An empty field mask will list all fields.
           in: query
           name: fieldMask
           schema:
             type: string
-        - description: |-
+        - description: >-
             Expression that defines the filter to apply across findings.
+
             The expression is a list of one or more restrictions combined via logical
+
             operators `AND` and `OR`.
+
             Parentheses are not supported, and `OR` has higher precedence than `AND`.
 
+
             Restrictions have the form `<field> <operator> <value>` and may have a `-`
+
             character in front of them to indicate negation. Examples include:
 
              * name
@@ -531,102 +609,126 @@ paths:
 
             The supported operators are:
 
+
             * `=` for all value types.
+
             * `>`, `<`, `>=`, `<=` for integer values.
+
             * `:`, meaning substring matching, for strings.
+
 
             The supported value types are:
 
+
             * string literals in quotes.
+
             * integer literals without quotes.
+
             * boolean literals `true` and `false` without quotes.
+
 
             For example, `source_properties.size = 100` is a valid filter string.
           in: query
           name: filter
           schema:
             type: string
-        - description: |-
+        - description: >-
             Expression that defines what fields and order to use for sorting. The
+
             string value should follow SQL syntax: comma separated list of fields. For
+
             example: "name,resource_properties.a_property". The default sorting order
+
             is ascending. To specify descending order for a field, a suffix " desc"
+
             should be appended to the field name. For example: "name
+
             desc,source_properties.a_property". Redundant space characters in the
+
             syntax are insignificant. "name desc,source_properties.a_property" and "
+
             name     desc  ,   source_properties.a_property  " are equivalent.
           in: query
           name: orderBy
           schema:
             type: string
-        - description: |-
+        - description: >-
             The maximum number of results to return in a single response. Default is
+
             10, minimum is 1, maximum is 1000.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: |-
+        - description: >-
             The value returned by the last `ListFindingsResponse`; indicates
+
             that this is a continuation of a prior `ListFindings` call, and
+
             that the system should return the next page of data.
           in: query
           name: pageToken
           schema:
             type: string
-        - description: |-
+        - description: >-
             Time used as a reference point when filtering findings. The filter is
+
             limited to findings existing at the supplied time and their values are
+
             those at that specific time. Absence of this field will default to the
+
             API's version of NOW.
           in: query
           name: readTime
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ListFindingsResponse'
+                $ref: "#/components/schemas/ListFindingsResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
     post:
-      description: |-
+      description: >-
         Creates a finding. The corresponding source must exist for finding creation
+
         to succeed.
       operationId: securitycenter.organizations.sources.findings.create
       parameters:
-        - description: |-
+        - description: >-
             Required. Resource name of the new finding's parent. Its format should be
+
             "organizations/[organization_id]/sources/[source_id]".
           in: path
           name: parent
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
-        - description: |-
+        - description: >-
             Required. Unique identifier provided by the client within the parent scope.
+
             It must be alphanumeric and less than or equal to 32 characters and
+
             greater than 0 characters in length.
           in: query
           name: findingId
@@ -636,293 +738,301 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/GoogleCloudSecuritycenterV1beta1Finding'
+              $ref: "#/components/schemas/GoogleCloudSecuritycenterV1beta1Finding"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/GoogleCloudSecuritycenterV1beta1Finding'
+                $ref: "#/components/schemas/GoogleCloudSecuritycenterV1beta1Finding"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  '/v1beta1/{parent}/findings:group':
+  "/v1beta1/{parent}/findings:group":
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
     post:
-      description: |-
+      description: >-
         Filters an organization or source's findings and  groups them by their
+
         specified properties.
 
+
         To group across all sources provide a `-` as the source id.
+
         Example: /v1beta1/organizations/{organization_id}/sources/-/findings
       operationId: securitycenter.organizations.sources.findings.group
       parameters:
-        - description: |-
+        - description: >-
             Required. Name of the source to groupBy. Its format is
+
             "organizations/[organization_id]/sources/[source_id]". To groupBy across
+
             all sources provide a source_id of `-`. For example:
+
             organizations/{organization_id}/sources/-
           in: path
           name: parent
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/GroupFindingsRequest'
+              $ref: "#/components/schemas/GroupFindingsRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/GroupFindingsResponse'
+                $ref: "#/components/schemas/GroupFindingsResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  '/v1beta1/{parent}/sources':
+  "/v1beta1/{parent}/sources":
     get:
       description: Lists all sources belonging to an organization.
       operationId: securitycenter.organizations.sources.list
       parameters:
-        - description: |-
+        - description: >-
             Required. Resource name of the parent of sources to list. Its format should be
+
             "organizations/[organization_id]".
           in: path
           name: parent
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
-        - description: |-
+        - description: >-
             The maximum number of results to return in a single response. Default is
+
             10, minimum is 1, maximum is 1000.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: |-
+        - description: >-
             The value returned by the last `ListSourcesResponse`; indicates
+
             that this is a continuation of a prior `ListSources` call, and
+
             that the system should return the next page of data.
           in: query
           name: pageToken
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ListSourcesResponse'
+                $ref: "#/components/schemas/ListSourcesResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: Creates a source.
       operationId: securitycenter.organizations.sources.create
       parameters:
-        - description: |-
+        - description: >-
             Required. Resource name of the new source's parent. Its format should be
+
             "organizations/[organization_id]".
           in: path
           name: parent
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Source'
+              $ref: "#/components/schemas/Source"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Source'
+                $ref: "#/components/schemas/Source"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  '/v1beta1/{resource}:getIamPolicy':
+  "/v1beta1/{resource}:getIamPolicy":
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: Gets the access control policy on the specified Source.
       operationId: securitycenter.organizations.sources.getIamPolicy
       parameters:
-        - description: |-
+        - description: >-
             REQUIRED: The resource for which the policy is being requested.
+
             See the operation documentation for the appropriate value for this field.
           in: path
           name: resource
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/GetIamPolicyRequest'
+              $ref: "#/components/schemas/GetIamPolicyRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Policy'
+                $ref: "#/components/schemas/Policy"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  '/v1beta1/{resource}:setIamPolicy':
+  "/v1beta1/{resource}:setIamPolicy":
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: Sets the access control policy on the specified Source.
       operationId: securitycenter.organizations.sources.setIamPolicy
       parameters:
-        - description: |-
+        - description: >-
             REQUIRED: The resource for which the policy is being specified.
+
             See the operation documentation for the appropriate value for this field.
           in: path
           name: resource
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SetIamPolicyRequest'
+              $ref: "#/components/schemas/SetIamPolicyRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Policy'
+                $ref: "#/components/schemas/Policy"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  '/v1beta1/{resource}:testIamPermissions':
+  "/v1beta1/{resource}:testIamPermissions":
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: Returns the permissions that a caller has on the specified source.
       operationId: securitycenter.organizations.sources.testIamPermissions
       parameters:
-        - description: |-
+        - description: >-
             REQUIRED: The resource for which the policy detail is being requested.
+
             See the operation documentation for the appropriate value for this field.
           in: path
           name: resource
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/TestIamPermissionsRequest'
+              $ref: "#/components/schemas/TestIamPermissionsRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/TestIamPermissionsResponse'
+                $ref: "#/components/schemas/TestIamPermissionsResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
 components:
@@ -933,8 +1043,8 @@ components:
       name: $.xgafv
       schema:
         enum:
-          - '1'
-          - '2'
+          - "1"
+          - "2"
         type: string
     access_token:
       description: OAuth access token.
@@ -947,7 +1057,6 @@ components:
       in: query
       name: alt
       schema:
-        default: json
         enum:
           - json
           - media
@@ -966,7 +1075,7 @@ components:
       schema:
         type: string
     key:
-      description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -982,35 +1091,39 @@ components:
       in: query
       name: prettyPrint
       schema:
-        default: true
         type: boolean
     quotaUser:
-      description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.'
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
       in: query
       name: quotaUser
       schema:
         type: string
     uploadType:
-      description: 'Legacy upload protocol for media (e.g. "media", "multipart").'
+      description: Legacy upload protocol for media (e.g. "media", "multipart").
       in: query
       name: uploadType
       schema:
         type: string
     upload_protocol:
-      description: 'Upload protocol for media (e.g. "raw", "multipart").'
+      description: Upload protocol for media (e.g. "raw", "multipart").
       in: query
       name: upload_protocol
       schema:
         type: string
   schemas:
     Asset:
-      description: |-
+      description: >-
         Security Command Center representation of a Google Cloud
+
         resource.
 
+
         The Asset is a Security Command Center resource that captures information
+
         about a single Google Cloud resource. All modifications to an Asset are only
+
         within the context of Security Command Center and don't affect the referenced
+
         Google Cloud resource.
       properties:
         createTime:
@@ -1018,31 +1131,38 @@ components:
           format: google-datetime
           type: string
         name:
-          description: |-
+          description: >-
             The relative resource name of this asset. See:
+
             https://cloud.google.com/apis/design/resource_names#relative_resource_name
+
             Example:
+
             "organizations/{organization_id}/assets/{asset_id}".
           type: string
         resourceProperties:
           additionalProperties: {}
-          description: |-
+          description: >-
             Resource managed properties. These properties are managed and defined by
+
             the Google Cloud resource and cannot be modified by the user.
           type: object
         securityCenterProperties:
-          $ref: '#/components/schemas/SecurityCenterProperties'
-          description: |-
+          $ref: "#/components/schemas/SecurityCenterProperties"
+          description: >-
             Security Command Center managed properties. These properties are managed by
+
             Security Command Center and cannot be modified by the user.
         securityMarks:
-          $ref: '#/components/schemas/GoogleCloudSecuritycenterV1beta1SecurityMarks'
-          description: |-
+          $ref: "#/components/schemas/GoogleCloudSecuritycenterV1beta1SecurityMarks"
+          description: >-
             User specified security marks. These marks are entirely managed by the user
+
             and come from the SecurityMarks resource that belongs to the asset.
         updateTime:
-          description: |-
+          description: >-
             The time at which the asset was last updated, added, or deleted in Security
+
             Command Center.
           format: google-datetime
           type: string
@@ -1064,23 +1184,31 @@ components:
           type: array
       type: object
     AuditConfig:
-      description: |-
+      description: >-
         Specifies the audit configuration for a service.
+
         The configuration determines which permission types are logged, and what
+
         identities, if any, are exempted from logging.
+
         An AuditConfig must have one or more AuditLogConfigs.
 
+
         If there are AuditConfigs for both `allServices` and a specific service,
+
         the union of the two AuditConfigs is used for that service: the log_types
+
         specified in each AuditConfig are enabled, and the exempted_members in each
+
         AuditLogConfig are exempted.
+
 
         Example Policy with multiple AuditConfigs:
 
             {
               "audit_configs": [
                 {
-                  "service": "allServices"
+                  "service": "allServices",
                   "audit_log_configs": [
                     {
                       "log_type": "DATA_READ",
@@ -1089,18 +1217,18 @@ components:
                       ]
                     },
                     {
-                      "log_type": "DATA_WRITE",
+                      "log_type": "DATA_WRITE"
                     },
                     {
-                      "log_type": "ADMIN_READ",
+                      "log_type": "ADMIN_READ"
                     }
                   ]
                 },
                 {
-                  "service": "sampleservice.googleapis.com"
+                  "service": "sampleservice.googleapis.com",
                   "audit_log_configs": [
                     {
-                      "log_type": "DATA_READ",
+                      "log_type": "DATA_READ"
                     },
                     {
                       "log_type": "DATA_WRITE",
@@ -1114,24 +1242,29 @@ components:
             }
 
         For sampleservice, this policy enables DATA_READ, DATA_WRITE and ADMIN_READ
+
         logging. It also exempts jose@example.com from DATA_READ logging, and
+
         aliya@example.com from DATA_WRITE logging.
       properties:
         auditLogConfigs:
           description: The configuration for logging of each type of permission.
           items:
-            $ref: '#/components/schemas/AuditLogConfig'
+            $ref: "#/components/schemas/AuditLogConfig"
           type: array
         service:
-          description: |-
+          description: >-
             Specifies a service that will be enabled for audit logging.
+
             For example, `storage.googleapis.com`, `cloudsql.googleapis.com`.
+
             `allServices` is a special value that covers all services.
           type: string
       type: object
     AuditLogConfig:
-      description: |-
+      description: >-
         Provides the configuration for logging a type of permissions.
+
         Example:
 
             {
@@ -1143,18 +1276,21 @@ components:
                   ]
                 },
                 {
-                  "log_type": "DATA_WRITE",
+                  "log_type": "DATA_WRITE"
                 }
               ]
             }
 
         This enables 'DATA_READ' and 'DATA_WRITE' logging, while exempting
+
         jose@example.com from DATA_READ logging.
       properties:
         exemptedMembers:
-          description: |-
+          description: >-
             Specifies the identities that do not cause logging for this type of
+
             permission.
+
             Follows the same format of Binding.members.
           items:
             type: string
@@ -1172,16 +1308,34 @@ components:
       description: Associates `members` with a `role`.
       properties:
         condition:
-          $ref: '#/components/schemas/Expr'
-          description: |-
+          $ref: "#/components/schemas/Expr"
+          description: >-
             The condition that is associated with this binding.
-            NOTE: An unsatisfied condition will not allow user access via current
-            binding. Different bindings, including their conditions, are examined
-            independently.
+
+
+            If the condition evaluates to `true`, then this binding applies to the
+
+            current request.
+
+
+            If the condition evaluates to `false`, then this binding does not apply to
+
+            the current request. However, a different role binding might grant the same
+
+            role to one or more of the members in this binding.
+
+
+            To learn which resources support conditions in their IAM policies, see the
+
+            [IAM
+
+            documentation](https://cloud.google.com/iam/help/conditions/resource-policies).
         members:
-          description: |+
+          description: >+
             Specifies the identities requesting access for a Cloud Platform resource.
+
             `members` can have the following values:
+
 
             * `allUsers`: A special identifier that represents anyone who is
                on the internet; with or without a Google account.
@@ -1220,15 +1374,15 @@ components:
                recovered group retains the role in the binding.
 
 
-            * `domain:{domain}`: The G Suite domain (primary) that represents all the
-               users of that domain. For example, `google.com` or `example.com`.
+            * `domain:{domain}`: The G Suite domain (primary) that represents all the    users of that domain. For example, `google.com` or `example.com`.
 
           items:
             type: string
           type: array
         role:
-          description: |-
+          description: >-
             Role that is assigned to `members`.
+
             For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
           type: string
       type: object
@@ -1237,9 +1391,11 @@ components:
       properties: {}
       type: object
     Empty:
-      description: |-
+      description: >-
         A generic empty message that you can re-use to avoid defining duplicated
+
         empty messages in your APIs. A typical example is to use it as the request
+
         or the response type of an API method. For instance:
 
             service Foo {
@@ -1250,10 +1406,13 @@ components:
       properties: {}
       type: object
     Expr:
-      description: |-
+      description: >-
         Represents a textual expression in the Common Expression Language (CEL)
+
         syntax. CEL is a C-like expression language. The syntax and semantics of CEL
+
         are documented at https://github.com/google/cel-spec.
+
 
         Example (Comparison):
 
@@ -1280,45 +1439,59 @@ components:
             expression: "'New message received at ' + string(document.create_time)"
 
         The exact variables and functions that may be referenced within an expression
+
         are determined by the service that evaluates it. See the service
+
         documentation for additional information.
       properties:
         description:
-          description: |-
+          description: >-
             Optional. Description of the expression. This is a longer text which
+
             describes the expression, e.g. when hovered over it in a UI.
           type: string
         expression:
-          description: |-
+          description: >-
             Textual representation of an expression in Common Expression Language
+
             syntax.
           type: string
         location:
-          description: |-
+          description: >-
             Optional. String indicating the location of the expression for error
+
             reporting, e.g. a file name and a position in the file.
           type: string
         title:
-          description: |-
+          description: >-
             Optional. Title for the expression, i.e. a short string describing
+
             its purpose. This can be used e.g. in UIs which allow to enter the
+
             expression.
           type: string
       type: object
     Finding:
-      description: |-
+      description: >-
         Security Command Center finding.
 
+
         A finding is a record of assessment data like security, risk, health, or
+
         privacy, that is ingested into Security Command Center for presentation,
+
         notification, analysis, policy testing, and enforcement. For example, a
+
         cross-site scripting (XSS) vulnerability in an App Engine application is a
+
         finding.
       properties:
         category:
-          description: |-
+          description: >-
             The additional taxonomy group within findings from a given source.
+
             This field is immutable after creation time.
+
             Example: "XSS_FLASH_INJECTION"
           type: string
         createTime:
@@ -1326,54 +1499,75 @@ components:
           format: google-datetime
           type: string
         eventTime:
-          description: |-
+          description: >-
             The time at which the event took place. For example, if the finding
+
             represents an open firewall it would capture the time the detector believes
+
             the firewall became open. The accuracy is determined by the detector.
           format: google-datetime
           type: string
         externalUri:
-          description: |-
+          description: >-
             The URI that, if available, points to a web page outside of Security
+
             Command Center where additional information about the finding can be found.
+
             This field is guaranteed to be either empty or a well formed URL.
           type: string
         name:
-          description: |-
+          description: >-
             The relative resource name of this finding. See:
+
             https://cloud.google.com/apis/design/resource_names#relative_resource_name
+
             Example:
+
             "organizations/{organization_id}/sources/{source_id}/findings/{finding_id}"
           type: string
         parent:
-          description: |-
+          description: >-
             The relative resource name of the source the finding belongs to. See:
+
             https://cloud.google.com/apis/design/resource_names#relative_resource_name
+
             This field is immutable after creation time.
+
             For example:
+
             "organizations/{organization_id}/sources/{source_id}"
           type: string
         resourceName:
-          description: |-
+          description: >-
             For findings on Google Cloud resources, the full resource
+
             name of the Google Cloud resource this finding is for. See:
+
             https://cloud.google.com/apis/design/resource_names#full_resource_name
+
             When the finding is for a non-Google Cloud resource, the resourceName can
+
             be a customer or partner defined string. This field is immutable after
+
             creation time.
           type: string
         securityMarks:
-          $ref: '#/components/schemas/SecurityMarks'
-          description: |-
+          $ref: "#/components/schemas/SecurityMarks"
+          description: >-
             Output only. User specified security marks. These marks are entirely
+
             managed by the user and come from the SecurityMarks resource that belongs
+
             to the finding.
         sourceProperties:
           additionalProperties: {}
-          description: |-
+          description: >-
             Source specific properties. These properties are managed by the source
+
             that writes the finding. The key names in the source_properties map must be
+
             between 1 and 255 characters, and must start with a letter and contain
+
             alphanumeric characters or underscores only.
           type: object
         state:
@@ -1388,24 +1582,37 @@ components:
       description: Request message for `GetIamPolicy` method.
       properties:
         options:
-          $ref: '#/components/schemas/GetPolicyOptions'
-          description: |-
+          $ref: "#/components/schemas/GetPolicyOptions"
+          description: >-
             OPTIONAL: A `GetPolicyOptions` object for specifying options to
-            `GetIamPolicy`. This field is only used by Cloud IAM.
+
+            `GetIamPolicy`.
       type: object
     GetPolicyOptions:
       description: Encapsulates settings provided to GetIamPolicy.
       properties:
         requestedPolicyVersion:
-          description: |-
+          description: >-
             Optional. The policy format version to be returned.
 
+
             Valid values are 0, 1, and 3. Requests specifying an invalid value will be
+
             rejected.
 
+
             Requests for policies with any conditional bindings must specify version 3.
+
             Policies without any conditional bindings may specify any valid value or
+
             leave the field unset.
+
+
+            To learn which resources support conditions in their IAM policies, see the
+
+            [IAM
+
+            documentation](https://cloud.google.com/iam/help/conditions/resource-policies).
           format: int32
           type: integer
       type: object
@@ -1413,12 +1620,44 @@ components:
       description: Cloud SCC's Notification
       properties:
         finding:
-          $ref: '#/components/schemas/Finding'
-          description: |-
+          $ref: "#/components/schemas/Finding"
+          description: >-
             If it's a Finding based notification config, this field will be
+
             populated.
         notificationConfigName:
           description: Name of the notification config that generated current notification.
+          type: string
+        resource:
+          $ref: "#/components/schemas/GoogleCloudSecuritycenterV1Resource"
+          description: The Cloud resource tied to this notification's Finding.
+      type: object
+    GoogleCloudSecuritycenterV1Resource:
+      description: >-
+        
+        Information related to the Google Cloud resource.
+      properties:
+        name:
+          description: >-
+            The full resource name of the resource. See:
+
+            https://cloud.google.com/apis/design/resource_names#full_resource_name
+          type: string
+        parent:
+          description: The full resource name of resource's parent.
+          type: string
+        parentDisplayName:
+          description: >-
+            
+            The human readable name of resource's parent.
+          type: string
+        project:
+          description: The full resource name of project that the resource belongs to.
+          type: string
+        projectDisplayName:
+          description: >-
+            
+            The human readable name of project that the resource belongs to.
           type: string
       type: object
     GoogleCloudSecuritycenterV1RunAssetDiscoveryResponse:
@@ -1438,18 +1677,24 @@ components:
           type: string
       type: object
     GoogleCloudSecuritycenterV1beta1Finding:
-      description: |-
+      description: >-
         Security Command Center finding.
 
+
         A finding is a record of assessment data (security, risk, health or privacy)
+
         ingested into Security Command Center for presentation, notification,
+
         analysis, policy testing, and enforcement. For example, an XSS vulnerability
+
         in an App Engine application is a finding.
       properties:
         category:
-          description: |-
+          description: >-
             The additional taxonomy group within findings from a given source.
+
             This field is immutable after creation time.
+
             Example: "XSS_FLASH_INJECTION"
           type: string
         createTime:
@@ -1457,54 +1702,75 @@ components:
           format: google-datetime
           type: string
         eventTime:
-          description: |-
+          description: >-
             The time at which the event took place. For example, if the finding
+
             represents an open firewall it would capture the time the detector believes
+
             the firewall became open. The accuracy is determined by the detector.
           format: google-datetime
           type: string
         externalUri:
-          description: |-
+          description: >-
             The URI that, if available, points to a web page outside of Security
+
             Command Center where additional information about the finding can be found.
+
             This field is guaranteed to be either empty or a well formed URL.
           type: string
         name:
-          description: |-
+          description: >-
             The relative resource name of this finding. See:
+
             https://cloud.google.com/apis/design/resource_names#relative_resource_name
+
             Example:
+
             "organizations/{organization_id}/sources/{source_id}/findings/{finding_id}"
           type: string
         parent:
-          description: |-
+          description: >-
             Immutable. The relative resource name of the source the finding belongs to. See:
+
             https://cloud.google.com/apis/design/resource_names#relative_resource_name
+
             This field is immutable after creation time.
+
             For example:
+
             "organizations/{organization_id}/sources/{source_id}"
           type: string
         resourceName:
-          description: |-
+          description: >-
             For findings on Google Cloud resources, the full resource
+
             name of the Google Cloud resource this finding is for. See:
+
             https://cloud.google.com/apis/design/resource_names#full_resource_name
+
             When the finding is for a non-Google Cloud resource, the resourceName can
+
             be a customer or partner defined string. This field is immutable after
+
             creation time.
           type: string
         securityMarks:
-          $ref: '#/components/schemas/GoogleCloudSecuritycenterV1beta1SecurityMarks'
-          description: |-
+          $ref: "#/components/schemas/GoogleCloudSecuritycenterV1beta1SecurityMarks"
+          description: >-
             Output only. User specified security marks. These marks are entirely
+
             managed by the user and come from the SecurityMarks resource that belongs
+
             to the finding.
         sourceProperties:
           additionalProperties: {}
-          description: |-
+          description: >-
             Source specific properties. These properties are managed by the source
+
             that writes the finding. The key names in the source_properties map must be
+
             between 1 and 255 characters, and must start with a letter and contain
+
             alphanumeric characters or underscores only.
           type: object
         state:
@@ -1532,17 +1798,21 @@ components:
           type: string
       type: object
     GoogleCloudSecuritycenterV1beta1SecurityMarks:
-      description: |-
+      description: >-
         User specified security marks that are attached to the parent Security
+
         Command Center resource. Security marks are scoped within a Security Command
+
         Center organization -- they can be modified and viewed by all users who have
+
         proper permissions on the organization.
       properties:
         marks:
           additionalProperties:
             type: string
-          description: |-
+          description: >-
             Mutable user specified security marks belonging to the parent resource.
+
             Constraints are as follows:
 
               * Keys and values are treated as case insensitive
@@ -1552,22 +1822,31 @@ components:
                 characters must be between 1 - 4096 characters (inclusive)
           type: object
         name:
-          description: |-
+          description: >-
             The relative resource name of the SecurityMarks. See:
+
             https://cloud.google.com/apis/design/resource_names#relative_resource_name
+
             Examples:
+
             "organizations/{organization_id}/assets/{asset_id}/securityMarks"
+
             "organizations/{organization_id}/sources/{source_id}/findings/{finding_id}/securityMarks".
           type: string
       type: object
     GoogleCloudSecuritycenterV1p1beta1Asset:
-      description: |-
+      description: >-
         Security Command Center representation of a Google Cloud
+
         resource.
 
+
         The Asset is a Security Command Center resource that captures information
+
         about a single Google Cloud resource. All modifications to an Asset are only
+
         within the context of Security Command Center and don't affect the referenced
+
         Google Cloud resource.
       properties:
         createTime:
@@ -1575,55 +1854,71 @@ components:
           format: google-datetime
           type: string
         iamPolicy:
-          $ref: '#/components/schemas/GoogleCloudSecuritycenterV1p1beta1IamPolicy'
-          description: |-
+          $ref: "#/components/schemas/GoogleCloudSecuritycenterV1p1beta1IamPolicy"
+          description: >-
             Cloud IAM Policy information associated with the Google Cloud resource
+
             described by the Security Command Center asset. This information is managed
+
             and defined by the Google Cloud resource and cannot be modified by the
+
             user.
         name:
-          description: |-
+          description: >-
             The relative resource name of this asset. See:
+
             https://cloud.google.com/apis/design/resource_names#relative_resource_name
+
             Example:
+
             "organizations/{organization_id}/assets/{asset_id}".
           type: string
         resourceProperties:
           additionalProperties: {}
-          description: |-
+          description: >-
             Resource managed properties. These properties are managed and defined by
+
             the Google Cloud resource and cannot be modified by the user.
           type: object
         securityCenterProperties:
-          $ref: '#/components/schemas/GoogleCloudSecuritycenterV1p1beta1SecurityCenterProperties'
-          description: |-
+          $ref: "#/components/schemas/GoogleCloudSecuritycenterV1p1beta1SecurityCenterProperties"
+          description: >-
             Security Command Center managed properties. These properties are managed by
+
             Security Command Center and cannot be modified by the user.
         securityMarks:
-          $ref: '#/components/schemas/GoogleCloudSecuritycenterV1p1beta1SecurityMarks'
-          description: |-
+          $ref: "#/components/schemas/GoogleCloudSecuritycenterV1p1beta1SecurityMarks"
+          description: >-
             User specified security marks. These marks are entirely managed by the user
+
             and come from the SecurityMarks resource that belongs to the asset.
         updateTime:
-          description: |-
+          description: >-
             The time at which the asset was last updated, added, or deleted in Cloud
+
             SCC.
           format: google-datetime
           type: string
       type: object
     GoogleCloudSecuritycenterV1p1beta1Finding:
-      description: |-
+      description: >-
         Security Command Center finding.
 
+
         A finding is a record of assessment data (security, risk, health or privacy)
+
         ingested into Security Command Center for presentation, notification,
+
         analysis, policy testing, and enforcement. For example, an XSS vulnerability
+
         in an App Engine application is a finding.
       properties:
         category:
-          description: |-
+          description: >-
             The additional taxonomy group within findings from a given source.
+
             This field is immutable after creation time.
+
             Example: "XSS_FLASH_INJECTION"
           type: string
         createTime:
@@ -1631,54 +1926,75 @@ components:
           format: google-datetime
           type: string
         eventTime:
-          description: |-
+          description: >-
             The time at which the event took place. For example, if the finding
+
             represents an open firewall it would capture the time the detector believes
+
             the firewall became open. The accuracy is determined by the detector.
           format: google-datetime
           type: string
         externalUri:
-          description: |-
+          description: >-
             The URI that, if available, points to a web page outside of Security
+
             Command Center where additional information about the finding can be found.
+
             This field is guaranteed to be either empty or a well formed URL.
           type: string
         name:
-          description: |-
+          description: >-
             The relative resource name of this finding. See:
+
             https://cloud.google.com/apis/design/resource_names#relative_resource_name
+
             Example:
+
             "organizations/{organization_id}/sources/{source_id}/findings/{finding_id}"
           type: string
         parent:
-          description: |-
+          description: >-
             The relative resource name of the source the finding belongs to. See:
+
             https://cloud.google.com/apis/design/resource_names#relative_resource_name
+
             This field is immutable after creation time.
+
             For example:
+
             "organizations/{organization_id}/sources/{source_id}"
           type: string
         resourceName:
-          description: |-
+          description: >-
             For findings on Google Cloud resources, the full resource
+
             name of the Google Cloud resource this finding is for. See:
+
             https://cloud.google.com/apis/design/resource_names#full_resource_name
+
             When the finding is for a non-Google Cloud resource, the resourceName can
+
             be a customer or partner defined string. This field is immutable after
+
             creation time.
           type: string
         securityMarks:
-          $ref: '#/components/schemas/GoogleCloudSecuritycenterV1p1beta1SecurityMarks'
-          description: |-
+          $ref: "#/components/schemas/GoogleCloudSecuritycenterV1p1beta1SecurityMarks"
+          description: >-
             Output only. User specified security marks. These marks are entirely
+
             managed by the user and come from the SecurityMarks resource that belongs
+
             to the finding.
         sourceProperties:
           additionalProperties: {}
-          description: |-
+          description: >-
             Source specific properties. These properties are managed by the source
+
             that writes the finding. The key names in the source_properties map must be
+
             between 1 and 255 characters, and must start with a letter and contain
+
             alphanumeric characters or underscores only.
           type: object
         state:
@@ -1690,16 +2006,21 @@ components:
           type: string
       type: object
     GoogleCloudSecuritycenterV1p1beta1IamPolicy:
-      description: |-
+      description: >-
         Cloud IAM Policy information associated with the Google Cloud resource
+
         described by the Security Command Center asset. This information is managed
+
         and defined by the Google Cloud resource and cannot be modified by the
+
         user.
       properties:
         policyBlob:
-          description: |-
+          description: >-
             The JSON representation of the Policy associated with the asset.
+
             See https://cloud.google.com/iam/docs/reference/rest/v1/Policy for
+
             format details.
           type: string
       type: object
@@ -1707,18 +2028,51 @@ components:
       description: Security Command Center's Notification
       properties:
         finding:
-          $ref: '#/components/schemas/GoogleCloudSecuritycenterV1p1beta1Finding'
-          description: |-
+          $ref: "#/components/schemas/GoogleCloudSecuritycenterV1p1beta1Finding"
+          description: >-
             If it's a Finding based notification config, this field will be
+
             populated.
         notificationConfigName:
           description: Name of the notification config that generated current notification.
           type: string
+        resource:
+          $ref: "#/components/schemas/GoogleCloudSecuritycenterV1p1beta1Resource"
+          description: The Cloud resource tied to the notification.
         temporalAsset:
-          $ref: '#/components/schemas/GoogleCloudSecuritycenterV1p1beta1TemporalAsset'
-          description: |-
+          $ref: "#/components/schemas/GoogleCloudSecuritycenterV1p1beta1TemporalAsset"
+          description: >-
             If it's an asset based notification config, this field will be
+
             populated.
+      type: object
+    GoogleCloudSecuritycenterV1p1beta1Resource:
+      description: >-
+        
+        Information related to the Google Cloud resource.
+      properties:
+        name:
+          description: >-
+            The full resource name of the resource. See:
+
+            https://cloud.google.com/apis/design/resource_names#full_resource_name
+          type: string
+        parent:
+          description: The full resource name of resource's parent.
+          type: string
+        parentDisplayName:
+          description: >-
+            
+            The human readable name of resource's parent.
+          type: string
+        project:
+          description: The full resource name of project that the resource belongs to.
+          type: string
+        projectDisplayName:
+          description: >-
+            
+            The human readable name of project that the resource belongs to.
+          type: string
       type: object
     GoogleCloudSecuritycenterV1p1beta1RunAssetDiscoveryResponse:
       description: Response of asset discovery run
@@ -1737,17 +2091,20 @@ components:
           type: string
       type: object
     GoogleCloudSecuritycenterV1p1beta1SecurityCenterProperties:
-      description: |-
+      description: >-
         Security Command Center managed properties. These properties are managed by
+
         Security Command Center and cannot be modified by the user.
       properties:
         resourceDisplayName:
           description: The user defined display name for this resource.
           type: string
         resourceName:
-          description: |-
+          description: >-
             The full resource name of the Google Cloud resource this asset
+
             represents. This field is immutable after create time. See:
+
             https://cloud.google.com/apis/design/resource_names#full_resource_name
           type: string
         resourceOwners:
@@ -1756,41 +2113,50 @@ components:
             type: string
           type: array
         resourceParent:
-          description: |-
+          description: >-
             The full resource name of the immediate parent of the resource. See:
+
             https://cloud.google.com/apis/design/resource_names#full_resource_name
           type: string
         resourceParentDisplayName:
           description: The user defined display name for the parent of this resource.
           type: string
         resourceProject:
-          description: |-
+          description: >-
             The full resource name of the project the resource belongs to. See:
+
             https://cloud.google.com/apis/design/resource_names#full_resource_name
           type: string
         resourceProjectDisplayName:
           description: The user defined display name for the project of this resource.
           type: string
         resourceType:
-          description: |-
+          description: >-
             The type of the Google Cloud resource. Examples include: APPLICATION,
+
             PROJECT, and ORGANIZATION. This is a case insensitive field defined by
+
             Security Command Center and/or the producer of the resource and is
+
             immutable after create time.
           type: string
       type: object
     GoogleCloudSecuritycenterV1p1beta1SecurityMarks:
-      description: |-
+      description: >-
         User specified security marks that are attached to the parent Security
+
         Command Center resource. Security marks are scoped within a Security Command
+
         Center organization -- they can be modified and viewed by all users who have
+
         proper permissions on the organization.
       properties:
         marks:
           additionalProperties:
             type: string
-          description: |-
+          description: >-
             Mutable user specified security marks belonging to the parent resource.
+
             Constraints are as follows:
 
               * Keys and values are treated as case insensitive
@@ -1800,22 +2166,27 @@ components:
                 characters must be between 1 - 4096 characters (inclusive)
           type: object
         name:
-          description: |-
+          description: >-
             The relative resource name of the SecurityMarks. See:
+
             https://cloud.google.com/apis/design/resource_names#relative_resource_name
+
             Examples:
+
             "organizations/{organization_id}/assets/{asset_id}/securityMarks"
+
             "organizations/{organization_id}/sources/{source_id}/findings/{finding_id}/securityMarks".
           type: string
       type: object
     GoogleCloudSecuritycenterV1p1beta1TemporalAsset:
-      description: |-
+      description: >-
         Wrapper over asset object that also captures the state change for the asset
+
         e.g. if it was a newly created asset vs updated or deleted asset.
       properties:
         asset:
-          $ref: '#/components/schemas/GoogleCloudSecuritycenterV1p1beta1Asset'
-          description: 'Asset data that includes attributes, properties and marks about the asset.'
+          $ref: "#/components/schemas/GoogleCloudSecuritycenterV1p1beta1Asset"
+          description: Asset data that includes attributes, properties and marks about the asset.
         changeType:
           description: Represents if the asset was created/updated/deleted.
           enum:
@@ -1829,18 +2200,27 @@ components:
       description: Request message for grouping by assets.
       properties:
         compareDuration:
-          description: |-
+          description: >-
             When compare_duration is set, the Asset's "state" property is updated to
+
             indicate whether the asset was added, removed, or remained present during
+
             the compare_duration period of time that precedes the read_time. This is
+
             the time between (read_time - compare_duration) and read_time.
 
+
             The state value is derived based on the presence of the asset at the two
+
             points in time. Intermediate state changes between the two times don't
+
             affect the result. For example, the results aren't affected if the asset is
+
             removed and re-created again.
 
+
             Possible "state" values when compare_duration is specified:
+
 
             * "ADDED": indicates that the asset was not present before
                          compare_duration, but present at reference_time.
@@ -1854,69 +2234,103 @@ components:
           format: google-duration
           type: string
         filter:
-          description: |-
+          description: >-
             Expression that defines the filter to apply across assets.
+
             The expression is a list of zero or more restrictions combined via logical
+
             operators `AND` and `OR`.
+
             Parentheses are not supported, and `OR` has higher precedence than `AND`.
 
+
             Restrictions have the form `<field> <operator> <value>` and may have a `-`
+
             character in front of them to indicate negation. The fields map to those
+
             defined in the Asset resource. Examples include:
 
+
             * name
+
             * security_center_properties.resource_name
+
             * resource_properties.a_property
+
             * security_marks.marks.marka
+
 
             The supported operators are:
 
+
             * `=` for all value types.
+
             * `>`, `<`, `>=`, `<=` for integer values.
+
             * `:`, meaning substring matching, for strings.
+
 
             The supported value types are:
 
+
             * string literals in quotes.
+
             * integer literals without quotes.
+
             * boolean literals `true` and `false` without quotes.
+
 
             For example, `resource_properties.size = 100` is a valid filter string.
           type: string
         groupBy:
-          description: |-
+          description: >-
             Required. Expression that defines what assets fields to use for grouping. The string
+
             value should follow SQL syntax: comma separated list of fields. For
+
             example:
+
             "security_center_properties.resource_project,security_center_properties.project".
+
 
             The following fields are supported when compare_duration is not set:
 
+
             * security_center_properties.resource_project
+
             * security_center_properties.resource_type
+
             * security_center_properties.resource_parent
 
+
             The following fields are supported when compare_duration is set:
+
 
             * security_center_properties.resource_type
           type: string
         pageSize:
-          description: |-
+          description: >-
             The maximum number of results to return in a single response. Default is
+
             10, minimum is 1, maximum is 1000.
           format: int32
           type: integer
         pageToken:
-          description: |-
+          description: >-
             The value returned by the last `GroupAssetsResponse`; indicates
+
             that this is a continuation of a prior `GroupAssets` call, and that the
+
             system should return the next page of data.
           type: string
         readTime:
-          description: |-
+          description: >-
             Time used as a reference point when filtering assets. The filter is limited
+
             to assets existing at the supplied time and their values are those at that
+
             specific time. Absence of this field will default to the API's version of
+
             NOW.
           format: google-datetime
           type: string
@@ -1925,16 +2339,19 @@ components:
       description: Response message for grouping by assets.
       properties:
         groupByResults:
-          description: |-
+          description: >-
             Group results. There exists an element for each existing unique
+
             combination of property/values. The element contains a count for the number
+
             of times those specific property/values appear.
           items:
-            $ref: '#/components/schemas/GroupResult'
+            $ref: "#/components/schemas/GroupResult"
           type: array
         nextPageToken:
-          description: |-
+          description: >-
             Token to retrieve the next page of results, or empty if there are no more
+
             results.
           type: string
         readTime:
@@ -1946,13 +2363,18 @@ components:
       description: Request message for grouping by findings.
       properties:
         filter:
-          description: |-
+          description: >-
             Expression that defines the filter to apply across findings.
+
             The expression is a list of one or more restrictions combined via logical
+
             operators `AND` and `OR`.
+
             Parentheses are not supported, and `OR` has higher precedence than `AND`.
 
+
             Restrictions have the form `<field> <operator> <value>` and may have a `-`
+
             character in front of them to indicate negation. Examples include:
 
              * name
@@ -1961,49 +2383,71 @@ components:
 
             The supported operators are:
 
+
             * `=` for all value types.
+
             * `>`, `<`, `>=`, `<=` for integer values.
+
             * `:`, meaning substring matching, for strings.
+
 
             The supported value types are:
 
+
             * string literals in quotes.
+
             * integer literals without quotes.
+
             * boolean literals `true` and `false` without quotes.
+
 
             For example, `source_properties.size = 100` is a valid filter string.
           type: string
         groupBy:
-          description: |-
+          description: >-
             Required. Expression that defines what assets fields to use for grouping (including
+
             `state`). The string value should follow SQL syntax: comma separated list
+
             of fields. For example:
+
             "parent,resource_name".
+
 
             The following fields are supported:
 
+
             * resource_name
+
             * category
+
             * state
+
             * parent
           type: string
         pageSize:
-          description: |-
+          description: >-
             The maximum number of results to return in a single response. Default is
+
             10, minimum is 1, maximum is 1000.
           format: int32
           type: integer
         pageToken:
-          description: |-
+          description: >-
             The value returned by the last `GroupFindingsResponse`; indicates
+
             that this is a continuation of a prior `GroupFindings` call, and
+
             that the system should return the next page of data.
           type: string
         readTime:
-          description: |-
+          description: >-
             Time used as a reference point when filtering findings. The filter is
+
             limited to findings existing at the supplied time and their values are
+
             those at that specific time. Absence of this field will default to the
+
             API's version of NOW.
           format: google-datetime
           type: string
@@ -2012,16 +2456,19 @@ components:
       description: Response message for group by findings.
       properties:
         groupByResults:
-          description: |-
+          description: >-
             Group results. There exists an element for each existing unique
+
             combination of property/values. The element contains a count for the number
+
             of times those specific property/values appear.
           items:
-            $ref: '#/components/schemas/GroupResult'
+            $ref: "#/components/schemas/GroupResult"
           type: array
         nextPageToken:
-          description: |-
+          description: >-
             Token to retrieve the next page of results, or empty if there are no more
+
             results.
           type: string
         readTime:
@@ -2047,11 +2494,12 @@ components:
         listAssetsResults:
           description: Assets matching the list request.
           items:
-            $ref: '#/components/schemas/ListAssetsResult'
+            $ref: "#/components/schemas/ListAssetsResult"
           type: array
         nextPageToken:
-          description: |-
+          description: >-
             Token to retrieve the next page of results, or empty if there are no more
+
             results.
           type: string
         readTime:
@@ -2067,7 +2515,7 @@ components:
       description: Result containing the Asset and its State.
       properties:
         asset:
-          $ref: '#/components/schemas/Asset'
+          $ref: "#/components/schemas/Asset"
           description: Asset matching the search request.
         state:
           description: State of the asset.
@@ -2085,11 +2533,12 @@ components:
         findings:
           description: Findings matching the list request.
           items:
-            $ref: '#/components/schemas/GoogleCloudSecuritycenterV1beta1Finding'
+            $ref: "#/components/schemas/GoogleCloudSecuritycenterV1beta1Finding"
           type: array
         nextPageToken:
-          description: |-
+          description: >-
             Token to retrieve the next page of results, or empty if there are no more
+
             results.
           type: string
         readTime:
@@ -2110,105 +2559,143 @@ components:
         operations:
           description: A list of operations that matches the specified filter in the request.
           items:
-            $ref: '#/components/schemas/Operation'
+            $ref: "#/components/schemas/Operation"
           type: array
       type: object
     ListSourcesResponse:
       description: Response message for listing sources.
       properties:
         nextPageToken:
-          description: |-
+          description: >-
             Token to retrieve the next page of results, or empty if there are no more
+
             results.
           type: string
         sources:
           description: Sources belonging to the requested parent.
           items:
-            $ref: '#/components/schemas/Source'
+            $ref: "#/components/schemas/Source"
           type: array
       type: object
     Operation:
-      description: |-
+      description: >-
         This resource represents a long-running operation that is the result of a
+
         network API call.
       properties:
         done:
-          description: |-
+          description: >-
             If the value is `false`, it means the operation is still in progress.
+
             If `true`, the operation is completed, and either `error` or `response` is
+
             available.
           type: boolean
         error:
-          $ref: '#/components/schemas/Status'
+          $ref: "#/components/schemas/Status"
           description: The error result of the operation in case of failure or cancellation.
         metadata:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
-          description: |-
+          description: >-
             Service-specific metadata associated with the operation.  It typically
+
             contains progress information and common metadata such as create time.
+
             Some services might not provide such metadata.  Any method that returns a
+
             long-running operation should document the metadata type, if any.
           type: object
         name:
-          description: |-
+          description: >-
             The server-assigned name, which is only unique within the same service that
+
             originally returns it. If you use the default HTTP mapping, the
+
             `name` should be a resource name ending with `operations/{unique_id}`.
           type: string
         response:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
-          description: |-
+          description: >-
             The normal response of the operation in case of success.  If the original
+
             method returns no data on success, such as `Delete`, the response is
+
             `google.protobuf.Empty`.  If the original method is standard
+
             `Get`/`Create`/`Update`, the response should be the resource.  For other
+
             methods, the response should have the type `XxxResponse`, where `Xxx`
+
             is the original method name.  For example, if the original method name
+
             is `TakeSnapshot()`, the inferred response type is
+
             `TakeSnapshotResponse`.
           type: object
       type: object
     OrganizationSettings:
-      description: |-
+      description: >-
         User specified settings that are attached to the Security Command
+
         Center organization.
       properties:
         assetDiscoveryConfig:
-          $ref: '#/components/schemas/AssetDiscoveryConfig'
+          $ref: "#/components/schemas/AssetDiscoveryConfig"
           description: The configuration used for Asset Discovery runs.
         enableAssetDiscovery:
-          description: |-
+          description: >-
             A flag that indicates if Asset Discovery should be enabled. If the flag is
+
             set to `true`, then discovery of assets will occur. If it is set to `false,
+
             all historical assets will remain, but discovery of future assets will not
+
             occur.
           type: boolean
         name:
-          description: |-
+          description: >-
             The relative resource name of the settings. See:
+
             https://cloud.google.com/apis/design/resource_names#relative_resource_name
+
             Example:
+
             "organizations/{organization_id}/organizationSettings".
           type: string
       type: object
     Policy:
-      description: |-
+      description: >-
         An Identity and Access Management (IAM) policy, which specifies access
+
         controls for Google Cloud resources.
 
 
+
         A `Policy` is a collection of `bindings`. A `binding` binds one or more
+
         `members` to a single `role`. Members can be user accounts, service accounts,
+
         Google groups, and domains (such as G Suite). A `role` is a named list of
+
         permissions; each `role` can be an IAM predefined role or a user-created
+
         custom role.
 
-        Optionally, a `binding` can specify a `condition`, which is a logical
-        expression that allows access to a resource only if the expression evaluates
-        to `true`. A condition can add constraints based on attributes of the
-        request, the resource, or both.
+
+        For some types of Google Cloud resources, a `binding` can also specify a
+
+        `condition`, which is a logical expression that allows access to a resource
+
+        only if the expression evaluates to `true`. A condition can add constraints
+
+        based on attributes of the request, the resource, or both. To learn which
+
+        resources support conditions in their IAM policies, see the
+
+        [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies).
+
 
         **JSON example:**
 
@@ -2225,7 +2712,9 @@ components:
                 },
                 {
                   "role": "roles/resourcemanager.organizationViewer",
-                  "members": ["user:eve@example.com"],
+                  "members": [
+                    "user:eve@example.com"
+                  ],
                   "condition": {
                     "title": "expirable access",
                     "description": "Does not grant access after Sep 2020",
@@ -2257,60 +2746,91 @@ components:
             - version: 3
 
         For a description of IAM and its features, see the
+
         [IAM documentation](https://cloud.google.com/iam/docs/).
       properties:
         auditConfigs:
           description: Specifies cloud audit logging configuration for this policy.
           items:
-            $ref: '#/components/schemas/AuditConfig'
+            $ref: "#/components/schemas/AuditConfig"
           type: array
         bindings:
-          description: |-
+          description: >-
             Associates a list of `members` to a `role`. Optionally, may specify a
+
             `condition` that determines how and when the `bindings` are applied. Each
+
             of the `bindings` must contain at least one member.
           items:
-            $ref: '#/components/schemas/Binding'
+            $ref: "#/components/schemas/Binding"
           type: array
         etag:
-          description: |-
+          description: >-
             `etag` is used for optimistic concurrency control as a way to help
+
             prevent simultaneous updates of a policy from overwriting each other.
+
             It is strongly suggested that systems make use of the `etag` in the
+
             read-modify-write cycle to perform policy updates in order to avoid race
+
             conditions: An `etag` is returned in the response to `getIamPolicy`, and
+
             systems are expected to put that etag in the request to `setIamPolicy` to
+
             ensure that their change will be applied to the same version of the policy.
 
+
             **Important:** If you use IAM Conditions, you must include the `etag` field
+
             whenever you call `setIamPolicy`. If you omit this field, then IAM allows
+
             you to overwrite a version `3` policy with a version `1` policy, and all of
+
             the conditions in the version `3` policy are lost.
           format: byte
           type: string
         version:
-          description: |-
+          description: >-
             Specifies the format of the policy.
 
+
             Valid values are `0`, `1`, and `3`. Requests that specify an invalid value
+
             are rejected.
 
+
             Any operation that affects conditional role bindings must specify version
+
             `3`. This requirement applies to the following operations:
 
+
             * Getting a policy that includes a conditional role binding
+
             * Adding a conditional role binding to a policy
+
             * Changing a conditional role binding in a policy
+
             * Removing any role binding, with or without a condition, from a policy
               that includes conditions
 
             **Important:** If you use IAM Conditions, you must include the `etag` field
+
             whenever you call `setIamPolicy`. If you omit this field, then IAM allows
+
             you to overwrite a version `3` policy with a version `1` policy, and all of
+
             the conditions in the version `3` policy are lost.
 
+
             If a policy does not include any conditions, operations on that policy may
+
             specify any valid version or leave the field unset.
+
+
+            To learn which resources support conditions in their IAM policies, see the
+
+            [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies).
           format: int32
           type: integer
       type: object
@@ -2319,14 +2839,17 @@ components:
       properties: {}
       type: object
     SecurityCenterProperties:
-      description: |-
+      description: >-
         Security Command Center managed properties. These properties are managed by
+
         Security Command Center and cannot be modified by the user.
       properties:
         resourceName:
-          description: |-
+          description: >-
             Immutable. The full resource name of the Google Cloud resource this asset
+
             represents. This field is immutable after create time. See:
+
             https://cloud.google.com/apis/design/resource_names#full_resource_name
           type: string
         resourceOwners:
@@ -2335,35 +2858,44 @@ components:
             type: string
           type: array
         resourceParent:
-          description: |-
+          description: >-
             The full resource name of the immediate parent of the resource. See:
+
             https://cloud.google.com/apis/design/resource_names#full_resource_name
           type: string
         resourceProject:
-          description: |-
+          description: >-
             The full resource name of the project the resource belongs to. See:
+
             https://cloud.google.com/apis/design/resource_names#full_resource_name
           type: string
         resourceType:
-          description: |-
+          description: >-
             The type of the Google Cloud resource. Examples include: APPLICATION,
+
             PROJECT, and ORGANIZATION. This is a case insensitive field defined by
+
             Security Command Center and/or the producer of the resource and is
+
             immutable after create time.
           type: string
       type: object
     SecurityMarks:
-      description: |-
+      description: >-
         User specified security marks that are attached to the parent Security
+
         Command Center resource. Security marks are scoped within a Security Command
+
         Center organization -- they can be modified and viewed by all users who have
+
         proper permissions on the organization.
       properties:
         marks:
           additionalProperties:
             type: string
-          description: |-
+          description: >-
             Mutable user specified security marks belonging to the parent resource.
+
             Constraints are as follows:
 
               * Keys and values are treated as case insensitive
@@ -2373,11 +2905,15 @@ components:
                 characters must be between 1 - 4096 characters (inclusive)
           type: object
         name:
-          description: |-
+          description: >-
             The relative resource name of the SecurityMarks. See:
+
             https://cloud.google.com/apis/design/resource_names#relative_resource_name
+
             Examples:
+
             "organizations/{organization_id}/assets/{asset_id}/securityMarks"
+
             "organizations/{organization_id}/sources/{source_id}/findings/{finding_id}/securityMarks".
           type: string
       type: object
@@ -2400,71 +2936,98 @@ components:
       description: Request message for `SetIamPolicy` method.
       properties:
         policy:
-          $ref: '#/components/schemas/Policy'
-          description: |-
+          $ref: "#/components/schemas/Policy"
+          description: >-
             REQUIRED: The complete policy to be applied to the `resource`. The size of
+
             the policy is limited to a few 10s of KB. An empty policy is a
+
             valid policy but certain Cloud Platform services (such as Projects)
+
             might reject them.
         updateMask:
-          description: |-
+          description: >-
             OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
+
             the fields in the mask will be modified. If no mask is provided, the
+
             following default mask is used:
-            paths: "bindings, etag"
-            This field is only used by Cloud IAM.
+
+
+            `paths: "bindings, etag"`
           format: google-fieldmask
           type: string
       type: object
     Source:
-      description: |-
+      description: >-
         Security Command Center finding source. A finding source
+
         is an entity or a mechanism that can produce a finding. A source is like a
+
         container of findings that come from the same scanner, logger, monitor, etc.
       properties:
         description:
-          description: |-
+          description: >-
             The description of the source (max of 1024 characters).
+
             Example:
+
             "Web Security Scanner is a web security scanner for common
+
             vulnerabilities in App Engine applications. It can automatically
+
             scan and detect four common vulnerabilities, including cross-site-scripting
+
             (XSS), Flash injection, mixed content (HTTP in HTTPS), and
+
             outdated/insecure libraries."
           type: string
         displayName:
-          description: |-
+          description: >-
             The source's display name.
+
             A source's display name must be unique amongst its siblings, for example,
+
             two sources with the same parent can't share the same display name.
+
             The display name must have a length between 1 and 64 characters
+
             (inclusive).
           type: string
         name:
-          description: |-
+          description: >-
             The relative resource name of this source. See:
+
             https://cloud.google.com/apis/design/resource_names#relative_resource_name
+
             Example:
+
             "organizations/{organization_id}/sources/{source_id}"
           type: string
       type: object
     Status:
-      description: |-
+      description: >-
         The `Status` type defines a logical error model that is suitable for
+
         different programming environments, including REST APIs and RPC APIs. It is
+
         used by [gRPC](https://github.com/grpc). Each `Status` message contains
+
         three pieces of data: error code, error message, and error details.
 
+
         You can find out more about this error model and how to work with it in the
+
         [API Design Guide](https://cloud.google.com/apis/design/errors).
       properties:
         code:
-          description: 'The status code, which should be an enum value of google.rpc.Code.'
+          description: The status code, which should be an enum value of google.rpc.Code.
           format: int32
           type: integer
         details:
-          description: |-
+          description: >-
             A list of messages that carry the error details.  There is a common set of
+
             message types for APIs to use.
           items:
             additionalProperties:
@@ -2472,9 +3035,11 @@ components:
             type: object
           type: array
         message:
-          description: |-
+          description: >-
             A developer-facing error message, which should be in English. Any
+
             user-facing error message should be localized and sent in the
+
             google.rpc.Status.details field, or localized by the client.
           type: string
       type: object
@@ -2482,10 +3047,13 @@ components:
       description: Request message for `TestIamPermissions` method.
       properties:
         permissions:
-          description: |-
+          description: >-
             The set of permissions to check for the `resource`. Permissions with
+
             wildcards (such as '*' or 'storage.*') are not allowed. For more
+
             information see
+
             [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
           items:
             type: string
@@ -2495,8 +3063,9 @@ components:
       description: Response message for `TestIamPermissions` method.
       properties:
         permissions:
-          description: |-
+          description: >-
             A subset of `TestPermissionsRequest.permissions` that the caller is
+
             allowed.
           items:
             type: string
@@ -2507,16 +3076,16 @@ components:
       description: Oauth 2.0 implicit authentication
       flows:
         implicit:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
       type: oauth2
     Oauth2c:
-      description: Oauth 2.0 accessCode authentication
+      description: Oauth 2.0 authorizationCode authentication
       flows:
         authorizationCode:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-          tokenUrl: 'https://accounts.google.com/o/oauth2/token'
+            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+          tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

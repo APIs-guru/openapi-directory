@@ -1,52 +1,62 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://speech.googleapis.com/'
+  - url: https://speech.googleapis.com/
 info:
   contact:
     name: Google
-    url: 'https://google.com'
+    url: https://google.com
+    x-twitter: youtube
   description: Converts audio to text by applying powerful neural network models.
   license:
     name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
-  title: Cloud Speech-to-Text
+    url: http://creativecommons.org/licenses/by/3.0/
+  termsOfService: https://developers.google.com/terms/
+  title: Cloud Speech-to-Text API
   version: v1p1beta1
   x-apiClientRegistration:
-    url: 'https://console.developers.google.com'
+    url: https://console.developers.google.com
   x-apisguru-categories:
-    - machine_learning
+    - analytics
+    - media
   x-logo:
-    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.31
       format: google
-      url: 'https://speech.googleapis.com/$discovery/rest?version=v1p1beta1'
+      url: https://speech.googleapis.com/$discovery/rest?version=v1p1beta1
       version: v1
   x-preferred: false
   x-providerName: googleapis.com
   x-serviceName: speech
 externalDocs:
-  url: 'https://cloud.google.com/speech-to-text/docs/quickstart-protocol'
+  url: https://cloud.google.com/speech-to-text/docs/quickstart-protocol
 tags:
-  - name: operations
   - name: speech
+  - name: operations
   - name: projects
 paths:
   /v1p1beta1/operations:
     get:
-      description: |-
+      description: >-
         Lists operations that match the specified filter in the request. If the
+
         server doesn't support this method, it returns `UNIMPLEMENTED`.
 
+
         NOTE: the `name` binding allows API services to override the binding
+
         to use different resource name schemes, such as `users/*/operations`. To
+
         override the binding, API services can add a binding such as
+
         `"/v1/{name=users/*}/operations"` to their service configuration.
+
         For backwards compatibility, the default name includes the operations
+
         collection id, however overriding users must ensure the name binding
+
         is the parent resource, without the operations collection id.
       operationId: speech.operations.list
       parameters:
@@ -71,36 +81,38 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ListOperationsResponse'
+                $ref: "#/components/schemas/ListOperationsResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - operations
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-  '/v1p1beta1/operations/{name}':
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
+  "/v1p1beta1/operations/{name}":
     get:
-      description: |-
+      description: >-
         Gets the latest state of a long-running operation.  Clients can use this
+
         method to poll the operation result at intervals as recommended by the API
+
         service.
       operationId: speech.operations.get
       parameters:
@@ -110,116 +122,123 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - operations
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-  '/v1p1beta1/speech:longrunningrecognize':
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
+  /v1p1beta1/speech:longrunningrecognize:
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
     post:
-      description: |-
+      description: >-
         Performs asynchronous speech recognition: receive results via the
+
         google.longrunning.Operations interface. Returns either an
+
         `Operation.error` or an `Operation.response` which contains
+
         a `LongRunningRecognizeResponse` message.
+
         For more information on asynchronous speech recognition, see the
+
         [how-to](https://cloud.google.com/speech-to-text/docs/async-recognize).
       operationId: speech.speech.longrunningrecognize
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/LongRunningRecognizeRequest'
+              $ref: "#/components/schemas/LongRunningRecognizeRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - speech
-  '/v1p1beta1/speech:recognize':
+  /v1p1beta1/speech:recognize:
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
     post:
-      description: |-
+      description: >-
         Performs synchronous speech recognition: receive results after all audio
+
         has been sent and processed.
       operationId: speech.speech.recognize
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RecognizeRequest'
+              $ref: "#/components/schemas/RecognizeRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/RecognizeResponse'
+                $ref: "#/components/schemas/RecognizeResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - speech
-  '/v1p1beta1/{name}':
+  "/v1p1beta1/{name}":
     get:
-      description: |-
+      description: >-
         Gets the latest state of a long-running operation.  Clients can use this
+
         method to poll the operation result at intervals as recommended by the API
+
         service.
       operationId: speech.projects.locations.operations.get
       parameters:
@@ -229,45 +248,52 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-  '/v1p1beta1/{name}/operations':
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
+  "/v1p1beta1/{name}/operations":
     get:
-      description: |-
+      description: >-
         Lists operations that match the specified filter in the request. If the
+
         server doesn't support this method, it returns `UNIMPLEMENTED`.
 
+
         NOTE: the `name` binding allows API services to override the binding
+
         to use different resource name schemes, such as `users/*/operations`. To
+
         override the binding, API services can add a binding such as
+
         `"/v1/{name=users/*}/operations"` to their service configuration.
+
         For backwards compatibility, the default name includes the operations
+
         collection id, however overriding users must ensure the name binding
+
         is the parent resource, without the operations collection id.
       operationId: speech.projects.locations.operations.list
       parameters:
@@ -277,7 +303,6 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
         - description: The standard list filter.
           in: query
           name: filter
@@ -294,31 +319,31 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ListOperationsResponse'
+                $ref: "#/components/schemas/ListOperationsResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
 components:
   parameters:
     _.xgafv:
@@ -327,8 +352,8 @@ components:
       name: $.xgafv
       schema:
         enum:
-          - '1'
-          - '2'
+          - "1"
+          - "2"
         type: string
     access_token:
       description: OAuth access token.
@@ -341,7 +366,6 @@ components:
       in: query
       name: alt
       schema:
-        default: json
         enum:
           - json
           - media
@@ -360,7 +384,7 @@ components:
       schema:
         type: string
     key:
-      description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -376,22 +400,21 @@ components:
       in: query
       name: prettyPrint
       schema:
-        default: true
         type: boolean
     quotaUser:
-      description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.'
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
       in: query
       name: quotaUser
       schema:
         type: string
     uploadType:
-      description: 'Legacy upload protocol for media (e.g. "media", "multipart").'
+      description: Legacy upload protocol for media (e.g. "media", "multipart").
       in: query
       name: uploadType
       schema:
         type: string
     upload_protocol:
-      description: 'Upload protocol for media (e.g. "raw", "multipart").'
+      description: Upload protocol for media (e.g. "raw", "multipart").
       in: query
       name: upload_protocol
       schema:
@@ -405,20 +428,23 @@ components:
           type: string
       type: object
     CustomClass:
-      description: |-
+      description: >-
         A set of words or phrases that represents a common concept likely to appear
+
         in your audio, for example a list of passenger ship names. CustomClass items
+
         can be substituted into placeholders that you set in PhraseSet phrases.
       properties:
         customClassId:
-          description: |-
+          description: >-
             If this custom class is a resource, the custom_class_id is the resource id
-            of the CustomClass.
+
+            of the CustomClass. Case sensitive.
           type: string
         items:
           description: A collection of class items.
           items:
-            $ref: '#/components/schemas/ClassItem'
+            $ref: "#/components/schemas/ClassItem"
           type: array
         name:
           description: The resource name of the custom class.
@@ -433,13 +459,15 @@ components:
         operations:
           description: A list of operations that matches the specified filter in the request.
           items:
-            $ref: '#/components/schemas/Operation'
+            $ref: "#/components/schemas/Operation"
           type: array
       type: object
     LongRunningRecognizeMetadata:
-      description: |-
+      description: >-
         Describes the progress of a long-running `LongRunningRecognize` call. It is
+
         included in the `metadata` field of the `Operation` returned by the
+
         `GetOperation` call of the `google::longrunning::Operations` service.
       properties:
         lastUpdateTime:
@@ -447,8 +475,9 @@ components:
           format: google-datetime
           type: string
         progressPercent:
-          description: |-
+          description: >-
             Approximate percentage of audio processed thus far. Guaranteed to be 100
+
             when the audio is fully processed and the results are available.
           format: int32
           type: integer
@@ -457,118 +486,166 @@ components:
           format: google-datetime
           type: string
         uri:
-          description: |-
+          description: >-
             Output only. The URI of the audio file being transcribed. Empty if the audio was sent
-            as byte content. 
+
+            as byte content.
           type: string
       type: object
     LongRunningRecognizeRequest:
-      description: |-
+      description: >-
         The top-level message sent by the client for the `LongRunningRecognize`
+
         method.
       properties:
         audio:
-          $ref: '#/components/schemas/RecognitionAudio'
+          $ref: "#/components/schemas/RecognitionAudio"
           description: Required. The audio data to be recognized.
         config:
-          $ref: '#/components/schemas/RecognitionConfig'
-          description: |-
+          $ref: "#/components/schemas/RecognitionConfig"
+          description: >-
             Required. Provides information to the recognizer that specifies how to
+
             process the request.
       type: object
     LongRunningRecognizeResponse:
-      description: |-
+      description: >-
         The only message returned to the client by the `LongRunningRecognize` method.
+
         It contains the result as zero or more sequential `SpeechRecognitionResult`
+
         messages. It is included in the `result.response` field of the `Operation`
+
         returned by the `GetOperation` call of the `google::longrunning::Operations`
+
         service.
       properties:
         results:
-          description: |-
+          description: >-
             Sequential list of transcription results corresponding to
+
             sequential portions of audio.
           items:
-            $ref: '#/components/schemas/SpeechRecognitionResult'
+            $ref: "#/components/schemas/SpeechRecognitionResult"
           type: array
       type: object
     Operation:
-      description: |-
+      description: >-
         This resource represents a long-running operation that is the result of a
+
         network API call.
       properties:
         done:
-          description: |-
+          description: >-
             If the value is `false`, it means the operation is still in progress.
+
             If `true`, the operation is completed, and either `error` or `response` is
+
             available.
           type: boolean
         error:
-          $ref: '#/components/schemas/Status'
+          $ref: "#/components/schemas/Status"
           description: The error result of the operation in case of failure or cancellation.
         metadata:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
-          description: |-
+          description: >-
             Service-specific metadata associated with the operation.  It typically
+
             contains progress information and common metadata such as create time.
+
             Some services might not provide such metadata.  Any method that returns a
+
             long-running operation should document the metadata type, if any.
           type: object
         name:
-          description: |-
+          description: >-
             The server-assigned name, which is only unique within the same service that
+
             originally returns it. If you use the default HTTP mapping, the
+
             `name` should be a resource name ending with `operations/{unique_id}`.
           type: string
         response:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
-          description: |-
+          description: >-
             The normal response of the operation in case of success.  If the original
+
             method returns no data on success, such as `Delete`, the response is
+
             `google.protobuf.Empty`.  If the original method is standard
+
             `Get`/`Create`/`Update`, the response should be the resource.  For other
+
             methods, the response should have the type `XxxResponse`, where `Xxx`
+
             is the original method name.  For example, if the original method name
+
             is `TakeSnapshot()`, the inferred response type is
+
             `TakeSnapshotResponse`.
           type: object
       type: object
     Phrase:
-      description: |-
+      description: >-
         A phrases containing words and phrase "hints" so that
+
         the speech recognition is more likely to recognize them. This can be used
+
         to improve the accuracy for specific words and phrases, for example, if
+
         specific commands are typically spoken by the user. This can also be used
+
         to add additional words to the vocabulary of the recognizer. See
+
         [usage limits](https://cloud.google.com/speech-to-text/quotas#content).
 
+
         List items can also include pre-built or custom classes containing groups
+
         of words that represent common concepts that occur in natural language. For
+
         example, rather than providing a phrase hint for every month of the
+
         year (e.g. "i was born in january", "i was born in febuary", ...), use the
-        pre-built $MONTH class improves the likelihood of correctly transcribing
+
+        pre-built `$MONTH` class improves the likelihood of correctly transcribing
+
         audio that includes months (e.g. "i was born in $month").
-        To refer to pre-built classes, use the class' symbol prepended with $ e.g.
-        $MONTH. To refer to custom classes that were defined inline in the request,
-        set the class's `custom_class_id` to a string unique to all class resources
-        and inline classes. Then use the class' id wrapped in ${...} e.g.
-        "${my-months}". To refer to custom classes resources, use the class' id
-        wrapped in ${} (e.g.
-        ${my-months}).
+
+        To refer to pre-built classes, use the class' symbol prepended with `$`
+
+        e.g. `$MONTH`. To refer to custom classes that were defined inline in the
+
+        request, set the class's `custom_class_id` to a string unique to all class
+
+        resources and inline classes. Then use the class' id wrapped in $`{...}`
+
+        e.g. "${my-months}". To refer to custom classes resources, use the class'
+
+        id wrapped in `${}` (e.g. `${my-months}`).
       properties:
         boost:
-          description: |-
+          description: >-
             Hint Boost. Overrides the boost set at the phrase set level.
+
             Positive value will increase the probability that a specific phrase will
+
             be recognized over other similar sounding phrases. The higher the boost,
+
             the higher the chance of false positive recognition as well. Negative
+
             boost values would correspond to anti-biasing. Anti-biasing is not
+
             enabled, so negative boost will simply be ignored. Though `boost` can
+
             accept a wide range of positive values, most use cases are best served
+
             with values between 0 and 20. We recommend using a binary search approach
+
             to finding the optimal value for your use case. Speech recognition
+
             will skip PhraseSets with a boost value of 0.
           format: float
           type: number
@@ -577,20 +654,29 @@ components:
           type: string
       type: object
     PhraseSet:
-      description: |-
+      description: >-
         Provides "hints" to the speech recognizer to favor specific words and phrases
+
         in the results.
       properties:
         boost:
-          description: |-
+          description: >-
             Hint Boost. Positive value will increase the probability that a specific
+
             phrase will be recognized over other similar sounding phrases. The higher
+
             the boost, the higher the chance of false positive recognition as well.
+
             Negative boost values would correspond to anti-biasing. Anti-biasing is not
+
             enabled, so negative boost will simply be ignored. Though `boost` can
+
             accept a wide range of positive values, most use cases are best served with
+
             values between 0 (exclusive) and 20. We recommend using a binary search
+
             approach to finding the optimal value for your use case. Speech recognition
+
             will skip PhraseSets with a boost value of 0.
           format: float
           type: number
@@ -600,135 +686,197 @@ components:
         phrases:
           description: A list of word and phrases.
           items:
-            $ref: '#/components/schemas/Phrase'
+            $ref: "#/components/schemas/Phrase"
           type: array
       type: object
     RecognitionAudio:
-      description: |-
+      description: >-
         Contains audio data in the encoding specified in the `RecognitionConfig`.
+
         Either `content` or `uri` must be supplied. Supplying both or neither
+
         returns google.rpc.Code.INVALID_ARGUMENT. See
+
         [content limits](https://cloud.google.com/speech-to-text/quotas#content).
       properties:
         content:
-          description: |-
+          description: >-
             The audio data bytes encoded as specified in
+
             `RecognitionConfig`. Note: as with all bytes fields, proto buffers use a
+
             pure binary representation, whereas JSON representations use base64.
           format: byte
           type: string
         uri:
-          description: |-
+          description: >-
             URI that points to a file that contains audio data bytes as specified in
+
             `RecognitionConfig`. The file must not be compressed (for example, gzip).
+
             Currently, only Google Cloud Storage URIs are
+
             supported, which must be specified in the following format:
+
             `gs://bucket_name/object_name` (other URI formats return
+
             google.rpc.Code.INVALID_ARGUMENT). For more information, see
+
             [Request URIs](https://cloud.google.com/storage/docs/reference-uris).
           type: string
       type: object
     RecognitionConfig:
-      description: |-
+      description: >-
         Provides information to the recognizer that specifies how to process the
+
         request.
       properties:
         adaptation:
-          $ref: '#/components/schemas/SpeechAdaptation'
-          description: |-
+          $ref: "#/components/schemas/SpeechAdaptation"
+          description: >-
             Speech adaptation configuration improves the accuracy of speech
+
             recognition. When speech adaptation is set it supersedes the
+
             `speech_contexts` field. For more information, see the [speech
+
             adaptation](https://cloud.google.com/speech-to-text/docs/context-strength)
+
             documentation.
         alternativeLanguageCodes:
-          description: |-
+          description: >-
             A list of up to 3 additional
+
             [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tags,
+
             listing possible alternative languages of the supplied audio.
+
             See [Language
+
             Support](https://cloud.google.com/speech-to-text/docs/languages) for a list
+
             of the currently supported language codes. If alternative languages are
+
             listed, recognition result will contain recognition in the most likely
+
             language detected including the main language_code. The recognition result
+
             will include the language tag of the language detected in the audio. Note:
+
             This feature is only supported for Voice Command and Voice Search use cases
+
             and performance may vary for other use cases (e.g., phone call
+
             transcription).
           items:
             type: string
           type: array
         audioChannelCount:
-          description: |-
+          description: >-
             The number of channels in the input audio data.
+
             ONLY set this for MULTI-CHANNEL recognition.
+
             Valid values for LINEAR16 and FLAC are `1`-`8`.
+
             Valid values for OGG_OPUS are '1'-'254'.
+
             Valid value for MULAW, AMR, AMR_WB and SPEEX_WITH_HEADER_BYTE is only `1`.
+
             If `0` or omitted, defaults to one channel (mono).
+
             Note: We only recognize the first channel by default.
+
             To perform independent recognition on each channel set
+
             `enable_separate_recognition_per_channel` to 'true'.
           format: int32
           type: integer
         diarizationConfig:
-          $ref: '#/components/schemas/SpeakerDiarizationConfig'
-          description: |-
+          $ref: "#/components/schemas/SpeakerDiarizationConfig"
+          description: >-
             Config to enable speaker diarization and set additional
+
             parameters to make diarization better suited for your application.
+
             Note: When this is enabled, we send all the words from the beginning of the
+
             audio for the top alternative in every consecutive STREAMING responses.
+
             This is done in order to improve our speaker tags as our models learn to
+
             identify the speakers in the conversation over time.
+
             For non-streaming requests, the diarization results will be provided only
+
             in the top alternative of the FINAL SpeechRecognitionResult.
         diarizationSpeakerCount:
-          description: |-
+          description: >-
             If set, specifies the estimated number of speakers in the conversation.
+
             Defaults to '2'. Ignored unless enable_speaker_diarization is set to true.
+
             Note: Use diarization_config instead.
           format: int32
           type: integer
         enableAutomaticPunctuation:
-          description: |-
+          description: >-
             If 'true', adds punctuation to recognition result hypotheses.
+
             This feature is only available in select languages. Setting this for
+
             requests in other languages has no effect at all.
+
             The default 'false' value does not add punctuation to result hypotheses.
           type: boolean
         enableSeparateRecognitionPerChannel:
-          description: |-
+          description: >-
             This needs to be set to `true` explicitly and `audio_channel_count` > 1
+
             to get each channel recognized separately. The recognition result will
+
             contain a `channel_tag` field to state which channel that result belongs
+
             to. If this is not true, we will only recognize the first channel. The
+
             request is billed cumulatively for all channels recognized:
+
             `audio_channel_count` multiplied by the length of the audio.
           type: boolean
         enableSpeakerDiarization:
-          description: |-
+          description: >-
             If 'true', enables speaker detection for each recognized word in
+
             the top alternative of the recognition result using a speaker_tag provided
+
             in the WordInfo.
+
             Note: Use diarization_config instead.
           type: boolean
         enableWordConfidence:
-          description: |-
+          description: >-
             If `true`, the top result includes a list of words and the
+
             confidence for those words. If `false`, no word-level confidence
+
             information is returned. The default is `false`.
           type: boolean
         enableWordTimeOffsets:
-          description: |-
+          description: >-
             If `true`, the top result includes a list of words and
+
             the start and end time offsets (timestamps) for those words. If
+
             `false`, no word-level time offset information is returned. The default is
+
             `false`.
           type: boolean
         encoding:
-          description: |-
+          description: >-
             Encoding of audio data sent in all `RecognitionAudio` messages.
+
             This field is optional for `FLAC` and `WAV` audio files and required
+
             for all other audio formats. For details, see AudioEncoding.
           enum:
             - ENCODING_UNSPECIFIED
@@ -742,33 +890,47 @@ components:
             - MP3
           type: string
         languageCode:
-          description: |-
+          description: >-
             Required. The language of the supplied audio as a
+
             [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag.
+
             Example: "en-US".
+
             See [Language
+
             Support](https://cloud.google.com/speech-to-text/docs/languages) for a list
+
             of the currently supported language codes.
           type: string
         maxAlternatives:
-          description: |-
+          description: >-
             Maximum number of recognition hypotheses to be returned.
+
             Specifically, the maximum number of `SpeechRecognitionAlternative` messages
+
             within each `SpeechRecognitionResult`.
+
             The server may return fewer than `max_alternatives`.
+
             Valid values are `0`-`30`. A value of `0` or `1` will return a maximum of
+
             one. If omitted, will return a maximum of one.
           format: int32
           type: integer
         metadata:
-          $ref: '#/components/schemas/RecognitionMetadata'
+          $ref: "#/components/schemas/RecognitionMetadata"
           description: Metadata regarding this request.
         model:
-          description: |-
+          description: >-
             Which model to select for the given request. Select the model
+
             best suited to your domain to get best results. If a model is not
+
             explicitly specified, then we auto-select a model based on the parameters
+
             in the RecognitionConfig.
+
             <table>
               <tr>
                 <td><b>Model</b></td>
@@ -799,42 +961,61 @@ components:
             </table>
           type: string
         profanityFilter:
-          description: |-
+          description: >-
             If set to `true`, the server will attempt to filter out
+
             profanities, replacing all but the initial character in each filtered word
+
             with asterisks, e.g. "f***". If set to `false` or omitted, profanities
+
             won't be filtered out.
           type: boolean
         sampleRateHertz:
-          description: |-
+          description: >-
             Sample rate in Hertz of the audio data sent in all
+
             `RecognitionAudio` messages. Valid values are: 8000-48000.
+
             16000 is optimal. For best results, set the sampling rate of the audio
+
             source to 16000 Hz. If that's not possible, use the native sample rate of
+
             the audio source (instead of re-sampling).
+
             This field is optional for FLAC and WAV audio files, but is
+
             required for all other audio formats. For details, see AudioEncoding.
           format: int32
           type: integer
         speechContexts:
-          description: |-
+          description: >-
             Array of SpeechContext.
+
             A means to provide context to assist the speech recognition. For more
+
             information, see
+
             [speech
+
             adaptation](https://cloud.google.com/speech-to-text/docs/context-strength).
           items:
-            $ref: '#/components/schemas/SpeechContext'
+            $ref: "#/components/schemas/SpeechContext"
           type: array
         useEnhanced:
-          description: |-
+          description: >-
             Set to true to use an enhanced model for speech recognition.
+
             If `use_enhanced` is set to true and the `model` field is not set, then
+
             an appropriate enhanced model is chosen if an enhanced model exists for
+
             the audio.
 
+
             If `use_enhanced` is true and an enhanced version of the specified model
+
             does not exist, then the speech is recognized using the standard version
+
             of the specified model.
           type: boolean
       type: object
@@ -842,15 +1023,19 @@ components:
       description: Description of audio data to be recognized.
       properties:
         audioTopic:
-          description: |-
+          description: >-
             Description of the content. Eg. "Recordings of federal supreme court
+
             hearings from 2012".
           type: string
         industryNaicsCodeOfAudio:
-          description: |-
+          description: >-
             The industry vertical to which this speech recognition request most
+
             closely applies. This is most indicative of the topics contained
+
             in the audio.  Use the 6-digit NAICS code to identify the industry
+
             vertical - see https://www.naics.com/search/.
           format: uint32
           type: integer
@@ -876,8 +1061,9 @@ components:
             - FARFIELD
           type: string
         obfuscatedId:
-          description: |-
+          description: >-
             Obfuscated (privacy-protected) ID of the user, to identify number of
+
             unique users using the service.
           format: int64
           type: string
@@ -889,16 +1075,21 @@ components:
             - VIDEO
           type: string
         originalMimeType:
-          description: |-
+          description: >-
             Mime type of the original audio file.  For example `audio/m4a`,
+
             `audio/x-alaw-basic`, `audio/mp3`, `audio/3gpp`.
+
             A list of possible audio mime types is maintained at
+
             http://www.iana.org/assignments/media-types/media-types.xhtml#audio
           type: string
         recordingDeviceName:
-          description: |-
+          description: >-
             The device used to make the recording.  Examples 'Nexus 5X' or
+
             'Polycom SoundStation IP 6000' or 'POTS' or 'VoIP' or
+
             'Cardioid Microphone'.
           type: string
         recordingDeviceType:
@@ -917,48 +1108,58 @@ components:
       description: The top-level message sent by the client for the `Recognize` method.
       properties:
         audio:
-          $ref: '#/components/schemas/RecognitionAudio'
+          $ref: "#/components/schemas/RecognitionAudio"
           description: Required. The audio data to be recognized.
         config:
-          $ref: '#/components/schemas/RecognitionConfig'
-          description: |-
+          $ref: "#/components/schemas/RecognitionConfig"
+          description: >-
             Required. Provides information to the recognizer that specifies how to
+
             process the request.
       type: object
     RecognizeResponse:
-      description: |-
+      description: >-
         The only message returned to the client by the `Recognize` method. It
+
         contains the result as zero or more sequential `SpeechRecognitionResult`
+
         messages.
       properties:
         results:
-          description: |-
+          description: >-
             Sequential list of transcription results corresponding to
+
             sequential portions of audio.
           items:
-            $ref: '#/components/schemas/SpeechRecognitionResult'
+            $ref: "#/components/schemas/SpeechRecognitionResult"
           type: array
       type: object
     SpeakerDiarizationConfig:
       description: Config to enable speaker diarization.
       properties:
         enableSpeakerDiarization:
-          description: |-
+          description: >-
             If 'true', enables speaker detection for each recognized word in
+
             the top alternative of the recognition result using a speaker_tag provided
+
             in the WordInfo.
           type: boolean
         maxSpeakerCount:
-          description: |-
+          description: >-
             Maximum number of speakers in the conversation. This range gives you more
+
             flexibility by allowing the system to automatically determine the correct
+
             number of speakers. If not set, the default value is 6.
           format: int32
           type: integer
         minSpeakerCount:
-          description: |-
+          description: >-
             Minimum number of speakers in the conversation. This range gives you more
+
             flexibility by allowing the system to automatically determine the correct
+
             number of speakers. If not set, the default value is 2.
           format: int32
           type: integer
@@ -971,53 +1172,76 @@ components:
       description: Speech adaptation configuration.
       properties:
         customClasses:
-          description: |-
+          description: >-
             A collection of custom classes. To specify the classes inline, leave the
+
             class' `name` blank and fill in the rest of its fields, giving it a unique
+
             `custom_class_id`. Refer to the inline defined class in phrase hints by its
+
             `custom_class_id`.
           items:
-            $ref: '#/components/schemas/CustomClass'
+            $ref: "#/components/schemas/CustomClass"
           type: array
         phraseSets:
-          description: |-
+          description: >-
             A collection of phrase sets. To specify the hints inline, leave the
+
             phrase set's `name` blank and fill in the rest of its fields. Any
+
             phrase set can use any custom class.
           items:
-            $ref: '#/components/schemas/PhraseSet'
+            $ref: "#/components/schemas/PhraseSet"
           type: array
       type: object
     SpeechContext:
-      description: |-
+      description: >-
         Provides "hints" to the speech recognizer to favor specific words and phrases
+
         in the results.
       properties:
         boost:
-          description: |-
+          description: >-
             Hint Boost. Positive value will increase the probability that a specific
+
             phrase will be recognized over other similar sounding phrases. The higher
+
             the boost, the higher the chance of false positive recognition as well.
+
             Negative boost values would correspond to anti-biasing. Anti-biasing is not
+
             enabled, so negative boost will simply be ignored. Though `boost` can
+
             accept a wide range of positive values, most use cases are best served with
+
             values between 0 and 20. We recommend using a binary search approach to
+
             finding the optimal value for your use case.
           format: float
           type: number
         phrases:
-          description: |-
+          description: >-
             A list of strings containing words and phrases "hints" so that
+
             the speech recognition is more likely to recognize them. This can be used
+
             to improve the accuracy for specific words and phrases, for example, if
+
             specific commands are typically spoken by the user. This can also be used
+
             to add additional words to the vocabulary of the recognizer. See
+
             [usage limits](https://cloud.google.com/speech-to-text/quotas#content).
 
+
             List items can also be set to classes for groups of words that represent
+
             common concepts that occur in natural language. For example, rather than
+
             providing phrase hints for every month of the year, using the $MONTH class
+
             improves the likelihood of correctly transcribing audio that includes
+
             months.
           items:
             type: string
@@ -1027,13 +1251,19 @@ components:
       description: Alternative hypotheses (a.k.a. n-best list).
       properties:
         confidence:
-          description: |-
+          description: >-
             The confidence estimate between 0.0 and 1.0. A higher number
+
             indicates an estimated greater likelihood that the recognized words are
+
             correct. This field is set only for the top alternative of a non-streaming
+
             result or, of a streaming result where `is_final=true`.
+
             This field is not guaranteed to be accurate and users should not rely on it
+
             to be always provided.
+
             The default of 0.0 is a sentinel value indicating `confidence` was not set.
           format: float
           type: number
@@ -1041,57 +1271,72 @@ components:
           description: Transcript text representing the words that the user spoke.
           type: string
         words:
-          description: |-
+          description: >-
             A list of word-specific information for each recognized word.
+
             Note: When `enable_speaker_diarization` is true, you will see all the words
+
             from the beginning of the audio.
           items:
-            $ref: '#/components/schemas/WordInfo'
+            $ref: "#/components/schemas/WordInfo"
           type: array
       type: object
     SpeechRecognitionResult:
       description: A speech recognition result corresponding to a portion of the audio.
       properties:
         alternatives:
-          description: |-
+          description: >-
             May contain one or more recognition hypotheses (up to the
+
             maximum specified in `max_alternatives`).
+
             These alternatives are ordered in terms of accuracy, with the top (first)
+
             alternative being the most probable, as ranked by the recognizer.
           items:
-            $ref: '#/components/schemas/SpeechRecognitionAlternative'
+            $ref: "#/components/schemas/SpeechRecognitionAlternative"
           type: array
         channelTag:
-          description: |-
+          description: >-
             For multi-channel audio, this is the channel number corresponding to the
+
             recognized result for the audio from that channel.
+
             For audio_channel_count = N, its output values can range from '1' to 'N'.
           format: int32
           type: integer
         languageCode:
-          description: |-
+          description: >-
             Output only. The [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag
+
             of the language in this result. This language code was detected to have
+
             the most likelihood of being spoken in the audio.
           type: string
       type: object
     Status:
-      description: |-
+      description: >-
         The `Status` type defines a logical error model that is suitable for
+
         different programming environments, including REST APIs and RPC APIs. It is
+
         used by [gRPC](https://github.com/grpc). Each `Status` message contains
+
         three pieces of data: error code, error message, and error details.
 
+
         You can find out more about this error model and how to work with it in the
+
         [API Design Guide](https://cloud.google.com/apis/design/errors).
       properties:
         code:
-          description: 'The status code, which should be an enum value of google.rpc.Code.'
+          description: The status code, which should be an enum value of google.rpc.Code.
           format: int32
           type: integer
         details:
-          description: |-
+          description: >-
             A list of messages that carry the error details.  There is a common set of
+
             message types for APIs to use.
           items:
             additionalProperties:
@@ -1099,9 +1344,11 @@ components:
             type: object
           type: array
         message:
-          description: |-
+          description: >-
             A developer-facing error message, which should be in English. Any
+
             user-facing error message should be localized and sent in the
+
             google.rpc.Status.details field, or localized by the client.
           type: string
       type: object
@@ -1109,42 +1356,62 @@ components:
       description: Word-specific information for recognized words.
       properties:
         confidence:
-          description: |-
+          description: >-
             The confidence estimate between 0.0 and 1.0. A higher number
+
             indicates an estimated greater likelihood that the recognized words are
+
             correct. This field is set only for the top alternative of a non-streaming
+
             result or, of a streaming result where `is_final=true`.
+
             This field is not guaranteed to be accurate and users should not rely on it
+
             to be always provided.
+
             The default of 0.0 is a sentinel value indicating `confidence` was not set.
           format: float
           type: number
         endTime:
-          description: |-
+          description: >-
             Time offset relative to the beginning of the audio,
+
             and corresponding to the end of the spoken word.
+
             This field is only set if `enable_word_time_offsets=true` and only
+
             in the top hypothesis.
+
             This is an experimental feature and the accuracy of the time offset can
+
             vary.
           format: google-duration
           type: string
         speakerTag:
-          description: |-
+          description: >-
             Output only. A distinct integer value is assigned for every speaker within
+
             the audio. This field specifies which one of those speakers was detected to
+
             have spoken this word. Value ranges from '1' to diarization_speaker_count.
+
             speaker_tag is set if enable_speaker_diarization = 'true' and only in the
+
             top alternative.
           format: int32
           type: integer
         startTime:
-          description: |-
+          description: >-
             Time offset relative to the beginning of the audio,
+
             and corresponding to the start of the spoken word.
+
             This field is only set if `enable_word_time_offsets=true` and only
+
             in the top hypothesis.
+
             This is an experimental feature and the accuracy of the time offset can
+
             vary.
           format: google-duration
           type: string
@@ -1157,16 +1424,16 @@ components:
       description: Oauth 2.0 implicit authentication
       flows:
         implicit:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
       type: oauth2
     Oauth2c:
-      description: Oauth 2.0 accessCode authentication
+      description: Oauth 2.0 authorizationCode authentication
       flows:
         authorizationCode:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-          tokenUrl: 'https://accounts.google.com/o/oauth2/token'
+            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+          tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

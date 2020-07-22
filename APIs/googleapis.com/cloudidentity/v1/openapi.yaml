@@ -1,33 +1,37 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://cloudidentity.googleapis.com/'
+  - url: https://cloudidentity.googleapis.com/
 info:
   contact:
     name: Google
-    url: 'https://google.com'
+    url: https://google.com
+    x-twitter: youtube
   description: API for provisioning and managing identity resources.
   license:
     name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
-  title: Cloud Identity
+    url: http://creativecommons.org/licenses/by/3.0/
+  termsOfService: https://developers.google.com/terms/
+  title: Cloud Identity API
   version: v1
   x-apiClientRegistration:
-    url: 'https://console.developers.google.com'
+    url: https://console.developers.google.com
+  x-apisguru-categories:
+    - analytics
+    - media
   x-logo:
-    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.31
       format: google
-      url: 'https://cloudidentity.googleapis.com/$discovery/rest?version=v1'
+      url: https://cloudidentity.googleapis.com/$discovery/rest?version=v1
       version: v1
   x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: cloudidentity
 externalDocs:
-  url: 'https://cloud.google.com/identity/'
+  url: https://cloud.google.com/identity/
 tags:
   - name: groups
 paths:
@@ -36,14 +40,15 @@ paths:
       description: Lists groups within a customer or a domain.
       operationId: cloudidentity.groups.list
       parameters:
-        - description: |-
+        - description: >-
             The default page size is 200 (max 1000) for the BASIC view, and 50
+
             (max 500) for the FULL view.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: 'The next_page_token value returned from a previous list request, if any.'
+        - description: The next_page_token value returned from a previous list request, if any.
           in: query
           name: pageToken
           schema:
@@ -53,7 +58,7 @@ paths:
           name: parent
           schema:
             type: string
-        - description: 'Group resource view to be returned. Defaults to [View.BASIC]().'
+        - description: Group resource view to be returned. Defaults to [View.BASIC]().
           in: query
           name: view
           schema:
@@ -63,149 +68,163 @@ paths:
               - FULL
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ListGroupsResponse'
+                $ref: "#/components/schemas/ListGroupsResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-identity.groups'
+            - https://www.googleapis.com/auth/cloud-identity.groups
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-identity.groups'
+            - https://www.googleapis.com/auth/cloud-identity.groups
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-identity.groups.readonly'
+            - https://www.googleapis.com/auth/cloud-identity.groups.readonly
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-identity.groups.readonly'
+            - https://www.googleapis.com/auth/cloud-identity.groups.readonly
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - groups
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
     post:
       description: Creates a Group.
       operationId: cloudidentity.groups.create
       requestBody:
-        $ref: '#/components/requestBodies/Group'
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Group"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-identity.groups'
+            - https://www.googleapis.com/auth/cloud-identity.groups
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-identity.groups'
+            - https://www.googleapis.com/auth/cloud-identity.groups
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - groups
-  '/v1/groups:lookup':
+  /v1/groups:lookup:
     get:
-      description: |-
+      description: >-
         Looks up [resource
+
         name](https://cloud.google.com/apis/design/resource_names) of a Group by
+
         its EntityKey.
       operationId: cloudidentity.groups.lookup
       parameters:
-        - description: |-
+        - description: >-
             The ID of the entity within the given namespace. The ID must be unique
+
             within its namespace.
           in: query
           name: groupKey.id
           schema:
             type: string
-        - description: |-
+        - description: >-
             Namespaces provide isolation for IDs, so an ID only needs to be unique
+
             within its namespace.
 
+
             Namespaces are currently only created as part of IdentitySource creation
+
             from Admin Console. A namespace `"identitysources/{identity_source_id}"` is
+
             created corresponding to every Identity Source `identity_source_id`.
           in: query
           name: groupKey.namespace
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/LookupGroupNameResponse'
+                $ref: "#/components/schemas/LookupGroupNameResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-identity.groups'
+            - https://www.googleapis.com/auth/cloud-identity.groups
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-identity.groups'
+            - https://www.googleapis.com/auth/cloud-identity.groups
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-identity.groups.readonly'
+            - https://www.googleapis.com/auth/cloud-identity.groups.readonly
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-identity.groups.readonly'
+            - https://www.googleapis.com/auth/cloud-identity.groups.readonly
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - groups
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-  '/v1/groups:search':
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+  /v1/groups:search:
     get:
       description: Searches for Groups.
       operationId: cloudidentity.groups.search
       parameters:
-        - description: |-
+        - description: >-
             The default page size is 200 (max 1000) for the BASIC view, and 50
+
             (max 500) for the FULL view.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: 'The next_page_token value returned from a previous search request, if any.'
+        - description: The next_page_token value returned from a previous search request, if any.
           in: query
           name: pageToken
           schema:
             type: string
-        - description: |-
+        - description: >-
             Required. `Required`. Query string for performing search on groups. Users can search
+
             on parent and label attributes of groups.
+
             EXACT match ('==') is supported on parent, and CONTAINS match ('in') is
+
             supported on labels.
           in: query
           name: query
           schema:
             type: string
-        - description: 'Group resource view to be returned. Defaults to [View.BASIC]().'
+        - description: Group resource view to be returned. Defaults to [View.BASIC]().
           in: query
           name: view
           schema:
@@ -215,134 +234,143 @@ paths:
               - FULL
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/SearchGroupsResponse'
+                $ref: "#/components/schemas/SearchGroupsResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-identity.groups'
+            - https://www.googleapis.com/auth/cloud-identity.groups
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-identity.groups'
+            - https://www.googleapis.com/auth/cloud-identity.groups
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-identity.groups.readonly'
+            - https://www.googleapis.com/auth/cloud-identity.groups.readonly
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-identity.groups.readonly'
+            - https://www.googleapis.com/auth/cloud-identity.groups.readonly
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - groups
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-  '/v1/{name}':
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+  "/v1/{name}":
     delete:
       description: Deletes a Membership.
       operationId: cloudidentity.groups.memberships.delete
       parameters:
-        - description: |-
+        - description: >-
             Required. [Resource name](https://cloud.google.com/apis/design/resource_names) of the
+
             Membership to be deleted.
 
+
             Format: `groups/{group_id}/memberships/{member_id}`, where `group_id` is
+
             the unique ID assigned to the Group to which Membership belongs to, and
+
             member_id is the unique ID assigned to the member.
           in: path
           name: name
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-identity.groups'
+            - https://www.googleapis.com/auth/cloud-identity.groups
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-identity.groups'
+            - https://www.googleapis.com/auth/cloud-identity.groups
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - groups
     get:
       description: Retrieves a Membership.
       operationId: cloudidentity.groups.memberships.get
       parameters:
-        - description: |-
+        - description: >-
             Required. [Resource name](https://cloud.google.com/apis/design/resource_names) of the
+
             Membership to be retrieved.
 
+
             Format: `groups/{group_id}/memberships/{member_id}`, where `group_id` is
+
             the unique id assigned to the Group to which Membership belongs to, and
+
             `member_id` is the unique ID assigned to the member.
           in: path
           name: name
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Membership'
+                $ref: "#/components/schemas/Membership"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-identity.groups'
+            - https://www.googleapis.com/auth/cloud-identity.groups
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-identity.groups'
+            - https://www.googleapis.com/auth/cloud-identity.groups
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-identity.groups.readonly'
+            - https://www.googleapis.com/auth/cloud-identity.groups.readonly
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-identity.groups.readonly'
+            - https://www.googleapis.com/auth/cloud-identity.groups.readonly
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - groups
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
     patch:
       description: Updates a Group.
       operationId: cloudidentity.groups.patch
       parameters:
-        - description: |-
+        - description: >-
             Output only. [Resource name](https://cloud.google.com/apis/design/resource_names) of the
+
             Group in the format: `groups/{group_id}`, where group_id is the unique ID
+
             assigned to the Group.
+
 
             Must be left blank while creating a Group.
           in: path
@@ -350,8 +378,7 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
-        - description: 'Required. Editable fields: `display_name`, `description`'
+        - description: "Required. Editable fields: `display_name`, `description`"
           in: query
           name: updateMask
           schema:
@@ -360,50 +387,53 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Group'
+              $ref: "#/components/schemas/Group"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-identity.groups'
+            - https://www.googleapis.com/auth/cloud-identity.groups
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-identity.groups'
+            - https://www.googleapis.com/auth/cloud-identity.groups
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - groups
-  '/v1/{parent}/memberships':
+  "/v1/{parent}/memberships":
     get:
       description: Lists Memberships within a Group.
       operationId: cloudidentity.groups.memberships.list
       parameters:
-        - description: |-
+        - description: >-
             Required. [Resource name](https://cloud.google.com/apis/design/resource_names) of the
+
             Group to list Memberships within.
 
+
             Format: `groups/{group_id}`, where `group_id` is the unique ID assigned to
+
             the Group.
           in: path
           name: parent
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
-        - description: |-
+        - description: >-
             The default page size is 200 (max 1000) for the BASIC view, and 50
+
             (max 500) for the FULL view.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: 'The next_page_token value returned from a previous list request, if any.'
+        - description: The next_page_token value returned from a previous list request, if any.
           in: query
           name: pageToken
           schema:
@@ -418,148 +448,158 @@ paths:
               - FULL
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ListMembershipsResponse'
+                $ref: "#/components/schemas/ListMembershipsResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-identity.groups'
+            - https://www.googleapis.com/auth/cloud-identity.groups
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-identity.groups'
+            - https://www.googleapis.com/auth/cloud-identity.groups
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-identity.groups.readonly'
+            - https://www.googleapis.com/auth/cloud-identity.groups.readonly
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-identity.groups.readonly'
+            - https://www.googleapis.com/auth/cloud-identity.groups.readonly
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - groups
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
     post:
       description: Creates a Membership.
       operationId: cloudidentity.groups.memberships.create
       parameters:
-        - description: |-
+        - description: >-
             Required. [Resource name](https://cloud.google.com/apis/design/resource_names) of the
+
             Group to create Membership within. Format: `groups/{group_id}`, where
+
             `group_id` is the unique ID assigned to the Group.
           in: path
           name: parent
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Membership'
+              $ref: "#/components/schemas/Membership"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-identity.groups'
+            - https://www.googleapis.com/auth/cloud-identity.groups
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-identity.groups'
+            - https://www.googleapis.com/auth/cloud-identity.groups
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - groups
-  '/v1/{parent}/memberships:lookup':
+  "/v1/{parent}/memberships:lookup":
     get:
-      description: |-
+      description: >-
         Looks up [resource
+
         name](https://cloud.google.com/apis/design/resource_names) of a Membership
+
         within a Group by member's EntityKey.
       operationId: cloudidentity.groups.memberships.lookup
       parameters:
-        - description: |-
+        - description: >-
             Required. [Resource name](https://cloud.google.com/apis/design/resource_names) of the
+
             Group to lookup Membership within.
 
+
             Format: `groups/{group_id}`, where `group_id` is the unique ID assigned to
+
             the Group.
           in: path
           name: parent
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
-        - description: |-
+        - description: >-
             The ID of the entity within the given namespace. The ID must be unique
+
             within its namespace.
           in: query
           name: memberKey.id
           schema:
             type: string
-        - description: |-
+        - description: >-
             Namespaces provide isolation for IDs, so an ID only needs to be unique
+
             within its namespace.
 
+
             Namespaces are currently only created as part of IdentitySource creation
+
             from Admin Console. A namespace `"identitysources/{identity_source_id}"` is
+
             created corresponding to every Identity Source `identity_source_id`.
           in: query
           name: memberKey.namespace
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/LookupMembershipNameResponse'
+                $ref: "#/components/schemas/LookupMembershipNameResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-identity.groups'
+            - https://www.googleapis.com/auth/cloud-identity.groups
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-identity.groups'
+            - https://www.googleapis.com/auth/cloud-identity.groups
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-identity.groups.readonly'
+            - https://www.googleapis.com/auth/cloud-identity.groups.readonly
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-identity.groups.readonly'
+            - https://www.googleapis.com/auth/cloud-identity.groups.readonly
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - groups
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
 components:
   parameters:
     _.xgafv:
@@ -568,8 +608,8 @@ components:
       name: $.xgafv
       schema:
         enum:
-          - '1'
-          - '2'
+          - "1"
+          - "2"
         type: string
     access_token:
       description: OAuth access token.
@@ -582,7 +622,6 @@ components:
       in: query
       name: alt
       schema:
-        default: json
         enum:
           - json
           - media
@@ -601,7 +640,7 @@ components:
       schema:
         type: string
     key:
-      description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -617,51 +656,51 @@ components:
       in: query
       name: prettyPrint
       schema:
-        default: true
         type: boolean
     quotaUser:
-      description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.'
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
       in: query
       name: quotaUser
       schema:
         type: string
     uploadType:
-      description: 'Legacy upload protocol for media (e.g. "media", "multipart").'
+      description: Legacy upload protocol for media (e.g. "media", "multipart").
       in: query
       name: uploadType
       schema:
         type: string
     upload_protocol:
-      description: 'Upload protocol for media (e.g. "raw", "multipart").'
+      description: Upload protocol for media (e.g. "raw", "multipart").
       in: query
       name: upload_protocol
       schema:
         type: string
-  requestBodies:
-    Group:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Group'
   schemas:
     EntityKey:
-      description: |-
+      description: >-
         An EntityKey uniquely identifies an Entity. Namespaces are used to provide
+
         isolation for IDs. A single ID can be reused across namespaces but the
+
         combination of a namespace and an ID must be unique.
       properties:
         id:
-          description: |-
+          description: >-
             The ID of the entity within the given namespace. The ID must be unique
+
             within its namespace.
           type: string
         namespace:
-          description: |-
+          description: >-
             Namespaces provide isolation for IDs, so an ID only needs to be unique
+
             within its namespace.
 
+
             Namespaces are currently only created as part of IdentitySource creation
+
             from Admin Console. A namespace `"identitysources/{identity_source_id}"` is
+
             created corresponding to every Identity Source `identity_source_id`.
           type: string
       type: object
@@ -669,53 +708,66 @@ components:
       description: Resource representing a Group.
       properties:
         createTime:
-          description: |-
+          description: >-
             Output only. The time when the Group was created.
+
             Output only.
           format: google-datetime
           type: string
         description:
-          description: |-
+          description: >-
             An extended description to help users determine the purpose of a Group. For
+
             example, you can include information about who should join the Group, the
+
             types of messages to send to the Group, links to FAQs about the Group, or
+
             related Groups. Maximum length is 4,096 characters.
           type: string
         displayName:
           description: The Group's display name.
           type: string
         groupKey:
-          $ref: '#/components/schemas/EntityKey'
-          description: |-
+          $ref: "#/components/schemas/EntityKey"
+          description: >-
             Required. Immutable. EntityKey of the Group.
+
 
             Must be set when creating a Group, read-only afterwards.
         labels:
           additionalProperties:
             type: string
-          description: |-
+          description: >-
             Required. `Required`. Labels for Group resource.
+
             For creating Groups under a namespace, set label key to
+
             'labels/system/groups/external' and label value as empty.
           type: object
         name:
-          description: |-
+          description: >-
             Output only. [Resource name](https://cloud.google.com/apis/design/resource_names) of the
+
             Group in the format: `groups/{group_id}`, where group_id is the unique ID
+
             assigned to the Group.
+
 
             Must be left blank while creating a Group.
           type: string
         parent:
-          description: |-
+          description: >-
             Required. Immutable. The entity under which this Group resides in Cloud Identity resource
+
             hierarchy. Must be set when creating a Group, read-only afterwards.
+
 
             Currently allowed types: `identitysources`.
           type: string
         updateTime:
-          description: |-
+          description: >-
             Output only. The time when the Group was last updated.
+
             Output only.
           format: google-datetime
           type: string
@@ -724,15 +776,17 @@ components:
       description: Response message for ListGroups operation.
       properties:
         groups:
-          description: |-
+          description: >-
             Groups returned in response to list request.
+
             The results are not sorted.
           items:
-            $ref: '#/components/schemas/Group'
+            $ref: "#/components/schemas/Group"
           type: array
         nextPageToken:
-          description: |-
+          description: >-
             Token to retrieve the next page of results, or empty if there are no
+
             more results available for listing.
           type: string
       type: object
@@ -741,32 +795,39 @@ components:
         memberships:
           description: List of Memberships.
           items:
-            $ref: '#/components/schemas/Membership'
+            $ref: "#/components/schemas/Membership"
           type: array
         nextPageToken:
-          description: |-
+          description: >-
             Token to retrieve the next page of results, or empty if there are no
+
             more results available for listing.
           type: string
       type: object
     LookupGroupNameResponse:
       properties:
         name:
-          description: |-
+          description: >-
             [Resource name](https://cloud.google.com/apis/design/resource_names) of the
+
             Group in the format: `groups/{group_id}`, where `group_id` is the unique ID
+
             assigned to the Group.
           type: string
       type: object
     LookupMembershipNameResponse:
       properties:
         name:
-          description: |-
+          description: >-
             [Resource name](https://cloud.google.com/apis/design/resource_names) of the
+
             Membership being looked up.
 
+
             Format: `groups/{group_id}/memberships/{member_id}`, where `group_id` is
+
             the unique ID assigned to the Group to which Membership belongs to, and
+
             `member_id` is the unique ID assigned to the member.
           type: string
       type: object
@@ -778,28 +839,35 @@ components:
           format: google-datetime
           type: string
         name:
-          description: |-
+          description: >-
             Output only. [Resource name](https://cloud.google.com/apis/design/resource_names) of the
+
             Membership in the format: `groups/{group_id}/memberships/{member_id}`,
+
             where group_id is the unique ID assigned to the Group to which Membership
+
             belongs to, and member_id is the unique ID assigned to the member
+
 
             Must be left blank while creating a Membership.
           type: string
         preferredMemberKey:
-          $ref: '#/components/schemas/EntityKey'
-          description: |-
+          $ref: "#/components/schemas/EntityKey"
+          description: >-
             Required. Immutable. EntityKey of the entity to be added as the member. Must be set while
+
             creating a Membership, read-only afterwards.
+
 
             Currently allowed entity types: `Users`, `Groups`.
         roles:
-          description: |-
+          description: >-
             Roles for a member within the Group.
+
 
             Currently supported MembershipRoles: `"MEMBER"`.
           items:
-            $ref: '#/components/schemas/MembershipRole'
+            $ref: "#/components/schemas/MembershipRole"
           type: array
         updateTime:
           description: Output only. Last updated timestamp of the Membership. Output only.
@@ -810,52 +878,68 @@ components:
       description: Resource representing a role within a Membership.
       properties:
         name:
-          description: |-
+          description: >-
             MembershipRole in string format.
+
 
             Currently supported MembershipRoles: `"MEMBER"`.
           type: string
       type: object
     Operation:
-      description: |-
+      description: >-
         This resource represents a long-running operation that is the result of a
+
         network API call.
       properties:
         done:
-          description: |-
+          description: >-
             If the value is `false`, it means the operation is still in progress.
+
             If `true`, the operation is completed, and either `error` or `response` is
+
             available.
           type: boolean
         error:
-          $ref: '#/components/schemas/Status'
+          $ref: "#/components/schemas/Status"
           description: The error result of the operation in case of failure or cancellation.
         metadata:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
-          description: |-
+          description: >-
             Service-specific metadata associated with the operation.  It typically
+
             contains progress information and common metadata such as create time.
+
             Some services might not provide such metadata.  Any method that returns a
+
             long-running operation should document the metadata type, if any.
           type: object
         name:
-          description: |-
+          description: >-
             The server-assigned name, which is only unique within the same service that
+
             originally returns it. If you use the default HTTP mapping, the
+
             `name` should be a resource name ending with `operations/{unique_id}`.
           type: string
         response:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
-          description: |-
+          description: >-
             The normal response of the operation in case of success.  If the original
+
             method returns no data on success, such as `Delete`, the response is
+
             `google.protobuf.Empty`.  If the original method is standard
+
             `Get`/`Create`/`Update`, the response should be the resource.  For other
+
             methods, the response should have the type `XxxResponse`, where `Xxx`
+
             is the original method name.  For example, if the original method name
+
             is `TakeSnapshot()`, the inferred response type is
+
             `TakeSnapshotResponse`.
           type: object
       type: object
@@ -864,31 +948,38 @@ components:
         groups:
           description: List of Groups satisfying the search query.
           items:
-            $ref: '#/components/schemas/Group'
+            $ref: "#/components/schemas/Group"
           type: array
         nextPageToken:
-          description: |-
+          description: >-
             Token to retrieve the next page of results, or empty if there are no
+
             more results available for specified query.
           type: string
       type: object
     Status:
-      description: |-
+      description: >-
         The `Status` type defines a logical error model that is suitable for
+
         different programming environments, including REST APIs and RPC APIs. It is
+
         used by [gRPC](https://github.com/grpc). Each `Status` message contains
+
         three pieces of data: error code, error message, and error details.
 
+
         You can find out more about this error model and how to work with it in the
+
         [API Design Guide](https://cloud.google.com/apis/design/errors).
       properties:
         code:
-          description: 'The status code, which should be an enum value of google.rpc.Code.'
+          description: The status code, which should be an enum value of google.rpc.Code.
           format: int32
           type: integer
         details:
-          description: |-
+          description: >-
             A list of messages that carry the error details.  There is a common set of
+
             message types for APIs to use.
           items:
             additionalProperties:
@@ -896,9 +987,11 @@ components:
             type: object
           type: array
         message:
-          description: |-
+          description: >-
             A developer-facing error message, which should be in English. Any
+
             user-facing error message should be localized and sent in the
+
             google.rpc.Status.details field, or localized by the client.
           type: string
       type: object
@@ -907,20 +1000,20 @@ components:
       description: Oauth 2.0 implicit authentication
       flows:
         implicit:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            'https://www.googleapis.com/auth/cloud-identity.groups': 'See, change, create, and delete any of the Cloud Identity Groups that you can access, including the members of each group'
-            'https://www.googleapis.com/auth/cloud-identity.groups.readonly': 'See any Cloud Identity Groups that you can access, including group members and their emails'
-            'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/cloud-identity.groups: See, change, create, and delete any of the Cloud Identity Groups that you can access, including the members of each group
+            https://www.googleapis.com/auth/cloud-identity.groups.readonly: See any Cloud Identity Groups that you can access, including group members and their emails
+            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
       type: oauth2
     Oauth2c:
-      description: Oauth 2.0 accessCode authentication
+      description: Oauth 2.0 authorizationCode authentication
       flows:
         authorizationCode:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            'https://www.googleapis.com/auth/cloud-identity.groups': 'See, change, create, and delete any of the Cloud Identity Groups that you can access, including the members of each group'
-            'https://www.googleapis.com/auth/cloud-identity.groups.readonly': 'See any Cloud Identity Groups that you can access, including group members and their emails'
-            'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-          tokenUrl: 'https://accounts.google.com/o/oauth2/token'
+            https://www.googleapis.com/auth/cloud-identity.groups: See, change, create, and delete any of the Cloud Identity Groups that you can access, including the members of each group
+            https://www.googleapis.com/auth/cloud-identity.groups.readonly: See any Cloud Identity Groups that you can access, including group members and their emails
+            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+          tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

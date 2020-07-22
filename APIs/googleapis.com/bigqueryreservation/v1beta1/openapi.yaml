@@ -1,134 +1,142 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://bigqueryreservation.googleapis.com/'
+  - url: https://bigqueryreservation.googleapis.com/
 info:
   contact:
     name: Google
-    url: 'https://google.com'
+    url: https://google.com
+    x-twitter: youtube
   description: A service to modify your BigQuery flat-rate reservations.
   license:
     name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
-  title: BigQuery Reservation
+    url: http://creativecommons.org/licenses/by/3.0/
+  termsOfService: https://developers.google.com/terms/
+  title: BigQuery Reservation API
   version: v1beta1
   x-apiClientRegistration:
-    url: 'https://console.developers.google.com'
+    url: https://console.developers.google.com
+  x-apisguru-categories:
+    - analytics
+    - media
   x-logo:
-    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.31
       format: google
-      url: 'https://bigqueryreservation.googleapis.com/$discovery/rest?version=v1beta1'
+      url: https://bigqueryreservation.googleapis.com/$discovery/rest?version=v1beta1
       version: v1
   x-preferred: false
   x-providerName: googleapis.com
   x-serviceName: bigqueryreservation
 externalDocs:
-  url: 'https://cloud.google.com/bigquery/'
+  url: https://cloud.google.com/bigquery/
 tags:
   - name: projects
 paths:
-  '/v1beta1/{name}':
+  "/v1beta1/{name}":
     delete:
-      description: |-
-        Deletes a assignment. No expansion will happen.
-        E.g:
-        organizationA contains project1 and project2. Reservation res1 exists.
-        CreateAssignment was invoked previously and following assignments were
-        created explicitly:
-          <organizationA, res1>
-          <project1, res1>
-        Then deletion of <organizationA, res1> won't affect <project1, res1>. After
-        deletion of <organizationA, res1>, queries from project1 will still use
-        res1, while queries from project2 will use on-demand mode.
-      operationId: bigqueryreservation.projects.locations.reservations.assignments.delete
+      description: >-
+        Deletes a capacity commitment. Attempting to delete capacity commitment
+
+        before its commitment_end_time will fail with the error code
+
+        `google.rpc.Code.FAILED_PRECONDITION`.
+      operationId: bigqueryreservation.projects.locations.capacityCommitments.delete
       parameters:
-        - description: |-
-            Required. Name of the resource, e.g.:
-              projects/myproject/locations/US/reservations/team1-prod/assignments/123
+        - description: >-
+            Required. Resource name of the capacity commitment to delete. E.g.,
+               `projects/myproject/locations/US/capacityCommitments/123`
           in: path
           name: name
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Empty'
+                $ref: "#/components/schemas/Empty"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/bigquery'
+            - https://www.googleapis.com/auth/bigquery
           Oauth2c:
-            - 'https://www.googleapis.com/auth/bigquery'
+            - https://www.googleapis.com/auth/bigquery
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
     get:
-      description: Returns information about the reservation.
-      operationId: bigqueryreservation.projects.locations.reservations.get
+      description: Returns information about the capacity commitment.
+      operationId: bigqueryreservation.projects.locations.capacityCommitments.get
       parameters:
-        - description: |-
-            Required. Resource name of the reservation to retrieve. E.g.,
-               projects/myproject/locations/US/reservations/team1-prod
+        - description: >-
+            Required. Resource name of the capacity commitment to retrieve. E.g.,
+               `projects/myproject/locations/US/capacityCommitments/123`
           in: path
           name: name
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Reservation'
+                $ref: "#/components/schemas/CapacityCommitment"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/bigquery'
+            - https://www.googleapis.com/auth/bigquery
           Oauth2c:
-            - 'https://www.googleapis.com/auth/bigquery'
+            - https://www.googleapis.com/auth/bigquery
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
     patch:
-      description: Updates an existing reservation resource.
-      operationId: bigqueryreservation.projects.locations.reservations.patch
+      description: >-
+        Updates an existing capacity commitment.
+
+
+        Only `plan` and `renewal_plan` fields can be updated.
+
+
+        Plan can only be changed to a plan of a longer commitment period.
+
+        Attempting to change to a plan with shorter commitment period will fail
+
+        with the error code `google.rpc.Code.FAILED_PRECONDITION`.
+      operationId: bigqueryreservation.projects.locations.capacityCommitments.patch
       parameters:
-        - description: |-
-            The resource name of the reservation, e.g.,
-            "projects/*/locations/*/reservations/team1-prod".
+        - description: >-
+            Output only. The resource name of the capacity commitment, e.g.,
+
+            `projects/myproject/locations/US/capacityCommitments/123`
           in: path
           name: name
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
         - description: Standard field mask for the set of fields to be updated.
           in: query
           name: updateMask
@@ -138,313 +146,387 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Reservation'
+              $ref: "#/components/schemas/CapacityCommitment"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Reservation'
+                $ref: "#/components/schemas/CapacityCommitment"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/bigquery'
+            - https://www.googleapis.com/auth/bigquery
           Oauth2c:
-            - 'https://www.googleapis.com/auth/bigquery'
+            - https://www.googleapis.com/auth/bigquery
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1beta1/{name}:move':
+  "/v1beta1/{name}:move":
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
     post:
-      description: |-
-        Moves a assignment under a new reservation. Customers can do this by
-        deleting the existing assignment followed by creating another assignment
-        under the new reservation, but this method provides a transactional way to
-        do so, to make sure the assignee always has an associated reservation.
-        Without the method customers might see some queries run on-demand which
-        might be unexpected.
+      description: >-
+        Moves an assignment under a new reservation.
+
+
+        This differs from removing an existing assignment and recreating a new one
+
+        by providing a transactional change that ensures an assignee always has an
+
+        associated reservation.
       operationId: bigqueryreservation.projects.locations.reservations.assignments.move
       parameters:
-        - description: |-
+        - description: >-
             Required. The resource name of the assignment,
-            e.g.:
-              projects/myproject/locations/US/reservations/team1-prod/assignments/123
+
+            e.g.
+
+            `projects/myproject/locations/US/reservations/team1-prod/assignments/123`
           in: path
           name: name
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/MoveAssignmentRequest'
+              $ref: "#/components/schemas/MoveAssignmentRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Assignment'
+                $ref: "#/components/schemas/Assignment"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/bigquery'
+            - https://www.googleapis.com/auth/bigquery
           Oauth2c:
-            - 'https://www.googleapis.com/auth/bigquery'
+            - https://www.googleapis.com/auth/bigquery
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1beta1/{name}:split':
+  "/v1beta1/{name}:split":
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
     post:
-      description: |-
+      description: >-
         Splits capacity commitment to two commitments of the same plan and
-        commitment_end_time. A common use case to do that is to perform a downgrade
-        e.g., in order to downgrade from 10000 slots to 8000, one might split 10000
-        capacity commitment to 2000 and 8000, change the plan of the first one to
-        flex and then delete it.
+
+        `commitment_end_time`.
+
+
+        A common use case is to enable downgrading commitments.
+
+
+        For example, in order to downgrade from 10000 slots to 8000, you might
+
+        split a 10000 capacity commitment into commitments of 2000 and 8000. Then,
+
+        you would change the plan of the first one to `FLEX` and then delete it.
       operationId: bigqueryreservation.projects.locations.capacityCommitments.split
       parameters:
-        - description: |-
+        - description: >-
             Required. The resource name e.g.,:
-              projects/myproject/locations/US/capacityCommitments/123
+             `projects/myproject/locations/US/capacityCommitments/123`
           in: path
           name: name
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SplitCapacityCommitmentRequest'
+              $ref: "#/components/schemas/SplitCapacityCommitmentRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/SplitCapacityCommitmentResponse'
+                $ref: "#/components/schemas/SplitCapacityCommitmentResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/bigquery'
+            - https://www.googleapis.com/auth/bigquery
           Oauth2c:
-            - 'https://www.googleapis.com/auth/bigquery'
+            - https://www.googleapis.com/auth/bigquery
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1beta1/{parent}/assignments':
+  "/v1beta1/{parent}/assignments":
     get:
-      description: |-
+      description: >-
         Lists assignments.
-        Only explicitly created assignments will be returned. E.g:
-        organizationA contains project1 and project2. Reservation res1 exists.
-        CreateAssignment was invoked previously and following assignments were
-        created explicitly:
-          <organizationA, res1>
-          <project1, res1>
-        Then this API will just return the above two assignments for reservation
-        res1, and no expansion/merge will happen. Wildcard "-" can be used for
+
+
+        Only explicitly created assignments will be returned.
+
+
+        Example:
+
+
+        * Organization `organizationA` contains two projects, `project1` and
+          `project2`.
+        * Reservation `res1` exists and was created previously.
+
+        * CreateAssignment was used previously to define the following
+          associations between entities and reservations: `<organizationA, res1>`
+          and `<project1, res1>`
+
+        In this example, ListAssignments will just return the above two assignments
+
+        for reservation `res1`, and no expansion/merge will happen.
+
+
+        The wildcard "-" can be used for
+
         reservations in the request. In that case all assignments belongs to the
-        specified project and location will be listed. Note
-        "-" cannot be used for projects nor locations.
+
+        specified project and location will be listed.
+
+
+        **Note** "-" cannot be used for projects nor locations.
       operationId: bigqueryreservation.projects.locations.reservations.assignments.list
       parameters:
-        - description: |-
+        - description: >-
             Required. The parent resource name e.g.:
-            projects/myproject/locations/US/reservations/team1-prod
+
+
+            `projects/myproject/locations/US/reservations/team1-prod`
+
+
             Or:
-            projects/myproject/locations/US/reservations/-
+
+
+            `projects/myproject/locations/US/reservations/-`
           in: path
           name: parent
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
         - description: The maximum number of items to return.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: 'The next_page_token value returned from a previous List request, if any.'
+        - description: The next_page_token value returned from a previous List request, if any.
           in: query
           name: pageToken
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ListAssignmentsResponse'
+                $ref: "#/components/schemas/ListAssignmentsResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/bigquery'
+            - https://www.googleapis.com/auth/bigquery
           Oauth2c:
-            - 'https://www.googleapis.com/auth/bigquery'
+            - https://www.googleapis.com/auth/bigquery
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
     post:
-      description: |-
+      description: >-
+        Creates an assignment object which allows the given project to submit jobs
+
+        of a certain type using slots from the specified reservation.
+
+
+        Currently a
+
+        resource (project, folder, organization) can only have one assignment per
+
+        each (job_type, location) combination, and that reservation will be used
+
+        for all jobs of the matching type.
+
+
+        Different assignments can be created on different levels of the
+
+        projects, folders or organization hierarchy.  During query execution,
+
+        the assignment is looked up at the project, folder and organization levels
+
+        in that order. The first assignment found is applied to the query.
+
+
+        When creating assignments, it does not matter if other assignments exist at
+
+        higher levels.
+
+
+        Example:
+
+
+        * The organization `organizationA` contains two projects, `project1`
+          and `project2`.
+        * Assignments for all three entities (`organizationA`, `project1`, and
+          `project2`) could all be created and mapped to the same or different
+          reservations.
+
         Returns `google.rpc.Code.PERMISSION_DENIED` if user does not have
+
         'bigquery.admin' permissions on the project using the reservation
+
         and the project that owns this reservation.
+
+
         Returns `google.rpc.Code.INVALID_ARGUMENT` when location of the assignment
+
         does not match location of the reservation.
       operationId: bigqueryreservation.projects.locations.reservations.assignments.create
       parameters:
-        - description: |-
+        - description: >-
             Required. The parent resource name of the assignment
-            E.g.: projects/myproject/locations/US/reservations/team1-prod
+
+            E.g. `projects/myproject/locations/US/reservations/team1-prod`
           in: path
           name: parent
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Assignment'
+              $ref: "#/components/schemas/Assignment"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Assignment'
+                $ref: "#/components/schemas/Assignment"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/bigquery'
+            - https://www.googleapis.com/auth/bigquery
           Oauth2c:
-            - 'https://www.googleapis.com/auth/bigquery'
+            - https://www.googleapis.com/auth/bigquery
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1beta1/{parent}/capacityCommitments':
+  "/v1beta1/{parent}/capacityCommitments":
     get:
       description: Lists all the capacity commitments for the admin project.
       operationId: bigqueryreservation.projects.locations.capacityCommitments.list
       parameters:
-        - description: |-
+        - description: >-
             Required. Resource name of the parent reservation. E.g.,
-               projects/myproject/locations/US
+               `projects/myproject/locations/US`
           in: path
           name: parent
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
         - description: The maximum number of items to return.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: 'The next_page_token value returned from a previous List request, if any.'
+        - description: The next_page_token value returned from a previous List request, if any.
           in: query
           name: pageToken
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ListCapacityCommitmentsResponse'
+                $ref: "#/components/schemas/ListCapacityCommitmentsResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/bigquery'
+            - https://www.googleapis.com/auth/bigquery
           Oauth2c:
-            - 'https://www.googleapis.com/auth/bigquery'
+            - https://www.googleapis.com/auth/bigquery
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
     post:
       description: Creates a new capacity commitment resource.
       operationId: bigqueryreservation.projects.locations.capacityCommitments.create
       parameters:
-        - description: |-
+        - description: >-
             Required. Resource name of the parent reservation. E.g.,
-               projects/myproject/locations/US
+               `projects/myproject/locations/US`
           in: path
           name: parent
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
-        - description: |-
+        - description: >-
             If true, fail the request if another project in the organization has a
+
             capacity commitment.
           in: query
           name: enforceSingleAdminProjectPerOrg
@@ -454,97 +536,106 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CapacityCommitment'
+              $ref: "#/components/schemas/CapacityCommitment"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/CapacityCommitment'
+                $ref: "#/components/schemas/CapacityCommitment"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/bigquery'
+            - https://www.googleapis.com/auth/bigquery
           Oauth2c:
-            - 'https://www.googleapis.com/auth/bigquery'
+            - https://www.googleapis.com/auth/bigquery
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1beta1/{parent}/capacityCommitments:merge':
+  "/v1beta1/{parent}/capacityCommitments:merge":
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
     post:
-      description: |-
-        Merges capacity commitments of the same plan into one. Resulting capacity
-        commitment has the longer commitment_end_time out of the two. Attempting to
-        merge capacity commitments of different plan will fail with the error code
-        `google.rpc.Code.FAILED_PRECONDITION`.
+      description: >-
+        Merges capacity commitments of the same plan into a single commitment.
+
+
+        The resulting capacity commitment has the greater commitment_end_time
+
+        out of the to-be-merged capacity commitments.
+
+
+        Attempting to merge capacity commitments of different plan will fail
+
+        with the error code `google.rpc.Code.FAILED_PRECONDITION`.
       operationId: bigqueryreservation.projects.locations.capacityCommitments.merge
       parameters:
-        - description: |-
+        - description: >-
             Parent resource that identifies admin project and location e.g.,
-            projects/myproject/locations/us
+             `projects/myproject/locations/us`
           in: path
           name: parent
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/MergeCapacityCommitmentsRequest'
+              $ref: "#/components/schemas/MergeCapacityCommitmentsRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/CapacityCommitment'
+                $ref: "#/components/schemas/CapacityCommitment"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/bigquery'
+            - https://www.googleapis.com/auth/bigquery
           Oauth2c:
-            - 'https://www.googleapis.com/auth/bigquery'
+            - https://www.googleapis.com/auth/bigquery
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1beta1/{parent}/reservations':
+  "/v1beta1/{parent}/reservations":
     get:
       description: Lists all the reservations for the project in the specified location.
       operationId: bigqueryreservation.projects.locations.reservations.list
       parameters:
-        - description: |-
+        - description: >-
             Required. The parent resource name containing project and location, e.g.:
-              "projects/myproject/locations/US"
+              `projects/myproject/locations/US`
           in: path
           name: parent
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
-        - description: |-
+        - description: >-
             Can be used to filter out reservations based on names, capacity, etc, e.g.:
+
             filter="reservation.slot_capacity > 200"
+
             filter="reservation.name = \"*dev/*\""
+
             Advanced filtering syntax can be
+
             [here](https://cloud.google.com/logging/docs/view/advanced-filters).
           in: query
           name: filter
@@ -555,56 +646,57 @@ paths:
           name: pageSize
           schema:
             type: integer
-        - description: 'The next_page_token value returned from a previous List request, if any.'
+        - description: The next_page_token value returned from a previous List request, if any.
           in: query
           name: pageToken
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ListReservationsResponse'
+                $ref: "#/components/schemas/ListReservationsResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/bigquery'
+            - https://www.googleapis.com/auth/bigquery
           Oauth2c:
-            - 'https://www.googleapis.com/auth/bigquery'
+            - https://www.googleapis.com/auth/bigquery
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
     post:
       description: Creates a new reservation resource.
       operationId: bigqueryreservation.projects.locations.reservations.create
       parameters:
-        - description: |-
+        - description: >-
             Required. Project, location. E.g.,
-               projects/myproject/locations/US
+
+            `projects/myproject/locations/US`
           in: path
           name: parent
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
-        - description: |-
+        - description: >-
             The reservation ID. This field must only contain lower case alphanumeric
+
             characters or dash. Max length is 64 characters.
           in: query
           name: reservationId
@@ -614,105 +706,131 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Reservation'
+              $ref: "#/components/schemas/Reservation"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Reservation'
+                $ref: "#/components/schemas/Reservation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/bigquery'
+            - https://www.googleapis.com/auth/bigquery
           Oauth2c:
-            - 'https://www.googleapis.com/auth/bigquery'
+            - https://www.googleapis.com/auth/bigquery
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1beta1/{parent}:searchAssignments':
+  "/v1beta1/{parent}:searchAssignments":
     get:
-      description: |-
+      description: >-
         Looks up assignments for a specified resource for a particular region.
+
         If the request is about a project:
-          1) Assignments created on the project will be returned if they exist.
-          2) Otherwise assignments created on the closest ancestor will be
-          returned. 3) Assignments for different JobTypes will all be returned.
-        Same logic applies if the request is about a folder.
+
+
+        1. Assignments created on the project will be returned if they exist.
+
+        2. Otherwise assignments created on the closest ancestor will be
+           returned.
+        3. Assignments for different JobTypes will all be returned.
+
+
+        The same logic applies if the request is about a folder.
+
+
         If the request is about an organization, then assignments created on the
+
         organization will be returned (organization doesn't have ancestors).
+
+
         Comparing to ListAssignments, there are some behavior
+
         differences:
-          1) permission on the assignee will be verified in this API.
-          2) Hierarchy lookup (project->folder->organization) happens in this API.
-          3) Parent here is projects/*/locations/*, instead of
-          projects/*/locations/*reservations/*.
-        Note "-" cannot be used for projects
+
+
+        1. permission on the assignee will be verified in this API.
+
+        2. Hierarchy lookup (project->folder->organization) happens in this API.
+
+        3. Parent here is `projects/*/locations/*`, instead of
+           `projects/*/locations/*reservations/*`.
+
+        **Note** "-" cannot be used for projects
+
         nor locations.
       operationId: bigqueryreservation.projects.locations.searchAssignments
       parameters:
-        - description: |-
+        - description: >-
             Required. The resource name of the admin project(containing project and location),
+
             e.g.:
-              "projects/myproject/locations/US".
+              `projects/myproject/locations/US`.
           in: path
           name: parent
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
         - description: The maximum number of items to return.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: 'The next_page_token value returned from a previous List request, if any.'
+        - description: The next_page_token value returned from a previous List request, if any.
           in: query
           name: pageToken
           schema:
             type: string
-        - description: |-
+        - description: >-
             Please specify resource name as assignee in the query.
-            e.g., "assignee=projects/myproject"
-                  "assignee=folders/123"
-                  "assignee=organizations/456"
+
+
+            Examples:
+
+
+            * `assignee=projects/myproject`
+
+            * `assignee=folders/123`
+
+            * `assignee=organizations/456`
           in: query
           name: query
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/SearchAssignmentsResponse'
+                $ref: "#/components/schemas/SearchAssignmentsResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/bigquery'
+            - https://www.googleapis.com/auth/bigquery
           Oauth2c:
-            - 'https://www.googleapis.com/auth/bigquery'
+            - https://www.googleapis.com/auth/bigquery
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
 components:
   parameters:
     _.xgafv:
@@ -721,8 +839,8 @@ components:
       name: $.xgafv
       schema:
         enum:
-          - '1'
-          - '2'
+          - "1"
+          - "2"
         type: string
     access_token:
       description: OAuth access token.
@@ -735,7 +853,6 @@ components:
       in: query
       name: alt
       schema:
-        default: json
         enum:
           - json
           - media
@@ -754,7 +871,7 @@ components:
       schema:
         type: string
     key:
-      description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -770,42 +887,37 @@ components:
       in: query
       name: prettyPrint
       schema:
-        default: true
         type: boolean
     quotaUser:
-      description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.'
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
       in: query
       name: quotaUser
       schema:
         type: string
     uploadType:
-      description: 'Legacy upload protocol for media (e.g. "media", "multipart").'
+      description: Legacy upload protocol for media (e.g. "media", "multipart").
       in: query
       name: uploadType
       schema:
         type: string
     upload_protocol:
-      description: 'Upload protocol for media (e.g. "raw", "multipart").'
+      description: Upload protocol for media (e.g. "raw", "multipart").
       in: query
       name: upload_protocol
       schema:
         type: string
-  requestBodies:
-    Reservation:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Reservation'
   schemas:
     Assignment:
-      description: |-
+      description: >-
         A Assignment allows a project to submit jobs
+
         of a certain type using slots from the specified reservation.
       properties:
         assignee:
-          description: |-
+          description: >-
             The resource which will use the reservation. E.g.
-            projects/myproject, folders/123, organizations/456.
+
+            `projects/myproject`, `folders/123`, or `organizations/456`.
           type: string
         jobType:
           description: Which type of jobs will use the reservation.
@@ -813,11 +925,13 @@ components:
             - JOB_TYPE_UNSPECIFIED
             - PIPELINE
             - QUERY
+            - ML_EXTERNAL
           type: string
         name:
-          description: |-
+          description: >-
             Output only. Name of the resource. E.g.:
-            projects/myproject/locations/US/reservations/team1-prod/assignments/123.
+
+            `projects/myproject/locations/US/reservations/team1-prod/assignments/123`.
           type: string
         state:
           description: Output only. State of the assignment.
@@ -827,39 +941,19 @@ components:
             - ACTIVE
           type: string
       type: object
-    Autoscale:
-      description: |-
-        Auto scaling settings and current situation.
-        System will create a dedicated FLEX capacity commitment to hold the slots
-        for auto-scale. Users won't be able to manage it,to avoid conflicts.
-        Scale-up will happen, if there are always pending tasks for the past 10
-        minutes.
-        Scale-down will happen, if the system knows that scale-up won't be
-        triggered again.
-        Note this is an alpha feature.
-      properties:
-        currentSlots:
-          description: |-
-            Output only. The slot capacity added to this reservation when autoscale happens. Will
-            be between [0, max_slots].
-          format: int64
-          type: string
-        maxSlots:
-          description: Number of slots to be scaled when needed.
-          format: int64
-          type: string
-      type: object
     BiReservation:
       description: Represents a BI Reservation.
       properties:
         name:
-          description: |-
+          description: >-
             The resource name of the singleton BI reservation.
+
             Reservation names have the form
+
             `projects/{project_id}/locations/{location_id}/bireservation`.
           type: string
         size:
-          description: 'Size of a reservation, in bytes.'
+          description: Size of a reservation, in bytes.
           format: int64
           type: string
         updateTime:
@@ -868,46 +962,68 @@ components:
           type: string
       type: object
     CapacityCommitment:
-      description: |-
+      description: >-
         Capacity commitment is a way to purchase compute capacity for BigQuery jobs
+
         (in the form of slots) with some committed period of usage. Annual
+
         commitments renew by default. Commitments can be removed after their
-        commitment end time passes. In order to remove annual commitment, its plan
-        needs to be changed to monthly or flex first.
+
+        commitment end time passes.
+
+
+        In order to remove annual commitment, its plan needs to be changed
+
+        to monthly or flex first.
+
 
         A capacity commitment resource exists as a child resource of the admin
+
         project.
       properties:
         commitmentEndTime:
-          description: |-
+          description: >-
             Output only. The end of the current commitment period. It is applicable only for ACTIVE
+
             capacity commitments.
           format: google-datetime
           type: string
+        commitmentStartTime:
+          description: >-
+            Output only. The start of the current commitment period. It is applicable only for
+
+            ACTIVE capacity commitments.
+          format: google-datetime
+          type: string
         failureStatus:
-          $ref: '#/components/schemas/Status'
-          description: 'Output only. For FAILED commitment plan, provides the reason of failure.'
+          $ref: "#/components/schemas/Status"
+          description: Output only. For FAILED commitment plan, provides the reason of failure.
         name:
-          description: |-
+          description: >-
             Output only. The resource name of the capacity commitment, e.g.,
-               projects/myproject/locations/US/capacityCommitments/123
+
+            `projects/myproject/locations/US/capacityCommitments/123`
           type: string
         plan:
           description: Capacity commitment commitment plan.
           enum:
             - COMMITMENT_PLAN_UNSPECIFIED
             - FLEX
+            - TRIAL
             - MONTHLY
             - ANNUAL
           type: string
         renewalPlan:
-          description: |-
+          description: >-
             The plan this capacity commitment is converted to after commitment_end_time
+
             passes. Once the plan is changed, committed period is extended according to
+
             commitment plan. Only applicable for ANNUAL commitments.
           enum:
             - COMMITMENT_PLAN_UNSPECIFIED
             - FLEX
+            - TRIAL
             - MONTHLY
             - ANNUAL
           type: string
@@ -925,20 +1041,24 @@ components:
           type: string
       type: object
     CreateSlotPoolMetadata:
-      description: |-
+      description: >-
         The metadata for operation returned from
+
         ReservationService.CreateSlotPool.
       properties:
         slotPool:
-          description: |-
+          description: >-
             Resource name of the slot pool that is being created. E.g.,
+
             projects/myproject/locations/us-central1/reservations/foo/slotPools/123
           type: string
       type: object
     Empty:
-      description: |-
+      description: >-
         A generic empty message that you can re-use to avoid defining duplicated
+
         empty messages in your APIs. A typical example is to use it as the request
+
         or the response type of an API method. For instance:
 
             service Foo {
@@ -954,11 +1074,12 @@ components:
         assignments:
           description: List of assignments visible to the user.
           items:
-            $ref: '#/components/schemas/Assignment'
+            $ref: "#/components/schemas/Assignment"
           type: array
         nextPageToken:
-          description: |-
+          description: >-
             Token to retrieve the next page of results, or empty if there are no
+
             more results in the list.
           type: string
       type: object
@@ -968,11 +1089,12 @@ components:
         capacityCommitments:
           description: List of capacity commitments visible to the user.
           items:
-            $ref: '#/components/schemas/CapacityCommitment'
+            $ref: "#/components/schemas/CapacityCommitment"
           type: array
         nextPageToken:
-          description: |-
+          description: >-
             Token to retrieve the next page of results, or empty if there are no
+
             more results in the list.
           type: string
       type: object
@@ -980,71 +1102,94 @@ components:
       description: The response for ReservationService.ListReservations.
       properties:
         nextPageToken:
-          description: |-
+          description: >-
             Token to retrieve the next page of results, or empty if there are no
+
             more results in the list.
           type: string
         reservations:
           description: List of reservations visible to the user.
           items:
-            $ref: '#/components/schemas/Reservation'
+            $ref: "#/components/schemas/Reservation"
           type: array
       type: object
     MergeCapacityCommitmentsRequest:
       description: The request for ReservationService.MergeCapacityCommitments.
       properties:
         capacityCommitmentIds:
-          description: |-
+          description: >-
             Ids of capacity commitments to merge.
+
             These capacity commitments must exist under admin project and location
+
             specified in the parent.
+
+            ID is the last portion of capacity commitment name e.g., 'abc' for
+
+            projects/myproject/locations/US/capacityCommitments/abc
           items:
             type: string
           type: array
       type: object
     MoveAssignmentRequest:
-      description: |-
+      description: >-
         The request for
+
         ReservationService.MoveAssignment.
-        Note: "bigquery.reservationAssignments.create" permission is required on the
-        destination_id. Note: "bigquery.reservationAssignments.create" and
-        "bigquery.reservationAssignments.delete" permission is required on the
+
+
+        **Note**: "bigquery.reservationAssignments.create" permission is required on
+
+        the destination_id.
+
+
+        **Note**: "bigquery.reservationAssignments.create" and
+
+        "bigquery.reservationAssignments.delete" permission are required on the
+
         related assignee.
       properties:
         destinationId:
-          description: |-
+          description: >-
             The new reservation ID, e.g.:
-              projects/myotherproject/locations/US/reservations/team2-prod
+              `projects/myotherproject/locations/US/reservations/team2-prod`
           type: string
       type: object
     Reservation:
       description: A reservation is a mechanism used to guarantee slots to users.
       properties:
-        autoscale:
-          $ref: '#/components/schemas/Autoscale'
-          description: |-
-            The configuration parameters for the auto scaling feature. Note this is an
-            alpha feature.
         ignoreIdleSlots:
-          description: |-
+          description: >-
             If false, any query using this reservation will use idle slots from other
+
             reservations within the same admin project. If true, a query using this
+
             reservation will execute with the slot capacity specified above at most.
           type: boolean
         name:
-          description: |-
+          description: >-
             The resource name of the reservation, e.g.,
-            "projects/*/locations/*/reservations/team1-prod".
+
+            `projects/*/locations/*/reservations/team1-prod`.
           type: string
         slotCapacity:
-          description: |-
+          description: >-
             Minimum slots available to this reservation. A slot is a unit of
+
             computational power in BigQuery, and serves as the unit of parallelism.
+
+
             Queries using this reservation might use more slots during runtime if
+
             ignore_idle_slots is set to false.
+
+
             If the new reservation's slot capacity exceed the parent's slot capacity or
+
             if total slot capacity of the new reservation and its siblings exceeds the
+
             parent's slot capacity, the request will fail with
+
             `google.rpc.Code.RESOURCE_EXHAUSTED`.
           format: int64
           type: string
@@ -1055,11 +1200,12 @@ components:
         assignments:
           description: List of assignments visible to the user.
           items:
-            $ref: '#/components/schemas/Assignment'
+            $ref: "#/components/schemas/Assignment"
           type: array
         nextPageToken:
-          description: |-
+          description: >-
             Token to retrieve the next page of results, or empty if there are no
+
             more results in the list.
           type: string
       type: object
@@ -1075,29 +1221,35 @@ components:
       description: The response for ReservationService.SplitCapacityCommitment.
       properties:
         first:
-          $ref: '#/components/schemas/CapacityCommitment'
-          description: 'First capacity commitment, result of a split.'
+          $ref: "#/components/schemas/CapacityCommitment"
+          description: First capacity commitment, result of a split.
         second:
-          $ref: '#/components/schemas/CapacityCommitment'
-          description: 'Second capacity commitment, result of a split.'
+          $ref: "#/components/schemas/CapacityCommitment"
+          description: Second capacity commitment, result of a split.
       type: object
     Status:
-      description: |-
+      description: >-
         The `Status` type defines a logical error model that is suitable for
+
         different programming environments, including REST APIs and RPC APIs. It is
+
         used by [gRPC](https://github.com/grpc). Each `Status` message contains
+
         three pieces of data: error code, error message, and error details.
 
+
         You can find out more about this error model and how to work with it in the
+
         [API Design Guide](https://cloud.google.com/apis/design/errors).
       properties:
         code:
-          description: 'The status code, which should be an enum value of google.rpc.Code.'
+          description: The status code, which should be an enum value of google.rpc.Code.
           format: int32
           type: integer
         details:
-          description: |-
+          description: >-
             A list of messages that carry the error details.  There is a common set of
+
             message types for APIs to use.
           items:
             additionalProperties:
@@ -1105,9 +1257,11 @@ components:
             type: object
           type: array
         message:
-          description: |-
+          description: >-
             A developer-facing error message, which should be in English. Any
+
             user-facing error message should be localized and sent in the
+
             google.rpc.Status.details field, or localized by the client.
           type: string
       type: object
@@ -1116,18 +1270,18 @@ components:
       description: Oauth 2.0 implicit authentication
       flows:
         implicit:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            'https://www.googleapis.com/auth/bigquery': View and manage your data in Google BigQuery
-            'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/bigquery: View and manage your data in Google BigQuery
+            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
       type: oauth2
     Oauth2c:
-      description: Oauth 2.0 accessCode authentication
+      description: Oauth 2.0 authorizationCode authentication
       flows:
         authorizationCode:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            'https://www.googleapis.com/auth/bigquery': View and manage your data in Google BigQuery
-            'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-          tokenUrl: 'https://accounts.google.com/o/oauth2/token'
+            https://www.googleapis.com/auth/bigquery: View and manage your data in Google BigQuery
+            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+          tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

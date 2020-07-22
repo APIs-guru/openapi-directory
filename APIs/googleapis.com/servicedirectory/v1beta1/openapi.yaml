@@ -1,34 +1,43 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://servicedirectory.googleapis.com/'
+  - url: https://servicedirectory.googleapis.com/
 info:
   contact:
     name: Google
-    url: 'https://google.com'
-  description: |
-    Service Directory is a platform for discovering, publishing, and connecting services.
-  title: Service Directory
+    url: https://google.com
+    x-twitter: youtube
+  description: >
+    Service Directory is a platform for discovering, publishing, and connecting
+    services.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: http://creativecommons.org/licenses/by/3.0/
+  termsOfService: https://developers.google.com/terms/
+  title: Service Directory API
   version: v1beta1
   x-apiClientRegistration:
-    url: 'https://console.developers.google.com'
+    url: https://console.developers.google.com
+  x-apisguru-categories:
+    - analytics
+    - media
   x-logo:
-    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.31
       format: google
-      url: 'https://servicedirectory.googleapis.com/$discovery/rest?version=v1beta1'
+      url: https://servicedirectory.googleapis.com/$discovery/rest?version=v1beta1
       version: v1
   x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: servicedirectory
 externalDocs:
-  url: 'https://cloud.google.com/service-directory'
+  url: https://cloud.google.com/service-directory
 tags:
   - name: projects
 paths:
-  '/v1beta1/{name}':
+  "/v1beta1/{name}":
     delete:
       description: Deletes a endpoint.
       operationId: servicedirectory.projects.locations.namespaces.services.endpoints.delete
@@ -39,17 +48,18 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Empty'
+                $ref: "#/components/schemas/Empty"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
     get:
@@ -62,31 +72,32 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Endpoint'
+                $ref: "#/components/schemas/Endpoint"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
     patch:
       description: Updates a endpoint.
       operationId: servicedirectory.projects.locations.namespaces.services.endpoints.patch
@@ -99,7 +110,6 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
         - description: Required. List of fields to be updated in this request.
           in: query
           name: updateMask
@@ -109,31 +119,37 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Endpoint'
+              $ref: "#/components/schemas/Endpoint"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Endpoint'
+                $ref: "#/components/schemas/Endpoint"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1beta1/{name}/locations':
+  "/v1beta1/{name}/locations":
     get:
       description: Lists information about the supported locations for this service.
       operationId: servicedirectory.projects.locations.list
       parameters:
-        - description: 'The resource that owns the locations collection, if applicable.'
+        - description: The resource that owns the locations collection, if applicable.
           in: path
           name: name
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
+        - description: The standard list filter.
+          in: query
+          name: filter
+          schema:
+            type: string
         - description: The standard list page size.
           in: query
           name: pageSize
@@ -144,48 +160,45 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: The standard list filter.
-          in: query
-          name: filter
-          schema:
-            type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ListLocationsResponse'
+                $ref: "#/components/schemas/ListLocationsResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-  '/v1beta1/{name}:resolve':
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
+  "/v1beta1/{name}:resolve":
     parameters:
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: |-
         Returns a service and its
@@ -199,73 +212,69 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ResolveServiceRequest'
+              $ref: "#/components/schemas/ResolveServiceRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ResolveServiceResponse'
+                $ref: "#/components/schemas/ResolveServiceResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1beta1/{parent}/endpoints':
+  "/v1beta1/{parent}/endpoints":
     get:
       description: Lists all endpoints.
       operationId: servicedirectory.projects.locations.namespaces.services.endpoints.list
       parameters:
-        - description: |-
-            Required. The resource name of the service whose endpoints we'd like to
+        - description: >-
+            Required. The resource name of the service whose endpoints we'd like
+            to
+
             list.
           in: path
           name: parent
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
-        - description: |-
-            Optional. The next_page_token value returned from a previous List request,
-            if any.
-          in: query
-          name: pageToken
-          schema:
-            type: string
-        - description: Optional. The order to list result by.
-          in: query
-          name: orderBy
-          schema:
-            type: string
-        - description: Optional. The maximum number of items to return.
-          in: query
-          name: pageSize
-          schema:
-            type: integer
-        - description: |-
+        - description: >-
             Optional. The filter to list result by.
 
+
             General filter string syntax:
+
             <field> <operator> <value> (<logical connector>)
+
             <field> can be "name", "address", "port" or "metadata.<key>" for map field.
+
             <operator> can be "<, >, <=, >=, !=, =, :". Of which ":" means HAS, and
+
             is roughly the same as "=".
+
             <value> must be the same data type as field.
+
             <logical connector> can be "AND, OR, NOT".
 
+
             Examples of valid filters:
+
             * "metadata.owner" returns Endpoints that have a label with the key "owner"
               this is the same as "metadata:owner".
             * "metadata.protocol=gRPC" returns Endpoints that have key/value
               "protocol=gRPC".
             * "address=192.108.1.105" returns Endpoints that have this address.
+
             * "port>8080" returns Endpoints that have port number larger than 8080.
+
             * "name>projects/my-project/locations/us-east/namespaces/my-namespace/services/my-service/endpoints/endpoint-c"
               returns Endpoints that have name that is alphabetically later than the
               string, so "endpoint-e" will be returned but "endpoint-a" will not be.
@@ -278,48 +287,76 @@ paths:
           name: filter
           schema:
             type: string
+        - description: Optional. The order to list result by.
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: Optional. The maximum number of items to return.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: >-
+            Optional. The next_page_token value returned from a previous List
+            request,
+
+            if any.
+          in: query
+          name: pageToken
+          schema:
+            type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ListEndpointsResponse'
+                $ref: "#/components/schemas/ListEndpointsResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
-      description: 'Creates a endpoint, and returns the new Endpoint.'
+      description: Creates a endpoint, and returns the new Endpoint.
       operationId: servicedirectory.projects.locations.namespaces.services.endpoints.create
       parameters:
-        - description: Required. The resource name of the service that this endpoint provides.
+        - description: Required. The resource name of the service that this endpoint
+            provides.
           in: path
           name: parent
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
-        - description: |-
-            Required. The Resource ID must be 1-63 characters long, and comply with
+        - description: >-
+            Required. The Resource ID must be 1-63 characters long, and comply
+            with
+
             <a href="https://www.ietf.org/rfc/rfc1035.txt" target="_blank">RFC1035</a>.
+
             Specifically, the name must be 1-63 characters long and match the regular
+
             expression `[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?` which means the first
+
             character must be a lowercase letter, and all following characters must
+
             be a dash, lowercase letter, or digit, except the last character, which
+
             cannot be a dash.
           in: query
           name: endpointId
@@ -329,64 +366,57 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Endpoint'
+              $ref: "#/components/schemas/Endpoint"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Endpoint'
+                $ref: "#/components/schemas/Endpoint"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1beta1/{parent}/namespaces':
+  "/v1beta1/{parent}/namespaces":
     get:
       description: Lists all namespaces.
       operationId: servicedirectory.projects.locations.namespaces.list
       parameters:
-        - description: |-
-            Required. The resource name of the project and location whose namespaces we'd like to
+        - description: >-
+            Required. The resource name of the project and location whose
+            namespaces we'd like to
+
             list.
           in: path
           name: parent
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
-        - description: 'Optional. The next_page_token value returned from a previous List request, if any.'
-          in: query
-          name: pageToken
-          schema:
-            type: string
-        - description: |-
-            Optional. The order to list result by.
-
-            General order by string syntax:
-            <field> (<asc|desc>) (,)
-            <field> allows values {"name"}
-            <asc/desc> ascending or descending order by <field>. If this is left
-            blank, "asc" is used.
-            Note that an empty order_by string result in default order, which is order
-            by name in ascending order.
-          in: query
-          name: orderBy
-          schema:
-            type: string
-        - description: |-
+        - description: >-
             Optional. The filter to list result by.
 
+
             General filter string syntax:
+
             <field> <operator> <value> (<logical connector>)
+
             <field> can be "name", or "labels.<key>" for map field.
+
             <operator> can be "<, >, <=, >=, !=, =, :". Of which ":" means HAS, and
+
             is roughly the same as "=".
+
             <value> must be the same data type as field.
+
             <logical connector> can be "AND, OR, NOT".
 
+
             Examples of valid filters:
+
             * "labels.owner" returns Namespaces that have a label with the key "owner"
               this is the same as "labels:owner".
             * "labels.protocol=gRPC" returns Namespaces that have key/value
@@ -403,55 +433,92 @@ paths:
           name: filter
           schema:
             type: string
+        - description: >-
+            Optional. The order to list result by.
+
+
+            General order by string syntax:
+
+            <field> (<asc|desc>) (,)
+
+            <field> allows values {"name"}
+
+            <asc/desc> ascending or descending order by <field>. If this is left
+
+            blank, "asc" is used.
+
+            Note that an empty order_by string result in default order, which is order
+
+            by name in ascending order.
+          in: query
+          name: orderBy
+          schema:
+            type: string
         - description: Optional. The maximum number of items to return.
           in: query
           name: pageSize
           schema:
             type: integer
+        - description: Optional. The next_page_token value returned from a previous List
+            request, if any.
+          in: query
+          name: pageToken
+          schema:
+            type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ListNamespacesResponse'
+                $ref: "#/components/schemas/ListNamespacesResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
-      description: 'Creates a namespace, and returns the new Namespace.'
+      description: Creates a namespace, and returns the new Namespace.
       operationId: servicedirectory.projects.locations.namespaces.create
       parameters:
-        - description: |-
-            Required. The resource name of the project and location the namespace
+        - description: >-
+            Required. The resource name of the project and location the
+            namespace
+
             will be created in.
           in: path
           name: parent
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
-        - description: |-
-            Required. The Resource ID must be 1-63 characters long, and comply with
+        - description: >-
+            Required. The Resource ID must be 1-63 characters long, and comply
+            with
+
             <a href="https://www.ietf.org/rfc/rfc1035.txt" target="_blank">RFC1035</a>.
+
             Specifically, the name must be 1-63 characters long and match the regular
+
             expression `[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?` which means the first
+
             character must be a lowercase letter, and all following characters must
+
             be a dash, lowercase letter, or digit, except the last character, which
+
             cannot be a dash.
           in: query
           name: namespaceId
@@ -461,20 +528,22 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Namespace'
+              $ref: "#/components/schemas/Namespace"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Namespace'
+                $ref: "#/components/schemas/Namespace"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1beta1/{parent}/services':
+  "/v1beta1/{parent}/services":
     get:
       description: Lists all services belonging to a namespace.
       operationId: servicedirectory.projects.locations.namespaces.services.list
@@ -487,31 +556,27 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
-        - description: |-
-            Optional. The next_page_token value returned from a previous List request,
-            if any.
-          in: query
-          name: pageToken
-          schema:
-            type: string
-        - description: Optional. The maximum number of items to return.
-          in: query
-          name: pageSize
-          schema:
-            type: integer
-        - description: |-
+        - description: >-
             Optional. The filter to list result by.
 
+
             General filter string syntax:
+
             <field> <operator> <value> (<logical connector>)
+
             <field> can be "name", or "metadata.<key>" for map field.
+
             <operator> can be "<, >, <=, >=, !=, =, :". Of which ":" means HAS, and
+
             is roughly the same as "=".
+
             <value> must be the same data type as field.
+
             <logical connector> can be "AND, OR, NOT".
 
+
             Examples of valid filters:
+
             * "metadata.owner" returns Services that have a label with the key "owner"
               this is the same as "metadata:owner".
             * "metadata.protocol=gRPC" returns Services that have key/value
@@ -533,48 +598,71 @@ paths:
           name: orderBy
           schema:
             type: string
+        - description: Optional. The maximum number of items to return.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: >-
+            Optional. The next_page_token value returned from a previous List
+            request,
+
+            if any.
+          in: query
+          name: pageToken
+          schema:
+            type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ListServicesResponse'
+                $ref: "#/components/schemas/ListServicesResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
-      description: 'Creates a service, and returns the new Service.'
+      description: Creates a service, and returns the new Service.
       operationId: servicedirectory.projects.locations.namespaces.services.create
       parameters:
-        - description: Required. The resource name of the namespace this service will belong to.
+        - description: Required. The resource name of the namespace this service will
+            belong to.
           in: path
           name: parent
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
-        - description: |-
-            Required. The Resource ID must be 1-63 characters long, and comply with
+        - description: >-
+            Required. The Resource ID must be 1-63 characters long, and comply
+            with
+
             <a href="https://www.ietf.org/rfc/rfc1035.txt" target="_blank">RFC1035</a>.
+
             Specifically, the name must be 1-63 characters long and match the regular
+
             expression `[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?` which means the first
+
             character must be a lowercase letter, and all following characters must
+
             be a dash, lowercase letter, or digit, except the last character, which
+
             cannot be a dash.
           in: query
           name: serviceId
@@ -584,146 +672,155 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Service'
+              $ref: "#/components/schemas/Service"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Service'
+                $ref: "#/components/schemas/Service"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1beta1/{resource}:getIamPolicy':
+  "/v1beta1/{resource}:getIamPolicy":
     parameters:
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: Gets the IAM Policy for a resource (namespace or service only).
       operationId: servicedirectory.projects.locations.namespaces.services.getIamPolicy
       parameters:
-        - description: |-
+        - description: >-
             REQUIRED: The resource for which the policy is being requested.
+
             See the operation documentation for the appropriate value for this field.
           in: path
           name: resource
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/GetIamPolicyRequest'
+              $ref: "#/components/schemas/GetIamPolicyRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Policy'
+                $ref: "#/components/schemas/Policy"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1beta1/{resource}:setIamPolicy':
+  "/v1beta1/{resource}:setIamPolicy":
     parameters:
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: Sets the IAM Policy for a resource (namespace or service only).
       operationId: servicedirectory.projects.locations.namespaces.services.setIamPolicy
       parameters:
-        - description: |-
+        - description: >-
             REQUIRED: The resource for which the policy is being specified.
+
             See the operation documentation for the appropriate value for this field.
           in: path
           name: resource
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SetIamPolicyRequest'
+              $ref: "#/components/schemas/SetIamPolicyRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Policy'
+                $ref: "#/components/schemas/Policy"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1beta1/{resource}:testIamPermissions':
+  "/v1beta1/{resource}:testIamPermissions":
     parameters:
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: Tests IAM permissions for a resource (namespace or service only).
       operationId: servicedirectory.projects.locations.namespaces.services.testIamPermissions
       parameters:
-        - description: |-
-            REQUIRED: The resource for which the policy detail is being requested.
+        - description: >-
+            REQUIRED: The resource for which the policy detail is being
+            requested.
+
             See the operation documentation for the appropriate value for this field.
           in: path
           name: resource
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/TestIamPermissionsRequest'
+              $ref: "#/components/schemas/TestIamPermissionsRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/TestIamPermissionsResponse'
+                $ref: "#/components/schemas/TestIamPermissionsResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
 components:
@@ -734,8 +831,8 @@ components:
       name: $.xgafv
       schema:
         enum:
-          - '1'
-          - '2'
+          - "1"
+          - "2"
         type: string
     access_token:
       description: OAuth access token.
@@ -748,7 +845,6 @@ components:
       in: query
       name: alt
       schema:
-        default: json
         enum:
           - json
           - media
@@ -767,7 +863,9 @@ components:
       schema:
         type: string
     key:
-      description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+      description: API key. Your API key identifies your project and provides you with
+        API access, quota, and reports. Required unless you provide an OAuth 2.0
+        token.
       in: query
       name: key
       schema:
@@ -783,55 +881,61 @@ components:
       in: query
       name: prettyPrint
       schema:
-        default: true
         type: boolean
     quotaUser:
-      description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.'
+      description: Available to use for quota purposes for server-side applications.
+        Can be any arbitrary string assigned to a user, but should not exceed 40
+        characters.
       in: query
       name: quotaUser
       schema:
         type: string
     uploadType:
-      description: 'Legacy upload protocol for media (e.g. "media", "multipart").'
+      description: Legacy upload protocol for media (e.g. "media", "multipart").
       in: query
       name: uploadType
       schema:
         type: string
     upload_protocol:
-      description: 'Upload protocol for media (e.g. "raw", "multipart").'
+      description: Upload protocol for media (e.g. "raw", "multipart").
       in: query
       name: upload_protocol
       schema:
         type: string
-  requestBodies:
-    Endpoint:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Endpoint'
   schemas:
     Binding:
       description: Associates `members` with a `role`.
       properties:
         condition:
-          $ref: '#/components/schemas/Expr'
-          description: |-
+          $ref: "#/components/schemas/Expr"
+          description: >-
             The condition that is associated with this binding.
 
+
             If the condition evaluates to `true`, then this binding applies to the
+
             current request.
 
+
             If the condition evaluates to `false`, then this binding does not apply to
+
             the current request. However, a different role binding might grant the same
+
             role to one or more of the members in this binding.
 
+
             To learn which resources support conditions in their IAM policies, see the
+
             [IAM
+
             documentation](https://cloud.google.com/iam/help/conditions/resource-policies).
         members:
-          description: |+
-            Specifies the identities requesting access for a Cloud Platform resource.
+          description: >+
+            Specifies the identities requesting access for a Cloud Platform
+            resource.
+
             `members` can have the following values:
+
 
             * `allUsers`: A special identifier that represents anyone who is
                on the internet; with or without a Google account.
@@ -883,9 +987,11 @@ components:
           type: string
       type: object
     Empty:
-      description: |-
+      description: >-
         A generic empty message that you can re-use to avoid defining duplicated
+
         empty messages in your APIs. A typical example is to use it as the request
+
         or the response type of an API method. For instance:
 
             service Foo {
@@ -915,10 +1021,14 @@ components:
         metadata:
           additionalProperties:
             type: string
-          description: |-
-            Optional. Metadata for the endpoint. This data can be consumed by service
+          description: >-
+            Optional. Metadata for the endpoint. This data can be consumed by
+            service
+
             clients.  The entire metadata dictionary may contain up to 512 characters,
+
             spread accoss all key-value pairs. Metadata that goes beyond any these
+
             limits will be rejected.
           type: object
         name:
@@ -927,15 +1037,18 @@ components:
             'projects/*/locations/*/namespaces/*/services/*/endpoints/*'.
           type: string
         port:
-          description: 'Optional. Service Directory will reject values outside of [0, 65535].'
+          description: Optional. Service Directory will reject values outside of [0, 65535].
           format: int32
           type: integer
       type: object
     Expr:
-      description: |-
+      description: >-
         Represents a textual expression in the Common Expression Language (CEL)
+
         syntax. CEL is a C-like expression language. The syntax and semantics of CEL
+
         are documented at https://github.com/google/cel-spec.
+
 
         Example (Comparison):
 
@@ -962,7 +1075,9 @@ components:
             expression: "'New message received at ' + string(document.create_time)"
 
         The exact variables and functions that may be referenced within an expression
+
         are determined by the service that evaluates it. See the service
+
         documentation for additional information.
       properties:
         description:
@@ -971,8 +1086,10 @@ components:
             describes the expression, e.g. when hovered over it in a UI.
           type: string
         expression:
-          description: |-
-            Textual representation of an expression in Common Expression Language
+          description: >-
+            Textual representation of an expression in Common Expression
+            Language
+
             syntax.
           type: string
         location:
@@ -991,7 +1108,7 @@ components:
       description: Request message for `GetIamPolicy` method.
       properties:
         options:
-          $ref: '#/components/schemas/GetPolicyOptions'
+          $ref: "#/components/schemas/GetPolicyOptions"
           description: |-
             OPTIONAL: A `GetPolicyOptions` object for specifying options to
             `GetIamPolicy`.
@@ -1000,18 +1117,26 @@ components:
       description: Encapsulates settings provided to GetIamPolicy.
       properties:
         requestedPolicyVersion:
-          description: |-
+          description: >-
             Optional. The policy format version to be returned.
 
+
             Valid values are 0, 1, and 3. Requests specifying an invalid value will be
+
             rejected.
 
+
             Requests for policies with any conditional bindings must specify version 3.
+
             Policies without any conditional bindings may specify any valid value or
+
             leave the field unset.
 
+
             To learn which resources support conditions in their IAM policies, see the
+
             [IAM
+
             documentation](https://cloud.google.com/iam/help/conditions/resource-policies).
           format: int32
           type: integer
@@ -1022,7 +1147,7 @@ components:
         endpoints:
           description: The list of endpoints.
           items:
-            $ref: '#/components/schemas/Endpoint'
+            $ref: "#/components/schemas/Endpoint"
           type: array
         nextPageToken:
           description: |-
@@ -1036,7 +1161,7 @@ components:
         locations:
           description: A list of locations that matches the specified filter in the request.
           items:
-            $ref: '#/components/schemas/Location'
+            $ref: "#/components/schemas/Location"
           type: array
         nextPageToken:
           description: The standard List next-page token.
@@ -1048,7 +1173,7 @@ components:
         namespaces:
           description: The list of namespaces.
           items:
-            $ref: '#/components/schemas/Namespace'
+            $ref: "#/components/schemas/Namespace"
           type: array
         nextPageToken:
           description: |-
@@ -1067,7 +1192,7 @@ components:
         services:
           description: The list of services.
           items:
-            $ref: '#/components/schemas/Service'
+            $ref: "#/components/schemas/Service"
           type: array
       type: object
     Location:
@@ -1092,13 +1217,17 @@ components:
         metadata:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
-          description: |-
-            Service-specific metadata. For example the available capacity at the given
+          description: >-
+            Service-specific metadata. For example the available capacity at the
+            given
+
             location.
           type: object
         name:
-          description: |-
-            Resource name for the location, which may vary between implementations.
+          description: >-
+            Resource name for the location, which may vary between
+            implementations.
+
             For example: `"projects/example-project/locations/us-east1"`
           type: string
       type: object
@@ -1111,9 +1240,11 @@ components:
         labels:
           additionalProperties:
             type: string
-          description: |-
+          description: >-
             Optional. Resource labels associated with this Namespace.
+
             No more than 64 user labels can be associated with a given resource.  Label
+
             keys and values can be no longer than 63 characters.
           type: object
         name:
@@ -1123,23 +1254,36 @@ components:
           type: string
       type: object
     Policy:
-      description: |-
+      description: >-
         An Identity and Access Management (IAM) policy, which specifies access
+
         controls for Google Cloud resources.
 
 
+
         A `Policy` is a collection of `bindings`. A `binding` binds one or more
+
         `members` to a single `role`. Members can be user accounts, service accounts,
+
         Google groups, and domains (such as G Suite). A `role` is a named list of
+
         permissions; each `role` can be an IAM predefined role or a user-created
+
         custom role.
 
+
         For some types of Google Cloud resources, a `binding` can also specify a
+
         `condition`, which is a logical expression that allows access to a resource
+
         only if the expression evaluates to `true`. A condition can add constraints
+
         based on attributes of the request, the resource, or both. To learn which
+
         resources support conditions in their IAM policies, see the
+
         [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies).
+
 
         **JSON example:**
 
@@ -1190,57 +1334,86 @@ components:
             - version: 3
 
         For a description of IAM and its features, see the
+
         [IAM documentation](https://cloud.google.com/iam/docs/).
       properties:
         bindings:
-          description: |-
-            Associates a list of `members` to a `role`. Optionally, may specify a
+          description: >-
+            Associates a list of `members` to a `role`. Optionally, may specify
+            a
+
             `condition` that determines how and when the `bindings` are applied. Each
+
             of the `bindings` must contain at least one member.
           items:
-            $ref: '#/components/schemas/Binding'
+            $ref: "#/components/schemas/Binding"
           type: array
         etag:
-          description: |-
+          description: >-
             `etag` is used for optimistic concurrency control as a way to help
+
             prevent simultaneous updates of a policy from overwriting each other.
+
             It is strongly suggested that systems make use of the `etag` in the
+
             read-modify-write cycle to perform policy updates in order to avoid race
+
             conditions: An `etag` is returned in the response to `getIamPolicy`, and
+
             systems are expected to put that etag in the request to `setIamPolicy` to
+
             ensure that their change will be applied to the same version of the policy.
 
+
             **Important:** If you use IAM Conditions, you must include the `etag` field
+
             whenever you call `setIamPolicy`. If you omit this field, then IAM allows
+
             you to overwrite a version `3` policy with a version `1` policy, and all of
+
             the conditions in the version `3` policy are lost.
           format: byte
           type: string
         version:
-          description: |-
+          description: >-
             Specifies the format of the policy.
 
+
             Valid values are `0`, `1`, and `3`. Requests that specify an invalid value
+
             are rejected.
 
+
             Any operation that affects conditional role bindings must specify version
+
             `3`. This requirement applies to the following operations:
 
+
             * Getting a policy that includes a conditional role binding
+
             * Adding a conditional role binding to a policy
+
             * Changing a conditional role binding in a policy
+
             * Removing any role binding, with or without a condition, from a policy
               that includes conditions
 
             **Important:** If you use IAM Conditions, you must include the `etag` field
+
             whenever you call `setIamPolicy`. If you omit this field, then IAM allows
+
             you to overwrite a version `3` policy with a version `1` policy, and all of
+
             the conditions in the version `3` policy are lost.
 
+
             If a policy does not include any conditions, operations on that policy may
+
             specify any valid version or leave the field unset.
 
+
             To learn which resources support conditions in their IAM policies, see the
+
             [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies).
           format: int32
           type: integer
@@ -1251,18 +1424,28 @@ components:
         Looks up a service by its name, returns the service and its endpoints.
       properties:
         endpointFilter:
-          description: |-
-            Optional. The filter applied to the endpoints of the resolved service.
+          description: >-
+            Optional. The filter applied to the endpoints of the resolved
+            service.
+
 
             General filter string syntax:
+
             <field> <operator> <value> (<logical connector>)
+
             <field> can be "name" or "metadata.<key>" for map field.
+
             <operator> can be "<, >, <=, >=, !=, =, :". Of which ":" means HAS and is
+
             roughly the same as "=".
+
             <value> must be the same data type as the field.
+
             <logical connector> can be "AND, OR, NOT".
 
+
             Examples of valid filters:
+
             * "metadata.owner" returns Endpoints that have a label with the
               key "owner", this is the same as "metadata:owner"
             * "metadata.protocol=gRPC" returns Endpoints that have key/value
@@ -1272,9 +1455,12 @@ components:
               "sd" AND have the key/value foo=bar.
           type: string
         maxEndpoints:
-          description: |-
-            Optional. The maximum number of endpoints to return. Defaults to 25. Maximum is 100.
+          description: >-
+            Optional. The maximum number of endpoints to return. Defaults to 25.
+            Maximum is 100.
+
             If a value less than one is specified, the Default is used.
+
             If a value greater than the Maximum is specified, the Maximum is used.
           format: int32
           type: integer
@@ -1283,7 +1469,7 @@ components:
       description: The response message for LookupService.ResolveService.
       properties:
         service:
-          $ref: '#/components/schemas/Service'
+          $ref: "#/components/schemas/Service"
       type: object
     Service:
       description: |-
@@ -1293,19 +1479,25 @@ components:
         added to it.
       properties:
         endpoints:
-          description: |-
-            Output only. Endpoints associated with this service. Returned on LookupService.Resolve.
+          description: >-
+            Output only. Endpoints associated with this service. Returned on
+            LookupService.Resolve.
+
             Control plane clients should use RegistrationService.ListEndpoints.
           items:
-            $ref: '#/components/schemas/Endpoint'
+            $ref: "#/components/schemas/Endpoint"
           type: array
         metadata:
           additionalProperties:
             type: string
-          description: |-
-            Optional. Metadata for the service. This data can be consumed by service
+          description: >-
+            Optional. Metadata for the service. This data can be consumed by
+            service
+
             clients.  The entire metadata dictionary may contain up to 2000 characters,
+
             spread across all key-value pairs. Metadata that goes beyond any these
+
             limits will be rejected.
           type: object
         name:
@@ -1318,21 +1510,28 @@ components:
       description: Request message for `SetIamPolicy` method.
       properties:
         policy:
-          $ref: '#/components/schemas/Policy'
-          description: |-
-            REQUIRED: The complete policy to be applied to the `resource`. The size of
+          $ref: "#/components/schemas/Policy"
+          description: >-
+            REQUIRED: The complete policy to be applied to the `resource`. The
+            size of
+
             the policy is limited to a few 10s of KB. An empty policy is a
+
             valid policy but certain Cloud Platform services (such as Projects)
+
             might reject them.
       type: object
     TestIamPermissionsRequest:
       description: Request message for `TestIamPermissions` method.
       properties:
         permissions:
-          description: |-
+          description: >-
             The set of permissions to check for the `resource`. Permissions with
+
             wildcards (such as '*' or 'storage.*') are not allowed. For more
+
             information see
+
             [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
           items:
             type: string
@@ -1351,10 +1550,19 @@ components:
       type: object
   securitySchemes:
     Oauth2:
-      description: Oauth 2.0 authentication
+      description: Oauth 2.0 implicit authentication
       flows:
         implicit:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+      type: oauth2
+    Oauth2c:
+      description: Oauth 2.0 authorizationCode authentication
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          scopes:
+            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+          tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

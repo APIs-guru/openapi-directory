@@ -1,44 +1,48 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://pagespeedonline.googleapis.com/'
+  - url: https://pagespeedonline.googleapis.com/
 info:
   contact:
     name: Google
-    url: 'https://google.com'
-  description: |
+    url: https://google.com
+    x-twitter: youtube
+  description: >
     The PageSpeed Insights API lets you analyze the performance of your website with a simple API.  It offers tailored suggestions for how you can optimize your site, and lets you easily integrate PageSpeed Insights analysis into your development tools and workflow.
   license:
     name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
-  title: PageSpeed Insights
+    url: http://creativecommons.org/licenses/by/3.0/
+  termsOfService: https://developers.google.com/terms/
+  title: PageSpeed Insights API
   version: v5
   x-apiClientRegistration:
-    url: 'https://console.developers.google.com'
+    url: https://console.developers.google.com
   x-apisguru-categories:
-    - tools
+    - analytics
+    - media
   x-logo:
-    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.31
       format: google
-      url: 'https://www.googleapis.com/discovery/v1/apis/pagespeedonline/v5/rest'
+      url: https://www.googleapis.com/discovery/v1/apis/pagespeedonline/v5/rest
       version: v1
   x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: pagespeedonline
 externalDocs:
-  url: 'https://developers.google.com/speed/docs/insights/v5/about'
+  url: https://developers.google.com/speed/docs/insights/v5/about
 tags:
   - name: pagespeedapi
 paths:
   /pagespeedonline/v5/runPagespeed:
     get:
-      description: |-
+      description: >-
         Runs PageSpeed analysis on the page at the specified URL, and returns
+
         PageSpeed scores, a list of suggestions to make that page faster, and other
+
         information.
       operationId: pagespeedonline.pagespeedapi.runpagespeed
       parameters:
@@ -47,8 +51,9 @@ paths:
           name: captchaToken
           schema:
             type: string
-        - description: |-
+        - description: >-
             A Lighthouse category to run; if none are given, only Performance category
+
             will be run
           explode: true
           in: query
@@ -64,13 +69,15 @@ paths:
                 - SEO
               type: string
             type: array
+          style: form
         - description: The locale used to localize formatted results
           in: query
           name: locale
           schema:
             type: string
-        - description: |-
+        - description: >-
             The analysis strategy (desktop or mobile) to use, and desktop is the
+
             default
           in: query
           name: strategy
@@ -96,11 +103,11 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/PagespeedApiPagespeedResponseV5'
+                $ref: "#/components/schemas/PagespeedApiPagespeedResponseV5"
           description: Successful response
       security:
         - Oauth2:
@@ -110,17 +117,17 @@ paths:
       tags:
         - pagespeedapi
     parameters:
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
 components:
   parameters:
     _.xgafv:
@@ -129,8 +136,8 @@ components:
       name: $.xgafv
       schema:
         enum:
-          - '1'
-          - '2'
+          - "1"
+          - "2"
         type: string
     access_token:
       description: OAuth access token.
@@ -143,7 +150,6 @@ components:
       in: query
       name: alt
       schema:
-        default: json
         enum:
           - json
           - media
@@ -162,7 +168,7 @@ components:
       schema:
         type: string
     key:
-      description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -178,30 +184,30 @@ components:
       in: query
       name: prettyPrint
       schema:
-        default: true
         type: boolean
     quotaUser:
-      description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.'
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
       in: query
       name: quotaUser
       schema:
         type: string
     uploadType:
-      description: 'Legacy upload protocol for media (e.g. "media", "multipart").'
+      description: Legacy upload protocol for media (e.g. "media", "multipart").
       in: query
       name: uploadType
       schema:
         type: string
     upload_protocol:
-      description: 'Upload protocol for media (e.g. "raw", "multipart").'
+      description: Upload protocol for media (e.g. "raw", "multipart").
       in: query
       name: upload_protocol
       schema:
         type: string
   schemas:
     AuditRefs:
-      description: |-
+      description: >-
         A light reference to an audit by id, used to group and weight audits in a
+
         given category.
       properties:
         group:
@@ -216,9 +222,11 @@ components:
           type: number
       type: object
     Bucket:
-      description: |-
+      description: >-
         A proportion of data in the total distribution, bucketed by a min/max
+
         percentage. Each bucket's range is bounded by min <= x < max, In
+
         millisecond.
       properties:
         max:
@@ -238,25 +246,28 @@ components:
       description: The categories in a Lighthouse run.
       properties:
         accessibility:
-          $ref: '#/components/schemas/LighthouseCategoryV5'
-          description: 'The accessibility category, containing all accessibility related audits.'
+          $ref: "#/components/schemas/LighthouseCategoryV5"
+          description: The accessibility category, containing all accessibility related audits.
         best-practices:
-          $ref: '#/components/schemas/LighthouseCategoryV5'
-          description: |-
+          $ref: "#/components/schemas/LighthouseCategoryV5"
+          description: >-
             The best practices category, containing all best practices related
+
             audits.
         performance:
-          $ref: '#/components/schemas/LighthouseCategoryV5'
-          description: 'The performance category, containing all performance related audits.'
+          $ref: "#/components/schemas/LighthouseCategoryV5"
+          description: The performance category, containing all performance related audits.
         pwa:
-          $ref: '#/components/schemas/LighthouseCategoryV5'
-          description: |-
+          $ref: "#/components/schemas/LighthouseCategoryV5"
+          description: >-
             The Progressive-Web-App (PWA) category, containing all pwa related
+
             audits.
         seo:
-          $ref: '#/components/schemas/LighthouseCategoryV5'
-          description: |-
+          $ref: "#/components/schemas/LighthouseCategoryV5"
+          description: >-
             The Search-Engine-Optimization (SEO) category, containing all seo related
+
             audits.
       type: object
     CategoryGroupV5:
@@ -273,8 +284,9 @@ components:
       description: Message containing the configuration settings for the Lighthouse run.
       properties:
         channel:
-          description: |-
+          description: >-
             How Lighthouse was run, e.g. from the Chrome extension or from the npm
+
             module.
           type: string
         emulatedFormFactor:
@@ -304,9 +316,10 @@ components:
       description: Message containing the i18n data for the LHR - Version 1.
       properties:
         rendererFormattedStrings:
-          $ref: '#/components/schemas/RendererFormattedStrings'
-          description: |-
+          $ref: "#/components/schemas/RendererFormattedStrings"
+          description: >-
             Internationalized strings that are formatted to the locale in
+
             configSettings.
       type: object
     LighthouseAuditResultV5:
@@ -333,14 +346,16 @@ components:
           description: The audit's id.
           type: string
         numericValue:
-          description: |-
+          description: >-
             A numeric value that has a meaning specific to the audit, e.g. the number
+
             of nodes in the DOM or the timestamp of a specific load event. More
+
             information can be found in the audit details, if present.
           format: double
           type: number
         score:
-          description: 'The score of the audit, can be null.'
+          description: The score of the audit, can be null.
         scoreDisplayMode:
           description: The enumerated score display mode.
           type: string
@@ -348,7 +363,7 @@ components:
           description: The human readable title.
           type: string
         warnings:
-          description: 'Possible warnings that occurred in the audit, can be null.'
+          description: Possible warnings that occurred in the audit, can be null.
       type: object
     LighthouseCategoryV5:
       description: A Lighthouse category.
@@ -356,7 +371,7 @@ components:
         auditRefs:
           description: An array of references to all the audit members of this category.
           items:
-            $ref: '#/components/schemas/AuditRefs'
+            $ref: "#/components/schemas/AuditRefs"
           type: array
         description:
           description: A more detailed description of the category and its importance.
@@ -368,8 +383,9 @@ components:
           description: A description for the manual audits in the category.
           type: string
         score:
-          description: |-
+          description: >-
             The overall score of the category, the weighted average of all its audits.
+
             (The category's score, can be null.)
         title:
           description: The human-friendly name of the category.
@@ -380,22 +396,22 @@ components:
       properties:
         audits:
           additionalProperties:
-            $ref: '#/components/schemas/LighthouseAuditResultV5'
+            $ref: "#/components/schemas/LighthouseAuditResultV5"
           description: Map of audits in the LHR.
           type: object
         categories:
-          $ref: '#/components/schemas/Categories'
+          $ref: "#/components/schemas/Categories"
           description: Map of categories in the LHR.
         categoryGroups:
           additionalProperties:
-            $ref: '#/components/schemas/CategoryGroupV5'
+            $ref: "#/components/schemas/CategoryGroupV5"
           description: Map of category groups in the LHR.
           type: object
         configSettings:
-          $ref: '#/components/schemas/ConfigSettings'
+          $ref: "#/components/schemas/ConfigSettings"
           description: The configuration settings for this LHR.
         environment:
-          $ref: '#/components/schemas/Environment'
+          $ref: "#/components/schemas/Environment"
           description: Environment settings that were used when making this LHR.
         fetchTime:
           description: The time that this run was fetched.
@@ -404,7 +420,7 @@ components:
           description: The final resolved url that was audited.
           type: string
         i18n:
-          $ref: '#/components/schemas/I18n'
+          $ref: "#/components/schemas/I18n"
           description: The internationalization strings that are required to render the LHR.
         lighthouseVersion:
           description: The lighthouse version that was used to generate this LHR.
@@ -413,21 +429,22 @@ components:
           description: The original requested url.
           type: string
         runWarnings:
-          description: 'List of all run warnings in the LHR.  Will always output to at least `[]`.'
+          description: List of all run warnings in the LHR.  Will always output to at least `[]`.
           items: {}
           type: array
         runtimeError:
-          $ref: '#/components/schemas/RuntimeError'
-          description: |-
+          $ref: "#/components/schemas/RuntimeError"
+          description: >-
             A top-level error message that, if present, indicates a serious enough
+
             problem that this Lighthouse result may need to be discarded.
         stackPacks:
           description: The Stack Pack advice strings.
           items:
-            $ref: '#/components/schemas/StackPack'
+            $ref: "#/components/schemas/StackPack"
           type: array
         timing:
-          $ref: '#/components/schemas/Timing'
+          $ref: "#/components/schemas/Timing"
           description: Timing information for this LHR.
         userAgent:
           description: The user agent that was used to run this LHR.
@@ -437,16 +454,19 @@ components:
       description: The CrUX loading experience object that contains CrUX data breakdowns.
       properties:
         id:
-          description: 'The url, pattern or origin which the metrics are on.'
+          description: The url, pattern or origin which the metrics are on.
           type: string
         initial_url:
-          description: 'The requested URL, which may differ from the resolved "id".'
+          description: The requested URL, which may differ from the resolved "id".
           type: string
         metrics:
           additionalProperties:
-            $ref: '#/components/schemas/UserPageLoadMetricV5'
-          description: 'The map of <metrics, data>.'
+            $ref: "#/components/schemas/UserPageLoadMetricV5"
+          description: The map of <metrics, data>.
           type: object
+        origin_fallback:
+          description: True if the result is an origin fallback from a page, false otherwise.
+          type: boolean
         overall_category:
           description: The human readable speed "category" of the id.
           type: string
@@ -461,24 +481,25 @@ components:
           description: The captcha verify result
           type: string
         id:
-          description: |-
+          description: >-
             Canonicalized and final URL for the document, after following page
+
             redirects (if any).
           type: string
         kind:
           description: Kind of result.
           type: string
         lighthouseResult:
-          $ref: '#/components/schemas/LighthouseResultV5'
+          $ref: "#/components/schemas/LighthouseResultV5"
           description: Lighthouse response for the audit url as an object.
         loadingExperience:
-          $ref: '#/components/schemas/PagespeedApiLoadingExperienceV5'
+          $ref: "#/components/schemas/PagespeedApiLoadingExperienceV5"
           description: Metrics of end users' page loading experience.
         originLoadingExperience:
-          $ref: '#/components/schemas/PagespeedApiLoadingExperienceV5'
+          $ref: "#/components/schemas/PagespeedApiLoadingExperienceV5"
           description: Metrics of the aggregated page loading experience of the origin
         version:
-          $ref: '#/components/schemas/PagespeedVersion'
+          $ref: "#/components/schemas/PagespeedVersion"
           description: The version of PageSpeed used to generate these results.
       type: object
     PagespeedVersion:
@@ -513,21 +534,24 @@ components:
           description: The title of the lab data performance category.
           type: string
         lsPerformanceCategoryDescription:
-          description: |-
+          description: >-
             The disclaimer shown under performance explaning that the network can
+
             vary.
           type: string
         manualAuditsGroupTitle:
-          description: |-
+          description: >-
             The heading shown above a list of audits that were not computerd in the
+
             run.
           type: string
         notApplicableAuditsGroupTitle:
           description: The heading shown above a list of audits that do not apply to a page.
           type: string
         opportunityResourceColumnLabel:
-          description: |-
+          description: >-
             The heading for the estimated page load savings opportunity of an
+
             audit.
           type: string
         opportunitySavingsColumnLabel:
@@ -537,11 +561,12 @@ components:
           description: The heading that is shown above a list of audits that are passing.
           type: string
         scorescaleLabel:
-          description: 'The label that explains the score gauges scale (0-49, 50-89, 90-100).'
+          description: The label that explains the score gauges scale (0-49, 50-89, 90-100).
           type: string
         toplevelWarningsMessage:
-          description: |-
+          description: >-
             The label shown preceding important warnings that may have invalidated
+
             an entire report.
           type: string
         varianceDisclaimer:
@@ -596,22 +621,24 @@ components:
         distributions:
           description: Metric distributions. Proportions should sum up to 1.
           items:
-            $ref: '#/components/schemas/Bucket'
+            $ref: "#/components/schemas/Bucket"
           type: array
         formFactor:
           description: Identifies the form factor of the metric being collected.
           type: string
         median:
-          description: 'The median number of the metric, in millisecond.'
+          description: The median number of the metric, in millisecond.
           format: int32
           type: integer
         metricId:
           description: Identifies the type of the metric.
           type: string
         percentile:
-          description: |-
+          description: >-
             We use this field to store certain percentile value for this metric.
+
             For v4, this field contains pc50.
+
             For v5, this field contains pc90.
           format: int32
           type: integer
@@ -621,16 +648,16 @@ components:
       description: Oauth 2.0 implicit authentication
       flows:
         implicit:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
             openid: Associate you with your personal info on Google
       type: oauth2
     Oauth2c:
-      description: Oauth 2.0 accessCode authentication
+      description: Oauth 2.0 authorizationCode authentication
       flows:
         authorizationCode:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
             openid: Associate you with your personal info on Google
-          tokenUrl: 'https://accounts.google.com/o/oauth2/token'
+          tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

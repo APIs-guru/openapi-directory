@@ -1,41 +1,41 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://www.googleapis.com/pagespeedonline/v4'
+  - url: https://www.googleapis.com/pagespeedonline/v4
 info:
   contact:
     name: Google
-    url: 'https://google.com'
+    url: https://google.com
   description: Analyzes the performance of a web page and provides tailored suggestions to make that page faster.
   license:
     name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
+    url: http://creativecommons.org/licenses/by/3.0/
+  termsOfService: https://developers.google.com/terms/
   title: PageSpeed Insights
   version: v4
   x-apiClientRegistration:
-    url: 'https://console.developers.google.com'
+    url: https://console.developers.google.com
   x-apisguru-categories:
     - tools
   x-logo:
-    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.31
       format: google
-      url: 'https://www.googleapis.com/discovery/v1/apis/pagespeedonline/v4/rest'
+      url: https://www.googleapis.com/discovery/v1/apis/pagespeedonline/v4/rest
       version: v1
   x-preferred: false
   x-providerName: googleapis.com
   x-serviceName: pagespeedonline
 externalDocs:
-  url: 'https://developers.google.com/speed/docs/insights/v4/getting-started'
+  url: https://developers.google.com/speed/docs/insights/v4/getting-started
 tags:
   - name: pagespeedapi
 paths:
   /runPagespeed:
     get:
-      description: 'Runs PageSpeed analysis on the page at the specified URL, and returns PageSpeed scores, a list of suggestions to make that page faster, and other information.'
+      description: Runs PageSpeed analysis on the page at the specified URL, and returns PageSpeed scores, a list of suggestions to make that page faster, and other information.
       operationId: pagespeedonline.pagespeedapi.runpagespeed
       parameters:
         - description: The URL to fetch and analyze
@@ -55,7 +55,7 @@ paths:
           name: locale
           schema:
             type: string
-        - description: 'A PageSpeed rule to run; if none are given, all rules are run'
+        - description: A PageSpeed rule to run; if none are given, all rules are run
           explode: true
           in: query
           name: rule
@@ -75,7 +75,7 @@ paths:
           schema:
             default: false
             type: boolean
-        - description: 'The analysis strategy (desktop or mobile) to use, and desktop is the default'
+        - description: The analysis strategy (desktop or mobile) to use, and desktop is the default
           in: query
           name: strategy
           schema:
@@ -94,22 +94,22 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/PagespeedApiPagespeedResponseV4'
+                $ref: "#/components/schemas/PagespeedApiPagespeedResponseV4"
           description: Successful response
       tags:
         - pagespeedapi
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
 components:
   parameters:
     alt:
@@ -128,7 +128,7 @@ components:
       schema:
         type: string
     key:
-      description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -166,10 +166,10 @@ components:
           items:
             properties:
               key:
-                description: 'The placeholder key for this arg, as a string.'
+                description: The placeholder key for this arg, as a string.
                 type: string
               rects:
-                description: 'The screen rectangles being referred to, with dimensions measured in CSS pixels. This is only ever used for SNAPSHOT_RECT arguments. If this is absent for a SNAPSHOT_RECT argument, it means that that argument refers to the entire snapshot.'
+                description: The screen rectangles being referred to, with dimensions measured in CSS pixels. This is only ever used for SNAPSHOT_RECT arguments. If this is absent for a SNAPSHOT_RECT argument, it means that that argument refers to the entire snapshot.
                 items:
                   properties:
                     height:
@@ -187,7 +187,7 @@ components:
                   type: object
                 type: array
               secondary_rects:
-                description: 'Secondary screen rectangles being referred to, with dimensions measured in CSS pixels. This is only ever used for SNAPSHOT_RECT arguments.'
+                description: Secondary screen rectangles being referred to, with dimensions measured in CSS pixels. This is only ever used for SNAPSHOT_RECT arguments.
                 items:
                   properties:
                     height:
@@ -205,15 +205,15 @@ components:
                   type: object
                 type: array
               type:
-                description: 'Type of argument. One of URL, STRING_LITERAL, INT_LITERAL, BYTES, DURATION, VERBATIM_STRING, PERCENTAGE, HYPERLINK, or SNAPSHOT_RECT.'
+                description: Type of argument. One of URL, STRING_LITERAL, INT_LITERAL, BYTES, DURATION, VERBATIM_STRING, PERCENTAGE, HYPERLINK, or SNAPSHOT_RECT.
                 type: string
               value:
-                description: 'Argument value, as a localized string.'
+                description: Argument value, as a localized string.
                 type: string
             type: object
           type: array
         format:
-          description: 'A localized format string with {{FOO}} placeholders, where ''FOO'' is the key of the argument whose value should be substituted. For HYPERLINK arguments, the format string will instead contain {{BEGIN_FOO}} and {{END_FOO}} for the argument with key ''FOO''.'
+          description: A localized format string with {{FOO}} placeholders, where 'FOO' is the key of the argument whose value should be substituted. For HYPERLINK arguments, the format string will instead contain {{BEGIN_FOO}} and {{END_FOO}} for the argument with key 'FOO'.
           type: string
       type: object
     PagespeedApiImageV4:
@@ -227,7 +227,7 @@ components:
           format: int32
           type: integer
         key:
-          description: 'Unique string key, if any, identifying this image.'
+          description: Unique string key, if any, identifying this image.
           type: string
         mime_type:
           description: Mime type of image data (e.g. "image/jpeg").
@@ -261,36 +261,36 @@ components:
           description: Localized PageSpeed results. Contains a ruleResults entry for each PageSpeed rule instantiated and run by the server.
           properties:
             locale:
-              description: 'The locale of the formattedResults, e.g. "en_US".'
+              description: The locale of the formattedResults, e.g. "en_US".
               type: string
             ruleResults:
               additionalProperties:
                 description: The enum-like identifier for this rule. For instance "EnableKeepAlive" or "AvoidCssImport". Not localized.
                 properties:
                   beta:
-                    description: 'Whether this rule is in ''beta''. Rules in beta are new rules that are being tested, which do not impact the overall score.'
+                    description: Whether this rule is in 'beta'. Rules in beta are new rules that are being tested, which do not impact the overall score.
                     type: boolean
                   groups:
-                    description: 'List of rule groups that this rule belongs to. Each entry in the list is one of "SPEED", "USABILITY", or "SECURITY".'
+                    description: List of rule groups that this rule belongs to. Each entry in the list is one of "SPEED", "USABILITY", or "SECURITY".
                     items:
                       type: string
                     type: array
                   localizedRuleName:
-                    description: 'Localized name of the rule, intended for presentation to a user.'
+                    description: Localized name of the rule, intended for presentation to a user.
                     type: string
                   ruleImpact:
-                    description: 'The impact (unbounded floating point value) that implementing the suggestions for this rule would have on making the page faster. Impact is comparable between rules to determine which rule''s suggestions would have a higher or lower impact on making a page faster. For instance, if enabling compression would save 1MB, while optimizing images would save 500kB, the enable compression rule would have 2x the impact of the image optimization rule, all other things being equal.'
+                    description: The impact (unbounded floating point value) that implementing the suggestions for this rule would have on making the page faster. Impact is comparable between rules to determine which rule's suggestions would have a higher or lower impact on making a page faster. For instance, if enabling compression would save 1MB, while optimizing images would save 500kB, the enable compression rule would have 2x the impact of the image optimization rule, all other things being equal.
                     format: double
                     type: number
                   summary:
-                    $ref: '#/components/schemas/PagespeedApiFormatStringV4'
-                    description: 'A brief summary description for the rule, indicating at a high level what should be done to follow the rule and what benefit can be gained by doing so.'
+                    $ref: "#/components/schemas/PagespeedApiFormatStringV4"
+                    description: A brief summary description for the rule, indicating at a high level what should be done to follow the rule and what benefit can be gained by doing so.
                   urlBlocks:
                     description: List of blocks of URLs. Each block may contain a heading and a list of URLs. Each URL may optionally include additional details.
                     items:
                       properties:
                         header:
-                          $ref: '#/components/schemas/PagespeedApiFormatStringV4'
+                          $ref: "#/components/schemas/PagespeedApiFormatStringV4"
                           description: Heading to be displayed with the list of URLs.
                         urls:
                           description: List of entries that provide information about URLs in the url block. Optional.
@@ -299,36 +299,36 @@ components:
                               details:
                                 description: List of entries that provide additional details about a single URL. Optional.
                                 items:
-                                  $ref: '#/components/schemas/PagespeedApiFormatStringV4'
+                                  $ref: "#/components/schemas/PagespeedApiFormatStringV4"
                                 type: array
                               result:
-                                $ref: '#/components/schemas/PagespeedApiFormatStringV4'
-                                description: 'A format string that gives information about the URL, and a list of arguments for that format string.'
+                                $ref: "#/components/schemas/PagespeedApiFormatStringV4"
+                                description: A format string that gives information about the URL, and a list of arguments for that format string.
                             type: object
                           type: array
                       type: object
                     type: array
                 type: object
-              description: 'Dictionary of formatted rule results, with one entry for each PageSpeed rule instantiated and run by the server.'
+              description: Dictionary of formatted rule results, with one entry for each PageSpeed rule instantiated and run by the server.
               type: object
           type: object
         id:
-          description: 'Canonicalized and final URL for the document, after following page redirects (if any).'
+          description: Canonicalized and final URL for the document, after following page redirects (if any).
           type: string
         invalidRules:
-          description: 'List of rules that were specified in the request, but which the server did not know how to instantiate.'
+          description: List of rules that were specified in the request, but which the server did not know how to instantiate.
           items:
             type: string
           type: array
         kind:
-          default: 'pagespeedonline#result'
+          default: pagespeedonline#result
           description: Kind of result.
           type: string
         loadingExperience:
           description: Metrics of end users' page loading experience.
           properties:
             id:
-              description: 'The url, pattern or origin which the metrics are on.'
+              description: The url, pattern or origin which the metrics are on.
               type: string
             initial_url:
               type: string
@@ -361,7 +361,7 @@ components:
               type: string
           type: object
         pageStats:
-          description: 'Summary statistics for the page, such as number of JavaScript bytes, number of HTML bytes, etc.'
+          description: Summary statistics for the page, such as number of JavaScript bytes, number of HTML bytes, etc.
           properties:
             cms:
               description: Content management system (CMS) used for the page.
@@ -427,7 +427,7 @@ components:
               format: int64
               type: string
             overTheWireResponseBytes:
-              description: 'Number of over-the-wire bytes, uses the default gzip compression strategy as an estimation.'
+              description: Number of over-the-wire bytes, uses the default gzip compression strategy as an estimation.
               format: int64
               type: string
             robotedUrls:
@@ -436,7 +436,7 @@ components:
                 type: string
               type: array
             textResponseBytes:
-              description: 'Number of uncompressed response bytes for text resources not covered by other statistics (i.e non-HTML, non-script, non-CSS resources) on the page.'
+              description: Number of uncompressed response bytes for text resources not covered by other statistics (i.e non-HTML, non-script, non-CSS resources) on the page.
               format: int64
               type: string
             totalRequestBytes:
@@ -460,22 +460,22 @@ components:
               pass:
                 type: boolean
               score:
-                description: 'The score (0-100) for this rule group, which indicates how much better a page could be in that category (e.g. how much faster, or how much more usable, or how much more secure). A high score indicates little room for improvement, while a lower score indicates more room for improvement.'
+                description: The score (0-100) for this rule group, which indicates how much better a page could be in that category (e.g. how much faster, or how much more usable, or how much more secure). A high score indicates little room for improvement, while a lower score indicates more room for improvement.
                 format: int32
                 type: integer
             type: object
           description: A map with one entry for each rule group in these results.
           type: object
         screenshot:
-          $ref: '#/components/schemas/PagespeedApiImageV4'
+          $ref: "#/components/schemas/PagespeedApiImageV4"
           description: Base64-encoded screenshot of the page that was analyzed.
         snapshots:
-          description: 'Additional base64-encoded screenshots of the page, in various partial render states.'
+          description: Additional base64-encoded screenshots of the page, in various partial render states.
           items:
-            $ref: '#/components/schemas/PagespeedApiImageV4'
+            $ref: "#/components/schemas/PagespeedApiImageV4"
           type: array
         title:
-          description: 'Title of the page, as displayed in the browser''s title bar.'
+          description: Title of the page, as displayed in the browser's title bar.
           type: string
         version:
           description: The version of PageSpeed used to generate these results.

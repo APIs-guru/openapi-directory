@@ -1,207 +1,248 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://homegraph.googleapis.com/'
+  - url: https://homegraph.googleapis.com/
 info:
   contact:
     name: Google
-    url: 'https://google.com'
+    url: https://google.com
+    x-twitter: youtube
+  description: ""
   license:
     name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
-  title: HomeGraph
+    url: http://creativecommons.org/licenses/by/3.0/
+  termsOfService: https://developers.google.com/terms/
+  title: HomeGraph API
   version: v1
   x-apiClientRegistration:
-    url: 'https://console.developers.google.com'
+    url: https://console.developers.google.com
+  x-apisguru-categories:
+    - analytics
+    - media
   x-logo:
-    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.31
       format: google
-      url: 'https://homegraph.googleapis.com/$discovery/rest?version=v1'
+      url: https://homegraph.googleapis.com/$discovery/rest?version=v1
       version: v1
   x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: homegraph
 externalDocs:
-  url: 'https://developers.google.com/actions/smarthome/create-app#request-sync'
+  url: https://developers.google.com/actions/smarthome/create-app#request-sync
 tags:
   - name: agentUsers
   - name: devices
 paths:
-  '/v1/devices:query':
+  /v1/devices:query:
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
     post:
-      description: |-
+      description: >-
         Gets the current states in Home Graph for the given set of the third-party
+
         user's devices.
 
+
         The third-party user's identity is passed in via the `agent_user_id`
+
         (see QueryRequest).
+
         This request must be authorized using service account credentials from your
+
         Actions console project.
       operationId: homegraph.devices.query
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/QueryRequest'
+              $ref: "#/components/schemas/QueryRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/QueryResponse'
+                $ref: "#/components/schemas/QueryResponse"
           description: Successful response
       tags:
         - devices
-  '/v1/devices:reportStateAndNotification':
+  /v1/devices:reportStateAndNotification:
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
     post:
-      description: |-
+      description: >-
         Reports device state and optionally sends device notifications.
+
         Called by your smart home Action when the state of a third-party device
+
         changes or you need to send a notification about the device.
+
         See [Implement Report
+
         State](https://developers.google.com/assistant/smarthome/develop/report-state)
+
         for more information.
 
+
         This method updates the device state according to its declared
+
         [traits](https://developers.google.com/assistant/smarthome/concepts/devices-traits).
+
         Publishing a new state value outside of these traits will result in an
+
         `INVALID_ARGUMENT` error response.
 
+
         The third-party user's identity is passed in via the `agent_user_id`
+
         (see ReportStateAndNotificationRequest).
+
         This request must be authorized using service account credentials from your
+
         Actions console project.
       operationId: homegraph.devices.reportStateAndNotification
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ReportStateAndNotificationRequest'
+              $ref: "#/components/schemas/ReportStateAndNotificationRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ReportStateAndNotificationResponse'
+                $ref: "#/components/schemas/ReportStateAndNotificationResponse"
           description: Successful response
       tags:
         - devices
-  '/v1/devices:requestSync':
+  /v1/devices:requestSync:
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
     post:
-      description: |-
+      description: >-
         Requests Google to send an `action.devices.SYNC`
+
         [intent](https://developers.google.com/assistant/smarthome/reference/intent/sync)
+
         to your smart home Action to update device metadata for the given user.
 
 
+
         The third-party user's identity is passed via the `agent_user_id`
+
         (see RequestSyncDevicesRequest).
+
         This request must be authorized using service account credentials from your
+
         Actions console project.
       operationId: homegraph.devices.requestSync
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RequestSyncDevicesRequest'
+              $ref: "#/components/schemas/RequestSyncDevicesRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/RequestSyncDevicesResponse'
+                $ref: "#/components/schemas/RequestSyncDevicesResponse"
           description: Successful response
       tags:
         - devices
-  '/v1/devices:sync':
+  /v1/devices:sync:
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
     post:
-      description: |-
+      description: >-
         Gets all the devices associated with the given third-party user.
 
+
         The third-party user's identity is passed in via the `agent_user_id`
+
         (see SyncRequest).
+
         This request must be authorized using service account credentials from your
+
         Actions console project.
       operationId: homegraph.devices.sync
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SyncRequest'
+              $ref: "#/components/schemas/SyncRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/SyncResponse'
+                $ref: "#/components/schemas/SyncResponse"
           description: Successful response
       tags:
         - devices
-  '/v1/{agentUserId}':
+  "/v1/{agentUserId}":
     delete:
-      description: |-
+      description: >-
         Unlinks the given third-party user from your smart home Action.
+
         All data related to this user will be deleted.
 
+
         For more details on how users link their accounts, see
+
         [fulfillment and
+
         authentication](https://developers.google.com/assistant/smarthome/concepts/fulfillment-authentication).
 
+
         The third-party user's identity is passed in via the `agent_user_id`
+
         (see DeleteAgentUserRequest).
+
         This request must be authorized using service account credentials from your
+
         Actions console project.
       operationId: homegraph.agentUsers.delete
       parameters:
@@ -211,33 +252,32 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
         - description: Request ID used for debugging.
           in: query
           name: requestId
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Empty'
+                $ref: "#/components/schemas/Empty"
           description: Successful response
       tags:
         - agentUsers
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
 components:
   parameters:
     _.xgafv:
@@ -246,8 +286,8 @@ components:
       name: $.xgafv
       schema:
         enum:
-          - '1'
-          - '2'
+          - "1"
+          - "2"
         type: string
     access_token:
       description: OAuth access token.
@@ -260,7 +300,6 @@ components:
       in: query
       name: alt
       schema:
-        default: json
         enum:
           - json
           - media
@@ -279,7 +318,7 @@ components:
       schema:
         type: string
     key:
-      description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -295,22 +334,21 @@ components:
       in: query
       name: prettyPrint
       schema:
-        default: true
         type: boolean
     quotaUser:
-      description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.'
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
       in: query
       name: quotaUser
       schema:
         type: string
     uploadType:
-      description: 'Legacy upload protocol for media (e.g. "media", "multipart").'
+      description: Legacy upload protocol for media (e.g. "media", "multipart").
       in: query
       name: uploadType
       schema:
         type: string
     upload_protocol:
-      description: 'Upload protocol for media (e.g. "raw", "multipart").'
+      description: Upload protocol for media (e.g. "raw", "multipart").
       in: query
       name: upload_protocol
       schema:
@@ -344,69 +382,89 @@ components:
         customData:
           additionalProperties:
             description: Properties of the object.
-          description: |-
+          description: >-
             Custom device attributes stored in Home Graph and provided to your
+
             smart home Action in each
+
             [QUERY](https://developers.google.com/assistant/smarthome/reference/intent/query)
+
             and
+
             [EXECUTE](https://developers.google.com/assistant/smarthome/reference/intent/execute)
+
             intent.
           type: object
         deviceInfo:
-          $ref: '#/components/schemas/DeviceInfo'
-          description: 'Device manufacturer, model, hardware version, and software version.'
+          $ref: "#/components/schemas/DeviceInfo"
+          description: Device manufacturer, model, hardware version, and software version.
         id:
           description: Third-party device ID.
           type: string
         name:
-          $ref: '#/components/schemas/DeviceNames'
+          $ref: "#/components/schemas/DeviceNames"
           description: Names given to this device by your smart home Action.
         notificationSupportedByAgent:
-          description: |-
+          description: >-
             Indicates whether your smart home Action will report notifications
+
             to Google for this device via
+
             ReportStateAndNotification.
 
+
             If your smart home Action enables users to control device notifications,
+
             you should update this field and call
+
             RequestSyncDevices.
           type: boolean
         otherDeviceIds:
-          description: |-
+          description: >-
             Alternate IDs associated with this device.
+
             This is used to identify cloud synced devices enabled for [local
+
             fulfillment](https://developers.google.com/assistant/smarthome/concepts/local).
           items:
-            $ref: '#/components/schemas/AgentOtherDeviceId'
+            $ref: "#/components/schemas/AgentOtherDeviceId"
           type: array
         roomHint:
-          description: |-
+          description: >-
             Suggested name for the room where this device is installed.
+
             Google attempts to use this value during user setup.
           type: string
         structureHint:
-          description: |-
+          description: >-
             Suggested name for the structure where this device is installed.
+
             Google attempts to use this value during user setup.
           type: string
         traits:
-          description: |-
+          description: >-
             Traits supported by the device.
+
             See [device
+
             traits](https://developers.google.com/assistant/smarthome/traits).
           items:
             type: string
           type: array
         type:
-          description: |-
+          description: >-
             Hardware type of the device.
+
             See [device
+
             types](https://developers.google.com/assistant/smarthome/guides).
           type: string
         willReportState:
-          description: |-
+          description: >-
             Indicates whether your smart home Action will report state of this device
+
             to Google via
+
             ReportStateAndNotification.
           type: boolean
       type: object
@@ -430,14 +488,15 @@ components:
       description: Identifiers used to describe the device.
       properties:
         defaultNames:
-          description: |-
+          description: >-
             List of names provided by the manufacturer rather than the user, such as
+
             serial numbers, SKUs, etc.
           items:
             type: string
           type: array
         name:
-          description: 'Primary name of the device, generally provided by the user.'
+          description: Primary name of the device, generally provided by the user.
           type: string
         nicknames:
           description: Additional names provided by the user for the device.
@@ -446,9 +505,11 @@ components:
           type: array
       type: object
     Empty:
-      description: |-
+      description: >-
         A generic empty message that you can re-use to avoid defining duplicated
+
         empty messages in your APIs. A typical example is to use it as the request
+
         or the response type of an API method. For instance:
 
             service Foo {
@@ -459,19 +520,21 @@ components:
       properties: {}
       type: object
     QueryRequest:
-      description: |-
+      description: >-
         Request type for the
+
         [`Query`](#google.home.graph.v1.HomeGraphApiService.Query) call.
       properties:
         agentUserId:
           description: Required. Third-party user ID.
           type: string
         inputs:
-          description: |-
+          description: >-
             Required. Inputs containing third-party device IDs for which to
+
             get the device states.
           items:
-            $ref: '#/components/schemas/QueryRequestInput'
+            $ref: "#/components/schemas/QueryRequestInput"
           type: array
         requestId:
           description: Request ID used for debugging.
@@ -481,7 +544,7 @@ components:
       description: Device ID inputs to QueryRequest.
       properties:
         payload:
-          $ref: '#/components/schemas/QueryRequestPayload'
+          $ref: "#/components/schemas/QueryRequestPayload"
           description: Payload containing third-party device IDs.
       type: object
     QueryRequestPayload:
@@ -490,19 +553,26 @@ components:
         devices:
           description: Third-party device IDs for which to get the device states.
           items:
-            $ref: '#/components/schemas/AgentDeviceId'
+            $ref: "#/components/schemas/AgentDeviceId"
           type: array
       type: object
     QueryResponse:
-      description: |-
+      description: >-
         Response type for the
+
         [`Query`](#google.home.graph.v1.HomeGraphApiService.Query) call.
+
         This should follow the same format as the Google smart home
+
         `action.devices.QUERY`
+
         [response](https://developers.google.com/assistant/smarthome/reference/intent/query).
+
         # Example
 
+
         ```json
+
         {
           "requestId": "ff36a3cc-ec34-11e6-b1a0-64510650abcf",
           "payload": {
@@ -523,10 +593,11 @@ components:
             }
           }
         }
+
         ```
       properties:
         payload:
-          $ref: '#/components/schemas/QueryResponsePayload'
+          $ref: "#/components/schemas/QueryResponsePayload"
           description: Device states for the devices given in the request.
         requestId:
           description: Request ID used for debugging. Copied from the request.
@@ -540,8 +611,9 @@ components:
             additionalProperties:
               description: Properties of the object.
             type: object
-          description: |-
+          description: >-
             States of the devices. Map of third-party device ID to struct of device
+
             states.
           type: object
       type: object
@@ -551,30 +623,41 @@ components:
         notifications:
           additionalProperties:
             description: Properties of the object.
-          description: |-
+          description: >-
             Notifications metadata for devices. See the **Device NOTIFICATIONS**
+
             section of the individual trait [reference
+
             guides](https://developers.google.com/assistant/smarthome/traits).
           type: object
         states:
           additionalProperties:
             description: Properties of the object.
-          description: |-
+          description: >-
             States of devices to update. See the **Device STATES** section
+
             of the individual trait [reference
+
             guides](https://developers.google.com/assistant/smarthome/traits).
           type: object
       type: object
     ReportStateAndNotificationRequest:
-      description: |-
+      description: >-
         Request type for the
+
         [`ReportStateAndNotification`](#google.home.graph.v1.HomeGraphApiService.ReportStateAndNotification)
+
         call. It may include states, notifications, or both. States and notifications
+
         are defined per `device_id` (for example, "123" and "456" in the following
+
         example).
+
         # Example
 
+
         ```json
+
         {
           "requestId": "ff36a3cc-ec34-11e6-b1a0-64510650abcf",
           "agentUserId": "1234",
@@ -592,28 +675,38 @@ components:
             }
           }
         }
+
         ```
       properties:
         agentUserId:
           description: Required. Third-party user ID.
           type: string
         eventId:
-          description: 'Unique identifier per event (for example, a doorbell press).'
+          description: Unique identifier per event (for example, a doorbell press).
           type: string
         followUpToken:
-          description: Token to maintain state in the follow up notification response.
+          description: >-
+            Token to maintain state in the follow up notification response.
+
+            Deprecated. See the [notifications
+
+            guide](https://developers.google.com/assistant/smarthome/develop/notifications)
+
+            for details on implementing follow up notifications.
           type: string
         payload:
-          $ref: '#/components/schemas/StateAndNotificationPayload'
+          $ref: "#/components/schemas/StateAndNotificationPayload"
           description: Required. State of devices to update and notification metadata for devices.
         requestId:
           description: Request ID used for debugging.
           type: string
       type: object
     ReportStateAndNotificationResponse:
-      description: |-
+      description: >-
         Response type for the
+
         [`ReportStateAndNotification`](#google.home.graph.v1.HomeGraphApiService.ReportStateAndNotification)
+
         call.
       properties:
         requestId:
@@ -621,28 +714,36 @@ components:
           type: string
       type: object
     RequestSyncDevicesRequest:
-      description: |-
+      description: >-
         Request type for the
+
         [`RequestSyncDevices`](#google.home.graph.v1.HomeGraphApiService.RequestSyncDevices)
+
         call.
       properties:
         agentUserId:
           description: Required. Third-party user ID.
           type: string
         async:
-          description: |-
+          description: >-
             Optional. If set, the request will be added to a queue and a response will
+
             be returned immediately. This enables concurrent requests for the given
+
             `agent_user_id`, but the caller will not receive any error responses.
           type: boolean
       type: object
     RequestSyncDevicesResponse:
-      description: |-
+      description: >-
         Response type for the
+
         [`RequestSyncDevices`](#google.home.graph.v1.HomeGraphApiService.RequestSyncDevices)
+
         call.
 
+
         Intentionally empty upon success. An HTTP response code is returned
+
         with more details upon failure.
       properties: {}
       type: object
@@ -650,12 +751,13 @@ components:
       description: Payload containing the state and notification information for devices.
       properties:
         devices:
-          $ref: '#/components/schemas/ReportStateAndNotificationDevice'
+          $ref: "#/components/schemas/ReportStateAndNotificationDevice"
           description: The devices for updating state and sending notifications.
       type: object
     SyncRequest:
-      description: |-
+      description: >-
         Request type for the [`Sync`](#google.home.graph.v1.HomeGraphApiService.Sync)
+
         call.
       properties:
         agentUserId:
@@ -666,15 +768,22 @@ components:
           type: string
       type: object
     SyncResponse:
-      description: |-
+      description: >-
         Response type for the
+
         [`Sync`](#google.home.graph.v1.HomeGraphApiService.Sync) call.
+
         This should follow the same format as the Google smart home
+
         `action.devices.SYNC`
+
         [response](https://developers.google.com/assistant/smarthome/reference/intent/sync).
+
         # Example
 
+
         ```json
+
         {
           "requestId": "ff36a3cc-ec34-11e6-b1a0-64510650abcf",
           "payload": {
@@ -705,10 +814,11 @@ components:
             }]
           }
         }
+
         ```
       properties:
         payload:
-          $ref: '#/components/schemas/SyncResponsePayload'
+          $ref: "#/components/schemas/SyncResponsePayload"
           description: Devices associated with the third-party user.
         requestId:
           description: Request ID used for debugging. Copied from the request.
@@ -723,6 +833,6 @@ components:
         devices:
           description: Devices associated with the third-party user.
           items:
-            $ref: '#/components/schemas/Device'
+            $ref: "#/components/schemas/Device"
           type: array
       type: object

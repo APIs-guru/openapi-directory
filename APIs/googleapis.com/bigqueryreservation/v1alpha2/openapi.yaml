@@ -1,52 +1,58 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://bigqueryreservation.googleapis.com/'
+  - url: https://bigqueryreservation.googleapis.com/
 info:
   contact:
     name: Google
-    url: 'https://google.com'
+    url: https://google.com
   description: A service to modify your BigQuery flat-rate reservations.
   license:
     name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
+    url: http://creativecommons.org/licenses/by/3.0/
+  termsOfService: https://developers.google.com/terms/
   title: BigQuery Reservation
   version: v1alpha2
   x-apiClientRegistration:
-    url: 'https://console.developers.google.com'
+    url: https://console.developers.google.com
   x-logo:
-    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.31
       format: google
-      url: 'https://bigqueryreservation.googleapis.com/$discovery/rest?version=v1alpha2'
+      url: https://bigqueryreservation.googleapis.com/$discovery/rest?version=v1alpha2
       version: v1
   x-preferred: false
   x-providerName: googleapis.com
   x-serviceName: bigqueryreservation
 externalDocs:
-  url: 'https://cloud.google.com/bigquery/'
+  url: https://cloud.google.com/bigquery/
 tags:
   - name: projects
 paths:
-  '/v1alpha2/{name}':
+  "/v1alpha2/{name}":
     delete:
-      description: |-
+      description: >-
         Deletes a reservation grant. No expansion will happen.
+
         E.g:
+
         organizationA contains project1 and project2. Reservation res1 exists.
+
         CreateReservationGrant was invoked previously and following grants were
+
         created explicitly:
           <organizationA, res1>
           <project1, res1>
         Then deletion of <organizationA, res1> won't affect <project1, res1>. After
+
         deletion of <organizationA, res1>, queries from project1 will still use
+
         res1, while queries from project2 will use on-demand mode.
       operationId: bigqueryreservation.projects.locations.reservationGrants.delete
       parameters:
-        - description: |-
+        - description: >-
             Name of the resource, e.g.:
               projects/myproject/locations/eu/reservationGrants/123
           in: path
@@ -55,37 +61,42 @@ paths:
           schema:
             type: string
           x-reservedExpansion: true
-        - description: |-
+        - description: >-
             If true, deletes all the child reservations of the given reservation.
+
             Otherwise, attempting to delete a reservation that has child
+
             reservations will fail with error code
+
             `google.rpc.Code.FAILED_PRECONDITION`.
           in: query
           name: force
           schema:
             type: boolean
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/Empty'
+                $ref: "#/components/schemas/Empty"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/bigquery'
+            - https://www.googleapis.com/auth/bigquery
           Oauth2c:
-            - 'https://www.googleapis.com/auth/bigquery'
+            - https://www.googleapis.com/auth/bigquery
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
     get:
-      description: |-
+      description: >-
         Gets the latest state of a long-running operation.  Clients can use this
+
         method to poll the operation result at intervals as recommended by the API
+
         service.
       operationId: bigqueryreservation.projects.locations.operations.get
       parameters:
@@ -97,45 +108,49 @@ paths:
             type: string
           x-reservedExpansion: true
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/bigquery'
+            - https://www.googleapis.com/auth/bigquery
           Oauth2c:
-            - 'https://www.googleapis.com/auth/bigquery'
+            - https://www.googleapis.com/auth/bigquery
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
     patch:
-      description: |-
+      description: >-
         Updates an existing reservation resource. Applicable only for child
+
         reservations.
       operationId: bigqueryreservation.projects.locations.reservations.patch
       parameters:
-        - description: |-
+        - description: >-
             The resource name of the reservation, e.g.,
+
             "projects/*/locations/*/reservations/dev/team/product". Reservation names
+
             (e.g., "dev/team/product") exceeding a depth of six will fail with
+
             `google.rpc.Code.INVALID_ARGUMENT`.
           in: path
           name: name
@@ -152,49 +167,58 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Reservation'
+              $ref: "#/components/schemas/Reservation"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/Reservation'
+                $ref: "#/components/schemas/Reservation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/bigquery'
+            - https://www.googleapis.com/auth/bigquery
           Oauth2c:
-            - 'https://www.googleapis.com/auth/bigquery'
+            - https://www.googleapis.com/auth/bigquery
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1alpha2/{name}:cancel':
+  "/v1alpha2/{name}:cancel":
     parameters:
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
-      description: |-
+      description: >-
         Starts asynchronous cancellation on a long-running operation.  The server
+
         makes a best effort to cancel the operation, but success is not
+
         guaranteed.  If the server doesn't support this method, it returns
+
         `google.rpc.Code.UNIMPLEMENTED`.  Clients can use
+
         Operations.GetOperation or
+
         other methods to check whether the cancellation succeeded or whether the
+
         operation completed despite cancellation. On successful cancellation,
+
         the operation is not deleted; instead, it becomes an operation with
+
         an Operation.error value with a google.rpc.Status.code of 1,
+
         corresponding to `Code.CANCELLED`.
       operationId: bigqueryreservation.projects.locations.operations.cancel
       parameters:
@@ -206,43 +230,44 @@ paths:
             type: string
           x-reservedExpansion: true
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/Empty'
+                $ref: "#/components/schemas/Empty"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/bigquery'
+            - https://www.googleapis.com/auth/bigquery
           Oauth2c:
-            - 'https://www.googleapis.com/auth/bigquery'
+            - https://www.googleapis.com/auth/bigquery
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1alpha2/{parent}':
+  "/v1alpha2/{parent}":
     parameters:
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
-      description: |-
+      description: >-
         Creates a new reservation resource. Multiple reservations are created if
+
         the ancestor reservations do not exist.
       operationId: bigqueryreservation.projects.locations.reservations.createReservation
       parameters:
-        - description: |-
+        - description: >-
             Project, location, and (optionally) reservation name. E.g.,
                projects/myproject/locations/us-central1/reservations/parent
           in: path
@@ -251,8 +276,9 @@ paths:
           schema:
             type: string
           x-reservedExpansion: true
-        - description: |-
+        - description: >-
             The reservation ID relative to the parent, e.g., "dev". This field must
+
             only contain alphanumeric characters.
           in: query
           name: reservationId
@@ -262,40 +288,45 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Reservation'
+              $ref: "#/components/schemas/Reservation"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/Reservation'
+                $ref: "#/components/schemas/Reservation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/bigquery'
+            - https://www.googleapis.com/auth/bigquery
           Oauth2c:
-            - 'https://www.googleapis.com/auth/bigquery'
+            - https://www.googleapis.com/auth/bigquery
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1alpha2/{parent}/reservationGrants':
+  "/v1alpha2/{parent}/reservationGrants":
     get:
-      description: |-
+      description: >-
         Lists reservation grants.
+
         Only explicitly created grants will be returned. E.g:
+
         organizationA contains project1 and project2. Reservation res1 exists.
+
         CreateReservationGrant was invoked previously and following grants were
+
         created explicitly:
           <organizationA, res1>
           <project1, res1>
         Then this API will just return the above two grants for reservation res1,
+
         and no expansion/merge will happen.
       operationId: bigqueryreservation.projects.locations.reservationGrants.list
       parameters:
-        - description: 'The parent resource name e.g.: projects/myproject/location/eu.'
+        - description: "The parent resource name e.g.: projects/myproject/location/eu."
           in: path
           name: parent
           required: true
@@ -307,52 +338,57 @@ paths:
           name: pageSize
           schema:
             type: integer
-        - description: 'The next_page_token value returned from a previous List request, if any.'
+        - description: The next_page_token value returned from a previous List request, if any.
           in: query
           name: pageToken
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ListReservationGrantsResponse'
+                $ref: "#/components/schemas/ListReservationGrantsResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/bigquery'
+            - https://www.googleapis.com/auth/bigquery
           Oauth2c:
-            - 'https://www.googleapis.com/auth/bigquery'
+            - https://www.googleapis.com/auth/bigquery
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
-      description: |-
+      description: >-
         Returns `google.rpc.Code.PERMISSION_DENIED` if user does not have
+
         'bigquery.admin' permissions on the project using the reservation
+
         and the project that owns this reservation.
+
         Returns `google.rpc.Code.INVALID_ARGUMENT` when location of the grant
+
         does not match location of the reservation.
       operationId: bigqueryreservation.projects.locations.reservationGrants.create
       parameters:
-        - description: |-
+        - description: >-
             The parent resource name of the reservation grant
+
             E.g.: projects/myproject/location/eu.
           in: path
           name: parent
@@ -364,31 +400,31 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ReservationGrant'
+              $ref: "#/components/schemas/ReservationGrant"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ReservationGrant'
+                $ref: "#/components/schemas/ReservationGrant"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/bigquery'
+            - https://www.googleapis.com/auth/bigquery
           Oauth2c:
-            - 'https://www.googleapis.com/auth/bigquery'
+            - https://www.googleapis.com/auth/bigquery
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1alpha2/{parent}/reservations':
+  "/v1alpha2/{parent}/reservations":
     get:
       description: Lists all the reservations for the project in the specified location.
       operationId: bigqueryreservation.projects.locations.reservations.list
       parameters:
-        - description: |-
+        - description: >-
             The parent resource name containing project and location, e.g.:
               "projects/myproject/locations/us-central1"
           in: path
@@ -397,11 +433,15 @@ paths:
           schema:
             type: string
           x-reservedExpansion: true
-        - description: |-
+        - description: >-
             Can be used to filter out reservations based on names, capacity, etc, e.g.:
+
             filter="reservation.slot_capacity > 200"
+
             filter="reservation.name = \"*dev/*\""
+
             Advanced filtering syntax can be
+
             [here](https://cloud.google.com/logging/docs/view/advanced-filters).
           in: query
           name: filter
@@ -412,48 +452,49 @@ paths:
           name: pageSize
           schema:
             type: integer
-        - description: 'The next_page_token value returned from a previous List request, if any.'
+        - description: The next_page_token value returned from a previous List request, if any.
           in: query
           name: pageToken
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ListReservationsResponse'
+                $ref: "#/components/schemas/ListReservationsResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/bigquery'
+            - https://www.googleapis.com/auth/bigquery
           Oauth2c:
-            - 'https://www.googleapis.com/auth/bigquery'
+            - https://www.googleapis.com/auth/bigquery
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
-      description: |-
+      description: >-
         Creates a new reservation resource. Multiple reservations are created if
+
         the ancestor reservations do not exist.
       operationId: bigqueryreservation.projects.locations.reservations.create
       parameters:
-        - description: |-
+        - description: >-
             Project, location, and (optionally) reservation name. E.g.,
                projects/myproject/locations/us-central1/reservations/parent
           in: path
@@ -462,8 +503,9 @@ paths:
           schema:
             type: string
           x-reservedExpansion: true
-        - description: |-
+        - description: >-
             The reservation ID relative to the parent, e.g., "dev". This field must
+
             only contain alphanumeric characters.
           in: query
           name: reservationId
@@ -473,32 +515,33 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Reservation'
+              $ref: "#/components/schemas/Reservation"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/Reservation'
+                $ref: "#/components/schemas/Reservation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/bigquery'
+            - https://www.googleapis.com/auth/bigquery
           Oauth2c:
-            - 'https://www.googleapis.com/auth/bigquery'
+            - https://www.googleapis.com/auth/bigquery
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1alpha2/{parent}/slotPools':
+  "/v1alpha2/{parent}/slotPools":
     get:
       description: Lists all the slot pools for the reservation.
       operationId: bigqueryreservation.projects.locations.reservations.slotPools.list
       parameters:
-        - description: |-
+        - description: >-
             Resource name of the parent reservation. Only top-level reservations can
+
             have slot pools. E.g.,
                projects/myproject/locations/us-central1/reservations/my_reservation
           in: path
@@ -512,60 +555,66 @@ paths:
           name: pageSize
           schema:
             type: integer
-        - description: 'The next_page_token value returned from a previous List request, if any.'
+        - description: The next_page_token value returned from a previous List request, if any.
           in: query
           name: pageToken
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ListSlotPoolsResponse'
+                $ref: "#/components/schemas/ListSlotPoolsResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/bigquery'
+            - https://www.googleapis.com/auth/bigquery
           Oauth2c:
-            - 'https://www.googleapis.com/auth/bigquery'
+            - https://www.googleapis.com/auth/bigquery
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-  '/v1alpha2/{parent}:SearchReservationGrants':
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
+  "/v1alpha2/{parent}:SearchReservationGrants":
     get:
-      description: |-
+      description: >-
         Look up grants for a specified resource for a particular region.
+
         If the request is about a project:
           1) Grants created on the project will be returned if they exist.
           2) Otherwise grants created on the closest ancestor will be returned.
           3) Grants for different JobTypes will all be returned.
         Same logic applies if the request is about a folder.
+
         If the request is about an organization, then grants created on the
+
         organization will be returned (organization doesn't have ancestors).
+
         Comparing to ListReservationGrants, there are two behavior
+
         differences:
           1) permission on the grantee will be verified in this API.
           2) Hierarchy lookup (project->folder->organization) happens in this API.
       operationId: bigqueryreservation.projects.locations.searchReservationGrants
       parameters:
-        - description: |-
+        - description: >-
             The parent resource name (containing project and location), which owns the
+
             grants. e.g.:
               "projects/myproject/locations/us-central1".
           in: path
@@ -579,13 +628,14 @@ paths:
           name: pageSize
           schema:
             type: integer
-        - description: 'The next_page_token value returned from a previous List request, if any.'
+        - description: The next_page_token value returned from a previous List request, if any.
           in: query
           name: pageToken
           schema:
             type: string
-        - description: |-
+        - description: >-
             Please specify resource name as grantee in the query.
+
             e.g., "grantee=projects/myproject"
                   "grantee=folders/123"
                   "grantee=organizations/456"
@@ -594,35 +644,35 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/SearchReservationGrantsResponse'
+                $ref: "#/components/schemas/SearchReservationGrantsResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/bigquery'
+            - https://www.googleapis.com/auth/bigquery
           Oauth2c:
-            - 'https://www.googleapis.com/auth/bigquery'
+            - https://www.googleapis.com/auth/bigquery
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
 components:
   parameters:
     _.xgafv:
@@ -631,8 +681,8 @@ components:
       name: $.xgafv
       schema:
         enum:
-          - '1'
-          - '2'
+          - "1"
+          - "2"
         type: string
     access_token:
       description: OAuth access token.
@@ -664,7 +714,7 @@ components:
       schema:
         type: string
     key:
-      description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -683,19 +733,19 @@ components:
         default: true
         type: boolean
     quotaUser:
-      description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.'
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
       in: query
       name: quotaUser
       schema:
         type: string
     uploadType:
-      description: 'Legacy upload protocol for media (e.g. "media", "multipart").'
+      description: Legacy upload protocol for media (e.g. "media", "multipart").
       in: query
       name: uploadType
       schema:
         type: string
     upload_protocol:
-      description: 'Upload protocol for media (e.g. "raw", "multipart").'
+      description: Upload protocol for media (e.g. "raw", "multipart").
       in: query
       name: upload_protocol
       schema:
@@ -705,23 +755,27 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Reservation'
+            $ref: "#/components/schemas/Reservation"
   schemas:
     CreateSlotPoolMetadata:
-      description: |-
+      description: >-
         The metadata for operation returned from
+
         ReservationService.CreateSlotPool.
       properties:
         slotPool:
-          description: |-
+          description: >-
             Resource name of the slot pool that is being created. E.g.,
+
             projects/myproject/locations/us-central1/reservations/foo/slotPools/123
           type: string
       type: object
     Empty:
-      description: |-
+      description: >-
         A generic empty message that you can re-use to avoid defining duplicated
+
         empty messages in your APIs. A typical example is to use it as the request
+
         or the response type of an API method. For instance:
 
             service Foo {
@@ -735,84 +789,102 @@ components:
       description: The response for ReservationService.ListReservationGrants.
       properties:
         nextPageToken:
-          description: |-
+          description: >-
             Token to retrieve the next page of results, or empty if there are no
+
             more results in the list.
           type: string
         reservationGrants:
           description: List of reservation grants visible to the user.
           items:
-            $ref: '#/components/schemas/ReservationGrant'
+            $ref: "#/components/schemas/ReservationGrant"
           type: array
       type: object
     ListReservationsResponse:
       description: The response for ReservationService.ListReservations.
       properties:
         nextPageToken:
-          description: |-
+          description: >-
             Token to retrieve the next page of results, or empty if there are no
+
             more results in the list.
           type: string
         reservations:
           description: List of reservations visible to the user.
           items:
-            $ref: '#/components/schemas/Reservation'
+            $ref: "#/components/schemas/Reservation"
           type: array
       type: object
     ListSlotPoolsResponse:
       description: The response for ReservationService.ListSlotPools.
       properties:
         nextPageToken:
-          description: |-
+          description: >-
             Token to retrieve the next page of results, or empty if there are no
+
             more results in the list.
           type: string
         slotPools:
           description: List of slot pools visible to the user.
           items:
-            $ref: '#/components/schemas/SlotPool'
+            $ref: "#/components/schemas/SlotPool"
           type: array
       type: object
     Operation:
-      description: |-
+      description: >-
         This resource represents a long-running operation that is the result of a
+
         network API call.
       properties:
         done:
-          description: |-
+          description: >-
             If the value is `false`, it means the operation is still in progress.
+
             If `true`, the operation is completed, and either `error` or `response` is
+
             available.
           type: boolean
         error:
-          $ref: '#/components/schemas/Status'
+          $ref: "#/components/schemas/Status"
           description: The error result of the operation in case of failure or cancellation.
         metadata:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
-          description: |-
+          description: >-
             Service-specific metadata associated with the operation.  It typically
+
             contains progress information and common metadata such as create time.
+
             Some services might not provide such metadata.  Any method that returns a
+
             long-running operation should document the metadata type, if any.
           type: object
         name:
-          description: |-
+          description: >-
             The server-assigned name, which is only unique within the same service that
+
             originally returns it. If you use the default HTTP mapping, the
+
             `name` should be a resource name ending with `operations/{unique_id}`.
           type: string
         response:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
-          description: |-
+          description: >-
             The normal response of the operation in case of success.  If the original
+
             method returns no data on success, such as `Delete`, the response is
+
             `google.protobuf.Empty`.  If the original method is standard
+
             `Get`/`Create`/`Update`, the response should be the resource.  For other
+
             methods, the response should have the type `XxxResponse`, where `Xxx`
+
             is the original method name.  For example, if the original method name
+
             is `TakeSnapshot()`, the inferred response type is
+
             `TakeSnapshotResponse`.
           type: object
       type: object
@@ -820,46 +892,66 @@ components:
       description: A reservation is a mechanism used to guarantee slots to users.
       properties:
         name:
-          description: |-
+          description: >-
             The resource name of the reservation, e.g.,
+
             "projects/*/locations/*/reservations/dev/team/product". Reservation names
+
             (e.g., "dev/team/product") exceeding a depth of six will fail with
+
             `google.rpc.Code.INVALID_ARGUMENT`.
           type: string
         slotCapacity:
-          description: |-
+          description: >-
             Maximum slots available to this reservation and its children. A slot is a
+
             unit of computational power in BigQuery, and serves as the unit of
+
             parallelism. In a scan of a multi-partitioned table, a single slot operates
+
             on a single partition of the table.
 
+
             If the new reservation's slot capacity exceed the parent's slot capacity or
+
             if total slot capacity of the new reservation and its siblings exceeds the
+
             parent's slot capacity, the request will fail with
+
             `google.rpc.Code.RESOURCE_EXHAUSTED`.
           format: int64
           type: string
         useParentReservation:
-          description: |-
+          description: >-
             If true, any query using this reservation will also be submitted to the
+
             parent reservation. This allows the query to share the additional slot
+
             capacity of the parent with other queries in the parent reservation. If the
+
             parent also has this field set to true, then this process will continue
+
             until it encounters a reservation for which this is false.
+
             If false, a query using this reservation will
+
             execute with the maximum slot capacity as specified above.
+
             If not specified, default value is true.
+
             Ignored for top-level reservation.
           type: boolean
       type: object
     ReservationGrant:
-      description: |-
+      description: >-
         A ReservationGrant allows a project to submit jobs
+
         of a certain type using slots from the specified reservation.
       properties:
         grantee:
-          description: |-
+          description: >-
             The resource which will use the reservation. E.g.
+
             projects/myproject, folders/123, organizations/456.
           type: string
         jobType:
@@ -870,15 +962,19 @@ components:
             - QUERY
           type: string
         name:
-          description: |-
+          description: >-
             Output only. Name of the resource. E.g.:
+
             projects/myproject/locations/eu/reservationGrants/123.
           type: string
         reservation:
-          description: |-
+          description: >-
             Resource name of the reservation.
+
             E.g., projects/myproject/locations/eu/reservations/my_reservation.
+
             This reservation must be in the same location as the grant.
+
             This reservation should belong to the same parent project.
           type: string
         state:
@@ -893,41 +989,52 @@ components:
       description: The response for ReservationService.SearchReservationGrants.
       properties:
         nextPageToken:
-          description: |-
+          description: >-
             Token to retrieve the next page of results, or empty if there are no
+
             more results in the list.
           type: string
         reservationGrants:
           description: List of reservation grants visible to the user.
           items:
-            $ref: '#/components/schemas/ReservationGrant'
+            $ref: "#/components/schemas/ReservationGrant"
           type: array
       type: object
     SlotPool:
-      description: |-
+      description: >-
         Slot pool is a way to purchase slots with some minimum committed period of
+
         usage. Slot pool is immutable and cannot be deleted until the end of the
+
         commitment period. After the end of the commitment period, slots are still
+
         available but can be freely removed any time. Annual commitments will
+
         automatically be downgraded to monthly after the commitment ends.
 
+
         A slot pool resource exists as a child resource of a top-level reservation.
+
         Sum of all the ACTIVE pools slot_count is always equal to the reservation
+
         slot_capacity.
       properties:
         commitmentEndTime:
-          description: |-
+          description: >-
             Output only. The end of the commitment period. Slot pool cannot be
+
             removed before commitment_end_time. It is applicable only for ACTIVE slot
+
             pools and is computed as a combination of the plan and the time when the
+
             slot pool became ACTIVE.
           format: google-datetime
           type: string
         failureStatus:
-          $ref: '#/components/schemas/Status'
-          description: 'Output only. For FAILED slot pool, provides the reason of failure.'
+          $ref: "#/components/schemas/Status"
+          description: Output only. For FAILED slot pool, provides the reason of failure.
         name:
-          description: |-
+          description: >-
             Output only. The resource name of the slot pool, e.g.,
                projects/myproject/locations/us-central1/reservations/myreservation/slotPools/123
           type: string
@@ -953,22 +1060,28 @@ components:
           type: string
       type: object
     Status:
-      description: |-
+      description: >-
         The `Status` type defines a logical error model that is suitable for
+
         different programming environments, including REST APIs and RPC APIs. It is
+
         used by [gRPC](https://github.com/grpc). Each `Status` message contains
+
         three pieces of data: error code, error message, and error details.
 
+
         You can find out more about this error model and how to work with it in the
+
         [API Design Guide](https://cloud.google.com/apis/design/errors).
       properties:
         code:
-          description: 'The status code, which should be an enum value of google.rpc.Code.'
+          description: The status code, which should be an enum value of google.rpc.Code.
           format: int32
           type: integer
         details:
-          description: |-
+          description: >-
             A list of messages that carry the error details.  There is a common set of
+
             message types for APIs to use.
           items:
             additionalProperties:
@@ -976,9 +1089,11 @@ components:
             type: object
           type: array
         message:
-          description: |-
+          description: >-
             A developer-facing error message, which should be in English. Any
+
             user-facing error message should be localized and sent in the
+
             google.rpc.Status.details field, or localized by the client.
           type: string
       type: object
@@ -987,18 +1102,18 @@ components:
       description: Oauth 2.0 implicit authentication
       flows:
         implicit:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            'https://www.googleapis.com/auth/bigquery': View and manage your data in Google BigQuery
-            'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/bigquery: View and manage your data in Google BigQuery
+            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
       type: oauth2
     Oauth2c:
       description: Oauth 2.0 accessCode authentication
       flows:
         authorizationCode:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            'https://www.googleapis.com/auth/bigquery': View and manage your data in Google BigQuery
-            'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-          tokenUrl: 'https://accounts.google.com/o/oauth2/token'
+            https://www.googleapis.com/auth/bigquery: View and manage your data in Google BigQuery
+            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+          tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

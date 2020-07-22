@@ -1,41 +1,41 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://www.googleapis.com/pagespeedonline/v1'
+  - url: https://www.googleapis.com/pagespeedonline/v1
 info:
   contact:
     name: Google
-    url: 'https://google.com'
+    url: https://google.com
   description: Analyzes the performance of a web page and provides tailored suggestions to make that page faster.
   license:
     name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
+    url: http://creativecommons.org/licenses/by/3.0/
+  termsOfService: https://developers.google.com/terms/
   title: PageSpeed Insights
   version: v1
   x-apiClientRegistration:
-    url: 'https://console.developers.google.com'
+    url: https://console.developers.google.com
   x-apisguru-categories:
     - tools
   x-logo:
-    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.31
       format: google
-      url: 'https://www.googleapis.com/discovery/v1/apis/pagespeedonline/v1/rest'
+      url: https://www.googleapis.com/discovery/v1/apis/pagespeedonline/v1/rest
       version: v1
   x-preferred: false
   x-providerName: googleapis.com
   x-serviceName: pagespeedonline
 externalDocs:
-  url: 'https://developers.google.com/speed/docs/insights/v1/getting_started'
+  url: https://developers.google.com/speed/docs/insights/v1/getting_started
 tags:
   - name: pagespeedapi
 paths:
   /runPagespeed:
     get:
-      description: 'Runs PageSpeed analysis on the page at the specified URL, and returns a PageSpeed score, a list of suggestions to make that page faster, and other information.'
+      description: Runs PageSpeed analysis on the page at the specified URL, and returns a PageSpeed score, a list of suggestions to make that page faster, and other information.
       operationId: pagespeedonline.pagespeedapi.runpagespeed
       parameters:
         - description: The URL to fetch and analyze
@@ -55,7 +55,7 @@ paths:
           name: locale
           schema:
             type: string
-        - description: 'A PageSpeed rule to run; if none are given, all rules are run'
+        - description: A PageSpeed rule to run; if none are given, all rules are run
           explode: true
           in: query
           name: rule
@@ -78,22 +78,22 @@ paths:
               - mobile
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/Result'
+                $ref: "#/components/schemas/Result"
           description: Successful response
       tags:
         - pagespeedapi
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
 components:
   parameters:
     alt:
@@ -112,7 +112,7 @@ components:
       schema:
         type: string
     key:
-      description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -152,17 +152,17 @@ components:
           description: Localized PageSpeed results. Contains a ruleResults entry for each PageSpeed rule instantiated and run by the server.
           properties:
             locale:
-              description: 'The locale of the formattedResults, e.g. "en_US".'
+              description: The locale of the formattedResults, e.g. "en_US".
               type: string
             ruleResults:
               additionalProperties:
                 description: The enum-like identifier for this rule. For instance "EnableKeepAlive" or "AvoidCssImport". Not localized.
                 properties:
                   localizedRuleName:
-                    description: 'Localized name of the rule, intended for presentation to a user.'
+                    description: Localized name of the rule, intended for presentation to a user.
                     type: string
                   ruleImpact:
-                    description: 'The impact (unbounded floating point value) that implementing the suggestions for this rule would have on making the page faster. Impact is comparable between rules to determine which rule''s suggestions would have a higher or lower impact on making a page faster. For instance, if enabling compression would save 1MB, while optimizing images would save 500kB, the enable compression rule would have 2x the impact of the image optimization rule, all other things being equal.'
+                    description: The impact (unbounded floating point value) that implementing the suggestions for this rule would have on making the page faster. Impact is comparable between rules to determine which rule's suggestions would have a higher or lower impact on making a page faster. For instance, if enabling compression would save 1MB, while optimizing images would save 500kB, the enable compression rule would have 2x the impact of the image optimization rule, all other things being equal.
                     format: double
                     type: number
                   urlBlocks:
@@ -177,15 +177,15 @@ components:
                               items:
                                 properties:
                                   type:
-                                    description: 'Type of argument. One of URL, STRING_LITERAL, INT_LITERAL, BYTES, or DURATION.'
+                                    description: Type of argument. One of URL, STRING_LITERAL, INT_LITERAL, BYTES, or DURATION.
                                     type: string
                                   value:
-                                    description: 'Argument value, as a localized string.'
+                                    description: Argument value, as a localized string.
                                     type: string
                                 type: object
                               type: array
                             format:
-                              description: 'A localized format string with $N placeholders, where N is the 1-indexed argument number, e.g. ''Minifying the following $1 resources would save a total of $2 bytes''.'
+                              description: A localized format string with $N placeholders, where N is the 1-indexed argument number, e.g. 'Minifying the following $1 resources would save a total of $2 bytes'.
                               type: string
                           type: object
                         urls:
@@ -201,35 +201,35 @@ components:
                                       items:
                                         properties:
                                           type:
-                                            description: 'Type of argument. One of URL, STRING_LITERAL, INT_LITERAL, BYTES, or DURATION.'
+                                            description: Type of argument. One of URL, STRING_LITERAL, INT_LITERAL, BYTES, or DURATION.
                                             type: string
                                           value:
-                                            description: 'Argument value, as a localized string.'
+                                            description: Argument value, as a localized string.
                                             type: string
                                         type: object
                                       type: array
                                     format:
-                                      description: 'A localized format string with $N placeholders, where N is the 1-indexed argument number, e.g. ''Unnecessary metadata for this resource adds an additional $1 bytes to its download size''.'
+                                      description: A localized format string with $N placeholders, where N is the 1-indexed argument number, e.g. 'Unnecessary metadata for this resource adds an additional $1 bytes to its download size'.
                                       type: string
                                   type: object
                                 type: array
                               result:
-                                description: 'A format string that gives information about the URL, and a list of arguments for that format string.'
+                                description: A format string that gives information about the URL, and a list of arguments for that format string.
                                 properties:
                                   args:
                                     description: List of arguments for the format string.
                                     items:
                                       properties:
                                         type:
-                                          description: 'Type of argument. One of URL, STRING_LITERAL, INT_LITERAL, BYTES, or DURATION.'
+                                          description: Type of argument. One of URL, STRING_LITERAL, INT_LITERAL, BYTES, or DURATION.
                                           type: string
                                         value:
-                                          description: 'Argument value, as a localized string.'
+                                          description: Argument value, as a localized string.
                                           type: string
                                       type: object
                                     type: array
                                   format:
-                                    description: 'A localized format string with $N placeholders, where N is the 1-indexed argument number, e.g. ''Minifying the resource at URL $1 can save $2 bytes''.'
+                                    description: A localized format string with $N placeholders, where N is the 1-indexed argument number, e.g. 'Minifying the resource at URL $1 can save $2 bytes'.
                                     type: string
                                 type: object
                             type: object
@@ -237,23 +237,23 @@ components:
                       type: object
                     type: array
                 type: object
-              description: 'Dictionary of formatted rule results, with one entry for each PageSpeed rule instantiated and run by the server.'
+              description: Dictionary of formatted rule results, with one entry for each PageSpeed rule instantiated and run by the server.
               type: object
           type: object
         id:
-          description: 'Canonicalized and final URL for the document, after following page redirects (if any).'
+          description: Canonicalized and final URL for the document, after following page redirects (if any).
           type: string
         invalidRules:
-          description: 'List of rules that were specified in the request, but which the server did not know how to instantiate.'
+          description: List of rules that were specified in the request, but which the server did not know how to instantiate.
           items:
             type: string
           type: array
         kind:
-          default: 'pagespeedonline#result'
+          default: pagespeedonline#result
           description: Kind of result.
           type: string
         pageStats:
-          description: 'Summary statistics for the page, such as number of JavaScript bytes, number of HTML bytes, etc.'
+          description: Summary statistics for the page, such as number of JavaScript bytes, number of HTML bytes, etc.
           properties:
             cssResponseBytes:
               description: Number of uncompressed response bytes for CSS resources on the page.
@@ -300,7 +300,7 @@ components:
               format: int64
               type: string
             textResponseBytes:
-              description: 'Number of uncompressed response bytes for text resources not covered by other statistics (i.e non-HTML, non-script, non-CSS resources) on the page.'
+              description: Number of uncompressed response bytes for text resources not covered by other statistics (i.e non-HTML, non-script, non-CSS resources) on the page.
               format: int64
               type: string
             totalRequestBytes:
@@ -313,7 +313,7 @@ components:
           format: int32
           type: integer
         score:
-          description: 'The PageSpeed Score (0-100), which indicates how much faster a page could be. A high score indicates little room for improvement, while a lower score indicates more room for improvement.'
+          description: The PageSpeed Score (0-100), which indicates how much faster a page could be. A high score indicates little room for improvement, while a lower score indicates more room for improvement.
           format: int32
           type: integer
         screenshot:
@@ -336,7 +336,7 @@ components:
               type: integer
           type: object
         title:
-          description: 'Title of the page, as displayed in the browser''s title bar.'
+          description: Title of the page, as displayed in the browser's title bar.
           type: string
         version:
           description: The version of PageSpeed used to generate these results.

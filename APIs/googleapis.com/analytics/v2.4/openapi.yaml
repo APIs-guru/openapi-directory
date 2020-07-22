@@ -1,35 +1,35 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://www.googleapis.com/analytics/v2.4'
+  - url: https://www.googleapis.com/analytics/v2.4
 info:
   contact:
     name: Google
-    url: 'https://google.com'
+    url: https://google.com
   description: Views and manages your Google Analytics data.
   license:
     name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
+    url: http://creativecommons.org/licenses/by/3.0/
+  termsOfService: https://developers.google.com/terms/
   title: Google Analytics
   version: v2.4
   x-apiClientRegistration:
-    url: 'https://console.developers.google.com'
+    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
   x-logo:
-    url: 'https://www.gstatic.com/images/icons/material/product/2x/analytics_64dp.png'
+    url: https://www.gstatic.com/images/icons/material/product/2x/analytics_64dp.png
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.31
       format: google
-      url: 'https://www.googleapis.com/discovery/v1/apis/analytics/v2.4/rest'
+      url: https://www.googleapis.com/discovery/v1/apis/analytics/v2.4/rest
       version: v1
   x-preferred: false
   x-providerName: googleapis.com
   x-serviceName: analytics
 externalDocs:
-  url: 'https://developers.google.com/analytics/'
+  url: https://developers.google.com/analytics/
 tags:
   - name: data
   - name: management
@@ -39,7 +39,7 @@ paths:
       description: Returns Analytics report data for a view (profile).
       operationId: analytics.data.get
       parameters:
-        - description: 'Unique table ID for retrieving report data. Table ID is of the form ga:XXXX, where XXXX is the Analytics view (profile) ID.'
+        - description: Unique table ID for retrieving report data. Table ID is of the form ga:XXXX, where XXXX is the Analytics view (profile) ID.
           in: query
           name: ids
           required: true
@@ -57,13 +57,13 @@ paths:
           required: true
           schema:
             type: string
-        - description: 'A comma-separated list of Analytics metrics. E.g., ''ga:sessions,ga:pageviews''. At least one metric must be specified to retrieve a valid Analytics report.'
+        - description: A comma-separated list of Analytics metrics. E.g., 'ga:sessions,ga:pageviews'. At least one metric must be specified to retrieve a valid Analytics report.
           in: query
           name: metrics
           required: true
           schema:
             type: string
-        - description: 'A comma-separated list of Analytics dimensions. E.g., ''ga:browser,ga:city''.'
+        - description: A comma-separated list of Analytics dimensions. E.g., 'ga:browser,ga:city'.
           in: query
           name: dimensions
           schema:
@@ -95,27 +95,27 @@ paths:
             minimum: 1
             type: integer
       responses:
-        '200':
+        "200":
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/analytics'
+            - https://www.googleapis.com/auth/analytics
           Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics'
+            - https://www.googleapis.com/auth/analytics
         - Oauth2:
-            - 'https://www.googleapis.com/auth/analytics.readonly'
+            - https://www.googleapis.com/auth/analytics.readonly
           Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics.readonly'
+            - https://www.googleapis.com/auth/analytics.readonly
       tags:
         - data
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
   /management/accounts:
     get:
       description: Lists all accounts to which the user has access.
@@ -133,33 +133,33 @@ paths:
             minimum: 1
             type: integer
       responses:
-        '200':
+        "200":
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/analytics'
+            - https://www.googleapis.com/auth/analytics
           Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics'
+            - https://www.googleapis.com/auth/analytics
         - Oauth2:
-            - 'https://www.googleapis.com/auth/analytics.readonly'
+            - https://www.googleapis.com/auth/analytics.readonly
           Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics.readonly'
+            - https://www.googleapis.com/auth/analytics.readonly
       tags:
         - management
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
-  '/management/accounts/{accountId}/webproperties':
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
+  "/management/accounts/{accountId}/webproperties":
     get:
       description: Lists web properties to which the user has access.
       operationId: analytics.management.webproperties.list
       parameters:
-        - description: 'Account ID to retrieve web properties for. Can either be a specific account ID or ''~all'', which refers to all the accounts that user has access to.'
+        - description: Account ID to retrieve web properties for. Can either be a specific account ID or '~all', which refers to all the accounts that user has access to.
           in: path
           name: accountId
           required: true
@@ -177,39 +177,39 @@ paths:
             minimum: 1
             type: integer
       responses:
-        '200':
+        "200":
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/analytics'
+            - https://www.googleapis.com/auth/analytics
           Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics'
+            - https://www.googleapis.com/auth/analytics
         - Oauth2:
-            - 'https://www.googleapis.com/auth/analytics.readonly'
+            - https://www.googleapis.com/auth/analytics.readonly
           Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics.readonly'
+            - https://www.googleapis.com/auth/analytics.readonly
       tags:
         - management
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
-  '/management/accounts/{accountId}/webproperties/{webPropertyId}/profiles':
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
+  "/management/accounts/{accountId}/webproperties/{webPropertyId}/profiles":
     get:
       description: Lists views (profiles) to which the user has access.
       operationId: analytics.management.profiles.list
       parameters:
-        - description: 'Account ID for the views (profiles) to retrieve. Can either be a specific account ID or ''~all'', which refers to all the accounts to which the user has access.'
+        - description: Account ID for the views (profiles) to retrieve. Can either be a specific account ID or '~all', which refers to all the accounts to which the user has access.
           in: path
           name: accountId
           required: true
           schema:
             type: string
-        - description: 'Web property ID for the views (profiles) to retrieve. Can either be a specific web property ID or ''~all'', which refers to all the web properties to which the user has access.'
+        - description: Web property ID for the views (profiles) to retrieve. Can either be a specific web property ID or '~all', which refers to all the web properties to which the user has access.
           in: path
           name: webPropertyId
           required: true
@@ -227,45 +227,45 @@ paths:
             minimum: 1
             type: integer
       responses:
-        '200':
+        "200":
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/analytics'
+            - https://www.googleapis.com/auth/analytics
           Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics'
+            - https://www.googleapis.com/auth/analytics
         - Oauth2:
-            - 'https://www.googleapis.com/auth/analytics.readonly'
+            - https://www.googleapis.com/auth/analytics.readonly
           Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics.readonly'
+            - https://www.googleapis.com/auth/analytics.readonly
       tags:
         - management
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
-  '/management/accounts/{accountId}/webproperties/{webPropertyId}/profiles/{profileId}/goals':
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
+  "/management/accounts/{accountId}/webproperties/{webPropertyId}/profiles/{profileId}/goals":
     get:
       description: Lists goals to which the user has access.
       operationId: analytics.management.goals.list
       parameters:
-        - description: 'Account ID to retrieve goals for. Can either be a specific account ID or ''~all'', which refers to all the accounts that user has access to.'
+        - description: Account ID to retrieve goals for. Can either be a specific account ID or '~all', which refers to all the accounts that user has access to.
           in: path
           name: accountId
           required: true
           schema:
             type: string
-        - description: 'Web property ID to retrieve goals for. Can either be a specific web property ID or ''~all'', which refers to all the web properties that user has access to.'
+        - description: Web property ID to retrieve goals for. Can either be a specific web property ID or '~all', which refers to all the web properties that user has access to.
           in: path
           name: webPropertyId
           required: true
           schema:
             type: string
-        - description: 'View (Profile) ID to retrieve goals for. Can either be a specific view (profile) ID or ''~all'', which refers to all the views (profiles) that user has access to.'
+        - description: View (Profile) ID to retrieve goals for. Can either be a specific view (profile) ID or '~all', which refers to all the views (profiles) that user has access to.
           in: path
           name: profileId
           required: true
@@ -283,27 +283,27 @@ paths:
             minimum: 1
             type: integer
       responses:
-        '200':
+        "200":
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/analytics'
+            - https://www.googleapis.com/auth/analytics
           Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics'
+            - https://www.googleapis.com/auth/analytics
         - Oauth2:
-            - 'https://www.googleapis.com/auth/analytics.readonly'
+            - https://www.googleapis.com/auth/analytics.readonly
           Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics.readonly'
+            - https://www.googleapis.com/auth/analytics.readonly
       tags:
         - management
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
   /management/segments:
     get:
       description: Lists advanced segments to which the user has access.
@@ -321,27 +321,27 @@ paths:
             minimum: 1
             type: integer
       responses:
-        '200':
+        "200":
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/analytics'
+            - https://www.googleapis.com/auth/analytics
           Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics'
+            - https://www.googleapis.com/auth/analytics
         - Oauth2:
-            - 'https://www.googleapis.com/auth/analytics.readonly'
+            - https://www.googleapis.com/auth/analytics.readonly
           Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics.readonly'
+            - https://www.googleapis.com/auth/analytics.readonly
       tags:
         - management
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
 components:
   parameters:
     alt:
@@ -360,7 +360,7 @@ components:
       schema:
         type: string
     key:
-      description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -395,18 +395,18 @@ components:
       description: Oauth 2.0 implicit authentication
       flows:
         implicit:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            'https://www.googleapis.com/auth/analytics': View and manage your Google Analytics data
-            'https://www.googleapis.com/auth/analytics.readonly': View your Google Analytics data
+            https://www.googleapis.com/auth/analytics: View and manage your Google Analytics data
+            https://www.googleapis.com/auth/analytics.readonly: View your Google Analytics data
       type: oauth2
     Oauth2c:
       description: Oauth 2.0 accessCode authentication
       flows:
         authorizationCode:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            'https://www.googleapis.com/auth/analytics': View and manage your Google Analytics data
-            'https://www.googleapis.com/auth/analytics.readonly': View your Google Analytics data
-          tokenUrl: 'https://accounts.google.com/o/oauth2/token'
+            https://www.googleapis.com/auth/analytics: View and manage your Google Analytics data
+            https://www.googleapis.com/auth/analytics.readonly: View your Google Analytics data
+          tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

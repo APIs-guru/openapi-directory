@@ -1,31 +1,37 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://www.googleapis.com/plus/v1'
+  - url: https://www.googleapis.com/plus/v1
 info:
   contact:
     name: Google
-    url: 'https://google.com'
+    url: https://google.com
+    x-twitter: youtube
   description: Builds on top of the Google+ platform.
-  title: Google+
+  license:
+    name: Creative Commons Attribution 3.0
+    url: http://creativecommons.org/licenses/by/3.0/
+  termsOfService: https://developers.google.com/terms/
+  title: Google+ API
   version: v1
   x-apiClientRegistration:
-    url: 'https://console.developers.google.com'
+    url: https://console.developers.google.com
   x-apisguru-categories:
-    - social
+    - analytics
+    - media
   x-logo:
-    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.31
       format: google
-      url: 'https://www.googleapis.com/discovery/v1/apis/plus/v1/rest'
+      url: https://www.googleapis.com/discovery/v1/apis/plus/v1/rest
       version: v1
   x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: plus
 externalDocs:
-  url: 'https://developers.google.com/+/api/'
+  url: https://developers.google.com/+/api/
 tags:
   - name: activities
   - name: comments
@@ -33,7 +39,8 @@ tags:
 paths:
   /activities:
     get:
-      description: 'Shut down. See https://developers.google.com/+/api-shutdown for more details.'
+      description: Shut down. See https://developers.google.com/+/api-shutdown for
+        more details.
       operationId: plus.activities.search
       parameters:
         - description: Full-text search query string.
@@ -42,17 +49,18 @@ paths:
           required: true
           schema:
             type: string
-        - description: Specify the preferred language to search with. See search language codes for available values.
+        - description: Specify the preferred language to search with. See search language
+            codes for available values.
           in: query
           name: language
           schema:
-            default: en-US
             type: string
-        - description: 'The maximum number of activities to include in the response, which is used for paging. For any response, the actual number returned might be less than the specified maxResults.'
+        - description: The maximum number of activities to include in the response, which
+            is used for paging. For any response, the actual number returned
+            might be less than the specified maxResults.
           in: query
           name: maxResults
           schema:
-            default: 10
             maximum: 20
             minimum: 1
             type: integer
@@ -60,41 +68,48 @@ paths:
           in: query
           name: orderBy
           schema:
-            default: recent
             enum:
               - best
               - recent
             type: string
-        - description: 'The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of "nextPageToken" from the previous response. This token can be of any length.'
+        - description: The continuation token, which is used to page through large result
+            sets. To get the next page of results, set this parameter to the
+            value of "nextPageToken" from the previous response. This token can
+            be of any length.
           in: query
           name: pageToken
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ActivityFeed'
+                $ref: "#/components/schemas/ActivityFeed"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
+            - https://www.googleapis.com/auth/plus.login
+          Oauth2c:
+            - https://www.googleapis.com/auth/plus.login
         - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.me'
+            - https://www.googleapis.com/auth/plus.me
+          Oauth2c:
+            - https://www.googleapis.com/auth/plus.me
       tags:
         - activities
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
-  '/activities/{activityId}':
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
+  "/activities/{activityId}":
     get:
-      description: 'Shut down. See https://developers.google.com/+/api-shutdown for more details.'
+      description: Shut down. See https://developers.google.com/+/api-shutdown for
+        more details.
       operationId: plus.activities.get
       parameters:
         - description: The ID of the activity to get.
@@ -104,30 +119,35 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Activity'
+                $ref: "#/components/schemas/Activity"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
+            - https://www.googleapis.com/auth/plus.login
+          Oauth2c:
+            - https://www.googleapis.com/auth/plus.login
         - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.me'
+            - https://www.googleapis.com/auth/plus.me
+          Oauth2c:
+            - https://www.googleapis.com/auth/plus.me
       tags:
         - activities
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
-  '/activities/{activityId}/comments':
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
+  "/activities/{activityId}/comments":
     get:
-      description: 'Shut down. See https://developers.google.com/+/api-shutdown for more details.'
+      description: Shut down. See https://developers.google.com/+/api-shutdown for
+        more details.
       operationId: plus.comments.list
       parameters:
         - description: The ID of the activity to get comments for.
@@ -136,15 +156,18 @@ paths:
           required: true
           schema:
             type: string
-        - description: 'The maximum number of comments to include in the response, which is used for paging. For any response, the actual number returned might be less than the specified maxResults.'
+        - description: The maximum number of comments to include in the response, which is
+            used for paging. For any response, the actual number returned might
+            be less than the specified maxResults.
           in: query
           name: maxResults
           schema:
-            default: 20
             maximum: 500
             minimum: 0
             type: integer
-        - description: 'The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of "nextPageToken" from the previous response.'
+        - description: The continuation token, which is used to page through large result
+            sets. To get the next page of results, set this parameter to the
+            value of "nextPageToken" from the previous response.
           in: query
           name: pageToken
           schema:
@@ -153,36 +176,40 @@ paths:
           in: query
           name: sortOrder
           schema:
-            default: ascending
             enum:
               - ascending
               - descending
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/CommentFeed'
+                $ref: "#/components/schemas/CommentFeed"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
+            - https://www.googleapis.com/auth/plus.login
+          Oauth2c:
+            - https://www.googleapis.com/auth/plus.login
         - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.me'
+            - https://www.googleapis.com/auth/plus.me
+          Oauth2c:
+            - https://www.googleapis.com/auth/plus.me
       tags:
         - comments
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
-  '/activities/{activityId}/people/{collection}':
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
+  "/activities/{activityId}/people/{collection}":
     get:
-      description: 'Shut down. See https://developers.google.com/+/api-shutdown for more details.'
+      description: Shut down. See https://developers.google.com/+/api-shutdown for
+        more details.
       operationId: plus.people.listByActivity
       parameters:
         - description: The ID of the activity to get the list of people for.
@@ -200,44 +227,52 @@ paths:
               - plusoners
               - resharers
             type: string
-        - description: 'The maximum number of people to include in the response, which is used for paging. For any response, the actual number returned might be less than the specified maxResults.'
+        - description: The maximum number of people to include in the response, which is
+            used for paging. For any response, the actual number returned might
+            be less than the specified maxResults.
           in: query
           name: maxResults
           schema:
-            default: 20
             maximum: 100
             minimum: 1
             type: integer
-        - description: 'The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of "nextPageToken" from the previous response.'
+        - description: The continuation token, which is used to page through large result
+            sets. To get the next page of results, set this parameter to the
+            value of "nextPageToken" from the previous response.
           in: query
           name: pageToken
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/PeopleFeed'
+                $ref: "#/components/schemas/PeopleFeed"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
+            - https://www.googleapis.com/auth/plus.login
+          Oauth2c:
+            - https://www.googleapis.com/auth/plus.login
         - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.me'
+            - https://www.googleapis.com/auth/plus.me
+          Oauth2c:
+            - https://www.googleapis.com/auth/plus.me
       tags:
         - people
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
-  '/comments/{commentId}':
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
+  "/comments/{commentId}":
     get:
-      description: 'Shut down. See https://developers.google.com/+/api-shutdown for more details.'
+      description: Shut down. See https://developers.google.com/+/api-shutdown for
+        more details.
       operationId: plus.comments.get
       parameters:
         - description: The ID of the comment to get.
@@ -247,122 +282,149 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Comment'
+                $ref: "#/components/schemas/Comment"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
+            - https://www.googleapis.com/auth/plus.login
+          Oauth2c:
+            - https://www.googleapis.com/auth/plus.login
         - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.me'
+            - https://www.googleapis.com/auth/plus.me
+          Oauth2c:
+            - https://www.googleapis.com/auth/plus.me
       tags:
         - comments
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
   /people:
     get:
-      description: 'Shut down. See https://developers.google.com/+/api-shutdown for more details.'
+      description: Shut down. See https://developers.google.com/+/api-shutdown for
+        more details.
       operationId: plus.people.search
       parameters:
-        - description: Specify a query string for full text search of public text in all profiles.
+        - description: Specify a query string for full text search of public text in all
+            profiles.
           in: query
           name: query
           required: true
           schema:
             type: string
-        - description: Specify the preferred language to search with. See search language codes for available values.
+        - description: Specify the preferred language to search with. See search language
+            codes for available values.
           in: query
           name: language
           schema:
-            default: en-US
             type: string
-        - description: 'The maximum number of people to include in the response, which is used for paging. For any response, the actual number returned might be less than the specified maxResults.'
+        - description: The maximum number of people to include in the response, which is
+            used for paging. For any response, the actual number returned might
+            be less than the specified maxResults.
           in: query
           name: maxResults
           schema:
-            default: 25
             maximum: 50
             minimum: 1
             type: integer
-        - description: 'The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of "nextPageToken" from the previous response. This token can be of any length.'
+        - description: The continuation token, which is used to page through large result
+            sets. To get the next page of results, set this parameter to the
+            value of "nextPageToken" from the previous response. This token can
+            be of any length.
           in: query
           name: pageToken
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/PeopleFeed'
+                $ref: "#/components/schemas/PeopleFeed"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
+            - https://www.googleapis.com/auth/plus.login
+          Oauth2c:
+            - https://www.googleapis.com/auth/plus.login
         - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.me'
+            - https://www.googleapis.com/auth/plus.me
+          Oauth2c:
+            - https://www.googleapis.com/auth/plus.me
       tags:
         - people
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
-  '/people/{userId}':
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
+  "/people/{userId}":
     get:
-      description: 'Get a person''s profile. If your app uses scope https://www.googleapis.com/auth/plus.login, this method is guaranteed to return ageRange and language.'
+      description: Get a person's profile. If your app uses scope
+        https://www.googleapis.com/auth/plus.login, this method is guaranteed to
+        return ageRange and language.
       operationId: plus.people.get
       parameters:
-        - description: The ID of the person to get the profile for. The special value "me" can be used to indicate the authenticated user.
+        - description: The ID of the person to get the profile for. The special value "me"
+            can be used to indicate the authenticated user.
           in: path
           name: userId
           required: true
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Person'
+                $ref: "#/components/schemas/Person"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
+            - https://www.googleapis.com/auth/plus.login
+          Oauth2c:
+            - https://www.googleapis.com/auth/plus.login
         - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.me'
+            - https://www.googleapis.com/auth/plus.me
+          Oauth2c:
+            - https://www.googleapis.com/auth/plus.me
         - Oauth2:
-            - 'https://www.googleapis.com/auth/userinfo.email'
+            - https://www.googleapis.com/auth/userinfo.email
+          Oauth2c:
+            - https://www.googleapis.com/auth/userinfo.email
         - Oauth2:
-            - 'https://www.googleapis.com/auth/userinfo.profile'
+            - https://www.googleapis.com/auth/userinfo.profile
+          Oauth2c:
+            - https://www.googleapis.com/auth/userinfo.profile
       tags:
         - people
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
-  '/people/{userId}/activities/{collection}':
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
+  "/people/{userId}/activities/{collection}":
     get:
-      description: 'Shut down. See https://developers.google.com/+/api-shutdown for more details.'
+      description: Shut down. See https://developers.google.com/+/api-shutdown for
+        more details.
       operationId: plus.activities.list
       parameters:
-        - description: The ID of the user to get activities for. The special value "me" can be used to indicate the authenticated user.
+        - description: The ID of the user to get activities for. The special value "me"
+            can be used to indicate the authenticated user.
           in: path
           name: userId
           required: true
@@ -376,47 +438,55 @@ paths:
             enum:
               - public
             type: string
-        - description: 'The maximum number of activities to include in the response, which is used for paging. For any response, the actual number returned might be less than the specified maxResults.'
+        - description: The maximum number of activities to include in the response, which
+            is used for paging. For any response, the actual number returned
+            might be less than the specified maxResults.
           in: query
           name: maxResults
           schema:
-            default: 20
             maximum: 100
             minimum: 1
             type: integer
-        - description: 'The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of "nextPageToken" from the previous response.'
+        - description: The continuation token, which is used to page through large result
+            sets. To get the next page of results, set this parameter to the
+            value of "nextPageToken" from the previous response.
           in: query
           name: pageToken
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ActivityFeed'
+                $ref: "#/components/schemas/ActivityFeed"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
+            - https://www.googleapis.com/auth/plus.login
+          Oauth2c:
+            - https://www.googleapis.com/auth/plus.login
         - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.me'
+            - https://www.googleapis.com/auth/plus.me
+          Oauth2c:
+            - https://www.googleapis.com/auth/plus.me
       tags:
         - activities
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
-  '/people/{userId}/people/{collection}':
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
+  "/people/{userId}/people/{collection}":
     get:
       description: List all of the people in the specified collection.
       operationId: plus.people.list
       parameters:
-        - description: Get the collection of people for the person identified. Use "me" to indicate the authenticated user.
+        - description: Get the collection of people for the person identified. Use "me" to
+            indicate the authenticated user.
           in: path
           name: userId
           required: true
@@ -431,11 +501,12 @@ paths:
               - connected
               - visible
             type: string
-        - description: 'The maximum number of people to include in the response, which is used for paging. For any response, the actual number returned might be less than the specified maxResults.'
+        - description: The maximum number of people to include in the response, which is
+            used for paging. For any response, the actual number returned might
+            be less than the specified maxResults.
           in: query
           name: maxResults
           schema:
-            default: 100
             maximum: 100
             minimum: 1
             type: integer
@@ -447,33 +518,39 @@ paths:
               - alphabetical
               - best
             type: string
-        - description: 'The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of "nextPageToken" from the previous response.'
+        - description: The continuation token, which is used to page through large result
+            sets. To get the next page of results, set this parameter to the
+            value of "nextPageToken" from the previous response.
           in: query
           name: pageToken
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/PeopleFeed'
+                $ref: "#/components/schemas/PeopleFeed"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
+            - https://www.googleapis.com/auth/plus.login
+          Oauth2c:
+            - https://www.googleapis.com/auth/plus.login
         - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.me'
+            - https://www.googleapis.com/auth/plus.me
+          Oauth2c:
+            - https://www.googleapis.com/auth/plus.me
       tags:
         - people
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
 components:
   parameters:
     alt:
@@ -481,7 +558,6 @@ components:
       in: query
       name: alt
       schema:
-        default: json
         enum:
           - json
         type: string
@@ -492,7 +568,9 @@ components:
       schema:
         type: string
     key:
-      description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+      description: API key. Your API key identifies your project and provides you with
+        API access, quota, and reports. Required unless you provide an OAuth 2.0
+        token.
       in: query
       name: key
       schema:
@@ -508,10 +586,10 @@ components:
       in: query
       name: prettyPrint
       schema:
-        default: true
         type: boolean
     quotaUser:
-      description: An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+      description: An opaque string that represents a user for quota purposes. Must
+        not exceed 40 characters.
       in: query
       name: quotaUser
       schema:
@@ -526,22 +604,23 @@ components:
     Acl:
       properties:
         description:
-          description: 'Description of the access granted, suitable for display.'
+          description: Description of the access granted, suitable for display.
           type: string
         items:
           description: The list of access entries.
           items:
-            $ref: '#/components/schemas/PlusAclentryResource'
+            $ref: "#/components/schemas/PlusAclentryResource"
           type: array
         kind:
-          default: 'plus#acl'
-          description: 'Identifies this resource as a collection of access controls. Value: "plus#acl".'
+          default: plus#acl
+          description: 'Identifies this resource as a collection of access controls.
+            Value: "plus#acl".'
           type: string
       type: object
     Activity:
       properties:
         access:
-          $ref: '#/components/schemas/Acl'
+          $ref: "#/components/schemas/Acl"
           description: Identifies who has access to see this activity.
         actor:
           description: The person who performed this activity.
@@ -558,7 +637,7 @@ components:
                   type: object
               type: object
             displayName:
-              description: 'The name of the actor, suitable for display.'
+              description: The name of the actor, suitable for display.
               type: string
             id:
               description: The ID of the actor's Person resource.
@@ -567,7 +646,9 @@ components:
               description: The image representation of the actor.
               properties:
                 url:
-                  description: 'The URL of the actor''s profile photo. To resize the image and crop it to a square, append the query string ?sz=x, where x is the dimension in pixels of each side.'
+                  description: The URL of the actor's profile photo. To resize the image and crop
+                    it to a square, append the query string ?sz=x, where x is
+                    the dimension in pixels of each side.
                   type: string
               type: object
             name:
@@ -595,32 +676,37 @@ components:
           description: Street address where this activity occurred.
           type: string
         annotation:
-          description: 'Additional content added by the person who shared this activity, applicable only when resharing an activity.'
+          description: Additional content added by the person who shared this activity,
+            applicable only when resharing an activity.
           type: string
         crosspostSource:
-          description: 'If this activity is a crosspost from another system, this property specifies the ID of the original activity.'
+          description: If this activity is a crosspost from another system, this property
+            specifies the ID of the original activity.
           type: string
         etag:
           description: ETag of this response for caching purposes.
           type: string
         geocode:
-          description: 'Latitude and longitude where this activity occurred. Format is latitude followed by longitude, space separated.'
+          description: Latitude and longitude where this activity occurred. Format is
+            latitude followed by longitude, space separated.
           type: string
         id:
           description: The ID of this activity.
           type: string
         kind:
-          default: 'plus#activity'
+          default: plus#activity
           description: 'Identifies this resource as an activity. Value: "plus#activity".'
           type: string
         location:
-          $ref: '#/components/schemas/Place'
+          $ref: "#/components/schemas/Place"
           description: The location where this activity occurred.
         object:
           description: The object of this activity.
           properties:
             actor:
-              description: 'If this activity''s object is itself another activity, such as when a person reshares an activity, this property specifies the original activity''s actor.'
+              description: If this activity's object is itself another activity, such as when
+                a person reshares an activity, this property specifies the
+                original activity's actor.
               properties:
                 clientSpecificActorInfo:
                   description: Actor info specific to particular clients.
@@ -634,7 +720,7 @@ components:
                       type: object
                   type: object
                 displayName:
-                  description: 'The original actor''s name, which is suitable for display.'
+                  description: The original actor's name, which is suitable for display.
                   type: string
                 id:
                   description: ID of the original actor.
@@ -662,13 +748,16 @@ components:
               items:
                 properties:
                   content:
-                    description: 'If the attachment is an article, this property contains a snippet of text from the article. It can also include descriptions for other types.'
+                    description: If the attachment is an article, this property contains a snippet
+                      of text from the article. It can also include descriptions
+                      for other types.
                     type: string
                   displayName:
-                    description: 'The title of the attachment, such as a photo caption or an article title.'
+                    description: The title of the attachment, such as a photo caption or an article
+                      title.
                     type: string
                   embed:
-                    description: 'If the attachment is a video, the embeddable link.'
+                    description: If the attachment is a video, the embeddable link.
                     properties:
                       type:
                         description: Media type of the link.
@@ -681,7 +770,7 @@ components:
                     description: The full image URL for photo attachments.
                     properties:
                       height:
-                        description: 'The height, in pixels, of the linked resource.'
+                        description: The height, in pixels, of the linked resource.
                         format: uint32
                         type: integer
                       type:
@@ -691,7 +780,7 @@ components:
                         description: URL of the image.
                         type: string
                       width:
-                        description: 'The width, in pixels, of the linked resource.'
+                        description: The width, in pixels, of the linked resource.
                         format: uint32
                         type: integer
                     type: object
@@ -702,7 +791,7 @@ components:
                     description: The preview image for photos or videos.
                     properties:
                       height:
-                        description: 'The height, in pixels, of the linked resource.'
+                        description: The height, in pixels, of the linked resource.
                         format: uint32
                         type: integer
                       type:
@@ -712,20 +801,26 @@ components:
                         description: Image URL.
                         type: string
                       width:
-                        description: 'The width, in pixels, of the linked resource.'
+                        description: The width, in pixels, of the linked resource.
                         format: uint32
                         type: integer
                     type: object
                   objectType:
-                    description: |-
-                      The type of media object. Possible values include, but are not limited to, the following values:  
+                    description: >-
+                      The type of media object. Possible values include, but are
+                      not limited to, the following values:  
+
                       - "photo" - A photo. 
+
                       - "album" - A photo album. 
+
                       - "video" - A video. 
+
                       - "article" - An article, specified by a link.
                     type: string
                   thumbnails:
-                    description: 'If the attachment is an album, this property is a list of potential additional thumbnails from the album.'
+                    description: If the attachment is an album, this property is a list of potential
+                      additional thumbnails from the album.
                     items:
                       properties:
                         description:
@@ -735,7 +830,7 @@ components:
                           description: Image resource.
                           properties:
                             height:
-                              description: 'The height, in pixels, of the linked resource.'
+                              description: The height, in pixels, of the linked resource.
                               format: uint32
                               type: integer
                             type:
@@ -745,7 +840,7 @@ components:
                               description: Image url.
                               type: string
                             width:
-                              description: 'The width, in pixels, of the linked resource.'
+                              description: The width, in pixels, of the linked resource.
                               format: uint32
                               type: integer
                           type: object
@@ -755,24 +850,31 @@ components:
                       type: object
                     type: array
                   url:
-                    description: 'The link to the attachment, which should be of type text/html.'
+                    description: The link to the attachment, which should be of type text/html.
                     type: string
                 type: object
               type: array
             content:
-              description: 'The HTML-formatted content, which is suitable for display.'
+              description: The HTML-formatted content, which is suitable for display.
               type: string
             id:
-              description: 'The ID of the object. When resharing an activity, this is the ID of the activity that is being reshared.'
+              description: The ID of the object. When resharing an activity, this is the ID of
+                the activity that is being reshared.
               type: string
             objectType:
-              description: |-
-                The type of the object. Possible values include, but are not limited to, the following values:  
+              description: >-
+                The type of the object. Possible values include, but are not
+                limited to, the following values:  
+
                 - "note" - Textual content. 
+
                 - "activity" - A Google+ activity.
               type: string
             originalContent:
-              description: 'The content (text) as provided by the author, which is stored without any HTML formatting. When creating or updating an activity, this value must be supplied as plain text in the request.'
+              description: The content (text) as provided by the author, which is stored
+                without any HTML formatting. When creating or updating an
+                activity, this value must be supplied as plain text in the
+                request.
               type: string
             plusoners:
               description: People who +1'd this activity.
@@ -825,26 +927,33 @@ components:
               type: string
           type: object
         published:
-          description: The time at which this activity was initially published. Formatted as an RFC 3339 timestamp.
+          description: The time at which this activity was initially published. Formatted
+            as an RFC 3339 timestamp.
           format: date-time
           type: string
         radius:
-          description: 'Radius, in meters, of the region where this activity occurred, centered at the latitude and longitude identified in geocode.'
+          description: Radius, in meters, of the region where this activity occurred,
+            centered at the latitude and longitude identified in geocode.
           type: string
         title:
           description: Title of this activity.
           type: string
         updated:
-          description: The time at which this activity was last updated. Formatted as an RFC 3339 timestamp.
+          description: The time at which this activity was last updated. Formatted as an
+            RFC 3339 timestamp.
           format: date-time
           type: string
         url:
           description: The link to this activity.
           type: string
         verb:
-          description: |-
-            This activity's verb, which indicates the action that was performed. Possible values include, but are not limited to, the following values:  
+          description: >-
+            This activity's verb, which indicates the action that was performed.
+            Possible values include, but are not limited to, the following
+            values:  
+
             - "post" - Publish content to the stream. 
+
             - "share" - Reshare an activity.
           type: string
       type: object
@@ -859,26 +968,31 @@ components:
         items:
           description: The activities in this page of results.
           items:
-            $ref: '#/components/schemas/Activity'
+            $ref: "#/components/schemas/Activity"
           type: array
         kind:
-          default: 'plus#activityFeed'
-          description: 'Identifies this resource as a collection of activities. Value: "plus#activityFeed".'
+          default: plus#activityFeed
+          description: 'Identifies this resource as a collection of activities. Value:
+            "plus#activityFeed".'
           type: string
         nextLink:
           description: Link to the next page of activities.
           type: string
         nextPageToken:
-          description: 'The continuation token, which is used to page through large result sets. Provide this value in a subsequent request to return the next page of results.'
+          description: The continuation token, which is used to page through large result
+            sets. Provide this value in a subsequent request to return the next
+            page of results.
           type: string
         selfLink:
           description: Link to this activity resource.
           type: string
         title:
-          description: 'The title of this collection of activities, which is a truncated portion of the content.'
+          description: The title of this collection of activities, which is a truncated
+            portion of the content.
           type: string
         updated:
-          description: The time at which this collection of activities was last updated. Formatted as an RFC 3339 timestamp.
+          description: The time at which this collection of activities was last updated.
+            Formatted as an RFC 3339 timestamp.
           format: date-time
           type: string
       type: object
@@ -899,7 +1013,7 @@ components:
                   type: object
               type: object
             displayName:
-              description: 'The name of this actor, suitable for display.'
+              description: The name of this actor, suitable for display.
               type: string
             id:
               description: The ID of the actor.
@@ -908,7 +1022,9 @@ components:
               description: The image representation of this actor.
               properties:
                 url:
-                  description: 'The URL of the actor''s profile photo. To resize the image and crop it to a square, append the query string ?sz=x, where x is the dimension in pixels of each side.'
+                  description: The URL of the actor's profile photo. To resize the image and crop
+                    it to a square, append the query string ?sz=x, where x is
+                    the dimension in pixels of each side.
                   type: string
               type: object
             url:
@@ -941,14 +1057,14 @@ components:
             type: object
           type: array
         kind:
-          default: 'plus#comment'
+          default: plus#comment
           description: 'Identifies this resource as a comment. Value: "plus#comment".'
           type: string
         object:
           description: The object of this comment.
           properties:
             content:
-              description: 'The HTML-formatted content, suitable for display.'
+              description: The HTML-formatted content, suitable for display.
               type: string
             objectType:
               default: comment
@@ -957,7 +1073,9 @@ components:
                 - "comment" - A comment in reply to an activity.
               type: string
             originalContent:
-              description: 'The content (text) as provided by the author, stored without any HTML formatting. When creating or updating a comment, this value must be supplied as plain text in the request.'
+              description: The content (text) as provided by the author, stored without any
+                HTML formatting. When creating or updating a comment, this value
+                must be supplied as plain text in the request.
               type: string
           type: object
         plusoners:
@@ -969,20 +1087,24 @@ components:
               type: integer
           type: object
         published:
-          description: The time at which this comment was initially published. Formatted as an RFC 3339 timestamp.
+          description: The time at which this comment was initially published. Formatted
+            as an RFC 3339 timestamp.
           format: date-time
           type: string
         selfLink:
           description: Link to this comment resource.
           type: string
         updated:
-          description: The time at which this comment was last updated. Formatted as an RFC 3339 timestamp.
+          description: The time at which this comment was last updated. Formatted as an
+            RFC 3339 timestamp.
           format: date-time
           type: string
         verb:
           default: post
-          description: |-
-            This comment's verb, indicating what action was performed. Possible values are:  
+          description: >-
+            This comment's verb, indicating what action was performed. Possible
+            values are:  
+
             - "post" - Publish content to the stream.
           type: string
       type: object
@@ -997,23 +1119,27 @@ components:
         items:
           description: The comments in this page of results.
           items:
-            $ref: '#/components/schemas/Comment'
+            $ref: "#/components/schemas/Comment"
           type: array
         kind:
-          default: 'plus#commentFeed'
-          description: 'Identifies this resource as a collection of comments. Value: "plus#commentFeed".'
+          default: plus#commentFeed
+          description: 'Identifies this resource as a collection of comments. Value:
+            "plus#commentFeed".'
           type: string
         nextLink:
           description: Link to the next page of activities.
           type: string
         nextPageToken:
-          description: 'The continuation token, which is used to page through large result sets. Provide this value in a subsequent request to return the next page of results.'
+          description: The continuation token, which is used to page through large result
+            sets. Provide this value in a subsequent request to return the next
+            page of results.
           type: string
         title:
           description: The title of this collection of comments.
           type: string
         updated:
-          description: The time at which this collection of comments was last updated. Formatted as an RFC 3339 timestamp.
+          description: The time at which this collection of comments was last updated.
+            Formatted as an RFC 3339 timestamp.
           format: date-time
           type: string
       type: object
@@ -1023,16 +1149,21 @@ components:
           description: ETag of this response for caching purposes.
           type: string
         items:
-          description: 'The people in this page of results. Each item includes the id, displayName, image, and url for the person. To retrieve additional profile data, see the people.get method.'
+          description: The people in this page of results. Each item includes the id,
+            displayName, image, and url for the person. To retrieve additional
+            profile data, see the people.get method.
           items:
-            $ref: '#/components/schemas/Person'
+            $ref: "#/components/schemas/Person"
           type: array
         kind:
-          default: 'plus#peopleFeed'
-          description: 'Identifies this resource as a collection of people. Value: "plus#peopleFeed".'
+          default: plus#peopleFeed
+          description: 'Identifies this resource as a collection of people. Value:
+            "plus#peopleFeed".'
           type: string
         nextPageToken:
-          description: 'The continuation token, which is used to page through large result sets. Provide this value in a subsequent request to return the next page of results.'
+          description: The continuation token, which is used to page through large result
+            sets. Provide this value in a subsequent request to return the next
+            page of results.
           type: string
         selfLink:
           description: Link to this resource.
@@ -1041,7 +1172,9 @@ components:
           description: The title of this collection of people.
           type: string
         totalItems:
-          description: The total number of people available in this list. The number of people in a response might be smaller due to paging. This might not be set for all collections.
+          description: The total number of people available in this list. The number of
+            people in a response might be smaller due to paging. This might not
+            be set for all collections.
           format: int32
           type: integer
       type: object
@@ -1051,31 +1184,40 @@ components:
           description: A short biography for this person.
           type: string
         ageRange:
-          description: 'The age range of the person. Valid ranges are 17 or younger, 18 to 20, and 21 or older. Age is determined from the user''s birthday using Western age reckoning.'
+          description: The age range of the person. Valid ranges are 17 or younger, 18 to
+            20, and 21 or older. Age is determined from the user's birthday
+            using Western age reckoning.
           properties:
             max:
-              description: |-
-                The age range's upper bound, if any. Possible values include, but are not limited to, the following:  
+              description: >-
+                The age range's upper bound, if any. Possible values include,
+                but are not limited to, the following:  
+
                 - "17" - for age 17 
+
                 - "20" - for age 20
               format: int32
               type: integer
             min:
-              description: |-
-                The age range's lower bound, if any. Possible values include, but are not limited to, the following:  
+              description: >-
+                The age range's lower bound, if any. Possible values include,
+                but are not limited to, the following:  
+
                 - "21" - for age 21 
+
                 - "18" - for age 18
               format: int32
               type: integer
           type: object
         birthday:
-          description: 'The person''s date of birth, represented as YYYY-MM-DD.'
+          description: The person's date of birth, represented as YYYY-MM-DD.
           type: string
         braggingRights:
           description: The "bragging rights" line of this person.
           type: string
         circledByCount:
-          description: 'For followers who are visible, the number of people who have added this person or page to a circle.'
+          description: For followers who are visible, the number of people who have added
+            this person or page to a circle.
           format: int32
           type: integer
         cover:
@@ -1085,11 +1227,13 @@ components:
               description: Extra information about the cover photo.
               properties:
                 leftImageOffset:
-                  description: The difference between the left position of the cover image and the actual displayed cover image. Only valid for banner layout.
+                  description: The difference between the left position of the cover image and the
+                    actual displayed cover image. Only valid for banner layout.
                   format: int32
                   type: integer
                 topImageOffset:
-                  description: The difference between the top position of the cover image and the actual displayed cover image. Only valid for banner layout.
+                  description: The difference between the top position of the cover image and the
+                    actual displayed cover image. Only valid for banner layout.
                   format: int32
                   type: integer
               type: object
@@ -1109,8 +1253,10 @@ components:
                   type: integer
               type: object
             layout:
-              description: |-
-                The layout of the cover art. Possible values include, but are not limited to, the following values:  
+              description: >-
+                The layout of the cover art. Possible values include, but are
+                not limited to, the following values:  
+
                 - "banner" - One large image banner.
               type: string
           type: object
@@ -1118,21 +1264,32 @@ components:
           description: (this field is not currently used)
           type: string
         displayName:
-          description: 'The name of this person, which is suitable for display.'
+          description: The name of this person, which is suitable for display.
           type: string
         domain:
-          description: 'The hosted domain name for the user''s Google Apps account. For instance, example.com. The plus.profile.emails.read or email scope is needed to get this domain name.'
+          description: The hosted domain name for the user's Google Apps account. For
+            instance, example.com. The plus.profile.emails.read or email scope
+            is needed to get this domain name.
           type: string
         emails:
-          description: 'A list of email addresses that this person has, including their Google account email address, and the public verified email addresses on their Google+ profile. The plus.profile.emails.read scope is needed to retrieve these email addresses, or the email scope can be used to retrieve just the Google account email address.'
+          description: A list of email addresses that this person has, including their
+            Google account email address, and the public verified email
+            addresses on their Google+ profile. The plus.profile.emails.read
+            scope is needed to retrieve these email addresses, or the email
+            scope can be used to retrieve just the Google account email address.
           items:
             properties:
               type:
-                description: |-
-                  The type of address. Possible values include, but are not limited to, the following values:  
+                description: >-
+                  The type of address. Possible values include, but are not
+                  limited to, the following values:  
+
                   - "account" - Google account email address. 
+
                   - "home" - Home email address. 
+
                   - "work" - Work email address. 
+
                   - "other" - Other.
                 type: string
               value:
@@ -1144,10 +1301,14 @@ components:
           description: ETag of this response for caching purposes.
           type: string
         gender:
-          description: |-
-            The person's gender. Possible values include, but are not limited to, the following values:  
+          description: >-
+            The person's gender. Possible values include, but are not limited
+            to, the following values:  
+
             - "male" - Male gender. 
+
             - "female" - Female gender. 
+
             - "other" - Other.
           type: string
         id:
@@ -1160,27 +1321,31 @@ components:
               description: Whether the person's profile photo is the default one
               type: boolean
             url:
-              description: 'The URL of the person''s profile photo. To resize the image and crop it to a square, append the query string ?sz=x, where x is the dimension in pixels of each side.'
+              description: The URL of the person's profile photo. To resize the image and crop
+                it to a square, append the query string ?sz=x, where x is the
+                dimension in pixels of each side.
               type: string
           type: object
         isPlusUser:
           description: Whether this user has signed up for Google+.
           type: boolean
         kind:
-          default: 'plus#person'
+          default: plus#person
           description: 'Identifies this resource as a person. Value: "plus#person".'
           type: string
         language:
           description: The user's preferred language for rendering.
           type: string
         name:
-          description: An object representation of the individual components of a person's name.
+          description: An object representation of the individual components of a person's
+            name.
           properties:
             familyName:
               description: The family name (last name) of this person.
               type: string
             formatted:
-              description: 'The full name of this person, including middle names, suffixes, etc.'
+              description: The full name of this person, including middle names, suffixes,
+                etc.
               type: string
             givenName:
               description: The given name (first name) of this person.
@@ -1199,23 +1364,28 @@ components:
           description: The nickname of this person.
           type: string
         objectType:
-          description: |-
-            Type of person within Google+. Possible values include, but are not limited to, the following values:  
+          description: >-
+            Type of person within Google+. Possible values include, but are not
+            limited to, the following values:  
+
             - "person" - represents an actual person. 
+
             - "page" - represents a page.
           type: string
         occupation:
           description: The occupation of this person.
           type: string
         organizations:
-          description: A list of current or past organizations with which this person is associated.
+          description: A list of current or past organizations with which this person is
+            associated.
           items:
             properties:
               department:
                 description: The department within the organization. Deprecated.
                 type: string
               description:
-                description: A short description of the person's role in this organization. Deprecated.
+                description: A short description of the person's role in this organization.
+                  Deprecated.
                 type: string
               endDate:
                 description: The date that the person left this organization.
@@ -1227,7 +1397,8 @@ components:
                 description: The name of the organization.
                 type: string
               primary:
-                description: 'If "true", indicates this organization is the person''s primary one, which is typically interpreted as the current one.'
+                description: If "true", indicates this organization is the person's primary one,
+                  which is typically interpreted as the current one.
                 type: boolean
               startDate:
                 description: The date that the person joined this organization.
@@ -1236,9 +1407,12 @@ components:
                 description: The person's job title or role within the organization.
                 type: string
               type:
-                description: |-
-                  The type of organization. Possible values include, but are not limited to, the following values:  
+                description: >-
+                  The type of organization. Possible values include, but are not
+                  limited to, the following values:  
+
                   - "work" - Work. 
+
                   - "school" - School.
                 type: string
             type: object
@@ -1248,28 +1422,40 @@ components:
           items:
             properties:
               primary:
-                description: 'If "true", this place of residence is this person''s primary residence.'
+                description: If "true", this place of residence is this person's primary
+                  residence.
                 type: boolean
               value:
-                description: 'A place where this person has lived. For example: "Seattle, WA", "Near Toronto".'
+                description: 'A place where this person has lived. For example: "Seattle, WA",
+                  "Near Toronto".'
                 type: string
             type: object
           type: array
         plusOneCount:
-          description: 'If a Google+ Page, the number of people who have +1''d this page.'
+          description: If a Google+ Page, the number of people who have +1'd this page.
           format: int32
           type: integer
         relationshipStatus:
-          description: |-
-            The person's relationship status. Possible values include, but are not limited to, the following values:  
+          description: >-
+            The person's relationship status. Possible values include, but are
+            not limited to, the following values:  
+
             - "single" - Person is single. 
+
             - "in_a_relationship" - Person is in a relationship. 
+
             - "engaged" - Person is engaged. 
+
             - "married" - Person is married. 
+
             - "its_complicated" - The relationship is complicated. 
+
             - "open_relationship" - Person is in an open relationship. 
+
             - "widowed" - Person is widowed. 
+
             - "in_domestic_partnership" - Person is in a domestic partnership. 
+
             - "in_civil_union" - Person is in a civil union.
           type: string
         skills:
@@ -1289,11 +1475,16 @@ components:
                 description: The label of the URL.
                 type: string
               type:
-                description: |-
-                  The type of URL. Possible values include, but are not limited to, the following values:  
+                description: >-
+                  The type of URL. Possible values include, but are not limited
+                  to, the following values:  
+
                   - "otherProfile" - URL for another profile. 
+
                   - "contributor" - URL to a site for which this person is a contributor. 
+
                   - "website" - URL for this Google+ Page's primary website. 
+
                   - "other" - Other URL.
                 type: string
               value:
@@ -1321,7 +1512,7 @@ components:
           description: The id of the place.
           type: string
         kind:
-          default: 'plus#place'
+          default: plus#place
           description: 'Identifies this resource as a place. Value: "plus#place".'
           type: string
         position:
@@ -1343,28 +1534,51 @@ components:
           description: A descriptive name for this entry. Suitable for display.
           type: string
         id:
-          description: 'The ID of the entry. For entries of type "person" or "circle", this is the ID of the resource. For other types, this property is not set.'
+          description: The ID of the entry. For entries of type "person" or "circle", this
+            is the ID of the resource. For other types, this property is not
+            set.
           type: string
         type:
-          description: |-
-            The type of entry describing to whom access is granted. Possible values are:  
+          description: >-
+            The type of entry describing to whom access is granted. Possible
+            values are:  
+
             - "person" - Access to an individual. 
+
             - "circle" - Access to members of a circle. 
+
             - "myCircles" - Access to members of all the person's circles. 
+
             - "extendedCircles" - Access to members of all the person's circles, plus all of the people in their circles. 
+
             - "domain" - Access to members of the person's Google Apps domain. 
+
             - "public" - Access to anyone on the web.
           type: string
       type: object
   securitySchemes:
     Oauth2:
-      description: Oauth 2.0 authentication
+      description: Oauth 2.0 implicit authentication
       flows:
         implicit:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            'https://www.googleapis.com/auth/plus.login': 'View your basic profile info, including your age range and language'
-            'https://www.googleapis.com/auth/plus.me': Associate you with your personal info on Google
-            'https://www.googleapis.com/auth/userinfo.email': View your email address
-            'https://www.googleapis.com/auth/userinfo.profile': 'See your personal info, including any personal info you''ve made publicly available'
+            https://www.googleapis.com/auth/plus.login: View your basic profile info, including your age range and language
+            https://www.googleapis.com/auth/plus.me: Associate you with your personal info on Google
+            https://www.googleapis.com/auth/userinfo.email: View your email address
+            https://www.googleapis.com/auth/userinfo.profile: See your personal info,
+              including any personal info you've made publicly available
+      type: oauth2
+    Oauth2c:
+      description: Oauth 2.0 authorizationCode authentication
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          scopes:
+            https://www.googleapis.com/auth/plus.login: View your basic profile info, including your age range and language
+            https://www.googleapis.com/auth/plus.me: Associate you with your personal info on Google
+            https://www.googleapis.com/auth/userinfo.email: View your email address
+            https://www.googleapis.com/auth/userinfo.profile: See your personal info,
+              including any personal info you've made publicly available
+          tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

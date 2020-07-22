@@ -1,38 +1,50 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://firebaseml.googleapis.com/'
+  - url: https://firebaseml.googleapis.com/
 info:
   contact:
     name: Google
-    url: 'https://google.com'
+    url: https://google.com
+    x-twitter: youtube
   description: Access custom machine learning models hosted via Firebase ML.
-  title: Firebase ML
+  license:
+    name: Creative Commons Attribution 3.0
+    url: http://creativecommons.org/licenses/by/3.0/
+  termsOfService: https://developers.google.com/terms/
+  title: Firebase ML API
   version: v1
   x-apiClientRegistration:
-    url: 'https://console.developers.google.com'
+    url: https://console.developers.google.com
+  x-apisguru-categories:
+    - analytics
+    - media
   x-logo:
-    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.31
       format: google
-      url: 'https://firebaseml.googleapis.com/$discovery/rest?version=v1'
+      url: https://firebaseml.googleapis.com/$discovery/rest?version=v1
       version: v1
   x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: firebaseml
 externalDocs:
-  url: 'https://firebase.google.com'
+  url: https://firebase.google.com
 tags:
   - name: operations
 paths:
-  '/v1/{name}':
+  "/v1/{name}":
     delete:
-      description: |-
-        Deletes a long-running operation. This method indicates that the client is
+      description: >-
+        Deletes a long-running operation. This method indicates that the client
+        is
+
         no longer interested in the operation result. It does not cancel the
+
         operation. If the server doesn't support this method, it returns
+
         `google.rpc.Code.UNIMPLEMENTED`.
       operationId: firebaseml.operations.delete
       parameters:
@@ -42,17 +54,18 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Empty'
+                $ref: "#/components/schemas/Empty"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - operations
     get:
@@ -75,7 +88,6 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
         - description: The standard list filter.
           in: query
           name: filter
@@ -92,53 +104,65 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ListOperationsResponse'
+                $ref: "#/components/schemas/ListOperationsResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - operations
     parameters:
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/oauth_token'
-  '/v1/{name}:cancel':
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/upload_protocol"
+  "/v1/{name}:cancel":
     parameters:
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
-      description: |-
-        Starts asynchronous cancellation on a long-running operation.  The server
+      description: >-
+        Starts asynchronous cancellation on a long-running operation.  The
+        server
+
         makes a best effort to cancel the operation, but success is not
+
         guaranteed.  If the server doesn't support this method, it returns
+
         `google.rpc.Code.UNIMPLEMENTED`.  Clients can use
+
         Operations.GetOperation or
+
         other methods to check whether the cancellation succeeded or whether the
+
         operation completed despite cancellation. On successful cancellation,
+
         the operation is not deleted; instead, it becomes an operation with
+
         an Operation.error value with a google.rpc.Status.code of 1,
+
         corresponding to `Code.CANCELLED`.
       operationId: firebaseml.operations.cancel
       parameters:
@@ -148,22 +172,23 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CancelOperationRequest'
+              $ref: "#/components/schemas/CancelOperationRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Empty'
+                $ref: "#/components/schemas/Empty"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - operations
 components:
@@ -174,8 +199,8 @@ components:
       name: $.xgafv
       schema:
         enum:
-          - '1'
-          - '2'
+          - "1"
+          - "2"
         type: string
     access_token:
       description: OAuth access token.
@@ -188,7 +213,6 @@ components:
       in: query
       name: alt
       schema:
-        default: json
         enum:
           - json
           - media
@@ -207,7 +231,9 @@ components:
       schema:
         type: string
     key:
-      description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+      description: API key. Your API key identifies your project and provides you with
+        API access, quota, and reports. Required unless you provide an OAuth 2.0
+        token.
       in: query
       name: key
       schema:
@@ -223,22 +249,23 @@ components:
       in: query
       name: prettyPrint
       schema:
-        default: true
         type: boolean
     quotaUser:
-      description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.'
+      description: Available to use for quota purposes for server-side applications.
+        Can be any arbitrary string assigned to a user, but should not exceed 40
+        characters.
       in: query
       name: quotaUser
       schema:
         type: string
     uploadType:
-      description: 'Legacy upload protocol for media (e.g. "media", "multipart").'
+      description: Legacy upload protocol for media (e.g. "media", "multipart").
       in: query
       name: uploadType
       schema:
         type: string
     upload_protocol:
-      description: 'Upload protocol for media (e.g. "raw", "multipart").'
+      description: Upload protocol for media (e.g. "raw", "multipart").
       in: query
       name: upload_protocol
       schema:
@@ -249,9 +276,11 @@ components:
       properties: {}
       type: object
     Empty:
-      description: |-
+      description: >-
         A generic empty message that you can re-use to avoid defining duplicated
+
         empty messages in your APIs. A typical example is to use it as the request
+
         or the response type of an API method. For instance:
 
             service Foo {
@@ -268,9 +297,10 @@ components:
           description: The standard List next-page token.
           type: string
         operations:
-          description: A list of operations that matches the specified filter in the request.
+          description: A list of operations that matches the specified filter in the
+            request.
           items:
-            $ref: '#/components/schemas/Operation'
+            $ref: "#/components/schemas/Operation"
           type: array
       type: object
     ModelOperationMetadata:
@@ -285,71 +315,99 @@ components:
             - BASIC_OPERATION_STATUS_VERIFYING
           type: string
         name:
-          description: |-
+          description: >-
             The name of the model we are creating/updating
+
             The name must have the form `projects/{project_id}/models/{model_id}`
           type: string
       type: object
     Operation:
-      description: |-
-        This resource represents a long-running operation that is the result of a
+      description: >-
+        This resource represents a long-running operation that is the result of
+        a
+
         network API call.
       properties:
         done:
-          description: |-
-            If the value is `false`, it means the operation is still in progress.
+          description: >-
+            If the value is `false`, it means the operation is still in
+            progress.
+
             If `true`, the operation is completed, and either `error` or `response` is
+
             available.
           type: boolean
         error:
-          $ref: '#/components/schemas/Status'
+          $ref: "#/components/schemas/Status"
           description: The error result of the operation in case of failure or cancellation.
         metadata:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
-          description: |-
-            Service-specific metadata associated with the operation.  It typically
+          description: >-
+            Service-specific metadata associated with the operation.  It
+            typically
+
             contains progress information and common metadata such as create time.
+
             Some services might not provide such metadata.  Any method that returns a
+
             long-running operation should document the metadata type, if any.
           type: object
         name:
-          description: |-
-            The server-assigned name, which is only unique within the same service that
+          description: >-
+            The server-assigned name, which is only unique within the same
+            service that
+
             originally returns it. If you use the default HTTP mapping, the
+
             `name` should be a resource name ending with `operations/{unique_id}`.
           type: string
         response:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
-          description: |-
-            The normal response of the operation in case of success.  If the original
+          description: >-
+            The normal response of the operation in case of success.  If the
+            original
+
             method returns no data on success, such as `Delete`, the response is
+
             `google.protobuf.Empty`.  If the original method is standard
+
             `Get`/`Create`/`Update`, the response should be the resource.  For other
+
             methods, the response should have the type `XxxResponse`, where `Xxx`
+
             is the original method name.  For example, if the original method name
+
             is `TakeSnapshot()`, the inferred response type is
+
             `TakeSnapshotResponse`.
           type: object
       type: object
     Status:
-      description: |-
+      description: >-
         The `Status` type defines a logical error model that is suitable for
+
         different programming environments, including REST APIs and RPC APIs. It is
+
         used by [gRPC](https://github.com/grpc). Each `Status` message contains
+
         three pieces of data: error code, error message, and error details.
 
+
         You can find out more about this error model and how to work with it in the
+
         [API Design Guide](https://cloud.google.com/apis/design/errors).
       properties:
         code:
-          description: 'The status code, which should be an enum value of google.rpc.Code.'
+          description: The status code, which should be an enum value of google.rpc.Code.
           format: int32
           type: integer
         details:
-          description: |-
-            A list of messages that carry the error details.  There is a common set of
+          description: >-
+            A list of messages that carry the error details.  There is a common
+            set of
+
             message types for APIs to use.
           items:
             additionalProperties:
@@ -365,10 +423,19 @@ components:
       type: object
   securitySchemes:
     Oauth2:
-      description: Oauth 2.0 authentication
+      description: Oauth 2.0 implicit authentication
       flows:
         implicit:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+      type: oauth2
+    Oauth2c:
+      description: Oauth 2.0 authorizationCode authentication
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          scopes:
+            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+          tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

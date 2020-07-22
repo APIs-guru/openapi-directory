@@ -1,89 +1,92 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://sqladmin.googleapis.com/'
+  - url: https://www.googleapis.com/
 info:
   contact:
     name: Google
-    url: 'https://google.com'
+    url: https://google.com
+    x-twitter: youtube
   description: API for Cloud SQL database instance management
   license:
     name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
-  title: Cloud SQL Admin
+    url: http://creativecommons.org/licenses/by/3.0/
+  termsOfService: https://developers.google.com/terms/
+  title: Cloud SQL Admin API
   version: v1beta4
   x-apiClientRegistration:
-    url: 'https://console.developers.google.com'
+    url: https://console.developers.google.com
   x-apisguru-categories:
-    - backend
+    - analytics
+    - media
   x-logo:
-    url: 'https://twitter.com/googlecloud/profile_image?size=original'
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.31
       format: google
-      url: 'https://www.googleapis.com/discovery/v1/apis/sqladmin/v1beta4/rest'
+      url: https://www.googleapis.com/discovery/v1/apis/sqladmin/v1beta4/rest
       version: v1
   x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: sqladmin
 externalDocs:
-  url: 'https://developers.google.com/cloud-sql/'
+  url: https://developers.google.com/cloud-sql/
 tags:
-  - name: databases
   - name: sslCerts
-  - name: backupRuns
-  - name: tiers
   - name: flags
-  - name: users
-  - name: operations
   - name: instances
+  - name: users
+  - name: databases
+  - name: tiers
+  - name: backupRuns
   - name: projects
+  - name: operations
 paths:
   /sql/v1beta4/flags:
     get:
       description: List all available database flags for Cloud SQL instances.
       operationId: sql.flags.list
       parameters:
-        - description: |-
+        - description: >-
             Database type and version you want to retrieve flags for. By default, this
+
             method returns flags for all database types and versions.
           in: query
           name: databaseVersion
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/FlagsListResponse'
+                $ref: "#/components/schemas/FlagsListResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
           Oauth2c:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - flags
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-  '/sql/v1beta4/projects/{project}/instances':
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+  "/sql/v1beta4/projects/{project}/instances":
     get:
       description: Lists instances under a given project.
       operationId: sql.instances.list
@@ -94,15 +97,22 @@ paths:
           required: true
           schema:
             type: string
-        - description: |-
+        - description: >-
             A filter expression that filters resources listed in the response.
+
             The expression is in the form of field:value. For example,
+
             'instanceType:CLOUD_SQL_INSTANCE'. Fields can be nested as needed as per
+
             their JSON representation, such as 'settings.userLabels.auto_start:true'.
 
+
             Multiple filter queries are space-separated. For example.
+
             'state:RUNNABLE instanceType:CLOUD_SQL_INSTANCE'. By default, each
+
             expression is an AND expression. However, you can include AND and OR
+
             expressions explicitly.
           in: query
           name: filter
@@ -113,49 +123,51 @@ paths:
           name: maxResults
           schema:
             type: integer
-        - description: |-
+        - description: >-
             A previously-returned page token representing part of the larger set of
+
             results to view.
           in: query
           name: pageToken
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/InstancesListResponse'
+                $ref: "#/components/schemas/InstancesListResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
           Oauth2c:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - instances
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
     post:
       description: Creates a new Cloud SQL instance.
       operationId: sql.instances.insert
       parameters:
-        - description: |-
+        - description: >-
             Project ID of the project to which the newly created Cloud SQL instances
+
             should belong.
           in: path
           name: project
@@ -166,26 +178,26 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/DatabaseInstance'
+              $ref: "#/components/schemas/DatabaseInstance"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
           Oauth2c:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - instances
-  '/sql/v1beta4/projects/{project}/instances/{instance}':
+  "/sql/v1beta4/projects/{project}/instances/{instance}":
     delete:
       description: Deletes a Cloud SQL instance.
       operationId: sql.instances.delete
@@ -203,21 +215,21 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
           Oauth2c:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - instances
     get:
@@ -237,38 +249,39 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/DatabaseInstance'
+                $ref: "#/components/schemas/DatabaseInstance"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
           Oauth2c:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - instances
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
     patch:
-      description: |-
+      description: >-
         Updates settings of a Cloud SQL instance.
+
         This method supports patch semantics.
       operationId: sql.instances.patch
       parameters:
@@ -288,28 +301,29 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/DatabaseInstance'
+              $ref: "#/components/schemas/DatabaseInstance"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
           Oauth2c:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - instances
     put:
-      description: |-
+      description: >-
         Updates settings of a Cloud SQL instance. Using this operation might cause
+
         your instance to restart.
       operationId: sql.instances.update
       parameters:
@@ -329,44 +343,48 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/DatabaseInstance'
+              $ref: "#/components/schemas/DatabaseInstance"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
           Oauth2c:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - instances
-  '/sql/v1beta4/projects/{project}/instances/{instance}/addServerCa':
+  "/sql/v1beta4/projects/{project}/instances/{instance}/addServerCa":
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
     post:
-      description: |-
+      description: >-
         Add a new trusted Certificate Authority (CA) version for the specified
+
         instance. Required to prepare for a certificate rotation. If a CA version
+
         was previously added but never used in a certificate rotation, this
+
         operation replaces that version. There cannot be more than one CA version
+
         waiting to be rotated in.
       operationId: sql.instances.addServerCa
       parameters:
@@ -383,27 +401,28 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
           Oauth2c:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - instances
-  '/sql/v1beta4/projects/{project}/instances/{instance}/backupRuns':
+  "/sql/v1beta4/projects/{project}/instances/{instance}/backupRuns":
     get:
-      description: |-
+      description: >-
         Lists all backup runs associated with a given instance and configuration in
+
         the reverse chronological order of the backup initiation time.
       operationId: sql.backupRuns.list
       parameters:
@@ -424,46 +443,48 @@ paths:
           name: maxResults
           schema:
             type: integer
-        - description: |-
+        - description: >-
             A previously-returned page token representing part of the larger set of
+
             results to view.
           in: query
           name: pageToken
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/BackupRunsListResponse'
+                $ref: "#/components/schemas/BackupRunsListResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
           Oauth2c:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - backupRuns
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
     post:
-      description: |-
+      description: >-
         Creates a new backup run on demand. This method is applicable only to
+
         Second Generation instances.
       operationId: sql.backupRuns.insert
       parameters:
@@ -483,26 +504,26 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/BackupRun'
+              $ref: "#/components/schemas/BackupRun"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
           Oauth2c:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - backupRuns
-  '/sql/v1beta4/projects/{project}/instances/{instance}/backupRuns/{id}':
+  "/sql/v1beta4/projects/{project}/instances/{instance}/backupRuns/{id}":
     delete:
       description: Deletes the backup taken by a backup run.
       operationId: sql.backupRuns.delete
@@ -519,9 +540,11 @@ paths:
           required: true
           schema:
             type: string
-        - description: |-
+        - description: >-
             The ID of the Backup Run to delete. To find a Backup Run ID, use the <a
+
             href="/sql/docs/db_path/admin-api/rest/v1beta4/backupRuns/list">list</a>
+
             method.
           in: path
           name: id
@@ -529,21 +552,21 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
           Oauth2c:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - backupRuns
     get:
@@ -569,51 +592,52 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/BackupRun'
+                $ref: "#/components/schemas/BackupRun"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
           Oauth2c:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - backupRuns
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-  '/sql/v1beta4/projects/{project}/instances/{instance}/clone':
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+  "/sql/v1beta4/projects/{project}/instances/{instance}/clone":
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
     post:
-      description: |-
+      description: >-
         Creates a Cloud SQL instance as a clone of the source instance. Using this
+
         operation might cause your instance to restart.
       operationId: sql.instances.clone
       parameters:
@@ -623,8 +647,9 @@ paths:
           required: true
           schema:
             type: string
-        - description: |-
+        - description: >-
             The ID of the Cloud SQL instance to be cloned (source). This does not
+
             include the project ID.
           in: path
           name: instance
@@ -635,43 +660,46 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/InstancesCloneRequest'
+              $ref: "#/components/schemas/InstancesCloneRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
           Oauth2c:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - instances
-  '/sql/v1beta4/projects/{project}/instances/{instance}/createEphemeral':
+  "/sql/v1beta4/projects/{project}/instances/{instance}/createEphemeral":
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
     post:
-      description: |-
+      description: >-
         Generates a short-lived X509 certificate containing the provided public key
+
         and signed by a private key specific to the target instance. Users may use
+
         the certificate to authenticate as themselves when connecting to the
+
         database.
       operationId: sql.sslCerts.createEphemeral
       parameters:
@@ -691,26 +719,26 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SslCertsCreateEphemeralRequest'
+              $ref: "#/components/schemas/SslCertsCreateEphemeralRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/SslCert'
+                $ref: "#/components/schemas/SslCert"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
           Oauth2c:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - sslCerts
-  '/sql/v1beta4/projects/{project}/instances/{instance}/databases':
+  "/sql/v1beta4/projects/{project}/instances/{instance}/databases":
     get:
       description: Lists databases in the specified Cloud SQL instance.
       operationId: sql.databases.list
@@ -728,38 +756,39 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/DatabasesListResponse'
+                $ref: "#/components/schemas/DatabasesListResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
           Oauth2c:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - databases
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
     post:
-      description: |-
+      description: >-
         Inserts a resource containing information about a database inside a Cloud
+
         SQL instance.
       operationId: sql.databases.insert
       parameters:
@@ -779,26 +808,26 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Database'
+              $ref: "#/components/schemas/Database"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
           Oauth2c:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - databases
-  '/sql/v1beta4/projects/{project}/instances/{instance}/databases/{database}':
+  "/sql/v1beta4/projects/{project}/instances/{instance}/databases/{database}":
     delete:
       description: Deletes a database from a Cloud SQL instance.
       operationId: sql.databases.delete
@@ -822,26 +851,27 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
           Oauth2c:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - databases
     get:
-      description: |-
+      description: >-
         Retrieves a resource containing information about a database inside a Cloud
+
         SQL instance.
       operationId: sql.databases.get
       parameters:
@@ -864,38 +894,39 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Database'
+                $ref: "#/components/schemas/Database"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
           Oauth2c:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - databases
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
     patch:
-      description: |-
+      description: >-
         Partially updates a resource containing information about a database inside
+
         a Cloud SQL instance. This method supports patch semantics.
       operationId: sql.databases.patch
       parameters:
@@ -921,28 +952,29 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Database'
+              $ref: "#/components/schemas/Database"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
           Oauth2c:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - databases
     put:
-      description: |-
+      description: >-
         Updates a resource containing information about a database inside a Cloud
+
         SQL instance.
       operationId: sql.databases.update
       parameters:
@@ -968,41 +1000,42 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Database'
+              $ref: "#/components/schemas/Database"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
           Oauth2c:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - databases
-  '/sql/v1beta4/projects/{project}/instances/{instance}/demoteMaster':
+  "/sql/v1beta4/projects/{project}/instances/{instance}/demoteMaster":
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
     post:
-      description: |-
+      description: >-
         Demotes the stand-alone instance to be a Cloud SQL read replica for an
+
         external database server.
       operationId: sql.instances.demoteMaster
       parameters:
@@ -1022,41 +1055,42 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/InstancesDemoteMasterRequest'
+              $ref: "#/components/schemas/InstancesDemoteMasterRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
           Oauth2c:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - instances
-  '/sql/v1beta4/projects/{project}/instances/{instance}/export':
+  "/sql/v1beta4/projects/{project}/instances/{instance}/export":
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
     post:
-      description: |-
+      description: >-
         Exports data from a Cloud SQL instance to a Cloud Storage bucket as a SQL
+
         dump or CSV file.
       operationId: sql.instances.export
       parameters:
@@ -1076,37 +1110,38 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/InstancesExportRequest'
+              $ref: "#/components/schemas/InstancesExportRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - instances
-  '/sql/v1beta4/projects/{project}/instances/{instance}/failover':
+  "/sql/v1beta4/projects/{project}/instances/{instance}/failover":
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
     post:
-      description: |-
+      description: >-
         Failover the instance to its failover replica instance. Using this
+
         operation might cause your instance to restart.
       operationId: sql.instances.failover
       parameters:
@@ -1126,41 +1161,42 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/InstancesFailoverRequest'
+              $ref: "#/components/schemas/InstancesFailoverRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
           Oauth2c:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - instances
-  '/sql/v1beta4/projects/{project}/instances/{instance}/import':
+  "/sql/v1beta4/projects/{project}/instances/{instance}/import":
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
     post:
-      description: |-
+      description: >-
         Imports data into a Cloud SQL instance from a SQL dump  or CSV file in
+
         Cloud Storage.
       operationId: sql.instances.import
       parameters:
@@ -1180,28 +1216,32 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/InstancesImportRequest'
+              $ref: "#/components/schemas/InstancesImportRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - instances
-  '/sql/v1beta4/projects/{project}/instances/{instance}/listServerCas':
+  "/sql/v1beta4/projects/{project}/instances/{instance}/listServerCas":
     get:
-      description: |-
+      description: >-
         Lists all of the trusted Certificate Authorities (CAs) for the specified
+
         instance. There can be up to three CAs listed: the CA that was used to sign
+
         the certificate that is currently in use, a CA that has been added but not
+
         yet used to sign a certificate, and a CA used to sign a certificate that
+
         has previously rotated out.
       operationId: sql.instances.listServerCas
       parameters:
@@ -1218,51 +1258,52 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/InstancesListServerCasResponse'
+                $ref: "#/components/schemas/InstancesListServerCasResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
           Oauth2c:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - instances
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-  '/sql/v1beta4/projects/{project}/instances/{instance}/promoteReplica':
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+  "/sql/v1beta4/projects/{project}/instances/{instance}/promoteReplica":
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
     post:
-      description: |-
+      description: >-
         Promotes the read replica instance to be a stand-alone Cloud SQL instance.
+
         Using this operation might cause your instance to restart.
       operationId: sql.instances.promoteReplica
       parameters:
@@ -1279,36 +1320,36 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
           Oauth2c:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - instances
-  '/sql/v1beta4/projects/{project}/instances/{instance}/rescheduleMaintenance':
+  "/sql/v1beta4/projects/{project}/instances/{instance}/rescheduleMaintenance":
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
     post:
       description: Reschedules the maintenance on the given instance.
       operationId: sql.projects.instances.rescheduleMaintenance
@@ -1329,41 +1370,42 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SqlInstancesRescheduleMaintenanceRequestBody'
+              $ref: "#/components/schemas/SqlInstancesRescheduleMaintenanceRequestBody"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
           Oauth2c:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - projects
-  '/sql/v1beta4/projects/{project}/instances/{instance}/resetSslConfig':
+  "/sql/v1beta4/projects/{project}/instances/{instance}/resetSslConfig":
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
     post:
-      description: |-
+      description: >-
         Deletes all client certificates and generates a new server SSL certificate
+
         for the instance.
       operationId: sql.instances.resetSslConfig
       parameters:
@@ -1380,36 +1422,36 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
           Oauth2c:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - instances
-  '/sql/v1beta4/projects/{project}/instances/{instance}/restart':
+  "/sql/v1beta4/projects/{project}/instances/{instance}/restart":
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
     post:
       description: Restarts a Cloud SQL instance.
       operationId: sql.instances.restart
@@ -1427,39 +1469,40 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
           Oauth2c:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - instances
-  '/sql/v1beta4/projects/{project}/instances/{instance}/restoreBackup':
+  "/sql/v1beta4/projects/{project}/instances/{instance}/restoreBackup":
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
     post:
-      description: |-
+      description: >-
         Restores a backup of a Cloud SQL instance. Using this operation might cause
+
         your instance to restart.
       operationId: sql.instances.restoreBackup
       parameters:
@@ -1479,41 +1522,42 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/InstancesRestoreBackupRequest'
+              $ref: "#/components/schemas/InstancesRestoreBackupRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
           Oauth2c:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - instances
-  '/sql/v1beta4/projects/{project}/instances/{instance}/rotateServerCa':
+  "/sql/v1beta4/projects/{project}/instances/{instance}/rotateServerCa":
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
     post:
-      description: |-
+      description: >-
         Rotates the server certificate to one signed by the Certificate Authority
+
         (CA) version previously added with the addServerCA method.
       operationId: sql.instances.rotateServerCa
       parameters:
@@ -1533,26 +1577,26 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/InstancesRotateServerCaRequest'
+              $ref: "#/components/schemas/InstancesRotateServerCaRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
           Oauth2c:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - instances
-  '/sql/v1beta4/projects/{project}/instances/{instance}/sslCerts':
+  "/sql/v1beta4/projects/{project}/instances/{instance}/sslCerts":
     get:
       description: Lists all of the current SSL certificates for the instance.
       operationId: sql.sslCerts.list
@@ -1570,39 +1614,41 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/SslCertsListResponse'
+                $ref: "#/components/schemas/SslCertsListResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
           Oauth2c:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - sslCerts
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
     post:
-      description: |-
+      description: >-
         Creates an SSL certificate and returns it along with the private key and
+
         server certificate authority.  The new certificate will not be usable until
+
         the instance is restarted.
       operationId: sql.sslCerts.insert
       parameters:
@@ -1622,29 +1668,30 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SslCertsInsertRequest'
+              $ref: "#/components/schemas/SslCertsInsertRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/SslCertsInsertResponse'
+                $ref: "#/components/schemas/SslCertsInsertResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
           Oauth2c:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - sslCerts
-  '/sql/v1beta4/projects/{project}/instances/{instance}/sslCerts/{sha1Fingerprint}':
+  "/sql/v1beta4/projects/{project}/instances/{instance}/sslCerts/{sha1Fingerprint}":
     delete:
-      description: |-
+      description: >-
         Deletes the SSL certificate. For First Generation instances, the
+
         certificate remains valid until the instance is restarted.
       operationId: sql.sslCerts.delete
       parameters:
@@ -1667,27 +1714,29 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
           Oauth2c:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - sslCerts
     get:
-      description: |-
+      description: >-
         Retrieves a particular SSL certificate.  Does not include the private key
+
         (required for usage).  The private key must be saved from the response to
+
         initial creation.
       operationId: sql.sslCerts.get
       parameters:
@@ -1710,48 +1759,48 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/SslCert'
+                $ref: "#/components/schemas/SslCert"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
           Oauth2c:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - sslCerts
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-  '/sql/v1beta4/projects/{project}/instances/{instance}/startExternalSync':
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+  "/sql/v1beta4/projects/{project}/instances/{instance}/startExternalSync":
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
     post:
       description: Start External master migration.
       operationId: sql.projects.instances.startExternalSync
@@ -1778,36 +1827,36 @@ paths:
               - OFFLINE
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
           Oauth2c:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - projects
-  '/sql/v1beta4/projects/{project}/instances/{instance}/startReplica':
+  "/sql/v1beta4/projects/{project}/instances/{instance}/startReplica":
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
     post:
       description: Starts the replication in the read replica instance.
       operationId: sql.instances.startReplica
@@ -1825,36 +1874,36 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
           Oauth2c:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - instances
-  '/sql/v1beta4/projects/{project}/instances/{instance}/stopReplica':
+  "/sql/v1beta4/projects/{project}/instances/{instance}/stopReplica":
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
     post:
       description: Stops the replication in the read replica instance.
       operationId: sql.instances.stopReplica
@@ -1872,36 +1921,36 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
           Oauth2c:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - instances
-  '/sql/v1beta4/projects/{project}/instances/{instance}/truncateLog':
+  "/sql/v1beta4/projects/{project}/instances/{instance}/truncateLog":
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
     post:
       description: Truncate MySQL general and slow query log tables
       operationId: sql.instances.truncateLog
@@ -1922,26 +1971,26 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/InstancesTruncateLogRequest'
+              $ref: "#/components/schemas/InstancesTruncateLogRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
           Oauth2c:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - instances
-  '/sql/v1beta4/projects/{project}/instances/{instance}/users':
+  "/sql/v1beta4/projects/{project}/instances/{instance}/users":
     delete:
       description: Deletes a user from a Cloud SQL instance.
       operationId: sql.users.delete
@@ -1969,21 +2018,21 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
           Oauth2c:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - users
     get:
@@ -2003,35 +2052,35 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/UsersListResponse'
+                $ref: "#/components/schemas/UsersListResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
           Oauth2c:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - users
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
     post:
       description: Creates a new user in a Cloud SQL instance.
       operationId: sql.users.insert
@@ -2052,23 +2101,23 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/User'
+              $ref: "#/components/schemas/User"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
           Oauth2c:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - users
     put:
@@ -2101,38 +2150,38 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/User'
+              $ref: "#/components/schemas/User"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
           Oauth2c:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - users
-  '/sql/v1beta4/projects/{project}/instances/{instance}/verifyExternalSyncSettings':
+  "/sql/v1beta4/projects/{project}/instances/{instance}/verifyExternalSyncSettings":
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
     post:
       description: Verify External master external sync settings.
       operationId: sql.projects.instances.verifyExternalSyncSettings
@@ -2164,27 +2213,28 @@ paths:
           schema:
             type: boolean
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/SqlInstancesVerifyExternalSyncSettingsResponse'
+                $ref: "#/components/schemas/SqlInstancesVerifyExternalSyncSettingsResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
           Oauth2c:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - projects
-  '/sql/v1beta4/projects/{project}/operations':
+  "/sql/v1beta4/projects/{project}/operations":
     get:
-      description: |-
+      description: >-
         Lists all instance operations that have been performed on the given Cloud
+
         SQL instance in the reverse chronological order of the start time.
       operationId: sql.operations.list
       parameters:
@@ -2204,44 +2254,45 @@ paths:
           name: maxResults
           schema:
             type: integer
-        - description: |-
+        - description: >-
             A previously-returned page token representing part of the larger set of
+
             results to view.
           in: query
           name: pageToken
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/OperationsListResponse'
+                $ref: "#/components/schemas/OperationsListResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
           Oauth2c:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - operations
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-  '/sql/v1beta4/projects/{project}/operations/{operation}':
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+  "/sql/v1beta4/projects/{project}/operations/{operation}":
     get:
       description: Retrieves an instance operation that has been performed on an instance.
       operationId: sql.operations.get
@@ -2259,40 +2310,42 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
           Oauth2c:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - operations
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-  '/sql/v1beta4/projects/{project}/tiers':
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+  "/sql/v1beta4/projects/{project}/tiers":
     get:
-      description: |-
+      description: >-
         Lists all available machine types (tiers) for Cloud SQL, for example,
+
         db-n1-standard-1. For related information, see <a
+
         href="/sql/pricing">Pricing</a>.
       operationId: sql.tiers.list
       parameters:
@@ -2303,35 +2356,35 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/TiersListResponse'
+                $ref: "#/components/schemas/TiersListResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
           Oauth2c:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
+            - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - tiers
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
 components:
   parameters:
     _.xgafv:
@@ -2340,8 +2393,8 @@ components:
       name: $.xgafv
       schema:
         enum:
-          - '1'
-          - '2'
+          - "1"
+          - "2"
         type: string
     access_token:
       description: OAuth access token.
@@ -2354,7 +2407,6 @@ components:
       in: query
       name: alt
       schema:
-        default: json
         enum:
           - json
           - media
@@ -2373,7 +2425,7 @@ components:
       schema:
         type: string
     key:
-      description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -2389,55 +2441,40 @@ components:
       in: query
       name: prettyPrint
       schema:
-        default: true
         type: boolean
     quotaUser:
-      description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.'
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
       in: query
       name: quotaUser
       schema:
         type: string
     uploadType:
-      description: 'Legacy upload protocol for media (e.g. "media", "multipart").'
+      description: Legacy upload protocol for media (e.g. "media", "multipart").
       in: query
       name: uploadType
       schema:
         type: string
     upload_protocol:
-      description: 'Upload protocol for media (e.g. "raw", "multipart").'
+      description: Upload protocol for media (e.g. "raw", "multipart").
       in: query
       name: upload_protocol
       schema:
         type: string
-  requestBodies:
-    Database:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Database'
-    DatabaseInstance:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/DatabaseInstance'
-    User:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/User'
   schemas:
     AclEntry:
       description: An entry for an Access Control list.
       properties:
         expirationTime:
-          description: |-
+          description: >-
             The time when this access control entry expires in <a
+
             href="https://tools.ietf.org/html/rfc3339">RFC 3339</a> format, for example
-            <code>2012-11-15T16:19:00.094Z</code>.
+
+            <b>2012-11-15T16:19:00.094Z</b>.
           format: google-datetime
           type: string
         kind:
-          description: 'This is always <code>sql#aclEntry</code>.'
+          description: This is always <b>sql#aclEntry</b>.
           type: string
         name:
           description: Optional. A label to identify this entry.
@@ -2463,15 +2500,16 @@ components:
       description: Database instance backup configuration.
       properties:
         binaryLogEnabled:
-          description: |-
+          description: >-
             (MySQL only) Whether binary log is enabled. If backup configuration is
+
             disabled, binarylog must be disabled as well.
           type: boolean
         enabled:
           description: Whether this configuration is enabled.
           type: boolean
         kind:
-          description: 'This is always <code>sql#backupConfiguration</code>.'
+          description: This is always <b>sql#backupConfiguration</b>.
           type: string
         location:
           description: Location of the backup
@@ -2483,49 +2521,65 @@ components:
           description: Reserved for future use.
           type: boolean
         startTime:
-          description: |-
+          description: >-
             Start time for the daily backup configuration in UTC timezone in the 24
-            hour format - <code>HH:MM</code>.
+
+            hour format - <b>HH:MM</b>.
           type: string
       type: object
     BackupRun:
       description: A BackupRun resource.
       properties:
+        backupKind:
+          description: Specifies the kind of backup, PHYSICAL or DEFAULT_SNAPSHOT.
+          enum:
+            - SQL_BACKUP_KIND_UNSPECIFIED
+            - SNAPSHOT
+            - PHYSICAL
+          type: string
         description:
-          description: 'The description of this run, only applicable to on-demand backups.'
+          description: The description of this run, only applicable to on-demand backups.
           type: string
         diskEncryptionConfiguration:
-          $ref: '#/components/schemas/DiskEncryptionConfiguration'
-          description: |-
+          $ref: "#/components/schemas/DiskEncryptionConfiguration"
+          description: >-
             Encryption configuration specific to a backup.
+
             Applies only to Second Generation instances.
         diskEncryptionStatus:
-          $ref: '#/components/schemas/DiskEncryptionStatus'
-          description: |-
+          $ref: "#/components/schemas/DiskEncryptionStatus"
+          description: >-
             Encryption status specific to a backup.
+
             Applies only to Second Generation instances.
         endTime:
-          description: |-
+          description: >-
             The time the backup operation completed in UTC timezone in <a
+
             href="https://tools.ietf.org/html/rfc3339">RFC 3339</a> format, for example
-            <code>2012-11-15T16:19:00.094Z</code>.
+
+            <b>2012-11-15T16:19:00.094Z</b>.
           format: google-datetime
           type: string
         enqueuedTime:
-          description: |-
+          description: >-
             The time the run was enqueued in UTC timezone in <a
+
             href="https://tools.ietf.org/html/rfc3339">RFC 3339</a> format, for example
-            <code>2012-11-15T16:19:00.094Z</code>.
+
+            <b>2012-11-15T16:19:00.094Z</b>.
           format: google-datetime
           type: string
         error:
-          $ref: '#/components/schemas/OperationError'
-          description: |-
+          $ref: "#/components/schemas/OperationError"
+          description: >-
             Information about why the backup operation failed. This is only present if
+
             the run has the FAILED status.
         id:
-          description: |-
+          description: >-
             The identifier for this backup run. Unique only for a specific Cloud SQL
+
             instance.
           format: int64
           type: string
@@ -2533,7 +2587,7 @@ components:
           description: Name of the database instance.
           type: string
         kind:
-          description: 'This is always <code>sql#backupRun</code>.'
+          description: This is always <b>sql#backupRun</b>.
           type: string
         location:
           description: Location of the backups.
@@ -2542,10 +2596,12 @@ components:
           description: The URI of this resource.
           type: string
         startTime:
-          description: |-
+          description: >-
             The time the backup operation actually started in UTC timezone in <a
+
             href="https://tools.ietf.org/html/rfc3339">RFC 3339</a> format, for example
-            <code>2012-11-15T16:19:00.094Z</code>.
+
+            <b>2012-11-15T16:19:00.094Z</b>.
           format: google-datetime
           type: string
         status:
@@ -2570,10 +2626,12 @@ components:
             - ON_DEMAND
           type: string
         windowStartTime:
-          description: |-
+          description: >-
             The start time of the backup window during which this the backup was
+
             attempted in <a href="https://tools.ietf.org/html/rfc3339">RFC 3339</a>
-            format, for example <code>2012-11-15T16:19:00.094Z</code>.
+
+            format, for example <b>2012-11-15T16:19:00.094Z</b>.
           format: google-datetime
           type: string
       type: object
@@ -2583,14 +2641,15 @@ components:
         items:
           description: A list of backup runs in reverse chronological order of the enqueued time.
           items:
-            $ref: '#/components/schemas/BackupRun'
+            $ref: "#/components/schemas/BackupRun"
           type: array
         kind:
-          description: 'This is always <code>sql#backupRunsList</code>.'
+          description: This is always <b>sql#backupRunsList</b>.
           type: string
         nextPageToken:
-          description: |-
+          description: >-
             The continuation token, used to page through large result sets. Provide
+
             this value in a subsequent request to return the next page of results.
           type: string
       type: object
@@ -2605,23 +2664,25 @@ components:
           format: int64
           type: string
         kind:
-          description: 'This is always <code>sql#binLogCoordinates</code>.'
+          description: This is always <b>sql#binLogCoordinates</b>.
           type: string
       type: object
     CloneContext:
       description: Database instance clone context.
       properties:
         binLogCoordinates:
-          $ref: '#/components/schemas/BinLogCoordinates'
-          description: |-
+          $ref: "#/components/schemas/BinLogCoordinates"
+          description: >-
             Binary log coordinates, if specified, identify the position up to which the
+
             source instance should be cloned. If not specified, the source instance is
+
             cloned up to the most recent binary log coordinates.
         destinationInstanceName:
           description: Name of the Cloud SQL instance to be created as a clone.
           type: string
         kind:
-          description: 'This is always <code>sql#cloneContext</code>.'
+          description: This is always <b>sql#cloneContext</b>.
           type: string
         pitrTimestampMs:
           description: Reserved for future use.
@@ -2636,67 +2697,82 @@ components:
       description: Represents a SQL database on the Cloud SQL instance.
       properties:
         charset:
-          description: The MySQL charset value.
+          description: The Cloud SQL charset value.
           type: string
         collation:
-          description: The MySQL collation value.
+          description: The Cloud SQL collation value.
           type: string
         etag:
-          description: |-
+          description: >-
             This field is deprecated and will be removed from a future version of the
+
             API.
           type: string
         instance:
           description: The name of the Cloud SQL instance. This does not include the project ID.
           type: string
         kind:
-          description: 'This is always <code>sql#database</code>.'
+          description: This is always <b>sql#database</b>.
           type: string
         name:
-          description: |-
+          description: >-
             The name of the database in the Cloud SQL instance. This does not include
+
             the project ID or instance name.
           type: string
         project:
-          description: |-
+          description: >-
             The project ID of the project containing the Cloud SQL database. The Google
+
             apps domain is prefixed if applicable.
           type: string
         selfLink:
           description: The URI of this resource.
           type: string
         sqlserverDatabaseDetails:
-          $ref: '#/components/schemas/SqlServerDatabaseDetails'
+          $ref: "#/components/schemas/SqlServerDatabaseDetails"
       type: object
     DatabaseFlags:
       description: Database flags for Cloud SQL instances.
       properties:
         name:
-          description: |-
+          description: >-
             The name of the flag. These flags are passed at instance startup, so
+
             include both server options and system variables for MySQL. Flags should be
+
             specified with underscores, not hyphens. For more information, see <a
+
             href="/sql/docs/mysql/flags">Configuring Database Flags</a> in the Cloud
+
             SQL documentation.
           type: string
         value:
-          description: |-
-            The value of the flag. Booleans should be set to <code>on</code> for true
-            and <code>off</code> for false. This field must be omitted if the flag
+          description: >-
+            The value of the flag. Booleans should be set to <b>on</b> for true
+
+            and <b>off</b> for false. This field must be omitted if the flag
+
             doesn't take a value.
           type: string
       type: object
     DatabaseInstance:
-      description: A Cloud SQL instance resource.
+      description: >-
+        A Cloud SQL instance resource.
+
+        Next field: 34
       properties:
         backendType:
-          description: |-
-            <code>FIRST_GEN</code>: First Generation instance. MySQL only. <br
-            /><code>SECOND_GEN</code>: Second Generation instance or PostgreSQL
-            instance. <br /><code>EXTERNAL</code>: A database server that is not
+          description: >-
+            <br><b>SECOND_GEN</b>: Cloud SQL database instance.
+
+            <br><b>EXTERNAL</b>: A database server that is not
+
             managed by Google. <br>This property is read-only; use the
-            <code>tier</code> property in the <code>settings</code> object to determine
-            the database type and Second or First Generation.
+
+            <b>tier</b> property in the <b>settings</b> object to determine
+
+            the database type.
           enum:
             - SQL_BACKEND_TYPE_UNSPECIFIED
             - FIRST_GEN
@@ -2707,23 +2783,37 @@ components:
           description: Connection name of the Cloud SQL instance used in connection strings.
           type: string
         currentDiskSize:
-          description: |-
+          description: >-
             The current disk usage of the instance in bytes. This property has been
+
             deprecated. Users should use the
+
             "cloudsql.googleapis.com/database/disk/bytes_used" metric in Cloud
+
             Monitoring API instead. Please see <a
+
             href="https://groups.google.com/d/msg/google-cloud-sql-announce/I_7-F9EBhT0/BtvFtdFeAgAJ">this
+
             announcement</a> for details.
           format: int64
           type: string
         databaseVersion:
-          description: |-
-            The database engine type and version. The <code>databaseVersion</code>
-            field can not be changed after instance creation.  MySQL Second Generation
-            instances: <code>MYSQL_5_7</code> (default) or <code>MYSQL_5_6</code>.
-            PostgreSQL instances: <code>POSTGRES_9_6</code> (default) or
-            <code>POSTGRES_11 Beta</code> MySQL First Generation
-            instances: <code>MYSQL_5_6</code> (default) or <code>MYSQL_5_5</code>
+          description: >-
+            The database engine type and version. The <b>databaseVersion</b>
+
+            field cannot be changed after instance creation.
+
+            <br>MySQL instances: <b>MYSQL_5_7</b> (default), or <b>MYSQL_5_6</b>.
+
+            <br>PostgreSQL instances: <b>POSTGRES_9_6</b> (default), or
+
+            <b>POSTGRES_10</b>, or <b>POSTGRES_11 Beta</b>, or <b>POSTGRES_12</b>.
+
+            <br>SQL Server instances: <b>SQLSERVER_2017_STANDARD</b> (default),
+
+            <b>SQLSERVER_2017_ENTERPRISE</b>, <b>SQLSERVER_2017_EXPRESS</b>, or
+
+            <b>SQLSERVER_2017_WEB</b>.
           enum:
             - SQL_DATABASE_VERSION_UNSPECIFIED
             - MYSQL_5_1
@@ -2738,55 +2828,70 @@ components:
             - SQLSERVER_2017_WEB
             - POSTGRES_10
             - POSTGRES_12
+            - MYSQL_8_0
           type: string
         diskEncryptionConfiguration:
-          $ref: '#/components/schemas/DiskEncryptionConfiguration'
-          description: |-
+          $ref: "#/components/schemas/DiskEncryptionConfiguration"
+          description: >-
             Disk encryption configuration specific to an instance.
+
             Applies only to Second Generation instances.
         diskEncryptionStatus:
-          $ref: '#/components/schemas/DiskEncryptionStatus'
-          description: |-
+          $ref: "#/components/schemas/DiskEncryptionStatus"
+          description: >-
             Disk encryption status specific to an instance.
+
             Applies only to Second Generation instances.
         etag:
-          description: |-
+          description: >-
             This field is deprecated and will be removed from a future version of the
-            API. Use the <code>settings.settingsVersion</code> field instead.
+
+            API. Use the <b>settings.settingsVersion</b> field instead.
           type: string
         failoverReplica:
-          description: |-
+          description: >-
             The name and status of the failover replica. This property is applicable
+
             only to Second Generation instances.
           properties:
             available:
-              description: |-
+              description: >-
                 The availability status of the failover replica. A false status indicates
+
                 that the failover replica is out of sync. The master can only failover to
+
                 the failover replica when the status is true.
               type: boolean
             name:
-              description: |-
+              description: >-
                 The name of the failover replica. If specified at instance creation, a
+
                 failover replica is created for the instance. The name
+
                 doesn't include the project ID. This property is applicable only to
+
                 Second Generation instances.
               type: string
           type: object
         gceZone:
-          description: |-
+          description: >-
             The Compute Engine zone that the instance is currently serving from. This
+
             value could be different from the zone that was specified when the instance
+
             was created if the instance has failed over to its secondary zone.
           type: string
         instanceType:
-          description: |-
+          description: >-
             The instance type. This can be one of the following.
-            <br><code>CLOUD_SQL_INSTANCE</code>: A Cloud SQL instance that is not
-            replicating from a master. <br><code>ON_PREMISES_INSTANCE</code>: An
-            instance running on the
-            customer's premises. <br><code>READ_REPLICA_INSTANCE</code>: A Cloud SQL
-            instance configured as a read-replica.
+
+            <br><b>CLOUD_SQL_INSTANCE</b>: A Cloud SQL instance that is not replicating
+
+            from a master. <br><b>ON_PREMISES_INSTANCE</b>: An instance running on the
+
+            customer's premises. <br><b>READ_REPLICA_INSTANCE</b>: A Cloud SQL instance
+
+            configured as a read-replica.
           enum:
             - SQL_INSTANCE_TYPE_UNSPECIFIED
             - CLOUD_SQL_INSTANCE
@@ -2796,15 +2901,18 @@ components:
         ipAddresses:
           description: The assigned IP addresses for the instance.
           items:
-            $ref: '#/components/schemas/IpMapping'
+            $ref: "#/components/schemas/IpMapping"
           type: array
         ipv6Address:
-          description: |-
-            The IPv6 address assigned to the instance. This property is applicable only
+          description: >-
+            The IPv6 address assigned to the instance.
+
+            (Deprecated) This property was applicable only
+
             to First Generation instances.
           type: string
         kind:
-          description: 'This is always <code>sql#instance</code>.'
+          description: This is always <b>sql#instance</b>.
           type: string
         masterInstanceName:
           description: The name of the instance which will act as master in the replication setup.
@@ -2817,25 +2925,32 @@ components:
           description: Name of the Cloud SQL instance. This does not include the project ID.
           type: string
         onPremisesConfiguration:
-          $ref: '#/components/schemas/OnPremisesConfiguration'
+          $ref: "#/components/schemas/OnPremisesConfiguration"
           description: Configuration specific to on-premises instances.
         project:
-          description: |-
+          description: >-
             The project ID of the project containing the Cloud SQL instance. The Google
+
             apps domain is prefixed if applicable.
           type: string
         region:
-          description: |-
-            The geographical region. Can be <code>us-central</code>
-            (<code>FIRST_GEN</code> instances only), <code>us-central1</code>
-            (<code>SECOND_GEN</code> instances only), <code>asia-east1</code> or
-            <code>europe-west1</code>. Defaults to <code>us-central</code> or
-            <code>us-central1</code> depending on the instance type (First Generation
-            or Second Generation). The region can not be changed after instance
-            creation.
+          description: >-
+            The geographical region. Can be
+
+            <br><b>us-central</b> (<b>FIRST_GEN</b> instances only)
+
+            <br><b>us-central1</b> (<b>SECOND_GEN</b> instances only)
+
+            <br><b>asia-east1</b> or <b>europe-west1</b>.
+
+            <br>Defaults to <b>us-central</b> or
+
+            <b>us-central1</b> depending on the instance type.
+
+            The region cannot be changed after instance creation.
           type: string
         replicaConfiguration:
-          $ref: '#/components/schemas/ReplicaConfiguration'
+          $ref: "#/components/schemas/ReplicaConfiguration"
           description: Configuration specific to failover replicas and read replicas.
         replicaNames:
           description: The replicas of the instance.
@@ -2846,32 +2961,40 @@ components:
           description: Initial root password. Use only on creation.
           type: string
         scheduledMaintenance:
-          $ref: '#/components/schemas/SqlScheduledMaintenance'
+          $ref: "#/components/schemas/SqlScheduledMaintenance"
           description: The start time of any upcoming scheduled maintenance for this instance.
         selfLink:
           description: The URI of this resource.
           type: string
         serverCaCert:
-          $ref: '#/components/schemas/SslCert'
+          $ref: "#/components/schemas/SslCert"
           description: SSL configuration.
         serviceAccountEmailAddress:
-          description: |-
+          description: >-
             The service account email address assigned to the instance. This property
+
             is applicable only to Second Generation instances.
           type: string
         settings:
-          $ref: '#/components/schemas/Settings'
+          $ref: "#/components/schemas/Settings"
           description: The user settings.
         state:
-          description: |-
+          description: >-
             The current serving state of the Cloud SQL instance. This can be one of the
-            following. <br><code>RUNNABLE</code>: The instance is running, or is ready
-            to run when accessed. <br><code>SUSPENDED</code>: The instance is not
+
+            following. <br><b>RUNNABLE</b>: The instance is running, or is ready
+
+            to run when accessed. <br><b>SUSPENDED</b>: The instance is not
+
             available, for example due to problems with billing.
-            <br><code>PENDING_CREATE</code>: The instance is being created.
-            <br><code>MAINTENANCE</code>: The instance is down for maintenance.
-            <br><code>FAILED</code>: The instance creation failed.
-            <br><code>UNKNOWN_STATE</code>: The state of the instance is unknown.
+
+            <br><b>PENDING_CREATE</b>: The instance is being created.
+
+            <br><b>MAINTENANCE</b>: The instance is down for maintenance.
+
+            <br><b>FAILED</b>: The instance creation failed.
+
+            <br><b>UNKNOWN_STATE</b>: The state of the instance is unknown.
           enum:
             - SQL_INSTANCE_STATE_UNSPECIFIED
             - RUNNABLE
@@ -2882,7 +3005,7 @@ components:
             - FAILED
           type: string
         suspensionReason:
-          description: 'If the instance state is SUSPENDED, the reason for the suspension.'
+          description: If the instance state is SUSPENDED, the reason for the suspension.
           items:
             enum:
               - SQL_SUSPENSION_REASON_UNSPECIFIED
@@ -2899,52 +3022,65 @@ components:
         items:
           description: List of database resources in the instance.
           items:
-            $ref: '#/components/schemas/Database'
+            $ref: "#/components/schemas/Database"
           type: array
         kind:
-          description: 'This is always <code>sql#databasesList</code>.'
+          description: This is always <b>sql#databasesList</b>.
           type: string
       type: object
     DemoteMasterConfiguration:
       description: Read-replica configuration for connecting to the on-premises master.
       properties:
         kind:
-          description: 'This is always <code>sql#demoteMasterConfiguration</code>.'
+          description: This is always <b>sql#demoteMasterConfiguration</b>.
           type: string
         mysqlReplicaConfiguration:
-          $ref: '#/components/schemas/DemoteMasterMySqlReplicaConfiguration'
-          description: |-
+          $ref: "#/components/schemas/DemoteMasterMySqlReplicaConfiguration"
+          description: >-
             MySQL specific configuration when replicating from a MySQL on-premises
+
             master. Replication configuration information such as the username,
+
             password, certificates, and keys are not stored in the instance metadata.
+
             The configuration information is used only to set up the replication
-            connection and is stored by MySQL in a file named <code>master.info</code>
+
+            connection and is stored by MySQL in a file named <b>master.info</b>
+
             in the data directory.
       type: object
     DemoteMasterContext:
       description: Database instance demote master context.
       properties:
         kind:
-          description: 'This is always <code>sql#demoteMasterContext</code>.'
+          description: This is always <b>sql#demoteMasterContext</b>.
           type: string
         masterInstanceName:
-          description: |-
+          description: >-
             The name of the instance which will act as on-premises master in the
+
             replication setup.
           type: string
         replicaConfiguration:
-          $ref: '#/components/schemas/DemoteMasterConfiguration'
-          description: |-
+          $ref: "#/components/schemas/DemoteMasterConfiguration"
+          description: >-
             Configuration specific to read-replicas replicating from the on-premises
+
             master.
         verifyGtidConsistency:
-          description: |-
+          description: >-
             Verify GTID consistency for demote operation. Default value:
-            <code>True</code>. Second Generation instances only.  Setting this flag to
+
+            <b>True</b>. Second Generation instances only.  Setting this flag to
+
             false enables you to bypass GTID consistency check between on-premises
+
             master and Cloud SQL instance during the demotion operation but also
+
             exposes you to the risk of future replication failures. Change the value
+
             only if you know the reason for the GTID divergence and are confident that
+
             doing so will not cause any replication issues.
           type: boolean
       type: object
@@ -2958,13 +3094,15 @@ components:
           description: PEM representation of the slave's x509 certificate.
           type: string
         clientKey:
-          description: |-
+          description: >-
             PEM representation of the slave's private key. The corresponsing public key
+
             is encoded in the client's certificate. The format of the slave's private
+
             key can be either PKCS #1 or PKCS #8.
           type: string
         kind:
-          description: 'This is always <code>sql#demoteMasterMysqlReplicaConfiguration</code>.'
+          description: This is always <b>sql#demoteMasterMysqlReplicaConfiguration</b>.
           type: string
         password:
           description: The password for the replication connection.
@@ -2977,7 +3115,7 @@ components:
       description: Disk encryption configuration for an instance.
       properties:
         kind:
-          description: 'This is always <code>sql#diskEncryptionConfiguration</code>.'
+          description: This is always <b>sql#diskEncryptionConfiguration</b>.
           type: string
         kmsKeyName:
           description: Resource name of KMS key for disk encryption
@@ -2987,7 +3125,7 @@ components:
       description: Disk encryption status for an instance.
       properties:
         kind:
-          description: 'This is always <code>sql#diskEncryptionStatus</code>.'
+          description: This is always <b>sql#diskEncryptionStatus</b>.
           type: string
         kmsKeyVersionName:
           description: KMS key version used to encrypt the Cloud SQL instance resource
@@ -3004,24 +3142,34 @@ components:
               type: string
           type: object
         databases:
-          description: |-
+          description: >-
             Databases to be exported. <br /> <b>MySQL instances:</b> If
-            <code>fileType</code> is <code>SQL</code> and no database is specified, all
-            databases are exported, except for the <code>mysql</code> system database.
-            If <code>fileType</code> is <code>CSV</code>, you can specify one database,
+
+            <b>fileType</b> is <b>SQL</b> and no database is specified, all
+
+            databases are exported, except for the <b>mysql</b> system database.
+
+            If <b>fileType</b> is <b>CSV</b>, you can specify one database,
+
             either by using this property or by using the
-            <code>csvExportOptions.selectQuery</code> property, which takes precedence
+
+            <b>csvExportOptions.selectQuery</b> property, which takes precedence
+
             over this property. <br /> <b>PostgreSQL instances:</b> You must specify
-            one database to be exported. If <code>fileType</code> is <code>CSV</code>,
+
+            one database to be exported. If <b>fileType</b> is <b>CSV</b>,
+
             this database must match the one specified in the
-            <code>csvExportOptions.selectQuery</code> property.
+
+            <b>csvExportOptions.selectQuery</b> property.
           items:
             type: string
           type: array
         fileType:
-          description: |-
-            The file type for the specified uri. <br><code>SQL</code>: The file
-            contains SQL statements. <br><code>CSV</code>: The file contains CSV data.
+          description: >-
+            The file type for the specified uri. <br><b>SQL</b>: The file
+
+            contains SQL statements. <br><b>CSV</b>: The file contains CSV data.
           enum:
             - SQL_FILE_TYPE_UNSPECIFIED
             - SQL
@@ -3029,7 +3177,7 @@ components:
             - BAK
           type: string
         kind:
-          description: 'This is always <code>sql#exportContext</code>.'
+          description: This is always <b>sql#exportContext</b>.
           type: string
         sqlExportOptions:
           description: Options for exporting data as SQL statements.
@@ -3038,11 +3186,12 @@ components:
               description: Options for exporting from MySQL.
               properties:
                 masterData:
-                  description: |-
+                  description: >-
                     Option to include SQL statement required to set up replication.
-                    If set to <code>1</code>, the dump file includes
+
+                    <br>If set to <b>1</b>, the dump file includes
                      a CHANGE MASTER TO statement with the binary log coordinates.
-                    If set to <code>2</code>, the CHANGE MASTER TO statement is written as
+                    <br>If set to <b>2</b>, the CHANGE MASTER TO statement is written as
                      a SQL comment, and has no effect.
                     All other values are ignored.
                   format: int32
@@ -3052,21 +3201,28 @@ components:
               description: Export only schemas.
               type: boolean
             tables:
-              description: |-
+              description: >-
                 Tables to export, or that were exported, from the specified database. If
+
                 you specify tables, specify one and only one database. For PostgreSQL
+
                 instances, you can specify only one table.
               items:
                 type: string
               type: array
           type: object
         uri:
-          description: |-
+          description: >-
             The path to the file in Google Cloud Storage where the export will be
-            stored. The URI is in the form <code>gs:
-            //bucketName/fileName</code>. If the file already exists, the requests
-            // succeeds, but the operation fails. If <code>fileType</code> is
-            // <code>SQL</code> and the filename ends with .gz, the contents are
+
+            stored. The URI is in the form <b>gs:
+
+            //bucketName/fileName</b>. If the file already exists, the requests
+
+            // succeeds, but the operation fails. If <b>fileType</b> is
+
+            // <b>SQL</b> and the filename ends with .gz, the contents are
+
             // compressed.
           type: string
       type: object
@@ -3074,11 +3230,12 @@ components:
       description: Database instance failover context.
       properties:
         kind:
-          description: 'This is always <code>sql#failoverContext</code>.'
+          description: This is always <b>sql#failoverContext</b>.
           type: string
         settingsVersion:
-          description: |-
+          description: >-
             The current settings version of this instance. Request will be rejected if
+
             this version doesn't match the current settings version.
           format: int64
           type: string
@@ -3087,24 +3244,28 @@ components:
       description: A flag resource.
       properties:
         allowedIntValues:
-          description: |-
+          description: >-
             Use this field if only certain integers are accepted. Can be combined
+
             with min_value and max_value to add additional values.
           items:
             format: int64
             type: string
           type: array
         allowedStringValues:
-          description: |-
-            For <code>STRING</code> flags, a list of strings that the value can be set
+          description: >-
+            For <b>STRING</b> flags, a list of strings that the value can be set
+
             to.
           items:
             type: string
           type: array
         appliesTo:
-          description: |-
-            The database version this flag applies to. Can be <code>MYSQL_5_5</code>,
-            <code>MYSQL_5_6</code>, or <code>MYSQL_5_7</code>. <code>MYSQL_5_7</code>
+          description: >-
+            The database version this flag applies to. Can be <b>MYSQL_5_5</b>,
+
+            <b>MYSQL_5_6</b>, or <b>MYSQL_5_7</b>. <b>MYSQL_5_7</b>
+
             is applicable only to Second Generation instances.
           items:
             enum:
@@ -3121,38 +3282,44 @@ components:
               - SQLSERVER_2017_WEB
               - POSTGRES_10
               - POSTGRES_12
+              - MYSQL_8_0
             type: string
           type: array
         inBeta:
           description: Whether or not the flag is considered in beta.
           type: boolean
         kind:
-          description: 'This is always <code>sql#flag</code>.'
+          description: This is always <b>sql#flag</b>.
           type: string
         maxValue:
-          description: 'For <code>INTEGER</code> flags, the maximum allowed value.'
+          description: For <b>INTEGER</b> flags, the maximum allowed value.
           format: int64
           type: string
         minValue:
-          description: 'For <code>INTEGER</code> flags, the minimum allowed value.'
+          description: For <b>INTEGER</b> flags, the minimum allowed value.
           format: int64
           type: string
         name:
-          description: |-
+          description: >-
             This is the name of the flag. Flag names always use underscores, not
-            hyphens, e.g. <code>max_allowed_packet</code>
+
+            hyphens, e.g. <b>max_allowed_packet</b>
           type: string
         requiresRestart:
-          description: |-
+          description: >-
             Indicates whether changing this flag will trigger a database restart. Only
+
             applicable to Second Generation instances.
           type: boolean
         type:
-          description: |-
-            The type of the flag. Flags are typed to being <code>BOOLEAN</code>,
-            <code>STRING</code>, <code>INTEGER</code> or <code>NONE</code>.
-            <code>NONE</code> is used for flags which do not take a value, such as
-            <code>skip_grant_tables</code>.
+          description: >-
+            The type of the flag. Flags are typed to being <b>BOOLEAN</b>,
+
+            <b>STRING</b>, <b>INTEGER</b> or <b>NONE</b>.
+
+            <b>NONE</b> is used for flags which do not take a value, such as
+
+            <b>skip_grant_tables</b>.
           enum:
             - SQL_FLAG_TYPE_UNSPECIFIED
             - BOOLEAN
@@ -3170,10 +3337,10 @@ components:
         items:
           description: List of flags.
           items:
-            $ref: '#/components/schemas/Flag'
+            $ref: "#/components/schemas/Flag"
           type: array
         kind:
-          description: 'This is always <code>sql#flagsList</code>.'
+          description: This is always <b>sql#flagsList</b>.
           type: string
       type: object
     ImportContext:
@@ -3185,18 +3352,22 @@ components:
             encryptionOptions:
               properties:
                 certPath:
-                  description: |-
+                  description: >-
                     Path to the Certificate (.cer) in Cloud Storage, in the form
-                    <code>gs://bucketName/fileName</code>. The instance must have
+
+                    <b>gs://bucketName/fileName</b>. The instance must have
+
                     write permissions to the bucket and read access to the file.
                   type: string
                 pvkPassword:
                   description: Password that encrypts the private key
                   type: string
                 pvkPath:
-                  description: |-
+                  description: >-
                     Path to the Certificate Private Key (.pvk)  in Cloud Storage, in the
-                    form <code>gs://bucketName/fileName</code>. The instance must have
+
+                    form <b>gs://bucketName/fileName</b>. The instance must have
+
                     write permissions to the bucket and read access to the file.
                   type: string
               type: object
@@ -3205,8 +3376,9 @@ components:
           description: Options for importing data as CSV.
           properties:
             columns:
-              description: |-
+              description: >-
                 The columns to which CSV data is imported. If not specified, all columns
+
                 of the database table are loaded with CSV data.
               items:
                 type: string
@@ -3216,17 +3388,22 @@ components:
               type: string
           type: object
         database:
-          description: |-
-            The target database for the import. If <code>fileType</code> is
-            <code>SQL</code>, this field is required only if the import file does not
+          description: >-
+            The target database for the import. If <b>fileType</b> is
+
+            <b>SQL</b>, this field is required only if the import file does not
+
             specify a database, and is overridden by any database specification in the
-            import file. If <code>fileType</code> is <code>CSV</code>, one database
+
+            import file. If <b>fileType</b> is <b>CSV</b>, one database
+
             must be specified.
           type: string
         fileType:
-          description: |-
-            The file type for the specified uri. <br><code>SQL</code>: The file
-            contains SQL statements. <br><code>CSV</code>: The file contains CSV data.
+          description: >-
+            The file type for the specified uri. <br><b>SQL</b>: The file
+
+            contains SQL statements. <br><b>CSV</b>: The file contains CSV data.
           enum:
             - SQL_FILE_TYPE_UNSPECIFIED
             - SQL
@@ -3237,14 +3414,18 @@ components:
           description: The PostgreSQL user for this import operation. PostgreSQL instances only.
           type: string
         kind:
-          description: 'This is always <code>sql#importContext</code>.'
+          description: This is always <b>sql#importContext</b>.
           type: string
         uri:
-          description: |-
+          description: >-
             Path to the import file in Cloud Storage, in the form
-            <code>gs:
-            //bucketName/fileName</code>. Compressed gzip files (.gz) are supported
-            // when <code>fileType</code> is <code>SQL</code>. The instance must have
+
+            <b>gs:
+
+            //bucketName/fileName</b>. Compressed gzip files (.gz) are supported
+
+            // when <b>fileType</b> is <b>SQL</b>. The instance must have
+
             // write permissions to the bucket and read access to the file.
           type: string
       type: object
@@ -3252,35 +3433,35 @@ components:
       description: Database instance clone request.
       properties:
         cloneContext:
-          $ref: '#/components/schemas/CloneContext'
+          $ref: "#/components/schemas/CloneContext"
           description: Contains details about the clone operation.
       type: object
     InstancesDemoteMasterRequest:
       description: Database demote master request.
       properties:
         demoteMasterContext:
-          $ref: '#/components/schemas/DemoteMasterContext'
+          $ref: "#/components/schemas/DemoteMasterContext"
           description: Contains details about the demoteMaster operation.
       type: object
     InstancesExportRequest:
       description: Database instance export request.
       properties:
         exportContext:
-          $ref: '#/components/schemas/ExportContext'
+          $ref: "#/components/schemas/ExportContext"
           description: Contains details about the export operation.
       type: object
     InstancesFailoverRequest:
       description: Instance failover request.
       properties:
         failoverContext:
-          $ref: '#/components/schemas/FailoverContext'
+          $ref: "#/components/schemas/FailoverContext"
           description: Failover Context.
       type: object
     InstancesImportRequest:
       description: Database instance import request.
       properties:
         importContext:
-          $ref: '#/components/schemas/ImportContext'
+          $ref: "#/components/schemas/ImportContext"
           description: Contains details about the import operation.
       type: object
     InstancesListResponse:
@@ -3289,20 +3470,21 @@ components:
         items:
           description: List of database instance resources.
           items:
-            $ref: '#/components/schemas/DatabaseInstance'
+            $ref: "#/components/schemas/DatabaseInstance"
           type: array
         kind:
-          description: 'This is always <code>sql#instancesList</code>.'
+          description: This is always <b>sql#instancesList</b>.
           type: string
         nextPageToken:
-          description: |-
+          description: >-
             The continuation token, used to page through large result sets. Provide
+
             this value in a subsequent request to return the next page of results.
           type: string
         warnings:
           description: List of warnings that occurred while handling the request.
           items:
-            $ref: '#/components/schemas/ApiWarning'
+            $ref: "#/components/schemas/ApiWarning"
           type: array
       type: object
     InstancesListServerCasResponse:
@@ -3313,54 +3495,57 @@ components:
         certs:
           description: List of server CA certificates for the instance.
           items:
-            $ref: '#/components/schemas/SslCert'
+            $ref: "#/components/schemas/SslCert"
           type: array
         kind:
-          description: 'This is always <code>sql#instancesListServerCas</code>.'
+          description: This is always <b>sql#instancesListServerCas</b>.
           type: string
       type: object
     InstancesRestoreBackupRequest:
       description: Database instance restore backup request.
       properties:
         restoreBackupContext:
-          $ref: '#/components/schemas/RestoreBackupContext'
+          $ref: "#/components/schemas/RestoreBackupContext"
           description: Parameters required to perform the restore backup operation.
       type: object
     InstancesRotateServerCaRequest:
       description: Rotate Server CA request.
       properties:
         rotateServerCaContext:
-          $ref: '#/components/schemas/RotateServerCaContext'
+          $ref: "#/components/schemas/RotateServerCaContext"
           description: Contains details about the rotate server CA operation.
       type: object
     InstancesTruncateLogRequest:
       description: Instance truncate log request.
       properties:
         truncateLogContext:
-          $ref: '#/components/schemas/TruncateLogContext'
+          $ref: "#/components/schemas/TruncateLogContext"
           description: Contains details about the truncate log operation.
       type: object
     IpConfiguration:
       description: IP Management configuration.
       properties:
         authorizedNetworks:
-          description: |-
+          description: >-
             The list of external networks that are allowed to connect to the instance
-            using the IP. In <a
-            href="http://en.wikipedia.org/wiki/CIDR_notation#CIDR_notation">CIDR
-            notation</a>, also known as 'slash' notation (e.g.
-            <code>192.168.100.0/24</code>).
+
+            using the IP. In 'CIDR' notation, also known as 'slash' notation (e.g.
+
+            <b>192.168.100.0/24</b>).
           items:
-            $ref: '#/components/schemas/AclEntry'
+            $ref: "#/components/schemas/AclEntry"
           type: array
         ipv4Enabled:
           description: Whether the instance should be assigned an IP address or not.
           type: boolean
         privateNetwork:
-          description: |-
+          description: >-
             The resource link for the VPC network from which the Cloud SQL instance is
+
             accessible for private IP. For example,
-            <code>/projects/myProject/global/networks/default</code>. This setting can
+
+            <b>/projects/myProject/global/networks/default</b>. This setting can
+
             be updated, but it cannot be removed after it is set.
           type: string
         requireSsl:
@@ -3374,19 +3559,26 @@ components:
           description: The IP address assigned.
           type: string
         timeToRetire:
-          description: |-
+          description: >-
             The due time for this IP to be retired in <a
+
             href="https://tools.ietf.org/html/rfc3339">RFC 3339</a> format, for example
-            <code>2012-11-15T16:19:00.094Z</code>. This field is only available when
+
+            <b>2012-11-15T16:19:00.094Z</b>. This field is only available when
+
             the IP is scheduled to be retired.
           format: google-datetime
           type: string
         type:
-          description: |-
-            The type of this IP address. A <code>PRIMARY</code> address is a public
-            address that can accept incoming connections. A <code>PRIVATE</code>
+          description: >-
+            The type of this IP address. A <b>PRIMARY</b> address is a public
+
+            address that can accept incoming connections. A <b>PRIVATE</b>
+
             address is a private address that can accept incoming connections. An
-            <code>OUTGOING</code> address is the source address of connections
+
+            <b>OUTGOING</b> address is the source address of connections
+
             originating from the instance, if supported.
           enum:
             - SQL_IP_ADDRESS_TYPE_UNSPECIFIED
@@ -3397,34 +3589,41 @@ components:
           type: string
       type: object
     LocationPreference:
-      description: |-
+      description: >-
         Preferred location. This specifies where a Cloud SQL instance should
+
         preferably be located, either in a specific Compute Engine zone, or
+
         co-located with an App Engine application. Note that if the preferred
+
         location is not available, the instance will be located as close as possible
+
         within the region. Only one location may be specified.
       properties:
         followGaeApplication:
-          description: |-
-            The AppEngine application to follow, it must be in the same region as the
+          description: >-
+            The App Engine application to follow, it must be in the same region as the
+
             Cloud SQL instance.
           type: string
         kind:
-          description: 'This is always <code>sql#locationPreference</code>.'
+          description: This is always <b>sql#locationPreference</b>.
           type: string
         zone:
-          description: |-
+          description: >-
             The preferred Compute Engine zone (e.g. us-central1-a, us-central1-b,
+
             etc.).
           type: string
       type: object
     MaintenanceWindow:
-      description: |-
+      description: >-
         Maintenance window. This specifies when a v2 Cloud SQL instance should
+
         preferably be restarted for system maintenance purposes.
       properties:
         day:
-          description: 'day of week (1-7), starting on Monday.'
+          description: day of week (1-7), starting on Monday.
           format: int32
           type: integer
         hour:
@@ -3432,13 +3631,16 @@ components:
           format: int32
           type: integer
         kind:
-          description: 'This is always <code>sql#maintenanceWindow</code>.'
+          description: This is always <b>sql#maintenanceWindow</b>.
           type: string
         updateTrack:
-          description: |-
-            Maintenance timing setting: <code>canary</code> (Earlier) or
-            <code>stable</code> (Later). <br /><a
+          description: >-
+            Maintenance timing setting: <b>canary</b> (Earlier) or
+
+            <b>stable</b> (Later). <br /><a
+
             href="/sql/docs/db_path/instance-settings#maintenance-timing-2ndgen">
+
             Learn more</a>.
           enum:
             - SQL_UPDATE_TRACK_UNSPECIFIED
@@ -3456,8 +3658,9 @@ components:
           description: PEM representation of the slave's x509 certificate.
           type: string
         clientKey:
-          description: |-
+          description: >-
             PEM representation of the slave's private key. The corresponsing public key
+
             is encoded in the client's certificate.
           type: string
         connectRetryInterval:
@@ -3465,16 +3668,21 @@ components:
           format: int32
           type: integer
         dumpFilePath:
-          description: |-
+          description: >-
             Path to a SQL dump file in Google Cloud Storage from which the slave
-            instance is to be created. The URI is in the form gs:
-            //bucketName/fileName. Compressed gzip files (.gz) are also supported.
-            // Dumps should have the binlog co-ordinates from which replication should
-            // begin. This can be accomplished by setting --master-data to 1 when using
-            // mysqldump.
+
+            instance is to be created. The URI is in the form gs://bucketName/fileName.
+
+            Compressed gzip files (.gz) are also supported.
+
+            Dumps should have the binlog co-ordinates from which replication should
+
+            begin. This can be accomplished by setting --master-data to 1 when using
+
+            mysqldump.
           type: string
         kind:
-          description: 'This is always <code>sql#mysqlReplicaConfiguration</code>.'
+          description: This is always <b>sql#mysqlReplicaConfiguration</b>.
           type: string
         masterHeartbeatPeriod:
           description: Interval in milliseconds between replication heartbeats.
@@ -3490,8 +3698,9 @@ components:
           description: The username for the replication connection.
           type: string
         verifyServerCertificate:
-          description: |-
+          description: >-
             Whether or not to check the master's Common Name value in the certificate
+
             that it sends during the SSL handshake.
           type: boolean
       type: object
@@ -3505,18 +3714,19 @@ components:
           description: PEM representation of the slave's x509 certificate.
           type: string
         clientKey:
-          description: |-
+          description: >-
             PEM representation of the slave's private key. The corresponsing public key
+
             is encoded in the client's certificate.
           type: string
         dumpFilePath:
           description: The dump file to create the Cloud SQL replica.
           type: string
         hostPort:
-          description: 'The host and port of the on-premises instance in host:port format'
+          description: The host and port of the on-premises instance in host:port format
           type: string
         kind:
-          description: 'This is always <code>sql#onPremisesConfiguration</code>.'
+          description: This is always <b>sql#onPremisesConfiguration</b>.
           type: string
         password:
           description: The password for connecting to on-premises instance.
@@ -3526,53 +3736,81 @@ components:
           type: string
       type: object
     Operation:
-      description: |-
+      description: >-
         An Operation resource.&nbsp;For successful operations that return an
+
         Operation resource, only the fields relevant to the operation are populated
+
         in the resource.
       properties:
         endTime:
-          description: |-
+          description: >-
             The time this operation finished in UTC timezone in <a
+
             href="https://tools.ietf.org/html/rfc3339">RFC 3339</a> format, for example
-            <code>2012-11-15T16:19:00.094Z</code>.
+
+            <b>2012-11-15T16:19:00.094Z</b>.
           format: google-datetime
           type: string
         error:
-          $ref: '#/components/schemas/OperationErrors'
-          description: |-
+          $ref: "#/components/schemas/OperationErrors"
+          description: >-
             If errors occurred during processing of this operation, this field will be
+
             populated.
         exportContext:
-          $ref: '#/components/schemas/ExportContext'
-          description: 'The context for export operation, if applicable.'
+          $ref: "#/components/schemas/ExportContext"
+          description: The context for export operation, if applicable.
         importContext:
-          $ref: '#/components/schemas/ImportContext'
-          description: 'The context for import operation, if applicable.'
+          $ref: "#/components/schemas/ImportContext"
+          description: The context for import operation, if applicable.
         insertTime:
-          description: |-
+          description: >-
             The time this operation was enqueued in UTC timezone in <a
+
             href="https://tools.ietf.org/html/rfc3339">RFC 3339</a> format, for example
-            <code>2012-11-15T16:19:00.094Z</code>.
+
+            <b>2012-11-15T16:19:00.094Z</b>.
           format: google-datetime
           type: string
         kind:
-          description: 'This is always <code>sql#operation</code>.'
+          description: This is always <b>sql#operation</b>.
           type: string
         name:
-          description: |-
+          description: >-
             An identifier that uniquely identifies the operation. You can use this
+
             identifier to retrieve the Operations resource that has information about
+
             the operation.
           type: string
         operationType:
-          description: |-
-            The type of the operation. Valid values are <code>CREATE</code>,
-            <code>DELETE</code>, <code>UPDATE</code>, <code>RESTART</code>,
-            <code>IMPORT</code>, <code>EXPORT</code>, <code>BACKUP_VOLUME</code>,
-            <code>RESTORE_VOLUME</code>, <code>CREATE_USER</code>,
-            <code>DELETE_USER</code>, <code>CREATE_DATABASE</code>,
-            <code>DELETE_DATABASE</code> .
+          description: >-
+            The type of the operation. Valid values are:
+
+            <br><b>CREATE</b>
+
+            <br><b>DELETE</b>
+
+            <br><b>UPDATE</b>
+
+            <br><b>RESTART</b>
+
+            <br><b>IMPORT</b>
+
+            <br><b>EXPORT</b>
+
+            <br><b>BACKUP_VOLUME</b>
+
+            <br><b>RESTORE_VOLUME</b>
+
+            <br><b>CREATE_USER</b>
+
+            <br><b>DELETE_USER</b>
+
+            <br><b>CREATE_DATABASE</b>
+
+            <br><b>DELETE_DATABASE</b>
           enum:
             - SQL_OPERATION_TYPE_UNSPECIFIED
             - IMPORT
@@ -3614,17 +3852,25 @@ components:
           description: The URI of this resource.
           type: string
         startTime:
-          description: |-
+          description: >-
             The time this operation actually started in UTC timezone in <a
+
             href="https://tools.ietf.org/html/rfc3339">RFC 3339</a> format, for example
-            <code>2012-11-15T16:19:00.094Z</code>.
+
+            <b>2012-11-15T16:19:00.094Z</b>.
           format: google-datetime
           type: string
         status:
-          description: |-
-            The status of an operation. Valid values are <code>PENDING</code>,
-            <code>RUNNING</code>, <code>DONE</code>,
-            <code>SQL_OPERATION_STATUS_UNSPECIFIED</code>.
+          description: >-
+            The status of an operation. Valid values are:
+
+            <br><b>PENDING</b>
+
+            <br><b>RUNNING</b>
+
+            <br><b>DONE</b>
+
+            <br><b>SQL_OPERATION_STATUS_UNSPECIFIED</b>
           enum:
             - SQL_OPERATION_STATUS_UNSPECIFIED
             - PENDING
@@ -3650,7 +3896,7 @@ components:
           description: Identifies the specific error that occurred.
           type: string
         kind:
-          description: 'This is always <code>sql#operationError</code>.'
+          description: This is always <b>sql#operationError</b>.
           type: string
         message:
           description: Additional information about the error encountered.
@@ -3662,10 +3908,10 @@ components:
         errors:
           description: The list of errors encountered while processing this operation.
           items:
-            $ref: '#/components/schemas/OperationError'
+            $ref: "#/components/schemas/OperationError"
           type: array
         kind:
-          description: 'This is always <code>sql#operationErrors</code>.'
+          description: This is always <b>sql#operationErrors</b>.
           type: string
       type: object
     OperationsListResponse:
@@ -3674,14 +3920,15 @@ components:
         items:
           description: List of operation resources.
           items:
-            $ref: '#/components/schemas/Operation'
+            $ref: "#/components/schemas/Operation"
           type: array
         kind:
-          description: 'This is always <code>sql#operationsList</code>.'
+          description: This is always <b>sql#operationsList</b>.
           type: string
         nextPageToken:
-          description: |-
+          description: >-
             The continuation token, used to page through large result sets. Provide
+
             this value in a subsequent request to return the next page of results.
           type: string
       type: object
@@ -3689,25 +3936,35 @@ components:
       description: Read-replica configuration for connecting to the master.
       properties:
         failoverTarget:
-          description: |-
+          description: >-
             Specifies if the replica is the failover target. If the field is set to
-            <code>true</code> the replica will be designated as a failover replica. In
+
+            <b>true</b> the replica will be designated as a failover replica. In
+
             case the master instance fails, the replica instance will be promoted as
+
             the new master instance.  <p>Only one replica can be specified as failover
+
             target, and the replica has to be in different zone with the master
+
             instance.
           type: boolean
         kind:
-          description: 'This is always <code>sql#replicaConfiguration</code>.'
+          description: This is always <b>sql#replicaConfiguration</b>.
           type: string
         mysqlReplicaConfiguration:
-          $ref: '#/components/schemas/MySqlReplicaConfiguration'
-          description: |-
+          $ref: "#/components/schemas/MySqlReplicaConfiguration"
+          description: >-
             MySQL specific configuration when replicating from a MySQL on-premises
+
             master. Replication configuration information such as the username,
+
             password, certificates, and keys are not stored in the instance metadata.
+
             The configuration information is used only to set up the replication
-            connection and is stored by MySQL in a file named <code>master.info</code>
+
+            connection and is stored by MySQL in a file named <b>master.info</b>
+
             in the data directory.
       type: object
     Reschedule:
@@ -3721,17 +3978,21 @@ components:
             - SPECIFIC_TIME
           type: string
         scheduleTime:
-          description: |-
+          description: >-
             Optional. Timestamp when the maintenance shall be rescheduled to if
+
             reschedule_type=SPECIFIC_TIME, in <a
+
             href="https://tools.ietf.org/html/rfc3339">RFC 3339</a> format, for
-            example <code>2012-11-15T16:19:00.094Z</code>.
+
+            example <b>2012-11-15T16:19:00.094Z</b>.
           format: google-datetime
           type: string
       type: object
     RestoreBackupContext:
-      description: |-
+      description: >-
         Database instance restore from backup context.
+
         Backup context contains source instance id and project id.
       properties:
         backupRunId:
@@ -3742,7 +4003,7 @@ components:
           description: The ID of the instance that the backup was taken from.
           type: string
         kind:
-          description: 'This is always <code>sql#restoreBackupContext</code>.'
+          description: This is always <b>sql#restoreBackupContext</b>.
           type: string
         project:
           description: The full project ID of the source instance.
@@ -3752,11 +4013,12 @@ components:
       description: Instance rotate server CA context.
       properties:
         kind:
-          description: 'This is always <code>sql#rotateServerCaContext</code>.'
+          description: This is always <b>sql#rotateServerCaContext</b>.
           type: string
         nextVersion:
-          description: |-
+          description: >-
             The fingerprint of the next version to be rotated to. If left unspecified,
+
             will be rotated to the most recently added server CA version.
           type: string
       type: object
@@ -3764,17 +4026,14 @@ components:
       description: Database instance settings.
       properties:
         activationPolicy:
-          description: |-
+          description: >-
             The activation policy specifies when the instance is activated; it is
-            applicable only when the instance state is <code>RUNNABLE</code>. Valid
-            values: <br><code>ALWAYS</code>: The instance is on, and remains so even in
-            the absence of connection requests. <br><code>NEVER</code>: The instance is
-            off; it is not activated, even if a connection request arrives.
-            <br><code>ON_DEMAND</code>: First Generation instances only. The instance
-            responds to incoming requests, and turns itself off when not in use.
-            Instances with <code>PER_USE</code> pricing turn off after 15 minutes of
-            inactivity. Instances with <code>PER_PACKAGE</code> pricing turn off after
-            12 hours of inactivity.
+
+            applicable only when the instance state is RUNNABLE. Valid values:
+              <br><b>ALWAYS</b>: The instance is on, and remains so even in
+            the absence of connection requests.
+              <br><b>NEVER</b>: The instance is off; it is not activated, even if a
+              connection request arrives.
           enum:
             - SQL_ACTIVATION_POLICY_UNSPECIFIED
             - ALWAYS
@@ -3782,45 +4041,53 @@ components:
             - ON_DEMAND
           type: string
         authorizedGaeApplications:
-          description: |-
-            The App Engine app IDs that can access this instance. First Generation
-            instances only.
+          description: >-
+            The App Engine app IDs that can access this instance.
+
+            (Deprecated) Applied to First Generation instances only.
           items:
             type: string
           type: array
         availabilityType:
-          description: |-
-            Availability type (PostgreSQL and MySQL instances only). Potential values:
-            <br><code>ZONAL</code>: The instance serves data from only one zone.
-            Outages in that zone affect data accessibility. <br><code>REGIONAL</code>:
-            The instance can serve data from more than one zone in a region (it is
-            highly available). <br>For more information, see <a
-            href="https://cloud.google.com/sql/docs/postgres/high-availability">Overview
-            of the High Availability Configuration</a>.
+          description: >-
+            Availability type. Potential values:
+              <br><b>ZONAL</b>: The instance serves data from only one zone.
+            Outages in that zone affect data accessibility.
+              <br><b>REGIONAL</b>: The instance can serve data from more than one zone
+              in a region
+            (it is highly available). <br>For more information, see
+
+            <a href="/sql/docs/postgres/high-availability">
+
+            Overview of the High Availability Configuration</a>.
           enum:
             - SQL_AVAILABILITY_TYPE_UNSPECIFIED
             - ZONAL
             - REGIONAL
           type: string
         backupConfiguration:
-          $ref: '#/components/schemas/BackupConfiguration'
+          $ref: "#/components/schemas/BackupConfiguration"
           description: The daily backup configuration for the instance.
+        collation:
+          description: The name of server Instance collation.
+          type: string
         crashSafeReplicationEnabled:
-          description: |-
+          description: >-
             Configuration specific to read replica instances. Indicates whether
-            database flags for crash-safe replication are enabled. This property is
+
+            database flags for crash-safe replication are enabled. This property was
+
             only applicable to First Generation instances.
           type: boolean
         dataDiskSizeGb:
-          description: |-
-            The size of data disk, in GB. The data disk size minimum is 10GB. Not used
-            for First Generation instances.
+          description: The size of data disk, in GB. The data disk size minimum is 10GB.
           format: int64
           type: string
         dataDiskType:
-          description: |-
-            The type of data disk: <code>PD_SSD</code> (default) or
-            <code>PD_HDD</code>. Not used for First Generation instances.
+          description: >-
+            The type of data disk: PD_SSD (default) or
+
+            PD_HDD. Not used for First Generation instances.
           enum:
             - SQL_DATA_DISK_TYPE_UNSPECIFIED
             - PD_SSD
@@ -3830,39 +4097,47 @@ components:
         databaseFlags:
           description: The database flags passed to the instance at startup.
           items:
-            $ref: '#/components/schemas/DatabaseFlags'
+            $ref: "#/components/schemas/DatabaseFlags"
           type: array
         databaseReplicationEnabled:
-          description: |-
+          description: >-
             Configuration specific to read replica instances. Indicates whether
+
             replication is enabled or not.
           type: boolean
         ipConfiguration:
-          $ref: '#/components/schemas/IpConfiguration'
-          description: |-
+          $ref: "#/components/schemas/IpConfiguration"
+          description: >-
             The settings for IP Management. This allows to enable or disable the
+
             instance IP and manage which external networks can connect to the instance.
+
             The IPv4 address cannot be disabled for Second Generation instances.
         kind:
-          description: 'This is always <code>sql#settings</code>.'
+          description: This is always <b>sql#settings</b>.
           type: string
         locationPreference:
-          $ref: '#/components/schemas/LocationPreference'
-          description: |-
+          $ref: "#/components/schemas/LocationPreference"
+          description: >-
             The location preference settings. This allows the instance to be located as
+
             near as possible to either an App Engine app or Compute Engine zone for
-            better performance. App Engine co-location is only applicable to First
+
+            better performance. App Engine co-location was only applicable to First
+
             Generation instances.
         maintenanceWindow:
-          $ref: '#/components/schemas/MaintenanceWindow'
-          description: |-
+          $ref: "#/components/schemas/MaintenanceWindow"
+          description: >-
             The maintenance window for this instance. This specifies when the instance
-            can be restarted for maintenance purposes. Not used for First Generation
-            instances.
+
+            can be restarted for maintenance purposes.
         pricingPlan:
-          description: |-
-            The pricing plan for this instance. This can be either <code>PER_USE</code>
-            or <code>PACKAGE</code>. Only <code>PER_USE</code> is supported for Second
+          description: >-
+            The pricing plan for this instance. This can be either <b>PER_USE</b>
+
+            or <b>PACKAGE</b>. Only <b>PER_USE</b> is supported for Second
+
             Generation instances.
           enum:
             - SQL_PRICING_PLAN_UNSPECIFIED
@@ -3870,49 +4145,57 @@ components:
             - PER_USE
           type: string
         replicationType:
-          description: |-
+          description: >-
             The type of replication this instance uses. This can be either
-            <code>ASYNCHRONOUS</code> or <code>SYNCHRONOUS</code>. This property is
-            only applicable to First Generation instances.
+
+            <b>ASYNCHRONOUS</b> or <b>SYNCHRONOUS</b>.
+
+            (Deprecated_ This property was only applicable to
+
+            First Generation instances.
           enum:
             - SQL_REPLICATION_TYPE_UNSPECIFIED
             - SYNCHRONOUS
             - ASYNCHRONOUS
           type: string
         settingsVersion:
-          description: |-
+          description: >-
             The version of instance settings. This is a required field for update
+
             method to make sure concurrent updates are handled properly. During update,
+
             use the most recent settingsVersion value for this instance and do not try
+
             to update this value.
           format: int64
           type: string
         storageAutoResize:
-          description: |-
+          description: >-
             Configuration to increase storage size automatically. The default value is
-            true. Not used for First Generation instances.
+
+            true.
           type: boolean
         storageAutoResizeLimit:
-          description: |-
+          description: >-
             The maximum size to which storage capacity can be automatically increased.
-            The default value is 0, which specifies that there is no limit. Not used
-            for First Generation instances.
+
+            The default value is 0, which specifies that there is no limit.
           format: int64
           type: string
         tier:
-          description: |-
+          description: >-
             The tier (or machine type) for this instance, for example
-            <code>db-n1-standard-1</code> (MySQL instances) or
-            <code>db-custom-1-3840</code> (PostgreSQL instances). For MySQL instances,
-            this property determines whether the instance is First or Second
-            Generation. For more information, see <a
-            href="/sql/docs/db_path/instance-settings">Instance Settings</a>.
+
+            <b>db-n1-standard-1</b> (MySQL instances) or
+
+            <b>db-custom-1-3840</b> (PostgreSQL instances).
           type: string
         userLabels:
           additionalProperties:
             type: string
-          description: |-
+          description: >-
             User-provided labels, represented as a dictionary where each label is a
+
             single key value pair.
           type: object
       type: object
@@ -3923,7 +4206,7 @@ components:
           description: Additional information about the error encountered.
           type: string
         kind:
-          description: 'This is always <code>sql#migrationSettingError</code>.'
+          description: This is always <b>sql#migrationSettingError</b>.
           type: string
         type:
           description: Identifies the specific error that occurred.
@@ -3937,13 +4220,20 @@ components:
             - UNSUPPORTED_MIGRATION_TYPE
             - NO_PGLOGICAL_INSTALLED
             - PGLOGICAL_NODE_ALREADY_EXISTS
+            - INVALID_WAL_LEVEL
+            - INVALID_SHARED_PRELOAD_LIBRARY
+            - INSUFFICIENT_MAX_REPLICATION_SLOTS
+            - INSUFFICIENT_MAX_WAL_SENDERS
+            - INSUFFICIENT_MAX_WORKER_PROCESSES
+            - UNSUPPORTED_EXTENSIONS
+            - INVALID_RDS_LOGICAL_REPLICATION
           type: string
       type: object
     SqlInstancesRescheduleMaintenanceRequestBody:
       description: Reschedule options for maintenance windows.
       properties:
         reschedule:
-          $ref: '#/components/schemas/Reschedule'
+          $ref: "#/components/schemas/Reschedule"
           description: Required. The type of the reschedule the user wants.
       type: object
     SqlInstancesVerifyExternalSyncSettingsResponse:
@@ -3952,10 +4242,10 @@ components:
         errors:
           description: List of migration violations.
           items:
-            $ref: '#/components/schemas/SqlExternalSyncSettingError'
+            $ref: "#/components/schemas/SqlExternalSyncSettingError"
           type: array
         kind:
-          description: 'This is always <code>sql#migrationSettingErrorList</code>.'
+          description: This is always <b>sql#migrationSettingErrorList</b>.
           type: string
       type: object
     SqlScheduledMaintenance:
@@ -4001,30 +4291,34 @@ components:
           description: PEM representation.
           type: string
         certSerialNumber:
-          description: 'Serial number, as extracted from the certificate.'
+          description: Serial number, as extracted from the certificate.
           type: string
         commonName:
-          description: 'User supplied name.  Constrained to [a-zA-Z.-_ ]+.'
+          description: User supplied name.  Constrained to [a-zA-Z.-_ ]+.
           type: string
         createTime:
-          description: |-
+          description: >-
             The time when the certificate was created in <a
+
             href="https://tools.ietf.org/html/rfc3339">RFC 3339</a> format, for example
-            <code>2012-11-15T16:19:00.094Z</code>
+
+            <b>2012-11-15T16:19:00.094Z</b>
           format: google-datetime
           type: string
         expirationTime:
-          description: |-
+          description: >-
             The time when the certificate expires in <a
+
             href="https://tools.ietf.org/html/rfc3339">RFC 3339</a> format, for example
-            <code>2012-11-15T16:19:00.094Z</code>.
+
+            <b>2012-11-15T16:19:00.094Z</b>.
           format: google-datetime
           type: string
         instance:
           description: Name of the database instance.
           type: string
         kind:
-          description: 'This is always <code>sql#sslCert</code>.'
+          description: This is always <b>sql#sslCert</b>.
           type: string
         selfLink:
           description: The URI of this resource.
@@ -4037,11 +4331,12 @@ components:
       description: SslCertDetail.
       properties:
         certInfo:
-          $ref: '#/components/schemas/SslCert'
+          $ref: "#/components/schemas/SslCert"
           description: The public information about the cert.
         certPrivateKey:
-          description: |-
+          description: >-
             The private key for the client cert, in pem format.  Keep private in order
+
             to protect your security.
           type: string
       type: object
@@ -4056,8 +4351,9 @@ components:
       description: SslCerts insert request.
       properties:
         commonName:
-          description: |-
+          description: >-
             User supplied name.  Must be a distinct name from the other certificates
+
             for this instance.
           type: string
       type: object
@@ -4065,22 +4361,21 @@ components:
       description: SslCert insert response.
       properties:
         clientCert:
-          $ref: '#/components/schemas/SslCertDetail'
-          description: |-
-            The new client certificate and private key.  For First Generation
-            instances, the new certificate does not take effect until the instance is
-            restarted.
+          $ref: "#/components/schemas/SslCertDetail"
+          description: The new client certificate and private key.
         kind:
-          description: 'This is always <code>sql#sslCertsInsert</code>.'
+          description: This is always <b>sql#sslCertsInsert</b>.
           type: string
         operation:
-          $ref: '#/components/schemas/Operation'
+          $ref: "#/components/schemas/Operation"
           description: The operation to track the ssl certs insert request.
         serverCaCert:
-          $ref: '#/components/schemas/SslCert'
-          description: |-
+          $ref: "#/components/schemas/SslCert"
+          description: >-
             The server Certificate Authority's certificate.  If this is missing you can
+
             force a new one to be generated by calling resetSslConfig method on
+
             instances resource.
       type: object
     SslCertsListResponse:
@@ -4089,10 +4384,10 @@ components:
         items:
           description: List of client certificates for the instance.
           items:
-            $ref: '#/components/schemas/SslCert'
+            $ref: "#/components/schemas/SslCert"
           type: array
         kind:
-          description: 'This is always <code>sql#sslCertsList</code>.'
+          description: This is always <b>sql#sslCertsList</b>.
           type: string
       type: object
     Tier:
@@ -4107,7 +4402,7 @@ components:
           format: int64
           type: string
         kind:
-          description: 'This is always <code>sql#tier</code>.'
+          description: This is always <b>sql#tier</b>.
           type: string
         region:
           description: The applicable regions for this tier.
@@ -4115,8 +4410,9 @@ components:
             type: string
           type: array
         tier:
-          description: |-
+          description: >-
             An identifier for the machine type, for example, db-n1-standard-1. For
+
             related information, see <a href="/sql/pricing">Pricing</a>.
           type: string
       type: object
@@ -4126,64 +4422,74 @@ components:
         items:
           description: List of tiers.
           items:
-            $ref: '#/components/schemas/Tier'
+            $ref: "#/components/schemas/Tier"
           type: array
         kind:
-          description: 'This is always <code>sql#tiersList</code>.'
+          description: This is always <b>sql#tiersList</b>.
           type: string
       type: object
     TruncateLogContext:
       description: Database Instance truncate log context.
       properties:
         kind:
-          description: 'This is always <code>sql#truncateLogContext</code>.'
+          description: This is always <b>sql#truncateLogContext</b>.
           type: string
         logType:
-          description: |-
+          description: >-
             The type of log to truncate. Valid values are
-            <code>MYSQL_GENERAL_TABLE</code> and <code>MYSQL_SLOW_TABLE</code>.
+
+            <b>MYSQL_GENERAL_TABLE</b> and <b>MYSQL_SLOW_TABLE</b>.
           type: string
       type: object
     User:
       description: A Cloud SQL user resource.
       properties:
         etag:
-          description: |-
+          description: >-
             This field is deprecated and will be removed from a future version of the
+
             API.
           type: string
         host:
-          description: |-
-            The host name from which the user can connect. For <code>insert</code>
-            operations, host defaults to an empty string. For <code>update</code>
+          description: >-
+            The host name from which the user can connect. For <b>insert</b>
+
+            operations, host defaults to an empty string. For <b>update</b>
+
             operations, host is specified as part of the request URL. The host name
+
             cannot be updated after insertion.
           type: string
         instance:
-          description: |-
+          description: >-
             The name of the Cloud SQL instance. This does not include the project ID.
-            Can be omitted for <code>update</code> since it is already specified on the
+
+            Can be omitted for <b>update</b> since it is already specified on the
+
             URL.
           type: string
         kind:
-          description: 'This is always <code>sql#user</code>.'
+          description: This is always <b>sql#user</b>.
           type: string
         name:
-          description: |-
+          description: >-
             The name of the user in the Cloud SQL instance. Can be omitted for
-            <code>update</code> since it is already specified in the URL.
+
+            <b>update</b> since it is already specified in the URL.
           type: string
         password:
           description: The password for the user.
           type: string
         project:
-          description: |-
+          description: >-
             The project ID of the project containing the Cloud SQL database. The Google
+
             apps domain is prefixed if applicable. Can be omitted for
-            <code>update</code> since it is already specified on the URL.
+
+            <b>update</b> since it is already specified on the URL.
           type: string
         sqlserverUserDetails:
-          $ref: '#/components/schemas/SqlServerUserDetails'
+          $ref: "#/components/schemas/SqlServerUserDetails"
       type: object
     UsersListResponse:
       description: User list response.
@@ -4191,15 +4497,17 @@ components:
         items:
           description: List of user resources in the instance.
           items:
-            $ref: '#/components/schemas/User'
+            $ref: "#/components/schemas/User"
           type: array
         kind:
-          description: 'This is always <code>sql#usersList</code>.'
+          description: This is always <b>sql#usersList</b>.
           type: string
         nextPageToken:
-          description: |-
+          description: >-
             An identifier that uniquely identifies the operation. You can use this
+
             identifier to retrieve the Operations resource that has information about
+
             the operation.
           type: string
       type: object
@@ -4208,18 +4516,18 @@ components:
       description: Oauth 2.0 implicit authentication
       flows:
         implicit:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-            'https://www.googleapis.com/auth/sqlservice.admin': Manage your Google SQL Service instances
+            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/sqlservice.admin: Manage your Google SQL Service instances
       type: oauth2
     Oauth2c:
-      description: Oauth 2.0 accessCode authentication
+      description: Oauth 2.0 authorizationCode authentication
       flows:
         authorizationCode:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-            'https://www.googleapis.com/auth/sqlservice.admin': Manage your Google SQL Service instances
-          tokenUrl: 'https://accounts.google.com/o/oauth2/token'
+            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/sqlservice.admin: Manage your Google SQL Service instances
+          tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

@@ -1,40 +1,44 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://www.googleapis.com/adsensehost/v4.1'
+  - url: https://www.googleapis.com/adsensehost/v4.1
 info:
   contact:
     name: Google
-    url: 'https://google.com'
-  description: 'Generates performance reports, generates ad codes, and provides publisher management capabilities for AdSense Hosts.'
+    url: https://google.com
+    x-twitter: youtube
+  description: Generates performance reports, generates ad codes, and provides publisher management capabilities for AdSense Hosts.
   license:
     name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
-  title: AdSense Host
+    url: http://creativecommons.org/licenses/by/3.0/
+  termsOfService: https://developers.google.com/terms/
+  title: AdSense Host API
   version: v4.1
   x-apiClientRegistration:
-    url: 'https://console.developers.google.com'
+    url: https://console.developers.google.com
+  x-apisguru-categories:
+    - analytics
+    - media
   x-logo:
-    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.31
       format: google
-      url: 'https://www.googleapis.com/discovery/v1/apis/adsensehost/v4.1/rest'
+      url: https://www.googleapis.com/discovery/v1/apis/adsensehost/v4.1/rest
       version: v1
   x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: adsensehost
 externalDocs:
-  url: 'https://developers.google.com/adsense/host/'
+  url: https://developers.google.com/adsense/host/
 tags:
-  - name: reports
-  - name: urlchannels
-  - name: associationsessions
   - name: accounts
-  - name: customchannels
+  - name: urlchannels
   - name: adclients
+  - name: customchannels
+  - name: reports
+  - name: associationsessions
 paths:
   /accounts:
     get:
@@ -50,29 +54,30 @@ paths:
             items:
               type: string
             type: array
+          style: form
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Accounts'
+                $ref: "#/components/schemas/Accounts"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/adsensehost'
+            - https://www.googleapis.com/auth/adsensehost
           Oauth2c:
-            - 'https://www.googleapis.com/auth/adsensehost'
+            - https://www.googleapis.com/auth/adsensehost
       tags:
         - accounts
     parameters:
-      - $ref: '#/components/parameters/userIp'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/alt'
-  '/accounts/{accountId}':
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+  "/accounts/{accountId}":
     get:
       description: Get information about the selected associated AdSense account.
       operationId: adsensehost.accounts.get
@@ -84,28 +89,28 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Account'
+                $ref: "#/components/schemas/Account"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/adsensehost'
+            - https://www.googleapis.com/auth/adsensehost
           Oauth2c:
-            - 'https://www.googleapis.com/auth/adsensehost'
+            - https://www.googleapis.com/auth/adsensehost
       tags:
         - accounts
     parameters:
-      - $ref: '#/components/parameters/userIp'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/alt'
-  '/accounts/{accountId}/adclients':
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+  "/accounts/{accountId}/adclients":
     get:
       description: List all hosted ad clients in the specified hosted account.
       operationId: adsensehost.accounts.adclients.list
@@ -116,41 +121,41 @@ paths:
           required: true
           schema:
             type: string
-        - description: 'The maximum number of ad clients to include in the response, used for paging.'
+        - description: The maximum number of ad clients to include in the response, used for paging.
           in: query
           name: maxResults
           schema:
             maximum: 10000
             minimum: 0
             type: integer
-        - description: 'A continuation token, used to page through ad clients. To retrieve the next page, set this parameter to the value of "nextPageToken" from the previous response.'
+        - description: A continuation token, used to page through ad clients. To retrieve the next page, set this parameter to the value of "nextPageToken" from the previous response.
           in: query
           name: pageToken
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/AdClients'
+                $ref: "#/components/schemas/AdClients"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/adsensehost'
+            - https://www.googleapis.com/auth/adsensehost
           Oauth2c:
-            - 'https://www.googleapis.com/auth/adsensehost'
+            - https://www.googleapis.com/auth/adsensehost
       tags:
         - accounts
     parameters:
-      - $ref: '#/components/parameters/userIp'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/alt'
-  '/accounts/{accountId}/adclients/{adClientId}':
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+  "/accounts/{accountId}/adclients/{adClientId}":
     get:
       description: Get information about one of the ad clients in the specified publisher's AdSense account.
       operationId: adsensehost.accounts.adclients.get
@@ -168,28 +173,28 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/AdClient'
+                $ref: "#/components/schemas/AdClient"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/adsensehost'
+            - https://www.googleapis.com/auth/adsensehost
           Oauth2c:
-            - 'https://www.googleapis.com/auth/adsensehost'
+            - https://www.googleapis.com/auth/adsensehost
       tags:
         - accounts
     parameters:
-      - $ref: '#/components/parameters/userIp'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/alt'
-  '/accounts/{accountId}/adclients/{adClientId}/adunits':
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+  "/accounts/{accountId}/adclients/{adClientId}/adunits":
     get:
       description: List all ad units in the specified publisher's AdSense account.
       operationId: adsensehost.accounts.adunits.list
@@ -206,45 +211,45 @@ paths:
           required: true
           schema:
             type: string
-        - description: 'Whether to include inactive ad units. Default: true.'
+        - description: "Whether to include inactive ad units. Default: true."
           in: query
           name: includeInactive
           schema:
             type: boolean
-        - description: 'The maximum number of ad units to include in the response, used for paging.'
+        - description: The maximum number of ad units to include in the response, used for paging.
           in: query
           name: maxResults
           schema:
             maximum: 10000
             minimum: 0
             type: integer
-        - description: 'A continuation token, used to page through ad units. To retrieve the next page, set this parameter to the value of "nextPageToken" from the previous response.'
+        - description: A continuation token, used to page through ad units. To retrieve the next page, set this parameter to the value of "nextPageToken" from the previous response.
           in: query
           name: pageToken
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/AdUnits'
+                $ref: "#/components/schemas/AdUnits"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/adsensehost'
+            - https://www.googleapis.com/auth/adsensehost
           Oauth2c:
-            - 'https://www.googleapis.com/auth/adsensehost'
+            - https://www.googleapis.com/auth/adsensehost
       tags:
         - accounts
     parameters:
-      - $ref: '#/components/parameters/userIp'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
     patch:
       description: Update the supplied ad unit in the specified publisher AdSense account. This method supports patch semantics.
       operationId: adsensehost.accounts.adunits.patch
@@ -271,19 +276,19 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AdUnit'
+              $ref: "#/components/schemas/AdUnit"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/AdUnit'
+                $ref: "#/components/schemas/AdUnit"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/adsensehost'
+            - https://www.googleapis.com/auth/adsensehost
           Oauth2c:
-            - 'https://www.googleapis.com/auth/adsensehost'
+            - https://www.googleapis.com/auth/adsensehost
       tags:
         - accounts
     post:
@@ -306,19 +311,19 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AdUnit'
+              $ref: "#/components/schemas/AdUnit"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/AdUnit'
+                $ref: "#/components/schemas/AdUnit"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/adsensehost'
+            - https://www.googleapis.com/auth/adsensehost
           Oauth2c:
-            - 'https://www.googleapis.com/auth/adsensehost'
+            - https://www.googleapis.com/auth/adsensehost
       tags:
         - accounts
     put:
@@ -341,22 +346,22 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AdUnit'
+              $ref: "#/components/schemas/AdUnit"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/AdUnit'
+                $ref: "#/components/schemas/AdUnit"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/adsensehost'
+            - https://www.googleapis.com/auth/adsensehost
           Oauth2c:
-            - 'https://www.googleapis.com/auth/adsensehost'
+            - https://www.googleapis.com/auth/adsensehost
       tags:
         - accounts
-  '/accounts/{accountId}/adclients/{adClientId}/adunits/{adUnitId}':
+  "/accounts/{accountId}/adclients/{adClientId}/adunits/{adUnitId}":
     delete:
       description: Delete the specified ad unit from the specified publisher AdSense account.
       operationId: adsensehost.accounts.adunits.delete
@@ -380,17 +385,17 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/AdUnit'
+                $ref: "#/components/schemas/AdUnit"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/adsensehost'
+            - https://www.googleapis.com/auth/adsensehost
           Oauth2c:
-            - 'https://www.googleapis.com/auth/adsensehost'
+            - https://www.googleapis.com/auth/adsensehost
       tags:
         - accounts
     get:
@@ -416,30 +421,30 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/AdUnit'
+                $ref: "#/components/schemas/AdUnit"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/adsensehost'
+            - https://www.googleapis.com/auth/adsensehost
           Oauth2c:
-            - 'https://www.googleapis.com/auth/adsensehost'
+            - https://www.googleapis.com/auth/adsensehost
       tags:
         - accounts
     parameters:
-      - $ref: '#/components/parameters/userIp'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/alt'
-  '/accounts/{accountId}/adclients/{adClientId}/adunits/{adUnitId}/adcode':
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+  "/accounts/{accountId}/adclients/{adClientId}/adunits/{adUnitId}/adcode":
     get:
-      description: 'Get ad code for the specified ad unit, attaching the specified host custom channels.'
+      description: Get ad code for the specified ad unit, attaching the specified host custom channels.
       operationId: adsensehost.accounts.adunits.getAdCode
       parameters:
         - description: Account which contains the ad client.
@@ -468,29 +473,30 @@ paths:
             items:
               type: string
             type: array
+          style: form
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/AdCode'
+                $ref: "#/components/schemas/AdCode"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/adsensehost'
+            - https://www.googleapis.com/auth/adsensehost
           Oauth2c:
-            - 'https://www.googleapis.com/auth/adsensehost'
+            - https://www.googleapis.com/auth/adsensehost
       tags:
         - accounts
     parameters:
-      - $ref: '#/components/parameters/userIp'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/alt'
-  '/accounts/{accountId}/reports':
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+  "/accounts/{accountId}/reports":
     get:
       description: Generate an AdSense report based on the report request sent in the query parameters. Returns the result as JSON; to retrieve output in CSV format specify "alt=csv" as a query parameter.
       operationId: adsensehost.accounts.reports.generate
@@ -501,13 +507,13 @@ paths:
           required: true
           schema:
             type: string
-        - description: 'Start of the date range to report on in "YYYY-MM-DD" format, inclusive.'
+        - description: Start of the date range to report on in "YYYY-MM-DD" format, inclusive.
           in: query
           name: startDate
           required: true
           schema:
             type: string
-        - description: 'End of the date range to report on in "YYYY-MM-DD" format, inclusive.'
+        - description: End of the date range to report on in "YYYY-MM-DD" format, inclusive.
           in: query
           name: endDate
           required: true
@@ -521,6 +527,7 @@ paths:
             items:
               type: string
             type: array
+          style: form
         - description: Filters to be run on the report.
           explode: true
           in: query
@@ -529,6 +536,7 @@ paths:
             items:
               type: string
             type: array
+          style: form
         - description: Optional locale to use for translating report output to a local language. Defaults to "en_US" if not specified.
           in: query
           name: locale
@@ -549,7 +557,8 @@ paths:
             items:
               type: string
             type: array
-        - description: 'The name of a dimension or metric to sort the resulting report on, optionally prefixed with "+" to sort ascending or "-" to sort descending. If no prefix is specified, the column is sorted ascending.'
+          style: form
+        - description: The name of a dimension or metric to sort the resulting report on, optionally prefixed with "+" to sort ascending or "-" to sort descending. If no prefix is specified, the column is sorted ascending.
           explode: true
           in: query
           name: sort
@@ -557,6 +566,7 @@ paths:
             items:
               type: string
             type: array
+          style: form
         - description: Index of the first row of report data to return.
           in: query
           name: startIndex
@@ -565,67 +575,67 @@ paths:
             minimum: 0
             type: integer
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Report'
+                $ref: "#/components/schemas/Report"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/adsensehost'
+            - https://www.googleapis.com/auth/adsensehost
           Oauth2c:
-            - 'https://www.googleapis.com/auth/adsensehost'
+            - https://www.googleapis.com/auth/adsensehost
       tags:
         - accounts
     parameters:
-      - $ref: '#/components/parameters/userIp'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
   /adclients:
     get:
       description: List all host ad clients in this AdSense account.
       operationId: adsensehost.adclients.list
       parameters:
-        - description: 'The maximum number of ad clients to include in the response, used for paging.'
+        - description: The maximum number of ad clients to include in the response, used for paging.
           in: query
           name: maxResults
           schema:
             maximum: 10000
             minimum: 0
             type: integer
-        - description: 'A continuation token, used to page through ad clients. To retrieve the next page, set this parameter to the value of "nextPageToken" from the previous response.'
+        - description: A continuation token, used to page through ad clients. To retrieve the next page, set this parameter to the value of "nextPageToken" from the previous response.
           in: query
           name: pageToken
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/AdClients'
+                $ref: "#/components/schemas/AdClients"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/adsensehost'
+            - https://www.googleapis.com/auth/adsensehost
           Oauth2c:
-            - 'https://www.googleapis.com/auth/adsensehost'
+            - https://www.googleapis.com/auth/adsensehost
       tags:
         - adclients
     parameters:
-      - $ref: '#/components/parameters/userIp'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/alt'
-  '/adclients/{adClientId}':
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+  "/adclients/{adClientId}":
     get:
       description: Get information about one of the ad clients in the Host AdSense account.
       operationId: adsensehost.adclients.get
@@ -637,28 +647,28 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/AdClient'
+                $ref: "#/components/schemas/AdClient"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/adsensehost'
+            - https://www.googleapis.com/auth/adsensehost
           Oauth2c:
-            - 'https://www.googleapis.com/auth/adsensehost'
+            - https://www.googleapis.com/auth/adsensehost
       tags:
         - adclients
     parameters:
-      - $ref: '#/components/parameters/userIp'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/alt'
-  '/adclients/{adClientId}/customchannels':
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+  "/adclients/{adClientId}/customchannels":
     get:
       description: List all host custom channels in this AdSense account.
       operationId: adsensehost.customchannels.list
@@ -669,40 +679,40 @@ paths:
           required: true
           schema:
             type: string
-        - description: 'The maximum number of custom channels to include in the response, used for paging.'
+        - description: The maximum number of custom channels to include in the response, used for paging.
           in: query
           name: maxResults
           schema:
             maximum: 10000
             minimum: 0
             type: integer
-        - description: 'A continuation token, used to page through custom channels. To retrieve the next page, set this parameter to the value of "nextPageToken" from the previous response.'
+        - description: A continuation token, used to page through custom channels. To retrieve the next page, set this parameter to the value of "nextPageToken" from the previous response.
           in: query
           name: pageToken
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/CustomChannels'
+                $ref: "#/components/schemas/CustomChannels"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/adsensehost'
+            - https://www.googleapis.com/auth/adsensehost
           Oauth2c:
-            - 'https://www.googleapis.com/auth/adsensehost'
+            - https://www.googleapis.com/auth/adsensehost
       tags:
         - customchannels
     parameters:
-      - $ref: '#/components/parameters/userIp'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
     patch:
       description: Update a custom channel in the host AdSense account. This method supports patch semantics.
       operationId: adsensehost.customchannels.patch
@@ -723,19 +733,19 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CustomChannel'
+              $ref: "#/components/schemas/CustomChannel"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/CustomChannel'
+                $ref: "#/components/schemas/CustomChannel"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/adsensehost'
+            - https://www.googleapis.com/auth/adsensehost
           Oauth2c:
-            - 'https://www.googleapis.com/auth/adsensehost'
+            - https://www.googleapis.com/auth/adsensehost
       tags:
         - customchannels
     post:
@@ -752,19 +762,19 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CustomChannel'
+              $ref: "#/components/schemas/CustomChannel"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/CustomChannel'
+                $ref: "#/components/schemas/CustomChannel"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/adsensehost'
+            - https://www.googleapis.com/auth/adsensehost
           Oauth2c:
-            - 'https://www.googleapis.com/auth/adsensehost'
+            - https://www.googleapis.com/auth/adsensehost
       tags:
         - customchannels
     put:
@@ -781,22 +791,22 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CustomChannel'
+              $ref: "#/components/schemas/CustomChannel"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/CustomChannel'
+                $ref: "#/components/schemas/CustomChannel"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/adsensehost'
+            - https://www.googleapis.com/auth/adsensehost
           Oauth2c:
-            - 'https://www.googleapis.com/auth/adsensehost'
+            - https://www.googleapis.com/auth/adsensehost
       tags:
         - customchannels
-  '/adclients/{adClientId}/customchannels/{customChannelId}':
+  "/adclients/{adClientId}/customchannels/{customChannelId}":
     delete:
       description: Delete a specific custom channel from the host AdSense account.
       operationId: adsensehost.customchannels.delete
@@ -814,17 +824,17 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/CustomChannel'
+                $ref: "#/components/schemas/CustomChannel"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/adsensehost'
+            - https://www.googleapis.com/auth/adsensehost
           Oauth2c:
-            - 'https://www.googleapis.com/auth/adsensehost'
+            - https://www.googleapis.com/auth/adsensehost
       tags:
         - customchannels
     get:
@@ -844,28 +854,28 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/CustomChannel'
+                $ref: "#/components/schemas/CustomChannel"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/adsensehost'
+            - https://www.googleapis.com/auth/adsensehost
           Oauth2c:
-            - 'https://www.googleapis.com/auth/adsensehost'
+            - https://www.googleapis.com/auth/adsensehost
       tags:
         - customchannels
     parameters:
-      - $ref: '#/components/parameters/userIp'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/alt'
-  '/adclients/{adClientId}/urlchannels':
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+  "/adclients/{adClientId}/urlchannels":
     get:
       description: List all host URL channels in the host AdSense account.
       operationId: adsensehost.urlchannels.list
@@ -876,40 +886,40 @@ paths:
           required: true
           schema:
             type: string
-        - description: 'The maximum number of URL channels to include in the response, used for paging.'
+        - description: The maximum number of URL channels to include in the response, used for paging.
           in: query
           name: maxResults
           schema:
             maximum: 10000
             minimum: 0
             type: integer
-        - description: 'A continuation token, used to page through URL channels. To retrieve the next page, set this parameter to the value of "nextPageToken" from the previous response.'
+        - description: A continuation token, used to page through URL channels. To retrieve the next page, set this parameter to the value of "nextPageToken" from the previous response.
           in: query
           name: pageToken
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/UrlChannels'
+                $ref: "#/components/schemas/UrlChannels"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/adsensehost'
+            - https://www.googleapis.com/auth/adsensehost
           Oauth2c:
-            - 'https://www.googleapis.com/auth/adsensehost'
+            - https://www.googleapis.com/auth/adsensehost
       tags:
         - urlchannels
     parameters:
-      - $ref: '#/components/parameters/userIp'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
     post:
       description: Add a new URL channel to the host AdSense account.
       operationId: adsensehost.urlchannels.insert
@@ -924,22 +934,22 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UrlChannel'
+              $ref: "#/components/schemas/UrlChannel"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/UrlChannel'
+                $ref: "#/components/schemas/UrlChannel"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/adsensehost'
+            - https://www.googleapis.com/auth/adsensehost
           Oauth2c:
-            - 'https://www.googleapis.com/auth/adsensehost'
+            - https://www.googleapis.com/auth/adsensehost
       tags:
         - urlchannels
-  '/adclients/{adClientId}/urlchannels/{urlChannelId}':
+  "/adclients/{adClientId}/urlchannels/{urlChannelId}":
     delete:
       description: Delete a URL channel from the host AdSense account.
       operationId: adsensehost.urlchannels.delete
@@ -957,27 +967,27 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/UrlChannel'
+                $ref: "#/components/schemas/UrlChannel"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/adsensehost'
+            - https://www.googleapis.com/auth/adsensehost
           Oauth2c:
-            - 'https://www.googleapis.com/auth/adsensehost'
+            - https://www.googleapis.com/auth/adsensehost
       tags:
         - urlchannels
     parameters:
-      - $ref: '#/components/parameters/userIp'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
   /associationsessions/start:
     get:
       description: Create an association session for initiating an association with an AdSense user.
@@ -998,6 +1008,7 @@ paths:
                 - AFV
               type: string
             type: array
+          style: form
         - description: The URL of the user's hosted website.
           in: query
           name: websiteUrl
@@ -1020,27 +1031,27 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/AssociationSession'
+                $ref: "#/components/schemas/AssociationSession"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/adsensehost'
+            - https://www.googleapis.com/auth/adsensehost
           Oauth2c:
-            - 'https://www.googleapis.com/auth/adsensehost'
+            - https://www.googleapis.com/auth/adsensehost
       tags:
         - associationsessions
     parameters:
-      - $ref: '#/components/parameters/userIp'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
   /associationsessions/verify:
     get:
       description: Verify an association session after the association callback returns from AdSense signup.
@@ -1053,39 +1064,39 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/AssociationSession'
+                $ref: "#/components/schemas/AssociationSession"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/adsensehost'
+            - https://www.googleapis.com/auth/adsensehost
           Oauth2c:
-            - 'https://www.googleapis.com/auth/adsensehost'
+            - https://www.googleapis.com/auth/adsensehost
       tags:
         - associationsessions
     parameters:
-      - $ref: '#/components/parameters/userIp'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
   /reports:
     get:
       description: Generate an AdSense report based on the report request sent in the query parameters. Returns the result as JSON; to retrieve output in CSV format specify "alt=csv" as a query parameter.
       operationId: adsensehost.reports.generate
       parameters:
-        - description: 'Start of the date range to report on in "YYYY-MM-DD" format, inclusive.'
+        - description: Start of the date range to report on in "YYYY-MM-DD" format, inclusive.
           in: query
           name: startDate
           required: true
           schema:
             type: string
-        - description: 'End of the date range to report on in "YYYY-MM-DD" format, inclusive.'
+        - description: End of the date range to report on in "YYYY-MM-DD" format, inclusive.
           in: query
           name: endDate
           required: true
@@ -1099,6 +1110,7 @@ paths:
             items:
               type: string
             type: array
+          style: form
         - description: Filters to be run on the report.
           explode: true
           in: query
@@ -1107,6 +1119,7 @@ paths:
             items:
               type: string
             type: array
+          style: form
         - description: Optional locale to use for translating report output to a local language. Defaults to "en_US" if not specified.
           in: query
           name: locale
@@ -1127,7 +1140,8 @@ paths:
             items:
               type: string
             type: array
-        - description: 'The name of a dimension or metric to sort the resulting report on, optionally prefixed with "+" to sort ascending or "-" to sort descending. If no prefix is specified, the column is sorted ascending.'
+          style: form
+        - description: The name of a dimension or metric to sort the resulting report on, optionally prefixed with "+" to sort ascending or "-" to sort descending. If no prefix is specified, the column is sorted ascending.
           explode: true
           in: query
           name: sort
@@ -1135,6 +1149,7 @@ paths:
             items:
               type: string
             type: array
+          style: form
         - description: Index of the first row of report data to return.
           in: query
           name: startIndex
@@ -1143,27 +1158,27 @@ paths:
             minimum: 0
             type: integer
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Report'
+                $ref: "#/components/schemas/Report"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/adsensehost'
+            - https://www.googleapis.com/auth/adsensehost
           Oauth2c:
-            - 'https://www.googleapis.com/auth/adsensehost'
+            - https://www.googleapis.com/auth/adsensehost
       tags:
         - reports
     parameters:
-      - $ref: '#/components/parameters/userIp'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
 components:
   parameters:
     alt:
@@ -1171,7 +1186,6 @@ components:
       in: query
       name: alt
       schema:
-        default: json
         enum:
           - csv
           - json
@@ -1183,7 +1197,7 @@ components:
       schema:
         type: string
     key:
-      description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -1199,7 +1213,6 @@ components:
       in: query
       name: prettyPrint
       schema:
-        default: true
         type: boolean
     quotaUser:
       description: An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
@@ -1213,17 +1226,6 @@ components:
       name: userIp
       schema:
         type: string
-  requestBodies:
-    AdUnit:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/AdUnit'
-    CustomChannel:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/CustomChannel'
   schemas:
     Account:
       properties:
@@ -1231,14 +1233,14 @@ components:
           description: Unique identifier of this account.
           type: string
         kind:
-          default: 'adsensehost#account'
-          description: 'Kind of resource this is, in this case adsensehost#account.'
+          default: adsensehost#account
+          description: Kind of resource this is, in this case adsensehost#account.
           type: string
         name:
           description: Name of this account.
           type: string
         status:
-          description: 'Approval status of this account. One of: PENDING, APPROVED, DISABLED.'
+          description: "Approval status of this account. One of: PENDING, APPROVED, DISABLED."
           type: string
       type: object
     Accounts:
@@ -1249,11 +1251,11 @@ components:
         items:
           description: The accounts returned in this list response.
           items:
-            $ref: '#/components/schemas/Account'
+            $ref: "#/components/schemas/Account"
           type: array
         kind:
-          default: 'adsensehost#accounts'
-          description: 'Kind of list this is, in this case adsensehost#accounts.'
+          default: adsensehost#accounts
+          description: Kind of list this is, in this case adsensehost#accounts.
           type: string
       type: object
     AdClient:
@@ -1265,11 +1267,11 @@ components:
           description: Unique identifier of this ad client.
           type: string
         kind:
-          default: 'adsensehost#adClient'
-          description: 'Kind of resource this is, in this case adsensehost#adClient.'
+          default: adsensehost#adClient
+          description: Kind of resource this is, in this case adsensehost#adClient.
           type: string
         productCode:
-          description: 'This ad client''s product code, which corresponds to the PRODUCT_CODE report dimension.'
+          description: This ad client's product code, which corresponds to the PRODUCT_CODE report dimension.
           type: string
         supportsReporting:
           description: Whether this ad client supports being reported on.
@@ -1283,14 +1285,14 @@ components:
         items:
           description: The ad clients returned in this list response.
           items:
-            $ref: '#/components/schemas/AdClient'
+            $ref: "#/components/schemas/AdClient"
           type: array
         kind:
-          default: 'adsensehost#adClients'
-          description: 'Kind of list this is, in this case adsensehost#adClients.'
+          default: adsensehost#adClients
+          description: Kind of list this is, in this case adsensehost#adClients.
           type: string
         nextPageToken:
-          description: 'Continuation token used to page through ad clients. To retrieve the next page of results, set the next request''s "pageToken" value to this.'
+          description: Continuation token used to page through ad clients. To retrieve the next page of results, set the next request's "pageToken" value to this.
           type: string
       type: object
     AdCode:
@@ -1299,14 +1301,14 @@ components:
           description: The ad code snippet.
           type: string
         kind:
-          default: 'adsensehost#adCode'
-          description: 'Kind this is, in this case adsensehost#adCode.'
+          default: adsensehost#adCode
+          description: Kind this is, in this case adsensehost#adCode.
           type: string
       type: object
     AdStyle:
       properties:
         colors:
-          description: 'The colors included in the style. These are represented as six hexadecimal characters, similar to HTML color codes, but without the leading hash.'
+          description: The colors included in the style. These are represented as six hexadecimal characters, similar to HTML color codes, but without the leading hash.
           properties:
             background:
               description: The color of the ad background.
@@ -1325,27 +1327,27 @@ components:
               type: string
           type: object
         corners:
-          description: 'The style of the corners in the ad (deprecated: never populated, ignored).'
+          description: "The style of the corners in the ad (deprecated: never populated, ignored)."
           type: string
         font:
           description: The font which is included in the style.
           properties:
             family:
-              description: 'The family of the font. Possible values are: ACCOUNT_DEFAULT_FAMILY, ADSENSE_DEFAULT_FAMILY, ARIAL, TIMES and VERDANA.'
+              description: "The family of the font. Possible values are: ACCOUNT_DEFAULT_FAMILY, ADSENSE_DEFAULT_FAMILY, ARIAL, TIMES and VERDANA."
               type: string
             size:
-              description: 'The size of the font. Possible values are: ACCOUNT_DEFAULT_SIZE, ADSENSE_DEFAULT_SIZE, SMALL, MEDIUM and LARGE.'
+              description: "The size of the font. Possible values are: ACCOUNT_DEFAULT_SIZE, ADSENSE_DEFAULT_SIZE, SMALL, MEDIUM and LARGE."
               type: string
           type: object
         kind:
-          default: 'adsensehost#adStyle'
-          description: 'Kind this is, in this case adsensehost#adStyle.'
+          default: adsensehost#adStyle
+          description: Kind this is, in this case adsensehost#adStyle.
           type: string
       type: object
     AdUnit:
       properties:
         code:
-          description: 'Identity code of this ad unit, not necessarily unique across ad clients.'
+          description: Identity code of this ad unit, not necessarily unique across ad clients.
           type: string
         contentAdsSettings:
           description: Settings specific to content ads (AFC) and highend mobile content ads (AFMC - deprecated).
@@ -1354,31 +1356,31 @@ components:
               description: The backup option to be used in instances where no ad is available.
               properties:
                 color:
-                  description: 'Color to use when type is set to COLOR. These are represented as six hexadecimal characters, similar to HTML color codes, but without the leading hash.'
+                  description: Color to use when type is set to COLOR. These are represented as six hexadecimal characters, similar to HTML color codes, but without the leading hash.
                   type: string
                 type:
-                  description: 'Type of the backup option. Possible values are BLANK, COLOR and URL.'
+                  description: Type of the backup option. Possible values are BLANK, COLOR and URL.
                   type: string
                 url:
                   description: URL to use when type is set to URL.
                   type: string
               type: object
             size:
-              description: 'Size of this ad unit. Size values are in the form SIZE_{width}_{height}.'
+              description: Size of this ad unit. Size values are in the form SIZE_{width}_{height}.
               type: string
             type:
-              description: 'Type of this ad unit. Possible values are TEXT, TEXT_IMAGE, IMAGE and LINK.'
+              description: Type of this ad unit. Possible values are TEXT, TEXT_IMAGE, IMAGE and LINK.
               type: string
           type: object
         customStyle:
-          $ref: '#/components/schemas/AdStyle'
+          $ref: "#/components/schemas/AdStyle"
           description: Custom style information specific to this ad unit.
         id:
           description: Unique identifier of this ad unit. This should be considered an opaque identifier; it is not safe to rely on it being in any particular format.
           type: string
         kind:
-          default: 'adsensehost#adUnit'
-          description: 'Kind of resource this is, in this case adsensehost#adUnit.'
+          default: adsensehost#adUnit
+          description: Kind of resource this is, in this case adsensehost#adUnit.
           type: string
         mobileContentAdsSettings:
           description: Settings specific to WAP mobile content ads (AFMC - deprecated).
@@ -1400,11 +1402,14 @@ components:
           description: Name of this ad unit.
           type: string
         status:
-          description: |-
+          description: >-
             Status of this ad unit. Possible values are:
+
             NEW: Indicates that the ad unit was created within the last seven days and does not yet have any activity associated with it.
 
+
             ACTIVE: Indicates that there has been activity on this ad unit in the last seven days.
+
 
             INACTIVE: Indicates that there has been no activity on this ad unit in the last seven days.
           type: string
@@ -1417,14 +1422,14 @@ components:
         items:
           description: The ad units returned in this list response.
           items:
-            $ref: '#/components/schemas/AdUnit'
+            $ref: "#/components/schemas/AdUnit"
           type: array
         kind:
-          default: 'adsensehost#adUnits'
-          description: 'Kind of list this is, in this case adsensehost#adUnits.'
+          default: adsensehost#adUnits
+          description: Kind of list this is, in this case adsensehost#adUnits.
           type: string
         nextPageToken:
-          description: 'Continuation token used to page through ad units. To retrieve the next page of results, set the next request''s "pageToken" value to this.'
+          description: Continuation token used to page through ad units. To retrieve the next page of results, set the next request's "pageToken" value to this.
           type: string
       type: object
     AssociationSession:
@@ -1436,11 +1441,11 @@ components:
           description: Unique identifier of this association session.
           type: string
         kind:
-          default: 'adsensehost#associationSession'
-          description: 'Kind of resource this is, in this case adsensehost#associationSession.'
+          default: adsensehost#associationSession
+          description: Kind of resource this is, in this case adsensehost#associationSession.
           type: string
         productCodes:
-          description: 'The products to associate with the user. Options: AFC, AFG, AFV, AFS (deprecated), AFMC (deprecated)'
+          description: "The products to associate with the user. Options: AFC, AFG, AFV, AFS (deprecated), AFMC (deprecated)"
           items:
             type: string
           type: array
@@ -1448,7 +1453,7 @@ components:
           description: Redirect URL of this association session. Used to redirect users into the AdSense association flow.
           type: string
         status:
-          description: 'Status of the completed association, available once the association callback token has been verified. One of ACCEPTED, REJECTED, or ERROR.'
+          description: Status of the completed association, available once the association callback token has been verified. One of ACCEPTED, REJECTED, or ERROR.
           type: string
         userLocale:
           description: The preferred locale of the user themselves when going through the AdSense association flow.
@@ -1463,14 +1468,14 @@ components:
     CustomChannel:
       properties:
         code:
-          description: 'Code of this custom channel, not necessarily unique across ad clients.'
+          description: Code of this custom channel, not necessarily unique across ad clients.
           type: string
         id:
           description: Unique identifier of this custom channel. This should be considered an opaque identifier; it is not safe to rely on it being in any particular format.
           type: string
         kind:
-          default: 'adsensehost#customChannel'
-          description: 'Kind of resource this is, in this case adsensehost#customChannel.'
+          default: adsensehost#customChannel
+          description: Kind of resource this is, in this case adsensehost#customChannel.
           type: string
         name:
           description: Name of this custom channel.
@@ -1484,14 +1489,14 @@ components:
         items:
           description: The custom channels returned in this list response.
           items:
-            $ref: '#/components/schemas/CustomChannel'
+            $ref: "#/components/schemas/CustomChannel"
           type: array
         kind:
-          default: 'adsensehost#customChannels'
-          description: 'Kind of list this is, in this case adsensehost#customChannels.'
+          default: adsensehost#customChannels
+          description: Kind of list this is, in this case adsensehost#customChannels.
           type: string
         nextPageToken:
-          description: 'Continuation token used to page through custom channels. To retrieve the next page of results, set the next request''s "pageToken" value to this.'
+          description: Continuation token used to page through custom channels. To retrieve the next page of results, set the next request's "pageToken" value to this.
           type: string
       type: object
     Report:
@@ -1502,7 +1507,7 @@ components:
             type: string
           type: array
         headers:
-          description: 'The header information of the columns requested in the report. This is a list of headers; one for each dimension in the request, followed by one for each metric in the request.'
+          description: The header information of the columns requested in the report. This is a list of headers; one for each dimension in the request, followed by one for each metric in the request.
           items:
             properties:
               currency:
@@ -1512,16 +1517,16 @@ components:
                 description: The name of the header.
                 type: string
               type:
-                description: 'The type of the header; one of DIMENSION, METRIC_TALLY, METRIC_RATIO, or METRIC_CURRENCY.'
+                description: The type of the header; one of DIMENSION, METRIC_TALLY, METRIC_RATIO, or METRIC_CURRENCY.
                 type: string
             type: object
           type: array
         kind:
-          default: 'adsensehost#report'
-          description: 'Kind this is, in this case adsensehost#report.'
+          default: adsensehost#report
+          description: Kind this is, in this case adsensehost#report.
           type: string
         rows:
-          description: 'The output rows of the report. Each row is a list of cells; one for each dimension in the request, followed by one for each metric in the request. The dimension cells contain strings, and the metric cells contain numbers.'
+          description: The output rows of the report. Each row is a list of cells; one for each dimension in the request, followed by one for each metric in the request. The dimension cells contain strings, and the metric cells contain numbers.
           items:
             items:
               type: string
@@ -1548,8 +1553,8 @@ components:
           description: Unique identifier of this URL channel. This should be considered an opaque identifier; it is not safe to rely on it being in any particular format.
           type: string
         kind:
-          default: 'adsensehost#urlChannel'
-          description: 'Kind of resource this is, in this case adsensehost#urlChannel.'
+          default: adsensehost#urlChannel
+          description: Kind of resource this is, in this case adsensehost#urlChannel.
           type: string
         urlPattern:
           description: 'URL Pattern of this URL channel. Does not include "http://" or "https://". Example: www.example.com/home'
@@ -1563,14 +1568,14 @@ components:
         items:
           description: The URL channels returned in this list response.
           items:
-            $ref: '#/components/schemas/UrlChannel'
+            $ref: "#/components/schemas/UrlChannel"
           type: array
         kind:
-          default: 'adsensehost#urlChannels'
-          description: 'Kind of list this is, in this case adsensehost#urlChannels.'
+          default: adsensehost#urlChannels
+          description: Kind of list this is, in this case adsensehost#urlChannels.
           type: string
         nextPageToken:
-          description: 'Continuation token used to page through URL channels. To retrieve the next page of results, set the next request''s "pageToken" value to this.'
+          description: Continuation token used to page through URL channels. To retrieve the next page of results, set the next request's "pageToken" value to this.
           type: string
       type: object
   securitySchemes:
@@ -1578,16 +1583,16 @@ components:
       description: Oauth 2.0 implicit authentication
       flows:
         implicit:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            'https://www.googleapis.com/auth/adsensehost': View and manage your AdSense host data and associated accounts
+            https://www.googleapis.com/auth/adsensehost: View and manage your AdSense host data and associated accounts
       type: oauth2
     Oauth2c:
-      description: Oauth 2.0 accessCode authentication
+      description: Oauth 2.0 authorizationCode authentication
       flows:
         authorizationCode:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            'https://www.googleapis.com/auth/adsensehost': View and manage your AdSense host data and associated accounts
-          tokenUrl: 'https://accounts.google.com/o/oauth2/token'
+            https://www.googleapis.com/auth/adsensehost: View and manage your AdSense host data and associated accounts
+          tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

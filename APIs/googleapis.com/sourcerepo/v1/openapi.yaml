@@ -1,45 +1,46 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://sourcerepo.googleapis.com/'
+  - url: https://sourcerepo.googleapis.com/
 info:
   contact:
     name: Google
-    url: 'https://google.com'
+    url: https://google.com
   description: Accesses source code repositories hosted by Google.
   license:
     name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
+    url: http://creativecommons.org/licenses/by/3.0/
+  termsOfService: https://developers.google.com/terms/
   title: Cloud Source Repositories
   version: v1
   x-apiClientRegistration:
-    url: 'https://console.developers.google.com'
+    url: https://console.developers.google.com
   x-apisguru-categories:
     - developer_tools
   x-logo:
-    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.31
       format: google
-      url: 'https://sourcerepo.googleapis.com/$discovery/rest?version=v1'
+      url: https://sourcerepo.googleapis.com/$discovery/rest?version=v1
       version: v1
   x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: sourcerepo
 externalDocs:
-  url: 'https://cloud.google.com/source-repositories/docs/apis'
+  url: https://cloud.google.com/source-repositories/docs/apis
 tags:
   - name: projects
 paths:
-  '/v1/{name}':
+  "/v1/{name}":
     delete:
       description: Deletes a repo.
       operationId: sourcerepo.projects.repos.delete
       parameters:
-        - description: |-
+        - description: >-
             The name of the repo to delete. Values are of the form
+
             `projects/<project>/repos/<repo>`.
           in: path
           name: name
@@ -48,29 +49,30 @@ paths:
             type: string
           x-reservedExpansion: true
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/Empty'
+                $ref: "#/components/schemas/Empty"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/source.full_control'
+            - https://www.googleapis.com/auth/source.full_control
           Oauth2c:
-            - 'https://www.googleapis.com/auth/source.full_control'
+            - https://www.googleapis.com/auth/source.full_control
       tags:
         - projects
     get:
       description: Returns information about a repo.
       operationId: sourcerepo.projects.repos.get
       parameters:
-        - description: |-
+        - description: >-
             The name of the requested repository. Values are of the form
+
             `projects/<project>/repos/<repo>`.
           in: path
           name: name
@@ -79,49 +81,50 @@ paths:
             type: string
           x-reservedExpansion: true
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/Repo'
+                $ref: "#/components/schemas/Repo"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/source.full_control'
+            - https://www.googleapis.com/auth/source.full_control
           Oauth2c:
-            - 'https://www.googleapis.com/auth/source.full_control'
+            - https://www.googleapis.com/auth/source.full_control
         - Oauth2:
-            - 'https://www.googleapis.com/auth/source.read_only'
+            - https://www.googleapis.com/auth/source.read_only
           Oauth2c:
-            - 'https://www.googleapis.com/auth/source.read_only'
+            - https://www.googleapis.com/auth/source.read_only
         - Oauth2:
-            - 'https://www.googleapis.com/auth/source.read_write'
+            - https://www.googleapis.com/auth/source.read_write
           Oauth2c:
-            - 'https://www.googleapis.com/auth/source.read_write'
+            - https://www.googleapis.com/auth/source.read_write
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
     patch:
       description: Updates information about a repo.
       operationId: sourcerepo.projects.repos.patch
       parameters:
-        - description: |-
+        - description: >-
             The name of the requested repository. Values are of the form
+
             `projects/<project>/repos/<repo>`.
           in: path
           name: name
@@ -133,28 +136,29 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateRepoRequest'
+              $ref: "#/components/schemas/UpdateRepoRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/Repo'
+                $ref: "#/components/schemas/Repo"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1/{name}/config':
+  "/v1/{name}/config":
     get:
       description: Returns the Cloud Source Repositories configuration of the project.
       operationId: sourcerepo.projects.getConfig
       parameters:
-        - description: |-
+        - description: >-
             The name of the requested project. Values are of the form
+
             `projects/<project>`.
           in: path
           name: name
@@ -163,37 +167,38 @@ paths:
             type: string
           x-reservedExpansion: true
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ProjectConfig'
+                $ref: "#/components/schemas/ProjectConfig"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
     patch:
       description: Updates the Cloud Source Repositories configuration of the project.
       operationId: sourcerepo.projects.updateConfig
       parameters:
-        - description: |-
+        - description: >-
             The name of the requested project. Values are of the form
+
             `projects/<project>`.
           in: path
           name: name
@@ -205,30 +210,32 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateProjectConfigRequest'
+              $ref: "#/components/schemas/UpdateProjectConfigRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ProjectConfig'
+                $ref: "#/components/schemas/ProjectConfig"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1/{name}/repos':
+  "/v1/{name}/repos":
     get:
-      description: |-
+      description: >-
         Returns all repos belonging to a project. The sizes of the repos are
+
         not set by ListRepos.  To get the size of a repo, use GetRepo.
       operationId: sourcerepo.projects.repos.list
       parameters:
-        - description: |-
+        - description: >-
             The project ID whose repos should be listed. Values are of the form
+
             `projects/<project>`.
           in: path
           name: name
@@ -236,81 +243,86 @@ paths:
           schema:
             type: string
           x-reservedExpansion: true
-        - description: |-
+        - description: >-
             Maximum number of repositories to return; between 1 and 500.
+
             If not set or zero, defaults to 100 at the server.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: |-
+        - description: >-
             Resume listing repositories where a prior ListReposResponse
+
             left off. This is an opaque token that must be obtained from
+
             a recent, prior ListReposResponse's next_page_token field.
           in: query
           name: pageToken
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ListReposResponse'
+                $ref: "#/components/schemas/ListReposResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/source.full_control'
+            - https://www.googleapis.com/auth/source.full_control
           Oauth2c:
-            - 'https://www.googleapis.com/auth/source.full_control'
+            - https://www.googleapis.com/auth/source.full_control
         - Oauth2:
-            - 'https://www.googleapis.com/auth/source.read_only'
+            - https://www.googleapis.com/auth/source.read_only
           Oauth2c:
-            - 'https://www.googleapis.com/auth/source.read_only'
+            - https://www.googleapis.com/auth/source.read_only
         - Oauth2:
-            - 'https://www.googleapis.com/auth/source.read_write'
+            - https://www.googleapis.com/auth/source.read_write
           Oauth2c:
-            - 'https://www.googleapis.com/auth/source.read_write'
+            - https://www.googleapis.com/auth/source.read_write
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-  '/v1/{name}:sync':
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+  "/v1/{name}:sync":
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
     post:
-      description: |-
+      description: >-
         Synchronize a connected repo.
+
 
         The response contains SyncRepoMetadata in the metadata field.
       operationId: sourcerepo.projects.repos.sync
       parameters:
-        - description: |-
+        - description: >-
             The name of the repo to synchronize. Values are of the form
+
             `projects/<project>/repos/<repo>`.
           in: path
           name: name
@@ -322,44 +334,47 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SyncRepoRequest'
+              $ref: "#/components/schemas/SyncRepoRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1/{parent}/repos':
+  "/v1/{parent}/repos":
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
     post:
-      description: |-
+      description: >-
         Creates a repo in the given project with the given name.
 
+
         If the named repository already exists, `CreateRepo` returns
+
         `ALREADY_EXISTS`.
       operationId: sourcerepo.projects.repos.create
       parameters:
-        - description: |-
+        - description: >-
             The project in which to create the repo. Values are of the form
+
             `projects/<project>`.
           in: path
           name: parent
@@ -371,35 +386,38 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Repo'
+              $ref: "#/components/schemas/Repo"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/Repo'
+                $ref: "#/components/schemas/Repo"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/source.full_control'
+            - https://www.googleapis.com/auth/source.full_control
           Oauth2c:
-            - 'https://www.googleapis.com/auth/source.full_control'
+            - https://www.googleapis.com/auth/source.full_control
       tags:
         - projects
-  '/v1/{resource}:getIamPolicy':
+  "/v1/{resource}:getIamPolicy":
     get:
-      description: |-
+      description: >-
         Gets the access control policy for a resource.
+
         Returns an empty policy if the resource exists and does not have a policy
+
         set.
       operationId: sourcerepo.projects.repos.getIamPolicy
       parameters:
-        - description: |-
+        - description: >-
             REQUIRED: The resource for which the policy is being requested.
+
             See the operation documentation for the appropriate value for this field.
           in: path
           name: resource
@@ -407,78 +425,85 @@ paths:
           schema:
             type: string
           x-reservedExpansion: true
-        - description: |-
+        - description: >-
             Optional. The policy format version to be returned.
 
+
             Valid values are 0, 1, and 3. Requests specifying an invalid value will be
+
             rejected.
 
+
             Requests for policies with any conditional bindings must specify version 3.
+
             Policies without any conditional bindings may specify any valid value or
+
             leave the field unset.
           in: query
           name: options.requestedPolicyVersion
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/Policy'
+                $ref: "#/components/schemas/Policy"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/source.full_control'
+            - https://www.googleapis.com/auth/source.full_control
           Oauth2c:
-            - 'https://www.googleapis.com/auth/source.full_control'
+            - https://www.googleapis.com/auth/source.full_control
         - Oauth2:
-            - 'https://www.googleapis.com/auth/source.read_only'
+            - https://www.googleapis.com/auth/source.read_only
           Oauth2c:
-            - 'https://www.googleapis.com/auth/source.read_only'
+            - https://www.googleapis.com/auth/source.read_only
         - Oauth2:
-            - 'https://www.googleapis.com/auth/source.read_write'
+            - https://www.googleapis.com/auth/source.read_write
           Oauth2c:
-            - 'https://www.googleapis.com/auth/source.read_write'
+            - https://www.googleapis.com/auth/source.read_write
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-  '/v1/{resource}:setIamPolicy':
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+  "/v1/{resource}:setIamPolicy":
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
     post:
-      description: |-
+      description: >-
         Sets the access control policy on the specified resource. Replaces any
+
         existing policy.
       operationId: sourcerepo.projects.repos.setIamPolicy
       parameters:
-        - description: |-
+        - description: >-
             REQUIRED: The resource for which the policy is being specified.
+
             See the operation documentation for the appropriate value for this field.
           in: path
           name: resource
@@ -490,47 +515,50 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SetIamPolicyRequest'
+              $ref: "#/components/schemas/SetIamPolicyRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/Policy'
+                $ref: "#/components/schemas/Policy"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/source.full_control'
+            - https://www.googleapis.com/auth/source.full_control
           Oauth2c:
-            - 'https://www.googleapis.com/auth/source.full_control'
+            - https://www.googleapis.com/auth/source.full_control
       tags:
         - projects
-  '/v1/{resource}:testIamPermissions':
+  "/v1/{resource}:testIamPermissions":
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
     post:
-      description: |-
+      description: >-
         Returns permissions that a caller has on the specified resource.
+
         If the resource does not exist, this will return an empty set of
+
         permissions, not a NOT_FOUND error.
       operationId: sourcerepo.projects.repos.testIamPermissions
       parameters:
-        - description: |-
+        - description: >-
             REQUIRED: The resource for which the policy detail is being requested.
+
             See the operation documentation for the appropriate value for this field.
           in: path
           name: resource
@@ -542,31 +570,31 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/TestIamPermissionsRequest'
+              $ref: "#/components/schemas/TestIamPermissionsRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/TestIamPermissionsResponse'
+                $ref: "#/components/schemas/TestIamPermissionsResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/source.full_control'
+            - https://www.googleapis.com/auth/source.full_control
           Oauth2c:
-            - 'https://www.googleapis.com/auth/source.full_control'
+            - https://www.googleapis.com/auth/source.full_control
         - Oauth2:
-            - 'https://www.googleapis.com/auth/source.read_only'
+            - https://www.googleapis.com/auth/source.read_only
           Oauth2c:
-            - 'https://www.googleapis.com/auth/source.read_only'
+            - https://www.googleapis.com/auth/source.read_only
         - Oauth2:
-            - 'https://www.googleapis.com/auth/source.read_write'
+            - https://www.googleapis.com/auth/source.read_write
           Oauth2c:
-            - 'https://www.googleapis.com/auth/source.read_write'
+            - https://www.googleapis.com/auth/source.read_write
       tags:
         - projects
 components:
@@ -577,8 +605,8 @@ components:
       name: $.xgafv
       schema:
         enum:
-          - '1'
-          - '2'
+          - "1"
+          - "2"
         type: string
     access_token:
       description: OAuth access token.
@@ -610,7 +638,7 @@ components:
       schema:
         type: string
     key:
-      description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -629,35 +657,43 @@ components:
         default: true
         type: boolean
     quotaUser:
-      description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.'
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
       in: query
       name: quotaUser
       schema:
         type: string
     uploadType:
-      description: 'Legacy upload protocol for media (e.g. "media", "multipart").'
+      description: Legacy upload protocol for media (e.g. "media", "multipart").
       in: query
       name: uploadType
       schema:
         type: string
     upload_protocol:
-      description: 'Upload protocol for media (e.g. "raw", "multipart").'
+      description: Upload protocol for media (e.g. "raw", "multipart").
       in: query
       name: upload_protocol
       schema:
         type: string
   schemas:
     AuditConfig:
-      description: |-
+      description: >-
         Specifies the audit configuration for a service.
+
         The configuration determines which permission types are logged, and what
+
         identities, if any, are exempted from logging.
+
         An AuditConfig must have one or more AuditLogConfigs.
 
+
         If there are AuditConfigs for both `allServices` and a specific service,
+
         the union of the two AuditConfigs is used for that service: the log_types
+
         specified in each AuditConfig are enabled, and the exempted_members in each
+
         AuditLogConfig are exempted.
+
 
         Example Policy with multiple AuditConfigs:
 
@@ -698,24 +734,29 @@ components:
             }
 
         For sampleservice, this policy enables DATA_READ, DATA_WRITE and ADMIN_READ
+
         logging. It also exempts jose@example.com from DATA_READ logging, and
+
         aliya@example.com from DATA_WRITE logging.
       properties:
         auditLogConfigs:
           description: The configuration for logging of each type of permission.
           items:
-            $ref: '#/components/schemas/AuditLogConfig'
+            $ref: "#/components/schemas/AuditLogConfig"
           type: array
         service:
-          description: |-
+          description: >-
             Specifies a service that will be enabled for audit logging.
+
             For example, `storage.googleapis.com`, `cloudsql.googleapis.com`.
+
             `allServices` is a special value that covers all services.
           type: string
       type: object
     AuditLogConfig:
-      description: |-
+      description: >-
         Provides the configuration for logging a type of permissions.
+
         Example:
 
             {
@@ -733,12 +774,15 @@ components:
             }
 
         This enables 'DATA_READ' and 'DATA_WRITE' logging, while exempting
+
         jose@example.com from DATA_READ logging.
       properties:
         exemptedMembers:
-          description: |-
+          description: >-
             Specifies the identities that do not cause logging for this type of
+
             permission.
+
             Follows the same format of Binding.members.
           items:
             type: string
@@ -756,16 +800,21 @@ components:
       description: Associates `members` with a `role`.
       properties:
         condition:
-          $ref: '#/components/schemas/Expr'
-          description: |-
+          $ref: "#/components/schemas/Expr"
+          description: >-
             The condition that is associated with this binding.
+
             NOTE: An unsatisfied condition will not allow user access via current
+
             binding. Different bindings, including their conditions, are examined
+
             independently.
         members:
-          description: |+
+          description: >+
             Specifies the identities requesting access for a Cloud Platform resource.
+
             `members` can have the following values:
+
 
             * `allUsers`: A special identifier that represents anyone who is
                on the internet; with or without a Google account.
@@ -811,15 +860,18 @@ components:
             type: string
           type: array
         role:
-          description: |-
+          description: >-
             Role that is assigned to `members`.
+
             For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
           type: string
       type: object
     Empty:
-      description: |-
+      description: >-
         A generic empty message that you can re-use to avoid defining duplicated
+
         empty messages in your APIs. A typical example is to use it as the request
+
         or the response type of an API method. For instance:
 
             service Foo {
@@ -830,10 +882,13 @@ components:
       properties: {}
       type: object
     Expr:
-      description: |-
+      description: >-
         Represents a textual expression in the Common Expression Language (CEL)
+
         syntax. CEL is a C-like expression language. The syntax and semantics of CEL
+
         are documented at https://github.com/google/cel-spec.
+
 
         Example (Comparison):
 
@@ -860,28 +915,35 @@ components:
             expression: "'New message received at ' + string(document.create_time)"
 
         The exact variables and functions that may be referenced within an expression
+
         are determined by the service that evaluates it. See the service
+
         documentation for additional information.
       properties:
         description:
-          description: |-
+          description: >-
             Optional. Description of the expression. This is a longer text which
+
             describes the expression, e.g. when hovered over it in a UI.
           type: string
         expression:
-          description: |-
+          description: >-
             Textual representation of an expression in Common Expression Language
+
             syntax.
           type: string
         location:
-          description: |-
+          description: >-
             Optional. String indicating the location of the expression for error
+
             reporting, e.g. a file name and a position in the file.
           type: string
         title:
-          description: |-
+          description: >-
             Optional. Title for the expression, i.e. a short string describing
+
             its purpose. This can be used e.g. in UIs which allow to enter the
+
             expression.
           type: string
       type: object
@@ -889,98 +951,132 @@ components:
       description: Response for ListRepos.  The size is not set in the returned repositories.
       properties:
         nextPageToken:
-          description: |-
+          description: >-
             If non-empty, additional repositories exist within the project. These
+
             can be retrieved by including this value in the next ListReposRequest's
+
             page_token field.
           type: string
         repos:
           description: The listed repos.
           items:
-            $ref: '#/components/schemas/Repo'
+            $ref: "#/components/schemas/Repo"
           type: array
       type: object
     MirrorConfig:
-      description: |-
+      description: >-
         Configuration to automatically mirror a repository from another
+
         hosting service, for example GitHub or Bitbucket.
       properties:
         deployKeyId:
-          description: |-
+          description: >-
             ID of the SSH deploy key at the other hosting service.
+
             Removing this key from the other service would deauthorize
+
             Google Cloud Source Repositories from mirroring.
           type: string
         url:
           description: URL of the main repository at the other hosting service.
           type: string
         webhookId:
-          description: |-
+          description: >-
             ID of the webhook listening to updates to trigger mirroring.
+
             Removing this webhook from the other hosting service will stop
+
             Google Cloud Source Repositories from receiving notifications,
+
             and thereby disabling mirroring.
           type: string
       type: object
     Operation:
-      description: |-
+      description: >-
         This resource represents a long-running operation that is the result of a
+
         network API call.
       properties:
         done:
-          description: |-
+          description: >-
             If the value is `false`, it means the operation is still in progress.
+
             If `true`, the operation is completed, and either `error` or `response` is
+
             available.
           type: boolean
         error:
-          $ref: '#/components/schemas/Status'
+          $ref: "#/components/schemas/Status"
           description: The error result of the operation in case of failure or cancellation.
         metadata:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
-          description: |-
+          description: >-
             Service-specific metadata associated with the operation.  It typically
+
             contains progress information and common metadata such as create time.
+
             Some services might not provide such metadata.  Any method that returns a
+
             long-running operation should document the metadata type, if any.
           type: object
         name:
-          description: |-
+          description: >-
             The server-assigned name, which is only unique within the same service that
+
             originally returns it. If you use the default HTTP mapping, the
+
             `name` should be a resource name ending with `operations/{unique_id}`.
           type: string
         response:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
-          description: |-
+          description: >-
             The normal response of the operation in case of success.  If the original
+
             method returns no data on success, such as `Delete`, the response is
+
             `google.protobuf.Empty`.  If the original method is standard
+
             `Get`/`Create`/`Update`, the response should be the resource.  For other
+
             methods, the response should have the type `XxxResponse`, where `Xxx`
+
             is the original method name.  For example, if the original method name
+
             is `TakeSnapshot()`, the inferred response type is
+
             `TakeSnapshotResponse`.
           type: object
       type: object
     Policy:
-      description: |-
+      description: >-
         An Identity and Access Management (IAM) policy, which specifies access
+
         controls for Google Cloud resources.
 
 
+
         A `Policy` is a collection of `bindings`. A `binding` binds one or more
+
         `members` to a single `role`. Members can be user accounts, service accounts,
+
         Google groups, and domains (such as G Suite). A `role` is a named list of
+
         permissions; each `role` can be an IAM predefined role or a user-created
+
         custom role.
 
+
         Optionally, a `binding` can specify a `condition`, which is a logical
+
         expression that allows access to a resource only if the expression evaluates
+
         to `true`. A condition can add constraints based on attributes of the
+
         request, the resource, or both.
+
 
         **JSON example:**
 
@@ -1029,59 +1125,85 @@ components:
             - version: 3
 
         For a description of IAM and its features, see the
+
         [IAM documentation](https://cloud.google.com/iam/docs/).
       properties:
         auditConfigs:
           description: Specifies cloud audit logging configuration for this policy.
           items:
-            $ref: '#/components/schemas/AuditConfig'
+            $ref: "#/components/schemas/AuditConfig"
           type: array
         bindings:
-          description: |-
+          description: >-
             Associates a list of `members` to a `role`. Optionally, may specify a
+
             `condition` that determines how and when the `bindings` are applied. Each
+
             of the `bindings` must contain at least one member.
           items:
-            $ref: '#/components/schemas/Binding'
+            $ref: "#/components/schemas/Binding"
           type: array
         etag:
-          description: |-
+          description: >-
             `etag` is used for optimistic concurrency control as a way to help
+
             prevent simultaneous updates of a policy from overwriting each other.
+
             It is strongly suggested that systems make use of the `etag` in the
+
             read-modify-write cycle to perform policy updates in order to avoid race
+
             conditions: An `etag` is returned in the response to `getIamPolicy`, and
+
             systems are expected to put that etag in the request to `setIamPolicy` to
+
             ensure that their change will be applied to the same version of the policy.
 
+
             **Important:** If you use IAM Conditions, you must include the `etag` field
+
             whenever you call `setIamPolicy`. If you omit this field, then IAM allows
+
             you to overwrite a version `3` policy with a version `1` policy, and all of
+
             the conditions in the version `3` policy are lost.
           format: byte
           type: string
         version:
-          description: |-
+          description: >-
             Specifies the format of the policy.
 
+
             Valid values are `0`, `1`, and `3`. Requests that specify an invalid value
+
             are rejected.
 
+
             Any operation that affects conditional role bindings must specify version
+
             `3`. This requirement applies to the following operations:
 
+
             * Getting a policy that includes a conditional role binding
+
             * Adding a conditional role binding to a policy
+
             * Changing a conditional role binding in a policy
+
             * Removing any role binding, with or without a condition, from a policy
               that includes conditions
 
             **Important:** If you use IAM Conditions, you must include the `etag` field
+
             whenever you call `setIamPolicy`. If you omit this field, then IAM allows
+
             you to overwrite a version `3` policy with a version `1` policy, and all of
+
             the conditions in the version `3` policy are lost.
 
+
             If a policy does not include any conditions, operations on that policy may
+
             specify any valid version or leave the field unset.
           format: int32
           type: integer
@@ -1097,9 +1219,10 @@ components:
           type: string
         pubsubConfigs:
           additionalProperties:
-            $ref: '#/components/schemas/PubsubConfig'
-          description: |-
+            $ref: "#/components/schemas/PubsubConfig"
+          description: >-
             How this project publishes a change in the repositories through Cloud
+
             Pub/Sub. Keyed by the topic names.
           type: object
       type: object
@@ -1114,17 +1237,23 @@ components:
             - JSON
           type: string
         serviceAccountEmail:
-          description: |-
+          description: >-
             Email address of the service account used for publishing Cloud Pub/Sub
+
             messages. This service account needs to be in the same project as the
+
             PubsubConfig. When added, the caller needs to have
+
             iam.serviceAccounts.actAs permission on this service account. If
+
             unspecified, it defaults to the compute engine default service account.
           type: string
         topic:
-          description: |-
+          description: >-
             A topic of Cloud Pub/Sub. Values are of the form
+
             `projects/<project>/topics/<topic>`. The project needs to be the same
+
             project as this config is in.
           type: string
       type: object
@@ -1132,32 +1261,38 @@ components:
       description: A repository (or repo) is a Git repository storing versioned source content.
       properties:
         mirrorConfig:
-          $ref: '#/components/schemas/MirrorConfig'
-          description: |-
+          $ref: "#/components/schemas/MirrorConfig"
+          description: >-
             How this repository mirrors a repository managed by another service.
+
             Read-only field.
         name:
-          description: |-
+          description: >-
             Resource name of the repository, of the form
+
             `projects/<project>/repos/<repo>`.  The repo name may contain slashes.
+
             eg, `projects/myproject/repos/name/with/slash`
           type: string
         pubsubConfigs:
           additionalProperties:
-            $ref: '#/components/schemas/PubsubConfig'
-          description: |-
+            $ref: "#/components/schemas/PubsubConfig"
+          description: >-
             How this repository publishes a change in the repository through Cloud
+
             Pub/Sub. Keyed by the topic names.
           type: object
         size:
-          description: |-
+          description: >-
             The disk usage of the repo, in bytes. Read-only field. Size is only
+
             returned by GetRepo.
           format: int64
           type: string
         url:
-          description: |-
+          description: >-
             URL to clone the repository from Google Cloud Source Repositories.
+
             Read-only field.
           type: string
       type: object
@@ -1165,39 +1300,52 @@ components:
       description: Request message for `SetIamPolicy` method.
       properties:
         policy:
-          $ref: '#/components/schemas/Policy'
-          description: |-
+          $ref: "#/components/schemas/Policy"
+          description: >-
             REQUIRED: The complete policy to be applied to the `resource`. The size of
+
             the policy is limited to a few 10s of KB. An empty policy is a
+
             valid policy but certain Cloud Platform services (such as Projects)
+
             might reject them.
         updateMask:
-          description: |-
+          description: >-
             OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
+
             the fields in the mask will be modified. If no mask is provided, the
+
             following default mask is used:
+
             paths: "bindings, etag"
+
             This field is only used by Cloud IAM.
           format: google-fieldmask
           type: string
       type: object
     Status:
-      description: |-
+      description: >-
         The `Status` type defines a logical error model that is suitable for
+
         different programming environments, including REST APIs and RPC APIs. It is
+
         used by [gRPC](https://github.com/grpc). Each `Status` message contains
+
         three pieces of data: error code, error message, and error details.
 
+
         You can find out more about this error model and how to work with it in the
+
         [API Design Guide](https://cloud.google.com/apis/design/errors).
       properties:
         code:
-          description: 'The status code, which should be an enum value of google.rpc.Code.'
+          description: The status code, which should be an enum value of google.rpc.Code.
           format: int32
           type: integer
         details:
-          description: |-
+          description: >-
             A list of messages that carry the error details.  There is a common set of
+
             message types for APIs to use.
           items:
             additionalProperties:
@@ -1205,21 +1353,25 @@ components:
             type: object
           type: array
         message:
-          description: |-
+          description: >-
             A developer-facing error message, which should be in English. Any
+
             user-facing error message should be localized and sent in the
+
             google.rpc.Status.details field, or localized by the client.
           type: string
       type: object
     SyncRepoMetadata:
-      description: |-
+      description: >-
         Metadata of SyncRepo.
+
 
         This message is in the metadata field of Operation.
       properties:
         name:
-          description: |-
+          description: >-
             The name of the repo being synchronized. Values are of the form
+
             `projects/<project>/repos/<repo>`.
           type: string
         startTime:
@@ -1242,10 +1394,13 @@ components:
       description: Request message for `TestIamPermissions` method.
       properties:
         permissions:
-          description: |-
+          description: >-
             The set of permissions to check for the `resource`. Permissions with
+
             wildcards (such as '*' or 'storage.*') are not allowed. For more
+
             information see
+
             [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
           items:
             type: string
@@ -1255,8 +1410,9 @@ components:
       description: Response message for `TestIamPermissions` method.
       properties:
         permissions:
-          description: |-
+          description: >-
             A subset of `TestPermissionsRequest.permissions` that the caller is
+
             allowed.
           items:
             type: string
@@ -1266,12 +1422,14 @@ components:
       description: Request for UpdateProjectConfig.
       properties:
         projectConfig:
-          $ref: '#/components/schemas/ProjectConfig'
+          $ref: "#/components/schemas/ProjectConfig"
           description: The new configuration for the project.
         updateMask:
-          description: |-
+          description: >-
             A FieldMask specifying which fields of the project_config to modify. Only
+
             the fields in the mask will be modified. If no mask is provided, this
+
             request is no-op.
           format: google-fieldmask
           type: string
@@ -1280,12 +1438,14 @@ components:
       description: Request for UpdateRepo.
       properties:
         repo:
-          $ref: '#/components/schemas/Repo'
+          $ref: "#/components/schemas/Repo"
           description: The new configuration for the repository.
         updateMask:
-          description: |-
+          description: >-
             A FieldMask specifying which fields of the repo to modify. Only the fields
+
             in the mask will be modified. If no mask is provided, this request is
+
             no-op.
           format: google-fieldmask
           type: string
@@ -1295,22 +1455,22 @@ components:
       description: Oauth 2.0 implicit authentication
       flows:
         implicit:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-            'https://www.googleapis.com/auth/source.full_control': Manage your source code repositories
-            'https://www.googleapis.com/auth/source.read_only': View the contents of your source code repositories
-            'https://www.googleapis.com/auth/source.read_write': Manage the contents of your source code repositories
+            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/source.full_control: Manage your source code repositories
+            https://www.googleapis.com/auth/source.read_only: View the contents of your source code repositories
+            https://www.googleapis.com/auth/source.read_write: Manage the contents of your source code repositories
       type: oauth2
     Oauth2c:
       description: Oauth 2.0 accessCode authentication
       flows:
         authorizationCode:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-            'https://www.googleapis.com/auth/source.full_control': Manage your source code repositories
-            'https://www.googleapis.com/auth/source.read_only': View the contents of your source code repositories
-            'https://www.googleapis.com/auth/source.read_write': Manage the contents of your source code repositories
-          tokenUrl: 'https://accounts.google.com/o/oauth2/token'
+            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/source.full_control: Manage your source code repositories
+            https://www.googleapis.com/auth/source.read_only: View the contents of your source code repositories
+            https://www.googleapis.com/auth/source.read_write: Manage the contents of your source code repositories
+          tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

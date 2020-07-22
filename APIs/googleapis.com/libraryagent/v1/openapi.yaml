@@ -1,86 +1,95 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://libraryagent.googleapis.com/'
+  - url: https://libraryagent.googleapis.com/
 info:
   contact:
     name: Google
-    url: 'https://google.com'
+    url: https://google.com
+    x-twitter: youtube
   description: A simple Google Example Library API.
   license:
     name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
-  title: Library Agent
+    url: http://creativecommons.org/licenses/by/3.0/
+  termsOfService: https://developers.google.com/terms/
+  title: Library Agent API
   version: v1
   x-apiClientRegistration:
-    url: 'https://console.developers.google.com'
+    url: https://console.developers.google.com
+  x-apisguru-categories:
+    - analytics
+    - media
   x-logo:
-    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.31
       format: google
-      url: 'https://libraryagent.googleapis.com/$discovery/rest?version=v1'
+      url: https://libraryagent.googleapis.com/$discovery/rest?version=v1
       version: v1
   x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: libraryagent
 externalDocs:
-  url: 'https://cloud.google.com/docs/quota'
+  url: https://cloud.google.com/docs/quota
 tags:
   - name: shelves
 paths:
   /v1/shelves:
     get:
-      description: |-
+      description: >-
         Lists shelves. The order is unspecified but deterministic. Newly created
+
         shelves will not necessarily be added to the end of this list.
       operationId: libraryagent.shelves.list
       parameters:
-        - description: |-
+        - description: >-
             Requested page size. Server may return fewer shelves than requested.
+
             If unspecified, server will pick an appropriate default.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: |-
+        - description: >-
             A token identifying a page of results the server should return.
+
             Typically, this is the value of
+
             ListShelvesResponse.next_page_token
+
             returned from the previous call to `ListShelves` method.
           in: query
           name: pageToken
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/GoogleExampleLibraryagentV1ListShelvesResponse'
+                $ref: "#/components/schemas/GoogleExampleLibraryagentV1ListShelvesResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - shelves
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-  '/v1/{name}':
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+  "/v1/{name}":
     get:
       description: Gets a book. Returns NOT_FOUND if the book does not exist.
       operationId: libraryagent.shelves.books.get
@@ -91,51 +100,53 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/GoogleExampleLibraryagentV1Book'
+                $ref: "#/components/schemas/GoogleExampleLibraryagentV1Book"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - shelves
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-  '/v1/{name}:borrow':
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+  "/v1/{name}:borrow":
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
     post:
-      description: |-
+      description: >-
         Borrow a book from the library. Returns the book if it is borrowed
+
         successfully. Returns NOT_FOUND if the book does not exist in the library.
+
         Returns quota exceeded error if the amount of books borrowed exceeds
+
         allocation quota in any dimensions.
       operationId: libraryagent.shelves.books.borrow
       parameters:
@@ -145,39 +156,41 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/GoogleExampleLibraryagentV1Book'
+                $ref: "#/components/schemas/GoogleExampleLibraryagentV1Book"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - shelves
-  '/v1/{name}:return':
+  "/v1/{name}:return":
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
     post:
-      description: |-
+      description: >-
         Return a book to the library. Returns the book if it is returned to the
+
         library successfully.
+
         Returns error if the book does not belong to the library
+
         or the users didn't borrow before.
       operationId: libraryagent.shelves.books.return
       parameters:
@@ -187,26 +200,27 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/GoogleExampleLibraryagentV1Book'
+                $ref: "#/components/schemas/GoogleExampleLibraryagentV1Book"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - shelves
-  '/v1/{parent}/books':
+  "/v1/{parent}/books":
     get:
-      description: |-
+      description: >-
         Lists books in a shelf. The order is unspecified but deterministic. Newly
+
         created books will not necessarily be added to the end of this list.
+
         Returns NOT_FOUND if the shelf does not exist.
       operationId: libraryagent.shelves.books.list
       parameters:
@@ -216,49 +230,52 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
-        - description: |-
+        - description: >-
             Requested page size. Server may return fewer books than requested.
+
             If unspecified, server will pick an appropriate default.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: |-
+        - description: >-
             A token identifying a page of results the server should return.
+
             Typically, this is the value of
+
             ListBooksResponse.next_page_token.
+
             returned from the previous call to `ListBooks` method.
           in: query
           name: pageToken
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/GoogleExampleLibraryagentV1ListBooksResponse'
+                $ref: "#/components/schemas/GoogleExampleLibraryagentV1ListBooksResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - shelves
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
 components:
   parameters:
     _.xgafv:
@@ -267,8 +284,8 @@ components:
       name: $.xgafv
       schema:
         enum:
-          - '1'
-          - '2'
+          - "1"
+          - "2"
         type: string
     access_token:
       description: OAuth access token.
@@ -281,7 +298,6 @@ components:
       in: query
       name: alt
       schema:
-        default: json
         enum:
           - json
           - media
@@ -300,7 +316,7 @@ components:
       schema:
         type: string
     key:
-      description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -316,22 +332,21 @@ components:
       in: query
       name: prettyPrint
       schema:
-        default: true
         type: boolean
     quotaUser:
-      description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.'
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
       in: query
       name: quotaUser
       schema:
         type: string
     uploadType:
-      description: 'Legacy upload protocol for media (e.g. "media", "multipart").'
+      description: Legacy upload protocol for media (e.g. "media", "multipart").
       in: query
       name: uploadType
       schema:
         type: string
     upload_protocol:
-      description: 'Upload protocol for media (e.g. "raw", "multipart").'
+      description: Upload protocol for media (e.g. "raw", "multipart").
       in: query
       name: upload_protocol
       schema:
@@ -344,9 +359,11 @@ components:
           description: The name of the book author.
           type: string
         name:
-          description: |-
+          description: >-
             The resource name of the book.
+
             Book names have the form `shelves/{shelf_id}/books/{book_id}`.
+
             The name is ignored when creating a book.
           type: string
         read:
@@ -362,14 +379,18 @@ components:
         books:
           description: The list of books.
           items:
-            $ref: '#/components/schemas/GoogleExampleLibraryagentV1Book'
+            $ref: "#/components/schemas/GoogleExampleLibraryagentV1Book"
           type: array
         nextPageToken:
-          description: |-
+          description: >-
             A token to retrieve next page of results.
+
             Pass this value in the
+
             ListBooksRequest.page_token
+
             field in the subsequent call to `ListBooks` method to retrieve the next
+
             page of results.
           type: string
       type: object
@@ -377,26 +398,32 @@ components:
       description: Response message for LibraryAgent.ListShelves.
       properties:
         nextPageToken:
-          description: |-
+          description: >-
             A token to retrieve next page of results.
+
             Pass this value in the
+
             ListShelvesRequest.page_token
+
             field in the subsequent call to `ListShelves` method to retrieve the next
+
             page of results.
           type: string
         shelves:
           description: The list of shelves.
           items:
-            $ref: '#/components/schemas/GoogleExampleLibraryagentV1Shelf'
+            $ref: "#/components/schemas/GoogleExampleLibraryagentV1Shelf"
           type: array
       type: object
     GoogleExampleLibraryagentV1Shelf:
       description: A Shelf contains a collection of books with a theme.
       properties:
         name:
-          description: |-
+          description: >-
             Output only. The resource name of the shelf.
+
             Shelf names have the form `shelves/{shelf_id}`.
+
             The name is ignored when creating a shelf.
           type: string
         theme:
@@ -408,16 +435,16 @@ components:
       description: Oauth 2.0 implicit authentication
       flows:
         implicit:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
       type: oauth2
     Oauth2c:
-      description: Oauth 2.0 accessCode authentication
+      description: Oauth 2.0 authorizationCode authentication
       flows:
         authorizationCode:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-          tokenUrl: 'https://accounts.google.com/o/oauth2/token'
+            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+          tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

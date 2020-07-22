@@ -1,43 +1,49 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://cloudbuild.googleapis.com/'
+  - url: https://cloudbuild.googleapis.com/
 info:
   contact:
     name: Google
-    url: 'https://google.com'
+    url: https://google.com
+    x-twitter: youtube
   description: Creates and manages builds on Google Cloud Platform.
   license:
     name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
-  title: Cloud Build
+    url: http://creativecommons.org/licenses/by/3.0/
+  termsOfService: https://developers.google.com/terms/
+  title: Cloud Build API
   version: v1
   x-apiClientRegistration:
-    url: 'https://console.developers.google.com'
+    url: https://console.developers.google.com
+  x-apisguru-categories:
+    - analytics
+    - media
   x-logo:
-    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.31
       format: google
-      url: 'https://cloudbuild.googleapis.com/$discovery/rest?version=v1'
+      url: https://cloudbuild.googleapis.com/$discovery/rest?version=v1
       version: v1
   x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: cloudbuild
 externalDocs:
-  url: 'https://cloud.google.com/cloud-build/docs/'
+  url: https://cloud.google.com/cloud-build/docs/
 tags:
-  - name: operations
   - name: projects
+  - name: operations
 paths:
-  '/v1/projects/{projectId}/builds':
+  "/v1/projects/{projectId}/builds":
     get:
-      description: |-
+      description: >-
         Lists previously requested builds.
 
+
         Previously requested builds may still be in-progress, or may have finished
+
         successfully or unsuccessfully.
       operationId: cloudbuild.projects.builds.list
       parameters:
@@ -63,37 +69,40 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ListBuildsResponse'
+                $ref: "#/components/schemas/ListBuildsResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
     post:
-      description: |-
+      description: >-
         Starts a build with the specified configuration.
 
+
         This method returns a long-running `Operation`, which includes the build
+
         ID. Pass the build ID to `GetBuild` to determine the build status (such as
+
         `SUCCESS` or `FAILURE`).
       operationId: cloudbuild.projects.builds.create
       parameters:
@@ -107,27 +116,29 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Build'
+              $ref: "#/components/schemas/Build"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1/projects/{projectId}/builds/{id}':
+  "/v1/projects/{projectId}/builds/{id}":
     get:
-      description: |-
+      description: >-
         Returns information about a previously requested build.
 
+
         The `Build` that is returned includes its status (such as `SUCCESS`,
+
         `FAILURE`, or `WORKING`), and timing information.
       operationId: cloudbuild.projects.builds.get
       parameters:
@@ -144,44 +155,44 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Build'
+                $ref: "#/components/schemas/Build"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-  '/v1/projects/{projectId}/builds/{id}:cancel':
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+  "/v1/projects/{projectId}/builds/{id}:cancel":
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
     post:
       description: Cancels a build in progress.
       operationId: cloudbuild.projects.builds.cancel
@@ -202,62 +213,81 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CancelBuildRequest'
+              $ref: "#/components/schemas/CancelBuildRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Build'
+                $ref: "#/components/schemas/Build"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1/projects/{projectId}/builds/{id}:retry':
+  "/v1/projects/{projectId}/builds/{id}:retry":
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
     post:
-      description: |-
+      description: >-
         Creates a new build based on the specified build.
 
+
         This method creates a new build using the original build request, which may
+
         or may not result in an identical build.
+
 
         For triggered builds:
 
+
         * Triggered builds resolve to a precise revision; therefore a retry of a
+
         triggered build will result in a build that uses the same revision.
+
 
         For non-triggered builds that specify `RepoSource`:
 
+
         * If the original build built from the tip of a branch, the retried build
+
         will build from the tip of that branch, which may not be the same revision
+
         as the original build.
+
         * If the original build specified a commit sha or revision ID, the retried
+
         build will use the identical source.
+
 
         For builds that specify `StorageSource`:
 
+
         * If the original build pulled source from Google Cloud Storage without
+
         specifying the generation of the object, the new build will use the current
+
         object, which may be different from the original build source.
+
         * If the original build pulled source from Cloud Storage and specified the
+
         generation of the object, the new build will attempt to use the same
+
         object, which may or may not be available depending on the bucket's
+
         lifecycle management settings.
       operationId: cloudbuild.projects.builds.retry
       parameters:
@@ -277,25 +307,26 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RetryBuildRequest'
+              $ref: "#/components/schemas/RetryBuildRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1/projects/{projectId}/triggers':
+  "/v1/projects/{projectId}/triggers":
     get:
-      description: |-
+      description: >-
         Lists existing `BuildTrigger`s.
+
 
         This API is experimental.
       operationId: cloudbuild.projects.triggers.list
@@ -317,34 +348,35 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ListBuildTriggersResponse'
+                $ref: "#/components/schemas/ListBuildTriggersResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
     post:
-      description: |-
+      description: >-
         Creates a new `BuildTrigger`.
+
 
         This API is experimental.
       operationId: cloudbuild.projects.triggers.create
@@ -359,25 +391,26 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/BuildTrigger'
+              $ref: "#/components/schemas/BuildTrigger"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/BuildTrigger'
+                $ref: "#/components/schemas/BuildTrigger"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1/projects/{projectId}/triggers/{triggerId}':
+  "/v1/projects/{projectId}/triggers/{triggerId}":
     delete:
-      description: |-
+      description: >-
         Deletes a `BuildTrigger` by its project ID and trigger ID.
+
 
         This API is experimental.
       operationId: cloudbuild.projects.triggers.delete
@@ -395,22 +428,23 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Empty'
+                $ref: "#/components/schemas/Empty"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
     get:
-      description: |-
+      description: >-
         Returns information about a `BuildTrigger`.
+
 
         This API is experimental.
       operationId: cloudbuild.projects.triggers.get
@@ -428,34 +462,35 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/BuildTrigger'
+                $ref: "#/components/schemas/BuildTrigger"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
     patch:
-      description: |-
+      description: >-
         Updates a `BuildTrigger` by its project ID and trigger ID.
+
 
         This API is experimental.
       operationId: cloudbuild.projects.triggers.patch
@@ -476,34 +511,34 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/BuildTrigger'
+              $ref: "#/components/schemas/BuildTrigger"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/BuildTrigger'
+                $ref: "#/components/schemas/BuildTrigger"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1/projects/{projectId}/triggers/{triggerId}:run':
+  "/v1/projects/{projectId}/triggers/{triggerId}:run":
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
     post:
       description: Runs a `BuildTrigger` at a particular source revision.
       operationId: cloudbuild.projects.triggers.run
@@ -524,26 +559,28 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RepoSource'
+              $ref: "#/components/schemas/RepoSource"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1/{name}':
+  "/v1/{name}":
     get:
-      description: |-
+      description: >-
         Gets the latest state of a long-running operation.  Clients can use this
+
         method to poll the operation result at intervals as recommended by the API
+
         service.
       operationId: cloudbuild.operations.get
       parameters:
@@ -553,57 +590,65 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - operations
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-  '/v1/{name}:cancel':
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+  "/v1/{name}:cancel":
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
     post:
-      description: |-
+      description: >-
         Starts asynchronous cancellation on a long-running operation.  The server
+
         makes a best effort to cancel the operation, but success is not
+
         guaranteed.  If the server doesn't support this method, it returns
+
         `google.rpc.Code.UNIMPLEMENTED`.  Clients can use
+
         Operations.GetOperation or
+
         other methods to check whether the cancellation succeeded or whether the
+
         operation completed despite cancellation. On successful cancellation,
+
         the operation is not deleted; instead, it becomes an operation with
+
         an Operation.error value with a google.rpc.Status.code of 1,
+
         corresponding to `Code.CANCELLED`.
       operationId: cloudbuild.operations.cancel
       parameters:
@@ -613,24 +658,23 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CancelOperationRequest'
+              $ref: "#/components/schemas/CancelOperationRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Empty'
+                $ref: "#/components/schemas/Empty"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - operations
 components:
@@ -641,8 +685,8 @@ components:
       name: $.xgafv
       schema:
         enum:
-          - '1'
-          - '2'
+          - "1"
+          - "2"
         type: string
     access_token:
       description: OAuth access token.
@@ -655,7 +699,6 @@ components:
       in: query
       name: alt
       schema:
-        default: json
         enum:
           - json
           - media
@@ -674,7 +717,7 @@ components:
       schema:
         type: string
     key:
-      description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -690,45 +733,43 @@ components:
       in: query
       name: prettyPrint
       schema:
-        default: true
         type: boolean
     quotaUser:
-      description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.'
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
       in: query
       name: quotaUser
       schema:
         type: string
     uploadType:
-      description: 'Legacy upload protocol for media (e.g. "media", "multipart").'
+      description: Legacy upload protocol for media (e.g. "media", "multipart").
       in: query
       name: uploadType
       schema:
         type: string
     upload_protocol:
-      description: 'Upload protocol for media (e.g. "raw", "multipart").'
+      description: Upload protocol for media (e.g. "raw", "multipart").
       in: query
       name: upload_protocol
       schema:
         type: string
-  requestBodies:
-    BuildTrigger:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/BuildTrigger'
   schemas:
     ArtifactObjects:
-      description: |-
+      description: >-
         Files in the workspace to upload to Cloud Storage upon successful
+
         completion of all build steps.
       properties:
         location:
-          description: |-
+          description: >-
             Cloud Storage bucket and optional object path, in the form
+
             "gs://bucket/path/to/somewhere/". (see [Bucket Name
+
             Requirements](https://cloud.google.com/storage/docs/bucket-naming#requirements)).
 
+
             Files in the workspace matching any path pattern will be uploaded to
+
             Cloud Storage with this location as a prefix.
           type: string
         paths:
@@ -737,88 +778,117 @@ components:
             type: string
           type: array
         timing:
-          $ref: '#/components/schemas/TimeSpan'
+          $ref: "#/components/schemas/TimeSpan"
           description: Output only. Stores timing information for pushing all artifact objects.
       type: object
     ArtifactResult:
-      description: |-
+      description: >-
         An artifact that was uploaded during a build. This
+
         is a single record in the artifact manifest JSON file.
       properties:
         fileHash:
           description: The file hash of the artifact.
           items:
-            $ref: '#/components/schemas/FileHashes'
+            $ref: "#/components/schemas/FileHashes"
           type: array
         location:
-          description: |-
+          description: >-
             The path of an artifact in a Google Cloud Storage bucket, with the
+
             generation number. For example,
+
             `gs://mybucket/path/to/output.jar#generation`.
           type: string
       type: object
     Artifacts:
-      description: |-
+      description: >-
         Artifacts produced by a build that should be uploaded upon
+
         successful completion of all build steps.
       properties:
         images:
-          description: |-
+          description: >-
             A list of images to be pushed upon the successful completion of all build
+
             steps.
+
 
             The images will be pushed using the builder service account's credentials.
 
+
             The digests of the pushed images will be stored in the Build resource's
+
             results field.
+
 
             If any of the images fail to be pushed, the build is marked FAILURE.
           items:
             type: string
           type: array
         objects:
-          $ref: '#/components/schemas/ArtifactObjects'
-          description: |-
+          $ref: "#/components/schemas/ArtifactObjects"
+          description: >-
             A list of objects to be uploaded to Cloud Storage upon successful
+
             completion of all build steps.
 
+
             Files in the workspace matching specified paths globs will be uploaded to
+
             the specified Cloud Storage location using the builder service account's
+
             credentials.
 
+
             The location and generation of the uploaded objects will be stored in the
+
             Build resource's results field.
+
 
             If any objects fail to be pushed, the build is marked FAILURE.
       type: object
     Build:
-      description: |-
+      description: >-
         A build resource in the Cloud Build API.
 
+
         At a high level, a `Build` describes where to find source code, how to build
+
         it (for example, the builder image to run on the source), and where to store
+
         the built artifacts.
 
+
         Fields can include the following variables, which will be expanded when the
+
         build is created:
 
+
         - $PROJECT_ID: the project ID of the build.
+
         - $BUILD_ID: the autogenerated ID of the build.
+
         - $REPO_NAME: the source repository name specified by RepoSource.
+
         - $BRANCH_NAME: the branch name specified by RepoSource.
+
         - $TAG_NAME: the tag name specified by RepoSource.
+
         - $REVISION_ID or $COMMIT_SHA: the commit SHA specified by RepoSource or
           resolved from the specified branch or tag.
         - $SHORT_SHA: first 7 characters of $REVISION_ID or $COMMIT_SHA.
       properties:
         artifacts:
-          $ref: '#/components/schemas/Artifacts'
-          description: |-
+          $ref: "#/components/schemas/Artifacts"
+          description: >-
             Artifacts produced by the build that should be uploaded upon
+
             successful completion of all build steps.
         buildTriggerId:
-          description: |-
+          description: >-
             Output only. The ID of the `BuildTrigger` that triggered this build, if it
+
             was triggered automatically.
           type: string
         createTime:
@@ -826,10 +896,12 @@ components:
           format: google-datetime
           type: string
         finishTime:
-          description: |-
+          description: >-
             Output only. Time at which execution of the build was finished.
 
+
             The difference between finish_time and start_time is the duration of the
+
             build's execution.
           format: google-datetime
           type: string
@@ -837,16 +909,22 @@ components:
           description: Output only. Unique identifier of the build.
           type: string
         images:
-          description: |-
+          description: >-
             A list of images to be pushed upon the successful completion of all build
+
             steps.
+
 
             The images are pushed using the builder service account's credentials.
 
+
             The digests of the pushed images will be stored in the `Build` resource's
+
             results field.
 
+
             If any of the images fail to be pushed, the build status is marked
+
             `FAILURE`.
           items:
             type: string
@@ -855,40 +933,46 @@ components:
           description: Output only. URL to logs for this build in Google Cloud Console.
           type: string
         logsBucket:
-          description: |-
+          description: >-
             Google Cloud Storage bucket where logs should be written (see
+
             [Bucket Name
+
             Requirements](https://cloud.google.com/storage/docs/bucket-naming#requirements)).
+
             Logs file names will be of the format `${logs_bucket}/log-${build_id}.txt`.
           type: string
         options:
-          $ref: '#/components/schemas/BuildOptions'
+          $ref: "#/components/schemas/BuildOptions"
           description: Special options for this build.
         projectId:
           description: Output only. ID of the project.
           type: string
         queueTtl:
-          description: |-
+          description: >-
             TTL in queue for this build. If provided and the build is enqueued longer
+
             than this value, the build will expire and the build status will be
+
             `EXPIRED`.
+
 
             The TTL starts ticking from create_time.
           format: google-duration
           type: string
         results:
-          $ref: '#/components/schemas/Results'
+          $ref: "#/components/schemas/Results"
           description: Output only. Results of the build.
         secrets:
           description: Secrets to decrypt using Cloud Key Management Service.
           items:
-            $ref: '#/components/schemas/Secret'
+            $ref: "#/components/schemas/Secret"
           type: array
         source:
-          $ref: '#/components/schemas/Source'
+          $ref: "#/components/schemas/Source"
           description: The location of the source files to build.
         sourceProvenance:
-          $ref: '#/components/schemas/SourceProvenance'
+          $ref: "#/components/schemas/SourceProvenance"
           description: Output only. A permanent fixed identifier for source.
         startTime:
           description: Output only. Time at which execution of the build was started.
@@ -913,7 +997,7 @@ components:
         steps:
           description: Required. The operations to be performed on the workspace.
           items:
-            $ref: '#/components/schemas/BuildStep'
+            $ref: "#/components/schemas/BuildStep"
           type: array
         substitutions:
           additionalProperties:
@@ -926,26 +1010,38 @@ components:
             type: string
           type: array
         timeout:
-          description: |-
+          description: >-
             Amount of time that this build should be allowed to run, to second
+
             granularity. If this amount of time elapses, work on the build will cease
+
             and the build status will be `TIMEOUT`.
+
+
+            `timeout` starts ticking from `startTime`.
+
 
             Default time is ten minutes.
           format: google-duration
           type: string
         timing:
           additionalProperties:
-            $ref: '#/components/schemas/TimeSpan'
-          description: |-
+            $ref: "#/components/schemas/TimeSpan"
+          description: >-
             Output only. Stores timing information for phases of the build. Valid keys
+
             are:
 
+
             * BUILD: time to execute all build steps
+
             * PUSH: time to push all specified images.
+
             * FETCHSOURCE: time to fetch source.
 
+
             If the build does not specify source or images,
+
             these keys will not be included.
           type: object
       type: object
@@ -953,36 +1049,57 @@ components:
       description: Metadata for build operations.
       properties:
         build:
-          $ref: '#/components/schemas/Build'
+          $ref: "#/components/schemas/Build"
           description: The build that the operation is tracking.
       type: object
     BuildOptions:
       description: Optional arguments to enable specific features of builds.
       properties:
         diskSizeGb:
-          description: |-
+          description: >-
             Requested disk size for the VM that runs the build. Note that this is *NOT*
+
             "disk free"; some of the space will be used by the operating system and
+
             build utilities. Also note that this is the minimum disk size that will be
+
             allocated for the build -- the build may run with a larger disk than
+
             requested. At present, the maximum disk size is 1000GB; builds that request
+
             more than the maximum are rejected with an error.
           format: int64
           type: string
+        dynamicSubstitutions:
+          description: >-
+            Option to specify whether or not to apply bash style string
+
+            operations to the substitutions.
+
+
+            NOTE: this is always enabled for triggered builds and cannot be
+
+            overridden in the build configuration file.
+          type: boolean
         env:
-          description: |-
+          description: >-
             A list of global environment variable definitions that will exist for all
+
             build steps in this build. If a variable is defined in both globally and in
+
             a build step, the variable will use the build step value.
 
+
             The elements are of the form "KEY=VALUE" for the environment variable "KEY"
+
             being given the value "VALUE".
           items:
             type: string
           type: array
         logStreamingOption:
-          description: |-
+          description: >-
             Option to define build log streaming behavior to Google Cloud
+
             Storage.
           enum:
             - STREAM_DEFAULT
@@ -990,13 +1107,16 @@ components:
             - STREAM_OFF
           type: string
         logging:
-          description: |-
-            Option to specify the logging mode, which determines where the logs are
-            stored.
+          description: >-
+            Option to specify the logging mode, which determines if and where build
+
+            logs are stored.
           enum:
             - LOGGING_UNSPECIFIED
             - LEGACY
             - GCS_ONLY
+            - STACKDRIVER_ONLY
+            - NONE
           type: string
         machineType:
           description: Compute Engine machine type on which to run the build.
@@ -1012,10 +1132,13 @@ components:
             - VERIFIED
           type: string
         secretEnv:
-          description: |-
+          description: >-
             A list of global environment variables, which are encrypted using a Cloud
+
             Key Management Service crypto key. These values must be specified in the
+
             build's `Secret`. These variables will be available to all build steps
+
             in this build.
           items:
             type: string
@@ -1030,31 +1153,45 @@ components:
             type: string
           type: array
         substitutionOption:
-          description: |-
+          description: >-
             Option to specify behavior when there is an error in the substitution
+
             checks.
+
+
+            NOTE: this is always set to ALLOW_LOOSE for triggered builds and cannot
+
+            be overridden in the build configuration file.
           enum:
             - MUST_MATCH
             - ALLOW_LOOSE
           type: string
         volumes:
-          description: |-
+          description: >-
             Global list of volumes to mount for ALL build steps
 
+
             Each volume is created as an empty volume prior to starting the build
+
             process. Upon completion of the build, volumes and their contents are
+
             discarded. Global volume names and paths cannot conflict with the volumes
+
             defined a build step.
 
+
             Using a global volume in a build with only one step is not valid as
+
             it is indicative of a build request with an incorrect configuration.
           items:
-            $ref: '#/components/schemas/Volume'
+            $ref: "#/components/schemas/Volume"
           type: array
         workerPool:
-          description: |-
+          description: >-
             Option to specify a `WorkerPool` for the build.
+
             Format: projects/{project}/workerPools/{workerPool}
+
 
             This field is experimental.
           type: string
@@ -1063,85 +1200,118 @@ components:
       description: A step in the build pipeline.
       properties:
         args:
-          description: |-
+          description: >-
             A list of arguments that will be presented to the step when it is started.
 
+
             If the image used to run the step's container has an entrypoint, the `args`
+
             are used as arguments to that entrypoint. If the image does not define
+
             an entrypoint, the first element in args is used as the entrypoint,
+
             and the remainder will be used as arguments.
           items:
             type: string
           type: array
         dir:
-          description: |-
+          description: >-
             Working directory to use when running this step's container.
 
+
             If this value is a relative path, it is relative to the build's working
+
             directory. If this value is absolute, it may be outside the build's working
+
             directory, in which case the contents of the path may not be persisted
+
             across build step executions, unless a `volume` for that path is specified.
 
+
             If the build specifies a `RepoSource` with `dir` and a step with a `dir`,
+
             which specifies an absolute path, the `RepoSource` `dir` is ignored for
+
             the step's execution.
           type: string
         entrypoint:
-          description: |-
+          description: >-
             Entrypoint to be used instead of the build step image's default entrypoint.
+
             If unset, the image's default entrypoint is used.
           type: string
         env:
-          description: |-
+          description: >-
             A list of environment variable definitions to be used when running a step.
 
+
             The elements are of the form "KEY=VALUE" for the environment variable "KEY"
+
             being given the value "VALUE".
           items:
             type: string
           type: array
         id:
-          description: |-
+          description: >-
             Unique identifier for this build step, used in `wait_for` to
+
             reference this build step as a dependency.
           type: string
         name:
-          description: |-
+          description: >-
             Required. The name of the container image that will run this particular
+
             build step.
 
+
             If the image is available in the host's Docker daemon's cache, it
+
             will be run directly. If not, the host will attempt to pull the image
+
             first, using the builder service account's credentials if necessary.
 
+
             The Docker daemon's cache will already have the latest versions of all of
+
             the officially supported build steps
+
             ([https://github.com/GoogleCloudPlatform/cloud-builders](https://github.com/GoogleCloudPlatform/cloud-builders)).
+
             The Docker daemon will also have cached many of the layers for some popular
+
             images, like "ubuntu", "debian", but they will be refreshed at the time you
+
             attempt to use them.
 
+
             If you built an image in a previous build step, it will be stored in the
+
             host's Docker daemon's cache and is available to use as the name for a
+
             later build step.
           type: string
         pullTiming:
-          $ref: '#/components/schemas/TimeSpan'
-          description: |-
+          $ref: "#/components/schemas/TimeSpan"
+          description: >-
             Output only. Stores timing information for pulling this build step's
+
             builder image only.
         secretEnv:
-          description: |-
+          description: >-
             A list of environment variables which are encrypted using a Cloud Key
+
             Management Service crypto key. These values must be specified in the
+
             build's `Secret`.
           items:
             type: string
           type: array
         status:
-          description: |-
+          description: >-
             Output only. Status of the build step. At this time, build step status is
+
             only updated on build completion; step status is not updated in real-time
+
             as the build progresses.
           enum:
             - STATUS_UNKNOWN
@@ -1155,46 +1325,58 @@ components:
             - EXPIRED
           type: string
         timeout:
-          description: |-
+          description: >-
             Time limit for executing this build step. If not defined, the step has no
+
             time limit and will be allowed to continue to run until either it completes
+
             or the build itself times out.
           format: google-duration
           type: string
         timing:
-          $ref: '#/components/schemas/TimeSpan'
+          $ref: "#/components/schemas/TimeSpan"
           description: Output only. Stores timing information for executing this build step.
         volumes:
-          description: |-
+          description: >-
             List of volumes to mount into the build step.
 
+
             Each volume is created as an empty volume prior to execution of the
+
             build step. Upon completion of the build, volumes and their contents are
+
             discarded.
 
+
             Using a named volume in only one step is not valid as it is indicative
+
             of a build request with an incorrect configuration.
           items:
-            $ref: '#/components/schemas/Volume'
+            $ref: "#/components/schemas/Volume"
           type: array
         waitFor:
-          description: |-
+          description: >-
             The ID(s) of the step(s) that this build step depends on.
+
             This build step will not start until all the build steps in `wait_for`
+
             have completed successfully. If `wait_for` is empty, this build step will
+
             start when all previous build steps in the `Build.Steps` list have
+
             completed successfully.
           items:
             type: string
           type: array
       type: object
     BuildTrigger:
-      description: |-
+      description: >-
         Configuration for an automated build in response to source repository
+
         changes.
       properties:
         build:
-          $ref: '#/components/schemas/Build'
+          $ref: "#/components/schemas/Build"
           description: Contents of the build template.
         createTime:
           description: Output only. Time when the trigger was created.
@@ -1204,65 +1386,86 @@ components:
           description: Human-readable description of this trigger.
           type: string
         disabled:
-          description: 'If true, the trigger will never result in a build.'
+          description: If true, the trigger will never automatically execute a build.
           type: boolean
         filename:
-          description: |-
+          description: >-
             Path, from the source root, to a file whose contents is used for the
+
             template.
           type: string
         github:
-          $ref: '#/components/schemas/GitHubEventsConfig'
-          description: |-
+          $ref: "#/components/schemas/GitHubEventsConfig"
+          description: >-
             GitHubEventsConfig describes the configuration of a trigger that creates
+
             a build whenever a GitHub event is received.
+
 
             Mutually exclusive with `trigger_template`.
         id:
           description: Output only. Unique identifier of the trigger.
           type: string
         ignoredFiles:
-          description: |-
+          description: >-
             ignored_files and included_files are file glob matches using
+
             https://golang.org/pkg/path/filepath/#Match extended with support for "**".
 
+
             If ignored_files and changed files are both empty, then they are
+
             not used to determine whether or not to trigger a build.
 
+
             If ignored_files is not empty, then we ignore any files that match
+
             any of the ignored_file globs. If the change has no files that are
+
             outside of the ignored_files globs, then we do not trigger a build.
           items:
             type: string
           type: array
         includedFiles:
-          description: |-
+          description: >-
             If any of the files altered in the commit pass the ignored_files
+
             filter and included_files is empty, then as far as this filter is
+
             concerned, we should trigger the build.
 
+
             If any of the files altered in the commit pass the ignored_files
+
             filter and included_files is not empty, then we make sure that at
+
             least one of those files matches a included_files glob. If not,
+
             then we do not trigger a build.
           items:
             type: string
           type: array
         name:
-          description: |-
+          description: >-
             User-assigned name of the trigger. Must be unique within the project.
+
             Trigger names must meet the following requirements:
 
+
             + They must contain only alphanumeric characters and dashes.
+
             + They can be 1-64 characters long.
+
             + They must begin and end with an alphanumeric character.
           type: string
         substitutions:
           additionalProperties:
             type: string
-          description: |-
+          description: >-
             Substitutions for Build resource. The keys must match the following
+
             regular expression: `^_[A-Z0-9_]+$`.The keys cannot conflict with the
+
             keys in bindings.
           type: object
         tags:
@@ -1271,13 +1474,17 @@ components:
             type: string
           type: array
         triggerTemplate:
-          $ref: '#/components/schemas/RepoSource'
-          description: |-
+          $ref: "#/components/schemas/RepoSource"
+          description: >-
             Template describing the types of source changes to trigger a build.
 
+
             Branch and tag names in trigger templates are interpreted as regular
+
             expressions. Any branch or tag change that matches that regular expression
+
             will trigger a build.
+
 
             Mutually exclusive with `github`.
       type: object
@@ -1288,12 +1495,13 @@ components:
           description: Docker Registry 2.0 digest.
           type: string
         name:
-          description: |-
+          description: >-
             Name used to push the container image to Google Container Registry, as
+
             presented to `docker push`.
           type: string
         pushTiming:
-          $ref: '#/components/schemas/TimeSpan'
+          $ref: "#/components/schemas/TimeSpan"
           description: Output only. Stores timing information for pushing the specified image.
       type: object
     CancelBuildRequest:
@@ -1305,9 +1513,11 @@ components:
       properties: {}
       type: object
     Empty:
-      description: |-
+      description: >-
         A generic empty message that you can re-use to avoid defining duplicated
+
         empty messages in your APIs. A typical example is to use it as the request
+
         or the response type of an API method. For instance:
 
             service Foo {
@@ -1318,20 +1528,23 @@ components:
       properties: {}
       type: object
     FileHashes:
-      description: |-
+      description: >-
         Container message for hashes of byte content of files, used in
+
         SourceProvenance messages to verify integrity of source input to the build.
       properties:
         fileHash:
           description: Collection of file hashes.
           items:
-            $ref: '#/components/schemas/Hash'
+            $ref: "#/components/schemas/Hash"
           type: array
       type: object
     GitHubEventsConfig:
-      description: |-
+      description: >-
         GitHubEventsConfig describes the configuration of a trigger that creates a
+
         build whenever a GitHub event is received.
+
 
         This message is experimental.
       properties:
@@ -1340,22 +1553,32 @@ components:
           format: int64
           type: string
         name:
-          description: |-
+          description: >-
             Name of the repository. For example: The name for
+
             https://github.com/googlecloudplatform/cloud-builders is "cloud-builders".
           type: string
         owner:
-          description: |-
+          description: >-
             Owner of the repository. For example: The owner for
+
             https://github.com/googlecloudplatform/cloud-builders is
+
             "googlecloudplatform".
           type: string
         pullRequest:
-          $ref: '#/components/schemas/PullRequestFilter'
+          $ref: "#/components/schemas/PullRequestFilter"
           description: filter to match changes in pull requests.
         push:
-          $ref: '#/components/schemas/PushFilter'
-          description: 'filter to match changes in refs like branches, tags.'
+          $ref: "#/components/schemas/PushFilter"
+          description: filter to match changes in refs like branches, tags.
+      type: object
+    HTTPDelivery:
+      description: HTTPDelivery is the delivery configuration for an HTTP notification.
+      properties:
+        uri:
+          description: The URI to which JSON-containing HTTP POST requests should be sent.
+          type: string
       type: object
     Hash:
       description: Container message for hash values.
@@ -1379,122 +1602,248 @@ components:
           description: Token to receive the next page of results.
           type: string
         triggers:
-          description: '`BuildTriggers` for the project, sorted by `create_time` descending.'
+          description: "`BuildTriggers` for the project, sorted by `create_time` descending."
           items:
-            $ref: '#/components/schemas/BuildTrigger'
+            $ref: "#/components/schemas/BuildTrigger"
           type: array
       type: object
     ListBuildsResponse:
       description: Response including listed builds.
       properties:
         builds:
-          description: 'Builds will be sorted by `create_time`, descending.'
+          description: Builds will be sorted by `create_time`, descending.
           items:
-            $ref: '#/components/schemas/Build'
+            $ref: "#/components/schemas/Build"
           type: array
         nextPageToken:
           description: Token to receive the next page of results.
           type: string
       type: object
-    ListOperationsResponse:
-      description: The response message for Operations.ListOperations.
+    Notification:
+      description: >-
+        Notification is the container which holds the data that is relevant to this
+
+        particular notification.
       properties:
-        nextPageToken:
-          description: The standard List next-page token.
+        filter:
+          description: >-
+            The filter string to use for notification filtering.
+
+            Currently, this is assumed to be a CEL program.
+
+            See https://opensource.google/projects/cel for more.
           type: string
-        operations:
-          description: A list of operations that matches the specified filter in the request.
+        httpDelivery:
+          $ref: "#/components/schemas/HTTPDelivery"
+          description: Configuration for HTTP delivery.
+        slackDelivery:
+          $ref: "#/components/schemas/SlackDelivery"
+          description: Configuration for Slack delivery.
+        smtpDelivery:
+          $ref: "#/components/schemas/SMTPDelivery"
+          description: Configuration for SMTP (email) delivery.
+        structDelivery:
+          additionalProperties:
+            description: Properties of the object.
+          description: Escape hatch for users to supply custom delivery configs.
+          type: object
+      type: object
+    NotifierConfig:
+      description: NotifierConfig is the top-level configuration message.
+      properties:
+        apiVersion:
+          description: The API version of this configuration format.
+          type: string
+        kind:
+          description: The type of notifier to use (e.g. SMTPNotifier).
+          type: string
+        metadata:
+          $ref: "#/components/schemas/NotifierMetadata"
+          description: Metadata for referring to/handling/deploying this notifier.
+        spec:
+          $ref: "#/components/schemas/NotifierSpec"
+          description: The actual configuration for this notifier.
+      type: object
+    NotifierMetadata:
+      description: >-
+        NotifierMetadata contains the data which can be used to reference or describe
+
+        this notifier.
+      properties:
+        name:
+          description: >-
+            The human-readable and user-given name for the notifier.
+
+            For example: "repo-merge-email-notifier".
+          type: string
+        notifier:
+          description: >-
+            The string representing the name and version of notifier to deploy.
+
+            Expected to be of the form of "<registry-path>/<name>:<version>".
+
+            For example: "gcr.io/my-project/notifiers/smtp:1.2.34".
+          type: string
+      type: object
+    NotifierSecret:
+      description: >-
+        NotifierSecret is the container that maps a secret name (reference) to its
+
+        Google Cloud Secret Manager resource path.
+      properties:
+        name:
+          description: >-
+            Name is the local name of the secret, such as the verbatim string
+
+            "my-smtp-password".
+          type: string
+        value:
+          description: >-
+            Value is interpreted to be a resource path for fetching the actual
+
+            (versioned) secret data for this secret. For example, this would be a
+
+            Google Cloud Secret Manager secret version resource path like:
+
+            "projects/my-project/secrets/my-secret/versions/latest".
+          type: string
+      type: object
+    NotifierSecretRef:
+      description: >-
+        NotifierSecretRef contains the reference to a secret stored in the
+
+        corresponding NotifierSpec.
+      properties:
+        secretRef:
+          description: >-
+            The value of `secret_ref` should be a `name` that is registered in a
+
+            `Secret` in the `secrets` list of the `Spec`.
+          type: string
+      type: object
+    NotifierSpec:
+      description: NotifierSpec is the configuration container for notifications.
+      properties:
+        notification:
+          $ref: "#/components/schemas/Notification"
+          description: The configuration of this particular notifier.
+        secrets:
+          description: Configurations for secret resources used by this particular notifier.
           items:
-            $ref: '#/components/schemas/Operation'
+            $ref: "#/components/schemas/NotifierSecret"
           type: array
       type: object
     Operation:
-      description: |-
+      description: >-
         This resource represents a long-running operation that is the result of a
+
         network API call.
       properties:
         done:
-          description: |-
+          description: >-
             If the value is `false`, it means the operation is still in progress.
+
             If `true`, the operation is completed, and either `error` or `response` is
+
             available.
           type: boolean
         error:
-          $ref: '#/components/schemas/Status'
+          $ref: "#/components/schemas/Status"
           description: The error result of the operation in case of failure or cancellation.
         metadata:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
-          description: |-
+          description: >-
             Service-specific metadata associated with the operation.  It typically
+
             contains progress information and common metadata such as create time.
+
             Some services might not provide such metadata.  Any method that returns a
+
             long-running operation should document the metadata type, if any.
           type: object
         name:
-          description: |-
+          description: >-
             The server-assigned name, which is only unique within the same service that
+
             originally returns it. If you use the default HTTP mapping, the
+
             `name` should be a resource name ending with `operations/{unique_id}`.
           type: string
         response:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
-          description: |-
+          description: >-
             The normal response of the operation in case of success.  If the original
+
             method returns no data on success, such as `Delete`, the response is
+
             `google.protobuf.Empty`.  If the original method is standard
+
             `Get`/`Create`/`Update`, the response should be the resource.  For other
+
             methods, the response should have the type `XxxResponse`, where `Xxx`
+
             is the original method name.  For example, if the original method name
+
             is `TakeSnapshot()`, the inferred response type is
+
             `TakeSnapshotResponse`.
           type: object
       type: object
     PullRequestFilter:
-      description: |-
+      description: >-
         PullRequestFilter contains filter properties for matching GitHub Pull
+
         Requests.
       properties:
         branch:
-          description: |-
+          description: >-
             Regex of branches to match.
 
+
             The syntax of the regular expressions accepted is the syntax accepted by
+
             RE2 and described at https://github.com/google/re2/wiki/Syntax
           type: string
         commentControl:
-          description: |-
-            Whether to block builds on a "/gcbrun" comment from a repository admin or
-            collaborator.
+          description: >-
+            Configure builds to run whether a repository owner or collaborator need to
+
+            comment `/gcbrun`.
           enum:
             - COMMENTS_DISABLED
             - COMMENTS_ENABLED
           type: string
         invertRegex:
-          description: 'If true, branches that do NOT match the git_ref will trigger a build.'
+          description: If true, branches that do NOT match the git_ref will trigger a build.
           type: boolean
       type: object
     PushFilter:
       description: Push contains filter properties for matching GitHub git pushes.
       properties:
         branch:
-          description: |-
+          description: >-
             Regexes matching branches to build.
 
+
             The syntax of the regular expressions accepted is the syntax accepted by
+
             RE2 and described at https://github.com/google/re2/wiki/Syntax
           type: string
         invertRegex:
-          description: |-
+          description: >-
             When true, only trigger a build if the revision regex does NOT match the
+
             git_ref regex.
           type: boolean
         tag:
-          description: |-
+          description: >-
             Regexes matching tags to build.
 
+
             The syntax of the regular expressions accepted is the syntax accepted by
+
             RE2 and described at https://github.com/google/re2/wiki/Syntax
           type: string
       type: object
@@ -1502,30 +1851,36 @@ components:
       description: Location of the source in a Google Cloud Source Repository.
       properties:
         branchName:
-          description: |-
+          description: >-
             Regex matching branches to build.
 
+
             The syntax of the regular expressions accepted is the syntax accepted by
+
             RE2 and described at https://github.com/google/re2/wiki/Syntax
           type: string
         commitSha:
           description: Explicit commit SHA to build.
           type: string
         dir:
-          description: |-
+          description: >-
             Directory, relative to the source root, in which to run the build.
 
+
             This must be a relative path. If a step's `dir` is specified and is an
+
             absolute path, this value is ignored for that step's execution.
           type: string
         invertRegex:
-          description: |-
+          description: >-
             Only trigger a build if the revision regex does NOT match the revision
+
             regex.
           type: boolean
         projectId:
-          description: |-
+          description: >-
             ID of the project that owns the Cloud Source Repository. If omitted, the
+
             project ID requesting the build is assumed.
           type: string
         repoName:
@@ -1534,15 +1889,18 @@ components:
         substitutions:
           additionalProperties:
             type: string
-          description: |-
+          description: >-
             Substitutions to use in a triggered build.
+
             Should only be used with RunBuildTrigger
           type: object
         tagName:
-          description: |-
+          description: >-
             Regex matching tags to build.
 
+
             The syntax of the regular expressions accepted is the syntax accepted by
+
             RE2 and described at https://github.com/google/re2/wiki/Syntax
           type: string
       type: object
@@ -1553,22 +1911,27 @@ components:
           description: Path to the artifact manifest. Only populated when artifacts are uploaded.
           type: string
         artifactTiming:
-          $ref: '#/components/schemas/TimeSpan'
+          $ref: "#/components/schemas/TimeSpan"
           description: Time to push all non-container artifacts.
         buildStepImages:
-          description: |-
+          description: >-
             List of build step digests, in the order corresponding to build step
+
             indices.
           items:
             type: string
           type: array
         buildStepOutputs:
-          description: |-
+          description: >-
             List of build step outputs, produced by builder images, in the order
+
             corresponding to build step indices.
 
+
             [Cloud Builders](https://cloud.google.com/cloud-build/docs/cloud-builders)
+
             can produce this output by writing to `$BUILDER_OUTPUT/output`.
+
             Only the first 4KB of data is stored.
           items:
             format: byte
@@ -1577,7 +1940,7 @@ components:
         images:
           description: Container images that were built as a part of the build.
           items:
-            $ref: '#/components/schemas/BuiltImage'
+            $ref: "#/components/schemas/BuiltImage"
           type: array
         numArtifacts:
           description: Number of artifacts uploaded. Only populated when artifacts are uploaded.
@@ -1588,9 +1951,40 @@ components:
       description: Specifies a build to retry.
       properties: {}
       type: object
+    SMTPDelivery:
+      description: SMTPDelivery is the delivery configuration for an SMTP (email) notification.
+      properties:
+        fromAddress:
+          description: >-
+            This is the SMTP account/email that appears in the `From:` of the email.
+
+            If empty, it is assumed to be sender.
+          type: string
+        password:
+          $ref: "#/components/schemas/NotifierSecretRef"
+          description: The SMTP sender's password.
+        port:
+          description: The SMTP port of the server.
+          type: string
+        recipientAddresses:
+          description: >-
+            This is the list of addresses to which we send the email (i.e. in the `To:`
+
+            of the email).
+          items:
+            type: string
+          type: array
+        senderAddress:
+          description: This is the SMTP account/email that is used to send the message.
+          type: string
+        server:
+          description: The address of the SMTP server.
+          type: string
+      type: object
     Secret:
-      description: |-
+      description: >-
         Pairs a set of secret environment variables containing encrypted
+
         values with the Cloud KMS key to use to decrypt the value.
       properties:
         kmsKeyName:
@@ -1600,75 +1994,111 @@ components:
           additionalProperties:
             format: byte
             type: string
-          description: |-
+          description: >-
             Map of environment variable name to its encrypted value.
 
+
             Secret environment variables must be unique across all of a build's
+
             secrets, and must be used by at least one build step. Values can be at most
+
             64 KB in size. There can be at most 100 secret values across all of a
+
             build's secrets.
           type: object
+      type: object
+    SlackDelivery:
+      description: >-
+        SlackDelivery is the delivery configuration for delivering Slack messages via
+
+        webhooks. See Slack webhook documentation at:
+
+        https://api.slack.com/messaging/webhooks.
+      properties:
+        webhookUri:
+          $ref: "#/components/schemas/NotifierSecretRef"
+          description: >-
+            The secret reference for the Slack webhook URI for sending messages to a
+
+            channel.
       type: object
     Source:
       description: Location of the source in a supported storage service.
       properties:
         repoSource:
-          $ref: '#/components/schemas/RepoSource'
-          description: |-
+          $ref: "#/components/schemas/RepoSource"
+          description: >-
             If provided, get the source from this location in a Cloud Source
+
             Repository.
         storageSource:
-          $ref: '#/components/schemas/StorageSource'
-          description: 'If provided, get the source from this location in Google Cloud Storage.'
+          $ref: "#/components/schemas/StorageSource"
+          description: If provided, get the source from this location in Google Cloud Storage.
       type: object
     SourceProvenance:
-      description: |-
+      description: >-
         Provenance of the source. Ways to find the original source, or verify that
+
         some source was used for this build.
       properties:
         fileHashes:
           additionalProperties:
-            $ref: '#/components/schemas/FileHashes'
-          description: |-
+            $ref: "#/components/schemas/FileHashes"
+          description: >-
             Output only. Hash(es) of the build source, which can be used to verify that
+
             the original source integrity was maintained in the build. Note that
+
             `FileHashes` will only be populated if `BuildOptions` has requested a
+
             `SourceProvenanceHash`.
 
+
             The keys to this map are file paths used as build source and the values
+
             contain the hash values for those files.
 
+
             If the build source came in a single package such as a gzipped tarfile
+
             (`.tar.gz`), the `FileHash` will be for the single path to that file.
           type: object
         resolvedRepoSource:
-          $ref: '#/components/schemas/RepoSource'
-          description: |-
+          $ref: "#/components/schemas/RepoSource"
+          description: >-
             A copy of the build's `source.repo_source`, if exists, with any
+
             revisions resolved.
         resolvedStorageSource:
-          $ref: '#/components/schemas/StorageSource'
-          description: |-
+          $ref: "#/components/schemas/StorageSource"
+          description: >-
             A copy of the build's `source.storage_source`, if exists, with any
+
             generations resolved.
       type: object
     Status:
-      description: |-
+      description: >-
         The `Status` type defines a logical error model that is suitable for
+
         different programming environments, including REST APIs and RPC APIs. It is
+
         used by [gRPC](https://github.com/grpc). Each `Status` message contains
+
         three pieces of data: error code, error message, and error details.
 
+
         You can find out more about this error model and how to work with it in the
+
         [API Design Guide](https://cloud.google.com/apis/design/errors).
       properties:
         code:
-          description: 'The status code, which should be an enum value of google.rpc.Code.'
+          description: The status code, which should be an enum value of google.rpc.Code.
           format: int32
           type: integer
         details:
-          description: |-
+          description: >-
             A list of messages that carry the error details.  There is a common set of
+
             message types for APIs to use.
           items:
             additionalProperties:
@@ -1676,9 +2106,11 @@ components:
             type: object
           type: array
         message:
-          description: |-
+          description: >-
             A developer-facing error message, which should be in English. Any
+
             user-facing error message should be localized and sent in the
+
             google.rpc.Status.details field, or localized by the client.
           type: string
       type: object
@@ -1686,22 +2118,27 @@ components:
       description: Location of the source in an archive file in Google Cloud Storage.
       properties:
         bucket:
-          description: |-
+          description: >-
             Google Cloud Storage bucket containing the source (see
+
             [Bucket Name
+
             Requirements](https://cloud.google.com/storage/docs/bucket-naming#requirements)).
           type: string
         generation:
-          description: |-
+          description: >-
             Google Cloud Storage generation for the object. If the generation is
+
             omitted, the latest generation will be used.
           format: int64
           type: string
         object:
-          description: |-
+          description: >-
             Google Cloud Storage object containing the source.
 
+
             This object must be a gzipped archive file (`.tar.gz`) containing source to
+
             build.
           type: string
       type: object
@@ -1718,22 +2155,27 @@ components:
           type: string
       type: object
     Volume:
-      description: |-
+      description: >-
         Volume describes a Docker container volume which is mounted into build steps
+
         in order to persist files across build step execution.
       properties:
         name:
-          description: |-
+          description: >-
             Name of the volume to mount.
 
+
             Volume names must be unique per build step and must be valid names for
+
             Docker volumes. Each named volume must be used by at least two build steps.
           type: string
         path:
-          description: |-
+          description: >-
             Path at which to mount the volume.
 
+
             Paths must be absolute and cannot conflict with other volume paths on the
+
             same build step or with certain reserved volume paths.
           type: string
       type: object
@@ -1742,16 +2184,16 @@ components:
       description: Oauth 2.0 implicit authentication
       flows:
         implicit:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
       type: oauth2
     Oauth2c:
-      description: Oauth 2.0 accessCode authentication
+      description: Oauth 2.0 authorizationCode authentication
       flows:
         authorizationCode:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-          tokenUrl: 'https://accounts.google.com/o/oauth2/token'
+            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+          tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

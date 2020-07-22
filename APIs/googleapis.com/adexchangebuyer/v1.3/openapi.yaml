@@ -1,33 +1,37 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://www.googleapis.com/adexchangebuyer/v1.3'
+  - url: https://www.googleapis.com/adexchangebuyer/v1.3
 info:
   contact:
     name: Google
-    url: 'https://google.com'
-  description: 'Accesses your bidding-account information, submits creatives for validation, finds available direct deals, and retrieves performance reports.'
+    url: https://google.com
+    x-twitter: youtube
+  description: Accesses your bidding-account information, submits creatives for validation, finds available direct deals, and retrieves performance reports.
   license:
     name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
-  title: Ad Exchange Buyer
+    url: http://creativecommons.org/licenses/by/3.0/
+  termsOfService: https://developers.google.com/terms/
+  title: Ad Exchange Buyer API
   version: v1.3
   x-apiClientRegistration:
-    url: 'https://console.developers.google.com'
+    url: https://console.developers.google.com
+  x-apisguru-categories:
+    - analytics
+    - media
   x-logo:
-    url: 'https://www.doubleclickbygoogle.com/static/core/img/doubleclick-google-logo-wide.svg'
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.31
       format: google
-      url: 'https://www.googleapis.com/discovery/v1/apis/adexchangebuyer/v1.3/rest'
+      url: https://www.googleapis.com/discovery/v1/apis/adexchangebuyer/v1.3/rest
       version: v1
   x-preferred: false
   x-providerName: googleapis.com
   x-serviceName: adexchangebuyer
 externalDocs:
-  url: 'https://developers.google.com/ad-exchange/buyer-rest'
+  url: https://developers.google.com/ad-exchange/buyer-rest
 tags:
   - name: accounts
   - name: billingInfo
@@ -42,28 +46,28 @@ paths:
       description: Retrieves the authenticated user's list of accounts.
       operationId: adexchangebuyer.accounts.list
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/AccountsList'
+                $ref: "#/components/schemas/AccountsList"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
+            - https://www.googleapis.com/auth/adexchange.buyer
           Oauth2c:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
+            - https://www.googleapis.com/auth/adexchange.buyer
       tags:
         - accounts
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
-  '/accounts/{id}':
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
+  "/accounts/{id}":
     get:
       description: Gets one account by ID.
       operationId: adexchangebuyer.accounts.get
@@ -75,27 +79,27 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Account'
+                $ref: "#/components/schemas/Account"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
+            - https://www.googleapis.com/auth/adexchange.buyer
           Oauth2c:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
+            - https://www.googleapis.com/auth/adexchange.buyer
       tags:
         - accounts
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
     patch:
       description: Updates an existing account. This method supports patch semantics.
       operationId: adexchangebuyer.accounts.patch
@@ -110,19 +114,19 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Account'
+              $ref: "#/components/schemas/Account"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Account'
+                $ref: "#/components/schemas/Account"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
+            - https://www.googleapis.com/auth/adexchange.buyer
           Oauth2c:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
+            - https://www.googleapis.com/auth/adexchange.buyer
       tags:
         - accounts
     put:
@@ -139,19 +143,19 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Account'
+              $ref: "#/components/schemas/Account"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Account'
+                $ref: "#/components/schemas/Account"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
+            - https://www.googleapis.com/auth/adexchange.buyer
           Oauth2c:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
+            - https://www.googleapis.com/auth/adexchange.buyer
       tags:
         - accounts
   /billinginfo:
@@ -159,28 +163,28 @@ paths:
       description: Retrieves a list of billing information for all accounts of the authenticated user.
       operationId: adexchangebuyer.billingInfo.list
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/BillingInfoList'
+                $ref: "#/components/schemas/BillingInfoList"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
+            - https://www.googleapis.com/auth/adexchange.buyer
           Oauth2c:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
+            - https://www.googleapis.com/auth/adexchange.buyer
       tags:
         - billingInfo
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
-  '/billinginfo/{accountId}':
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
+  "/billinginfo/{accountId}":
     get:
       description: Returns the billing information for one account specified by account ID.
       operationId: adexchangebuyer.billingInfo.get
@@ -192,28 +196,28 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/BillingInfo'
+                $ref: "#/components/schemas/BillingInfo"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
+            - https://www.googleapis.com/auth/adexchange.buyer
           Oauth2c:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
+            - https://www.googleapis.com/auth/adexchange.buyer
       tags:
         - billingInfo
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
-  '/billinginfo/{accountId}/{billingId}':
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
+  "/billinginfo/{accountId}/{billingId}":
     get:
       description: Returns the budget information for the adgroup specified by the accountId and billingId.
       operationId: adexchangebuyer.budget.get
@@ -231,29 +235,29 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Budget'
+                $ref: "#/components/schemas/Budget"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
+            - https://www.googleapis.com/auth/adexchange.buyer
           Oauth2c:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
+            - https://www.googleapis.com/auth/adexchange.buyer
       tags:
         - budget
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
     patch:
-      description: 'Updates the budget amount for the budget of the adgroup specified by the accountId and billingId, with the budget amount in the request. This method supports patch semantics.'
+      description: Updates the budget amount for the budget of the adgroup specified by the accountId and billingId, with the budget amount in the request. This method supports patch semantics.
       operationId: adexchangebuyer.budget.patch
       parameters:
         - description: The account id associated with the budget being updated.
@@ -272,23 +276,23 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Budget'
+              $ref: "#/components/schemas/Budget"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Budget'
+                $ref: "#/components/schemas/Budget"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
+            - https://www.googleapis.com/auth/adexchange.buyer
           Oauth2c:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
+            - https://www.googleapis.com/auth/adexchange.buyer
       tags:
         - budget
     put:
-      description: 'Updates the budget amount for the budget of the adgroup specified by the accountId and billingId, with the budget amount in the request.'
+      description: Updates the budget amount for the budget of the adgroup specified by the accountId and billingId, with the budget amount in the request.
       operationId: adexchangebuyer.budget.update
       parameters:
         - description: The account id associated with the budget being updated.
@@ -307,19 +311,19 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Budget'
+              $ref: "#/components/schemas/Budget"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Budget'
+                $ref: "#/components/schemas/Budget"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
+            - https://www.googleapis.com/auth/adexchange.buyer
           Oauth2c:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
+            - https://www.googleapis.com/auth/adexchange.buyer
       tags:
         - budget
   /creatives:
@@ -327,7 +331,7 @@ paths:
       description: Retrieves a list of the authenticated user's active creatives. A creative will be available 30-40 minutes after submission.
       operationId: adexchangebuyer.creatives.list
       parameters:
-        - description: 'When specified, only creatives for the given account ids are returned.'
+        - description: When specified, only creatives for the given account ids are returned.
           explode: true
           in: query
           name: accountId
@@ -335,7 +339,8 @@ paths:
             items:
               type: integer
             type: array
-        - description: 'When specified, only creatives for the given buyer creative ids are returned.'
+          style: form
+        - description: When specified, only creatives for the given buyer creative ids are returned.
           explode: true
           in: query
           name: buyerCreativeId
@@ -343,19 +348,20 @@ paths:
             items:
               type: string
             type: array
-        - description: 'Maximum number of entries returned on one result page. If not set, the default is 100. Optional.'
+          style: form
+        - description: Maximum number of entries returned on one result page. If not set, the default is 100. Optional.
           in: query
           name: maxResults
           schema:
             maximum: 1000
             minimum: 1
             type: integer
-        - description: 'A continuation token, used to page through ad clients. To retrieve the next page, set this parameter to the value of "nextPageToken" from the previous response. Optional.'
+        - description: A continuation token, used to page through ad clients. To retrieve the next page, set this parameter to the value of "nextPageToken" from the previous response. Optional.
           in: query
           name: pageToken
           schema:
             type: string
-        - description: 'When specified, only creatives having the given status are returned.'
+        - description: When specified, only creatives having the given status are returned.
           in: query
           name: statusFilter
           schema:
@@ -365,27 +371,27 @@ paths:
               - not_checked
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/CreativesList'
+                $ref: "#/components/schemas/CreativesList"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
+            - https://www.googleapis.com/auth/adexchange.buyer
           Oauth2c:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
+            - https://www.googleapis.com/auth/adexchange.buyer
       tags:
         - creatives
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
     post:
       description: Submit a new creative.
       operationId: adexchangebuyer.creatives.insert
@@ -393,22 +399,22 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Creative'
+              $ref: "#/components/schemas/Creative"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Creative'
+                $ref: "#/components/schemas/Creative"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
+            - https://www.googleapis.com/auth/adexchange.buyer
           Oauth2c:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
+            - https://www.googleapis.com/auth/adexchange.buyer
       tags:
         - creatives
-  '/creatives/{accountId}/{buyerCreativeId}':
+  "/creatives/{accountId}/{buyerCreativeId}":
     get:
       description: Gets the status for a single creative. A creative will be available 30-40 minutes after submission.
       operationId: adexchangebuyer.creatives.get
@@ -426,54 +432,54 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Creative'
+                $ref: "#/components/schemas/Creative"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
+            - https://www.googleapis.com/auth/adexchange.buyer
           Oauth2c:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
+            - https://www.googleapis.com/auth/adexchange.buyer
       tags:
         - creatives
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
   /directdeals:
     get:
       description: Retrieves the authenticated user's list of direct deals.
       operationId: adexchangebuyer.directDeals.list
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/DirectDealsList'
+                $ref: "#/components/schemas/DirectDealsList"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
+            - https://www.googleapis.com/auth/adexchange.buyer
           Oauth2c:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
+            - https://www.googleapis.com/auth/adexchange.buyer
       tags:
         - directDeals
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
-  '/directdeals/{id}':
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
+  "/directdeals/{id}":
     get:
       description: Gets one direct deal by ID.
       operationId: adexchangebuyer.directDeals.get
@@ -485,27 +491,27 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/DirectDeal'
+                $ref: "#/components/schemas/DirectDeal"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
+            - https://www.googleapis.com/auth/adexchange.buyer
           Oauth2c:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
+            - https://www.googleapis.com/auth/adexchange.buyer
       tags:
         - directDeals
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
   /performancereport:
     get:
       description: Retrieves the authenticated user's list of performance metrics.
@@ -529,41 +535,41 @@ paths:
           required: true
           schema:
             type: string
-        - description: 'Maximum number of entries returned on one result page. If not set, the default is 100. Optional.'
+        - description: Maximum number of entries returned on one result page. If not set, the default is 100. Optional.
           in: query
           name: maxResults
           schema:
             maximum: 1000
             minimum: 1
             type: integer
-        - description: 'A continuation token, used to page through performance reports. To retrieve the next page, set this parameter to the value of "nextPageToken" from the previous response. Optional.'
+        - description: A continuation token, used to page through performance reports. To retrieve the next page, set this parameter to the value of "nextPageToken" from the previous response. Optional.
           in: query
           name: pageToken
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/PerformanceReportList'
+                $ref: "#/components/schemas/PerformanceReportList"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
+            - https://www.googleapis.com/auth/adexchange.buyer
           Oauth2c:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
+            - https://www.googleapis.com/auth/adexchange.buyer
       tags:
         - performanceReport
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
-  '/pretargetingconfigs/{accountId}':
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
+  "/pretargetingconfigs/{accountId}":
     get:
       description: Retrieves a list of the authenticated user's pretargeting configurations.
       operationId: adexchangebuyer.pretargetingConfig.list
@@ -575,27 +581,27 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/PretargetingConfigList'
+                $ref: "#/components/schemas/PretargetingConfigList"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
+            - https://www.googleapis.com/auth/adexchange.buyer
           Oauth2c:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
+            - https://www.googleapis.com/auth/adexchange.buyer
       tags:
         - pretargetingConfig
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
     post:
       description: Inserts a new pretargeting configuration.
       operationId: adexchangebuyer.pretargetingConfig.insert
@@ -610,22 +616,22 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/PretargetingConfig'
+              $ref: "#/components/schemas/PretargetingConfig"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/PretargetingConfig'
+                $ref: "#/components/schemas/PretargetingConfig"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
+            - https://www.googleapis.com/auth/adexchange.buyer
           Oauth2c:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
+            - https://www.googleapis.com/auth/adexchange.buyer
       tags:
         - pretargetingConfig
-  '/pretargetingconfigs/{accountId}/{configId}':
+  "/pretargetingconfigs/{accountId}/{configId}":
     delete:
       description: Deletes an existing pretargeting config.
       operationId: adexchangebuyer.pretargetingConfig.delete
@@ -643,13 +649,13 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
+            - https://www.googleapis.com/auth/adexchange.buyer
           Oauth2c:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
+            - https://www.googleapis.com/auth/adexchange.buyer
       tags:
         - pretargetingConfig
     get:
@@ -669,27 +675,27 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/PretargetingConfig'
+                $ref: "#/components/schemas/PretargetingConfig"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
+            - https://www.googleapis.com/auth/adexchange.buyer
           Oauth2c:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
+            - https://www.googleapis.com/auth/adexchange.buyer
       tags:
         - pretargetingConfig
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
     patch:
       description: Updates an existing pretargeting config. This method supports patch semantics.
       operationId: adexchangebuyer.pretargetingConfig.patch
@@ -710,19 +716,19 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/PretargetingConfig'
+              $ref: "#/components/schemas/PretargetingConfig"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/PretargetingConfig'
+                $ref: "#/components/schemas/PretargetingConfig"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
+            - https://www.googleapis.com/auth/adexchange.buyer
           Oauth2c:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
+            - https://www.googleapis.com/auth/adexchange.buyer
       tags:
         - pretargetingConfig
     put:
@@ -745,19 +751,19 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/PretargetingConfig'
+              $ref: "#/components/schemas/PretargetingConfig"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/PretargetingConfig'
+                $ref: "#/components/schemas/PretargetingConfig"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
+            - https://www.googleapis.com/auth/adexchange.buyer
           Oauth2c:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
+            - https://www.googleapis.com/auth/adexchange.buyer
       tags:
         - pretargetingConfig
 components:
@@ -767,7 +773,6 @@ components:
       in: query
       name: alt
       schema:
-        default: json
         enum:
           - json
         type: string
@@ -778,7 +783,7 @@ components:
       schema:
         type: string
     key:
-      description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -794,7 +799,6 @@ components:
       in: query
       name: prettyPrint
       schema:
-        default: true
         type: boolean
     quotaUser:
       description: An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
@@ -808,22 +812,6 @@ components:
       name: userIp
       schema:
         type: string
-  requestBodies:
-    Account:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Account'
-    Budget:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Budget'
-    PretargetingConfig:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PretargetingConfig'
   schemas:
     Account:
       description: Configuration data for an Ad Exchange buyer account.
@@ -837,11 +825,15 @@ components:
                 format: int32
                 type: integer
               region:
-                description: |-
+                description: >-
                   The geographical region the Ad Exchange should send requests from. Only used by some quota systems, but always setting the value is recommended. Allowed values:  
+
                   - ASIA 
+
                   - EUROPE 
+
                   - US_EAST 
+
                   - US_WEST
                 type: string
               url:
@@ -860,11 +852,11 @@ components:
           format: int32
           type: integer
         kind:
-          default: 'adexchangebuyer#account'
+          default: adexchangebuyer#account
           description: Resource type.
           type: string
         maximumActiveCreatives:
-          description: 'The maximum number of active creatives that an account can have, where a creative is active if it was inserted or bid with in the last 30 days. Please contact your technical account manager if you need to change this.'
+          description: The maximum number of active creatives that an account can have, where a creative is active if it was inserted or bid with in the last 30 days. Please contact your technical account manager if you need to change this.
           format: int32
           type: integer
         maximumTotalQps:
@@ -882,10 +874,10 @@ components:
         items:
           description: A list of accounts.
           items:
-            $ref: '#/components/schemas/Account'
+            $ref: "#/components/schemas/Account"
           type: array
         kind:
-          default: 'adexchangebuyer#accountsList'
+          default: adexchangebuyer#accountsList
           description: Resource type.
           type: string
       type: object
@@ -900,12 +892,12 @@ components:
           description: Account name.
           type: string
         billingId:
-          description: 'A list of adgroup IDs associated with this particular account. These IDs may show up as part of a realtime bidding BidRequest, which indicates a bid request for this account.'
+          description: A list of adgroup IDs associated with this particular account. These IDs may show up as part of a realtime bidding BidRequest, which indicates a bid request for this account.
           items:
             type: string
           type: array
         kind:
-          default: 'adexchangebuyer#billingInfo'
+          default: adexchangebuyer#billingInfo
           description: Resource type.
           type: string
       type: object
@@ -915,10 +907,10 @@ components:
         items:
           description: A list of billing info relevant for your account.
           items:
-            $ref: '#/components/schemas/BillingInfo'
+            $ref: "#/components/schemas/BillingInfo"
           type: array
         kind:
-          default: 'adexchangebuyer#billingInfoList'
+          default: adexchangebuyer#billingInfoList
           description: Resource type.
           type: string
       type: object
@@ -944,15 +936,15 @@ components:
           description: The unique id that describes this item.
           type: string
         kind:
-          default: 'adexchangebuyer#budget'
-          description: 'The kind of the resource, i.e. "adexchangebuyer#budget".'
+          default: adexchangebuyer#budget
+          description: The kind of the resource, i.e. "adexchangebuyer#budget".
           type: string
       type: object
     Creative:
       description: A creative and its classification data.
       properties:
         HTMLSnippet:
-          description: 'The HTML snippet that displays the ad when inserted in the web page. If set, videoURL should not be set.'
+          description: The HTML snippet that displays the ad when inserted in the web page. If set, videoURL should not be set.
           type: string
         accountId:
           description: Account id.
@@ -961,17 +953,17 @@ components:
         adTechnologyProviders:
           properties:
             detectedProviderIds:
-              description: 'The detected ad technology provider IDs for this creative. See https://storage.googleapis.com/adx-rtb-dictionaries/providers.csv for mapping of provider ID to provided name, a privacy policy URL, and a list of domains which can be attributed to the provider. If this creative contains provider IDs that are outside of those listed in the `BidRequest.adslot.consented_providers_settings.consented_providers` field on the  Authorized Buyers Real-Time Bidding protocol or the `BidRequest.user.ext.consented_providers_settings.consented_providers` field on the OpenRTB protocol, a bid submitted for a European Economic Area (EEA) user with this creative is not compliant with the GDPR policies as mentioned in the "Third-party Ad Technology Vendors" section of Authorized Buyers Program Guidelines.'
+              description: The detected ad technology provider IDs for this creative. See https://storage.googleapis.com/adx-rtb-dictionaries/providers.csv for mapping of provider ID to provided name, a privacy policy URL, and a list of domains which can be attributed to the provider. If this creative contains provider IDs that are outside of those listed in the `BidRequest.adslot.consented_providers_settings.consented_providers` field on the  Authorized Buyers Real-Time Bidding protocol or the `BidRequest.user.ext.consented_providers_settings.consented_providers` field on the OpenRTB protocol, a bid submitted for a European Economic Area (EEA) user with this creative is not compliant with the GDPR policies as mentioned in the "Third-party Ad Technology Vendors" section of Authorized Buyers Program Guidelines.
               items:
                 format: int64
                 type: string
               type: array
             hasUnidentifiedProvider:
-              description: 'Whether the creative contains an unidentified ad technology provider. If true, a bid submitted for a European Economic Area (EEA) user with this creative is not compliant with the GDPR policies as mentioned in the "Third-party Ad Technology Vendors" section of Authorized Buyers Program Guidelines.'
+              description: Whether the creative contains an unidentified ad technology provider. If true, a bid submitted for a European Economic Area (EEA) user with this creative is not compliant with the GDPR policies as mentioned in the "Third-party Ad Technology Vendors" section of Authorized Buyers Program Guidelines.
               type: boolean
           type: object
         advertiserId:
-          description: 'Detected advertiser id, if any. Read-only. This field should not be set in requests.'
+          description: Detected advertiser id, if any. Read-only. This field should not be set in requests.
           items:
             format: int64
             type: string
@@ -984,7 +976,7 @@ components:
           format: int64
           type: string
         apiUploadTimestamp:
-          description: 'The last upload timestamp of this creative if it was uploaded via API. Read-only. The value of this field is generated, and will be ignored for uploads. (formatted RFC 3339 timestamp).'
+          description: The last upload timestamp of this creative if it was uploaded via API. Read-only. The value of this field is generated, and will be ignored for uploads. (formatted RFC 3339 timestamp).
           format: date-time
           type: string
         attribute:
@@ -1016,7 +1008,7 @@ components:
             type: object
           type: array
         disapprovalReasons:
-          description: 'The reasons for disapproval, if any. Note that not all disapproval reasons may be categorized, so it is possible for the creative to have a status of DISAPPROVED with an empty list for disapproval_reasons. In this case, please reach out to your TAM to help debug the issue. Read-only. This field should not be set in requests.'
+          description: The reasons for disapproval, if any. Note that not all disapproval reasons may be categorized, so it is possible for the creative to have a status of DISAPPROVED with an empty list for disapproval_reasons. In this case, please reach out to your TAM to help debug the issue. Read-only. This field should not be set in requests.
           items:
             properties:
               details:
@@ -1033,7 +1025,7 @@ components:
           description: The filtering reasons for the creative. Read-only. This field should not be set in requests.
           properties:
             date:
-              description: 'The date in ISO 8601 format for the data. The data is collected from 00:00:00 to 23:59:59 in PST.'
+              description: The date in ISO 8601 format for the data. The data is collected from 00:00:00 to 23:59:59 in PST.
               type: string
             reasons:
               description: The filtering reasons.
@@ -1060,16 +1052,16 @@ components:
             type: string
           type: array
         kind:
-          default: 'adexchangebuyer#creative'
+          default: adexchangebuyer#creative
           description: Resource type.
           type: string
         nativeAd:
-          description: 'If nativeAd is set, HTMLSnippet and videoURL should not be set.'
+          description: If nativeAd is set, HTMLSnippet and videoURL should not be set.
           properties:
             advertiser:
               type: string
             appIcon:
-              description: 'The app icon, for app download ads.'
+              description: The app icon, for app download ads.
               properties:
                 height:
                   format: int32
@@ -1110,7 +1102,7 @@ components:
                 type: string
               type: array
             logo:
-              description: 'A smaller image, for the advertiser logo.'
+              description: A smaller image, for the advertiser logo.
               properties:
                 height:
                   format: int32
@@ -1125,12 +1117,12 @@ components:
               description: The price of the promoted app including the currency info.
               type: string
             starRating:
-              description: 'The app rating in the app store. Must be in the range [0-5].'
+              description: The app rating in the app store. Must be in the range [0-5].
               format: double
               type: number
           type: object
         productCategories:
-          description: 'Detected product categories, if any. Read-only. This field should not be set in requests.'
+          description: Detected product categories, if any. Read-only. This field should not be set in requests.
           items:
             format: int32
             type: integer
@@ -1142,7 +1134,7 @@ components:
             type: integer
           type: array
         sensitiveCategories:
-          description: 'Detected sensitive categories, if any. Read-only. This field should not be set in requests.'
+          description: Detected sensitive categories, if any. Read-only. This field should not be set in requests.
           items:
             format: int32
             type: integer
@@ -1161,7 +1153,7 @@ components:
           format: int32
           type: integer
         videoURL:
-          description: 'The URL to fetch a video ad. If set, HTMLSnippet and the nativeAd should not be set.'
+          description: The URL to fetch a video ad. If set, HTMLSnippet and the nativeAd should not be set.
           type: string
         width:
           description: Ad width.
@@ -1174,14 +1166,14 @@ components:
         items:
           description: A list of creatives.
           items:
-            $ref: '#/components/schemas/Creative'
+            $ref: "#/components/schemas/Creative"
           type: array
         kind:
-          default: 'adexchangebuyer#creativesList'
+          default: adexchangebuyer#creativesList
           description: Resource type.
           type: string
         nextPageToken:
-          description: 'Continuation token used to page through creatives. To retrieve the next page of results, set the next request''s "pageToken" value to this.'
+          description: Continuation token used to page through creatives. To retrieve the next page of results, set the next request's "pageToken" value to this.
           type: string
       type: object
     DirectDeal:
@@ -1212,7 +1204,7 @@ components:
           format: int64
           type: string
         fixedCpm:
-          description: 'The fixed price for this direct deal. In cpm micros of currency according to currency_code. If set, then this deal is eligible for the fixed price tier of buying (highest priority, pay exactly the configured fixed price).'
+          description: The fixed price for this direct deal. In cpm micros of currency according to currency_code. If set, then this deal is eligible for the fixed price tier of buying (highest priority, pay exactly the configured fixed price).
           format: int64
           type: string
         id:
@@ -1220,18 +1212,18 @@ components:
           format: int64
           type: string
         kind:
-          default: 'adexchangebuyer#directDeal'
+          default: adexchangebuyer#directDeal
           description: Resource type.
           type: string
         name:
           description: Deal name.
           type: string
         privateExchangeMinCpm:
-          description: 'The minimum price for this direct deal. In cpm micros of currency according to currency_code. If set, then this deal is eligible for the private exchange tier of buying (below fixed price priority, run as a second price auction).'
+          description: The minimum price for this direct deal. In cpm micros of currency according to currency_code. If set, then this deal is eligible for the private exchange tier of buying (below fixed price priority, run as a second price auction).
           format: int64
           type: string
         publisherBlocksOverriden:
-          description: 'If true, the publisher has opted to have their blocks ignored when a creative is bid with for this deal.'
+          description: If true, the publisher has opted to have their blocks ignored when a creative is bid with for this deal.
           type: boolean
         sellerNetwork:
           description: The name of the publisher offering this direct deal.
@@ -1247,10 +1239,10 @@ components:
         directDeals:
           description: A list of direct deals relevant for your account.
           items:
-            $ref: '#/components/schemas/DirectDeal'
+            $ref: "#/components/schemas/DirectDeal"
           type: array
         kind:
-          default: 'adexchangebuyer#directDealsList'
+          default: adexchangebuyer#directDealsList
           description: Resource type.
           type: string
       type: object
@@ -1290,7 +1282,7 @@ components:
           format: double
           type: number
         kind:
-          default: 'adexchangebuyer#performanceReport'
+          default: adexchangebuyer#performanceReport
           description: Resource type.
           type: string
         latency50thPercentile:
@@ -1341,7 +1333,7 @@ components:
           format: int64
           type: string
         unsuccessfulRequestRate:
-          description: 'The number of bid responses that were unsuccessful due to timeouts, incorrect formatting, etc.'
+          description: The number of bid responses that were unsuccessful due to timeouts, incorrect formatting, etc.
           format: double
           type: number
       type: object
@@ -1349,19 +1341,19 @@ components:
       description: The configuration data for an Ad Exchange performance report list.
       properties:
         kind:
-          default: 'adexchangebuyer#performanceReportList'
+          default: adexchangebuyer#performanceReportList
           description: Resource type.
           type: string
         performanceReport:
           description: A list of performance reports relevant for the account.
           items:
-            $ref: '#/components/schemas/PerformanceReport'
+            $ref: "#/components/schemas/PerformanceReport"
           type: array
       type: object
     PretargetingConfig:
       properties:
         billingId:
-          description: 'The id for billing purposes, provided for reference. Leave this field blank for insert requests; the id will be generated automatically.'
+          description: The id for billing purposes, provided for reference. Leave this field blank for insert requests; the id will be generated automatically.
           format: int64
           type: string
         configId:
@@ -1377,7 +1369,7 @@ components:
             type: string
           type: array
         dimensions:
-          description: 'Requests which allow one of these (width, height) pairs will match. All pairs must be supported ad dimensions.'
+          description: Requests which allow one of these (width, height) pairs will match. All pairs must be supported ad dimensions.
           items:
             properties:
               height:
@@ -1407,7 +1399,7 @@ components:
           items:
             properties:
               token:
-                description: 'The value of the placement. Interpretation depends on the placement type, e.g. URL for a site placement, channel name for a channel placement, app id for a mobile app placement.'
+                description: The value of the placement. Interpretation depends on the placement type, e.g. URL for a site placement, channel name for a channel placement, app id for a mobile app placement.
                 type: string
               type:
                 description: The type of the placement.
@@ -1436,8 +1428,8 @@ components:
           description: Whether this config is active. Required for all requests.
           type: boolean
         kind:
-          default: 'adexchangebuyer#pretargetingConfig'
-          description: 'The kind of the resource, i.e. "adexchangebuyer#pretargetingConfig".'
+          default: adexchangebuyer#pretargetingConfig
+          description: The kind of the resource, i.e. "adexchangebuyer#pretargetingConfig".
           type: string
         languages:
           description: Request containing any of these language codes will match.
@@ -1445,7 +1437,7 @@ components:
             type: string
           type: array
         maximumQps:
-          description: 'The maximum QPS allocated to this pretargeting configuration, used for pretargeting-level QPS limits. By default, this is not set, which indicates that there is no QPS limit at the configuration level (a global or account-level limit may still be imposed).'
+          description: The maximum QPS allocated to this pretargeting configuration, used for pretargeting-level QPS limits. By default, this is not set, which indicates that there is no QPS limit at the configuration level (a global or account-level limit may still be imposed).
           format: int64
           type: string
         mobileCarriers:
@@ -1471,7 +1463,7 @@ components:
           items:
             properties:
               token:
-                description: 'The value of the placement. Interpretation depends on the placement type, e.g. URL for a site placement, channel name for a channel placement, app id for a mobile app placement.'
+                description: The value of the placement. Interpretation depends on the placement type, e.g. URL for a site placement, channel name for a channel placement, app id for a mobile app placement.
                 type: string
               type:
                 description: The type of the placement.
@@ -1479,7 +1471,7 @@ components:
             type: object
           type: array
         platforms:
-          description: 'Requests matching any of these platforms will match. Possible values are PRETARGETING_PLATFORM_MOBILE, PRETARGETING_PLATFORM_DESKTOP, and PRETARGETING_PLATFORM_TABLET.'
+          description: Requests matching any of these platforms will match. Possible values are PRETARGETING_PLATFORM_MOBILE, PRETARGETING_PLATFORM_DESKTOP, and PRETARGETING_PLATFORM_TABLET.
           items:
             type: string
           type: array
@@ -1513,10 +1505,10 @@ components:
         items:
           description: A list of pretargeting configs
           items:
-            $ref: '#/components/schemas/PretargetingConfig'
+            $ref: "#/components/schemas/PretargetingConfig"
           type: array
         kind:
-          default: 'adexchangebuyer#pretargetingConfigList'
+          default: adexchangebuyer#pretargetingConfigList
           description: Resource type.
           type: string
       type: object
@@ -1525,16 +1517,16 @@ components:
       description: Oauth 2.0 implicit authentication
       flows:
         implicit:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            'https://www.googleapis.com/auth/adexchange.buyer': Manage your Ad Exchange buyer account configuration
+            https://www.googleapis.com/auth/adexchange.buyer: Manage your Ad Exchange buyer account configuration
       type: oauth2
     Oauth2c:
-      description: Oauth 2.0 accessCode authentication
+      description: Oauth 2.0 authorizationCode authentication
       flows:
         authorizationCode:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            'https://www.googleapis.com/auth/adexchange.buyer': Manage your Ad Exchange buyer account configuration
-          tokenUrl: 'https://accounts.google.com/o/oauth2/token'
+            https://www.googleapis.com/auth/adexchange.buyer: Manage your Ad Exchange buyer account configuration
+          tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

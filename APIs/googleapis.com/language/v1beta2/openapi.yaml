@@ -1,134 +1,139 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://language.googleapis.com/'
+  - url: https://language.googleapis.com/
 info:
   contact:
     name: Google
-    url: 'https://google.com'
-  description: 'Provides natural language understanding technologies, such as sentiment analysis, entity recognition, entity sentiment analysis, and other text annotations, to developers.'
+    url: https://google.com
+    x-twitter: youtube
+  description: Provides natural language understanding technologies, such as sentiment analysis, entity recognition, entity sentiment analysis, and other text annotations, to developers.
   license:
     name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
-  title: Cloud Natural Language
+    url: http://creativecommons.org/licenses/by/3.0/
+  termsOfService: https://developers.google.com/terms/
+  title: Cloud Natural Language API
   version: v1beta2
   x-apiClientRegistration:
-    url: 'https://console.developers.google.com'
+    url: https://console.developers.google.com
   x-apisguru-categories:
-    - text
+    - analytics
+    - media
   x-logo:
-    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.31
       format: google
-      url: 'https://language.googleapis.com/$discovery/rest?version=v1beta2'
+      url: https://language.googleapis.com/$discovery/rest?version=v1beta2
       version: v1
   x-preferred: false
   x-providerName: googleapis.com
   x-serviceName: language
 externalDocs:
-  url: 'https://cloud.google.com/natural-language/'
+  url: https://cloud.google.com/natural-language/
 tags:
   - name: documents
 paths:
-  '/v1beta2/documents:analyzeEntities':
+  /v1beta2/documents:analyzeEntities:
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
-      description: |-
+      description: >-
         Finds named entities (currently proper names and common nouns) in the text
+
         along with entity types, salience, mentions for each entity, and
+
         other properties.
       operationId: language.documents.analyzeEntities
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AnalyzeEntitiesRequest'
+              $ref: "#/components/schemas/AnalyzeEntitiesRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/AnalyzeEntitiesResponse'
+                $ref: "#/components/schemas/AnalyzeEntitiesResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-language'
+            - https://www.googleapis.com/auth/cloud-language
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-language'
+            - https://www.googleapis.com/auth/cloud-language
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - documents
-  '/v1beta2/documents:analyzeEntitySentiment':
+  /v1beta2/documents:analyzeEntitySentiment:
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
-      description: |-
+      description: >-
         Finds entities, similar to AnalyzeEntities in the text and analyzes
+
         sentiment associated with each entity and its mentions.
       operationId: language.documents.analyzeEntitySentiment
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AnalyzeEntitySentimentRequest'
+              $ref: "#/components/schemas/AnalyzeEntitySentimentRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/AnalyzeEntitySentimentResponse'
+                $ref: "#/components/schemas/AnalyzeEntitySentimentResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-language'
+            - https://www.googleapis.com/auth/cloud-language
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-language'
+            - https://www.googleapis.com/auth/cloud-language
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - documents
-  '/v1beta2/documents:analyzeSentiment':
+  /v1beta2/documents:analyzeSentiment:
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
       description: Analyzes the sentiment of the provided text.
       operationId: language.documents.analyzeSentiment
@@ -136,121 +141,124 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AnalyzeSentimentRequest'
+              $ref: "#/components/schemas/AnalyzeSentimentRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/AnalyzeSentimentResponse'
+                $ref: "#/components/schemas/AnalyzeSentimentResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-language'
+            - https://www.googleapis.com/auth/cloud-language
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-language'
+            - https://www.googleapis.com/auth/cloud-language
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - documents
-  '/v1beta2/documents:analyzeSyntax':
+  /v1beta2/documents:analyzeSyntax:
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
-      description: |-
+      description: >-
         Analyzes the syntax of the text and provides sentence boundaries and
+
         tokenization along with part of speech tags, dependency trees, and other
+
         properties.
       operationId: language.documents.analyzeSyntax
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AnalyzeSyntaxRequest'
+              $ref: "#/components/schemas/AnalyzeSyntaxRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/AnalyzeSyntaxResponse'
+                $ref: "#/components/schemas/AnalyzeSyntaxResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-language'
+            - https://www.googleapis.com/auth/cloud-language
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-language'
+            - https://www.googleapis.com/auth/cloud-language
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - documents
-  '/v1beta2/documents:annotateText':
+  /v1beta2/documents:annotateText:
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
-      description: |-
+      description: >-
         A convenience method that provides all syntax, sentiment, entity, and
+
         classification features in one call.
       operationId: language.documents.annotateText
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AnnotateTextRequest'
+              $ref: "#/components/schemas/AnnotateTextRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/AnnotateTextResponse'
+                $ref: "#/components/schemas/AnnotateTextResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-language'
+            - https://www.googleapis.com/auth/cloud-language
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-language'
+            - https://www.googleapis.com/auth/cloud-language
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - documents
-  '/v1beta2/documents:classifyText':
+  /v1beta2/documents:classifyText:
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
       description: Classifies a document into categories.
       operationId: language.documents.classifyText
@@ -258,23 +266,23 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ClassifyTextRequest'
+              $ref: "#/components/schemas/ClassifyTextRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ClassifyTextResponse'
+                $ref: "#/components/schemas/ClassifyTextResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-language'
+            - https://www.googleapis.com/auth/cloud-language
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-language'
+            - https://www.googleapis.com/auth/cloud-language
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - documents
 components:
@@ -285,8 +293,8 @@ components:
       name: $.xgafv
       schema:
         enum:
-          - '1'
-          - '2'
+          - "1"
+          - "2"
         type: string
     access_token:
       description: OAuth access token.
@@ -299,7 +307,6 @@ components:
       in: query
       name: alt
       schema:
-        default: json
         enum:
           - json
           - media
@@ -318,7 +325,7 @@ components:
       schema:
         type: string
     key:
-      description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -334,22 +341,21 @@ components:
       in: query
       name: prettyPrint
       schema:
-        default: true
         type: boolean
     quotaUser:
-      description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.'
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
       in: query
       name: quotaUser
       schema:
         type: string
     uploadType:
-      description: 'Legacy upload protocol for media (e.g. "media", "multipart").'
+      description: Legacy upload protocol for media (e.g. "media", "multipart").
       in: query
       name: uploadType
       schema:
         type: string
     upload_protocol:
-      description: 'Upload protocol for media (e.g. "raw", "multipart").'
+      description: Upload protocol for media (e.g. "raw", "multipart").
       in: query
       name: upload_protocol
       schema:
@@ -359,7 +365,7 @@ components:
       description: The entity analysis request message.
       properties:
         document:
-          $ref: '#/components/schemas/Document'
+          $ref: "#/components/schemas/Document"
           description: Required. Input document.
         encodingType:
           description: The encoding type used by the API to calculate offsets.
@@ -376,12 +382,14 @@ components:
         entities:
           description: The recognized entities in the input document.
           items:
-            $ref: '#/components/schemas/Entity'
+            $ref: "#/components/schemas/Entity"
           type: array
         language:
-          description: |-
+          description: >-
             The language of the text, which will be the same as the language specified
+
             in the request or, if not specified, the automatically-detected language.
+
             See Document.language field for more details.
           type: string
       type: object
@@ -389,7 +397,7 @@ components:
       description: The entity-level sentiment analysis request message.
       properties:
         document:
-          $ref: '#/components/schemas/Document'
+          $ref: "#/components/schemas/Document"
           description: Required. Input document.
         encodingType:
           description: The encoding type used by the API to calculate offsets.
@@ -406,12 +414,14 @@ components:
         entities:
           description: The recognized entities in the input document with associated sentiments.
           items:
-            $ref: '#/components/schemas/Entity'
+            $ref: "#/components/schemas/Entity"
           type: array
         language:
-          description: |-
+          description: >-
             The language of the text, which will be the same as the language specified
+
             in the request or, if not specified, the automatically-detected language.
+
             See Document.language field for more details.
           type: string
       type: object
@@ -419,11 +429,12 @@ components:
       description: The sentiment analysis request message.
       properties:
         document:
-          $ref: '#/components/schemas/Document'
+          $ref: "#/components/schemas/Document"
           description: Required. Input document.
         encodingType:
-          description: |-
+          description: >-
             The encoding type used by the API to calculate sentence offsets for the
+
             sentence sentiment.
           enum:
             - NONE
@@ -436,25 +447,27 @@ components:
       description: The sentiment analysis response message.
       properties:
         documentSentiment:
-          $ref: '#/components/schemas/Sentiment'
+          $ref: "#/components/schemas/Sentiment"
           description: The overall sentiment of the input document.
         language:
-          description: |-
+          description: >-
             The language of the text, which will be the same as the language specified
+
             in the request or, if not specified, the automatically-detected language.
+
             See Document.language field for more details.
           type: string
         sentences:
           description: The sentiment for all the sentences in the document.
           items:
-            $ref: '#/components/schemas/Sentence'
+            $ref: "#/components/schemas/Sentence"
           type: array
       type: object
     AnalyzeSyntaxRequest:
       description: The syntax analysis request message.
       properties:
         document:
-          $ref: '#/components/schemas/Document'
+          $ref: "#/components/schemas/Document"
           description: Required. Input document.
         encodingType:
           description: The encoding type used by the API to calculate offsets.
@@ -469,29 +482,32 @@ components:
       description: The syntax analysis response message.
       properties:
         language:
-          description: |-
+          description: >-
             The language of the text, which will be the same as the language specified
+
             in the request or, if not specified, the automatically-detected language.
+
             See Document.language field for more details.
           type: string
         sentences:
           description: Sentences in the input document.
           items:
-            $ref: '#/components/schemas/Sentence'
+            $ref: "#/components/schemas/Sentence"
           type: array
         tokens:
-          description: 'Tokens, along with their syntactic information, in the input document.'
+          description: Tokens, along with their syntactic information, in the input document.
           items:
-            $ref: '#/components/schemas/Token'
+            $ref: "#/components/schemas/Token"
           type: array
       type: object
     AnnotateTextRequest:
-      description: |-
+      description: >-
         The request message for the text annotation API, which can perform multiple
+
         analysis types (sentiment, entities, and syntax) in one call.
       properties:
         document:
-          $ref: '#/components/schemas/Document'
+          $ref: "#/components/schemas/Document"
           description: Required. Input document.
         encodingType:
           description: The encoding type used by the API to calculate offsets.
@@ -502,7 +518,7 @@ components:
             - UTF32
           type: string
         features:
-          $ref: '#/components/schemas/Features'
+          $ref: "#/components/schemas/Features"
           description: Required. The enabled features.
       type: object
     AnnotateTextResponse:
@@ -511,55 +527,65 @@ components:
         categories:
           description: Categories identified in the input document.
           items:
-            $ref: '#/components/schemas/ClassificationCategory'
+            $ref: "#/components/schemas/ClassificationCategory"
           type: array
         documentSentiment:
-          $ref: '#/components/schemas/Sentiment'
-          description: |-
+          $ref: "#/components/schemas/Sentiment"
+          description: >-
             The overall sentiment for the document. Populated if the user enables
+
             AnnotateTextRequest.Features.extract_document_sentiment.
         entities:
-          description: |-
+          description: >-
             Entities, along with their semantic information, in the input document.
+
             Populated if the user enables
+
             AnnotateTextRequest.Features.extract_entities.
           items:
-            $ref: '#/components/schemas/Entity'
+            $ref: "#/components/schemas/Entity"
           type: array
         language:
-          description: |-
+          description: >-
             The language of the text, which will be the same as the language specified
+
             in the request or, if not specified, the automatically-detected language.
+
             See Document.language field for more details.
           type: string
         sentences:
-          description: |-
+          description: >-
             Sentences in the input document. Populated if the user enables
+
             AnnotateTextRequest.Features.extract_syntax.
           items:
-            $ref: '#/components/schemas/Sentence'
+            $ref: "#/components/schemas/Sentence"
           type: array
         tokens:
-          description: |-
+          description: >-
             Tokens, along with their syntactic information, in the input document.
+
             Populated if the user enables
+
             AnnotateTextRequest.Features.extract_syntax.
           items:
-            $ref: '#/components/schemas/Token'
+            $ref: "#/components/schemas/Token"
           type: array
       type: object
     ClassificationCategory:
       description: Represents a category returned from the text classifier.
       properties:
         confidence:
-          description: |-
+          description: >-
             The classifier's confidence of the category. Number represents how certain
+
             the classifier is that this category represents the given text.
           format: float
           type: number
         name:
-          description: |-
+          description: >-
             The name of the category representing the document, from the [predefined
+
             taxonomy](https://cloud.google.com/natural-language/docs/categories).
           type: string
       type: object
@@ -567,7 +593,7 @@ components:
       description: The document classification request message.
       properties:
         document:
-          $ref: '#/components/schemas/Document'
+          $ref: "#/components/schemas/Document"
           description: Required. Input document.
       type: object
     ClassifyTextResponse:
@@ -576,18 +602,22 @@ components:
         categories:
           description: Categories representing the input document.
           items:
-            $ref: '#/components/schemas/ClassificationCategory'
+            $ref: "#/components/schemas/ClassificationCategory"
           type: array
       type: object
     DependencyEdge:
       description: Represents dependency parse tree information for a token.
       properties:
         headTokenIndex:
-          description: |-
+          description: >-
             Represents the head of this token in the dependency tree.
+
             This is the index of the token which has an arc going to this token.
+
             The index is the position of the token in the array of tokens returned
+
             by the API method. If this token is a root token, then the
+
             `head_token_index` is its own index.
           format: int32
           type: integer
@@ -680,15 +710,18 @@ components:
           type: string
       type: object
     Document:
-      description: |-
+      description: >-
         ################################################################ #
+
 
         Represents the input to API methods.
       properties:
         boilerplateHandling:
-          description: |-
+          description: >-
             Indicates how detected boilerplate(e.g. advertisements, copyright
+
             declarations, banners) should be handled for this document. If not
+
             specified, boilerplate will be treated the same as content.
           enum:
             - BOILERPLATE_HANDLING_UNSPECIFIED
@@ -696,36 +729,49 @@ components:
             - KEEP_BOILERPLATE
           type: string
         content:
-          description: |-
+          description: >-
             The content of the input in string format.
+
             Cloud audit logging exempt since it is based on user data.
           type: string
         gcsContentUri:
-          description: |-
+          description: >-
             The Google Cloud Storage URI where the file content is located.
+
             This URI must be of the form: gs://bucket_name/object_name. For more
+
             details, see https://cloud.google.com/storage/docs/reference-uris.
+
             NOTE: Cloud Storage object versioning is not supported.
           type: string
         language:
-          description: |-
+          description: >-
             The language of the document (if not specified, the language is
+
             automatically detected). Both ISO and BCP-47 language codes are
+
             accepted.<br>
+
             [Language
+
             Support](https://cloud.google.com/natural-language/docs/languages) lists
+
             currently supported languages for each API method. If the language (either
+
             specified by the caller or automatically detected) is not supported by the
+
             called API method, an `INVALID_ARGUMENT` error is returned.
           type: string
         referenceWebUri:
-          description: |-
+          description: >-
             The web URI where the document comes from. This URI is not used for
+
             fetching the content, but as a hint for analyzing the document.
           type: string
         type:
-          description: |-
+          description: >-
             Required. If the type is not set or is `TYPE_UNSPECIFIED`,
+
             returns an `INVALID_ARGUMENT` error.
           enum:
             - TYPE_UNSPECIFIED
@@ -734,47 +780,60 @@ components:
           type: string
       type: object
     Entity:
-      description: |-
+      description: >-
         Represents a phrase in the text that is a known entity, such as
+
         a person, an organization, or location. The API associates information, such
+
         as salience and mentions, with entities.
       properties:
         mentions:
-          description: |-
+          description: >-
             The mentions of this entity in the input document. The API currently
+
             supports proper noun mentions.
           items:
-            $ref: '#/components/schemas/EntityMention'
+            $ref: "#/components/schemas/EntityMention"
           type: array
         metadata:
           additionalProperties:
             type: string
-          description: |-
+          description: >-
             Metadata associated with the entity.
 
+
             For most entity types, the metadata is a Wikipedia URL (`wikipedia_url`)
+
             and Knowledge Graph MID (`mid`), if they are available. For the metadata
+
             associated with other entity types, see the Type table below.
           type: object
         name:
           description: The representative name for the entity.
           type: string
         salience:
-          description: |-
+          description: >-
             The salience score associated with the entity in the [0, 1.0] range.
 
+
             The salience score for an entity provides information about the
+
             importance or centrality of that entity to the entire document text.
+
             Scores closer to 0 are less salient, while scores closer to 1.0 are highly
+
             salient.
           format: float
           type: number
         sentiment:
-          $ref: '#/components/schemas/Sentiment'
-          description: |-
+          $ref: "#/components/schemas/Sentiment"
+          description: >-
             For calls to AnalyzeEntitySentiment or if
+
             AnnotateTextRequest.Features.extract_entity_sentiment is set to
+
             true, this field will contain the aggregate sentiment expressed for this
+
             entity in the provided document.
         type:
           description: The entity type.
@@ -795,19 +854,23 @@ components:
           type: string
       type: object
     EntityMention:
-      description: |-
+      description: >-
         Represents a mention for an entity in the text. Currently, proper noun
+
         mentions are supported.
       properties:
         sentiment:
-          $ref: '#/components/schemas/Sentiment'
-          description: |-
+          $ref: "#/components/schemas/Sentiment"
+          description: >-
             For calls to AnalyzeEntitySentiment or if
+
             AnnotateTextRequest.Features.extract_entity_sentiment is set to
+
             true, this field will contain the sentiment expressed for this mention of
+
             the entity in the provided document.
         text:
-          $ref: '#/components/schemas/TextSpan'
+          $ref: "#/components/schemas/TextSpan"
           description: The mention text.
         type:
           description: The type of the entity mention.
@@ -818,16 +881,21 @@ components:
           type: string
       type: object
     Features:
-      description: |-
+      description: >-
         All available features for sentiment, syntax, and semantic analysis.
+
         Setting each one to true will enable that specific analysis for the input.
+
         Next ID: 10
       properties:
         classifyText:
-          description: |-
+          description: >-
             Classify the full document into categories. If this is true,
+
             the API will use the default model which classifies into a
+
             [predefined
+
             taxonomy](https://cloud.google.com/natural-language/docs/categories).
           type: boolean
         extractDocumentSentiment:
@@ -981,52 +1049,65 @@ components:
       description: Represents a sentence in the input document.
       properties:
         sentiment:
-          $ref: '#/components/schemas/Sentiment'
-          description: |-
+          $ref: "#/components/schemas/Sentiment"
+          description: >-
             For calls to AnalyzeSentiment or if
+
             AnnotateTextRequest.Features.extract_document_sentiment is set to
+
             true, this field will contain the sentiment for the sentence.
         text:
-          $ref: '#/components/schemas/TextSpan'
+          $ref: "#/components/schemas/TextSpan"
           description: The sentence text.
       type: object
     Sentiment:
-      description: |-
+      description: >-
         Represents the feeling associated with the entire text or entities in
+
         the text.
+
         Next ID: 6
       properties:
         magnitude:
-          description: |-
+          description: >-
             A non-negative number in the [0, +inf) range, which represents
+
             the absolute magnitude of sentiment regardless of score (positive or
+
             negative).
           format: float
           type: number
         score:
-          description: |-
+          description: >-
             Sentiment score between -1.0 (negative sentiment) and 1.0
+
             (positive sentiment).
           format: float
           type: number
       type: object
     Status:
-      description: |-
+      description: >-
         The `Status` type defines a logical error model that is suitable for
+
         different programming environments, including REST APIs and RPC APIs. It is
+
         used by [gRPC](https://github.com/grpc). Each `Status` message contains
+
         three pieces of data: error code, error message, and error details.
 
+
         You can find out more about this error model and how to work with it in the
+
         [API Design Guide](https://cloud.google.com/apis/design/errors).
       properties:
         code:
-          description: 'The status code, which should be an enum value of google.rpc.Code.'
+          description: The status code, which should be an enum value of google.rpc.Code.
           format: int32
           type: integer
         details:
-          description: |-
+          description: >-
             A list of messages that carry the error details.  There is a common set of
+
             message types for APIs to use.
           items:
             additionalProperties:
@@ -1034,9 +1115,11 @@ components:
             type: object
           type: array
         message:
-          description: |-
+          description: >-
             A developer-facing error message, which should be in English. Any
+
             user-facing error message should be localized and sent in the
+
             google.rpc.Status.details field, or localized by the client.
           type: string
       type: object
@@ -1044,8 +1127,9 @@ components:
       description: Represents an output piece of text.
       properties:
         beginOffset:
-          description: |-
+          description: >-
             The API calculates the beginning offset of the content in the original
+
             document according to the EncodingType specified in the API request.
           format: int32
           type: integer
@@ -1057,16 +1141,16 @@ components:
       description: Represents the smallest syntactic building block of the text.
       properties:
         dependencyEdge:
-          $ref: '#/components/schemas/DependencyEdge'
+          $ref: "#/components/schemas/DependencyEdge"
           description: Dependency tree parse for this token.
         lemma:
-          description: '[Lemma](https://en.wikipedia.org/wiki/Lemma_%28morphology%29) of the token.'
+          description: "[Lemma](https://en.wikipedia.org/wiki/Lemma_%28morphology%29) of the token."
           type: string
         partOfSpeech:
-          $ref: '#/components/schemas/PartOfSpeech'
+          $ref: "#/components/schemas/PartOfSpeech"
           description: Parts of speech tag for this token.
         text:
-          $ref: '#/components/schemas/TextSpan'
+          $ref: "#/components/schemas/TextSpan"
           description: The token text.
       type: object
   securitySchemes:
@@ -1074,18 +1158,18 @@ components:
       description: Oauth 2.0 implicit authentication
       flows:
         implicit:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            'https://www.googleapis.com/auth/cloud-language': Apply machine learning models to reveal the structure and meaning of text
-            'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/cloud-language: Apply machine learning models to reveal the structure and meaning of text
+            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
       type: oauth2
     Oauth2c:
-      description: Oauth 2.0 accessCode authentication
+      description: Oauth 2.0 authorizationCode authentication
       flows:
         authorizationCode:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            'https://www.googleapis.com/auth/cloud-language': Apply machine learning models to reveal the structure and meaning of text
-            'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-          tokenUrl: 'https://accounts.google.com/o/oauth2/token'
+            https://www.googleapis.com/auth/cloud-language: Apply machine learning models to reveal the structure and meaning of text
+            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+          tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

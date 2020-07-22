@@ -1,120 +1,126 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://cloudshell.googleapis.com/'
+  - url: https://cloudshell.googleapis.com/
 info:
   contact:
     name: Google
-    url: 'https://google.com'
-  description: |
+    url: https://google.com
+    x-twitter: youtube
+  description: >
     Allows users to start, configure, and connect to interactive shell sessions running in the cloud.
   license:
     name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
-  title: Cloud Shell
+    url: http://creativecommons.org/licenses/by/3.0/
+  termsOfService: https://developers.google.com/terms/
+  title: Cloud Shell API
   version: v1alpha1
   x-apiClientRegistration:
-    url: 'https://console.developers.google.com'
+    url: https://console.developers.google.com
+  x-apisguru-categories:
+    - analytics
+    - media
   x-logo:
-    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.31
       format: google
-      url: 'https://cloudshell.googleapis.com/$discovery/rest?version=v1alpha1'
+      url: https://cloudshell.googleapis.com/$discovery/rest?version=v1alpha1
       version: v1
   x-preferred: false
   x-providerName: googleapis.com
   x-serviceName: cloudshell
 externalDocs:
-  url: 'https://cloud.google.com/shell/docs/'
+  url: https://cloud.google.com/shell/docs/
 tags:
   - name: users
 paths:
-  '/v1alpha1/{name}':
+  "/v1alpha1/{name}":
     delete:
-      description: |-
+      description: >-
         Removes a public SSH key from an environment. Clients will no longer be
+
         able to connect to the environment using the corresponding private key.
       operationId: cloudshell.users.environments.publicKeys.delete
       parameters:
-        - description: |-
+        - description: >-
             Name of the resource to be deleted, e.g.
+
             `users/me/environments/default/publicKeys/my-key`.
           in: path
           name: name
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Empty'
+                $ref: "#/components/schemas/Empty"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - users
     get:
       description: Gets an environment. Returns NOT_FOUND if the environment does not exist.
       operationId: cloudshell.users.environments.get
       parameters:
-        - description: |-
+        - description: >-
             Name of the requested resource, for example `users/me/environments/default`
+
             or `users/someone@example.com/environments/default`.
           in: path
           name: name
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Environment'
+                $ref: "#/components/schemas/Environment"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - users
     parameters:
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
     patch:
       description: Updates an existing environment.
       operationId: cloudshell.users.environments.patch
       parameters:
-        - description: |-
+        - description: >-
             Name of the resource to be updated, for example
+
             `users/me/environments/default` or
+
             `users/someone@example.com/environments/default`.
           in: path
           name: name
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
         - description: Mask specifying which fields in the environment should be updated.
           in: query
           name: updateMask
@@ -124,168 +130,180 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Environment'
+              $ref: "#/components/schemas/Environment"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Environment'
+                $ref: "#/components/schemas/Environment"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - users
-  '/v1alpha1/{name}:authorize':
+  "/v1alpha1/{name}:authorize":
     parameters:
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
     post:
-      description: |-
+      description: >-
         Sends OAuth credentials to a running environment on behalf of a user. When
+
         this completes, the environment will be authorized to run various Google
+
         Cloud command line tools without requiring the user to manually
+
         authenticate.
       operationId: cloudshell.users.environments.authorize
       parameters:
-        - description: |-
+        - description: >-
             Name of the resource that should receive the credentials, for example
+
             `users/me/environments/default` or
+
             `users/someone@example.com/environments/default`.
           in: path
           name: name
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AuthorizeEnvironmentRequest'
+              $ref: "#/components/schemas/AuthorizeEnvironmentRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Empty'
+                $ref: "#/components/schemas/Empty"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - users
-  '/v1alpha1/{name}:start':
+  "/v1alpha1/{name}:start":
     parameters:
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
     post:
-      description: |-
+      description: >-
         Starts an existing environment, allowing clients to connect to it. The
+
         returned operation will contain an instance of StartEnvironmentMetadata in
+
         its metadata field. Users can wait for the environment to start by polling
+
         this operation via GetOperation. Once the environment has finished starting
+
         and is ready to accept connections, the operation will contain a
+
         StartEnvironmentResponse in its response field.
       operationId: cloudshell.users.environments.start
       parameters:
-        - description: |-
+        - description: >-
             Name of the resource that should be started, for example
+
             `users/me/environments/default` or
+
             `users/someone@example.com/environments/default`.
           in: path
           name: name
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/StartEnvironmentRequest'
+              $ref: "#/components/schemas/StartEnvironmentRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - users
-  '/v1alpha1/{parent}/publicKeys':
+  "/v1alpha1/{parent}/publicKeys":
     parameters:
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
     post:
-      description: |-
+      description: >-
         Adds a public SSH key to an environment, allowing clients with the
+
         corresponding private key to connect to that environment via SSH. If a key
+
         with the same format and content already exists, this will return the
+
         existing key.
       operationId: cloudshell.users.environments.publicKeys.create
       parameters:
-        - description: 'Parent resource name, e.g. `users/me/environments/default`.'
+        - description: Parent resource name, e.g. `users/me/environments/default`.
           in: path
           name: parent
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreatePublicKeyRequest'
+              $ref: "#/components/schemas/CreatePublicKeyRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/PublicKey'
+                $ref: "#/components/schemas/PublicKey"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - users
 components:
@@ -296,8 +314,8 @@ components:
       name: $.xgafv
       schema:
         enum:
-          - '1'
-          - '2'
+          - "1"
+          - "2"
         type: string
     access_token:
       description: OAuth access token.
@@ -310,7 +328,6 @@ components:
       in: query
       name: alt
       schema:
-        default: json
         enum:
           - json
           - media
@@ -329,7 +346,7 @@ components:
       schema:
         type: string
     key:
-      description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -345,22 +362,21 @@ components:
       in: query
       name: prettyPrint
       schema:
-        default: true
         type: boolean
     quotaUser:
-      description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.'
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
       in: query
       name: quotaUser
       schema:
         type: string
     uploadType:
-      description: 'Legacy upload protocol for media (e.g. "media", "multipart").'
+      description: Legacy upload protocol for media (e.g. "media", "multipart").
       in: query
       name: uploadType
       schema:
         type: string
     upload_protocol:
-      description: 'Upload protocol for media (e.g. "raw", "multipart").'
+      description: Upload protocol for media (e.g. "raw", "multipart").
       in: query
       name: upload_protocol
       schema:
@@ -373,8 +389,9 @@ components:
           description: The OAuth access token that should be sent to the environment.
           type: string
         expireTime:
-          description: |-
+          description: >-
             The time when the credentials expire. If not set, defaults to one hour from
+
             when the server received the request.
           format: google-datetime
           type: string
@@ -386,13 +403,15 @@ components:
       description: Request message for CreatePublicKey.
       properties:
         key:
-          $ref: '#/components/schemas/PublicKey'
+          $ref: "#/components/schemas/PublicKey"
           description: Key that should be added to the environment.
       type: object
     Empty:
-      description: |-
+      description: >-
         A generic empty message that you can re-use to avoid defining duplicated
+
         empty messages in your APIs. A typical example is to use it as the request
+
         or the response type of an API method. For instance:
 
             service Foo {
@@ -403,44 +422,59 @@ components:
       properties: {}
       type: object
     Environment:
-      description: |-
+      description: >-
         A Cloud Shell environment, which is defined as the combination of a Docker
+
         image specifying what is installed on the environment and a home directory
+
         containing the user's data that will remain across sessions. Each user has a
+
         single environment with the ID "default".
       properties:
         dockerImage:
-          description: |-
+          description: >-
             Required. Full path to the Docker image used to run this environment, e.g.
+
             "gcr.io/dev-con/cloud-devshell:latest".
           type: string
         id:
-          description: |-
+          description: >-
             Output only. The environment's identifier, unique among the user's
+
             environments.
           type: string
         name:
-          description: |-
+          description: >-
             Output only. Full name of this resource, in the format
+
             `users/{owner_email}/environments/{environment_id}`. `{owner_email}` is the
+
             email address of the user to whom this environment belongs, and
+
             `{environment_id}` is the identifier of this environment. For example,
+
             `users/someone@example.com/environments/default`.
           type: string
         publicKeys:
-          description: |-
+          description: >-
             Output only. Public keys associated with the environment. Clients can
+
             connect to this environment via SSH only if they possess a private key
+
             corresponding to at least one of these public keys. Keys can be added to or
+
             removed from the environment using the CreatePublicKey and DeletePublicKey
+
             methods.
           items:
-            $ref: '#/components/schemas/PublicKey'
+            $ref: "#/components/schemas/PublicKey"
           type: array
         size:
-          description: |-
+          description: >-
             Indicates the size of the backing VM running the environment.  If set to
+
             something other than DEFAULT, it will be reverted to the default VM size
+
             after vm_size_expire_time.
           enum:
             - VM_SIZE_UNSPECIFIED
@@ -448,19 +482,22 @@ components:
             - BOOSTED
           type: string
         sshHost:
-          description: |-
+          description: >-
             Output only. Host to which clients can connect to initiate SSH sessions
+
             with the environment.
           type: string
         sshPort:
-          description: |-
+          description: >-
             Output only. Port to which clients can connect to initiate SSH sessions
+
             with the environment.
           format: int32
           type: integer
         sshUsername:
-          description: |-
+          description: >-
             Output only. Username that clients should use when initiating SSH sessions
+
             with the environment.
           type: string
         state:
@@ -470,21 +507,25 @@ components:
             - DISABLED
             - STARTING
             - RUNNING
+            - DELETING
           type: string
         vmSizeExpireTime:
-          description: |-
+          description: >-
             Output only. The time when the Environment will expire back to the default
+
             VM size.
           format: google-datetime
           type: string
         webHost:
-          description: |-
+          description: >-
             Output only. Host to which clients can connect to initiate HTTPS or WSS
+
             connections with the environment.
           type: string
         webPorts:
-          description: |-
+          description: >-
             Output only. Ports to which clients can connect to initiate HTTPS or WSS
+
             connections with the environment.
           items:
             format: int32
@@ -492,50 +533,65 @@ components:
           type: array
       type: object
     Operation:
-      description: |-
+      description: >-
         This resource represents a long-running operation that is the result of a
+
         network API call.
       properties:
         done:
-          description: |-
+          description: >-
             If the value is `false`, it means the operation is still in progress.
+
             If `true`, the operation is completed, and either `error` or `response` is
+
             available.
           type: boolean
         error:
-          $ref: '#/components/schemas/Status'
+          $ref: "#/components/schemas/Status"
           description: The error result of the operation in case of failure or cancellation.
         metadata:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
-          description: |-
+          description: >-
             Service-specific metadata associated with the operation.  It typically
+
             contains progress information and common metadata such as create time.
+
             Some services might not provide such metadata.  Any method that returns a
+
             long-running operation should document the metadata type, if any.
           type: object
         name:
-          description: |-
+          description: >-
             The server-assigned name, which is only unique within the same service that
+
             originally returns it. If you use the default HTTP mapping, the
+
             `name` should be a resource name ending with `operations/{unique_id}`.
           type: string
         response:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
-          description: |-
+          description: >-
             The normal response of the operation in case of success.  If the original
+
             method returns no data on success, such as `Delete`, the response is
+
             `google.protobuf.Empty`.  If the original method is standard
+
             `Get`/`Create`/`Update`, the response should be the resource.  For other
+
             methods, the response should have the type `XxxResponse`, where `Xxx`
+
             is the original method name.  For example, if the original method name
+
             is `TakeSnapshot()`, the inferred response type is
+
             `TakeSnapshotResponse`.
           type: object
       type: object
     PublicKey:
-      description: 'A public SSH key, corresponding to a private SSH key held by the client.'
+      description: A public SSH key, corresponding to a private SSH key held by the client.
       properties:
         format:
           description: Required. Format of this key's content.
@@ -552,18 +608,24 @@ components:
           format: byte
           type: string
         name:
-          description: |-
+          description: >-
             Output only. Full name of this resource, in the format
+
             `users/{owner_email}/environments/{environment_id}/publicKeys/{key_id}`.
+
             `{owner_email}` is the email address of the user to whom the key belongs.
+
             `{environment_id}` is the identifier of the environment to which the key
+
             grants access. `{key_id}` is the unique identifier of the key. For example,
+
             `users/someone@example.com/environments/default/publicKeys/myKey`.
           type: string
       type: object
     StartEnvironmentMetadata:
-      description: |-
+      description: >-
         Message included in the metadata field of operations returned from
+
         StartEnvironment.
       properties:
         state:
@@ -581,40 +643,56 @@ components:
       description: Request message for StartEnvironment.
       properties:
         accessToken:
-          description: |-
+          description: >-
             The initial access token passed to the environment. If this is present and
+
             valid, the environment will be pre-authenticated with gcloud so that the
+
             user can run gcloud commands in Cloud Shell without having to log in. This
+
             code can be updated later by calling AuthorizeEnvironment.
           type: string
+        publicKeys:
+          description: Public keys that should be added to the environment before it is started.
+          items:
+            $ref: "#/components/schemas/PublicKey"
+          type: array
       type: object
     StartEnvironmentResponse:
-      description: |-
+      description: >-
         Message included in the response field of operations returned from
+
         StartEnvironment once the
+
         operation is complete.
       properties:
         environment:
-          $ref: '#/components/schemas/Environment'
+          $ref: "#/components/schemas/Environment"
           description: Environment that was started.
       type: object
     Status:
-      description: |-
+      description: >-
         The `Status` type defines a logical error model that is suitable for
+
         different programming environments, including REST APIs and RPC APIs. It is
+
         used by [gRPC](https://github.com/grpc). Each `Status` message contains
+
         three pieces of data: error code, error message, and error details.
 
+
         You can find out more about this error model and how to work with it in the
+
         [API Design Guide](https://cloud.google.com/apis/design/errors).
       properties:
         code:
-          description: 'The status code, which should be an enum value of google.rpc.Code.'
+          description: The status code, which should be an enum value of google.rpc.Code.
           format: int32
           type: integer
         details:
-          description: |-
+          description: >-
             A list of messages that carry the error details.  There is a common set of
+
             message types for APIs to use.
           items:
             additionalProperties:
@@ -622,9 +700,11 @@ components:
             type: object
           type: array
         message:
-          description: |-
+          description: >-
             A developer-facing error message, which should be in English. Any
+
             user-facing error message should be localized and sent in the
+
             google.rpc.Status.details field, or localized by the client.
           type: string
       type: object
@@ -633,16 +713,16 @@ components:
       description: Oauth 2.0 implicit authentication
       flows:
         implicit:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
       type: oauth2
     Oauth2c:
-      description: Oauth 2.0 accessCode authentication
+      description: Oauth 2.0 authorizationCode authentication
       flows:
         authorizationCode:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-          tokenUrl: 'https://accounts.google.com/o/oauth2/token'
+            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+          tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

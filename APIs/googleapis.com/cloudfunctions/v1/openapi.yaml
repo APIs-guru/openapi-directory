@@ -1,53 +1,61 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://cloudfunctions.googleapis.com/'
+  - url: https://cloudfunctions.googleapis.com/
 info:
   contact:
     name: Google
-    url: 'https://google.com'
+    url: https://google.com
   description: Manages lightweight user-provided functions executed in response to events.
   license:
     name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
+    url: http://creativecommons.org/licenses/by/3.0/
+  termsOfService: https://developers.google.com/terms/
   title: Cloud Functions
   version: v1
   x-apiClientRegistration:
-    url: 'https://console.developers.google.com'
+    url: https://console.developers.google.com
   x-logo:
-    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.31
       format: google
-      url: 'https://cloudfunctions.googleapis.com/$discovery/rest?version=v1'
+      url: https://cloudfunctions.googleapis.com/$discovery/rest?version=v1
       version: v1
   x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: cloudfunctions
 externalDocs:
-  url: 'https://cloud.google.com/functions'
+  url: https://cloud.google.com/functions
 tags:
   - name: operations
   - name: projects
 paths:
   /v1/operations:
     get:
-      description: |-
+      description: >-
         Lists operations that match the specified filter in the request. If the
+
         server doesn't support this method, it returns `UNIMPLEMENTED`.
 
+
         NOTE: the `name` binding allows API services to override the binding
+
         to use different resource name schemes, such as `users/*/operations`. To
+
         override the binding, API services can add a binding such as
+
         `"/v1/{name=users/*}/operations"` to their service configuration.
+
         For backwards compatibility, the default name includes the operations
+
         collection id, however overriding users must ensure the name binding
+
         is the parent resource, without the operations collection id.
       operationId: cloudfunctions.operations.list
       parameters:
-        - description: 'Required. A filter for matching the requested operations.<br><br> The supported formats of <b>filter</b> are:<br> To query for a specific function: <code>project:*,location:*,function:*</code><br> To query for all of the latest operations for a project: <code>project:*,latest:true</code>'
+        - description: "Required. A filter for matching the requested operations.<br><br> The supported formats of <b>filter</b> are:<br> To query for a specific function: <code>project:*,location:*,function:*</code><br> To query for all of the latest operations for a project: <code>project:*,latest:true</code>"
           in: query
           name: filter
           schema:
@@ -57,64 +65,67 @@ paths:
           name: name
           schema:
             type: string
-        - description: 'The maximum number of records that should be returned.<br> Requested page size cannot exceed 100. If not set, the default page size is 100.<br><br> Pagination is only supported when querying for a specific function.'
+        - description: The maximum number of records that should be returned.<br> Requested page size cannot exceed 100. If not set, the default page size is 100.<br><br> Pagination is only supported when querying for a specific function.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: 'Token identifying which result to start with, which is returned by a previous list call.<br><br> Pagination is only supported when querying for a specific function.'
+        - description: Token identifying which result to start with, which is returned by a previous list call.<br><br> Pagination is only supported when querying for a specific function.
           in: query
           name: pageToken
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ListOperationsResponse'
+                $ref: "#/components/schemas/ListOperationsResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - operations
     parameters:
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-  '/v1/{location}/functions':
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
+  "/v1/{location}/functions":
     parameters:
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
-      description: |-
+      description: >-
         Creates a new function. If a function with the given name already exists in
+
         the specified project, the long running operation will return
+
         `ALREADY_EXISTS` error.
       operationId: cloudfunctions.projects.locations.functions.create
       parameters:
-        - description: |-
+        - description: >-
             Required. The project and location in which the function should be created, specified
+
             in the format `projects/*/locations/*`
           in: path
           name: location
@@ -126,26 +137,28 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CloudFunction'
+              $ref: "#/components/schemas/CloudFunction"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1/{name}':
+  "/v1/{name}":
     delete:
-      description: |-
+      description: >-
         Deletes a function with the given name from the specified project. If the
+
         given function is used by some trigger, the trigger will be updated to
+
         remove this function.
       operationId: cloudfunctions.projects.locations.functions.delete
       parameters:
@@ -157,17 +170,17 @@ paths:
             type: string
           x-reservedExpansion: true
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
     get:
@@ -182,37 +195,38 @@ paths:
             type: string
           x-reservedExpansion: true
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/CloudFunction'
+                $ref: "#/components/schemas/CloudFunction"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
     patch:
       description: Updates existing function.
       operationId: cloudfunctions.projects.locations.functions.patch
       parameters:
-        - description: |-
+        - description: >-
             A user-defined name of the function. Function names must be unique
+
             globally and match pattern `projects/*/locations/*/functions/*`
           in: path
           name: name
@@ -229,27 +243,27 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CloudFunction'
+              $ref: "#/components/schemas/CloudFunction"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1/{name}/locations':
+  "/v1/{name}/locations":
     get:
       description: Lists information about the supported locations for this service.
       operationId: cloudfunctions.projects.locations.list
       parameters:
-        - description: 'The resource that owns the locations collection, if applicable.'
+        - description: The resource that owns the locations collection, if applicable.
           in: path
           name: name
           required: true
@@ -272,49 +286,52 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ListLocationsResponse'
+                $ref: "#/components/schemas/ListLocationsResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-  '/v1/{name}:call':
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
+  "/v1/{name}:call":
     parameters:
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
-      description: |-
+      description: >-
         Synchronously invokes a deployed Cloud Function. To be used for testing
+
         purposes as very limited traffic is allowed. For more information on
+
         the actual limits, refer to
+
         [Rate Limits](https://cloud.google.com/functions/quotas#rate_limits).
       operationId: cloudfunctions.projects.locations.functions.call
       parameters:
@@ -329,45 +346,50 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CallFunctionRequest'
+              $ref: "#/components/schemas/CallFunctionRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/CallFunctionResponse'
+                $ref: "#/components/schemas/CallFunctionResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1/{name}:generateDownloadUrl':
+  "/v1/{name}:generateDownloadUrl":
     parameters:
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
-      description: |-
+      description: >-
         Returns a signed URL for downloading deployed function source code.
+
         The URL is only valid for a limited period and should be used within
+
         minutes after generation.
+
         For more information about the signed URL usage see:
+
         https://cloud.google.com/storage/docs/access-control/signed-urls
       operationId: cloudfunctions.projects.locations.functions.generateDownloadUrl
       parameters:
-        - description: |-
+        - description: >-
             The name of function for which source code Google Cloud Storage signed
+
             URL should be generated.
           in: path
           name: name
@@ -379,32 +401,37 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/GenerateDownloadUrlRequest'
+              $ref: "#/components/schemas/GenerateDownloadUrlRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/GenerateDownloadUrlResponse'
+                $ref: "#/components/schemas/GenerateDownloadUrlResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1/{parent}/functions':
+  "/v1/{parent}/functions":
     get:
       description: Returns a list of functions that belong to the requested project.
       operationId: cloudfunctions.projects.locations.functions.list
       parameters:
-        - description: |-
+        - description: >-
             The project and location from which the function should be listed,
+
             specified in the format `projects/*/locations/*`
+
             If you want to list functions in all locations, use "-" in place of a
+
             location. When listing functions in all locations, if one or more
+
             location(s) are unreachable, the response will contain functions from all
+
             reachable locations along with the names of any unreachable locations.
           in: path
           name: parent
@@ -417,68 +444,81 @@ paths:
           name: pageSize
           schema:
             type: integer
-        - description: |-
+        - description: >-
             The value returned by the last
+
             `ListFunctionsResponse`; indicates that
+
             this is a continuation of a prior `ListFunctions` call, and that the
+
             system should return the next page of data.
           in: query
           name: pageToken
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ListFunctionsResponse'
+                $ref: "#/components/schemas/ListFunctionsResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-  '/v1/{parent}/functions:generateUploadUrl':
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
+  "/v1/{parent}/functions:generateUploadUrl":
     parameters:
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
-      description: |-
+      description: >-
         Returns a signed URL for uploading a function source code.
+
         For more information about the signed URL usage see:
+
         https://cloud.google.com/storage/docs/access-control/signed-urls.
+
         Once the function source code upload is complete, the used signed
+
         URL should be provided in CreateFunction or UpdateFunction request
+
         as a reference to the function source code.
 
+
         When uploading source code to the generated signed URL, please follow
+
         these restrictions:
 
+
         * Source file type should be a zip file.
+
         * Source file size should not exceed 100MB limit.
+
         * No credentials should be attached - the signed URLs provide access to the
           target bucket using internal service identity; if credentials were
           attached, the identity from the credentials would be used, but that
@@ -486,16 +526,21 @@ paths:
 
         When making a HTTP PUT request, these two headers need to be specified:
 
+
         * `content-type: application/zip`
+
         * `x-goog-content-length-range: 0,104857600`
 
+
         And this header SHOULD NOT be specified:
+
 
         * `Authorization: Bearer YOUR_TOKEN`
       operationId: cloudfunctions.projects.locations.functions.generateUploadUrl
       parameters:
-        - description: |-
+        - description: >-
             The project and location in which the Google Cloud Storage signed URL
+
             should be generated, specified in the format `projects/*/locations/*`.
           in: path
           name: parent
@@ -507,31 +552,34 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/GenerateUploadUrlRequest'
+              $ref: "#/components/schemas/GenerateUploadUrlRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/GenerateUploadUrlResponse'
+                $ref: "#/components/schemas/GenerateUploadUrlResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1/{resource}:getIamPolicy':
+  "/v1/{resource}:getIamPolicy":
     get:
-      description: |-
+      description: >-
         Gets the IAM access control policy for a function.
+
         Returns an empty policy if the function exists and does not have a policy
+
         set.
       operationId: cloudfunctions.projects.locations.functions.getIamPolicy
       parameters:
-        - description: |-
+        - description: >-
             REQUIRED: The resource for which the policy is being requested.
+
             See the operation documentation for the appropriate value for this field.
           in: path
           name: resource
@@ -539,66 +587,73 @@ paths:
           schema:
             type: string
           x-reservedExpansion: true
-        - description: |-
+        - description: >-
             Optional. The policy format version to be returned.
 
+
             Valid values are 0, 1, and 3. Requests specifying an invalid value will be
+
             rejected.
 
+
             Requests for policies with any conditional bindings must specify version 3.
+
             Policies without any conditional bindings may specify any valid value or
+
             leave the field unset.
           in: query
           name: options.requestedPolicyVersion
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/Policy'
+                $ref: "#/components/schemas/Policy"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-  '/v1/{resource}:setIamPolicy':
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
+  "/v1/{resource}:setIamPolicy":
     parameters:
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
-      description: |-
+      description: >-
         Sets the IAM access control policy on the specified function.
+
         Replaces any existing policy.
       operationId: cloudfunctions.projects.locations.functions.setIamPolicy
       parameters:
-        - description: |-
+        - description: >-
             REQUIRED: The resource for which the policy is being specified.
+
             See the operation documentation for the appropriate value for this field.
           in: path
           name: resource
@@ -610,44 +665,48 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SetIamPolicyRequest'
+              $ref: "#/components/schemas/SetIamPolicyRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/Policy'
+                $ref: "#/components/schemas/Policy"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1/{resource}:testIamPermissions':
+  "/v1/{resource}:testIamPermissions":
     parameters:
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
-      description: |-
+      description: >-
         Tests the specified permissions against the IAM access control policy
+
         for a function.
+
         If the function does not exist, this will return an empty set of
+
         permissions, not a NOT_FOUND error.
       operationId: cloudfunctions.projects.locations.functions.testIamPermissions
       parameters:
-        - description: |-
+        - description: >-
             REQUIRED: The resource for which the policy detail is being requested.
+
             See the operation documentation for the appropriate value for this field.
           in: path
           name: resource
@@ -659,19 +718,19 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/TestIamPermissionsRequest'
+              $ref: "#/components/schemas/TestIamPermissionsRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/TestIamPermissionsResponse'
+                $ref: "#/components/schemas/TestIamPermissionsResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
 components:
@@ -682,8 +741,8 @@ components:
       name: $.xgafv
       schema:
         enum:
-          - '1'
-          - '2'
+          - "1"
+          - "2"
         type: string
     access_token:
       description: OAuth access token.
@@ -715,7 +774,7 @@ components:
       schema:
         type: string
     key:
-      description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -734,19 +793,19 @@ components:
         default: true
         type: boolean
     quotaUser:
-      description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.'
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
       in: query
       name: quotaUser
       schema:
         type: string
     uploadType:
-      description: 'Legacy upload protocol for media (e.g. "media", "multipart").'
+      description: Legacy upload protocol for media (e.g. "media", "multipart").
       in: query
       name: uploadType
       schema:
         type: string
     upload_protocol:
-      description: 'Upload protocol for media (e.g. "raw", "multipart").'
+      description: Upload protocol for media (e.g. "raw", "multipart").
       in: query
       name: upload_protocol
       schema:
@@ -756,19 +815,27 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/CloudFunction'
+            $ref: "#/components/schemas/CloudFunction"
   schemas:
     AuditConfig:
-      description: |-
+      description: >-
         Specifies the audit configuration for a service.
+
         The configuration determines which permission types are logged, and what
+
         identities, if any, are exempted from logging.
+
         An AuditConfig must have one or more AuditLogConfigs.
 
+
         If there are AuditConfigs for both `allServices` and a specific service,
+
         the union of the two AuditConfigs is used for that service: the log_types
+
         specified in each AuditConfig are enabled, and the exempted_members in each
+
         AuditLogConfig are exempted.
+
 
         Example Policy with multiple AuditConfigs:
 
@@ -809,24 +876,29 @@ components:
             }
 
         For sampleservice, this policy enables DATA_READ, DATA_WRITE and ADMIN_READ
+
         logging. It also exempts jose@example.com from DATA_READ logging, and
+
         aliya@example.com from DATA_WRITE logging.
       properties:
         auditLogConfigs:
           description: The configuration for logging of each type of permission.
           items:
-            $ref: '#/components/schemas/AuditLogConfig'
+            $ref: "#/components/schemas/AuditLogConfig"
           type: array
         service:
-          description: |-
+          description: >-
             Specifies a service that will be enabled for audit logging.
+
             For example, `storage.googleapis.com`, `cloudsql.googleapis.com`.
+
             `allServices` is a special value that covers all services.
           type: string
       type: object
     AuditLogConfig:
-      description: |-
+      description: >-
         Provides the configuration for logging a type of permissions.
+
         Example:
 
             {
@@ -844,12 +916,15 @@ components:
             }
 
         This enables 'DATA_READ' and 'DATA_WRITE' logging, while exempting
+
         jose@example.com from DATA_READ logging.
       properties:
         exemptedMembers:
-          description: |-
+          description: >-
             Specifies the identities that do not cause logging for this type of
+
             permission.
+
             Follows the same format of Binding.members.
           items:
             type: string
@@ -867,16 +942,21 @@ components:
       description: Associates `members` with a `role`.
       properties:
         condition:
-          $ref: '#/components/schemas/Expr'
-          description: |-
+          $ref: "#/components/schemas/Expr"
+          description: >-
             The condition that is associated with this binding.
+
             NOTE: An unsatisfied condition will not allow user access via current
+
             binding. Different bindings, including their conditions, are examined
+
             independently.
         members:
-          description: |+
+          description: >+
             Specifies the identities requesting access for a Cloud Platform resource.
+
             `members` can have the following values:
+
 
             * `allUsers`: A special identifier that represents anyone who is
                on the internet; with or without a Google account.
@@ -922,8 +1002,9 @@ components:
             type: string
           type: array
         role:
-          description: |-
+          description: >-
             Role that is assigned to `members`.
+
             For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
           type: string
       type: object
@@ -938,27 +1019,31 @@ components:
       description: Response of `CallFunction` method.
       properties:
         error:
-          description: |-
+          description: >-
             Either system or user-function generated error. Set if execution
+
             was not successful.
           type: string
         executionId:
           description: Execution id of function invocation.
           type: string
         result:
-          description: |-
+          description: >-
             Result populated for successful execution of synchronous function. Will
+
             not be populated if function does not return a result through context.
           type: string
       type: object
     CloudFunction:
-      description: |-
+      description: >-
         Describes a Cloud Function that contains user computation executed in
+
         response to an event. It encapsulate function and triggers configurations.
       properties:
         availableMemoryMb:
-          description: |-
+          description: >-
             The amount of memory in MB available for a function.
+
             Defaults to 256MB.
           format: int32
           type: integer
@@ -966,12 +1051,17 @@ components:
           description: User-provided description of a function.
           type: string
         entryPoint:
-          description: |-
+          description: >-
             The name of the function (as defined in source code) that will be
+
             executed. Defaults to the resource name suffix, if not specified. For
+
             backward compatibility, if function with given name is not found, then the
+
             system will try to use function named "function".
+
             For Node.js this is name of a function exported by the module specified
+
             in `source_location`.
           type: string
         environmentVariables:
@@ -980,14 +1070,15 @@ components:
           description: Environment variables that shall be available during function execution.
           type: object
         eventTrigger:
-          $ref: '#/components/schemas/EventTrigger'
+          $ref: "#/components/schemas/EventTrigger"
           description: A source that fires events in response to a condition in another service.
         httpsTrigger:
-          $ref: '#/components/schemas/HttpsTrigger'
+          $ref: "#/components/schemas/HttpsTrigger"
           description: An HTTPS endpoint type of source that can be triggered via URL.
         ingressSettings:
-          description: |-
+          description: >-
             The ingress settings for the function, controlling what traffic can reach
+
             it.
           enum:
             - INGRESS_SETTINGS_UNSPECIFIED
@@ -1000,60 +1091,81 @@ components:
           description: Labels associated with this Cloud Function.
           type: object
         maxInstances:
-          description: |-
+          description: >-
             The limit on the maximum number of function instances that may coexist at a
+
             given time.
           format: int32
           type: integer
         name:
-          description: |-
+          description: >-
             A user-defined name of the function. Function names must be unique
+
             globally and match pattern `projects/*/locations/*/functions/*`
           type: string
         network:
-          description: |-
+          description: >-
             The VPC Network that this cloud function can connect to. It can be
+
             either the fully-qualified URI, or the short name of the network resource.
+
             If the short network name is used, the network must belong to the same
+
             project. Otherwise, it must belong to a project within the same
+
             organization. The format of this field is either
+
             `projects/{project}/global/networks/{network}` or `{network}`, where
+
             {project} is a project id where the network is defined, and {network} is
+
             the short name of the network.
 
+
             This field is mutually exclusive with `vpc_connector` and will be replaced
+
             by it.
 
+
             See [the VPC documentation](https://cloud.google.com/compute/docs/vpc) for
+
             more information on connecting Cloud projects.
           type: string
         runtime:
-          description: |-
+          description: >-
             The runtime in which to run the function. Required when deploying a new
+
             function, optional when updating an existing function. For a complete
+
             list of possible choices, see the
+
             [`gcloud` command
+
             reference](/sdk/gcloud/reference/functions/deploy#--runtime).
           type: string
         serviceAccountEmail:
-          description: |-
+          description: >-
             The email of the function's service account. If empty, defaults to
+
             `{project_id}@appspot.gserviceaccount.com`.
           type: string
         sourceArchiveUrl:
-          description: |-
+          description: >-
             The Google Cloud Storage URL, starting with gs://, pointing to the zip
+
             archive which contains the function.
           type: string
         sourceRepository:
-          $ref: '#/components/schemas/SourceRepository'
-          description: |-
+          $ref: "#/components/schemas/SourceRepository"
+          description: >-
             **Beta Feature**
+
 
             The source repository where a function is hosted.
         sourceUploadUrl:
-          description: |-
+          description: >-
             The Google Cloud Storage signed URL used for source uploading, generated
+
             by google.cloud.functions.v1.GenerateUploadUrl
           type: string
         status:
@@ -1067,9 +1179,11 @@ components:
             - UNKNOWN
           type: string
         timeout:
-          description: |-
+          description: >-
             The function execution timeout. Execution is considered failed and
+
             can be terminated if the function is not completed at the end of the
+
             timeout period. Defaults to 60 seconds.
           format: google-duration
           type: string
@@ -1078,27 +1192,36 @@ components:
           format: google-datetime
           type: string
         versionId:
-          description: |-
+          description: >-
             Output only. The version identifier of the Cloud Function. Each deployment attempt
+
             results in a new version of a function being created.
           format: int64
           type: string
         vpcConnector:
-          description: |-
+          description: >-
             The VPC Network Connector that this cloud function can connect to. It can
+
             be either the fully-qualified URI, or the short name of the network
+
             connector resource. The format of this field is
+
             `projects/*/locations/*/connectors/*`
 
+
             This field is mutually exclusive with `network` field and will eventually
+
             replace it.
 
+
             See [the VPC documentation](https://cloud.google.com/compute/docs/vpc) for
+
             more information on connecting Cloud projects.
           type: string
         vpcConnectorEgressSettings:
-          description: |-
+          description: >-
             The egress settings for the connector, controlling what traffic is diverted
+
             through it.
           enum:
             - VPC_CONNECTOR_EGRESS_SETTINGS_UNSPECIFIED
@@ -1107,18 +1230,24 @@ components:
           type: string
       type: object
     EventTrigger:
-      description: |-
+      description: >-
         Describes EventTrigger, used to request events be sent from another
+
         service.
       properties:
         eventType:
-          description: |-
+          description: >-
             Required. The type of event to observe. For example:
+
             `providers/cloud.storage/eventTypes/object.change` and
+
             `providers/cloud.pubsub/eventTypes/topic.publish`.
 
+
             Event types match pattern `providers/*/eventTypes/*.*`.
+
             The pattern contains:
+
 
             1. namespace: For example, `cloud.storage` and
                `google.firebase.analytics`.
@@ -1129,15 +1258,19 @@ components:
             These parts are lower case.
           type: string
         failurePolicy:
-          $ref: '#/components/schemas/FailurePolicy'
+          $ref: "#/components/schemas/FailurePolicy"
           description: Specifies policy for failed executions.
         resource:
-          description: |-
+          description: >-
             Required. The resource(s) from which to observe events, for example,
+
             `projects/_/buckets/myBucket`.
 
+
             Not all syntactically correct values are accepted by all services. For
+
             example:
+
 
             1. The authorization model must support it. Google Cloud Functions
                only allows EventTriggers to be deployed that observe resources in the
@@ -1148,25 +1281,34 @@ components:
                that matches Google Cloud Pub/Sub topics.
 
             Additionally, some services may support short names when creating an
+
             `EventTrigger`. These will always be returned in the normalized "long"
+
             format.
+
 
             See each *service's* documentation for supported formats.
           type: string
         service:
-          description: |-
+          description: >-
             The hostname of the service that should be observed.
 
+
             If no string is provided, the default service implementing the API will
+
             be used. For example, `storage.googleapis.com` is the default for all
+
             event types in the `google.storage` namespace.
           type: string
       type: object
     Expr:
-      description: |-
+      description: >-
         Represents a textual expression in the Common Expression Language (CEL)
+
         syntax. CEL is a C-like expression language. The syntax and semantics of CEL
+
         are documented at https://github.com/google/cel-spec.
+
 
         Example (Comparison):
 
@@ -1193,46 +1335,55 @@ components:
             expression: "'New message received at ' + string(document.create_time)"
 
         The exact variables and functions that may be referenced within an expression
+
         are determined by the service that evaluates it. See the service
+
         documentation for additional information.
       properties:
         description:
-          description: |-
+          description: >-
             Optional. Description of the expression. This is a longer text which
+
             describes the expression, e.g. when hovered over it in a UI.
           type: string
         expression:
-          description: |-
+          description: >-
             Textual representation of an expression in Common Expression Language
+
             syntax.
           type: string
         location:
-          description: |-
+          description: >-
             Optional. String indicating the location of the expression for error
+
             reporting, e.g. a file name and a position in the file.
           type: string
         title:
-          description: |-
+          description: >-
             Optional. Title for the expression, i.e. a short string describing
+
             its purpose. This can be used e.g. in UIs which allow to enter the
+
             expression.
           type: string
       type: object
     FailurePolicy:
-      description: |-
+      description: >-
         Describes the policy in case of function's execution failure.
+
         If empty, then defaults to ignoring failures (i.e. not retrying them).
       properties:
         retry:
-          $ref: '#/components/schemas/Retry'
-          description: 'If specified, then the function will be retried in case of a failure.'
+          $ref: "#/components/schemas/Retry"
+          description: If specified, then the function will be retried in case of a failure.
       type: object
     GenerateDownloadUrlRequest:
       description: Request of `GenerateDownloadUrl` method.
       properties:
         versionId:
-          description: |-
+          description: >-
             The optional version of function. If not set, default, current version
+
             is used.
           format: uint64
           type: string
@@ -1241,8 +1392,9 @@ components:
       description: Response of `GenerateDownloadUrl` method.
       properties:
         downloadUrl:
-          description: |-
+          description: >-
             The generated Google Cloud Storage signed URL that should be used for
+
             function source code download.
           type: string
       type: object
@@ -1254,14 +1406,16 @@ components:
       description: Response of `GenerateSourceUploadUrl` method.
       properties:
         uploadUrl:
-          description: |-
+          description: >-
             The generated Google Cloud Storage signed URL that should be used for a
+
             function source code upload. The uploaded file should be a zip archive
+
             which contains a function.
           type: string
       type: object
     HttpsTrigger:
-      description: 'Describes HttpsTrigger, could be used to connect web hooks to function.'
+      description: Describes HttpsTrigger, could be used to connect web hooks to function.
       properties:
         url:
           description: Output only. The deployed url for the function.
@@ -1273,18 +1427,22 @@ components:
         functions:
           description: The functions that match the request.
           items:
-            $ref: '#/components/schemas/CloudFunction'
+            $ref: "#/components/schemas/CloudFunction"
           type: array
         nextPageToken:
-          description: |-
+          description: >-
             If not empty, indicates that there may be more functions that match
+
             the request; this value should be passed in a new
+
             google.cloud.functions.v1.ListFunctionsRequest
+
             to get more functions.
           type: string
         unreachable:
-          description: |-
+          description: >-
             Locations that could not be reached. The response does not include any
+
             functions from these locations.
           items:
             type: string
@@ -1296,7 +1454,7 @@ components:
         locations:
           description: A list of locations that matches the specified filter in the request.
           items:
-            $ref: '#/components/schemas/Location'
+            $ref: "#/components/schemas/Location"
           type: array
         nextPageToken:
           description: The standard List next-page token.
@@ -1311,21 +1469,22 @@ components:
         operations:
           description: A list of operations that matches the specified filter in the request.
           items:
-            $ref: '#/components/schemas/Operation'
+            $ref: "#/components/schemas/Operation"
           type: array
       type: object
     Location:
       description: A resource that represents Google Cloud Platform location.
       properties:
         displayName:
-          description: |-
+          description: >-
             The friendly name for this location, typically a nearby city name.
+
             For example, "Tokyo".
           type: string
         labels:
           additionalProperties:
             type: string
-          description: |-
+          description: >-
             Cross-service attributes for the location. For example
 
                 {"cloud.googleapis.com/region": "us-east1"}
@@ -1336,56 +1495,73 @@ components:
         metadata:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
-          description: |-
+          description: >-
             Service-specific metadata. For example the available capacity at the given
+
             location.
           type: object
         name:
-          description: |-
+          description: >-
             Resource name for the location, which may vary between implementations.
+
             For example: `"projects/example-project/locations/us-east1"`
           type: string
       type: object
     Operation:
-      description: |-
+      description: >-
         This resource represents a long-running operation that is the result of a
+
         network API call.
       properties:
         done:
-          description: |-
+          description: >-
             If the value is `false`, it means the operation is still in progress.
+
             If `true`, the operation is completed, and either `error` or `response` is
+
             available.
           type: boolean
         error:
-          $ref: '#/components/schemas/Status'
+          $ref: "#/components/schemas/Status"
           description: The error result of the operation in case of failure or cancellation.
         metadata:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
-          description: |-
+          description: >-
             Service-specific metadata associated with the operation.  It typically
+
             contains progress information and common metadata such as create time.
+
             Some services might not provide such metadata.  Any method that returns a
+
             long-running operation should document the metadata type, if any.
           type: object
         name:
-          description: |-
+          description: >-
             The server-assigned name, which is only unique within the same service that
+
             originally returns it. If you use the default HTTP mapping, the
+
             `name` should be a resource name ending with `operations/{unique_id}`.
           type: string
         response:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
-          description: |-
+          description: >-
             The normal response of the operation in case of success.  If the original
+
             method returns no data on success, such as `Delete`, the response is
+
             `google.protobuf.Empty`.  If the original method is standard
+
             `Get`/`Create`/`Update`, the response should be the resource.  For other
+
             methods, the response should have the type `XxxResponse`, where `Xxx`
+
             is the original method name.  For example, if the original method name
+
             is `TakeSnapshot()`, the inferred response type is
+
             `TakeSnapshotResponse`.
           type: object
       type: object
@@ -1398,8 +1574,9 @@ components:
           description: The original request that started the operation.
           type: object
         target:
-          description: |-
+          description: >-
             Target of the operation - for example
+
             projects/project-1/locations/region-1/functions/function-1
           type: string
         type:
@@ -1415,8 +1592,9 @@ components:
           format: google-datetime
           type: string
         versionId:
-          description: |-
+          description: >-
             Version id of the function created or updated by an API call.
+
             This field is only populated for Create and Update operations.
           format: int64
           type: string
@@ -1430,8 +1608,9 @@ components:
           description: The original request that started the operation.
           type: object
         target:
-          description: |-
+          description: >-
             Target of the operation - for example
+
             projects/project-1/locations/region-1/functions/function-1
           type: string
         type:
@@ -1447,28 +1626,40 @@ components:
           format: google-datetime
           type: string
         versionId:
-          description: |-
+          description: >-
             Version id of the function created or updated by an API call.
+
             This field is only populated for Create and Update operations.
           format: int64
           type: string
       type: object
     Policy:
-      description: |-
+      description: >-
         An Identity and Access Management (IAM) policy, which specifies access
+
         controls for Google Cloud resources.
 
 
+
         A `Policy` is a collection of `bindings`. A `binding` binds one or more
+
         `members` to a single `role`. Members can be user accounts, service accounts,
+
         Google groups, and domains (such as G Suite). A `role` is a named list of
+
         permissions; each `role` can be an IAM predefined role or a user-created
+
         custom role.
 
+
         Optionally, a `binding` can specify a `condition`, which is a logical
+
         expression that allows access to a resource only if the expression evaluates
+
         to `true`. A condition can add constraints based on attributes of the
+
         request, the resource, or both.
+
 
         **JSON example:**
 
@@ -1517,69 +1708,99 @@ components:
             - version: 3
 
         For a description of IAM and its features, see the
+
         [IAM documentation](https://cloud.google.com/iam/docs/).
       properties:
         auditConfigs:
           description: Specifies cloud audit logging configuration for this policy.
           items:
-            $ref: '#/components/schemas/AuditConfig'
+            $ref: "#/components/schemas/AuditConfig"
           type: array
         bindings:
-          description: |-
+          description: >-
             Associates a list of `members` to a `role`. Optionally, may specify a
+
             `condition` that determines how and when the `bindings` are applied. Each
+
             of the `bindings` must contain at least one member.
           items:
-            $ref: '#/components/schemas/Binding'
+            $ref: "#/components/schemas/Binding"
           type: array
         etag:
-          description: |-
+          description: >-
             `etag` is used for optimistic concurrency control as a way to help
+
             prevent simultaneous updates of a policy from overwriting each other.
+
             It is strongly suggested that systems make use of the `etag` in the
+
             read-modify-write cycle to perform policy updates in order to avoid race
+
             conditions: An `etag` is returned in the response to `getIamPolicy`, and
+
             systems are expected to put that etag in the request to `setIamPolicy` to
+
             ensure that their change will be applied to the same version of the policy.
 
+
             **Important:** If you use IAM Conditions, you must include the `etag` field
+
             whenever you call `setIamPolicy`. If you omit this field, then IAM allows
+
             you to overwrite a version `3` policy with a version `1` policy, and all of
+
             the conditions in the version `3` policy are lost.
           format: byte
           type: string
         version:
-          description: |-
+          description: >-
             Specifies the format of the policy.
 
+
             Valid values are `0`, `1`, and `3`. Requests that specify an invalid value
+
             are rejected.
 
+
             Any operation that affects conditional role bindings must specify version
+
             `3`. This requirement applies to the following operations:
 
+
             * Getting a policy that includes a conditional role binding
+
             * Adding a conditional role binding to a policy
+
             * Changing a conditional role binding in a policy
+
             * Removing any role binding, with or without a condition, from a policy
               that includes conditions
 
             **Important:** If you use IAM Conditions, you must include the `etag` field
+
             whenever you call `setIamPolicy`. If you omit this field, then IAM allows
+
             you to overwrite a version `3` policy with a version `1` policy, and all of
+
             the conditions in the version `3` policy are lost.
 
+
             If a policy does not include any conditions, operations on that policy may
+
             specify any valid version or leave the field unset.
           format: int32
           type: integer
       type: object
     Retry:
-      description: |-
+      description: >-
         Describes the retry policy in case of function's execution failure.
+
         A function execution will be retried on any failure.
+
         A failed execution will be retried up to 7 days with an exponential backoff
+
         (capped at 10 seconds).
+
         Retried execution is charged as any other execution.
       properties: {}
       type: object
@@ -1587,67 +1808,93 @@ components:
       description: Request message for `SetIamPolicy` method.
       properties:
         policy:
-          $ref: '#/components/schemas/Policy'
-          description: |-
+          $ref: "#/components/schemas/Policy"
+          description: >-
             REQUIRED: The complete policy to be applied to the `resource`. The size of
+
             the policy is limited to a few 10s of KB. An empty policy is a
+
             valid policy but certain Cloud Platform services (such as Projects)
+
             might reject them.
         updateMask:
-          description: |-
+          description: >-
             OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
+
             the fields in the mask will be modified. If no mask is provided, the
+
             following default mask is used:
+
             paths: "bindings, etag"
+
             This field is only used by Cloud IAM.
           format: google-fieldmask
           type: string
       type: object
     SourceRepository:
-      description: |-
+      description: >-
         Describes SourceRepository, used to represent parameters related to
+
         source repository where a function is hosted.
       properties:
         deployedUrl:
-          description: |-
+          description: >-
             Output only. The URL pointing to the hosted repository where the function
+
             were defined at the time of deployment. It always points to a specific
+
             commit in the format described above.
           type: string
         url:
-          description: |-
+          description: >-
             The URL pointing to the hosted repository where the function is defined.
+
             There are supported Cloud Source Repository URLs in the following
+
             formats:
 
+
             To refer to a specific commit:
+
             `https://source.developers.google.com/projects/*/repos/*/revisions/*/paths/*`
+
             To refer to a moveable alias (branch):
+
             `https://source.developers.google.com/projects/*/repos/*/moveable-aliases/*/paths/*`
+
             In particular, to refer to HEAD use `master` moveable alias.
+
             To refer to a specific fixed alias (tag):
+
             `https://source.developers.google.com/projects/*/repos/*/fixed-aliases/*/paths/*`
+
 
             You may omit `paths/*` if you want to use the main directory.
           type: string
       type: object
     Status:
-      description: |-
+      description: >-
         The `Status` type defines a logical error model that is suitable for
+
         different programming environments, including REST APIs and RPC APIs. It is
+
         used by [gRPC](https://github.com/grpc). Each `Status` message contains
+
         three pieces of data: error code, error message, and error details.
 
+
         You can find out more about this error model and how to work with it in the
+
         [API Design Guide](https://cloud.google.com/apis/design/errors).
       properties:
         code:
-          description: 'The status code, which should be an enum value of google.rpc.Code.'
+          description: The status code, which should be an enum value of google.rpc.Code.
           format: int32
           type: integer
         details:
-          description: |-
+          description: >-
             A list of messages that carry the error details.  There is a common set of
+
             message types for APIs to use.
           items:
             additionalProperties:
@@ -1655,9 +1902,11 @@ components:
             type: object
           type: array
         message:
-          description: |-
+          description: >-
             A developer-facing error message, which should be in English. Any
+
             user-facing error message should be localized and sent in the
+
             google.rpc.Status.details field, or localized by the client.
           type: string
       type: object
@@ -1665,10 +1914,13 @@ components:
       description: Request message for `TestIamPermissions` method.
       properties:
         permissions:
-          description: |-
+          description: >-
             The set of permissions to check for the `resource`. Permissions with
+
             wildcards (such as '*' or 'storage.*') are not allowed. For more
+
             information see
+
             [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
           items:
             type: string
@@ -1678,8 +1930,9 @@ components:
       description: Response message for `TestIamPermissions` method.
       properties:
         permissions:
-          description: |-
+          description: >-
             A subset of `TestPermissionsRequest.permissions` that the caller is
+
             allowed.
           items:
             type: string
@@ -1690,16 +1943,16 @@ components:
       description: Oauth 2.0 implicit authentication
       flows:
         implicit:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
       type: oauth2
     Oauth2c:
       description: Oauth 2.0 accessCode authentication
       flows:
         authorizationCode:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-          tokenUrl: 'https://accounts.google.com/o/oauth2/token'
+            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+          tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

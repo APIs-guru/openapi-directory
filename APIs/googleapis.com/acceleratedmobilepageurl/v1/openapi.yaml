@@ -1,66 +1,71 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://acceleratedmobilepageurl.googleapis.com/'
+  - url: https://acceleratedmobilepageurl.googleapis.com/
 info:
   contact:
     name: Google
-    url: 'https://google.com'
-  description: |
+    url: https://google.com
+    x-twitter: youtube
+  description: >
     Retrieves the list of AMP URLs (and equivalent AMP Cache URLs) for a given list of public URL(s).
   license:
     name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
-  title: Accelerated Mobile Pages (AMP) URL
+    url: http://creativecommons.org/licenses/by/3.0/
+  termsOfService: https://developers.google.com/terms/
+  title: Accelerated Mobile Pages (AMP) URL API
   version: v1
   x-apiClientRegistration:
-    url: 'https://console.developers.google.com'
+    url: https://console.developers.google.com
+  x-apisguru-categories:
+    - analytics
+    - media
   x-logo:
-    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.31
       format: google
-      url: 'https://acceleratedmobilepageurl.googleapis.com/$discovery/rest?version=v1'
+      url: https://acceleratedmobilepageurl.googleapis.com/$discovery/rest?version=v1
       version: v1
   x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: acceleratedmobilepageurl
 externalDocs:
-  url: 'https://developers.google.com/amp/cache/'
+  url: https://developers.google.com/amp/cache/
 tags:
   - name: ampUrls
 paths:
-  '/v1/ampUrls:batchGet':
+  /v1/ampUrls:batchGet:
     parameters:
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/uploadType"
     post:
-      description: |-
+      description: >-
         Returns AMP URL(s) and equivalent
+
         [AMP Cache URL(s)](/amp/cache/overview#amp-cache-url-format).
       operationId: acceleratedmobilepageurl.ampUrls.batchGet
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/BatchGetAmpUrlsRequest'
+              $ref: "#/components/schemas/BatchGetAmpUrlsRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/BatchGetAmpUrlsResponse'
+                $ref: "#/components/schemas/BatchGetAmpUrlsResponse"
           description: Successful response
       tags:
         - ampUrls
@@ -72,8 +77,8 @@ components:
       name: $.xgafv
       schema:
         enum:
-          - '1'
-          - '2'
+          - "1"
+          - "2"
         type: string
     access_token:
       description: OAuth access token.
@@ -86,7 +91,6 @@ components:
       in: query
       name: alt
       schema:
-        default: json
         enum:
           - json
           - media
@@ -105,7 +109,7 @@ components:
       schema:
         type: string
     key:
-      description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -121,22 +125,21 @@ components:
       in: query
       name: prettyPrint
       schema:
-        default: true
         type: boolean
     quotaUser:
-      description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.'
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
       in: query
       name: quotaUser
       schema:
         type: string
     uploadType:
-      description: 'Legacy upload protocol for media (e.g. "media", "multipart").'
+      description: Legacy upload protocol for media (e.g. "media", "multipart").
       in: query
       name: uploadType
       schema:
         type: string
     upload_protocol:
-      description: 'Upload protocol for media (e.g. "raw", "multipart").'
+      description: Upload protocol for media (e.g. "raw", "multipart").
       in: query
       name: upload_protocol
       schema:
@@ -149,8 +152,9 @@ components:
           description: The AMP URL pointing to the publisher's web server.
           type: string
         cdnAmpUrl:
-          description: |-
+          description: >-
             The [AMP Cache URL](/amp/cache/overview#amp-cache-url-format) pointing to
+
             the cached document in the Google AMP Cache.
           type: string
         originalUrl:
@@ -187,9 +191,11 @@ components:
             - IN_INDEX_DOC
           type: string
         urls:
-          description: |-
+          description: >-
             List of URLs to look up for the paired AMP URLs.
+
             The URLs are case-sensitive. Up to 50 URLs per lookup
+
             (see [Usage Limits](/amp/cache/reference/limits)).
           items:
             type: string
@@ -199,17 +205,20 @@ components:
       description: Batch AMP URL response.
       properties:
         ampUrls:
-          description: |-
+          description: >-
             For each URL in BatchAmpUrlsRequest, the URL response. The response might
+
             not be in the same order as URLs in the batch request.
+
             If BatchAmpUrlsRequest contains duplicate URLs, AmpUrl is generated
+
             only once.
           items:
-            $ref: '#/components/schemas/AmpUrl'
+            $ref: "#/components/schemas/AmpUrl"
           type: array
         urlErrors:
           description: The errors for requested URLs that have no AMP URL.
           items:
-            $ref: '#/components/schemas/AmpUrlError'
+            $ref: "#/components/schemas/AmpUrlError"
           type: array
       type: object

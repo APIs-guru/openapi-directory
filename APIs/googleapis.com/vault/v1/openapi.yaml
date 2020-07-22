@@ -1,46 +1,49 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://vault.googleapis.com/'
+  - url: https://vault.googleapis.com/
 info:
   contact:
     name: Google
-    url: 'https://google.com'
+    url: https://google.com
+    x-twitter: youtube
   description: Archiving and eDiscovery for G Suite.
   license:
     name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
-  title: G Suite Vault
+    url: http://creativecommons.org/licenses/by/3.0/
+  termsOfService: https://developers.google.com/terms/
+  title: G Suite Vault API
   version: v1
   x-apiClientRegistration:
-    url: 'https://console.developers.google.com'
+    url: https://console.developers.google.com
   x-apisguru-categories:
-    - storage
+    - analytics
+    - media
   x-logo:
-    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.31
       format: google
-      url: 'https://vault.googleapis.com/$discovery/rest?version=v1'
+      url: https://vault.googleapis.com/$discovery/rest?version=v1
       version: v1
   x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: vault
 externalDocs:
-  url: 'https://developers.google.com/vault'
+  url: https://developers.google.com/vault
 tags:
-  - name: matters
   - name: operations
+  - name: matters
 paths:
   /v1/matters:
     get:
       description: Lists matters the user has access to.
       operationId: vault.matters.list
       parameters:
-        - description: |-
+        - description: >-
             The number of matters to return in the response.
+
             Default and maximum are 100.
           in: query
           name: pageSize
@@ -51,8 +54,9 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: |-
+        - description: >-
             If set, list only matters with that specific state. The default is listing
+
             matters of all states.
           in: query
           name: state
@@ -73,58 +77,63 @@ paths:
               - FULL
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ListMattersResponse'
+                $ref: "#/components/schemas/ListMattersResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ediscovery'
+            - https://www.googleapis.com/auth/ediscovery
           Oauth2c:
-            - 'https://www.googleapis.com/auth/ediscovery'
+            - https://www.googleapis.com/auth/ediscovery
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ediscovery.readonly'
+            - https://www.googleapis.com/auth/ediscovery.readonly
           Oauth2c:
-            - 'https://www.googleapis.com/auth/ediscovery.readonly'
+            - https://www.googleapis.com/auth/ediscovery.readonly
       tags:
         - matters
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
     post:
-      description: |-
+      description: >-
         Creates a new matter with the given name and description. The initial state
+
         is open, and the owner is the method caller. Returns the created matter
+
         with default view.
       operationId: vault.matters.create
       requestBody:
-        $ref: '#/components/requestBodies/Matter'
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Matter"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Matter'
+                $ref: "#/components/schemas/Matter"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ediscovery'
+            - https://www.googleapis.com/auth/ediscovery
           Oauth2c:
-            - 'https://www.googleapis.com/auth/ediscovery'
+            - https://www.googleapis.com/auth/ediscovery
       tags:
         - matters
-  '/v1/matters/{matterId}':
+  "/v1/matters/{matterId}":
     delete:
       description: Deletes the specified matter. Returns matter with updated state.
       operationId: vault.matters.delete
@@ -136,17 +145,17 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Matter'
+                $ref: "#/components/schemas/Matter"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ediscovery'
+            - https://www.googleapis.com/auth/ediscovery
           Oauth2c:
-            - 'https://www.googleapis.com/auth/ediscovery'
+            - https://www.googleapis.com/auth/ediscovery
       tags:
         - matters
     get:
@@ -169,40 +178,43 @@ paths:
               - FULL
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Matter'
+                $ref: "#/components/schemas/Matter"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ediscovery'
+            - https://www.googleapis.com/auth/ediscovery
           Oauth2c:
-            - 'https://www.googleapis.com/auth/ediscovery'
+            - https://www.googleapis.com/auth/ediscovery
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ediscovery.readonly'
+            - https://www.googleapis.com/auth/ediscovery.readonly
           Oauth2c:
-            - 'https://www.googleapis.com/auth/ediscovery.readonly'
+            - https://www.googleapis.com/auth/ediscovery.readonly
       tags:
         - matters
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
     put:
-      description: |-
+      description: >-
         Updates the specified matter.
+
         This updates only the name and description of the matter, identified by
-        matter id. Changes to any other fields are ignored.
+
+        matter ID. Changes to any other fields are ignored.
+
         Returns the default view of the matter.
       operationId: vault.matters.update
       parameters:
@@ -216,22 +228,22 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Matter'
+              $ref: "#/components/schemas/Matter"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Matter'
+                $ref: "#/components/schemas/Matter"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ediscovery'
+            - https://www.googleapis.com/auth/ediscovery
           Oauth2c:
-            - 'https://www.googleapis.com/auth/ediscovery'
+            - https://www.googleapis.com/auth/ediscovery
       tags:
         - matters
-  '/v1/matters/{matterId}/exports':
+  "/v1/matters/{matterId}/exports":
     get:
       description: Lists Exports.
       operationId: vault.matters.exports.list
@@ -253,35 +265,35 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ListExportsResponse'
+                $ref: "#/components/schemas/ListExportsResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ediscovery'
+            - https://www.googleapis.com/auth/ediscovery
           Oauth2c:
-            - 'https://www.googleapis.com/auth/ediscovery'
+            - https://www.googleapis.com/auth/ediscovery
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ediscovery.readonly'
+            - https://www.googleapis.com/auth/ediscovery.readonly
           Oauth2c:
-            - 'https://www.googleapis.com/auth/ediscovery.readonly'
+            - https://www.googleapis.com/auth/ediscovery.readonly
       tags:
         - matters
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
     post:
       description: Creates an Export.
       operationId: vault.matters.exports.create
@@ -296,22 +308,22 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Export'
+              $ref: "#/components/schemas/Export"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Export'
+                $ref: "#/components/schemas/Export"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ediscovery'
+            - https://www.googleapis.com/auth/ediscovery
           Oauth2c:
-            - 'https://www.googleapis.com/auth/ediscovery'
+            - https://www.googleapis.com/auth/ediscovery
       tags:
         - matters
-  '/v1/matters/{matterId}/exports/{exportId}':
+  "/v1/matters/{matterId}/exports/{exportId}":
     delete:
       description: Deletes an Export.
       operationId: vault.matters.exports.delete
@@ -329,17 +341,17 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Empty'
+                $ref: "#/components/schemas/Empty"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ediscovery'
+            - https://www.googleapis.com/auth/ediscovery
           Oauth2c:
-            - 'https://www.googleapis.com/auth/ediscovery'
+            - https://www.googleapis.com/auth/ediscovery
       tags:
         - matters
     get:
@@ -359,39 +371,40 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Export'
+                $ref: "#/components/schemas/Export"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ediscovery'
+            - https://www.googleapis.com/auth/ediscovery
           Oauth2c:
-            - 'https://www.googleapis.com/auth/ediscovery'
+            - https://www.googleapis.com/auth/ediscovery
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ediscovery.readonly'
+            - https://www.googleapis.com/auth/ediscovery.readonly
           Oauth2c:
-            - 'https://www.googleapis.com/auth/ediscovery.readonly'
+            - https://www.googleapis.com/auth/ediscovery.readonly
       tags:
         - matters
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-  '/v1/matters/{matterId}/holds':
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+  "/v1/matters/{matterId}/holds":
     get:
-      description: |-
+      description: >-
         Lists holds within a matter. An empty page token in ListHoldsResponse
+
         denotes no more holds to list.
       operationId: vault.matters.holds.list
       parameters:
@@ -401,15 +414,17 @@ paths:
           required: true
           schema:
             type: string
-        - description: |-
+        - description: >-
             The number of holds to return in the response, between 0 and 100 inclusive.
+
             Leaving this empty, or as 0, is the same as page_size = 100.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: |-
+        - description: >-
             The pagination token as returned in the response.
+
             An empty token means start from the beginning.
           in: query
           name: pageToken
@@ -425,35 +440,35 @@ paths:
               - FULL_HOLD
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ListHoldsResponse'
+                $ref: "#/components/schemas/ListHoldsResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ediscovery'
+            - https://www.googleapis.com/auth/ediscovery
           Oauth2c:
-            - 'https://www.googleapis.com/auth/ediscovery'
+            - https://www.googleapis.com/auth/ediscovery
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ediscovery.readonly'
+            - https://www.googleapis.com/auth/ediscovery.readonly
           Oauth2c:
-            - 'https://www.googleapis.com/auth/ediscovery.readonly'
+            - https://www.googleapis.com/auth/ediscovery.readonly
       tags:
         - matters
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
     post:
       description: Creates a hold in the given matter.
       operationId: vault.matters.holds.create
@@ -468,22 +483,22 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Hold'
+              $ref: "#/components/schemas/Hold"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Hold'
+                $ref: "#/components/schemas/Hold"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ediscovery'
+            - https://www.googleapis.com/auth/ediscovery
           Oauth2c:
-            - 'https://www.googleapis.com/auth/ediscovery'
+            - https://www.googleapis.com/auth/ediscovery
       tags:
         - matters
-  '/v1/matters/{matterId}/holds/{holdId}':
+  "/v1/matters/{matterId}/holds/{holdId}":
     delete:
       description: Removes a hold by ID. This will release any HeldAccounts on this Hold.
       operationId: vault.matters.holds.delete
@@ -501,17 +516,17 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Empty'
+                $ref: "#/components/schemas/Empty"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ediscovery'
+            - https://www.googleapis.com/auth/ediscovery
           Oauth2c:
-            - 'https://www.googleapis.com/auth/ediscovery'
+            - https://www.googleapis.com/auth/ediscovery
       tags:
         - matters
     get:
@@ -540,39 +555,41 @@ paths:
               - FULL_HOLD
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Hold'
+                $ref: "#/components/schemas/Hold"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ediscovery'
+            - https://www.googleapis.com/auth/ediscovery
           Oauth2c:
-            - 'https://www.googleapis.com/auth/ediscovery'
+            - https://www.googleapis.com/auth/ediscovery
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ediscovery.readonly'
+            - https://www.googleapis.com/auth/ediscovery.readonly
           Oauth2c:
-            - 'https://www.googleapis.com/auth/ediscovery.readonly'
+            - https://www.googleapis.com/auth/ediscovery.readonly
       tags:
         - matters
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
     put:
-      description: |-
+      description: >-
         Updates the OU and/or query parameters of a hold. You cannot add accounts
+
         to a hold that covers an OU, nor can you add OUs to a hold that covers
+
         individual accounts. Accounts listed in the hold will be ignored.
       operationId: vault.matters.holds.update
       parameters:
@@ -592,27 +609,30 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Hold'
+              $ref: "#/components/schemas/Hold"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Hold'
+                $ref: "#/components/schemas/Hold"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ediscovery'
+            - https://www.googleapis.com/auth/ediscovery
           Oauth2c:
-            - 'https://www.googleapis.com/auth/ediscovery'
+            - https://www.googleapis.com/auth/ediscovery
       tags:
         - matters
-  '/v1/matters/{matterId}/holds/{holdId}/accounts':
+  "/v1/matters/{matterId}/holds/{holdId}/accounts":
     get:
-      description: |-
+      description: >-
         Lists HeldAccounts for a hold. This will only list individually specified
+
         held accounts. If the hold is on an OU, then use
+
         <a href="https://developers.google.com/admin-sdk/">Admin SDK</a>
+
         to enumerate its members.
       operationId: vault.matters.holds.accounts.list
       parameters:
@@ -629,39 +649,41 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ListHeldAccountsResponse'
+                $ref: "#/components/schemas/ListHeldAccountsResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ediscovery'
+            - https://www.googleapis.com/auth/ediscovery
           Oauth2c:
-            - 'https://www.googleapis.com/auth/ediscovery'
+            - https://www.googleapis.com/auth/ediscovery
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ediscovery.readonly'
+            - https://www.googleapis.com/auth/ediscovery.readonly
           Oauth2c:
-            - 'https://www.googleapis.com/auth/ediscovery.readonly'
+            - https://www.googleapis.com/auth/ediscovery.readonly
       tags:
         - matters
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
     post:
-      description: |-
+      description: >-
         Adds a HeldAccount to a hold. Accounts can only be added to a hold that
+
         has no held_org_unit set. Attempting to add an account to an OU-based
+
         hold will result in an error.
       operationId: vault.matters.holds.accounts.create
       parameters:
@@ -681,25 +703,26 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/HeldAccount'
+              $ref: "#/components/schemas/HeldAccount"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/HeldAccount'
+                $ref: "#/components/schemas/HeldAccount"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ediscovery'
+            - https://www.googleapis.com/auth/ediscovery
           Oauth2c:
-            - 'https://www.googleapis.com/auth/ediscovery'
+            - https://www.googleapis.com/auth/ediscovery
       tags:
         - matters
-  '/v1/matters/{matterId}/holds/{holdId}/accounts/{accountId}':
+  "/v1/matters/{matterId}/holds/{holdId}/accounts/{accountId}":
     delete:
-      description: |-
+      description: >-
         Removes a HeldAccount from a hold. If this request leaves the hold with
+
         no held accounts, the hold will not apply to any accounts.
       operationId: vault.matters.holds.accounts.delete
       parameters:
@@ -722,48 +745,50 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Empty'
+                $ref: "#/components/schemas/Empty"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ediscovery'
+            - https://www.googleapis.com/auth/ediscovery
           Oauth2c:
-            - 'https://www.googleapis.com/auth/ediscovery'
+            - https://www.googleapis.com/auth/ediscovery
       tags:
         - matters
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-  '/v1/matters/{matterId}/holds/{holdId}:addHeldAccounts':
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+  "/v1/matters/{matterId}/holds/{holdId}:addHeldAccounts":
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
     post:
-      description: |-
+      description: >-
         Adds HeldAccounts to a hold. Returns a list of accounts that have been
+
         successfully added. Accounts can only be added to an existing account-based
+
         hold.
       operationId: vault.matters.holds.addHeldAccounts
       parameters:
@@ -783,38 +808,40 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AddHeldAccountsRequest'
+              $ref: "#/components/schemas/AddHeldAccountsRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/AddHeldAccountsResponse'
+                $ref: "#/components/schemas/AddHeldAccountsResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ediscovery'
+            - https://www.googleapis.com/auth/ediscovery
           Oauth2c:
-            - 'https://www.googleapis.com/auth/ediscovery'
+            - https://www.googleapis.com/auth/ediscovery
       tags:
         - matters
-  '/v1/matters/{matterId}/holds/{holdId}:removeHeldAccounts':
+  "/v1/matters/{matterId}/holds/{holdId}:removeHeldAccounts":
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
     post:
-      description: |-
+      description: >-
         Removes HeldAccounts from a hold. Returns a list of statuses in the same
+
         order as the request. If this request leaves the hold with no held
+
         accounts, the hold will not apply to any accounts.
       operationId: vault.matters.holds.removeHeldAccounts
       parameters:
@@ -834,30 +861,32 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RemoveHeldAccountsRequest'
+              $ref: "#/components/schemas/RemoveHeldAccountsRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/RemoveHeldAccountsResponse'
+                $ref: "#/components/schemas/RemoveHeldAccountsResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ediscovery'
+            - https://www.googleapis.com/auth/ediscovery
           Oauth2c:
-            - 'https://www.googleapis.com/auth/ediscovery'
+            - https://www.googleapis.com/auth/ediscovery
       tags:
         - matters
-  '/v1/matters/{matterId}/savedQueries':
+  "/v1/matters/{matterId}/savedQueries":
     get:
-      description: |-
+      description: >-
         Lists saved queries within a matter. An empty page token in
+
         ListSavedQueriesResponse denotes no more saved queries to list.
       operationId: vault.matters.savedQueries.list
       parameters:
-        - description: |-
-            The matter id of the parent matter for which the saved queries are to be
+        - description: >-
+            The matter ID of the parent matter for which the saved queries are to be
+
             retrieved.
           in: path
           name: matterId
@@ -869,49 +898,51 @@ paths:
           name: pageSize
           schema:
             type: integer
-        - description: |-
+        - description: >-
             The pagination token as returned in the previous response.
+
             An empty token means start from the beginning.
           in: query
           name: pageToken
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ListSavedQueriesResponse'
+                $ref: "#/components/schemas/ListSavedQueriesResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ediscovery'
+            - https://www.googleapis.com/auth/ediscovery
           Oauth2c:
-            - 'https://www.googleapis.com/auth/ediscovery'
+            - https://www.googleapis.com/auth/ediscovery
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ediscovery.readonly'
+            - https://www.googleapis.com/auth/ediscovery.readonly
           Oauth2c:
-            - 'https://www.googleapis.com/auth/ediscovery.readonly'
+            - https://www.googleapis.com/auth/ediscovery.readonly
       tags:
         - matters
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
     post:
       description: Creates a saved query.
       operationId: vault.matters.savedQueries.create
       parameters:
-        - description: |-
-            The matter id of the parent matter for which the saved query is to be
+        - description: >-
+            The matter ID of the parent matter for which the saved query is to be
+
             created.
           in: path
           name: matterId
@@ -922,115 +953,117 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SavedQuery'
+              $ref: "#/components/schemas/SavedQuery"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/SavedQuery'
+                $ref: "#/components/schemas/SavedQuery"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ediscovery'
+            - https://www.googleapis.com/auth/ediscovery
           Oauth2c:
-            - 'https://www.googleapis.com/auth/ediscovery'
+            - https://www.googleapis.com/auth/ediscovery
       tags:
         - matters
-  '/v1/matters/{matterId}/savedQueries/{savedQueryId}':
+  "/v1/matters/{matterId}/savedQueries/{savedQueryId}":
     delete:
       description: Deletes a saved query by Id.
       operationId: vault.matters.savedQueries.delete
       parameters:
-        - description: |-
-            The matter id of the parent matter for which the saved query is to be
+        - description: >-
+            The matter ID of the parent matter for which the saved query is to be
+
             deleted.
           in: path
           name: matterId
           required: true
           schema:
             type: string
-        - description: Id of the saved query to be deleted.
+        - description: ID of the saved query to be deleted.
           in: path
           name: savedQueryId
           required: true
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Empty'
+                $ref: "#/components/schemas/Empty"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ediscovery'
+            - https://www.googleapis.com/auth/ediscovery
           Oauth2c:
-            - 'https://www.googleapis.com/auth/ediscovery'
+            - https://www.googleapis.com/auth/ediscovery
       tags:
         - matters
     get:
       description: Retrieves a saved query by Id.
       operationId: vault.matters.savedQueries.get
       parameters:
-        - description: |-
-            The matter id of the parent matter for which the saved query is to be
+        - description: >-
+            The matter ID of the parent matter for which the saved query is to be
+
             retrieved.
           in: path
           name: matterId
           required: true
           schema:
             type: string
-        - description: Id of the saved query to be retrieved.
+        - description: ID of the saved query to be retrieved.
           in: path
           name: savedQueryId
           required: true
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/SavedQuery'
+                $ref: "#/components/schemas/SavedQuery"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ediscovery'
+            - https://www.googleapis.com/auth/ediscovery
           Oauth2c:
-            - 'https://www.googleapis.com/auth/ediscovery'
+            - https://www.googleapis.com/auth/ediscovery
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ediscovery.readonly'
+            - https://www.googleapis.com/auth/ediscovery.readonly
           Oauth2c:
-            - 'https://www.googleapis.com/auth/ediscovery.readonly'
+            - https://www.googleapis.com/auth/ediscovery.readonly
       tags:
         - matters
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-  '/v1/matters/{matterId}:addPermissions':
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+  "/v1/matters/{matterId}:addPermissions":
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
     post:
       description: Adds an account as a matter collaborator.
       operationId: vault.matters.addPermissions
@@ -1045,34 +1078,34 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AddMatterPermissionsRequest'
+              $ref: "#/components/schemas/AddMatterPermissionsRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/MatterPermission'
+                $ref: "#/components/schemas/MatterPermission"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ediscovery'
+            - https://www.googleapis.com/auth/ediscovery
           Oauth2c:
-            - 'https://www.googleapis.com/auth/ediscovery'
+            - https://www.googleapis.com/auth/ediscovery
       tags:
         - matters
-  '/v1/matters/{matterId}:close':
+  "/v1/matters/{matterId}:close":
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
     post:
       description: Closes the specified matter. Returns matter with updated state.
       operationId: vault.matters.close
@@ -1087,34 +1120,34 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CloseMatterRequest'
+              $ref: "#/components/schemas/CloseMatterRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/CloseMatterResponse'
+                $ref: "#/components/schemas/CloseMatterResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ediscovery'
+            - https://www.googleapis.com/auth/ediscovery
           Oauth2c:
-            - 'https://www.googleapis.com/auth/ediscovery'
+            - https://www.googleapis.com/auth/ediscovery
       tags:
         - matters
-  '/v1/matters/{matterId}:removePermissions':
+  "/v1/matters/{matterId}:removePermissions":
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
     post:
       description: Removes an account as a matter collaborator.
       operationId: vault.matters.removePermissions
@@ -1129,34 +1162,34 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RemoveMatterPermissionsRequest'
+              $ref: "#/components/schemas/RemoveMatterPermissionsRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Empty'
+                $ref: "#/components/schemas/Empty"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ediscovery'
+            - https://www.googleapis.com/auth/ediscovery
           Oauth2c:
-            - 'https://www.googleapis.com/auth/ediscovery'
+            - https://www.googleapis.com/auth/ediscovery
       tags:
         - matters
-  '/v1/matters/{matterId}:reopen':
+  "/v1/matters/{matterId}:reopen":
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
     post:
       description: Reopens the specified matter. Returns matter with updated state.
       operationId: vault.matters.reopen
@@ -1171,34 +1204,34 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ReopenMatterRequest'
+              $ref: "#/components/schemas/ReopenMatterRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ReopenMatterResponse'
+                $ref: "#/components/schemas/ReopenMatterResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ediscovery'
+            - https://www.googleapis.com/auth/ediscovery
           Oauth2c:
-            - 'https://www.googleapis.com/auth/ediscovery'
+            - https://www.googleapis.com/auth/ediscovery
       tags:
         - matters
-  '/v1/matters/{matterId}:undelete':
+  "/v1/matters/{matterId}:undelete":
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
     post:
       description: Undeletes the specified matter. Returns matter with updated state.
       operationId: vault.matters.undelete
@@ -1213,27 +1246,30 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UndeleteMatterRequest'
+              $ref: "#/components/schemas/UndeleteMatterRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Matter'
+                $ref: "#/components/schemas/Matter"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ediscovery'
+            - https://www.googleapis.com/auth/ediscovery
           Oauth2c:
-            - 'https://www.googleapis.com/auth/ediscovery'
+            - https://www.googleapis.com/auth/ediscovery
       tags:
         - matters
-  '/v1/{name}':
+  "/v1/{name}":
     delete:
-      description: |-
+      description: >-
         Deletes a long-running operation. This method indicates that the client is
+
         no longer interested in the operation result. It does not cancel the
+
         operation. If the server doesn't support this method, it returns
+
         `google.rpc.Code.UNIMPLEMENTED`.
       operationId: vault.operations.delete
       parameters:
@@ -1243,28 +1279,27 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Empty'
+                $ref: "#/components/schemas/Empty"
           description: Successful response
       tags:
         - operations
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
 components:
   parameters:
     _.xgafv:
@@ -1273,8 +1308,8 @@ components:
       name: $.xgafv
       schema:
         enum:
-          - '1'
-          - '2'
+          - "1"
+          - "2"
         type: string
     access_token:
       description: OAuth access token.
@@ -1287,7 +1322,6 @@ components:
       in: query
       name: alt
       schema:
-        default: json
         enum:
           - json
           - media
@@ -1306,7 +1340,7 @@ components:
       schema:
         type: string
     key:
-      description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -1322,37 +1356,25 @@ components:
       in: query
       name: prettyPrint
       schema:
-        default: true
         type: boolean
     quotaUser:
-      description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.'
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
       in: query
       name: quotaUser
       schema:
         type: string
     uploadType:
-      description: 'Legacy upload protocol for media (e.g. "media", "multipart").'
+      description: Legacy upload protocol for media (e.g. "media", "multipart").
       in: query
       name: uploadType
       schema:
         type: string
     upload_protocol:
-      description: 'Upload protocol for media (e.g. "raw", "multipart").'
+      description: Upload protocol for media (e.g. "raw", "multipart").
       in: query
       name: upload_protocol
       schema:
         type: string
-  requestBodies:
-    Hold:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Hold'
-    Matter:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Matter'
   schemas:
     AccountInfo:
       description: Accounts to search
@@ -1364,30 +1386,33 @@ components:
           type: array
       type: object
     AddHeldAccountResult:
-      description: |-
+      description: >-
         A status detailing the status of each account creation, and the
+
         HeldAccount, if successful.
       properties:
         account:
-          $ref: '#/components/schemas/HeldAccount'
-          description: 'If present, this account was successfully created.'
+          $ref: "#/components/schemas/HeldAccount"
+          description: If present, this account was successfully created.
         status:
-          $ref: '#/components/schemas/Status'
-          description: 'This represents the success status. If failed, check message.'
+          $ref: "#/components/schemas/Status"
+          description: This represents the success status. If failed, check message.
       type: object
     AddHeldAccountsRequest:
       description: Add a list of accounts to a hold.
       properties:
         accountIds:
-          description: |-
-            Account ids to identify which accounts to add. Only account_ids or only
+          description: >-
+            Account IDs to identify which accounts to add. Only account_ids or only
+
             emails should be specified, but not both.
           items:
             type: string
           type: array
         emails:
-          description: |-
+          description: >-
             Emails to identify which accounts to add. Only emails or only account_ids
+
             should be specified, but not both.
           items:
             type: string
@@ -1397,29 +1422,34 @@ components:
       description: Response for batch create held accounts.
       properties:
         responses:
-          description: 'The list of responses, in the same order as the batch request.'
+          description: The list of responses, in the same order as the batch request.
           items:
-            $ref: '#/components/schemas/AddHeldAccountResult'
+            $ref: "#/components/schemas/AddHeldAccountResult"
           type: array
       type: object
     AddMatterPermissionsRequest:
-      description: |-
+      description: >-
         Add an account with the permission specified. The role cannot be owner.
+
         If an account already has a role in the matter, it will be
+
         overwritten.
       properties:
         ccMe:
-          description: |-
+          description: >-
             Only relevant if send_emails is true.
+
             True to CC requestor in the email message.
+
             False to not CC requestor.
           type: boolean
         matterPermission:
-          $ref: '#/components/schemas/MatterPermission'
+          $ref: "#/components/schemas/MatterPermission"
           description: The MatterPermission to add.
         sendEmails:
-          description: |-
+          description: >-
             True to send notification email to the added account.
+
             False to not send notification email.
           type: boolean
       type: object
@@ -1431,23 +1461,31 @@ components:
       description: Response to a CloseMatterRequest.
       properties:
         matter:
-          $ref: '#/components/schemas/Matter'
-          description: 'The updated matter, with state CLOSED.'
+          $ref: "#/components/schemas/Matter"
+          description: The updated matter, with state CLOSED.
       type: object
     CloudStorageFile:
       description: An export file on cloud storage
       properties:
         bucketName:
-          description: |-
+          description: >-
             The cloud storage bucket name of this export file.
-            Can be used in cloud storage JSON/XML API.
+
+            Can be used in cloud storage JSON/XML API, but not to list the bucket
+
+            contents. Instead, you can <a
+
+            href="https://cloud.google.com/storage/docs/json_api/v1/objects/get">
+
+            get individual export files</a> by object name.
           type: string
         md5Hash:
           description: The md5 hash of the file.
           type: string
         objectName:
-          description: |-
+          description: >-
             The cloud storage object name of this export file.
+
             Can be used in cloud storage JSON/XML API.
           type: string
         size:
@@ -1461,35 +1499,39 @@ components:
         files:
           description: Output only. The exported files on cloud storage.
           items:
-            $ref: '#/components/schemas/CloudStorageFile'
+            $ref: "#/components/schemas/CloudStorageFile"
           type: array
       type: object
     CorpusQuery:
       description: Corpus specific queries.
       properties:
         driveQuery:
-          $ref: '#/components/schemas/HeldDriveQuery'
-          description: 'Details pertaining to Drive holds. If set, corpus must be Drive.'
+          $ref: "#/components/schemas/HeldDriveQuery"
+          description: Details pertaining to Drive holds. If set, corpus must be Drive.
         groupsQuery:
-          $ref: '#/components/schemas/HeldGroupsQuery'
-          description: 'Details pertaining to Groups holds. If set, corpus must be Groups.'
+          $ref: "#/components/schemas/HeldGroupsQuery"
+          description: Details pertaining to Groups holds. If set, corpus must be Groups.
         hangoutsChatQuery:
-          $ref: '#/components/schemas/HeldHangoutsChatQuery'
-          description: |-
+          $ref: "#/components/schemas/HeldHangoutsChatQuery"
+          description: >-
             Details pertaining to Hangouts Chat holds. If set, corpus must be
+
             Hangouts Chat.
         mailQuery:
-          $ref: '#/components/schemas/HeldMailQuery'
-          description: 'Details pertaining to mail holds. If set, corpus must be mail.'
+          $ref: "#/components/schemas/HeldMailQuery"
+          description: Details pertaining to mail holds. If set, corpus must be mail.
       type: object
     DriveExportOptions:
       description: The options for Drive export.
       properties:
         includeAccessInfo:
-          description: |-
+          description: >-
             Set to true to include access level information for users
+
             with <a
+
             href="https://support.google.com/vault/answer/6099459#metadata">indirect
+
             access</a> to files.
           type: boolean
       type: object
@@ -1503,17 +1545,21 @@ components:
           description: Set to true to include Team Drive.
           type: boolean
         versionDate:
-          description: |-
+          description: >-
             Search the versions of the Drive file
+
             as of the reference date. These timestamps are in GMT and
+
             rounded down to the given date.
           format: google-datetime
           type: string
       type: object
     Empty:
-      description: |-
+      description: >-
         A generic empty message that you can re-use to avoid defining duplicated
+
         empty messages in your APIs. A typical example is to use it as the request
+
         or the response type of an API method. For instance:
 
             service Foo {
@@ -1527,14 +1573,14 @@ components:
       description: An export
       properties:
         cloudStorageSink:
-          $ref: '#/components/schemas/CloudStorageSink'
+          $ref: "#/components/schemas/CloudStorageSink"
           description: Output only. Export sink for cloud storage files.
         createTime:
           description: Output only. The time when the export was created.
           format: google-datetime
           type: string
         exportOptions:
-          $ref: '#/components/schemas/ExportOptions'
+          $ref: "#/components/schemas/ExportOptions"
           description: Advanced options of the export.
         id:
           description: Output only. The generated export ID.
@@ -1546,13 +1592,13 @@ components:
           description: The export name.
           type: string
         query:
-          $ref: '#/components/schemas/Query'
+          $ref: "#/components/schemas/Query"
           description: The search query being exported.
         requester:
-          $ref: '#/components/schemas/UserInfo'
+          $ref: "#/components/schemas/UserInfo"
           description: Output only. The requester of the export.
         stats:
-          $ref: '#/components/schemas/ExportStats'
+          $ref: "#/components/schemas/ExportStats"
           description: Output only. Export statistics.
         status:
           description: Output only. The export status.
@@ -1567,16 +1613,16 @@ components:
       description: Export advanced options
       properties:
         driveOptions:
-          $ref: '#/components/schemas/DriveExportOptions'
+          $ref: "#/components/schemas/DriveExportOptions"
           description: Option available for Drive export.
         groupsOptions:
-          $ref: '#/components/schemas/GroupsExportOptions'
+          $ref: "#/components/schemas/GroupsExportOptions"
           description: Option available for groups export.
         hangoutsChatOptions:
-          $ref: '#/components/schemas/HangoutsChatExportOptions'
+          $ref: "#/components/schemas/HangoutsChatExportOptions"
           description: Option available for hangouts chat export.
         mailOptions:
-          $ref: '#/components/schemas/MailExportOptions'
+          $ref: "#/components/schemas/MailExportOptions"
           description: Option available for mail export.
         region:
           description: The requested export location.
@@ -1642,18 +1688,21 @@ components:
           type: boolean
       type: object
     HeldAccount:
-      description: |-
+      description: >-
         An account being held in a particular hold. This structure is immutable.
+
         This can be either a single user or a google group, depending on the corpus.
       properties:
         accountId:
-          description: |-
+          description: >-
             The account's ID as provided by the
+
             <a href="https://developers.google.com/admin-sdk/">Admin SDK</a>.
           type: string
         email:
-          description: |-
+          description: >-
             The primary email address of the account. If used as an input, this takes
+
             precedence over account ID.
           type: string
         firstName:
@@ -1671,24 +1720,26 @@ components:
       description: Query options for Drive holds.
       properties:
         includeSharedDriveFiles:
-          description: 'If true, include files in shared drives in the hold.'
+          description: If true, include files in shared drives in the hold.
           type: boolean
         includeTeamDriveFiles:
-          description: 'If true, include files in Team Drives in the hold.'
+          description: If true, include files in Team Drives in the hold.
           type: boolean
       type: object
     HeldGroupsQuery:
       description: Query options for group holds.
       properties:
         endTime:
-          description: |-
+          description: >-
             The end time range for the search query. These timestamps are in GMT and
+
             rounded down to the start of the given date.
           format: google-datetime
           type: string
         startTime:
-          description: |-
+          description: >-
             The start time range for the search query. These timestamps are in GMT and
+
             rounded down to the start of the given date.
           format: google-datetime
           type: string
@@ -1700,21 +1751,23 @@ components:
       description: Query options for hangouts chat holds.
       properties:
         includeRooms:
-          description: 'If true, include rooms the user has participated in.'
+          description: If true, include rooms the user has participated in.
           type: boolean
       type: object
     HeldMailQuery:
       description: Query options for mail holds.
       properties:
         endTime:
-          description: |-
+          description: >-
             The end time range for the search query. These timestamps are in GMT and
+
             rounded down to the start of the given date.
           format: google-datetime
           type: string
         startTime:
-          description: |-
+          description: >-
             The start time range for the search query. These timestamps are in GMT and
+
             rounded down to the start of the given date.
           format: google-datetime
           type: string
@@ -1723,8 +1776,9 @@ components:
           type: string
       type: object
     HeldOrgUnit:
-      description: |-
+      description: >-
         A organizational unit being held in a particular hold.
+
         This structure is immutable.
       properties:
         holdTime:
@@ -1736,18 +1790,22 @@ components:
           type: string
       type: object
     Hold:
-      description: |-
+      description: >-
         Represents a hold within Vault. A hold restricts purging of
+
         artifacts based on the combination of the query and accounts restrictions.
+
         A hold can be configured to either apply to an explicitly configured set
+
         of accounts, or can be applied to all members of an organizational unit.
       properties:
         accounts:
-          description: |-
+          description: >-
             If set, the hold applies to the enumerated accounts and org_unit must be
+
             empty.
           items:
-            $ref: '#/components/schemas/HeldAccount'
+            $ref: "#/components/schemas/HeldAccount"
           type: array
         corpus:
           description: The corpus to be searched.
@@ -1765,15 +1823,18 @@ components:
           description: The name of the hold.
           type: string
         orgUnit:
-          $ref: '#/components/schemas/HeldOrgUnit'
-          description: |-
+          $ref: "#/components/schemas/HeldOrgUnit"
+          description: >-
             If set, the hold applies to all members of the organizational unit and
+
             accounts must be empty. This property is mutable. For groups holds,
+
             set the accounts field.
         query:
-          $ref: '#/components/schemas/CorpusQuery'
-          description: |-
+          $ref: "#/components/schemas/CorpusQuery"
+          description: >-
             The corpus-specific query. If set, the corpusQuery must match corpus
+
             type.
         updateTime:
           description: The last time this hold was modified.
@@ -1786,7 +1847,7 @@ components:
         exports:
           description: The list of exports.
           items:
-            $ref: '#/components/schemas/Export'
+            $ref: "#/components/schemas/Export"
           type: array
         nextPageToken:
           description: Page token to retrieve the next page of results in the list.
@@ -1798,7 +1859,7 @@ components:
         accounts:
           description: The held accounts on a hold.
           items:
-            $ref: '#/components/schemas/HeldAccount'
+            $ref: "#/components/schemas/HeldAccount"
           type: array
       type: object
     ListHoldsResponse:
@@ -1807,11 +1868,12 @@ components:
         holds:
           description: The list of holds.
           items:
-            $ref: '#/components/schemas/Hold'
+            $ref: "#/components/schemas/Hold"
           type: array
         nextPageToken:
-          description: |-
+          description: >-
             Page token to retrieve the next page of results in the list.
+
             If this is empty, then there are no more holds to list.
           type: string
       type: object
@@ -1821,7 +1883,7 @@ components:
         matters:
           description: List of matters.
           items:
-            $ref: '#/components/schemas/Matter'
+            $ref: "#/components/schemas/Matter"
           type: array
         nextPageToken:
           description: Page token to retrieve the next page of results in the list.
@@ -1831,14 +1893,15 @@ components:
       description: Definition of the response for method ListSaveQuery.
       properties:
         nextPageToken:
-          description: |-
+          description: >-
             Page token to retrieve the next page of results in the list.
+
             If this is empty, then there are no more saved queries to list.
           type: string
         savedQueries:
           description: List of output saved queries.
           items:
-            $ref: '#/components/schemas/SavedQuery'
+            $ref: "#/components/schemas/SavedQuery"
           type: array
       type: object
     MailExportOptions:
@@ -1869,16 +1932,18 @@ components:
           description: The description of the matter.
           type: string
         matterId:
-          description: |-
+          description: >-
             The matter ID which is generated by the server.
+
             Should be blank when creating a new matter.
           type: string
         matterPermissions:
-          description: |-
+          description: >-
             List of users and access to the matter. Currently there is no programmer
+
             defined limit on the number of permissions a matter can have.
           items:
-            $ref: '#/components/schemas/MatterPermission'
+            $ref: "#/components/schemas/MatterPermission"
           type: array
         name:
           description: The name of the matter.
@@ -1893,14 +1958,17 @@ components:
           type: string
       type: object
     MatterPermission:
-      description: |-
+      description: >-
         Currently each matter only has one owner, and all others are collaborators.
+
         When an account is purged, its corresponding MatterPermission resources
+
         cease to exist.
       properties:
         accountId:
-          description: |-
-            The account id, as provided by <a
+          description: >-
+            The account ID, as provided by <a
+
             href="https://developers.google.com/admin-sdk/">Admin SDK</a>.
           type: string
         role:
@@ -1915,9 +1983,11 @@ components:
       description: Org Unit to search
       properties:
         orgUnitId:
-          description: |-
+          description: >-
             Org unit to search, as provided by the
+
             <a href="https://developers.google.com/admin-sdk/directory/">Admin SDK
+
             Directory API</a>.
           type: string
       type: object
@@ -1925,9 +1995,10 @@ components:
       description: A query definition relevant for search & export.
       properties:
         accountInfo:
-          $ref: '#/components/schemas/AccountInfo'
-          description: |-
+          $ref: "#/components/schemas/AccountInfo"
+          description: >-
             When 'ACCOUNT' is chosen as search method,
+
             account_info needs to be specified.
         corpus:
           description: The corpus to search.
@@ -1947,30 +2018,35 @@ components:
             - UNPROCESSED_DATA
           type: string
         driveOptions:
-          $ref: '#/components/schemas/DriveOptions'
-          description: 'For Drive search, specify more options in this field.'
+          $ref: "#/components/schemas/DriveOptions"
+          description: For Drive search, specify more options in this field.
         endTime:
-          description: |-
+          description: >-
             The end time range for the search query. These timestamps are in GMT and
+
             rounded down to the start of the given date.
           format: google-datetime
           type: string
         hangoutsChatInfo:
-          $ref: '#/components/schemas/HangoutsChatInfo'
-          description: |-
+          $ref: "#/components/schemas/HangoutsChatInfo"
+          description: >-
             When 'ROOM' is chosen as search method, hangout_chats_info needs to be
+
             specified. (read-only)
         hangoutsChatOptions:
-          $ref: '#/components/schemas/HangoutsChatOptions'
-          description: 'For hangouts chat search, specify more options in this field. (read-only)'
+          $ref: "#/components/schemas/HangoutsChatOptions"
+          description: For hangouts chat search, specify more options in this field. (read-only)
         mailOptions:
-          $ref: '#/components/schemas/MailOptions'
-          description: 'For mail search, specify more options in this field.'
+          $ref: "#/components/schemas/MailOptions"
+          description: For mail search, specify more options in this field.
         method:
-          description: |-
+          description: >-
             The search method to use. This field is similar to the search_method field
+
             but is introduced to support shared drives. It supports all
+
             search method types. In case the search_method is TEAM_DRIVE the response
+
             of this field will be SHARED_DRIVE only.
           enum:
             - SEARCH_METHOD_UNSPECIFIED
@@ -1982,9 +2058,10 @@ components:
             - SHARED_DRIVE
           type: string
         orgUnitInfo:
-          $ref: '#/components/schemas/OrgUnitInfo'
-          description: |-
+          $ref: "#/components/schemas/OrgUnitInfo"
+          description: >-
             When 'ORG_UNIT' is chosen as as search method, org_unit_info needs
+
             to be specified.
         searchMethod:
           description: The search method to use.
@@ -1998,33 +2075,42 @@ components:
             - SHARED_DRIVE
           type: string
         sharedDriveInfo:
-          $ref: '#/components/schemas/SharedDriveInfo'
-          description: |-
+          $ref: "#/components/schemas/SharedDriveInfo"
+          description: >-
             When 'SHARED_DRIVE' is chosen as search method, shared_drive_info needs
+
             to be specified.
         startTime:
-          description: |-
+          description: >-
             The start time range for the search query. These timestamps are in GMT and
+
             rounded down to the start of the given date.
           format: google-datetime
           type: string
         teamDriveInfo:
-          $ref: '#/components/schemas/TeamDriveInfo'
-          description: |-
+          $ref: "#/components/schemas/TeamDriveInfo"
+          description: >-
             When 'TEAM_DRIVE' is chosen as search method, team_drive_info needs to be
+
             specified.
         terms:
-          description: |-
+          description: >-
             The corpus-specific
+
             <a href="https://support.google.com/vault/answer/2474474">search
+
             operators</a> used to generate search results.
           type: string
         timeZone:
-          description: |-
+          description: >-
             The time zone name.
+
             It should be an IANA TZ name, such as "America/Los_Angeles".
+
             For more information, see
+
             <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">Time
+
             Zone</a>.
           type: string
       type: object
@@ -2032,7 +2118,7 @@ components:
       description: Remove a list of accounts from a hold.
       properties:
         accountIds:
-          description: Account ids to identify HeldAccounts to remove.
+          description: Account IDs to identify HeldAccounts to remove.
           items:
             type: string
           type: array
@@ -2041,11 +2127,12 @@ components:
       description: Response for batch delete held accounts.
       properties:
         statuses:
-          description: |-
+          description: >-
             A list of statuses for deleted accounts. Results have the
+
             same order as the request.
           items:
-            $ref: '#/components/schemas/Status'
+            $ref: "#/components/schemas/Status"
           type: array
       type: object
     RemoveMatterPermissionsRequest:
@@ -2063,15 +2150,16 @@ components:
       description: Response to a ReopenMatterRequest.
       properties:
         matter:
-          $ref: '#/components/schemas/Matter'
-          description: 'The updated matter, with state OPEN.'
+          $ref: "#/components/schemas/Matter"
+          description: The updated matter, with state OPEN.
       type: object
     SavedQuery:
       description: Definition of the saved query.
       properties:
         createTime:
-          description: |-
+          description: >-
             Output only. The server generated timestamp at which saved query was
+
             created.
           format: google-datetime
           type: string
@@ -2079,15 +2167,18 @@ components:
           description: Name of the saved query.
           type: string
         matterId:
-          description: |-
-            Output only. The matter id of the associated matter.
+          description: >-
+            Output only. The matter ID of the associated matter.
+
             The server does not look at this field during create and always uses matter
+
             id in the URL.
           type: string
         query:
-          $ref: '#/components/schemas/Query'
-          description: |-
+          $ref: "#/components/schemas/Query"
+          description: >-
             The underlying Query object which contains all the information of the saved
+
             query.
         savedQueryId:
           description: A unique identifier for the saved query.
@@ -2097,30 +2188,37 @@ components:
       description: Shared drives to search
       properties:
         sharedDriveIds:
-          description: |-
-            List of Shared drive ids, as provided by <a
+          description: >-
+            List of Shared drive IDs, as provided by <a
+
             href="https://developers.google.com/drive">Drive API</a>.
           items:
             type: string
           type: array
       type: object
     Status:
-      description: |-
+      description: >-
         The `Status` type defines a logical error model that is suitable for
+
         different programming environments, including REST APIs and RPC APIs. It is
+
         used by [gRPC](https://github.com/grpc). Each `Status` message contains
+
         three pieces of data: error code, error message, and error details.
 
+
         You can find out more about this error model and how to work with it in the
+
         [API Design Guide](https://cloud.google.com/apis/design/errors).
       properties:
         code:
-          description: 'The status code, which should be an enum value of google.rpc.Code.'
+          description: The status code, which should be an enum value of google.rpc.Code.
           format: int32
           type: integer
         details:
-          description: |-
+          description: >-
             A list of messages that carry the error details.  There is a common set of
+
             message types for APIs to use.
           items:
             additionalProperties:
@@ -2128,9 +2226,11 @@ components:
             type: object
           type: array
         message:
-          description: |-
+          description: >-
             A developer-facing error message, which should be in English. Any
+
             user-facing error message should be localized and sent in the
+
             google.rpc.Status.details field, or localized by the client.
           type: string
       type: object
@@ -2138,8 +2238,9 @@ components:
       description: Team Drives to search
       properties:
         teamDriveIds:
-          description: |-
-            List of Team Drive ids, as provided by <a
+          description: >-
+            List of Team Drive IDs, as provided by <a
+
             href="https://developers.google.com/drive">Drive API</a>.
           items:
             type: string
@@ -2164,18 +2265,18 @@ components:
       description: Oauth 2.0 implicit authentication
       flows:
         implicit:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            'https://www.googleapis.com/auth/ediscovery': Manage your eDiscovery data
-            'https://www.googleapis.com/auth/ediscovery.readonly': View your eDiscovery data
+            https://www.googleapis.com/auth/ediscovery: Manage your eDiscovery data
+            https://www.googleapis.com/auth/ediscovery.readonly: View your eDiscovery data
       type: oauth2
     Oauth2c:
-      description: Oauth 2.0 accessCode authentication
+      description: Oauth 2.0 authorizationCode authentication
       flows:
         authorizationCode:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            'https://www.googleapis.com/auth/ediscovery': Manage your eDiscovery data
-            'https://www.googleapis.com/auth/ediscovery.readonly': View your eDiscovery data
-          tokenUrl: 'https://accounts.google.com/o/oauth2/token'
+            https://www.googleapis.com/auth/ediscovery: Manage your eDiscovery data
+            https://www.googleapis.com/auth/ediscovery.readonly: View your eDiscovery data
+          tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

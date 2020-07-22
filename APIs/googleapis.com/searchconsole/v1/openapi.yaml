@@ -1,51 +1,53 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://searchconsole.googleapis.com/'
+  - url: https://searchconsole.googleapis.com/
 info:
   contact:
     name: Google
-    url: 'https://google.com'
-  description: Provides tools for running validation tests against single URLs
+    url: https://google.com
+    x-twitter: youtube
+  description: The Search Console API provides access to both Search Console data (verified users only) and to public information on an URL basis (anyone)
   license:
     name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
-  title: Google Search Console URL Testing Tools
+    url: http://creativecommons.org/licenses/by/3.0/
+  termsOfService: https://developers.google.com/terms/
+  title: Google Search Console API
   version: v1
   x-apiClientRegistration:
-    url: 'https://console.developers.google.com'
+    url: https://console.developers.google.com
   x-apisguru-categories:
-    - search
+    - analytics
+    - media
   x-logo:
-    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.31
       format: google
-      url: 'https://searchconsole.googleapis.com/$discovery/rest?version=v1'
+      url: https://searchconsole.googleapis.com/$discovery/rest?version=v1
       version: v1
   x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: searchconsole
 externalDocs:
-  url: 'https://developers.google.com/webmaster-tools/search-console-api/'
+  url: https://developers.google.com/webmaster-tools/search-console-api/
 tags:
   - name: urlTestingTools
 paths:
-  '/v1/urlTestingTools/mobileFriendlyTest:run':
+  /v1/urlTestingTools/mobileFriendlyTest:run:
     parameters:
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
       description: Runs Mobile-Friendly Test for a given URL.
       operationId: searchconsole.urlTestingTools.mobileFriendlyTest.run
@@ -53,13 +55,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RunMobileFriendlyTestRequest'
+              $ref: "#/components/schemas/RunMobileFriendlyTestRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/RunMobileFriendlyTestResponse'
+                $ref: "#/components/schemas/RunMobileFriendlyTestResponse"
           description: Successful response
       tags:
         - urlTestingTools
@@ -71,8 +73,8 @@ components:
       name: $.xgafv
       schema:
         enum:
-          - '1'
-          - '2'
+          - "1"
+          - "2"
         type: string
     access_token:
       description: OAuth access token.
@@ -85,7 +87,6 @@ components:
       in: query
       name: alt
       schema:
-        default: json
         enum:
           - json
           - media
@@ -104,7 +105,7 @@ components:
       schema:
         type: string
     key:
-      description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -120,22 +121,21 @@ components:
       in: query
       name: prettyPrint
       schema:
-        default: true
         type: boolean
     quotaUser:
-      description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.'
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
       in: query
       name: quotaUser
       schema:
         type: string
     uploadType:
-      description: 'Legacy upload protocol for media (e.g. "media", "multipart").'
+      description: Legacy upload protocol for media (e.g. "media", "multipart").
       in: query
       name: uploadType
       schema:
         type: string
     upload_protocol:
-      description: 'Upload protocol for media (e.g. "raw", "multipart").'
+      description: Upload protocol for media (e.g. "raw", "multipart").
       in: query
       name: upload_protocol
       schema:
@@ -152,8 +152,9 @@ components:
       description: Describe image data.
       properties:
         data:
-          description: |-
+          description: >-
             Image data in format determined by the mime type. Currently, the format
+
             will always be "image/png", but this might change in the future.
           format: byte
           type: string
@@ -180,7 +181,7 @@ components:
       description: Information about a resource with issue.
       properties:
         blockedResource:
-          $ref: '#/components/schemas/BlockedResource'
+          $ref: "#/components/schemas/BlockedResource"
           description: Describes a blocked resource issue.
       type: object
     RunMobileFriendlyTestRequest:
@@ -194,12 +195,13 @@ components:
           type: string
       type: object
     RunMobileFriendlyTestResponse:
-      description: |-
+      description: >-
         Mobile-friendly test response, including mobile-friendly issues and resource
+
         issues.
       properties:
         mobileFriendliness:
-          description: 'Test verdict, whether the page is mobile friendly or not.'
+          description: Test verdict, whether the page is mobile friendly or not.
           enum:
             - MOBILE_FRIENDLY_TEST_RESULT_UNSPECIFIED
             - MOBILE_FRIENDLY
@@ -208,22 +210,22 @@ components:
         mobileFriendlyIssues:
           description: List of mobile-usability issues.
           items:
-            $ref: '#/components/schemas/MobileFriendlyIssue'
+            $ref: "#/components/schemas/MobileFriendlyIssue"
           type: array
         resourceIssues:
           description: Information about embedded resources issues.
           items:
-            $ref: '#/components/schemas/ResourceIssue'
+            $ref: "#/components/schemas/ResourceIssue"
           type: array
         screenshot:
-          $ref: '#/components/schemas/Image'
+          $ref: "#/components/schemas/Image"
           description: Screenshot of the requested URL.
         testStatus:
-          $ref: '#/components/schemas/TestStatus'
-          description: 'Final state of the test, can be either complete or an error.'
+          $ref: "#/components/schemas/TestStatus"
+          description: Final state of the test, can be either complete or an error.
       type: object
     TestStatus:
-      description: 'Final state of the test, including error details if necessary.'
+      description: Final state of the test, including error details if necessary.
       properties:
         details:
           description: Error details if applicable.

@@ -1,41 +1,43 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://www.googleapis.com/'
+  - url: https://www.googleapis.com/
 info:
   contact:
     name: Google
-    url: 'https://google.com'
+    url: https://google.com
+    x-twitter: youtube
   description: The Google Play Game Services Publishing API allows developers to configure their games in Game Services.
   license:
     name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
-  title: Google Play Game Services Publishing
+    url: http://creativecommons.org/licenses/by/3.0/
+  termsOfService: https://developers.google.com/terms/
+  title: Google Play Game Services Publishing API
   version: v1configuration
   x-apiClientRegistration:
-    url: 'https://console.developers.google.com'
+    url: https://console.developers.google.com
   x-apisguru-categories:
-    - social
+    - analytics
+    - media
   x-logo:
-    url: 'https://www.gstatic.com/images/icons/material/product/2x/play_games_64dp.png'
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.31
       format: google
-      url: 'https://www.googleapis.com/discovery/v1/apis/gamesConfiguration/v1configuration/rest'
+      url: https://www.googleapis.com/discovery/v1/apis/gamesConfiguration/v1configuration/rest
       version: v1
   x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: gamesConfiguration
 externalDocs:
-  url: 'https://developers.google.com/games/'
+  url: https://developers.google.com/games/
 tags:
   - name: achievementConfigurations
   - name: imageConfigurations
   - name: leaderboardConfigurations
 paths:
-  '/games/v1configuration/achievements/{achievementId}':
+  "/games/v1configuration/achievements/{achievementId}":
     delete:
       description: Delete the achievement configuration with the given ID.
       operationId: gamesConfiguration.achievementConfigurations.delete
@@ -47,13 +49,13 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/androidpublisher'
+            - https://www.googleapis.com/auth/androidpublisher
           Oauth2c:
-            - 'https://www.googleapis.com/auth/androidpublisher'
+            - https://www.googleapis.com/auth/androidpublisher
       tags:
         - achievementConfigurations
     get:
@@ -67,31 +69,31 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/AchievementConfiguration'
+                $ref: "#/components/schemas/AchievementConfiguration"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/androidpublisher'
+            - https://www.googleapis.com/auth/androidpublisher
           Oauth2c:
-            - 'https://www.googleapis.com/auth/androidpublisher'
+            - https://www.googleapis.com/auth/androidpublisher
       tags:
         - achievementConfigurations
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
     put:
       description: Update the metadata of the achievement configuration with the given ID.
       operationId: gamesConfiguration.achievementConfigurations.update
@@ -106,22 +108,22 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AchievementConfiguration'
+              $ref: "#/components/schemas/AchievementConfiguration"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/AchievementConfiguration'
+                $ref: "#/components/schemas/AchievementConfiguration"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/androidpublisher'
+            - https://www.googleapis.com/auth/androidpublisher
           Oauth2c:
-            - 'https://www.googleapis.com/auth/androidpublisher'
+            - https://www.googleapis.com/auth/androidpublisher
       tags:
         - achievementConfigurations
-  '/games/v1configuration/applications/{applicationId}/achievements':
+  "/games/v1configuration/applications/{applicationId}/achievements":
     get:
       description: Returns a list of the achievement configurations in this application.
       operationId: gamesConfiguration.achievementConfigurations.list
@@ -132,10 +134,12 @@ paths:
           required: true
           schema:
             type: string
-        - description: |-
+        - description: >-
             The maximum number of resource configurations to return in the response,
+
             used for paging. For any response, the actual number of resources returned
-            may be less than the specified <code>maxResults</code>.
+
+            may be less than the specified `maxResults`.
           in: query
           name: maxResults
           schema:
@@ -146,31 +150,31 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/AchievementConfigurationListResponse'
+                $ref: "#/components/schemas/AchievementConfigurationListResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/androidpublisher'
+            - https://www.googleapis.com/auth/androidpublisher
           Oauth2c:
-            - 'https://www.googleapis.com/auth/androidpublisher'
+            - https://www.googleapis.com/auth/androidpublisher
       tags:
         - achievementConfigurations
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Insert a new achievement configuration in this application.
       operationId: gamesConfiguration.achievementConfigurations.insert
@@ -185,22 +189,22 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AchievementConfiguration'
+              $ref: "#/components/schemas/AchievementConfiguration"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/AchievementConfiguration'
+                $ref: "#/components/schemas/AchievementConfiguration"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/androidpublisher'
+            - https://www.googleapis.com/auth/androidpublisher
           Oauth2c:
-            - 'https://www.googleapis.com/auth/androidpublisher'
+            - https://www.googleapis.com/auth/androidpublisher
       tags:
         - achievementConfigurations
-  '/games/v1configuration/applications/{applicationId}/leaderboards':
+  "/games/v1configuration/applications/{applicationId}/leaderboards":
     get:
       description: Returns a list of the leaderboard configurations in this application.
       operationId: gamesConfiguration.leaderboardConfigurations.list
@@ -211,10 +215,12 @@ paths:
           required: true
           schema:
             type: string
-        - description: |-
+        - description: >-
             The maximum number of resource configurations to return in the response,
+
             used for paging. For any response, the actual number of resources returned
-            may be less than the specified <code>maxResults</code>.
+
+            may be less than the specified `maxResults`.
           in: query
           name: maxResults
           schema:
@@ -225,31 +231,31 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/LeaderboardConfigurationListResponse'
+                $ref: "#/components/schemas/LeaderboardConfigurationListResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/androidpublisher'
+            - https://www.googleapis.com/auth/androidpublisher
           Oauth2c:
-            - 'https://www.googleapis.com/auth/androidpublisher'
+            - https://www.googleapis.com/auth/androidpublisher
       tags:
         - leaderboardConfigurations
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Insert a new leaderboard configuration in this application.
       operationId: gamesConfiguration.leaderboardConfigurations.insert
@@ -264,34 +270,34 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/LeaderboardConfiguration'
+              $ref: "#/components/schemas/LeaderboardConfiguration"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/LeaderboardConfiguration'
+                $ref: "#/components/schemas/LeaderboardConfiguration"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/androidpublisher'
+            - https://www.googleapis.com/auth/androidpublisher
           Oauth2c:
-            - 'https://www.googleapis.com/auth/androidpublisher'
+            - https://www.googleapis.com/auth/androidpublisher
       tags:
         - leaderboardConfigurations
-  '/games/v1configuration/images/{resourceId}/imageType/{imageType}':
+  "/games/v1configuration/images/{resourceId}/imageType/{imageType}":
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Uploads an image for a resource with the given ID and image type.
       operationId: gamesConfiguration.imageConfigurations.upload
@@ -313,20 +319,20 @@ paths:
               - LEADERBOARD_ICON
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ImageConfiguration'
+                $ref: "#/components/schemas/ImageConfiguration"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/androidpublisher'
+            - https://www.googleapis.com/auth/androidpublisher
           Oauth2c:
-            - 'https://www.googleapis.com/auth/androidpublisher'
+            - https://www.googleapis.com/auth/androidpublisher
       tags:
         - imageConfigurations
-  '/games/v1configuration/leaderboards/{leaderboardId}':
+  "/games/v1configuration/leaderboards/{leaderboardId}":
     delete:
       description: Delete the leaderboard configuration with the given ID.
       operationId: gamesConfiguration.leaderboardConfigurations.delete
@@ -338,13 +344,13 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/androidpublisher'
+            - https://www.googleapis.com/auth/androidpublisher
           Oauth2c:
-            - 'https://www.googleapis.com/auth/androidpublisher'
+            - https://www.googleapis.com/auth/androidpublisher
       tags:
         - leaderboardConfigurations
     get:
@@ -358,31 +364,31 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/LeaderboardConfiguration'
+                $ref: "#/components/schemas/LeaderboardConfiguration"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/androidpublisher'
+            - https://www.googleapis.com/auth/androidpublisher
           Oauth2c:
-            - 'https://www.googleapis.com/auth/androidpublisher'
+            - https://www.googleapis.com/auth/androidpublisher
       tags:
         - leaderboardConfigurations
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
     put:
       description: Update the metadata of the leaderboard configuration with the given ID.
       operationId: gamesConfiguration.leaderboardConfigurations.update
@@ -397,19 +403,19 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/LeaderboardConfiguration'
+              $ref: "#/components/schemas/LeaderboardConfiguration"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/LeaderboardConfiguration'
+                $ref: "#/components/schemas/LeaderboardConfiguration"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/androidpublisher'
+            - https://www.googleapis.com/auth/androidpublisher
           Oauth2c:
-            - 'https://www.googleapis.com/auth/androidpublisher'
+            - https://www.googleapis.com/auth/androidpublisher
       tags:
         - leaderboardConfigurations
 components:
@@ -420,8 +426,8 @@ components:
       name: $.xgafv
       schema:
         enum:
-          - '1'
-          - '2'
+          - "1"
+          - "2"
         type: string
     access_token:
       description: OAuth access token.
@@ -434,7 +440,6 @@ components:
       in: query
       name: alt
       schema:
-        default: json
         enum:
           - json
           - media
@@ -453,7 +458,7 @@ components:
       schema:
         type: string
     key:
-      description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -469,37 +474,25 @@ components:
       in: query
       name: prettyPrint
       schema:
-        default: true
         type: boolean
     quotaUser:
-      description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.'
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
       in: query
       name: quotaUser
       schema:
         type: string
     uploadType:
-      description: 'Legacy upload protocol for media (e.g. "media", "multipart").'
+      description: Legacy upload protocol for media (e.g. "media", "multipart").
       in: query
       name: uploadType
       schema:
         type: string
     upload_protocol:
-      description: 'Upload protocol for media (e.g. "raw", "multipart").'
+      description: Upload protocol for media (e.g. "raw", "multipart").
       in: query
       name: upload_protocol
       schema:
         type: string
-  requestBodies:
-    AchievementConfiguration:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/AchievementConfiguration'
-    LeaderboardConfiguration:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/LeaderboardConfiguration'
   schemas:
     AchievementConfiguration:
       description: An achievement configuration resource.
@@ -512,7 +505,7 @@ components:
             - INCREMENTAL
           type: string
         draft:
-          $ref: '#/components/schemas/AchievementConfigurationDetail'
+          $ref: "#/components/schemas/AchievementConfigurationDetail"
           description: The draft data of the achievement.
         id:
           description: The ID of the achievement.
@@ -525,12 +518,13 @@ components:
             - REVEALED
           type: string
         kind:
-          description: |-
+          description: >-
             Uniquely identifies the type of this resource. Value is always the fixed
-            string <code>gamesConfiguration#achievementConfiguration</code>.
+
+            string `gamesConfiguration#achievementConfiguration`.
           type: string
         published:
-          $ref: '#/components/schemas/AchievementConfigurationDetail'
+          $ref: "#/components/schemas/AchievementConfigurationDetail"
           description: The read-only published data of the achievement.
         stepsToUnlock:
           description: Steps to unlock.  Only applicable to incremental achievements.
@@ -544,18 +538,19 @@ components:
       description: An achievement configuration detail.
       properties:
         description:
-          $ref: '#/components/schemas/LocalizedStringBundle'
+          $ref: "#/components/schemas/LocalizedStringBundle"
           description: Localized strings for the achievement description.
         iconUrl:
           description: The icon url of this achievement. Writes to this field are ignored.
           type: string
         kind:
-          description: |-
+          description: >-
             Uniquely identifies the type of this resource. Value is always the fixed
-            string <code>gamesConfiguration#achievementConfigurationDetail</code>.
+
+            string `gamesConfiguration#achievementConfigurationDetail`.
           type: string
         name:
-          $ref: '#/components/schemas/LocalizedStringBundle'
+          $ref: "#/components/schemas/LocalizedStringBundle"
           description: Localized strings for the achievement name.
         pointValue:
           description: Point value for the achievement.
@@ -572,13 +567,13 @@ components:
         items:
           description: The achievement configurations.
           items:
-            $ref: '#/components/schemas/AchievementConfiguration'
+            $ref: "#/components/schemas/AchievementConfiguration"
           type: array
         kind:
-          description: |-
+          description: >-
             Uniquely identifies the type of this resource. Value is always the fixed
-            string
-            <code>gamesConfiguration#achievementConfigurationListResponse</code>.
+
+            string `gamesConfiguration#achievementConfigurationListResponse`.
           type: string
         nextPageToken:
           description: The pagination token for the next page of results.
@@ -588,36 +583,44 @@ components:
       description: A number affix resource.
       properties:
         few:
-          $ref: '#/components/schemas/LocalizedStringBundle'
-          description: |-
+          $ref: "#/components/schemas/LocalizedStringBundle"
+          description: >-
             When the language requires special treatment of "small" numbers (as with 2,
+
             3, and 4 in Czech; or numbers ending 2, 3, or 4 but not 12, 13, or 14 in
+
             Polish).
         many:
-          $ref: '#/components/schemas/LocalizedStringBundle'
-          description: |-
+          $ref: "#/components/schemas/LocalizedStringBundle"
+          description: >-
             When the language requires special treatment of "large" numbers (as with
+
             numbers ending 11-99 in Maltese).
         one:
-          $ref: '#/components/schemas/LocalizedStringBundle'
-          description: |-
+          $ref: "#/components/schemas/LocalizedStringBundle"
+          description: >-
             When the language requires special treatment of numbers like one (as with
+
             the number 1 in English and most other languages; in Russian, any number
+
             ending in 1 but not ending in 11 is in this class).
         other:
-          $ref: '#/components/schemas/LocalizedStringBundle'
-          description: |-
+          $ref: "#/components/schemas/LocalizedStringBundle"
+          description: >-
             When the language does not require special treatment of the given quantity
+
             (as with all numbers in Chinese, or 42 in English).
         two:
-          $ref: '#/components/schemas/LocalizedStringBundle'
-          description: |-
+          $ref: "#/components/schemas/LocalizedStringBundle"
+          description: >-
             When the language requires special treatment of numbers like two (as with 2
+
             in Welsh, or 102 in Slovenian).
         zero:
-          $ref: '#/components/schemas/LocalizedStringBundle'
-          description: |-
+          $ref: "#/components/schemas/LocalizedStringBundle"
+          description: >-
             When the language requires special treatment of the number 0 (as in
+
             Arabic).
       type: object
     GamesNumberFormatConfiguration:
@@ -639,11 +642,14 @@ components:
             - CURRENCY
           type: string
         suffix:
-          $ref: '#/components/schemas/GamesNumberAffixConfiguration'
-          description: |-
+          $ref: "#/components/schemas/GamesNumberAffixConfiguration"
+          description: >-
             An optional suffix for the NUMERIC format type.  These strings follow the
+
             same <a
+
             href="http://developer.android.com/guide/topics/resources/string-resource.html#Plurals">
+
             plural rules</a> as all Android string resources.
       type: object
     ImageConfiguration:
@@ -657,9 +663,10 @@ components:
             - LEADERBOARD_ICON
           type: string
         kind:
-          description: |-
+          description: >-
             Uniquely identifies the type of this resource. Value is always the fixed
-            string <code>gamesConfiguration#imageConfiguration</code>.
+
+            string `gamesConfiguration#imageConfiguration`.
           type: string
         resourceId:
           description: The resource ID of resource which the image belongs to.
@@ -672,18 +679,19 @@ components:
       description: An leaderboard configuration resource.
       properties:
         draft:
-          $ref: '#/components/schemas/LeaderboardConfigurationDetail'
+          $ref: "#/components/schemas/LeaderboardConfigurationDetail"
           description: The draft data of the leaderboard.
         id:
           description: The ID of the leaderboard.
           type: string
         kind:
-          description: |-
+          description: >-
             Uniquely identifies the type of this resource. Value is always the fixed
-            string <code>gamesConfiguration#leaderboardConfiguration</code>.
+
+            string `gamesConfiguration#leaderboardConfiguration`.
           type: string
         published:
-          $ref: '#/components/schemas/LeaderboardConfigurationDetail'
+          $ref: "#/components/schemas/LeaderboardConfigurationDetail"
           description: The read-only published data of the leaderboard.
         scoreMax:
           description: Maximum score that can be posted to this leaderboard.
@@ -710,15 +718,16 @@ components:
           description: The icon url of this leaderboard. Writes to this field are ignored.
           type: string
         kind:
-          description: |-
+          description: >-
             Uniquely identifies the type of this resource. Value is always the fixed
-            string <code>gamesConfiguration#leaderboardConfigurationDetail</code>.
+
+            string `gamesConfiguration#leaderboardConfigurationDetail`.
           type: string
         name:
-          $ref: '#/components/schemas/LocalizedStringBundle'
+          $ref: "#/components/schemas/LocalizedStringBundle"
           description: Localized strings for the leaderboard name.
         scoreFormat:
-          $ref: '#/components/schemas/GamesNumberFormatConfiguration'
+          $ref: "#/components/schemas/GamesNumberFormatConfiguration"
           description: The score formatting for the leaderboard.
         sortRank:
           description: The sort rank of this leaderboard. Writes to this field are ignored.
@@ -731,13 +740,15 @@ components:
         items:
           description: The leaderboard configurations.
           items:
-            $ref: '#/components/schemas/LeaderboardConfiguration'
+            $ref: "#/components/schemas/LeaderboardConfiguration"
           type: array
         kind:
-          description: |-
+          description: >-
             Uniquely identifies the type of this resource. Value is always the fixed
+
             string
-            <code>gamesConfiguration#leaderboardConfigurationListResponse</code>.
+
+            `gamesConfiguration#leaderboardConfigurationListResponse`.
           type: string
         nextPageToken:
           description: The pagination token for the next page of results.
@@ -747,9 +758,10 @@ components:
       description: A localized string resource.
       properties:
         kind:
-          description: |-
+          description: >-
             Uniquely identifies the type of this resource. Value is always the fixed
-            string <code>gamesConfiguration#localizedString</code>.
+
+            string `gamesConfiguration#localizedString`.
           type: string
         locale:
           description: The locale string.
@@ -762,14 +774,15 @@ components:
       description: A localized string bundle resource.
       properties:
         kind:
-          description: |-
+          description: >-
             Uniquely identifies the type of this resource. Value is always the fixed
-            string <code>gamesConfiguration#localizedStringBundle</code>.
+
+            string `gamesConfiguration#localizedStringBundle`.
           type: string
         translations:
           description: The locale strings.
           items:
-            $ref: '#/components/schemas/LocalizedString'
+            $ref: "#/components/schemas/LocalizedString"
           type: array
       type: object
   securitySchemes:
@@ -777,16 +790,16 @@ components:
       description: Oauth 2.0 implicit authentication
       flows:
         implicit:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            'https://www.googleapis.com/auth/androidpublisher': View and manage your Google Play Developer account
+            https://www.googleapis.com/auth/androidpublisher: View and manage your Google Play Developer account
       type: oauth2
     Oauth2c:
-      description: Oauth 2.0 accessCode authentication
+      description: Oauth 2.0 authorizationCode authentication
       flows:
         authorizationCode:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            'https://www.googleapis.com/auth/androidpublisher': View and manage your Google Play Developer account
-          tokenUrl: 'https://accounts.google.com/o/oauth2/token'
+            https://www.googleapis.com/auth/androidpublisher: View and manage your Google Play Developer account
+          tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

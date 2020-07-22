@@ -1,102 +1,123 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://clouddebugger.googleapis.com/'
+  - url: https://clouddebugger.googleapis.com/
 info:
   contact:
     name: Google
-    url: 'https://google.com'
-  description: |
+    url: https://google.com
+    x-twitter: youtube
+  description: >
     Examines the call stack and variables of a running application without stopping or slowing it down.
   license:
     name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
-  title: Cloud Debugger
+    url: http://creativecommons.org/licenses/by/3.0/
+  termsOfService: https://developers.google.com/terms/
+  title: Cloud Debugger API
   version: v2
   x-apiClientRegistration:
-    url: 'https://console.developers.google.com'
+    url: https://console.developers.google.com
+  x-apisguru-categories:
+    - analytics
+    - media
   x-logo:
-    url: 'https://twitter.com/googlecloud/profile_image?size=original'
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.31
       format: google
-      url: 'https://clouddebugger.googleapis.com/$discovery/rest?version=v2'
+      url: https://clouddebugger.googleapis.com/$discovery/rest?version=v2
       version: v1
   x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: clouddebugger
 externalDocs:
-  url: 'https://cloud.google.com/debugger'
+  url: https://cloud.google.com/debugger
 tags:
   - name: controller
   - name: debugger
 paths:
   /v2/controller/debuggees/register:
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
-      description: |-
+      description: >-
         Registers the debuggee with the controller service.
 
+
         All agents attached to the same application must call this method with
+
         exactly the same request content to get back the same stable `debuggee_id`.
+
         Agents should call this method again whenever `google.rpc.Code.NOT_FOUND`
+
         is returned from any controller method.
 
+
         This protocol allows the controller service to disable debuggees, recover
+
         from data loss, or change the `debuggee_id` format. Agents must handle
+
         `debuggee_id` value changing upon re-registration.
       operationId: clouddebugger.controller.debuggees.register
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RegisterDebuggeeRequest'
+              $ref: "#/components/schemas/RegisterDebuggeeRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/RegisterDebuggeeResponse'
+                $ref: "#/components/schemas/RegisterDebuggeeResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud_debugger'
+            - https://www.googleapis.com/auth/cloud_debugger
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud_debugger'
+            - https://www.googleapis.com/auth/cloud_debugger
       tags:
         - controller
-  '/v2/controller/debuggees/{debuggeeId}/breakpoints':
+  "/v2/controller/debuggees/{debuggeeId}/breakpoints":
     get:
-      description: |-
+      description: >-
         Returns the list of all active breakpoints for the debuggee.
 
+
         The breakpoint specification (`location`, `condition`, and `expressions`
+
         fields) is semantically immutable, although the field values may
+
         change. For example, an agent may update the location line number
+
         to reflect the actual line where the breakpoint was set, but this
+
         doesn't change the breakpoint semantics.
 
+
         This means that an agent does not need to check if a breakpoint has changed
+
         when it encounters the same breakpoint on a successive call.
+
         Moreover, an agent should remember the breakpoints that are completed
+
         until the controller removes them from the active list to avoid
+
         setting those breakpoints again.
       operationId: clouddebugger.controller.debuggees.breakpoints.list
       parameters:
@@ -106,85 +127,99 @@ paths:
           required: true
           schema:
             type: string
-        - description: |-
+        - description: >-
             Identifies the agent.
+
             This is the ID returned in the RegisterDebuggee response.
           in: query
           name: agentId
           schema:
             type: string
-        - description: |-
+        - description: >-
             If set to `true` (recommended), returns `google.rpc.Code.OK` status and
+
             sets the `wait_expired` response field to `true` when the server-selected
+
             timeout has expired.
 
+
             If set to `false` (deprecated), returns `google.rpc.Code.ABORTED` status
+
             when the server-selected timeout has expired.
           in: query
           name: successOnTimeout
           schema:
             type: boolean
-        - description: |-
+        - description: >-
             A token that, if specified, blocks the method call until the list
+
             of active breakpoints has changed, or a server-selected timeout has
+
             expired. The value should be set from the `next_wait_token` field in
+
             the last response. The initial value should be set to `"init"`.
           in: query
           name: waitToken
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ListActiveBreakpointsResponse'
+                $ref: "#/components/schemas/ListActiveBreakpointsResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud_debugger'
+            - https://www.googleapis.com/auth/cloud_debugger
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud_debugger'
+            - https://www.googleapis.com/auth/cloud_debugger
       tags:
         - controller
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-  '/v2/controller/debuggees/{debuggeeId}/breakpoints/{id}':
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+  "/v2/controller/debuggees/{debuggeeId}/breakpoints/{id}":
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
     put:
-      description: |-
+      description: >-
         Updates the breakpoint state or mutable fields.
+
         The entire Breakpoint message must be sent back to the controller service.
 
+
         Updates to active breakpoint fields are only allowed if the new value
+
         does not change the breakpoint specification. Updates to the `location`,
+
         `condition` and `expressions` fields should not alter the breakpoint
+
         semantics. These may only make changes such as canonicalizing a value
+
         or snapping the location to the correct line of code.
       operationId: clouddebugger.controller.debuggees.breakpoints.update
       parameters:
@@ -194,7 +229,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: 'Breakpoint identifier, unique in the scope of the debuggee.'
+        - description: Breakpoint identifier, unique in the scope of the debuggee.
           in: path
           name: id
           required: true
@@ -204,23 +239,23 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateActiveBreakpointRequest'
+              $ref: "#/components/schemas/UpdateActiveBreakpointRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/UpdateActiveBreakpointResponse'
+                $ref: "#/components/schemas/UpdateActiveBreakpointResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud_debugger'
+            - https://www.googleapis.com/auth/cloud_debugger
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud_debugger'
+            - https://www.googleapis.com/auth/cloud_debugger
       tags:
         - controller
   /v2/debugger/debuggees:
@@ -228,15 +263,17 @@ paths:
       description: Lists all the debuggees that the user has access to.
       operationId: clouddebugger.debugger.debuggees.list
       parameters:
-        - description: |-
+        - description: >-
             Required. The client version making the call.
+
             Schema: `domain/type/version` (e.g., `google.com/intellij/v1`).
           in: query
           name: clientVersion
           schema:
             type: string
-        - description: |-
+        - description: >-
             When set to `true`, the result includes all debuggees. Otherwise, the
+
             result includes only debuggees that are active.
           in: query
           name: includeInactive
@@ -248,36 +285,36 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ListDebuggeesResponse'
+                $ref: "#/components/schemas/ListDebuggeesResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud_debugger'
+            - https://www.googleapis.com/auth/cloud_debugger
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud_debugger'
+            - https://www.googleapis.com/auth/cloud_debugger
       tags:
         - debugger
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-  '/v2/debugger/debuggees/{debuggeeId}/breakpoints':
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+  "/v2/debugger/debuggees/{debuggeeId}/breakpoints":
     get:
       description: Lists all breakpoints for the debuggee.
       operationId: clouddebugger.debugger.debuggees.breakpoints.list
@@ -296,87 +333,95 @@ paths:
               - CAPTURE
               - LOG
             type: string
-        - description: |-
+        - description: >-
             Required. The client version making the call.
+
             Schema: `domain/type/version` (e.g., `google.com/intellij/v1`).
           in: query
           name: clientVersion
           schema:
             type: string
-        - description: |-
+        - description: >-
             When set to `true`, the response includes the list of breakpoints set by
+
             any user. Otherwise, it includes only breakpoints set by the caller.
           in: query
           name: includeAllUsers
           schema:
             type: boolean
-        - description: |-
+        - description: >-
             When set to `true`, the response includes active and inactive
+
             breakpoints. Otherwise, it includes only active breakpoints.
           in: query
           name: includeInactive
           schema:
             type: boolean
-        - description: |-
+        - description: >-
             This field is deprecated. The following fields are always stripped out of
+
             the result: `stack_frames`, `evaluated_expressions` and `variable_table`.
           in: query
           name: stripResults
           schema:
             type: boolean
-        - description: |-
+        - description: >-
             A wait token that, if specified, blocks the call until the breakpoints
+
             list has changed, or a server selected timeout has expired.  The value
+
             should be set from the last response. The error code
+
             `google.rpc.Code.ABORTED` (RPC) is returned on wait timeout, which
+
             should be called again with the same `wait_token`.
           in: query
           name: waitToken
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ListBreakpointsResponse'
+                $ref: "#/components/schemas/ListBreakpointsResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud_debugger'
+            - https://www.googleapis.com/auth/cloud_debugger
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud_debugger'
+            - https://www.googleapis.com/auth/cloud_debugger
       tags:
         - debugger
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-  '/v2/debugger/debuggees/{debuggeeId}/breakpoints/set':
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+  "/v2/debugger/debuggees/{debuggeeId}/breakpoints/set":
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: Sets the breakpoint to the debuggee.
       operationId: clouddebugger.debugger.debuggees.breakpoints.set
@@ -396,8 +441,9 @@ paths:
               - CANARY_OPTION_TRY_ENABLE
               - CANARY_OPTION_TRY_DISABLE
             type: string
-        - description: |-
+        - description: >-
             Required. The client version making the call.
+
             Schema: `domain/type/version` (e.g., `google.com/intellij/v1`).
           in: query
           name: clientVersion
@@ -407,26 +453,26 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Breakpoint'
+              $ref: "#/components/schemas/Breakpoint"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/SetBreakpointResponse'
+                $ref: "#/components/schemas/SetBreakpointResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud_debugger'
+            - https://www.googleapis.com/auth/cloud_debugger
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud_debugger'
+            - https://www.googleapis.com/auth/cloud_debugger
       tags:
         - debugger
-  '/v2/debugger/debuggees/{debuggeeId}/breakpoints/{breakpointId}':
+  "/v2/debugger/debuggees/{debuggeeId}/breakpoints/{breakpointId}":
     delete:
       description: Deletes the breakpoint from the debuggee.
       operationId: clouddebugger.debugger.debuggees.breakpoints.delete
@@ -443,29 +489,30 @@ paths:
           required: true
           schema:
             type: string
-        - description: |-
+        - description: >-
             Required. The client version making the call.
+
             Schema: `domain/type/version` (e.g., `google.com/intellij/v1`).
           in: query
           name: clientVersion
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Empty'
+                $ref: "#/components/schemas/Empty"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud_debugger'
+            - https://www.googleapis.com/auth/cloud_debugger
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud_debugger'
+            - https://www.googleapis.com/auth/cloud_debugger
       tags:
         - debugger
     get:
@@ -484,43 +531,44 @@ paths:
           required: true
           schema:
             type: string
-        - description: |-
+        - description: >-
             Required. The client version making the call.
+
             Schema: `domain/type/version` (e.g., `google.com/intellij/v1`).
           in: query
           name: clientVersion
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/GetBreakpointResponse'
+                $ref: "#/components/schemas/GetBreakpointResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud_debugger'
+            - https://www.googleapis.com/auth/cloud_debugger
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud_debugger'
+            - https://www.googleapis.com/auth/cloud_debugger
       tags:
         - debugger
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
 components:
   parameters:
     _.xgafv:
@@ -529,8 +577,8 @@ components:
       name: $.xgafv
       schema:
         enum:
-          - '1'
-          - '2'
+          - "1"
+          - "2"
         type: string
     access_token:
       description: OAuth access token.
@@ -543,7 +591,6 @@ components:
       in: query
       name: alt
       schema:
-        default: json
         enum:
           - json
           - media
@@ -562,7 +609,7 @@ components:
       schema:
         type: string
     key:
-      description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -578,22 +625,21 @@ components:
       in: query
       name: prettyPrint
       schema:
-        default: true
         type: boolean
     quotaUser:
-      description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.'
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
       in: query
       name: quotaUser
       schema:
         type: string
     uploadType:
-      description: 'Legacy upload protocol for media (e.g. "media", "multipart").'
+      description: Legacy upload protocol for media (e.g. "media", "multipart").
       in: query
       name: uploadType
       schema:
         type: string
     upload_protocol:
-      description: 'Upload protocol for media (e.g. "raw", "multipart").'
+      description: Upload protocol for media (e.g. "raw", "multipart").
       in: query
       name: upload_protocol
       schema:
@@ -615,30 +661,36 @@ components:
           type: string
       type: object
     Breakpoint:
-      description: |-
+      description: >-
         ------------------------------------------------------------------------------
+
         ## Breakpoint (the resource)
+
 
         Represents the breakpoint specification, status and results.
       properties:
         action:
-          description: |-
+          description: >-
             Action that the agent should perform when the code at the
+
             breakpoint location is hit.
           enum:
             - CAPTURE
             - LOG
           type: string
         canaryExpireTime:
-          description: |-
+          description: >-
             The deadline for the breakpoint to stay in CANARY_ACTIVE state. The value
+
             is meaningless when the breakpoint is not in CANARY_ACTIVE state.
           format: google-datetime
           type: string
         condition:
-          description: |-
+          description: >-
             Condition that triggers the breakpoint.
+
             The condition is a compound boolean expression composed using expressions
+
             in a programming language at the source location.
           type: string
         createTime:
@@ -646,49 +698,61 @@ components:
           format: google-datetime
           type: string
         evaluatedExpressions:
-          description: |-
+          description: >-
             Values of evaluated expressions at breakpoint time.
+
             The evaluated expressions appear in exactly the same order they
+
             are listed in the `expressions` field.
+
             The `name` field holds the original expression text, the `value` or
+
             `members` field holds the result of the evaluated expression.
+
             If the expression cannot be evaluated, the `status` inside the `Variable`
+
             will indicate an error and contain the error text.
           items:
-            $ref: '#/components/schemas/Variable'
+            $ref: "#/components/schemas/Variable"
           type: array
         expressions:
-          description: |-
+          description: >-
             List of read-only expressions to evaluate at the breakpoint location.
+
             The expressions are composed using expressions in the programming language
+
             at the source location. If the breakpoint action is `LOG`, the evaluated
+
             expressions are included in log statements.
           items:
             type: string
           type: array
         finalTime:
-          description: |-
+          description: >-
             Time this breakpoint was finalized as seen by the server in seconds
+
             resolution.
           format: google-datetime
           type: string
         id:
-          description: 'Breakpoint identifier, unique in the scope of the debuggee.'
+          description: Breakpoint identifier, unique in the scope of the debuggee.
           type: string
         isFinalState:
-          description: |-
+          description: >-
             When true, indicates that this is a final result and the
+
             breakpoint state will not change from here on.
           type: boolean
         labels:
           additionalProperties:
             type: string
-          description: |-
+          description: >-
             A set of custom breakpoint properties, populated by the agent, to be
+
             displayed to the user.
           type: object
         location:
-          $ref: '#/components/schemas/SourceLocation'
+          $ref: "#/components/schemas/SourceLocation"
           description: Breakpoint source location.
         logLevel:
           description: Indicates the severity of the log. Only relevant when action is `LOG`.
@@ -698,22 +762,29 @@ components:
             - ERROR
           type: string
         logMessageFormat:
-          description: |-
+          description: >-
             Only relevant when action is `LOG`. Defines the message to log when
+
             the breakpoint hits. The message may include parameter placeholders `$0`,
+
             `$1`, etc. These placeholders are replaced with the evaluated value
+
             of the appropriate expression. Expressions not referenced in
+
             `log_message_format` are not logged.
 
+
             Example: `Message received, id = $0, count = $1` with
+
             `expressions` = `[ message.id, message.count ]`.
           type: string
         stackFrames:
-          description: |-
+          description: >-
             The stack at breakpoint time, where stack_frames[0] represents the most
+
             recently entered function.
           items:
-            $ref: '#/components/schemas/StackFrame'
+            $ref: "#/components/schemas/StackFrame"
           type: array
         state:
           description: The current state of the breakpoint.
@@ -725,101 +796,131 @@ components:
             - STATE_IS_FINAL
           type: string
         status:
-          $ref: '#/components/schemas/StatusMessage'
-          description: |-
+          $ref: "#/components/schemas/StatusMessage"
+          description: >-
             Breakpoint status.
 
+
             The status includes an error flag and a human readable message.
+
             This field is usually unset. The message can be either
+
             informational or an error message. Regardless, clients should always
+
             display the text message back to the user.
+
 
             Error status indicates complete failure of the breakpoint.
 
+
             Example (non-final state): `Still loading symbols...`
+
 
             Examples (final state):
 
+
             *   `Invalid line number` referring to location
+
             *   `Field f not found in class C` referring to condition
         userEmail:
           description: E-mail address of the user that created this breakpoint
           type: string
         variableTable:
-          description: |-
+          description: >-
             The `variable_table` exists to aid with computation, memory and network
+
             traffic optimization.  It enables storing a variable once and reference
+
             it from multiple variables, including variables stored in the
+
             `variable_table` itself.
+
             For example, the same `this` object, which may appear at many levels of
+
             the stack, can have all of its data stored once in this table.  The
+
             stack frame variables then would hold only a reference to it.
 
+
             The variable `var_table_index` field is an index into this repeated field.
+
             The stored objects are nameless and get their name from the referencing
+
             variable. The effective variable is a merge of the referencing variable
+
             and the referenced variable.
           items:
-            $ref: '#/components/schemas/Variable'
+            $ref: "#/components/schemas/Variable"
           type: array
       type: object
     CloudRepoSourceContext:
-      description: |-
+      description: >-
         A CloudRepoSourceContext denotes a particular revision in a cloud
+
         repo (a repo hosted by the Google Cloud Platform).
       properties:
         aliasContext:
-          $ref: '#/components/schemas/AliasContext'
-          description: 'An alias, which may be a branch or tag.'
+          $ref: "#/components/schemas/AliasContext"
+          description: An alias, which may be a branch or tag.
         aliasName:
-          description: 'The name of an alias (branch, tag, etc.).'
+          description: The name of an alias (branch, tag, etc.).
           type: string
         repoId:
-          $ref: '#/components/schemas/RepoId'
+          $ref: "#/components/schemas/RepoId"
           description: The ID of the repo.
         revisionId:
           description: A revision ID.
           type: string
       type: object
     CloudWorkspaceId:
-      description: |-
+      description: >-
         A CloudWorkspaceId is a unique identifier for a cloud workspace.
+
         A cloud workspace is a place associated with a repo where modified files
+
         can be stored before they are committed.
       properties:
         name:
-          description: |-
+          description: >-
             The unique name of the workspace within the repo.  This is the name
+
             chosen by the client in the Source API's CreateWorkspace method.
           type: string
         repoId:
-          $ref: '#/components/schemas/RepoId'
+          $ref: "#/components/schemas/RepoId"
           description: The ID of the repo containing the workspace.
       type: object
     CloudWorkspaceSourceContext:
       description: A CloudWorkspaceSourceContext denotes a workspace at a particular snapshot.
       properties:
         snapshotId:
-          description: |-
+          description: >-
             The ID of the snapshot.
+
             An empty snapshot_id refers to the most recent snapshot.
           type: string
         workspaceId:
-          $ref: '#/components/schemas/CloudWorkspaceId'
+          $ref: "#/components/schemas/CloudWorkspaceId"
           description: The ID of the workspace.
       type: object
     Debuggee:
-      description: |-
+      description: >-
         Represents the debugged application. The application may include one or more
+
         replicated processes executing the same code. Each of these processes is
+
         attached with a debugger agent, carrying out the debugging commands.
+
         Agents attached to the same debuggee identify themselves as such by using
+
         exactly the same Debuggee message value when registering.
       properties:
         agentVersion:
-          description: |-
+          description: >-
             Version ID of the agent.
+
             Schema: `domain/language-platform/vmajor.minor` (for example
+
             `google.com/java-gcp/v1.1`).
           type: string
         canaryMode:
@@ -832,70 +933,87 @@ components:
             - CANARY_MODE_DEFAULT_DISABLED
           type: string
         description:
-          description: |-
+          description: >-
             Human readable description of the debuggee.
+
             Including a human-readable project name, environment name and version
+
             information is recommended.
           type: string
         extSourceContexts:
-          description: |-
+          description: >-
             References to the locations and revisions of the source code used in the
+
             deployed application.
           items:
-            $ref: '#/components/schemas/ExtendedSourceContext'
+            $ref: "#/components/schemas/ExtendedSourceContext"
           type: array
         id:
           description: Unique identifier for the debuggee generated by the controller service.
           type: string
         isDisabled:
-          description: |-
+          description: >-
             If set to `true`, indicates that the agent should disable itself and
+
             detach from the debuggee.
           type: boolean
         isInactive:
-          description: |-
+          description: >-
             If set to `true`, indicates that Controller service does not detect any
+
             activity from the debuggee agents and the application is possibly stopped.
           type: boolean
         labels:
           additionalProperties:
             type: string
-          description: |-
+          description: >-
             A set of custom debuggee properties, populated by the agent, to be
+
             displayed to the user.
           type: object
         project:
-          description: |-
+          description: >-
             Project the debuggee is associated with.
+
             Use project number or id when registering a Google Cloud Platform project.
           type: string
         sourceContexts:
-          description: |-
+          description: >-
             References to the locations and revisions of the source code used in the
+
             deployed application.
           items:
-            $ref: '#/components/schemas/SourceContext'
+            $ref: "#/components/schemas/SourceContext"
           type: array
         status:
-          $ref: '#/components/schemas/StatusMessage'
-          description: |-
+          $ref: "#/components/schemas/StatusMessage"
+          description: >-
             Human readable message to be displayed to the user about this debuggee.
+
             Absence of this field indicates no status. The message can be either
+
             informational or an error status.
         uniquifier:
-          description: |-
+          description: >-
             Uniquifier to further distinguish the application.
+
             It is possible that different applications might have identical values in
+
             the debuggee message, thus, incorrectly identified as a single application
+
             by the Controller service. This field adds salt to further distinguish the
+
             application. Agents should consider seeding this field with value that
+
             identifies the code, binary, configuration and environment.
           type: string
       type: object
     Empty:
-      description: |-
+      description: >-
         A generic empty message that you can re-use to avoid defining duplicated
+
         empty messages in your APIs. A typical example is to use it as the request
+
         or the response type of an API method. For instance:
 
             service Foo {
@@ -906,12 +1024,13 @@ components:
       properties: {}
       type: object
     ExtendedSourceContext:
-      description: |-
+      description: >-
         An ExtendedSourceContext is a SourceContext combined with additional
+
         details describing the context.
       properties:
         context:
-          $ref: '#/components/schemas/SourceContext'
+          $ref: "#/components/schemas/SourceContext"
           description: Any source context.
         labels:
           additionalProperties:
@@ -923,12 +1042,16 @@ components:
       description: Represents a message with parameters.
       properties:
         format:
-          description: |-
+          description: >-
             Format template for the message. The `format` uses placeholders `$0`,
+
             `$1`, etc. to reference parameters. `$$` can be used to denote the `$`
+
             character.
 
+
             Examples:
+
 
             *   `Failed to load '$0' which helps debug $1 the first time it
                 is loaded.  Again, $0 is very important.`
@@ -944,15 +1067,17 @@ components:
       description: A SourceContext referring to a Gerrit project.
       properties:
         aliasContext:
-          $ref: '#/components/schemas/AliasContext'
-          description: 'An alias, which may be a branch or tag.'
+          $ref: "#/components/schemas/AliasContext"
+          description: An alias, which may be a branch or tag.
         aliasName:
-          description: 'The name of an alias (branch, tag, etc.).'
+          description: The name of an alias (branch, tag, etc.).
           type: string
         gerritProject:
-          description: |-
+          description: >-
             The full project name within the host. Projects may be nested, so
+
             "project/subproject" is a valid project name.
+
             The "repo name" is hostURI/project.
           type: string
         hostUri:
@@ -966,19 +1091,22 @@ components:
       description: Response for getting breakpoint information.
       properties:
         breakpoint:
-          $ref: '#/components/schemas/Breakpoint'
-          description: |-
+          $ref: "#/components/schemas/Breakpoint"
+          description: >-
             Complete breakpoint state.
+
             The fields `id` and `location` are guaranteed to be set.
       type: object
     GitSourceContext:
-      description: |-
+      description: >-
         A GitSourceContext denotes a particular revision in a third party Git
+
         repository (e.g. GitHub).
       properties:
         revisionId:
-          description: |-
+          description: >-
             Git commit hash.
+
             required.
           type: string
         url:
@@ -989,21 +1117,25 @@ components:
       description: Response for listing active breakpoints.
       properties:
         breakpoints:
-          description: |-
+          description: >-
             List of all active breakpoints.
+
             The fields `id` and `location` are guaranteed to be set on each breakpoint.
           items:
-            $ref: '#/components/schemas/Breakpoint'
+            $ref: "#/components/schemas/Breakpoint"
           type: array
         nextWaitToken:
-          description: |-
+          description: >-
             A token that can be used in the next method call to block until
+
             the list of breakpoints changes.
           type: string
         waitExpired:
-          description: |-
+          description: >-
             If set to `true`, indicates that there is no change to the
+
             list of active breakpoints and the server-selected timeout has expired.
+
             The `breakpoints` field would be empty and should be ignored.
           type: boolean
       type: object
@@ -1011,17 +1143,21 @@ components:
       description: Response for listing breakpoints.
       properties:
         breakpoints:
-          description: |-
+          description: >-
             List of breakpoints matching the request.
+
             The fields `id` and `location` are guaranteed to be set on each breakpoint.
+
             The fields: `stack_frames`, `evaluated_expressions` and `variable_table`
+
             are cleared on each breakpoint regardless of its status.
           items:
-            $ref: '#/components/schemas/Breakpoint'
+            $ref: "#/components/schemas/Breakpoint"
           type: array
         nextWaitToken:
-          description: |-
+          description: >-
             A wait token that can be used in the next call to `list` (REST) or
+
             `ListBreakpoints` (RPC) to block until the list of breakpoints has changes.
           type: string
       type: object
@@ -1029,18 +1165,22 @@ components:
       description: Response for listing debuggees.
       properties:
         debuggees:
-          description: |-
+          description: >-
             List of debuggees accessible to the calling user.
+
             The fields `debuggee.id` and `description` are guaranteed to be set.
+
             The `description` field is a human readable field provided by agents and
+
             can be displayed to users.
           items:
-            $ref: '#/components/schemas/Debuggee'
+            $ref: "#/components/schemas/Debuggee"
           type: array
       type: object
     ProjectRepoId:
-      description: |-
+      description: >-
         Selects a repo using a Google Cloud Platform project ID
+
         (e.g. winged-cargo-31) and a repo name within that project.
       properties:
         projectId:
@@ -1054,73 +1194,84 @@ components:
       description: Request to register a debuggee.
       properties:
         debuggee:
-          $ref: '#/components/schemas/Debuggee'
-          description: |-
+          $ref: "#/components/schemas/Debuggee"
+          description: >-
             Required. Debuggee information to register.
+
             The fields `project`, `uniquifier`, `description` and `agent_version`
+
             of the debuggee must be set.
       type: object
     RegisterDebuggeeResponse:
       description: Response for registering a debuggee.
       properties:
         agentId:
-          description: |-
+          description: >-
             A unique ID generated for the agent.
+
             Each RegisterDebuggee request will generate a new agent ID.
           type: string
         debuggee:
-          $ref: '#/components/schemas/Debuggee'
-          description: |-
+          $ref: "#/components/schemas/Debuggee"
+          description: >-
             Debuggee resource.
+
             The field `id` is guaranteed to be set (in addition to the echoed fields).
+
             If the field `is_disabled` is set to `true`, the agent should disable
+
             itself by removing all breakpoints and detaching from the application.
+
             It should however continue to poll `RegisterDebuggee` until reenabled.
       type: object
     RepoId:
       description: A unique identifier for a cloud repo.
       properties:
         projectRepoId:
-          $ref: '#/components/schemas/ProjectRepoId'
+          $ref: "#/components/schemas/ProjectRepoId"
           description: A combination of a project ID and a repo name.
         uid:
-          description: 'A server-assigned, globally unique identifier.'
+          description: A server-assigned, globally unique identifier.
           type: string
       type: object
     SetBreakpointResponse:
       description: Response for setting a breakpoint.
       properties:
         breakpoint:
-          $ref: '#/components/schemas/Breakpoint'
-          description: |-
+          $ref: "#/components/schemas/Breakpoint"
+          description: >-
             Breakpoint resource.
+
             The field `id` is guaranteed to be set (in addition to the echoed fields).
       type: object
     SourceContext:
-      description: |-
+      description: >-
         A SourceContext is a reference to a tree of files. A SourceContext together
+
         with a path point to a unique revision of a single file or directory.
       properties:
         cloudRepo:
-          $ref: '#/components/schemas/CloudRepoSourceContext'
+          $ref: "#/components/schemas/CloudRepoSourceContext"
           description: A SourceContext referring to a revision in a cloud repo.
         cloudWorkspace:
-          $ref: '#/components/schemas/CloudWorkspaceSourceContext'
+          $ref: "#/components/schemas/CloudWorkspaceSourceContext"
           description: A SourceContext referring to a snapshot in a cloud workspace.
         gerrit:
-          $ref: '#/components/schemas/GerritSourceContext'
+          $ref: "#/components/schemas/GerritSourceContext"
           description: A SourceContext referring to a Gerrit project.
         git:
-          $ref: '#/components/schemas/GitSourceContext'
+          $ref: "#/components/schemas/GitSourceContext"
           description: A SourceContext referring to any third party Git repo (e.g. GitHub).
       type: object
     SourceLocation:
       description: Represents a location in the source code.
       properties:
         column:
-          description: |-
+          description: >-
             Column within a line. The first column in a line as the value `1`.
+
             Agents that do not support setting breakpoints on specific columns ignore
+
             this field.
           format: int32
           type: integer
@@ -1136,36 +1287,42 @@ components:
       description: Represents a stack frame context.
       properties:
         arguments:
-          description: |-
+          description: >-
             Set of arguments passed to this function.
+
             Note that this might not be populated for all stack frames.
           items:
-            $ref: '#/components/schemas/Variable'
+            $ref: "#/components/schemas/Variable"
           type: array
         function:
           description: Demangled function name at the call site.
           type: string
         locals:
-          description: |-
+          description: >-
             Set of local variables at the stack frame location.
+
             Note that this might not be populated for all stack frames.
           items:
-            $ref: '#/components/schemas/Variable'
+            $ref: "#/components/schemas/Variable"
           type: array
         location:
-          $ref: '#/components/schemas/SourceLocation'
+          $ref: "#/components/schemas/SourceLocation"
           description: Source location of the call site.
       type: object
     StatusMessage:
-      description: |-
+      description: >-
         Represents a contextual status message.
+
         The message can indicate an error or informational status, and refer to
+
         specific parts of the containing object.
+
         For example, the `Breakpoint.status` field can indicate an error referring
+
         to the `BREAKPOINT_SOURCE_LOCATION` with the message `Location not found`.
       properties:
         description:
-          $ref: '#/components/schemas/FormatMessage'
+          $ref: "#/components/schemas/FormatMessage"
           description: Status message text.
         isError:
           description: Distinguishes errors from informational messages.
@@ -1187,22 +1344,27 @@ components:
       description: Request to update an active breakpoint.
       properties:
         breakpoint:
-          $ref: '#/components/schemas/Breakpoint'
-          description: |-
+          $ref: "#/components/schemas/Breakpoint"
+          description: >-
             Required. Updated breakpoint information.
+
             The field `id` must be set.
+
             The agent must echo all Breakpoint specification fields in the update.
       type: object
     UpdateActiveBreakpointResponse:
-      description: |-
+      description: >-
         Response for updating an active breakpoint.
+
         The message is defined to allow future extensions.
       properties: {}
       type: object
     Variable:
-      description: |-
+      description: >-
         Represents a variable or an argument possibly of a compound object type.
+
         Note how the following variables are represented:
+
 
         1) A simple variable:
 
@@ -1250,9 +1412,12 @@ components:
             }
 
         The status should describe the reason for the missing value,
+
         such as `<optimized out>`, `<inaccessible>`, `<pointers limit reached>`.
 
+
         Note that a null pointer should not have members.
+
 
         5) An unnamed value:
 
@@ -1284,11 +1449,17 @@ components:
             }
 
         To optimize computation, memory and network traffic, variables that
+
         repeat in the output multiple times can be stored once in a shared
+
         variable table and be referenced using the `var_table_index` field.  The
+
         variables stored in the shared table are nameless and are essentially
+
         a partition of the complete variable. To reconstruct the complete
+
         variable, merge the referencing variable with the referenced variable.
+
 
         When using the shared variable table, the following variables:
 
@@ -1306,55 +1477,76 @@ components:
             }
 
         Note that the pointer address is stored with the referencing variable
+
         and not with the referenced variable. This allows the referenced variable
+
         to be shared between pointers and references.
+
 
         The type field is optional. The debugger agent may or may not support it.
       properties:
         members:
           description: Members contained or pointed to by the variable.
           items:
-            $ref: '#/components/schemas/Variable'
+            $ref: "#/components/schemas/Variable"
           type: array
         name:
-          description: 'Name of the variable, if any.'
+          description: Name of the variable, if any.
           type: string
         status:
-          $ref: '#/components/schemas/StatusMessage'
-          description: |-
+          $ref: "#/components/schemas/StatusMessage"
+          description: >-
             Status associated with the variable. This field will usually stay
+
             unset. A status of a single variable only applies to that variable or
+
             expression. The rest of breakpoint data still remains valid. Variables
+
             might be reported in error state even when breakpoint is not in final
+
             state.
 
+
             The message may refer to variable name with `refers_to` set to
+
             `VARIABLE_NAME`. Alternatively `refers_to` will be set to `VARIABLE_VALUE`.
+
             In either case variable value and members will be unset.
+
 
             Example of error message applied to name: `Invalid expression syntax`.
 
+
             Example of information message applied to value: `Not captured`.
+
 
             Examples of error message applied to value:
 
+
             *   `Malformed string`,
+
             *   `Field f not found in class C`
+
             *   `Null pointer dereference`
         type:
-          description: |-
+          description: >-
             Variable type (e.g. `MyClass`). If the variable is split with
+
             `var_table_index`, `type` goes next to `value`. The interpretation of
+
             a type is agent specific. It is recommended to include the dynamic type
+
             rather than a static type of an object.
           type: string
         value:
           description: Simple value of the variable.
           type: string
         varTableIndex:
-          description: |-
+          description: >-
             Reference to a variable in the shared variable table. More than
+
             one variable can reference the same variable in the table. The
+
             `var_table_index` field is an index into `variable_table` in Breakpoint.
           format: int32
           type: integer
@@ -1364,18 +1556,18 @@ components:
       description: Oauth 2.0 implicit authentication
       flows:
         implicit:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-            'https://www.googleapis.com/auth/cloud_debugger': Use Stackdriver Debugger
+            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/cloud_debugger: Use Stackdriver Debugger
       type: oauth2
     Oauth2c:
-      description: Oauth 2.0 accessCode authentication
+      description: Oauth 2.0 authorizationCode authentication
       flows:
         authorizationCode:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-            'https://www.googleapis.com/auth/cloud_debugger': Use Stackdriver Debugger
-          tokenUrl: 'https://accounts.google.com/o/oauth2/token'
+            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/cloud_debugger: Use Stackdriver Debugger
+          tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

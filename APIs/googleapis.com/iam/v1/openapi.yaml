@@ -1,170 +1,185 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://iam.googleapis.com/'
+  - url: https://iam.googleapis.com/
 info:
   contact:
     name: Google
-    url: 'https://google.com'
-  description: 'Manages identity and access control for Google Cloud Platform resources, including the creation of service accounts, which you can use to authenticate to Google and make API calls.'
+    url: https://google.com
+    x-twitter: youtube
+  description: Manages identity and access control for Google Cloud Platform resources, including the creation of service accounts, which you can use to authenticate to Google and make API calls.
   license:
     name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
-  title: Identity and Access Management (IAM)
+    url: http://creativecommons.org/licenses/by/3.0/
+  termsOfService: https://developers.google.com/terms/
+  title: Identity and Access Management (IAM) API
   version: v1
   x-apiClientRegistration:
-    url: 'https://console.developers.google.com'
+    url: https://console.developers.google.com
   x-apisguru-categories:
-    - security
+    - analytics
+    - media
   x-logo:
-    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.31
       format: google
-      url: 'https://iam.googleapis.com/$discovery/rest?version=v1'
+      url: https://iam.googleapis.com/$discovery/rest?version=v1
       version: v1
   x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: iam
 externalDocs:
-  url: 'https://cloud.google.com/iam/'
+  url: https://cloud.google.com/iam/
 tags:
-  - name: iamPolicies
-  - name: projects
   - name: roles
-  - name: permissions
+  - name: iamPolicies
   - name: organizations
+  - name: permissions
+  - name: projects
 paths:
-  '/v1/iamPolicies:lintPolicy':
+  /v1/iamPolicies:lintPolicy:
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
-      description: |-
-        Lints a Cloud IAM policy object or its sub fields. Currently supports
-        google.iam.v1.Binding.condition.
+      description: >-
+        Lints, or validates, an IAM policy. Currently checks the
 
-        Each lint operation consists of multiple lint validation units.
-        Each unit inspects the input object in regard to a particular linting
-        aspect and issues a google.iam.admin.v1.LintResult disclosing the
-        result.
+        google.iam.v1.Binding.condition field, which contains a condition
 
-        The set of applicable validation units is determined by the Cloud IAM
-        server and is not configurable.
+        expression for a role binding.
 
-        Regardless of any lint issues or their severities, successful calls to
-        `lintPolicy` return an HTTP 200 OK status code.
+
+        Successful calls to this method always return an HTTP `200 OK` status code,
+
+        even if the linter detects an issue in the IAM policy.
       operationId: iam.iamPolicies.lintPolicy
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/LintPolicyRequest'
+              $ref: "#/components/schemas/LintPolicyRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/LintPolicyResponse'
+                $ref: "#/components/schemas/LintPolicyResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - iamPolicies
-  '/v1/iamPolicies:queryAuditableServices':
+  /v1/iamPolicies:queryAuditableServices:
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
-      description: |-
-        Returns a list of services that support service level audit logging
-        configuration for the given resource.
+      description: >-
+        Returns a list of services that allow you to opt into audit logs that are
+
+        not generated by default.
+
+
+        To learn more about audit logs, see the [Logging
+
+        documentation](https://cloud.google.com/logging/docs/audit).
       operationId: iam.iamPolicies.queryAuditableServices
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/QueryAuditableServicesRequest'
+              $ref: "#/components/schemas/QueryAuditableServicesRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/QueryAuditableServicesResponse'
+                $ref: "#/components/schemas/QueryAuditableServicesResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - iamPolicies
-  '/v1/permissions:queryTestablePermissions':
+  /v1/permissions:queryTestablePermissions:
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
-      description: |-
-        Lists the permissions testable on a resource.
-        A permission is testable if it can be tested for an identity on a resource.
+      description: >-
+        Lists every permission that you can test on a resource. A permission is
+
+        testable if you can check whether a member has that permission on the
+
+        resource.
       operationId: iam.permissions.queryTestablePermissions
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/QueryTestablePermissionsRequest'
+              $ref: "#/components/schemas/QueryTestablePermissionsRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/QueryTestablePermissionsResponse'
+                $ref: "#/components/schemas/QueryTestablePermissionsResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - permissions
   /v1/roles:
     get:
-      description: Lists the Roles defined on a resource.
+      description: >-
+        Lists every predefined Role that IAM supports, or every custom role
+
+        that is defined for an organization or project.
       operationId: iam.roles.list
       parameters:
-        - description: Optional limit on the number of roles to include in the response.
+        - description: >-
+            Optional limit on the number of roles to include in the response.
+
+
+            The default is 300, and the maximum is 1,000.
           in: query
           name: pageSize
           schema:
@@ -174,13 +189,19 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: |-
+        - description: >-
             The `parent` parameter's value depends on the target resource for the
+
             request, namely
+
             [`roles`](/iam/reference/rest/v1/roles),
+
             [`projects`](/iam/reference/rest/v1/projects.roles), or
+
             [`organizations`](/iam/reference/rest/v1/organizations.roles). Each
+
             resource type's `parent` value format is described below:
+
 
             * [`roles.list()`](/iam/reference/rest/v1/roles/list): An empty string.
               This method doesn't require a resource; it simply returns all
@@ -201,6 +222,7 @@ paths:
               `https://iam.googleapis.com/v1/organizations/{ORGANIZATION_ID}/roles`
 
             Note: Wildcard (*) values are invalid; you must specify a complete project
+
             ID or organization ID.
           in: query
           name: parent
@@ -211,10 +233,13 @@ paths:
           name: showDeleted
           schema:
             type: boolean
-        - description: |-
+        - description: >-
             Optional view for the returned Role objects. When `FULL` is specified,
+
             the `includedPermissions` field is returned, which includes a list of all
+
             permissions in the role. The default value is `BASIC`, which does not
+
             return the `includedPermissions` field.
           in: query
           name: view
@@ -224,87 +249,116 @@ paths:
               - FULL
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ListRolesResponse'
+                $ref: "#/components/schemas/ListRolesResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - roles
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-  '/v1/roles:queryGrantableRoles':
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+  /v1/roles:queryGrantableRoles:
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
-      description: |-
-        Queries roles that can be granted on a particular resource.
-        A role is grantable if it can be used as the role in a binding for a policy
-        for that resource.
+      description: >-
+        Lists roles that can be granted on a Google Cloud resource. A role is
+
+        grantable if the IAM policy for the resource can contain bindings to the
+
+        role.
       operationId: iam.roles.queryGrantableRoles
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/QueryGrantableRolesRequest'
+              $ref: "#/components/schemas/QueryGrantableRolesRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/QueryGrantableRolesResponse'
+                $ref: "#/components/schemas/QueryGrantableRolesResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - roles
-  '/v1/{name}':
+  "/v1/{name}":
     delete:
-      description: |-
-        Soft deletes a role. The role is suspended and cannot be used to create new
-        IAM Policy Bindings.
-        The Role will not be included in `ListRoles()` unless `show_deleted` is set
-        in the `ListRolesRequest`. The Role contains the deleted boolean set.
-        Existing Bindings remains, but are inactive. The Role can be undeleted
-        within 7 days. After 7 days the Role is deleted and all Bindings associated
-        with the role are removed.
-      operationId: iam.organizations.roles.delete
+      description: >-
+        Deletes a custom Role.
+
+
+        When you delete a custom role, the following changes occur immediately:
+
+
+        * You cannot bind a member to the custom role in an IAM
+
+        Policy.
+
+        * Existing bindings to the custom role are not changed, but they have no
+
+        effect.
+
+        * By default, the response from ListRoles does not include the custom
+
+        role.
+
+
+        You have 7 days to undelete the custom role. After 7 days, the following
+
+        changes occur:
+
+
+        * The custom role is permanently deleted and cannot be recovered.
+
+        * If an IAM policy contains a binding to the custom role, the binding is
+
+        permanently removed.
+      operationId: iam.projects.roles.delete
       parameters:
-        - description: |-
+        - description: >-
             The `name` parameter's value depends on the target resource for the
+
             request, namely
+
             [`projects`](/iam/reference/rest/v1/projects.roles) or
+
             [`organizations`](/iam/reference/rest/v1/organizations.roles). Each
+
             resource type's `name` value format is described below:
+
 
             * [`projects.roles.delete()`](/iam/reference/rest/v1/projects.roles/delete):
               `projects/{PROJECT_ID}/roles/{CUSTOM_ROLE_ID}`. This method deletes only
@@ -319,43 +373,49 @@ paths:
               `https://iam.googleapis.com/v1/organizations/{ORGANIZATION_ID}/roles/{CUSTOM_ROLE_ID}`
 
             Note: Wildcard (*) values are invalid; you must specify a complete project
+
             ID or organization ID.
           in: path
           name: name
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
         - description: Used to perform a consistent read-modify-write.
           in: query
           name: etag
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Role'
+                $ref: "#/components/schemas/Role"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
-        - organizations
+        - projects
     get:
-      description: Gets a Role definition.
-      operationId: iam.organizations.roles.get
+      description: Gets the definition of a Role.
+      operationId: iam.projects.roles.get
       parameters:
-        - description: |-
+        - description: >-
             The `name` parameter's value depends on the target resource for the
+
             request, namely
+
             [`roles`](/iam/reference/rest/v1/roles),
+
             [`projects`](/iam/reference/rest/v1/projects.roles), or
+
             [`organizations`](/iam/reference/rest/v1/organizations.roles). Each
+
             resource type's `name` value format is described below:
+
 
             * [`roles.get()`](/iam/reference/rest/v1/roles/get): `roles/{ROLE_NAME}`.
               This method returns results from all
@@ -376,15 +436,16 @@ paths:
               `https://iam.googleapis.com/v1/organizations/{ORGANIZATION_ID}/roles/{CUSTOM_ROLE_ID}`
 
             Note: Wildcard (*) values are invalid; you must specify a complete project
+
             ID or organization ID.
           in: path
           name: name
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
-        - description: |-
+        - description: >-
             The output format of the public key requested.
+
             X509_PEM is the default output format.
           in: query
           name: publicKeyType
@@ -395,41 +456,46 @@ paths:
               - TYPE_RAW_PUBLIC_KEY
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Role'
+                $ref: "#/components/schemas/Role"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
-        - organizations
+        - projects
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
     patch:
-      description: Updates a Role definition.
-      operationId: iam.organizations.roles.patch
+      description: Updates the definition of a custom Role.
+      operationId: iam.projects.roles.patch
       parameters:
-        - description: |-
+        - description: >-
             The `name` parameter's value depends on the target resource for the
+
             request, namely
+
             [`projects`](/iam/reference/rest/v1/projects.roles) or
+
             [`organizations`](/iam/reference/rest/v1/organizations.roles). Each
+
             resource type's `name` value format is described below:
+
 
             * [`projects.roles.patch()`](/iam/reference/rest/v1/projects.roles/patch):
               `projects/{PROJECT_ID}/roles/{CUSTOM_ROLE_ID}`. This method updates only
@@ -444,13 +510,13 @@ paths:
               `https://iam.googleapis.com/v1/organizations/{ORGANIZATION_ID}/roles/{CUSTOM_ROLE_ID}`
 
             Note: Wildcard (*) values are invalid; you must specify a complete project
+
             ID or organization ID.
           in: path
           name: name
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
         - description: A mask describing which fields in the Role have changed.
           in: query
           name: updateMask
@@ -460,88 +526,117 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Role'
+              $ref: "#/components/schemas/Role"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Role'
+                $ref: "#/components/schemas/Role"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
-        - organizations
+        - projects
     put:
-      description: |-
-        Note: This method is in the process of being deprecated. Use
+      description: >-
+        **Note:** We are in the process of deprecating this method. Use
+
         PatchServiceAccount instead.
+
 
         Updates a ServiceAccount.
 
-        Currently, only the following fields are updatable:
-        `display_name` and `description`.
+
+        You can update only the `display_name` and `description` fields.
       operationId: iam.projects.serviceAccounts.update
       parameters:
-        - description: |-
-            The resource name of the service account in the following format:
-            `projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT}`.
+        - description: >-
+            The resource name of the service account.
 
-            Requests using `-` as a wildcard for the `PROJECT_ID` will infer the
-            project from the `account` and the `ACCOUNT` value can be the `email`
-            address or the `unique_id` of the service account.
 
-            In responses the resource name will always be in the format
-            `projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT}`.
+            Use one of the following formats:
+
+
+            * `projects/{PROJECT_ID}/serviceAccounts/{EMAIL_ADDRESS}`
+
+            * `projects/{PROJECT_ID}/serviceAccounts/{UNIQUE_ID}`
+
+
+            As an alternative, you can use the `-` wildcard character instead of the
+
+            project ID:
+
+
+            * `projects/-/serviceAccounts/{EMAIL_ADDRESS}`
+
+            * `projects/-/serviceAccounts/{UNIQUE_ID}`
+
+
+            When possible, avoid using the `-` wildcard character, because it can cause
+
+            response messages to contain misleading error codes. For example, if you
+
+            try to get the service account
+
+            `projects/-/serviceAccounts/fake@example.com`, which does not exist, the
+
+            response contains an HTTP `403 Forbidden` error instead of a `404 Not
+
+            Found` error.
           in: path
           name: name
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ServiceAccount'
+              $ref: "#/components/schemas/ServiceAccount"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ServiceAccount'
+                $ref: "#/components/schemas/ServiceAccount"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1/{name}/keys':
+  "/v1/{name}/keys":
     get:
-      description: Lists ServiceAccountKeys.
+      description: Lists every ServiceAccountKey for a service account.
       operationId: iam.projects.serviceAccounts.keys.list
       parameters:
-        - description: |-
+        - description: >-
             Required. The resource name of the service account in the following format:
+
             `projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT}`.
 
+
             Using `-` as a wildcard for the `PROJECT_ID`, will infer the project from
+
             the account. The `ACCOUNT` value can be the `email` address or the
+
             `unique_id` of the service account.
           in: path
           name: name
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
-        - description: |-
+        - description: >-
             Filters the types of keys the user wants to include in the list
+
             response. Duplicate key types are not allowed. If no key type
+
             is provided, all keys are returned.
           explode: true
           in: query
@@ -554,468 +649,534 @@ paths:
                 - SYSTEM_MANAGED
               type: string
             type: array
+          style: form
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ListServiceAccountKeysResponse'
+                $ref: "#/components/schemas/ListServiceAccountKeysResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
-      description: |-
-        Creates a ServiceAccountKey
-        and returns it.
+      description: Creates a ServiceAccountKey.
       operationId: iam.projects.serviceAccounts.keys.create
       parameters:
-        - description: |-
+        - description: >-
             Required. The resource name of the service account in the following format:
+
             `projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT}`.
+
             Using `-` as a wildcard for the `PROJECT_ID` will infer the project from
+
             the account. The `ACCOUNT` value can be the `email` address or the
+
             `unique_id` of the service account.
           in: path
           name: name
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateServiceAccountKeyRequest'
+              $ref: "#/components/schemas/CreateServiceAccountKeyRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ServiceAccountKey'
+                $ref: "#/components/schemas/ServiceAccountKey"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1/{name}/keys:upload':
+  "/v1/{name}/keys:upload":
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
-      description: |-
-        Upload public key for a given service account.
-        This rpc will create a
-        ServiceAccountKey that has the
-        provided public key and returns it.
+      description: Creates a ServiceAccountKey, using a public key that you provide.
       operationId: iam.projects.serviceAccounts.keys.upload
       parameters:
-        - description: |-
+        - description: >-
             The resource name of the service account in the following format:
+
             `projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT}`.
+
             Using `-` as a wildcard for the `PROJECT_ID` will infer the project from
+
             the account. The `ACCOUNT` value can be the `email` address or the
+
             `unique_id` of the service account.
           in: path
           name: name
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UploadServiceAccountKeyRequest'
+              $ref: "#/components/schemas/UploadServiceAccountKeyRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ServiceAccountKey'
+                $ref: "#/components/schemas/ServiceAccountKey"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1/{name}/serviceAccounts':
+  "/v1/{name}/serviceAccounts":
     get:
-      description: Lists ServiceAccounts for a project.
+      description: Lists every ServiceAccount that belongs to a specific project.
       operationId: iam.projects.serviceAccounts.list
       parameters:
-        - description: |-
+        - description: >-
             Required. The resource name of the project associated with the service
+
             accounts, such as `projects/my-project-123`.
           in: path
           name: name
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
-        - description: |-
+        - description: >-
             Optional limit on the number of service accounts to include in the
+
             response. Further accounts can subsequently be obtained by including the
+
             ListServiceAccountsResponse.next_page_token
+
             in a subsequent request.
+
+
+            The default is 20, and the maximum is 100.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: |-
+        - description: >-
             Optional pagination token returned in an earlier
+
             ListServiceAccountsResponse.next_page_token.
           in: query
           name: pageToken
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ListServiceAccountsResponse'
+                $ref: "#/components/schemas/ListServiceAccountsResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
-      description: |-
-        Creates a ServiceAccount
-        and returns it.
+      description: Creates a ServiceAccount.
       operationId: iam.projects.serviceAccounts.create
       parameters:
-        - description: |-
+        - description: >-
             Required. The resource name of the project associated with the service
+
             accounts, such as `projects/my-project-123`.
           in: path
           name: name
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateServiceAccountRequest'
+              $ref: "#/components/schemas/CreateServiceAccountRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ServiceAccount'
+                $ref: "#/components/schemas/ServiceAccount"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1/{name}:disable':
+  "/v1/{name}:disable":
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
-      description: |-
-        DisableServiceAccount is currently in the alpha launch stage.
+      description: >-
+        Disables a ServiceAccount immediately.
 
-        Disables a ServiceAccount,
-        which immediately prevents the service account from authenticating and
-        gaining access to APIs.
 
-        Disabled service accounts can be safely restored by using
-        EnableServiceAccount at any point. Deleted service accounts cannot be
-        restored using this method.
+        If an application uses the service account to authenticate, that
 
-        Disabling a service account that is bound to VMs, Apps, Functions, or
-        other jobs will cause those jobs to lose access to resources if they are
-        using the disabled service account.
+        application can no longer call Google APIs or access Google Cloud
 
-        To improve reliability of your services and avoid unexpected outages, it
-        is recommended to first disable a service account rather than delete it.
-        After disabling the service account, wait at least 24 hours to verify there
-        are no unintended consequences, and then delete the service account.
+        resources. Existing access tokens for the service account are rejected, and
+
+        requests for new access tokens will fail.
+
+
+        To re-enable the service account, use EnableServiceAccount. After you
+
+        re-enable the service account, its existing access tokens will be accepted,
+
+        and you can request new access tokens.
+
+
+        To help avoid unplanned outages, we recommend that you disable the service
+
+        account before you delete it. Use this method to disable the service
+
+        account, then wait at least 24 hours and watch for unintended consequences.
+
+        If there are no unintended consequences, you can delete the service account
+
+        with DeleteServiceAccount.
       operationId: iam.projects.serviceAccounts.disable
       parameters:
-        - description: |-
+        - description: >-
             The resource name of the service account in the following format:
+
             `projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT}`.
+
             Using `-` as a wildcard for the `PROJECT_ID` will infer the project from
+
             the account. The `ACCOUNT` value can be the `email` address or the
+
             `unique_id` of the service account.
           in: path
           name: name
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/DisableServiceAccountRequest'
+              $ref: "#/components/schemas/DisableServiceAccountRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Empty'
+                $ref: "#/components/schemas/Empty"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1/{name}:enable':
+  "/v1/{name}:enable":
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
-      description: |-
-        EnableServiceAccount is currently in the alpha launch stage.
+      description: >-
+        Enables a ServiceAccount that was disabled by
 
-         Restores a disabled ServiceAccount
-         that has been manually disabled by using DisableServiceAccount. Service
-         accounts that have been disabled by other means or for other reasons,
-         such as abuse, cannot be restored using this method.
+        DisableServiceAccount.
 
-         EnableServiceAccount will have no effect on a service account that is
-         not disabled.  Enabling an already enabled service account will have no
-         effect.
+
+        If the service account is already enabled, then this method has no effect.
+
+
+        If the service account was disabled by other means—for example, if Google
+
+        disabled the service account because it was compromised—you cannot use this
+
+        method to enable the service account.
       operationId: iam.projects.serviceAccounts.enable
       parameters:
-        - description: |-
+        - description: >-
             The resource name of the service account in the following format:
+
             `projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT}`.
+
             Using `-` as a wildcard for the `PROJECT_ID` will infer the project from
+
             the account. The `ACCOUNT` value can be the `email` address or the
+
             `unique_id` of the service account.
           in: path
           name: name
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/EnableServiceAccountRequest'
+              $ref: "#/components/schemas/EnableServiceAccountRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Empty'
+                $ref: "#/components/schemas/Empty"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1/{name}:signBlob':
+  "/v1/{name}:signBlob":
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
-      description: |-
-        **Note**: This method is in the process of being deprecated. Call the
-        [`signBlob()`](/iam/credentials/reference/rest/v1/projects.serviceAccounts/signBlob)
-        method of the Cloud IAM Service Account Credentials API instead.
+      description: >-
+        **Note:** This method is deprecated and will stop working on July 1, 2021.
 
-        Signs a blob using a service account's system-managed private key.
+        Use the
+
+        [`signBlob`](https://cloud.google.com/iam/help/rest-credentials/v1/projects.serviceAccounts/signBlob)
+
+        method in the IAM Service Account Credentials API instead. If you currently
+
+        use this method, see the [migration
+
+        guide](https://cloud.google.com/iam/help/credentials/migrate-api) for
+
+        instructions.
+
+
+        Signs a blob using the system-managed private key for a ServiceAccount.
       operationId: iam.projects.serviceAccounts.signBlob
       parameters:
-        - description: |-
-            Required. The resource name of the service account in the following format:
+        - description: >-
+            Required. Deprecated. [Migrate to Service Account Credentials
+
+            API](https://cloud.google.com/iam/help/credentials/migrate-api).
+
+
+            The resource name of the service account in the following format:
+
             `projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT}`.
+
             Using `-` as a wildcard for the `PROJECT_ID` will infer the project from
+
             the account. The `ACCOUNT` value can be the `email` address or the
+
             `unique_id` of the service account.
           in: path
           name: name
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SignBlobRequest'
+              $ref: "#/components/schemas/SignBlobRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/SignBlobResponse'
+                $ref: "#/components/schemas/SignBlobResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1/{name}:signJwt':
+  "/v1/{name}:signJwt":
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
-      description: |-
-        **Note**: This method is in the process of being deprecated. Call the
-        [`signJwt()`](/iam/credentials/reference/rest/v1/projects.serviceAccounts/signJwt)
-        method of the Cloud IAM Service Account Credentials API instead.
+      description: >-
+        **Note:** This method is deprecated and will stop working on July 1, 2021.
 
-        Signs a JWT using a service account's system-managed private key.
+        Use the
 
-        If no expiry time (`exp`) is provided in the `SignJwtRequest`, IAM sets an
-        an expiry time of one hour by default. If you request an expiry time of
-        more than one hour, the request will fail.
+        [`signJwt`](https://cloud.google.com/iam/help/rest-credentials/v1/projects.serviceAccounts/signJwt)
+
+        method in the IAM Service Account Credentials API instead. If you currently
+
+        use this method, see the [migration
+
+        guide](https://cloud.google.com/iam/help/credentials/migrate-api) for
+
+        instructions.
+
+
+        Signs a JSON Web Token (JWT) using the system-managed private key for a
+
+        ServiceAccount.
       operationId: iam.projects.serviceAccounts.signJwt
       parameters:
-        - description: |-
-            Required. The resource name of the service account in the following format:
+        - description: >-
+            Required. Deprecated. [Migrate to Service Account Credentials
+
+            API](https://cloud.google.com/iam/help/credentials/migrate-api).
+
+
+            The resource name of the service account in the following format:
+
             `projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT}`.
+
             Using `-` as a wildcard for the `PROJECT_ID` will infer the project from
+
             the account. The `ACCOUNT` value can be the `email` address or the
+
             `unique_id` of the service account.
           in: path
           name: name
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SignJwtRequest'
+              $ref: "#/components/schemas/SignJwtRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/SignJwtResponse'
+                $ref: "#/components/schemas/SignJwtResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1/{name}:undelete':
+  "/v1/{name}:undelete":
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
-      description: 'Undelete a Role, bringing it back in its previous state.'
-      operationId: iam.organizations.roles.undelete
+      description: Undeletes a custom Role.
+      operationId: iam.projects.roles.undelete
       parameters:
-        - description: |-
+        - description: >-
             The `name` parameter's value depends on the target resource for the
+
             request, namely
+
             [`projects`](/iam/reference/rest/v1/projects.roles) or
+
             [`organizations`](/iam/reference/rest/v1/organizations.roles). Each
+
             resource type's `name` value format is described below:
+
 
             * [`projects.roles.undelete()`](/iam/reference/rest/v1/projects.roles/undelete):
               `projects/{PROJECT_ID}/roles/{CUSTOM_ROLE_ID}`. This method undeletes
@@ -1030,44 +1191,53 @@ paths:
               `https://iam.googleapis.com/v1/organizations/{ORGANIZATION_ID}/roles/{CUSTOM_ROLE_ID}`
 
             Note: Wildcard (*) values are invalid; you must specify a complete project
+
             ID or organization ID.
           in: path
           name: name
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UndeleteRoleRequest'
+              $ref: "#/components/schemas/UndeleteRoleRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Role'
+                $ref: "#/components/schemas/Role"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
-        - organizations
-  '/v1/{parent}/roles':
+        - projects
+  "/v1/{parent}/roles":
     get:
-      description: Lists the Roles defined on a resource.
-      operationId: iam.organizations.roles.list
+      description: >-
+        Lists every predefined Role that IAM supports, or every custom role
+
+        that is defined for an organization or project.
+      operationId: iam.projects.roles.list
       parameters:
-        - description: |-
+        - description: >-
             The `parent` parameter's value depends on the target resource for the
+
             request, namely
+
             [`roles`](/iam/reference/rest/v1/roles),
+
             [`projects`](/iam/reference/rest/v1/projects.roles), or
+
             [`organizations`](/iam/reference/rest/v1/organizations.roles). Each
+
             resource type's `parent` value format is described below:
+
 
             * [`roles.list()`](/iam/reference/rest/v1/roles/list): An empty string.
               This method doesn't require a resource; it simply returns all
@@ -1088,14 +1258,18 @@ paths:
               `https://iam.googleapis.com/v1/organizations/{ORGANIZATION_ID}/roles`
 
             Note: Wildcard (*) values are invalid; you must specify a complete project
+
             ID or organization ID.
           in: path
           name: parent
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
-        - description: Optional limit on the number of roles to include in the response.
+        - description: >-
+            Optional limit on the number of roles to include in the response.
+
+
+            The default is 300, and the maximum is 1,000.
           in: query
           name: pageSize
           schema:
@@ -1110,10 +1284,13 @@ paths:
           name: showDeleted
           schema:
             type: boolean
-        - description: |-
+        - description: >-
             Optional view for the returned Role objects. When `FULL` is specified,
+
             the `includedPermissions` field is returned, which includes a list of all
+
             permissions in the role. The default value is `BASIC`, which does not
+
             return the `includedPermissions` field.
           in: query
           name: view
@@ -1123,41 +1300,46 @@ paths:
               - FULL
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ListRolesResponse'
+                $ref: "#/components/schemas/ListRolesResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
-        - organizations
+        - projects
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
-      description: Creates a new Role.
-      operationId: iam.organizations.roles.create
+      description: Creates a new custom Role.
+      operationId: iam.projects.roles.create
       parameters:
-        - description: |-
+        - description: >-
             The `parent` parameter's value depends on the target resource for the
+
             request, namely
+
             [`projects`](/iam/reference/rest/v1/projects.roles) or
+
             [`organizations`](/iam/reference/rest/v1/organizations.roles). Each
+
             resource type's `parent` value format is described below:
+
 
             * [`projects.roles.create()`](/iam/reference/rest/v1/projects.roles/create):
               `projects/{PROJECT_ID}`. This method creates project-level
@@ -1172,206 +1354,235 @@ paths:
               `https://iam.googleapis.com/v1/organizations/{ORGANIZATION_ID}/roles`
 
             Note: Wildcard (*) values are invalid; you must specify a complete project
+
             ID or organization ID.
           in: path
           name: parent
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateRoleRequest'
+              $ref: "#/components/schemas/CreateRoleRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Role'
+                $ref: "#/components/schemas/Role"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
-        - organizations
-  '/v1/{resource}:getIamPolicy':
+        - projects
+  "/v1/{resource}:getIamPolicy":
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
-      description: |-
-        Returns the Cloud IAM access control policy for a
-        ServiceAccount.
+      description: >-
+        Gets the IAM policy that is attached to a ServiceAccount. This IAM
 
-        Note: Service accounts are both
-        [resources and
-        identities](/iam/docs/service-accounts#service_account_permissions). This
-        method treats the service account as a resource. It returns the Cloud IAM
-        policy that reflects what members have access to the service account.
+        policy specifies which members have access to the service account.
 
-        This method does not return what resources the service account has access
-        to. To see if a service account has access to a resource, call the
-        `getIamPolicy` method on the target resource. For example, to view grants
-        for a project, call the
-        [projects.getIamPolicy](/resource-manager/reference/rest/v1/projects/getIamPolicy)
+
+        This method does not tell you whether the service account has been granted
+
+        any roles on other resources. To check whether a service account has role
+
+        grants on a resource, use the `getIamPolicy` method for that resource. For
+
+        example, to view the role grants for a project, call the Resource Manager
+
+        API's
+
+        [`projects.getIamPolicy`](https://cloud.google.com/resource-manager/reference/rest/v1/projects/getIamPolicy)
+
         method.
       operationId: iam.projects.serviceAccounts.getIamPolicy
       parameters:
-        - description: |-
+        - description: >-
             REQUIRED: The resource for which the policy is being requested.
+
             See the operation documentation for the appropriate value for this field.
           in: path
           name: resource
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
-        - description: |-
+        - description: >-
             Optional. The policy format version to be returned.
 
+
             Valid values are 0, 1, and 3. Requests specifying an invalid value will be
+
             rejected.
 
+
             Requests for policies with any conditional bindings must specify version 3.
+
             Policies without any conditional bindings may specify any valid value or
+
             leave the field unset.
+
+
+            To learn which resources support conditions in their IAM policies, see the
+
+            [IAM
+
+            documentation](https://cloud.google.com/iam/help/conditions/resource-policies).
           in: query
           name: options.requestedPolicyVersion
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Policy'
+                $ref: "#/components/schemas/Policy"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1/{resource}:setIamPolicy':
+  "/v1/{resource}:setIamPolicy":
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
-      description: |-
-        Sets the Cloud IAM access control policy for a
-        ServiceAccount.
+      description: >-
+        Sets the IAM policy that is attached to a ServiceAccount.
 
-        Note: Service accounts are both
-        [resources and
-        identities](/iam/docs/service-accounts#service_account_permissions). This
-        method treats the service account as a resource. Use it to grant members
-        access to the service account, such as when they need to impersonate it.
 
-        This method does not grant the service account access to other resources,
-        such as projects. To grant a service account access to resources, include
-        the service account in the Cloud IAM policy for the desired resource, then
-        call the appropriate `setIamPolicy` method on the target resource. For
-        example, to grant a service account access to a project, call the
-        [projects.setIamPolicy](/resource-manager/reference/rest/v1/projects/setIamPolicy)
-        method.
+        Use this method to grant or revoke access to the service account. For
+
+        example, you could grant a member the ability to impersonate the service
+
+        account.
+
+
+        This method does not enable the service account to access other resources.
+
+        To grant roles to a service account on a resource, follow these steps:
+
+
+        1. Call the resource's `getIamPolicy` method to get its current IAM policy.
+
+        2. Edit the policy so that it binds the service account to an IAM role for
+
+        the resource.
+
+        3. Call the resource's `setIamPolicy` method to update its IAM policy.
+
+
+        For detailed instructions, see
+
+        [Granting roles to a service account for specific
+
+        resources](https://cloud.google.com/iam/help/service-accounts/granting-access-to-service-accounts).
       operationId: iam.projects.serviceAccounts.setIamPolicy
       parameters:
-        - description: |-
+        - description: >-
             REQUIRED: The resource for which the policy is being specified.
+
             See the operation documentation for the appropriate value for this field.
           in: path
           name: resource
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SetIamPolicyRequest'
+              $ref: "#/components/schemas/SetIamPolicyRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Policy'
+                $ref: "#/components/schemas/Policy"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1/{resource}:testIamPermissions':
+  "/v1/{resource}:testIamPermissions":
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
-      description: |-
-        Tests the specified permissions against the IAM access control policy
-        for a ServiceAccount.
+      description: >-
+        Tests whether the caller has the specified permissions on a
+
+        ServiceAccount.
       operationId: iam.projects.serviceAccounts.testIamPermissions
       parameters:
-        - description: |-
+        - description: >-
             REQUIRED: The resource for which the policy detail is being requested.
+
             See the operation documentation for the appropriate value for this field.
           in: path
           name: resource
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/TestIamPermissionsRequest'
+              $ref: "#/components/schemas/TestIamPermissionsRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/TestIamPermissionsResponse'
+                $ref: "#/components/schemas/TestIamPermissionsResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
 components:
@@ -1382,8 +1593,8 @@ components:
       name: $.xgafv
       schema:
         enum:
-          - '1'
-          - '2'
+          - "1"
+          - "2"
         type: string
     access_token:
       description: OAuth access token.
@@ -1396,7 +1607,6 @@ components:
       in: query
       name: alt
       schema:
-        default: json
         enum:
           - json
           - media
@@ -1415,7 +1625,7 @@ components:
       schema:
         type: string
     key:
-      description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -1431,55 +1641,64 @@ components:
       in: query
       name: prettyPrint
       schema:
-        default: true
         type: boolean
     quotaUser:
-      description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.'
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
       in: query
       name: quotaUser
       schema:
         type: string
     uploadType:
-      description: 'Legacy upload protocol for media (e.g. "media", "multipart").'
+      description: Legacy upload protocol for media (e.g. "media", "multipart").
       in: query
       name: uploadType
       schema:
         type: string
     upload_protocol:
-      description: 'Upload protocol for media (e.g. "raw", "multipart").'
+      description: Upload protocol for media (e.g. "raw", "multipart").
       in: query
       name: upload_protocol
       schema:
         type: string
   schemas:
     AdminAuditData:
-      description: |-
+      description: >-
         Audit log information specific to Cloud IAM admin APIs. This message is
+
         serialized as an `Any` type in the `ServiceData` message of an
+
         `AuditLog` message.
       properties:
         permissionDelta:
-          $ref: '#/components/schemas/PermissionDelta'
+          $ref: "#/components/schemas/PermissionDelta"
           description: The permission_delta when when creating or updating a Role.
       type: object
     AuditConfig:
-      description: |-
+      description: >-
         Specifies the audit configuration for a service.
+
         The configuration determines which permission types are logged, and what
+
         identities, if any, are exempted from logging.
+
         An AuditConfig must have one or more AuditLogConfigs.
 
+
         If there are AuditConfigs for both `allServices` and a specific service,
+
         the union of the two AuditConfigs is used for that service: the log_types
+
         specified in each AuditConfig are enabled, and the exempted_members in each
+
         AuditLogConfig are exempted.
+
 
         Example Policy with multiple AuditConfigs:
 
             {
               "audit_configs": [
                 {
-                  "service": "allServices"
+                  "service": "allServices",
                   "audit_log_configs": [
                     {
                       "log_type": "DATA_READ",
@@ -1488,18 +1707,18 @@ components:
                       ]
                     },
                     {
-                      "log_type": "DATA_WRITE",
+                      "log_type": "DATA_WRITE"
                     },
                     {
-                      "log_type": "ADMIN_READ",
+                      "log_type": "ADMIN_READ"
                     }
                   ]
                 },
                 {
-                  "service": "sampleservice.googleapis.com"
+                  "service": "sampleservice.googleapis.com",
                   "audit_log_configs": [
                     {
-                      "log_type": "DATA_READ",
+                      "log_type": "DATA_READ"
                     },
                     {
                       "log_type": "DATA_WRITE",
@@ -1513,34 +1732,41 @@ components:
             }
 
         For sampleservice, this policy enables DATA_READ, DATA_WRITE and ADMIN_READ
+
         logging. It also exempts jose@example.com from DATA_READ logging, and
+
         aliya@example.com from DATA_WRITE logging.
       properties:
         auditLogConfigs:
           description: The configuration for logging of each type of permission.
           items:
-            $ref: '#/components/schemas/AuditLogConfig'
+            $ref: "#/components/schemas/AuditLogConfig"
           type: array
         service:
-          description: |-
+          description: >-
             Specifies a service that will be enabled for audit logging.
+
             For example, `storage.googleapis.com`, `cloudsql.googleapis.com`.
+
             `allServices` is a special value that covers all services.
           type: string
       type: object
     AuditData:
-      description: |-
+      description: >-
         Audit log information specific to Cloud IAM. This message is serialized
+
         as an `Any` type in the `ServiceData` message of an
+
         `AuditLog` message.
       properties:
         policyDelta:
-          $ref: '#/components/schemas/PolicyDelta'
+          $ref: "#/components/schemas/PolicyDelta"
           description: Policy delta between the original policy and the newly set policy.
       type: object
     AuditLogConfig:
-      description: |-
+      description: >-
         Provides the configuration for logging a type of permissions.
+
         Example:
 
             {
@@ -1552,18 +1778,21 @@ components:
                   ]
                 },
                 {
-                  "log_type": "DATA_WRITE",
+                  "log_type": "DATA_WRITE"
                 }
               ]
             }
 
         This enables 'DATA_READ' and 'DATA_WRITE' logging, while exempting
+
         jose@example.com from DATA_READ logging.
       properties:
         exemptedMembers:
-          description: |-
+          description: >-
             Specifies the identities that do not cause logging for this type of
+
             permission.
+
             Follows the same format of Binding.members.
           items:
             type: string
@@ -1581,8 +1810,9 @@ components:
       description: Contains information about an auditable service.
       properties:
         name:
-          description: |-
+          description: >-
             Public name of the service.
+
             For example, the service name for Cloud IAM is 'iam.googleapis.com'.
           type: string
       type: object
@@ -1590,16 +1820,34 @@ components:
       description: Associates `members` with a `role`.
       properties:
         condition:
-          $ref: '#/components/schemas/Expr'
-          description: |-
+          $ref: "#/components/schemas/Expr"
+          description: >-
             The condition that is associated with this binding.
-            NOTE: An unsatisfied condition will not allow user access via current
-            binding. Different bindings, including their conditions, are examined
-            independently.
+
+
+            If the condition evaluates to `true`, then this binding applies to the
+
+            current request.
+
+
+            If the condition evaluates to `false`, then this binding does not apply to
+
+            the current request. However, a different role binding might grant the same
+
+            role to one or more of the members in this binding.
+
+
+            To learn which resources support conditions in their IAM policies, see the
+
+            [IAM
+
+            documentation](https://cloud.google.com/iam/help/conditions/resource-policies).
         members:
-          description: |+
+          description: >+
             Specifies the identities requesting access for a Cloud Platform resource.
+
             `members` can have the following values:
+
 
             * `allUsers`: A special identifier that represents anyone who is
                on the internet; with or without a Google account.
@@ -1638,26 +1886,28 @@ components:
                recovered group retains the role in the binding.
 
 
-            * `domain:{domain}`: The G Suite domain (primary) that represents all the
-               users of that domain. For example, `google.com` or `example.com`.
+            * `domain:{domain}`: The G Suite domain (primary) that represents all the    users of that domain. For example, `google.com` or `example.com`.
 
           items:
             type: string
           type: array
         role:
-          description: |-
+          description: >-
             Role that is assigned to `members`.
+
             For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
           type: string
       type: object
     BindingDelta:
-      description: |-
+      description: >-
         One delta entry for Binding. Each individual change (only one member in each
+
         entry) to a binding will be a separate entry.
       properties:
         action:
-          description: |-
+          description: >-
             The action that was performed on a Binding.
+
             Required
           enum:
             - ACTION_UNSPECIFIED
@@ -1665,18 +1915,22 @@ components:
             - REMOVE
           type: string
         condition:
-          $ref: '#/components/schemas/Expr'
+          $ref: "#/components/schemas/Expr"
           description: The condition that is associated with this binding.
         member:
-          description: |-
+          description: >-
             A single identity requesting access for a Cloud Platform resource.
+
             Follows the same format of Binding.members.
+
             Required
           type: string
         role:
-          description: |-
+          description: >-
             Role that is assigned to `members`.
+
             For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
+
             Required
           type: string
       type: object
@@ -1684,19 +1938,29 @@ components:
       description: The request to create a new role.
       properties:
         role:
-          $ref: '#/components/schemas/Role'
+          $ref: "#/components/schemas/Role"
           description: The Role resource to create.
         roleId:
-          description: The role ID to use for this role.
+          description: >-
+            The role ID to use for this role.
+
+
+            A role ID may contain alphanumeric characters, underscores (`_`), and
+
+            periods (`.`). It must contain a minimum of 3 characters and a maximum of
+
+            64 characters.
           type: string
       type: object
     CreateServiceAccountKeyRequest:
       description: The service account key create request.
       properties:
         keyAlgorithm:
-          description: |-
+          description: >-
             Which type of key and algorithm to use for the key.
+
             The default is currently a 2K RSA key.  However this may change in the
+
             future.
           enum:
             - KEY_ALG_UNSPECIFIED
@@ -1704,9 +1968,11 @@ components:
             - KEY_ALG_RSA_2048
           type: string
         privateKeyType:
-          description: |-
+          description: >-
             The output format of the private key. The default value is
+
             `TYPE_GOOGLE_CREDENTIALS_FILE`, which is the Google Credentials File
+
             format.
           enum:
             - TYPE_UNSPECIFIED
@@ -1718,17 +1984,22 @@ components:
       description: The service account create request.
       properties:
         accountId:
-          description: |-
+          description: >-
             Required. The account id that is used to generate the service account
+
             email address and a stable unique id. It is unique within a project,
+
             must be 6-30 characters long, and match the regular expression
+
             `[a-z]([-a-z0-9]*[a-z0-9])` to comply with RFC1035.
           type: string
         serviceAccount:
-          $ref: '#/components/schemas/ServiceAccount'
-          description: |-
+          $ref: "#/components/schemas/ServiceAccount"
+          description: >-
             The ServiceAccount resource to
+
             create. Currently, only the following values are user assignable:
+
             `display_name` and `description`.
       type: object
     DisableServiceAccountRequest:
@@ -1736,9 +2007,11 @@ components:
       properties: {}
       type: object
     Empty:
-      description: |-
+      description: >-
         A generic empty message that you can re-use to avoid defining duplicated
+
         empty messages in your APIs. A typical example is to use it as the request
+
         or the response type of an API method. For instance:
 
             service Foo {
@@ -1753,10 +2026,13 @@ components:
       properties: {}
       type: object
     Expr:
-      description: |-
+      description: >-
         Represents a textual expression in the Common Expression Language (CEL)
+
         syntax. CEL is a C-like expression language. The syntax and semantics of CEL
+
         are documented at https://github.com/google/cel-spec.
+
 
         Example (Comparison):
 
@@ -1783,28 +2059,35 @@ components:
             expression: "'New message received at ' + string(document.create_time)"
 
         The exact variables and functions that may be referenced within an expression
+
         are determined by the service that evaluates it. See the service
+
         documentation for additional information.
       properties:
         description:
-          description: |-
+          description: >-
             Optional. Description of the expression. This is a longer text which
+
             describes the expression, e.g. when hovered over it in a UI.
           type: string
         expression:
-          description: |-
+          description: >-
             Textual representation of an expression in Common Expression Language
+
             syntax.
           type: string
         location:
-          description: |-
+          description: >-
             Optional. String indicating the location of the expression for error
+
             reporting, e.g. a file name and a position in the file.
           type: string
         title:
-          description: |-
+          description: >-
             Optional. Title for the expression, i.e. a short string describing
+
             its purpose. This can be used e.g. in UIs which allow to enter the
+
             expression.
           type: string
       type: object
@@ -1812,30 +2095,37 @@ components:
       description: The request to lint a Cloud IAM policy object.
       properties:
         condition:
-          $ref: '#/components/schemas/Expr'
+          $ref: "#/components/schemas/Expr"
           description: google.iam.v1.Binding.condition object to be linted.
         fullResourceName:
-          description: |-
+          description: >-
             The full resource name of the policy this lint request is about.
 
+
             The name follows the Google Cloud Platform (GCP) resource format.
+
             For example, a GCP project with ID `my-project` will be named
+
             `//cloudresourcemanager.googleapis.com/projects/my-project`.
 
+
             The resource name is not used to read the policy instance from the Cloud
+
             IAM database. The candidate policy for lint has to be provided in the same
+
             request object.
           type: string
       type: object
     LintPolicyResponse:
-      description: |-
+      description: >-
         The response of a lint operation. An empty response indicates
+
         the operation was able to fully execute and no lint issue was found.
       properties:
         lintResults:
           description: List of lint results sorted by `severity` in descending order.
           items:
-            $ref: '#/components/schemas/LintResult'
+            $ref: "#/components/schemas/LintResult"
           type: array
       type: object
     LintResult:
@@ -1845,13 +2135,18 @@ components:
           description: Human readable debug message associated with the issue.
           type: string
         fieldName:
-          description: |-
+          description: >-
             The name of the field for which this lint result is about.
 
+
             For nested messages `field_name` consists of names of the embedded fields
+
             separated by period character. The top-level qualifier is the input object
+
             to lint in the request. For example, the `field_name` value
+
             `condition.expression` identifies a lint result for the `expression` field
+
             of the provided condition.
           type: string
         level:
@@ -1861,9 +2156,11 @@ components:
             - CONDITION
           type: string
         locationOffset:
-          description: |-
+          description: >-
             0-based character position of problematic construct within the object
+
             identified by `field_name`. Currently, this is populated only for condition
+
             expression.
           format: int32
           type: integer
@@ -1878,8 +2175,9 @@ components:
             - DEPRECATED
           type: string
         validationUnitName:
-          description: |-
+          description: >-
             The validation unit name, for instance
+
             "lintValidationUnits/ConditionComplexityCheck".
           type: string
       type: object
@@ -1887,14 +2185,15 @@ components:
       description: The response containing the roles defined under a resource.
       properties:
         nextPageToken:
-          description: |-
+          description: >-
             To retrieve the next page of results, set
+
             `ListRolesRequest.page_token` to this value.
           type: string
         roles:
           description: The Roles defined on this resource.
           items:
-            $ref: '#/components/schemas/Role'
+            $ref: "#/components/schemas/Role"
           type: array
       type: object
     ListServiceAccountKeysResponse:
@@ -1903,7 +2202,7 @@ components:
         keys:
           description: The public keys for the service account.
           items:
-            $ref: '#/components/schemas/ServiceAccountKey'
+            $ref: "#/components/schemas/ServiceAccountKey"
           type: array
       type: object
     ListServiceAccountsResponse:
@@ -1912,20 +2211,35 @@ components:
         accounts:
           description: The list of matching service accounts.
           items:
-            $ref: '#/components/schemas/ServiceAccount'
+            $ref: "#/components/schemas/ServiceAccount"
           type: array
         nextPageToken:
-          description: |-
+          description: >-
             To retrieve the next page of results, set
+
             ListServiceAccountsRequest.page_token
+
             to this value.
           type: string
       type: object
     PatchServiceAccountRequest:
-      description: The patch service account request.
+      description: >-
+        The request for
+
+        PatchServiceAccount.
+
+
+        You can patch only the `display_name` and `description` fields. You must use
+
+        the `update_mask` field to specify which of these fields you want to patch.
+
+
+        Only the fields specified in the request are guaranteed to be returned in
+
+        the response. Other fields may be empty in the response.
       properties:
         serviceAccount:
-          $ref: '#/components/schemas/ServiceAccount'
+          $ref: "#/components/schemas/ServiceAccount"
         updateMask:
           format: google-fieldmask
           type: string
@@ -1944,8 +2258,9 @@ components:
             - NOT_SUPPORTED
           type: string
         description:
-          description: |-
+          description: >-
             A brief description of what this Permission is used for.
+
             This permission can ONLY be used in predefined roles.
           type: string
         name:
@@ -1954,8 +2269,9 @@ components:
         onlyInPredefinedRoles:
           type: boolean
         primaryPermission:
-          description: |-
+          description: >-
             The preferred name for this permission. If present, then this permission is
+
             an alias of, and equivalent to, the listed primary_permission.
           type: string
         stage:
@@ -1971,8 +2287,9 @@ components:
           type: string
       type: object
     PermissionDelta:
-      description: |-
+      description: >-
         A PermissionDelta message to record the added_permissions and
+
         removed_permissions inside a role.
       properties:
         addedPermissions:
@@ -1987,21 +2304,36 @@ components:
           type: array
       type: object
     Policy:
-      description: |-
+      description: >-
         An Identity and Access Management (IAM) policy, which specifies access
+
         controls for Google Cloud resources.
 
 
+
         A `Policy` is a collection of `bindings`. A `binding` binds one or more
+
         `members` to a single `role`. Members can be user accounts, service accounts,
+
         Google groups, and domains (such as G Suite). A `role` is a named list of
+
         permissions; each `role` can be an IAM predefined role or a user-created
+
         custom role.
 
-        Optionally, a `binding` can specify a `condition`, which is a logical
-        expression that allows access to a resource only if the expression evaluates
-        to `true`. A condition can add constraints based on attributes of the
-        request, the resource, or both.
+
+        For some types of Google Cloud resources, a `binding` can also specify a
+
+        `condition`, which is a logical expression that allows access to a resource
+
+        only if the expression evaluates to `true`. A condition can add constraints
+
+        based on attributes of the request, the resource, or both. To learn which
+
+        resources support conditions in their IAM policies, see the
+
+        [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies).
+
 
         **JSON example:**
 
@@ -2018,7 +2350,9 @@ components:
                 },
                 {
                   "role": "roles/resourcemanager.organizationViewer",
-                  "members": ["user:eve@example.com"],
+                  "members": [
+                    "user:eve@example.com"
+                  ],
                   "condition": {
                     "title": "expirable access",
                     "description": "Does not grant access after Sep 2020",
@@ -2050,60 +2384,91 @@ components:
             - version: 3
 
         For a description of IAM and its features, see the
+
         [IAM documentation](https://cloud.google.com/iam/docs/).
       properties:
         auditConfigs:
           description: Specifies cloud audit logging configuration for this policy.
           items:
-            $ref: '#/components/schemas/AuditConfig'
+            $ref: "#/components/schemas/AuditConfig"
           type: array
         bindings:
-          description: |-
+          description: >-
             Associates a list of `members` to a `role`. Optionally, may specify a
+
             `condition` that determines how and when the `bindings` are applied. Each
+
             of the `bindings` must contain at least one member.
           items:
-            $ref: '#/components/schemas/Binding'
+            $ref: "#/components/schemas/Binding"
           type: array
         etag:
-          description: |-
+          description: >-
             `etag` is used for optimistic concurrency control as a way to help
+
             prevent simultaneous updates of a policy from overwriting each other.
+
             It is strongly suggested that systems make use of the `etag` in the
+
             read-modify-write cycle to perform policy updates in order to avoid race
+
             conditions: An `etag` is returned in the response to `getIamPolicy`, and
+
             systems are expected to put that etag in the request to `setIamPolicy` to
+
             ensure that their change will be applied to the same version of the policy.
 
+
             **Important:** If you use IAM Conditions, you must include the `etag` field
+
             whenever you call `setIamPolicy`. If you omit this field, then IAM allows
+
             you to overwrite a version `3` policy with a version `1` policy, and all of
+
             the conditions in the version `3` policy are lost.
           format: byte
           type: string
         version:
-          description: |-
+          description: >-
             Specifies the format of the policy.
 
+
             Valid values are `0`, `1`, and `3`. Requests that specify an invalid value
+
             are rejected.
 
+
             Any operation that affects conditional role bindings must specify version
+
             `3`. This requirement applies to the following operations:
 
+
             * Getting a policy that includes a conditional role binding
+
             * Adding a conditional role binding to a policy
+
             * Changing a conditional role binding in a policy
+
             * Removing any role binding, with or without a condition, from a policy
               that includes conditions
 
             **Important:** If you use IAM Conditions, you must include the `etag` field
+
             whenever you call `setIamPolicy`. If you omit this field, then IAM allows
+
             you to overwrite a version `3` policy with a version `1` policy, and all of
+
             the conditions in the version `3` policy are lost.
 
+
             If a policy does not include any conditions, operations on that policy may
+
             specify any valid version or leave the field unset.
+
+
+            To learn which resources support conditions in their IAM policies, see the
+
+            [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies).
           format: int32
           type: integer
       type: object
@@ -2113,19 +2478,23 @@ components:
         bindingDeltas:
           description: The delta for Bindings between two policies.
           items:
-            $ref: '#/components/schemas/BindingDelta'
+            $ref: "#/components/schemas/BindingDelta"
           type: array
       type: object
     QueryAuditableServicesRequest:
       description: A request to get the list of auditable services for a resource.
       properties:
         fullResourceName:
-          description: |-
+          description: >-
             Required. The full resource name to query from the list of auditable
+
             services.
 
+
             The name follows the Google Cloud Platform resource format.
+
             For example, a Cloud Platform project with id `my-project` will be named
+
             `//cloudresourcemanager.googleapis.com/projects/my-project`.
           type: string
       type: object
@@ -2135,27 +2504,35 @@ components:
         services:
           description: The auditable services for a resource.
           items:
-            $ref: '#/components/schemas/AuditableService'
+            $ref: "#/components/schemas/AuditableService"
           type: array
       type: object
     QueryGrantableRolesRequest:
       description: The grantable role query request.
       properties:
         fullResourceName:
-          description: |-
+          description: >-
             Required. The full resource name to query from the list of grantable roles.
 
+
             The name follows the Google Cloud Platform resource format.
+
             For example, a Cloud Platform project with id `my-project` will be named
+
             `//cloudresourcemanager.googleapis.com/projects/my-project`.
           type: string
         pageSize:
-          description: Optional limit on the number of roles to include in the response.
+          description: >-
+            Optional limit on the number of roles to include in the response.
+
+
+            The default is 300, and the maximum is 1,000.
           format: int32
           type: integer
         pageToken:
-          description: |-
+          description: >-
             Optional pagination token returned in an earlier
+
             QueryGrantableRolesResponse.
           type: string
         view:
@@ -2168,35 +2545,45 @@ components:
       description: The grantable role query response.
       properties:
         nextPageToken:
-          description: |-
+          description: >-
             To retrieve the next page of results, set
+
             `QueryGrantableRolesRequest.page_token` to this value.
           type: string
         roles:
           description: The list of matching roles.
           items:
-            $ref: '#/components/schemas/Role'
+            $ref: "#/components/schemas/Role"
           type: array
       type: object
     QueryTestablePermissionsRequest:
       description: A request to get permissions which can be tested on a resource.
       properties:
         fullResourceName:
-          description: |-
+          description: >-
             Required. The full resource name to query from the list of testable
+
             permissions.
 
+
             The name follows the Google Cloud Platform resource format.
+
             For example, a Cloud Platform project with id `my-project` will be named
+
             `//cloudresourcemanager.googleapis.com/projects/my-project`.
           type: string
         pageSize:
-          description: Optional limit on the number of permissions to include in the response.
+          description: >-
+            Optional limit on the number of permissions to include in the response.
+
+
+            The default is 100, and the maximum is 1,000.
           format: int32
           type: integer
         pageToken:
-          description: |-
+          description: >-
             Optional pagination token returned in an earlier
+
             QueryTestablePermissionsRequest.
           type: string
       type: object
@@ -2204,22 +2591,24 @@ components:
       description: The response containing permissions which can be tested on a resource.
       properties:
         nextPageToken:
-          description: |-
+          description: >-
             To retrieve the next page of results, set
+
             `QueryTestableRolesRequest.page_token` to this value.
           type: string
         permissions:
           description: The Permissions testable on the requested resource.
           items:
-            $ref: '#/components/schemas/Permission'
+            $ref: "#/components/schemas/Permission"
           type: array
       type: object
     Role:
       description: A role in the Identity and Access Management API.
       properties:
         deleted:
-          description: |-
+          description: >-
             The current deleted state of the role. This field is read only.
+
             It will be ignored in calls to CreateRole and UpdateRole.
           type: boolean
         description:
@@ -2235,19 +2624,25 @@ components:
             type: string
           type: array
         name:
-          description: |-
+          description: >-
             The name of the role.
+
 
             When Role is used in CreateRole, the role name must not be set.
 
+
             When Role is used in output and other input such as UpdateRole, the role
+
             name is the complete path, e.g., roles/logging.viewer for predefined roles
+
             and organizations/{ORGANIZATION_ID}/roles/logging.viewer for custom roles.
           type: string
         stage:
-          description: |-
+          description: >-
             The current launch stage of the role. If the `ALPHA` launch stage has been
+
             selected for a role, the `stage` field will not be included in the
+
             returned definition for the role.
           enum:
             - ALPHA
@@ -2258,98 +2653,143 @@ components:
             - EAP
           type: string
         title:
-          description: |-
+          description: >-
             Optional. A human-readable title for the role.  Typically this
+
             is limited to 100 UTF-8 bytes.
           type: string
       type: object
     ServiceAccount:
-      description: |-
-        A service account in the Identity and Access Management API.
+      description: >-
+        An IAM service account.
 
-        To create a service account, specify the `project_id` and the `account_id`
-        for the account.  The `account_id` is unique within the project, and is used
-        to generate the service account email address and a stable
-        `unique_id`.
 
-        If the account already exists, the account's resource name is returned
-        in the format of projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT}. The caller
-        can use the name in other methods to access the account.
+        A service account is an account for an application or a virtual machine (VM)
 
-        All other methods can identify the service account using the format
-        `projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT}`.
-        Using `-` as a wildcard for the `PROJECT_ID` will infer the project from
-        the account. The `ACCOUNT` value can be the `email` address or the
-        `unique_id` of the service account.
+        instance, not a person. You can use a service account to call Google APIs. To
+
+        learn more, read the [overview of service
+
+        accounts](https://cloud.google.com/iam/help/service-accounts/overview).
+
+
+        When you create a service account, you specify the project ID that owns the
+
+        service account, as well as a name that must be unique within the project.
+
+        IAM uses these values to create an email address that identifies the service
+
+        account.
       properties:
         description:
-          description: |-
-            Optional. A user-specified opaque description of the service account.
-            Must be less than or equal to 256 UTF-8 bytes.
+          description: >-
+            Optional. A user-specified, human-readable description of the service account. The
+
+            maximum length is 256 UTF-8 bytes.
           type: string
         disabled:
-          description: |-
-            @OutputOnly A bool indicate if the service account is disabled.
-            The field is currently in alpha phase.
+          description: Output only. Whether the service account is disabled.
           type: boolean
         displayName:
-          description: |-
-            Optional. A user-specified name for the service account.
-            Must be less than or equal to 100 UTF-8 bytes.
+          description: >-
+            Optional. A user-specified, human-readable name for the service account. The maximum
+
+            length is 100 UTF-8 bytes.
           type: string
         email:
-          description: '@OutputOnly The email address of the service account.'
+          description: Output only. The email address of the service account.
           type: string
         etag:
-          description: |-
-            Optional. Note: `etag` is an inoperable legacy field that is only returned
-            for backwards compatibility.
+          description: Deprecated. Do not use.
           format: byte
           type: string
         name:
-          description: |-
-            The resource name of the service account in the following format:
-            `projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT}`.
+          description: >-
+            The resource name of the service account.
 
-            Requests using `-` as a wildcard for the `PROJECT_ID` will infer the
-            project from the `account` and the `ACCOUNT` value can be the `email`
-            address or the `unique_id` of the service account.
 
-            In responses the resource name will always be in the format
-            `projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT}`.
+            Use one of the following formats:
+
+
+            * `projects/{PROJECT_ID}/serviceAccounts/{EMAIL_ADDRESS}`
+
+            * `projects/{PROJECT_ID}/serviceAccounts/{UNIQUE_ID}`
+
+
+            As an alternative, you can use the `-` wildcard character instead of the
+
+            project ID:
+
+
+            * `projects/-/serviceAccounts/{EMAIL_ADDRESS}`
+
+            * `projects/-/serviceAccounts/{UNIQUE_ID}`
+
+
+            When possible, avoid using the `-` wildcard character, because it can cause
+
+            response messages to contain misleading error codes. For example, if you
+
+            try to get the service account
+
+            `projects/-/serviceAccounts/fake@example.com`, which does not exist, the
+
+            response contains an HTTP `403 Forbidden` error instead of a `404 Not
+
+            Found` error.
           type: string
         oauth2ClientId:
-          description: |-
-            @OutputOnly The OAuth2 client id for the service account.
-            This is used in conjunction with the OAuth2 clientconfig API to make
-            three legged OAuth2 (3LO) flows to access the data of Google users.
+          description: Output only. The OAuth 2.0 client ID for the service account.
           type: string
         projectId:
-          description: '@OutputOnly The id of the project that owns the service account.'
+          description: Output only. The ID of the project that owns the service account.
           type: string
         uniqueId:
-          description: '@OutputOnly The unique and stable id of the service account.'
+          description: >-
+            Output only. The unique, stable numeric ID for the service account.
+
+
+            Each service account retains its unique ID even if you delete the service
+
+            account. For example, if you delete a service account, then create a new
+
+            service account with the same name, the new service account has a different
+
+            unique ID than the deleted service account.
           type: string
       type: object
     ServiceAccountKey:
-      description: |-
+      description: >-
         Represents a service account key.
 
+
         A service account has two sets of key-pairs: user-managed, and
+
         system-managed.
 
+
         User-managed key-pairs can be created and deleted by users.  Users are
+
         responsible for rotating these keys periodically to ensure security of
+
         their service accounts.  Users retain the private key of these key-pairs,
+
         and Google retains ONLY the public key.
 
+
         System-managed keys are automatically rotated by Google, and are used for
+
         signing for a maximum of two weeks. The rotation process is probabilistic,
+
         and usage of the new key will gradually ramp up and down over the key's
+
         lifetime. We recommend caching the public key set for a service account for
+
         no more than 24 hours to ensure you have access to the latest keys.
 
+
         Public keys for all service accounts are also published at the OAuth2
+
         Service Account API.
       properties:
         keyAlgorithm:
@@ -2374,28 +2814,39 @@ components:
             - SYSTEM_MANAGED
           type: string
         name:
-          description: |-
+          description: >-
             The resource name of the service account key in the following format
+
             `projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT}/keys/{key}`.
           type: string
         privateKeyData:
-          description: |-
+          description: >-
             The private key data. Only provided in `CreateServiceAccountKey`
+
             responses. Make sure to keep the private key data secure because it
+
             allows for the assertion of the service account identity.
+
             When base64 decoded, the private key data can be used to authenticate with
+
             Google API client libraries and with
+
             <a href="/sdk/gcloud/reference/auth/activate-service-account">gcloud
+
             auth activate-service-account</a>.
           format: byte
           type: string
         privateKeyType:
-          description: |-
+          description: >-
             The output format for the private key.
+
             Only provided in `CreateServiceAccountKey` responses, not
+
             in `GetServiceAccountKey` or `ListServiceAccountKey` responses.
 
+
             Google never exposes system-managed private keys, and never retains
+
             user-managed private keys.
           enum:
             - TYPE_UNSPECIFIED
@@ -2411,10 +2862,13 @@ components:
           format: google-datetime
           type: string
         validBeforeTime:
-          description: |-
+          description: >-
             The key can be used before this timestamp.
+
             For system-managed key pairs, this timestamp is the end time for the
+
             private key signing operation. The public key could still be used
+
             for verification for a few hours after this time.
           format: google-datetime
           type: string
@@ -2423,66 +2877,151 @@ components:
       description: Request message for `SetIamPolicy` method.
       properties:
         policy:
-          $ref: '#/components/schemas/Policy'
-          description: |-
+          $ref: "#/components/schemas/Policy"
+          description: >-
             REQUIRED: The complete policy to be applied to the `resource`. The size of
+
             the policy is limited to a few 10s of KB. An empty policy is a
+
             valid policy but certain Cloud Platform services (such as Projects)
+
             might reject them.
         updateMask:
-          description: |-
+          description: >-
             OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
+
             the fields in the mask will be modified. If no mask is provided, the
+
             following default mask is used:
-            paths: "bindings, etag"
-            This field is only used by Cloud IAM.
+
+
+            `paths: "bindings, etag"`
           format: google-fieldmask
           type: string
       type: object
     SignBlobRequest:
-      description: The service account sign blob request.
+      description: >-
+        Deprecated. [Migrate to Service Account Credentials
+
+        API](https://cloud.google.com/iam/help/credentials/migrate-api).
+
+
+        The service account sign blob request.
       properties:
         bytesToSign:
-          description: Required. The bytes to sign.
+          description: >-
+            Required. Deprecated. [Migrate to Service Account Credentials
+
+            API](https://cloud.google.com/iam/help/credentials/migrate-api).
+
+
+            The bytes to sign.
           format: byte
           type: string
       type: object
     SignBlobResponse:
-      description: The service account sign blob response.
+      description: >-
+        Deprecated. [Migrate to Service Account Credentials
+
+        API](https://cloud.google.com/iam/help/credentials/migrate-api).
+
+
+        The service account sign blob response.
       properties:
         keyId:
-          description: The id of the key used to sign the blob.
+          description: >-
+            Deprecated. [Migrate to Service Account Credentials
+
+            API](https://cloud.google.com/iam/help/credentials/migrate-api).
+
+
+            The id of the key used to sign the blob.
           type: string
         signature:
-          description: The signed blob.
+          description: >-
+            Deprecated. [Migrate to Service Account Credentials
+
+            API](https://cloud.google.com/iam/help/credentials/migrate-api).
+
+
+            The signed blob.
           format: byte
           type: string
       type: object
     SignJwtRequest:
-      description: The service account sign JWT request.
+      description: >-
+        Deprecated. [Migrate to Service Account Credentials
+
+        API](https://cloud.google.com/iam/help/credentials/migrate-api).
+
+
+        The service account sign JWT request.
       properties:
         payload:
-          description: 'Required. The JWT payload to sign, a JSON JWT Claim set.'
+          description: >-
+            Required. Deprecated. [Migrate to Service Account Credentials
+
+            API](https://cloud.google.com/iam/help/credentials/migrate-api).
+
+
+            The JWT payload to sign. Must be a serialized JSON object that contains a
+
+            JWT Claims Set. For example: `{"sub": "user@example.com", "iat": 313435}`
+
+
+            If the JWT Claims Set contains an expiration time (`exp`) claim, it must be
+
+            an integer timestamp that is not in the past and no more than 1 hour in the
+
+            future.
+
+
+            If the JWT Claims Set does not contain an expiration time (`exp`) claim,
+
+            this claim is added automatically, with a timestamp that is 1 hour in the
+
+            future.
           type: string
       type: object
     SignJwtResponse:
-      description: The service account sign JWT response.
+      description: >-
+        Deprecated. [Migrate to Service Account Credentials
+
+        API](https://cloud.google.com/iam/help/credentials/migrate-api).
+
+
+        The service account sign JWT response.
       properties:
         keyId:
-          description: The id of the key used to sign the JWT.
+          description: >-
+            Deprecated. [Migrate to Service Account Credentials
+
+            API](https://cloud.google.com/iam/help/credentials/migrate-api).
+
+
+            The id of the key used to sign the JWT.
           type: string
         signedJwt:
-          description: The signed JWT.
+          description: >-
+            Deprecated. [Migrate to Service Account Credentials
+
+            API](https://cloud.google.com/iam/help/credentials/migrate-api).
+
+
+            The signed JWT.
           type: string
       type: object
     TestIamPermissionsRequest:
       description: Request message for `TestIamPermissions` method.
       properties:
         permissions:
-          description: |-
+          description: >-
             The set of permissions to check for the `resource`. Permissions with
+
             wildcards (such as '*' or 'storage.*') are not allowed. For more
+
             information see
+
             [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
           items:
             type: string
@@ -2492,8 +3031,9 @@ components:
       description: Response message for `TestIamPermissions` method.
       properties:
         permissions:
-          description: |-
+          description: >-
             A subset of `TestPermissionsRequest.permissions` that the caller is
+
             allowed.
           items:
             type: string
@@ -2514,17 +3054,20 @@ components:
     UndeleteServiceAccountResponse:
       properties:
         restoredAccount:
-          $ref: '#/components/schemas/ServiceAccount'
+          $ref: "#/components/schemas/ServiceAccount"
           description: Metadata for the restored service account.
       type: object
     UploadServiceAccountKeyRequest:
       description: The service account key upload request.
       properties:
         publicKeyData:
-          description: |-
+          description: >-
             A field that allows clients to upload their own public key. If set,
+
             use this public key data to create a service account key for given
+
             service account.
+
             Please note, the expected format for this field is X509_PEM.
           format: byte
           type: string
@@ -2534,16 +3077,16 @@ components:
       description: Oauth 2.0 implicit authentication
       flows:
         implicit:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
       type: oauth2
     Oauth2c:
-      description: Oauth 2.0 accessCode authentication
+      description: Oauth 2.0 authorizationCode authentication
       flows:
         authorizationCode:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-          tokenUrl: 'https://accounts.google.com/o/oauth2/token'
+            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+          tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

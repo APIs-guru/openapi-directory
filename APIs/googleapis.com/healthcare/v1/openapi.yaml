@@ -1,36 +1,37 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://healthcare.googleapis.com/'
+  - url: https://healthcare.googleapis.com/
 info:
   contact:
     name: Google
-    url: 'https://google.com'
-  description: 'Manage, store, and access healthcare data in Google Cloud Platform.'
+    url: https://google.com
+  description: Manage, store, and access healthcare data in Google Cloud Platform.
   title: Cloud Healthcare
   version: v1
   x-apiClientRegistration:
-    url: 'https://console.developers.google.com'
+    url: https://console.developers.google.com
   x-logo:
-    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.31
       format: google
-      url: 'https://healthcare.googleapis.com/$discovery/rest?version=v1'
+      url: https://healthcare.googleapis.com/$discovery/rest?version=v1
       version: v1
   x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: healthcare
 externalDocs:
-  url: 'https://cloud.google.com/healthcare'
+  url: https://cloud.google.com/healthcare
 tags:
   - name: projects
 paths:
-  '/v1/{name}':
+  "/v1/{name}":
     delete:
-      description: |-
+      description: >-
         Deletes the specified DICOM store and removes all images that are contained
+
         within it.
       operationId: healthcare.projects.locations.datasets.dicomStores.delete
       parameters:
@@ -42,15 +43,15 @@ paths:
             type: string
           x-reservedExpansion: true
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/Empty'
+                $ref: "#/components/schemas/Empty"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
     get:
@@ -64,8 +65,9 @@ paths:
           schema:
             type: string
           x-reservedExpansion: true
-        - description: |-
+        - description: >-
             Specifies which parts of the Message resource to return in the response.
+
             When unspecified, equivalent to FULL.
           in: query
           name: view
@@ -78,35 +80,36 @@ paths:
               - BASIC
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/DicomStore'
+                $ref: "#/components/schemas/DicomStore"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
     patch:
       description: Updates the specified DICOM store.
       operationId: healthcare.projects.locations.datasets.dicomStores.patch
       parameters:
-        - description: |-
+        - description: >-
             Resource name of the DICOM store, of the form
+
             `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`.
           in: path
           name: name
@@ -114,56 +117,76 @@ paths:
           schema:
             type: string
           x-reservedExpansion: true
-        - description: |-
+        - description: >-
             The update mask applies to the resource. For the `FieldMask` definition,
+
             see
+
             https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
           in: query
           name: updateMask
           schema:
-            $ref: '#/components/schemas/HttpBody'
+            $ref: "#/components/schemas/HttpBody"
             type: string
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/DicomStore'
+              $ref: "#/components/schemas/DicomStore"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/DicomStore'
+                $ref: "#/components/schemas/DicomStore"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
     put:
-      description: |-
+      description: >-
         Updates the entire contents of a resource.
 
+
         Implements the FHIR standard update interaction
+
         ([DSTU2](http://hl7.org/implement/standards/fhir/DSTU2/http.html#update),
+
         [STU3](http://hl7.org/implement/standards/fhir/STU3/http.html#update),
+
         [R4](http://hl7.org/implement/standards/fhir/R4/http.html#update)).
 
+
         If the specified resource does
+
         not exist and the FHIR store has
+
         enable_update_create set, creates the
+
         resource with the client-specified ID.
 
+
         The request body must contain a JSON-encoded FHIR resource, and the request
+
         headers must contain `Content-Type: application/fhir+json`. The resource
+
         must contain an `id` element having an identical value to the ID in the
+
         REST path of the request.
 
+
         On success, the response body will contain a JSON-encoded representation
+
         of the updated resource, including the server-assigned version ID.
+
         Errors generated by the FHIR store will contain a JSON-encoded
+
         `OperationOutcome` resource describing the reason for the error. If the
+
         request cannot be mapped to a valid API method on a FHIR store, a generic
+
         GCP error might be returned instead.
       operationId: healthcare.projects.locations.datasets.fhirStores.fhir.update
       parameters:
@@ -178,41 +201,56 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/HttpBody'
+              $ref: "#/components/schemas/HttpBody"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/HttpBody'
+                $ref: "#/components/schemas/HttpBody"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1/{name}/$everything':
+  "/v1/{name}/$everything":
     get:
-      description: |-
+      description: >-
         Retrieves a Patient resource and resources related to that patient.
 
+
         Implements the FHIR extended operation Patient-everything
+
         ([DSTU2](http://hl7.org/implement/standards/fhir/DSTU2/patient-operations.html#everything),
+
         [STU3](http://hl7.org/implement/standards/fhir/STU3/patient-operations.html#everything),
+
         [R4](http://hl7.org/implement/standards/fhir/R4/patient-operations.html#everything)).
 
+
         On success, the response body will contain a JSON-encoded representation
+
         of a `Bundle` resource of type `searchset`, containing the results of the
+
         operation.
+
         Errors generated by the FHIR store will contain a JSON-encoded
+
         `OperationOutcome` resource describing the reason for the error. If the
+
         request cannot be mapped to a valid API method on a FHIR store, a generic
+
         GCP error might be returned instead.
+
 
         The resources in scope for the response are:
 
+
         * The patient resource itself.
+
         * All the resources directly referenced by the patient resource.
+
         * Resources directly referencing the patient resource that meet the
           inclusion criteria. The inclusion criteria are based on the membership
           rules in the patient compartment definition
@@ -229,20 +267,26 @@ paths:
           schema:
             type: string
           x-reservedExpansion: true
-        - description: |-
+        - description: >-
             Used to retrieve the next or previous page of results
+
             when using pagination. Value should be set to the value of page_token set
+
             in next or previous page links' urls. Next and previous page are returned
+
             in the response bundle's links field, where `link.relation` is "previous"
+
             or "next".
+
 
             Omit `page_token` if no previous request has been made.
           in: query
           name: _page_token
           schema:
             type: string
-        - description: |-
+        - description: >-
             The response includes records prior to the end date. If no end date is
+
             provided, all records subsequent to the start date are in scope.
           in: query
           name: end
@@ -253,43 +297,47 @@ paths:
           name: _count
           schema:
             type: integer
-        - description: |-
+        - description: >-
             The response includes records subsequent to the start date. If no start
+
             date is provided, all records prior to the end date are in scope.
           in: query
           name: start
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/HttpBody'
+                $ref: "#/components/schemas/HttpBody"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/oauth_token'
-  '/v1/{name}/$purge':
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+  "/v1/{name}/$purge":
     delete:
-      description: |-
+      description: >-
         Deletes all the historical versions of a resource (excluding the current
+
         version) from the FHIR store. To remove all versions of a resource, first
+
         delete the current version and then call this method.
+
 
         This is not a FHIR standard operation.
       operationId: healthcare.projects.locations.datasets.fhirStores.fhir.Resource-purge
@@ -302,46 +350,58 @@ paths:
             type: string
           x-reservedExpansion: true
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/Empty'
+                $ref: "#/components/schemas/Empty"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/oauth_token'
-  '/v1/{name}/_history':
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+  "/v1/{name}/_history":
     get:
-      description: |-
+      description: >-
         Lists all the versions of a resource (including the current version and
+
         deleted versions) from the FHIR store.
 
+
         Implements the per-resource form of the FHIR standard history interaction
+
         ([DSTU2](http://hl7.org/implement/standards/fhir/DSTU2/http.html#history),
+
         [STU3](http://hl7.org/implement/standards/fhir/STU3/http.html#history),
+
         [R4](http://hl7.org/implement/standards/fhir/R4/http.html#history)).
 
+
         On success, the response body will contain a JSON-encoded representation
+
         of a `Bundle` resource of type `history`, containing the version history
+
         sorted from most recent to oldest versions.
+
         Errors generated by the FHIR store will contain a JSON-encoded
+
         `OperationOutcome` resource describing the reason for the error. If the
+
         request cannot be mapped to a valid API method on a FHIR store, a generic
+
         GCP error might be returned instead.
       operationId: healthcare.projects.locations.datasets.fhirStores.fhir.history
       parameters:
@@ -352,38 +412,54 @@ paths:
           schema:
             type: string
           x-reservedExpansion: true
-        - description: |-
+        - description: >-
             Used to retrieve the first, previous, next, or last page of resource
+
             versions when using pagination. Value should be set to the value of
+
             `_page_token` set in next or previous page links' URLs. Next and previous
+
             page are returned in the response bundle's links field, where
+
             `link.relation` is "previous" or "next".
+
 
             Omit `_page_token` if no previous request has been made.
           in: query
           name: _page_token
           schema:
             type: string
-        - description: |-
+        - description: >-
             Only include resource versions that were current at some point during the
+
             time period specified in the date time value. The date parameter format is
+
             yyyy-mm-ddThh:mm:ss[Z|(+|-)hh:mm]
+
 
             Clients may specify any of the following:
 
+
             *  An entire year: `_at=2019`
+
             *  An entire month: `_at=2019-01`
+
             *  A specific day: `_at=2019-01-20`
+
             *  A specific second: `_at=2018-12-31T23:59:58Z`
           in: query
           name: _at
           schema:
             type: string
-        - description: |-
+        - description: >-
             Only include resource versions that were created at or after the given
+
             instant in time. The instant in time uses the format
+
             YYYY-MM-DDThh:mm:ss.sss+zz:zz (for example 2015-02-07T13:28:17.239+02:00 or
+
             2017-01-01T00:00:00Z). The time must be specified to the second and
+
             include a time zone.
           in: query
           name: _since
@@ -395,48 +471,62 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/HttpBody'
+                $ref: "#/components/schemas/HttpBody"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/oauth_token'
-  '/v1/{name}/fhir/metadata':
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+  "/v1/{name}/fhir/metadata":
     get:
-      description: |-
+      description: >-
         Gets the FHIR capability statement
+
         ([STU3](http://hl7.org/implement/standards/fhir/STU3/capabilitystatement.html),
+
         [R4](http://hl7.org/implement/standards/fhir/R4/capabilitystatement.html)),
+
         or the [conformance
+
         statement](http://hl7.org/implement/standards/fhir/DSTU2/conformance.html)
+
         in the DSTU2 case for the store, which contains a description of
+
         functionality supported by the server.
 
+
         Implements the FHIR standard capabilities interaction
+
         ([STU3](http://hl7.org/implement/standards/fhir/STU3/http.html#capabilities),
+
         [R4](http://hl7.org/implement/standards/fhir/R4/http.html#capabilities)),
+
         or the [conformance
+
         interaction](http://hl7.org/implement/standards/fhir/DSTU2/http.html#conformance)
+
         in the DSTU2 case.
 
+
         On success, the response body will contain a JSON-encoded representation
+
         of a `CapabilityStatement` resource.
       operationId: healthcare.projects.locations.datasets.fhirStores.fhir.capabilities
       parameters:
@@ -448,41 +538,49 @@ paths:
             type: string
           x-reservedExpansion: true
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/HttpBody'
+                $ref: "#/components/schemas/HttpBody"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/oauth_token'
-  '/v1/{name}/operations':
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+  "/v1/{name}/operations":
     get:
-      description: |-
+      description: >-
         Lists operations that match the specified filter in the request. If the
+
         server doesn't support this method, it returns `UNIMPLEMENTED`.
 
+
         NOTE: the `name` binding allows API services to override the binding
+
         to use different resource name schemes, such as `users/*/operations`. To
+
         override the binding, API services can add a binding such as
+
         `"/v1/{name=users/*}/operations"` to their service configuration.
+
         For backwards compatibility, the default name includes the operations
+
         collection id, however overriding users must ensure the name binding
+
         is the parent resource, without the operations collection id.
       operationId: healthcare.projects.locations.datasets.operations.list
       parameters:
@@ -509,53 +607,62 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ListOperationsResponse'
+                $ref: "#/components/schemas/ListOperationsResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/oauth_token'
-  '/v1/{name}:cancel':
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+  "/v1/{name}:cancel":
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
     post:
-      description: |-
+      description: >-
         Starts asynchronous cancellation on a long-running operation.  The server
+
         makes a best effort to cancel the operation, but success is not
+
         guaranteed.  If the server doesn't support this method, it returns
+
         `google.rpc.Code.UNIMPLEMENTED`.  Clients can use
+
         Operations.GetOperation or
+
         other methods to check whether the cancellation succeeded or whether the
+
         operation completed despite cancellation. On successful cancellation,
+
         the operation is not deleted; instead, it becomes an operation with
+
         an Operation.error value with a google.rpc.Status.code of 1,
+
         corresponding to `Code.CANCELLED`.
       operationId: healthcare.projects.locations.datasets.operations.cancel
       parameters:
@@ -570,45 +677,52 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CancelOperationRequest'
+              $ref: "#/components/schemas/CancelOperationRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/Empty'
+                $ref: "#/components/schemas/Empty"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1/{name}:export':
+  "/v1/{name}:export":
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
     post:
-      description: |-
+      description: >-
         Exports data to the specified destination by copying it from the DICOM
+
         store.
+
         Errors are also logged to Cloud Logging. For more information,
+
         see [Viewing logs](/healthcare/docs/how-tos/logging).
+
         The metadata field type is
+
         OperationMetadata.
       operationId: healthcare.projects.locations.datasets.dicomStores.export
       parameters:
-        - description: |-
+        - description: >-
             The DICOM store resource name from which to export the data. For
+
             example,
+
             `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`.
           in: path
           name: name
@@ -620,44 +734,50 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ExportDicomDataRequest'
+              $ref: "#/components/schemas/ExportDicomDataRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1/{name}:import':
+  "/v1/{name}:import":
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
     post:
-      description: |-
+      description: >-
         Imports data into the DICOM store by copying it from the specified source.
+
         Errors are logged to Cloud Logging. For more information, see
+
         [Viewing logs](/healthcare/docs/how-tos/logging). The
+
         metadata field type is
+
         OperationMetadata.
       operationId: healthcare.projects.locations.datasets.dicomStores.import
       parameters:
-        - description: |-
+        - description: >-
             The name of the DICOM store resource into which the data is imported.
+
             For example,
+
             `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`.
           in: path
           name: name
@@ -669,26 +789,27 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ImportDicomDataRequest'
+              $ref: "#/components/schemas/ImportDicomDataRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1/{parent}/datasets':
+  "/v1/{parent}/datasets":
     get:
       description: Lists the health datasets in the current project.
       operationId: healthcare.projects.locations.datasets.list
       parameters:
-        - description: |-
+        - description: >-
             The name of the project whose datasets should be listed.
+
             For example, `projects/{project_id}/locations/{location_id}`.
           in: path
           name: parent
@@ -696,55 +817,63 @@ paths:
           schema:
             type: string
           x-reservedExpansion: true
-        - description: |-
+        - description: >-
             The maximum number of items to return. Capped to 100 if not specified.
+
             May not be larger than 1000.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: 'The next_page_token value returned from a previous List request, if any.'
+        - description: The next_page_token value returned from a previous List request, if any.
           in: query
           name: pageToken
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ListDatasetsResponse'
+                $ref: "#/components/schemas/ListDatasetsResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
     post:
-      description: |-
+      description: >-
         Creates a new health dataset. Results are returned through the
+
         Operation interface which returns either an
+
         `Operation.response` which contains a Dataset or
+
         `Operation.error`. The metadata
+
         field type is OperationMetadata.
+
         A Google Cloud Platform project can contain up to 500 datasets across all
+
         regions.
       operationId: healthcare.projects.locations.datasets.create
       parameters:
-        - description: |-
+        - description: >-
             The name of the project where the server creates the dataset. For
+
             example, `projects/{project_id}/locations/{location_id}`.
           in: path
           name: parent
@@ -752,8 +881,9 @@ paths:
           schema:
             type: string
           x-reservedExpansion: true
-        - description: |-
+        - description: >-
             The ID of the dataset that is being created.
+
             The string must match the following regex: `[\p{L}\p{N}_\-\.]{1,256}`.
           in: query
           name: datasetId
@@ -763,20 +893,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Dataset'
+              $ref: "#/components/schemas/Dataset"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1/{parent}/dicomStores':
+  "/v1/{parent}/dicomStores":
     get:
       description: Lists the DICOM stores in the given dataset.
       operationId: healthcare.projects.locations.datasets.dicomStores.list
@@ -788,50 +918,53 @@ paths:
           schema:
             type: string
           x-reservedExpansion: true
-        - description: |-
+        - description: >-
             Limit on the number of DICOM stores to return in a single response.
+
             If zero the default page size of 100 is used.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: 'The next_page_token value returned from the previous List request, if any.'
+        - description: The next_page_token value returned from the previous List request, if any.
           in: query
           name: pageToken
           schema:
             type: string
-        - description: |-
+        - description: >-
             Restricts stores returned to those matching a filter. Syntax:
+
             https://cloud.google.com/appengine/docs/standard/python/search/query_strings
+
             Only filtering on labels is supported. For example, `labels.key=value`.
           in: query
           name: filter
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ListDicomStoresResponse'
+                $ref: "#/components/schemas/ListDicomStoresResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
     post:
       description: Creates a new DICOM store within the parent dataset.
       operationId: healthcare.projects.locations.datasets.dicomStores.create
@@ -843,8 +976,9 @@ paths:
           schema:
             type: string
           x-reservedExpansion: true
-        - description: |-
+        - description: >-
             The ID of the DICOM store that is being created.
+
             Any string value up to 256 characters in length.
           in: query
           name: dicomStoreId
@@ -854,31 +988,36 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/DicomStore'
+              $ref: "#/components/schemas/DicomStore"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/DicomStore'
+                $ref: "#/components/schemas/DicomStore"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1/{parent}/dicomWeb/{dicomWebPath}':
+  "/v1/{parent}/dicomWeb/{dicomWebPath}":
     delete:
-      description: |-
+      description: >-
         DeleteInstance deletes an instance associated with the given study, series,
+
         and SOP Instance UID. Delete requests are equivalent to the GET requests
+
         specified in the Retrieve transaction.
+
         Study and series search results can take a few seconds to be updated after
+
         an instance is deleted using DeleteInstance.
       operationId: healthcare.projects.locations.datasets.dicomStores.studies.series.instances.delete
       parameters:
-        - description: |-
+        - description: >-
             The name of the DICOM store that is being accessed. For example,
+
             `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`.
           in: path
           name: parent
@@ -886,8 +1025,9 @@ paths:
           schema:
             type: string
           x-reservedExpansion: true
-        - description: |-
+        - description: >-
             The path of the DeleteInstance request. For example,
+
             `studies/{study_uid}/series/{series_uid}/instances/{instance_uid}`.
           in: path
           name: dicomWebPath
@@ -896,28 +1036,33 @@ paths:
             type: string
           x-reservedExpansion: true
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/Empty'
+                $ref: "#/components/schemas/Empty"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
     get:
-      description: |-
+      description: >-
         RetrieveRenderedFrames returns instances associated with the given study,
+
         series, SOP Instance UID and frame numbers in an acceptable Rendered Media
+
         Type. See
+
         [RetrieveTransaction]
+
         (http://dicom.nema.org/medical/dicom/current/output/html/part18.html#sect_10.4).
       operationId: healthcare.projects.locations.datasets.dicomStores.studies.series.instances.frames.retrieveRendered
       parameters:
-        - description: |-
+        - description: >-
             The name of the DICOM store that is being accessed. For example,
+
             `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`.
           in: path
           name: parent
@@ -925,8 +1070,9 @@ paths:
           schema:
             type: string
           x-reservedExpansion: true
-        - description: |-
+        - description: >-
             The path of the RetrieveRenderedFrames DICOMweb request. For example,
+
             `studies/{study_uid}/series/{series_uid}/instances/{instance_uid}/frames/{frame_list}/rendered`.
           in: path
           name: dicomWebPath
@@ -935,39 +1081,43 @@ paths:
             type: string
           x-reservedExpansion: true
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/HttpBody'
+                $ref: "#/components/schemas/HttpBody"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
     post:
-      description: |-
+      description: >-
         StoreInstances stores DICOM instances associated with study instance unique
+
         identifiers (SUID). See
+
         [Store Transaction]
+
         (http://dicom.nema.org/medical/dicom/current/output/html/part18.html#sect_10.5).
       operationId: healthcare.projects.locations.datasets.dicomStores.studies.storeInstances
       parameters:
-        - description: |-
+        - description: >-
             The name of the DICOM store that is being accessed. For example,
+
             `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`.
           in: path
           name: parent
@@ -975,8 +1125,9 @@ paths:
           schema:
             type: string
           x-reservedExpansion: true
-        - description: |-
+        - description: >-
             The path of the StoreInstances DICOMweb request. For example,
+
             `studies/[{study_uid}]`. Note that the `study_uid` is optional.
           in: path
           name: dicomWebPath
@@ -988,62 +1139,86 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/HttpBody'
+              $ref: "#/components/schemas/HttpBody"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/HttpBody'
+                $ref: "#/components/schemas/HttpBody"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1/{parent}/fhir':
+  "/v1/{parent}/fhir":
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
     post:
-      description: |-
+      description: >-
         Executes all the requests in the given Bundle.
 
+
         Implements the FHIR standard batch/transaction interaction
+
         ([DSTU2](http://hl7.org/implement/standards/fhir/DSTU2/http.html#transaction),
+
         [STU3](http://hl7.org/implement/standards/fhir/STU3/http.html#transaction),
+
         [R4](http://hl7.org/implement/standards/fhir/R4/http.html#transaction)).
 
+
         Supports all interactions within a bundle, except search. This method
+
         accepts Bundles of type `batch` and `transaction`, processing them
+
         according to the batch processing rules
+
         ([DSTU2](http://hl7.org/implement/standards/fhir/DSTU2/http.html#2.1.0.16.1),
+
         [STU3](http://hl7.org/implement/standards/fhir/STU3/http.html#2.21.0.17.1),
+
         [R4](http://hl7.org/implement/standards/fhir/R4/http.html#brules))
+
         and transaction processing rules
+
         ([DSTU2](http://hl7.org/implement/standards/fhir/DSTU2/http.html#2.1.0.16.2),
+
         [STU3](http://hl7.org/implement/standards/fhir/STU3/http.html#2.21.0.17.2),
+
         [R4](http://hl7.org/implement/standards/fhir/R4/http.html#trules)).
 
+
         The request body must contain a JSON-encoded FHIR `Bundle` resource, and
+
         the request headers must contain `Content-Type: application/fhir+json`.
 
+
         For a batch bundle or a successful transaction the response body will
+
         contain a JSON-encoded representation of a `Bundle` resource of type
+
         `batch-response` or `transaction-response` containing one entry for each
+
         entry in the request, with the outcome of processing the entry. In the
+
         case of an error for a transaction bundle, the response body will contain
+
         a JSON-encoded `OperationOutcome` resource describing the reason for the
+
         error. If the request cannot be mapped to a valid API method on a FHIR
+
         store, a generic GCP error might be returned instead.
       operationId: healthcare.projects.locations.datasets.fhirStores.fhir.executeBundle
       parameters:
@@ -1058,92 +1233,139 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/HttpBody'
+              $ref: "#/components/schemas/HttpBody"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/HttpBody'
+                $ref: "#/components/schemas/HttpBody"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1/{parent}/fhir/_search':
+  "/v1/{parent}/fhir/_search":
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
     post:
-      description: |-
+      description: >-
         Searches for resources in the given FHIR store according to criteria
+
         specified as query parameters.
 
+
         Implements the FHIR standard search interaction
+
         ([DSTU2](http://hl7.org/implement/standards/fhir/DSTU2/http.html#search),
+
         [STU3](http://hl7.org/implement/standards/fhir/STU3/http.html#search),
+
         [R4](http://hl7.org/implement/standards/fhir/R4/http.html#search))
+
         using the search semantics described in the FHIR Search specification
+
         ([DSTU2](http://hl7.org/implement/standards/fhir/DSTU2/search.html),
+
         [STU3](http://hl7.org/implement/standards/fhir/STU3/search.html),
+
         [R4](http://hl7.org/implement/standards/fhir/R4/search.html)).
+
 
         Supports three methods of search defined by the specification:
 
+
         *  `GET [base]?[parameters]` to search across all resources.
+
         *  `GET [base]/[type]?[parameters]` to search resources of a specified
+
         type.
+
         *  `POST [base]/[type]/_search?[parameters]` as an alternate form having
+
         the same semantics as the `GET` method.
 
+
         The `GET` methods do not support compartment searches. The `POST` method
+
         does not support `application/x-www-form-urlencoded` search parameters.
 
+
         On success, the response body will contain a JSON-encoded representation
+
         of a `Bundle` resource of type `searchset`, containing the results of the
+
         search.
+
         Errors generated by the FHIR store will contain a JSON-encoded
+
         `OperationOutcome` resource describing the reason for the error. If the
+
         request cannot be mapped to a valid API method on a FHIR store, a generic
+
         GCP error might be returned instead.
 
+
         The server's capability statement, retrieved through
+
         capabilities, indicates what search parameters
+
         are supported on each FHIR resource. A list of all search parameters
+
         defined by the specification can be found in the FHIR Search Parameter
+
         Registry
+
         ([STU3](http://hl7.org/implement/standards/fhir/STU3/searchparameter-registry.html),
+
         [R4](http://hl7.org/implement/standards/fhir/R4/searchparameter-registry.html)).
+
         FHIR search parameters for DSTU2 can be found on each resource's definition
+
         page.
 
+
         Supported search modifiers: `:missing`, `:exact`, `:contains`, `:text`,
+
         `:in`, `:not-in`, `:above`, `:below`, `:[type]`, `:not`, and `:recurse`.
 
+
         Supported search result parameters: `_sort`, `_count`, `_include`,
+
         `_revinclude`, `_summary=text`, `_summary=data`, and `_elements`.
 
+
         The maximum number of search results returned defaults to 100, which can
+
         be overridden by the `_count` parameter up to a maximum limit of 1000. If
+
         there are additional results, the returned `Bundle` will contain
+
         pagination links.
 
+
         Resources with a total size larger than 5MB or a field count larger than
+
         50,000 might not be fully searchable as the server might trim its generated
+
         search index in those cases.
 
+
         Note: FHIR resources are indexed asynchronously, so there might be a slight
+
         delay between the time a resource is created or changes and when the change
+
         is reflected in search results.
       operationId: healthcare.projects.locations.datasets.fhirStores.fhir.search
       parameters:
@@ -1158,51 +1380,65 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SearchResourcesRequest'
+              $ref: "#/components/schemas/SearchResourcesRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/HttpBody'
+                $ref: "#/components/schemas/HttpBody"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1/{parent}/fhir/{type}':
+  "/v1/{parent}/fhir/{type}":
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
     post:
-      description: |-
+      description: >-
         Creates a FHIR resource.
 
+
         Implements the FHIR standard create interaction
+
         ([DSTU2](http://hl7.org/implement/standards/fhir/DSTU2/http.html#create),
+
         [STU3](http://hl7.org/implement/standards/fhir/STU3/http.html#create),
+
         [R4](http://hl7.org/implement/standards/fhir/R4/http.html#create)),
+
         which creates a new resource with a server-assigned resource ID.
 
+
         The request body must contain a JSON-encoded FHIR resource, and the request
+
         headers must contain `Content-Type: application/fhir+json`.
 
+
         On success, the response body will contain a JSON-encoded representation
+
         of the resource as it was created on the server, including the
+
         server-assigned resource ID and version ID.
+
         Errors generated by the FHIR store will contain a JSON-encoded
+
         `OperationOutcome` resource describing the reason for the error. If the
+
         request cannot be mapped to a valid API method on a FHIR store, a generic
+
         GCP error might be returned instead.
       operationId: healthcare.projects.locations.datasets.fhirStores.fhir.create
       parameters:
@@ -1213,12 +1449,17 @@ paths:
           schema:
             type: string
           x-reservedExpansion: true
-        - description: |-
+        - description: >-
             The FHIR resource type to create, such as Patient or Observation. For a
+
             complete list, see the FHIR Resource Index
+
             ([DSTU2](http://hl7.org/implement/standards/fhir/DSTU2/resourcelist.html),
+
             [STU3](http://hl7.org/implement/standards/fhir/STU3/resourcelist.html),
+
             [R4](http://hl7.org/implement/standards/fhir/R4/resourcelist.html)).
+
             Must match the resource type in the provided content.
           in: path
           name: type
@@ -1230,20 +1471,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/HttpBody'
+              $ref: "#/components/schemas/HttpBody"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/HttpBody'
+                $ref: "#/components/schemas/HttpBody"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1/{parent}/fhirStores':
+  "/v1/{parent}/fhirStores":
     get:
       description: Lists the FHIR stores in the given dataset.
       operationId: healthcare.projects.locations.datasets.fhirStores.list
@@ -1255,50 +1496,53 @@ paths:
           schema:
             type: string
           x-reservedExpansion: true
-        - description: 'The next_page_token value returned from the previous List request, if any.'
+        - description: The next_page_token value returned from the previous List request, if any.
           in: query
           name: pageToken
           schema:
             type: string
-        - description: |-
+        - description: >-
             Restricts stores returned to those matching a filter. Syntax:
+
             https://cloud.google.com/appengine/docs/standard/python/search/query_strings
+
             Only filtering on labels is supported, for example `labels.key=value`.
           in: query
           name: filter
           schema:
             type: string
-        - description: |-
+        - description: >-
             Limit on the number of FHIR stores to return in a single response.  If zero
+
             the default page size of 100 is used.
           in: query
           name: pageSize
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ListFhirStoresResponse'
+                $ref: "#/components/schemas/ListFhirStoresResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
     post:
       description: Creates a new FHIR store within the parent dataset.
       operationId: healthcare.projects.locations.datasets.fhirStores.create
@@ -1310,8 +1554,9 @@ paths:
           schema:
             type: string
           x-reservedExpansion: true
-        - description: |-
+        - description: >-
             The ID of the FHIR store that is being created.
+
             The string must match the following regex: `[\p{L}\p{N}_\-\.]{1,256}`.
           in: query
           name: fhirStoreId
@@ -1321,20 +1566,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/FhirStore'
+              $ref: "#/components/schemas/FhirStore"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/FhirStore'
+                $ref: "#/components/schemas/FhirStore"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1/{parent}/hl7V2Stores':
+  "/v1/{parent}/hl7V2Stores":
     get:
       description: Lists the HL7v2 stores in the given dataset.
       operationId: healthcare.projects.locations.datasets.hl7V2Stores.list
@@ -1346,50 +1591,53 @@ paths:
           schema:
             type: string
           x-reservedExpansion: true
-        - description: |-
+        - description: >-
             Limit on the number of HL7v2 stores to return in a single response.
+
             If zero the default page size of 100 is used.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: |-
+        - description: >-
             Restricts stores returned to those matching a filter. Syntax:
+
             https://cloud.google.com/appengine/docs/standard/python/search/query_strings
+
             Only filtering on labels is supported. For example, `labels.key=value`.
           in: query
           name: filter
           schema:
             type: string
-        - description: 'The next_page_token value returned from the previous List request, if any.'
+        - description: The next_page_token value returned from the previous List request, if any.
           in: query
           name: pageToken
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ListHl7V2StoresResponse'
+                $ref: "#/components/schemas/ListHl7V2StoresResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
     post:
       description: Creates a new HL7v2 store within the parent dataset.
       operationId: healthcare.projects.locations.datasets.hl7V2Stores.create
@@ -1401,8 +1649,9 @@ paths:
           schema:
             type: string
           x-reservedExpansion: true
-        - description: |-
+        - description: >-
             The ID of the HL7v2 store that is being created.
+
             The string must match the following regex: `[\p{L}\p{N}_\-\.]{1,256}`.
           in: query
           name: hl7V2StoreId
@@ -1412,26 +1661,29 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Hl7V2Store'
+              $ref: "#/components/schemas/Hl7V2Store"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/Hl7V2Store'
+                $ref: "#/components/schemas/Hl7V2Store"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1/{parent}/messages':
+  "/v1/{parent}/messages":
     get:
-      description: |-
+      description: >-
         Lists all the messages in the given HL7v2 store with support for filtering.
 
+
         Note: HL7v2 messages are indexed asynchronously, so there might be a slight
+
         delay between the time a message is created and when it can be found
+
         through a filter.
       operationId: healthcare.projects.locations.datasets.hl7V2Stores.messages.list
       parameters:
@@ -1442,17 +1694,21 @@ paths:
           schema:
             type: string
           x-reservedExpansion: true
-        - description: |-
+        - description: >-
             Limit on the number of messages to return in a single response.
+
             If zero the default page size of 100 is used.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: |-
+        - description: >-
             Specifies the parts of the Message to return in the response.
+
             When unspecified, equivalent to BASIC. Setting this to anything other than
+
             BASIC with a `page_size` larger than the default can generate a large
+
             response, which impacts the performance of this method.
           in: query
           name: view
@@ -1464,80 +1720,107 @@ paths:
               - FULL
               - BASIC
             type: string
-        - description: 'The next_page_token value returned from the previous List request, if any.'
+        - description: The next_page_token value returned from the previous List request, if any.
           in: query
           name: pageToken
           schema:
             type: string
-        - description: |-
+        - description: >-
             Orders messages returned by the specified order_by clause.
+
             Syntax: https://cloud.google.com/apis/design/design_patterns#sorting_order
 
+
             Fields available for ordering are:
+
 
             *  `send_time`
           in: query
           name: orderBy
           schema:
             type: string
-        - description: |-
+        - description: >-
             Restricts messages returned to those matching a filter. Syntax:
+
             https://cloud.google.com/appengine/docs/standard/python/search/query_strings
+
 
             Fields/functions available for filtering are:
 
+
             *  `message_type`, from the MSH-9.1 field. For example,
+
             `NOT message_type = "ADT"`.
+
             *  `send_date` or `sendDate`, the YYYY-MM-DD date the message was sent in
+
             the dataset's time_zone, from the MSH-7 segment. For example,
+
             `send_date < "2017-01-02"`.
+
             *  `send_time`, the timestamp when the message was sent, using the
+
             RFC3339 time format for comparisons, from the MSH-7 segment. For example,
+
             `send_time < "2017-01-02T00:00:00-05:00"`.
+
             *  `send_facility`, the care center that the message came from, from the
+
             MSH-4 segment. For example, `send_facility = "ABC"`.
+
             *  `PatientId(value, type)`, which matches if the message lists a patient
+
             having an ID of the given value and type in the PID-2, PID-3, or PID-4
+
             segments. For example, `PatientId("123456", "MRN")`.
+
             *  `labels.x`, a string value of the label with key `x` as set using the
+
             Message.labels
+
             map. For example, `labels."priority"="high"`. The operator `:*` can be used
+
             to assert the existence of a label. For example, `labels."priority":*`.
           in: query
           name: filter
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ListMessagesResponse'
+                $ref: "#/components/schemas/ListMessagesResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
     post:
-      description: |-
+      description: >-
         Creates a message and sends a notification to the Cloud Pub/Sub topic. If
+
         configured, the MLLP adapter listens to messages created by this method and
+
         sends those back to the hospital. A successful response indicates the
+
         message has been persisted to storage and a Cloud Pub/Sub notification has
+
         been sent. Sending to the hospital by the MLLP adapter happens
+
         asynchronously.
       operationId: healthcare.projects.locations.datasets.hl7V2Stores.messages.create
       parameters:
@@ -1552,36 +1835,38 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateMessageRequest'
+              $ref: "#/components/schemas/CreateMessageRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/Message'
+                $ref: "#/components/schemas/Message"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1/{parent}/messages:ingest':
+  "/v1/{parent}/messages:ingest":
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
     post:
-      description: |-
+      description: >-
         Ingests a new HL7v2 message from the hospital and sends a notification to
+
         the Cloud Pub/Sub topic. Return is an HL7v2 ACK message if the message was
+
         successfully stored. Otherwise an error is returned.
       operationId: healthcare.projects.locations.datasets.hl7V2Stores.messages.ingest
       parameters:
@@ -1596,29 +1881,32 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/IngestMessageRequest'
+              $ref: "#/components/schemas/IngestMessageRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/IngestMessageResponse'
+                $ref: "#/components/schemas/IngestMessageResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1/{resource}:getIamPolicy':
+  "/v1/{resource}:getIamPolicy":
     get:
-      description: |-
+      description: >-
         Gets the access control policy for a resource.
+
         Returns an empty policy if the resource exists and does not have a policy
+
         set.
       operationId: healthcare.projects.locations.datasets.dicomStores.getIamPolicy
       parameters:
-        - description: |-
+        - description: >-
             REQUIRED: The resource for which the policy is being requested.
+
             See the operation documentation for the appropriate value for this field.
           in: path
           name: resource
@@ -1626,70 +1914,81 @@ paths:
           schema:
             type: string
           x-reservedExpansion: true
-        - description: |-
+        - description: >-
             Optional. The policy format version to be returned.
 
+
             Valid values are 0, 1, and 3. Requests specifying an invalid value will be
+
             rejected.
 
+
             Requests for policies with any conditional bindings must specify version 3.
+
             Policies without any conditional bindings may specify any valid value or
+
             leave the field unset.
 
+
             To learn which resources support conditions in their IAM policies, see the
+
             [IAM
+
             documentation](https://cloud.google.com/iam/help/conditions/resource-policies).
           in: query
           name: options.requestedPolicyVersion
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/Policy'
+                $ref: "#/components/schemas/Policy"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/oauth_token'
-  '/v1/{resource}:setIamPolicy':
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+  "/v1/{resource}:setIamPolicy":
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
     post:
-      description: |-
+      description: >-
         Sets the access control policy on the specified resource. Replaces any
+
         existing policy.
+
 
         Can return `NOT_FOUND`, `INVALID_ARGUMENT`, and `PERMISSION_DENIED` errors.
       operationId: healthcare.projects.locations.datasets.dicomStores.setIamPolicy
       parameters:
-        - description: |-
+        - description: >-
             REQUIRED: The resource for which the policy is being specified.
+
             See the operation documentation for the appropriate value for this field.
           in: path
           name: resource
@@ -1701,45 +2000,51 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SetIamPolicyRequest'
+              $ref: "#/components/schemas/SetIamPolicyRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/Policy'
+                $ref: "#/components/schemas/Policy"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1/{resource}:testIamPermissions':
+  "/v1/{resource}:testIamPermissions":
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
     post:
-      description: |-
+      description: >-
         Returns permissions that a caller has on the specified resource.
+
         If the resource does not exist, this will return an empty set of
+
         permissions, not a `NOT_FOUND` error.
 
+
         Note: This operation is designed to be used for building permission-aware
+
         UIs and command-line tools, not for authorization checking. This operation
+
         may "fail open" without warning.
       operationId: healthcare.projects.locations.datasets.dicomStores.testIamPermissions
       parameters:
-        - description: |-
+        - description: >-
             REQUIRED: The resource for which the policy detail is being requested.
+
             See the operation documentation for the appropriate value for this field.
           in: path
           name: resource
@@ -1751,51 +2056,64 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/TestIamPermissionsRequest'
+              $ref: "#/components/schemas/TestIamPermissionsRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/TestIamPermissionsResponse'
+                $ref: "#/components/schemas/TestIamPermissionsResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1/{sourceDataset}:deidentify':
+  "/v1/{sourceDataset}:deidentify":
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
     post:
-      description: |-
+      description: >-
         Creates a new dataset containing de-identified data from the source
+
         dataset. The metadata field type
+
         is OperationMetadata.
+
         If the request is successful, the
+
         response field type is
+
         DeidentifySummary.
+
         If errors occur, error is set.
+
         The LRO result may still be successful if de-identification fails for some
+
         DICOM instances. The new de-identified dataset will not contain these
+
         failed resources. Failed resource totals are tracked in
+
         Operation.metadata.
+
         Error details are also logged to Cloud Logging. For more information,
+
         see [Viewing logs](/healthcare/docs/how-tos/logging).
       operationId: healthcare.projects.locations.datasets.deidentify
       parameters:
-        - description: |-
+        - description: >-
             Source dataset resource name. For example,
+
             `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}`.
           in: path
           name: sourceDataset
@@ -1807,51 +2125,64 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/DeidentifyDatasetRequest'
+              $ref: "#/components/schemas/DeidentifyDatasetRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1/{sourceStore}:deidentify':
+  "/v1/{sourceStore}:deidentify":
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
     post:
-      description: |-
+      description: >-
         De-identifies data from the source store and writes it to the destination
+
         store. The metadata field type
+
         is OperationMetadata.
+
         If the request is successful, the
+
         response field type is
+
         DeidentifyDicomStoreSummary. If errors occur,
+
         error is set.
+
         The LRO result may still be successful if de-identification fails for some
+
         DICOM instances. The output DICOM store will not contain
+
         these failed resources. Failed resource totals are tracked in
+
         Operation.metadata.
+
         Error details are also logged to Cloud Logging
+
         (see [Viewing logs](/healthcare/docs/how-tos/logging)).
       operationId: healthcare.projects.locations.datasets.dicomStores.deidentify
       parameters:
-        - description: |-
+        - description: >-
             Source DICOM store resource name. For example,
+
             `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`.
           in: path
           name: sourceStore
@@ -1863,17 +2194,17 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/DeidentifyDicomStoreRequest'
+              $ref: "#/components/schemas/DeidentifyDicomStoreRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
 components:
@@ -1884,8 +2215,8 @@ components:
       name: $.xgafv
       schema:
         enum:
-          - '1'
-          - '2'
+          - "1"
+          - "2"
         type: string
     access_token:
       description: OAuth access token.
@@ -1917,7 +2248,7 @@ components:
       schema:
         type: string
     key:
-      description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -1936,19 +2267,19 @@ components:
         default: true
         type: boolean
     quotaUser:
-      description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.'
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
       in: query
       name: quotaUser
       schema:
         type: string
     uploadType:
-      description: 'Legacy upload protocol for media (e.g. "media", "multipart").'
+      description: Legacy upload protocol for media (e.g. "media", "multipart").
       in: query
       name: uploadType
       schema:
         type: string
     upload_protocol:
-      description: 'Upload protocol for media (e.g. "raw", "multipart").'
+      description: Upload protocol for media (e.g. "raw", "multipart").
       in: query
       name: upload_protocol
       schema:
@@ -1958,24 +2289,32 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/DicomStore'
+            $ref: "#/components/schemas/DicomStore"
     HttpBody:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/HttpBody'
+            $ref: "#/components/schemas/HttpBody"
   schemas:
     AuditConfig:
-      description: |-
+      description: >-
         Specifies the audit configuration for a service.
+
         The configuration determines which permission types are logged, and what
+
         identities, if any, are exempted from logging.
+
         An AuditConfig must have one or more AuditLogConfigs.
 
+
         If there are AuditConfigs for both `allServices` and a specific service,
+
         the union of the two AuditConfigs is used for that service: the log_types
+
         specified in each AuditConfig are enabled, and the exempted_members in each
+
         AuditLogConfig are exempted.
+
 
         Example Policy with multiple AuditConfigs:
 
@@ -2016,24 +2355,29 @@ components:
             }
 
         For sampleservice, this policy enables DATA_READ, DATA_WRITE and ADMIN_READ
+
         logging. It also exempts jose@example.com from DATA_READ logging, and
+
         aliya@example.com from DATA_WRITE logging.
       properties:
         auditLogConfigs:
           description: The configuration for logging of each type of permission.
           items:
-            $ref: '#/components/schemas/AuditLogConfig'
+            $ref: "#/components/schemas/AuditLogConfig"
           type: array
         service:
-          description: |-
+          description: >-
             Specifies a service that will be enabled for audit logging.
+
             For example, `storage.googleapis.com`, `cloudsql.googleapis.com`.
+
             `allServices` is a special value that covers all services.
           type: string
       type: object
     AuditLogConfig:
-      description: |-
+      description: >-
         Provides the configuration for logging a type of permissions.
+
         Example:
 
             {
@@ -2051,12 +2395,15 @@ components:
             }
 
         This enables 'DATA_READ' and 'DATA_WRITE' logging, while exempting
+
         jose@example.com from DATA_READ logging.
       properties:
         exemptedMembers:
-          description: |-
+          description: >-
             Specifies the identities that do not cause logging for this type of
+
             permission.
+
             Follows the same format of Binding.members.
           items:
             type: string
@@ -2074,24 +2421,34 @@ components:
       description: Associates `members` with a `role`.
       properties:
         condition:
-          $ref: '#/components/schemas/Expr'
-          description: |-
+          $ref: "#/components/schemas/Expr"
+          description: >-
             The condition that is associated with this binding.
 
+
             If the condition evaluates to `true`, then this binding applies to the
+
             current request.
 
+
             If the condition evaluates to `false`, then this binding does not apply to
+
             the current request. However, a different role binding might grant the same
+
             role to one or more of the members in this binding.
 
+
             To learn which resources support conditions in their IAM policies, see the
+
             [IAM
+
             documentation](https://cloud.google.com/iam/help/conditions/resource-policies).
         members:
-          description: |+
+          description: >+
             Specifies the identities requesting access for a Cloud Platform resource.
+
             `members` can have the following values:
+
 
             * `allUsers`: A special identifier that represents anyone who is
                on the internet; with or without a Google account.
@@ -2137,8 +2494,9 @@ components:
             type: string
           type: array
         role:
-          description: |-
+          description: >-
             Role that is assigned to `members`.
+
             For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
           type: string
       type: object
@@ -2150,97 +2508,117 @@ components:
       description: Mask a string by replacing its characters with a fixed character.
       properties:
         maskingCharacter:
-          description: 'Character to mask the sensitive values. If not supplied, defaults to "*".'
+          description: Character to mask the sensitive values. If not supplied, defaults to "*".
           type: string
       type: object
     CreateMessageRequest:
       description: Creates a new message.
       properties:
         message:
-          $ref: '#/components/schemas/Message'
+          $ref: "#/components/schemas/Message"
           description: HL7v2 message.
       type: object
     CryptoHashConfig:
-      description: |-
+      description: >-
         Pseudonymization method that generates surrogates via cryptographic hashing.
+
         Uses SHA-256.
+
         Outputs a base64-encoded representation of the hashed output
+
         (for example, `L7k0BHmF1ha5U3NfGykjro4xWi1MPVQPjhMAZbSV9mM=`).
       properties:
         cryptoKey:
-          description: |-
+          description: >-
             An AES 128/192/256 bit key. Causes the hash to be computed based on this
+
             key. A default key is generated for each Deidentify operation and is used
+
             wherever crypto_key is not specified.
           format: byte
           type: string
       type: object
     Dataset:
-      description: |-
+      description: >-
         A message representing a health dataset.
 
+
         A health dataset represents a collection of healthcare data pertaining to one
+
         or more patients. This may include multiple modalities of healthcare data,
+
         such as electronic medical records or medical imaging data.
       properties:
         name:
-          description: |-
+          description: >-
             Resource name of the dataset, of the form
+
             `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}`.
           type: string
         timeZone:
-          description: |-
+          description: >-
             The default timezone used by this dataset. Must be a either a valid IANA
+
             time zone name such as "America/New_York" or empty, which defaults to UTC.
+
             This is used for parsing times in resources, such as HL7 messages, where no
+
             explicit timezone is specified.
           type: string
       type: object
     DateShiftConfig:
-      description: |-
+      description: >-
         Shift a date forward or backward in time by a random amount which is
+
         consistent for a given patient and crypto key combination.
       properties:
         cryptoKey:
-          description: |-
+          description: >-
             An AES 128/192/256 bit key. Causes the shift to be computed based on this
+
             key and the patient ID. A default key is generated for each
+
             Deidentify operation and is used wherever crypto_key is not specified.
           format: byte
           type: string
       type: object
     DeidentifyConfig:
-      description: |-
+      description: >-
         Configures de-id options specific to different types of content.
+
         Each submessage customizes the handling of an
+
         https://tools.ietf.org/html/rfc6838 media type or subtype. Configs are
+
         applied in a nested manner at runtime.
       properties:
         dicom:
-          $ref: '#/components/schemas/DicomConfig'
+          $ref: "#/components/schemas/DicomConfig"
           description: Configures de-id of application/DICOM content.
         fhir:
-          $ref: '#/components/schemas/FhirConfig'
+          $ref: "#/components/schemas/FhirConfig"
           description: Configures de-id of application/FHIR content.
         image:
-          $ref: '#/components/schemas/ImageConfig'
-          description: |-
+          $ref: "#/components/schemas/ImageConfig"
+          description: >-
             Configures de-identification of image pixels wherever they are found in the
+
             source_dataset.
         text:
-          $ref: '#/components/schemas/TextConfig'
-          description: |-
+          $ref: "#/components/schemas/TextConfig"
+          description: >-
             Configures de-identification of text wherever it is found in the
+
             source_dataset.
       type: object
     DeidentifyDatasetRequest:
       description: Redacts identifying information from the specified dataset.
       properties:
         config:
-          $ref: '#/components/schemas/DeidentifyConfig'
+          $ref: "#/components/schemas/DeidentifyConfig"
           description: Deidentify configuration.
         destinationDataset:
-          description: |-
+          description: >-
             The name of the dataset resource to create and write the redacted data to.
 
              * The destination dataset must not exist.
@@ -2253,12 +2631,14 @@ components:
       description: Creates a new DICOM store with sensitive information de-identified.
       properties:
         config:
-          $ref: '#/components/schemas/DeidentifyConfig'
+          $ref: "#/components/schemas/DeidentifyConfig"
           description: De-identify configuration.
         destinationStore:
-          description: |-
+          description: >-
             The name of the DICOM store to create and write the redacted data to.
+
             For example,
+
             `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`.
 
              * The destination dataset must exist.
@@ -2269,19 +2649,21 @@ components:
                DICOM store.
           type: string
         filterConfig:
-          $ref: '#/components/schemas/DicomFilterConfig'
+          $ref: "#/components/schemas/DicomFilterConfig"
           description: Filter configuration.
       type: object
     DeidentifyFhirStoreRequest:
       description: Creates a new FHIR store with sensitive information de-identified.
       properties:
         config:
-          $ref: '#/components/schemas/DeidentifyConfig'
+          $ref: "#/components/schemas/DeidentifyConfig"
           description: Deidentify configuration.
         destinationStore:
-          description: |-
+          description: >-
             The name of the FHIR store to create and write the redacted data to.
+
             For example,
+
             `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/fhirStores/{fhir_store_id}`.
 
              * The destination dataset must exist.
@@ -2292,9 +2674,10 @@ components:
                write to the destination FHIR store.
           type: string
         resourceFilter:
-          $ref: '#/components/schemas/FhirFilter'
-          description: |-
+          $ref: "#/components/schemas/FhirFilter"
+          description: >-
             A filter specifying the resources to include in the output. If not
+
             specified, all resources are included in the output.
       type: object
     DeidentifySummary:
@@ -2314,20 +2697,27 @@ components:
             - DEIDENTIFY_TAG_CONTENTS
           type: string
         keepList:
-          $ref: '#/components/schemas/TagFilterList'
+          $ref: "#/components/schemas/TagFilterList"
           description: List of tags to keep. Remove all other tags.
         removeList:
-          $ref: '#/components/schemas/TagFilterList'
+          $ref: "#/components/schemas/TagFilterList"
           description: List of tags to remove. Keep all other tags.
         skipIdRedaction:
-          description: |-
+          description: >-
             If true, skip replacing StudyInstanceUID, SeriesInstanceUID,
+
             SOPInstanceUID, and MediaStorageSOPInstanceUID and leave them untouched.
+
             The Cloud Healthcare API regenerates these UIDs by default based on the
+
             DICOM Standard's reasoning: "Whilst these UIDs cannot be mapped directly
+
             to an individual out of context, given access to the original images, or
+
             to a database of the original images containing the UIDs, it would be
+
             possible to recover the individual's identity."
+
             http://dicom.nema.org/medical/dicom/current/output/chtml/part15/sect_E.3.9.html
           type: boolean
       type: object
@@ -2335,16 +2725,24 @@ components:
       description: Specifies the filter configuration for DICOM resources.
       properties:
         resourcePathsGcsUri:
-          description: |-
+          description: >-
             The Cloud Storage location of the filter configuration file.
+
             The `gcs_uri` must be in the format `gs://bucket/path/to/object`.
+
             The filter configuration file must contain a list of resource paths
+
             separated by newline characters (\n or \r\n). Each resource path
+
             must be in the format
+
             "/studies/{studyUID}[/series/{seriesUID}[/instances/{instanceUID}]]"
 
+
             The Cloud Healthcare API service account must have the
+
             `roles/storage.objectViewer` Cloud IAM role for this Cloud Storage
+
             location.
           type: string
       type: object
@@ -2354,35 +2752,47 @@ components:
         labels:
           additionalProperties:
             type: string
-          description: |-
+          description: >-
             User-supplied key-value pairs used to organize DICOM stores.
 
+
             Label keys must be between 1 and 63 characters long, have a UTF-8 encoding
+
             of maximum 128 bytes, and must conform to the
+
             following PCRE regular expression:
+
             \p{Ll}\p{Lo}{0,62}
 
+
             Label values are optional, must be between 1 and 63 characters long, have
+
             a UTF-8 encoding of maximum 128 bytes, and must conform to the
+
             following PCRE regular expression: [\p{Ll}\p{Lo}\p{N}_-]{0,63}
+
 
             No more than 64 labels can be associated with a given store.
           type: object
         name:
-          description: |-
+          description: >-
             Resource name of the DICOM store, of the form
+
             `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`.
           type: string
         notificationConfig:
-          $ref: '#/components/schemas/NotificationConfig'
-          description: |-
+          $ref: "#/components/schemas/NotificationConfig"
+          description: >-
             Notification destination for new DICOM instances.
+
             Supplied by the client.
       type: object
     Empty:
-      description: |-
+      description: >-
         A generic empty message that you can re-use to avoid defining duplicated
+
         empty messages in your APIs. A typical example is to use it as the request
+
         or the response type of an API method. For instance:
 
             service Foo {
@@ -2393,30 +2803,41 @@ components:
       properties: {}
       type: object
     ExportDicomDataRequest:
-      description: |-
+      description: >-
         Exports data from the specified DICOM store.
+
         If a given resource, such as a DICOM object with the same SOPInstance UID,
+
         already exists in the output, it is overwritten with the version
+
         in the source dataset.
+
         Exported DICOM data persists when the DICOM store from which it was
+
         exported is deleted.
       properties:
         bigqueryDestination:
-          $ref: '#/components/schemas/GoogleCloudHealthcareV1DicomBigQueryDestination'
-          description: |-
+          $ref: "#/components/schemas/GoogleCloudHealthcareV1DicomBigQueryDestination"
+          description: >-
             The BigQuery output destination.
 
+
             You can only export to a BigQuery dataset that's in the same project as
+
             the DICOM store you're exporting from.
 
+
             The BigQuery location requires two IAM roles:
+
             `roles/bigquery.dataEditor` and `roles/bigquery.jobUser`.
         gcsDestination:
-          $ref: '#/components/schemas/GoogleCloudHealthcareV1DicomGcsDestination'
-          description: |-
+          $ref: "#/components/schemas/GoogleCloudHealthcareV1DicomGcsDestination"
+          description: >-
             The Cloud Storage output destination.
 
+
             The Cloud Storage location requires the `roles/storage.objectAdmin` Cloud
+
             IAM role.
       type: object
     ExportDicomDataResponse:
@@ -2427,40 +2848,55 @@ components:
       description: Request to export resources.
       properties:
         bigqueryDestination:
-          $ref: '#/components/schemas/GoogleCloudHealthcareV1FhirBigQueryDestination'
-          description: |-
+          $ref: "#/components/schemas/GoogleCloudHealthcareV1FhirBigQueryDestination"
+          description: >-
             The BigQuery output destination.
 
+
             The BigQuery location requires two IAM roles:
+
             `roles/bigquery.dataEditor` and `roles/bigquery.jobUser`.
+
 
             The output is one BigQuery table per resource type.
         gcsDestination:
-          $ref: '#/components/schemas/GoogleCloudHealthcareV1FhirGcsDestination'
-          description: |-
+          $ref: "#/components/schemas/GoogleCloudHealthcareV1FhirGcsDestination"
+          description: >-
             The Cloud Storage output destination.
 
+
             The Cloud Storage location requires the `roles/storage.objectAdmin` Cloud
+
             IAM role.
 
+
             The exported outputs are
+
             organized by FHIR resource types. The server creates one object per
+
             resource type. Each object contains newline delimited JSON, and each line
+
             is a FHIR resource.
       type: object
     ExportResourcesResponse:
-      description: |-
+      description: >-
         Response when all resources export successfully.
+
         This structure is included in the
+
         response to describe the detailed
+
         outcome after the operation finishes successfully.
       properties: {}
       type: object
     Expr:
-      description: |-
+      description: >-
         Represents a textual expression in the Common Expression Language (CEL)
+
         syntax. CEL is a C-like expression language. The syntax and semantics of CEL
+
         are documented at https://github.com/google/cel-spec.
+
 
         Example (Comparison):
 
@@ -2487,28 +2923,35 @@ components:
             expression: "'New message received at ' + string(document.create_time)"
 
         The exact variables and functions that may be referenced within an expression
+
         are determined by the service that evaluates it. See the service
+
         documentation for additional information.
       properties:
         description:
-          description: |-
+          description: >-
             Optional. Description of the expression. This is a longer text which
+
             describes the expression, e.g. when hovered over it in a UI.
           type: string
         expression:
-          description: |-
+          description: >-
             Textual representation of an expression in Common Expression Language
+
             syntax.
           type: string
         location:
-          description: |-
+          description: >-
             Optional. String indicating the location of the expression for error
+
             reporting, e.g. a file name and a position in the file.
           type: string
         title:
-          description: |-
+          description: >-
             Optional. Title for the expression, i.e. a short string describing
+
             its purpose. This can be used e.g. in UIs which allow to enter the
+
             expression.
           type: string
       type: object
@@ -2516,111 +2959,162 @@ components:
       description: Specifies how to handle de-identification of a FHIR store.
       properties:
         fieldMetadataList:
-          description: |-
+          description: >-
             Specifies FHIR paths to match and how to transform them. Any field that
+
             is not matched by a FieldMetadata is passed through to the output
+
             dataset unmodified. All extensions are removed in the output.
           items:
-            $ref: '#/components/schemas/FieldMetadata'
+            $ref: "#/components/schemas/FieldMetadata"
           type: array
       type: object
     FhirFilter:
       description: Filter configuration.
       properties:
         resources:
-          $ref: '#/components/schemas/Resources'
-          description: |-
+          $ref: "#/components/schemas/Resources"
+          description: >-
             List of resources to include in the output. If this list is empty or
+
             not specified, all resources are included in the output.
       type: object
     FhirStore:
       description: Represents a FHIR store.
       properties:
         disableReferentialIntegrity:
-          description: |-
+          description: >-
             Whether to disable referential integrity in this FHIR store. This field is
+
             immutable after FHIR store creation.
+
             The default value is false, meaning that the API enforces referential
+
             integrity and fails the requests that result in inconsistent state in
+
             the FHIR store.
+
             When this field is set to true, the API skips referential integrity
+
             checks. Consequently, operations that rely on references, such as
+
             GetPatientEverything, do not return all the results if broken references
+
             exist.
           type: boolean
         disableResourceVersioning:
-          description: |-
+          description: >-
             Whether to disable resource versioning for this FHIR store. This field can
+
             not be changed after the creation of FHIR store.
+
             If set to false, which is the default behavior, all write operations
+
             cause historical versions to be recorded automatically. The historical
+
             versions can be fetched through the history APIs, but cannot be updated.
+
             If set to true, no historical versions are kept. The server sends
+
             errors for attempts to read the historical versions.
           type: boolean
         enableUpdateCreate:
-          description: |-
+          description: >-
             Whether this FHIR store has the [updateCreate
+
             capability](https://www.hl7.org/fhir/capabilitystatement-definitions.html#CapabilityStatement.rest.resource.updateCreate).
+
             This determines if the client can use an Update operation to create a new
+
             resource with a client-specified ID. If false, all IDs are server-assigned
+
             through the Create operation and attempts to update a non-existent resource
+
             return errors. Please treat the audit logs with appropriate levels of
+
             care if client-specified resource IDs contain sensitive data such as
+
             patient identifiers, those IDs are part of the FHIR resource path
+
             recorded in Cloud audit logs and Cloud Pub/Sub notifications.
           type: boolean
         labels:
           additionalProperties:
             type: string
-          description: |-
+          description: >-
             User-supplied key-value pairs used to organize FHIR stores.
 
+
             Label keys must be between 1 and 63 characters long, have a UTF-8 encoding
+
             of maximum 128 bytes, and must conform to the
+
             following PCRE regular expression:
+
             \p{Ll}\p{Lo}{0,62}
 
+
             Label values are optional, must be between 1 and 63 characters long, have
+
             a UTF-8 encoding of maximum 128 bytes, and must conform to the
+
             following PCRE regular expression: [\p{Ll}\p{Lo}\p{N}_-]{0,63}
+
 
             No more than 64 labels can be associated with a given store.
           type: object
         name:
-          description: |-
+          description: >-
             Output only. Resource name of the FHIR store, of the form
+
             `projects/{project_id}/datasets/{dataset_id}/fhirStores/{fhir_store_id}`.
           type: string
         notificationConfig:
-          $ref: '#/components/schemas/NotificationConfig'
-          description: |-
+          $ref: "#/components/schemas/NotificationConfig"
+          description: >-
             If non-empty, publish all resource modifications of this FHIR store to
+
             this destination. The Cloud Pub/Sub message attributes contain a map
+
             with a string describing the action that has triggered the notification.
+
             For example, "action":"CreateResource".
         streamConfigs:
-          description: |-
+          description: >-
             A list of streaming configs that configure the destinations of streaming
+
             export for every resource mutation in this FHIR store. Each store is
+
             allowed to have up to 10 streaming configs.
+
             After a new config is added, the next resource mutation is streamed to
+
             the new location in addition to the existing ones.
+
             When a location is removed from the list, the server stops
+
             streaming to that location. Before adding a new config, you must add the
+
             required
+
             [`bigquery.dataEditor`](https://cloud.google.com/bigquery/docs/access-control#bigquery.dataEditor)
+
             role to your project's **Cloud Healthcare Service Agent**
+
             [service account](https://cloud.google.com/iam/docs/service-accounts).
+
             Some lag (typically on the order of dozens of seconds) is expected before
+
             the results show up in the streaming destination.
           items:
-            $ref: '#/components/schemas/StreamConfig'
+            $ref: "#/components/schemas/StreamConfig"
           type: array
         version:
-          description: |-
+          description: >-
             The FHIR specification version that this FHIR store supports natively. This
+
             field is immutable after store creation. Requests are rejected if they
+
             contain FHIR resources of a different version.
           enum:
             - VERSION_UNSPECIFIED
@@ -2630,8 +3124,9 @@ components:
           type: string
       type: object
     FieldMetadata:
-      description: |-
+      description: >-
         Specifies FHIR paths to match, and how to handle de-identification of
+
         matching fields.
       properties:
         action:
@@ -2643,17 +3138,27 @@ components:
             - DO_NOT_TRANSFORM
           type: string
         paths:
-          description: |-
+          description: >-
             List of paths to FHIR fields to be redacted. Each path is a
+
             period-separated list where each component is either a field name or
+
             FHIR type name, for example: Patient, HumanName.
+
             For "choice" types (those defined in the FHIR spec with the form:
+
             field[x]) we use two separate components. For example,
+
             "deceasedAge.unit" is matched by "Deceased.Age.unit".
+
             Supported types are: AdministrativeGenderCode, Code, Date, DateTime,
+
             Decimal, HumanName, Id, LanguageCode, Markdown, Oid, String, Uri, Uuid,
+
             Xhtml.
+
             Base64Binary is also supported, but may only be kept as-is or have all
+
             the content removed.
           items:
             type: string
@@ -2671,32 +3176,43 @@ components:
       description: The BigQuery table where the server writes the output.
       properties:
         force:
-          description: |-
+          description: >-
             If the destination table already exists and this flag is `TRUE`, the table
+
             is overwritten by the contents of the DICOM store. If the flag is not
+
             set and the destination table already exists, the export call returns an
+
             error.
           type: boolean
         tableUri:
-          description: |-
+          description: >-
             BigQuery URI to a table, up to 2000 characters long, in the format
+
             `bq://projectId.bqDatasetId.tableId`
           type: string
       type: object
     GoogleCloudHealthcareV1DicomGcsDestination:
-      description: |-
+      description: >-
         The Cloud Storage location where the server writes the output and the export
+
         configuration.
       properties:
         mimeType:
-          description: |-
+          description: >-
             MIME types supported by DICOM spec.
+
             Each file is written in the following format:
+
             `.../{study_id}/{series_id}/{instance_id}[/{frame_number}].{extension}`
+
             The frame_number component exists only for multi-frame instances.
 
+
             Supported MIME types are consistent with supported formats in DICOMweb:
+
             https://cloud.google.com/healthcare/docs/dicom#retrieve_transaction.
+
             Specifically, the following are supported:
 
               - application/dicom; transfer-syntax=1.2.840.10008.1.2.1
@@ -2725,16 +3241,22 @@ components:
              - application/octet-stream -> no extension
 
             If unspecified, the instances are exported in the original
+
             DICOM format they were uploaded in.
           type: string
         uriPrefix:
-          description: |-
+          description: >-
             The Cloud Storage destination to export to.
 
+
             URI for a Cloud Storage directory where the server writes the result files,
+
             in the format `gs://{bucket-id}/{path/to/destination/dir}`). If there is no
+
             trailing slash, the service appends one when composing the object path.
+
             The user is responsible for creating the Cloud Storage bucket referenced in
+
             `uri_prefix`.
           type: string
       type: object
@@ -2742,10 +3264,13 @@ components:
       description: Specifies the configuration for importing data from Cloud Storage.
       properties:
         uri:
-          description: |-
+          description: >-
             Points to a Cloud Storage URI containing file(s) with
+
             content only. The URI must be in the following format:
+
             `gs://{bucket_id}/{object_id}`. The URI can include wildcards in
+
             `object_id` and thus identify multiple files. Supported wildcards:
              '*' to match 0 or more non-separator characters
              '**' to match 0 or more characters (including separators). Must be used at
@@ -2757,7 +3282,9 @@ components:
                   extensions in `my-directory/` and its sub-directories.
              '?' to match 1 character
             All other URI formats are invalid.
+
             Files matching the wildcard are expected to contain content only, no
+
             metadata.
           type: string
       type: object
@@ -2765,29 +3292,36 @@ components:
       description: The configuration for exporting to BigQuery.
       properties:
         datasetUri:
-          description: |-
+          description: >-
             BigQuery URI to a dataset, up to 2000 characters long, in the format
+
             `bq://projectId.bqDatasetId`
           type: string
         force:
-          description: |-
+          description: >-
             If this flag is `TRUE`, all tables are deleted from the dataset before
+
             the new exported tables are written. If the flag is not set and the
+
             destination dataset contains tables, the export call returns an error.
           type: boolean
         schemaConfig:
-          $ref: '#/components/schemas/SchemaConfig'
+          $ref: "#/components/schemas/SchemaConfig"
           description: The configuration for the exported BigQuery schema.
       type: object
     GoogleCloudHealthcareV1FhirGcsDestination:
       description: The configuration for exporting to Cloud Storage.
       properties:
         uriPrefix:
-          description: |-
+          description: >-
             URI for a Cloud Storage directory where result files should be written, in
+
             the format of `gs://{bucket-id}/{path/to/destination/dir}`. If there is no
+
             trailing slash, the service appends one when composing the object path.
+
             The user is responsible for creating the Cloud Storage bucket referenced in
+
             `uri_prefix`.
           type: string
       type: object
@@ -2795,84 +3329,134 @@ components:
       description: Specifies the configuration for importing data from Cloud Storage.
       properties:
         uri:
-          description: |-
+          description: >-
             Points to a Cloud Storage URI containing file(s) to import.
 
+
             The URI must be in the following format: `gs://{bucket_id}/{object_id}`.
+
             The URI can include wildcards in `object_id` and thus identify multiple
+
             files. Supported wildcards:
 
+
             *  `*` to match 0 or more non-separator characters
+
             *  `**` to match 0 or more characters (including separators). Must be used
+
             at the end of a path and with no other wildcards in the
+
             path. Can also be used with a file extension (such as .ndjson), which
+
             imports all files with the extension in the specified directory and
+
             its sub-directories. For example, `gs://my-bucket/my-directory/**.ndjson`
+
             imports all files with `.ndjson` extensions in `my-directory/` and its
+
             sub-directories.
+
             *  `?` to match 1 character
 
+
             Files matching the wildcard are expected to contain content only, no
+
             metadata.
           type: string
       type: object
     Hl7V2NotificationConfig:
-      description: |-
+      description: >-
         Specifies where and whether to send notifications upon changes to a
+
         data store.
       properties:
         filter:
-          description: |-
+          description: >-
             Restricts notifications sent for messages matching a filter. If this is
+
             empty, all messages are matched. Syntax:
+
             https://cloud.google.com/appengine/docs/standard/python/search/query_strings
+
 
             The following fields and functions are available for filtering:
 
+
             *  `message_type`, from the MSH-9.1 field. For example,
+
             `NOT message_type = "ADT"`.
+
             *  `send_date` or `sendDate`, the YYYY-MM-DD date the message was sent in
+
             the dataset's time_zone, from the MSH-7 segment. For example,
+
             `send_date < "2017-01-02"`.
+
             *  `send_time`, the timestamp when the message was sent, using the
+
             RFC3339 time format for comparisons, from the MSH-7 segment. For example,
+
             `send_time < "2017-01-02T00:00:00-05:00"`.
+
             *  `send_facility`, the care center that the message came from, from the
+
             MSH-4 segment. For example, `send_facility = "ABC"`.
+
             *  `PatientId(value, type)`, which matches if the message lists a patient
+
             having an ID of the given value and type in the PID-2, PID-3, or PID-4
+
             segments. For example, `PatientId("123456", "MRN")`.
+
             *  `labels.x`, a string value of the label with key `x` as set using the
+
             Message.labels
+
             map. For example, `labels."priority"="high"`. The operator `:*` can be
+
             used to assert the existence of a label. For example,
+
             `labels."priority":*`.
           type: string
         pubsubTopic:
-          description: |-
+          description: >-
             The [Cloud Pub/Sub](https://cloud.google.com/pubsub/docs/) topic that
+
             notifications of changes are published on. Supplied by the client.
+
 
             The notification is a `PubsubMessage` with the following fields:
 
+
             *  `PubsubMessage.Data` contains the resource name.
+
             *  `PubsubMessage.MessageId` is the ID of this notification. It's
                guaranteed to be unique within the topic.
             *  `PubsubMessage.PublishTime` is the time when the message was
                published.
 
             Note that notifications are only sent if the topic is non-empty. [Topic
+
             names](https://cloud.google.com/pubsub/docs/overview#names) must be
+
             scoped to a project.
 
+
             The Cloud Healthcare API service account,
+
             service-PROJECT_NUMBER@gcp-sa-healthcare.iam.gserviceaccount.com,
+
             must have
+
             publisher permissions on the given Pub/Sub topic. Not having adequate
+
             permissions causes the calls that send notifications to fail.
 
+
             If a notification cannot be published to Cloud Pub/Sub, errors are
+
             logged to Cloud Logging. For more information, see
+
             [Viewing error logs in Cloud Logging](/healthcare/docs/how-tos/logging)).
           type: string
       type: object
@@ -2882,67 +3466,98 @@ components:
         labels:
           additionalProperties:
             type: string
-          description: |-
+          description: >-
             User-supplied key-value pairs used to organize HL7v2 stores.
 
+
             Label keys must be between 1 and 63 characters long, have a UTF-8 encoding
+
             of maximum 128 bytes, and must conform to the
+
             following PCRE regular expression:
+
             \p{Ll}\p{Lo}{0,62}
 
+
             Label values are optional, must be between 1 and 63 characters long, have
+
             a UTF-8 encoding of maximum 128 bytes, and must conform to the
+
             following PCRE regular expression: [\p{Ll}\p{Lo}\p{N}_-]{0,63}
+
 
             No more than 64 labels can be associated with a given store.
           type: object
         name:
-          description: |-
+          description: >-
             Resource name of the HL7v2 store, of the form
+
             `projects/{project_id}/datasets/{dataset_id}/hl7V2Stores/{hl7v2_store_id}`.
           type: string
         notificationConfigs:
-          description: |-
+          description: >-
             A list of notification configs. Each configuration uses a filter to
+
             determine whether to publish a message (both Ingest & Create) on
+
             the corresponding notification destination. Only the message name is sent
+
             as part of the notification. Supplied by the client.
           items:
-            $ref: '#/components/schemas/Hl7V2NotificationConfig'
+            $ref: "#/components/schemas/Hl7V2NotificationConfig"
           type: array
         parserConfig:
-          $ref: '#/components/schemas/ParserConfig'
-          description: |-
+          $ref: "#/components/schemas/ParserConfig"
+          description: >-
             The configuration for the parser. It determines how the server parses the
+
             messages.
         rejectDuplicateMessage:
-          description: |-
+          description: >-
             Determines whether to reject duplicate messages. A duplicate
+
             message is a message with the same raw bytes as a message that has already
+
             been ingested/created in this HL7v2 store.
+
             The default value is false, meaning that the store accepts the duplicate
+
             messages and it also returns the same ACK message in the
+
             IngestMessageResponse as has been returned previously. Note that only
+
             one resource is created in the store.
+
             When this field is set to true,
+
             CreateMessage/IngestMessage
+
             requests with a duplicate message will be rejected by the store, and
+
             IngestMessageErrorDetail returns a NACK message upon rejection.
           type: boolean
       type: object
     HttpBody:
-      description: |-
+      description: >-
         Message that represents an arbitrary HTTP body. It should only be used for
+
         payload formats that can't be represented as JSON, such as raw binary or
+
         an HTML page.
 
 
+
         This message can be used both in streaming and non-streaming API methods in
+
         the request as well as the response.
 
+
         It can be used as a top-level request field, which is convenient if one
+
         wants to extract parameters from either the URL or HTTP template into the
+
         request fields and also want access to the raw HTTP body.
+
 
         Example:
 
@@ -2970,6 +3585,7 @@ components:
             }
 
         Use of this type only changes how the request and response bodies are
+
         handled, all other features will continue to work unchanged.
       properties:
         contentType:
@@ -2980,8 +3596,9 @@ components:
           format: byte
           type: string
         extensions:
-          description: |-
+          description: >-
             Application specific response metadata. Must be set in the first response
+
             for streaming APIs.
           items:
             additionalProperties:
@@ -3002,18 +3619,23 @@ components:
           type: string
       type: object
     ImportDicomDataRequest:
-      description: |-
+      description: >-
         Imports data into the specified DICOM store.
+
         Returns an error if any of the files to import are not DICOM files. This
+
         API accepts duplicate DICOM instances by ignoring the newly-pushed instance.
+
         It does not overwrite.
       properties:
         gcsSource:
-          $ref: '#/components/schemas/GoogleCloudHealthcareV1DicomGcsSource'
-          description: |-
+          $ref: "#/components/schemas/GoogleCloudHealthcareV1DicomGcsSource"
+          description: >-
             Cloud Storage source data location and import configuration.
 
+
             The Cloud Storage location requires the `roles/storage.objectViewer`
+
             Cloud IAM role.
       type: object
     ImportDicomDataResponse:
@@ -3024,8 +3646,9 @@ components:
       description: Request to import resources.
       properties:
         contentStructure:
-          description: |-
+          description: >-
             The content structure in the source location. If not specified, the server
+
             treats the input source files as BUNDLE.
           enum:
             - CONTENT_STRUCTURE_UNSPECIFIED
@@ -3035,62 +3658,72 @@ components:
             - RESOURCE_PRETTY
           type: string
         gcsSource:
-          $ref: '#/components/schemas/GoogleCloudHealthcareV1FhirGcsSource'
-          description: |-
+          $ref: "#/components/schemas/GoogleCloudHealthcareV1FhirGcsSource"
+          description: >-
             Cloud Storage source data location and import configuration.
 
+
             The Cloud Storage location requires the `roles/storage.objectViewer`
+
             Cloud IAM role.
 
+
             Each Cloud Storage object should be a text file that contains the format
+
             specified in ContentStructure.
       type: object
     ImportResourcesResponse:
-      description: |-
+      description: >-
         Final response of importing resources.
+
         This structure is included in the
+
         response to describe the detailed
+
         outcome after the operation finishes successfully.
       properties: {}
       type: object
     InfoTypeTransformation:
-      description: |-
+      description: >-
         A transformation to apply to text that is identified as a specific
+
         info_type.
       properties:
         characterMaskConfig:
-          $ref: '#/components/schemas/CharacterMaskConfig'
+          $ref: "#/components/schemas/CharacterMaskConfig"
           description: Config for character mask.
         cryptoHashConfig:
-          $ref: '#/components/schemas/CryptoHashConfig'
+          $ref: "#/components/schemas/CryptoHashConfig"
           description: Config for crypto hash.
         dateShiftConfig:
-          $ref: '#/components/schemas/DateShiftConfig'
+          $ref: "#/components/schemas/DateShiftConfig"
           description: Config for date shift.
         infoTypes:
-          description: |-
+          description: >-
             InfoTypes to apply this transformation to. If this is not specified, the
+
             transformation applies to any info_type.
           items:
             type: string
           type: array
         redactConfig:
-          $ref: '#/components/schemas/RedactConfig'
+          $ref: "#/components/schemas/RedactConfig"
           description: Config for text redaction.
         replaceWithInfoTypeConfig:
-          $ref: '#/components/schemas/ReplaceWithInfoTypeConfig'
+          $ref: "#/components/schemas/ReplaceWithInfoTypeConfig"
           description: Config for replace with InfoType.
       type: object
     IngestMessageRequest:
       description: Ingests a message into the specified HL7v2 store.
       properties:
         message:
-          $ref: '#/components/schemas/Message'
+          $ref: "#/components/schemas/Message"
           description: HL7v2 message to ingest.
       type: object
     IngestMessageResponse:
-      description: |-
+      description: >-
         Acknowledges that a message has been ingested into the specified
+
         HL7v2 store.
       properties:
         hl7Ack:
@@ -3098,7 +3731,7 @@ components:
           format: byte
           type: string
         message:
-          $ref: '#/components/schemas/Message'
+          $ref: "#/components/schemas/Message"
           description: Created message resource.
       type: object
     ListDatasetsResponse:
@@ -3107,11 +3740,12 @@ components:
         datasets:
           description: The first page of datasets.
           items:
-            $ref: '#/components/schemas/Dataset'
+            $ref: "#/components/schemas/Dataset"
           type: array
         nextPageToken:
-          description: |-
+          description: >-
             Token to retrieve the next page of results, or empty if there are no
+
             more results in the list.
           type: string
       type: object
@@ -3119,15 +3753,17 @@ components:
       description: Lists the DICOM stores in the given dataset.
       properties:
         dicomStores:
-          description: |-
+          description: >-
             The returned DICOM stores. Won't be more DICOM stores than the value of
+
             page_size in the request.
           items:
-            $ref: '#/components/schemas/DicomStore'
+            $ref: "#/components/schemas/DicomStore"
           type: array
         nextPageToken:
-          description: |-
+          description: >-
             Token to retrieve the next page of results or empty if there are no more
+
             results in the list.
           type: string
       type: object
@@ -3135,15 +3771,17 @@ components:
       description: Lists the FHIR stores in the given dataset.
       properties:
         fhirStores:
-          description: |-
+          description: >-
             The returned FHIR stores. Won't be more FHIR stores than the value of
+
             page_size in the request.
           items:
-            $ref: '#/components/schemas/FhirStore'
+            $ref: "#/components/schemas/FhirStore"
           type: array
         nextPageToken:
-          description: |-
+          description: >-
             Token to retrieve the next page of results or empty if there are no more
+
             results in the list.
           type: string
       type: object
@@ -3151,15 +3789,17 @@ components:
       description: Lists the HL7v2 stores in the given dataset.
       properties:
         hl7V2Stores:
-          description: |-
+          description: >-
             The returned HL7v2 stores. Won't be more HL7v2 stores than the value of
+
             page_size in the request.
           items:
-            $ref: '#/components/schemas/Hl7V2Store'
+            $ref: "#/components/schemas/Hl7V2Store"
           type: array
         nextPageToken:
-          description: |-
+          description: >-
             Token to retrieve the next page of results or empty if there are no more
+
             results in the list.
           type: string
       type: object
@@ -3167,17 +3807,21 @@ components:
       description: Lists the messages in the specified HL7v2 store.
       properties:
         hl7V2Messages:
-          description: |-
+          description: >-
             The returned Messages. Won't be more Messages than the value of
+
             page_size in the request. See
+
             view for
+
             populated fields.
           items:
-            $ref: '#/components/schemas/Message'
+            $ref: "#/components/schemas/Message"
           type: array
         nextPageToken:
-          description: |-
+          description: >-
             Token to retrieve the next page of results or empty if there are no more
+
             results in the list.
           type: string
       type: object
@@ -3190,14 +3834,17 @@ components:
         operations:
           description: A list of operations that matches the specified filter in the request.
           items:
-            $ref: '#/components/schemas/Operation'
+            $ref: "#/components/schemas/Operation"
           type: array
       type: object
     Message:
-      description: |-
+      description: >-
         A complete HL7v2 message.
+
         See [Introduction to HL7 Standards]
+
         (https://www.hl7.org/implement/standards/index.cfm?ref=common) for
+
         details on the standard.
       properties:
         createTime:
@@ -3211,17 +3858,25 @@ components:
         labels:
           additionalProperties:
             type: string
-          description: |-
+          description: >-
             User-supplied key-value pairs used to organize HL7v2 stores.
 
+
             Label keys must be between 1 and 63 characters long, have a UTF-8 encoding
+
             of maximum 128 bytes, and must conform to the
+
             following PCRE regular expression:
+
             \p{Ll}\p{Lo}{0,62}
 
+
             Label values are optional, must be between 1 and 63 characters long, have
+
             a UTF-8 encoding of maximum 128 bytes, and must conform to the
+
             following PCRE regular expression: [\p{Ll}\p{Lo}\p{N}_-]{0,63}
+
 
             No more than 64 labels can be associated with a given store.
           type: object
@@ -3229,20 +3884,23 @@ components:
           description: The message type for this message. MSH-9.1.
           type: string
         name:
-          description: |-
+          description: >-
             Resource name of the Message, of the form
+
             `projects/{project_id}/datasets/{dataset_id}/hl7V2Stores/{hl7_v2_store_id}/messages/{message_id}`.
+
             Assigned by the server.
           type: string
         parsedData:
-          $ref: '#/components/schemas/ParsedData'
+          $ref: "#/components/schemas/ParsedData"
           description: Output only. The parsed version of the raw message data.
         patientIds:
-          description: |-
+          description: >-
             All patient IDs listed in the PID-2, PID-3, and PID-4 segments of this
+
             message.
           items:
-            $ref: '#/components/schemas/PatientId'
+            $ref: "#/components/schemas/PatientId"
           type: array
         sendFacility:
           description: The hospital that this message came from. MSH-4.
@@ -3256,72 +3914,103 @@ components:
       description: Specifies where to send notifications upon changes to a data store.
       properties:
         pubsubTopic:
-          description: |-
+          description: >-
             The [Cloud Pub/Sub](https://cloud.google.com/pubsub/docs/) topic that
+
             notifications of changes are published on. Supplied by the client.
+
             PubsubMessage.Data contains the resource name.
+
             PubsubMessage.MessageId is the ID of this message. It is guaranteed to be
+
             unique within the topic.
+
             PubsubMessage.PublishTime is the time at which the message was published.
+
             Notifications are only sent if the topic is
+
             non-empty. [Topic
+
             names](https://cloud.google.com/pubsub/docs/overview#names) must be scoped
+
             to a project. Cloud Healthcare API service account must have publisher
+
             permissions on the given Cloud Pub/Sub topic. Not having adequate
+
             permissions causes the calls that send notifications to fail.
 
+
             If a notification can't be published to Cloud Pub/Sub, errors are logged to
+
             Cloud Logging (see [Viewing
+
             logs](/healthcare/docs/how-tos/logging)). If the number of
+
             errors exceeds a certain rate, some aren't submitted.
           type: string
       type: object
     Operation:
-      description: |-
+      description: >-
         This resource represents a long-running operation that is the result of a
+
         network API call.
       properties:
         done:
-          description: |-
+          description: >-
             If the value is `false`, it means the operation is still in progress.
+
             If `true`, the operation is completed, and either `error` or `response` is
+
             available.
           type: boolean
         error:
-          $ref: '#/components/schemas/Status'
+          $ref: "#/components/schemas/Status"
           description: The error result of the operation in case of failure or cancellation.
         metadata:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
-          description: |-
+          description: >-
             Service-specific metadata associated with the operation.  It typically
+
             contains progress information and common metadata such as create time.
+
             Some services might not provide such metadata.  Any method that returns a
+
             long-running operation should document the metadata type, if any.
           type: object
         name:
-          description: |-
+          description: >-
             The server-assigned name, which is only unique within the same service that
+
             originally returns it. If you use the default HTTP mapping, the
+
             `name` should be a resource name ending with `operations/{unique_id}`.
           type: string
         response:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
-          description: |-
+          description: >-
             The normal response of the operation in case of success.  If the original
+
             method returns no data on success, such as `Delete`, the response is
+
             `google.protobuf.Empty`.  If the original method is standard
+
             `Get`/`Create`/`Update`, the response should be the resource.  For other
+
             methods, the response should have the type `XxxResponse`, where `Xxx`
+
             is the original method name.  For example, if the original method name
+
             is `TakeSnapshot()`, the inferred response type is
+
             `TakeSnapshotResponse`.
           type: object
       type: object
     OperationMetadata:
-      description: |-
+      description: >-
         OperationMetadata provides information about the operation execution.
+
         Returned in the long-running operation's metadata field.
       properties:
         apiMethodName:
@@ -3331,7 +4020,7 @@ components:
           description: Specifies if cancellation was requested for the operation.
           type: boolean
         counter:
-          $ref: '#/components/schemas/ProgressCounter'
+          $ref: "#/components/schemas/ProgressCounter"
         createTime:
           description: The time at which the operation was created by the API.
           format: google-datetime
@@ -3341,9 +4030,11 @@ components:
           format: google-datetime
           type: string
         logsUrl:
-          description: |-
+          description: >-
             A link to audit and error logs in the log viewer. Error logs are generated
+
             only by some operations, listed at
+
             [Viewing logs](/healthcare/docs/how-tos/logging).
           type: string
       type: object
@@ -3352,20 +4043,22 @@ components:
       properties:
         segments:
           items:
-            $ref: '#/components/schemas/Segment'
+            $ref: "#/components/schemas/Segment"
           type: array
       type: object
     ParserConfig:
-      description: |-
+      description: >-
         The configuration for the parser. It determines how the server parses the
+
         messages.
       properties:
         allowNullHeader:
           description: Determines whether messages with no header are allowed.
           type: boolean
         segmentTerminator:
-          description: |-
+          description: >-
             Byte(s) to use as the segment terminator. If this is unset, '\r' is
+
             used as segment terminator.
           format: byte
           type: string
@@ -3374,30 +4067,43 @@ components:
       description: A patient identifier and associated type.
       properties:
         type:
-          description: 'ID type. For example, MRN or NHS.'
+          description: ID type. For example, MRN or NHS.
           type: string
         value:
           description: The patient's unique identifier.
           type: string
       type: object
     Policy:
-      description: |-
+      description: >-
         An Identity and Access Management (IAM) policy, which specifies access
+
         controls for Google Cloud resources.
 
 
+
         A `Policy` is a collection of `bindings`. A `binding` binds one or more
+
         `members` to a single `role`. Members can be user accounts, service accounts,
+
         Google groups, and domains (such as G Suite). A `role` is a named list of
+
         permissions; each `role` can be an IAM predefined role or a user-created
+
         custom role.
 
+
         For some types of Google Cloud resources, a `binding` can also specify a
+
         `condition`, which is a logical expression that allows access to a resource
+
         only if the expression evaluates to `true`. A condition can add constraints
+
         based on attributes of the request, the resource, or both. To learn which
+
         resources support conditions in their IAM policies, see the
+
         [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies).
+
 
         **JSON example:**
 
@@ -3448,62 +4154,90 @@ components:
             - version: 3
 
         For a description of IAM and its features, see the
+
         [IAM documentation](https://cloud.google.com/iam/docs/).
       properties:
         auditConfigs:
           description: Specifies cloud audit logging configuration for this policy.
           items:
-            $ref: '#/components/schemas/AuditConfig'
+            $ref: "#/components/schemas/AuditConfig"
           type: array
         bindings:
-          description: |-
+          description: >-
             Associates a list of `members` to a `role`. Optionally, may specify a
+
             `condition` that determines how and when the `bindings` are applied. Each
+
             of the `bindings` must contain at least one member.
           items:
-            $ref: '#/components/schemas/Binding'
+            $ref: "#/components/schemas/Binding"
           type: array
         etag:
-          description: |-
+          description: >-
             `etag` is used for optimistic concurrency control as a way to help
+
             prevent simultaneous updates of a policy from overwriting each other.
+
             It is strongly suggested that systems make use of the `etag` in the
+
             read-modify-write cycle to perform policy updates in order to avoid race
+
             conditions: An `etag` is returned in the response to `getIamPolicy`, and
+
             systems are expected to put that etag in the request to `setIamPolicy` to
+
             ensure that their change will be applied to the same version of the policy.
 
+
             **Important:** If you use IAM Conditions, you must include the `etag` field
+
             whenever you call `setIamPolicy`. If you omit this field, then IAM allows
+
             you to overwrite a version `3` policy with a version `1` policy, and all of
+
             the conditions in the version `3` policy are lost.
           format: byte
           type: string
         version:
-          description: |-
+          description: >-
             Specifies the format of the policy.
 
+
             Valid values are `0`, `1`, and `3`. Requests that specify an invalid value
+
             are rejected.
 
+
             Any operation that affects conditional role bindings must specify version
+
             `3`. This requirement applies to the following operations:
 
+
             * Getting a policy that includes a conditional role binding
+
             * Adding a conditional role binding to a policy
+
             * Changing a conditional role binding in a policy
+
             * Removing any role binding, with or without a condition, from a policy
               that includes conditions
 
             **Important:** If you use IAM Conditions, you must include the `etag` field
+
             whenever you call `setIamPolicy`. If you omit this field, then IAM allows
+
             you to overwrite a version `3` policy with a version `1` policy, and all of
+
             the conditions in the version `3` policy are lost.
 
+
             If a policy does not include any conditions, operations on that policy may
+
             specify any valid version or leave the field unset.
 
+
             To learn which resources support conditions in their IAM policies, see the
+
             [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies).
           format: int32
           type: integer
@@ -3525,18 +4259,24 @@ components:
           type: string
       type: object
     RedactConfig:
-      description: |-
+      description: >-
         Define how to redact sensitive values. Default behaviour is erase.
+
         For example, "My name is Jane." becomes "My name is ."
       properties: {}
       type: object
     ReplaceWithInfoTypeConfig:
-      description: |-
+      description: >-
         When using the
+
         INSPECT_AND_TRANSFORM
+
         action, each match is replaced with the name of the info_type. For example,
+
         "My name is Jane" becomes "My name is [PERSON_NAME]." The
+
         TRANSFORM
+
         action is equivalent to redacting.
       properties: {}
       type: object
@@ -3544,23 +4284,29 @@ components:
       description: A list of FHIR resources.
       properties:
         resources:
-          description: 'List of resources IDs. For example, "Patient/1234".'
+          description: List of resources IDs. For example, "Patient/1234".
           items:
             type: string
           type: array
       type: object
     SchemaConfig:
-      description: |-
+      description: >-
         Configuration for the FHIR BigQuery schema. Determines how the server
+
         generates the schema.
       properties:
         recursiveStructureDepth:
-          description: |-
+          description: >-
             The depth for all recursive structures in the output analytics
+
             schema. For example, `concept` in the CodeSystem resource is a recursive
+
             structure; when the depth is 2, the CodeSystem table will have a column
+
             called `concept.concept` but not `concept.concept.concept`. If not
+
             specified or set to 0, the server will use the default value 2. The
+
             maximum depth allowed is 5.
           format: int64
           type: string
@@ -3575,11 +4321,15 @@ components:
       description: Request to search the resources in the specified FHIR store.
       properties:
         resourceType:
-          description: |-
+          description: >-
             The FHIR resource type to search, such as Patient or Observation. For a
+
             complete list, see the FHIR Resource Index
+
             ([DSTU2](http://hl7.org/implement/standards/fhir/DSTU2/resourcelist.html),
+
             [STU3](http://hl7.org/implement/standards/fhir/STU3/resourcelist.html),
+
             [R4](http://hl7.org/implement/standards/fhir/R4/resourcelist.html)).
           type: string
       type: object
@@ -3589,14 +4339,20 @@ components:
         fields:
           additionalProperties:
             type: string
-          description: |-
+          description: >-
             A mapping from the positional location to the value.
+
             The key string uses zero-based indexes separated by dots to identify
+
             Fields, components and sub-components. A bracket notation is also used to
+
             identify different instances of a repeated field.
+
             Regex for key: (\d+)(\[\d+\])?(.\d+)?(.\d+)?
 
+
             Examples of (key, value) pairs:
+
 
             * (0.1, "hemoglobin") denotes that the first component of Field 0 has the
               value "hemoglobin".
@@ -3608,11 +4364,12 @@ components:
               first Instance of Field 1, which is repeated, has the value "HbA1c".
           type: object
         segmentId:
-          description: 'A string that indicates the type of segment. For example, EVN or PID.'
+          description: A string that indicates the type of segment. For example, EVN or PID.
           type: string
         setId:
-          description: |-
+          description: >-
             Set ID for segments that can be in a set. This can be empty if it's
+
             missing or isn't applicable.
           type: string
       type: object
@@ -3620,39 +4377,51 @@ components:
       description: Request message for `SetIamPolicy` method.
       properties:
         policy:
-          $ref: '#/components/schemas/Policy'
-          description: |-
+          $ref: "#/components/schemas/Policy"
+          description: >-
             REQUIRED: The complete policy to be applied to the `resource`. The size of
+
             the policy is limited to a few 10s of KB. An empty policy is a
+
             valid policy but certain Cloud Platform services (such as Projects)
+
             might reject them.
         updateMask:
-          description: |-
+          description: >-
             OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
+
             the fields in the mask will be modified. If no mask is provided, the
+
             following default mask is used:
+
 
             `paths: "bindings, etag"`
           format: google-fieldmask
           type: string
       type: object
     Status:
-      description: |-
+      description: >-
         The `Status` type defines a logical error model that is suitable for
+
         different programming environments, including REST APIs and RPC APIs. It is
+
         used by [gRPC](https://github.com/grpc). Each `Status` message contains
+
         three pieces of data: error code, error message, and error details.
 
+
         You can find out more about this error model and how to work with it in the
+
         [API Design Guide](https://cloud.google.com/apis/design/errors).
       properties:
         code:
-          description: 'The status code, which should be an enum value of google.rpc.Code.'
+          description: The status code, which should be an enum value of google.rpc.Code.
           format: int32
           type: integer
         details:
-          description: |-
+          description: >-
             A list of messages that carry the error details.  There is a common set of
+
             message types for APIs to use.
           items:
             additionalProperties:
@@ -3660,9 +4429,11 @@ components:
             type: object
           type: array
         message:
-          description: |-
+          description: >-
             A developer-facing error message, which should be in English. Any
+
             user-facing error message should be localized and sent in the
+
             google.rpc.Status.details field, or localized by the client.
           type: string
       type: object
@@ -3670,55 +4441,91 @@ components:
       description: Contains configuration for streaming FHIR export.
       properties:
         bigqueryDestination:
-          $ref: '#/components/schemas/GoogleCloudHealthcareV1FhirBigQueryDestination'
-          description: |-
+          $ref: "#/components/schemas/GoogleCloudHealthcareV1FhirBigQueryDestination"
+          description: >-
             The destination BigQuery structure that contains both the dataset
+
             location and corresponding schema config.
 
+
             The output is organized in one table per resource type. The server
+
             reuses the existing tables (if any) that are named after the resource
+
             types. For example, "Patient", "Observation". When there is no existing
+
             table for a given resource type, the server attempts to create one.
 
+
             When a table schema doesn't align with the schema config, either
+
             because of existing incompatible schema or out of band incompatible
+
             modification, the server does not stream in new data.
 
+
             BigQuery imposes a 1 MB limit on streaming insert row size, therefore
+
             any resource mutation that generates more than 1 MB of BigQuery data
+
             is not streamed.
 
+
             One resolution in this case is to delete the incompatible
+
             table and let the server recreate one, though the newly created table
+
             only contains data after the table recreation.
 
+
             Results are appended to the corresponding BigQuery tables. Different
+
             versions of the same resource are distinguishable by the meta.versionId
+
             and meta.lastUpdated columns. The operation (CREATE/UPDATE/DELETE) that
+
             results in the new version is recorded in the meta.tag.
 
+
             The tables contain all historical resource versions since streaming was
+
             enabled. For query convenience, the server also creates one view per
+
             table of the same name containing only the current resource version.
 
+
             The streamed data in the BigQuery dataset is not guaranteed to be
+
             completely unique. The combination of the id and meta.versionId columns
+
             should ideally identify a single unique row. But in rare cases,
+
             duplicates may exist. At query time, users may use the SQL select
+
             statement to keep only one of the duplicate rows given an id and
+
             meta.versionId pair. Alternatively, the server created view mentioned
+
             above also filters out duplicates.
 
+
             If a resource mutation cannot be streamed to BigQuery, errors are
+
             logged to Cloud Logging. For more information, see
+
             [Viewing error logs in Cloud
+
             Logging](/healthcare/docs/how-tos/logging)).
         resourceTypes:
-          description: |-
+          description: >-
             Supply a FHIR resource type (such as "Patient" or "Observation").
+
             See https://www.hl7.org/fhir/valueset-resource-types.html for a list of
+
             all FHIR resource types.
+
             The server treats an empty list as an intent to stream all the
+
             supported resource types in this FHIR store.
           items:
             type: string
@@ -3728,11 +4535,15 @@ components:
       description: List of tags to be filtered.
       properties:
         tags:
-          description: |-
+          description: >-
             Tags to be filtered. Tags must be DICOM Data Elements, File Meta
+
             Elements, or Directory Structuring Elements, as defined at:
+
             http://dicom.nema.org/medical/dicom/current/output/html/part06.html#table_6-1,.
+
             They may be provided by "Keyword" or "Tag". For example "PatientID",
+
             "00100010".
           items:
             type: string
@@ -3742,10 +4553,13 @@ components:
       description: Request message for `TestIamPermissions` method.
       properties:
         permissions:
-          description: |-
+          description: >-
             The set of permissions to check for the `resource`. Permissions with
+
             wildcards (such as '*' or 'storage.*') are not allowed. For more
+
             information see
+
             [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
           items:
             type: string
@@ -3755,8 +4569,9 @@ components:
       description: Response message for `TestIamPermissions` method.
       properties:
         permissions:
-          description: |-
+          description: >-
             A subset of `TestPermissionsRequest.permissions` that the caller is
+
             allowed.
           items:
             type: string
@@ -3767,7 +4582,7 @@ components:
         transformations:
           description: The transformations to apply to the detected data.
           items:
-            $ref: '#/components/schemas/InfoTypeTransformation'
+            $ref: "#/components/schemas/InfoTypeTransformation"
           type: array
       type: object
   securitySchemes:
@@ -3775,7 +4590,7 @@ components:
       description: Oauth 2.0 authentication
       flows:
         implicit:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
       type: oauth2

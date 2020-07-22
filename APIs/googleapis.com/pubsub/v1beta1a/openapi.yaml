@@ -1,39 +1,41 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://pubsub.googleapis.com/'
+  - url: https://pubsub.googleapis.com/
 info:
   contact:
     name: Google
-    url: 'https://google.com'
-  description: |
+    url: https://google.com
+    x-twitter: youtube
+  description: >
     Provides reliable, many-to-many, asynchronous messaging between applications.
   license:
     name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
-  title: Cloud Pub/Sub
+    url: http://creativecommons.org/licenses/by/3.0/
+  termsOfService: https://developers.google.com/terms/
+  title: Cloud Pub/Sub API
   version: v1beta1a
   x-apiClientRegistration:
-    url: 'https://console.developers.google.com'
+    url: https://console.developers.google.com
   x-apisguru-categories:
-    - messaging
+    - analytics
+    - media
   x-logo:
-    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.31
       format: google
-      url: 'https://pubsub.googleapis.com/$discovery/rest?version=v1beta1a'
+      url: https://pubsub.googleapis.com/$discovery/rest?version=v1beta1a
       version: v1
   x-preferred: false
   x-providerName: googleapis.com
   x-serviceName: pubsub
 externalDocs:
-  url: 'https://cloud.google.com/pubsub/docs'
+  url: https://cloud.google.com/pubsub/docs
 tags:
-  - name: subscriptions
   - name: topics
+  - name: subscriptions
 paths:
   /v1beta1a/subscriptions:
     get:
@@ -45,8 +47,9 @@ paths:
           name: maxResults
           schema:
             type: integer
-        - description: |-
+        - description: >-
             The value obtained in the last <code>ListSubscriptionsResponse</code>
+
             for continuation.
           in: query
           name: pageToken
@@ -58,124 +61,132 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ListSubscriptionsResponse'
+                $ref: "#/components/schemas/ListSubscriptionsResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/pubsub'
+            - https://www.googleapis.com/auth/pubsub
           Oauth2c:
-            - 'https://www.googleapis.com/auth/pubsub'
+            - https://www.googleapis.com/auth/pubsub
       tags:
         - subscriptions
     parameters:
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/key"
     post:
-      description: |-
+      description: >-
         Creates a subscription on a given topic for a given subscriber.
+
         If the subscription already exists, returns ALREADY_EXISTS.
+
         If the corresponding topic doesn't exist, returns NOT_FOUND.
 
+
         If the name is not provided in the request, the server will assign a random
+
         name for this subscription on the same project as the topic.
       operationId: pubsub.subscriptions.create
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Subscription'
+              $ref: "#/components/schemas/Subscription"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Subscription'
+                $ref: "#/components/schemas/Subscription"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/pubsub'
+            - https://www.googleapis.com/auth/pubsub
           Oauth2c:
-            - 'https://www.googleapis.com/auth/pubsub'
+            - https://www.googleapis.com/auth/pubsub
       tags:
         - subscriptions
   /v1beta1a/subscriptions/acknowledge:
     parameters:
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/key"
     post:
-      description: |-
+      description: >-
         Acknowledges a particular received message: the Pub/Sub system can remove
+
         the given message from the subscription. Acknowledging a message whose
+
         Ack deadline has expired may succeed, but the message could have been
+
         already redelivered. Acknowledging a message more than once will not
+
         result in an error. This is only used for messages received via pull.
       operationId: pubsub.subscriptions.acknowledge
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AcknowledgeRequest'
+              $ref: "#/components/schemas/AcknowledgeRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Empty'
+                $ref: "#/components/schemas/Empty"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/pubsub'
+            - https://www.googleapis.com/auth/pubsub
           Oauth2c:
-            - 'https://www.googleapis.com/auth/pubsub'
+            - https://www.googleapis.com/auth/pubsub
       tags:
         - subscriptions
   /v1beta1a/subscriptions/modifyAckDeadline:
     parameters:
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/key"
     post:
       description: Modifies the Ack deadline for a message received from a pull request.
       operationId: pubsub.subscriptions.modifyAckDeadline
@@ -183,160 +194,172 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ModifyAckDeadlineRequest'
+              $ref: "#/components/schemas/ModifyAckDeadlineRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Empty'
+                $ref: "#/components/schemas/Empty"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/pubsub'
+            - https://www.googleapis.com/auth/pubsub
           Oauth2c:
-            - 'https://www.googleapis.com/auth/pubsub'
+            - https://www.googleapis.com/auth/pubsub
       tags:
         - subscriptions
   /v1beta1a/subscriptions/modifyPushConfig:
     parameters:
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/key"
     post:
-      description: |-
+      description: >-
         Modifies the <code>PushConfig</code> for a specified subscription.
+
         This method can be used to suspend the flow of messages to an endpoint
+
         by clearing the <code>PushConfig</code> field in the request. Messages
+
         will be accumulated for delivery even if no push configuration is
+
         defined or while the configuration is modified.
       operationId: pubsub.subscriptions.modifyPushConfig
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ModifyPushConfigRequest'
+              $ref: "#/components/schemas/ModifyPushConfigRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Empty'
+                $ref: "#/components/schemas/Empty"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/pubsub'
+            - https://www.googleapis.com/auth/pubsub
           Oauth2c:
-            - 'https://www.googleapis.com/auth/pubsub'
+            - https://www.googleapis.com/auth/pubsub
       tags:
         - subscriptions
   /v1beta1a/subscriptions/pull:
     parameters:
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/key"
     post:
-      description: |-
+      description: >-
         Pulls a single message from the server.
+
         If return_immediately is true, and no messages are available in the
+
         subscription, this method returns FAILED_PRECONDITION. The system is free
+
         to return an UNAVAILABLE error if no messages are available in a
+
         reasonable amount of time (to reduce system load).
       operationId: pubsub.subscriptions.pull
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/PullRequest'
+              $ref: "#/components/schemas/PullRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/PullResponse'
+                $ref: "#/components/schemas/PullResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/pubsub'
+            - https://www.googleapis.com/auth/pubsub
           Oauth2c:
-            - 'https://www.googleapis.com/auth/pubsub'
+            - https://www.googleapis.com/auth/pubsub
       tags:
         - subscriptions
   /v1beta1a/subscriptions/pullBatch:
     parameters:
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/key"
     post:
-      description: |-
+      description: >-
         Pulls messages from the server. Returns an empty list if there are no
+
         messages available in the backlog. The system is free to return UNAVAILABLE
+
         if there are too many pull requests outstanding for the given subscription.
       operationId: pubsub.subscriptions.pullBatch
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/PullBatchRequest'
+              $ref: "#/components/schemas/PullBatchRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/PullBatchResponse'
+                $ref: "#/components/schemas/PullBatchResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/pubsub'
+            - https://www.googleapis.com/auth/pubsub
           Oauth2c:
-            - 'https://www.googleapis.com/auth/pubsub'
+            - https://www.googleapis.com/auth/pubsub
       tags:
         - subscriptions
-  '/v1beta1a/subscriptions/{subscription}':
+  "/v1beta1a/subscriptions/{subscription}":
     delete:
-      description: |-
+      description: >-
         Deletes an existing subscription. All pending messages in the subscription
+
         are immediately dropped. Calls to Pull after deletion will return
+
         NOT_FOUND.
       operationId: pubsub.subscriptions.delete
       parameters:
@@ -346,23 +369,22 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Empty'
+                $ref: "#/components/schemas/Empty"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/pubsub'
+            - https://www.googleapis.com/auth/pubsub
           Oauth2c:
-            - 'https://www.googleapis.com/auth/pubsub'
+            - https://www.googleapis.com/auth/pubsub
       tags:
         - subscriptions
     get:
@@ -375,37 +397,36 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Subscription'
+                $ref: "#/components/schemas/Subscription"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/pubsub'
+            - https://www.googleapis.com/auth/pubsub
           Oauth2c:
-            - 'https://www.googleapis.com/auth/pubsub'
+            - https://www.googleapis.com/auth/pubsub
       tags:
         - subscriptions
     parameters:
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/key"
   /v1beta1a/topics:
     get:
       description: Lists matching topics.
@@ -416,8 +437,9 @@ paths:
           name: maxResults
           schema:
             type: integer
-        - description: |-
+        - description: >-
             The value obtained in the last <code>ListTopicsResponse</code>
+
             for continuation.
           in: query
           name: pageToken
@@ -429,35 +451,35 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ListTopicsResponse'
+                $ref: "#/components/schemas/ListTopicsResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/pubsub'
+            - https://www.googleapis.com/auth/pubsub
           Oauth2c:
-            - 'https://www.googleapis.com/auth/pubsub'
+            - https://www.googleapis.com/auth/pubsub
       tags:
         - topics
     parameters:
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/key"
     post:
       description: Creates the given topic with the given name.
       operationId: pubsub.topics.create
@@ -465,112 +487,116 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Topic'
+              $ref: "#/components/schemas/Topic"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Topic'
+                $ref: "#/components/schemas/Topic"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/pubsub'
+            - https://www.googleapis.com/auth/pubsub
           Oauth2c:
-            - 'https://www.googleapis.com/auth/pubsub'
+            - https://www.googleapis.com/auth/pubsub
       tags:
         - topics
   /v1beta1a/topics/publish:
     parameters:
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/key"
     post:
-      description: |-
+      description: >-
         Adds a message to the topic.  Returns NOT_FOUND if the topic does not
+
         exist.
       operationId: pubsub.topics.publish
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/PublishRequest'
+              $ref: "#/components/schemas/PublishRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Empty'
+                $ref: "#/components/schemas/Empty"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/pubsub'
+            - https://www.googleapis.com/auth/pubsub
           Oauth2c:
-            - 'https://www.googleapis.com/auth/pubsub'
+            - https://www.googleapis.com/auth/pubsub
       tags:
         - topics
   /v1beta1a/topics/publishBatch:
     parameters:
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/key"
     post:
-      description: |-
+      description: >-
         Adds one or more messages to the topic. Returns NOT_FOUND if the topic does
+
         not exist.
       operationId: pubsub.topics.publishBatch
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/PublishBatchRequest'
+              $ref: "#/components/schemas/PublishBatchRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/PublishBatchResponse'
+                $ref: "#/components/schemas/PublishBatchResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/pubsub'
+            - https://www.googleapis.com/auth/pubsub
           Oauth2c:
-            - 'https://www.googleapis.com/auth/pubsub'
+            - https://www.googleapis.com/auth/pubsub
       tags:
         - topics
-  '/v1beta1a/topics/{topic}':
+  "/v1beta1a/topics/{topic}":
     delete:
-      description: |-
+      description: >-
         Deletes the topic with the given name. Returns NOT_FOUND if the topic does
+
         not exist. After a topic is deleted, a new topic may be created with the
+
         same name.
       operationId: pubsub.topics.delete
       parameters:
@@ -580,29 +606,30 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Empty'
+                $ref: "#/components/schemas/Empty"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/pubsub'
+            - https://www.googleapis.com/auth/pubsub
           Oauth2c:
-            - 'https://www.googleapis.com/auth/pubsub'
+            - https://www.googleapis.com/auth/pubsub
       tags:
         - topics
     get:
-      description: |-
+      description: >-
         Gets the configuration of a topic. Since the topic only has the name
+
         attribute, this method is only useful to check the existence of a topic.
+
         If other attributes are added in the future, they will be returned here.
       operationId: pubsub.topics.get
       parameters:
@@ -612,37 +639,36 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Topic'
+                $ref: "#/components/schemas/Topic"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/pubsub'
+            - https://www.googleapis.com/auth/pubsub
           Oauth2c:
-            - 'https://www.googleapis.com/auth/pubsub'
+            - https://www.googleapis.com/auth/pubsub
       tags:
         - topics
     parameters:
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/key"
 components:
   parameters:
     _.xgafv:
@@ -651,8 +677,8 @@ components:
       name: $.xgafv
       schema:
         enum:
-          - '1'
-          - '2'
+          - "1"
+          - "2"
         type: string
     access_token:
       description: OAuth access token.
@@ -665,7 +691,6 @@ components:
       in: query
       name: alt
       schema:
-        default: json
         enum:
           - json
           - media
@@ -684,7 +709,7 @@ components:
       schema:
         type: string
     key:
-      description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -700,22 +725,21 @@ components:
       in: query
       name: prettyPrint
       schema:
-        default: true
         type: boolean
     quotaUser:
-      description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.'
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
       in: query
       name: quotaUser
       schema:
         type: string
     uploadType:
-      description: 'Legacy upload protocol for media (e.g. "media", "multipart").'
+      description: Legacy upload protocol for media (e.g. "media", "multipart").
       in: query
       name: uploadType
       schema:
         type: string
     upload_protocol:
-      description: 'Upload protocol for media (e.g. "raw", "multipart").'
+      description: Upload protocol for media (e.g. "raw", "multipart").
       in: query
       name: upload_protocol
       schema:
@@ -725,8 +749,9 @@ components:
       description: Request for the Acknowledge method.
       properties:
         ackId:
-          description: |-
+          description: >-
             The acknowledgment ID for the message being acknowledged. This was
+
             returned by the Pub/Sub system in the Pull response.
           items:
             type: string
@@ -736,9 +761,11 @@ components:
           type: string
       type: object
     Empty:
-      description: |-
+      description: >-
         An empty message that you can re-use to avoid defining duplicated empty
+
         messages in your project. A typical example is to use it as argument or the
+
         return value of a service API. For instance:
 
           service Foo {
@@ -746,8 +773,11 @@ components:
           };
 
         BEGIN GOOGLE-INTERNAL
+
         The difference between this one and net/rpc/empty-message.proto is that
+
         1) The generated message here is in proto2 C++ API.
+
         2) The proto2.Empty has minimum dependencies
            (no message_set or net/rpc dependencies)
         END GOOGLE-INTERNAL
@@ -757,14 +787,21 @@ components:
       description: A key-value pair applied to a given object.
       properties:
         key:
-          description: |-
+          description: >-
             The key of a label is a syntactically valid URL (as per RFC 1738) with
+
             the "scheme" and initial slashes omitted and with the additional
+
             restrictions noted below.  Each key should be globally unique.  The
+
             "host" portion is called the "namespace" and is not necessarily
+
             resolvable to a network endpoint.  Instead, the namespace indicates what
+
             system or entity defines the semantics of the label.  Namespaces do not
+
             restrict the set of objects to which a label may be associated.
+
 
             Keys are defined by the following grammar:
 
@@ -773,6 +810,7 @@ components:
               ksegment     = alphadigit | *[ alphadigit | "-" | "_" | "." ]
 
             where "hostname" and "alphadigit" are defined as in RFC 1738.
+
 
             Example key:
               spanner.google.com/universe
@@ -789,59 +827,70 @@ components:
       description: Response for the ListSubscriptions method.
       properties:
         nextPageToken:
-          description: |-
+          description: >-
             If not empty, indicates that there are more subscriptions that match the
+
             request and this value should be passed to the next
+
             <code>ListSubscriptionsRequest</code> to continue.
           type: string
         subscription:
           description: The subscriptions that match the request.
           items:
-            $ref: '#/components/schemas/Subscription'
+            $ref: "#/components/schemas/Subscription"
           type: array
       type: object
     ListTopicsResponse:
       description: Response for the ListTopics method.
       properties:
         nextPageToken:
-          description: |-
+          description: >-
             If not empty, indicates that there are more topics that match the request,
+
             and this value should be passed to the next <code>ListTopicsRequest</code>
+
             to continue.
           type: string
         topic:
           description: The resulting topics.
           items:
-            $ref: '#/components/schemas/Topic'
+            $ref: "#/components/schemas/Topic"
           type: array
       type: object
     ModifyAckDeadlineRequest:
       description: Request for the ModifyAckDeadline method.
       properties:
         ackDeadlineSeconds:
-          description: |-
+          description: >-
             The new ack deadline with respect to the time this request was sent to the
+
             Pub/Sub system. Must be >= 0. For example, if the value is 10, the new ack
+
             deadline will expire 10 seconds after the ModifyAckDeadline call was made.
+
             Specifying zero may immediately make the message available for another pull
+
             request.
           format: int32
           type: integer
         ackId:
-          description: |-
+          description: >-
             The acknowledgment ID. Either this or ack_ids must be populated,
+
             not both.
           type: string
         ackIds:
-          description: |-
+          description: >-
             List of acknowledgment IDs. Either this field or ack_id
+
             should be populated, not both.
           items:
             type: string
           type: array
         subscription:
-          description: |-
+          description: >-
             Next Index: 5
+
             The name of the subscription from which messages are being pulled.
           type: string
       type: object
@@ -849,9 +898,10 @@ components:
       description: Request for the ModifyPushConfig method.
       properties:
         pushConfig:
-          $ref: '#/components/schemas/PushConfig'
-          description: |-
+          $ref: "#/components/schemas/PushConfig"
+          description: >-
             An empty <code>push_config</code> indicates that the Pub/Sub system should
+
             pause pushing messages from the given subscription.
         subscription:
           description: The name of the subscription.
@@ -863,7 +913,7 @@ components:
         messages:
           description: The messages to publish.
           items:
-            $ref: '#/components/schemas/PubsubMessage'
+            $ref: "#/components/schemas/PubsubMessage"
           type: array
         topic:
           description: The messages in the request will be published on this topic.
@@ -873,9 +923,11 @@ components:
       description: Response for the PublishBatch method.
       properties:
         messageIds:
-          description: |-
+          description: >-
             The server-assigned ID of each published message, in the same order as
+
             the messages in the request. IDs are guaranteed to be unique within
+
             the topic.
           items:
             type: string
@@ -885,7 +937,7 @@ components:
       description: Request for the Publish method.
       properties:
         message:
-          $ref: '#/components/schemas/PubsubMessage'
+          $ref: "#/components/schemas/PubsubMessage"
           description: The message to publish.
         topic:
           description: The message in the request will be published on this topic.
@@ -895,13 +947,15 @@ components:
       description: An event indicating a received message or truncation event.
       properties:
         deleted:
-          description: |-
+          description: >-
             Indicates that this subscription has been deleted. (Note that pull
+
             subscribers will always receive NOT_FOUND in response in their pull
+
             request on the subscription, rather than seeing this boolean.)
           type: boolean
         message:
-          $ref: '#/components/schemas/PubsubMessage'
+          $ref: "#/components/schemas/PubsubMessage"
           description: A received message.
         subscription:
           description: The subscription that received the event.
@@ -918,22 +972,27 @@ components:
           format: byte
           type: string
         label:
-          description: |-
+          description: >-
             Optional list of labels for this message. Keys in this collection must
+
             be unique.
           items:
-            $ref: '#/components/schemas/Label'
+            $ref: "#/components/schemas/Label"
           type: array
         messageId:
-          description: |-
+          description: >-
             ID of this message assigned by the server at publication time. Guaranteed
+
             to be unique within the topic. This value may be read by a subscriber
+
             that receives a PubsubMessage via a Pull call or a push delivery. It must
+
             not be populated by a publisher in a Publish call.
           type: string
         publishTime:
-          description: |-
+          description: >-
             The time at which the message was published.
+
             The time is milliseconds since the UNIX epoch.
           format: int64
           type: string
@@ -942,17 +1001,22 @@ components:
       description: Request for the PullBatch method.
       properties:
         maxEvents:
-          description: |-
+          description: >-
             The maximum number of PubsubEvents returned for this request. The Pub/Sub
+
             system may return fewer than the number of events specified.
           format: int32
           type: integer
         returnImmediately:
-          description: |-
+          description: >-
             If this is specified as true the system will respond immediately even if
+
             it is not able to return a message in the Pull response. Otherwise the
+
             system is allowed to wait until at least one message is available rather
+
             than returning no messages. The client may cancel the request if it does
+
             not wish to wait any longer for the response.
           type: boolean
         subscription:
@@ -963,24 +1027,31 @@ components:
       description: Response for the PullBatch method.
       properties:
         pullResponses:
-          description: |-
+          description: >-
             Received Pub/Sub messages or status events. The Pub/Sub system will return
+
             zero messages if there are no more messages available in the backlog. The
+
             Pub/Sub system may return fewer than the max_events requested even if
+
             there are more messages available in the backlog.
           items:
-            $ref: '#/components/schemas/PullResponse'
+            $ref: "#/components/schemas/PullResponse"
           type: array
       type: object
     PullRequest:
       description: Request for the Pull method.
       properties:
         returnImmediately:
-          description: |-
+          description: >-
             If this is specified as true the system will respond immediately even if
+
             it is not able to return a message in the Pull response. Otherwise the
+
             system is allowed to wait until at least one message is available rather
+
             than returning FAILED_PRECONDITION. The client may cancel the request if
+
             it does not wish to wait any longer for the response.
           type: boolean
         subscription:
@@ -988,23 +1059,25 @@ components:
           type: string
       type: object
     PullResponse:
-      description: |-
+      description: >-
         Either a <code>PubsubMessage</code> or a truncation event. One of these two
+
         must be populated.
       properties:
         ackId:
           description: This ID must be used to acknowledge the received event or message.
           type: string
         pubsubEvent:
-          $ref: '#/components/schemas/PubsubEvent'
+          $ref: "#/components/schemas/PubsubEvent"
           description: A pubsub message or truncation event.
       type: object
     PushConfig:
       description: Configuration for a push delivery endpoint.
       properties:
         pushEndpoint:
-          description: |-
+          description: >-
             A URL locating the endpoint to which messages should be pushed.
+
             For example, a Webhook endpoint might use "https://example.com/push".
           type: string
       type: object
@@ -1012,25 +1085,41 @@ components:
       description: A subscription resource.
       properties:
         ackDeadlineSeconds:
-          description: |-
+          description: >-
             For either push or pull delivery, the value is the maximum time after a
+
             subscriber receives a message before the subscriber should acknowledge or
+
             Nack the message. If the Ack deadline for a message passes without an
+
             Ack or a Nack, the Pub/Sub system will eventually redeliver the message.
+
             If a subscriber acknowledges after the deadline, the Pub/Sub system may
+
             accept the Ack, but it is possible that the message has been already
+
             delivered again. Multiple Acks to the message are allowed and will
+
             succeed.
 
+
             For push delivery, this value is used to set the request timeout for
+
             the call to the push endpoint.
 
+
             For pull delivery, this value is used as the initial value for the Ack
+
             deadline. It may be overridden for each message using its corresponding
+
             ack_id with <code>ModifyAckDeadline</code>.
+
             While a message is outstanding (i.e. it has been delivered to a pull
+
             subscriber and the subscriber has not yet Acked or Nacked), the Pub/Sub
+
             system will not deliver that message to another pull subscriber
+
             (on a best-effort basis).
           format: int32
           type: integer
@@ -1038,9 +1127,10 @@ components:
           description: Name of the subscription.
           type: string
         pushConfig:
-          $ref: '#/components/schemas/PushConfig'
-          description: |-
+          $ref: "#/components/schemas/PushConfig"
+          description: >-
             If push delivery is used with this subscription, this field is
+
             used to configure it.
         topic:
           description: The name of the topic from which this subscription is receiving messages.
@@ -1058,18 +1148,18 @@ components:
       description: Oauth 2.0 implicit authentication
       flows:
         implicit:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-            'https://www.googleapis.com/auth/pubsub': View and manage Pub/Sub topics and subscriptions
+            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/pubsub: View and manage Pub/Sub topics and subscriptions
       type: oauth2
     Oauth2c:
-      description: Oauth 2.0 accessCode authentication
+      description: Oauth 2.0 authorizationCode authentication
       flows:
         authorizationCode:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-            'https://www.googleapis.com/auth/pubsub': View and manage Pub/Sub topics and subscriptions
-          tokenUrl: 'https://accounts.google.com/o/oauth2/token'
+            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/pubsub: View and manage Pub/Sub topics and subscriptions
+          tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

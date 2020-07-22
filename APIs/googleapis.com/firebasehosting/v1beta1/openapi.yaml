@@ -1,72 +1,73 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://firebasehosting.googleapis.com/'
+  - url: https://firebasehosting.googleapis.com/
 info:
   contact:
     name: Google
-    url: 'https://google.com'
+    url: https://google.com
+    x-twitter: youtube
   description: The Firebase Hosting REST API enables programmatic and customizable deployments to your Firebase-hosted sites. Use this REST API to deploy new or updated hosting configurations and content files.
   license:
     name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
-  title: Firebase Hosting
+    url: http://creativecommons.org/licenses/by/3.0/
+  termsOfService: https://developers.google.com/terms/
+  title: Firebase Hosting API
   version: v1beta1
   x-apiClientRegistration:
-    url: 'https://console.developers.google.com'
+    url: https://console.developers.google.com
+  x-apisguru-categories:
+    - analytics
+    - media
   x-logo:
-    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.31
       format: google
-      url: 'https://firebasehosting.googleapis.com/$discovery/rest?version=v1beta1'
+      url: https://firebasehosting.googleapis.com/$discovery/rest?version=v1beta1
       version: v1
   x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: firebasehosting
 externalDocs:
-  url: 'https://firebase.google.com/docs/hosting/'
+  url: https://firebase.google.com/docs/hosting/
 tags:
-  - name: projects
   - name: sites
+  - name: projects
 paths:
-  '/v1beta1/{name}':
+  "/v1beta1/{name}":
     delete:
-      description: Deletes the specified version.
-      operationId: firebasehosting.sites.versions.delete
+      description: Deletes the existing domain mapping on the specified site.
+      operationId: firebasehosting.projects.sites.domains.delete
       parameters:
-        - description: |-
-            Required. The name of the version to be deleted, in the format:
-            <code>sites/<var>site-name</var>/versions/<var>versionID</var></code>
+        - description: Required. The name of the domain association to delete.
           in: path
           name: name
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Empty'
+                $ref: "#/components/schemas/Empty"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/firebase'
+            - https://www.googleapis.com/auth/firebase
           Oauth2c:
-            - 'https://www.googleapis.com/auth/firebase'
+            - https://www.googleapis.com/auth/firebase
       tags:
-        - sites
+        - projects
     get:
       description: Gets a domain mapping on the specified site.
-      operationId: firebasehosting.sites.domains.get
+      operationId: firebasehosting.projects.sites.domains.get
       parameters:
         - description: Required. The name of the domain configuration to get.
           in: path
@@ -74,71 +75,81 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Domain'
+                $ref: "#/components/schemas/Domain"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - https://www.googleapis.com/auth/cloud-platform.read-only
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - https://www.googleapis.com/auth/cloud-platform.read-only
         - Oauth2:
-            - 'https://www.googleapis.com/auth/firebase'
+            - https://www.googleapis.com/auth/firebase
           Oauth2c:
-            - 'https://www.googleapis.com/auth/firebase'
+            - https://www.googleapis.com/auth/firebase
         - Oauth2:
-            - 'https://www.googleapis.com/auth/firebase.readonly'
+            - https://www.googleapis.com/auth/firebase.readonly
           Oauth2c:
-            - 'https://www.googleapis.com/auth/firebase.readonly'
+            - https://www.googleapis.com/auth/firebase.readonly
       tags:
-        - sites
+        - projects
     parameters:
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
     patch:
-      description: |-
+      description: >-
         Updates the specified metadata for a version. Note that this method will
+
         fail with `FAILED_PRECONDITION` in the event of an invalid state
+
         transition. The only valid transition for a version is currently from a
+
         `CREATED` status to a `FINALIZED` status.
+
         Use [`DeleteVersion`](../sites.versions/delete) to set the status of a
+
         version to `DELETED`.
-      operationId: firebasehosting.sites.versions.patch
+      operationId: firebasehosting.projects.sites.versions.patch
       parameters:
-        - description: |-
+        - description: >-
             The unique identifier for a version, in the format:
+
             <code>sites/<var>site-name</var>/versions/<var>versionID</var></code>
+
             This name is provided in the response body when you call the
+
             [`CreateVersion`](../sites.versions/create) endpoint.
           in: path
           name: name
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
-        - description: |-
+        - description: >-
             A set of field names from your [version](../sites.versions) that you want
+
             to update.
+
             <br>A field will be overwritten if, and only if, it's in the mask.
+
             <br>If a mask is not provided then a default mask of only
+
             [`status`](../sites.versions#Version.FIELDS.status) will be used.
           in: query
           name: updateMask
@@ -148,182 +159,184 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Version'
+              $ref: "#/components/schemas/Version"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Version'
+                $ref: "#/components/schemas/Version"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/firebase'
+            - https://www.googleapis.com/auth/firebase
           Oauth2c:
-            - 'https://www.googleapis.com/auth/firebase'
+            - https://www.googleapis.com/auth/firebase
       tags:
-        - sites
+        - projects
     put:
-      description: |-
+      description: >-
         Updates the specified domain mapping, creating the mapping as if it does
+
         not exist.
-      operationId: firebasehosting.sites.domains.update
+      operationId: firebasehosting.projects.sites.domains.update
       parameters:
-        - description: |-
+        - description: >-
             Required. The name of the domain association to update or create, if an
+
             association doesn't already exist.
           in: path
           name: name
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Domain'
+              $ref: "#/components/schemas/Domain"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Domain'
+                $ref: "#/components/schemas/Domain"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/firebase'
+            - https://www.googleapis.com/auth/firebase
           Oauth2c:
-            - 'https://www.googleapis.com/auth/firebase'
+            - https://www.googleapis.com/auth/firebase
       tags:
-        - sites
-  '/v1beta1/{parent}/domains':
+        - projects
+  "/v1beta1/{parent}/domains":
     get:
       description: Lists the domains for the specified site.
-      operationId: firebasehosting.sites.domains.list
+      operationId: firebasehosting.projects.sites.domains.list
       parameters:
-        - description: |-
+        - description: >-
             Required. The parent for which to list domains, in the format:
+
             <code>sites/<var>site-name</var></code>
           in: path
           name: parent
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
         - description: The page size to return. Defaults to 50.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: 'The next_page_token from a previous request, if provided.'
+        - description: The next_page_token from a previous request, if provided.
           in: query
           name: pageToken
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ListDomainsResponse'
+                $ref: "#/components/schemas/ListDomainsResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - https://www.googleapis.com/auth/cloud-platform.read-only
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - https://www.googleapis.com/auth/cloud-platform.read-only
         - Oauth2:
-            - 'https://www.googleapis.com/auth/firebase'
+            - https://www.googleapis.com/auth/firebase
           Oauth2c:
-            - 'https://www.googleapis.com/auth/firebase'
+            - https://www.googleapis.com/auth/firebase
         - Oauth2:
-            - 'https://www.googleapis.com/auth/firebase.readonly'
+            - https://www.googleapis.com/auth/firebase.readonly
           Oauth2c:
-            - 'https://www.googleapis.com/auth/firebase.readonly'
+            - https://www.googleapis.com/auth/firebase.readonly
       tags:
-        - sites
+        - projects
     parameters:
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
     post:
       description: Creates a domain mapping on the specified site.
-      operationId: firebasehosting.sites.domains.create
+      operationId: firebasehosting.projects.sites.domains.create
       parameters:
-        - description: |-
+        - description: >-
             Required. The parent to create the domain association for, in the format:
+
             <code>sites/<var>site-name</var></code>
           in: path
           name: parent
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Domain'
+              $ref: "#/components/schemas/Domain"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Domain'
+                $ref: "#/components/schemas/Domain"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/firebase'
+            - https://www.googleapis.com/auth/firebase
           Oauth2c:
-            - 'https://www.googleapis.com/auth/firebase'
+            - https://www.googleapis.com/auth/firebase
       tags:
-        - sites
-  '/v1beta1/{parent}/files':
+        - projects
+  "/v1beta1/{parent}/files":
     get:
       description: Lists the remaining files to be uploaded for the specified version.
-      operationId: firebasehosting.sites.versions.files.list
+      operationId: firebasehosting.projects.sites.versions.files.list
       parameters:
-        - description: |-
+        - description: >-
             Required. The parent to list files for, in the format:
+
             <code>sites/<var>site-name</var>/versions/<var>versionID</var></code>
           in: path
           name: parent
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
         - description: The page size to return. Defaults to 1000.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: |-
+        - description: >-
             The next_page_token from a previous request, if provided. This will be the
+
             encoded version of a firebase.hosting.proto.metadata.ListFilesPageToken.
           in: query
           name: pageToken
@@ -339,127 +352,134 @@ paths:
               - ACTIVE
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ListVersionFilesResponse'
+                $ref: "#/components/schemas/ListVersionFilesResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - https://www.googleapis.com/auth/cloud-platform.read-only
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - https://www.googleapis.com/auth/cloud-platform.read-only
         - Oauth2:
-            - 'https://www.googleapis.com/auth/firebase'
+            - https://www.googleapis.com/auth/firebase
           Oauth2c:
-            - 'https://www.googleapis.com/auth/firebase'
+            - https://www.googleapis.com/auth/firebase
         - Oauth2:
-            - 'https://www.googleapis.com/auth/firebase.readonly'
+            - https://www.googleapis.com/auth/firebase.readonly
           Oauth2c:
-            - 'https://www.googleapis.com/auth/firebase.readonly'
+            - https://www.googleapis.com/auth/firebase.readonly
       tags:
-        - sites
+        - projects
     parameters:
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-  '/v1beta1/{parent}/releases':
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+  "/v1beta1/{parent}/releases":
     get:
       description: Lists the releases that have been created on the specified site.
-      operationId: firebasehosting.sites.releases.list
+      operationId: firebasehosting.projects.sites.releases.list
       parameters:
-        - description: |-
+        - description: >-
             Required. The parent for which to list files, in the format:
+
             <code>sites/<var>site-name</var></code>
           in: path
           name: parent
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
         - description: The page size to return. Defaults to 100.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: 'The next_page_token from a previous request, if provided.'
+        - description: The next_page_token from a previous request, if provided.
           in: query
           name: pageToken
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ListReleasesResponse'
+                $ref: "#/components/schemas/ListReleasesResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - https://www.googleapis.com/auth/cloud-platform.read-only
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - https://www.googleapis.com/auth/cloud-platform.read-only
         - Oauth2:
-            - 'https://www.googleapis.com/auth/firebase'
+            - https://www.googleapis.com/auth/firebase
           Oauth2c:
-            - 'https://www.googleapis.com/auth/firebase'
+            - https://www.googleapis.com/auth/firebase
         - Oauth2:
-            - 'https://www.googleapis.com/auth/firebase.readonly'
+            - https://www.googleapis.com/auth/firebase.readonly
           Oauth2c:
-            - 'https://www.googleapis.com/auth/firebase.readonly'
+            - https://www.googleapis.com/auth/firebase.readonly
       tags:
-        - sites
+        - projects
     parameters:
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
     post:
-      description: |-
+      description: >-
         Creates a new release which makes the content of the specified version
+
         actively display on the appropriate URL(s).
-      operationId: firebasehosting.sites.releases.create
+      operationId: firebasehosting.projects.sites.releases.create
       parameters:
-        - description: |-
+        - description: >-
             Required. The site that the release belongs to, in the format:
+
             <code>sites/<var>site-name</var></code>
           in: path
           name: parent
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
-        - description: |-
+        - description: >-
             The unique identifier for a version, in the format:
+
             <code>/sites/<var>site-name</var>/versions/<var>versionID</var></code>
+
             The <var>site-name</var> in this version identifier must match the
+
             <var>site-name</var> in the `parent` parameter.
+
             <br>
+
             <br>This query parameter must be empty if the `type` field in the
+
             request body is `SITE_DISABLE`.
           in: query
           name: versionName
@@ -469,107 +489,133 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Release'
+              $ref: "#/components/schemas/Release"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Release'
+                $ref: "#/components/schemas/Release"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/firebase'
+            - https://www.googleapis.com/auth/firebase
           Oauth2c:
-            - 'https://www.googleapis.com/auth/firebase'
+            - https://www.googleapis.com/auth/firebase
       tags:
-        - sites
-  '/v1beta1/{parent}/versions':
+        - projects
+  "/v1beta1/{parent}/versions":
     get:
-      description: |-
+      description: >-
         Lists the versions that have been created on the specified site.
+
         Will include filtering in the future.
-      operationId: firebasehosting.sites.versions.list
+      operationId: firebasehosting.projects.sites.versions.list
       parameters:
-        - description: |-
+        - description: >-
             Required. The parent for which to list files, in the format:
+
             <code>sites/<var>site-name</var></code>
           in: path
           name: parent
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
-        - description: |-
+        - description: >-
             The filter string used to return a subset of versions in the response.
+
             Currently supported fields for filtering are: name, status,
+
             and create_time. Filter processing will be implemented in accordance
+
             with go/filtering.
           in: query
           name: filter
           schema:
             type: string
-        - description: |-
+        - description: >-
             The maximum number of versions to return. The service may return fewer than
+
             this value.
+
             If unspecified, at most 25 versions will be returned.
+
             The maximum value is 100; values above 100 will be coerced to 100
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: 'The next_page_token from a previous request, if provided.'
+        - description: The next_page_token from a previous request, if provided.
           in: query
           name: pageToken
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ListVersionsResponse'
+                $ref: "#/components/schemas/ListVersionsResponse"
           description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+        - Oauth2:
+            - https://www.googleapis.com/auth/firebase
+          Oauth2c:
+            - https://www.googleapis.com/auth/firebase
+        - Oauth2:
+            - https://www.googleapis.com/auth/firebase.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/firebase.readonly
       tags:
-        - sites
+        - projects
     parameters:
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
     post:
       description: Creates a new version for a site.
-      operationId: firebasehosting.sites.versions.create
+      operationId: firebasehosting.projects.sites.versions.create
       parameters:
-        - description: |-
+        - description: >-
             Required. The parent to create the version for, in the format:
+
             <code>sites/<var>site-name</var></code>
           in: path
           name: parent
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
-        - description: |-
+        - description: >-
             The self-reported size of the version. This value is used for a pre-emptive
+
             quota check for legacy version uploads.
           in: query
           name: sizeBytes
           schema:
             type: string
-        - description: |-
+        - description: >-
             A unique id for the new version. This is only specified for legacy version
+
             creations.
           in: query
           name: versionId
@@ -579,116 +625,77 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Version'
+              $ref: "#/components/schemas/Version"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Version'
+                $ref: "#/components/schemas/Version"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/firebase'
+            - https://www.googleapis.com/auth/firebase
           Oauth2c:
-            - 'https://www.googleapis.com/auth/firebase'
+            - https://www.googleapis.com/auth/firebase
       tags:
-        - sites
-  '/v1beta1/{parent}/versions:clone':
+        - projects
+  "/v1beta1/{parent}:populateFiles":
     parameters:
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
     post:
-      description: |-
-        Creates a new version on the target site using the content
-        of the specified version.
-      operationId: firebasehosting.sites.versions.clone
+      description: >-
+        Adds content files to a version.
+
+        Each file must be under 2 GB.
+      operationId: firebasehosting.projects.sites.versions.populateFiles
       parameters:
-        - description: |-
-            Required. The target site where the cloned version will reside,
-            in the format: `sites/{site}`
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-          x-reservedExpansion: true
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CloneVersionRequest'
-      responses:
-        '200':
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/Operation'
-          description: Successful response
-      tags:
-        - sites
-  '/v1beta1/{parent}:populateFiles':
-    parameters:
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-    post:
-      description: Adds content files to a version.
-      operationId: firebasehosting.sites.versions.populateFiles
-      parameters:
-        - description: |-
+        - description: >-
             Required. The version to add files to, in the format:
+
             <code>sites/<var>site-name</var>/versions/<var>versionID</var></code>
           in: path
           name: parent
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/PopulateVersionFilesRequest'
+              $ref: "#/components/schemas/PopulateVersionFilesRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/PopulateVersionFilesResponse'
+                $ref: "#/components/schemas/PopulateVersionFilesResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/firebase'
+            - https://www.googleapis.com/auth/firebase
           Oauth2c:
-            - 'https://www.googleapis.com/auth/firebase'
+            - https://www.googleapis.com/auth/firebase
       tags:
-        - sites
+        - projects
 components:
   parameters:
     _.xgafv:
@@ -697,8 +704,8 @@ components:
       name: $.xgafv
       schema:
         enum:
-          - '1'
-          - '2'
+          - "1"
+          - "2"
         type: string
     access_token:
       description: OAuth access token.
@@ -711,7 +718,6 @@ components:
       in: query
       name: alt
       schema:
-        default: json
         enum:
           - json
           - media
@@ -730,7 +736,7 @@ components:
       schema:
         type: string
     key:
-      description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -746,49 +752,39 @@ components:
       in: query
       name: prettyPrint
       schema:
-        default: true
         type: boolean
     quotaUser:
-      description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.'
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
       in: query
       name: quotaUser
       schema:
         type: string
     uploadType:
-      description: 'Legacy upload protocol for media (e.g. "media", "multipart").'
+      description: Legacy upload protocol for media (e.g. "media", "multipart").
       in: query
       name: uploadType
       schema:
         type: string
     upload_protocol:
-      description: 'Upload protocol for media (e.g. "raw", "multipart").'
+      description: Upload protocol for media (e.g. "raw", "multipart").
       in: query
       name: upload_protocol
       schema:
         type: string
-  requestBodies:
-    Domain:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Domain'
-    Version:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Version'
   schemas:
     ActingUser:
-      description: |-
+      description: >-
         Contains metadata about the user who performed an action, such as creating
+
         a release or finalizing a version.
       properties:
         email:
           description: The email address of the user when the user performed the action.
           type: string
         imageUrl:
-          description: |-
+          description: >-
             A profile image URL for the user. May not be present if the user has
+
             changed their email address or deleted their account.
           type: string
       type: object
@@ -799,8 +795,9 @@ components:
           description: The domain name upon which the DNS challenge must be satisfied.
           type: string
         token:
-          description: |-
+          description: >-
             The value that must be present as a TXT record on the domain name to
+
             satisfy the challenge.
           type: string
       type: object
@@ -808,49 +805,34 @@ components:
       description: Represents an HTTP certificate challenge.
       properties:
         path:
-          description: |-
+          description: >-
             The URL path on which to serve the specified token to satisfy the
+
             certificate challenge.
           type: string
         token:
-          description: |-
+          description: >-
             The token to serve at the specified URL path to satisfy the certificate
+
             challenge.
           type: string
       type: object
-    CloneVersionRequest:
-      description: The request sent to CloneVersion.
-      properties:
-        exclude:
-          $ref: '#/components/schemas/PathFilter'
-          description: |-
-            If provided, only paths that do not match any of the regexes in this
-            list will be included in the new version.
-        finalize:
-          description: 'If true, immediately finalize the version after cloning is complete.'
-          type: boolean
-        include:
-          $ref: '#/components/schemas/PathFilter'
-          description: |-
-            If provided, only paths that match one or more regexes in this list
-            will be included in the new version.
-        sourceVersion:
-          description: |-
-            Required. The name of the version to be cloned, in the format:
-            `sites/{site}/versions/{version}`
-          type: string
-      type: object
     CloudRunRewrite:
-      description: |-
+      description: >-
         A configured rewrite that directs requests to a Cloud Run service. If the
+
         Cloud Run service does not exist when setting or updating your Firebase
+
         Hosting configuration, then the request fails. Any errors from the Cloud Run
+
         service are passed to the end user (for example, if you delete a service, any
+
         requests directed to that service receive a `404` error).
       properties:
         region:
-          description: |-
+          description: >-
             Optional. User-provided region where the Cloud Run service is hosted.<br>
+
             Defaults to `us-central1` if not supplied.
           type: string
         serviceId:
@@ -864,12 +846,13 @@ components:
           description: Required. The domain name of the association.
           type: string
         domainRedirect:
-          $ref: '#/components/schemas/DomainRedirect'
-          description: 'If set, the domain should redirect with the provided parameters.'
+          $ref: "#/components/schemas/DomainRedirect"
+          description: If set, the domain should redirect with the provided parameters.
         provisioning:
-          $ref: '#/components/schemas/DomainProvisioning'
-          description: |-
+          $ref: "#/components/schemas/DomainProvisioning"
+          description: >-
             Output only. Information about the provisioning of certificates and the
+
             health of the DNS resolution for the domain.
         site:
           description: Required. The site name of the association.
@@ -892,21 +875,23 @@ components:
       description: The current certificate provisioning status information for a domain.
       properties:
         certChallengeDiscoveredTxt:
-          description: |-
+          description: >-
             The TXT records (for the certificate challenge) that were found at the last
+
             DNS fetch.
           items:
             type: string
           type: array
         certChallengeDns:
-          $ref: '#/components/schemas/CertDnsChallenge'
+          $ref: "#/components/schemas/CertDnsChallenge"
           description: The DNS challenge for generating a certificate.
         certChallengeHttp:
-          $ref: '#/components/schemas/CertHttpChallenge'
+          $ref: "#/components/schemas/CertHttpChallenge"
           description: The HTTP challenge for generating a certificate.
         certStatus:
-          description: |-
+          description: >-
             The certificate provisioning status; updated when Firebase Hosting
+
             provisions an SSL certificate for the domain.
           enum:
             - CERT_STATUS_UNSPECIFIED
@@ -943,9 +928,11 @@ components:
           type: array
       type: object
     DomainRedirect:
-      description: |-
+      description: >-
         Defines the behavior of a domain-level redirect. Domain redirects preserve
+
         the path of the redirect but replace the requested domain with the one
+
         specified in the redirect configuration.
       properties:
         domainName:
@@ -959,9 +946,11 @@ components:
           type: string
       type: object
     Empty:
-      description: |-
+      description: >-
         A generic empty message that you can re-use to avoid defining duplicated
+
         empty messages in your APIs. A typical example is to use it as the request
+
         or the response type of an API method. For instance:
 
             service Foo {
@@ -972,14 +961,19 @@ components:
       properties: {}
       type: object
     Header:
-      description: |-
-        A [`header`](/docs/hosting/full-config#headers) defines custom headers to
-        add to a response should the request URL path match the pattern.
+      description: >-
+        A [`header`](/docs/hosting/full-config#headers) is an object that specifies
+
+        a URL pattern that, if matched to the request URL path, triggers Hosting to
+
+        apply the specified custom response headers.
       properties:
         glob:
-          description: |-
-            The user-supplied [glob
-            pattern](/docs/hosting/full-config#glob_pattern_matching) to match
+          description: >-
+            The user-supplied
+
+            [glob](/docs/hosting/full-config#glob_pattern_matching) to match
+
             against the request URL path.
           type: string
         headers:
@@ -988,8 +982,9 @@ components:
           description: Required. The additional headers to add to the response.
           type: object
         regex:
-          description: |-
+          description: >-
             The user-supplied RE2 regular expression to match against the request
+
             URL path.
           type: string
       type: object
@@ -997,105 +992,111 @@ components:
       description: The response to listing Domains.
       properties:
         domains:
-          description: 'The list of domains, if any exist.'
+          description: The list of domains, if any exist.
           items:
-            $ref: '#/components/schemas/Domain'
+            $ref: "#/components/schemas/Domain"
           type: array
         nextPageToken:
-          description: 'The pagination token, if more results exist.'
+          description: The pagination token, if more results exist.
           type: string
       type: object
     ListReleasesResponse:
-      description: The response when listing Releases.
       properties:
         nextPageToken:
-          description: |-
+          description: >-
             If there are additional releases remaining beyond the ones in this
+
             response, then supply this token in the next
+
             [`list`](../sites.versions.files/list) call to continue with the next set
+
             of releases.
           type: string
         releases:
-          description: 'The list of hashes of files that still need to be uploaded, if any exist.'
+          description: The list of hashes of files that still need to be uploaded, if any exist.
           items:
-            $ref: '#/components/schemas/Release'
+            $ref: "#/components/schemas/Release"
           type: array
       type: object
     ListVersionFilesResponse:
-      description: The response when listing a Version's Files..
       properties:
         files:
           description: The list path/hashes in the specified version.
           items:
-            $ref: '#/components/schemas/VersionFile'
+            $ref: "#/components/schemas/VersionFile"
           type: array
         nextPageToken:
-          description: 'The pagination token, if more results exist.'
+          description: The pagination token, if more results exist.
           type: string
       type: object
     ListVersionsResponse:
-      description: The response when listing Versions.
       properties:
         nextPageToken:
-          description: 'The pagination token, if more results exist'
+          description: The pagination token, if more results exist
           type: string
         versions:
-          description: 'The list of versions, if any exist.'
+          description: The list of versions, if any exist.
           items:
-            $ref: '#/components/schemas/Version'
+            $ref: "#/components/schemas/Version"
           type: array
       type: object
     Operation:
-      description: |-
+      description: >-
         This resource represents a long-running operation that is the result of a
+
         network API call.
       properties:
         done:
-          description: |-
+          description: >-
             If the value is `false`, it means the operation is still in progress.
+
             If `true`, the operation is completed, and either `error` or `response` is
+
             available.
           type: boolean
         error:
-          $ref: '#/components/schemas/Status'
+          $ref: "#/components/schemas/Status"
           description: The error result of the operation in case of failure or cancellation.
         metadata:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
-          description: |-
+          description: >-
             Service-specific metadata associated with the operation.  It typically
+
             contains progress information and common metadata such as create time.
+
             Some services might not provide such metadata.  Any method that returns a
+
             long-running operation should document the metadata type, if any.
           type: object
         name:
-          description: |-
+          description: >-
             The server-assigned name, which is only unique within the same service that
+
             originally returns it. If you use the default HTTP mapping, the
+
             `name` should be a resource name ending with `operations/{unique_id}`.
           type: string
         response:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
-          description: |-
+          description: >-
             The normal response of the operation in case of success.  If the original
+
             method returns no data on success, such as `Delete`, the response is
+
             `google.protobuf.Empty`.  If the original method is standard
+
             `Get`/`Create`/`Update`, the response should be the resource.  For other
+
             methods, the response should have the type `XxxResponse`, where `Xxx`
+
             is the original method name.  For example, if the original method name
+
             is `TakeSnapshot()`, the inferred response type is
+
             `TakeSnapshotResponse`.
           type: object
-      type: object
-    PathFilter:
-      description: A representation of filter path.
-      properties:
-        regexes:
-          description: An array of regexes to filter by.
-          items:
-            type: string
-          type: array
       type: object
     PopulateVersionFilesRequest:
       description: The request to populate a Version's Files.
@@ -1103,98 +1104,126 @@ components:
         files:
           additionalProperties:
             type: string
-          description: |-
+          description: >-
             A set of file paths to the hashes corresponding to assets that should be
+
             added to the version. Note that a file path to an empty hash will remove
+
             the path from the version. Calculate a hash by Gzipping the file then
+
             taking the SHA256 hash of the newly compressed file.
           type: object
       type: object
     PopulateVersionFilesResponse:
-      description: The response to a PopulateVersionFilesRequest.
       properties:
         uploadRequiredHashes:
-          description: |-
+          description: >-
             The content hashes of the specified files that need to be uploaded to the
+
             specified endpoint.
           items:
             type: string
           type: array
         uploadUrl:
-          description: |-
+          description: >-
             The URL to which the files should be uploaded, in the format:
+
             <br>"https://upload-firebasehosting.googleapis.com/upload/sites/<var>site-name</var>/versions/<var>versionID</var>/files".
+
             <br>Perform a multipart `POST` of the Gzipped file contents to the URL
+
             using a forward slash and the hash of the file appended to the end.
           type: string
       type: object
     PreviewConfig:
-      description: |-
+      description: >-
         Version preview configuration. If active and unexpired,
+
         this version will be accessible via a custom URL even
+
         if it is not the currently released version.
       properties:
         active:
-          description: 'If true, preview URLs are enabled for this version.'
+          description: If true, preview URLs are enabled for this version.
           type: boolean
         expireTime:
-          description: |-
+          description: >-
             Indicates the expiration time for previewing this
+
             version; preview URL requests received after this time will 404.
           format: google-datetime
           type: string
       type: object
     Redirect:
-      description: |-
-        A [`redirect`](/docs/hosting/full-config#redirects) represents the
-        configuration for returning an HTTP redirect response given a matching
-        request URL path.
+      description: >-
+        A [`redirect`](/docs/hosting/full-config#redirects) object specifies a URL
+
+        pattern that, if matched to the request URL path, triggers Hosting to
+
+        respond with a redirect to the specified destination path.
       properties:
         glob:
-          description: |-
-            The user-supplied [glob
-            pattern](/docs/hosting/full-config#glob_pattern_matching) to match
+          description: >-
+            The user-supplied
+
+            [glob](/docs/hosting/full-config#glob_pattern_matching) to match
+
             against the request URL path.
           type: string
         location:
-          description: |-
+          description: >-
             Required. The value to put in the HTTP location header of the response.
+
             <br>The location can contain capture group values from the pattern using
+
             a `:` prefix to identify the segment and an optional `*` to capture the
+
             rest of the URL.
+
             For example:
+
             <code>"glob": "/:capture*",
+
             <br>"statusCode": 301,
+
             <br>"location": "https://example.com/foo/:capture"</code>
           type: string
         regex:
-          description: |-
+          description: >-
             The user-supplied RE2 regular expression to match against the request
+
             URL path.
           type: string
         statusCode:
-          description: |-
+          description: >-
             Required. The status HTTP code to return in the response. It must be a
+
             valid 3xx status code.
           format: int32
           type: integer
       type: object
     Release:
-      description: |-
+      description: >-
         A `Release` is a particular
+
         [collection of configurations and files](sites.versions)
+
         that is set to be public at a particular time.
       properties:
         message:
-          description: |-
+          description: >-
             The deploy description when the release was created. The value can be up to
+
             512&nbsp;characters.
           type: string
         name:
-          description: |-
+          description: >-
             Output only. The unique identifier for the release, in the format:
+
             <code>sites/<var>site-name</var>/releases/<var>releaseID</var></code>
+
             This name is provided in the response body when you call the
+
             [`CreateRelease`](sites.releases/create) endpoint.
           type: string
         releaseTime:
@@ -1202,12 +1231,14 @@ components:
           format: google-datetime
           type: string
         releaseUser:
-          $ref: '#/components/schemas/ActingUser'
+          $ref: "#/components/schemas/ActingUser"
           description: Output only. Identifies the user who created the release.
         type:
-          description: |-
+          description: >-
             Explains the reason for the release.
+
             <br>Specify a value for this field only when creating a `SITE_DISABLE`
+
             type release.
           enum:
             - TYPE_UNSPECIFIED
@@ -1216,47 +1247,57 @@ components:
             - SITE_DISABLE
           type: string
         version:
-          $ref: '#/components/schemas/Version'
+          $ref: "#/components/schemas/Version"
           description: Output only. The configuration and content that was released.
       type: object
     Rewrite:
-      description: |-
-        A [`rewrite`](/docs/hosting/full-config#rewrites) represents an internal
-        content rewrite on the version. If the pattern matches, the request will be
-        handled as if it were to the destination path specified in the
-        configuration.
+      description: >-
+        A [`rewrite`](/docs/hosting/full-config#rewrites) object specifies a URL
+
+        pattern that, if matched to the request URL path, triggers Hosting to
+
+        respond as if the service were given the specified destination URL.
       properties:
         dynamicLinks:
           description: The request will be forwarded to Firebase Dynamic Links.
           type: boolean
         function:
-          description: |-
+          description: >-
             The function to proxy requests to. Must match the exported function
+
             name exactly.
           type: string
         glob:
-          description: |-
-            The user-supplied [glob
-            pattern](/docs/hosting/full-config#glob_pattern_matching) to match
+          description: >-
+            The user-supplied
+
+            [glob](/docs/hosting/full-config#glob_pattern_matching) to match
+
             against the request URL path.
           type: string
         path:
           description: The URL path to rewrite the request to.
           type: string
         regex:
-          description: |-
+          description: >-
             The user-supplied RE2 regular expression to match against the request
+
             URL path.
           type: string
         run:
-          $ref: '#/components/schemas/CloudRunRewrite'
+          $ref: "#/components/schemas/CloudRunRewrite"
           description: The request will be forwarded to Cloud Run.
       type: object
     ServingConfig:
-      description: |-
+      description: >-
         The configuration for how incoming requests to a site should be routed and
-        processed before serving content. The patterns are matched and applied
-        according to a specific
+
+        processed before serving content. The URL request paths are matched against
+
+        the specified URL patterns in the configuration, then Hosting applies the
+
+        applicable configuration according to a specific
+
         [priority order](/docs/hosting/full-config#hosting_priority_order).
       properties:
         appAssociation:
@@ -1269,25 +1310,34 @@ components:
           description: Defines whether to drop the file extension from uploaded files.
           type: boolean
         headers:
-          description: |-
-            A list of custom response headers that are added to the content if the
-            request URL path matches the glob.
+          description: >-
+            An array of objects, where each object specifies a URL pattern that, if
+
+            matched to the request URL path, triggers Hosting to apply the specified
+
+            custom response headers.
           items:
-            $ref: '#/components/schemas/Header'
+            $ref: "#/components/schemas/Header"
           type: array
         redirects:
-          description: |-
-            A list of globs that will cause the response to redirect to another
-            location.
+          description: >-
+            An array of objects (called redirect rules), where each rule specifies a
+
+            URL pattern that, if matched to the request URL path, triggers Hosting to
+
+            respond with a redirect to the specified destination path.
           items:
-            $ref: '#/components/schemas/Redirect'
+            $ref: "#/components/schemas/Redirect"
           type: array
         rewrites:
-          description: |-
-            A list of rewrites that will act as if the service were given the
-            destination URL.
+          description: >-
+            An array of objects (called rewrite rules), where each rule specifies a URL
+
+            pattern that, if matched to the request URL path, triggers Hosting to
+
+            respond as if the service were given the specified destination URL.
           items:
-            $ref: '#/components/schemas/Rewrite'
+            $ref: "#/components/schemas/Rewrite"
           type: array
         trailingSlashBehavior:
           description: Defines how to handle a trailing slash in the URL path.
@@ -1298,37 +1348,54 @@ components:
           type: string
       type: object
     SiteConfig:
-      description: |-
+      description: >-
         A `SiteConfig` contains metadata associated with a specific site that
+
         controls Firebase Hosting serving behavior
       properties:
+        cloudLoggingEnabled:
+          description: >-
+            Whether or not web requests made by site visitors are logged via Cloud
+
+            Logging.
+          type: boolean
         maxVersions:
-          description: |-
+          description: >-
             The number of FINALIZED versions that will be held for a site before
+
             automatic deletion. When a new version is deployed, content for versions
+
             in storage in excess of this number will be deleted, and will no longer be
+
             billed for storage usage. Oldest versions will be deleted first; sites are
+
             created with an unlimited number of max_versions by default.
           format: int64
           type: string
       type: object
     Status:
-      description: |-
+      description: >-
         The `Status` type defines a logical error model that is suitable for
+
         different programming environments, including REST APIs and RPC APIs. It is
+
         used by [gRPC](https://github.com/grpc). Each `Status` message contains
+
         three pieces of data: error code, error message, and error details.
 
+
         You can find out more about this error model and how to work with it in the
+
         [API Design Guide](https://cloud.google.com/apis/design/errors).
       properties:
         code:
-          description: 'The status code, which should be an enum value of google.rpc.Code.'
+          description: The status code, which should be an enum value of google.rpc.Code.
           format: int32
           type: integer
         details:
-          description: |-
+          description: >-
             A list of messages that carry the error details.  There is a common set of
+
             message types for APIs to use.
           items:
             additionalProperties:
@@ -1336,39 +1403,44 @@ components:
             type: object
           type: array
         message:
-          description: |-
+          description: >-
             A developer-facing error message, which should be in English. Any
+
             user-facing error message should be localized and sent in the
+
             google.rpc.Status.details field, or localized by the client.
           type: string
       type: object
     Version:
-      description: |-
+      description: >-
         A `Version` is the collection of configuration and
+
         [static files](sites.versions.files) that determine how a site is displayed.
       properties:
         config:
-          $ref: '#/components/schemas/ServingConfig'
-          description: |-
+          $ref: "#/components/schemas/ServingConfig"
+          description: >-
             The configuration for the behavior of the site. This configuration exists
+
             in the [`firebase.json`](/docs/cli/#the_firebasejson_file) file.
         createTime:
           description: Output only. The time at which the version was created.
           format: google-datetime
           type: string
         createUser:
-          $ref: '#/components/schemas/ActingUser'
+          $ref: "#/components/schemas/ActingUser"
           description: Output only. Identifies the user who created the version.
         deleteTime:
           description: Output only. The time at which the version was `DELETED`.
           format: google-datetime
           type: string
         deleteUser:
-          $ref: '#/components/schemas/ActingUser'
+          $ref: "#/components/schemas/ActingUser"
           description: Output only. Identifies the user who `DELETED` the version.
         fileCount:
-          description: |-
+          description: >-
             Output only. The total number of files associated with the version.
+
             <br>This value is calculated after a version is `FINALIZED`.
           format: int64
           type: string
@@ -1377,7 +1449,7 @@ components:
           format: google-datetime
           type: string
         finalizeUser:
-          $ref: '#/components/schemas/ActingUser'
+          $ref: "#/components/schemas/ActingUser"
           description: Output only. Identifies the user who `FINALIZED` the version.
         labels:
           additionalProperties:
@@ -1385,34 +1457,53 @@ components:
           description: The labels used for extra metadata and/or filtering.
           type: object
         name:
-          description: |-
+          description: >-
             The unique identifier for a version, in the format:
+
             <code>sites/<var>site-name</var>/versions/<var>versionID</var></code>
+
             This name is provided in the response body when you call the
+
             [`CreateVersion`](../sites.versions/create) endpoint.
           type: string
         preview:
-          $ref: '#/components/schemas/PreviewConfig'
-          description: |-
+          $ref: "#/components/schemas/PreviewConfig"
+          description: >-
             Version preview configuration for the site version. This configuration
+
             specfies whether previewing is enabled for this site version. Version
+
             previews allow you to preview your site at a custom URL before
+
             releasing it as the live version.
         status:
-          description: |-
+          description: >-
             The deploy status of a version.
+
             <br>
+
             <br>For a successful deploy, call the
+
             [`CreateVersion`](sites.versions/create) endpoint to make a new version
+
             (`CREATED` status),
+
             [upload all desired files](sites.versions/populateFiles) to the version,
+
             then [update](sites.versions/patch) the version to the `FINALIZED` status.
+
             <br>
+
             <br>Note that if you leave the version in the `CREATED` state for more
+
             than 12&nbsp;hours, the system will automatically mark the version as
+
             `ABANDONED`.
+
             <br>
+
             <br>You can also change the status of a version to `DELETED` by calling the
+
             [`DeleteVersion`](sites.versions/delete) endpoint.
           enum:
             - VERSION_STATUS_UNSPECIFIED
@@ -1421,11 +1512,11 @@ components:
             - DELETED
             - ABANDONED
             - EXPIRED
-            - CLONING
           type: string
         versionBytes:
-          description: |-
+          description: >-
             Output only. The total stored bytesize of the version.
+
             <br>This value is calculated after a version is `FINALIZED`.
           format: int64
           type: string
@@ -1440,9 +1531,11 @@ components:
           description: The URI at which the file's content should display.
           type: string
         status:
-          description: |-
+          description: >-
             Output only. The current status of a particular file in the specified
+
             version.
+
             <br>The value will be either `pending upload` or `uploaded`.
           enum:
             - STATUS_UNSPECIFIED
@@ -1455,22 +1548,22 @@ components:
       description: Oauth 2.0 implicit authentication
       flows:
         implicit:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-            'https://www.googleapis.com/auth/cloud-platform.read-only': View your data across Google Cloud Platform services
-            'https://www.googleapis.com/auth/firebase': View and administer all your Firebase data and settings
-            'https://www.googleapis.com/auth/firebase.readonly': View all your Firebase data and settings
+            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/cloud-platform.read-only: View your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/firebase: View and administer all your Firebase data and settings
+            https://www.googleapis.com/auth/firebase.readonly: View all your Firebase data and settings
       type: oauth2
     Oauth2c:
-      description: Oauth 2.0 accessCode authentication
+      description: Oauth 2.0 authorizationCode authentication
       flows:
         authorizationCode:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-            'https://www.googleapis.com/auth/cloud-platform.read-only': View your data across Google Cloud Platform services
-            'https://www.googleapis.com/auth/firebase': View and administer all your Firebase data and settings
-            'https://www.googleapis.com/auth/firebase.readonly': View all your Firebase data and settings
-          tokenUrl: 'https://accounts.google.com/o/oauth2/token'
+            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/cloud-platform.read-only: View your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/firebase: View and administer all your Firebase data and settings
+            https://www.googleapis.com/auth/firebase.readonly: View all your Firebase data and settings
+          tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

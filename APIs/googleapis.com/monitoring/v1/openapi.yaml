@@ -1,124 +1,127 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://monitoring.googleapis.com/'
+  - url: https://monitoring.googleapis.com/
 info:
   contact:
     name: Google
-    url: 'https://google.com'
-  description: 'Manages your Cloud Monitoring data and configurations. Most projects must be associated with a Workspace, with a few exceptions as noted on the individual method pages. The table entries below are presented in alphabetical order, not in order of common use. For explanations of the concepts found in the table entries, read the Cloud Monitoring documentation.'
+    url: https://google.com
+    x-twitter: youtube
+  description: Manages your Cloud Monitoring data and configurations. Most projects must be associated with a Workspace, with a few exceptions as noted on the individual method pages. The table entries below are presented in alphabetical order, not in order of common use. For explanations of the concepts found in the table entries, read the Cloud Monitoring documentation.
   license:
     name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
-  title: Cloud Monitoring
+    url: http://creativecommons.org/licenses/by/3.0/
+  termsOfService: https://developers.google.com/terms/
+  title: Cloud Monitoring API
   version: v1
   x-apiClientRegistration:
-    url: 'https://console.developers.google.com'
+    url: https://console.developers.google.com
   x-apisguru-categories:
-    - monitoring
+    - analytics
+    - media
   x-logo:
-    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.31
       format: google
-      url: 'https://monitoring.googleapis.com/$discovery/rest?version=v1'
+      url: https://monitoring.googleapis.com/$discovery/rest?version=v1
       version: v1
   x-preferred: false
   x-providerName: googleapis.com
   x-serviceName: monitoring
 externalDocs:
-  url: 'https://cloud.google.com/monitoring/api/'
+  url: https://cloud.google.com/monitoring/api/
 tags:
   - name: projects
 paths:
-  '/v1/{name}':
+  "/v1/{name}":
     delete:
-      description: 'Deletes an existing custom dashboard.This method requires the monitoring.dashboards.delete permission on the specified dashboard. For more information, see Google Cloud IAM (https://cloud.google.com/iam).'
+      description: Deletes an existing custom dashboard.This method requires the monitoring.dashboards.delete permission on the specified dashboard. For more information, see Google Cloud IAM (https://cloud.google.com/iam).
       operationId: monitoring.projects.dashboards.delete
       parameters:
-        - description: |
+        - description: >
             Required. The resource name of the Dashboard. The format is:
+
             projects/[PROJECT_ID_OR_NUMBER]/dashboards/[DASHBOARD_ID]
           in: path
           name: name
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Empty'
+                $ref: "#/components/schemas/Empty"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/monitoring'
+            - https://www.googleapis.com/auth/monitoring
           Oauth2c:
-            - 'https://www.googleapis.com/auth/monitoring'
+            - https://www.googleapis.com/auth/monitoring
         - Oauth2:
-            - 'https://www.googleapis.com/auth/monitoring.write'
+            - https://www.googleapis.com/auth/monitoring.write
           Oauth2c:
-            - 'https://www.googleapis.com/auth/monitoring.write'
+            - https://www.googleapis.com/auth/monitoring.write
       tags:
         - projects
     get:
-      description: 'Fetches a specific dashboard.This method requires the monitoring.dashboards.get permission on the specified dashboard. For more information, see Google Cloud IAM (https://cloud.google.com/iam).'
+      description: Fetches a specific dashboard.This method requires the monitoring.dashboards.get permission on the specified dashboard. For more information, see Google Cloud IAM (https://cloud.google.com/iam).
       operationId: monitoring.projects.dashboards.get
       parameters:
-        - description: |-
+        - description: >-
             Required. The resource name of the Dashboard. The format is one of:
+
             dashboards/[DASHBOARD_ID] (for system dashboards)
+
             projects/[PROJECT_ID_OR_NUMBER]/dashboards/[DASHBOARD_ID]  (for custom dashboards).
           in: path
           name: name
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Dashboard'
+                $ref: "#/components/schemas/Dashboard"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/monitoring'
+            - https://www.googleapis.com/auth/monitoring
           Oauth2c:
-            - 'https://www.googleapis.com/auth/monitoring'
+            - https://www.googleapis.com/auth/monitoring
         - Oauth2:
-            - 'https://www.googleapis.com/auth/monitoring.read'
+            - https://www.googleapis.com/auth/monitoring.read
           Oauth2c:
-            - 'https://www.googleapis.com/auth/monitoring.read'
+            - https://www.googleapis.com/auth/monitoring.read
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
     patch:
-      description: 'Replaces an existing custom dashboard with a new definition.This method requires the monitoring.dashboards.update permission on the specified dashboard. For more information, see Google Cloud IAM (https://cloud.google.com/iam).'
+      description: Replaces an existing custom dashboard with a new definition.This method requires the monitoring.dashboards.update permission on the specified dashboard. For more information, see Google Cloud IAM (https://cloud.google.com/iam).
       operationId: monitoring.projects.dashboards.patch
       parameters:
         - description: Immutable. The resource name of the dashboard.
@@ -127,49 +130,48 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Dashboard'
+              $ref: "#/components/schemas/Dashboard"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Dashboard'
+                $ref: "#/components/schemas/Dashboard"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/monitoring'
+            - https://www.googleapis.com/auth/monitoring
           Oauth2c:
-            - 'https://www.googleapis.com/auth/monitoring'
+            - https://www.googleapis.com/auth/monitoring
         - Oauth2:
-            - 'https://www.googleapis.com/auth/monitoring.write'
+            - https://www.googleapis.com/auth/monitoring.write
           Oauth2c:
-            - 'https://www.googleapis.com/auth/monitoring.write'
+            - https://www.googleapis.com/auth/monitoring.write
       tags:
         - projects
-  '/v1/{parent}/dashboards':
+  "/v1/{parent}/dashboards":
     get:
-      description: 'Lists the existing dashboards.This method requires the monitoring.dashboards.list permission on the specified project. For more information, see Google Cloud IAM (https://cloud.google.com/iam).'
+      description: Lists the existing dashboards.This method requires the monitoring.dashboards.list permission on the specified project. For more information, see Google Cloud IAM (https://cloud.google.com/iam).
       operationId: monitoring.projects.dashboards.list
       parameters:
-        - description: |
+        - description: >
             Required. The scope of the dashboards to list. The format is:
+
             projects/[PROJECT_ID_OR_NUMBER]
           in: path
           name: parent
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
-        - description: 'A positive number that is the maximum number of results to return. If unspecified, a default of 1000 is used.'
+        - description: A positive number that is the maximum number of results to return. If unspecified, a default of 1000 is used.
           in: query
           name: pageSize
           schema:
@@ -180,78 +182,79 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ListDashboardsResponse'
+                $ref: "#/components/schemas/ListDashboardsResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/monitoring'
+            - https://www.googleapis.com/auth/monitoring
           Oauth2c:
-            - 'https://www.googleapis.com/auth/monitoring'
+            - https://www.googleapis.com/auth/monitoring
         - Oauth2:
-            - 'https://www.googleapis.com/auth/monitoring.read'
+            - https://www.googleapis.com/auth/monitoring.read
           Oauth2c:
-            - 'https://www.googleapis.com/auth/monitoring.read'
+            - https://www.googleapis.com/auth/monitoring.read
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
     post:
-      description: 'Creates a new custom dashboard.This method requires the monitoring.dashboards.create permission on the specified project. For more information, see Google Cloud IAM (https://cloud.google.com/iam).'
+      description: Creates a new custom dashboard.This method requires the monitoring.dashboards.create permission on the specified project. For more information, see Google Cloud IAM (https://cloud.google.com/iam).
       operationId: monitoring.projects.dashboards.create
       parameters:
-        - description: |-
+        - description: >-
             Required. The project on which to execute the request. The format is:
+
             projects/[PROJECT_ID_OR_NUMBER]
+
             The [PROJECT_ID_OR_NUMBER] must match the dashboard resource name.
           in: path
           name: parent
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Dashboard'
+              $ref: "#/components/schemas/Dashboard"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Dashboard'
+                $ref: "#/components/schemas/Dashboard"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/monitoring'
+            - https://www.googleapis.com/auth/monitoring
           Oauth2c:
-            - 'https://www.googleapis.com/auth/monitoring'
+            - https://www.googleapis.com/auth/monitoring
         - Oauth2:
-            - 'https://www.googleapis.com/auth/monitoring.write'
+            - https://www.googleapis.com/auth/monitoring.write
           Oauth2c:
-            - 'https://www.googleapis.com/auth/monitoring.write'
+            - https://www.googleapis.com/auth/monitoring.write
       tags:
         - projects
 components:
@@ -262,8 +265,8 @@ components:
       name: $.xgafv
       schema:
         enum:
-          - '1'
-          - '2'
+          - "1"
+          - "2"
         type: string
     access_token:
       description: OAuth access token.
@@ -276,7 +279,6 @@ components:
       in: query
       name: alt
       schema:
-        default: json
         enum:
           - json
           - media
@@ -295,7 +297,7 @@ components:
       schema:
         type: string
     key:
-      description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -311,42 +313,35 @@ components:
       in: query
       name: prettyPrint
       schema:
-        default: true
         type: boolean
     quotaUser:
-      description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.'
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
       in: query
       name: quotaUser
       schema:
         type: string
     uploadType:
-      description: 'Legacy upload protocol for media (e.g. "media", "multipart").'
+      description: Legacy upload protocol for media (e.g. "media", "multipart").
       in: query
       name: uploadType
       schema:
         type: string
     upload_protocol:
-      description: 'Upload protocol for media (e.g. "raw", "multipart").'
+      description: Upload protocol for media (e.g. "raw", "multipart").
       in: query
       name: upload_protocol
       schema:
         type: string
-  requestBodies:
-    Dashboard:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Dashboard'
   schemas:
     Aggregation:
-      description: 'Describes how to combine multiple time series to provide a different view of the data. Aggregation of time series is done in two steps. First, each time series in the set is aligned to the same time interval boundaries, then the set of time series is optionally reduced in number.Alignment consists of applying the per_series_aligner operation to each time series after its data has been divided into regular alignment_period time intervals. This process takes all of the data points in an alignment period, applies a mathematical transformation such as averaging, minimum, maximum, delta, etc., and converts them into a single data point per period.Reduction is when the aligned and transformed time series can optionally be combined, reducing the number of time series through similar mathematical transformations. Reduction involves applying a cross_series_reducer to all the time series, optionally sorting the time series into subsets with group_by_fields, and applying the reducer to each subset.The raw time series data can contain a huge amount of information from multiple sources. Alignment and reduction transforms this mass of data into a more manageable and representative collection of data, for example "the 95% latency across the average of all tasks in a cluster". This representative data can be more easily graphed and comprehended, and the individual time series data is still available for later drilldown. For more details, see Filtering and aggregation (https://cloud.google.com/monitoring/api/v3/aggregation).'
+      description: Describes how to combine multiple time series to provide a different view of the data. Aggregation of time series is done in two steps. First, each time series in the set is aligned to the same time interval boundaries, then the set of time series is optionally reduced in number.Alignment consists of applying the per_series_aligner operation to each time series after its data has been divided into regular alignment_period time intervals. This process takes all of the data points in an alignment period, applies a mathematical transformation such as averaging, minimum, maximum, delta, etc., and converts them into a single data point per period.Reduction is when the aligned and transformed time series can optionally be combined, reducing the number of time series through similar mathematical transformations. Reduction involves applying a cross_series_reducer to all the time series, optionally sorting the time series into subsets with group_by_fields, and applying the reducer to each subset.The raw time series data can contain a huge amount of information from multiple sources. Alignment and reduction transforms this mass of data into a more manageable and representative collection of data, for example "the 95% latency across the average of all tasks in a cluster". This representative data can be more easily graphed and comprehended, and the individual time series data is still available for later drilldown. For more details, see Filtering and aggregation (https://cloud.google.com/monitoring/api/v3/aggregation).
       properties:
         alignmentPeriod:
-          description: 'The alignment_period specifies a time interval, in seconds, that is used to divide the data in all the time series into consistent blocks of time. This will be done before the per-series aligner can be applied to the data.The value must be at least 60 seconds. If a per-series aligner other than ALIGN_NONE is specified, this field is required or an error is returned. If no per-series aligner is specified, or the aligner ALIGN_NONE is specified, then this field is ignored.'
+          description: The alignment_period specifies a time interval, in seconds, that is used to divide the data in all the time series into consistent blocks of time. This will be done before the per-series aligner can be applied to the data.The value must be at least 60 seconds. If a per-series aligner other than ALIGN_NONE is specified, this field is required or an error is returned. If no per-series aligner is specified, or the aligner ALIGN_NONE is specified, then this field is ignored.
           format: google-duration
           type: string
         crossSeriesReducer:
-          description: 'The reduction operation to be used to combine time series into a single time series, where the value of each data point in the resulting series is a function of all the already aligned values in the input time series.Not all reducer operations can be applied to all time series. The valid choices depend on the metric_kind and the value_type of the original time series. Reduction can yield a time series with a different metric_kind or value_type than the input time series.Time series data must first be aligned (see per_series_aligner) in order to perform cross-time series reduction. If cross_series_reducer is specified, then per_series_aligner must be specified, and must not be ALIGN_NONE. An alignment_period must also be specified; otherwise, an error is returned.'
+          description: The reduction operation to be used to combine time series into a single time series, where the value of each data point in the resulting series is a function of all the already aligned values in the input time series.Not all reducer operations can be applied to all time series. The valid choices depend on the metric_kind and the value_type of the original time series. Reduction can yield a time series with a different metric_kind or value_type than the input time series.Time series data must first be aligned (see per_series_aligner) in order to perform cross-time series reduction. If cross_series_reducer is specified, then per_series_aligner must be specified, and must not be ALIGN_NONE. An alignment_period must also be specified; otherwise, an error is returned.
           enum:
             - REDUCE_NONE
             - REDUCE_MEAN
@@ -364,12 +359,12 @@ components:
             - REDUCE_PERCENTILE_05
           type: string
         groupByFields:
-          description: 'The set of fields to preserve when cross_series_reducer is specified. The group_by_fields determine how the time series are partitioned into subsets prior to applying the aggregation operation. Each subset contains time series that have the same value for each of the grouping fields. Each individual time series is a member of exactly one subset. The cross_series_reducer is applied to each subset of time series. It is not possible to reduce across different resource types, so this field implicitly contains resource.type. Fields not specified in group_by_fields are aggregated away. If group_by_fields is not specified and all the time series have the same resource type, then the time series are aggregated into a single output time series. If cross_series_reducer is not defined, this field is ignored.'
+          description: The set of fields to preserve when cross_series_reducer is specified. The group_by_fields determine how the time series are partitioned into subsets prior to applying the aggregation operation. Each subset contains time series that have the same value for each of the grouping fields. Each individual time series is a member of exactly one subset. The cross_series_reducer is applied to each subset of time series. It is not possible to reduce across different resource types, so this field implicitly contains resource.type. Fields not specified in group_by_fields are aggregated away. If group_by_fields is not specified and all the time series have the same resource type, then the time series are aggregated into a single output time series. If cross_series_reducer is not defined, this field is ignored.
           items:
             type: string
           type: array
         perSeriesAligner:
-          description: 'An Aligner describes how to bring the data points in a single time series into temporal alignment. Except for ALIGN_NONE, all alignments cause all the data points in an alignment_period to be mathematically grouped together, resulting in a single data point for each alignment_period with end timestamp at the end of the period.Not all alignment operations may be applied to all time series. The valid choices depend on the metric_kind and value_type of the original time series. Alignment can change the metric_kind or the value_type of the time series.Time series data must be aligned in order to perform cross-time series reduction. If cross_series_reducer is specified, then per_series_aligner must be specified and not equal to ALIGN_NONE and alignment_period must be specified; otherwise, an error is returned.'
+          description: An Aligner describes how to bring the data points in a single time series into temporal alignment. Except for ALIGN_NONE, all alignments cause all the data points in an alignment_period to be mathematically grouped together, resulting in a single data point for each alignment_period with end timestamp at the end of the period.Not all alignment operations may be applied to all time series. The valid choices depend on the metric_kind and value_type of the original time series. Alignment can change the metric_kind or the value_type of the time series.Time series data must be aligned in order to perform cross-time series reduction. If cross_series_reducer is specified, then per_series_aligner must be specified and not equal to ALIGN_NONE and alignment_period must be specified; otherwise, an error is returned.
           enum:
             - ALIGN_NONE
             - ALIGN_DELTA
@@ -399,7 +394,7 @@ components:
           description: The label of the axis.
           type: string
         scale:
-          description: 'The axis scale. By default, a linear scale is used.'
+          description: The axis scale. By default, a linear scale is used.
           enum:
             - SCALE_UNSPECIFIED
             - LINEAR
@@ -422,13 +417,13 @@ components:
       description: Defines the layout properties and content for a column.
       properties:
         weight:
-          description: 'The relative weight of this column. The column weight is used to adjust the width of columns on the screen (relative to peers). Greater the weight, greater the width of the column on the screen. If omitted, a value of 1 is used while rendering.'
+          description: The relative weight of this column. The column weight is used to adjust the width of columns on the screen (relative to peers). Greater the weight, greater the width of the column on the screen. If omitted, a value of 1 is used while rendering.
           format: int64
           type: string
         widgets:
           description: The display widgets arranged vertically in this column.
           items:
-            $ref: '#/components/schemas/Widget'
+            $ref: "#/components/schemas/Widget"
           type: array
       type: object
     ColumnLayout:
@@ -437,39 +432,39 @@ components:
         columns:
           description: The columns of content to display.
           items:
-            $ref: '#/components/schemas/Column'
+            $ref: "#/components/schemas/Column"
           type: array
       type: object
     Dashboard:
       description: A Google Stackdriver dashboard. Dashboards define the content and layout of pages in the Stackdriver web application.
       properties:
         columnLayout:
-          $ref: '#/components/schemas/ColumnLayout'
+          $ref: "#/components/schemas/ColumnLayout"
           description: The content is divided into equally spaced columns and the widgets are arranged vertically.
         displayName:
-          description: 'Required. The mutable, human-readable name.'
+          description: Required. The mutable, human-readable name.
           type: string
         etag:
-          description: 'etag is used for optimistic concurrency control as a way to help prevent simultaneous updates of a policy from overwriting each other. An etag is returned in the response to GetDashboard, and users are expected to put that etag in the request to UpdateDashboard to ensure that their change will be applied to the same version of the Dashboard configuration. The field should not be passed during dashboard creation.'
+          description: etag is used for optimistic concurrency control as a way to help prevent simultaneous updates of a policy from overwriting each other. An etag is returned in the response to GetDashboard, and users are expected to put that etag in the request to UpdateDashboard to ensure that their change will be applied to the same version of the Dashboard configuration. The field should not be passed during dashboard creation.
           type: string
         gridLayout:
-          $ref: '#/components/schemas/GridLayout'
+          $ref: "#/components/schemas/GridLayout"
           description: Content is arranged with a basic layout that re-flows a simple list of informational elements like widgets or tiles.
         name:
           description: Immutable. The resource name of the dashboard.
           type: string
         rowLayout:
-          $ref: '#/components/schemas/RowLayout'
+          $ref: "#/components/schemas/RowLayout"
           description: The content is divided into equally spaced rows and the widgets are arranged horizontally.
       type: object
     DataSet:
       description: Groups a time series query definition with charting options.
       properties:
         legendTemplate:
-          description: 'A template string for naming TimeSeries in the resulting data set. This should be a string with interpolations of the form ${label_name}, which will resolve to the label''s value.'
+          description: A template string for naming TimeSeries in the resulting data set. This should be a string with interpolations of the form ${label_name}, which will resolve to the label's value.
           type: string
         minAlignmentPeriod:
-          description: 'Optional. The lower bound on data point frequency for this data set, implemented by specifying the minimum alignment period to use in a time series query For example, if the data is published once every 10 minutes, the min_alignment_period should be at least 10 minutes. It would not make sense to fetch and align data at one minute intervals.'
+          description: Optional. The lower bound on data point frequency for this data set, implemented by specifying the minimum alignment period to use in a time series query For example, if the data is published once every 10 minutes, the min_alignment_period should be at least 10 minutes. It would not make sense to fetch and align data at one minute intervals.
           format: google-duration
           type: string
         plotType:
@@ -482,24 +477,26 @@ components:
             - HEATMAP
           type: string
         timeSeriesQuery:
-          $ref: '#/components/schemas/TimeSeriesQuery'
+          $ref: "#/components/schemas/TimeSeriesQuery"
           description: Required. Fields for querying time series data from the Stackdriver metrics API.
       type: object
     DroppedLabels:
-      description: 'A set of (label, value) pairs which were dropped during aggregation, attached to google.api.Distribution.Exemplars in google.api.Distribution values during aggregation.These values are used in combination with the label values that remain on the aggregated Distribution timeseries to construct the full label set for the exemplar values. The resulting full label set may be used to identify the specific task/job/instance (for example) which may be contributing to a long-tail, while allowing the storage savings of only storing aggregated distribution values for a large group.Note that there are no guarantees on ordering of the labels from exemplar-to-exemplar and from distribution-to-distribution in the same stream, and there may be duplicates. It is up to clients to resolve any ambiguities.'
+      description: A set of (label, value) pairs which were dropped during aggregation, attached to google.api.Distribution.Exemplars in google.api.Distribution values during aggregation.These values are used in combination with the label values that remain on the aggregated Distribution timeseries to construct the full label set for the exemplar values. The resulting full label set may be used to identify the specific task/job/instance (for example) which may be contributing to a long-tail, while allowing the storage savings of only storing aggregated distribution values for a large group.Note that there are no guarantees on ordering of the labels from exemplar-to-exemplar and from distribution-to-distribution in the same stream, and there may be duplicates. It is up to clients to resolve any ambiguities.
       properties:
         label:
           additionalProperties:
             type: string
-          description: 'Map from label to its value, for all labels dropped in any aggregation.'
+          description: Map from label to its value, for all labels dropped in any aggregation.
           type: object
       type: object
     Empty:
-      description: |-
+      description: >-
         A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance:
+
         service Foo {
           rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);
         }
+
         The JSON representation for Empty is empty JSON object {}.
       properties: {}
       type: object
@@ -551,13 +548,13 @@ components:
           format: int32
           type: integer
         oneofIndex:
-          description: 'The index of the field type in Type.oneofs, for message or enumeration types. The first type has index 1; zero means the type is not in the list.'
+          description: The index of the field type in Type.oneofs, for message or enumeration types. The first type has index 1; zero means the type is not in the list.
           format: int32
           type: integer
         options:
           description: The protocol buffer options.
           items:
-            $ref: '#/components/schemas/Option'
+            $ref: "#/components/schemas/Option"
           type: array
         packed:
           description: Whether to use alternative packed wire representation.
@@ -582,13 +579,13 @@ components:
       description: A basic layout divides the available space into vertical columns of equal width and arranges a list of widgets using a row-first strategy.
       properties:
         columns:
-          description: 'The number of columns into which the view''s width is divided. If omitted or set to zero, a system default will be used while rendering.'
+          description: The number of columns into which the view's width is divided. If omitted or set to zero, a system default will be used while rendering.
           format: int64
           type: string
         widgets:
           description: The informational elements that are arranged into the columns row-first.
           items:
-            $ref: '#/components/schemas/Widget'
+            $ref: "#/components/schemas/Widget"
           type: array
       type: object
     ListDashboardsResponse:
@@ -597,26 +594,26 @@ components:
         dashboards:
           description: The list of requested dashboards.
           items:
-            $ref: '#/components/schemas/Dashboard'
+            $ref: "#/components/schemas/Dashboard"
           type: array
         nextPageToken:
-          description: 'If there are more results than have been returned, then this field is set to a non-empty value. To see the additional results, use that value as page_token in the next call to this method.'
+          description: If there are more results than have been returned, then this field is set to a non-empty value. To see the additional results, use that value as page_token in the next call to this method.
           type: string
       type: object
     Option:
-      description: 'A protocol buffer option, which can be attached to a message, field, enumeration, etc.'
+      description: A protocol buffer option, which can be attached to a message, field, enumeration, etc.
       properties:
         name:
-          description: 'The option''s name. For protobuf built-in options (options defined in descriptor.proto), this is the short name. For example, "map_entry". For custom options, it should be the fully-qualified name. For example, "google.api.http".'
+          description: The option's name. For protobuf built-in options (options defined in descriptor.proto), this is the short name. For example, "map_entry". For custom options, it should be the fully-qualified name. For example, "google.api.http".
           type: string
         value:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
-          description: 'The option''s value packed in an Any message. If the value is a primitive, the corresponding wrapper type defined in google/protobuf/wrappers.proto should be used. If the value is an enum, it should be stored as an int32 value using the google.protobuf.Int32Value type.'
+          description: The option's value packed in an Any message. If the value is a primitive, the corresponding wrapper type defined in google/protobuf/wrappers.proto should be used. If the value is an enum, it should be stored as an int32 value using the google.protobuf.Int32Value type.
           type: object
       type: object
     PickTimeSeriesFilter:
-      description: 'Describes a ranking-based time series filter. Each input time series is ranked with an aligner. The filter will allow up to num_time_series time series to pass through it, selecting them based on the relative ranking.For example, if ranking_method is METHOD_MEAN,direction is BOTTOM, and num_time_series is 3, then the 3 times series with the lowest mean values will pass through the filter.'
+      description: Describes a ranking-based time series filter. Each input time series is ranked with an aligner. The filter will allow up to num_time_series time series to pass through it, selecting them based on the relative ranking.For example, if ranking_method is METHOD_MEAN,direction is BOTTOM, and num_time_series is 3, then the 3 times series with the lowest mean values will pass through the filter.
       properties:
         direction:
           description: How to use the ranking to select time series that pass through the filter.
@@ -644,23 +641,23 @@ components:
       description: Describes a query to build the numerator or denominator of a TimeSeriesFilterRatio.
       properties:
         aggregation:
-          $ref: '#/components/schemas/Aggregation'
-          description: 'By default, the raw time series data is returned. Use this field to combine multiple time series for different views of the data.'
+          $ref: "#/components/schemas/Aggregation"
+          description: By default, the raw time series data is returned. Use this field to combine multiple time series for different views of the data.
         filter:
-          description: 'Required. The monitoring filter (https://cloud.google.com/monitoring/api/v3/filters) that identifies the metric types, resources, and projects to query.'
+          description: Required. The monitoring filter (https://cloud.google.com/monitoring/api/v3/filters) that identifies the metric types, resources, and projects to query.
           type: string
       type: object
     Row:
       description: Defines the layout properties and content for a row.
       properties:
         weight:
-          description: 'The relative weight of this row. The row weight is used to adjust the height of rows on the screen (relative to peers). Greater the weight, greater the height of the row on the screen. If omitted, a value of 1 is used while rendering.'
+          description: The relative weight of this row. The row weight is used to adjust the height of rows on the screen (relative to peers). Greater the weight, greater the height of the row on the screen. If omitted, a value of 1 is used while rendering.
           format: int64
           type: string
         widgets:
           description: The display widgets arranged horizontally in this row.
           items:
-            $ref: '#/components/schemas/Widget'
+            $ref: "#/components/schemas/Widget"
           type: array
       type: object
     RowLayout:
@@ -669,51 +666,54 @@ components:
         rows:
           description: The rows of content to display.
           items:
-            $ref: '#/components/schemas/Row'
+            $ref: "#/components/schemas/Row"
           type: array
       type: object
     Scorecard:
-      description: 'A widget showing the latest value of a metric, and how this value relates to one or more thresholds.'
+      description: A widget showing the latest value of a metric, and how this value relates to one or more thresholds.
       properties:
         gaugeView:
-          $ref: '#/components/schemas/GaugeView'
+          $ref: "#/components/schemas/GaugeView"
           description: Will cause the scorecard to show a gauge chart.
         sparkChartView:
-          $ref: '#/components/schemas/SparkChartView'
+          $ref: "#/components/schemas/SparkChartView"
           description: Will cause the scorecard to show a spark chart.
         thresholds:
-          description: 'The thresholds used to determine the state of the scorecard given the time series'' current value. For an actual value x, the scorecard is in a danger state if x is less than or equal to a danger threshold that triggers below, or greater than or equal to a danger threshold that triggers above. Similarly, if x is above/below a warning threshold that triggers above/below, then the scorecard is in a warning state - unless x also puts it in a danger state. (Danger trumps warning.)As an example, consider a scorecard with the following four thresholds: {  value: 90,  category: ''DANGER'',  trigger: ''ABOVE'', }, {  value: 70,  category: ''WARNING'',  trigger: ''ABOVE'', }, {  value: 10,  category: ''DANGER'',  trigger: ''BELOW'', }, {  value: 20,  category: ''WARNING'',  trigger: ''BELOW'', }Then: values less than or equal to 10 would put the scorecard in a DANGER state, values greater than 10 but less than or equal to 20 a WARNING state, values strictly between 20 and 70 an OK state, values greater than or equal to 70 but less than 90 a WARNING state, and values greater than or equal to 90 a DANGER state.'
+          description: "The thresholds used to determine the state of the scorecard given the time series' current value. For an actual value x, the scorecard is in a danger state if x is less than or equal to a danger threshold that triggers below, or greater than or equal to a danger threshold that triggers above. Similarly, if x is above/below a warning threshold that triggers above/below, then the scorecard is in a warning state - unless x also puts it in a danger state. (Danger trumps warning.)As an example, consider a scorecard with the following four thresholds: {  value: 90,  category: 'DANGER',  trigger: 'ABOVE', }, {  value: 70,  category: 'WARNING',  trigger: 'ABOVE', }, {  value: 10,  category: 'DANGER',  trigger: 'BELOW', }, {  value: 20,  category: 'WARNING',  trigger: 'BELOW', }Then: values less than or equal to 10 would put the scorecard in a DANGER state, values greater than 10 but less than or equal to 20 a WARNING state, values strictly between 20 and 70 an OK state, values greater than or equal to 70 but less than 90 a WARNING state, and values greater than or equal to 90 a DANGER state."
           items:
-            $ref: '#/components/schemas/Threshold'
+            $ref: "#/components/schemas/Threshold"
           type: array
         timeSeriesQuery:
-          $ref: '#/components/schemas/TimeSeriesQuery'
+          $ref: "#/components/schemas/TimeSeriesQuery"
           description: Required. Fields for querying time series data from the Stackdriver metrics API.
       type: object
     SourceContext:
-      description: 'SourceContext represents information about the source of a protobuf element, like the file in which it is defined.'
+      description: SourceContext represents information about the source of a protobuf element, like the file in which it is defined.
       properties:
         fileName:
           description: 'The path-qualified name of the .proto file that contained the associated protobuf element. For example: "google/protobuf/source_context.proto".'
           type: string
       type: object
     SpanContext:
-      description: |
+      description: >
         The context of a span, attached to Exemplars in Distribution values during aggregation.It contains the name of a span with format:
+
         projects/[PROJECT_ID_OR_NUMBER]/traces/[TRACE_ID]/spans/[SPAN_ID]
       properties:
         spanName:
-          description: |-
+          description: >-
             The resource name of the span. The format is:
+
             projects/[PROJECT_ID_OR_NUMBER]/traces/[TRACE_ID]/spans/[SPAN_ID]
+
             [TRACE_ID] is a unique identifier for a trace within a project; it is a 32-character hexadecimal encoding of a 16-byte array.[SPAN_ID] is a unique identifier for a span within a trace; it is a 16-character hexadecimal encoding of an 8-byte array.
           type: string
       type: object
     SparkChartView:
-      description: 'A sparkChart is a small chart suitable for inclusion in a table-cell or inline in text. This message contains the configuration for a sparkChart to show up on a Scorecard, showing recent trends of the scorecard''s timeseries.'
+      description: A sparkChart is a small chart suitable for inclusion in a table-cell or inline in text. This message contains the configuration for a sparkChart to show up on a Scorecard, showing recent trends of the scorecard's timeseries.
       properties:
         minAlignmentPeriod:
-          description: 'The lower bound on data point frequency in the chart implemented by specifying the minimum alignment period to use in a time series query. For example, if the data is published once every 10 minutes it would not make sense to fetch and align data at one minute intervals. This field is optional and exists only as a hint.'
+          description: The lower bound on data point frequency in the chart implemented by specifying the minimum alignment period to use in a time series query. For example, if the data is published once every 10 minutes it would not make sense to fetch and align data at one minute intervals. This field is optional and exists only as a hint.
           format: google-duration
           type: string
         sparkChartType:
@@ -722,6 +722,20 @@ components:
             - SPARK_CHART_TYPE_UNSPECIFIED
             - SPARK_LINE
             - SPARK_BAR
+          type: string
+      type: object
+    StatisticalTimeSeriesFilter:
+      description: "A filter that ranks streams based on their statistical relation to other streams in a request. Note: This field is deprecated and completely ignored by the API."
+      properties:
+        numTimeSeries:
+          description: How many time series to output.
+          format: int32
+          type: integer
+        rankingMethod:
+          description: rankingMethod is applied to a set of time series, and then the produced value for each individual time series is used to compare a given time series to others. These are methods that cannot be applied stream-by-stream, but rather require the full context of a request to evaluate time series.
+          enum:
+            - METHOD_UNSPECIFIED
+            - METHOD_CLUSTER_OUTLIER
           type: string
       type: object
     Text:
@@ -764,51 +778,57 @@ components:
           type: number
       type: object
     TimeSeriesFilter:
-      description: 'A filter that defines a subset of time series data that is displayed in a widget. Time series data is fetched using the ListTimeSeries (https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list) method.'
+      description: A filter that defines a subset of time series data that is displayed in a widget. Time series data is fetched using the ListTimeSeries (https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list) method.
       properties:
         aggregation:
-          $ref: '#/components/schemas/Aggregation'
-          description: 'By default, the raw time series data is returned. Use this field to combine multiple time series for different views of the data.'
+          $ref: "#/components/schemas/Aggregation"
+          description: By default, the raw time series data is returned. Use this field to combine multiple time series for different views of the data.
         filter:
-          description: 'Required. The monitoring filter (https://cloud.google.com/monitoring/api/v3/filters) that identifies the metric types, resources, and projects to query.'
+          description: Required. The monitoring filter (https://cloud.google.com/monitoring/api/v3/filters) that identifies the metric types, resources, and projects to query.
           type: string
         pickTimeSeriesFilter:
-          $ref: '#/components/schemas/PickTimeSeriesFilter'
+          $ref: "#/components/schemas/PickTimeSeriesFilter"
           description: Ranking based time series filter.
         secondaryAggregation:
-          $ref: '#/components/schemas/Aggregation'
+          $ref: "#/components/schemas/Aggregation"
           description: Apply a second aggregation after aggregation is applied.
+        statisticalTimeSeriesFilter:
+          $ref: "#/components/schemas/StatisticalTimeSeriesFilter"
+          description: "Statistics based time series filter. Note: This field is deprecated and completely ignored by the API."
       type: object
     TimeSeriesFilterRatio:
       description: A pair of time series filters that define a ratio computation. The output time series is the pair-wise division of each aligned element from the numerator and denominator time series.
       properties:
         denominator:
-          $ref: '#/components/schemas/RatioPart'
+          $ref: "#/components/schemas/RatioPart"
           description: The denominator of the ratio.
         numerator:
-          $ref: '#/components/schemas/RatioPart'
+          $ref: "#/components/schemas/RatioPart"
           description: The numerator of the ratio.
         pickTimeSeriesFilter:
-          $ref: '#/components/schemas/PickTimeSeriesFilter'
+          $ref: "#/components/schemas/PickTimeSeriesFilter"
           description: Ranking based time series filter.
         secondaryAggregation:
-          $ref: '#/components/schemas/Aggregation'
+          $ref: "#/components/schemas/Aggregation"
           description: Apply a second aggregation after the ratio is computed.
+        statisticalTimeSeriesFilter:
+          $ref: "#/components/schemas/StatisticalTimeSeriesFilter"
+          description: "Statistics based time series filter. Note: This field is deprecated and completely ignored by the API."
       type: object
     TimeSeriesQuery:
       description: TimeSeriesQuery collects the set of supported methods for querying time series data from the Stackdriver metrics API.
       properties:
         timeSeriesFilter:
-          $ref: '#/components/schemas/TimeSeriesFilter'
+          $ref: "#/components/schemas/TimeSeriesFilter"
           description: Filter parameters to fetch time series.
         timeSeriesFilterRatio:
-          $ref: '#/components/schemas/TimeSeriesFilterRatio'
+          $ref: "#/components/schemas/TimeSeriesFilterRatio"
           description: Parameters to fetch a ratio between two time series filters.
         timeSeriesQueryLanguage:
           description: A query used to fetch time series.
           type: string
         unitOverride:
-          description: 'The unit of data contained in fetched time series. If non-empty, this unit will override any unit that accompanies fetched data. The format is the same as the unit (https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.metricDescriptors) field in MetricDescriptor.'
+          description: The unit of data contained in fetched time series. If non-empty, this unit will override any unit that accompanies fetched data. The format is the same as the unit (https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.metricDescriptors) field in MetricDescriptor.
           type: string
       type: object
     Type:
@@ -817,7 +837,7 @@ components:
         fields:
           description: The list of fields.
           items:
-            $ref: '#/components/schemas/Field'
+            $ref: "#/components/schemas/Field"
           type: array
         name:
           description: The fully qualified message name.
@@ -830,10 +850,10 @@ components:
         options:
           description: The protocol buffer options.
           items:
-            $ref: '#/components/schemas/Option'
+            $ref: "#/components/schemas/Option"
           type: array
         sourceContext:
-          $ref: '#/components/schemas/SourceContext'
+          $ref: "#/components/schemas/SourceContext"
           description: The source context.
         syntax:
           description: The source syntax.
@@ -846,46 +866,46 @@ components:
       description: Widget contains a single dashboard component and configuration of how to present the component in the dashboard.
       properties:
         blank:
-          $ref: '#/components/schemas/Empty'
+          $ref: "#/components/schemas/Empty"
           description: A blank space.
         scorecard:
-          $ref: '#/components/schemas/Scorecard'
+          $ref: "#/components/schemas/Scorecard"
           description: A scorecard summarizing time series data.
         text:
-          $ref: '#/components/schemas/Text'
+          $ref: "#/components/schemas/Text"
           description: A raw string or markdown displaying textual content.
         title:
           description: Optional. The title of the widget.
           type: string
         xyChart:
-          $ref: '#/components/schemas/XyChart'
+          $ref: "#/components/schemas/XyChart"
           description: A chart of time series data.
       type: object
     XyChart:
       description: A chart that displays data on a 2D (X and Y axes) plane.
       properties:
         chartOptions:
-          $ref: '#/components/schemas/ChartOptions'
+          $ref: "#/components/schemas/ChartOptions"
           description: Display options for the chart.
         dataSets:
           description: Required. The data displayed in this chart.
           items:
-            $ref: '#/components/schemas/DataSet'
+            $ref: "#/components/schemas/DataSet"
           type: array
         thresholds:
           description: Threshold lines drawn horizontally across the chart.
           items:
-            $ref: '#/components/schemas/Threshold'
+            $ref: "#/components/schemas/Threshold"
           type: array
         timeshiftDuration:
-          description: 'The duration used to display a comparison chart. A comparison chart simultaneously shows values from two similar-length time periods (e.g., week-over-week metrics). The duration must be positive, and it can only be applied to charts with data sets of LINE plot type.'
+          description: The duration used to display a comparison chart. A comparison chart simultaneously shows values from two similar-length time periods (e.g., week-over-week metrics). The duration must be positive, and it can only be applied to charts with data sets of LINE plot type.
           format: google-duration
           type: string
         xAxis:
-          $ref: '#/components/schemas/Axis'
+          $ref: "#/components/schemas/Axis"
           description: The properties applied to the X axis.
         yAxis:
-          $ref: '#/components/schemas/Axis'
+          $ref: "#/components/schemas/Axis"
           description: The properties applied to the Y axis.
       type: object
   securitySchemes:
@@ -893,22 +913,22 @@ components:
       description: Oauth 2.0 implicit authentication
       flows:
         implicit:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-            'https://www.googleapis.com/auth/monitoring': View and write monitoring data for all of your Google and third-party Cloud and API projects
-            'https://www.googleapis.com/auth/monitoring.read': View monitoring data for all of your Google Cloud and third-party projects
-            'https://www.googleapis.com/auth/monitoring.write': Publish metric data to your Google Cloud projects
+            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/monitoring: View and write monitoring data for all of your Google and third-party Cloud and API projects
+            https://www.googleapis.com/auth/monitoring.read: View monitoring data for all of your Google Cloud and third-party projects
+            https://www.googleapis.com/auth/monitoring.write: Publish metric data to your Google Cloud projects
       type: oauth2
     Oauth2c:
-      description: Oauth 2.0 accessCode authentication
+      description: Oauth 2.0 authorizationCode authentication
       flows:
         authorizationCode:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-            'https://www.googleapis.com/auth/monitoring': View and write monitoring data for all of your Google and third-party Cloud and API projects
-            'https://www.googleapis.com/auth/monitoring.read': View monitoring data for all of your Google Cloud and third-party projects
-            'https://www.googleapis.com/auth/monitoring.write': Publish metric data to your Google Cloud projects
-          tokenUrl: 'https://accounts.google.com/o/oauth2/token'
+            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/monitoring: View and write monitoring data for all of your Google and third-party Cloud and API projects
+            https://www.googleapis.com/auth/monitoring.read: View monitoring data for all of your Google Cloud and third-party projects
+            https://www.googleapis.com/auth/monitoring.write: Publish metric data to your Google Cloud projects
+          tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

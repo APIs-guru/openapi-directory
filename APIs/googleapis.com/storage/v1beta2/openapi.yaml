@@ -1,35 +1,37 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://storage.googleapis.com/storage/v1beta2'
+  - url: https://storage.googleapis.com/storage/v1beta2
 info:
   contact:
     name: Google
-    url: 'https://google.com'
-  description: 'Lets you store and retrieve potentially-large, immutable data objects.'
+    url: https://google.com
+    x-twitter: youtube
+  description: Lets you store and retrieve potentially-large, immutable data objects.
   license:
     name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
-  title: Cloud Storage
+    url: http://creativecommons.org/licenses/by/3.0/
+  termsOfService: https://developers.google.com/terms/
+  title: Cloud Storage JSON API
   version: v1beta2
   x-apiClientRegistration:
-    url: 'https://console.developers.google.com'
+    url: https://console.developers.google.com
   x-apisguru-categories:
-    - storage
+    - analytics
+    - media
   x-logo:
-    url: 'https://cloud.google.com/storage/images/cloud-storage-logo.png'
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.31
       format: google
-      url: 'https://www.googleapis.com/discovery/v1/apis/storage/v1beta2/rest'
+      url: https://www.googleapis.com/discovery/v1/apis/storage/v1beta2/rest
       version: v1
   x-preferred: false
   x-providerName: googleapis.com
   x-serviceName: storage
 externalDocs:
-  url: 'https://developers.google.com/storage/docs/json_api/'
+  url: https://developers.google.com/storage/docs/json_api/
 tags:
   - name: bucketAccessControls
   - name: buckets
@@ -69,35 +71,35 @@ paths:
               - noAcl
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Buckets'
+                $ref: "#/components/schemas/Buckets"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
+            - https://www.googleapis.com/auth/devstorage.full_control
           Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
+            - https://www.googleapis.com/auth/devstorage.full_control
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.read_only'
+            - https://www.googleapis.com/auth/devstorage.read_only
           Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.read_only'
+            - https://www.googleapis.com/auth/devstorage.read_only
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.read_write'
+            - https://www.googleapis.com/auth/devstorage.read_write
           Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.read_write'
+            - https://www.googleapis.com/auth/devstorage.read_write
       tags:
         - buckets
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
     post:
       description: Creates a new bucket.
       operationId: storage.buckets.insert
@@ -108,7 +110,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: 'Set of properties to return. Defaults to noAcl, unless the bucket resource specifies acl or defaultObjectAcl properties, when it defaults to full.'
+        - description: Set of properties to return. Defaults to noAcl, unless the bucket resource specifies acl or defaultObjectAcl properties, when it defaults to full.
           in: query
           name: projection
           schema:
@@ -117,26 +119,29 @@ paths:
               - noAcl
             type: string
       requestBody:
-        $ref: '#/components/requestBodies/Bucket'
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Bucket"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Bucket'
+                $ref: "#/components/schemas/Bucket"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
+            - https://www.googleapis.com/auth/devstorage.full_control
           Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
+            - https://www.googleapis.com/auth/devstorage.full_control
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.read_write'
+            - https://www.googleapis.com/auth/devstorage.read_write
           Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.read_write'
+            - https://www.googleapis.com/auth/devstorage.read_write
       tags:
         - buckets
-  '/b/{bucket}':
+  "/b/{bucket}":
     delete:
       description: Permanently deletes an empty bucket.
       operationId: storage.buckets.delete
@@ -158,17 +163,17 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
+            - https://www.googleapis.com/auth/devstorage.full_control
           Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
+            - https://www.googleapis.com/auth/devstorage.full_control
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.read_write'
+            - https://www.googleapis.com/auth/devstorage.read_write
           Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.read_write'
+            - https://www.googleapis.com/auth/devstorage.read_write
       tags:
         - buckets
     get:
@@ -200,35 +205,35 @@ paths:
               - noAcl
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Bucket'
+                $ref: "#/components/schemas/Bucket"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
+            - https://www.googleapis.com/auth/devstorage.full_control
           Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
+            - https://www.googleapis.com/auth/devstorage.full_control
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.read_only'
+            - https://www.googleapis.com/auth/devstorage.read_only
           Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.read_only'
+            - https://www.googleapis.com/auth/devstorage.read_only
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.read_write'
+            - https://www.googleapis.com/auth/devstorage.read_write
           Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.read_write'
+            - https://www.googleapis.com/auth/devstorage.read_write
       tags:
         - buckets
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
     patch:
       description: Updates a bucket. This method supports patch semantics.
       operationId: storage.buckets.patch
@@ -261,23 +266,23 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Bucket'
+              $ref: "#/components/schemas/Bucket"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Bucket'
+                $ref: "#/components/schemas/Bucket"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
+            - https://www.googleapis.com/auth/devstorage.full_control
           Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
+            - https://www.googleapis.com/auth/devstorage.full_control
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.read_write'
+            - https://www.googleapis.com/auth/devstorage.read_write
           Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.read_write'
+            - https://www.googleapis.com/auth/devstorage.read_write
       tags:
         - buckets
     put:
@@ -312,26 +317,26 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Bucket'
+              $ref: "#/components/schemas/Bucket"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Bucket'
+                $ref: "#/components/schemas/Bucket"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
+            - https://www.googleapis.com/auth/devstorage.full_control
           Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
+            - https://www.googleapis.com/auth/devstorage.full_control
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.read_write'
+            - https://www.googleapis.com/auth/devstorage.read_write
           Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.read_write'
+            - https://www.googleapis.com/auth/devstorage.read_write
       tags:
         - buckets
-  '/b/{bucket}/acl':
+  "/b/{bucket}/acl":
     get:
       description: Retrieves ACL entries on the specified bucket.
       operationId: storage.bucketAccessControls.list
@@ -343,27 +348,27 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/BucketAccessControls'
+                $ref: "#/components/schemas/BucketAccessControls"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
+            - https://www.googleapis.com/auth/devstorage.full_control
           Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
+            - https://www.googleapis.com/auth/devstorage.full_control
       tags:
         - bucketAccessControls
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
     post:
       description: Creates a new ACL entry on the specified bucket.
       operationId: storage.bucketAccessControls.insert
@@ -378,22 +383,22 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/BucketAccessControl'
+              $ref: "#/components/schemas/BucketAccessControl"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/BucketAccessControl'
+                $ref: "#/components/schemas/BucketAccessControl"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
+            - https://www.googleapis.com/auth/devstorage.full_control
           Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
+            - https://www.googleapis.com/auth/devstorage.full_control
       tags:
         - bucketAccessControls
-  '/b/{bucket}/acl/{entity}':
+  "/b/{bucket}/acl/{entity}":
     delete:
       description: Permanently deletes the ACL entry for the specified entity on the specified bucket.
       operationId: storage.bucketAccessControls.delete
@@ -404,20 +409,20 @@ paths:
           required: true
           schema:
             type: string
-        - description: 'The entity holding the permission. Can be user-userId, user-emailAddress, group-groupId, group-emailAddress, allUsers, or allAuthenticatedUsers.'
+        - description: The entity holding the permission. Can be user-userId, user-emailAddress, group-groupId, group-emailAddress, allUsers, or allAuthenticatedUsers.
           in: path
           name: entity
           required: true
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
+            - https://www.googleapis.com/auth/devstorage.full_control
           Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
+            - https://www.googleapis.com/auth/devstorage.full_control
       tags:
         - bucketAccessControls
     get:
@@ -430,34 +435,34 @@ paths:
           required: true
           schema:
             type: string
-        - description: 'The entity holding the permission. Can be user-userId, user-emailAddress, group-groupId, group-emailAddress, allUsers, or allAuthenticatedUsers.'
+        - description: The entity holding the permission. Can be user-userId, user-emailAddress, group-groupId, group-emailAddress, allUsers, or allAuthenticatedUsers.
           in: path
           name: entity
           required: true
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/BucketAccessControl'
+                $ref: "#/components/schemas/BucketAccessControl"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
+            - https://www.googleapis.com/auth/devstorage.full_control
           Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
+            - https://www.googleapis.com/auth/devstorage.full_control
       tags:
         - bucketAccessControls
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
     patch:
       description: Updates an ACL entry on the specified bucket. This method supports patch semantics.
       operationId: storage.bucketAccessControls.patch
@@ -468,7 +473,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: 'The entity holding the permission. Can be user-userId, user-emailAddress, group-groupId, group-emailAddress, allUsers, or allAuthenticatedUsers.'
+        - description: The entity holding the permission. Can be user-userId, user-emailAddress, group-groupId, group-emailAddress, allUsers, or allAuthenticatedUsers.
           in: path
           name: entity
           required: true
@@ -478,19 +483,19 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/BucketAccessControl'
+              $ref: "#/components/schemas/BucketAccessControl"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/BucketAccessControl'
+                $ref: "#/components/schemas/BucketAccessControl"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
+            - https://www.googleapis.com/auth/devstorage.full_control
           Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
+            - https://www.googleapis.com/auth/devstorage.full_control
       tags:
         - bucketAccessControls
     put:
@@ -503,7 +508,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: 'The entity holding the permission. Can be user-userId, user-emailAddress, group-groupId, group-emailAddress, allUsers, or allAuthenticatedUsers.'
+        - description: The entity holding the permission. Can be user-userId, user-emailAddress, group-groupId, group-emailAddress, allUsers, or allAuthenticatedUsers.
           in: path
           name: entity
           required: true
@@ -513,22 +518,22 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/BucketAccessControl'
+              $ref: "#/components/schemas/BucketAccessControl"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/BucketAccessControl'
+                $ref: "#/components/schemas/BucketAccessControl"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
+            - https://www.googleapis.com/auth/devstorage.full_control
           Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
+            - https://www.googleapis.com/auth/devstorage.full_control
       tags:
         - bucketAccessControls
-  '/b/{bucket}/defaultObjectAcl':
+  "/b/{bucket}/defaultObjectAcl":
     get:
       description: Retrieves default object ACL entries on the specified bucket.
       operationId: storage.defaultObjectAccessControls.list
@@ -539,38 +544,38 @@ paths:
           required: true
           schema:
             type: string
-        - description: 'If present, only return default ACL listing if the bucket''s current metageneration matches this value.'
+        - description: If present, only return default ACL listing if the bucket's current metageneration matches this value.
           in: query
           name: ifMetagenerationMatch
           schema:
             type: string
-        - description: 'If present, only return default ACL listing if the bucket''s current metageneration does not match the given value.'
+        - description: If present, only return default ACL listing if the bucket's current metageneration does not match the given value.
           in: query
           name: ifMetagenerationNotMatch
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ObjectAccessControls'
+                $ref: "#/components/schemas/ObjectAccessControls"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
+            - https://www.googleapis.com/auth/devstorage.full_control
           Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
+            - https://www.googleapis.com/auth/devstorage.full_control
       tags:
         - defaultObjectAccessControls
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
     post:
       description: Creates a new default object ACL entry on the specified bucket.
       operationId: storage.defaultObjectAccessControls.insert
@@ -585,22 +590,22 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ObjectAccessControl'
+              $ref: "#/components/schemas/ObjectAccessControl"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ObjectAccessControl'
+                $ref: "#/components/schemas/ObjectAccessControl"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
+            - https://www.googleapis.com/auth/devstorage.full_control
           Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
+            - https://www.googleapis.com/auth/devstorage.full_control
       tags:
         - defaultObjectAccessControls
-  '/b/{bucket}/defaultObjectAcl/{entity}':
+  "/b/{bucket}/defaultObjectAcl/{entity}":
     delete:
       description: Permanently deletes the default object ACL entry for the specified entity on the specified bucket.
       operationId: storage.defaultObjectAccessControls.delete
@@ -611,20 +616,20 @@ paths:
           required: true
           schema:
             type: string
-        - description: 'The entity holding the permission. Can be user-userId, user-emailAddress, group-groupId, group-emailAddress, allUsers, or allAuthenticatedUsers.'
+        - description: The entity holding the permission. Can be user-userId, user-emailAddress, group-groupId, group-emailAddress, allUsers, or allAuthenticatedUsers.
           in: path
           name: entity
           required: true
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
+            - https://www.googleapis.com/auth/devstorage.full_control
           Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
+            - https://www.googleapis.com/auth/devstorage.full_control
       tags:
         - defaultObjectAccessControls
     get:
@@ -637,34 +642,34 @@ paths:
           required: true
           schema:
             type: string
-        - description: 'The entity holding the permission. Can be user-userId, user-emailAddress, group-groupId, group-emailAddress, allUsers, or allAuthenticatedUsers.'
+        - description: The entity holding the permission. Can be user-userId, user-emailAddress, group-groupId, group-emailAddress, allUsers, or allAuthenticatedUsers.
           in: path
           name: entity
           required: true
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ObjectAccessControl'
+                $ref: "#/components/schemas/ObjectAccessControl"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
+            - https://www.googleapis.com/auth/devstorage.full_control
           Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
+            - https://www.googleapis.com/auth/devstorage.full_control
       tags:
         - defaultObjectAccessControls
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
     patch:
       description: Updates a default object ACL entry on the specified bucket. This method supports patch semantics.
       operationId: storage.defaultObjectAccessControls.patch
@@ -675,7 +680,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: 'The entity holding the permission. Can be user-userId, user-emailAddress, group-groupId, group-emailAddress, allUsers, or allAuthenticatedUsers.'
+        - description: The entity holding the permission. Can be user-userId, user-emailAddress, group-groupId, group-emailAddress, allUsers, or allAuthenticatedUsers.
           in: path
           name: entity
           required: true
@@ -685,19 +690,19 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ObjectAccessControl'
+              $ref: "#/components/schemas/ObjectAccessControl"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ObjectAccessControl'
+                $ref: "#/components/schemas/ObjectAccessControl"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
+            - https://www.googleapis.com/auth/devstorage.full_control
           Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
+            - https://www.googleapis.com/auth/devstorage.full_control
       tags:
         - defaultObjectAccessControls
     put:
@@ -710,7 +715,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: 'The entity holding the permission. Can be user-userId, user-emailAddress, group-groupId, group-emailAddress, allUsers, or allAuthenticatedUsers.'
+        - description: The entity holding the permission. Can be user-userId, user-emailAddress, group-groupId, group-emailAddress, allUsers, or allAuthenticatedUsers.
           in: path
           name: entity
           required: true
@@ -720,22 +725,22 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ObjectAccessControl'
+              $ref: "#/components/schemas/ObjectAccessControl"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ObjectAccessControl'
+                $ref: "#/components/schemas/ObjectAccessControl"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
+            - https://www.googleapis.com/auth/devstorage.full_control
           Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
+            - https://www.googleapis.com/auth/devstorage.full_control
       tags:
         - defaultObjectAccessControls
-  '/b/{bucket}/o':
+  "/b/{bucket}/o":
     get:
       description: Retrieves a list of objects matching the criteria.
       operationId: storage.objects.list
@@ -746,12 +751,12 @@ paths:
           required: true
           schema:
             type: string
-        - description: 'Returns results in a directory-like mode. items will contain only objects whose names, aside from the prefix, do not contain delimiter. Objects whose names, aside from the prefix, contain delimiter will have their name, truncated after the delimiter, returned in prefixes. Duplicate prefixes are omitted.'
+        - description: Returns results in a directory-like mode. items will contain only objects whose names, aside from the prefix, do not contain delimiter. Objects whose names, aside from the prefix, contain delimiter will have their name, truncated after the delimiter, returned in prefixes. Duplicate prefixes are omitted.
           in: query
           name: delimiter
           schema:
             type: string
-        - description: 'Maximum number of items plus prefixes to return. As duplicate prefixes are omitted, fewer total results may be returned than requested.'
+        - description: Maximum number of items plus prefixes to return. As duplicate prefixes are omitted, fewer total results may be returned than requested.
           in: query
           name: maxResults
           schema:
@@ -775,46 +780,46 @@ paths:
               - full
               - noAcl
             type: string
-        - description: 'If true, lists all versions of a file as distinct results.'
+        - description: If true, lists all versions of a file as distinct results.
           in: query
           name: versions
           schema:
             type: boolean
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Objects'
+                $ref: "#/components/schemas/Objects"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
+            - https://www.googleapis.com/auth/devstorage.full_control
           Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
+            - https://www.googleapis.com/auth/devstorage.full_control
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.read_only'
+            - https://www.googleapis.com/auth/devstorage.read_only
           Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.read_only'
+            - https://www.googleapis.com/auth/devstorage.read_only
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.read_write'
+            - https://www.googleapis.com/auth/devstorage.read_write
           Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.read_write'
+            - https://www.googleapis.com/auth/devstorage.read_write
       tags:
         - objects
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
     post:
       description: Stores new data blobs and associated metadata.
       operationId: storage.objects.insert
       parameters:
-        - description: 'Name of the bucket in which to store the new object. Overrides the provided object metadata''s bucket value, if any.'
+        - description: Name of the bucket in which to store the new object. Overrides the provided object metadata's bucket value, if any.
           in: path
           name: bucket
           required: true
@@ -840,12 +845,12 @@ paths:
           name: ifMetagenerationNotMatch
           schema:
             type: string
-        - description: 'Name of the object. Required when the object metadata is not otherwise provided. Overrides the object metadata''s name value, if any.'
+        - description: Name of the object. Required when the object metadata is not otherwise provided. Overrides the object metadata's name value, if any.
           in: query
           name: name
           schema:
             type: string
-        - description: 'Set of properties to return. Defaults to noAcl, unless the object resource specifies the acl property, when it defaults to full.'
+        - description: Set of properties to return. Defaults to noAcl, unless the object resource specifies the acl property, when it defaults to full.
           in: query
           name: projection
           schema:
@@ -857,34 +862,34 @@ paths:
         content:
           application/octet-stream:
             schema:
-              $ref: '#/components/schemas/Object'
+              $ref: "#/components/schemas/Object"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Object'
+                $ref: "#/components/schemas/Object"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
+            - https://www.googleapis.com/auth/devstorage.full_control
           Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
+            - https://www.googleapis.com/auth/devstorage.full_control
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.read_write'
+            - https://www.googleapis.com/auth/devstorage.read_write
           Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.read_write'
+            - https://www.googleapis.com/auth/devstorage.read_write
       tags:
         - objects
-  '/b/{bucket}/o/watch':
+  "/b/{bucket}/o/watch":
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
     post:
       description: Watch for changes on all objects in a bucket.
       operationId: storage.objects.watchAll
@@ -895,12 +900,12 @@ paths:
           required: true
           schema:
             type: string
-        - description: 'Returns results in a directory-like mode. items will contain only objects whose names, aside from the prefix, do not contain delimiter. Objects whose names, aside from the prefix, contain delimiter will have their name, truncated after the delimiter, returned in prefixes. Duplicate prefixes are omitted.'
+        - description: Returns results in a directory-like mode. items will contain only objects whose names, aside from the prefix, do not contain delimiter. Objects whose names, aside from the prefix, contain delimiter will have their name, truncated after the delimiter, returned in prefixes. Duplicate prefixes are omitted.
           in: query
           name: delimiter
           schema:
             type: string
-        - description: 'Maximum number of items plus prefixes to return. As duplicate prefixes are omitted, fewer total results may be returned than requested.'
+        - description: Maximum number of items plus prefixes to return. As duplicate prefixes are omitted, fewer total results may be returned than requested.
           in: query
           name: maxResults
           schema:
@@ -924,7 +929,7 @@ paths:
               - full
               - noAcl
             type: string
-        - description: 'If true, lists all versions of a file as distinct results.'
+        - description: If true, lists all versions of a file as distinct results.
           in: query
           name: versions
           schema:
@@ -933,32 +938,32 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Channel'
+              $ref: "#/components/schemas/Channel"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Channel'
+                $ref: "#/components/schemas/Channel"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
+            - https://www.googleapis.com/auth/devstorage.full_control
           Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
+            - https://www.googleapis.com/auth/devstorage.full_control
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.read_only'
+            - https://www.googleapis.com/auth/devstorage.read_only
           Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.read_only'
+            - https://www.googleapis.com/auth/devstorage.read_only
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.read_write'
+            - https://www.googleapis.com/auth/devstorage.read_write
           Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.read_write'
+            - https://www.googleapis.com/auth/devstorage.read_write
       tags:
         - objects
-  '/b/{bucket}/o/{object}':
+  "/b/{bucket}/o/{object}":
     delete:
-      description: 'Deletes data blobs and associated metadata. Deletions are permanent if versioning is not enabled for the bucket, or if the generation parameter is used.'
+      description: Deletes data blobs and associated metadata. Deletions are permanent if versioning is not enabled for the bucket, or if the generation parameter is used.
       operationId: storage.objects.delete
       parameters:
         - description: Name of the bucket in which the object resides.
@@ -973,7 +978,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: 'If present, permanently deletes a specific revision of this object (as opposed to the latest version, the default).'
+        - description: If present, permanently deletes a specific revision of this object (as opposed to the latest version, the default).
           in: query
           name: generation
           schema:
@@ -999,17 +1004,17 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
+            - https://www.googleapis.com/auth/devstorage.full_control
           Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
+            - https://www.googleapis.com/auth/devstorage.full_control
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.read_write'
+            - https://www.googleapis.com/auth/devstorage.read_write
           Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.read_write'
+            - https://www.googleapis.com/auth/devstorage.read_write
       tags:
         - objects
     get:
@@ -1028,7 +1033,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: 'If present, selects a specific revision of this object (as opposed to the latest version, the default).'
+        - description: If present, selects a specific revision of this object (as opposed to the latest version, the default).
           in: query
           name: generation
           schema:
@@ -1062,35 +1067,35 @@ paths:
               - noAcl
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Object'
+                $ref: "#/components/schemas/Object"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
+            - https://www.googleapis.com/auth/devstorage.full_control
           Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
+            - https://www.googleapis.com/auth/devstorage.full_control
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.read_only'
+            - https://www.googleapis.com/auth/devstorage.read_only
           Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.read_only'
+            - https://www.googleapis.com/auth/devstorage.read_only
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.read_write'
+            - https://www.googleapis.com/auth/devstorage.read_write
           Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.read_write'
+            - https://www.googleapis.com/auth/devstorage.read_write
       tags:
         - objects
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
     patch:
       description: Updates a data blob's associated metadata. This method supports patch semantics.
       operationId: storage.objects.patch
@@ -1107,7 +1112,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: 'If present, selects a specific revision of this object (as opposed to the latest version, the default).'
+        - description: If present, selects a specific revision of this object (as opposed to the latest version, the default).
           in: query
           name: generation
           schema:
@@ -1144,23 +1149,23 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Object'
+              $ref: "#/components/schemas/Object"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Object'
+                $ref: "#/components/schemas/Object"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
+            - https://www.googleapis.com/auth/devstorage.full_control
           Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
+            - https://www.googleapis.com/auth/devstorage.full_control
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.read_write'
+            - https://www.googleapis.com/auth/devstorage.read_write
           Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.read_write'
+            - https://www.googleapis.com/auth/devstorage.read_write
       tags:
         - objects
     put:
@@ -1179,7 +1184,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: 'If present, selects a specific revision of this object (as opposed to the latest version, the default).'
+        - description: If present, selects a specific revision of this object (as opposed to the latest version, the default).
           in: query
           name: generation
           schema:
@@ -1216,26 +1221,26 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Object'
+              $ref: "#/components/schemas/Object"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Object'
+                $ref: "#/components/schemas/Object"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
+            - https://www.googleapis.com/auth/devstorage.full_control
           Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
+            - https://www.googleapis.com/auth/devstorage.full_control
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.read_write'
+            - https://www.googleapis.com/auth/devstorage.read_write
           Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.read_write'
+            - https://www.googleapis.com/auth/devstorage.read_write
       tags:
         - objects
-  '/b/{bucket}/o/{object}/acl':
+  "/b/{bucket}/o/{object}/acl":
     get:
       description: Retrieves ACL entries on the specified object.
       operationId: storage.objectAccessControls.list
@@ -1252,33 +1257,33 @@ paths:
           required: true
           schema:
             type: string
-        - description: 'If present, selects a specific revision of this object (as opposed to the latest version, the default).'
+        - description: If present, selects a specific revision of this object (as opposed to the latest version, the default).
           in: query
           name: generation
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ObjectAccessControls'
+                $ref: "#/components/schemas/ObjectAccessControls"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
+            - https://www.googleapis.com/auth/devstorage.full_control
           Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
+            - https://www.googleapis.com/auth/devstorage.full_control
       tags:
         - objectAccessControls
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
     post:
       description: Creates a new ACL entry on the specified object.
       operationId: storage.objectAccessControls.insert
@@ -1295,7 +1300,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: 'If present, selects a specific revision of this object (as opposed to the latest version, the default).'
+        - description: If present, selects a specific revision of this object (as opposed to the latest version, the default).
           in: query
           name: generation
           schema:
@@ -1304,22 +1309,22 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ObjectAccessControl'
+              $ref: "#/components/schemas/ObjectAccessControl"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ObjectAccessControl'
+                $ref: "#/components/schemas/ObjectAccessControl"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
+            - https://www.googleapis.com/auth/devstorage.full_control
           Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
+            - https://www.googleapis.com/auth/devstorage.full_control
       tags:
         - objectAccessControls
-  '/b/{bucket}/o/{object}/acl/{entity}':
+  "/b/{bucket}/o/{object}/acl/{entity}":
     delete:
       description: Permanently deletes the ACL entry for the specified entity on the specified object.
       operationId: storage.objectAccessControls.delete
@@ -1336,25 +1341,25 @@ paths:
           required: true
           schema:
             type: string
-        - description: 'The entity holding the permission. Can be user-userId, user-emailAddress, group-groupId, group-emailAddress, allUsers, or allAuthenticatedUsers.'
+        - description: The entity holding the permission. Can be user-userId, user-emailAddress, group-groupId, group-emailAddress, allUsers, or allAuthenticatedUsers.
           in: path
           name: entity
           required: true
           schema:
             type: string
-        - description: 'If present, selects a specific revision of this object (as opposed to the latest version, the default).'
+        - description: If present, selects a specific revision of this object (as opposed to the latest version, the default).
           in: query
           name: generation
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
+            - https://www.googleapis.com/auth/devstorage.full_control
           Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
+            - https://www.googleapis.com/auth/devstorage.full_control
       tags:
         - objectAccessControls
     get:
@@ -1373,39 +1378,39 @@ paths:
           required: true
           schema:
             type: string
-        - description: 'The entity holding the permission. Can be user-userId, user-emailAddress, group-groupId, group-emailAddress, allUsers, or allAuthenticatedUsers.'
+        - description: The entity holding the permission. Can be user-userId, user-emailAddress, group-groupId, group-emailAddress, allUsers, or allAuthenticatedUsers.
           in: path
           name: entity
           required: true
           schema:
             type: string
-        - description: 'If present, selects a specific revision of this object (as opposed to the latest version, the default).'
+        - description: If present, selects a specific revision of this object (as opposed to the latest version, the default).
           in: query
           name: generation
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ObjectAccessControl'
+                $ref: "#/components/schemas/ObjectAccessControl"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
+            - https://www.googleapis.com/auth/devstorage.full_control
           Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
+            - https://www.googleapis.com/auth/devstorage.full_control
       tags:
         - objectAccessControls
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
     patch:
       description: Updates an ACL entry on the specified object. This method supports patch semantics.
       operationId: storage.objectAccessControls.patch
@@ -1422,13 +1427,13 @@ paths:
           required: true
           schema:
             type: string
-        - description: 'The entity holding the permission. Can be user-userId, user-emailAddress, group-groupId, group-emailAddress, allUsers, or allAuthenticatedUsers.'
+        - description: The entity holding the permission. Can be user-userId, user-emailAddress, group-groupId, group-emailAddress, allUsers, or allAuthenticatedUsers.
           in: path
           name: entity
           required: true
           schema:
             type: string
-        - description: 'If present, selects a specific revision of this object (as opposed to the latest version, the default).'
+        - description: If present, selects a specific revision of this object (as opposed to the latest version, the default).
           in: query
           name: generation
           schema:
@@ -1437,19 +1442,19 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ObjectAccessControl'
+              $ref: "#/components/schemas/ObjectAccessControl"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ObjectAccessControl'
+                $ref: "#/components/schemas/ObjectAccessControl"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
+            - https://www.googleapis.com/auth/devstorage.full_control
           Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
+            - https://www.googleapis.com/auth/devstorage.full_control
       tags:
         - objectAccessControls
     put:
@@ -1468,13 +1473,13 @@ paths:
           required: true
           schema:
             type: string
-        - description: 'The entity holding the permission. Can be user-userId, user-emailAddress, group-groupId, group-emailAddress, allUsers, or allAuthenticatedUsers.'
+        - description: The entity holding the permission. Can be user-userId, user-emailAddress, group-groupId, group-emailAddress, allUsers, or allAuthenticatedUsers.
           in: path
           name: entity
           required: true
           schema:
             type: string
-        - description: 'If present, selects a specific revision of this object (as opposed to the latest version, the default).'
+        - description: If present, selects a specific revision of this object (as opposed to the latest version, the default).
           in: query
           name: generation
           schema:
@@ -1483,30 +1488,30 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ObjectAccessControl'
+              $ref: "#/components/schemas/ObjectAccessControl"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ObjectAccessControl'
+                $ref: "#/components/schemas/ObjectAccessControl"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
+            - https://www.googleapis.com/auth/devstorage.full_control
           Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
+            - https://www.googleapis.com/auth/devstorage.full_control
       tags:
         - objectAccessControls
-  '/b/{destinationBucket}/o/{destinationObject}/compose':
+  "/b/{destinationBucket}/o/{destinationObject}/compose":
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
     post:
       description: Concatenates a list of existing objects into a new object in the same bucket.
       operationId: storage.objects.compose
@@ -1537,34 +1542,34 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ComposeRequest'
+              $ref: "#/components/schemas/ComposeRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Object'
+                $ref: "#/components/schemas/Object"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
+            - https://www.googleapis.com/auth/devstorage.full_control
           Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
+            - https://www.googleapis.com/auth/devstorage.full_control
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.read_write'
+            - https://www.googleapis.com/auth/devstorage.read_write
           Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.read_write'
+            - https://www.googleapis.com/auth/devstorage.read_write
       tags:
         - objects
-  '/b/{sourceBucket}/o/{sourceObject}/copyTo/b/{destinationBucket}/o/{destinationObject}':
+  "/b/{sourceBucket}/o/{sourceObject}/copyTo/b/{destinationBucket}/o/{destinationObject}":
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
     post:
       description: Copies an object to a destination in the same location. Optionally overrides metadata.
       operationId: storage.objects.copy
@@ -1581,13 +1586,13 @@ paths:
           required: true
           schema:
             type: string
-        - description: 'Name of the bucket in which to store the new object. Overrides the provided object metadata''s bucket value, if any.'
+        - description: Name of the bucket in which to store the new object. Overrides the provided object metadata's bucket value, if any.
           in: path
           name: destinationBucket
           required: true
           schema:
             type: string
-        - description: 'Name of the new object. Required when the object metadata is not otherwise provided. Overrides the object metadata''s name value, if any.'
+        - description: Name of the new object. Required when the object metadata is not otherwise provided. Overrides the object metadata's name value, if any.
           in: path
           name: destinationObject
           required: true
@@ -1633,7 +1638,7 @@ paths:
           name: ifSourceMetagenerationNotMatch
           schema:
             type: string
-        - description: 'Set of properties to return. Defaults to noAcl, unless the object resource specifies the acl property, when it defaults to full.'
+        - description: Set of properties to return. Defaults to noAcl, unless the object resource specifies the acl property, when it defaults to full.
           in: query
           name: projection
           schema:
@@ -1641,7 +1646,7 @@ paths:
               - full
               - noAcl
             type: string
-        - description: 'If present, selects a specific revision of the source object (as opposed to the latest version, the default).'
+        - description: If present, selects a specific revision of the source object (as opposed to the latest version, the default).
           in: query
           name: sourceGeneration
           schema:
@@ -1650,55 +1655,58 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Object'
+              $ref: "#/components/schemas/Object"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Object'
+                $ref: "#/components/schemas/Object"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
+            - https://www.googleapis.com/auth/devstorage.full_control
           Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
+            - https://www.googleapis.com/auth/devstorage.full_control
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.read_write'
+            - https://www.googleapis.com/auth/devstorage.read_write
           Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.read_write'
+            - https://www.googleapis.com/auth/devstorage.read_write
       tags:
         - objects
   /channels/stop:
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
     post:
       description: Stop watching resources through this channel
       operationId: storage.channels.stop
       requestBody:
-        $ref: '#/components/requestBodies/Channel'
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Channel"
       responses:
-        '200':
+        "200":
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
+            - https://www.googleapis.com/auth/devstorage.full_control
           Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
+            - https://www.googleapis.com/auth/devstorage.full_control
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.read_only'
+            - https://www.googleapis.com/auth/devstorage.read_only
           Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.read_only'
+            - https://www.googleapis.com/auth/devstorage.read_only
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.read_write'
+            - https://www.googleapis.com/auth/devstorage.read_write
           Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.read_write'
+            - https://www.googleapis.com/auth/devstorage.read_write
       tags:
         - channels
 components:
@@ -1708,7 +1716,6 @@ components:
       in: query
       name: alt
       schema:
-        default: json
         enum:
           - json
         type: string
@@ -1719,7 +1726,7 @@ components:
       schema:
         type: string
     key:
-      description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -1735,7 +1742,6 @@ components:
       in: query
       name: prettyPrint
       schema:
-        default: true
         type: boolean
     quotaUser:
       description: An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
@@ -1749,32 +1755,6 @@ components:
       name: userIp
       schema:
         type: string
-  requestBodies:
-    Bucket:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Bucket'
-    BucketAccessControl:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/BucketAccessControl'
-    Channel:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Channel'
-    Object:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Object'
-    ObjectAccessControl:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ObjectAccessControl'
   schemas:
     Bucket:
       description: A bucket.
@@ -1782,14 +1762,14 @@ components:
         acl:
           description: Access controls on the bucket.
           items:
-            $ref: '#/components/schemas/BucketAccessControl'
+            $ref: "#/components/schemas/BucketAccessControl"
           type: array
         cors:
           description: The bucket's Cross-Origin Resource Sharing (CORS) configuration.
           items:
             properties:
               maxAgeSeconds:
-                description: 'The value, in seconds, to return in the  Access-Control-Max-Age header used in preflight responses.'
+                description: The value, in seconds, to return in the  Access-Control-Max-Age header used in preflight responses.
                 format: int32
                 type: integer
               method:
@@ -1812,7 +1792,7 @@ components:
         defaultObjectAcl:
           description: Default access controls to apply to new objects when no ACL is provided.
           items:
-            $ref: '#/components/schemas/ObjectAccessControl'
+            $ref: "#/components/schemas/ObjectAccessControl"
           type: array
         etag:
           description: HTTP 1.1 Entity tag for the bucket.
@@ -1821,14 +1801,14 @@ components:
           description: The ID of the bucket.
           type: string
         kind:
-          default: 'storage#bucket'
-          description: 'The kind of item this is. For buckets, this is always storage#bucket.'
+          default: storage#bucket
+          description: The kind of item this is. For buckets, this is always storage#bucket.
           type: string
         lifecycle:
           description: The bucket's lifecycle configuration. See object lifecycle management for more information.
           properties:
             rule:
-              description: 'A lifecycle management rule, which is made of an action to take and the condition(s) under which the action will be taken.'
+              description: A lifecycle management rule, which is made of an action to take and the condition(s) under which the action will be taken.
               items:
                 properties:
                   action:
@@ -1846,14 +1826,14 @@ components:
                         format: int32
                         type: integer
                       createdBefore:
-                        description: 'A date in RFC 3339 format with only the date part, e.g. "2013-01-15". This condition is satisfied when an object is created before midnight of the specified date in UTC.'
+                        description: A date in RFC 3339 format with only the date part, e.g. "2013-01-15". This condition is satisfied when an object is created before midnight of the specified date in UTC.
                         format: date
                         type: string
                       isLive:
-                        description: 'Relevant only for versioned objects. If the value is true, this condition matches live objects; if the value is false, it matches archived objects.'
+                        description: Relevant only for versioned objects. If the value is true, this condition matches live objects; if the value is false, it matches archived objects.
                         type: boolean
                       numNewerVersions:
-                        description: 'Relevant only for versioned objects. If the value is N, this condition is satisfied when there are at least N versions (including the live version) newer than this version of the object.'
+                        description: Relevant only for versioned objects. If the value is N, this condition is satisfied when there are at least N versions (including the live version) newer than this version of the object.
                         format: int32
                         type: integer
                     type: object
@@ -1864,7 +1844,7 @@ components:
           description: The location of the bucket. Object data for objects in the bucket resides in physical storage within this region. Typical values are US and EU. Defaults to US. See the developer's guide for the authoritative list.
           type: string
         logging:
-          description: 'The bucket''s logging configuration, which defines the destination bucket and optional name prefix for the current bucket''s logs.'
+          description: The bucket's logging configuration, which defines the destination bucket and optional name prefix for the current bucket's logs.
           properties:
             logBucket:
               description: The destination bucket where the current bucket's logs should be placed.
@@ -1884,7 +1864,7 @@ components:
           description: The owner of the bucket. This is always the project team's owner group.
           properties:
             entity:
-              description: 'The entity, in the form group-groupId.'
+              description: The entity, in the form group-groupId.
               type: string
             entityId:
               description: The ID for the entity.
@@ -1904,7 +1884,7 @@ components:
           description: The bucket's versioning configuration.
           properties:
             enabled:
-              description: 'While set to true, versioning is fully enabled for this bucket.'
+              description: While set to true, versioning is fully enabled for this bucket.
               type: boolean
           type: object
         website:
@@ -1925,27 +1905,37 @@ components:
           description: The name of the bucket.
           type: string
         domain:
-          description: 'The domain associated with the entity, if any.'
+          description: The domain associated with the entity, if any.
           type: string
         email:
-          description: 'The email address associated with the entity, if any.'
+          description: The email address associated with the entity, if any.
           type: string
         entity:
-          description: |-
+          description: >-
             The entity holding the permission, in one of the following forms: 
+
             - user-userId 
+
             - user-email 
+
             - group-groupId 
+
             - group-email 
+
             - domain-domain 
+
             - allUsers 
+
             - allAuthenticatedUsers Examples: 
+
             - The user liz@example.com would be user-liz@example.com. 
+
             - The group example@googlegroups.com would be group-example@googlegroups.com. 
+
             - To refer to all members of the Google Apps for Business domain example.com, the entity would be domain-example.com.
           type: string
         entityId:
-          description: 'The ID for the entity, if any.'
+          description: The ID for the entity, if any.
           type: string
         etag:
           description: HTTP 1.1 Entity tag for the access-control entry.
@@ -1954,11 +1944,11 @@ components:
           description: The ID of the access-control entry.
           type: string
         kind:
-          default: 'storage#bucketAccessControl'
-          description: 'The kind of item this is. For bucket access control entries, this is always storage#bucketAccessControl.'
+          default: storage#bucketAccessControl
+          description: The kind of item this is. For bucket access control entries, this is always storage#bucketAccessControl.
           type: string
         role:
-          description: 'The access permission for the entity. Can be READER, WRITER, or OWNER.'
+          description: The access permission for the entity. Can be READER, WRITER, or OWNER.
           type: string
         selfLink:
           description: The link to this access-control entry.
@@ -1970,11 +1960,11 @@ components:
         items:
           description: The list of items.
           items:
-            $ref: '#/components/schemas/BucketAccessControl'
+            $ref: "#/components/schemas/BucketAccessControl"
           type: array
         kind:
-          default: 'storage#bucketAccessControls'
-          description: 'The kind of item this is. For lists of bucket access control entries, this is always storage#bucketAccessControls.'
+          default: storage#bucketAccessControls
+          description: The kind of item this is. For lists of bucket access control entries, this is always storage#bucketAccessControls.
           type: string
       type: object
     Buckets:
@@ -1983,14 +1973,14 @@ components:
         items:
           description: The list of items.
           items:
-            $ref: '#/components/schemas/Bucket'
+            $ref: "#/components/schemas/Bucket"
           type: array
         kind:
-          default: 'storage#buckets'
-          description: 'The kind of item this is. For lists of buckets, this is always storage#buckets.'
+          default: storage#buckets
+          description: The kind of item this is. For lists of buckets, this is always storage#buckets.
           type: string
         nextPageToken:
-          description: 'The continuation token, used to page through large result sets. Provide this value in a subsequent request to return the next page of results.'
+          description: The continuation token, used to page through large result sets. Provide this value in a subsequent request to return the next page of results.
           type: string
       type: object
     Channel:
@@ -2000,15 +1990,15 @@ components:
           description: The address where notifications are delivered for this channel.
           type: string
         expiration:
-          description: 'Date and time of notification channel expiration, expressed as a Unix timestamp, in milliseconds. Optional.'
+          description: Date and time of notification channel expiration, expressed as a Unix timestamp, in milliseconds. Optional.
           format: int64
           type: string
         id:
           description: A UUID or similar unique string that identifies this channel.
           type: string
         kind:
-          default: 'api#channel'
-          description: 'Identifies this as a notification channel used to watch for changes to a resource, which is "api#channel".'
+          default: api#channel
+          description: Identifies this as a notification channel used to watch for changes to a resource, which is "api#channel".
           type: string
         params:
           additionalProperties:
@@ -2036,10 +2026,10 @@ components:
       description: A Compose request.
       properties:
         destination:
-          $ref: '#/components/schemas/Object'
+          $ref: "#/components/schemas/Object"
           description: Properties of the resulting object
         kind:
-          default: 'storage#composeRequest'
+          default: storage#composeRequest
           description: The kind of item this is.
           type: string
         sourceObjects:
@@ -2057,7 +2047,7 @@ components:
                 description: Conditions that must be met for this operation to execute.
                 properties:
                   ifGenerationMatch:
-                    description: 'Only perform the composition if the generation of the source object that would be used matches this value. If this value and a generation are both specified, they must be the same value or the call will fail.'
+                    description: Only perform the composition if the generation of the source object that would be used matches this value. If this value and a generation are both specified, they must be the same value or the call will fail.
                     format: int64
                     type: string
                 type: object
@@ -2070,7 +2060,7 @@ components:
         acl:
           description: Access controls on the object.
           items:
-            $ref: '#/components/schemas/ObjectAccessControl'
+            $ref: "#/components/schemas/ObjectAccessControl"
           type: array
         bucket:
           description: The bucket containing this object.
@@ -2095,7 +2085,7 @@ components:
           description: Content-Type of the object data.
           type: string
         crc32c:
-          description: 'CRC32c checksum, as described in RFC 4960, Appendix B; encoded using base64.'
+          description: CRC32c checksum, as described in RFC 4960, Appendix B; encoded using base64.
           type: string
         etag:
           description: HTTP 1.1 Entity tag for the object.
@@ -2108,8 +2098,8 @@ components:
           description: The ID of the object.
           type: string
         kind:
-          default: 'storage#object'
-          description: 'The kind of item this is. For objects, this is always storage#object.'
+          default: storage#object
+          description: The kind of item this is. For objects, this is always storage#object.
           type: string
         md5Hash:
           description: MD5 hash of the data; encoded using base64.
@@ -2121,7 +2111,7 @@ components:
           additionalProperties:
             description: An individual metadata entry.
             type: string
-          description: 'User-provided metadata, in key/value pairs.'
+          description: User-provided metadata, in key/value pairs.
           type: object
         metageneration:
           description: The generation of the metadata for this object at this generation. Used for metadata versioning. Has no meaning outside of the context of this generation.
@@ -2134,7 +2124,7 @@ components:
           description: The owner of the object. This will always be the uploader of the object.
           properties:
             entity:
-              description: 'The entity, in the form user-userId.'
+              description: The entity, in the form user-userId.
               type: string
             entityId:
               description: The ID for the entity.
@@ -2166,27 +2156,37 @@ components:
           description: The name of the bucket.
           type: string
         domain:
-          description: 'The domain associated with the entity, if any.'
+          description: The domain associated with the entity, if any.
           type: string
         email:
-          description: 'The email address associated with the entity, if any.'
+          description: The email address associated with the entity, if any.
           type: string
         entity:
-          description: |-
+          description: >-
             The entity holding the permission, in one of the following forms: 
+
             - user-userId 
+
             - user-email 
+
             - group-groupId 
+
             - group-email 
+
             - domain-domain 
+
             - allUsers 
+
             - allAuthenticatedUsers Examples: 
+
             - The user liz@example.com would be user-liz@example.com. 
+
             - The group example@googlegroups.com would be group-example@googlegroups.com. 
+
             - To refer to all members of the Google Apps for Business domain example.com, the entity would be domain-example.com.
           type: string
         entityId:
-          description: 'The ID for the entity, if any.'
+          description: The ID for the entity, if any.
           type: string
         etag:
           description: HTTP 1.1 Entity tag for the access-control entry.
@@ -2199,8 +2199,8 @@ components:
           description: The ID of the access-control entry.
           type: string
         kind:
-          default: 'storage#objectAccessControl'
-          description: 'The kind of item this is. For object access control entries, this is always storage#objectAccessControl.'
+          default: storage#objectAccessControl
+          description: The kind of item this is. For object access control entries, this is always storage#objectAccessControl.
           type: string
         object:
           description: The name of the object.
@@ -2220,8 +2220,8 @@ components:
           items: {}
           type: array
         kind:
-          default: 'storage#objectAccessControls'
-          description: 'The kind of item this is. For lists of object access control entries, this is always storage#objectAccessControls.'
+          default: storage#objectAccessControls
+          description: The kind of item this is. For lists of object access control entries, this is always storage#objectAccessControls.
           type: string
       type: object
     Objects:
@@ -2230,14 +2230,14 @@ components:
         items:
           description: The list of items.
           items:
-            $ref: '#/components/schemas/Object'
+            $ref: "#/components/schemas/Object"
           type: array
         kind:
-          default: 'storage#objects'
-          description: 'The kind of item this is. For lists of objects, this is always storage#objects.'
+          default: storage#objects
+          description: The kind of item this is. For lists of objects, this is always storage#objects.
           type: string
         nextPageToken:
-          description: 'The continuation token, used to page through large result sets. Provide this value in a subsequent request to return the next page of results.'
+          description: The continuation token, used to page through large result sets. Provide this value in a subsequent request to return the next page of results.
           type: string
         prefixes:
           description: The list of prefixes of objects matching-but-not-listed up to and including the requested delimiter.
@@ -2250,20 +2250,20 @@ components:
       description: Oauth 2.0 implicit authentication
       flows:
         implicit:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            'https://www.googleapis.com/auth/devstorage.full_control': Manage your data and permissions in Google Cloud Storage
-            'https://www.googleapis.com/auth/devstorage.read_only': View your data in Google Cloud Storage
-            'https://www.googleapis.com/auth/devstorage.read_write': Manage your data in Google Cloud Storage
+            https://www.googleapis.com/auth/devstorage.full_control: Manage your data and permissions in Google Cloud Storage
+            https://www.googleapis.com/auth/devstorage.read_only: View your data in Google Cloud Storage
+            https://www.googleapis.com/auth/devstorage.read_write: Manage your data in Google Cloud Storage
       type: oauth2
     Oauth2c:
-      description: Oauth 2.0 accessCode authentication
+      description: Oauth 2.0 authorizationCode authentication
       flows:
         authorizationCode:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            'https://www.googleapis.com/auth/devstorage.full_control': Manage your data and permissions in Google Cloud Storage
-            'https://www.googleapis.com/auth/devstorage.read_only': View your data in Google Cloud Storage
-            'https://www.googleapis.com/auth/devstorage.read_write': Manage your data in Google Cloud Storage
-          tokenUrl: 'https://accounts.google.com/o/oauth2/token'
+            https://www.googleapis.com/auth/devstorage.full_control: Manage your data and permissions in Google Cloud Storage
+            https://www.googleapis.com/auth/devstorage.read_only: View your data in Google Cloud Storage
+            https://www.googleapis.com/auth/devstorage.read_write: Manage your data in Google Cloud Storage
+          tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

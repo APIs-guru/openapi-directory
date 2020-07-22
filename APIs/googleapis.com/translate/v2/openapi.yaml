@@ -1,49 +1,52 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://translation.googleapis.com/language/translate'
+  - url: https://translation.googleapis.com/language/translate
 info:
   contact:
     name: Google
-    url: 'https://google.com'
-  description: |-
+    url: https://google.com
+    x-twitter: youtube
+  description: >-
     The Google Cloud Translation API lets websites and programs integrate with
         Google Translate programmatically.
   license:
     name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
-  title: Google Cloud Translation
+    url: http://creativecommons.org/licenses/by/3.0/
+  termsOfService: https://developers.google.com/terms/
+  title: Google Cloud Translation API
   version: v2
   x-apiClientRegistration:
-    url: 'https://console.developers.google.com'
+    url: https://console.developers.google.com
   x-apisguru-categories:
-    - text
+    - analytics
+    - media
   x-logo:
-    url: 'https://twitter.com/googlecloud/profile_image?size=original'
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.31
       format: google
-      url: 'https://translation.googleapis.com/$discovery/rest?version=v2'
+      url: https://translation.googleapis.com/$discovery/rest?version=v2
       version: v1
   x-preferred: false
   x-providerName: googleapis.com
   x-serviceName: translate
 externalDocs:
-  url: 'https://code.google.com/apis/language/translate/v2/getting_started.html'
+  url: https://code.google.com/apis/language/translate/v2/getting_started.html
 tags:
-  - name: detections
   - name: languages
   - name: translations
+  - name: detections
 paths:
   /v2:
     get:
-      description: 'Translates input text, returning translated text.'
+      description: Translates input text, returning translated text.
       operationId: language.translations.list
       parameters:
-        - description: |-
+        - description: >-
             The input text to translate. Repeat this parameter to perform translation
+
             operations on multiple text inputs.
           explode: true
           in: query
@@ -53,8 +56,10 @@ paths:
             items:
               type: string
             type: array
-        - description: |-
+          style: form
+        - description: >-
             The language to use for translation of the input text, set to one of the
+
             language codes listed in Language Support.
           in: query
           name: target
@@ -69,8 +74,10 @@ paths:
             items:
               type: string
             type: array
-        - description: |-
+          style: form
+        - description: >-
             The format of the source text, in either HTML (default) or plain-text. A
+
             value of "html" indicates HTML and a value of "text" indicates plain-text.
           in: query
           name: format
@@ -79,78 +86,82 @@ paths:
               - html
               - text
             type: string
-        - description: |-
+        - description: >-
             The `model` type requested for this translation. Valid values are
+
             listed in public documentation.
           in: query
           name: model
           schema:
             type: string
-        - description: |-
+        - description: >-
             The language of the source text, set to one of the language codes listed in
+
             Language Support. If the source language is not specified, the API will
+
             attempt to identify the source language automatically and return it within
+
             the response.
           in: query
           name: source
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/TranslationsListResponse'
+                $ref: "#/components/schemas/TranslationsListResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-translation'
+            - https://www.googleapis.com/auth/cloud-translation
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-translation'
+            - https://www.googleapis.com/auth/cloud-translation
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - translations
     parameters:
-      - $ref: '#/components/parameters/pp'
-      - $ref: '#/components/parameters/bearer_token'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/quotaUser'
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/pp"
+      - $ref: "#/components/parameters/bearer_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
-      description: 'Translates input text, returning translated text.'
+      description: Translates input text, returning translated text.
       operationId: language.translations.translate
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/TranslateTextRequest'
+              $ref: "#/components/schemas/TranslateTextRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/TranslationsListResponse'
+                $ref: "#/components/schemas/TranslationsListResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-translation'
+            - https://www.googleapis.com/auth/cloud-translation
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-translation'
+            - https://www.googleapis.com/auth/cloud-translation
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - translations
   /v2/detect:
@@ -158,8 +169,9 @@ paths:
       description: Detects the language of text within a request.
       operationId: language.detections.list
       parameters:
-        - description: |-
+        - description: >-
             The input text upon which to perform language detection. Repeat this
+
             parameter to perform language detection on multiple text inputs.
           explode: true
           in: query
@@ -169,38 +181,39 @@ paths:
             items:
               type: string
             type: array
+          style: form
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/DetectionsListResponse'
+                $ref: "#/components/schemas/DetectionsListResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-translation'
+            - https://www.googleapis.com/auth/cloud-translation
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-translation'
+            - https://www.googleapis.com/auth/cloud-translation
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - detections
     parameters:
-      - $ref: '#/components/parameters/pp'
-      - $ref: '#/components/parameters/bearer_token'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/quotaUser'
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/pp"
+      - $ref: "#/components/parameters/bearer_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
       description: Detects the language of text within a request.
       operationId: language.detections.detect
@@ -208,23 +221,23 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/DetectLanguageRequest'
+              $ref: "#/components/schemas/DetectLanguageRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/DetectionsListResponse'
+                $ref: "#/components/schemas/DetectionsListResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-translation'
+            - https://www.googleapis.com/auth/cloud-translation
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-translation'
+            - https://www.googleapis.com/auth/cloud-translation
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - detections
   /v2/languages:
@@ -237,45 +250,46 @@ paths:
           name: model
           schema:
             type: string
-        - description: |-
+        - description: >-
             The language to use to return localized, human readable names of supported
+
             languages.
           in: query
           name: target
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/LanguagesListResponse'
+                $ref: "#/components/schemas/LanguagesListResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-translation'
+            - https://www.googleapis.com/auth/cloud-translation
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-translation'
+            - https://www.googleapis.com/auth/cloud-translation
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - languages
     parameters:
-      - $ref: '#/components/parameters/pp'
-      - $ref: '#/components/parameters/bearer_token'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/quotaUser'
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/pp"
+      - $ref: "#/components/parameters/bearer_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
 components:
   parameters:
     _.xgafv:
@@ -284,8 +298,8 @@ components:
       name: $.xgafv
       schema:
         enum:
-          - '1'
-          - '2'
+          - "1"
+          - "2"
         type: string
     access_token:
       description: OAuth access token.
@@ -298,7 +312,6 @@ components:
       in: query
       name: alt
       schema:
-        default: json
         enum:
           - json
           - media
@@ -323,7 +336,7 @@ components:
       schema:
         type: string
     key:
-      description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -339,29 +352,27 @@ components:
       in: query
       name: pp
       schema:
-        default: true
         type: boolean
     prettyPrint:
       description: Returns response with indentations and line breaks.
       in: query
       name: prettyPrint
       schema:
-        default: true
         type: boolean
     quotaUser:
-      description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.'
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.
       in: query
       name: quotaUser
       schema:
         type: string
     uploadType:
-      description: 'Legacy upload protocol for media (e.g. "media", "multipart").'
+      description: Legacy upload protocol for media (e.g. "media", "multipart").
       in: query
       name: uploadType
       schema:
         type: string
     upload_protocol:
-      description: 'Upload protocol for media (e.g. "raw", "multipart").'
+      description: Upload protocol for media (e.g. "raw", "multipart").
       in: query
       name: upload_protocol
       schema:
@@ -371,8 +382,9 @@ components:
       description: The request message for language detection.
       properties:
         q:
-          description: |-
+          description: >-
             The input text upon which to perform language detection. Repeat this
+
             parameter to perform language detection on multiple text inputs.
           items:
             type: string
@@ -383,7 +395,7 @@ components:
         detections:
           description: A detections contains detection results of several text
           items:
-            $ref: '#/components/schemas/DetectionsResource'
+            $ref: "#/components/schemas/DetectionsResource"
           type: array
       type: object
     DetectionsResource:
@@ -406,25 +418,28 @@ components:
       description: The request message for discovering supported languages.
       properties:
         target:
-          description: |-
+          description: >-
             The language to use to return localized, human readable names of supported
+
             languages.
           type: string
       type: object
     LanguagesListResponse:
       properties:
         languages:
-          description: 'List of source/target languages supported by the translation API. If target parameter is unspecified, the list is sorted by the ASCII code point order of the language code. If target parameter is specified, the list is sorted by the collation order of the language name in the target language.'
+          description: List of source/target languages supported by the translation API. If target parameter is unspecified, the list is sorted by the ASCII code point order of the language code. If target parameter is specified, the list is sorted by the collation order of the language name in the target language.
           items:
-            $ref: '#/components/schemas/LanguagesResource'
+            $ref: "#/components/schemas/LanguagesResource"
           type: array
       type: object
     LanguagesResource:
       properties:
         language:
-          description: |-
+          description: >-
             Supported language code, generally consisting of its ISO 639-1
+
             identifier. (E.g. 'en', 'ja'). In certain cases, BCP-47 codes including
+
             language + region identifiers are returned (e.g. 'zh-TW' and 'zh-CH')
           type: string
         name:
@@ -435,32 +450,39 @@ components:
       description: The main translation request message for the Cloud Translation API.
       properties:
         format:
-          description: |-
+          description: >-
             The format of the source text, in either HTML (default) or plain-text. A
+
             value of "html" indicates HTML and a value of "text" indicates plain-text.
           type: string
         model:
-          description: |-
+          description: >-
             The `model` type requested for this translation. Valid values are
+
             listed in public documentation.
           type: string
         q:
-          description: |-
+          description: >-
             The input text to translate. Repeat this parameter to perform translation
+
             operations on multiple text inputs.
           items:
             type: string
           type: array
         source:
-          description: |-
+          description: >-
             The language of the source text, set to one of the language codes listed in
+
             Language Support. If the source language is not specified, the API will
+
             attempt to identify the source language automatically and return it within
+
             the response.
           type: string
         target:
-          description: |-
+          description: >-
             The language to use for translation of the input text, set to one of the
+
             language codes listed in Language Support.
           type: string
       type: object
@@ -470,22 +492,27 @@ components:
         translations:
           description: Translations contains list of translation results of given text
           items:
-            $ref: '#/components/schemas/TranslationsResource'
+            $ref: "#/components/schemas/TranslationsResource"
           type: array
       type: object
     TranslationsResource:
       properties:
         detectedSourceLanguage:
-          description: |-
+          description: >-
             The source language of the initial request, detected automatically, if
+
             no source language was passed within the initial request. If the
+
             source language was passed, auto-detection of the language will not
+
             occur and this field will be empty.
           type: string
         model:
-          description: |-
+          description: >-
             The `model` type used for this translation. Valid values are
+
             listed in public documentation. Can be different from requested `model`.
+
             Present only if specific model type was explicitly requested.
           type: string
         translatedText:
@@ -497,18 +524,18 @@ components:
       description: Oauth 2.0 implicit authentication
       flows:
         implicit:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-            'https://www.googleapis.com/auth/cloud-translation': Translate text from one language to another using Google Translate
+            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/cloud-translation: Translate text from one language to another using Google Translate
       type: oauth2
     Oauth2c:
-      description: Oauth 2.0 accessCode authentication
+      description: Oauth 2.0 authorizationCode authentication
       flows:
         authorizationCode:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-            'https://www.googleapis.com/auth/cloud-translation': Translate text from one language to another using Google Translate
-          tokenUrl: 'https://accounts.google.com/o/oauth2/token'
+            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/cloud-translation: Translate text from one language to another using Google Translate
+          tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

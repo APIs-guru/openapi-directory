@@ -1,47 +1,49 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://www.googleapis.com/'
+  - url: https://www.googleapis.com/
 info:
   contact:
     name: Google
-    url: 'https://google.com'
+    url: https://google.com
+    x-twitter: youtube
   description: Obtains end-user authorization grants for use with other Google APIs.
   license:
     name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
-  title: Google OAuth2
+    url: http://creativecommons.org/licenses/by/3.0/
+  termsOfService: https://developers.google.com/terms/
+  title: Google OAuth2 API
   version: v2
   x-apiClientRegistration:
-    url: 'https://console.developers.google.com'
+    url: https://console.developers.google.com
   x-apisguru-categories:
-    - security
+    - analytics
+    - media
   x-logo:
-    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.31
       format: google
-      url: 'https://www.googleapis.com/discovery/v1/apis/oauth2/v2/rest'
+      url: https://www.googleapis.com/discovery/v1/apis/oauth2/v2/rest
       version: v1
   x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: oauth2
 externalDocs:
-  url: 'https://developers.google.com/identity/protocols/oauth2/'
+  url: https://developers.google.com/identity/protocols/oauth2/
 tags:
   - name: userinfo
 paths:
   /oauth2/v2/tokeninfo:
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
     post:
       operationId: oauth2.tokeninfo
       parameters:
@@ -54,21 +56,21 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Tokeninfo'
+                $ref: "#/components/schemas/Tokeninfo"
           description: Successful response
   /oauth2/v2/userinfo:
     get:
       operationId: oauth2.userinfo.get
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Userinfo'
+                $ref: "#/components/schemas/Userinfo"
           description: Successful response
       security:
         - Oauth2:
@@ -76,32 +78,32 @@ paths:
           Oauth2c:
             - openid
         - Oauth2:
-            - 'https://www.googleapis.com/auth/userinfo.email'
+            - https://www.googleapis.com/auth/userinfo.email
           Oauth2c:
-            - 'https://www.googleapis.com/auth/userinfo.email'
+            - https://www.googleapis.com/auth/userinfo.email
         - Oauth2:
-            - 'https://www.googleapis.com/auth/userinfo.profile'
+            - https://www.googleapis.com/auth/userinfo.profile
           Oauth2c:
-            - 'https://www.googleapis.com/auth/userinfo.profile'
+            - https://www.googleapis.com/auth/userinfo.profile
       tags:
         - userinfo
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
   /userinfo/v2/me:
     get:
       operationId: oauth2.userinfo.v2.me.get
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Userinfo'
+                $ref: "#/components/schemas/Userinfo"
           description: Successful response
       security:
         - Oauth2:
@@ -109,23 +111,23 @@ paths:
           Oauth2c:
             - openid
         - Oauth2:
-            - 'https://www.googleapis.com/auth/userinfo.email'
+            - https://www.googleapis.com/auth/userinfo.email
           Oauth2c:
-            - 'https://www.googleapis.com/auth/userinfo.email'
+            - https://www.googleapis.com/auth/userinfo.email
         - Oauth2:
-            - 'https://www.googleapis.com/auth/userinfo.profile'
+            - https://www.googleapis.com/auth/userinfo.profile
           Oauth2c:
-            - 'https://www.googleapis.com/auth/userinfo.profile'
+            - https://www.googleapis.com/auth/userinfo.profile
       tags:
         - userinfo
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
 components:
   parameters:
     alt:
@@ -133,7 +135,6 @@ components:
       in: query
       name: alt
       schema:
-        default: json
         enum:
           - json
         type: string
@@ -144,7 +145,7 @@ components:
       schema:
         type: string
     key:
-      description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -160,7 +161,6 @@ components:
       in: query
       name: prettyPrint
       schema:
-        default: true
         type: boolean
     quotaUser:
       description: An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
@@ -184,7 +184,7 @@ components:
           description: The email address of the user. Present only if the email scope is present in the request.
           type: string
         expires_in:
-          description: 'The expiry time of the token, as number of seconds left until expiry.'
+          description: The expiry time of the token, as number of seconds left until expiry.
           format: int32
           type: integer
         issued_to:
@@ -242,20 +242,20 @@ components:
       description: Oauth 2.0 implicit authentication
       flows:
         implicit:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            'https://www.googleapis.com/auth/userinfo.email': View your email address
-            'https://www.googleapis.com/auth/userinfo.profile': 'See your personal info, including any personal info you''ve made publicly available'
+            https://www.googleapis.com/auth/userinfo.email: View your email address
+            https://www.googleapis.com/auth/userinfo.profile: See your personal info, including any personal info you've made publicly available
             openid: Associate you with your personal info on Google
       type: oauth2
     Oauth2c:
-      description: Oauth 2.0 accessCode authentication
+      description: Oauth 2.0 authorizationCode authentication
       flows:
         authorizationCode:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            'https://www.googleapis.com/auth/userinfo.email': View your email address
-            'https://www.googleapis.com/auth/userinfo.profile': 'See your personal info, including any personal info you''ve made publicly available'
+            https://www.googleapis.com/auth/userinfo.email: View your email address
+            https://www.googleapis.com/auth/userinfo.profile: See your personal info, including any personal info you've made publicly available
             openid: Associate you with your personal info on Google
-          tokenUrl: 'https://accounts.google.com/o/oauth2/token'
+          tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

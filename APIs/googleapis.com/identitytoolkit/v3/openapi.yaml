@@ -1,43 +1,49 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://www.googleapis.com/identitytoolkit/v3/relyingparty'
+  - url: https://www.googleapis.com/identitytoolkit/v3/relyingparty
 info:
   contact:
     name: Google
-    url: 'https://google.com'
+    url: https://google.com
+    x-twitter: youtube
   description: Help the third party sites to implement federated login.
-  title: Google Identity Toolkit
+  license:
+    name: Creative Commons Attribution 3.0
+    url: http://creativecommons.org/licenses/by/3.0/
+  termsOfService: https://developers.google.com/terms/
+  title: Google Identity Toolkit API
   version: v3
   x-apiClientRegistration:
-    url: 'https://console.developers.google.com'
+    url: https://console.developers.google.com
   x-apisguru-categories:
-    - security
+    - analytics
+    - media
   x-logo:
-    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.31
       format: google
-      url: 'https://identitytoolkit.googleapis.com/$discovery/rest?version=v3'
+      url: https://identitytoolkit.googleapis.com/$discovery/rest?version=v3
       version: v1
   x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: identitytoolkit
 externalDocs:
-  url: 'https://developers.google.com/identity-toolkit/v3/'
+  url: https://developers.google.com/identity-toolkit/v3/
 tags:
   - name: relyingparty
 paths:
   /createAuthUri:
     parameters:
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/userIp'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/quotaUser'
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
     post:
       description: Creates the URI used by the IdP to authenticate the user.
       operationId: identitytoolkit.relyingparty.createAuthUri
@@ -45,28 +51,30 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/IdentitytoolkitRelyingpartyCreateAuthUriRequest'
+              $ref: "#/components/schemas/IdentitytoolkitRelyingpartyCreateAuthUriRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/CreateAuthUriResponse'
+                $ref: "#/components/schemas/CreateAuthUriResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - relyingparty
   /deleteAccount:
     parameters:
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/userIp'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/quotaUser'
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
     post:
       description: Delete user account.
       operationId: identitytoolkit.relyingparty.deleteAccount
@@ -74,28 +82,30 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/IdentitytoolkitRelyingpartyDeleteAccountRequest'
+              $ref: "#/components/schemas/IdentitytoolkitRelyingpartyDeleteAccountRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/DeleteAccountResponse'
+                $ref: "#/components/schemas/DeleteAccountResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - relyingparty
   /downloadAccount:
     parameters:
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/userIp'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/quotaUser'
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
     post:
       description: Batch download user accounts.
       operationId: identitytoolkit.relyingparty.downloadAccount
@@ -103,30 +113,34 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/IdentitytoolkitRelyingpartyDownloadAccountRequest'
+              $ref: "#/components/schemas/IdentitytoolkitRelyingpartyDownloadAccountRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/DownloadAccountResponse'
+                $ref: "#/components/schemas/DownloadAccountResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/firebase'
+            - https://www.googleapis.com/auth/firebase
+          Oauth2c:
+            - https://www.googleapis.com/auth/firebase
       tags:
         - relyingparty
   /emailLinkSignin:
     parameters:
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/userIp'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/quotaUser'
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
     post:
       description: Reset password for a user.
       operationId: identitytoolkit.relyingparty.emailLinkSignin
@@ -134,28 +148,30 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/IdentitytoolkitRelyingpartyEmailLinkSigninRequest'
+              $ref: "#/components/schemas/IdentitytoolkitRelyingpartyEmailLinkSigninRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/EmailLinkSigninResponse'
+                $ref: "#/components/schemas/EmailLinkSigninResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - relyingparty
   /getAccountInfo:
     parameters:
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/userIp'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/quotaUser'
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
     post:
       description: Returns the account info.
       operationId: identitytoolkit.relyingparty.getAccountInfo
@@ -163,28 +179,30 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/IdentitytoolkitRelyingpartyGetAccountInfoRequest'
+              $ref: "#/components/schemas/IdentitytoolkitRelyingpartyGetAccountInfoRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/GetAccountInfoResponse'
+                $ref: "#/components/schemas/GetAccountInfoResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - relyingparty
   /getOobConfirmationCode:
     parameters:
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/userIp'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/quotaUser'
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
     post:
       description: Get a code for user action confirmation.
       operationId: identitytoolkit.relyingparty.getOobConfirmationCode
@@ -192,17 +210,19 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Relyingparty'
+              $ref: "#/components/schemas/Relyingparty"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/GetOobConfirmationCodeResponse'
+                $ref: "#/components/schemas/GetOobConfirmationCodeResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - relyingparty
   /getProjectConfig:
@@ -210,93 +230,99 @@ paths:
       description: Get project configuration.
       operationId: identitytoolkit.relyingparty.getProjectConfig
       parameters:
-        - description: GCP project number of the request.
-          in: query
-          name: projectNumber
-          schema:
-            type: string
         - description: Delegated GCP project number of the request.
           in: query
           name: delegatedProjectNumber
           schema:
             type: string
+        - description: GCP project number of the request.
+          in: query
+          name: projectNumber
+          schema:
+            type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/IdentitytoolkitRelyingpartyGetProjectConfigResponse'
+                $ref: "#/components/schemas/IdentitytoolkitRelyingpartyGetProjectConfigResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - relyingparty
     parameters:
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/userIp'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/quotaUser'
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
   /getRecaptchaParam:
     get:
       description: Get recaptcha secure param.
       operationId: identitytoolkit.relyingparty.getRecaptchaParam
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/GetRecaptchaParamResponse'
+                $ref: "#/components/schemas/GetRecaptchaParamResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - relyingparty
     parameters:
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/userIp'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/quotaUser'
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
   /publicKeys:
     get:
       description: Get token signing public key.
       operationId: identitytoolkit.relyingparty.getPublicKeys
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/IdentitytoolkitRelyingpartyGetPublicKeysResponse'
+                $ref: "#/components/schemas/IdentitytoolkitRelyingpartyGetPublicKeysResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - relyingparty
     parameters:
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/userIp'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/quotaUser'
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
   /resetPassword:
     parameters:
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/userIp'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/quotaUser'
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
     post:
       description: Reset password for a user.
       operationId: identitytoolkit.relyingparty.resetPassword
@@ -304,28 +330,30 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/IdentitytoolkitRelyingpartyResetPasswordRequest'
+              $ref: "#/components/schemas/IdentitytoolkitRelyingpartyResetPasswordRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ResetPasswordResponse'
+                $ref: "#/components/schemas/ResetPasswordResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - relyingparty
   /sendVerificationCode:
     parameters:
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/userIp'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/quotaUser'
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
     post:
       description: Send SMS verification code.
       operationId: identitytoolkit.relyingparty.sendVerificationCode
@@ -333,28 +361,30 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/IdentitytoolkitRelyingpartySendVerificationCodeRequest'
+              $ref: "#/components/schemas/IdentitytoolkitRelyingpartySendVerificationCodeRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/IdentitytoolkitRelyingpartySendVerificationCodeResponse'
+                $ref: "#/components/schemas/IdentitytoolkitRelyingpartySendVerificationCodeResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - relyingparty
   /setAccountInfo:
     parameters:
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/userIp'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/quotaUser'
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
     post:
       description: Set account info for a user.
       operationId: identitytoolkit.relyingparty.setAccountInfo
@@ -362,28 +392,30 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/IdentitytoolkitRelyingpartySetAccountInfoRequest'
+              $ref: "#/components/schemas/IdentitytoolkitRelyingpartySetAccountInfoRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/SetAccountInfoResponse'
+                $ref: "#/components/schemas/SetAccountInfoResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - relyingparty
   /setProjectConfig:
     parameters:
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/userIp'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/quotaUser'
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
     post:
       description: Set project configuration.
       operationId: identitytoolkit.relyingparty.setProjectConfig
@@ -391,28 +423,30 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/IdentitytoolkitRelyingpartySetProjectConfigRequest'
+              $ref: "#/components/schemas/IdentitytoolkitRelyingpartySetProjectConfigRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/IdentitytoolkitRelyingpartySetProjectConfigResponse'
+                $ref: "#/components/schemas/IdentitytoolkitRelyingpartySetProjectConfigResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - relyingparty
   /signOutUser:
     parameters:
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/userIp'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/quotaUser'
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
     post:
       description: Sign out user.
       operationId: identitytoolkit.relyingparty.signOutUser
@@ -420,28 +454,30 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/IdentitytoolkitRelyingpartySignOutUserRequest'
+              $ref: "#/components/schemas/IdentitytoolkitRelyingpartySignOutUserRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/IdentitytoolkitRelyingpartySignOutUserResponse'
+                $ref: "#/components/schemas/IdentitytoolkitRelyingpartySignOutUserResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - relyingparty
   /signupNewUser:
     parameters:
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/userIp'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/quotaUser'
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
     post:
       description: Signup new user.
       operationId: identitytoolkit.relyingparty.signupNewUser
@@ -449,28 +485,30 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/IdentitytoolkitRelyingpartySignupNewUserRequest'
+              $ref: "#/components/schemas/IdentitytoolkitRelyingpartySignupNewUserRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/SignupNewUserResponse'
+                $ref: "#/components/schemas/SignupNewUserResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - relyingparty
   /uploadAccount:
     parameters:
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/userIp'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/quotaUser'
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
     post:
       description: Batch upload existing user accounts.
       operationId: identitytoolkit.relyingparty.uploadAccount
@@ -478,30 +516,34 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/IdentitytoolkitRelyingpartyUploadAccountRequest'
+              $ref: "#/components/schemas/IdentitytoolkitRelyingpartyUploadAccountRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/UploadAccountResponse'
+                $ref: "#/components/schemas/UploadAccountResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/firebase'
+            - https://www.googleapis.com/auth/firebase
+          Oauth2c:
+            - https://www.googleapis.com/auth/firebase
       tags:
         - relyingparty
   /verifyAssertion:
     parameters:
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/userIp'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/quotaUser'
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
     post:
       description: Verifies the assertion returned by the IdP.
       operationId: identitytoolkit.relyingparty.verifyAssertion
@@ -509,28 +551,30 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/IdentitytoolkitRelyingpartyVerifyAssertionRequest'
+              $ref: "#/components/schemas/IdentitytoolkitRelyingpartyVerifyAssertionRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/VerifyAssertionResponse'
+                $ref: "#/components/schemas/VerifyAssertionResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - relyingparty
   /verifyCustomToken:
     parameters:
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/userIp'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/quotaUser'
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
     post:
       description: Verifies the developer asserted ID token.
       operationId: identitytoolkit.relyingparty.verifyCustomToken
@@ -538,28 +582,30 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/IdentitytoolkitRelyingpartyVerifyCustomTokenRequest'
+              $ref: "#/components/schemas/IdentitytoolkitRelyingpartyVerifyCustomTokenRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/VerifyCustomTokenResponse'
+                $ref: "#/components/schemas/VerifyCustomTokenResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - relyingparty
   /verifyPassword:
     parameters:
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/userIp'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/quotaUser'
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
     post:
       description: Verifies the user entered password.
       operationId: identitytoolkit.relyingparty.verifyPassword
@@ -567,28 +613,30 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/IdentitytoolkitRelyingpartyVerifyPasswordRequest'
+              $ref: "#/components/schemas/IdentitytoolkitRelyingpartyVerifyPasswordRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/VerifyPasswordResponse'
+                $ref: "#/components/schemas/VerifyPasswordResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - relyingparty
   /verifyPhoneNumber:
     parameters:
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/userIp'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/quotaUser'
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
     post:
       description: Verifies ownership of a phone number and creates/updates the user account accordingly.
       operationId: identitytoolkit.relyingparty.verifyPhoneNumber
@@ -596,17 +644,19 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/IdentitytoolkitRelyingpartyVerifyPhoneNumberRequest'
+              $ref: "#/components/schemas/IdentitytoolkitRelyingpartyVerifyPhoneNumberRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/IdentitytoolkitRelyingpartyVerifyPhoneNumberResponse'
+                $ref: "#/components/schemas/IdentitytoolkitRelyingpartyVerifyPhoneNumberResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - relyingparty
 components:
@@ -616,7 +666,6 @@ components:
       in: query
       name: alt
       schema:
-        default: json
         enum:
           - json
         type: string
@@ -627,7 +676,7 @@ components:
       schema:
         type: string
     key:
-      description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -643,7 +692,6 @@ components:
       in: query
       name: prettyPrint
       schema:
-        default: true
         type: boolean
     quotaUser:
       description: An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
@@ -676,8 +724,8 @@ components:
           description: True if the authUri is for user's existing provider.
           type: boolean
         kind:
-          default: 'identitytoolkit#CreateAuthUriResponse'
-          description: 'The fixed string identitytoolkit#CreateAuthUriResponse".'
+          default: identitytoolkit#CreateAuthUriResponse
+          description: The fixed string identitytoolkit#CreateAuthUriResponse".
           type: string
         providerId:
           description: The provider ID of the auth URI.
@@ -698,16 +746,16 @@ components:
       description: Respone of deleting account.
       properties:
         kind:
-          default: 'identitytoolkit#DeleteAccountResponse'
-          description: 'The fixed string "identitytoolkit#DeleteAccountResponse".'
+          default: identitytoolkit#DeleteAccountResponse
+          description: The fixed string "identitytoolkit#DeleteAccountResponse".
           type: string
       type: object
     DownloadAccountResponse:
       description: Response of downloading accounts in batch.
       properties:
         kind:
-          default: 'identitytoolkit#DownloadAccountResponse'
-          description: 'The fixed string "identitytoolkit#DownloadAccountResponse".'
+          default: identitytoolkit#DownloadAccountResponse
+          description: The fixed string "identitytoolkit#DownloadAccountResponse".
           type: string
         nextPageToken:
           description: The next page token. To be used in a subsequent request to return the next page of results.
@@ -715,7 +763,7 @@ components:
         users:
           description: The user accounts data.
           items:
-            $ref: '#/components/schemas/UserInfo'
+            $ref: "#/components/schemas/UserInfo"
           type: array
       type: object
     EmailLinkSigninResponse:
@@ -735,8 +783,8 @@ components:
           description: Whether the user is new.
           type: boolean
         kind:
-          default: 'identitytoolkit#EmailLinkSigninResponse'
-          description: 'The fixed string "identitytoolkit#EmailLinkSigninResponse".'
+          default: identitytoolkit#EmailLinkSigninResponse
+          description: The fixed string "identitytoolkit#EmailLinkSigninResponse".
           type: string
         localId:
           description: The RP local ID of the user.
@@ -771,24 +819,24 @@ components:
       description: Response of getting account information.
       properties:
         kind:
-          default: 'identitytoolkit#GetAccountInfoResponse'
-          description: 'The fixed string "identitytoolkit#GetAccountInfoResponse".'
+          default: identitytoolkit#GetAccountInfoResponse
+          description: The fixed string "identitytoolkit#GetAccountInfoResponse".
           type: string
         users:
           description: The info of the users.
           items:
-            $ref: '#/components/schemas/UserInfo'
+            $ref: "#/components/schemas/UserInfo"
           type: array
       type: object
     GetOobConfirmationCodeResponse:
-      description: 'Response of getting a code for user confirmation (reset password, change email etc.).'
+      description: Response of getting a code for user confirmation (reset password, change email etc.).
       properties:
         email:
           description: The email address that the email is sent to.
           type: string
         kind:
-          default: 'identitytoolkit#GetOobConfirmationCodeResponse'
-          description: 'The fixed string "identitytoolkit#GetOobConfirmationCodeResponse".'
+          default: identitytoolkit#GetOobConfirmationCodeResponse
+          description: The fixed string "identitytoolkit#GetOobConfirmationCodeResponse".
           type: string
         oobCode:
           description: The code to be send to the user.
@@ -798,21 +846,21 @@ components:
       description: Response of getting recaptcha param.
       properties:
         kind:
-          default: 'identitytoolkit#GetRecaptchaParamResponse'
-          description: 'The fixed string "identitytoolkit#GetRecaptchaParamResponse".'
+          default: identitytoolkit#GetRecaptchaParamResponse
+          description: The fixed string "identitytoolkit#GetRecaptchaParamResponse".
           type: string
         recaptchaSiteKey:
           description: Site key registered at recaptcha.
           type: string
         recaptchaStoken:
-          description: 'The stoken field for the recaptcha widget, used to request captcha challenge.'
+          description: The stoken field for the recaptcha widget, used to request captcha challenge.
           type: string
       type: object
     IdentitytoolkitRelyingpartyCreateAuthUriRequest:
       description: Request to get the IDP authentication URL.
       properties:
         appId:
-          description: 'The app ID of the mobile app, base64(CERT_SHA1):PACKAGE_NAME for Android, BUNDLE_ID for iOS.'
+          description: The app ID of the mobile app, base64(CERT_SHA1):PACKAGE_NAME for Android, BUNDLE_ID for iOS.
           type: string
         authFlowType:
           description: Explicitly specify the auth flow type. Currently only support "CODE_FLOW" type. The field is only used for Google provider.
@@ -830,7 +878,7 @@ components:
           additionalProperties:
             description: The customized query parameter.
             type: string
-          description: 'The query parameter that client can customize by themselves in auth url. The following parameters are reserved for server so that they cannot be customized by clients: client_id, response_type, scope, redirect_uri, state, oauth_token.'
+          description: "The query parameter that client can customize by themselves in auth url. The following parameters are reserved for server so that they cannot be customized by clients: client_id, response_type, scope, redirect_uri, state, oauth_token."
           type: object
         hostedDomain:
           description: The hosted domain to restrict sign-in to accounts at that domain for Google Apps hosted accounts.
@@ -842,22 +890,22 @@ components:
           description: The developer's consumer key for OpenId OAuth Extension
           type: string
         oauthScope:
-          description: 'Additional oauth scopes, beyond the basid user profile, that the user would be prompted to grant'
+          description: Additional oauth scopes, beyond the basid user profile, that the user would be prompted to grant
           type: string
         openidRealm:
-          description: 'Optional realm for OpenID protocol. The sub string "scheme://domain:port" of the param "continueUri" is used if this is not set.'
+          description: Optional realm for OpenID protocol. The sub string "scheme://domain:port" of the param "continueUri" is used if this is not set.
           type: string
         otaApp:
           description: The native app package for OTA installation.
           type: string
         providerId:
-          description: 'The IdP ID. For white listed IdPs it''s a short domain name e.g. google.com, aol.com, live.net and yahoo.com. For other OpenID IdPs it''s the OP identifier.'
+          description: The IdP ID. For white listed IdPs it's a short domain name e.g. google.com, aol.com, live.net and yahoo.com. For other OpenID IdPs it's the OP identifier.
           type: string
         sessionId:
           description: The session_id passed by client.
           type: string
         tenantId:
-          description: 'For multi-tenant use cases, in order to construct sign-in URL with the correct IDP parameters, Firebear needs to know which Tenant to retrieve IDP configs from.'
+          description: For multi-tenant use cases, in order to construct sign-in URL with the correct IDP parameters, Firebear needs to know which Tenant to retrieve IDP configs from.
           type: string
         tenantProjectNumber:
           description: Tenant project number to be used for idp discovery.
@@ -942,7 +990,7 @@ components:
           description: Whether to allow password user sign in or sign up.
           type: boolean
         apiKey:
-          description: 'Browser API key, needed when making http request to Apiary.'
+          description: Browser API key, needed when making http request to Apiary.
           type: string
         authorizedDomains:
           description: Authorized domains.
@@ -950,7 +998,7 @@ components:
             type: string
           type: array
         changeEmailTemplate:
-          $ref: '#/components/schemas/EmailTemplate'
+          $ref: "#/components/schemas/EmailTemplate"
           description: Change email template.
         dynamicLinksDomain:
           type: string
@@ -960,22 +1008,22 @@ components:
         idpConfig:
           description: OAuth2 provider configuration.
           items:
-            $ref: '#/components/schemas/IdpConfig'
+            $ref: "#/components/schemas/IdpConfig"
           type: array
         legacyResetPasswordTemplate:
-          $ref: '#/components/schemas/EmailTemplate'
+          $ref: "#/components/schemas/EmailTemplate"
           description: Legacy reset password email template.
         projectId:
           description: Project ID of the relying party.
           type: string
         resetPasswordTemplate:
-          $ref: '#/components/schemas/EmailTemplate'
+          $ref: "#/components/schemas/EmailTemplate"
           description: Reset password email template.
         useEmailSending:
           description: Whether to use email sending provided by Firebear.
           type: boolean
         verifyEmailTemplate:
-          $ref: '#/components/schemas/EmailTemplate'
+          $ref: "#/components/schemas/EmailTemplate"
           description: Verify email template.
       type: object
     IdentitytoolkitRelyingpartyGetPublicKeysResponse:
@@ -1112,7 +1160,7 @@ components:
           description: Whether to allow password user sign in or sign up.
           type: boolean
         apiKey:
-          description: 'Browser API key, needed when making http request to Apiary.'
+          description: Browser API key, needed when making http request to Apiary.
           type: string
         authorizedDomains:
           description: Authorized domains for widget redirect.
@@ -1120,7 +1168,7 @@ components:
             type: string
           type: array
         changeEmailTemplate:
-          $ref: '#/components/schemas/EmailTemplate'
+          $ref: "#/components/schemas/EmailTemplate"
           description: Change email template.
         delegatedProjectNumber:
           description: GCP project number of the requesting delegated app. Currently only intended for Firebase V1 migration.
@@ -1132,19 +1180,19 @@ components:
         idpConfig:
           description: Oauth2 provider configuration.
           items:
-            $ref: '#/components/schemas/IdpConfig'
+            $ref: "#/components/schemas/IdpConfig"
           type: array
         legacyResetPasswordTemplate:
-          $ref: '#/components/schemas/EmailTemplate'
+          $ref: "#/components/schemas/EmailTemplate"
           description: Legacy reset password email template.
         resetPasswordTemplate:
-          $ref: '#/components/schemas/EmailTemplate'
+          $ref: "#/components/schemas/EmailTemplate"
           description: Reset password email template.
         useEmailSending:
           description: Whether to use email sending provided by Firebear.
           type: boolean
         verifyEmailTemplate:
-          $ref: '#/components/schemas/EmailTemplate'
+          $ref: "#/components/schemas/EmailTemplate"
           description: Verify email template.
       type: object
     IdentitytoolkitRelyingpartySetProjectConfigResponse:
@@ -1172,7 +1220,7 @@ components:
           type: string
       type: object
     IdentitytoolkitRelyingpartySignupNewUserRequest:
-      description: 'Request to signup new user, create anonymous user or anonymous user reauth.'
+      description: Request to signup new user, create anonymous user or anonymous user reauth.
       properties:
         captchaChallenge:
           description: The captcha challenge.
@@ -1211,7 +1259,7 @@ components:
           description: The photo url of the user.
           type: string
         tenantId:
-          description: 'For multi-tenant use cases, in order to construct sign-in URL with the correct IDP parameters, Firebear needs to know which Tenant to retrieve IDP configs from.'
+          description: For multi-tenant use cases, in order to construct sign-in URL with the correct IDP parameters, Firebear needs to know which Tenant to retrieve IDP configs from.
           type: string
         tenantProjectNumber:
           description: Tenant project number to be used for idp discovery.
@@ -1257,7 +1305,7 @@ components:
           format: byte
           type: string
         sanityCheck:
-          description: 'If true, backend will do sanity check(including duplicate email and federated id) when uploading account.'
+          description: If true, backend will do sanity check(including duplicate email and federated id) when uploading account.
           type: boolean
         signerKey:
           description: The key for to hash the password.
@@ -1269,14 +1317,14 @@ components:
         users:
           description: The account info to be stored.
           items:
-            $ref: '#/components/schemas/UserInfo'
+            $ref: "#/components/schemas/UserInfo"
           type: array
       type: object
     IdentitytoolkitRelyingpartyVerifyAssertionRequest:
       description: Request to verify the IDP assertion.
       properties:
         autoCreate:
-          description: 'When it''s true, automatically creates a new account if the user doesn''t exist. When it''s false, allows existing user to sign in normally and throws exception if the user doesn''t exist.'
+          description: When it's true, automatically creates a new account if the user doesn't exist. When it's false, allows existing user to sign in normally and throws exception if the user doesn't exist.
           type: boolean
         delegatedProjectNumber:
           description: GCP project number of the requesting delegated app. Currently only intended for Firebase V1 migration.
@@ -1307,10 +1355,10 @@ components:
           description: Whether return sts id token and refresh token instead of gitkit token.
           type: boolean
         sessionId:
-          description: 'Session ID, which should match the one in previous createAuthUri request.'
+          description: Session ID, which should match the one in previous createAuthUri request.
           type: string
         tenantId:
-          description: 'For multi-tenant use cases, in order to construct sign-in URL with the correct IDP parameters, Firebear needs to know which Tenant to retrieve IDP configs from.'
+          description: For multi-tenant use cases, in order to construct sign-in URL with the correct IDP parameters, Firebear needs to know which Tenant to retrieve IDP configs from.
           type: string
         tenantProjectNumber:
           description: Tenant project number to be used for idp discovery.
@@ -1360,13 +1408,13 @@ components:
           description: The password inputed by the user.
           type: string
         pendingIdToken:
-          description: 'The GITKit token for the non-trusted IDP, which is to be confirmed by the user.'
+          description: The GITKit token for the non-trusted IDP, which is to be confirmed by the user.
           type: string
         returnSecureToken:
           description: Whether return sts id token and refresh token instead of gitkit token.
           type: boolean
         tenantId:
-          description: 'For multi-tenant use cases, in order to construct sign-in URL with the correct IDP parameters, Firebear needs to know which Tenant to retrieve IDP configs from.'
+          description: For multi-tenant use cases, in order to construct sign-in URL with the correct IDP parameters, Firebear needs to know which Tenant to retrieve IDP configs from.
           type: string
         tenantProjectNumber:
           description: Tenant project number to be used for idp discovery.
@@ -1445,7 +1493,7 @@ components:
           type: array
       type: object
     Relyingparty:
-      description: 'Request of getting a code for user confirmation (reset password, change email etc.)'
+      description: Request of getting a code for user confirmation (reset password, change email etc.)
       properties:
         androidInstallApp:
           description: whether or not to install the android app on the device where the link is opened
@@ -1481,8 +1529,8 @@ components:
           description: The user's Gitkit login token for email change.
           type: string
         kind:
-          default: 'identitytoolkit#relyingparty'
-          description: 'The fixed string "identitytoolkit#relyingparty".'
+          default: identitytoolkit#relyingparty
+          description: The fixed string "identitytoolkit#relyingparty".
           type: string
         newEmail:
           description: The new email if the code is for email change.
@@ -1498,14 +1546,14 @@ components:
       description: Response of resetting the password.
       properties:
         email:
-          description: 'The user''s email. If the out-of-band code is for email recovery, the user''s original email.'
+          description: The user's email. If the out-of-band code is for email recovery, the user's original email.
           type: string
         kind:
-          default: 'identitytoolkit#ResetPasswordResponse'
-          description: 'The fixed string "identitytoolkit#ResetPasswordResponse".'
+          default: identitytoolkit#ResetPasswordResponse
+          description: The fixed string "identitytoolkit#ResetPasswordResponse".
           type: string
         newEmail:
-          description: 'If the out-of-band code is for email recovery, the user''s new email.'
+          description: If the out-of-band code is for email recovery, the user's new email.
           type: string
         requestType:
           description: The request type.
@@ -1524,15 +1572,15 @@ components:
           description: If email has been verified.
           type: boolean
         expiresIn:
-          description: 'If idToken is STS id token, then this field will be expiration time of STS id token in seconds.'
+          description: If idToken is STS id token, then this field will be expiration time of STS id token in seconds.
           format: int64
           type: string
         idToken:
           description: The Gitkit id token to login the newly sign up user.
           type: string
         kind:
-          default: 'identitytoolkit#SetAccountInfoResponse'
-          description: 'The fixed string "identitytoolkit#SetAccountInfoResponse".'
+          default: identitytoolkit#SetAccountInfoResponse
+          description: The fixed string "identitytoolkit#SetAccountInfoResponse".
           type: string
         localId:
           description: The local ID of the user.
@@ -1561,16 +1609,16 @@ components:
                 description: The user's photo url at the IDP.
                 type: string
               providerId:
-                description: 'The IdP ID. For whitelisted IdPs it''s a short domain name, e.g., google.com, aol.com, live.net and yahoo.com. For other OpenID IdPs it''s the OP identifier.'
+                description: The IdP ID. For whitelisted IdPs it's a short domain name, e.g., google.com, aol.com, live.net and yahoo.com. For other OpenID IdPs it's the OP identifier.
                 type: string
             type: object
           type: array
         refreshToken:
-          description: 'If idToken is STS id token, then this field will be refresh token.'
+          description: If idToken is STS id token, then this field will be refresh token.
           type: string
       type: object
     SignupNewUserResponse:
-      description: 'Response of signing up new user, creating anonymous user or anonymous user reauth.'
+      description: Response of signing up new user, creating anonymous user or anonymous user reauth.
       properties:
         displayName:
           description: The name of the user.
@@ -1579,21 +1627,21 @@ components:
           description: The email of the user.
           type: string
         expiresIn:
-          description: 'If idToken is STS id token, then this field will be expiration time of STS id token in seconds.'
+          description: If idToken is STS id token, then this field will be expiration time of STS id token in seconds.
           format: int64
           type: string
         idToken:
           description: The Gitkit id token to login the newly sign up user.
           type: string
         kind:
-          default: 'identitytoolkit#SignupNewUserResponse'
-          description: 'The fixed string "identitytoolkit#SignupNewUserResponse".'
+          default: identitytoolkit#SignupNewUserResponse
+          description: The fixed string "identitytoolkit#SignupNewUserResponse".
           type: string
         localId:
           description: The RP local ID of the user.
           type: string
         refreshToken:
-          description: 'If idToken is STS id token, then this field will be refresh token.'
+          description: If idToken is STS id token, then this field will be refresh token.
           type: string
       type: object
     UploadAccountResponse:
@@ -1604,7 +1652,7 @@ components:
           items:
             properties:
               index:
-                description: 'The index of the malformed account, starting from 0.'
+                description: The index of the malformed account, starting from 0.
                 format: int32
                 type: integer
               message:
@@ -1613,8 +1661,8 @@ components:
             type: object
           type: array
         kind:
-          default: 'identitytoolkit#UploadAccountResponse'
-          description: 'The fixed string "identitytoolkit#UploadAccountResponse".'
+          default: identitytoolkit#UploadAccountResponse
+          description: The fixed string "identitytoolkit#UploadAccountResponse".
           type: string
       type: object
     UserInfo:
@@ -1683,7 +1731,7 @@ components:
                 description: The user's photo url at the IDP.
                 type: string
               providerId:
-                description: 'The IdP ID. For white listed IdPs it''s a short domain name, e.g., google.com, aol.com, live.net and yahoo.com. For other OpenID IdPs it''s the OP identifier.'
+                description: The IdP ID. For white listed IdPs it's a short domain name, e.g., google.com, aol.com, live.net and yahoo.com. For other OpenID IdPs it's the OP identifier.
                 type: string
               rawId:
                 description: User's raw identifier directly returned from IDP.
@@ -1734,7 +1782,7 @@ components:
           description: The display name of the user.
           type: string
         email:
-          description: 'The email returned by the IdP. NOTE: The federated login user may not own the email.'
+          description: "The email returned by the IdP. NOTE: The federated login user may not own the email."
           type: string
         emailRecycled:
           description: It's true if the email is recycled.
@@ -1746,7 +1794,7 @@ components:
           description: Client error code.
           type: string
         expiresIn:
-          description: 'If idToken is STS id token, then this field will be expiration time of STS id token in seconds.'
+          description: If idToken is STS id token, then this field will be expiration time of STS id token in seconds.
           format: int64
           type: string
         federatedId:
@@ -1765,11 +1813,11 @@ components:
           description: It's the identifier param in the createAuthUri request if the identifier is an email. It can be used to check whether the user input email is different from the asserted email.
           type: string
         isNewUser:
-          description: 'True if it''s a new user sign-in, false if it''s a returning user.'
+          description: True if it's a new user sign-in, false if it's a returning user.
           type: boolean
         kind:
-          default: 'identitytoolkit#VerifyAssertionResponse'
-          description: 'The fixed string "identitytoolkit#VerifyAssertionResponse".'
+          default: identitytoolkit#VerifyAssertionResponse
+          description: The fixed string "identitytoolkit#VerifyAssertionResponse".
           type: string
         language:
           description: The language preference of the user.
@@ -1818,13 +1866,13 @@ components:
           description: The URI of the public accessible profiel picture.
           type: string
         providerId:
-          description: 'The IdP ID. For white listed IdPs it''s a short domain name e.g. google.com, aol.com, live.net and yahoo.com. If the "providerId" param is set to OpenID OP identifer other than the whilte listed IdPs the OP identifier is returned. If the "identifier" param is federated ID in the createAuthUri request. The domain part of the federated ID is returned.'
+          description: The IdP ID. For white listed IdPs it's a short domain name e.g. google.com, aol.com, live.net and yahoo.com. If the "providerId" param is set to OpenID OP identifer other than the whilte listed IdPs the OP identifier is returned. If the "identifier" param is federated ID in the createAuthUri request. The domain part of the federated ID is returned.
           type: string
         rawUserInfo:
           description: Raw IDP-returned user info.
           type: string
         refreshToken:
-          description: 'If idToken is STS id token, then this field will be refresh token.'
+          description: If idToken is STS id token, then this field will be refresh token.
           type: string
         screenName:
           description: The screen_name of a Twitter user or the login name at Github.
@@ -1833,7 +1881,7 @@ components:
           description: The timezone of the user.
           type: string
         verifiedProvider:
-          description: 'When action is ''map'', contains the idps which can be used for confirmation.'
+          description: When action is 'map', contains the idps which can be used for confirmation.
           items:
             type: string
           type: array
@@ -1842,21 +1890,21 @@ components:
       description: Response from verifying a custom token
       properties:
         expiresIn:
-          description: 'If idToken is STS id token, then this field will be expiration time of STS id token in seconds.'
+          description: If idToken is STS id token, then this field will be expiration time of STS id token in seconds.
           format: int64
           type: string
         idToken:
           description: The GITKit token for authenticated user.
           type: string
         isNewUser:
-          description: 'True if it''s a new user sign-in, false if it''s a returning user.'
+          description: True if it's a new user sign-in, false if it's a returning user.
           type: boolean
         kind:
-          default: 'identitytoolkit#VerifyCustomTokenResponse'
-          description: 'The fixed string "identitytoolkit#VerifyCustomTokenResponse".'
+          default: identitytoolkit#VerifyCustomTokenResponse
+          description: The fixed string "identitytoolkit#VerifyCustomTokenResponse".
           type: string
         refreshToken:
-          description: 'If idToken is STS id token, then this field will be refresh token.'
+          description: If idToken is STS id token, then this field will be refresh token.
           type: string
       type: object
     VerifyPasswordResponse:
@@ -1866,18 +1914,18 @@ components:
           description: The name of the user.
           type: string
         email:
-          description: 'The email returned by the IdP. NOTE: The federated login user may not own the email.'
+          description: "The email returned by the IdP. NOTE: The federated login user may not own the email."
           type: string
         expiresIn:
-          description: 'If idToken is STS id token, then this field will be expiration time of STS id token in seconds.'
+          description: If idToken is STS id token, then this field will be expiration time of STS id token in seconds.
           format: int64
           type: string
         idToken:
           description: The GITKit token for authenticated user.
           type: string
         kind:
-          default: 'identitytoolkit#VerifyPasswordResponse'
-          description: 'The fixed string "identitytoolkit#VerifyPasswordResponse".'
+          default: identitytoolkit#VerifyPasswordResponse
+          description: The fixed string "identitytoolkit#VerifyPasswordResponse".
           type: string
         localId:
           description: The RP local ID if it's already been mapped to the IdP account identified by the federated ID.
@@ -1896,7 +1944,7 @@ components:
           description: The URI of the user's photo at IdP
           type: string
         refreshToken:
-          description: 'If idToken is STS id token, then this field will be refresh token.'
+          description: If idToken is STS id token, then this field will be refresh token.
           type: string
         registered:
           description: Whether the email is registered.
@@ -1904,11 +1952,21 @@ components:
       type: object
   securitySchemes:
     Oauth2:
-      description: Oauth 2.0 authentication
+      description: Oauth 2.0 implicit authentication
       flows:
         implicit:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-            'https://www.googleapis.com/auth/firebase': View and administer all your Firebase data and settings
+            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/firebase: View and administer all your Firebase data and settings
+      type: oauth2
+    Oauth2c:
+      description: Oauth 2.0 authorizationCode authentication
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          scopes:
+            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/firebase: View and administer all your Firebase data and settings
+          tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

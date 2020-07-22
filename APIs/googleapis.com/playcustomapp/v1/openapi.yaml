@@ -1,49 +1,55 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://www.googleapis.com/playcustomapp/v1/accounts'
+  - url: https://www.googleapis.com/
 info:
   contact:
     name: Google
-    url: 'https://google.com'
-  description: An API to publish custom Android apps.
+    url: https://google.com
+    x-twitter: youtube
+  description: API to create and publish custom Android apps
   license:
     name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
-  title: Google Play Custom App Publishing
+    url: http://creativecommons.org/licenses/by/3.0/
+  termsOfService: https://developers.google.com/terms/
+  title: Google Play Custom App Publishing API
   version: v1
   x-apiClientRegistration:
-    url: 'https://console.developers.google.com'
+    url: https://console.developers.google.com
   x-apisguru-categories:
-    - developer_tools
+    - analytics
+    - media
   x-logo:
-    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.31
       format: google
-      url: 'https://www.googleapis.com/discovery/v1/apis/playcustomapp/v1/rest'
+      url: https://www.googleapis.com/discovery/v1/apis/playcustomapp/v1/rest
       version: v1
   x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: playcustomapp
 externalDocs:
-  url: 'https://developers.google.com/android/work/play/custom-app-api'
+  url: https://developers.google.com/android/work/play/custom-app-api/
 tags:
   - name: accounts
 paths:
-  '/{account}/customApps':
+  "/playcustomapp/v1/accounts/{account}/customApps":
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
-      description: Create and publish a new custom app.
+      description: Creates a new custom app.
       operationId: playcustomapp.accounts.customApps.create
       parameters:
         - description: Developer account ID.
@@ -56,31 +62,53 @@ paths:
         content:
           application/octet-stream:
             schema:
-              $ref: '#/components/schemas/CustomApp'
+              $ref: "#/components/schemas/CustomApp"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/CustomApp'
+                $ref: "#/components/schemas/CustomApp"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/androidpublisher'
+            - https://www.googleapis.com/auth/androidpublisher
           Oauth2c:
-            - 'https://www.googleapis.com/auth/androidpublisher'
+            - https://www.googleapis.com/auth/androidpublisher
       tags:
         - accounts
 components:
   parameters:
+    _.xgafv:
+      description: V1 error format.
+      in: query
+      name: $.xgafv
+      schema:
+        enum:
+          - "1"
+          - "2"
+        type: string
+    access_token:
+      description: OAuth access token.
+      in: query
+      name: access_token
+      schema:
+        type: string
     alt:
-      description: Data format for the response.
+      description: Data format for response.
       in: query
       name: alt
       schema:
-        default: json
         enum:
           - json
+          - media
+          - proto
+        type: string
+    callback:
+      description: JSONP
+      in: query
+      name: callback
+      schema:
         type: string
     fields:
       description: Selector specifying which fields to include in a partial response.
@@ -89,7 +117,7 @@ components:
       schema:
         type: string
     key:
-      description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -105,18 +133,23 @@ components:
       in: query
       name: prettyPrint
       schema:
-        default: true
         type: boolean
     quotaUser:
-      description: An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
       in: query
       name: quotaUser
       schema:
         type: string
-    userIp:
-      description: Deprecated. Please use quotaUser instead.
+    uploadType:
+      description: Legacy upload protocol for media (e.g. "media", "multipart").
       in: query
-      name: userIp
+      name: uploadType
+      schema:
+        type: string
+    upload_protocol:
+      description: Upload protocol for media (e.g. "raw", "multipart").
+      in: query
+      name: upload_protocol
       schema:
         type: string
   schemas:
@@ -125,6 +158,12 @@ components:
       properties:
         languageCode:
           description: Default listing language in BCP 47 format.
+          type: string
+        packageName:
+          description: >-
+            Output only. Package name of the created Android app.
+
+            Only present in the API response.
           type: string
         title:
           description: Title for the Android app.
@@ -135,16 +174,16 @@ components:
       description: Oauth 2.0 implicit authentication
       flows:
         implicit:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            'https://www.googleapis.com/auth/androidpublisher': View and manage your Google Play Developer account
+            https://www.googleapis.com/auth/androidpublisher: View and manage your Google Play Developer account
       type: oauth2
     Oauth2c:
-      description: Oauth 2.0 accessCode authentication
+      description: Oauth 2.0 authorizationCode authentication
       flows:
         authorizationCode:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            'https://www.googleapis.com/auth/androidpublisher': View and manage your Google Play Developer account
-          tokenUrl: 'https://accounts.google.com/o/oauth2/token'
+            https://www.googleapis.com/auth/androidpublisher: View and manage your Google Play Developer account
+          tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

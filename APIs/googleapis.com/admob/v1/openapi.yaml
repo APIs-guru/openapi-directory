@@ -1,30 +1,38 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://admob.googleapis.com/'
+  - url: https://admob.googleapis.com/
 info:
   contact:
     name: Google
-    url: 'https://google.com'
+    url: https://google.com
+    x-twitter: youtube
   description: |
     The Google AdMob API lets you programmatically get reports on earnings.
-  title: AdMob
+  license:
+    name: Creative Commons Attribution 3.0
+    url: http://creativecommons.org/licenses/by/3.0/
+  termsOfService: https://developers.google.com/terms/
+  title: AdMob API
   version: v1
   x-apiClientRegistration:
-    url: 'https://console.developers.google.com'
+    url: https://console.developers.google.com
+  x-apisguru-categories:
+    - analytics
+    - media
   x-logo:
-    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.31
       format: google
-      url: 'https://admob.googleapis.com/$discovery/rest?version=v1'
+      url: https://admob.googleapis.com/$discovery/rest?version=v1
       version: v1
   x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: admob
 externalDocs:
-  url: 'https://developers.google.com/admob/api/'
+  url: https://developers.google.com/admob/api/
 tags:
   - name: accounts
 paths:
@@ -35,41 +43,44 @@ paths:
         Currently, all credentials have access to at most one AdMob account.
       operationId: admob.accounts.list
       parameters:
-        - description: |-
-            The value returned by the last `ListPublisherAccountsResponse`; indicates
-            that this is a continuation of a prior `ListPublisherAccounts` call, and
-            that the system should return the next page of data.
-          in: query
-          name: pageToken
-          schema:
-            type: string
         - description: Maximum number of accounts to return.
           in: query
           name: pageSize
           schema:
             type: integer
+        - description: >-
+            The value returned by the last `ListPublisherAccountsResponse`;
+            indicates
+
+            that this is a continuation of a prior `ListPublisherAccounts` call, and
+
+            that the system should return the next page of data.
+          in: query
+          name: pageToken
+          schema:
+            type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ListPublisherAccountsResponse'
+                $ref: "#/components/schemas/ListPublisherAccountsResponse"
           description: Successful response
       tags:
         - accounts
     parameters:
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-  '/v1/{name}':
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+  "/v1/{name}":
     get:
       description: Gets information about the specified AdMob publisher account.
       operationId: admob.accounts.get
@@ -82,41 +93,40 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/PublisherAccount'
+                $ref: "#/components/schemas/PublisherAccount"
           description: Successful response
       tags:
         - accounts
     parameters:
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-  '/v1/{parent}/mediationReport:generate':
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+  "/v1/{parent}/mediationReport:generate":
     parameters:
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
     post:
       description: |-
         Generates an AdMob Mediation report based on the provided report
@@ -131,34 +141,33 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/GenerateMediationReportRequest'
+              $ref: "#/components/schemas/GenerateMediationReportRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/GenerateMediationReportResponse'
+                $ref: "#/components/schemas/GenerateMediationReportResponse"
           description: Successful response
       tags:
         - accounts
-  '/v1/{parent}/networkReport:generate':
+  "/v1/{parent}/networkReport:generate":
     parameters:
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
     post:
       description: |-
         Generates an AdMob Network report based on the provided report
@@ -173,18 +182,17 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/GenerateNetworkReportRequest'
+              $ref: "#/components/schemas/GenerateNetworkReportRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/GenerateNetworkReportResponse'
+                $ref: "#/components/schemas/GenerateNetworkReportResponse"
           description: Successful response
       tags:
         - accounts
@@ -196,8 +204,8 @@ components:
       name: $.xgafv
       schema:
         enum:
-          - '1'
-          - '2'
+          - "1"
+          - "2"
         type: string
     access_token:
       description: OAuth access token.
@@ -210,7 +218,6 @@ components:
       in: query
       name: alt
       schema:
-        default: json
         enum:
           - json
           - media
@@ -229,7 +236,9 @@ components:
       schema:
         type: string
     key:
-      description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+      description: API key. Your API key identifies your project and provides you with
+        API access, quota, and reports. Required unless you provide an OAuth 2.0
+        token.
       in: query
       name: key
       schema:
@@ -245,56 +254,72 @@ components:
       in: query
       name: prettyPrint
       schema:
-        default: true
         type: boolean
     quotaUser:
-      description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.'
+      description: Available to use for quota purposes for server-side applications.
+        Can be any arbitrary string assigned to a user, but should not exceed 40
+        characters.
       in: query
       name: quotaUser
       schema:
         type: string
     uploadType:
-      description: 'Legacy upload protocol for media (e.g. "media", "multipart").'
+      description: Legacy upload protocol for media (e.g. "media", "multipart").
       in: query
       name: uploadType
       schema:
         type: string
     upload_protocol:
-      description: 'Upload protocol for media (e.g. "raw", "multipart").'
+      description: Upload protocol for media (e.g. "raw", "multipart").
       in: query
       name: upload_protocol
       schema:
         type: string
   schemas:
     Date:
-      description: |-
-        Represents a whole or partial calendar date, e.g. a birthday. The time of day
+      description: >-
+        Represents a whole or partial calendar date, e.g. a birthday. The time
+        of day
+
         and time zone are either specified elsewhere or are not significant. The date
+
         is relative to the Proleptic Gregorian Calendar. This can represent:
 
+
         * A full date, with non-zero year, month and day values
+
         * A month and day value, with a zero year, e.g. an anniversary
+
         * A year on its own, with zero month and day values
+
         * A year and month value, with a zero day, e.g. a credit card expiration date
+
 
         Related types are google.type.TimeOfDay and `google.protobuf.Timestamp`.
       properties:
         day:
-          description: |-
-            Day of month. Must be from 1 to 31 and valid for the year and month, or 0
+          description: >-
+            Day of month. Must be from 1 to 31 and valid for the year and month,
+            or 0
+
             if specifying a year by itself or a year and month where the day is not
+
             significant.
           format: int32
           type: integer
         month:
-          description: |-
-            Month of year. Must be from 1 to 12, or 0 if specifying a year without a
+          description: >-
+            Month of year. Must be from 1 to 12, or 0 if specifying a year
+            without a
+
             month and day.
           format: int32
           type: integer
         year:
-          description: |-
-            Year of date. Must be from 1 to 9999, or 0 if specifying a date without
+          description: >-
+            Year of date. Must be from 1 to 9999, or 0 if specifying a date
+            without
+
             a year.
           format: int32
           type: integer
@@ -303,21 +328,25 @@ components:
       description: Specification of a single date range. Both dates are inclusive.
       properties:
         endDate:
-          $ref: '#/components/schemas/Date'
-          description: |-
-            End date of the date range, inclusive. Must be greater than or equal to the
+          $ref: "#/components/schemas/Date"
+          description: >-
+            End date of the date range, inclusive. Must be greater than or equal
+            to the
+
             start date.
         startDate:
-          $ref: '#/components/schemas/Date'
-          description: |-
-            Start date of the date range, inclusive. Must be less than or equal to the
+          $ref: "#/components/schemas/Date"
+          description: >-
+            Start date of the date range, inclusive. Must be less than or equal
+            to the
+
             end date.
       type: object
     GenerateMediationReportRequest:
       description: Request to generate an AdMob Mediation report.
       properties:
         reportSpec:
-          $ref: '#/components/schemas/MediationReportSpec'
+          $ref: "#/components/schemas/MediationReportSpec"
           description: Network report specification.
       type: object
     GenerateMediationReportResponse:
@@ -359,31 +388,39 @@ components:
             }]
       properties:
         footer:
-          $ref: '#/components/schemas/ReportFooter'
-          description: |-
-            Additional information about the generated report, such as warnings about
+          $ref: "#/components/schemas/ReportFooter"
+          description: >-
+            Additional information about the generated report, such as warnings
+            about
+
             the data.
         header:
-          $ref: '#/components/schemas/ReportHeader'
-          description: |-
-            Report generation settings that describes the report contents, such as
+          $ref: "#/components/schemas/ReportHeader"
+          description: >-
+            Report generation settings that describes the report contents, such
+            as
+
             the report date range and localization settings.
         row:
-          $ref: '#/components/schemas/ReportRow'
+          $ref: "#/components/schemas/ReportRow"
           description: Actual report data.
       type: object
     GenerateNetworkReportRequest:
       description: Request to generate an AdMob Network report.
       properties:
         reportSpec:
-          $ref: '#/components/schemas/NetworkReportSpec'
+          $ref: "#/components/schemas/NetworkReportSpec"
           description: Network report specification.
       type: object
     GenerateNetworkReportResponse:
-      description: |-
-        The streaming response for the AdMob Network report where the first response
+      description: >-
+        The streaming response for the AdMob Network report where the first
+        response
+
         contains the report header, then a stream of row responses, and finally a
+
         footer as the last response message.
+
 
         For example:
 
@@ -418,17 +455,21 @@ components:
             }]
       properties:
         footer:
-          $ref: '#/components/schemas/ReportFooter'
-          description: |-
-            Additional information about the generated report, such as warnings about
+          $ref: "#/components/schemas/ReportFooter"
+          description: >-
+            Additional information about the generated report, such as warnings
+            about
+
             the data.
         header:
-          $ref: '#/components/schemas/ReportHeader'
-          description: |-
-            Report generation settings that describes the report contents, such as
+          $ref: "#/components/schemas/ReportHeader"
+          description: >-
+            Report generation settings that describes the report contents, such
+            as
+
             the report date range and localization settings.
         row:
-          $ref: '#/components/schemas/ReportRow'
+          $ref: "#/components/schemas/ReportRow"
           description: Actual report data.
       type: object
     ListPublisherAccountsResponse:
@@ -437,36 +478,48 @@ components:
         account:
           description: Publisher that the client credentials can access.
           items:
-            $ref: '#/components/schemas/PublisherAccount'
+            $ref: "#/components/schemas/PublisherAccount"
           type: array
         nextPageToken:
-          description: |-
-            If not empty, indicates that there might be more accounts for the request;
+          description: >-
+            If not empty, indicates that there might be more accounts for the
+            request;
+
             you must pass this value in a new `ListPublisherAccountsRequest`.
           type: string
       type: object
     LocalizationSettings:
-      description: |-
-        Localization settings for reports, such as currency and language. It affects
+      description: >-
+        Localization settings for reports, such as currency and language. It
+        affects
+
         how metrics are calculated.
       properties:
         currencyCode:
-          description: |-
-            Currency code of the earning related metrics, which is the 3-letter code
+          description: >-
+            Currency code of the earning related metrics, which is the 3-letter
+            code
+
             defined in ISO 4217. The daily average rate is used for the currency
+
             conversion. Defaults to the account currency code if unspecified.
           type: string
         languageCode:
-          description: |-
-            Language used for any localized text, such as some dimension value display
+          description: >-
+            Language used for any localized text, such as some dimension value
+            display
+
             labels. The language tag defined in the IETF BCP47. Defaults to 'en-US' if
+
             unspecified.
           type: string
       type: object
     MediationReportSpec:
-      description: |-
+      description: >-
         The specification for generating an AdMob Mediation report.
+
         For example, the specification to get observed ECPM sliced by ad source and
+
         app for the 'US' and 'CN' countries can look like the following example:
 
             {
@@ -492,6 +545,7 @@ components:
             }
 
         For a better understanding, you can treat the preceding specification like
+
         the following pseudo SQL:
 
             SELECT AD_SOURCE, APP, COUNTRY, OBSERVED_ECPM
@@ -502,17 +556,20 @@ components:
             ORDER BY APP ASC;
       properties:
         dateRange:
-          $ref: '#/components/schemas/DateRange'
+          $ref: "#/components/schemas/DateRange"
           description: The date range for which the report is generated.
         dimensionFilters:
           description: Describes which report rows to match based on their dimension values.
           items:
-            $ref: '#/components/schemas/MediationReportSpecDimensionFilter'
+            $ref: "#/components/schemas/MediationReportSpecDimensionFilter"
           type: array
         dimensions:
-          description: |-
-            List of dimensions of the report. The value combination of these dimensions
+          description: >-
+            List of dimensions of the report. The value combination of these
+            dimensions
+
             determines the row of the report. If no dimensions are specified, the
+
             report returns a single row of requested metrics for the entire account.
           items:
             enum:
@@ -531,17 +588,21 @@ components:
             type: string
           type: array
         localizationSettings:
-          $ref: '#/components/schemas/LocalizationSettings'
+          $ref: "#/components/schemas/LocalizationSettings"
           description: Localization settings of the report.
         maxReportRows:
-          description: |-
-            Maximum number of report data rows to return. If the value is not set, the
+          description: >-
+            Maximum number of report data rows to return. If the value is not
+            set, the
+
             API returns as many rows as possible, up to 100000. Acceptable values are
+
             1-100000, inclusive. Any other values are treated as 100000.
           format: int32
           type: integer
         metrics:
-          description: List of metrics of the report. A report must specify at least one metric.
+          description: List of metrics of the report. A report must specify at least one
+            metric.
           items:
             enum:
               - METRIC_UNSPECIFIED
@@ -556,21 +617,29 @@ components:
             type: string
           type: array
         sortConditions:
-          description: |-
-            Describes the sorting of report rows. The order of the condition in the
+          description: >-
+            Describes the sorting of report rows. The order of the condition in
+            the
+
             list defines its precedence; the earlier the condition, the higher its
+
             precedence. If no sort conditions are specified, the row ordering is
+
             undefined.
           items:
-            $ref: '#/components/schemas/MediationReportSpecSortCondition'
+            $ref: "#/components/schemas/MediationReportSpecSortCondition"
           type: array
         timeZone:
-          description: |-
+          description: >-
             A report time zone. Accepts an IANA TZ name values, such as
+
             "America/Los_Angeles."  If no time zone is defined, the account default
+
             takes effect. Check default value by the get account action.
 
+
             **Warning:** The "America/Los_Angeles" is the only supported value at
+
             the moment.
           type: string
       type: object
@@ -594,9 +663,11 @@ components:
             - PLATFORM
           type: string
         matchesAny:
-          $ref: '#/components/schemas/StringList'
-          description: |-
-            Matches a row if its value for the specified dimension is in one of the
+          $ref: "#/components/schemas/StringList"
+          description: >-
+            Matches a row if its value for the specified dimension is in one of
+            the
+
             values specified in this condition.
       type: object
     MediationReportSpecSortCondition:
@@ -640,9 +711,11 @@ components:
           type: string
       type: object
     NetworkReportSpec:
-      description: |-
+      description: >-
         The specification for generating an AdMob Network report.
+
         For example, the specification to get clicks and estimated earnings for only
+
         the 'US' and 'CN' countries can look like the following example:
 
             {
@@ -669,6 +742,7 @@ components:
             }
 
         For a better understanding, you can treat the preceding specification like
+
         the following pseudo SQL:
 
             SELECT DATE, APP, COUNTRY, CLICKS, ESTIMATED_EARNINGS
@@ -679,17 +753,20 @@ components:
             ORDER BY APP ASC, CLICKS DESC;
       properties:
         dateRange:
-          $ref: '#/components/schemas/DateRange'
+          $ref: "#/components/schemas/DateRange"
           description: The date range for which the report is generated.
         dimensionFilters:
           description: Describes which report rows to match based on their dimension values.
           items:
-            $ref: '#/components/schemas/NetworkReportSpecDimensionFilter'
+            $ref: "#/components/schemas/NetworkReportSpecDimensionFilter"
           type: array
         dimensions:
-          description: |-
-            List of dimensions of the report. The value combination of these dimensions
+          description: >-
+            List of dimensions of the report. The value combination of these
+            dimensions
+
             determines the row of the report. If no dimensions are specified, the
+
             report returns a single row of requested metrics for the entire account.
           items:
             enum:
@@ -706,17 +783,21 @@ components:
             type: string
           type: array
         localizationSettings:
-          $ref: '#/components/schemas/LocalizationSettings'
+          $ref: "#/components/schemas/LocalizationSettings"
           description: Localization settings of the report.
         maxReportRows:
-          description: |-
-            Maximum number of report data rows to return. If the value is not set, the
+          description: >-
+            Maximum number of report data rows to return. If the value is not
+            set, the
+
             API returns as many rows as possible, up to 100000. Acceptable values are
+
             1-100000, inclusive. Any other values are treated as 100000.
           format: int32
           type: integer
         metrics:
-          description: List of metrics of the report. A report must specify at least one metric.
+          description: List of metrics of the report. A report must specify at least one
+            metric.
           items:
             enum:
               - METRIC_UNSPECIFIED
@@ -732,21 +813,29 @@ components:
             type: string
           type: array
         sortConditions:
-          description: |-
-            Describes the sorting of report rows. The order of the condition in the
+          description: >-
+            Describes the sorting of report rows. The order of the condition in
+            the
+
             list defines its precedence; the earlier the condition, the higher its
+
             precedence. If no sort conditions are specified, the row ordering is
+
             undefined.
           items:
-            $ref: '#/components/schemas/NetworkReportSpecSortCondition'
+            $ref: "#/components/schemas/NetworkReportSpecSortCondition"
           type: array
         timeZone:
-          description: |-
+          description: >-
             A report time zone. Accepts an IANA TZ name values, such as
+
             "America/Los_Angeles."  If no time zone is defined, the account default
+
             takes effect. Check default value by the get account action.
 
+
             **Warning:** The "America/Los_Angeles" is the only supported value at
+
             the moment.
           type: string
       type: object
@@ -768,9 +857,11 @@ components:
             - PLATFORM
           type: string
         matchesAny:
-          $ref: '#/components/schemas/StringList'
-          description: |-
-            Matches a row if its value for the specified dimension is in one of the
+          $ref: "#/components/schemas/StringList"
+          description: >-
+            Matches a row if its value for the specified dimension is in one of
+            the
+
             values specified in this condition.
       type: object
     NetworkReportSpecSortCondition:
@@ -813,14 +904,19 @@ components:
           type: string
       type: object
     PublisherAccount:
-      description: |-
-        A publisher account contains information relevant to the use of this API,
+      description: >-
+        A publisher account contains information relevant to the use of this
+        API,
+
         such as the time zone used for the reports.
       properties:
         currencyCode:
-          description: |-
-            Currency code of the earning-related metrics, which is the 3-letter code
+          description: >-
+            Currency code of the earning-related metrics, which is the 3-letter
+            code
+
             defined in ISO 4217. The daily average rate is used for the currency
+
             conversion.
           type: string
         name:
@@ -834,15 +930,20 @@ components:
             in the API requests (for example, pub-1234567890).
           type: string
         reportingTimeZone:
-          description: |-
-            The time zone that is used in reports that are generated for this account.
+          description: >-
+            The time zone that is used in reports that are generated for this
+            account.
+
             The value is a time-zone ID as specified by the CLDR project,
+
             for example, "America/Los_Angeles".
           type: string
       type: object
     ReportFooter:
-      description: |-
-        Groups data available after report generation, for example, warnings and row
+      description: >-
+        Groups data available after report generation, for example, warnings and
+        row
+
         counts. Always sent as the last message in the stream response.
       properties:
         matchingRowCount:
@@ -852,7 +953,7 @@ components:
         warnings:
           description: Warnings associated with generation of the report.
           items:
-            $ref: '#/components/schemas/ReportWarning'
+            $ref: "#/components/schemas/ReportWarning"
           type: array
       type: object
     ReportHeader:
@@ -861,18 +962,24 @@ components:
         message in the stream response.
       properties:
         dateRange:
-          $ref: '#/components/schemas/DateRange'
-          description: |-
-            The date range for which the report is generated. This is identical to the
+          $ref: "#/components/schemas/DateRange"
+          description: >-
+            The date range for which the report is generated. This is identical
+            to the
+
             range specified in the report request.
         localizationSettings:
-          $ref: '#/components/schemas/LocalizationSettings'
-          description: |-
-            Localization settings of the report. This is identical to the settings
+          $ref: "#/components/schemas/LocalizationSettings"
+          description: >-
+            Localization settings of the report. This is identical to the
+            settings
+
             in the report request.
         reportingTimeZone:
-          description: |-
-            The report time zone. The value is a time-zone ID as specified by the CLDR
+          description: >-
+            The report time zone. The value is a time-zone ID as specified by
+            the CLDR
+
             project, for example, "America/Los_Angeles".
           type: string
       type: object
@@ -881,15 +988,19 @@ components:
       properties:
         dimensionValues:
           additionalProperties:
-            $ref: '#/components/schemas/ReportRowDimensionValue'
-          description: 'Map of dimension values in a row, with keys as enum name of the dimensions.'
+            $ref: "#/components/schemas/ReportRowDimensionValue"
+          description: Map of dimension values in a row, with keys as enum name of the
+            dimensions.
           type: object
         metricValues:
           additionalProperties:
-            $ref: '#/components/schemas/ReportRowMetricValue'
-          description: |-
-            Map of metric values in a row, with keys as enum name of the metrics. If
+            $ref: "#/components/schemas/ReportRowMetricValue"
+          description: >-
+            Map of metric values in a row, with keys as enum name of the
+            metrics. If
+
             a metric being requested has no value returned, the map will not include
+
             it.
           type: object
       type: object
@@ -897,13 +1008,17 @@ components:
       description: Representation of a dimension value.
       properties:
         displayLabel:
-          description: |-
-            The localized string representation of the value. If unspecified, the
+          description: >-
+            The localized string representation of the value. If unspecified,
+            the
+
             display label should be derived from the value.
           type: string
         value:
-          description: |-
-            Dimension value in the format specified in the report's spec Dimension
+          description: >-
+            Dimension value in the format specified in the report's spec
+            Dimension
+
             enum.
           type: string
       type: object
@@ -919,9 +1034,12 @@ components:
           format: int64
           type: string
         microsValue:
-          description: |-
-            Amount in micros. One million is equivalent to one unit. Currency value
+          description: >-
+            Amount in micros. One million is equivalent to one unit. Currency
+            value
+
             is in the unit (USD, EUR or other) specified by the request.
+
             For example, $6.50 whould be represented as 6500000 micros.
           format: int64
           type: string
@@ -930,7 +1048,7 @@ components:
       description: Warnings associated with generation of the report.
       properties:
         description:
-          description: 'Describes the details of the warning message, in English.'
+          description: Describes the details of the warning message, in English.
           type: string
         type:
           description: Type of the warning.

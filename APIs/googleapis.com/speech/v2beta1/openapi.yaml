@@ -1,39 +1,47 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://speech.googleapis.com/'
+  - url: https://speech.googleapis.com/
 info:
   contact:
     name: Google
-    url: 'https://google.com'
+    url: https://google.com
+    x-twitter: youtube
   description: Converts audio to text by applying powerful neural network models.
-  title: Cloud Speech-to-Text
+  license:
+    name: Creative Commons Attribution 3.0
+    url: http://creativecommons.org/licenses/by/3.0/
+  termsOfService: https://developers.google.com/terms/
+  title: Cloud Speech-to-Text API
   version: v2beta1
   x-apiClientRegistration:
-    url: 'https://console.developers.google.com'
+    url: https://console.developers.google.com
   x-apisguru-categories:
-    - machine_learning
+    - analytics
+    - media
   x-logo:
-    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.31
       format: google
-      url: 'https://speech.googleapis.com/$discovery/rest?version=v2beta1'
+      url: https://speech.googleapis.com/$discovery/rest?version=v2beta1
       version: v1
   x-preferred: false
   x-providerName: googleapis.com
   x-serviceName: speech
 externalDocs:
-  url: 'https://cloud.google.com/speech-to-text/docs/quickstart-protocol'
+  url: https://cloud.google.com/speech-to-text/docs/quickstart-protocol
 tags:
   - name: projects
 paths:
-  '/v2beta1/{name}':
+  "/v2beta1/{name}":
     get:
-      description: |-
+      description: >-
         Gets the latest state of a long-running operation.  Clients can use this
+
         method to poll the operation result at intervals as recommended by the API
+
         service.
       operationId: speech.projects.locations.operations.get
       parameters:
@@ -43,43 +51,52 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/callback'
-  '/v2beta1/{name}/operations':
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+  "/v2beta1/{name}/operations":
     get:
-      description: |-
+      description: >-
         Lists operations that match the specified filter in the request. If the
+
         server doesn't support this method, it returns `UNIMPLEMENTED`.
 
+
         NOTE: the `name` binding allows API services to override the binding
+
         to use different resource name schemes, such as `users/*/operations`. To
+
         override the binding, API services can add a binding such as
+
         `"/v1/{name=users/*}/operations"` to their service configuration.
+
         For backwards compatibility, the default name includes the operations
+
         collection id, however overriding users must ensure the name binding
+
         is the parent resource, without the operations collection id.
       operationId: speech.projects.locations.operations.list
       parameters:
@@ -89,7 +106,6 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
         - description: The standard list filter.
           in: query
           name: filter
@@ -106,29 +122,31 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ListOperationsResponse'
+                $ref: "#/components/schemas/ListOperationsResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/callback'
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
 components:
   parameters:
     _.xgafv:
@@ -137,8 +155,8 @@ components:
       name: $.xgafv
       schema:
         enum:
-          - '1'
-          - '2'
+          - "1"
+          - "2"
         type: string
     access_token:
       description: OAuth access token.
@@ -151,7 +169,6 @@ components:
       in: query
       name: alt
       schema:
-        default: json
         enum:
           - json
           - media
@@ -170,7 +187,7 @@ components:
       schema:
         type: string
     key:
-      description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -186,22 +203,21 @@ components:
       in: query
       name: prettyPrint
       schema:
-        default: true
         type: boolean
     quotaUser:
-      description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.'
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
       in: query
       name: quotaUser
       schema:
         type: string
     uploadType:
-      description: 'Legacy upload protocol for media (e.g. "media", "multipart").'
+      description: Legacy upload protocol for media (e.g. "media", "multipart").
       in: query
       name: uploadType
       schema:
         type: string
     upload_protocol:
-      description: 'Upload protocol for media (e.g. "raw", "multipart").'
+      description: Upload protocol for media (e.g. "raw", "multipart").
       in: query
       name: upload_protocol
       schema:
@@ -216,13 +232,15 @@ components:
         operations:
           description: A list of operations that matches the specified filter in the request.
           items:
-            $ref: '#/components/schemas/Operation'
+            $ref: "#/components/schemas/Operation"
           type: array
       type: object
     LongRunningRecognizeMetadata:
-      description: |-
+      description: >-
         Describes the progress of a long-running `LongRunningRecognize` call. It is
+
         included in the `metadata` field of the `Operation` returned by the
+
         `GetOperation` call of the `google::longrunning::Operations` service.
       properties:
         lastUpdateTime:
@@ -230,8 +248,9 @@ components:
           format: google-datetime
           type: string
         progressPercent:
-          description: |-
+          description: >-
             Output only. Approximate percentage of audio processed thus far. Guaranteed to be 100
+
             when the audio is fully processed and the results are available.
           format: int32
           type: integer
@@ -240,67 +259,88 @@ components:
           format: google-datetime
           type: string
         uri:
-          description: |-
+          description: >-
             The URI of the audio file being transcribed. Empty if the audio was sent
+
             as byte content.
           type: string
       type: object
     LongRunningRecognizeResponse:
-      description: |-
+      description: >-
         The only message returned to the client by the `LongRunningRecognize` method.
+
         It contains the result as zero or more sequential SpeechRecognitionResult
+
         messages. It is included in the `result.response` field of the `Operation`
+
         returned by the `GetOperation` call of the `google::longrunning::Operations`
+
         service.
       properties:
         results:
-          description: |-
+          description: >-
             Output only. Sequential list of transcription results corresponding to
+
             sequential portions of audio.
           items:
-            $ref: '#/components/schemas/SpeechRecognitionResult'
+            $ref: "#/components/schemas/SpeechRecognitionResult"
           type: array
       type: object
     Operation:
-      description: |-
+      description: >-
         This resource represents a long-running operation that is the result of a
+
         network API call.
       properties:
         done:
-          description: |-
+          description: >-
             If the value is `false`, it means the operation is still in progress.
+
             If `true`, the operation is completed, and either `error` or `response` is
+
             available.
           type: boolean
         error:
-          $ref: '#/components/schemas/Status'
+          $ref: "#/components/schemas/Status"
           description: The error result of the operation in case of failure or cancellation.
         metadata:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
-          description: |-
+          description: >-
             Service-specific metadata associated with the operation.  It typically
+
             contains progress information and common metadata such as create time.
+
             Some services might not provide such metadata.  Any method that returns a
+
             long-running operation should document the metadata type, if any.
           type: object
         name:
-          description: |-
+          description: >-
             The server-assigned name, which is only unique within the same service that
+
             originally returns it. If you use the default HTTP mapping, the
+
             `name` should be a resource name ending with `operations/{unique_id}`.
           type: string
         response:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
-          description: |-
+          description: >-
             The normal response of the operation in case of success.  If the original
+
             method returns no data on success, such as `Delete`, the response is
+
             `google.protobuf.Empty`.  If the original method is standard
+
             `Get`/`Create`/`Update`, the response should be the resource.  For other
+
             methods, the response should have the type `XxxResponse`, where `Xxx`
+
             is the original method name.  For example, if the original method name
+
             is `TakeSnapshot()`, the inferred response type is
+
             `TakeSnapshotResponse`.
           type: object
       type: object
@@ -308,13 +348,19 @@ components:
       description: Alternative hypotheses (a.k.a. n-best list).
       properties:
         confidence:
-          description: |-
+          description: >-
             Output only. The confidence estimate between 0.0 and 1.0. A higher number
+
             indicates an estimated greater likelihood that the recognized words are
+
             correct. This field is set only for the top alternative of a non-streaming
+
             result or, of a streaming result where `is_final=true`.
+
             This field is not guaranteed to be accurate and users should not rely on it
+
             to be always provided.
+
             The default of 0.0 is a sentinel value indicating `confidence` was not set.
           format: float
           type: number
@@ -322,58 +368,74 @@ components:
           description: Output only. Transcript text representing the words that the user spoke.
           type: string
         words:
-          description: |-
+          description: >-
             Output only. A list of word-specific information for each recognized word.
+
             Note: When `enable_speaker_diarization` is true, you will see all the words
+
             from the beginning of the audio.
           items:
-            $ref: '#/components/schemas/WordInfo'
+            $ref: "#/components/schemas/WordInfo"
           type: array
       type: object
     SpeechRecognitionResult:
       description: A speech recognition result corresponding to a portion of the audio.
       properties:
         alternatives:
-          description: |-
+          description: >-
             Output only. May contain one or more recognition hypotheses (up to the
+
             maximum specified in `max_alternatives`).
+
             These alternatives are ordered in terms of accuracy, with the top (first)
+
             alternative being the most probable, as ranked by the recognizer.
           items:
-            $ref: '#/components/schemas/SpeechRecognitionAlternative'
+            $ref: "#/components/schemas/SpeechRecognitionAlternative"
           type: array
         channelTag:
-          description: |-
+          description: >-
             Output only. For multi-channel audio, this is the channel number corresponding to the
+
             recognized result for the audio from that channel.
+
             For `audio_channel_count` = N, its output values can range from `1` to `N`.
           format: int32
           type: integer
         languageCode:
-          description: |-
+          description: >-
             Output only. The
+
             [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag of the
+
             language in this result. This language code was detected to have the most
+
             likelihood of being spoken in the audio.
           type: string
       type: object
     Status:
-      description: |-
+      description: >-
         The `Status` type defines a logical error model that is suitable for
+
         different programming environments, including REST APIs and RPC APIs. It is
+
         used by [gRPC](https://github.com/grpc). Each `Status` message contains
+
         three pieces of data: error code, error message, and error details.
 
+
         You can find out more about this error model and how to work with it in the
+
         [API Design Guide](https://cloud.google.com/apis/design/errors).
       properties:
         code:
-          description: 'The status code, which should be an enum value of google.rpc.Code.'
+          description: The status code, which should be an enum value of google.rpc.Code.
           format: int32
           type: integer
         details:
-          description: |-
+          description: >-
             A list of messages that carry the error details.  There is a common set of
+
             message types for APIs to use.
           items:
             additionalProperties:
@@ -381,9 +443,11 @@ components:
             type: object
           type: array
         message:
-          description: |-
+          description: >-
             A developer-facing error message, which should be in English. Any
+
             user-facing error message should be localized and sent in the
+
             google.rpc.Status.details field, or localized by the client.
           type: string
       type: object
@@ -391,43 +455,64 @@ components:
       description: Word-specific information for recognized words.
       properties:
         confidence:
-          description: |-
+          description: >-
             Output only. The confidence estimate between 0.0 and 1.0. A higher number
+
             indicates an estimated greater likelihood that the recognized words are
+
             correct. This field is set only for the top alternative of a non-streaming
+
             result or, of a streaming result where `is_final=true`.
+
             This field is not guaranteed to be accurate and users should not rely on it
+
             to be always provided.
+
             The default of 0.0 is a sentinel value indicating `confidence` was not set.
           format: float
           type: number
         endOffset:
-          description: |-
+          description: >-
             Output only. Time offset relative to the beginning of the audio,
+
             and corresponding to the end of the spoken word.
+
             This field is only set if `enable_word_time_offsets=true` and only
+
             in the top hypothesis.
+
             This is an experimental feature and the accuracy of the time offset can
+
             vary.
           format: google-duration
           type: string
         speakerTag:
-          description: |-
+          description: >-
             Output only. A distinct integer value is assigned for every speaker within
+
             the audio. This field specifies which one of those speakers was detected to
+
             have spoken this word. Value ranges from `1` to
+
             `diarization_config.max_speaker_count` . `speaker_tag` is set if
+
             `diarization_config.enable_speaker_diarization` = `true` and only in the
+
             top alternative.
           format: int32
           type: integer
         startOffset:
-          description: |-
+          description: >-
             Output only. Time offset relative to the beginning of the audio,
+
             and corresponding to the start of the spoken word.
+
             This field is only set if `enable_word_time_offsets=true` and only
+
             in the top hypothesis.
+
             This is an experimental feature and the accuracy of the time offset can
+
             vary.
           format: google-duration
           type: string
@@ -437,10 +522,19 @@ components:
       type: object
   securitySchemes:
     Oauth2:
-      description: Oauth 2.0 authentication
+      description: Oauth 2.0 implicit authentication
       flows:
         implicit:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+      type: oauth2
+    Oauth2c:
+      description: Oauth 2.0 authorizationCode authentication
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          scopes:
+            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+          tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

@@ -1,124 +1,135 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://appengine.googleapis.com/'
+  - url: https://appengine.googleapis.com/
 info:
   contact:
     name: Google
-    url: 'https://google.com'
+    url: https://google.com
+    x-twitter: youtube
   description: Provisions and manages developers' App Engine applications.
   license:
     name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
-  title: App Engine Admin
+    url: http://creativecommons.org/licenses/by/3.0/
+  termsOfService: https://developers.google.com/terms/
+  title: App Engine Admin API
   version: v1beta
   x-apiClientRegistration:
-    url: 'https://console.developers.google.com'
+    url: https://console.developers.google.com
+  x-apisguru-categories:
+    - analytics
+    - media
   x-logo:
-    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.31
       format: google
-      url: 'https://appengine.googleapis.com/$discovery/rest?version=v1beta'
+      url: https://appengine.googleapis.com/$discovery/rest?version=v1beta
       version: v1
   x-preferred: false
   x-providerName: googleapis.com
   x-serviceName: appengine
 externalDocs:
-  url: 'https://cloud.google.com/appengine/docs/admin-api/'
+  url: https://cloud.google.com/appengine/docs/admin-api/
 tags:
   - name: apps
 paths:
   /v1beta/apps:
     parameters:
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
-      description: |-
+      description: >-
         Creates an App Engine application for a Google Cloud Platform project. Required fields:
+
         id - The ID of the target Cloud Platform project.
+
         location - The region (https://cloud.google.com/appengine/docs/locations) where you want the App Engine application located.For more information about App Engine applications, see Managing Projects, Applications, and Billing (https://cloud.google.com/appengine/docs/standard/python/console/).
       operationId: appengine.apps.create
       requestBody:
-        $ref: '#/components/requestBodies/Application'
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Application"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - apps
-  '/v1beta/apps/{appsId}':
+  "/v1beta/apps/{appsId}":
     get:
       description: Gets information about an application.
       operationId: appengine.apps.get
       parameters:
-        - description: 'Part of `name`. Name of the Application resource to get. Example: apps/myapp.'
+        - description: "Part of `name`. Name of the Application resource to get. Example: apps/myapp."
           in: path
           name: appsId
           required: true
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Application'
+                $ref: "#/components/schemas/Application"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/appengine.admin'
+            - https://www.googleapis.com/auth/appengine.admin
           Oauth2c:
-            - 'https://www.googleapis.com/auth/appengine.admin'
+            - https://www.googleapis.com/auth/appengine.admin
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - https://www.googleapis.com/auth/cloud-platform.read-only
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - https://www.googleapis.com/auth/cloud-platform.read-only
       tags:
         - apps
     parameters:
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
     patch:
-      description: |-
+      description: >-
         Updates the specified Application resource. You can update the following fields:
+
         auth_domain - Google authentication domain for controlling user access to the application.
+
         default_cookie_expiration - Cookie expiration policy for the application.
       operationId: appengine.apps.patch
       parameters:
-        - description: 'Part of `name`. Name of the Application resource to update. Example: apps/myapp.'
+        - description: "Part of `name`. Name of the Application resource to update. Example: apps/myapp."
           in: path
           name: appsId
           required: true
@@ -133,27 +144,27 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Application'
+              $ref: "#/components/schemas/Application"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - apps
-  '/v1beta/apps/{appsId}/authorizedCertificates':
+  "/v1beta/apps/{appsId}/authorizedCertificates":
     get:
       description: Lists all SSL certificates the user is authorized to administer.
       operationId: appengine.apps.authorizedCertificates.list
       parameters:
-        - description: 'Part of `parent`. Name of the parent Application resource. Example: apps/myapp.'
+        - description: "Part of `parent`. Name of the parent Application resource. Example: apps/myapp."
           in: path
           name: appsId
           required: true
@@ -178,44 +189,44 @@ paths:
               - FULL_CERTIFICATE
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ListAuthorizedCertificatesResponse'
+                $ref: "#/components/schemas/ListAuthorizedCertificatesResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/appengine.admin'
+            - https://www.googleapis.com/auth/appengine.admin
           Oauth2c:
-            - 'https://www.googleapis.com/auth/appengine.admin'
+            - https://www.googleapis.com/auth/appengine.admin
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - https://www.googleapis.com/auth/cloud-platform.read-only
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - https://www.googleapis.com/auth/cloud-platform.read-only
       tags:
         - apps
     parameters:
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
       description: Uploads the specified SSL certificate.
       operationId: appengine.apps.authorizedCertificates.create
       parameters:
-        - description: 'Part of `parent`. Name of the parent Application resource. Example: apps/myapp.'
+        - description: "Part of `parent`. Name of the parent Application resource. Example: apps/myapp."
           in: path
           name: appsId
           required: true
@@ -225,27 +236,27 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AuthorizedCertificate'
+              $ref: "#/components/schemas/AuthorizedCertificate"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/AuthorizedCertificate'
+                $ref: "#/components/schemas/AuthorizedCertificate"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - apps
-  '/v1beta/apps/{appsId}/authorizedCertificates/{authorizedCertificatesId}':
+  "/v1beta/apps/{appsId}/authorizedCertificates/{authorizedCertificatesId}":
     delete:
       description: Deletes the specified SSL certificate.
       operationId: appengine.apps.authorizedCertificates.delete
       parameters:
-        - description: 'Part of `name`. Name of the resource to delete. Example: apps/myapp/authorizedCertificates/12345.'
+        - description: "Part of `name`. Name of the resource to delete. Example: apps/myapp/authorizedCertificates/12345."
           in: path
           name: appsId
           required: true
@@ -258,24 +269,24 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Empty'
+                $ref: "#/components/schemas/Empty"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - apps
     get:
       description: Gets the specified SSL certificate.
       operationId: appengine.apps.authorizedCertificates.get
       parameters:
-        - description: 'Part of `name`. Name of the resource requested. Example: apps/myapp/authorizedCertificates/12345.'
+        - description: "Part of `name`. Name of the resource requested. Example: apps/myapp/authorizedCertificates/12345."
           in: path
           name: appsId
           required: true
@@ -296,44 +307,44 @@ paths:
               - FULL_CERTIFICATE
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/AuthorizedCertificate'
+                $ref: "#/components/schemas/AuthorizedCertificate"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/appengine.admin'
+            - https://www.googleapis.com/auth/appengine.admin
           Oauth2c:
-            - 'https://www.googleapis.com/auth/appengine.admin'
+            - https://www.googleapis.com/auth/appengine.admin
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - https://www.googleapis.com/auth/cloud-platform.read-only
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - https://www.googleapis.com/auth/cloud-platform.read-only
       tags:
         - apps
     parameters:
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
     patch:
-      description: 'Updates the specified SSL certificate. To renew a certificate and maintain its existing domain mappings, update certificate_data with a new certificate. The new certificate must be applicable to the same domains as the original certificate. The certificate display_name may also be updated.'
+      description: Updates the specified SSL certificate. To renew a certificate and maintain its existing domain mappings, update certificate_data with a new certificate. The new certificate must be applicable to the same domains as the original certificate. The certificate display_name may also be updated.
       operationId: appengine.apps.authorizedCertificates.patch
       parameters:
-        - description: 'Part of `name`. Name of the resource to update. Example: apps/myapp/authorizedCertificates/12345.'
+        - description: "Part of `name`. Name of the resource to update. Example: apps/myapp/authorizedCertificates/12345."
           in: path
           name: appsId
           required: true
@@ -354,27 +365,27 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AuthorizedCertificate'
+              $ref: "#/components/schemas/AuthorizedCertificate"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/AuthorizedCertificate'
+                $ref: "#/components/schemas/AuthorizedCertificate"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - apps
-  '/v1beta/apps/{appsId}/authorizedDomains':
+  "/v1beta/apps/{appsId}/authorizedDomains":
     get:
       description: Lists all domains the user is authorized to administer.
       operationId: appengine.apps.authorizedDomains.list
       parameters:
-        - description: 'Part of `parent`. Name of the parent Application resource. Example: apps/myapp.'
+        - description: "Part of `parent`. Name of the parent Application resource. Example: apps/myapp."
           in: path
           name: appsId
           required: true
@@ -391,45 +402,45 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ListAuthorizedDomainsResponse'
+                $ref: "#/components/schemas/ListAuthorizedDomainsResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/appengine.admin'
+            - https://www.googleapis.com/auth/appengine.admin
           Oauth2c:
-            - 'https://www.googleapis.com/auth/appengine.admin'
+            - https://www.googleapis.com/auth/appengine.admin
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - https://www.googleapis.com/auth/cloud-platform.read-only
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - https://www.googleapis.com/auth/cloud-platform.read-only
       tags:
         - apps
     parameters:
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-  '/v1beta/apps/{appsId}/domainMappings':
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+  "/v1beta/apps/{appsId}/domainMappings":
     get:
       description: Lists the domain mappings on an application.
       operationId: appengine.apps.domainMappings.list
       parameters:
-        - description: 'Part of `parent`. Name of the parent Application resource. Example: apps/myapp.'
+        - description: "Part of `parent`. Name of the parent Application resource. Example: apps/myapp."
           in: path
           name: appsId
           required: true
@@ -446,50 +457,50 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ListDomainMappingsResponse'
+                $ref: "#/components/schemas/ListDomainMappingsResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/appengine.admin'
+            - https://www.googleapis.com/auth/appengine.admin
           Oauth2c:
-            - 'https://www.googleapis.com/auth/appengine.admin'
+            - https://www.googleapis.com/auth/appengine.admin
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - https://www.googleapis.com/auth/cloud-platform.read-only
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - https://www.googleapis.com/auth/cloud-platform.read-only
       tags:
         - apps
     parameters:
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
-      description: 'Maps a domain to an application. A user must be authorized to administer a domain in order to map it to an application. For a list of available authorized domains, see AuthorizedDomains.ListAuthorizedDomains.'
+      description: Maps a domain to an application. A user must be authorized to administer a domain in order to map it to an application. For a list of available authorized domains, see AuthorizedDomains.ListAuthorizedDomains.
       operationId: appengine.apps.domainMappings.create
       parameters:
-        - description: 'Part of `parent`. Name of the parent Application resource. Example: apps/myapp.'
+        - description: "Part of `parent`. Name of the parent Application resource. Example: apps/myapp."
           in: path
           name: appsId
           required: true
           schema:
             type: string
-        - description: 'Whether the domain creation should override any existing mappings for this domain. By default, overrides are rejected.'
+        - description: Whether the domain creation should override any existing mappings for this domain. By default, overrides are rejected.
           in: query
           name: overrideStrategy
           schema:
@@ -502,27 +513,27 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/DomainMapping'
+              $ref: "#/components/schemas/DomainMapping"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - apps
-  '/v1beta/apps/{appsId}/domainMappings/{domainMappingsId}':
+  "/v1beta/apps/{appsId}/domainMappings/{domainMappingsId}":
     delete:
       description: Deletes the specified domain mapping. A user must be authorized to administer the associated domain in order to delete a DomainMapping resource.
       operationId: appengine.apps.domainMappings.delete
       parameters:
-        - description: 'Part of `name`. Name of the resource to delete. Example: apps/myapp/domainMappings/example.com.'
+        - description: "Part of `name`. Name of the resource to delete. Example: apps/myapp/domainMappings/example.com."
           in: path
           name: appsId
           required: true
@@ -535,24 +546,24 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - apps
     get:
       description: Gets the specified domain mapping.
       operationId: appengine.apps.domainMappings.get
       parameters:
-        - description: 'Part of `name`. Name of the resource requested. Example: apps/myapp/domainMappings/example.com.'
+        - description: "Part of `name`. Name of the resource requested. Example: apps/myapp/domainMappings/example.com."
           in: path
           name: appsId
           required: true
@@ -565,44 +576,44 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/DomainMapping'
+                $ref: "#/components/schemas/DomainMapping"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/appengine.admin'
+            - https://www.googleapis.com/auth/appengine.admin
           Oauth2c:
-            - 'https://www.googleapis.com/auth/appengine.admin'
+            - https://www.googleapis.com/auth/appengine.admin
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - https://www.googleapis.com/auth/cloud-platform.read-only
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - https://www.googleapis.com/auth/cloud-platform.read-only
       tags:
         - apps
     parameters:
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
     patch:
-      description: 'Updates the specified domain mapping. To map an SSL certificate to a domain mapping, update certificate_id to point to an AuthorizedCertificate resource. A user must be authorized to administer the associated domain in order to update a DomainMapping resource.'
+      description: Updates the specified domain mapping. To map an SSL certificate to a domain mapping, update certificate_id to point to an AuthorizedCertificate resource. A user must be authorized to administer the associated domain in order to update a DomainMapping resource.
       operationId: appengine.apps.domainMappings.patch
       parameters:
-        - description: 'Part of `name`. Name of the resource to update. Example: apps/myapp/domainMappings/example.com.'
+        - description: "Part of `name`. Name of the resource to update. Example: apps/myapp/domainMappings/example.com."
           in: path
           name: appsId
           required: true
@@ -623,33 +634,33 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/DomainMapping'
+              $ref: "#/components/schemas/DomainMapping"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - apps
-  '/v1beta/apps/{appsId}/firewall/ingressRules':
+  "/v1beta/apps/{appsId}/firewall/ingressRules":
     get:
       description: Lists the firewall rules of an application.
       operationId: appengine.apps.firewall.ingressRules.list
       parameters:
-        - description: 'Part of `parent`. Name of the Firewall collection to retrieve. Example: apps/myapp/firewall/ingressRules.'
+        - description: "Part of `parent`. Name of the Firewall collection to retrieve. Example: apps/myapp/firewall/ingressRules."
           in: path
           name: appsId
           required: true
           schema:
             type: string
-        - description: 'A valid IP Address. If set, only rules matching this address will be returned. The first returned rule will be the rule that fires on requests from this IP.'
+        - description: A valid IP Address. If set, only rules matching this address will be returned. The first returned rule will be the rule that fires on requests from this IP.
           in: query
           name: matchingAddress
           schema:
@@ -665,44 +676,44 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ListIngressRulesResponse'
+                $ref: "#/components/schemas/ListIngressRulesResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/appengine.admin'
+            - https://www.googleapis.com/auth/appengine.admin
           Oauth2c:
-            - 'https://www.googleapis.com/auth/appengine.admin'
+            - https://www.googleapis.com/auth/appengine.admin
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - https://www.googleapis.com/auth/cloud-platform.read-only
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - https://www.googleapis.com/auth/cloud-platform.read-only
       tags:
         - apps
     parameters:
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
       description: Creates a firewall rule for the application.
       operationId: appengine.apps.firewall.ingressRules.create
       parameters:
-        - description: 'Part of `parent`. Name of the parent Firewall collection in which to create a new rule. Example: apps/myapp/firewall/ingressRules.'
+        - description: "Part of `parent`. Name of the parent Firewall collection in which to create a new rule. Example: apps/myapp/firewall/ingressRules."
           in: path
           name: appsId
           required: true
@@ -712,27 +723,27 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/FirewallRule'
+              $ref: "#/components/schemas/FirewallRule"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/FirewallRule'
+                $ref: "#/components/schemas/FirewallRule"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - apps
-  '/v1beta/apps/{appsId}/firewall/ingressRules/{ingressRulesId}':
+  "/v1beta/apps/{appsId}/firewall/ingressRules/{ingressRulesId}":
     delete:
       description: Deletes the specified firewall rule.
       operationId: appengine.apps.firewall.ingressRules.delete
       parameters:
-        - description: 'Part of `name`. Name of the Firewall resource to delete. Example: apps/myapp/firewall/ingressRules/100.'
+        - description: "Part of `name`. Name of the Firewall resource to delete. Example: apps/myapp/firewall/ingressRules/100."
           in: path
           name: appsId
           required: true
@@ -745,24 +756,24 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Empty'
+                $ref: "#/components/schemas/Empty"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - apps
     get:
       description: Gets the specified firewall rule.
       operationId: appengine.apps.firewall.ingressRules.get
       parameters:
-        - description: 'Part of `name`. Name of the Firewall resource to retrieve. Example: apps/myapp/firewall/ingressRules/100.'
+        - description: "Part of `name`. Name of the Firewall resource to retrieve. Example: apps/myapp/firewall/ingressRules/100."
           in: path
           name: appsId
           required: true
@@ -775,44 +786,44 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/FirewallRule'
+                $ref: "#/components/schemas/FirewallRule"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/appengine.admin'
+            - https://www.googleapis.com/auth/appengine.admin
           Oauth2c:
-            - 'https://www.googleapis.com/auth/appengine.admin'
+            - https://www.googleapis.com/auth/appengine.admin
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - https://www.googleapis.com/auth/cloud-platform.read-only
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - https://www.googleapis.com/auth/cloud-platform.read-only
       tags:
         - apps
     parameters:
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
     patch:
       description: Updates the specified firewall rule.
       operationId: appengine.apps.firewall.ingressRules.patch
       parameters:
-        - description: 'Part of `name`. Name of the Firewall resource to update. Example: apps/myapp/firewall/ingressRules/100.'
+        - description: "Part of `name`. Name of the Firewall resource to update. Example: apps/myapp/firewall/ingressRules/100."
           in: path
           name: appsId
           required: true
@@ -833,39 +844,39 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/FirewallRule'
+              $ref: "#/components/schemas/FirewallRule"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/FirewallRule'
+                $ref: "#/components/schemas/FirewallRule"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - apps
-  '/v1beta/apps/{appsId}/firewall/ingressRules:batchUpdate':
+  "/v1beta/apps/{appsId}/firewall/ingressRules:batchUpdate":
     parameters:
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
-      description: 'Replaces the entire firewall ruleset in one bulk operation. This overrides and replaces the rules of an existing firewall with the new rules.If the final rule does not match traffic with the ''*'' wildcard IP range, then an "allow all" rule is explicitly added to the end of the list.'
+      description: Replaces the entire firewall ruleset in one bulk operation. This overrides and replaces the rules of an existing firewall with the new rules.If the final rule does not match traffic with the '*' wildcard IP range, then an "allow all" rule is explicitly added to the end of the list.
       operationId: appengine.apps.firewall.ingressRules.batchUpdate
       parameters:
-        - description: 'Part of `name`. Name of the Firewall collection to set. Example: apps/myapp/firewall/ingressRules.'
+        - description: "Part of `name`. Name of the Firewall collection to set. Example: apps/myapp/firewall/ingressRules."
           in: path
           name: appsId
           required: true
@@ -875,27 +886,27 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/BatchUpdateIngressRulesRequest'
+              $ref: "#/components/schemas/BatchUpdateIngressRulesRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/BatchUpdateIngressRulesResponse'
+                $ref: "#/components/schemas/BatchUpdateIngressRulesResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - apps
-  '/v1beta/apps/{appsId}/locations':
+  "/v1beta/apps/{appsId}/locations":
     get:
       description: Lists information about the supported locations for this service.
       operationId: appengine.apps.locations.list
       parameters:
-        - description: 'Part of `name`. The resource that owns the locations collection, if applicable.'
+        - description: Part of `name`. The resource that owns the locations collection, if applicable.
           in: path
           name: appsId
           required: true
@@ -917,40 +928,40 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ListLocationsResponse'
+                $ref: "#/components/schemas/ListLocationsResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/appengine.admin'
+            - https://www.googleapis.com/auth/appengine.admin
           Oauth2c:
-            - 'https://www.googleapis.com/auth/appengine.admin'
+            - https://www.googleapis.com/auth/appengine.admin
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - https://www.googleapis.com/auth/cloud-platform.read-only
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - https://www.googleapis.com/auth/cloud-platform.read-only
       tags:
         - apps
     parameters:
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-  '/v1beta/apps/{appsId}/locations/{locationsId}':
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+  "/v1beta/apps/{appsId}/locations/{locationsId}":
     get:
       description: Gets information about a location.
       operationId: appengine.apps.locations.get
@@ -968,42 +979,42 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Location'
+                $ref: "#/components/schemas/Location"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/appengine.admin'
+            - https://www.googleapis.com/auth/appengine.admin
           Oauth2c:
-            - 'https://www.googleapis.com/auth/appengine.admin'
+            - https://www.googleapis.com/auth/appengine.admin
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - https://www.googleapis.com/auth/cloud-platform.read-only
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - https://www.googleapis.com/auth/cloud-platform.read-only
       tags:
         - apps
     parameters:
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-  '/v1beta/apps/{appsId}/operations':
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+  "/v1beta/apps/{appsId}/operations":
     get:
-      description: 'Lists operations that match the specified filter in the request. If the server doesn''t support this method, it returns UNIMPLEMENTED.NOTE: the name binding allows API services to override the binding to use different resource name schemes, such as users/*/operations. To override the binding, API services can add a binding such as "/v1/{name=users/*}/operations" to their service configuration. For backwards compatibility, the default name includes the operations collection id, however overriding users must ensure the name binding is the parent resource, without the operations collection id.'
+      description: "Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns UNIMPLEMENTED.NOTE: the name binding allows API services to override the binding to use different resource name schemes, such as users/*/operations. To override the binding, API services can add a binding such as \"/v1/{name=users/*}/operations\" to their service configuration. For backwards compatibility, the default name includes the operations collection id, however overriding users must ensure the name binding is the parent resource, without the operations collection id."
       operationId: appengine.apps.operations.list
       parameters:
         - description: Part of `name`. The name of the operation's parent resource.
@@ -1028,40 +1039,40 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ListOperationsResponse'
+                $ref: "#/components/schemas/ListOperationsResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/appengine.admin'
+            - https://www.googleapis.com/auth/appengine.admin
           Oauth2c:
-            - 'https://www.googleapis.com/auth/appengine.admin'
+            - https://www.googleapis.com/auth/appengine.admin
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - https://www.googleapis.com/auth/cloud-platform.read-only
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - https://www.googleapis.com/auth/cloud-platform.read-only
       tags:
         - apps
     parameters:
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-  '/v1beta/apps/{appsId}/operations/{operationsId}':
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+  "/v1beta/apps/{appsId}/operations/{operationsId}":
     get:
       description: Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
       operationId: appengine.apps.operations.get
@@ -1079,45 +1090,45 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/appengine.admin'
+            - https://www.googleapis.com/auth/appengine.admin
           Oauth2c:
-            - 'https://www.googleapis.com/auth/appengine.admin'
+            - https://www.googleapis.com/auth/appengine.admin
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - https://www.googleapis.com/auth/cloud-platform.read-only
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - https://www.googleapis.com/auth/cloud-platform.read-only
       tags:
         - apps
     parameters:
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-  '/v1beta/apps/{appsId}/services':
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+  "/v1beta/apps/{appsId}/services":
     get:
       description: Lists all the services in the application.
       operationId: appengine.apps.services.list
       parameters:
-        - description: 'Part of `parent`. Name of the parent Application resource. Example: apps/myapp.'
+        - description: "Part of `parent`. Name of the parent Application resource. Example: apps/myapp."
           in: path
           name: appsId
           required: true
@@ -1134,45 +1145,45 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ListServicesResponse'
+                $ref: "#/components/schemas/ListServicesResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/appengine.admin'
+            - https://www.googleapis.com/auth/appengine.admin
           Oauth2c:
-            - 'https://www.googleapis.com/auth/appengine.admin'
+            - https://www.googleapis.com/auth/appengine.admin
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - https://www.googleapis.com/auth/cloud-platform.read-only
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - https://www.googleapis.com/auth/cloud-platform.read-only
       tags:
         - apps
     parameters:
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-  '/v1beta/apps/{appsId}/services/{servicesId}':
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+  "/v1beta/apps/{appsId}/services/{servicesId}":
     delete:
       description: Deletes the specified service and all enclosed versions.
       operationId: appengine.apps.services.delete
       parameters:
-        - description: 'Part of `name`. Name of the resource requested. Example: apps/myapp/services/default.'
+        - description: "Part of `name`. Name of the resource requested. Example: apps/myapp/services/default."
           in: path
           name: appsId
           required: true
@@ -1185,24 +1196,24 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - apps
     get:
       description: Gets the current configuration of the specified service.
       operationId: appengine.apps.services.get
       parameters:
-        - description: 'Part of `name`. Name of the resource requested. Example: apps/myapp/services/default.'
+        - description: "Part of `name`. Name of the resource requested. Example: apps/myapp/services/default."
           in: path
           name: appsId
           required: true
@@ -1215,44 +1226,44 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Service'
+                $ref: "#/components/schemas/Service"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/appengine.admin'
+            - https://www.googleapis.com/auth/appengine.admin
           Oauth2c:
-            - 'https://www.googleapis.com/auth/appengine.admin'
+            - https://www.googleapis.com/auth/appengine.admin
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - https://www.googleapis.com/auth/cloud-platform.read-only
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - https://www.googleapis.com/auth/cloud-platform.read-only
       tags:
         - apps
     parameters:
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
     patch:
       description: Updates the configuration of the specified service.
       operationId: appengine.apps.services.patch
       parameters:
-        - description: 'Part of `name`. Name of the resource to update. Example: apps/myapp/services/default.'
+        - description: "Part of `name`. Name of the resource to update. Example: apps/myapp/services/default."
           in: path
           name: appsId
           required: true
@@ -1264,7 +1275,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: 'Set to true to gradually shift traffic to one or more versions that you specify. By default, traffic is shifted immediately. For gradual traffic migration, the target versions must be located within instances that are configured for both warmup requests (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1beta/apps.services.versions#InboundServiceType) and automatic scaling (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1beta/apps.services.versions#AutomaticScaling). You must specify the shardBy (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1beta/apps.services#ShardBy) field in the Service resource. Gradual traffic migration is not supported in the App Engine flexible environment. For examples, see Migrating and Splitting Traffic (https://cloud.google.com/appengine/docs/admin-api/migrating-splitting-traffic).'
+        - description: Set to true to gradually shift traffic to one or more versions that you specify. By default, traffic is shifted immediately. For gradual traffic migration, the target versions must be located within instances that are configured for both warmup requests (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1beta/apps.services.versions#InboundServiceType) and automatic scaling (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1beta/apps.services.versions#AutomaticScaling). You must specify the shardBy (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1beta/apps.services#ShardBy) field in the Service resource. Gradual traffic migration is not supported in the App Engine flexible environment. For examples, see Migrating and Splitting Traffic (https://cloud.google.com/appengine/docs/admin-api/migrating-splitting-traffic).
           in: query
           name: migrateTraffic
           schema:
@@ -1278,27 +1289,27 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Service'
+              $ref: "#/components/schemas/Service"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - apps
-  '/v1beta/apps/{appsId}/services/{servicesId}/versions':
+  "/v1beta/apps/{appsId}/services/{servicesId}/versions":
     get:
       description: Lists the versions of a service.
       operationId: appengine.apps.services.versions.list
       parameters:
-        - description: 'Part of `parent`. Name of the parent Service resource. Example: apps/myapp/services/default.'
+        - description: "Part of `parent`. Name of the parent Service resource. Example: apps/myapp/services/default."
           in: path
           name: appsId
           required: true
@@ -1329,44 +1340,44 @@ paths:
               - FULL
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ListVersionsResponse'
+                $ref: "#/components/schemas/ListVersionsResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/appengine.admin'
+            - https://www.googleapis.com/auth/appengine.admin
           Oauth2c:
-            - 'https://www.googleapis.com/auth/appengine.admin'
+            - https://www.googleapis.com/auth/appengine.admin
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - https://www.googleapis.com/auth/cloud-platform.read-only
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - https://www.googleapis.com/auth/cloud-platform.read-only
       tags:
         - apps
     parameters:
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
       description: Deploys code and resource files to a new version.
       operationId: appengine.apps.services.versions.create
       parameters:
-        - description: 'Part of `parent`. Name of the parent resource to create this version under. Example: apps/myapp/services/default.'
+        - description: "Part of `parent`. Name of the parent resource to create this version under. Example: apps/myapp/services/default."
           in: path
           name: appsId
           required: true
@@ -1382,27 +1393,27 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Version'
+              $ref: "#/components/schemas/Version"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - apps
-  '/v1beta/apps/{appsId}/services/{servicesId}/versions/{versionsId}':
+  "/v1beta/apps/{appsId}/services/{servicesId}/versions/{versionsId}":
     delete:
       description: Deletes an existing Version resource.
       operationId: appengine.apps.services.versions.delete
       parameters:
-        - description: 'Part of `name`. Name of the resource requested. Example: apps/myapp/services/default/versions/v1.'
+        - description: "Part of `name`. Name of the resource requested. Example: apps/myapp/services/default/versions/v1."
           in: path
           name: appsId
           required: true
@@ -1421,24 +1432,24 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - apps
     get:
-      description: 'Gets the specified Version resource. By default, only a BASIC_VIEW will be returned. Specify the FULL_VIEW parameter to get the full resource.'
+      description: Gets the specified Version resource. By default, only a BASIC_VIEW will be returned. Specify the FULL_VIEW parameter to get the full resource.
       operationId: appengine.apps.services.versions.get
       parameters:
-        - description: 'Part of `name`. Name of the resource requested. Example: apps/myapp/services/default/versions/v1.'
+        - description: "Part of `name`. Name of the resource requested. Example: apps/myapp/services/default/versions/v1."
           in: path
           name: appsId
           required: true
@@ -1465,58 +1476,75 @@ paths:
               - FULL
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Version'
+                $ref: "#/components/schemas/Version"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/appengine.admin'
+            - https://www.googleapis.com/auth/appengine.admin
           Oauth2c:
-            - 'https://www.googleapis.com/auth/appengine.admin'
+            - https://www.googleapis.com/auth/appengine.admin
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - https://www.googleapis.com/auth/cloud-platform.read-only
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - https://www.googleapis.com/auth/cloud-platform.read-only
       tags:
         - apps
     parameters:
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
     patch:
-      description: |-
+      description: >-
         Updates the specified Version resource. You can specify the following fields depending on the App Engine environment and type of scaling that the version resource uses:Standard environment
+
         instance_class (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1beta/apps.services.versions#Version.FIELDS.instance_class)automatic scaling in the standard environment:
+
         automatic_scaling.min_idle_instances (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1beta/apps.services.versions#Version.FIELDS.automatic_scaling)
+
         automatic_scaling.max_idle_instances (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1beta/apps.services.versions#Version.FIELDS.automatic_scaling)
+
         automaticScaling.standard_scheduler_settings.max_instances (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1beta/apps.services.versions#StandardSchedulerSettings)
+
         automaticScaling.standard_scheduler_settings.min_instances (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1beta/apps.services.versions#StandardSchedulerSettings)
+
         automaticScaling.standard_scheduler_settings.target_cpu_utilization (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1beta/apps.services.versions#StandardSchedulerSettings)
+
         automaticScaling.standard_scheduler_settings.target_throughput_utilization (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1beta/apps.services.versions#StandardSchedulerSettings)basic scaling or manual scaling in the standard environment:
-        serving_status (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1beta/apps.services.versions#Version.FIELDS.serving_status)Flexible environment
+
+        serving_status (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1beta/apps.services.versions#Version.FIELDS.serving_status)
+
+        manual_scaling.instances (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1beta/apps.services.versions#manualscaling)Flexible environment
+
         serving_status (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1beta/apps.services.versions#Version.FIELDS.serving_status)automatic scaling in the flexible environment:
+
         automatic_scaling.min_total_instances (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1beta/apps.services.versions#Version.FIELDS.automatic_scaling)
+
         automatic_scaling.max_total_instances (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1beta/apps.services.versions#Version.FIELDS.automatic_scaling)
+
         automatic_scaling.cool_down_period_sec (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1beta/apps.services.versions#Version.FIELDS.automatic_scaling)
-        automatic_scaling.cpu_utilization.target_utilization (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1beta/apps.services.versions#Version.FIELDS.automatic_scaling)
+
+        automatic_scaling.cpu_utilization.target_utilization (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1beta/apps.services.versions#Version.FIELDS.automatic_scaling)manual scaling in the flexible environment:
+
+        manual_scaling.instances (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1beta/apps.services.versions#manualscaling)
       operationId: appengine.apps.services.versions.patch
       parameters:
-        - description: 'Part of `name`. Name of the resource to update. Example: apps/myapp/services/default/versions/1.'
+        - description: "Part of `name`. Name of the resource to update. Example: apps/myapp/services/default/versions/1."
           in: path
           name: appsId
           required: true
@@ -1543,27 +1571,27 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Version'
+              $ref: "#/components/schemas/Version"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - apps
-  '/v1beta/apps/{appsId}/services/{servicesId}/versions/{versionsId}/instances':
+  "/v1beta/apps/{appsId}/services/{servicesId}/versions/{versionsId}/instances":
     get:
-      description: 'Lists the instances of a version.Tip: To aggregate details about instances over time, see the Stackdriver Monitoring API (https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list).'
+      description: "Lists the instances of a version.Tip: To aggregate details about instances over time, see the Stackdriver Monitoring API (https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list)."
       operationId: appengine.apps.services.versions.instances.list
       parameters:
-        - description: 'Part of `parent`. Name of the parent Version resource. Example: apps/myapp/services/default/versions/v1.'
+        - description: "Part of `parent`. Name of the parent Version resource. Example: apps/myapp/services/default/versions/v1."
           in: path
           name: appsId
           required: true
@@ -1592,45 +1620,45 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ListInstancesResponse'
+                $ref: "#/components/schemas/ListInstancesResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/appengine.admin'
+            - https://www.googleapis.com/auth/appengine.admin
           Oauth2c:
-            - 'https://www.googleapis.com/auth/appengine.admin'
+            - https://www.googleapis.com/auth/appengine.admin
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - https://www.googleapis.com/auth/cloud-platform.read-only
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - https://www.googleapis.com/auth/cloud-platform.read-only
       tags:
         - apps
     parameters:
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-  '/v1beta/apps/{appsId}/services/{servicesId}/versions/{versionsId}/instances/{instancesId}':
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+  "/v1beta/apps/{appsId}/services/{servicesId}/versions/{versionsId}/instances/{instancesId}":
     delete:
-      description: 'Stops a running instance.The instance might be automatically recreated based on the scaling settings of the version. For more information, see "How Instances are Managed" (standard environment (https://cloud.google.com/appengine/docs/standard/python/how-instances-are-managed) | flexible environment (https://cloud.google.com/appengine/docs/flexible/python/how-instances-are-managed)).To ensure that instances are not re-created and avoid getting billed, you can stop all instances within the target version by changing the serving status of the version to STOPPED with the apps.services.versions.patch (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions/patch) method.'
+      description: Stops a running instance.The instance might be automatically recreated based on the scaling settings of the version. For more information, see "How Instances are Managed" (standard environment (https://cloud.google.com/appengine/docs/standard/python/how-instances-are-managed) | flexible environment (https://cloud.google.com/appengine/docs/flexible/python/how-instances-are-managed)).To ensure that instances are not re-created and avoid getting billed, you can stop all instances within the target version by changing the serving status of the version to STOPPED with the apps.services.versions.patch (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions/patch) method.
       operationId: appengine.apps.services.versions.instances.delete
       parameters:
-        - description: 'Part of `name`. Name of the resource requested. Example: apps/myapp/services/default/versions/v1/instances/instance-1.'
+        - description: "Part of `name`. Name of the resource requested. Example: apps/myapp/services/default/versions/v1/instances/instance-1."
           in: path
           name: appsId
           required: true
@@ -1655,24 +1683,24 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - apps
     get:
       description: Gets instance information.
       operationId: appengine.apps.services.versions.instances.get
       parameters:
-        - description: 'Part of `name`. Name of the resource requested. Example: apps/myapp/services/default/versions/v1/instances/instance-1.'
+        - description: "Part of `name`. Name of the resource requested. Example: apps/myapp/services/default/versions/v1/instances/instance-1."
           in: path
           name: appsId
           required: true
@@ -1697,57 +1725,57 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Instance'
+                $ref: "#/components/schemas/Instance"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/appengine.admin'
+            - https://www.googleapis.com/auth/appengine.admin
           Oauth2c:
-            - 'https://www.googleapis.com/auth/appengine.admin'
+            - https://www.googleapis.com/auth/appengine.admin
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - https://www.googleapis.com/auth/cloud-platform.read-only
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - https://www.googleapis.com/auth/cloud-platform.read-only
       tags:
         - apps
     parameters:
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-  '/v1beta/apps/{appsId}/services/{servicesId}/versions/{versionsId}/instances/{instancesId}:debug':
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+  "/v1beta/apps/{appsId}/services/{servicesId}/versions/{versionsId}/instances/{instancesId}:debug":
     parameters:
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
-      description: 'Enables debugging on a VM instance. This allows you to use the SSH command to connect to the virtual machine where the instance lives. While in "debug mode", the instance continues to serve live traffic. You should delete the instance when you are done debugging and then allow the system to take over and determine if another instance should be started.Only applicable for instances in App Engine flexible environment.'
+      description: Enables debugging on a VM instance. This allows you to use the SSH command to connect to the virtual machine where the instance lives. While in "debug mode", the instance continues to serve live traffic. You should delete the instance when you are done debugging and then allow the system to take over and determine if another instance should be started.Only applicable for instances in App Engine flexible environment.
       operationId: appengine.apps.services.versions.instances.debug
       parameters:
-        - description: 'Part of `name`. Name of the resource requested. Example: apps/myapp/services/default/versions/v1/instances/instance-1.'
+        - description: "Part of `name`. Name of the resource requested. Example: apps/myapp/services/default/versions/v1/instances/instance-1."
           in: path
           name: appsId
           required: true
@@ -1775,39 +1803,39 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/DebugInstanceRequest'
+              $ref: "#/components/schemas/DebugInstanceRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - apps
-  '/v1beta/apps/{appsId}:repair':
+  "/v1beta/apps/{appsId}:repair":
     parameters:
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
-      description: 'Recreates the required App Engine features for the specified App Engine application, for example a Cloud Storage bucket or App Engine service account. Use this method if you receive an error message about a missing feature, for example, Error retrieving the App Engine service account. If you have deleted your App Engine service account, this will not be able to recreate it. Instead, you should attempt to use the IAM undelete API if possible at https://cloud.google.com/iam/reference/rest/v1/projects.serviceAccounts/undelete?apix_params=%7B"name"%3A"projects%2F-%2FserviceAccounts%2Funique_id"%2C"resource"%3A%7B%7D%7D . If the deletion was recent, the numeric ID can be found in the Cloud Console Activity Log.'
+      description: Recreates the required App Engine features for the specified App Engine application, for example a Cloud Storage bucket or App Engine service account. Use this method if you receive an error message about a missing feature, for example, Error retrieving the App Engine service account. If you have deleted your App Engine service account, this will not be able to recreate it. Instead, you should attempt to use the IAM undelete API if possible at https://cloud.google.com/iam/reference/rest/v1/projects.serviceAccounts/undelete?apix_params=%7B"name"%3A"projects%2F-%2FserviceAccounts%2Funique_id"%2C"resource"%3A%7B%7D%7D . If the deletion was recent, the numeric ID can be found in the Cloud Console Activity Log.
       operationId: appengine.apps.repair
       parameters:
-        - description: 'Part of `name`. Name of the application to repair. Example: apps/myapp'
+        - description: "Part of `name`. Name of the application to repair. Example: apps/myapp"
           in: path
           name: appsId
           required: true
@@ -1817,19 +1845,19 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RepairApplicationRequest'
+              $ref: "#/components/schemas/RepairApplicationRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - apps
 components:
@@ -1840,8 +1868,8 @@ components:
       name: $.xgafv
       schema:
         enum:
-          - '1'
-          - '2'
+          - "1"
+          - "2"
         type: string
     access_token:
       description: OAuth access token.
@@ -1854,7 +1882,6 @@ components:
       in: query
       name: alt
       schema:
-        default: json
         enum:
           - json
           - media
@@ -1873,7 +1900,7 @@ components:
       schema:
         type: string
     key:
-      description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -1889,55 +1916,28 @@ components:
       in: query
       name: prettyPrint
       schema:
-        default: true
         type: boolean
     quotaUser:
-      description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.'
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
       in: query
       name: quotaUser
       schema:
         type: string
     uploadType:
-      description: 'Legacy upload protocol for media (e.g. "media", "multipart").'
+      description: Legacy upload protocol for media (e.g. "media", "multipart").
       in: query
       name: uploadType
       schema:
         type: string
     upload_protocol:
-      description: 'Upload protocol for media (e.g. "raw", "multipart").'
+      description: Upload protocol for media (e.g. "raw", "multipart").
       in: query
       name: upload_protocol
       schema:
         type: string
-  requestBodies:
-    Application:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Application'
-    AuthorizedCertificate:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/AuthorizedCertificate'
-    DomainMapping:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/DomainMapping'
-    FirewallRule:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/FirewallRule'
-    Version:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Version'
   schemas:
     ApiConfigHandler:
-      description: 'Google Cloud Endpoints (https://cloud.google.com/appengine/docs/python/endpoints/) configuration for API handlers.'
+      description: Google Cloud Endpoints (https://cloud.google.com/appengine/docs/python/endpoints/) configuration for API handlers.
       properties:
         authFailAction:
           description: Action to take when users access resources that require authentication. Defaults to redirect.
@@ -1986,6 +1986,14 @@ components:
         codeBucket:
           description: Google Cloud Storage bucket that can be used for storing files associated with this application. This bucket is associated with the application and can be used by the gcloud deployment commands.@OutputOnly
           type: string
+        databaseType:
+          description: The type of the Cloud Firestore or Cloud Datastore database associated with this application.
+          enum:
+            - DATABASE_TYPE_UNSPECIFIED
+            - CLOUD_DATASTORE
+            - CLOUD_FIRESTORE
+            - CLOUD_DATASTORE_COMPATIBILITY
+          type: string
         defaultBucket:
           description: Google Cloud Storage bucket that can be used by this application to store content.@OutputOnly
           type: string
@@ -1994,29 +2002,29 @@ components:
           format: google-duration
           type: string
         defaultHostname:
-          description: 'Hostname used to reach this application, as resolved by App Engine.@OutputOnly'
+          description: Hostname used to reach this application, as resolved by App Engine.@OutputOnly
           type: string
         dispatchRules:
           description: HTTP path dispatch rules for requests to the application that do not explicitly target a service or version. Rules are order-dependent. Up to 20 dispatch rules can be supported.
           items:
-            $ref: '#/components/schemas/UrlDispatchRule'
+            $ref: "#/components/schemas/UrlDispatchRule"
           type: array
         featureSettings:
-          $ref: '#/components/schemas/FeatureSettings'
+          $ref: "#/components/schemas/FeatureSettings"
           description: The feature specific settings to be used in the application.
         gcrDomain:
           description: The Google Container Registry domain used for storing managed build docker images for this application.
           type: string
         iap:
-          $ref: '#/components/schemas/IdentityAwareProxy'
+          $ref: "#/components/schemas/IdentityAwareProxy"
         id:
-          description: 'Identifier of the Application resource. This identifier is equivalent to the project ID of the Google Cloud Platform project where you want to deploy your application. Example: myapp.'
+          description: "Identifier of the Application resource. This identifier is equivalent to the project ID of the Google Cloud Platform project where you want to deploy your application. Example: myapp."
           type: string
         locationId:
-          description: 'Location from which this application runs. Application instances run out of the data centers in the specified location, which is also where all of the application''s end user content is stored.Defaults to us-central.View the list of supported locations (https://cloud.google.com/appengine/docs/locations).'
+          description: Location from which this application runs. Application instances run out of the data centers in the specified location, which is also where all of the application's end user content is stored.Defaults to us-central.View the list of supported locations (https://cloud.google.com/appengine/docs/locations).
           type: string
         name:
-          description: 'Full path to the Application resource in the API. Example: apps/myapp.@OutputOnly'
+          description: "Full path to the Application resource in the API. Example: apps/myapp.@OutputOnly"
           type: string
         servingStatus:
           description: Serving status of this application.
@@ -2031,66 +2039,66 @@ components:
       description: An SSL certificate that a user has been authorized to administer. A user is authorized to administer any certificate that applies to one of their authorized domains.
       properties:
         certificateRawData:
-          $ref: '#/components/schemas/CertificateRawData'
+          $ref: "#/components/schemas/CertificateRawData"
           description: The SSL certificate serving the AuthorizedCertificate resource. This must be obtained independently from a certificate authority.
         displayName:
-          description: 'The user-specified display name of the certificate. This is not guaranteed to be unique. Example: My Certificate.'
+          description: "The user-specified display name of the certificate. This is not guaranteed to be unique. Example: My Certificate."
           type: string
         domainMappingsCount:
           description: Aggregate count of the domain mappings with this certificate mapped. This count includes domain mappings on applications for which the user does not have VIEWER permissions.Only returned by GET or LIST requests when specifically requested by the view=FULL_CERTIFICATE option.@OutputOnly
           format: int32
           type: integer
         domainNames:
-          description: 'Topmost applicable domains of this certificate. This certificate applies to these domains and their subdomains. Example: example.com.@OutputOnly'
+          description: "Topmost applicable domains of this certificate. This certificate applies to these domains and their subdomains. Example: example.com.@OutputOnly"
           items:
             type: string
           type: array
         expireTime:
-          description: 'The time when this certificate expires. To update the renewal time on this certificate, upload an SSL certificate with a different expiration time using AuthorizedCertificates.UpdateAuthorizedCertificate.@OutputOnly'
+          description: The time when this certificate expires. To update the renewal time on this certificate, upload an SSL certificate with a different expiration time using AuthorizedCertificates.UpdateAuthorizedCertificate.@OutputOnly
           format: google-datetime
           type: string
         id:
-          description: 'Relative name of the certificate. This is a unique value autogenerated on AuthorizedCertificate resource creation. Example: 12345.@OutputOnly'
+          description: "Relative name of the certificate. This is a unique value autogenerated on AuthorizedCertificate resource creation. Example: 12345.@OutputOnly"
           type: string
         managedCertificate:
-          $ref: '#/components/schemas/ManagedCertificate'
-          description: 'Only applicable if this certificate is managed by App Engine. Managed certificates are tied to the lifecycle of a DomainMapping and cannot be updated or deleted via the AuthorizedCertificates API. If this certificate is manually administered by the user, this field will be empty.@OutputOnly'
+          $ref: "#/components/schemas/ManagedCertificate"
+          description: Only applicable if this certificate is managed by App Engine. Managed certificates are tied to the lifecycle of a DomainMapping and cannot be updated or deleted via the AuthorizedCertificates API. If this certificate is manually administered by the user, this field will be empty.@OutputOnly
         name:
-          description: 'Full path to the AuthorizedCertificate resource in the API. Example: apps/myapp/authorizedCertificates/12345.@OutputOnly'
+          description: "Full path to the AuthorizedCertificate resource in the API. Example: apps/myapp/authorizedCertificates/12345.@OutputOnly"
           type: string
         visibleDomainMappings:
-          description: 'The full paths to user visible Domain Mapping resources that have this certificate mapped. Example: apps/myapp/domainMappings/example.com.This may not represent the full list of mapped domain mappings if the user does not have VIEWER permissions on all of the applications that have this certificate mapped. See domain_mappings_count for a complete count.Only returned by GET or LIST requests when specifically requested by the view=FULL_CERTIFICATE option.@OutputOnly'
+          description: "The full paths to user visible Domain Mapping resources that have this certificate mapped. Example: apps/myapp/domainMappings/example.com.This may not represent the full list of mapped domain mappings if the user does not have VIEWER permissions on all of the applications that have this certificate mapped. See domain_mappings_count for a complete count.Only returned by GET or LIST requests when specifically requested by the view=FULL_CERTIFICATE option.@OutputOnly"
           items:
             type: string
           type: array
       type: object
     AuthorizedDomain:
-      description: 'A domain that a user has been authorized to administer. To authorize use of a domain, verify ownership via Webmaster Central (https://www.google.com/webmasters/verification/home).'
+      description: A domain that a user has been authorized to administer. To authorize use of a domain, verify ownership via Webmaster Central (https://www.google.com/webmasters/verification/home).
       properties:
         id:
-          description: 'Fully qualified domain name of the domain authorized for use. Example: example.com.'
+          description: "Fully qualified domain name of the domain authorized for use. Example: example.com."
           type: string
         name:
-          description: 'Full path to the AuthorizedDomain resource in the API. Example: apps/myapp/authorizedDomains/example.com.@OutputOnly'
+          description: "Full path to the AuthorizedDomain resource in the API. Example: apps/myapp/authorizedDomains/example.com.@OutputOnly"
           type: string
       type: object
     AutomaticScaling:
-      description: 'Automatic scaling is based on request rate, response latencies, and other application metrics.'
+      description: Automatic scaling is based on request rate, response latencies, and other application metrics.
       properties:
         coolDownPeriod:
-          description: 'The time period that the Autoscaler (https://cloud.google.com/compute/docs/autoscaler/) should wait before it starts collecting information from a new instance. This prevents the autoscaler from collecting information when the instance is initializing, during which the collected usage would not be reliable. Only applicable in the App Engine flexible environment.'
+          description: The time period that the Autoscaler (https://cloud.google.com/compute/docs/autoscaler/) should wait before it starts collecting information from a new instance. This prevents the autoscaler from collecting information when the instance is initializing, during which the collected usage would not be reliable. Only applicable in the App Engine flexible environment.
           format: google-duration
           type: string
         cpuUtilization:
-          $ref: '#/components/schemas/CpuUtilization'
+          $ref: "#/components/schemas/CpuUtilization"
           description: Target scaling by CPU usage.
         customMetrics:
           description: Target scaling by user-provided metrics. Only applicable in the App Engine flexible environment.
           items:
-            $ref: '#/components/schemas/CustomMetric'
+            $ref: "#/components/schemas/CustomMetric"
           type: array
         diskUtilization:
-          $ref: '#/components/schemas/DiskUtilization'
+          $ref: "#/components/schemas/DiskUtilization"
           description: Target scaling by disk usage.
         maxConcurrentRequests:
           description: Number of concurrent requests an automatic scaling instance can accept before the scheduler spawns a new instance.Defaults to a runtime-specific value.
@@ -2121,13 +2129,13 @@ components:
           format: int32
           type: integer
         networkUtilization:
-          $ref: '#/components/schemas/NetworkUtilization'
+          $ref: "#/components/schemas/NetworkUtilization"
           description: Target scaling by network usage.
         requestUtilization:
-          $ref: '#/components/schemas/RequestUtilization'
+          $ref: "#/components/schemas/RequestUtilization"
           description: Target scaling by request utilization.
         standardSchedulerSettings:
-          $ref: '#/components/schemas/StandardSchedulerSettings'
+          $ref: "#/components/schemas/StandardSchedulerSettings"
           description: Scheduler settings for standard environment.
       type: object
     BasicScaling:
@@ -2148,7 +2156,7 @@ components:
         ingressRules:
           description: A list of FirewallRules to replace the existing set.
           items:
-            $ref: '#/components/schemas/FirewallRule'
+            $ref: "#/components/schemas/FirewallRule"
           type: array
       type: object
     BatchUpdateIngressRulesResponse:
@@ -2157,7 +2165,7 @@ components:
         ingressRules:
           description: The full list of ingress FirewallRules for this application.
           items:
-            $ref: '#/components/schemas/FirewallRule'
+            $ref: "#/components/schemas/FirewallRule"
           type: array
       type: object
     BuildInfo:
@@ -2171,17 +2179,17 @@ components:
       description: An SSL certificate obtained from a certificate authority.
       properties:
         privateKey:
-          description: 'Unencrypted PEM encoded RSA private key. This field is set once on certificate creation and then encrypted. The key size must be 2048 bits or fewer. Must include the header and footer. Example: <pre> -----BEGIN RSA PRIVATE KEY----- <unencrypted_key_value> -----END RSA PRIVATE KEY----- </pre> @InputOnly'
+          description: "Unencrypted PEM encoded RSA private key. This field is set once on certificate creation and then encrypted. The key size must be 2048 bits or fewer. Must include the header and footer. Example: <pre> -----BEGIN RSA PRIVATE KEY----- <unencrypted_key_value> -----END RSA PRIVATE KEY----- </pre> @InputOnly"
           type: string
         publicCertificate:
-          description: 'PEM encoded x.509 public key certificate. This field is set once on certificate creation. Must include the header and footer. Example: <pre> -----BEGIN CERTIFICATE----- <certificate_value> -----END CERTIFICATE----- </pre>'
+          description: "PEM encoded x.509 public key certificate. This field is set once on certificate creation. Must include the header and footer. Example: <pre> -----BEGIN CERTIFICATE----- <certificate_value> -----END CERTIFICATE----- </pre>"
           type: string
       type: object
     CloudBuildOptions:
       description: Options for the build operations performed as a part of the version deployment. Only applicable for App Engine flexible environment when creating a version using source code directly.
       properties:
         appYamlPath:
-          description: 'Path to the yaml file used in deployment, used to determine runtime configuration details.Required for flexible environment builds.See https://cloud.google.com/appengine/docs/standard/python/config/appref for more details.'
+          description: Path to the yaml file used in deployment, used to determine runtime configuration details.Required for flexible environment builds.See https://cloud.google.com/appengine/docs/standard/python/config/appref for more details.
           type: string
         cloudBuildTimeout:
           description: The Cloud Build timeout used as part of any dependent builds performed by version creation. Defaults to 10 minutes.
@@ -2242,7 +2250,7 @@ components:
           format: double
           type: number
         targetType:
-          description: 'The type of the metric. Must be a string representing a Stackdriver metric type e.g. GAGUE, DELTA_PER_SECOND, etc.'
+          description: The type of the metric. Must be a string representing a Stackdriver metric type e.g. GAGUE, DELTA_PER_SECOND, etc.
           type: string
         targetUtilization:
           description: The target value for the metric.
@@ -2253,9 +2261,11 @@ components:
       description: Request message for Instances.DebugInstance.
       properties:
         sshKey:
-          description: |-
+          description: >-
             Public SSH key to add to the instance. Examples:
+
             [USERNAME]:ssh-rsa [KEY_VALUE] [USERNAME]
+
             [USERNAME]:ssh-rsa [KEY_VALUE] google-ssh {"userName":"[USERNAME]","expireOn":"[EXPIRE_TIME]"}For more information, see Adding and Removing SSH Keys (https://cloud.google.com/compute/docs/instances/adding-removing-ssh-keys).
           type: string
       type: object
@@ -2263,22 +2273,22 @@ components:
       description: Code and application artifacts used to deploy a version to App Engine.
       properties:
         build:
-          $ref: '#/components/schemas/BuildInfo'
+          $ref: "#/components/schemas/BuildInfo"
           description: Google Cloud Build build information. Only applicable for instances running in the App Engine flexible environment.
         cloudBuildOptions:
-          $ref: '#/components/schemas/CloudBuildOptions'
-          description: 'Options for any Google Cloud Build builds created as a part of this deployment.These options will only be used if a new build is created, such as when deploying to the App Engine flexible environment using files or zip.'
+          $ref: "#/components/schemas/CloudBuildOptions"
+          description: Options for any Google Cloud Build builds created as a part of this deployment.These options will only be used if a new build is created, such as when deploying to the App Engine flexible environment using files or zip.
         container:
-          $ref: '#/components/schemas/ContainerInfo'
+          $ref: "#/components/schemas/ContainerInfo"
           description: The Docker image for the container that runs the version. Only applicable for instances running in the App Engine flexible environment.
         files:
           additionalProperties:
-            $ref: '#/components/schemas/FileInfo'
+            $ref: "#/components/schemas/FileInfo"
           description: Manifest of the files stored in Google Cloud Storage that are included as part of this version. All files must be readable using the credentials supplied with this call.
           type: object
         zip:
-          $ref: '#/components/schemas/ZipInfo'
-          description: 'The zip file for this deployment, if this is a zip deployment.'
+          $ref: "#/components/schemas/ZipInfo"
+          description: The zip file for this deployment, if this is a zip deployment.
       type: object
     DiskUtilization:
       description: Target scaling by disk usage. Only applicable in the App Engine flexible environment.
@@ -2304,43 +2314,45 @@ components:
       description: A domain serving an App Engine application.
       properties:
         id:
-          description: 'Relative name of the domain serving the application. Example: example.com.'
+          description: "Relative name of the domain serving the application. Example: example.com."
           type: string
         name:
-          description: 'Full path to the DomainMapping resource in the API. Example: apps/myapp/domainMapping/example.com.@OutputOnly'
+          description: "Full path to the DomainMapping resource in the API. Example: apps/myapp/domainMapping/example.com.@OutputOnly"
           type: string
         resourceRecords:
           description: The resource records required to configure this domain mapping. These records must be added to the domain's DNS configuration in order to serve the application via this domain mapping.@OutputOnly
           items:
-            $ref: '#/components/schemas/ResourceRecord'
+            $ref: "#/components/schemas/ResourceRecord"
           type: array
         sslSettings:
-          $ref: '#/components/schemas/SslSettings'
-          description: 'SSL configuration for this domain. If unconfigured, this domain will not serve with SSL.'
+          $ref: "#/components/schemas/SslSettings"
+          description: SSL configuration for this domain. If unconfigured, this domain will not serve with SSL.
       type: object
     Empty:
-      description: |-
+      description: >-
         A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance:
+
         service Foo {
           rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);
         }
+
         The JSON representation for Empty is empty JSON object {}.
       properties: {}
       type: object
     EndpointsApiService:
-      description: 'Cloud Endpoints (https://cloud.google.com/endpoints) configuration. The Endpoints API Service provides tooling for serving Open API and gRPC endpoints via an NGINX proxy. Only valid for App Engine Flexible environment deployments.The fields here refer to the name and configuration ID of a "service" resource in the Service Management API (https://cloud.google.com/service-management/overview).'
+      description: Cloud Endpoints (https://cloud.google.com/endpoints) configuration. The Endpoints API Service provides tooling for serving Open API and gRPC endpoints via an NGINX proxy. Only valid for App Engine Flexible environment deployments.The fields here refer to the name and configuration ID of a "service" resource in the Service Management API (https://cloud.google.com/service-management/overview).
       properties:
         configId:
-          description: 'Endpoints service configuration ID as specified by the Service Management API. For example "2016-09-19r1".By default, the rollout strategy for Endpoints is RolloutStrategy.FIXED. This means that Endpoints starts up with a particular configuration ID. When a new configuration is rolled out, Endpoints must be given the new configuration ID. The config_id field is used to give the configuration ID and is required in this case.Endpoints also has a rollout strategy called RolloutStrategy.MANAGED. When using this, Endpoints fetches the latest configuration and does not need the configuration ID. In this case, config_id must be omitted.'
+          description: Endpoints service configuration ID as specified by the Service Management API. For example "2016-09-19r1".By default, the rollout strategy for Endpoints is RolloutStrategy.FIXED. This means that Endpoints starts up with a particular configuration ID. When a new configuration is rolled out, Endpoints must be given the new configuration ID. The config_id field is used to give the configuration ID and is required in this case.Endpoints also has a rollout strategy called RolloutStrategy.MANAGED. When using this, Endpoints fetches the latest configuration and does not need the configuration ID. In this case, config_id must be omitted.
           type: string
         disableTraceSampling:
-          description: 'Enable or disable trace sampling. By default, this is set to false for enabled.'
+          description: Enable or disable trace sampling. By default, this is set to false for enabled.
           type: boolean
         name:
           description: Endpoints service name which is the name of the "service" resource in the Service Management API. For example "myapi.endpoints.myproject.cloud.goog"
           type: string
         rolloutStrategy:
-          description: 'Endpoints rollout strategy. If FIXED, config_id must be specified. If MANAGED, config_id must be omitted.'
+          description: Endpoints rollout strategy. If FIXED, config_id must be specified. If MANAGED, config_id must be omitted.
           enum:
             - UNSPECIFIED_ROLLOUT_STRATEGY
             - FIXED
@@ -2377,10 +2389,10 @@ components:
       description: The feature specific settings to be used in the application. These define behaviors that are user configurable.
       properties:
         splitHealthChecks:
-          description: 'Boolean value indicating if split health checks should be used instead of the legacy health checks. At an app.yaml level, this means defaulting to ''readiness_check'' and ''liveness_check'' values instead of ''health_check'' ones. Once the legacy ''health_check'' behavior is deprecated, and this value is always true, this setting can be removed.'
+          description: Boolean value indicating if split health checks should be used instead of the legacy health checks. At an app.yaml level, this means defaulting to 'readiness_check' and 'liveness_check' values instead of 'health_check' ones. Once the legacy 'health_check' behavior is deprecated, and this value is always true, this setting can be removed.
           type: boolean
         useContainerOptimizedOs:
-          description: 'If true, use Container-Optimized OS (https://cloud.google.com/container-optimized-os/) base image for VMs, rather than a base Debian image.'
+          description: If true, use Container-Optimized OS (https://cloud.google.com/container-optimized-os/) base image for VMs, rather than a base Debian image.
           type: boolean
       type: object
     FileInfo:
@@ -2390,10 +2402,10 @@ components:
           description: The MIME type of the file.Defaults to the value from Google Cloud Storage.
           type: string
         sha1Sum:
-          description: 'The SHA1 hash of the file, in hex.'
+          description: The SHA1 hash of the file, in hex.
           type: string
         sourceUrl:
-          description: 'URL source to use to fetch this file. Must be a URL to a resource in Google Cloud Storage in the form ''http(s)://storage.googleapis.com/<bucket>/<object>''.'
+          description: URL source to use to fetch this file. Must be a URL to a resource in Google Cloud Storage in the form 'http(s)://storage.googleapis.com/<bucket>/<object>'.
           type: string
       type: object
     FirewallRule:
@@ -2410,7 +2422,7 @@ components:
           description: An optional string description of this rule. This field has a maximum length of 100 characters.
           type: string
         priority:
-          description: 'A positive integer between 1, Int32.MaxValue-1 that defines the order of rule evaluation. Rules with the lowest priority are evaluated first.A default rule at priority Int32.MaxValue matches all IPv4 and IPv6 traffic when no previous rule matches. Only the action of this rule can be modified by the user.'
+          description: A positive integer between 1, Int32.MaxValue-1 that defines the order of rule evaluation. Rules with the lowest priority are evaluated first.A default rule at priority Int32.MaxValue matches all IPv4 and IPv6 traffic when no previous rule matches. Only the action of this rule can be modified by the user.
           format: int32
           type: integer
         sourceRange:
@@ -2451,13 +2463,13 @@ components:
       description: Identity-Aware Proxy
       properties:
         enabled:
-          description: 'Whether the serving infrastructure will authenticate and authorize all incoming requests.If true, the oauth2_client_id and oauth2_client_secret fields must be non-empty.'
+          description: Whether the serving infrastructure will authenticate and authorize all incoming requests.If true, the oauth2_client_id and oauth2_client_secret fields must be non-empty.
           type: boolean
         oauth2ClientId:
           description: OAuth2 client ID to use for the authentication flow.
           type: string
         oauth2ClientSecret:
-          description: 'OAuth2 client secret to use for the authentication flow.For security reasons, this value cannot be retrieved via the API. Instead, the SHA-256 hash of the value is returned in the oauth2_client_secret_sha256 field.@InputOnly'
+          description: OAuth2 client secret to use for the authentication flow.For security reasons, this value cannot be retrieved via the API. Instead, the SHA-256 hash of the value is returned in the oauth2_client_secret_sha256 field.@InputOnly
           type: string
         oauth2ClientSecretSha256:
           description: Hex-encoded SHA-256 hash of the client secret.@OutputOnly
@@ -2485,14 +2497,14 @@ components:
           format: int32
           type: integer
         id:
-          description: 'Relative name of the instance within the version. Example: instance-1.@OutputOnly'
+          description: "Relative name of the instance within the version. Example: instance-1.@OutputOnly"
           type: string
         memoryUsage:
           description: Total memory in use (bytes).@OutputOnly
           format: int64
           type: string
         name:
-          description: 'Full path to the Instance resource in the API. Example: apps/myapp/services/default/versions/v1/instances/instance-1.@OutputOnly'
+          description: "Full path to the Instance resource in the API. Example: apps/myapp/services/default/versions/v1/instances/instance-1.@OutputOnly"
           type: string
         qps:
           description: Average queries per second (QPS) over the last minute.@OutputOnly
@@ -2532,7 +2544,7 @@ components:
           description: 'Name of the library. Example: "django".'
           type: string
         version:
-          description: 'Version of the library to select, or "latest".'
+          description: Version of the library to select, or "latest".
           type: string
       type: object
     ListAuthorizedCertificatesResponse:
@@ -2541,7 +2553,7 @@ components:
         certificates:
           description: The SSL certificates the user is authorized to administer.
           items:
-            $ref: '#/components/schemas/AuthorizedCertificate'
+            $ref: "#/components/schemas/AuthorizedCertificate"
           type: array
         nextPageToken:
           description: Continuation token for fetching the next page of results.
@@ -2553,7 +2565,7 @@ components:
         domains:
           description: The authorized domains belonging to the user.
           items:
-            $ref: '#/components/schemas/AuthorizedDomain'
+            $ref: "#/components/schemas/AuthorizedDomain"
           type: array
         nextPageToken:
           description: Continuation token for fetching the next page of results.
@@ -2565,7 +2577,7 @@ components:
         domainMappings:
           description: The domain mappings for the application.
           items:
-            $ref: '#/components/schemas/DomainMapping'
+            $ref: "#/components/schemas/DomainMapping"
           type: array
         nextPageToken:
           description: Continuation token for fetching the next page of results.
@@ -2577,7 +2589,7 @@ components:
         ingressRules:
           description: The ingress FirewallRules for this application.
           items:
-            $ref: '#/components/schemas/FirewallRule'
+            $ref: "#/components/schemas/FirewallRule"
           type: array
         nextPageToken:
           description: Continuation token for fetching the next page of results.
@@ -2589,7 +2601,7 @@ components:
         instances:
           description: The instances belonging to the requested version.
           items:
-            $ref: '#/components/schemas/Instance'
+            $ref: "#/components/schemas/Instance"
           type: array
         nextPageToken:
           description: Continuation token for fetching the next page of results.
@@ -2601,7 +2613,7 @@ components:
         locations:
           description: A list of locations that matches the specified filter in the request.
           items:
-            $ref: '#/components/schemas/Location'
+            $ref: "#/components/schemas/Location"
           type: array
         nextPageToken:
           description: The standard List next-page token.
@@ -2616,7 +2628,7 @@ components:
         operations:
           description: A list of operations that matches the specified filter in the request.
           items:
-            $ref: '#/components/schemas/Operation'
+            $ref: "#/components/schemas/Operation"
           type: array
       type: object
     ListServicesResponse:
@@ -2628,7 +2640,7 @@ components:
         services:
           description: The services belonging to the requested application.
           items:
-            $ref: '#/components/schemas/Service'
+            $ref: "#/components/schemas/Service"
           type: array
       type: object
     ListVersionsResponse:
@@ -2640,7 +2652,7 @@ components:
         versions:
           description: The versions belonging to the requested service.
           items:
-            $ref: '#/components/schemas/Version'
+            $ref: "#/components/schemas/Version"
           type: array
       type: object
     LivenessCheck:
@@ -2677,13 +2689,14 @@ components:
       description: A resource that represents Google Cloud Platform location.
       properties:
         displayName:
-          description: 'The friendly name for this location, typically a nearby city name. For example, "Tokyo".'
+          description: The friendly name for this location, typically a nearby city name. For example, "Tokyo".
           type: string
         labels:
           additionalProperties:
             type: string
-          description: |
+          description: >
             Cross-service attributes for the location. For example
+
             {"cloud.googleapis.com/region": "us-east1"}
           type: object
         locationId:
@@ -2728,10 +2741,10 @@ components:
           type: string
       type: object
     ManualScaling:
-      description: 'A service with manual scaling runs continuously, allowing you to perform complex initialization and rely on the state of its memory over time.'
+      description: A service with manual scaling runs continuously, allowing you to perform complex initialization and rely on the state of its memory over time.
       properties:
         instances:
-          description: 'Number of instances to assign to the service at the start. This number can later be altered by using the Modules API (https://cloud.google.com/appengine/docs/python/modules/functions) set_num_instances() function.'
+          description: Number of instances to assign to the service at the start. This number can later be altered by using the Modules API (https://cloud.google.com/appengine/docs/python/modules/functions) set_num_instances() function.
           format: int32
           type: integer
       type: object
@@ -2739,7 +2752,7 @@ components:
       description: Extra network settings. Only applicable in the App Engine flexible environment.
       properties:
         forwardedPorts:
-          description: 'List of ports, or port pairs, to forward from the virtual machine to the application container. Only applicable in the App Engine flexible environment.'
+          description: List of ports, or port pairs, to forward from the virtual machine to the application container. Only applicable in the App Engine flexible environment.
           items:
             type: string
           type: array
@@ -2747,16 +2760,19 @@ components:
           description: Tag to apply to the instance during creation. Only applicable in the App Engine flexible environment.
           type: string
         name:
-          description: 'Google Compute Engine network where the virtual machines are created. Specify the short name, not the resource path.Defaults to default.'
+          description: Google Compute Engine network where the virtual machines are created. Specify the short name, not the resource path.Defaults to default.
           type: string
         sessionAffinity:
           description: Enable session affinity. Only applicable in the App Engine flexible environment.
           type: boolean
         subnetworkName:
-          description: |-
+          description: >-
             Google Cloud Platform sub-network where the virtual machines are created. Specify the short name, not the resource path.If a subnetwork name is specified, a network name will also be required unless it is for the default network.
+
             If the network that the instance is being created in is a Legacy network, then the IP address is allocated from the IPv4Range.
+
             If the network that the instance is being created in is an auto Subnet Mode Network, then only network name should be specified (not the subnetwork_name) and the IP address is created from the IPCidrRange of the subnetwork that exists in that zone for that network.
+
             If the network that the instance is being created in is a custom Subnet Mode Network, then the subnetwork_name must be specified and the IP address is created from the IPCidrRange of the subnetwork.If specified, the subnetwork must exist in the same region as the App Engine flexible environment application.
           type: string
       type: object
@@ -2784,30 +2800,30 @@ components:
       description: This resource represents a long-running operation that is the result of a network API call.
       properties:
         done:
-          description: 'If the value is false, it means the operation is still in progress. If true, the operation is completed, and either error or response is available.'
+          description: If the value is false, it means the operation is still in progress. If true, the operation is completed, and either error or response is available.
           type: boolean
         error:
-          $ref: '#/components/schemas/Status'
+          $ref: "#/components/schemas/Status"
           description: The error result of the operation in case of failure or cancellation.
         metadata:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
-          description: 'Service-specific metadata associated with the operation. It typically contains progress information and common metadata such as create time. Some services might not provide such metadata. Any method that returns a long-running operation should document the metadata type, if any.'
+          description: Service-specific metadata associated with the operation. It typically contains progress information and common metadata such as create time. Some services might not provide such metadata. Any method that returns a long-running operation should document the metadata type, if any.
           type: object
         name:
-          description: 'The server-assigned name, which is only unique within the same service that originally returns it. If you use the default HTTP mapping, the name should be a resource name ending with operations/{unique_id}.'
+          description: The server-assigned name, which is only unique within the same service that originally returns it. If you use the default HTTP mapping, the name should be a resource name ending with operations/{unique_id}.
           type: string
         response:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
-          description: 'The normal response of the operation in case of success. If the original method returns no data on success, such as Delete, the response is google.protobuf.Empty. If the original method is standard Get/Create/Update, the response should be the resource. For other methods, the response should have the type XxxResponse, where Xxx is the original method name. For example, if the original method name is TakeSnapshot(), the inferred response type is TakeSnapshotResponse.'
+          description: The normal response of the operation in case of success. If the original method returns no data on success, such as Delete, the response is google.protobuf.Empty. If the original method is standard Get/Create/Update, the response should be the resource. For other methods, the response should have the type XxxResponse, where Xxx is the original method name. For example, if the original method name is TakeSnapshot(), the inferred response type is TakeSnapshotResponse.
           type: object
       type: object
     OperationMetadataV1:
       description: Metadata for the given google.longrunning.Operation.
       properties:
         createVersionMetadata:
-          $ref: '#/components/schemas/CreateVersionMetadataV1'
+          $ref: "#/components/schemas/CreateVersionMetadataV1"
         endTime:
           description: Time that this operation completed.@OutputOnly
           format: google-datetime
@@ -2820,10 +2836,10 @@ components:
           format: google-datetime
           type: string
         method:
-          description: 'API method that initiated this operation. Example: google.appengine.v1.Versions.CreateVersion.@OutputOnly'
+          description: "API method that initiated this operation. Example: google.appengine.v1.Versions.CreateVersion.@OutputOnly"
           type: string
         target:
-          description: 'Name of the resource that this operation is acting on. Example: apps/myapp/services/default.@OutputOnly'
+          description: "Name of the resource that this operation is acting on. Example: apps/myapp/services/default.@OutputOnly"
           type: string
         user:
           description: User who requested this operation.@OutputOnly
@@ -2838,7 +2854,7 @@ components:
       description: Metadata for the given google.longrunning.Operation.
       properties:
         createVersionMetadata:
-          $ref: '#/components/schemas/CreateVersionMetadataV1Alpha'
+          $ref: "#/components/schemas/CreateVersionMetadataV1Alpha"
         endTime:
           description: Time that this operation completed.@OutputOnly
           format: google-datetime
@@ -2851,10 +2867,10 @@ components:
           format: google-datetime
           type: string
         method:
-          description: 'API method that initiated this operation. Example: google.appengine.v1alpha.Versions.CreateVersion.@OutputOnly'
+          description: "API method that initiated this operation. Example: google.appengine.v1alpha.Versions.CreateVersion.@OutputOnly"
           type: string
         target:
-          description: 'Name of the resource that this operation is acting on. Example: apps/myapp/services/default.@OutputOnly'
+          description: "Name of the resource that this operation is acting on. Example: apps/myapp/services/default.@OutputOnly"
           type: string
         user:
           description: User who requested this operation.@OutputOnly
@@ -2869,7 +2885,7 @@ components:
       description: Metadata for the given google.longrunning.Operation.
       properties:
         createVersionMetadata:
-          $ref: '#/components/schemas/CreateVersionMetadataV1Beta'
+          $ref: "#/components/schemas/CreateVersionMetadataV1Beta"
         endTime:
           description: Time that this operation completed.@OutputOnly
           format: google-datetime
@@ -2882,10 +2898,10 @@ components:
           format: google-datetime
           type: string
         method:
-          description: 'API method that initiated this operation. Example: google.appengine.v1beta.Versions.CreateVersion.@OutputOnly'
+          description: "API method that initiated this operation. Example: google.appengine.v1beta.Versions.CreateVersion.@OutputOnly"
           type: string
         target:
-          description: 'Name of the resource that this operation is acting on. Example: apps/myapp/services/default.@OutputOnly'
+          description: "Name of the resource that this operation is acting on. Example: apps/myapp/services/default.@OutputOnly"
           type: string
         user:
           description: User who requested this operation.@OutputOnly
@@ -2900,7 +2916,7 @@ components:
       description: Readiness checking configuration for VM instances. Unhealthy instances are removed from traffic rotation.
       properties:
         appStartTimeout:
-          description: 'A maximum time limit on application initialization, measured from moment the application successfully replies to a healthcheck until it is ready to serve traffic.'
+          description: A maximum time limit on application initialization, measured from moment the application successfully replies to a healthcheck until it is ready to serve traffic.
           format: google-duration
           type: string
         checkInterval:
@@ -2946,13 +2962,13 @@ components:
       description: A DNS resource record.
       properties:
         name:
-          description: 'Relative name of the object affected by this record. Only applicable for CNAME records. Example: ''www''.'
+          description: "Relative name of the object affected by this record. Only applicable for CNAME records. Example: 'www'."
           type: string
         rrdata:
-          description: 'Data for this record. Values vary by record type, as defined in RFC 1035 (section 5) and RFC 1034 (section 3.6.1).'
+          description: Data for this record. Values vary by record type, as defined in RFC 1035 (section 5) and RFC 1034 (section 3.6.1).
           type: string
         type:
-          description: 'Resource record type. Example: AAAA.'
+          description: "Resource record type. Example: AAAA."
           enum:
             - A
             - AAAA
@@ -2977,7 +2993,7 @@ components:
         volumes:
           description: User specified volumes.
           items:
-            $ref: '#/components/schemas/Volume'
+            $ref: "#/components/schemas/Volume"
           type: array
       type: object
     ScriptHandler:
@@ -2988,29 +3004,29 @@ components:
           type: string
       type: object
     Service:
-      description: 'A Service resource is a logical component of an application that can share state and communicate in a secure fashion with other services. For example, an application that handles customer requests might include separate services to handle tasks such as backend data analysis or API requests from mobile devices. Each service has a collection of versions that define a specific set of code used to implement the functionality of that service.'
+      description: A Service resource is a logical component of an application that can share state and communicate in a secure fashion with other services. For example, an application that handles customer requests might include separate services to handle tasks such as backend data analysis or API requests from mobile devices. Each service has a collection of versions that define a specific set of code used to implement the functionality of that service.
       properties:
         id:
-          description: 'Relative name of the service within the application. Example: default.@OutputOnly'
+          description: "Relative name of the service within the application. Example: default.@OutputOnly"
           type: string
         name:
-          description: 'Full path to the Service resource in the API. Example: apps/myapp/services/default.@OutputOnly'
+          description: "Full path to the Service resource in the API. Example: apps/myapp/services/default.@OutputOnly"
           type: string
         split:
-          $ref: '#/components/schemas/TrafficSplit'
+          $ref: "#/components/schemas/TrafficSplit"
           description: Mapping that defines fractional HTTP traffic diversion to different versions within the service.
       type: object
     SslSettings:
       description: SSL configuration for a DomainMapping resource.
       properties:
         certificateId:
-          description: 'ID of the AuthorizedCertificate resource configuring SSL for the application. Clearing this field will remove SSL support.By default, a managed certificate is automatically created for every domain mapping. To omit SSL support or to configure SSL manually, specify SslManagementType.MANUAL on a CREATE or UPDATE request. You must be authorized to administer the AuthorizedCertificate resource to manually map it to a DomainMapping resource. Example: 12345.'
+          description: "ID of the AuthorizedCertificate resource configuring SSL for the application. Clearing this field will remove SSL support.By default, a managed certificate is automatically created for every domain mapping. To omit SSL support or to configure SSL manually, specify SslManagementType.MANUAL on a CREATE or UPDATE request. You must be authorized to administer the AuthorizedCertificate resource to manually map it to a DomainMapping resource. Example: 12345."
           type: string
         pendingManagedCertificateId:
-          description: 'ID of the managed AuthorizedCertificate resource currently being provisioned, if applicable. Until the new managed certificate has been successfully provisioned, the previous SSL state will be preserved. Once the provisioning process completes, the certificate_id field will reflect the new managed certificate and this field will be left empty. To remove SSL support while there is still a pending managed certificate, clear the certificate_id field with an UpdateDomainMappingRequest.@OutputOnly'
+          description: ID of the managed AuthorizedCertificate resource currently being provisioned, if applicable. Until the new managed certificate has been successfully provisioned, the previous SSL state will be preserved. Once the provisioning process completes, the certificate_id field will reflect the new managed certificate and this field will be left empty. To remove SSL support while there is still a pending managed certificate, clear the certificate_id field with an UpdateDomainMappingRequest.@OutputOnly
           type: string
         sslManagementType:
-          description: 'SSL management type for this domain. If AUTOMATIC, a managed certificate is automatically provisioned. If MANUAL, certificate_id must be manually specified in order to configure SSL for this domain.'
+          description: SSL management type for this domain. If AUTOMATIC, a managed certificate is automatically provisioned. If MANUAL, certificate_id must be manually specified in order to configure SSL for this domain.
           enum:
             - AUTOMATIC
             - MANUAL
@@ -3037,10 +3053,10 @@ components:
           type: number
       type: object
     StaticFilesHandler:
-      description: 'Files served directly to the user for a given URL, such as images, CSS stylesheets, or JavaScript source files. Static file handlers describe which files in the application directory are static files, and which URLs serve them.'
+      description: Files served directly to the user for a given URL, such as images, CSS stylesheets, or JavaScript source files. Static file handlers describe which files in the application directory are static files, and which URLs serve them.
       properties:
         applicationReadable:
-          description: 'Whether files should also be uploaded as code data. By default, files declared in static file handlers are uploaded as static data and are only served to end users; they cannot be read by the application. If enabled, uploads are charged against both your code and static data storage resource quotas.'
+          description: Whether files should also be uploaded as code data. By default, files declared in static file handlers are uploaded as static data and are only served to end users; they cannot be read by the application. If enabled, uploads are charged against both your code and static data storage resource quotas.
           type: boolean
         expiration:
           description: Time a static file served by this handler should be cached by web proxies and browsers.
@@ -3052,10 +3068,10 @@ components:
           description: HTTP headers to use for all responses from these URLs.
           type: object
         mimeType:
-          description: 'MIME type used to serve all files served by this handler.Defaults to file-specific MIME types, which are derived from each file''s filename extension.'
+          description: MIME type used to serve all files served by this handler.Defaults to file-specific MIME types, which are derived from each file's filename extension.
           type: string
         path:
-          description: 'Path to the static files matched by the URL pattern, from the application root directory. The path can refer to text matched in groupings in the URL pattern.'
+          description: Path to the static files matched by the URL pattern, from the application root directory. The path can refer to text matched in groupings in the URL pattern.
           type: string
         requireMatchingFile:
           description: Whether this handler should match the request if the file referenced by the handler does not exist.
@@ -3065,10 +3081,10 @@ components:
           type: string
       type: object
     Status:
-      description: 'The Status type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by gRPC (https://github.com/grpc). Each Status message contains three pieces of data: error code, error message, and error details.You can find out more about this error model and how to work with it in the API Design Guide (https://cloud.google.com/apis/design/errors).'
+      description: "The Status type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by gRPC (https://github.com/grpc). Each Status message contains three pieces of data: error code, error message, and error details.You can find out more about this error model and how to work with it in the API Design Guide (https://cloud.google.com/apis/design/errors)."
       properties:
         code:
-          description: 'The status code, which should be an enum value of google.rpc.Code.'
+          description: The status code, which should be an enum value of google.rpc.Code.
           format: int32
           type: integer
         details:
@@ -3079,7 +3095,7 @@ components:
             type: object
           type: array
         message:
-          description: 'A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.'
+          description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.
           type: string
       type: object
     TrafficSplit:
@@ -3089,7 +3105,7 @@ components:
           additionalProperties:
             format: double
             type: number
-          description: 'Mapping from version IDs within the service to fractional (0.000, 1] allocations of traffic for that version. Each version can be specified only once, but some versions in the service may not have any traffic allocation. Services that have traffic allocated cannot be deleted until either the service is deleted or their traffic allocation is removed. Allocations must sum to 1. Up to two decimal place precision is supported for IP-based splits and up to three decimal places is supported for cookie-based splits.'
+          description: Mapping from version IDs within the service to fractional (0.000, 1] allocations of traffic for that version. Each version can be specified only once, but some versions in the service may not have any traffic allocation. Services that have traffic allocated cannot be deleted until either the service is deleted or their traffic allocation is removed. Allocations must sum to 1. Up to two decimal place precision is supported for IP-based splits and up to three decimal places is supported for cookie-based splits.
           type: object
         shardBy:
           description: Mechanism used to determine which version a request is sent to. The traffic selection algorithm will be stable for either type until allocations are changed.
@@ -3110,14 +3126,14 @@ components:
           description: Pathname within the host. Must start with a "/". A single "*" can be included at the end of the path.The sum of the lengths of the domain and path may not exceed 100 characters.
           type: string
         service:
-          description: 'Resource ID of a service in this application that should serve the matched request. The service must already exist. Example: default.'
+          description: "Resource ID of a service in this application that should serve the matched request. The service must already exist. Example: default."
           type: string
       type: object
     UrlMap:
-      description: 'URL pattern and description of how the URL should be handled. App Engine can handle URLs by executing application code or by serving static files uploaded with the version, such as images, CSS, or JavaScript.'
+      description: URL pattern and description of how the URL should be handled. App Engine can handle URLs by executing application code or by serving static files uploaded with the version, such as images, CSS, or JavaScript.
       properties:
         apiEndpoint:
-          $ref: '#/components/schemas/ApiEndpointHandler'
+          $ref: "#/components/schemas/ApiEndpointHandler"
           description: Uses API Endpoints to handle requests.
         authFailAction:
           description: Action to take when users access resources that require authentication. Defaults to redirect.
@@ -3144,7 +3160,7 @@ components:
             - REDIRECT_HTTP_RESPONSE_CODE_307
           type: string
         script:
-          $ref: '#/components/schemas/ScriptHandler'
+          $ref: "#/components/schemas/ScriptHandler"
           description: 'Executes a script to handle the requests that match this URL pattern. Only the auto value is supported for Node.js in the App Engine standard environment, for example "script": "auto".'
         securityLevel:
           description: Security (HTTPS) enforcement for this URL.
@@ -3156,23 +3172,23 @@ components:
             - SECURE_ALWAYS
           type: string
         staticFiles:
-          $ref: '#/components/schemas/StaticFilesHandler'
-          description: 'Returns the contents of a file, such as an image, as the response.'
+          $ref: "#/components/schemas/StaticFilesHandler"
+          description: Returns the contents of a file, such as an image, as the response.
         urlRegex:
-          description: 'URL prefix. Uses regular expression syntax, which means regexp special characters must be escaped, but should not contain groupings. All URLs that begin with this prefix are handled by this handler, using the portion of the URL after the prefix as part of the file path.'
+          description: URL prefix. Uses regular expression syntax, which means regexp special characters must be escaped, but should not contain groupings. All URLs that begin with this prefix are handled by this handler, using the portion of the URL after the prefix as part of the file path.
           type: string
       type: object
     Version:
       description: A Version resource is a specific set of source code and configuration files that are deployed into a service.
       properties:
         apiConfig:
-          $ref: '#/components/schemas/ApiConfigHandler'
-          description: 'Serving configuration for Google Cloud Endpoints (https://cloud.google.com/appengine/docs/python/endpoints/).Only returned in GET requests if view=FULL is set.'
+          $ref: "#/components/schemas/ApiConfigHandler"
+          description: Serving configuration for Google Cloud Endpoints (https://cloud.google.com/appengine/docs/python/endpoints/).Only returned in GET requests if view=FULL is set.
         automaticScaling:
-          $ref: '#/components/schemas/AutomaticScaling'
-          description: 'Automatic scaling is based on request rate, response latencies, and other application metrics.'
+          $ref: "#/components/schemas/AutomaticScaling"
+          description: Automatic scaling is based on request rate, response latencies, and other application metrics.
         basicScaling:
-          $ref: '#/components/schemas/BasicScaling'
+          $ref: "#/components/schemas/BasicScaling"
           description: A service with basic scaling will create an instance when the application receives a request. The instance will be turned down when the app becomes idle. Basic scaling is ideal for work that is intermittent or driven by user activity.
         betaSettings:
           additionalProperties:
@@ -3187,21 +3203,21 @@ components:
           description: Email address of the user who created this version.@OutputOnly
           type: string
         defaultExpiration:
-          description: 'Duration that static files should be cached by web proxies and browsers. Only applicable if the corresponding StaticFilesHandler (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1beta/apps.services.versions#StaticFilesHandler) does not specify its own expiration time.Only returned in GET requests if view=FULL is set.'
+          description: Duration that static files should be cached by web proxies and browsers. Only applicable if the corresponding StaticFilesHandler (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1beta/apps.services.versions#StaticFilesHandler) does not specify its own expiration time.Only returned in GET requests if view=FULL is set.
           format: google-duration
           type: string
         deployment:
-          $ref: '#/components/schemas/Deployment'
+          $ref: "#/components/schemas/Deployment"
           description: Code and application artifacts that make up this version.Only returned in GET requests if view=FULL is set.
         diskUsageBytes:
           description: Total size in bytes of all the files that are included in this version and currently hosted on the App Engine disk.@OutputOnly
           format: int64
           type: string
         endpointsApiService:
-          $ref: '#/components/schemas/EndpointsApiService'
-          description: 'Cloud Endpoints configuration.If endpoints_api_service is set, the Cloud Endpoints Extensible Service Proxy will be provided to serve the API implemented by the app.'
+          $ref: "#/components/schemas/EndpointsApiService"
+          description: Cloud Endpoints configuration.If endpoints_api_service is set, the Cloud Endpoints Extensible Service Proxy will be provided to serve the API implemented by the app.
         entrypoint:
-          $ref: '#/components/schemas/Entrypoint'
+          $ref: "#/components/schemas/Entrypoint"
           description: The entrypoint for the application.
         env:
           description: App Engine execution environment for this version.Defaults to standard.
@@ -3214,21 +3230,21 @@ components:
         errorHandlers:
           description: Custom static error pages. Limited to 10KB per page.Only returned in GET requests if view=FULL is set.
           items:
-            $ref: '#/components/schemas/ErrorHandler'
+            $ref: "#/components/schemas/ErrorHandler"
           type: array
         handlers:
           description: An ordered list of URL-matching patterns that should be applied to incoming requests. The first matching URL handles the request and other request handlers are not attempted.Only returned in GET requests if view=FULL is set.
           items:
-            $ref: '#/components/schemas/UrlMap'
+            $ref: "#/components/schemas/UrlMap"
           type: array
         healthCheck:
-          $ref: '#/components/schemas/HealthCheck'
+          $ref: "#/components/schemas/HealthCheck"
           description: Configures health checking for instances. Unhealthy instances are stopped and replaced with new instances. Only applicable in the App Engine flexible environment.Only returned in GET requests if view=FULL is set.
         id:
           description: 'Relative name of the version within the service. Example: v1. Version names can contain only lowercase letters, numbers, or hyphens. Reserved names: "default", "latest", and any name with the prefix "ah-".'
           type: string
         inboundServices:
-          description: 'Before an application can receive email or XMPP messages, the application must be configured to enable the service.'
+          description: Before an application can receive email or XMPP messages, the application must be configured to enable the service.
           items:
             enum:
               - INBOUND_SERVICE_UNSPECIFIED
@@ -3243,42 +3259,44 @@ components:
             type: string
           type: array
         instanceClass:
-          description: |-
+          description: >-
             Instance class that is used to run this version. Valid values are:
+
             AutomaticScaling: F1, F2, F4, F4_1G
+
             ManualScaling or BasicScaling: B1, B2, B4, B8, B4_1GDefaults to F1 for AutomaticScaling and B1 for ManualScaling or BasicScaling.
           type: string
         libraries:
           description: Configuration for third-party Python runtime libraries that are required by the application.Only returned in GET requests if view=FULL is set.
           items:
-            $ref: '#/components/schemas/Library'
+            $ref: "#/components/schemas/Library"
           type: array
         livenessCheck:
-          $ref: '#/components/schemas/LivenessCheck'
+          $ref: "#/components/schemas/LivenessCheck"
           description: Configures liveness health checking for instances. Unhealthy instances are stopped and replaced with new instancesOnly returned in GET requests if view=FULL is set.
         manualScaling:
-          $ref: '#/components/schemas/ManualScaling'
-          description: 'A service with manual scaling runs continuously, allowing you to perform complex initialization and rely on the state of its memory over time.'
+          $ref: "#/components/schemas/ManualScaling"
+          description: A service with manual scaling runs continuously, allowing you to perform complex initialization and rely on the state of its memory over time.
         name:
-          description: 'Full path to the Version resource in the API. Example: apps/myapp/services/default/versions/v1.@OutputOnly'
+          description: "Full path to the Version resource in the API. Example: apps/myapp/services/default/versions/v1.@OutputOnly"
           type: string
         network:
-          $ref: '#/components/schemas/Network'
+          $ref: "#/components/schemas/Network"
           description: Extra network settings. Only applicable in the App Engine flexible environment.
         nobuildFilesRegex:
           description: Files that match this pattern will not be built into this version. Only applicable for Go runtimes.Only returned in GET requests if view=FULL is set.
           type: string
         readinessCheck:
-          $ref: '#/components/schemas/ReadinessCheck'
+          $ref: "#/components/schemas/ReadinessCheck"
           description: Configures readiness health checking for instances. Unhealthy instances are not put into the backend traffic rotation.Only returned in GET requests if view=FULL is set.
         resources:
-          $ref: '#/components/schemas/Resources'
+          $ref: "#/components/schemas/Resources"
           description: Machine resources for this version. Only applicable in the App Engine flexible environment.
         runtime:
-          description: 'Desired runtime. Example: python27.'
+          description: "Desired runtime. Example: python27."
           type: string
         runtimeApiVersion:
-          description: 'The version of the API in the given runtime environment. Please see the app.yaml reference for valid values at https://cloud.google.com/appengine/docs/standard/<language>/config/appref'
+          description: The version of the API in the given runtime environment. Please see the app.yaml reference for valid values at https://cloud.google.com/appengine/docs/standard/<language>/config/appref
           type: string
         runtimeChannel:
           description: The channel of the runtime to use. Only available for some runtimes. Defaults to the default channel.
@@ -3303,7 +3321,7 @@ components:
           description: Whether to deploy this version in a container on a virtual machine.
           type: boolean
         vpcAccessConnector:
-          $ref: '#/components/schemas/VpcAccessConnector'
+          $ref: "#/components/schemas/VpcAccessConnector"
           description: Enables VPC connectivity for standard apps.
         zones:
           description: The Google Compute Engine zones that are supported by this version in the App Engine flexible environment. Deprecated.
@@ -3322,7 +3340,7 @@ components:
           format: double
           type: number
         volumeType:
-          description: 'Underlying volume type, e.g. ''tmpfs''.'
+          description: Underlying volume type, e.g. 'tmpfs'.
           type: string
       type: object
     VpcAccessConnector:
@@ -3336,11 +3354,11 @@ components:
       description: The zip file information for a zip deployment.
       properties:
         filesCount:
-          description: 'An estimate of the number of files in a zip for a zip deployment. If set, must be greater than or equal to the actual number of files. Used for optimizing performance; if not provided, deployment may be slow.'
+          description: An estimate of the number of files in a zip for a zip deployment. If set, must be greater than or equal to the actual number of files. Used for optimizing performance; if not provided, deployment may be slow.
           format: int32
           type: integer
         sourceUrl:
-          description: 'URL of the zip file to deploy from. Must be a URL to a resource in Google Cloud Storage in the form ''http(s)://storage.googleapis.com/<bucket>/<object>''.'
+          description: URL of the zip file to deploy from. Must be a URL to a resource in Google Cloud Storage in the form 'http(s)://storage.googleapis.com/<bucket>/<object>'.
           type: string
       type: object
   securitySchemes:
@@ -3348,20 +3366,20 @@ components:
       description: Oauth 2.0 implicit authentication
       flows:
         implicit:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            'https://www.googleapis.com/auth/appengine.admin': View and manage your applications deployed on Google App Engine
-            'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-            'https://www.googleapis.com/auth/cloud-platform.read-only': View your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/appengine.admin: View and manage your applications deployed on Google App Engine
+            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/cloud-platform.read-only: View your data across Google Cloud Platform services
       type: oauth2
     Oauth2c:
-      description: Oauth 2.0 accessCode authentication
+      description: Oauth 2.0 authorizationCode authentication
       flows:
         authorizationCode:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            'https://www.googleapis.com/auth/appengine.admin': View and manage your applications deployed on Google App Engine
-            'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-            'https://www.googleapis.com/auth/cloud-platform.read-only': View your data across Google Cloud Platform services
-          tokenUrl: 'https://accounts.google.com/o/oauth2/token'
+            https://www.googleapis.com/auth/appengine.admin: View and manage your applications deployed on Google App Engine
+            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/cloud-platform.read-only: View your data across Google Cloud Platform services
+          tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

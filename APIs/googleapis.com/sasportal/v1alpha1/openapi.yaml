@@ -1,30 +1,40 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://sasportal.googleapis.com/'
+  - url: https://sasportal.googleapis.com/
 info:
   contact:
     name: Google
-    url: 'https://google.com'
-  title: SAS Portal
+    url: https://google.com
+    x-twitter: youtube
+  description: ""
+  license:
+    name: Creative Commons Attribution 3.0
+    url: http://creativecommons.org/licenses/by/3.0/
+  termsOfService: https://developers.google.com/terms/
+  title: SAS Portal API
   version: v1alpha1
   x-apiClientRegistration:
-    url: 'https://console.developers.google.com'
+    url: https://console.developers.google.com
+  x-apisguru-categories:
+    - analytics
+    - media
   x-logo:
-    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.31
       format: google
-      url: 'https://sasportal.googleapis.com/$discovery/rest?version=v1alpha1'
+      url: https://sasportal.googleapis.com/$discovery/rest?version=v1alpha1
       version: v1
   x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: sasportal
 externalDocs:
-  url: 'https://developers.google.com/spectrum-access-system/'
+  url: https://developers.google.com/spectrum-access-system/
 tags:
   - name: installer
+  - name: deployments
   - name: nodes
   - name: policies
   - name: customers
@@ -35,56 +45,60 @@ paths:
       operationId: sasportal.customers.list
       parameters:
         - description: |-
-            A pagination token returned from a previous call to ListCustomers method that indicates where
-            this listing should continue from.
-          in: query
-          name: pageToken
-          schema:
-            type: string
-        - description: |-
             The maximum number of customers
             to return in the response.
           in: query
           name: pageSize
           schema:
             type: integer
+        - description: >-
+            A pagination token returned from a previous call to ListCustomers
+            method that indicates where
+
+            this listing should continue from.
+          in: query
+          name: pageToken
+          schema:
+            type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/SasPortalListCustomersResponse'
+                $ref: "#/components/schemas/SasPortalListCustomersResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/userinfo.email'
+            - https://www.googleapis.com/auth/userinfo.email
+          Oauth2c:
+            - https://www.googleapis.com/auth/userinfo.email
       tags:
         - customers
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/fields'
-  '/v1alpha1/installer:generateSecret':
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
+  /v1alpha1/installer:generateSecret:
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/fields'
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: Generates a secret to be used with the ValidateInstaller method
       operationId: sasportal.installer.generateSecret
@@ -92,32 +106,34 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SasPortalGenerateSecretRequest'
+              $ref: "#/components/schemas/SasPortalGenerateSecretRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/SasPortalGenerateSecretResponse'
+                $ref: "#/components/schemas/SasPortalGenerateSecretResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/userinfo.email'
+            - https://www.googleapis.com/auth/userinfo.email
+          Oauth2c:
+            - https://www.googleapis.com/auth/userinfo.email
       tags:
         - installer
-  '/v1alpha1/installer:validate':
+  /v1alpha1/installer:validate:
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/fields'
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: Validates the identity of a Certified Professional Installer (CPI).
       operationId: sasportal.installer.validate
@@ -125,68 +141,74 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SasPortalValidateInstallerRequest'
+              $ref: "#/components/schemas/SasPortalValidateInstallerRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/SasPortalValidateInstallerResponse'
+                $ref: "#/components/schemas/SasPortalValidateInstallerResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/userinfo.email'
+            - https://www.googleapis.com/auth/userinfo.email
+          Oauth2c:
+            - https://www.googleapis.com/auth/userinfo.email
       tags:
         - installer
-  '/v1alpha1/policies:get':
+  /v1alpha1/policies:get:
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/fields'
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
-      description: |-
+      description: >-
         Gets the access control policy for a resource.
+
         Returns an empty policy if the resource exists and does not have a policy
+
         set.
       operationId: sasportal.policies.get
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SasPortalGetPolicyRequest'
+              $ref: "#/components/schemas/SasPortalGetPolicyRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/SasPortalPolicy'
+                $ref: "#/components/schemas/SasPortalPolicy"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/userinfo.email'
+            - https://www.googleapis.com/auth/userinfo.email
+          Oauth2c:
+            - https://www.googleapis.com/auth/userinfo.email
       tags:
         - policies
-  '/v1alpha1/policies:set':
+  /v1alpha1/policies:set:
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/fields'
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: |-
         Sets the access control policy on the specified resource. Replaces any
@@ -196,32 +218,34 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SasPortalSetPolicyRequest'
+              $ref: "#/components/schemas/SasPortalSetPolicyRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/SasPortalPolicy'
+                $ref: "#/components/schemas/SasPortalPolicy"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/userinfo.email'
+            - https://www.googleapis.com/auth/userinfo.email
+          Oauth2c:
+            - https://www.googleapis.com/auth/userinfo.email
       tags:
         - policies
-  '/v1alpha1/policies:test':
+  /v1alpha1/policies:test:
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/fields'
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: Returns permissions that a caller has on the specified resource.
       operationId: sasportal.policies.test
@@ -229,20 +253,22 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SasPortalTestPermissionsRequest'
+              $ref: "#/components/schemas/SasPortalTestPermissionsRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/SasPortalTestPermissionsResponse'
+                $ref: "#/components/schemas/SasPortalTestPermissionsResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/userinfo.email'
+            - https://www.googleapis.com/auth/userinfo.email
+          Oauth2c:
+            - https://www.googleapis.com/auth/userinfo.email
       tags:
         - policies
-  '/v1alpha1/{name}':
+  "/v1alpha1/{name}":
     delete:
       description: Deletes a node.
       operationId: sasportal.customers.nodes.delete
@@ -253,17 +279,18 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/SasPortalEmpty'
+                $ref: "#/components/schemas/SasPortalEmpty"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/userinfo.email'
+            - https://www.googleapis.com/auth/userinfo.email
+          Oauth2c:
+            - https://www.googleapis.com/auth/userinfo.email
       tags:
         - customers
     get:
@@ -276,31 +303,32 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/SasPortalNode'
+                $ref: "#/components/schemas/SasPortalNode"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/userinfo.email'
+            - https://www.googleapis.com/auth/userinfo.email
+          Oauth2c:
+            - https://www.googleapis.com/auth/userinfo.email
       tags:
         - customers
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/fields'
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
     patch:
       description: Updates an existing node.
       operationId: sasportal.customers.nodes.patch
@@ -311,7 +339,6 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
         - description: Fields to be updated.
           in: query
           name: updateMask
@@ -321,32 +348,34 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SasPortalNode'
+              $ref: "#/components/schemas/SasPortalNode"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/SasPortalNode'
+                $ref: "#/components/schemas/SasPortalNode"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/userinfo.email'
+            - https://www.googleapis.com/auth/userinfo.email
+          Oauth2c:
+            - https://www.googleapis.com/auth/userinfo.email
       tags:
         - customers
-  '/v1alpha1/{name}:move':
+  "/v1alpha1/{name}:move":
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/fields'
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: Moves a node under another node or customer.
       operationId: sasportal.customers.nodes.move
@@ -359,37 +388,38 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SasPortalMoveNodeRequest'
+              $ref: "#/components/schemas/SasPortalMoveNodeRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/SasPortalOperation'
+                $ref: "#/components/schemas/SasPortalOperation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/userinfo.email'
+            - https://www.googleapis.com/auth/userinfo.email
+          Oauth2c:
+            - https://www.googleapis.com/auth/userinfo.email
       tags:
         - customers
-  '/v1alpha1/{name}:signDevice':
+  "/v1alpha1/{name}:signDevice":
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/fields'
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: Signs a device.
       operationId: sasportal.customers.devices.signDevice
@@ -400,37 +430,38 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SasPortalSignDeviceRequest'
+              $ref: "#/components/schemas/SasPortalSignDeviceRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/SasPortalEmpty'
+                $ref: "#/components/schemas/SasPortalEmpty"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/userinfo.email'
+            - https://www.googleapis.com/auth/userinfo.email
+          Oauth2c:
+            - https://www.googleapis.com/auth/userinfo.email
       tags:
         - customers
-  '/v1alpha1/{name}:updateSigned':
+  "/v1alpha1/{name}:updateSigned":
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/fields'
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
     patch:
       description: Updates a signed device.
       operationId: sasportal.customers.devices.updateSigned
@@ -441,25 +472,108 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SasPortalUpdateSignedDeviceRequest'
+              $ref: "#/components/schemas/SasPortalUpdateSignedDeviceRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/SasPortalDevice'
+                $ref: "#/components/schemas/SasPortalDevice"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/userinfo.email'
+            - https://www.googleapis.com/auth/userinfo.email
+          Oauth2c:
+            - https://www.googleapis.com/auth/userinfo.email
       tags:
         - customers
-  '/v1alpha1/{parent}/devices':
+  "/v1alpha1/{parent}/deployments":
+    get:
+      description: Lists deployments.
+      operationId: sasportal.customers.nodes.deployments.list
+      parameters:
+        - description: |-
+            Required. The parent resource name, for example, "nodes/1",
+            customer/1/nodes/2.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: The maximum number of deployments to return in the response.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: |-
+            A pagination token returned from a previous call to ListDeployments
+            method that
+            indicates where this listing should continue from.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SasPortalListDeploymentsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/userinfo.email
+          Oauth2c:
+            - https://www.googleapis.com/auth/userinfo.email
+      tags:
+        - customers
+    parameters:
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
+    post:
+      description: Creates a new deployment.
+      operationId: sasportal.customers.nodes.deployments.create
+      parameters:
+        - description: Required. The parent resource name where the deployment is to be
+            created.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SasPortalDeployment"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SasPortalDeployment"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/userinfo.email
+          Oauth2c:
+            - https://www.googleapis.com/auth/userinfo.email
+      tags:
+        - customers
+  "/v1alpha1/{parent}/devices":
     get:
       description: Lists devices under a node or customer.
       operationId: sasportal.customers.devices.list
@@ -470,7 +584,16 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
+        - description: >-
+            The filter expression. The filter should have one of the following
+
+            formats: "sn=123454" or "display_name=MyDevice". sn
+
+            corresponds to serial_number of the device. The filter is case insensitive.
+          in: query
+          name: filter
+          schema:
+            type: string
         - description: |-
             The maximum number of devices to return in the response.
             If empty or zero, all devices will be listed.
@@ -480,14 +603,6 @@ paths:
           schema:
             type: integer
         - description: |-
-            The filter expression. The filter should have one of the following
-            formats: "sn=123454" or "display_name=MyDevice". sn
-            corresponds to serial_number of the device. The filter is case insensitive.
-          in: query
-          name: filter
-          schema:
-            type: string
-        - description: |-
             A pagination token returned from a previous call to ListDevices
             that indicates where this listing should continue from.
           in: query
@@ -495,29 +610,31 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/SasPortalListDevicesResponse'
+                $ref: "#/components/schemas/SasPortalListDevicesResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/userinfo.email'
+            - https://www.googleapis.com/auth/userinfo.email
+          Oauth2c:
+            - https://www.googleapis.com/auth/userinfo.email
       tags:
         - customers
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/fields'
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: Creates a device under a node or customer.
       operationId: sasportal.customers.devices.create
@@ -528,39 +645,41 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SasPortalDevice'
+              $ref: "#/components/schemas/SasPortalDevice"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/SasPortalDevice'
+                $ref: "#/components/schemas/SasPortalDevice"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/userinfo.email'
+            - https://www.googleapis.com/auth/userinfo.email
+          Oauth2c:
+            - https://www.googleapis.com/auth/userinfo.email
       tags:
         - customers
-  '/v1alpha1/{parent}/devices:bulk':
+  "/v1alpha1/{parent}/devices:bulk":
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/fields'
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
-      description: Creates a device under a node or customer. Returned devices are unordered.
+      description: Creates a device under a node or customer. Returned devices are
+        unordered.
       operationId: sasportal.customers.devices.bulk
       parameters:
         - description: Required. The name of the parent resource.
@@ -569,37 +688,38 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SasPortalBulkCreateDeviceRequest'
+              $ref: "#/components/schemas/SasPortalBulkCreateDeviceRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/SasPortalBulkCreateDeviceResponse'
+                $ref: "#/components/schemas/SasPortalBulkCreateDeviceResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/userinfo.email'
+            - https://www.googleapis.com/auth/userinfo.email
+          Oauth2c:
+            - https://www.googleapis.com/auth/userinfo.email
       tags:
         - customers
-  '/v1alpha1/{parent}/devices:createSigned':
+  "/v1alpha1/{parent}/devices:createSigned":
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/fields'
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: |-
         Creates a signed device under a
@@ -612,41 +732,34 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SasPortalCreateSignedDeviceRequest'
+              $ref: "#/components/schemas/SasPortalCreateSignedDeviceRequest"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/SasPortalDevice'
+                $ref: "#/components/schemas/SasPortalDevice"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/userinfo.email'
+            - https://www.googleapis.com/auth/userinfo.email
+          Oauth2c:
+            - https://www.googleapis.com/auth/userinfo.email
       tags:
         - customers
-  '/v1alpha1/{parent}/nodes':
+  "/v1alpha1/{parent}/nodes":
     get:
       description: Lists nodes.
       operationId: sasportal.customers.nodes.nodes.list
       parameters:
-        - description: 'Required. The parent resource name, for example, "nodes/1".'
+        - description: Required. The parent resource name, for example, "nodes/1".
           in: path
           name: parent
           required: true
-          schema:
-            type: string
-          x-reservedExpansion: true
-        - description: |-
-            A pagination token returned from a previous call to ListNodes method
-            that indicates where this listing should continue from.
-          in: query
-          name: pageToken
           schema:
             type: string
         - description: The maximum number of nodes to return in the response.
@@ -654,30 +767,39 @@ paths:
           name: pageSize
           schema:
             type: integer
+        - description: |-
+            A pagination token returned from a previous call to ListNodes method
+            that indicates where this listing should continue from.
+          in: query
+          name: pageToken
+          schema:
+            type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/SasPortalListNodesResponse'
+                $ref: "#/components/schemas/SasPortalListNodesResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/userinfo.email'
+            - https://www.googleapis.com/auth/userinfo.email
+          Oauth2c:
+            - https://www.googleapis.com/auth/userinfo.email
       tags:
         - customers
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/fields'
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: Creates a new node.
       operationId: sasportal.customers.nodes.nodes.create
@@ -688,22 +810,23 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SasPortalNode'
+              $ref: "#/components/schemas/SasPortalNode"
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/SasPortalNode'
+                $ref: "#/components/schemas/SasPortalNode"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/userinfo.email'
+            - https://www.googleapis.com/auth/userinfo.email
+          Oauth2c:
+            - https://www.googleapis.com/auth/userinfo.email
       tags:
         - customers
 components:
@@ -714,8 +837,8 @@ components:
       name: $.xgafv
       schema:
         enum:
-          - '1'
-          - '2'
+          - "1"
+          - "2"
         type: string
     access_token:
       description: OAuth access token.
@@ -728,7 +851,6 @@ components:
       in: query
       name: alt
       schema:
-        default: json
         enum:
           - json
           - media
@@ -747,7 +869,9 @@ components:
       schema:
         type: string
     key:
-      description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+      description: API key. Your API key identifies your project and provides you with
+        API access, quota, and reports. Required unless you provide an OAuth 2.0
+        token.
       in: query
       name: key
       schema:
@@ -763,32 +887,27 @@ components:
       in: query
       name: prettyPrint
       schema:
-        default: true
         type: boolean
     quotaUser:
-      description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.'
+      description: Available to use for quota purposes for server-side applications.
+        Can be any arbitrary string assigned to a user, but should not exceed 40
+        characters.
       in: query
       name: quotaUser
       schema:
         type: string
     uploadType:
-      description: 'Legacy upload protocol for media (e.g. "media", "multipart").'
+      description: Legacy upload protocol for media (e.g. "media", "multipart").
       in: query
       name: uploadType
       schema:
         type: string
     upload_protocol:
-      description: 'Upload protocol for media (e.g. "raw", "multipart").'
+      description: Upload protocol for media (e.g. "raw", "multipart").
       in: query
       name: upload_protocol
       schema:
         type: string
-  requestBodies:
-    SasPortalNode:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/SasPortalNode'
   schemas:
     SasPortalAssignment:
       description: Associates `members` with a `role`.
@@ -814,8 +933,9 @@ components:
       description: Request for BulkCreateDevice method.
       properties:
         csv:
-          description: |-
+          description: >-
             Required. A csv with each row representing a [device]. Each row must
+
             conform to the regulations described on CreateDeviceRequest's device field.
           type: string
       type: object
@@ -825,21 +945,24 @@ components:
         devices:
           description: Required. The devices that were imported.
           items:
-            $ref: '#/components/schemas/SasPortalDevice'
+            $ref: "#/components/schemas/SasPortalDevice"
           type: array
       type: object
     SasPortalCreateSignedDeviceRequest:
       description: Request for CreateSignedDevice method.
       properties:
         encodedDevice:
-          description: |-
+          description: >-
             Required. JSON Web Token signed using a CPI private key. Payload
+
             must be the JSON encoding of the [Device]. The user_id field must be set.
           format: byte
           type: string
         installerId:
-          description: |-
-            Required. Unique installer id (cpiId) from the Certified Professional
+          description: >-
+            Required. Unique installer id (cpiId) from the Certified
+            Professional
+
             Installers database.
           type: string
       type: object
@@ -847,7 +970,8 @@ components:
       description: Entity representing a SAS customer.
       properties:
         displayName:
-          description: Required. Name of the organization that the customer entity represents.
+          description: Required. Name of the organization that the customer entity
+            represents.
           type: string
         name:
           description: Output only. Resource name of the customer.
@@ -858,11 +982,52 @@ components:
             type: string
           type: array
       type: object
+    SasPortalDeployment:
+      description: The Deployment.
+      properties:
+        allowedBillingModes:
+          description: The allowed billing modes under this deployment.
+          items:
+            enum:
+              - BILLING_MODE_UNSPECIFIED
+              - MOBILE
+              - FIXED_WIRELESS
+            type: string
+          type: array
+        defaultBillingMode:
+          description: Default billing mode for the deployment and devices under it.
+          enum:
+            - BILLING_MODE_UNSPECIFIED
+            - MOBILE
+            - FIXED_WIRELESS
+          type: string
+        displayName:
+          description: The deployment's display name.
+          type: string
+        name:
+          description: Output only. Resource name.
+          type: string
+        sasUserIds:
+          description: >-
+            User id used by the devices belonging to this deployment. Each
+            deployment
+
+            should be associated with one unique user_id.
+          items:
+            type: string
+          type: array
+      type: object
     SasPortalDevice:
       properties:
         activeConfig:
-          $ref: '#/components/schemas/SasPortalDeviceConfig'
-          description: Output only. Current configuration of the device as registered to the SAS.
+          $ref: "#/components/schemas/SasPortalDeviceConfig"
+          description: Output only. Current configuration of the device as registered to
+            the SAS.
+        deviceMetadata:
+          $ref: "#/components/schemas/SasPortalDeviceMetadata"
+          description: |-
+            Device parameters that can be overridden by both SAS Portal and SAS
+            registration requests.
         displayName:
           description: Device display name.
           type: string
@@ -872,14 +1037,14 @@ components:
         grants:
           description: Output only. Grants held by the device.
           items:
-            $ref: '#/components/schemas/SasPortalDeviceGrant'
+            $ref: "#/components/schemas/SasPortalDeviceGrant"
           type: array
         name:
           description: Output only. The resource path name.
           type: string
         preloadedConfig:
-          $ref: '#/components/schemas/SasPortalDeviceConfig'
-          description: 'Configuration of the device, as specified via SAS Portal API.'
+          $ref: "#/components/schemas/SasPortalDeviceConfig"
+          description: Configuration of the device, as specified via SAS Portal API.
         serialNumber:
           description: |-
             A serial number assigned to the device by the device
@@ -898,8 +1063,10 @@ components:
       description: Information about the device's air interface.
       properties:
         radioTechnology:
-          description: |-
-            This field specifies the radio access technology that is used for the CBSD.
+          description: >-
+            This field specifies the radio access technology that is used for
+            the CBSD.
+
 
             Conditional
           enum:
@@ -914,10 +1081,14 @@ components:
             - TARANA_WIRELESS
           type: string
         supportedSpec:
-          description: |-
-            This field is related to the radioTechnology field and provides the air
+          description: >-
+            This field is related to the radioTechnology field and provides the
+            air
+
             interface specification that the CBSD is compliant with at the time of
+
             registration.
+
 
             Optional
           type: string
@@ -926,7 +1097,7 @@ components:
       description: Information about the device configuration.
       properties:
         airInterface:
-          $ref: '#/components/schemas/SasPortalDeviceAirInterface'
+          $ref: "#/components/schemas/SasPortalDeviceAirInterface"
           description: Information about this device's air interface.
         callSign:
           description: The call sign of the device operator.
@@ -939,7 +1110,7 @@ components:
             - DEVICE_CATEGORY_B
           type: string
         installationParams:
-          $ref: '#/components/schemas/SasPortalInstallationParams'
+          $ref: "#/components/schemas/SasPortalInstallationParams"
           description: Installation parameters for the device.
         isSigned:
           description: Output-only. Whether the configuration has been signed by a CPI.
@@ -954,7 +1125,7 @@ components:
             type: string
           type: array
         model:
-          $ref: '#/components/schemas/SasPortalDeviceModel'
+          $ref: "#/components/schemas/SasPortalDeviceModel"
           description: Information about this device model.
         state:
           description: State of the configuration.
@@ -989,7 +1160,7 @@ components:
           format: google-datetime
           type: string
         frequencyRange:
-          $ref: '#/components/schemas/SasPortalFrequencyRange'
+          $ref: "#/components/schemas/SasPortalFrequencyRange"
           description: The transmission frequency range.
         maxEirp:
           description: |-
@@ -1002,7 +1173,7 @@ components:
         moveList:
           description: The DPA move lists on which this grant appears.
           items:
-            $ref: '#/components/schemas/SasPortalDpaMoveList'
+            $ref: "#/components/schemas/SasPortalDpaMoveList"
           type: array
         state:
           description: State of the grant.
@@ -1015,10 +1186,14 @@ components:
             - GRANT_STATE_EXPIRED
           type: string
         suspensionReason:
-          description: 'If the grant is suspended, the reason(s) for suspension.'
+          description: If the grant is suspended, the reason(s) for suspension.
           items:
             type: string
           type: array
+      type: object
+    SasPortalDeviceMetadata:
+      description: Device data overridable by both SAS Portal and registration requests.
+      properties: {}
       type: object
     SasPortalDeviceModel:
       description: Information about the model of the device.
@@ -1046,13 +1221,15 @@ components:
           description: The ID of the DPA.
           type: string
         frequencyRange:
-          $ref: '#/components/schemas/SasPortalFrequencyRange'
+          $ref: "#/components/schemas/SasPortalFrequencyRange"
           description: The frequency range that the move list affects.
       type: object
     SasPortalEmpty:
-      description: |-
+      description: >-
         A generic empty message that you can re-use to avoid defining duplicated
+
         empty messages in your APIs. A typical example is to use it as the request
+
         or the response type of an API method. For instance:
 
             service Foo {
@@ -1138,7 +1315,8 @@ components:
             octets.
           type: string
         cpeCbsdIndication:
-          description: 'If present, this parameter specifies whether the CBSD is a CPE-CBSD or not.'
+          description: If present, this parameter specifies whether the CBSD is a CPE-CBSD
+            or not.
           type: boolean
         eirpCapability:
           description: |-
@@ -1210,13 +1388,37 @@ components:
             The list of customers that
             match the request.
           items:
-            $ref: '#/components/schemas/SasPortalCustomer'
+            $ref: "#/components/schemas/SasPortalCustomer"
           type: array
         nextPageToken:
-          description: |-
-            A pagination token returned from a previous call to ListCustomers method that indicates from
+          description: >-
+            A pagination token returned from a previous call to ListCustomers
+            method that indicates from
+
             where listing should continue. If the field is missing or empty, it means
+
             there are no more customers.
+          type: string
+      type: object
+    SasPortalListDeploymentsResponse:
+      description: Response for ListDeployments method.
+      properties:
+        deployments:
+          description: |-
+            The deployments that match the
+            request.
+          items:
+            $ref: "#/components/schemas/SasPortalDeployment"
+          type: array
+        nextPageToken:
+          description: >-
+            A pagination token returned from a previous call to
+
+            ListDeployments method that indicates
+
+            from where listing should continue. If the field is missing or empty, it
+
+            means there is no more deployments.
           type: string
       type: object
     SasPortalListDevicesResponse:
@@ -1225,12 +1427,15 @@ components:
         devices:
           description: The devices that match the request.
           items:
-            $ref: '#/components/schemas/SasPortalDevice'
+            $ref: "#/components/schemas/SasPortalDevice"
           type: array
         nextPageToken:
-          description: |-
-            A pagination token returned from a previous call to ListDevices method
+          description: >-
+            A pagination token returned from a previous call to ListDevices
+            method
+
             that indicates from where listing should continue. If the field
+
             is missing or empty, it means there is no more devices.
           type: string
       type: object
@@ -1238,16 +1443,19 @@ components:
       description: Response for ListNodes method.
       properties:
         nextPageToken:
-          description: |-
+          description: >-
             A pagination token returned from a previous call to
+
             ListNodes method
+
             that indicates from where listing should continue. If the field is missing
+
             or empty, it means there is no more nodes.
           type: string
         nodes:
           description: The nodes that match the request.
           items:
-            $ref: '#/components/schemas/SasPortalNode'
+            $ref: "#/components/schemas/SasPortalNode"
           type: array
       type: object
     SasPortalMoveDeviceRequest:
@@ -1263,7 +1471,8 @@ components:
       description: Request for MoveNode method.
       properties:
         destination:
-          description: Required. The name of the new parent resource node or Customer) to reparent the node under.
+          description: Required. The name of the new parent resource node or Customer) to
+            reparent the node under.
           type: string
       type: object
     SasPortalNode:
@@ -1282,45 +1491,65 @@ components:
           type: array
       type: object
     SasPortalOperation:
-      description: |-
-        This resource represents a long-running operation that is the result of a
+      description: >-
+        This resource represents a long-running operation that is the result of
+        a
+
         network API call.
       properties:
         done:
-          description: |-
-            If the value is `false`, it means the operation is still in progress.
+          description: >-
+            If the value is `false`, it means the operation is still in
+            progress.
+
             If `true`, the operation is completed, and either `error` or `response` is
+
             available.
           type: boolean
         error:
-          $ref: '#/components/schemas/SasPortalStatus'
+          $ref: "#/components/schemas/SasPortalStatus"
           description: The error result of the operation in case of failure or cancellation.
         metadata:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
-          description: |-
-            Service-specific metadata associated with the operation.  It typically
+          description: >-
+            Service-specific metadata associated with the operation.  It
+            typically
+
             contains progress information and common metadata such as create time.
+
             Some services might not provide such metadata.  Any method that returns a
+
             long-running operation should document the metadata type, if any.
           type: object
         name:
-          description: |-
-            The server-assigned name, which is only unique within the same service that
+          description: >-
+            The server-assigned name, which is only unique within the same
+            service that
+
             originally returns it. If you use the default HTTP mapping, the
+
             `name` should be a resource name ending with `operations/{unique_id}`.
           type: string
         response:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
-          description: |-
-            The normal response of the operation in case of success.  If the original
+          description: >-
+            The normal response of the operation in case of success.  If the
+            original
+
             method returns no data on success, such as `Delete`, the response is
+
             `google.protobuf.Empty`.  If the original method is standard
+
             `Get`/`Create`/`Update`, the response should be the resource.  For other
+
             methods, the response should have the type `XxxResponse`, where `Xxx`
+
             is the original method name.  For example, if the original method name
+
             is `TakeSnapshot()`, the inferred response type is
+
             `TakeSnapshotResponse`.
           type: object
       type: object
@@ -1329,7 +1558,7 @@ components:
       properties:
         assignments:
           items:
-            $ref: '#/components/schemas/SasPortalAssignment'
+            $ref: "#/components/schemas/SasPortalAssignment"
           type: array
         etag:
           description: |-
@@ -1351,11 +1580,13 @@ components:
       description: Request message for `SetPolicy` method.
       properties:
         policy:
-          $ref: '#/components/schemas/SasPortalPolicy'
+          $ref: "#/components/schemas/SasPortalPolicy"
           description: Required. The policy to be applied to the `resource`.
         resource:
-          description: |-
-            Required. The resource for which the policy is being specified. This policy
+          description: >-
+            Required. The resource for which the policy is being specified. This
+            policy
+
             replaces any existing policy.
           type: string
       type: object
@@ -1363,29 +1594,36 @@ components:
       description: Request for SignDevice method.
       properties:
         device:
-          $ref: '#/components/schemas/SasPortalDevice'
+          $ref: "#/components/schemas/SasPortalDevice"
           description: |-
             Required. The device to sign.
             The device fields name, fcc_id and serial_number must be set.
             The user_id field must be set.
       type: object
     SasPortalStatus:
-      description: |-
+      description: >-
         The `Status` type defines a logical error model that is suitable for
+
         different programming environments, including REST APIs and RPC APIs. It is
+
         used by [gRPC](https://github.com/grpc). Each `Status` message contains
+
         three pieces of data: error code, error message, and error details.
 
+
         You can find out more about this error model and how to work with it in the
+
         [API Design Guide](https://cloud.google.com/apis/design/errors).
       properties:
         code:
-          description: 'The status code, which should be an enum value of google.rpc.Code.'
+          description: The status code, which should be an enum value of google.rpc.Code.
           format: int32
           type: integer
         details:
-          description: |-
-            A list of messages that carry the error details.  There is a common set of
+          description: >-
+            A list of messages that carry the error details.  There is a common
+            set of
+
             message types for APIs to use.
           items:
             additionalProperties:
@@ -1431,8 +1669,10 @@ components:
           format: byte
           type: string
         installerId:
-          description: |-
-            Required. Unique installer ID (CPI ID) from the Certified Professional
+          description: >-
+            Required. Unique installer ID (CPI ID) from the Certified
+            Professional
+
             Installers database.
           type: string
       type: object
@@ -1461,10 +1701,19 @@ components:
       type: object
   securitySchemes:
     Oauth2:
-      description: Oauth 2.0 authentication
+      description: Oauth 2.0 implicit authentication
       flows:
         implicit:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            'https://www.googleapis.com/auth/userinfo.email': View your email address
+            https://www.googleapis.com/auth/userinfo.email: View your email address
+      type: oauth2
+    Oauth2c:
+      description: Oauth 2.0 authorizationCode authentication
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          scopes:
+            https://www.googleapis.com/auth/userinfo.email: View your email address
+          tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

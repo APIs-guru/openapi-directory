@@ -1,70 +1,76 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://abusiveexperiencereport.googleapis.com/'
+  - url: https://abusiveexperiencereport.googleapis.com/
 info:
   contact:
     name: Google
-    url: 'https://google.com'
-  description: 'Views Abusive Experience Report data, and gets a list of sites that have a significant number of abusive experiences.'
+    url: https://google.com
+    x-twitter: youtube
+  description: Views Abusive Experience Report data, and gets a list of sites that have a significant number of abusive experiences.
   license:
     name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
-  title: Abusive Experience Report
+    url: http://creativecommons.org/licenses/by/3.0/
+  termsOfService: https://developers.google.com/terms/
+  title: Abusive Experience Report API
   version: v1
   x-apiClientRegistration:
-    url: 'https://console.developers.google.com'
+    url: https://console.developers.google.com
+  x-apisguru-categories:
+    - analytics
+    - media
   x-logo:
-    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.31
       format: google
-      url: 'https://abusiveexperiencereport.googleapis.com/$discovery/rest?version=v1'
+      url: https://abusiveexperiencereport.googleapis.com/$discovery/rest?version=v1
       version: v1
   x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: abusiveexperiencereport
 externalDocs:
-  url: 'https://developers.google.com/abusive-experience-report/'
+  url: https://developers.google.com/abusive-experience-report/
 tags:
-  - name: sites
   - name: violatingSites
+  - name: sites
 paths:
   /v1/violatingSites:
     get:
       description: Lists sites that are failing in the Abusive Experience Report.
       operationId: abusiveexperiencereport.violatingSites.list
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ViolatingSitesResponse'
+                $ref: "#/components/schemas/ViolatingSitesResponse"
           description: Successful response
       tags:
         - violatingSites
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-  '/v1/{name}':
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+  "/v1/{name}":
     get:
       description: Gets a site's Abusive Experience Report summary.
       operationId: abusiveexperiencereport.sites.get
       parameters:
-        - description: |-
+        - description: >-
             Required. The name of the site whose summary to get, e.g.
+
             `sites/http%3A%2F%2Fwww.google.com%2F`.
+
 
             Format: `sites/{site}`
           in: path
@@ -72,28 +78,27 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/SiteSummaryResponse'
+                $ref: "#/components/schemas/SiteSummaryResponse"
           description: Successful response
       tags:
         - sites
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
 components:
   parameters:
     _.xgafv:
@@ -102,8 +107,8 @@ components:
       name: $.xgafv
       schema:
         enum:
-          - '1'
-          - '2'
+          - "1"
+          - "2"
         type: string
     access_token:
       description: OAuth access token.
@@ -116,7 +121,6 @@ components:
       in: query
       name: alt
       schema:
-        default: json
         enum:
           - json
           - media
@@ -135,7 +139,7 @@ components:
       schema:
         type: string
     key:
-      description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -151,22 +155,21 @@ components:
       in: query
       name: prettyPrint
       schema:
-        default: true
         type: boolean
     quotaUser:
-      description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.'
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
       in: query
       name: quotaUser
       schema:
         type: string
     uploadType:
-      description: 'Legacy upload protocol for media (e.g. "media", "multipart").'
+      description: Legacy upload protocol for media (e.g. "media", "multipart").
       in: query
       name: uploadType
       schema:
         type: string
     upload_protocol:
-      description: 'Upload protocol for media (e.g. "raw", "multipart").'
+      description: Upload protocol for media (e.g. "raw", "multipart").
       in: query
       name: upload_protocol
       schema:
@@ -183,24 +186,30 @@ components:
             - FAILING
           type: string
         enforcementTime:
-          description: |-
+          description: >-
             The time at which
+
             [enforcement](https://support.google.com/webtools/answer/7538608) against
+
             the site began or will begin.
 
+
             Not set when the
+
             filter_status
+
             is OFF.
           format: google-datetime
           type: string
         filterStatus:
-          description: |-
+          description: >-
             The site's [enforcement
+
             status](https://support.google.com/webtools/answer/7538608).
           enum:
             - UNKNOWN
-            - 'ON'
-            - 'OFF'
+            - ON
+            - OFF
             - PAUSED
             - PENDING
           type: string
@@ -209,18 +218,23 @@ components:
           format: google-datetime
           type: string
         reportUrl:
-          description: |-
+          description: >-
             A link to the full Abusive Experience Report for the site.
 
+
             Not set in
+
             ViolatingSitesResponse.
 
+
             Note that you must complete the [Search Console verification
+
             process](https://support.google.com/webmasters/answer/9008080) for the site
+
             before you can access the full report.
           type: string
         reviewedSite:
-          description: 'The name of the reviewed site, e.g. `google.com`.'
+          description: The name of the reviewed site, e.g. `google.com`.
           type: string
         underReview:
           description: Whether the site is currently under review.
@@ -232,6 +246,6 @@ components:
         violatingSites:
           description: The list of violating sites.
           items:
-            $ref: '#/components/schemas/SiteSummaryResponse'
+            $ref: "#/components/schemas/SiteSummaryResponse"
           type: array
       type: object
