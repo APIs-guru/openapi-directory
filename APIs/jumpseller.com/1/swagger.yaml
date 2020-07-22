@@ -6,8 +6,7 @@ basePath: /v1
 info:
   contact:
     x-twitter: jumpseller
-  description: Explore all our endpoints with your own set of of access tokens.
-    All changes affect your production Jumpseller store.
+  description: Explore all our endpoints with your own set of of access tokens. All changes affect your production Jumpseller store.
   title: ""
   version: "1"
   x-apisguru-categories:
@@ -84,8 +83,7 @@ paths:
       tags:
         - Categories
     post:
-      description: Category's permalink is automatically generated from the given
-        category's name.
+      description: Category's permalink is automatically generated from the given category's name.
       parameters:
         - $ref: "#/parameters/LoginParam"
         - $ref: "#/parameters/AuthtokenParam"
@@ -207,8 +205,7 @@ paths:
       tags:
         - Checkout Custom Fields
     post:
-      description: "Type values can be: input, selection, checkbox, date or text. Area
-        values can be: contact, billing_shipping or other."
+      description: "Type values can be: input, selection, checkbox, date or text. Area values can be: contact, billing_shipping or other."
       parameters:
         - $ref: "#/parameters/LoginParam"
         - $ref: "#/parameters/AuthtokenParam"
@@ -1195,14 +1192,7 @@ paths:
       tags:
         - Orders
     post:
-      description: "Use the JSON format:<br/>'{ \"order\": {\"status\": \"Paid\",
-        \"shipping_method_id\": 123, \"products\": [{ \"id\": 123, \"qty\": 1}],
-        \"customer\": {\"id\": 123}}}'<br/>or in CURL:<br/>curl -X POST -d '{
-        \"order\": {\"status\": \"Paid\", \"shipping_method_id\": 123,
-        \"products\": [{ \"id\": 123, \"variant_id\": 123, \"qty\": 1}],
-        \"customer\": {\"id\": 123}}}'
-        \"https://api.jumpseller.com/v1/orders.json?login=storecode&authtoken=X\
-        XXXX\" -H \"Content-Type:application/json\" "
+      description: "Use the JSON format:<br/>'{ \"order\": {\"status\": \"Paid\", \"shipping_method_id\": 123, \"products\": [{ \"id\": 123, \"qty\": 1}], \"customer\": {\"id\": 123}}}'<br/>or in CURL:<br/>curl -X POST -d '{ \"order\": {\"status\": \"Paid\", \"shipping_method_id\": 123, \"products\": [{ \"id\": 123, \"variant_id\": 123, \"qty\": 1}], \"customer\": {\"id\": 123}}}' \"https://api.jumpseller.com/v1/orders.json?login=storecode&authtoken=XXXXX\" -H \"Content-Type:application/json\" "
       parameters:
         - $ref: "#/parameters/LoginParam"
         - $ref: "#/parameters/AuthtokenParam"
@@ -1224,8 +1214,7 @@ paths:
         - Orders
   "/orders/after/{id}.json":
     get:
-      description: For example the GET /orders/after/5000 will return Order 5001,
-        5002, 5003, etc.
+      description: For example the GET /orders/after/5000 will return Order 5001, 5002, 5003, etc.
       parameters:
         - $ref: "#/parameters/LoginParam"
         - $ref: "#/parameters/AuthtokenParam"
@@ -1313,18 +1302,7 @@ paths:
       tags:
         - Orders
     put:
-      description: "Only 'status', 'tracking_number', 'tracking_company',
-        'additional_information' and 'additional_fields' are available for
-        update.<br/>Use the JSON format:<br/>'{ \"order\": {\"status\":
-        \"Paid\", \"tracking_company\": \"other\", \"tracking_number\":
-        \"123456789\", \"additional_information\": \"My custom message.\",
-        \"additional_fields\": [{\"label\": \"Gift Name\", \"value\":
-        \"Duarte\"}, {\"label\": \"Gift Wrapping Color\", \"value\":
-        \"Green\"}]} }}'<br/>or in CURL:<br/>curl -X PUT -d '{ \"order\":
-        {\"status\": \"Paid\", \"additional_information\": \"My custom
-        message.\"}}'
-        \"https://api.jumpseller.com/api/v1/orders/{id}.json?login=storecode&au\
-        thtoken=XXXXX\" -H \"Content-Type:application/json\" "
+      description: "Only 'status', 'tracking_number', 'tracking_company', 'additional_information' and 'additional_fields' are available for update.<br/>Use the JSON format:<br/>'{ \"order\": {\"status\": \"Paid\", \"tracking_company\": \"other\", \"tracking_number\": \"123456789\", \"additional_information\": \"My custom message.\", \"additional_fields\": [{\"label\": \"Gift Name\", \"value\": \"Duarte\"}, {\"label\": \"Gift Wrapping Color\", \"value\": \"Green\"}]} }}'<br/>or in CURL:<br/>curl -X PUT -d '{ \"order\": {\"status\": \"Paid\", \"additional_information\": \"My custom message.\"}}' \"https://api.jumpseller.com/api/v1/orders/{id}.json?login=storecode&authtoken=XXXXX\" -H \"Content-Type:application/json\" "
       parameters:
         - $ref: "#/parameters/LoginParam"
         - $ref: "#/parameters/AuthtokenParam"
@@ -1403,13 +1381,7 @@ paths:
         - Orders
   "/orders/{id}/shipping.json":
     put:
-      description: "Only 'name' and 'amount' are available for update.<br/>Use the
-        JSON format:<br/>'{ \"shipping\": {\"name\": \"Shipping Service Name\",
-        \"amount\": \"1000.00\"}}'<br/>or in CURL:<br/>curl -X PUT -d '{
-        \"shipping\": {\"name\": \"Shipping Service Name\", \"amount\":
-        \"1000.00\"}}'
-        \"https://610d738f.ngrok.io/api/v1/orders/{id}/shipping.json?login=stor\
-        ecode&authtoken=XXXXX\" -H \"Content-Type:application/json\" "
+      description: "Only 'name' and 'amount' are available for update.<br/>Use the JSON format:<br/>'{ \"shipping\": {\"name\": \"Shipping Service Name\", \"amount\": \"1000.00\"}}'<br/>or in CURL:<br/>curl -X PUT -d '{ \"shipping\": {\"name\": \"Shipping Service Name\", \"amount\": \"1000.00\"}}' \"https://610d738f.ngrok.io/api/v1/orders/{id}/shipping.json?login=storecode&authtoken=XXXXX\" -H \"Content-Type:application/json\" "
       parameters:
         - $ref: "#/parameters/LoginParam"
         - $ref: "#/parameters/AuthtokenParam"
@@ -2959,8 +2931,7 @@ definitions:
         description: Postal code of the Customer's Billing Address
         type: string
       region:
-        description: Region of the Customer's Billing Address (Use the FIPS standard -
-          http://www.geonames.org/countries/)
+        description: Region of the Customer's Billing Address (Use the FIPS standard - http://www.geonames.org/countries/)
         type: string
       region_code:
         description: Region code of the Customer's Billing Address
@@ -3582,8 +3553,7 @@ definitions:
           - Paid
         type: string
       subtotal:
-        description: Subtotal value for the given Order. Excluding taxes, shipping and
-          discounts
+        description: Subtotal value for the given Order. Excluding taxes, shipping and discounts
         format: float
         type: number
       tax:
@@ -3591,8 +3561,7 @@ definitions:
         format: float
         type: number
       total:
-        description: Total value for the given Order. Including taxes, shipping and
-          discounts
+        description: Total value for the given Order. Including taxes, shipping and discounts
         format: float
         type: number
       tracking_company:
@@ -4104,8 +4073,7 @@ definitions:
         description: Controls the promotion's condition ('none', 'price', 'qty')
         type: string
       categories:
-        description: Products Categories where the promotion will be applied (requires
-          'discount_target' param - 'categories')
+        description: Products Categories where the promotion will be applied (requires 'discount_target' param - 'categories')
         items:
           $ref: "#/definitions/Id"
         type: array
@@ -4113,13 +4081,11 @@ definitions:
         description: Code of the promotion
         type: string
       condition_price:
-        description: Minimum order amount to validate the promotion (requires
-          'buys_at_least' param - 'price')
+        description: Minimum order amount to validate the promotion (requires 'buys_at_least' param - 'price')
         format: float
         type: number
       condition_qty:
-        description: Minimum quantity of ordered itens to validate the promotion
-          (requires 'buys_at_least' param - 'qty')
+        description: Minimum quantity of ordered itens to validate the promotion (requires 'buys_at_least' param - 'qty')
         format: int32
         type: integer
       cumulative:
@@ -4127,22 +4093,19 @@ definitions:
         description: True if the promotion can be acumulated with others
         type: boolean
       customer_categories:
-        description: Customer Categories to whom the promotion will be applied (requires
-          'customers' param - 'categories')
+        description: Customer Categories to whom the promotion will be applied (requires 'customers' param - 'categories')
         items:
           $ref: "#/definitions/Id"
         type: array
       customers:
-        description: Controls to which customers the promotion will be applied ('all',
-          'loggedin', 'categories', 'guests')
+        description: Controls to which customers the promotion will be applied ('all', 'loggedin', 'categories', 'guests')
         type: string
       discount_amount_fix:
         description: Fixed discount amount of the promotion (requires 'type' param - 'fix')
         format: float
         type: number
       discount_amount_percent:
-        description: Percentual discount amount of the promotion (requires 'type' param
-          - 'percentage')
+        description: Percentual discount amount of the promotion (requires 'type' param - 'percentage')
         format: float
         type: number
       discount_target:
@@ -4156,20 +4119,17 @@ definitions:
         description: Expiration date of the promotion (requires 'lasts' param - 'date')
         type: string
       lasts:
-        description: Controls when the promotion will expire ('none', 'date',
-          'max_times_used')
+        description: Controls when the promotion will expire ('none', 'date', 'max_times_used')
         type: string
       max_times_used:
-        description: Maximum amount a promotion can be used (requires 'lasts' param -
-          'max_times_used')
+        description: Maximum amount a promotion can be used (requires 'lasts' param - 'max_times_used')
         format: int32
         type: integer
       name:
         description: Name of the product
         type: string
       products:
-        description: Products where the promotion will be applied (requires
-          'discount_target' param - 'categories')
+        description: Products where the promotion will be applied (requires 'discount_target' param - 'categories')
         items:
           $ref: "#/definitions/Id"
         type: array
@@ -4228,12 +4188,10 @@ definitions:
         format: int32
         type: integer
       lasts:
-        description: Controls when the promotion will expire ('none', 'date',
-          'max_times_used')
+        description: Controls when the promotion will expire ('none', 'date', 'max_times_used')
         type: string
       max_times_used:
-        description: Maximum amount a promotion can be used (requires 'lasts' param -
-          'max_times_used')
+        description: Maximum amount a promotion can be used (requires 'lasts' param - 'max_times_used')
         format: int32
         type: integer
       name:
@@ -4281,8 +4239,7 @@ definitions:
         description: Postal code of the Customer's Shipping Address
         type: string
       region:
-        description: Region of the Customer's Shipping Address (Use the FIPS standard -
-          http://www.geonames.org/countries/)
+        description: Region of the Customer's Shipping Address (Use the FIPS standard - http://www.geonames.org/countries/)
         type: string
       region_code:
         description: Region code of the Customer's Shipping Address

@@ -7,8 +7,7 @@ info:
     name: Visual Crossing Corporation
     url: https://www.visualcrossing.com/weather-api
     x-twitter: visualcrossing
-  description: Weather Forecast and Historical Weather Observation Data via an
-    convenient, restful API.
+  description: Weather Forecast and Historical Weather Observation Data via an convenient, restful API.
   license:
     name: Visual Crossing Weather API
     url: https://www.visualcrossing.com/weather-api
@@ -34,9 +33,7 @@ tags:
 paths:
   /VisualCrossingWebServices/rest/services/weatherdata/forecast:
     get:
-      description: Provides access to weather forecast information. The forecast is
-        available for up to 15 days at the hourly, 12 hour and daily summary
-        level.
+      description: Provides access to weather forecast information. The forecast is available for up to 15 days at the hourly, 12 hour and daily summary level.
       parameters:
         - example: "false"
           in: query
@@ -90,8 +87,7 @@ paths:
       - url: https://weather.visualcrossing.com
   /VisualCrossingWebServices/rest/services/weatherdata/history:
     get:
-      description: The weather history data is suitable for retrieving hourly or daily
-        historical weather records.
+      description: The weather history data is suitable for retrieving hourly or daily historical weather records.
       parameters:
         - example: "-1"
           in: query

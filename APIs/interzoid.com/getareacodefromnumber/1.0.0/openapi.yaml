@@ -30,12 +30,10 @@ externalDocs:
 paths:
   /getareacodefromnumber:
     get:
-      description: The area code will be parsed out of a telephone number and used to
-        retrieve information about the area code.
+      description: The area code will be parsed out of a telephone number and used to retrieve information about the area code.
       operationId: getareacodefromnumber
       parameters:
-        - description: Your Interzoid license API key. Register at
-            www.interzoid.com/register
+        - description: Your Interzoid license API key. Register at www.interzoid.com/register
           in: query
           name: license
           required: true

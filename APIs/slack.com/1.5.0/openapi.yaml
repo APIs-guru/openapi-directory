@@ -5,9 +5,7 @@ info:
   contact:
     name: Slack developer relations
     url: https://api.slack.com/support
-  description: One way to interact with the Slack platform is its HTTP RPC-based
-    Web API, a collection of methods requiring OAuth 2.0-based user, bot, or
-    workspace tokens blessed with related OAuth scopes.
+  description: One way to interact with the Slack platform is its HTTP RPC-based Web API, a collection of methods requiring OAuth 2.0-based user, bot, or workspace tokens blessed with related OAuth scopes.
   title: Slack Web API
   version: 1.5.0
   x-apisguru-categories:
@@ -63,8 +61,7 @@ paths:
                     ok: true
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _OK_ response or a verbose
-                  schema is not available for this method.
+                description: This method either only returns a brief _OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_true"
@@ -83,8 +80,7 @@ paths:
                     ok: false
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _not OK_ response or a
-                  verbose schema is not available for this method.
+                description: This method either only returns a brief _not OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_false"
@@ -107,8 +103,7 @@ paths:
         url: https://api.slack.com/methods/admin.apps.approved.list
       operationId: admin_apps_approved_list
       parameters:
-        - description: Set `cursor` to `next_cursor` returned by the previous call to list
-            items in the next page
+        - description: Set `cursor` to `next_cursor` returned by the previous call to list items in the next page
           in: query
           name: cursor
           schema:
@@ -119,8 +114,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: The maximum number of items to return. Must be between 1 - 1000
-            both inclusive.
+        - description: The maximum number of items to return. Must be between 1 - 1000 both inclusive.
           in: query
           name: limit
           schema:
@@ -169,8 +163,7 @@ paths:
                           actor_id: W0G82F4FD
                           actor_type: user
                         scopes:
-                          - description: Add the ability for people to direct message or mention
-                              @my_test_app
+                          - description: Add the ability for people to direct message or mention @my_test_app
                             is_sensitive: true
                             name: bot
                             token_type: bot
@@ -179,8 +172,7 @@ paths:
                       next_cursor: ""
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _OK_ response or a verbose
-                  schema is not available for this method.
+                description: This method either only returns a brief _OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_true"
@@ -199,8 +191,7 @@ paths:
                     ok: false
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _not OK_ response or a
-                  verbose schema is not available for this method.
+                description: This method either only returns a brief _not OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_false"
@@ -223,8 +214,7 @@ paths:
         url: https://api.slack.com/methods/admin.apps.requests.list
       operationId: admin_apps_requests_list
       parameters:
-        - description: Set `cursor` to `next_cursor` returned by the previous call to list
-            items in the next page
+        - description: Set `cursor` to `next_cursor` returned by the previous call to list items in the next page
           in: query
           name: cursor
           schema:
@@ -235,8 +225,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: The maximum number of items to return. Must be between 1 - 1000
-            both inclusive.
+        - description: The maximum number of items to return. Must be between 1 - 1000 both inclusive.
           in: query
           name: limit
           schema:
@@ -297,8 +286,7 @@ paths:
                       next_cursor: ""
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _OK_ response or a verbose
-                  schema is not available for this method.
+                description: This method either only returns a brief _OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_true"
@@ -319,8 +307,7 @@ paths:
                     provided: read,client,admin,identify,post,apps
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _not OK_ response or a
-                  verbose schema is not available for this method.
+                description: This method either only returns a brief _not OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_false"
@@ -373,8 +360,7 @@ paths:
                     ok: true
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _OK_ response or a verbose
-                  schema is not available for this method.
+                description: This method either only returns a brief _OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_true"
@@ -393,8 +379,7 @@ paths:
                     ok: false
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _not OK_ response or a
-                  verbose schema is not available for this method.
+                description: This method either only returns a brief _not OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_false"
@@ -417,8 +402,7 @@ paths:
         url: https://api.slack.com/methods/admin.apps.restricted.list
       operationId: admin_apps_restricted_list
       parameters:
-        - description: Set `cursor` to `next_cursor` returned by the previous call to list
-            items in the next page
+        - description: Set `cursor` to `next_cursor` returned by the previous call to list items in the next page
           in: query
           name: cursor
           schema:
@@ -429,8 +413,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: The maximum number of items to return. Must be between 1 - 1000
-            both inclusive.
+        - description: The maximum number of items to return. Must be between 1 - 1000 both inclusive.
           in: query
           name: limit
           schema:
@@ -488,8 +471,7 @@ paths:
                             token_type: user
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _OK_ response or a verbose
-                  schema is not available for this method.
+                description: This method either only returns a brief _OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_true"
@@ -508,8 +490,7 @@ paths:
                     ok: false
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _not OK_ response or a
-                  verbose schema is not available for this method.
+                description: This method either only returns a brief _not OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_false"
@@ -550,13 +531,10 @@ paths:
                   description: True if channel has to be converted to an org channel
                   type: boolean
                 target_team_ids:
-                  description: "The list of workspaces to which the channel should be shared. Not
-                    required if the channel is being shared orgwide. Example:
-                    `['T1234', 'T5678']`"
+                  description: "The list of workspaces to which the channel should be shared. Not required if the channel is being shared orgwide. Example: `['T1234', 'T5678']`"
                   type: string
                 team_id:
-                  description: The workspace to which the channel belongs. Omit this argument if
-                    the channel is a cross-workspace shared channel.
+                  description: The workspace to which the channel belongs. Omit this argument if the channel is a cross-workspace shared channel.
                   type: string
               required:
                 - channel_id
@@ -572,8 +550,7 @@ paths:
                     ok: true
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _OK_ response or a verbose
-                  schema is not available for this method.
+                description: This method either only returns a brief _OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_true"
@@ -592,8 +569,7 @@ paths:
                     ok: false
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _not OK_ response or a
-                  verbose schema is not available for this method.
+                description: This method either only returns a brief _not OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_false"
@@ -621,15 +597,13 @@ paths:
             schema:
               properties:
                 name:
-                  description: The name of the emoji to be removed. Colons (`:myemoji:`) around
-                    the value are not required, although they may be included.
+                  description: The name of the emoji to be removed. Colons (`:myemoji:`) around the value are not required, although they may be included.
                   type: string
                 token:
                   description: "Authentication token. Requires scope: `admin.teams:write`"
                   type: string
                 url:
-                  description: The URL of a file to use as an image for the emoji. Square images
-                    under 128KB and with transparent backgrounds work best.
+                  description: The URL of a file to use as an image for the emoji. Square images under 128KB and with transparent backgrounds work best.
                   type: string
               required:
                 - url
@@ -647,8 +621,7 @@ paths:
                     ok: true
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _OK_ response or a verbose
-                  schema is not available for this method.
+                description: This method either only returns a brief _OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_true"
@@ -667,8 +640,7 @@ paths:
                     ok: false
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _not OK_ response or a
-                  verbose schema is not available for this method.
+                description: This method either only returns a brief _not OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_false"
@@ -699,8 +671,7 @@ paths:
                   description: The alias of the emoji.
                   type: string
                 name:
-                  description: The name of the emoji to be aliased. Colons (`:myemoji:`) around
-                    the value are not required, although they may be included.
+                  description: The name of the emoji to be aliased. Colons (`:myemoji:`) around the value are not required, although they may be included.
                   type: string
                 token:
                   description: "Authentication token. Requires scope: `admin.teams:write`"
@@ -721,8 +692,7 @@ paths:
                     ok: true
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _OK_ response or a verbose
-                  schema is not available for this method.
+                description: This method either only returns a brief _OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_true"
@@ -741,8 +711,7 @@ paths:
                     ok: false
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _not OK_ response or a
-                  verbose schema is not available for this method.
+                description: This method either only returns a brief _not OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_false"
@@ -765,8 +734,7 @@ paths:
         url: https://api.slack.com/methods/admin.emoji.list
       operationId: admin_emoji_list
       parameters:
-        - description: Set `cursor` to `next_cursor` returned by the previous call to list
-            items in the next page
+        - description: Set `cursor` to `next_cursor` returned by the previous call to list items in the next page
           in: query
           name: cursor
           schema:
@@ -777,8 +745,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: The maximum number of items to return. Must be between 1 - 1000
-            both inclusive.
+        - description: The maximum number of items to return. Must be between 1 - 1000 both inclusive.
           in: query
           name: limit
           schema:
@@ -819,8 +786,7 @@ paths:
                     ok: true
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _OK_ response or a verbose
-                  schema is not available for this method.
+                description: This method either only returns a brief _OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_true"
@@ -839,8 +805,7 @@ paths:
                     ok: false
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _not OK_ response or a
-                  verbose schema is not available for this method.
+                description: This method either only returns a brief _not OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_false"
@@ -868,8 +833,7 @@ paths:
             schema:
               properties:
                 name:
-                  description: The name of the emoji to be removed. Colons (`:myemoji:`) around
-                    the value are not required, although they may be included.
+                  description: The name of the emoji to be removed. Colons (`:myemoji:`) around the value are not required, although they may be included.
                   type: string
                 token:
                   description: "Authentication token. Requires scope: `admin.teams:write`"
@@ -889,8 +853,7 @@ paths:
                     ok: true
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _OK_ response or a verbose
-                  schema is not available for this method.
+                description: This method either only returns a brief _OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_true"
@@ -909,8 +872,7 @@ paths:
                     ok: false
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _not OK_ response or a
-                  verbose schema is not available for this method.
+                description: This method either only returns a brief _not OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_false"
@@ -938,8 +900,7 @@ paths:
             schema:
               properties:
                 name:
-                  description: The name of the emoji to be renamed. Colons (`:myemoji:`) around
-                    the value are not required, although they may be included.
+                  description: The name of the emoji to be renamed. Colons (`:myemoji:`) around the value are not required, although they may be included.
                   type: string
                 new_name:
                   description: The new name of the emoji.
@@ -963,8 +924,7 @@ paths:
                     ok: true
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _OK_ response or a verbose
-                  schema is not available for this method.
+                description: This method either only returns a brief _OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_true"
@@ -983,8 +943,7 @@ paths:
                     ok: false
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _not OK_ response or a
-                  verbose schema is not available for this method.
+                description: This method either only returns a brief _not OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_false"
@@ -1025,8 +984,7 @@ paths:
                     ok: true
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _OK_ response or a verbose
-                  schema is not available for this method.
+                description: This method either only returns a brief _OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_true"
@@ -1045,8 +1003,7 @@ paths:
                     ok: false
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _not OK_ response or a
-                  verbose schema is not available for this method.
+                description: This method either only returns a brief _not OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_false"
@@ -1069,8 +1026,7 @@ paths:
         url: https://api.slack.com/methods/admin.inviteRequests.approved.list
       operationId: admin_inviteRequests_approved_list
       parameters:
-        - description: Value of the `next_cursor` field sent as part of the previous API
-            response
+        - description: Value of the `next_cursor` field sent as part of the previous API response
           in: query
           name: cursor
           schema:
@@ -1081,8 +1037,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: The number of results that will be returned by the API on each
-            invocation. Must be between 1 - 1000, both inclusive
+        - description: The number of results that will be returned by the API on each invocation. Must be between 1 - 1000, both inclusive
           in: query
           name: limit
           schema:
@@ -1102,8 +1057,7 @@ paths:
                     ok: true
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _OK_ response or a verbose
-                  schema is not available for this method.
+                description: This method either only returns a brief _OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_true"
@@ -1122,8 +1076,7 @@ paths:
                     ok: false
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _not OK_ response or a
-                  verbose schema is not available for this method.
+                description: This method either only returns a brief _not OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_false"
@@ -1146,8 +1099,7 @@ paths:
         url: https://api.slack.com/methods/admin.inviteRequests.denied.list
       operationId: admin_inviteRequests_denied_list
       parameters:
-        - description: Value of the `next_cursor` field sent as part of the previous api
-            response
+        - description: Value of the `next_cursor` field sent as part of the previous api response
           in: query
           name: cursor
           schema:
@@ -1158,8 +1110,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: The number of results that will be returned by the API on each
-            invocation. Must be between 1 - 1000 both inclusive
+        - description: The number of results that will be returned by the API on each invocation. Must be between 1 - 1000 both inclusive
           in: query
           name: limit
           schema:
@@ -1179,8 +1130,7 @@ paths:
                     ok: true
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _OK_ response or a verbose
-                  schema is not available for this method.
+                description: This method either only returns a brief _OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_true"
@@ -1199,8 +1149,7 @@ paths:
                     ok: false
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _not OK_ response or a
-                  verbose schema is not available for this method.
+                description: This method either only returns a brief _not OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_false"
@@ -1241,8 +1190,7 @@ paths:
                     ok: true
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _OK_ response or a verbose
-                  schema is not available for this method.
+                description: This method either only returns a brief _OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_true"
@@ -1261,8 +1209,7 @@ paths:
                     ok: false
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _not OK_ response or a
-                  verbose schema is not available for this method.
+                description: This method either only returns a brief _not OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_false"
@@ -1285,8 +1232,7 @@ paths:
         url: https://api.slack.com/methods/admin.inviteRequests.list
       operationId: admin_inviteRequests_list
       parameters:
-        - description: Value of the `next_cursor` field sent as part of the previous API
-            response
+        - description: Value of the `next_cursor` field sent as part of the previous API response
           in: query
           name: cursor
           schema:
@@ -1297,8 +1243,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: The number of results that will be returned by the API on each
-            invocation. Must be between 1 - 1000, both inclusive
+        - description: The number of results that will be returned by the API on each invocation. Must be between 1 - 1000, both inclusive
           in: query
           name: limit
           schema:
@@ -1318,8 +1263,7 @@ paths:
                     ok: true
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _OK_ response or a verbose
-                  schema is not available for this method.
+                description: This method either only returns a brief _OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_true"
@@ -1338,8 +1282,7 @@ paths:
                     ok: false
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _not OK_ response or a
-                  verbose schema is not available for this method.
+                description: This method either only returns a brief _not OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_false"
@@ -1362,8 +1305,7 @@ paths:
         url: https://api.slack.com/methods/admin.teams.admins.list
       operationId: admin_teams_admins_list
       parameters:
-        - description: Set `cursor` to `next_cursor` returned by the previous call to list
-            items in the next page.
+        - description: Set `cursor` to `next_cursor` returned by the previous call to list items in the next page.
           in: query
           name: cursor
           schema:
@@ -1396,8 +1338,7 @@ paths:
                     ok: true
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _OK_ response or a verbose
-                  schema is not available for this method.
+                description: This method either only returns a brief _OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_true"
@@ -1416,8 +1357,7 @@ paths:
                     ok: false
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _not OK_ response or a
-                  verbose schema is not available for this method.
+                description: This method either only returns a brief _not OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_false"
@@ -1455,8 +1395,7 @@ paths:
                   description: Description for the team.
                   type: string
                 team_discoverability:
-                  description: Who can join the team. A team's discoverability can be `open`,
-                    `closed`, `invite_only`, or `unlisted`.
+                  description: Who can join the team. A team's discoverability can be `open`, `closed`, `invite_only`, or `unlisted`.
                   type: string
                 team_domain:
                   description: Team domain (for example, slacksoftballteam).
@@ -1480,8 +1419,7 @@ paths:
                     team: T12345
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _OK_ response or a verbose
-                  schema is not available for this method.
+                description: This method either only returns a brief _OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_true"
@@ -1500,8 +1438,7 @@ paths:
                     ok: false
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _not OK_ response or a
-                  verbose schema is not available for this method.
+                description: This method either only returns a brief _not OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_false"
@@ -1524,8 +1461,7 @@ paths:
         url: https://api.slack.com/methods/admin.teams.list
       operationId: admin_teams_list
       parameters:
-        - description: Set `cursor` to `next_cursor` returned by the previous call to list
-            items in the next page.
+        - description: Set `cursor` to `next_cursor` returned by the previous call to list items in the next page.
           in: query
           name: cursor
           schema:
@@ -1536,8 +1472,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: The maximum number of items to return. Must be between 1 - 100 both
-            inclusive.
+        - description: The maximum number of items to return. Must be between 1 - 100 both inclusive.
           in: query
           name: limit
           schema:
@@ -1559,8 +1494,7 @@ paths:
                           user_id: W1234
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _OK_ response or a verbose
-                  schema is not available for this method.
+                description: This method either only returns a brief _OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_true"
@@ -1579,8 +1513,7 @@ paths:
                     ok: false
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _not OK_ response or a
-                  verbose schema is not available for this method.
+                description: This method either only returns a brief _not OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_false"
@@ -1603,8 +1536,7 @@ paths:
         url: https://api.slack.com/methods/admin.teams.owners.list
       operationId: admin_teams_owners_list
       parameters:
-        - description: Set `cursor` to `next_cursor` returned by the previous call to list
-            items in the next page.
+        - description: Set `cursor` to `next_cursor` returned by the previous call to list items in the next page.
           in: query
           name: cursor
           schema:
@@ -1615,8 +1547,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: The maximum number of items to return. Must be between 1 - 1000
-            both inclusive.
+        - description: The maximum number of items to return. Must be between 1 - 1000 both inclusive.
           in: query
           name: limit
           schema:
@@ -1638,8 +1569,7 @@ paths:
                       - U1234
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _OK_ response or a verbose
-                  schema is not available for this method.
+                description: This method either only returns a brief _OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_true"
@@ -1658,8 +1588,7 @@ paths:
                     ok: false
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _not OK_ response or a
-                  verbose schema is not available for this method.
+                description: This method either only returns a brief _not OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_false"
@@ -1712,8 +1641,7 @@ paths:
                       name: string
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _OK_ response or a verbose
-                  schema is not available for this method.
+                description: This method either only returns a brief _OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_true"
@@ -1732,8 +1660,7 @@ paths:
                     ok: false
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _not OK_ response or a
-                  verbose schema is not available for this method.
+                description: This method either only returns a brief _not OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_false"
@@ -1785,8 +1712,7 @@ paths:
                     ok: true
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _OK_ response or a verbose
-                  schema is not available for this method.
+                description: This method either only returns a brief _OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_true"
@@ -1805,8 +1731,7 @@ paths:
                     ok: false
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _not OK_ response or a
-                  verbose schema is not available for this method.
+                description: This method either only returns a brief _not OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_false"
@@ -1861,8 +1786,7 @@ paths:
                     ok: true
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _OK_ response or a verbose
-                  schema is not available for this method.
+                description: This method either only returns a brief _OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_true"
@@ -1881,8 +1805,7 @@ paths:
                     ok: false
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _not OK_ response or a
-                  verbose schema is not available for this method.
+                description: This method either only returns a brief _not OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_false"
@@ -1899,8 +1822,7 @@ paths:
         - admin
   /admin.teams.settings.setDiscoverability:
     post:
-      description: An API method that allows admins to set the discoverability of a
-        given workspace
+      description: An API method that allows admins to set the discoverability of a given workspace
       externalDocs:
         description: API method documentation
         url: https://api.slack.com/methods/admin.teams.settings.setDiscoverability
@@ -1918,8 +1840,7 @@ paths:
             schema:
               properties:
                 discoverability:
-                  description: This workspace's discovery setting. It must be set to one of
-                    `open`, `invite_only`, `closed`, or `unlisted`.
+                  description: This workspace's discovery setting. It must be set to one of `open`, `invite_only`, `closed`, or `unlisted`.
                   type: string
                 team_id:
                   description: The ID of the workspace to set discoverability on.
@@ -1939,8 +1860,7 @@ paths:
                     ok: true
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _OK_ response or a verbose
-                  schema is not available for this method.
+                description: This method either only returns a brief _OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_true"
@@ -1959,8 +1879,7 @@ paths:
                     ok: false
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _not OK_ response or a
-                  verbose schema is not available for this method.
+                description: This method either only returns a brief _not OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_false"
@@ -2012,8 +1931,7 @@ paths:
                     ok: true
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _OK_ response or a verbose
-                  schema is not available for this method.
+                description: This method either only returns a brief _OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_true"
@@ -2032,8 +1950,7 @@ paths:
                     ok: false
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _not OK_ response or a
-                  verbose schema is not available for this method.
+                description: This method either only returns a brief _not OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_false"
@@ -2088,8 +2005,7 @@ paths:
                     ok: true
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _OK_ response or a verbose
-                  schema is not available for this method.
+                description: This method either only returns a brief _OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_true"
@@ -2108,8 +2024,7 @@ paths:
                     ok: false
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _not OK_ response or a
-                  verbose schema is not available for this method.
+                description: This method either only returns a brief _not OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_false"
@@ -2144,15 +2059,13 @@ paths:
             schema:
               properties:
                 channel_ids:
-                  description: Comma separated values of channel IDs to add user in the new
-                    workspace.
+                  description: Comma separated values of channel IDs to add user in the new workspace.
                   type: string
                 is_restricted:
                   description: True if user should be added to the workspace as a guest.
                   type: boolean
                 is_ultra_restricted:
-                  description: True if user should be added to the workspace as a single-channel
-                    guest.
+                  description: True if user should be added to the workspace as a single-channel guest.
                   type: boolean
                 team_id:
                   description: The ID (`T1234`) of the workspace.
@@ -2175,8 +2088,7 @@ paths:
                     ok: true
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _OK_ response or a verbose
-                  schema is not available for this method.
+                description: This method either only returns a brief _OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_true"
@@ -2195,8 +2107,7 @@ paths:
                     ok: false
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _not OK_ response or a
-                  verbose schema is not available for this method.
+                description: This method either only returns a brief _not OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_false"
@@ -2231,8 +2142,7 @@ paths:
             schema:
               properties:
                 channel_ids:
-                  description: A comma-separated list of `channel_id`s for this user to join. At
-                    least one channel is required.
+                  description: A comma-separated list of `channel_id`s for this user to join. At least one channel is required.
                   type: string
                 custom_message:
                   description: An optional message to send to the user in the invite email.
@@ -2241,9 +2151,7 @@ paths:
                   description: The email address of the person to invite.
                   type: string
                 guest_expiration_ts:
-                  description: Timestamp when guest account should be disabled. Only include this
-                    timestamp if you are inviting a guest user and you want
-                    their account to expire on a certain date.
+                  description: Timestamp when guest account should be disabled. Only include this timestamp if you are inviting a guest user and you want their account to expire on a certain date.
                   type: string
                 is_restricted:
                   description: "Is this user a multi-channel guest user? (default: false)"
@@ -2255,8 +2163,7 @@ paths:
                   description: Full name of the user.
                   type: string
                 resend:
-                  description: "Allow this invite to be resent in the future if a user has not
-                    signed up yet. (default: false)"
+                  description: "Allow this invite to be resent in the future if a user has not signed up yet. (default: false)"
                   type: boolean
                 team_id:
                   description: The ID (`T1234`) of the workspace.
@@ -2277,8 +2184,7 @@ paths:
                     ok: true
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _OK_ response or a verbose
-                  schema is not available for this method.
+                description: This method either only returns a brief _OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_true"
@@ -2297,8 +2203,7 @@ paths:
                     ok: false
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _not OK_ response or a
-                  verbose schema is not available for this method.
+                description: This method either only returns a brief _not OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_false"
@@ -2321,8 +2226,7 @@ paths:
         url: https://api.slack.com/methods/admin.users.list
       operationId: admin_users_list
       parameters:
-        - description: Set `cursor` to `next_cursor` returned by the previous call to list
-            items in the next page.
+        - description: Set `cursor` to `next_cursor` returned by the previous call to list items in the next page.
           in: query
           name: cursor
           schema:
@@ -2363,8 +2267,7 @@ paths:
                         is_ultra_restricted: false
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _OK_ response or a verbose
-                  schema is not available for this method.
+                description: This method either only returns a brief _OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_true"
@@ -2383,8 +2286,7 @@ paths:
                     ok: false
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _not OK_ response or a
-                  verbose schema is not available for this method.
+                description: This method either only returns a brief _not OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_false"
@@ -2439,8 +2341,7 @@ paths:
                     ok: true
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _OK_ response or a verbose
-                  schema is not available for this method.
+                description: This method either only returns a brief _OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_true"
@@ -2459,8 +2360,7 @@ paths:
                     ok: false
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _not OK_ response or a
-                  verbose schema is not available for this method.
+                description: This method either only returns a brief _not OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_false"
@@ -2516,8 +2416,7 @@ paths:
                     ok: true
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _OK_ response or a verbose
-                  schema is not available for this method.
+                description: This method either only returns a brief _OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_true"
@@ -2536,8 +2435,7 @@ paths:
                     ok: false
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _not OK_ response or a
-                  verbose schema is not available for this method.
+                description: This method either only returns a brief _not OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_false"
@@ -2592,8 +2490,7 @@ paths:
                     ok: true
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _OK_ response or a verbose
-                  schema is not available for this method.
+                description: This method either only returns a brief _OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_true"
@@ -2612,8 +2509,7 @@ paths:
                     ok: false
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _not OK_ response or a
-                  verbose schema is not available for this method.
+                description: This method either only returns a brief _not OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_false"
@@ -2672,8 +2568,7 @@ paths:
                     ok: true
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _OK_ response or a verbose
-                  schema is not available for this method.
+                description: This method either only returns a brief _OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_true"
@@ -2692,8 +2587,7 @@ paths:
                     ok: false
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _not OK_ response or a
-                  verbose schema is not available for this method.
+                description: This method either only returns a brief _not OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_false"
@@ -2710,8 +2604,7 @@ paths:
         - admin
   /admin.users.setOwner:
     post:
-      description: Set an existing guest, regular user, or admin user to be a
-        workspace owner.
+      description: Set an existing guest, regular user, or admin user to be a workspace owner.
       externalDocs:
         description: API method documentation
         url: https://api.slack.com/methods/admin.users.setOwner
@@ -2749,8 +2642,7 @@ paths:
                     ok: true
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _OK_ response or a verbose
-                  schema is not available for this method.
+                description: This method either only returns a brief _OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_true"
@@ -2769,8 +2661,7 @@ paths:
                     ok: false
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _not OK_ response or a
-                  verbose schema is not available for this method.
+                description: This method either only returns a brief _not OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_false"
@@ -2825,8 +2716,7 @@ paths:
                     ok: true
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _OK_ response or a verbose
-                  schema is not available for this method.
+                description: This method either only returns a brief _OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_true"
@@ -2845,8 +2735,7 @@ paths:
                     ok: false
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _not OK_ response or a
-                  verbose schema is not available for this method.
+                description: This method either only returns a brief _not OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_false"
@@ -3204,11 +3093,7 @@ paths:
         url: https://api.slack.com/methods/apps.permissions.resources.list
       operationId: apps_permissions_resources_list
       parameters:
-        - description: Paginate through collections of data by setting the `cursor`
-            parameter to a `next_cursor` attribute returned by a previous
-            request's `response_metadata`. Default value fetches the first
-            "page" of the collection. See [pagination](/docs/pagination) for
-            more detail.
+        - description: Paginate through collections of data by setting the `cursor` parameter to a `next_cursor` attribute returned by a previous request's `response_metadata`. Default value fetches the first "page" of the collection. See [pagination](/docs/pagination) for more detail.
           in: query
           name: cursor
           schema:
@@ -3243,8 +3128,7 @@ paths:
                       next_cursor: dGVhbTpDMUg5UkVTR0w=
               schema:
                 additionalProperties: true
-                description: Schema for successful response apps.permissions.resources.list
-                  method
+                description: Schema for successful response apps.permissions.resources.list method
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_true"
@@ -3292,8 +3176,7 @@ paths:
                     ok: false
               schema:
                 additionalProperties: false
-                description: Schema for error response from apps.permissions.resources.list
-                  method
+                description: Schema for error response from apps.permissions.resources.list method
                 properties:
                   error:
                     enum:
@@ -3451,18 +3334,13 @@ paths:
         - apps
   /apps.permissions.users.list:
     get:
-      description: Returns list of user grants and corresponding scopes this app has
-        on a team.
+      description: Returns list of user grants and corresponding scopes this app has on a team.
       externalDocs:
         description: API method documentation
         url: https://api.slack.com/methods/apps.permissions.users.list
       operationId: apps_permissions_users_list
       parameters:
-        - description: Paginate through collections of data by setting the `cursor`
-            parameter to a `next_cursor` attribute returned by a previous
-            request's `response_metadata`. Default value fetches the first
-            "page" of the collection. See [pagination](/docs/pagination) for
-            more detail.
+        - description: Paginate through collections of data by setting the `cursor` parameter to a `next_cursor` attribute returned by a previous request's `response_metadata`. Default value fetches the first "page" of the collection. See [pagination](/docs/pagination) for more detail.
           in: query
           name: cursor
           schema:
@@ -3498,8 +3376,7 @@ paths:
                       next_cursor: dGVhbTdPMUg5UkFTT0w=
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _OK_ response or a verbose
-                  schema is not available for this method.
+                description: This method either only returns a brief _OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_true"
@@ -3518,8 +3395,7 @@ paths:
                     ok: false
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _not OK_ response or a
-                  verbose schema is not available for this method.
+                description: This method either only returns a brief _not OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_false"
@@ -3536,8 +3412,7 @@ paths:
         - apps
   /apps.permissions.users.request:
     get:
-      description: Enables an app to trigger a permissions modal to grant an app
-        access to a user access scope.
+      description: Enables an app to trigger a permissions modal to grant an app access to a user access scope.
       externalDocs:
         description: API method documentation
         url: https://api.slack.com/methods/apps.permissions.users.request
@@ -3577,8 +3452,7 @@ paths:
                     ok: true
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _OK_ response or a verbose
-                  schema is not available for this method.
+                description: This method either only returns a brief _OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_true"
@@ -3597,8 +3471,7 @@ paths:
                     ok: false
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _not OK_ response or a
-                  verbose schema is not available for this method.
+                description: This method either only returns a brief _not OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_false"
@@ -3713,8 +3586,7 @@ paths:
         url: https://api.slack.com/methods/auth.revoke
       operationId: auth_revoke
       parameters:
-        - description: Setting this parameter to `1` triggers a _testing mode_ where the
-            specified token will not actually be revoked.
+        - description: Setting this parameter to `1` triggers a _testing mode_ where the specified token will not actually be revoked.
           in: query
           name: test
           schema:
@@ -4142,8 +4014,7 @@ paths:
                   description: Name of channel to create
                   type: string
                 validate:
-                  description: Whether to return errors on invalid channel name instead of
-                    modifying it to meet the specified criteria.
+                  description: Whether to return errors on invalid channel name instead of modifying it to meet the specified criteria.
                   type: boolean
               type: object
       responses:
@@ -4431,8 +4302,7 @@ paths:
           name: token
           schema:
             type: string
-        - description: Set this to `true` to receive the locale for this channel. Defaults
-            to `false`
+        - description: Set this to `true` to receive the locale for this channel. Defaults to `false`
           in: query
           name: include_locale
           schema:
@@ -4710,8 +4580,7 @@ paths:
                   description: Name of channel to join
                   type: string
                 validate:
-                  description: Whether to return errors on invalid channel name instead of
-                    modifying it to meet the specified criteria.
+                  description: Whether to return errors on invalid channel name instead of modifying it to meet the specified criteria.
                   type: boolean
               type: object
       responses:
@@ -5027,11 +4896,7 @@ paths:
           name: exclude_members
           schema:
             type: boolean
-        - description: Paginate through collections of data by setting the `cursor`
-            parameter to a `next_cursor` attribute returned by a previous
-            request's `response_metadata`. Default value fetches the first
-            "page" of the collection. See [pagination](/docs/pagination) for
-            more detail.
+        - description: Paginate through collections of data by setting the `cursor` parameter to a `next_cursor` attribute returned by a previous request's `response_metadata`. Default value fetches the first "page" of the collection. See [pagination](/docs/pagination) for more detail.
           in: query
           name: cursor
           schema:
@@ -5041,9 +4906,7 @@ paths:
           name: token
           schema:
             type: string
-        - description: The maximum number of items to return. Fewer than the requested
-            number of items may be returned, even if the end of the users list
-            hasn't been reached.
+        - description: The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the users list hasn't been reached.
           in: query
           name: limit
           schema:
@@ -5082,9 +4945,7 @@ paths:
                         purpose:
                           creator: ""
                           last_set: 0
-                          value: A place for non-work-related flimflam, faffing, hodge-podge or
-                            jibber-jabber you'd prefer to keep out of more
-                            focused work-related channels.
+                          value: A place for non-work-related flimflam, faffing, hodge-podge or jibber-jabber you'd prefer to keep out of more focused work-related channels.
                         topic:
                           creator: U0G9QF9C6
                           last_set: 1449709352
@@ -5293,8 +5154,7 @@ paths:
                   description: New name for channel.
                   type: string
                 validate:
-                  description: Whether to return errors on invalid channel name instead of
-                    modifying it to meet the specified criteria.
+                  description: Whether to return errors on invalid channel name instead of modifying it to meet the specified criteria.
                   type: boolean
               type: object
       responses:
@@ -5324,8 +5184,7 @@ paths:
                       purpose:
                         creator: U2U85N1RZ
                         last_set: 1509475801
-                        value: the purpose of this channel is to bring people and robots together in
-                          harmony
+                        value: the purpose of this channel is to bring people and robots together in harmony
                       topic:
                         creator: U2U85N1RZ
                         last_set: 1509475775
@@ -5946,10 +5805,7 @@ paths:
             schema:
               properties:
                 as_user:
-                  description: Pass true to delete the message as the authed user with
-                    `chat:write:user` scope. [Bot users](/bot-users) in this
-                    context are considered authed users. If unused or false, the
-                    message will be deleted with `chat:write:bot` scope.
+                  description: Pass true to delete the message as the authed user with `chat:write:user` scope. [Bot users](/bot-users) in this context are considered authed users. If unused or false, the message will be deleted with `chat:write:bot` scope.
                   type: boolean
                 channel:
                   description: Channel containing the message to be deleted.
@@ -6055,10 +5911,7 @@ paths:
             schema:
               properties:
                 as_user:
-                  description: Pass true to delete the message as the authed user with
-                    `chat:write:user` scope. [Bot users](/bot-users) in this
-                    context are considered authed users. If unused or false, the
-                    message will be deleted with `chat:write:bot` scope.
+                  description: Pass true to delete the message as the authed user with `chat:write:user` scope. [Bot users](/bot-users) in this context are considered authed users. If unused or false, the message will be deleted with `chat:write:bot` scope.
                   type: boolean
                 channel:
                   description: The channel the scheduled_message is posting to
@@ -6080,8 +5933,7 @@ paths:
                     ok: true
               schema:
                 additionalProperties: false
-                description: Schema for successful response from chat.deleteScheduledMessage
-                  method
+                description: Schema for successful response from chat.deleteScheduledMessage method
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_true"
@@ -6263,8 +6115,7 @@ paths:
             schema:
               properties:
                 channel:
-                  description: Channel to send message to. Can be a public channel, private group
-                    or IM channel. Can be an encoded ID, or a name.
+                  description: Channel to send message to. Can be a public channel, private group or IM channel. Can be an encoded ID, or a name.
                   type: string
                 text:
                   description: Text of the message to send.
@@ -6367,59 +6218,40 @@ paths:
             schema:
               properties:
                 as_user:
-                  description: Pass true to post the message as the authed user. Defaults to true
-                    if the chat:write:bot scope is not included. Otherwise,
-                    defaults to false.
+                  description: Pass true to post the message as the authed user. Defaults to true if the chat:write:bot scope is not included. Otherwise, defaults to false.
                   type: boolean
                 attachments:
-                  description: A JSON-based array of structured attachments, presented as a
-                    URL-encoded string.
+                  description: A JSON-based array of structured attachments, presented as a URL-encoded string.
                   type: string
                 blocks:
-                  description: A JSON-based array of structured blocks, presented as a URL-encoded
-                    string.
+                  description: A JSON-based array of structured blocks, presented as a URL-encoded string.
                   type: string
                 channel:
-                  description: Channel, private group, or IM channel to send message to. Can be an
-                    encoded ID, or a name.
+                  description: Channel, private group, or IM channel to send message to. Can be an encoded ID, or a name.
                   type: string
                 icon_emoji:
-                  description: Emoji to use as the icon for this message. Overrides `icon_url`.
-                    Must be used in conjunction with `as_user` set to `false`,
-                    otherwise ignored. See [authorship](#authorship) below.
+                  description: Emoji to use as the icon for this message. Overrides `icon_url`. Must be used in conjunction with `as_user` set to `false`, otherwise ignored. See [authorship](#authorship) below.
                   type: string
                 icon_url:
-                  description: URL to an image to use as the icon for this message. Must be used
-                    in conjunction with `as_user` set to false, otherwise
-                    ignored. See [authorship](#authorship) below.
+                  description: URL to an image to use as the icon for this message. Must be used in conjunction with `as_user` set to false, otherwise ignored. See [authorship](#authorship) below.
                   type: string
                 link_names:
                   description: Find and link channel names and usernames.
                   type: boolean
                 parse:
-                  description: Change how messages are treated. Defaults to `none`. See
-                    [below](#formatting).
+                  description: Change how messages are treated. Defaults to `none`. See [below](#formatting).
                   type: string
                 text:
-                  description: How this field works and whether it is required depends on other
-                    fields you use in your API call. [See below](#text_usage)
-                    for more detail.
+                  description: How this field works and whether it is required depends on other fields you use in your API call. [See below](#text_usage) for more detail.
                   type: string
                 thread_ts:
-                  description: Provide another message's `ts` value to post this message in a
-                    thread. Avoid using a reply's `ts` value; use its parent's
-                    value instead. Ephemeral messages in threads are only shown
-                    if there is already an active thread.
+                  description: Provide another message's `ts` value to post this message in a thread. Avoid using a reply's `ts` value; use its parent's value instead. Ephemeral messages in threads are only shown if there is already an active thread.
                   type: string
                 user:
-                  description: "`id` of the user who will receive the ephemeral message. The user
-                    should be in the channel specified by the `channel`
-                    argument."
+                  description: "`id` of the user who will receive the ephemeral message. The user should be in the channel specified by the `channel` argument."
                   type: string
                 username:
-                  description: Set your bot's user name. Must be used in conjunction with
-                    `as_user` set to false, otherwise ignored. See
-                    [authorship](#authorship) below.
+                  description: Set your bot's user name. Must be used in conjunction with `as_user` set to false, otherwise ignored. See [authorship](#authorship) below.
                   type: string
               required:
                 - user
@@ -6522,56 +6354,40 @@ paths:
             schema:
               properties:
                 as_user:
-                  description: Pass true to post the message as the authed user, instead of as a
-                    bot. Defaults to false. See [authorship](#authorship) below.
+                  description: Pass true to post the message as the authed user, instead of as a bot. Defaults to false. See [authorship](#authorship) below.
                   type: string
                 attachments:
-                  description: A JSON-based array of structured attachments, presented as a
-                    URL-encoded string.
+                  description: A JSON-based array of structured attachments, presented as a URL-encoded string.
                   type: string
                 blocks:
-                  description: A JSON-based array of structured blocks, presented as a URL-encoded
-                    string.
+                  description: A JSON-based array of structured blocks, presented as a URL-encoded string.
                   type: string
                 channel:
-                  description: Channel, private group, or IM channel to send message to. Can be an
-                    encoded ID, or a name. See [below](#channels) for more
-                    details.
+                  description: Channel, private group, or IM channel to send message to. Can be an encoded ID, or a name. See [below](#channels) for more details.
                   type: string
                 icon_emoji:
-                  description: Emoji to use as the icon for this message. Overrides `icon_url`.
-                    Must be used in conjunction with `as_user` set to `false`,
-                    otherwise ignored. See [authorship](#authorship) below.
+                  description: Emoji to use as the icon for this message. Overrides `icon_url`. Must be used in conjunction with `as_user` set to `false`, otherwise ignored. See [authorship](#authorship) below.
                   type: string
                 icon_url:
-                  description: URL to an image to use as the icon for this message. Must be used
-                    in conjunction with `as_user` set to false, otherwise
-                    ignored. See [authorship](#authorship) below.
+                  description: URL to an image to use as the icon for this message. Must be used in conjunction with `as_user` set to false, otherwise ignored. See [authorship](#authorship) below.
                   type: string
                 link_names:
                   description: Find and link channel names and usernames.
                   type: boolean
                 mrkdwn:
-                  description: Disable Slack markup parsing by setting to `false`. Enabled by
-                    default.
+                  description: Disable Slack markup parsing by setting to `false`. Enabled by default.
                   type: boolean
                 parse:
-                  description: Change how messages are treated. Defaults to `none`. See
-                    [below](#formatting).
+                  description: Change how messages are treated. Defaults to `none`. See [below](#formatting).
                   type: string
                 reply_broadcast:
-                  description: Used in conjunction with `thread_ts` and indicates whether reply
-                    should be made visible to everyone in the channel or
-                    conversation. Defaults to `false`.
+                  description: Used in conjunction with `thread_ts` and indicates whether reply should be made visible to everyone in the channel or conversation. Defaults to `false`.
                   type: boolean
                 text:
-                  description: How this field works and whether it is required depends on other
-                    fields you use in your API call. [See below](#text_usage)
-                    for more detail.
+                  description: How this field works and whether it is required depends on other fields you use in your API call. [See below](#text_usage) for more detail.
                   type: string
                 thread_ts:
-                  description: Provide another message's `ts` value to make this message a reply.
-                    Avoid using a reply's `ts` value; use its parent instead.
+                  description: Provide another message's `ts` value to make this message a reply. Avoid using a reply's `ts` value; use its parent instead.
                   type: string
                 unfurl_links:
                   description: Pass true to enable unfurling of primarily text-based content.
@@ -6580,9 +6396,7 @@ paths:
                   description: Pass false to disable unfurling of media content.
                   type: boolean
                 username:
-                  description: Set your bot's user name. Must be used in conjunction with
-                    `as_user` set to false, otherwise ignored. See
-                    [authorship](#authorship) below.
+                  description: Set your bot's user name. Must be used in conjunction with `as_user` set to false, otherwise ignored. See [authorship](#authorship) below.
                   type: string
               required:
                 - channel
@@ -6692,46 +6506,34 @@ paths:
             schema:
               properties:
                 as_user:
-                  description: Pass true to post the message as the authed user, instead of as a
-                    bot. Defaults to false. See
-                    [chat.postMessage](chat.postMessage#authorship).
+                  description: Pass true to post the message as the authed user, instead of as a bot. Defaults to false. See [chat.postMessage](chat.postMessage#authorship).
                   type: boolean
                 attachments:
-                  description: A JSON-based array of structured attachments, presented as a
-                    URL-encoded string.
+                  description: A JSON-based array of structured attachments, presented as a URL-encoded string.
                   type: string
                 blocks:
-                  description: A JSON-based array of structured blocks, presented as a URL-encoded
-                    string.
+                  description: A JSON-based array of structured blocks, presented as a URL-encoded string.
                   type: string
                 channel:
-                  description: Channel, private group, or DM channel to send message to. Can be an
-                    encoded ID, or a name. See [below](#channels) for more
-                    details.
+                  description: Channel, private group, or DM channel to send message to. Can be an encoded ID, or a name. See [below](#channels) for more details.
                   type: string
                 link_names:
                   description: Find and link channel names and usernames.
                   type: boolean
                 parse:
-                  description: Change how messages are treated. Defaults to `none`. See
-                    [chat.postMessage](chat.postMessage#formatting).
+                  description: Change how messages are treated. Defaults to `none`. See [chat.postMessage](chat.postMessage#formatting).
                   type: string
                 post_at:
                   description: Unix EPOCH timestamp of time in future to send the message.
                   type: string
                 reply_broadcast:
-                  description: Used in conjunction with `thread_ts` and indicates whether reply
-                    should be made visible to everyone in the channel or
-                    conversation. Defaults to `false`.
+                  description: Used in conjunction with `thread_ts` and indicates whether reply should be made visible to everyone in the channel or conversation. Defaults to `false`.
                   type: boolean
                 text:
-                  description: How this field works and whether it is required depends on other
-                    fields you use in your API call. [See below](#text_usage)
-                    for more detail.
+                  description: How this field works and whether it is required depends on other fields you use in your API call. [See below](#text_usage) for more detail.
                   type: string
                 thread_ts:
-                  description: Provide another message's `ts` value to make this message a reply.
-                    Avoid using a reply's `ts` value; use its parent instead.
+                  description: Provide another message's `ts` value to make this message a reply. Avoid using a reply's `ts` value; use its parent instead.
                   type: number
                 unfurl_links:
                   description: Pass true to enable unfurling of primarily text-based content.
@@ -6865,8 +6667,7 @@ paths:
                   - error
                 title: chat.scheduleMessage error schema
                 type: object
-          description: Typical error response if the `post_at` is invalid (ex. in the past
-            or too far into the future)
+          description: Typical error response if the `post_at` is invalid (ex. in the past or too far into the future)
       security:
         - slackAuth:
             - chat:write:user
@@ -6881,9 +6682,7 @@ paths:
         url: https://api.slack.com/methods/chat.scheduledMessages.list
       operationId: chat_scheduledMessages_list
       parameters:
-        - description: For pagination purposes, this is the `cursor` value returned from a
-            previous call to `chat.scheduledmessages.list` indicating where you
-            want to start this call from.
+        - description: For pagination purposes, this is the `cursor` value returned from a previous call to `chat.scheduledmessages.list` indicating where you want to start this call from.
           in: query
           name: cursor
           schema:
@@ -6931,8 +6730,7 @@ paths:
                         text: Here's a message for you in the future
               schema:
                 additionalProperties: false
-                description: Schema for successful response from chat.scheduledMessages.list
-                  method
+                description: Schema for successful response from chat.scheduledMessages.list method
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_true"
@@ -7051,23 +6849,16 @@ paths:
                   description: Timestamp of the message to add unfurl behavior to.
                   type: string
                 unfurls:
-                  description: URL-encoded JSON map with keys set to URLs featured in the the
-                    message, pointing to their unfurl blocks or message
-                    attachments.
+                  description: URL-encoded JSON map with keys set to URLs featured in the the message, pointing to their unfurl blocks or message attachments.
                   type: string
                 user_auth_message:
-                  description: Provide a simply-formatted string to send as an ephemeral message
-                    to the user as invitation to authenticate further and enable
-                    full unfurling behavior
+                  description: Provide a simply-formatted string to send as an ephemeral message to the user as invitation to authenticate further and enable full unfurling behavior
                   type: string
                 user_auth_required:
-                  description: Set to `true` or `1` to indicate the user must install your Slack
-                    app to trigger unfurls for this domain
+                  description: Set to `true` or `1` to indicate the user must install your Slack app to trigger unfurls for this domain
                   type: boolean
                 user_auth_url:
-                  description: Send users to this custom URL where they will complete
-                    authentication in your app to fully trigger unfurling. Value
-                    should be properly URL-encoded.
+                  description: Send users to this custom URL where they will complete authentication in your app to fully trigger unfurling. Value should be properly URL-encoded.
                   type: string
               required:
                 - ts
@@ -7163,35 +6954,25 @@ paths:
             schema:
               properties:
                 as_user:
-                  description: Pass true to update the message as the authed user. [Bot
-                    users](/bot-users) in this context are considered authed
-                    users.
+                  description: Pass true to update the message as the authed user. [Bot users](/bot-users) in this context are considered authed users.
                   type: string
                 attachments:
-                  description: A JSON-based array of structured attachments, presented as a
-                    URL-encoded string. This field is required when not
-                    presenting `text`.
+                  description: A JSON-based array of structured attachments, presented as a URL-encoded string. This field is required when not presenting `text`.
                   type: string
                 blocks:
-                  description: A JSON-based array of structured blocks, presented as a URL-encoded
-                    string.
+                  description: A JSON-based array of structured blocks, presented as a URL-encoded string.
                   type: string
                 channel:
                   description: Channel containing the message to be updated.
                   type: string
                 link_names:
-                  description: Find and link channel names and usernames. Defaults to `none`. See
-                    [below](#formatting).
+                  description: Find and link channel names and usernames. Defaults to `none`. See [below](#formatting).
                   type: string
                 parse:
-                  description: Change how messages are treated. Defaults to `client`, unlike
-                    `chat.postMessage`. Accepts either `none` or `full`. See
-                    [below](#formatting).
+                  description: Change how messages are treated. Defaults to `client`, unlike `chat.postMessage`. Accepts either `none` or `full`. See [below](#formatting).
                   type: string
                 text:
-                  description: New text for the message, using the [default formatting
-                    rules](/docs/formatting). It's not required when presenting
-                    `attachments`.
+                  description: New text for the message, using the [default formatting rules](/docs/formatting). It's not required when presenting `attachments`.
                   type: string
                 ts:
                   description: Timestamp of the message to be updated.
@@ -7528,10 +7309,7 @@ paths:
                   description: Name of the public or private channel to create
                   type: string
                 user_ids:
-                  description: "**Required** for workspace apps. A list of between 1 and 30 human
-                    users that will be added to the newly-created conversation.
-                    This argument has no effect when used by classic Slack
-                    apps."
+                  description: "**Required** for workspace apps. A list of between 1 and 30 human users that will be added to the newly-created conversation. This argument has no effect when used by classic Slack apps."
                   type: string
               type: object
       responses:
@@ -7589,8 +7367,7 @@ paths:
                   - channel
                 title: conversations.create success schema
                 type: object
-          description: If successful, the command returns a rather stark [conversation
-            object](/types/conversation)
+          description: If successful, the command returns a rather stark [conversation object](/types/conversation)
         default:
           content:
             application/json:
@@ -7662,17 +7439,12 @@ paths:
         url: https://api.slack.com/methods/conversations.history
       operationId: conversations_history
       parameters:
-        - description: Include messages with latest or oldest timestamp in results only
-            when either timestamp is specified.
+        - description: Include messages with latest or oldest timestamp in results only when either timestamp is specified.
           in: query
           name: inclusive
           schema:
             type: boolean
-        - description: Paginate through collections of data by setting the `cursor`
-            parameter to a `next_cursor` attribute returned by a previous
-            request's `response_metadata`. Default value fetches the first
-            "page" of the collection. See [pagination](/docs/pagination) for
-            more detail.
+        - description: Paginate through collections of data by setting the `cursor` parameter to a `next_cursor` attribute returned by a previous request's `response_metadata`. Default value fetches the first "page" of the collection. See [pagination](/docs/pagination) for more detail.
           in: query
           name: cursor
           schema:
@@ -7682,9 +7454,7 @@ paths:
           name: token
           schema:
             type: string
-        - description: The maximum number of items to return. Fewer than the requested
-            number of items may be returned, even if the end of the users list
-            hasn't been reached.
+        - description: The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the users list hasn't been reached.
           in: query
           name: limit
           schema:
@@ -7818,8 +7588,7 @@ paths:
         url: https://api.slack.com/methods/conversations.info
       operationId: conversations_info
       parameters:
-        - description: Set to `true` to include the member count for the specified
-            conversation. Defaults to `false`
+        - description: Set to `true` to include the member count for the specified conversation. Defaults to `false`
           in: query
           name: include_num_members
           schema:
@@ -7834,8 +7603,7 @@ paths:
           name: channel
           schema:
             type: string
-        - description: Set this to `true` to receive the locale for this conversation.
-            Defaults to `false`
+        - description: Set this to `true` to receive the locale for this conversation. Defaults to `false`
           in: query
           name: include_locale
           schema:
@@ -7897,9 +7665,7 @@ paths:
                   - channel
                 title: conversations.info success schema
                 type: object
-          description: Typical success response for a public channel. (Also, a response
-            from a private channel and a multi-party IM is very similar to this
-            example.)
+          description: Typical success response for a public channel. (Also, a response from a private channel and a multi-party IM is very similar to this example.)
         default:
           content:
             application/json:
@@ -8140,8 +7906,7 @@ paths:
                   - ok
                 title: conversations.invite error schema
                 type: object
-          description: Typical error response when an invite is attempted on a
-            conversation type that does not support it
+          description: Typical error response when an invite is attempted on a conversation type that does not support it
       security:
         - slackAuth:
             - channels:write
@@ -8288,8 +8053,7 @@ paths:
                   - error
                 title: conversations.join error schema
                 type: object
-          description: Typical error response if the conversation is archived and cannot
-            be joined
+          description: Typical error response if the conversation is archived and cannot be joined
       security:
         - slackAuth:
             - channels:write
@@ -8388,8 +8152,7 @@ paths:
                   - error
                 title: conversations.kick error schema
                 type: object
-          description: Typical error response when you attempt to kick yourself from a
-            channel
+          description: Typical error response when you attempt to kick yourself from a channel
       security:
         - slackAuth:
             - channels:write
@@ -8494,8 +8257,7 @@ paths:
                   - error
                 title: conversations.leave error schema
                 type: object
-          description: Typical error response when attempting to leave a workspace's
-            "general" channel
+          description: Typical error response when attempting to leave a workspace's "general" channel
       security:
         - slackAuth:
             - channels:write
@@ -8512,11 +8274,7 @@ paths:
         url: https://api.slack.com/methods/conversations.list
       operationId: conversations_list
       parameters:
-        - description: Paginate through collections of data by setting the `cursor`
-            parameter to a `next_cursor` attribute returned by a previous
-            request's `response_metadata`. Default value fetches the first
-            "page" of the collection. See [pagination](/docs/pagination) for
-            more detail.
+        - description: Paginate through collections of data by setting the `cursor` parameter to a `next_cursor` attribute returned by a previous request's `response_metadata`. Default value fetches the first "page" of the collection. See [pagination](/docs/pagination) for more detail.
           in: query
           name: cursor
           schema:
@@ -8526,9 +8284,7 @@ paths:
           name: token
           schema:
             type: string
-        - description: The maximum number of items to return. Fewer than the requested
-            number of items may be returned, even if the end of the list hasn't
-            been reached. Must be an integer no larger than 1000.
+        - description: The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the list hasn't been reached. Must be an integer no larger than 1000.
           in: query
           name: limit
           schema:
@@ -8538,8 +8294,7 @@ paths:
           name: exclude_archived
           schema:
             type: boolean
-        - description: Mix and match channel types by providing a comma-separated list of
-            any combination of `public_channel`, `private_channel`, `mpim`, `im`
+        - description: Mix and match channel types by providing a comma-separated list of any combination of `public_channel`, `private_channel`, `mpim`, `im`
           in: query
           name: types
           schema:
@@ -8575,8 +8330,7 @@ paths:
                         purpose:
                           creator: ""
                           last_set: 0
-                          value: This channel is for team-wide communication and announcements. All team
-                            members are in this channel.
+                          value: This channel is for team-wide communication and announcements. All team members are in this channel.
                         topic:
                           creator: ""
                           last_set: 0
@@ -8605,9 +8359,7 @@ paths:
                         purpose:
                           creator: ""
                           last_set: 0
-                          value: A place for non-work-related flimflam, faffing, hodge-podge or
-                            jibber-jabber you'd prefer to keep out of more
-                            focused work-related channels.
+                          value: A place for non-work-related flimflam, faffing, hodge-podge or jibber-jabber you'd prefer to keep out of more focused work-related channels.
                         topic:
                           creator: ""
                           last_set: 0
@@ -8698,11 +8450,7 @@ paths:
         url: https://api.slack.com/methods/conversations.members
       operationId: conversations_members
       parameters:
-        - description: Paginate through collections of data by setting the `cursor`
-            parameter to a `next_cursor` attribute returned by a previous
-            request's `response_metadata`. Default value fetches the first
-            "page" of the collection. See [pagination](/docs/pagination) for
-            more detail.
+        - description: Paginate through collections of data by setting the `cursor` parameter to a `next_cursor` attribute returned by a previous request's `response_metadata`. Default value fetches the first "page" of the collection. See [pagination](/docs/pagination) for more detail.
           in: query
           name: cursor
           schema:
@@ -8712,9 +8460,7 @@ paths:
           name: token
           schema:
             type: string
-        - description: The maximum number of items to return. Fewer than the requested
-            number of items may be returned, even if the end of the users list
-            hasn't been reached.
+        - description: The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the users list hasn't been reached.
           in: query
           name: limit
           schema:
@@ -8833,18 +8579,13 @@ paths:
             schema:
               properties:
                 channel:
-                  description: Resume a conversation by supplying an `im` or `mpim`'s ID. Or
-                    provide the `users` field instead.
+                  description: Resume a conversation by supplying an `im` or `mpim`'s ID. Or provide the `users` field instead.
                   type: string
                 return_im:
-                  description: Boolean, indicates you want the full IM channel definition in the
-                    response.
+                  description: Boolean, indicates you want the full IM channel definition in the response.
                   type: boolean
                 users:
-                  description: Comma separated lists of users. If only one user is included, this
-                    creates a 1:1 DM.  The ordering of the users is preserved
-                    whenever a multi-person direct message is returned. Supply a
-                    `channel` when not supplying `users`.
+                  description: Comma separated lists of users. If only one user is included, this creates a 1:1 DM.  The ordering of the users is preserved whenever a multi-person direct message is returned. Supply a `channel` when not supplying `users`.
                   type: string
               type: object
       responses:
@@ -8859,8 +8600,7 @@ paths:
                     ok: true
               schema:
                 additionalProperties: false
-                description: Schema for successful response from conversations.open method when
-                  opening channels, ims, mpims
+                description: Schema for successful response from conversations.open method when opening channels, ims, mpims
                 properties:
                   already_open:
                     type: boolean
@@ -9088,8 +8828,7 @@ paths:
                   - error
                 title: conversations.rename error schema
                 type: object
-          description: Typical error response when the calling user is not a member of the
-            conversation
+          description: Typical error response when the calling user is not a member of the conversation
       security:
         - slackAuth:
             - channels:write
@@ -9106,8 +8845,7 @@ paths:
         url: https://api.slack.com/methods/conversations.replies
       operationId: conversations_replies
       parameters:
-        - description: Include messages with latest or oldest timestamp in results only
-            when either timestamp is specified.
+        - description: Include messages with latest or oldest timestamp in results only when either timestamp is specified.
           in: query
           name: inclusive
           schema:
@@ -9117,11 +8855,7 @@ paths:
           name: ts
           schema:
             type: number
-        - description: Paginate through collections of data by setting the `cursor`
-            parameter to a `next_cursor` attribute returned by a previous
-            request's `response_metadata`. Default value fetches the first
-            "page" of the collection. See [pagination](/docs/pagination) for
-            more detail.
+        - description: Paginate through collections of data by setting the `cursor` parameter to a `next_cursor` attribute returned by a previous request's `response_metadata`. Default value fetches the first "page" of the collection. See [pagination](/docs/pagination) for more detail.
           in: query
           name: cursor
           schema:
@@ -9131,9 +8865,7 @@ paths:
           name: token
           schema:
             type: string
-        - description: The maximum number of items to return. Fewer than the requested
-            number of items may be returned, even if the end of the users list
-            hasn't been reached.
+        - description: The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the users list hasn't been reached.
           in: query
           name: limit
           schema:
@@ -9761,8 +9493,7 @@ paths:
                   - error
                 title: dialog.open error schema
                 type: object
-          description: Typical error response, before getting to any possible validation
-            errors.
+          description: Typical error response, before getting to any possible validation errors.
       security:
         - slackAuth:
             - none
@@ -10047,8 +9778,7 @@ paths:
         - dnd
   /dnd.setSnooze:
     post:
-      description: Turns on Do Not Disturb mode for the current user, or changes its
-        duration.
+      description: Turns on Do Not Disturb mode for the current user, or changes its duration.
       externalDocs:
         description: API method documentation
         url: https://api.slack.com/methods/dnd.setSnooze
@@ -10267,8 +9997,7 @@ paths:
                     ok: true
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _OK_ response or a verbose
-                  schema is not available for this method.
+                description: This method either only returns a brief _OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_true"
@@ -10287,8 +10016,7 @@ paths:
                     ok: false
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _not OK_ response or a
-                  verbose schema is not available for this method.
+                description: This method either only returns a brief _not OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_false"
@@ -10490,12 +10218,7 @@ paths:
           name: count
           schema:
             type: string
-        - description: "Parameter for pagination. File comments are paginated for a single
-            file. Set `cursor` equal to the `next_cursor` attribute returned by
-            the previous request's `response_metadata`. This parameter is
-            optional, but pagination is mandatory: the default value simply
-            fetches the first \"page\" of the collection of comments. See
-            [pagination](/docs/pagination) for more details."
+        - description: "Parameter for pagination. File comments are paginated for a single file. Set `cursor` equal to the `next_cursor` attribute returned by the previous request's `response_metadata`. This parameter is optional, but pagination is mandatory: the default value simply fetches the first \"page\" of the collection of comments. See [pagination](/docs/pagination) for more details."
           in: query
           name: cursor
           schema:
@@ -10505,9 +10228,7 @@ paths:
           name: token
           schema:
             type: string
-        - description: The maximum number of items to return. Fewer than the requested
-            number of items may be returned, even if the end of the list hasn't
-            been reached.
+        - description: The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the list hasn't been reached.
           in: query
           name: limit
           schema:
@@ -10694,8 +10415,7 @@ paths:
           name: user
           schema:
             type: string
-        - description: Show truncated file info for files hidden due to being too old, and
-            the team who owns the file being over the file limit.
+        - description: Show truncated file info for files hidden due to being too old, and the team who owns the file being over the file limit.
           in: query
           name: show_files_hidden_by_limit
           schema:
@@ -10704,10 +10424,7 @@ paths:
           name: page
           schema:
             type: string
-        - description: Filter files by type ([see below](#file_types)). You can pass
-            multiple values in the types argument, like
-            `types=spaces,snippets`.The default value is `all`, which does not
-            filter the list.
+        - description: Filter files by type ([see below](#file_types)). You can pass multiple values in the types argument, like `types=spaces,snippets`.The default value is `all`, which does not filter the list.
           in: query
           name: types
           schema:
@@ -10893,8 +10610,7 @@ paths:
                   description: type of file
                   type: string
                 indexable_file_contents:
-                  description: A text file (txt, pdf, doc, etc.) containing textual search terms
-                    that are used to improve discovery of the remote file.
+                  description: A text file (txt, pdf, doc, etc.) containing textual search terms that are used to improve discovery of the remote file.
                   type: string
                 preview_image:
                   description: Preview of the document via `multipart/form-data`.
@@ -10916,8 +10632,7 @@ paths:
                     ok: true
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _OK_ response or a verbose
-                  schema is not available for this method.
+                description: This method either only returns a brief _OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_true"
@@ -10936,8 +10651,7 @@ paths:
                     ok: false
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _not OK_ response or a
-                  verbose schema is not available for this method.
+                description: This method either only returns a brief _not OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_false"
@@ -10985,8 +10699,7 @@ paths:
                     ok: true
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _OK_ response or a verbose
-                  schema is not available for this method.
+                description: This method either only returns a brief _OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_true"
@@ -11005,8 +10718,7 @@ paths:
                     ok: false
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _not OK_ response or a
-                  verbose schema is not available for this method.
+                description: This method either only returns a brief _not OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_false"
@@ -11034,11 +10746,7 @@ paths:
           name: ts_to
           schema:
             type: number
-        - description: Paginate through collections of data by setting the `cursor`
-            parameter to a `next_cursor` attribute returned by a previous
-            request's `response_metadata`. Default value fetches the first
-            "page" of the collection. See [pagination](/docs/pagination) for
-            more detail.
+        - description: Paginate through collections of data by setting the `cursor` parameter to a `next_cursor` attribute returned by a previous request's `response_metadata`. Default value fetches the first "page" of the collection. See [pagination](/docs/pagination) for more detail.
           in: query
           name: cursor
           schema:
@@ -11073,8 +10781,7 @@ paths:
                     ok: true
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _OK_ response or a verbose
-                  schema is not available for this method.
+                description: This method either only returns a brief _OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_true"
@@ -11093,8 +10800,7 @@ paths:
                     ok: false
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _not OK_ response or a
-                  verbose schema is not available for this method.
+                description: This method either only returns a brief _not OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_false"
@@ -11141,8 +10847,7 @@ paths:
                     ok: true
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _OK_ response or a verbose
-                  schema is not available for this method.
+                description: This method either only returns a brief _OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_true"
@@ -11161,8 +10866,7 @@ paths:
                     ok: false
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _not OK_ response or a
-                  verbose schema is not available for this method.
+                description: This method either only returns a brief _not OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_false"
@@ -11215,8 +10919,7 @@ paths:
                     ok: true
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _OK_ response or a verbose
-                  schema is not available for this method.
+                description: This method either only returns a brief _OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_true"
@@ -11235,8 +10938,7 @@ paths:
                     ok: false
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _not OK_ response or a
-                  verbose schema is not available for this method.
+                description: This method either only returns a brief _not OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_false"
@@ -11276,8 +10978,7 @@ paths:
                   description: type of file
                   type: string
                 indexable_file_contents:
-                  description: File containing contents that can be used to improve searchability
-                    for the remote file.
+                  description: File containing contents that can be used to improve searchability for the remote file.
                   type: string
                 preview_image:
                   description: Preview of the document via `multipart/form-data`.
@@ -11299,8 +11000,7 @@ paths:
                     ok: true
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _OK_ response or a verbose
-                  schema is not available for this method.
+                description: This method either only returns a brief _OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_true"
@@ -11319,8 +11019,7 @@ paths:
                     ok: false
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _not OK_ response or a
-                  verbose schema is not available for this method.
+                description: This method either only returns a brief _not OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_false"
@@ -11535,16 +11234,13 @@ paths:
             schema:
               properties:
                 channels:
-                  description: Comma-separated list of channel names or IDs where the file will be
-                    shared.
+                  description: Comma-separated list of channel names or IDs where the file will be shared.
                   type: string
                 content:
-                  description: File contents via a POST variable. If omitting this parameter, you
-                    must provide a `file`.
+                  description: File contents via a POST variable. If omitting this parameter, you must provide a `file`.
                   type: string
                 file:
-                  description: File contents via `multipart/form-data`. If omitting this
-                    parameter, you must submit `content`.
+                  description: File contents via `multipart/form-data`. If omitting this parameter, you must submit `content`.
                   type: string
                 filename:
                   description: Filename of file.
@@ -11556,9 +11252,7 @@ paths:
                   description: The message text introducing the file in specified `channels`.
                   type: string
                 thread_ts:
-                  description: Provide another message's `ts` value to upload this file as a
-                    reply. Never use a reply's `ts` value; use its parent
-                    instead.
+                  description: Provide another message's `ts` value to upload this file as a reply. Never use a reply's `ts` value; use its parent instead.
                   type: number
                 title:
                   description: Title of file.
@@ -11637,8 +11331,7 @@ paths:
                   - file
                 title: files.upload schema
                 type: object
-          description: Success response after uploading a file to a channel with an
-            initial message
+          description: Success response after uploading a file to a channel with an initial message
         default:
           content:
             application/json:
@@ -11802,8 +11495,7 @@ paths:
                   description: Name of private channel to create
                   type: string
                 validate:
-                  description: Whether to return errors on invalid channel name instead of
-                    modifying it to meet the specified criteria.
+                  description: Whether to return errors on invalid channel name instead of modifying it to meet the specified criteria.
                   type: boolean
               type: object
       responses:
@@ -12128,8 +11820,7 @@ paths:
           name: token
           schema:
             type: string
-        - description: Set this to `true` to receive the locale for this group. Defaults
-            to `false`
+        - description: Set this to `true` to receive the locale for this group. Defaults to `false`
           in: query
           name: include_locale
           schema:
@@ -12512,11 +12203,7 @@ paths:
           name: exclude_members
           schema:
             type: boolean
-        - description: "Parameter for pagination. Set `cursor` equal to the `next_cursor`
-            attribute returned by the previous request's `response_metadata`.
-            This parameter is optional, but pagination is mandatory: the default
-            value simply fetches the first \"page\" of the collection. See
-            [pagination](/docs/pagination) for more details."
+        - description: "Parameter for pagination. Set `cursor` equal to the `next_cursor` attribute returned by the previous request's `response_metadata`. This parameter is optional, but pagination is mandatory: the default value simply fetches the first \"page\" of the collection. See [pagination](/docs/pagination) for more details."
           in: query
           name: cursor
           schema:
@@ -12526,9 +12213,7 @@ paths:
           name: token
           schema:
             type: string
-        - description: The maximum number of items to return. Fewer than the requested
-            number of items may be returned, even if the end of the list hasn't
-            been reached.
+        - description: The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the list hasn't been reached.
           in: query
           name: limit
           schema:
@@ -12807,8 +12492,7 @@ paths:
                   description: New name for private channel.
                   type: string
                 validate:
-                  description: Whether to return errors on invalid channel name instead of
-                    modifying it to meet the specified criteria.
+                  description: Whether to return errors on invalid channel name instead of modifying it to meet the specified criteria.
                   type: boolean
               type: object
       responses:
@@ -13533,11 +13217,7 @@ paths:
         url: https://api.slack.com/methods/im.list
       operationId: im_list
       parameters:
-        - description: Paginate through collections of data by setting the `cursor`
-            parameter to a `next_cursor` attribute returned by a previous
-            request's `response_metadata`. Default value fetches the first
-            "page" of the collection. See [pagination](/docs/pagination) for
-            more detail.
+        - description: Paginate through collections of data by setting the `cursor` parameter to a `next_cursor` attribute returned by a previous request's `response_metadata`. Default value fetches the first "page" of the collection. See [pagination](/docs/pagination) for more detail.
           in: query
           name: cursor
           schema:
@@ -13547,9 +13227,7 @@ paths:
           name: token
           schema:
             type: string
-        - description: The maximum number of items to return. Fewer than the requested
-            number of items may be returned, even if the end of the users list
-            hasn't been reached.
+        - description: The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the users list hasn't been reached.
           in: query
           name: limit
           schema:
@@ -13782,12 +13460,10 @@ paths:
             schema:
               properties:
                 include_locale:
-                  description: Set this to `true` to receive the locale for this im. Defaults to
-                    `false`
+                  description: Set this to `true` to receive the locale for this im. Defaults to `false`
                   type: boolean
                 return_im:
-                  description: Boolean, indicates you want the full IM channel definition in the
-                    response.
+                  description: Boolean, indicates you want the full IM channel definition in the response.
                   type: boolean
                 user:
                   description: User to open a direct message channel with.
@@ -14106,8 +13782,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Specify `true` to convert `W` global user IDs to workspace-specific
-            `U` IDs. Defaults to `false`.
+        - description: Specify `true` to convert `W` global user IDs to workspace-specific `U` IDs. Defaults to `false`.
           in: query
           name: to_old
           schema:
@@ -14162,8 +13837,7 @@ paths:
                   - enterprise_id
                 title: migration.exchange success schema
                 type: object
-          description: Typical success response when mappings exist for the specified user
-            IDs
+          description: Typical success response when mappings exist for the specified user IDs
         default:
           content:
             application/json:
@@ -14456,11 +14130,7 @@ paths:
         url: https://api.slack.com/methods/mpim.list
       operationId: mpim_list
       parameters:
-        - description: "Parameter for pagination. Set `cursor` equal to the `next_cursor`
-            attribute returned by the previous request's `response_metadata`.
-            This parameter is optional, but pagination is mandatory: the default
-            value simply fetches the first \"page\" of the collection. See
-            [pagination](/docs/pagination) for more details."
+        - description: "Parameter for pagination. Set `cursor` equal to the `next_cursor` attribute returned by the previous request's `response_metadata`. This parameter is optional, but pagination is mandatory: the default value simply fetches the first \"page\" of the collection. See [pagination](/docs/pagination) for more details."
           in: query
           name: cursor
           schema:
@@ -14470,9 +14140,7 @@ paths:
           name: token
           schema:
             type: string
-        - description: The maximum number of items to return. Fewer than the requested
-            number of items may be returned, even if the end of the list hasn't
-            been reached.
+        - description: The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the list hasn't been reached.
           in: query
           name: limit
           schema:
@@ -14662,8 +14330,7 @@ paths:
             schema:
               properties:
                 users:
-                  description: Comma separated lists of users.  The ordering of the users is
-                    preserved whenever a MPIM group is returned.
+                  description: Comma separated lists of users.  The ordering of the users is preserved whenever a MPIM group is returned.
                   type: string
               type: object
       responses:
@@ -14738,8 +14405,7 @@ paths:
         - mpim
   /mpim.replies:
     get:
-      description: Retrieve a thread of messages posted to a direct message
-        conversation from a multiparty direct message.
+      description: Retrieve a thread of messages posted to a direct message conversation from a multiparty direct message.
       externalDocs:
         description: API method documentation
         url: https://api.slack.com/methods/mpim.replies
@@ -14964,9 +14630,7 @@ paths:
           name: redirect_uri
           schema:
             type: string
-        - description: Request the user to add your app only to a single channel. Only
-            valid with a [legacy workspace
-            app](https://api.slack.com/legacy-workspace-apps).
+        - description: Request the user to add your app only to a single channel. Only valid with a [legacy workspace app](https://api.slack.com/legacy-workspace-apps).
           in: query
           name: single_channel
           schema:
@@ -14995,8 +14659,7 @@ paths:
                     team_name: Wyld Stallyns LLC
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _OK_ response or a verbose
-                  schema is not available for this method.
+                description: This method either only returns a brief _OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_true"
@@ -15015,8 +14678,7 @@ paths:
                     ok: false
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _not OK_ response or a
-                  verbose schema is not available for this method.
+                description: This method either only returns a brief _not OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_false"
@@ -15088,8 +14750,7 @@ paths:
                     token_type: app
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _OK_ response or a verbose
-                  schema is not available for this method.
+                description: This method either only returns a brief _OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_true"
@@ -15097,8 +14758,7 @@ paths:
                   - ok
                 title: Default success template
                 type: object
-          description: Success example using a workspace app produces a very different
-            kind of response
+          description: Success example using a workspace app produces a very different kind of response
         default:
           content:
             application/json:
@@ -15109,8 +14769,7 @@ paths:
                     ok: false
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _not OK_ response or a
-                  verbose schema is not available for this method.
+                description: This method either only returns a brief _not OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_false"
@@ -15179,8 +14838,7 @@ paths:
                     token_type: bot
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _OK_ response or a verbose
-                  schema is not available for this method.
+                description: This method either only returns a brief _OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_true"
@@ -15188,8 +14846,7 @@ paths:
                   - ok
                 title: Default success template
                 type: object
-          description: Successful token request with scopes for both a bot user and a user
-            token
+          description: Successful token request with scopes for both a bot user and a user token
         default:
           content:
             application/json:
@@ -15200,8 +14857,7 @@ paths:
                     ok: false
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _not OK_ response or a
-                  verbose schema is not available for this method.
+                description: This method either only returns a brief _not OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_false"
@@ -15852,11 +15508,7 @@ paths:
           name: full
           schema:
             type: boolean
-        - description: "Parameter for pagination. Set `cursor` equal to the `next_cursor`
-            attribute returned by the previous request's `response_metadata`.
-            This parameter is optional, but pagination is mandatory: the default
-            value simply fetches the first \"page\" of the collection. See
-            [pagination](/docs/pagination) for more details."
+        - description: "Parameter for pagination. Set `cursor` equal to the `next_cursor` attribute returned by the previous request's `response_metadata`. This parameter is optional, but pagination is mandatory: the default value simply fetches the first \"page\" of the collection. See [pagination](/docs/pagination) for more details."
           in: query
           name: cursor
           schema:
@@ -15867,9 +15519,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: The maximum number of items to return. Fewer than the requested
-            number of items may be returned, even if the end of the list hasn't
-            been reached.
+        - description: The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the list hasn't been reached.
           in: query
           name: limit
           schema:
@@ -16187,14 +15837,10 @@ paths:
                   description: The content of the reminder
                   type: string
                 time:
-                  description: 'When this reminder should happen: the Unix timestamp (up to five
-                    years from now), the number of seconds until the reminder
-                    (if within 24 hours), or a natural language description (Ex.
-                    "in 15 minutes," or "every Thursday")'
+                  description: 'When this reminder should happen: the Unix timestamp (up to five years from now), the number of seconds until the reminder (if within 24 hours), or a natural language description (Ex. "in 15 minutes," or "every Thursday")'
                   type: string
                 user:
-                  description: The user who will receive the reminder. If no user is specified,
-                    the reminder will go to user who created it.
+                  description: The user who will receive the reminder. If no user is specified, the reminder will go to user who created it.
                   type: string
               type: object
       responses:
@@ -16632,8 +16278,7 @@ paths:
         url: https://api.slack.com/methods/rtm.connect
       operationId: rtm_connect
       parameters:
-        - description: Only deliver presence events when requested by subscription. See
-            [presence subscriptions](/docs/presence-and-status#subscriptions).
+        - description: Only deliver presence events when requested by subscription. See [presence subscriptions](/docs/presence-and-status#subscriptions).
           in: query
           name: presence_sub
           schema:
@@ -16644,9 +16289,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Batch presence deliveries via subscription. Enabling changes the
-            shape of `presence_change` events. See [batch
-            presence](/docs/presence-and-status#batching).
+        - description: Batch presence deliveries via subscription. Enabling changes the shape of `presence_change` events. See [batch presence](/docs/presence-and-status#batching).
           in: query
           name: batch_presence_aware
           schema:
@@ -16860,8 +16503,7 @@ paths:
                     query: The meaning of life the universe and everything
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _OK_ response or a verbose
-                  schema is not available for this method.
+                description: This method either only returns a brief _OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_true"
@@ -16880,8 +16522,7 @@ paths:
                     ok: false
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _not OK_ response or a
-                  verbose schema is not available for this method.
+                description: This method either only returns a brief _not OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_false"
@@ -16915,8 +16556,7 @@ paths:
             schema:
               properties:
                 channel:
-                  description: Channel to add star to, or channel where the message to add star to
-                    was posted (used with `timestamp`).
+                  description: Channel to add star to, or channel where the message to add star to was posted (used with `timestamp`).
                   type: string
                 file:
                   description: File to add star to.
@@ -17012,11 +16652,7 @@ paths:
           name: count
           schema:
             type: string
-        - description: "Parameter for pagination. Set `cursor` equal to the `next_cursor`
-            attribute returned by the previous request's `response_metadata`.
-            This parameter is optional, but pagination is mandatory: the default
-            value simply fetches the first \"page\" of the collection. See
-            [pagination](/docs/pagination) for more details."
+        - description: "Parameter for pagination. Set `cursor` equal to the `next_cursor` attribute returned by the previous request's `response_metadata`. This parameter is optional, but pagination is mandatory: the default value simply fetches the first \"page\" of the collection. See [pagination](/docs/pagination) for more details."
           in: query
           name: cursor
           schema:
@@ -17026,9 +16662,7 @@ paths:
           name: token
           schema:
             type: string
-        - description: The maximum number of items to return. Fewer than the requested
-            number of items may be returned, even if the end of the list hasn't
-            been reached.
+        - description: The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the list hasn't been reached.
           in: query
           name: limit
           schema:
@@ -17226,8 +16860,7 @@ paths:
             schema:
               properties:
                 channel:
-                  description: Channel to remove star from, or channel where the message to remove
-                    star from was posted (used with `timestamp`).
+                  description: Channel to remove star from, or channel where the message to remove star from was posted (used with `timestamp`).
                   type: string
                 file:
                   description: File to remove star from.
@@ -17353,9 +16986,7 @@ paths:
                         ip: 127.0.0.1
                         isp: BigCo ISP
                         region: CA
-                        user_agent: SlackWeb Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_2)
-                          AppleWebKit/537.36 (KHTML, like Gecko)
-                          Chrome/41.0.2272.35 Safari/537.36
+                        user_agent: SlackWeb Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.35 Safari/537.36
                         user_id: U45678
                         username: alice
                       - count: 1
@@ -17365,9 +16996,7 @@ paths:
                         ip: 127.0.0.1
                         isp: BigCo ISP
                         region: CA
-                        user_agent: SlackWeb Mozilla/5.0 (iPhone; CPU iPhone OS 8_1_3 like Mac OS X)
-                          AppleWebKit/600.1.4 (KHTML, like Gecko) Version/8.0
-                          Mobile/12B466 Safari/600.1.4
+                        user_agent: SlackWeb Mozilla/5.0 (iPhone; CPU iPhone OS 8_1_3 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) Version/8.0 Mobile/12B466 Safari/600.1.4
                         user_id: U12345
                         username: white_rabbit
                     ok: true
@@ -17473,8 +17102,7 @@ paths:
                   - error
                 title: team.accessLogs error schema
                 type: object
-          description: "A workspace must be on a paid plan to use this method, otherwise
-            the `paid_only` error is thrown:"
+          description: "A workspace must be on a paid plan to use this method, otherwise the `paid_only` error is thrown:"
       security:
         - slackAuth:
             - admin
@@ -17494,8 +17122,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: A user to retrieve the billable information for. Defaults to all
-            users.
+        - description: A user to retrieve the billable information for. Defaults to all users.
           in: query
           name: user
           schema:
@@ -17585,9 +17212,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Team to get info on, if omitted, will return information about the
-            current team. Will only return team that the authenticated token is
-            allowed to see through external shared channels
+        - description: Team to get info on, if omitted, will return information about the current team. Will only return team that the authenticated token is allowed to see through external shared channels
           in: query
           name: team
           schema:
@@ -17989,15 +17614,13 @@ paths:
             schema:
               properties:
                 channels:
-                  description: A comma separated string of encoded channel IDs for which the User
-                    Group uses as a default.
+                  description: A comma separated string of encoded channel IDs for which the User Group uses as a default.
                   type: string
                 description:
                   description: A short description of the User Group.
                   type: string
                 handle:
-                  description: A mention handle. Must be unique among channels, users and User
-                    Groups.
+                  description: A mention handle. Must be unique among channels, users and User Groups.
                   type: string
                 include_count:
                   description: Include the number of users in each User Group.
@@ -18456,15 +18079,13 @@ paths:
             schema:
               properties:
                 channels:
-                  description: A comma separated string of encoded channel IDs for which the User
-                    Group uses as a default.
+                  description: A comma separated string of encoded channel IDs for which the User Group uses as a default.
                   type: string
                 description:
                   description: A short description of the User Group.
                   type: string
                 handle:
-                  description: A mention handle. Must be unique among channels, users and User
-                    Groups.
+                  description: A mention handle. Must be unique among channels, users and User Groups.
                   type: string
                 include_count:
                   description: Include the number of users in the User Group.
@@ -18702,8 +18323,7 @@ paths:
                   description: The encoded ID of the User Group to update.
                   type: string
                 users:
-                  description: A comma separated string of encoded user IDs that represent the
-                    entire list of users for the User Group.
+                  description: A comma separated string of encoded user IDs that represent the entire list of users for the User Group.
                   type: string
               required:
                 - users
@@ -18814,11 +18434,7 @@ paths:
         url: https://api.slack.com/methods/users.conversations
       operationId: users_conversations
       parameters:
-        - description: Paginate through collections of data by setting the `cursor`
-            parameter to a `next_cursor` attribute returned by a previous
-            request's `response_metadata`. Default value fetches the first
-            "page" of the collection. See [pagination](/docs/pagination) for
-            more detail.
+        - description: Paginate through collections of data by setting the `cursor` parameter to a `next_cursor` attribute returned by a previous request's `response_metadata`. Default value fetches the first "page" of the collection. See [pagination](/docs/pagination) for more detail.
           in: query
           name: cursor
           schema:
@@ -18828,16 +18444,12 @@ paths:
           name: token
           schema:
             type: string
-        - description: The maximum number of items to return. Fewer than the requested
-            number of items may be returned, even if the end of the list hasn't
-            been reached. Must be an integer no larger than 1000.
+        - description: The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the list hasn't been reached. Must be an integer no larger than 1000.
           in: query
           name: limit
           schema:
             type: integer
-        - description: Browse conversations by a specific user ID's membership. Non-public
-            channels are restricted to those where the calling user shares
-            membership.
+        - description: Browse conversations by a specific user ID's membership. Non-public channels are restricted to those where the calling user shares membership.
           in: query
           name: user
           schema:
@@ -18847,8 +18459,7 @@ paths:
           name: exclude_archived
           schema:
             type: boolean
-        - description: Mix and match channel types by providing a comma-separated list of
-            any combination of `public_channel`, `private_channel`, `mpim`, `im`
+        - description: Mix and match channel types by providing a comma-separated list of any combination of `public_channel`, `private_channel`, `mpim`, `im`
           in: query
           name: types
           schema:
@@ -18882,8 +18493,7 @@ paths:
                         purpose:
                           creator: ""
                           last_set: 0
-                          value: This channel is for team-wide communication and announcements. All team
-                            members are in this channel.
+                          value: This channel is for team-wide communication and announcements. All team members are in this channel.
                         topic:
                           creator: ""
                           last_set: 0
@@ -18910,9 +18520,7 @@ paths:
                         purpose:
                           creator: ""
                           last_set: 0
-                          value: A place for non-work-related flimflam, faffing, hodge-podge or
-                            jibber-jabber you'd prefer to keep out of more
-                            focused work-related channels.
+                          value: A place for non-work-related flimflam, faffing, hodge-podge or jibber-jabber you'd prefer to keep out of more focused work-related channels.
                         topic:
                           creator: ""
                           last_set: 0
@@ -18923,9 +18531,7 @@ paths:
                       next_cursor: dGVhbTpDMDYxRkE1UEI=
               schema:
                 additionalProperties: true
-                description: Schema for successful response from users.conversations method.
-                  Returned conversation objects do not include `num_members` or
-                  `is_member`
+                description: Schema for successful response from users.conversations method. Returned conversation objects do not include `num_members` or `is_member`
                 properties:
                   channels:
                     items:
@@ -18947,9 +18553,7 @@ paths:
                   - channels
                 title: users.conversations success schema
                 type: object
-          description: Typical success response with only public channels. Note how
-            `num_members` and `is_member` are not returned like typical
-            `conversations` objects.
+          description: Typical success response with only public channels. Note how `num_members` and `is_member` are not returned like typical `conversations` objects.
         default:
           content:
             application/json:
@@ -19118,8 +18722,7 @@ paths:
                     presence: active
               schema:
                 additionalProperties: true
-                description: Generated from users.getPresence with shasum
-                  e7251aec575d8863f9e0eb38663ae9dc26655f65
+                description: Generated from users.getPresence with shasum e7251aec575d8863f9e0eb38663ae9dc26655f65
                 properties:
                   auto_away:
                     type: boolean
@@ -19140,8 +18743,7 @@ paths:
                   - presence
                 title: "API method: users.getPresence"
                 type: object
-          description: When requesting information for a different user, this method just
-            returns the current presence (either `active` or `away`).
+          description: When requesting information for a different user, this method just returns the current presence (either `active` or `away`).
         default:
           content:
             application/json:
@@ -19449,8 +19051,7 @@ paths:
           name: user
           schema:
             type: string
-        - description: Set this to `true` to receive the locale for this user. Defaults to
-            `false`
+        - description: Set this to `true` to receive the locale for this user. Defaults to `false`
           in: query
           name: include_locale
           schema:
@@ -19565,11 +19166,7 @@ paths:
         url: https://api.slack.com/methods/users.list
       operationId: users_list
       parameters:
-        - description: Paginate through collections of data by setting the `cursor`
-            parameter to a `next_cursor` attribute returned by a previous
-            request's `response_metadata`. Default value fetches the first
-            "page" of the collection. See [pagination](/docs/pagination) for
-            more detail.
+        - description: Paginate through collections of data by setting the `cursor` parameter to a `next_cursor` attribute returned by a previous request's `response_metadata`. Default value fetches the first "page" of the collection. See [pagination](/docs/pagination) for more detail.
           in: query
           name: cursor
           schema:
@@ -19579,15 +19176,12 @@ paths:
           name: token
           schema:
             type: string
-        - description: The maximum number of items to return. Fewer than the requested
-            number of items may be returned, even if the end of the users list
-            hasn't been reached.
+        - description: The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the users list hasn't been reached.
           in: query
           name: limit
           schema:
             type: integer
-        - description: Set this to `true` to receive the locale for users. Defaults to
-            `false`
+        - description: Set this to `true` to receive the locale for users. Defaults to `false`
           in: query
           name: include_locale
           schema:
@@ -19996,21 +19590,16 @@ paths:
             schema:
               properties:
                 name:
-                  description: Name of a single key to set. Usable only if `profile` is not
-                    passed.
+                  description: Name of a single key to set. Usable only if `profile` is not passed.
                   type: string
                 profile:
-                  description: Collection of key:value pairs presented as a URL-encoded JSON hash.
-                    At most 50 fields may be set. Each field name is limited to
-                    255 characters.
+                  description: Collection of key:value pairs presented as a URL-encoded JSON hash. At most 50 fields may be set. Each field name is limited to 255 characters.
                   type: string
                 user:
-                  description: ID of user to change. This argument may only be specified by team
-                    admins on paid teams.
+                  description: ID of user to change. This argument may only be specified by team admins on paid teams.
                   type: string
                 value:
-                  description: Value to set a single key to. Usable only if `profile` is not
-                    passed.
+                  description: Value to set a single key to. Usable only if `profile` is not passed.
                   type: string
               type: object
       responses:
@@ -20133,8 +19722,7 @@ paths:
                     ok: true
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _OK_ response or a verbose
-                  schema is not available for this method.
+                description: This method either only returns a brief _OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_true"
@@ -20153,8 +19741,7 @@ paths:
                     ok: false
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _not OK_ response or a
-                  verbose schema is not available for this method.
+                description: This method either only returns a brief _not OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_false"
@@ -20429,8 +20016,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: A [view payload](/reference/surfaces/views). This must be a
-            JSON-encoded string.
+        - description: A [view payload](/reference/surfaces/views). This must be a JSON-encoded string.
           in: query
           name: view
           required: true
@@ -20478,8 +20064,7 @@ paths:
                       type: modal
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _OK_ response or a verbose
-                  schema is not available for this method.
+                description: This method either only returns a brief _OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_true"
@@ -20501,8 +20086,7 @@ paths:
                         - invalid `trigger_id`
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _not OK_ response or a
-                  verbose schema is not available for this method.
+                description: This method either only returns a brief _not OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_false"
@@ -20510,8 +20094,7 @@ paths:
                   - ok
                 title: Default error template
                 type: object
-          description: Typical error response, before getting to any possible validation
-            errors.
+          description: Typical error response, before getting to any possible validation errors.
       security:
         - slackAuth:
             - none
@@ -20525,8 +20108,7 @@ paths:
         url: https://api.slack.com/methods/views.publish
       operationId: views_publish
       parameters:
-        - description: A string that represents view state to protect against possible
-            race conditions.
+        - description: A string that represents view state to protect against possible race conditions.
           in: query
           name: hash
           schema:
@@ -20543,8 +20125,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: A [view payload](/reference/surfaces/views). This must be a
-            JSON-encoded string.
+        - description: A [view payload](/reference/surfaces/views). This must be a JSON-encoded string.
           in: query
           name: view
           required: true
@@ -20585,8 +20166,7 @@ paths:
                       type: home
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _OK_ response or a verbose
-                  schema is not available for this method.
+                description: This method either only returns a brief _OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_true"
@@ -20608,8 +20188,7 @@ paths:
                         - invalid `user_id`
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _not OK_ response or a
-                  verbose schema is not available for this method.
+                description: This method either only returns a brief _not OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_false"
@@ -20617,8 +20196,7 @@ paths:
                   - ok
                 title: Default error template
                 type: object
-          description: Typical error response, before getting to any possible validation
-            errors.
+          description: Typical error response, before getting to any possible validation errors.
       security:
         - slackAuth:
             - none
@@ -20644,8 +20222,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: A [view payload](/reference/surfaces/views). This must be a
-            JSON-encoded string.
+        - description: A [view payload](/reference/surfaces/views). This must be a JSON-encoded string.
           in: query
           name: view
           required: true
@@ -20698,8 +20275,7 @@ paths:
                       type: modal
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _OK_ response or a verbose
-                  schema is not available for this method.
+                description: This method either only returns a brief _OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_true"
@@ -20721,8 +20297,7 @@ paths:
                         - "missing required field: title"
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _not OK_ response or a
-                  verbose schema is not available for this method.
+                description: This method either only returns a brief _not OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_false"
@@ -20744,14 +20319,12 @@ paths:
         url: https://api.slack.com/methods/views.update
       operationId: views_update
       parameters:
-        - description: A string that represents view state to protect against possible
-            race conditions.
+        - description: A string that represents view state to protect against possible race conditions.
           in: query
           name: hash
           schema:
             type: string
-        - description: A unique identifier of the view to be updated. Either `view_id` or
-            `external_id` is required.
+        - description: A unique identifier of the view to be updated. Either `view_id` or `external_id` is required.
           in: query
           name: view_id
           schema:
@@ -20762,15 +20335,12 @@ paths:
           required: true
           schema:
             type: string
-        - description: A unique identifier of the view set by the developer. Must be
-            unique for all views on a team. Max length of 255 characters. Either
-            `view_id` or `external_id` is required.
+        - description: A unique identifier of the view set by the developer. Must be unique for all views on a team. Max length of 255 characters. Either `view_id` or `external_id` is required.
           in: query
           name: external_id
           schema:
             type: string
-        - description: A [view payload](/reference/surfaces/views) This must be a
-            JSON-encoded string.
+        - description: A [view payload](/reference/surfaces/views) This must be a JSON-encoded string.
           in: query
           name: view
           schema:
@@ -20823,8 +20393,7 @@ paths:
                       type: modal
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _OK_ response or a verbose
-                  schema is not available for this method.
+                description: This method either only returns a brief _OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_true"
@@ -20843,8 +20412,7 @@ paths:
                     ok: false
               schema:
                 additionalProperties: true
-                description: This method either only returns a brief _not OK_ response or a
-                  verbose schema is not available for this method.
+                description: This method either only returns a brief _not OK_ response or a verbose schema is not available for this method.
                 properties:
                   ok:
                     $ref: "#/components/schemas/defs_ok_false"
@@ -20876,8 +20444,7 @@ components:
             type: object
   schemas:
     blocks:
-      description: This is a very loose definition, in the future, we'll populate this
-        with deeper schema in this definition namespace.
+      description: This is a very loose definition, in the future, we'll populate this with deeper schema in this definition namespace.
       items:
         additionalProperties: true
         properties:
@@ -21119,8 +20686,7 @@ components:
             - last_set
           type: object
         unlinked:
-          title: Field to determine whether a channel has ever been shared/disconnected in
-            the past
+          title: Field to determine whether a channel has ever been shared/disconnected in the past
           type: integer
         unread_count:
           type: integer
@@ -21378,8 +20944,7 @@ components:
                   - last_set
                 type: object
               unlinked:
-                title: Field to determine whether a channel has ever been shared/disconnected in
-                  the past
+                title: Field to determine whether a channel has ever been shared/disconnected in the past
                 type: integer
               unread_count:
                 type: integer
@@ -21586,8 +21151,7 @@ components:
                   - last_set
                 type: object
               unlinked:
-                title: Field to determine whether a channel has ever been shared/disconnected in
-                  the past
+                title: Field to determine whether a channel has ever been shared/disconnected in the past
                 type: integer
               unread_count:
                 type: integer

@@ -9,8 +9,7 @@ info:
     email: partner@flinkster.de
     name: DB Rent GmbH
   description: >-
-    This REST-API enables you to query for private transport sharing offers
-    provided by companies and cities in Germany, Netherland and Austria. 
+    This REST-API enables you to query for private transport sharing offers provided by companies and cities in Germany, Netherland and Austria. 
 
     You can search for informations about the rental stations (points or areas) where you can find the rentals by utilizing the /areas/ ressource. 
 
@@ -105,14 +104,16 @@ paths:
           schema:
             $ref: "#/definitions/AreaJO"
         "403":
-          description: |-
+          description: >-
             Forbidden
+
             If provider is not allowed to display this area.
           schema:
             $ref: "#/definitions/AreaJO"
         "404":
-          description: |-
+          description: >-
             Not Found
+
             If no area was found for the given UID.
           schema:
             $ref: "#/definitions/AreaJO"
@@ -144,14 +145,16 @@ paths:
           schema:
             $ref: "#/definitions/AreaJO"
         "403":
-          description: |-
+          description: >-
             Forbidden
+
             If provider is not allowed to display this area.
           schema:
             $ref: "#/definitions/AreaJO"
         "404":
-          description: |-
+          description: >-
             Not Found
+
             If no area was found for the given UID.
           schema:
             $ref: "#/definitions/AreaJO"
@@ -162,8 +165,7 @@ paths:
       x-throttling-tier: Unlimited
   /bookingproposals:
     get:
-      description: Here you can query all bookable Rental Objects with different
-        Parameters (Time, Location,...)
+      description: Here you can query all bookable Rental Objects with different Parameters (Time, Location,...)
       operationId: listBookingProposals
       parameters:
         - format: double
@@ -219,14 +221,16 @@ paths:
           schema:
             $ref: "#/definitions/RentalObjectJO"
         "400":
-          description: |-
+          description: >-
             Bad Request
+
             One or more parameters have invalid values.
           schema:
             $ref: "#/definitions/ErrorJO"
         "403":
-          description: |-
+          description: >-
             Forbidden
+
             Provider is not allowed to use this interface.
           schema:
             $ref: "#/definitions/ErrorJO"
@@ -272,14 +276,16 @@ paths:
           schema:
             $ref: "#/definitions/CategoryJO"
         "400":
-          description: |-
+          description: >-
             Bad Request
+
             One or more parameters have invalid values.
           schema:
             $ref: "#/definitions/ErrorJO"
         "403":
-          description: |-
+          description: >-
             Forbidden
+
             Provider is not allowed to use this interface.
           schema:
             $ref: "#/definitions/ErrorJO"
@@ -314,14 +320,16 @@ paths:
           schema:
             $ref: "#/definitions/CategoryJO"
         "400":
-          description: |-
+          description: >-
             Bad Request
+
             One or more parameters have invalid values.
           schema:
             $ref: "#/definitions/ErrorJO"
         "403":
-          description: |-
+          description: >-
             Forbidden
+
             Provider is not allowed to use this interface.
           schema:
             $ref: "#/definitions/ErrorJO"
@@ -333,8 +341,7 @@ paths:
   "/providernetworks/{providernetworkUID}/prices":
     get:
       description: >
-        Prices of a rental object by query params. The params depend on the
-        price determination strategy of the provider network.
+        Prices of a rental object by query params. The params depend on the price determination strategy of the provider network.
       operationId: getPrices
       parameters:
         - in: path
@@ -349,14 +356,16 @@ paths:
           schema:
             $ref: "#/definitions/RentalObjectJO"
         "400":
-          description: |-
+          description: >-
             Bad Request
+
             One or more parameters have invalid values.
           schema:
             $ref: "#/definitions/ErrorJO"
         "403":
-          description: |-
+          description: >-
             Forbidden
+
             Provider is not allowed to use this interface.
           schema:
             $ref: "#/definitions/ErrorJO"
@@ -367,7 +376,7 @@ paths:
       x-throttling-tier: Unlimited
   "/providernetworks/{providernetworkUID}/rentalobjects/{rentalObjectUID}":
     get:
-      description: |
+      description: >
         Get information about the Rental Object.
       operationId: getRentalObject
       parameters:
@@ -391,14 +400,16 @@ paths:
           schema:
             $ref: "#/definitions/RentalObjectJO"
         "400":
-          description: |-
+          description: >-
             Bad Request
+
             One or more parameters have invalid values.
           schema:
             $ref: "#/definitions/ErrorJO"
         "403":
-          description: |-
+          description: >-
             Forbidden
+
             Provider is not allowed to use this interface.
           schema:
             $ref: "#/definitions/ErrorJO"
@@ -409,7 +420,7 @@ paths:
       x-throttling-tier: Unlimited
   "/providernetworks/{uid}":
     get:
-      description: |
+      description: >
         Get information about the ProviderNetworkResources.
       operationId: getProviderNetwork
       parameters:
@@ -425,14 +436,16 @@ paths:
           schema:
             $ref: "#/definitions/RentalObjectJO"
         "400":
-          description: |-
+          description: >-
             Bad Request
+
             One or more parameters have invalid values.
           schema:
             $ref: "#/definitions/ErrorJO"
         "403":
-          description: |-
+          description: >-
             Forbidden
+
             Provider is not allowed to use this interface.
           schema:
             $ref: "#/definitions/ErrorJO"
@@ -443,7 +456,7 @@ paths:
       x-throttling-tier: Unlimited
   "/providers/{uid}":
     get:
-      description: |
+      description: >
         Get information about the ProviderResourcesCtrl.
       operationId: getProvider
       parameters:
@@ -459,14 +472,16 @@ paths:
           schema:
             $ref: "#/definitions/RentalObjectJO"
         "400":
-          description: |-
+          description: >-
             Bad Request
+
             One or more parameters have invalid values.
           schema:
             $ref: "#/definitions/ErrorJO"
         "403":
-          description: |-
+          description: >-
             Forbidden
+
             Provider is not allowed to use this interface.
           schema:
             $ref: "#/definitions/ErrorJO"

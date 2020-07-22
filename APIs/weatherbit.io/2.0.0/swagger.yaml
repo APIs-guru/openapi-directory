@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
   - http
@@ -7,24 +7,24 @@ basePath: /v2.0
 info:
   contact:
     x-twitter: weatherbitio
-  description: 'This is the documentation for the Weatherbit Weather API.  The base URL for the API is [http://api.weatherbit.io/v2.0/](http://api.weatherbit.io/v2.0/) or [https://api.weatherbit.io/v2.0/](http://api.weatherbit.io/v2.0/). Below is the Swagger UI documentation for the API. All API requests require the `key` parameter.        An Example for a 5 day forecast for London, UK would be `http://api.weatherbit.io/v2.0/forecast/3hourly?city=London`&`country=UK`. See our [Weather API description page](https://www.weatherbit.io/api) for additional documentation.'
+  description: This is the documentation for the Weatherbit Weather API.  The base URL for the API is [http://api.weatherbit.io/v2.0/](http://api.weatherbit.io/v2.0/) or [https://api.weatherbit.io/v2.0/](http://api.weatherbit.io/v2.0/). Below is the Swagger UI documentation for the API. All API requests require the `key` parameter.        An Example for a 5 day forecast for London, UK would be `http://api.weatherbit.io/v2.0/forecast/3hourly?city=London`&`country=UK`. See our [Weather API description page](https://www.weatherbit.io/api) for additional documentation.
   title: Weatherbit.io - Swagger UI Weather API documentation
   version: 2.0.0
   x-apisguru-categories:
     - location
   x-logo:
-    url: 'https://twitter.com/weatherbitio/profile_image?size=original'
+    url: https://twitter.com/weatherbitio/profile_image?size=original
   x-origin:
     - format: swagger
-      url: 'https://www.weatherbit.io/static/swagger.json'
-      version: '2.0'
+      url: https://www.weatherbit.io/static/swagger.json
+      version: "2.0"
   x-providerName: weatherbit.io
 produces:
   - application/json
 paths:
-  '/alerts?lat={lat}&lon={lon}':
+  "/alerts?lat={lat}&lon={lon}":
     get:
-      description: 'Returns severe weather alerts issued by meteorological agencies - given a lat, and a lon.'
+      description: Returns severe weather alerts issued by meteorological agencies - given a lat, and a lon.
       parameters:
         - description: Latitude component of location.
           format: double
@@ -51,20 +51,20 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Weather Alert Object.
           schema:
-            $ref: '#/definitions/WeatherAlert'
+            $ref: "#/definitions/WeatherAlert"
         default:
           description: No Data.
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       summary: Returns severe weather alerts issued by meteorological agencies - Given a lat/lon.
       tags:
         - Alerts
-  '/bulk/files/{file}':
+  "/bulk/files/{file}":
     get:
-      description: '**(Advanceed/Enterprise plans only)** Downloads bulk data files - OPTIONS: ( current.json.gz - Current observations for cities > 1000 population). Units are Metric (Celcius, m/s, etc).'
+      description: "**(Advanceed/Enterprise plans only)** Downloads bulk data files - OPTIONS: ( current.json.gz - Current observations for cities > 1000 population). Units are Metric (Celcius, m/s, etc)."
       parameters:
         - description: Filename (ie. current.json.gz)
           format: string
@@ -82,15 +82,15 @@ paths:
         default:
           description: No Data.
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       summary: Download pre-generated bulk datasets
       tags:
         - Bulk Downloads
-  '/bulk/history/daily?city={city}&country={country}':
+  "/bulk/history/daily?city={city}&country={country}":
     get:
-      description: 'Returns Historical Observations - Given a city in the format of City,ST or City. The state, and country parameters can be provided to make the search more accurate.'
+      description: Returns Historical Observations - Given a city in the format of City,ST or City. The state, and country parameters can be provided to make the search more accurate.
       parameters:
-        - description: 'City search.. Example - &city=Raleigh,NC or &city=Berlin,DE or city=Paris&country=FR'
+        - description: City search.. Example - &city=Raleigh,NC or &city=Berlin,DE or city=Paris&country=FR
           format: string
           in: path
           name: city
@@ -108,13 +108,13 @@ paths:
           name: country
           required: true
           type: string
-        - description: 'Start Date (YYYY-MM-DD or YYYY-MM-DD:HH).'
+        - description: Start Date (YYYY-MM-DD or YYYY-MM-DD:HH).
           format: string
           in: query
           name: start_date
           required: true
           type: string
-        - description: 'End Date (YYYY-MM-DD or YYYY-MM-DD:HH).'
+        - description: End Date (YYYY-MM-DD or YYYY-MM-DD:HH).
           format: string
           in: query
           name: end_date
@@ -129,7 +129,7 @@ paths:
           name: units
           required: false
           type: string
-        - description: 'Language (Default: English) See <a target=''blank'' href=''/api/requests''>language field description</a>'
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
           enum:
             - ar
             - az
@@ -169,7 +169,7 @@ paths:
           name: lang
           required: false
           type: string
-        - description: 'Wraps return in jsonp callback. Example: callback=func'
+        - description: "Wraps return in jsonp callback. Example: callback=func"
           format: string
           in: query
           name: callback
@@ -182,34 +182,34 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: An Historical Day Data Object.
           schema:
-            $ref: '#/definitions/HistoryDay'
+            $ref: "#/definitions/HistoryDay"
         default:
           description: No Data.
           schema:
-            $ref: '#/definitions/Error'
-      summary: '[Enterprise Plan Only] Returns Historical Observations - Given City and/or State, Country.'
+            $ref: "#/definitions/Error"
+      summary: "[Enterprise Plan Only] Returns Historical Observations - Given City and/or State, Country."
       tags:
         - (Bulk) Daily Historical Weather Data (Enterprise Plans)
-  '/bulk/history/daily?city_id={city_id}':
+  "/bulk/history/daily?city_id={city_id}":
     get:
       description: Returns Historical Observations - Given a City ID.
       parameters:
-        - description: 'City ID. Example: 4487042'
+        - description: "City ID. Example: 4487042"
           format: string
           in: path
           name: city_id
           required: true
           type: string
-        - description: 'Start Date (YYYY-MM-DD or YYYY-MM-DD:HH)'
+        - description: Start Date (YYYY-MM-DD or YYYY-MM-DD:HH)
           format: string
           in: query
           name: start_date
           required: true
           type: string
-        - description: 'End Date (YYYY-MM-DD or YYYY-MM-DD:HH)'
+        - description: End Date (YYYY-MM-DD or YYYY-MM-DD:HH)
           format: string
           in: query
           name: end_date
@@ -224,7 +224,7 @@ paths:
           name: units
           required: false
           type: string
-        - description: 'Language (Default: English) See <a target=''blank'' href=''/api/requests''>language field description</a>'
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
           enum:
             - ar
             - az
@@ -264,7 +264,7 @@ paths:
           name: lang
           required: false
           type: string
-        - description: 'Wraps return in jsonp callback. Example: callback=func'
+        - description: "Wraps return in jsonp callback. Example: callback=func"
           format: string
           in: query
           name: callback
@@ -277,34 +277,34 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: An Historical Day Data Object.
           schema:
-            $ref: '#/definitions/HistoryDay'
+            $ref: "#/definitions/HistoryDay"
         default:
           description: No Data.
           schema:
-            $ref: '#/definitions/Error'
-      summary: '[Enterprise Plan Only] Returns Historical Observations - Given a City ID'
+            $ref: "#/definitions/Error"
+      summary: "[Enterprise Plan Only] Returns Historical Observations - Given a City ID"
       tags:
         - (Bulk) Daily Historical Weather Data (Enterprise Plans)
-  '/bulk/history/daily?ip={ip}':
+  "/bulk/history/daily?ip={ip}":
     get:
-      description: 'Returns Historical Observations - Given IP Address, or auto.'
+      description: Returns Historical Observations - Given IP Address, or auto.
       parameters:
-        - description: 'IP Address, or auto. Example: ip=auto'
+        - description: "IP Address, or auto. Example: ip=auto"
           format: string
           in: path
           name: ip
           required: true
           type: string
-        - description: 'Start Date (YYYY-MM-DD or YYYY-MM-DD:HH).'
+        - description: Start Date (YYYY-MM-DD or YYYY-MM-DD:HH).
           format: string
           in: query
           name: start_date
           required: true
           type: string
-        - description: 'End Date (YYYY-MM-DD or YYYY-MM-DD:HH).'
+        - description: End Date (YYYY-MM-DD or YYYY-MM-DD:HH).
           format: string
           in: query
           name: end_date
@@ -319,7 +319,7 @@ paths:
           name: units
           required: false
           type: string
-        - description: 'Language (Default: English) See <a target=''blank'' href=''/api/requests''>language field description</a>'
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
           enum:
             - ar
             - az
@@ -359,7 +359,7 @@ paths:
           name: lang
           required: false
           type: string
-        - description: 'Wraps return in jsonp callback. Example: callback=func'
+        - description: "Wraps return in jsonp callback. Example: callback=func"
           format: string
           in: query
           name: callback
@@ -372,20 +372,20 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: An Historical Day Data Object.
           schema:
-            $ref: '#/definitions/HistoryDay'
+            $ref: "#/definitions/HistoryDay"
         default:
           description: No Data.
           schema:
-            $ref: '#/definitions/Error'
-      summary: '[Enterprise Plan Only] Returns Historical Observations - Given IP Address, or auto.'
+            $ref: "#/definitions/Error"
+      summary: "[Enterprise Plan Only] Returns Historical Observations - Given IP Address, or auto."
       tags:
         - (Bulk) Daily Historical Weather Data (Enterprise Plans)
-  '/bulk/history/daily?lat={lat}&lon={lon}':
+  "/bulk/history/daily?lat={lat}&lon={lon}":
     get:
-      description: 'Returns Historical Observations - Given a lat, and lon.'
+      description: Returns Historical Observations - Given a lat, and lon.
       parameters:
         - description: Latitude component of location.
           format: double
@@ -399,13 +399,13 @@ paths:
           name: lon
           required: true
           type: number
-        - description: 'Start Date (YYYY-MM-DD or YYYY-MM-DD:HH).'
+        - description: Start Date (YYYY-MM-DD or YYYY-MM-DD:HH).
           format: string
           in: query
           name: start_date
           required: true
           type: string
-        - description: 'End Date (YYYY-MM-DD or YYYY-MM-DD:HH).'
+        - description: End Date (YYYY-MM-DD or YYYY-MM-DD:HH).
           format: string
           in: query
           name: end_date
@@ -420,7 +420,7 @@ paths:
           name: units
           required: false
           type: string
-        - description: 'Language (Default: English) See <a target=''blank'' href=''/api/requests''>language field description</a>'
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
           enum:
             - ar
             - az
@@ -460,7 +460,7 @@ paths:
           name: lang
           required: false
           type: string
-        - description: 'Wraps return in jsonp callback. Example: callback=func'
+        - description: "Wraps return in jsonp callback. Example: callback=func"
           format: string
           in: query
           name: callback
@@ -473,22 +473,22 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: An Historical Day Data Object.
           schema:
-            $ref: '#/definitions/HistoryDay'
+            $ref: "#/definitions/HistoryDay"
         default:
           description: No Data.
           schema:
-            $ref: '#/definitions/Error'
-      summary: '[Enterprise Plan Only] Returns Historical Observations - Given a lat/lon.'
+            $ref: "#/definitions/Error"
+      summary: "[Enterprise Plan Only] Returns Historical Observations - Given a lat/lon."
       tags:
         - (Bulk) Daily Historical Weather Data (Enterprise Plans)
-  '/bulk/history/daily?postal_code={postal_code}':
+  "/bulk/history/daily?postal_code={postal_code}":
     get:
       description: Returns Historical Observations - Given a Postal Code.
       parameters:
-        - description: 'Postal Code. Example: 28546'
+        - description: "Postal Code. Example: 28546"
           format: string
           in: path
           name: postal_code
@@ -500,13 +500,13 @@ paths:
           name: country
           required: false
           type: string
-        - description: 'Start Date (YYYY-MM-DD or YYYY-MM-DD:HH)'
+        - description: Start Date (YYYY-MM-DD or YYYY-MM-DD:HH)
           format: string
           in: query
           name: start_date
           required: true
           type: string
-        - description: 'End Date (YYYY-MM-DD or YYYY-MM-DD:HH)'
+        - description: End Date (YYYY-MM-DD or YYYY-MM-DD:HH)
           format: string
           in: query
           name: end_date
@@ -521,7 +521,7 @@ paths:
           name: units
           required: false
           type: string
-        - description: 'Language (Default: English) See <a target=''blank'' href=''/api/requests''>language field description</a>'
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
           enum:
             - ar
             - az
@@ -561,7 +561,7 @@ paths:
           name: lang
           required: false
           type: string
-        - description: 'Wraps return in jsonp callback. Example: callback=func'
+        - description: "Wraps return in jsonp callback. Example: callback=func"
           format: string
           in: query
           name: callback
@@ -574,18 +574,18 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: An Historical Day Data Object.
           schema:
-            $ref: '#/definitions/HistoryDay'
+            $ref: "#/definitions/HistoryDay"
         default:
           description: No Data.
           schema:
-            $ref: '#/definitions/Error'
-      summary: '[Enterprise Plan Only] Returns Historical Observations - Given a Postal Code'
+            $ref: "#/definitions/Error"
+      summary: "[Enterprise Plan Only] Returns Historical Observations - Given a Postal Code"
       tags:
         - (Bulk) Daily Historical Weather Data (Enterprise Plans)
-  '/bulk/history/daily?station={station}':
+  "/bulk/history/daily?station={station}":
     get:
       description: Returns Historical Observations - Given a station ID.
       parameters:
@@ -595,13 +595,13 @@ paths:
           name: station
           required: true
           type: string
-        - description: 'Start Date (YYYY-MM-DD or YYYY-MM-DD:HH).'
+        - description: Start Date (YYYY-MM-DD or YYYY-MM-DD:HH).
           format: string
           in: query
           name: start_date
           required: true
           type: string
-        - description: 'End Date (YYYY-MM-DD or YYYY-MM-DD:HH).'
+        - description: End Date (YYYY-MM-DD or YYYY-MM-DD:HH).
           format: string
           in: query
           name: end_date
@@ -616,7 +616,7 @@ paths:
           name: units
           required: false
           type: string
-        - description: 'Language (Default: English) See <a target=''blank'' href=''/api/requests''>language field description</a>'
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
           enum:
             - ar
             - az
@@ -656,7 +656,7 @@ paths:
           name: lang
           required: false
           type: string
-        - description: 'Wraps return in jsonp callback. Example: callback=func'
+        - description: "Wraps return in jsonp callback. Example: callback=func"
           format: string
           in: query
           name: callback
@@ -669,22 +669,22 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: An Historical Day Data Object.
           schema:
-            $ref: '#/definitions/HistoryDay'
+            $ref: "#/definitions/HistoryDay"
         default:
           description: No Data.
           schema:
-            $ref: '#/definitions/Error'
-      summary: '[Enterprise Plan Only] Returns Historical Observations - Given a station ID.'
+            $ref: "#/definitions/Error"
+      summary: "[Enterprise Plan Only] Returns Historical Observations - Given a station ID."
       tags:
         - (Bulk) Daily Historical Weather Data (Enterprise Plans)
-  '/bulk/history/hourly?city={city}&country={country}':
+  "/bulk/history/hourly?city={city}&country={country}":
     get:
-      description: 'Returns Historical Observations - Given a city in the format of City,ST or City. The state, and country parameters can be provided to make the search more accurate.'
+      description: Returns Historical Observations - Given a city in the format of City,ST or City. The state, and country parameters can be provided to make the search more accurate.
       parameters:
-        - description: 'City search.. Example - &city=Raleigh,NC or &city=Berlin,DE or city=Paris&country=FR'
+        - description: City search.. Example - &city=Raleigh,NC or &city=Berlin,DE or city=Paris&country=FR
           format: string
           in: path
           name: city
@@ -702,13 +702,13 @@ paths:
           name: country
           required: true
           type: string
-        - description: 'Start Date (YYYY-MM-DD or YYYY-MM-DD:HH).'
+        - description: Start Date (YYYY-MM-DD or YYYY-MM-DD:HH).
           format: string
           in: query
           name: start_date
           required: true
           type: string
-        - description: 'End Date (YYYY-MM-DD or YYYY-MM-DD:HH).'
+        - description: End Date (YYYY-MM-DD or YYYY-MM-DD:HH).
           format: string
           in: query
           name: end_date
@@ -723,7 +723,7 @@ paths:
           name: units
           required: false
           type: string
-        - description: 'Language (Default: English) See <a target=''blank'' href=''/api/requests''>language field description</a>'
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
           enum:
             - ar
             - az
@@ -763,7 +763,7 @@ paths:
           name: lang
           required: false
           type: string
-        - description: 'Wraps return in jsonp callback. Example: callback=func'
+        - description: "Wraps return in jsonp callback. Example: callback=func"
           format: string
           in: query
           name: callback
@@ -776,34 +776,34 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: An Historical Data Object.
           schema:
-            $ref: '#/definitions/History'
+            $ref: "#/definitions/History"
         default:
           description: No Data.
           schema:
-            $ref: '#/definitions/Error'
-      summary: '[Enterprise Plan Only] Returns Historical Observations - Given City and/or State, Country. (1 Year/call limit)'
+            $ref: "#/definitions/Error"
+      summary: "[Enterprise Plan Only] Returns Historical Observations - Given City and/or State, Country. (1 Year/call limit)"
       tags:
         - (Bulk) Hourly Historical Weather Data (Enterprise Plans)
-  '/bulk/history/hourly?city_id={city_id}':
+  "/bulk/history/hourly?city_id={city_id}":
     get:
       description: Returns Historical Observations - Given a City ID.
       parameters:
-        - description: 'City ID. Example: 4487042'
+        - description: "City ID. Example: 4487042"
           format: string
           in: path
           name: city_id
           required: true
           type: string
-        - description: 'Start Date (YYYY-MM-DD or YYYY-MM-DD:HH)'
+        - description: Start Date (YYYY-MM-DD or YYYY-MM-DD:HH)
           format: string
           in: query
           name: start_date
           required: true
           type: string
-        - description: 'End Date (YYYY-MM-DD or YYYY-MM-DD:HH)'
+        - description: End Date (YYYY-MM-DD or YYYY-MM-DD:HH)
           format: string
           in: query
           name: end_date
@@ -818,7 +818,7 @@ paths:
           name: units
           required: false
           type: string
-        - description: 'Language (Default: English) See <a target=''blank'' href=''/api/requests''>language field description</a>'
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
           enum:
             - ar
             - az
@@ -858,7 +858,7 @@ paths:
           name: lang
           required: false
           type: string
-        - description: 'Wraps return in jsonp callback. Example: callback=func'
+        - description: "Wraps return in jsonp callback. Example: callback=func"
           format: string
           in: query
           name: callback
@@ -871,34 +871,34 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: An Historical Data Object.
           schema:
-            $ref: '#/definitions/History'
+            $ref: "#/definitions/History"
         default:
           description: No Data.
           schema:
-            $ref: '#/definitions/Error'
-      summary: '[Enterprise Plan Only] Returns Historical Observations - Given a City ID. (1 Year/call limit)'
+            $ref: "#/definitions/Error"
+      summary: "[Enterprise Plan Only] Returns Historical Observations - Given a City ID. (1 Year/call limit)"
       tags:
         - (Bulk) Hourly Historical Weather Data (Enterprise Plans)
-  '/bulk/history/hourly?ip={ip}':
+  "/bulk/history/hourly?ip={ip}":
     get:
-      description: 'Returns Historical Observations - Given IP Address, or auto.'
+      description: Returns Historical Observations - Given IP Address, or auto.
       parameters:
-        - description: 'IP Address, or auto. Example: ip=auto'
+        - description: "IP Address, or auto. Example: ip=auto"
           format: string
           in: path
           name: ip
           required: true
           type: string
-        - description: 'Start Date (YYYY-MM-DD or YYYY-MM-DD:HH).'
+        - description: Start Date (YYYY-MM-DD or YYYY-MM-DD:HH).
           format: string
           in: query
           name: start_date
           required: true
           type: string
-        - description: 'End Date (YYYY-MM-DD or YYYY-MM-DD:HH).'
+        - description: End Date (YYYY-MM-DD or YYYY-MM-DD:HH).
           format: string
           in: query
           name: end_date
@@ -913,7 +913,7 @@ paths:
           name: units
           required: false
           type: string
-        - description: 'Language (Default: English) See <a target=''blank'' href=''/api/requests''>language field description</a>'
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
           enum:
             - ar
             - az
@@ -953,7 +953,7 @@ paths:
           name: lang
           required: false
           type: string
-        - description: 'Wraps return in jsonp callback. Example: callback=func'
+        - description: "Wraps return in jsonp callback. Example: callback=func"
           format: string
           in: query
           name: callback
@@ -966,20 +966,20 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: An Historical Data Object.
           schema:
-            $ref: '#/definitions/History'
+            $ref: "#/definitions/History"
         default:
           description: No Data.
           schema:
-            $ref: '#/definitions/Error'
-      summary: '[Enterprise Plan Only] Returns Historical Observations - Given IP Address, or auto. (1 Year/call limit)'
+            $ref: "#/definitions/Error"
+      summary: "[Enterprise Plan Only] Returns Historical Observations - Given IP Address, or auto. (1 Year/call limit)"
       tags:
         - (Bulk) Hourly Historical Weather Data (Enterprise Plans)
-  '/bulk/history/hourly?lat={lat}&lon={lon}':
+  "/bulk/history/hourly?lat={lat}&lon={lon}":
     get:
-      description: 'Returns Historical Observations - Given a lat, and lon.'
+      description: Returns Historical Observations - Given a lat, and lon.
       parameters:
         - description: Latitude component of location.
           format: double
@@ -993,13 +993,13 @@ paths:
           name: lon
           required: true
           type: number
-        - description: 'Start Date (YYYY-MM-DD or YYYY-MM-DD:HH).'
+        - description: Start Date (YYYY-MM-DD or YYYY-MM-DD:HH).
           format: string
           in: query
           name: start_date
           required: true
           type: string
-        - description: 'End Date (YYYY-MM-DD or YYYY-MM-DD:HH).'
+        - description: End Date (YYYY-MM-DD or YYYY-MM-DD:HH).
           format: string
           in: query
           name: end_date
@@ -1014,7 +1014,7 @@ paths:
           name: units
           required: false
           type: string
-        - description: 'Language (Default: English) See <a target=''blank'' href=''/api/requests''>language field description</a>'
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
           enum:
             - ar
             - az
@@ -1054,7 +1054,7 @@ paths:
           name: lang
           required: false
           type: string
-        - description: 'Wraps return in jsonp callback. Example: callback=func'
+        - description: "Wraps return in jsonp callback. Example: callback=func"
           format: string
           in: query
           name: callback
@@ -1067,22 +1067,22 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: An Historical Data Object.
           schema:
-            $ref: '#/definitions/History'
+            $ref: "#/definitions/History"
         default:
           description: No Data.
           schema:
-            $ref: '#/definitions/Error'
-      summary: '[Enterprise Plan Only] Returns Historical Observations - Given a lat/lon. (1 Year/call limit)'
+            $ref: "#/definitions/Error"
+      summary: "[Enterprise Plan Only] Returns Historical Observations - Given a lat/lon. (1 Year/call limit)"
       tags:
         - (Bulk) Hourly Historical Weather Data (Enterprise Plans)
-  '/bulk/history/hourly?postal_code={postal_code}':
+  "/bulk/history/hourly?postal_code={postal_code}":
     get:
-      description: 'Returns Historical Observations - Given a Postal Code. '
+      description: "Returns Historical Observations - Given a Postal Code. "
       parameters:
-        - description: 'Postal Code. Example: 28546'
+        - description: "Postal Code. Example: 28546"
           format: string
           in: path
           name: postal_code
@@ -1094,13 +1094,13 @@ paths:
           name: country
           required: false
           type: string
-        - description: 'Start Date (YYYY-MM-DD or YYYY-MM-DD:HH)'
+        - description: Start Date (YYYY-MM-DD or YYYY-MM-DD:HH)
           format: string
           in: query
           name: start_date
           required: true
           type: string
-        - description: 'End Date (YYYY-MM-DD or YYYY-MM-DD:HH)'
+        - description: End Date (YYYY-MM-DD or YYYY-MM-DD:HH)
           format: string
           in: query
           name: end_date
@@ -1115,7 +1115,7 @@ paths:
           name: units
           required: false
           type: string
-        - description: 'Language (Default: English) See <a target=''blank'' href=''/api/requests''>language field description</a>'
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
           enum:
             - ar
             - az
@@ -1155,7 +1155,7 @@ paths:
           name: lang
           required: false
           type: string
-        - description: 'Wraps return in jsonp callback. Example: callback=func'
+        - description: "Wraps return in jsonp callback. Example: callback=func"
           format: string
           in: query
           name: callback
@@ -1168,18 +1168,18 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: An Historical Data Object.
           schema:
-            $ref: '#/definitions/History'
+            $ref: "#/definitions/History"
         default:
           description: No Data.
           schema:
-            $ref: '#/definitions/Error'
-      summary: '[Enterprise Plan Only] Returns Historical Observations - Given a Postal Code. (1 Year/call limit)'
+            $ref: "#/definitions/Error"
+      summary: "[Enterprise Plan Only] Returns Historical Observations - Given a Postal Code. (1 Year/call limit)"
       tags:
         - (Bulk) Hourly Historical Weather Data (Enterprise Plans)
-  '/bulk/history/hourly?station={station}':
+  "/bulk/history/hourly?station={station}":
     get:
       description: Returns Historical Observations - Given a station ID.
       parameters:
@@ -1189,13 +1189,13 @@ paths:
           name: station
           required: true
           type: string
-        - description: 'Start Date (YYYY-MM-DD or YYYY-MM-DD:HH).'
+        - description: Start Date (YYYY-MM-DD or YYYY-MM-DD:HH).
           format: string
           in: query
           name: start_date
           required: true
           type: string
-        - description: 'End Date (YYYY-MM-DD or YYYY-MM-DD:HH).'
+        - description: End Date (YYYY-MM-DD or YYYY-MM-DD:HH).
           format: string
           in: query
           name: end_date
@@ -1210,7 +1210,7 @@ paths:
           name: units
           required: false
           type: string
-        - description: 'Language (Default: English) See <a target=''blank'' href=''/api/requests''>language field description</a>'
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
           enum:
             - ar
             - az
@@ -1250,7 +1250,7 @@ paths:
           name: lang
           required: false
           type: string
-        - description: 'Wraps return in jsonp callback. Example: callback=func'
+        - description: "Wraps return in jsonp callback. Example: callback=func"
           format: string
           in: query
           name: callback
@@ -1263,22 +1263,22 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: An Historical Data Object.
           schema:
-            $ref: '#/definitions/History'
+            $ref: "#/definitions/History"
         default:
           description: No Data.
           schema:
-            $ref: '#/definitions/Error'
-      summary: '[Enterprise Plan Only] Returns Historical Observations - Given a station ID. (1 Year/call limit)'
+            $ref: "#/definitions/Error"
+      summary: "[Enterprise Plan Only] Returns Historical Observations - Given a station ID. (1 Year/call limit)"
       tags:
         - (Bulk) Hourly Historical Weather Data (Enterprise Plans)
-  '/current/airquality?city={city}&country={country}':
+  "/current/airquality?city={city}&country={country}":
     get:
       description: Returns current air quality conditions.
       parameters:
-        - description: 'City search.. Example - &city=Raleigh,NC or &city=Berlin,DE or city=Paris&country=FR'
+        - description: City search.. Example - &city=Raleigh,NC or &city=Berlin,DE or city=Paris&country=FR
           format: string
           in: path
           name: city
@@ -1296,7 +1296,7 @@ paths:
           name: country
           required: true
           type: string
-        - description: 'Wraps return in jsonp callback. Example: callback=func'
+        - description: "Wraps return in jsonp callback. Example: callback=func"
           format: string
           in: query
           name: callback
@@ -1309,22 +1309,22 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Current air quality conditions
           schema:
-            $ref: '#/definitions/AQCurrentGroup'
+            $ref: "#/definitions/AQCurrentGroup"
         default:
           description: No Data.
           schema:
-            $ref: '#/definitions/Error'
-      summary: 'Returns current air quality conditions - Given City and/or State, Country.'
+            $ref: "#/definitions/Error"
+      summary: Returns current air quality conditions - Given City and/or State, Country.
       tags:
         - Current Air Quality
-  '/current/airquality?city_id={city_id}':
+  "/current/airquality?city_id={city_id}":
     get:
       description: Returns current air quality conditions.
       parameters:
-        - description: 'City ID. Example: 4487042'
+        - description: "City ID. Example: 4487042"
           format: integer
           in: path
           name: city_id
@@ -1343,18 +1343,18 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Current air quality conditions
           schema:
-            $ref: '#/definitions/AQCurrentGroup'
+            $ref: "#/definitions/AQCurrentGroup"
         default:
           description: No Data.
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       summary: Returns current air quality conditions - Given a City ID.
       tags:
         - Current Air Quality
-  '/current/airquality?lat={lat}&lon={lon}':
+  "/current/airquality?lat={lat}&lon={lon}":
     get:
       description: Returns current air quality conditions.
       parameters:
@@ -1383,22 +1383,22 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Current air quality conditions
           schema:
-            $ref: '#/definitions/AQCurrentGroup'
+            $ref: "#/definitions/AQCurrentGroup"
         default:
           description: No Data.
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       summary: Returns current air quality conditions - Given a lat/lon.
       tags:
         - Current Air Quality
-  '/current/airquality?postal_code={postal_code}':
+  "/current/airquality?postal_code={postal_code}":
     get:
       description: Returns current air quality conditions.
       parameters:
-        - description: 'Postal Code. Example: 28546'
+        - description: "Postal Code. Example: 28546"
           format: integer
           in: path
           name: postal_code
@@ -1423,22 +1423,22 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Current air quality conditions
           schema:
-            $ref: '#/definitions/AQCurrentGroup'
+            $ref: "#/definitions/AQCurrentGroup"
         default:
           description: No Data.
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       summary: Returns current air quality conditions - Given a Postal Code.
       tags:
         - Current Air Quality
-  '/current?cities={cities}':
+  "/current?cities={cities}":
     get:
-      description: 'Returns a group of Current Observations - Given a list of City IDs. '
+      description: "Returns a group of Current Observations - Given a list of City IDs. "
       parameters:
-        - description: 'Comma separated list of City ID''s. Example: 4487042, 4494942, 4504871'
+        - description: "Comma separated list of City ID's. Example: 4487042, 4494942, 4504871"
           format: string
           in: path
           name: cities
@@ -1453,7 +1453,7 @@ paths:
           name: units
           required: false
           type: string
-        - description: 'Marine stations only (buoys, oil platforms, etc)'
+        - description: Marine stations only (buoys, oil platforms, etc)
           enum:
             - t
           format: string
@@ -1461,7 +1461,7 @@ paths:
           name: marine
           required: false
           type: string
-        - description: 'Language (Default: English) See <a target=''blank'' href=''/api/requests''>language field description</a>'
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
           enum:
             - ar
             - az
@@ -1514,22 +1514,22 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: An Observation Group object.
           schema:
-            $ref: '#/definitions/CurrentObsGroup'
+            $ref: "#/definitions/CurrentObsGroup"
         default:
           description: No Data.
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       summary: Returns a group of observations given a list of cities
       tags:
         - Current Weather Data
-  '/current?city={city}&country={country}':
+  "/current?city={city}&country={country}":
     get:
-      description: 'Returns a Current Observation - Given a city in the format of City,ST or City. The state, and country parameters can be provided to make the search more accurate.'
+      description: Returns a Current Observation - Given a city in the format of City,ST or City. The state, and country parameters can be provided to make the search more accurate.
       parameters:
-        - description: 'City search.. Example - &city=Raleigh,NC or &city=Berlin,DE or city=Paris&country=FR'
+        - description: City search.. Example - &city=Raleigh,NC or &city=Berlin,DE or city=Paris&country=FR
           format: string
           in: path
           name: city
@@ -1547,7 +1547,7 @@ paths:
           name: country
           required: true
           type: string
-        - description: 'Marine stations only (buoys, oil platforms, etc)'
+        - description: Marine stations only (buoys, oil platforms, etc)
           enum:
             - t
           format: string
@@ -1564,7 +1564,7 @@ paths:
           name: units
           required: false
           type: string
-        - description: 'Language (Default: English) See <a target=''blank'' href=''/api/requests''>language field description</a>'
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
           enum:
             - ar
             - az
@@ -1617,22 +1617,22 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: An Observation Group object.
           schema:
-            $ref: '#/definitions/CurrentObsGroup'
+            $ref: "#/definitions/CurrentObsGroup"
         default:
           description: No Data.
           schema:
-            $ref: '#/definitions/Error'
-      summary: 'Returns a Current Observation - Given City and/or State, Country.'
+            $ref: "#/definitions/Error"
+      summary: Returns a Current Observation - Given City and/or State, Country.
       tags:
         - Current Weather Data
-  '/current?city_id={city_id}':
+  "/current?city_id={city_id}":
     get:
-      description: 'Returns current weather observation - Given a City ID. '
+      description: "Returns current weather observation - Given a City ID. "
       parameters:
-        - description: 'City ID. Example: 4487042'
+        - description: "City ID. Example: 4487042"
           format: string
           in: path
           name: city_id
@@ -1647,7 +1647,7 @@ paths:
           name: units
           required: false
           type: string
-        - description: 'Marine stations only (buoys, oil platforms, etc)'
+        - description: Marine stations only (buoys, oil platforms, etc)
           enum:
             - t
           format: string
@@ -1655,7 +1655,7 @@ paths:
           name: marine
           required: false
           type: string
-        - description: 'Language (Default: English) See <a target=''blank'' href=''/api/requests''>language field description</a>'
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
           enum:
             - ar
             - az
@@ -1708,28 +1708,28 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: An Observation Group object.
           schema:
-            $ref: '#/definitions/CurrentObsGroup'
+            $ref: "#/definitions/CurrentObsGroup"
         default:
           description: No Data.
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       summary: Returns a current observation by city id.
       tags:
         - Current Weather Data
-  '/current?ip={ip}':
+  "/current?ip={ip}":
     get:
-      description: 'Returns a Current Observation - Given an IP address, or auto.'
+      description: Returns a Current Observation - Given an IP address, or auto.
       parameters:
-        - description: 'IP Address, or auto. Example: ip=auto'
+        - description: "IP Address, or auto. Example: ip=auto"
           format: string
           in: path
           name: ip
           required: true
           type: string
-        - description: 'Marine stations only (buoys, oil platforms, etc)'
+        - description: Marine stations only (buoys, oil platforms, etc)
           enum:
             - t
           format: string
@@ -1746,7 +1746,7 @@ paths:
           name: units
           required: false
           type: string
-        - description: 'Language (Default: English) See <a target=''blank'' href=''/api/requests''>language field description</a>'
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
           enum:
             - ar
             - az
@@ -1799,20 +1799,20 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: An Observation Group object.
           schema:
-            $ref: '#/definitions/CurrentObsGroup'
+            $ref: "#/definitions/CurrentObsGroup"
         default:
           description: No Data.
           schema:
-            $ref: '#/definitions/Error'
-      summary: 'Returns a Current Observation - Given an IP address, or auto.'
+            $ref: "#/definitions/Error"
+      summary: Returns a Current Observation - Given an IP address, or auto.
       tags:
         - Current Weather Data
-  '/current?lat={lat}&lon={lon}':
+  "/current?lat={lat}&lon={lon}":
     get:
-      description: 'Returns a Current Observation - given a lat, and a lon.'
+      description: Returns a Current Observation - given a lat, and a lon.
       parameters:
         - description: Latitude component of location.
           format: double
@@ -1826,7 +1826,7 @@ paths:
           name: lon
           required: true
           type: number
-        - description: 'Marine stations only (buoys, oil platforms, etc)'
+        - description: Marine stations only (buoys, oil platforms, etc)
           enum:
             - t
           format: string
@@ -1843,7 +1843,7 @@ paths:
           name: units
           required: false
           type: string
-        - description: 'Language (Default: English) See <a target=''blank'' href=''/api/requests''>language field description</a>'
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
           enum:
             - ar
             - az
@@ -1896,22 +1896,22 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: An Observation Group object.
           schema:
-            $ref: '#/definitions/CurrentObsGroup'
+            $ref: "#/definitions/CurrentObsGroup"
         default:
           description: No Data.
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       summary: Returns a Current Observation - Given a lat/lon.
       tags:
         - Current Weather Data
-  '/current?postal_code={postal_code}':
+  "/current?postal_code={postal_code}":
     get:
-      description: 'Returns current weather observation - Given a Postal Code. '
+      description: "Returns current weather observation - Given a Postal Code. "
       parameters:
-        - description: 'Postal Code. Example: 28546'
+        - description: "Postal Code. Example: 28546"
           format: string
           in: path
           name: postal_code
@@ -1923,7 +1923,7 @@ paths:
           name: country
           required: false
           type: string
-        - description: 'Marine stations only (buoys, oil platforms, etc)'
+        - description: Marine stations only (buoys, oil platforms, etc)
           enum:
             - t
           format: string
@@ -1940,7 +1940,7 @@ paths:
           name: units
           required: false
           type: string
-        - description: 'Language (Default: English) See <a target=''blank'' href=''/api/requests''>language field description</a>'
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
           enum:
             - ar
             - az
@@ -1993,18 +1993,18 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: An Observation Group object.
           schema:
-            $ref: '#/definitions/CurrentObsGroup'
+            $ref: "#/definitions/CurrentObsGroup"
         default:
           description: No Data.
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       summary: Returns a current observation by postal code.
       tags:
         - Current Weather Data
-  '/current?station={station}':
+  "/current?station={station}":
     get:
       description: Returns a Current Observation - Given a station ID.
       parameters:
@@ -2023,7 +2023,7 @@ paths:
           name: units
           required: false
           type: string
-        - description: 'Language (Default: English) See <a target=''blank'' href=''/api/requests''>language field description</a>'
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
           enum:
             - ar
             - az
@@ -2063,7 +2063,7 @@ paths:
           name: lang
           required: false
           type: string
-        - description: 'Wraps return in jsonp callback. Example: callback=func'
+        - description: "Wraps return in jsonp callback. Example: callback=func"
           format: string
           in: query
           name: callback
@@ -2076,22 +2076,22 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: An Observation Group object.
           schema:
-            $ref: '#/definitions/CurrentObsGroup'
+            $ref: "#/definitions/CurrentObsGroup"
         default:
           description: No Data.
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       summary: Returns a Current Observation. - Given a station ID.
       tags:
         - Current Weather Data
-  '/current?stations={stations}':
+  "/current?stations={stations}":
     get:
-      description: 'Returns a group of Current Observations - Given a list of Station Call IDs. '
+      description: "Returns a group of Current Observations - Given a list of Station Call IDs. "
       parameters:
-        - description: 'Comma separated list of Station Call ID''s. Example: KRDU,KBFI,KVNY'
+        - description: "Comma separated list of Station Call ID's. Example: KRDU,KBFI,KVNY"
           format: string
           in: path
           name: stations
@@ -2106,7 +2106,7 @@ paths:
           name: units
           required: false
           type: string
-        - description: 'Language (Default: English) See <a target=''blank'' href=''/api/requests''>language field description</a>'
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
           enum:
             - ar
             - az
@@ -2146,7 +2146,7 @@ paths:
           name: lang
           required: false
           type: string
-        - description: 'Wraps return in jsonp callback. Example: callback=func'
+        - description: "Wraps return in jsonp callback. Example: callback=func"
           format: string
           in: query
           name: callback
@@ -2159,23 +2159,23 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: An Observation Group object.
           schema:
-            $ref: '#/definitions/CurrentObsGroup'
+            $ref: "#/definitions/CurrentObsGroup"
         default:
           description: No Data.
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       summary: Returns a group of observations given a list of stations
       tags:
         - Current Weather Data
-  '/forecast/3hourly?city={city}&country={country}':
+  "/forecast/3hourly?city={city}&country={country}":
     get:
-      description: |
+      description: >
         Returns a 3-hourly forecast, where each point represents a three hour   period. Every point has a datetime string in the format "YYYY-MM-DD:HH". Time is UTC.
       parameters:
-        - description: 'City search.. Example - &city=Raleigh,NC or &city=Berlin,DE or city=Paris&country=FR'
+        - description: City search.. Example - &city=Raleigh,NC or &city=Berlin,DE or city=Paris&country=FR
           format: string
           in: path
           name: city
@@ -2208,7 +2208,7 @@ paths:
           name: units
           required: false
           type: string
-        - description: 'Language (Default: English) See <a target=''blank'' href=''/api/requests''>language field description</a>'
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
           enum:
             - ar
             - az
@@ -2261,23 +2261,23 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: A forecast object.
           schema:
-            $ref: '#/definitions/ForecastHourly'
+            $ref: "#/definitions/ForecastHourly"
         default:
           description: No Data.
           schema:
-            $ref: '#/definitions/Error'
-      summary: 'Returns a 3-hourly forecast - Given City and/or State, Country.'
+            $ref: "#/definitions/Error"
+      summary: Returns a 3-hourly forecast - Given City and/or State, Country.
       tags:
         - 5 day / 3 hour Forecast
-  '/forecast/3hourly?city_id={city_id}':
+  "/forecast/3hourly?city_id={city_id}":
     get:
-      description: |
+      description: >
         Returns a 3-hourly forecast, where each point represents a three hour   period. Every point has a datetime string in the format "YYYY-MM-DD:HH". Time is UTC.
       parameters:
-        - description: 'City ID. Example: 4487042'
+        - description: "City ID. Example: 4487042"
           format: integer
           in: path
           name: city_id
@@ -2298,7 +2298,7 @@ paths:
           name: units
           required: false
           type: string
-        - description: 'Language (Default: English) See <a target=''blank'' href=''/api/requests''>language field description</a>'
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
           enum:
             - ar
             - az
@@ -2338,7 +2338,7 @@ paths:
           name: lang
           required: false
           type: string
-        - description: 'Wraps return in jsonp callback. Example: callback=func'
+        - description: "Wraps return in jsonp callback. Example: callback=func"
           format: string
           in: query
           name: callback
@@ -2351,23 +2351,23 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: A forecast object.
           schema:
-            $ref: '#/definitions/ForecastHourly'
+            $ref: "#/definitions/ForecastHourly"
         default:
           description: No Data.
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       summary: Returns a 3-hourly forecast - Given a City ID.
       tags:
         - 5 day / 3 hour Forecast
-  '/forecast/3hourly?ip={ip}':
+  "/forecast/3hourly?ip={ip}":
     get:
-      description: |
+      description: >
         Returns a 3-hourly forecast, where each point represents a three hour   period. Every point has a datetime string in the format "YYYY-MM-DD:HH". Time is UTC.
       parameters:
-        - description: 'IP address, or auto. Example: ip=auto'
+        - description: "IP address, or auto. Example: ip=auto"
           format: string
           in: path
           name: ip
@@ -2388,7 +2388,7 @@ paths:
           name: units
           required: false
           type: string
-        - description: 'Language (Default: English) See <a target=''blank'' href=''/api/requests''>language field description</a>'
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
           enum:
             - ar
             - az
@@ -2428,7 +2428,7 @@ paths:
           name: lang
           required: false
           type: string
-        - description: 'Wraps return in jsonp callback. Example: callback=func'
+        - description: "Wraps return in jsonp callback. Example: callback=func"
           format: string
           in: query
           name: callback
@@ -2441,20 +2441,20 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: A forecast object.
           schema:
-            $ref: '#/definitions/ForecastHourly'
+            $ref: "#/definitions/ForecastHourly"
         default:
           description: No Data.
           schema:
-            $ref: '#/definitions/Error'
-      summary: 'Returns a 3hourly forecast - Given an IP Address, or ip=auto for automatic IP lookup.'
+            $ref: "#/definitions/Error"
+      summary: Returns a 3hourly forecast - Given an IP Address, or ip=auto for automatic IP lookup.
       tags:
         - 5 day / 3 hour Forecast
-  '/forecast/3hourly?lat={lat}&lon={lon}':
+  "/forecast/3hourly?lat={lat}&lon={lon}":
     get:
-      description: |
+      description: >
         Returns a 3-hourly forecast, where each point represents a three hour   period. Every point has a datetime string in the format "YYYY-MM-DD:HH". Time is UTC.
       parameters:
         - description: Latitude component of location.
@@ -2484,7 +2484,7 @@ paths:
           name: units
           required: false
           type: string
-        - description: 'Language (Default: English) See <a target=''blank'' href=''/api/requests''>language field description</a>'
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
           enum:
             - ar
             - az
@@ -2537,23 +2537,23 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: A forecast object.
           schema:
-            $ref: '#/definitions/ForecastHourly'
+            $ref: "#/definitions/ForecastHourly"
         default:
           description: No Data.
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       summary: Returns a 3-hourly forecast - Given a lat/lon.
       tags:
         - 5 day / 3 hour Forecast
-  '/forecast/3hourly?postal_code={postal_code}':
+  "/forecast/3hourly?postal_code={postal_code}":
     get:
-      description: |
+      description: >
         Returns a 3-hourly forecast, where each point represents a three hour period. Every point has a datetime string in the format "YYYY-MM-DD:HH". Time is UTC.
       parameters:
-        - description: 'Postal Code. Example: 28546'
+        - description: "Postal Code. Example: 28546"
           format: integer
           in: path
           name: postal_code
@@ -2580,7 +2580,7 @@ paths:
           name: units
           required: false
           type: string
-        - description: 'Language (Default: English) See <a target=''blank'' href=''/api/requests''>language field description</a>'
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
           enum:
             - ar
             - az
@@ -2620,7 +2620,7 @@ paths:
           name: lang
           required: false
           type: string
-        - description: 'Wraps return in jsonp callback. Example: callback=func'
+        - description: "Wraps return in jsonp callback. Example: callback=func"
           format: string
           in: query
           name: callback
@@ -2633,22 +2633,22 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: A forecast object.
           schema:
-            $ref: '#/definitions/ForecastHourly'
+            $ref: "#/definitions/ForecastHourly"
         default:
           description: No Data.
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       summary: Returns a 3-hourly forecast - Given a Postal Code.
       tags:
         - 5 day / 3 hour Forecast
-  '/forecast/airquality?city={city}&country={country}':
+  "/forecast/airquality?city={city}&country={country}":
     get:
-      description: 'Returns 72 hour (hourly) Air Quality forecast, where each point represents a one hour period.'
+      description: Returns 72 hour (hourly) Air Quality forecast, where each point represents a one hour period.
       parameters:
-        - description: 'City search.. Example - &city=Raleigh,NC or &city=Berlin,DE or city=Paris&country=FR'
+        - description: City search.. Example - &city=Raleigh,NC or &city=Berlin,DE or city=Paris&country=FR
           format: string
           in: path
           name: city
@@ -2666,7 +2666,7 @@ paths:
           name: country
           required: true
           type: string
-        - description: 'Wraps return in jsonp callback. Example: callback=func'
+        - description: "Wraps return in jsonp callback. Example: callback=func"
           format: string
           in: query
           name: callback
@@ -2685,22 +2685,22 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: A forecast object.
           schema:
-            $ref: '#/definitions/AQHourly'
+            $ref: "#/definitions/AQHourly"
         default:
           description: No Data.
           schema:
-            $ref: '#/definitions/Error'
-      summary: 'Returns 72 hour (hourly) Air Quality forecast - Given City and/or State, Country.'
+            $ref: "#/definitions/Error"
+      summary: Returns 72 hour (hourly) Air Quality forecast - Given City and/or State, Country.
       tags:
         - Air Quality Forecast
-  '/forecast/airquality?city_id={city_id}':
+  "/forecast/airquality?city_id={city_id}":
     get:
-      description: 'Returns 72 hour (hourly) Air Quality forecast, where each point represents a one hour period.'
+      description: Returns 72 hour (hourly) Air Quality forecast, where each point represents a one hour period.
       parameters:
-        - description: 'City ID. Example: 4487042'
+        - description: "City ID. Example: 4487042"
           format: integer
           in: path
           name: city_id
@@ -2725,20 +2725,20 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: A forecast object.
           schema:
-            $ref: '#/definitions/AQHourly'
+            $ref: "#/definitions/AQHourly"
         default:
           description: No Data.
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       summary: Returns 72 hour (hourly) Air Quality forecast - Given a City ID.
       tags:
         - Air Quality Forecast
-  '/forecast/airquality?lat={lat}&lon={lon}':
+  "/forecast/airquality?lat={lat}&lon={lon}":
     get:
-      description: 'Returns 72 hour (hourly) Air Quality forecast, where each point represents a one hour period.'
+      description: Returns 72 hour (hourly) Air Quality forecast, where each point represents a one hour period.
       parameters:
         - description: Latitude component of location.
           format: double
@@ -2771,22 +2771,22 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: A forecast object.
           schema:
-            $ref: '#/definitions/AQHourly'
+            $ref: "#/definitions/AQHourly"
         default:
           description: No Data.
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       summary: Returns 72 hour (hourly) Air Quality forecast - Given a lat/lon.
       tags:
         - Air Quality Forecast
-  '/forecast/airquality?postal_code={postal_code}':
+  "/forecast/airquality?postal_code={postal_code}":
     get:
-      description: 'Returns 72 hour (hourly) Air Quality forecast, where each point represents a one hour period.'
+      description: Returns 72 hour (hourly) Air Quality forecast, where each point represents a one hour period.
       parameters:
-        - description: 'Postal Code. Example: 28546'
+        - description: "Postal Code. Example: 28546"
           format: integer
           in: path
           name: postal_code
@@ -2817,23 +2817,23 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: A forecast object.
           schema:
-            $ref: '#/definitions/AQHourly'
+            $ref: "#/definitions/AQHourly"
         default:
           description: No Data.
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       summary: Returns 72 hour (hourly) Air Quality forecast - Given a Postal Code.
       tags:
         - Air Quality Forecast
-  '/forecast/daily?city={city}&country={country}':
+  "/forecast/daily?city={city}&country={country}":
     get:
-      description: |
+      description: >
         Returns a daily forecast, where each point represents one day (24hr) period. Every point has a datetime string in the format "YYYY-MM-DD". One day begins at 00:00 UTC, and ends at 23:59 UTC. Accepts a city in the format of City,ST or City. The state, and country parameters can be provided to make the search more accurate.
       parameters:
-        - description: 'City search.. Example - &city=Raleigh,NC or &city=Berlin,DE or city=Paris&country=FR'
+        - description: City search.. Example - &city=Raleigh,NC or &city=Berlin,DE or city=Paris&country=FR
           format: string
           in: path
           name: city
@@ -2866,7 +2866,7 @@ paths:
           name: units
           required: false
           type: string
-        - description: 'Language (Default: English) See <a target=''blank'' href=''/api/requests''>language field description</a>'
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
           enum:
             - ar
             - az
@@ -2919,23 +2919,23 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: A forecast object.
           schema:
-            $ref: '#/definitions/ForecastDay'
+            $ref: "#/definitions/ForecastDay"
         default:
           description: No Data.
           schema:
-            $ref: '#/definitions/Error'
-      summary: 'Returns a daily forecast - Given City and/or State, Country.'
+            $ref: "#/definitions/Error"
+      summary: Returns a daily forecast - Given City and/or State, Country.
       tags:
         - 16 day / daily Forecast
-  '/forecast/daily?city_id={city_id}':
+  "/forecast/daily?city_id={city_id}":
     get:
-      description: |
+      description: >
         Returns a daily forecast, where each point represents one day (24hr) period. Every point has a datetime string in the format "YYYY-MM-DD". One day begins at 00:00 UTC, and ends at 23:59 UTC.
       parameters:
-        - description: 'City ID. Example: 4487042'
+        - description: "City ID. Example: 4487042"
           format: integer
           in: path
           name: city_id
@@ -2956,7 +2956,7 @@ paths:
           name: units
           required: false
           type: string
-        - description: 'Language (Default: English) See <a target=''blank'' href=''/api/requests''>language field description</a>'
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
           enum:
             - ar
             - az
@@ -2996,7 +2996,7 @@ paths:
           name: lang
           required: false
           type: string
-        - description: 'Wraps return in jsonp callback. Example: callback=func'
+        - description: "Wraps return in jsonp callback. Example: callback=func"
           format: string
           in: query
           name: callback
@@ -3009,23 +3009,23 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: A forecast object.
           schema:
-            $ref: '#/definitions/ForecastDay'
+            $ref: "#/definitions/ForecastDay"
         default:
           description: No Data.
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       summary: Returns a daily forecast - Given a City ID.
       tags:
         - 16 day / daily Forecast
-  '/forecast/daily?ip={ip}':
+  "/forecast/daily?ip={ip}":
     get:
-      description: |
+      description: >
         Returns a daily forecast, where each point represents one day (24hr) period. Every point has a datetime string in the format "YYYY-MM-DD". One day begins at 00:00 UTC, and ends at 23:59 UTC. 
       parameters:
-        - description: 'IP address, or auto. Example: ip=auto'
+        - description: "IP address, or auto. Example: ip=auto"
           format: string
           in: path
           name: ip
@@ -3046,7 +3046,7 @@ paths:
           name: units
           required: false
           type: string
-        - description: 'Language (Default: English) See <a target=''blank'' href=''/api/requests''>language field description</a>'
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
           enum:
             - ar
             - az
@@ -3086,7 +3086,7 @@ paths:
           name: lang
           required: false
           type: string
-        - description: 'Wraps return in jsonp callback. Example: callback=func'
+        - description: "Wraps return in jsonp callback. Example: callback=func"
           format: string
           in: query
           name: callback
@@ -3099,20 +3099,20 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: A forecast object.
           schema:
-            $ref: '#/definitions/ForecastDay'
+            $ref: "#/definitions/ForecastDay"
         default:
           description: No Data.
           schema:
-            $ref: '#/definitions/Error'
-      summary: 'Returns a daily forecast - Given an IP Address, or ip=auto for automatic IP lookup.'
+            $ref: "#/definitions/Error"
+      summary: Returns a daily forecast - Given an IP Address, or ip=auto for automatic IP lookup.
       tags:
         - 16 day / daily Forecast
-  '/forecast/daily?lat={lat}&lon={lon}':
+  "/forecast/daily?lat={lat}&lon={lon}":
     get:
-      description: |
+      description: >
         Returns a daily forecast, where each point represents one day (24hr) period. Every point has a datetime string in the format "YYYY-MM-DD". One day begins at 00:00 UTC, and ends at 23:59 UTC. 
       parameters:
         - description: Latitude component of location.
@@ -3142,7 +3142,7 @@ paths:
           name: units
           required: false
           type: string
-        - description: 'Language (Default: English) See <a target=''blank'' href=''/api/requests''>language field description</a>'
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
           enum:
             - ar
             - az
@@ -3182,7 +3182,7 @@ paths:
           name: lang
           required: false
           type: string
-        - description: 'Wraps return in jsonp callback. Example: callback=func'
+        - description: "Wraps return in jsonp callback. Example: callback=func"
           format: string
           in: query
           name: callback
@@ -3195,23 +3195,23 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: A forecast object.
           schema:
-            $ref: '#/definitions/ForecastDay'
+            $ref: "#/definitions/ForecastDay"
         default:
           description: No Data.
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       summary: Returns a daily forecast - Given Lat/Lon.
       tags:
         - 16 day / daily Forecast
-  '/forecast/daily?postal_code={postal_code}':
+  "/forecast/daily?postal_code={postal_code}":
     get:
-      description: |
+      description: >
         Returns a daily forecast, where each point represents one day (24hr) period. Every point has a datetime string in the format "YYYY-MM-DD". One day begins at 00:00 UTC, and ends at 23:59 UTC.
       parameters:
-        - description: 'Postal Code. Example: 28546'
+        - description: "Postal Code. Example: 28546"
           format: integer
           in: path
           name: postal_code
@@ -3238,7 +3238,7 @@ paths:
           name: units
           required: false
           type: string
-        - description: 'Language (Default: English) See <a target=''blank'' href=''/api/requests''>language field description</a>'
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
           enum:
             - ar
             - az
@@ -3278,7 +3278,7 @@ paths:
           name: lang
           required: false
           type: string
-        - description: 'Wraps return in jsonp callback. Example: callback=func'
+        - description: "Wraps return in jsonp callback. Example: callback=func"
           format: string
           in: query
           name: callback
@@ -3291,20 +3291,20 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: A forecast object.
           schema:
-            $ref: '#/definitions/ForecastDay'
+            $ref: "#/definitions/ForecastDay"
         default:
           description: No Data.
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       summary: Returns a daily forecast - Given a Postal Code.
       tags:
         - 16 day / daily Forecast
-  '/forecast/energy?lat={lat}&lon={lon}':
+  "/forecast/energy?lat={lat}&lon={lon}":
     get:
-      description: 'Retrieve an 8 day forecast relevant to te Energy Sector (degree days, solar radiation, precipitation, wind).'
+      description: Retrieve an 8 day forecast relevant to te Energy Sector (degree days, solar radiation, precipitation, wind).
       parameters:
         - description: Latitude component of location.
           format: double
@@ -3318,7 +3318,7 @@ paths:
           name: lon
           required: true
           type: number
-        - description: 'Temperature threshold to use to calculate degree days (default 18 C) '
+        - description: "Temperature threshold to use to calculate degree days (default 18 C) "
           format: double
           in: query
           name: threshold
@@ -3333,7 +3333,7 @@ paths:
           name: units
           required: false
           type: string
-        - description: 'Time period (default: daily)'
+        - description: "Time period (default: daily)"
           enum:
             - hourly
             - daily
@@ -3342,7 +3342,7 @@ paths:
           name: tp
           required: false
           type: string
-        - description: 'Wraps return in jsonp callback. Example: callback=func'
+        - description: "Wraps return in jsonp callback. Example: callback=func"
           format: string
           in: query
           name: callback
@@ -3355,24 +3355,24 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: An Energy Data Object.
           schema:
-            $ref: '#/definitions/EnergyObsGroupForecast'
+            $ref: "#/definitions/EnergyObsGroupForecast"
         default:
           description: No Data.
           schema:
-            $ref: '#/definitions/Error'
-      summary: 'Returns Energy Forecast API response  - Given a single lat/lon. '
+            $ref: "#/definitions/Error"
+      summary: "Returns Energy Forecast API response  - Given a single lat/lon. "
       tags:
         - Forecast Degree Day API
         - Forecast Solar Irradiance API
-  '/forecast/hourly?city={city}&country={country}':
+  "/forecast/hourly?city={city}&country={country}":
     get:
-      description: |2
+      description: >2
          Returns an hourly forecast, where each point represents a one hour   period. Every point has a datetime string in the format "YYYY-MM-DD:HH". Time is UTC. Accepts a city in the format of City,ST or City. The state, and country parameters can be provided to make the search more accurate.
       parameters:
-        - description: 'City search.. Example - &city=Raleigh,NC or &city=Berlin,DE or city=Paris&country=FR'
+        - description: City search.. Example - &city=Raleigh,NC or &city=Berlin,DE or city=Paris&country=FR
           format: string
           in: path
           name: city
@@ -3399,7 +3399,7 @@ paths:
           name: units
           required: false
           type: string
-        - description: 'Language (Default: English) See <a target=''blank'' href=''/api/requests''>language field description</a>'
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
           enum:
             - ar
             - az
@@ -3439,7 +3439,7 @@ paths:
           name: lang
           required: false
           type: string
-        - description: 'Wraps return in jsonp callback. Example: callback=func'
+        - description: "Wraps return in jsonp callback. Example: callback=func"
           format: string
           in: query
           name: callback
@@ -3458,23 +3458,23 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: A forecast object.
           schema:
-            $ref: '#/definitions/ForecastHourly'
+            $ref: "#/definitions/ForecastHourly"
         default:
           description: No Data.
           schema:
-            $ref: '#/definitions/Error'
-      summary: 'Returns an 120 hour (hourly forecast) - Given City and/or State, Country.'
+            $ref: "#/definitions/Error"
+      summary: Returns an 120 hour (hourly forecast) - Given City and/or State, Country.
       tags:
         - 120 hour / hourly Forecast
-  '/forecast/hourly?city_id={city_id}':
+  "/forecast/hourly?city_id={city_id}":
     get:
-      description: |2
+      description: >2
          Returns an hourly forecast, where each point represents a one hour   period. Every point has a datetime string in the format "YYYY-MM-DD:HH". Time is UTC. 
       parameters:
-        - description: 'City ID. Example: 4487042'
+        - description: "City ID. Example: 4487042"
           format: integer
           in: path
           name: city_id
@@ -3489,7 +3489,7 @@ paths:
           name: units
           required: false
           type: string
-        - description: 'Language (Default: English) See <a target=''blank'' href=''/api/requests''>language field description</a>'
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
           enum:
             - ar
             - az
@@ -3548,23 +3548,23 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: A forecast object.
           schema:
-            $ref: '#/definitions/ForecastHourly'
+            $ref: "#/definitions/ForecastHourly"
         default:
           description: No Data.
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       summary: Returns a 120 hour (hourly) forecast - Given a City ID.
       tags:
         - 120 hour / hourly Forecast
-  '/forecast/hourly?ip={ip}':
+  "/forecast/hourly?ip={ip}":
     get:
-      description: |2
+      description: >2
          Returns an hourly forecast, where each point represents a one hour period. Every point has a datetime string in the format "YYYY-MM-DD:HH". Time is UTC. 
       parameters:
-        - description: 'IP address, or auto. Example: ip=auto'
+        - description: "IP address, or auto. Example: ip=auto"
           format: string
           in: path
           name: ip
@@ -3585,7 +3585,7 @@ paths:
           name: units
           required: false
           type: string
-        - description: 'Language (Default: English) See <a target=''blank'' href=''/api/requests''>language field description</a>'
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
           enum:
             - ar
             - az
@@ -3625,7 +3625,7 @@ paths:
           name: lang
           required: false
           type: string
-        - description: 'Wraps return in jsonp callback. Example: callback=func'
+        - description: "Wraps return in jsonp callback. Example: callback=func"
           format: string
           in: query
           name: callback
@@ -3644,20 +3644,20 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: A forecast object.
           schema:
-            $ref: '#/definitions/ForecastHourly'
+            $ref: "#/definitions/ForecastHourly"
         default:
           description: No Data.
           schema:
-            $ref: '#/definitions/Error'
-      summary: 'Returns a hourly forecast - Given an IP Address, or ip=auto for automatic IP lookup.'
+            $ref: "#/definitions/Error"
+      summary: Returns a hourly forecast - Given an IP Address, or ip=auto for automatic IP lookup.
       tags:
         - 120 hour / hourly Forecast
-  '/forecast/hourly?lat={lat}&lon={lon}':
+  "/forecast/hourly?lat={lat}&lon={lon}":
     get:
-      description: |
+      description: >
         Returns an hourly forecast, where each point represents a one hour period. Every point has a datetime string in the format "YYYY-MM-DD:HH". Time is UTC. 
       parameters:
         - description: Latitude component of location.
@@ -3681,7 +3681,7 @@ paths:
           name: units
           required: false
           type: string
-        - description: 'Language (Default: English) See <a target=''blank'' href=''/api/requests''>language field description</a>'
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
           enum:
             - ar
             - az
@@ -3740,23 +3740,23 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: A forecast object.
           schema:
-            $ref: '#/definitions/ForecastHourly'
+            $ref: "#/definitions/ForecastHourly"
         default:
           description: No Data.
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       summary: Returns 120 hour (hourly) forecast - Given a lat/lon.
       tags:
         - 120 hour / hourly Forecast
-  '/forecast/hourly?postal_code={postal_code}':
+  "/forecast/hourly?postal_code={postal_code}":
     get:
-      description: |2
+      description: >2
          Returns an hourly forecast, where each point represents a one hour   period. Every point has a datetime string in the format "YYYY-MM-DD:HH". Time is UTC. 
       parameters:
-        - description: 'Postal Code. Example: 28546'
+        - description: "Postal Code. Example: 28546"
           format: integer
           in: path
           name: postal_code
@@ -3777,7 +3777,7 @@ paths:
           name: units
           required: false
           type: string
-        - description: 'Language (Default: English) See <a target=''blank'' href=''/api/requests''>language field description</a>'
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
           enum:
             - ar
             - az
@@ -3836,22 +3836,22 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: A forecast object.
           schema:
-            $ref: '#/definitions/ForecastHourly'
+            $ref: "#/definitions/ForecastHourly"
         default:
           description: No Data.
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       summary: Returns a 120 hour (hourly) forecast - Given a Postal Code.
       tags:
         - 120 hour / hourly Forecast
-  '/history/airquality?city={city}&country={country}':
+  "/history/airquality?city={city}&country={country}":
     get:
       description: Returns historical air quality conditions.
       parameters:
-        - description: 'City search.. Example - &city=Raleigh,NC or &city=Berlin,DE or city=Paris&country=FR'
+        - description: City search.. Example - &city=Raleigh,NC or &city=Berlin,DE or city=Paris&country=FR
           format: string
           in: path
           name: city
@@ -3869,7 +3869,7 @@ paths:
           name: country
           required: true
           type: string
-        - description: 'Wraps return in jsonp callback. Example: callback=func'
+        - description: "Wraps return in jsonp callback. Example: callback=func"
           format: string
           in: query
           name: callback
@@ -3882,18 +3882,18 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Historical air quality conditions
           schema:
-            $ref: '#/definitions/AQCurrentGroup'
+            $ref: "#/definitions/AQCurrentGroup"
         default:
           description: No Data.
           schema:
-            $ref: '#/definitions/Error'
-      summary: 'Returns 72 hours of historical quality conditions - Given City and/or State, Country.'
+            $ref: "#/definitions/Error"
+      summary: Returns 72 hours of historical quality conditions - Given City and/or State, Country.
       tags:
         - Historical Air Quality
-  '/history/airquality?city_id={city_id}':
+  "/history/airquality?city_id={city_id}":
     get:
       description: Returns historical air quality conditions.
       parameters:
@@ -3916,18 +3916,18 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Historical air quality conditions
           schema:
-            $ref: '#/definitions/AQCurrentGroup'
+            $ref: "#/definitions/AQCurrentGroup"
         default:
           description: No Data.
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       summary: Returns 72 hours of historical air quality conditions - Given a City ID.
       tags:
         - Historical Air Quality
-  '/history/airquality?lat={lat}&lon={lon}':
+  "/history/airquality?lat={lat}&lon={lon}":
     get:
       description: Returns historical air quality conditions.
       parameters:
@@ -3956,22 +3956,22 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Historical air quality conditions
           schema:
-            $ref: '#/definitions/AQCurrentGroup'
+            $ref: "#/definitions/AQCurrentGroup"
         default:
           description: No Data.
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       summary: Returns 72 hours of historical air quality conditions - Given a lat/lon.
       tags:
         - Historical Air Quality
-  '/history/airquality?postal_code={postal_code}':
+  "/history/airquality?postal_code={postal_code}":
     get:
       description: Returns historical air quality conditions.
       parameters:
-        - description: 'Postal Code. Example: 28546'
+        - description: "Postal Code. Example: 28546"
           format: integer
           in: path
           name: postal_code
@@ -3996,22 +3996,22 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Historical air quality conditions
           schema:
-            $ref: '#/definitions/AQCurrentGroup'
+            $ref: "#/definitions/AQCurrentGroup"
         default:
           description: No Data.
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       summary: Returns 72 hours of historical air quality conditions - Given a Postal Code.
       tags:
         - Historical Air Quality
-  '/history/daily?city={city}&country={country}':
+  "/history/daily?city={city}&country={country}":
     get:
-      description: 'Returns Historical Observations - Given a city in the format of City,ST or City. The state, and country parameters can be provided to make the search more accurate. **(LIMIT 1 day for Free plan. LIMIT 7 days for Developer. LIMIT 30 days for Advanced/Advanced+/Enterprise)**'
+      description: Returns Historical Observations - Given a city in the format of City,ST or City. The state, and country parameters can be provided to make the search more accurate. **(LIMIT 1 day for Free plan. LIMIT 7 days for Developer. LIMIT 30 days for Advanced/Advanced+/Enterprise)**
       parameters:
-        - description: 'City search.. Example - &city=Raleigh,NC or &city=Berlin,DE or city=Paris&country=FR'
+        - description: City search.. Example - &city=Raleigh,NC or &city=Berlin,DE or city=Paris&country=FR
           format: string
           in: path
           name: city
@@ -4029,13 +4029,13 @@ paths:
           name: country
           required: true
           type: string
-        - description: 'Start Date (YYYY-MM-DD or YYYY-MM-DD:HH).'
+        - description: Start Date (YYYY-MM-DD or YYYY-MM-DD:HH).
           format: string
           in: query
           name: start_date
           required: true
           type: string
-        - description: 'End Date (YYYY-MM-DD or YYYY-MM-DD:HH).'
+        - description: End Date (YYYY-MM-DD or YYYY-MM-DD:HH).
           format: string
           in: query
           name: end_date
@@ -4050,7 +4050,7 @@ paths:
           name: units
           required: false
           type: string
-        - description: 'Language (Default: English) See <a target=''blank'' href=''/api/requests''>language field description</a>'
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
           enum:
             - ar
             - az
@@ -4090,7 +4090,7 @@ paths:
           name: lang
           required: false
           type: string
-        - description: 'Wraps return in jsonp callback. Example: callback=func'
+        - description: "Wraps return in jsonp callback. Example: callback=func"
           format: string
           in: query
           name: callback
@@ -4103,34 +4103,34 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: An Historical Day Data Object.
           schema:
-            $ref: '#/definitions/HistoryDay'
+            $ref: "#/definitions/HistoryDay"
         default:
           description: No Data.
           schema:
-            $ref: '#/definitions/Error'
-      summary: 'Returns Historical Observations - Given City and/or State, Country.'
+            $ref: "#/definitions/Error"
+      summary: Returns Historical Observations - Given City and/or State, Country.
       tags:
         - Daily Historical Weather Data
-  '/history/daily?city_id={city_id}':
+  "/history/daily?city_id={city_id}":
     get:
       description: Returns Historical Observations - Given a City ID. **(LIMIT 1 day for Free plan. LIMIT 7 days for Developer. LIMIT 30 days for Advanced/Advanced+/Enterprise)**
       parameters:
-        - description: 'City ID. Example: 4487042'
+        - description: "City ID. Example: 4487042"
           format: string
           in: path
           name: city_id
           required: true
           type: string
-        - description: 'Start Date (YYYY-MM-DD or YYYY-MM-DD:HH)'
+        - description: Start Date (YYYY-MM-DD or YYYY-MM-DD:HH)
           format: string
           in: query
           name: start_date
           required: true
           type: string
-        - description: 'End Date (YYYY-MM-DD or YYYY-MM-DD:HH)'
+        - description: End Date (YYYY-MM-DD or YYYY-MM-DD:HH)
           format: string
           in: query
           name: end_date
@@ -4145,7 +4145,7 @@ paths:
           name: units
           required: false
           type: string
-        - description: 'Language (Default: English) See <a target=''blank'' href=''/api/requests''>language field description</a>'
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
           enum:
             - ar
             - az
@@ -4185,7 +4185,7 @@ paths:
           name: lang
           required: false
           type: string
-        - description: 'Wraps return in jsonp callback. Example: callback=func'
+        - description: "Wraps return in jsonp callback. Example: callback=func"
           format: string
           in: query
           name: callback
@@ -4198,34 +4198,34 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: An Historical Day Data Object.
           schema:
-            $ref: '#/definitions/HistoryDay'
+            $ref: "#/definitions/HistoryDay"
         default:
           description: No Data.
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       summary: Returns Historical Observations - Given a City ID
       tags:
         - Daily Historical Weather Data
-  '/history/daily?ip={ip}':
+  "/history/daily?ip={ip}":
     get:
-      description: 'Returns Historical Observations - Given IP Address, or auto. **(LIMIT 1 day for Free plan. LIMIT 7 days for Developer. LIMIT 30 days for Advanced/Advanced+/Enterprise)**'
+      description: Returns Historical Observations - Given IP Address, or auto. **(LIMIT 1 day for Free plan. LIMIT 7 days for Developer. LIMIT 30 days for Advanced/Advanced+/Enterprise)**
       parameters:
-        - description: 'IP Address, or auto. Example: ip=auto'
+        - description: "IP Address, or auto. Example: ip=auto"
           format: string
           in: path
           name: ip
           required: true
           type: string
-        - description: 'Start Date (YYYY-MM-DD or YYYY-MM-DD:HH).'
+        - description: Start Date (YYYY-MM-DD or YYYY-MM-DD:HH).
           format: string
           in: query
           name: start_date
           required: true
           type: string
-        - description: 'End Date (YYYY-MM-DD or YYYY-MM-DD:HH).'
+        - description: End Date (YYYY-MM-DD or YYYY-MM-DD:HH).
           format: string
           in: query
           name: end_date
@@ -4240,7 +4240,7 @@ paths:
           name: units
           required: false
           type: string
-        - description: 'Language (Default: English) See <a target=''blank'' href=''/api/requests''>language field description</a>'
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
           enum:
             - ar
             - az
@@ -4280,7 +4280,7 @@ paths:
           name: lang
           required: false
           type: string
-        - description: 'Wraps return in jsonp callback. Example: callback=func'
+        - description: "Wraps return in jsonp callback. Example: callback=func"
           format: string
           in: query
           name: callback
@@ -4293,20 +4293,20 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: An Historical Day Data Object.
           schema:
-            $ref: '#/definitions/HistoryDay'
+            $ref: "#/definitions/HistoryDay"
         default:
           description: No Data.
           schema:
-            $ref: '#/definitions/Error'
-      summary: 'Returns Historical Observations - Given IP Address, or auto.'
+            $ref: "#/definitions/Error"
+      summary: Returns Historical Observations - Given IP Address, or auto.
       tags:
         - Daily Historical Weather Data
-  '/history/daily?lat={lat}&lon={lon}':
+  "/history/daily?lat={lat}&lon={lon}":
     get:
-      description: 'Returns Historical Observations - Given a lat, and lon. **(LIMIT 1 day for Free plan. LIMIT 7 days for Developer. LIMIT 30 days for Advanced/Advanced+/Enterprise)**'
+      description: Returns Historical Observations - Given a lat, and lon. **(LIMIT 1 day for Free plan. LIMIT 7 days for Developer. LIMIT 30 days for Advanced/Advanced+/Enterprise)**
       parameters:
         - description: Latitude component of location.
           format: double
@@ -4320,13 +4320,13 @@ paths:
           name: lon
           required: true
           type: number
-        - description: 'Start Date (YYYY-MM-DD or YYYY-MM-DD:HH).'
+        - description: Start Date (YYYY-MM-DD or YYYY-MM-DD:HH).
           format: string
           in: query
           name: start_date
           required: true
           type: string
-        - description: 'End Date (YYYY-MM-DD or YYYY-MM-DD:HH).'
+        - description: End Date (YYYY-MM-DD or YYYY-MM-DD:HH).
           format: string
           in: query
           name: end_date
@@ -4341,7 +4341,7 @@ paths:
           name: units
           required: false
           type: string
-        - description: 'Language (Default: English) See <a target=''blank'' href=''/api/requests''>language field description</a>'
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
           enum:
             - ar
             - az
@@ -4381,7 +4381,7 @@ paths:
           name: lang
           required: false
           type: string
-        - description: 'Wraps return in jsonp callback. Example: callback=func'
+        - description: "Wraps return in jsonp callback. Example: callback=func"
           format: string
           in: query
           name: callback
@@ -4394,22 +4394,22 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: An Historical Day Data Object.
           schema:
-            $ref: '#/definitions/HistoryDay'
+            $ref: "#/definitions/HistoryDay"
         default:
           description: No Data.
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       summary: Returns Historical Observations - Given a lat/lon.
       tags:
         - Daily Historical Weather Data
-  '/history/daily?postal_code={postal_code}':
+  "/history/daily?postal_code={postal_code}":
     get:
       description: Returns Historical Observations - Given a Postal Code. **(LIMIT 1 day for Free plan. LIMIT 7 days for Developer. LIMIT 30 days for Advanced/Advanced+/Enterprise)**
       parameters:
-        - description: 'Postal Code. Example: 28546'
+        - description: "Postal Code. Example: 28546"
           format: string
           in: path
           name: postal_code
@@ -4421,13 +4421,13 @@ paths:
           name: country
           required: false
           type: string
-        - description: 'Start Date (YYYY-MM-DD or YYYY-MM-DD:HH)'
+        - description: Start Date (YYYY-MM-DD or YYYY-MM-DD:HH)
           format: string
           in: query
           name: start_date
           required: true
           type: string
-        - description: 'End Date (YYYY-MM-DD or YYYY-MM-DD:HH)'
+        - description: End Date (YYYY-MM-DD or YYYY-MM-DD:HH)
           format: string
           in: query
           name: end_date
@@ -4442,7 +4442,7 @@ paths:
           name: units
           required: false
           type: string
-        - description: 'Language (Default: English) See <a target=''blank'' href=''/api/requests''>language field description</a>'
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
           enum:
             - ar
             - az
@@ -4482,7 +4482,7 @@ paths:
           name: lang
           required: false
           type: string
-        - description: 'Wraps return in jsonp callback. Example: callback=func'
+        - description: "Wraps return in jsonp callback. Example: callback=func"
           format: string
           in: query
           name: callback
@@ -4495,18 +4495,18 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: An Historical Day Data Object.
           schema:
-            $ref: '#/definitions/HistoryDay'
+            $ref: "#/definitions/HistoryDay"
         default:
           description: No Data.
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       summary: Returns Historical Observations - Given a Postal Code
       tags:
         - Daily Historical Weather Data
-  '/history/daily?station={station}':
+  "/history/daily?station={station}":
     get:
       description: Returns Historical Observations - Given a station ID. **(LIMIT 1 day for Free plan. LIMIT 7 days for Developer. LIMIT 30 days for Advanced/Advanced+/Enterprise)**
       parameters:
@@ -4516,13 +4516,13 @@ paths:
           name: station
           required: true
           type: string
-        - description: 'Start Date (YYYY-MM-DD or YYYY-MM-DD:HH).'
+        - description: Start Date (YYYY-MM-DD or YYYY-MM-DD:HH).
           format: string
           in: query
           name: start_date
           required: true
           type: string
-        - description: 'End Date (YYYY-MM-DD or YYYY-MM-DD:HH).'
+        - description: End Date (YYYY-MM-DD or YYYY-MM-DD:HH).
           format: string
           in: query
           name: end_date
@@ -4537,7 +4537,7 @@ paths:
           name: units
           required: false
           type: string
-        - description: 'Language (Default: English) See <a target=''blank'' href=''/api/requests''>language field description</a>'
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
           enum:
             - ar
             - az
@@ -4577,7 +4577,7 @@ paths:
           name: lang
           required: false
           type: string
-        - description: 'Wraps return in jsonp callback. Example: callback=func'
+        - description: "Wraps return in jsonp callback. Example: callback=func"
           format: string
           in: query
           name: callback
@@ -4590,20 +4590,20 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: An Historical Day Data Object.
           schema:
-            $ref: '#/definitions/HistoryDay'
+            $ref: "#/definitions/HistoryDay"
         default:
           description: No Data.
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       summary: Returns Historical Observations - Given a station ID.
       tags:
         - Daily Historical Weather Data
-  '/history/energy/bbox?lat1={lat1}&lon1={lon1}&lat2={lat2}&lon2={lon2}':
+  "/history/energy/bbox?lat1={lat1}&lon1={lon1}&lat2={lat2}&lon2={lon2}":
     get:
-      description: 'Returns aggregate energy specific historical weather fields, over a specified time period. Supply a bounding box ex: lat1=40&lon1=-78&lat2=38&lon2=-80. This API will return UP TO 150 stations, aggregated by the specified time period start_date to end_date. '
+      description: "Returns aggregate energy specific historical weather fields, over a specified time period. Supply a bounding box ex: lat1=40&lon1=-78&lat2=38&lon2=-80. This API will return UP TO 150 stations, aggregated by the specified time period start_date to end_date. "
       parameters:
         - description: Latitude of upper left corner.
           format: double
@@ -4629,19 +4629,19 @@ paths:
           name: lon2
           required: true
           type: number
-        - description: 'Start Date (YYYY-MM-DD or YYYY-MM-DD:HH).'
+        - description: Start Date (YYYY-MM-DD or YYYY-MM-DD:HH).
           format: string
           in: query
           name: start_date
           required: true
           type: string
-        - description: 'End Date (YYYY-MM-DD or YYYY-MM-DD:HH).'
+        - description: End Date (YYYY-MM-DD or YYYY-MM-DD:HH).
           format: string
           in: query
           name: end_date
           required: true
           type: string
-        - description: 'Temperature threshold to use to calculate degree days (default 18 C) '
+        - description: "Temperature threshold to use to calculate degree days (default 18 C) "
           format: double
           in: query
           name: threshold
@@ -4656,7 +4656,7 @@ paths:
           name: units
           required: false
           type: string
-        - description: 'Wraps return in jsonp callback. Example: callback=func'
+        - description: "Wraps return in jsonp callback. Example: callback=func"
           format: string
           in: query
           name: callback
@@ -4669,22 +4669,22 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: An Energy Data Object.
           schema:
-            $ref: '#/definitions/EnergyObsGroup'
+            $ref: "#/definitions/EnergyObsGroup"
         default:
           description: No Data.
           schema:
-            $ref: '#/definitions/Error'
-      summary: 'Returns multiple locations given a bounding box. '
+            $ref: "#/definitions/Error"
+      summary: "Returns multiple locations given a bounding box. "
       tags:
         - Historical Degree Day API
         - Historical Solar Irradiance API
         - Historical Weather Energy API
-  '/history/energy?lat={lat}&lon={lon}':
+  "/history/energy?lat={lat}&lon={lon}":
     get:
-      description: 'Returns aggregate energy specific historical weather fields, over a specified time period.'
+      description: Returns aggregate energy specific historical weather fields, over a specified time period.
       parameters:
         - description: Latitude component of location.
           format: double
@@ -4698,19 +4698,19 @@ paths:
           name: lon
           required: true
           type: number
-        - description: 'Start Date (YYYY-MM-DD or YYYY-MM-DD:HH).'
+        - description: Start Date (YYYY-MM-DD or YYYY-MM-DD:HH).
           format: string
           in: query
           name: start_date
           required: true
           type: string
-        - description: 'End Date (YYYY-MM-DD or YYYY-MM-DD:HH).'
+        - description: End Date (YYYY-MM-DD or YYYY-MM-DD:HH).
           format: string
           in: query
           name: end_date
           required: true
           type: string
-        - description: 'Time period to aggregate by (daily, monthly)'
+        - description: Time period to aggregate by (daily, monthly)
           enum:
             - hourly
             - daily
@@ -4720,7 +4720,7 @@ paths:
           name: tp
           required: false
           type: string
-        - description: 'Temperature threshold to use to calculate degree days (default 18 C) '
+        - description: "Temperature threshold to use to calculate degree days (default 18 C) "
           format: double
           in: query
           name: threshold
@@ -4735,7 +4735,7 @@ paths:
           name: units
           required: false
           type: string
-        - description: 'Wraps return in jsonp callback. Example: callback=func'
+        - description: "Wraps return in jsonp callback. Example: callback=func"
           format: string
           in: query
           name: callback
@@ -4748,24 +4748,24 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: An Energy Data Object.
           schema:
-            $ref: '#/definitions/EnergyObsGroup'
+            $ref: "#/definitions/EnergyObsGroup"
         default:
           description: No Data.
           schema:
-            $ref: '#/definitions/Error'
-      summary: 'Returns Energy API response  - Given a single lat/lon. '
+            $ref: "#/definitions/Error"
+      summary: "Returns Energy API response  - Given a single lat/lon. "
       tags:
         - Historical Degree Day API
         - Historical Solar Irradiance API
         - Historical Weather Energy API
-  '/history/hourly?city={city}&country={country}':
+  "/history/hourly?city={city}&country={country}":
     get:
-      description: 'Returns Historical Observations - Given a city in the format of City,ST or City. The state, and country parameters can be provided to make the search more accurate. **(LIMIT 1 day for Free plan. LIMIT 7 days for Developer. LIMIT 30 days for Advanced/Advanced+/Enterprise)**'
+      description: Returns Historical Observations - Given a city in the format of City,ST or City. The state, and country parameters can be provided to make the search more accurate. **(LIMIT 1 day for Free plan. LIMIT 7 days for Developer. LIMIT 30 days for Advanced/Advanced+/Enterprise)**
       parameters:
-        - description: 'City search. Example - &city=Raleigh,NC or &city=Berlin,DE or city=Paris&country=FR'
+        - description: City search. Example - &city=Raleigh,NC or &city=Berlin,DE or city=Paris&country=FR
           format: string
           in: path
           name: city
@@ -4783,13 +4783,13 @@ paths:
           name: country
           required: true
           type: string
-        - description: 'Start Date (YYYY-MM-DD or YYYY-MM-DD:HH).'
+        - description: Start Date (YYYY-MM-DD or YYYY-MM-DD:HH).
           format: string
           in: query
           name: start_date
           required: true
           type: string
-        - description: 'End Date (YYYY-MM-DD or YYYY-MM-DD:HH).'
+        - description: End Date (YYYY-MM-DD or YYYY-MM-DD:HH).
           format: string
           in: query
           name: end_date
@@ -4804,7 +4804,7 @@ paths:
           name: units
           required: false
           type: string
-        - description: 'Language (Default: English) See <a target=''blank'' href=''/api/requests''>language field description</a>'
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
           enum:
             - ar
             - az
@@ -4844,7 +4844,7 @@ paths:
           name: lang
           required: false
           type: string
-        - description: 'Assume utc (default) or local time for start_date, end_date'
+        - description: Assume utc (default) or local time for start_date, end_date
           enum:
             - local
             - utc
@@ -4853,7 +4853,7 @@ paths:
           name: tz
           required: false
           type: string
-        - description: 'Wraps return in jsonp callback. Example: callback=func'
+        - description: "Wraps return in jsonp callback. Example: callback=func"
           format: string
           in: query
           name: callback
@@ -4866,34 +4866,34 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: An Historical Data Object.
           schema:
-            $ref: '#/definitions/History'
+            $ref: "#/definitions/History"
         default:
           description: No Data.
           schema:
-            $ref: '#/definitions/Error'
-      summary: 'Returns Historical Observations - Given City and/or State, Country.'
+            $ref: "#/definitions/Error"
+      summary: Returns Historical Observations - Given City and/or State, Country.
       tags:
         - Hourly Historical Weather Data
-  '/history/hourly?city_id={city_id}':
+  "/history/hourly?city_id={city_id}":
     get:
       description: Returns Historical Observations - Given a City ID. **(LIMIT 1 day for Free plan. LIMIT 7 days for Developer. LIMIT 30 days for Advanced/Advanced+/Enterprise)**
       parameters:
-        - description: 'City ID. Example: 4487042'
+        - description: "City ID. Example: 4487042"
           format: string
           in: path
           name: city_id
           required: true
           type: string
-        - description: 'Start Date (YYYY-MM-DD or YYYY-MM-DD:HH)'
+        - description: Start Date (YYYY-MM-DD or YYYY-MM-DD:HH)
           format: string
           in: query
           name: start_date
           required: true
           type: string
-        - description: 'End Date (YYYY-MM-DD or YYYY-MM-DD:HH)'
+        - description: End Date (YYYY-MM-DD or YYYY-MM-DD:HH)
           format: string
           in: query
           name: end_date
@@ -4908,7 +4908,7 @@ paths:
           name: units
           required: false
           type: string
-        - description: 'Language (Default: English) See <a target=''blank'' href=''/api/requests''>language field description</a>'
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
           enum:
             - ar
             - az
@@ -4948,7 +4948,7 @@ paths:
           name: lang
           required: false
           type: string
-        - description: 'Assume utc (default) or local time for start_date, end_date'
+        - description: Assume utc (default) or local time for start_date, end_date
           enum:
             - local
             - utc
@@ -4957,7 +4957,7 @@ paths:
           name: tz
           required: false
           type: string
-        - description: 'Wraps return in jsonp callback. Example: callback=func'
+        - description: "Wraps return in jsonp callback. Example: callback=func"
           format: string
           in: query
           name: callback
@@ -4970,34 +4970,34 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: An Historical Data Object.
           schema:
-            $ref: '#/definitions/History'
+            $ref: "#/definitions/History"
         default:
           description: No Data.
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       summary: Returns Historical Observations - Given a City ID
       tags:
         - Hourly Historical Weather Data
-  '/history/hourly?ip={ip}':
+  "/history/hourly?ip={ip}":
     get:
-      description: 'Returns Historical Observations - Given IP Address, or auto. **(LIMIT 1 day for Free plan. LIMIT 7 days for Developer. LIMIT 30 days for Advanced/Advanced+/Enterprise)**'
+      description: Returns Historical Observations - Given IP Address, or auto. **(LIMIT 1 day for Free plan. LIMIT 7 days for Developer. LIMIT 30 days for Advanced/Advanced+/Enterprise)**
       parameters:
-        - description: 'IP Address, or auto. Example: ip=auto'
+        - description: "IP Address, or auto. Example: ip=auto"
           format: string
           in: path
           name: ip
           required: true
           type: string
-        - description: 'Start Date (YYYY-MM-DD or YYYY-MM-DD:HH).'
+        - description: Start Date (YYYY-MM-DD or YYYY-MM-DD:HH).
           format: string
           in: query
           name: start_date
           required: true
           type: string
-        - description: 'End Date (YYYY-MM-DD or YYYY-MM-DD:HH).'
+        - description: End Date (YYYY-MM-DD or YYYY-MM-DD:HH).
           format: string
           in: query
           name: end_date
@@ -5012,7 +5012,7 @@ paths:
           name: units
           required: false
           type: string
-        - description: 'Language (Default: English) See <a target=''blank'' href=''/api/requests''>language field description</a>'
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
           enum:
             - ar
             - az
@@ -5052,7 +5052,7 @@ paths:
           name: lang
           required: false
           type: string
-        - description: 'Assume utc (default) or local time for start_date, end_date'
+        - description: Assume utc (default) or local time for start_date, end_date
           enum:
             - local
             - utc
@@ -5061,7 +5061,7 @@ paths:
           name: tz
           required: false
           type: string
-        - description: 'Wraps return in jsonp callback. Example: callback=func'
+        - description: "Wraps return in jsonp callback. Example: callback=func"
           format: string
           in: query
           name: callback
@@ -5074,20 +5074,20 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: An Historical Data Object.
           schema:
-            $ref: '#/definitions/History'
+            $ref: "#/definitions/History"
         default:
           description: No Data.
           schema:
-            $ref: '#/definitions/Error'
-      summary: 'Returns Historical Observations - Given IP Address, or auto.'
+            $ref: "#/definitions/Error"
+      summary: Returns Historical Observations - Given IP Address, or auto.
       tags:
         - Hourly Historical Weather Data
-  '/history/hourly?lat={lat}&lon={lon}':
+  "/history/hourly?lat={lat}&lon={lon}":
     get:
-      description: 'Returns Historical Observations - Given a lat, and lon. **(LIMIT 1 day for Free plan. LIMIT 7 days for Developer. LIMIT 30 days for Advanced/Advanced+/Enterprise)**'
+      description: Returns Historical Observations - Given a lat, and lon. **(LIMIT 1 day for Free plan. LIMIT 7 days for Developer. LIMIT 30 days for Advanced/Advanced+/Enterprise)**
       parameters:
         - description: Latitude component of location.
           format: double
@@ -5101,13 +5101,13 @@ paths:
           name: lon
           required: true
           type: number
-        - description: 'Start Date (YYYY-MM-DD or YYYY-MM-DD:HH).'
+        - description: Start Date (YYYY-MM-DD or YYYY-MM-DD:HH).
           format: string
           in: query
           name: start_date
           required: true
           type: string
-        - description: 'End Date (YYYY-MM-DD or YYYY-MM-DD:HH).'
+        - description: End Date (YYYY-MM-DD or YYYY-MM-DD:HH).
           format: string
           in: query
           name: end_date
@@ -5122,7 +5122,7 @@ paths:
           name: units
           required: false
           type: string
-        - description: 'Language (Default: English) See <a target=''blank'' href=''/api/requests''>language field description</a>'
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
           enum:
             - ar
             - az
@@ -5162,7 +5162,7 @@ paths:
           name: lang
           required: false
           type: string
-        - description: 'Assume utc (default) or local time for start_date, end_date'
+        - description: Assume utc (default) or local time for start_date, end_date
           enum:
             - local
             - utc
@@ -5171,7 +5171,7 @@ paths:
           name: tz
           required: false
           type: string
-        - description: 'Wraps return in jsonp callback. Example: callback=func'
+        - description: "Wraps return in jsonp callback. Example: callback=func"
           format: string
           in: query
           name: callback
@@ -5184,22 +5184,22 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: An Historical Data Object.
           schema:
-            $ref: '#/definitions/History'
+            $ref: "#/definitions/History"
         default:
           description: No Data.
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       summary: Returns Historical Observations - Given a lat/lon.
       tags:
         - Hourly Historical Weather Data
-  '/history/hourly?postal_code={postal_code}':
+  "/history/hourly?postal_code={postal_code}":
     get:
       description: Returns Historical Observations - Given a Postal Code. **(LIMIT 1 day for Free plan. LIMIT 7 days for Developer. LIMIT 30 days for Advanced/Advanced+/Enterprise)**
       parameters:
-        - description: 'Postal Code. Example: 28546'
+        - description: "Postal Code. Example: 28546"
           format: string
           in: path
           name: postal_code
@@ -5211,13 +5211,13 @@ paths:
           name: country
           required: false
           type: string
-        - description: 'Start Date (YYYY-MM-DD or YYYY-MM-DD:HH)'
+        - description: Start Date (YYYY-MM-DD or YYYY-MM-DD:HH)
           format: string
           in: query
           name: start_date
           required: true
           type: string
-        - description: 'End Date (YYYY-MM-DD or YYYY-MM-DD:HH)'
+        - description: End Date (YYYY-MM-DD or YYYY-MM-DD:HH)
           format: string
           in: query
           name: end_date
@@ -5232,7 +5232,7 @@ paths:
           name: units
           required: false
           type: string
-        - description: 'Language (Default: English) See <a target=''blank'' href=''/api/requests''>language field description</a>'
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
           enum:
             - ar
             - az
@@ -5272,7 +5272,7 @@ paths:
           name: lang
           required: false
           type: string
-        - description: 'Assume utc (default) or local time for start_date, end_date'
+        - description: Assume utc (default) or local time for start_date, end_date
           enum:
             - local
             - utc
@@ -5281,7 +5281,7 @@ paths:
           name: tz
           required: false
           type: string
-        - description: 'Wraps return in jsonp callback. Example: callback=func'
+        - description: "Wraps return in jsonp callback. Example: callback=func"
           format: string
           in: query
           name: callback
@@ -5294,18 +5294,18 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: An Historical Data Object.
           schema:
-            $ref: '#/definitions/History'
+            $ref: "#/definitions/History"
         default:
           description: No Data.
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       summary: Returns Historical Observations - Given a Postal Code
       tags:
         - Hourly Historical Weather Data
-  '/history/hourly?station={station}':
+  "/history/hourly?station={station}":
     get:
       description: Returns Historical Observations - Given a station ID. **(LIMIT 1 day for Free plan. LIMIT 7 days for Developer. LIMIT 30 days for Advanced/Advanced+/Enterprise)**
       parameters:
@@ -5315,13 +5315,13 @@ paths:
           name: station
           required: true
           type: string
-        - description: 'Start Date (YYYY-MM-DD or YYYY-MM-DD:HH).'
+        - description: Start Date (YYYY-MM-DD or YYYY-MM-DD:HH).
           format: string
           in: query
           name: start_date
           required: true
           type: string
-        - description: 'End Date (YYYY-MM-DD or YYYY-MM-DD:HH).'
+        - description: End Date (YYYY-MM-DD or YYYY-MM-DD:HH).
           format: string
           in: query
           name: end_date
@@ -5336,7 +5336,7 @@ paths:
           name: units
           required: false
           type: string
-        - description: 'Language (Default: English) See <a target=''blank'' href=''/api/requests''>language field description</a>'
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
           enum:
             - ar
             - az
@@ -5376,7 +5376,7 @@ paths:
           name: lang
           required: false
           type: string
-        - description: 'Assume utc (default) or local time for start_date, end_date'
+        - description: Assume utc (default) or local time for start_date, end_date
           enum:
             - local
             - utc
@@ -5385,7 +5385,7 @@ paths:
           name: tz
           required: false
           type: string
-        - description: 'Wraps return in jsonp callback. Example: callback=func'
+        - description: "Wraps return in jsonp callback. Example: callback=func"
           format: string
           in: query
           name: callback
@@ -5398,14 +5398,14 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: An Historical Data Object.
           schema:
-            $ref: '#/definitions/History'
+            $ref: "#/definitions/History"
         default:
           description: No Data.
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       summary: Returns Historical Observations - Given a station ID.
       tags:
         - Hourly Historical Weather Data
@@ -5449,15 +5449,15 @@ definitions:
         type: string
       data:
         items:
-          $ref: '#/definitions/AQCurrent'
+          $ref: "#/definitions/AQCurrent"
         type: array
       lat:
         description: Latitude
-        example: '38.25'
+        example: "38.25"
         type: string
       lon:
         description: Longitude
-        example: '-78.00'
+        example: "-78.00"
         type: string
       state_code:
         description: State Abbreviation
@@ -5496,15 +5496,15 @@ definitions:
         type: number
       timestamp_local:
         description: Timestamp in local time
-        example: '2019-03-04T12:00:00'
+        example: 2019-03-04T12:00:00
         type: string
       timestamp_utc:
         description: Timestamp UTC
-        example: '2019-03-04T17:00:00'
+        example: 2019-03-04T17:00:00
         type: string
       ts:
         description: Unix Timestamp
-        example: '1551718800'
+        example: "1551718800"
         type: number
     type: object
   AQHourly:
@@ -5519,15 +5519,15 @@ definitions:
         type: string
       data:
         items:
-          $ref: '#/definitions/AQHour'
+          $ref: "#/definitions/AQHour"
         type: array
       lat:
         description: Latitude
-        example: '38.25'
+        example: "38.25"
         type: string
       lon:
         description: Longitude
-        example: '-78.00'
+        example: "-78.00"
         type: string
       state_code:
         description: State Abbreviation
@@ -5540,7 +5540,7 @@ definitions:
     type: object
   AlertRegionGroup:
     description: List of impacted regions
-    example: 'St Louis, MO'
+    example: St Louis, MO
     type: string
   CurrentObs:
     properties:
@@ -5566,7 +5566,7 @@ definitions:
         type: string
       datetime:
         description: Cycle Hour (UTC) of observation
-        example: '2017-03-15:13'
+        example: 2017-03-15:13
         type: string
       dewpt:
         description: Dew point temperature - default (C)
@@ -5601,11 +5601,11 @@ definitions:
         example: -78.25
         type: number
       ob_time:
-        description: 'Full time (UTC) of observation (YYYY-MM-DD HH:MM)'
-        example: '2017-03-15 13:11'
+        description: Full time (UTC) of observation (YYYY-MM-DD HH:MM)
+        example: 2017-03-15 13:11
         type: string
       pod:
-        description: 'Part of the day (d = day, n = night)'
+        description: Part of the day (d = day, n = night)
         type: string
       precip:
         description: Precipitation in last hour - Default (mm)
@@ -5640,12 +5640,12 @@ definitions:
         example: KRDU
         type: string
       sunrise:
-        description: 'Time (UTC) of Sunrise (HH:MM)'
-        example: '06:22'
+        description: Time (UTC) of Sunrise (HH:MM)
+        example: 06:22
         type: string
       sunset:
-        description: 'Time (UTC) of Sunset (HH:MM)'
-        example: '19:34'
+        description: Time (UTC) of Sunset (HH:MM)
+        example: 19:34
         type: string
       temp:
         description: Temperature - Default (C)
@@ -5671,7 +5671,7 @@ definitions:
         properties:
           code:
             description: Weather Condition code
-            example: '802'
+            example: "802"
             type: string
           description:
             description: Weather Condition description
@@ -5703,11 +5703,11 @@ definitions:
     properties:
       count:
         description: Count of found observations
-        example: '1'
+        example: "1"
         type: integer
       data:
         items:
-          $ref: '#/definitions/CurrentObs'
+          $ref: "#/definitions/CurrentObs"
         type: array
     type: object
   EnergyObs:
@@ -5738,11 +5738,11 @@ definitions:
         type: number
       lat:
         description: Latitude
-        example: '38.00'
+        example: "38.00"
         type: string
       lon:
         description: Longitude
-        example: '-78.25'
+        example: "-78.25"
         type: string
       precip:
         description: Total precipitation in period - Default (mm)
@@ -5765,7 +5765,7 @@ definitions:
         example: 12345-999999
         type: string
       sun_hours:
-        description: 'Average number of daily sun hours - # hours where Solar GHI > 1000 W/m^2'
+        description: "Average number of daily sun hours - # hours where Solar GHI > 1000 W/m^2"
         example: 4.5
         type: number
       t_dhi:
@@ -5801,19 +5801,19 @@ definitions:
     properties:
       count:
         description: Count of found observations
-        example: '1'
+        example: "1"
         type: integer
       data:
         items:
-          $ref: '#/definitions/EnergyObs'
+          $ref: "#/definitions/EnergyObs"
         type: array
       end_date:
         description: End Date
-        example: '2017-01-30'
+        example: 2017-01-30
         type: integer
       start_date:
         description: Start Date
-        example: '2017-01-01'
+        example: 2017-01-01
         type: integer
     type: object
   EnergyObsGroupForecast:
@@ -5828,15 +5828,15 @@ definitions:
         type: string
       data:
         items:
-          $ref: '#/definitions/EnergyObsSeries'
+          $ref: "#/definitions/EnergyObsSeries"
         type: array
       lat:
         description: Latitude
-        example: '38.00'
+        example: "38.00"
         type: string
       lon:
         description: Longitude
-        example: '-78.25'
+        example: "-78.25"
         type: string
       state_code:
         description: State abbreviation
@@ -5848,7 +5848,7 @@ definitions:
         type: string
       threshold_value:
         description: Degree day threshold
-        example: '18'
+        example: "18"
         type: string
       timezone:
         description: Local IANA time zone
@@ -5867,7 +5867,7 @@ definitions:
         type: integer
       date:
         description: Date
-        example: '2018-06-01'
+        example: 2018-06-01
         type: string
       dewpt:
         description: Average dew point temperature - Default (C)
@@ -5890,7 +5890,7 @@ definitions:
         example: 10
         type: number
       sun_hours:
-        description: 'Average number of daily sun hours - # hours where Solar GHI > 1000 W/m^2'
+        description: "Average number of daily sun hours - # hours where Solar GHI > 1000 W/m^2"
         example: 4.5
         type: number
       t_dhi:
@@ -5941,16 +5941,16 @@ definitions:
         example: 100
         type: integer
       datetime:
-        description: 'Date in format "YYYY-MM-DD:HH". All datetime is in (UTC)'
-        example: '2019-03-04:17'
+        description: Date in format "YYYY-MM-DD:HH". All datetime is in (UTC)
+        example: 2019-03-04:17
         type: string
       dewpt:
         description: Dewpoint (Average) - default (C)
         example: 1
         type: number
       max_dhi:
-        description: '[Deprecated] Max direct component of solar insolation (W/m^2)'
-        example: '655'
+        description: "[Deprecated] Max direct component of solar insolation (W/m^2)"
+        example: "655"
         type: number
       max_temp:
         description: Maximum daily Temperature - default (C)
@@ -5973,8 +5973,8 @@ definitions:
         example: 1530331260
         type: integer
       pod:
-        description: 'Part of the day (d = day, n = night)'
-        example: 'n'
+        description: Part of the day (d = day, n = night)
+        example: n
         type: string
       pop:
         description: Chance of Precipitation as a percentage (%)
@@ -6018,15 +6018,15 @@ definitions:
         type: number
       timestamp_local:
         description: Timestamp in local time
-        example: '2019-03-04T12:00:00'
+        example: 2019-03-04T12:00:00
         type: string
       timestamp_utc:
         description: Timestamp UTC
-        example: '2019-03-04T17:00:00'
+        example: 2019-03-04T17:00:00
         type: string
       ts:
         description: Unix Timestamp
-        example: '1551718800'
+        example: "1551718800"
         type: number
       uv:
         description: UV Index
@@ -6040,7 +6040,7 @@ definitions:
         properties:
           code:
             description: Weather Condition code
-            example: '601'
+            example: "601"
             type: string
           description:
             description: Weather Condition description
@@ -6080,15 +6080,15 @@ definitions:
         type: string
       data:
         items:
-          $ref: '#/definitions/Forecast'
+          $ref: "#/definitions/Forecast"
         type: array
       lat:
         description: Latitude
-        example: '38.25'
+        example: "38.25"
         type: string
       lon:
         description: Longitude
-        example: '-78.00'
+        example: "-78.00"
         type: string
       state_code:
         description: State Abbreviation
@@ -6110,8 +6110,8 @@ definitions:
         example: 100
         type: integer
       datetime:
-        description: 'Date in format "YYYY-MM-DD:HH". All datetime is in (UTC)'
-        example: '2019-03-04:17'
+        description: Date in format "YYYY-MM-DD:HH". All datetime is in (UTC)
+        example: 2019-03-04:17
         type: string
       dewpt:
         description: Dewpoint - Default (C)
@@ -6130,7 +6130,7 @@ definitions:
         example: 1000
         type: number
       pod:
-        description: 'Part of day (d = day, n = night)'
+        description: Part of day (d = day, n = night)
         example: d
         type: string
       pop:
@@ -6175,15 +6175,15 @@ definitions:
         type: number
       timestamp_local:
         description: Timestamp in local time
-        example: '2019-03-04T12:00:00'
+        example: 2019-03-04T12:00:00
         type: string
       timestamp_utc:
         description: Timestamp UTC
-        example: '2019-03-04T17:00:00'
+        example: 2019-03-04T17:00:00
         type: string
       ts:
         description: Unix Timestamp
-        example: '1551718800'
+        example: "1551718800"
         type: number
       uv:
         description: UV Index
@@ -6197,7 +6197,7 @@ definitions:
         properties:
           code:
             description: Weather Condition code
-            example: '601'
+            example: "601"
             type: string
           description:
             description: Weather Condition description
@@ -6237,15 +6237,15 @@ definitions:
         type: string
       data:
         items:
-          $ref: '#/definitions/ForecastHour'
+          $ref: "#/definitions/ForecastHour"
         type: array
       lat:
         description: Latitude
-        example: '38.25'
+        example: "38.25"
         type: string
       lon:
         description: Longitude
-        example: '-78.00'
+        example: "-78.00"
         type: string
       state_code:
         description: State Abbreviation
@@ -6260,11 +6260,11 @@ definitions:
     properties:
       area_code:
         description: Area Code
-        example: '919'
+        example: "919"
         type: string
       charset:
         description: Character encoding
-        example: '1'
+        example: "1"
         type: string
       city:
         description: City Name
@@ -6284,7 +6284,7 @@ definitions:
         type: string
       dma_code:
         description: Longitude
-        example: '560'
+        example: "560"
         type: string
       ip:
         description: IP Address
@@ -6292,19 +6292,19 @@ definitions:
         type: string
       latitude:
         description: State Abbreviation
-        example: '35.811'
+        example: "35.811"
         type: string
       longitude:
         description: City Name
-        example: '-78.64'
+        example: "-78.64"
         type: string
       metro_code:
         description: Longitude
-        example: '560'
+        example: "560"
         type: string
       offset:
         description: UTC Offset (deprecated)
-        example: '-4'
+        example: "-4"
         type: string
       organization:
         description: Organization Name
@@ -6312,7 +6312,7 @@ definitions:
         type: string
       postal_code:
         description: Postal Code
-        example: '27601'
+        example: "27601"
         type: string
       region:
         description: Latitude
@@ -6335,15 +6335,15 @@ definitions:
         type: string
       data:
         items:
-          $ref: '#/definitions/HistoryObj'
+          $ref: "#/definitions/HistoryObj"
         type: array
       lat:
         description: Latitude
-        example: '47.61'
+        example: "47.61"
         type: string
       lon:
         description: Longitude
-        example: '-122.33'
+        example: "-122.33"
         type: string
       sources:
         description: Weather stations used in response
@@ -6372,15 +6372,15 @@ definitions:
         type: string
       data:
         items:
-          $ref: '#/definitions/HistoryDayObj'
+          $ref: "#/definitions/HistoryDayObj"
         type: array
       lat:
         description: Latitude
-        example: '47.61'
+        example: "47.61"
         type: string
       lon:
         description: Longitude
-        example: '-122.33'
+        example: "-122.33"
         type: string
       sources:
         description: Weather stations used in response
@@ -6401,7 +6401,7 @@ definitions:
     properties:
       datetime:
         description: Date in format "YYYY-MM-DD". All datetime is in (UTC)
-        example: '2015-01-03'
+        example: 2015-01-03
         type: string
       dewpt:
         description: Average dewpoint - Default (C)
@@ -6515,8 +6515,8 @@ definitions:
   HistoryObj:
     properties:
       datetime:
-        description: 'Date in format "YYYY-MM-DD:HH". All datetime is in (UTC)'
-        example: '2019-03-04:17'
+        description: Date in format "YYYY-MM-DD:HH". All datetime is in (UTC)
+        example: 2019-03-04:17
         type: string
       dewpt:
         description: Dew point (Default Celcius)
@@ -6543,8 +6543,8 @@ definitions:
         example: 15
         type: number
       pod:
-        description: 'Part of the day (d = day, n = night)'
-        example: 'n'
+        description: Part of the day (d = day, n = night)
+        example: n
         type: string
       precip:
         description: Liquid equivalent precipitation - Default (mm)
@@ -6580,15 +6580,15 @@ definitions:
         type: number
       timestamp_local:
         description: Timestamp in local time
-        example: '2019-03-04T12:00:00'
+        example: 2019-03-04T12:00:00
         type: string
       timestamp_utc:
         description: Timestamp UTC
-        example: '2019-03-04T17:00:00'
+        example: 2019-03-04T17:00:00
         type: string
       ts:
         description: Unix Timestamp
-        example: '1551718800'
+        example: "1551718800"
         type: number
       uv:
         description: UV Index (1-11+)
@@ -6598,7 +6598,7 @@ definitions:
         properties:
           code:
             description: Weather Condition code
-            example: '601'
+            example: "601"
             type: string
           description:
             description: Weather Condition description
@@ -6622,7 +6622,7 @@ definitions:
     properties:
       alerts:
         items:
-          $ref: '#/definitions/WeatherAlertGroup'
+          $ref: "#/definitions/WeatherAlertGroup"
         type: array
       lat:
         description: Latitude
@@ -6637,44 +6637,59 @@ definitions:
     properties:
       alerts:
         items:
-          $ref: '#/definitions/AlertRegionGroup'
+          $ref: "#/definitions/AlertRegionGroup"
         type: array
       description:
         description: Full description of weather alert
-        example: |-
+        example: >-
           Mississippi River at Chester
 
+
           .This Flood Warning is a result of 1-2 inches of rainfall across
+
           the basin earlier this week...
+
           The Flood Warning continues for
+
           the Mississippi River at Chester
+
           * until Tuesday morning.
+
           * At  8:30 PM Friday the stage was 26.8 feet.
+
           * Flood stage is 27.0 feet.
+
           * Minor flooding is forecast.
+
           * The river is forecast to rise above flood stage by tonight and to
+
           crest near 29.0 feet by Saturday evening. The river is forecast to
+
           fall below flood stage by Monday morning.
+
           * Impact:  At 28.0 feet...Unleveed islands near Chester and the prison
+
           farm floods.
+
           * Impact:  At 27.0 feet...Flood Stage.  Unprotected farmland on right
+
           bank begins to flood.
         type: string
       effective_local:
         description: Issued time local
-        example: '2019-02-08T21:51:00'
+        example: 2019-02-08T21:51:00
         type: string
       effective_utc:
         description: Issued time UTC
-        example: '2019-02-09T02:51:00'
+        example: 2019-02-09T02:51:00
         type: string
       expires_local:
         description: Expiration time local
-        example: '2019-02-09T21:51:00'
+        example: 2019-02-09T21:51:00
         type: string
       expires_utc:
         description: Expiration time UTC
-        example: '2019-02-10T02:51:00'
+        example: 2019-02-10T02:51:00
         type: string
       severity:
         description: Severity of weather. (Advisory | Watch | Warning)
@@ -6682,10 +6697,10 @@ definitions:
         type: string
       title:
         description: Brief description of weather alert
-        example: 'Flood Warning issued February 8 at 8:51PM CST expiring February 12 at 8:24AM CST by NWS St Louis MO'
+        example: Flood Warning issued February 8 at 8:51PM CST expiring February 12 at 8:24AM CST by NWS St Louis MO
         type: string
       uri:
         description: URI to weather alert
-        example: 'https://api.weather.gov/alerts/NWS-IDP-PROD-3361975-2942026'
+        example: https://api.weather.gov/alerts/NWS-IDP-PROD-3361975-2942026
         type: string
     type: object

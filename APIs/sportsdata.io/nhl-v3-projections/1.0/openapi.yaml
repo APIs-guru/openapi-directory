@@ -26,8 +26,7 @@ paths:
     get:
       operationId: DfsSlatesByDate
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or
-            <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -37,8 +36,9 @@ paths:
               - XML
               - JSON
             type: string
-        - description: |-
+        - description: >-
             The date of the game(s).
+
             <br>Examples: <code>2017-DEC-01</code>, <code>2018-FEB-15</code>.
           in: path
           name: date
@@ -59,8 +59,7 @@ paths:
     get:
       operationId: ProjectedPlayerGameStatsByDateWInjuriesDfsSalaries
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or
-            <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -72,8 +71,7 @@ paths:
             type: string
         - description: "The date of the game(s).
 
-            \ <br>Examples: <code>2018-JAN-31</code>,
-            <code>2017-OCT-01</code>.
+            \ <br>Examples: <code>2018-JAN-31</code>, <code>2017-OCT-01</code>.
 
             \ "
           in: path
@@ -95,8 +93,7 @@ paths:
     get:
       operationId: ProjectedPlayerGameStatsByPlayerWInjuriesDfsSalaries
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or
-            <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -108,8 +105,7 @@ paths:
             type: string
         - description: "The date of the game(s).
 
-            \ <br>Examples: <code>2018-JAN-31</code>,
-            <code>2017-OCT-01</code>.
+            \ <br>Examples: <code>2018-JAN-31</code>, <code>2017-OCT-01</code>.
 
             \ "
           in: path
@@ -117,8 +113,9 @@ paths:
           required: true
           schema:
             type: string
-        - description: |-
+        - description: >-
             Unique FantasyData Player ID.
+
             Example:<code>30000378</code>.
           in: path
           name: playerid

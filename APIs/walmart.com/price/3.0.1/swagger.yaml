@@ -7,9 +7,7 @@ info:
   contact:
     name: partnerapis@walmartlabs.com
     x-twitter: Walmart
-  description: Please make sure you use the correct version of the APIs for your
-    use case. To find out the appropriate version, go to the API Docs  drop down
-    on the menu.
+  description: Please make sure you use the correct version of the APIs for your use case. To find out the appropriate version, go to the API Docs  drop down on the menu.
   title: Price API
   version: 3.0.1
   x-apisguru-categories:
@@ -29,9 +27,7 @@ paths:
     post:
       consumes:
         - multipart/form-data
-      description: You can upload a price feed. If the feed successfully processed, it
-        returns a feed ID. Use the returned feed ID to retrieve a feed status.
-        You need Your Consumer ID and the private key to upload the feed
+      description: You can upload a price feed. If the feed successfully processed, it returns a feed ID. Use the returned feed ID to retrieve a feed status. You need Your Consumer ID and the private key to upload the feed
       operationId: updatePrice
       parameters:
         - default: price
@@ -98,8 +94,7 @@ paths:
     get:
       consumes:
         - application/xml
-      description: You can display the status of an item price within a feed. Use the
-        feed ID returned from the upload a price feed API.
+      description: You can display the status of an item price within a feed. Use the feed ID returned from the upload a price feed API.
       operationId: getFeedsStatus
       parameters:
         - description: The feed ID which status you want to retrieve.
@@ -108,23 +103,19 @@ paths:
           required: true
           type: string
         - default: "false"
-          description: Includes details of each entity in the feed. Do not set this
-            parameter to true.
+          description: Includes details of each entity in the feed. Do not set this parameter to true.
           in: query
           name: includeDetails
           required: false
           type: string
         - default: "0"
-          description: The object response to start with, where 0 is the first entity that
-            can be requested. It can only be used when includeDetails is set to
-            true.
+          description: The object response to start with, where 0 is the first entity that can be requested. It can only be used when includeDetails is set to true.
           in: query
           name: offset
           required: false
           type: string
         - default: "50"
-          description: The number of entities to be returned. It cannot be more than 50
-            entities. Only used when includeDetails is set to true.
+          description: The number of entities to be returned. It cannot be more than 50 entities. Only used when includeDetails is set to true.
           in: query
           name: limit
           required: false

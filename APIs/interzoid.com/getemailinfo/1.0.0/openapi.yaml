@@ -9,11 +9,7 @@ info:
     name: API Support
     url: https://www.interzoid.com
     x-twitter: interzoid
-  description: This API provides validation information for email addresses to aid
-    in deliverability. Syntax, existence of mail servers, and other tests are
-    run to ensure delivery. Additional demographics are provided for the email
-    address as well, including identifying generic, vulgar, education,
-    government, or other entity type email addresses.
+  description: This API provides validation information for email addresses to aid in deliverability. Syntax, existence of mail servers, and other tests are run to ensure delivery. Additional demographics are provided for the email address as well, including identifying generic, vulgar, education, government, or other entity type email addresses.
   license:
     name: Interzoid license
     url: https://www.interzoid.com/license
@@ -36,12 +32,10 @@ externalDocs:
 paths:
   /getemailinfo:
     get:
-      description: Get email validation information and other demographics for an
-        email address.
+      description: Get email validation information and other demographics for an email address.
       operationId: getemailinfo
       parameters:
-        - description: Your Interzoid license API key. Register at
-            www.interzoid.com/register
+        - description: Your Interzoid license API key. Register at www.interzoid.com/register
           in: query
           name: license
           required: true

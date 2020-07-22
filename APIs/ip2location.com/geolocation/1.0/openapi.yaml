@@ -4,15 +4,7 @@ servers:
 info:
   contact:
     x-twitter: ip2location
-  description: IP2Location web service providing a service to do a reverse lookup
-    of an IP address to an ISO3166 country code, region or state, city, latitude
-    and longitude, ZIP/Postal code, time zone, Internet Service Provider (ISP)
-    or company name, domain name, net speed, area code, weather station code,
-    weather station name, mobile country code (MCC), mobile network code (MNC)
-    and carrier brand, elevation, and usage type. There are also 7 categories of
-    additional add-on response fields supported such as metro, olson time zone,
-    translations and more. Refer to
-    https://www.ip2location.com/web-service/ip2location for further information.
+  description: IP2Location web service providing a service to do a reverse lookup of an IP address to an ISO3166 country code, region or state, city, latitude and longitude, ZIP/Postal code, time zone, Internet Service Provider (ISP) or company name, domain name, net speed, area code, weather station code, weather station name, mobile country code (MCC), mobile network code (MNC) and carrier brand, elevation, and usage type. There are also 7 categories of additional add-on response fields supported such as metro, olson time zone, translations and more. Refer to https://www.ip2location.com/web-service/ip2location for further information.
   title: IP2Location IP Geolocation
   version: "1.0"
   x-apisguru-categories:
@@ -51,9 +43,7 @@ paths:
               - country_groupings
               - time_zone_info
             type: string
-        - description: IP address (IPv4 or IPv6) for reverse IP location lookup purpose.
-            If not present, the server IP address will be used for the location
-            lookup.
+        - description: IP address (IPv4 or IPv6) for reverse IP location lookup purpose. If not present, the server IP address will be used for the location lookup.
           in: query
           name: ip
           required: true
@@ -67,8 +57,7 @@ paths:
               - json
               - xml
             type: string
-        - description: Translation information. The translation only applicable for
-            continent, country, region and city name for the addon package.
+        - description: Translation information. The translation only applicable for continent, country, region and city name for the addon package.
           in: query
           name: lang
           schema:
@@ -108,9 +97,7 @@ paths:
             application/json; charset=utf-8:
               examples:
                 "0":
-                  value: '{"country_code":"","country_name":"","region_name":"","city_name":"","latitude":"","longitude":"","zip_code":"","time_zone":"","isp":"","domain":"","net_speed":"","idd_code":"","area_code":"","weather_station_code":"","weather_station_name":"","mcc":"","mnc":"","mobile_brand":"","elevation":"","usage_type":"","continent":"{"name":"","code":"","hemisphere":"","translations":""}","country":"{"name":"","alpha3_code":"","numeric_code":"","demonym":"","flag":"","capital":"","total_area":"","population":"","currency":"{"code":"","name":"","symbol":""}","language":"{"code":"","name":""}"","idd_code":"","tld":"","translations":""},"region":"{"name":"","code":"","translations":""}","city":"{"name":"","translations":"[]"}","city":"{"name":"","translations":"[]"}","geotargeting":"{"metro":
-                    ""}","country_groupings":"{"acronym":"","name":
-                    ""}","time_zone_info":"{"olson":"","current_time":"","gmt_offset":"","is_dst":"","sunrise":"","sunset":""}"}'
+                  value: '{"country_code":"","country_name":"","region_name":"","city_name":"","latitude":"","longitude":"","zip_code":"","time_zone":"","isp":"","domain":"","net_speed":"","idd_code":"","area_code":"","weather_station_code":"","weather_station_name":"","mcc":"","mnc":"","mobile_brand":"","elevation":"","usage_type":"","continent":"{"name":"","code":"","hemisphere":"","translations":""}","country":"{"name":"","alpha3_code":"","numeric_code":"","demonym":"","flag":"","capital":"","total_area":"","population":"","currency":"{"code":"","name":"","symbol":""}","language":"{"code":"","name":""}"","idd_code":"","tld":"","translations":""},"region":"{"name":"","code":"","translations":""}","city":"{"name":"","translations":"[]"}","city":"{"name":"","translations":"[]"}","geotargeting":"{"metro": ""}","country_groupings":"{"acronym":"","name": ""}","time_zone_info":"{"olson":"","current_time":"","gmt_offset":"","is_dst":"","sunrise":"","sunset":""}"}'
               schema:
                 type: string
           description: Get response from IP lookup

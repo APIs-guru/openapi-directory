@@ -26,8 +26,7 @@ paths:
       consumes:
         - multipart/form-data
       description: >
-        Processa um arquivo CNAB para obter informações sobre o mesmo. Retorna
-        um ID temporário para o mesmo.
+        Processa um arquivo CNAB para obter informações sobre o mesmo. Retorna um ID temporário para o mesmo.
       parameters:
         - description: Arquivo CNAB
           in: formData
@@ -94,8 +93,7 @@ paths:
           description: Unexpected error
           schema:
             $ref: "#/definitions/Error"
-      summary: Retorna todas as linhas e seus respectivos campos (de forma não
-        processada, apenas indicando os campos reconhecidos)
+      summary: Retorna todas as linhas e seus respectivos campos (de forma não processada, apenas indicando os campos reconhecidos)
       tags:
         - file
   "/file/{fileId}/occurrences":
@@ -233,12 +231,10 @@ definitions:
             description: Retorna se é para dar baixa no boleto
             type: boolean
           is_rejected_payment:
-            description: "Retorno se é uma baixa rejeitada (Ex: pedido de baixa foi
-              rejeitado)"
+            description: "Retorno se é uma baixa rejeitada (Ex: pedido de baixa foi rejeitado)"
             type: boolean
           liquidation_code:
-            description: Retorna o código de liquidação, normalmente usado para saber onde o
-              cliente efetuou o pagamento
+            description: Retorna o código de liquidação, normalmente usado para saber onde o cliente efetuou o pagamento
             type: string
           liquidation_description:
             description: Retorna a descrição do código de liquidação
@@ -274,8 +270,7 @@ definitions:
             description: Retorna o número da carteira do boleto
             type: string
       id:
-        description: Posição da ocorrência em relação às outras ocorrências processadas
-          neste mesmo arquivo
+        description: Posição da ocorrência em relação às outras ocorrências processadas neste mesmo arquivo
         type: integer
       type:
         description: Sempre 'occurrences' para seguir a especificação JSON API

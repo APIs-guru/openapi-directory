@@ -74,8 +74,7 @@ security:
   - Basic: []
 tags:
   - description: >-
-      With these endpoints you can control how your existing Feature Flags and
-      Settings should serve their values. 
+      With these endpoints you can control how your existing Feature Flags and Settings should serve their values. 
 
       You can turn Feature Flags on or off, update Setting values and also add, remove or change the order of Percentage and Targeting Rules.
 
@@ -89,8 +88,7 @@ tags:
       from the [Feature Flag & Setting](#tag/Feature-Flags-and-Settings) endpoints.
     name: Feature Flag & Setting values using SDK Key
   - description: >-
-      With these endpoints you can control how your existing Feature Flags and
-      Settings should serve their values. 
+      With these endpoints you can control how your existing Feature Flags and Settings should serve their values. 
 
       You can turn Feature Flags on or off, update Setting values and also add, remove or reorder Percentage and Targeting Rules.
 
@@ -105,8 +103,7 @@ tags:
       `environmentId` which can be obtained from the [List Environments](#operation/get-environments) endpoint.
     name: Feature Flag & Setting values
   - description: >-
-      With these endpoints you can manage your Feature Flags or Settings within
-      a Config. 
+      With these endpoints you can manage your Feature Flags or Settings within a Config. 
 
       However you can't use them for manipulating the values of your Feature Flags and Settings,
 
@@ -148,8 +145,7 @@ tags:
       <a href="https://configcat.com/docs/main-concepts/#config" target="_blank">Here</a> you can read more about the concept of Configs.
     name: Configs
   - description: >-
-      With these endpoints you can update existing Environments or add new ones
-      into your selected [Product](#tag/Products). 
+      With these endpoints you can update existing Environments or add new ones into your selected [Product](#tag/Products). 
 
 
       <a href="https://configcat.com/docs/main-concepts/#environment" target="_blank">Here</a> you can read more about the concept of Environments.
@@ -162,8 +158,7 @@ paths:
   "/v1/configs/{configId}/settings":
     get:
       description: >-
-        This endpoint returns the list of the Feature Flags and Settings defined
-        in a 
+        This endpoint returns the list of the Feature Flags and Settings defined in a 
 
         specified Config, identified by the `configId` parameter.
       operationId: get-settings
@@ -192,20 +187,17 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Unauthorized. In case of the Public Management API credentials are
-            invalid.
+          description: Unauthorized. In case of the Public Management API credentials are invalid.
         "404":
           description: Not found.
         "429":
-          description: Too many requests. In case of the request rate exceeds the rate
-            limits.
+          description: Too many requests. In case of the request rate exceeds the rate limits.
       summary: List Flags
       tags:
         - Feature Flags & Settings
     post:
       description: >-
-        This endpoint creates a new Feature Flag or Setting in a specified
-        Config
+        This endpoint creates a new Feature Flag or Setting in a specified Config
 
         identified by the `configId` parameter.
 
@@ -245,20 +237,17 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Unauthorized. In case of the Public Management API credentials are
-            invalid.
+          description: Unauthorized. In case of the Public Management API credentials are invalid.
         "404":
           description: Not found.
         "429":
-          description: Too many requests. In case of the request rate exceeds the rate
-            limits.
+          description: Too many requests. In case of the request rate exceeds the rate limits.
       summary: Create Flag
       tags:
         - Feature Flags & Settings
   "/v1/environments/{environmentId}":
     put:
-      description: This endpoint updates an Environment identified by the
-        `environmentId` parameter.
+      description: This endpoint updates an Environment identified by the `environmentId` parameter.
       operationId: update-environment
       parameters:
         - description: The identifier of the Product.
@@ -293,13 +282,11 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Unauthorized. In case of the Public Management API credentials are
-            invalid.
+          description: Unauthorized. In case of the Public Management API credentials are invalid.
         "404":
           description: Not found.
         "429":
-          description: Too many requests. In case of the request rate exceeds the rate
-            limits.
+          description: Too many requests. In case of the request rate exceeds the rate limits.
       summary: Update Environment
       tags:
         - Environments
@@ -347,13 +334,11 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Unauthorized. In case of the Public Management API credentials are
-            invalid.
+          description: Unauthorized. In case of the Public Management API credentials are invalid.
         "404":
           description: Not found.
         "429":
-          description: Too many requests. In case of the request rate exceeds the rate
-            limits.
+          description: Too many requests. In case of the request rate exceeds the rate limits.
       summary: Delete Integration link
       tags:
         - Integration links
@@ -411,13 +396,11 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Unauthorized. In case of the Public Management API credentials are
-            invalid.
+          description: Unauthorized. In case of the Public Management API credentials are invalid.
         "404":
           description: Not found.
         "429":
-          description: Too many requests. In case of the request rate exceeds the rate
-            limits.
+          description: Too many requests. In case of the request rate exceeds the rate limits.
       summary: Add or update Integration link
       tags:
         - Integration links
@@ -472,13 +455,11 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Unauthorized. In case of the Public Management API credentials are
-            invalid.
+          description: Unauthorized. In case of the Public Management API credentials are invalid.
         "404":
           description: Not found.
         "429":
-          description: Too many requests. In case of the request rate exceeds the rate
-            limits.
+          description: Too many requests. In case of the request rate exceeds the rate limits.
       summary: Get value
       tags:
         - Feature Flag & Setting values
@@ -572,8 +553,7 @@ paths:
           schema:
             format: int32
             type: integer
-        - description: The reason note for the Audit Log if the Product's "Config changes
-            require a reason" preference is turned on.
+        - description: The reason note for the Audit Log if the Product's "Config changes require a reason" preference is turned on.
           in: query
           name: reason
           schema:
@@ -614,8 +594,7 @@ paths:
                       comparisonValue: "@blacklist.com"
                       value: false
               reorder targeting rules:
-                description: This example swaps the first and the second targeting evaluation
-                  rule.
+                description: This example swaps the first and the second targeting evaluation rule.
                 value:
                   - from: /rolloutRules/0
                     op: move
@@ -663,8 +642,7 @@ paths:
                       comparisonValue: "@blacklist.com"
                       value: false
               reorder targeting rules:
-                description: This example swaps the first and the second targeting evaluation
-                  rule.
+                description: This example swaps the first and the second targeting evaluation rule.
                 value:
                   - from: /rolloutRules/0
                     op: move
@@ -712,8 +690,7 @@ paths:
                       comparisonValue: "@blacklist.com"
                       value: false
               reorder targeting rules:
-                description: This example swaps the first and the second targeting evaluation
-                  rule.
+                description: This example swaps the first and the second targeting evaluation rule.
                 value:
                   - from: /rolloutRules/0
                     op: move
@@ -761,8 +738,7 @@ paths:
                       comparisonValue: "@blacklist.com"
                       value: false
               reorder targeting rules:
-                description: This example swaps the first and the second targeting evaluation
-                  rule.
+                description: This example swaps the first and the second targeting evaluation rule.
                 value:
                   - from: /rolloutRules/0
                     op: move
@@ -793,20 +769,17 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Unauthorized. In case of the Public Management API credentials are
-            invalid.
+          description: Unauthorized. In case of the Public Management API credentials are invalid.
         "404":
           description: Not found.
         "429":
-          description: Too many requests. In case of the request rate exceeds the rate
-            limits.
+          description: Too many requests. In case of the request rate exceeds the rate limits.
       summary: Update value
       tags:
         - Feature Flag & Setting values
     put:
       description: >-
-        This endpoint replaces the whole value of a Feature Flag or Setting in a
-        specified Environment.
+        This endpoint replaces the whole value of a Feature Flag or Setting in a specified Environment.
 
 
         Only the `value`, `rolloutRules` and `percentageRules` attributes are modifiable by this endpoint.
@@ -877,8 +850,7 @@ paths:
           schema:
             format: int32
             type: integer
-        - description: The reason note for the Audit Log if the Product's "Config changes
-            require a reason" preference is turned on.
+        - description: The reason note for the Audit Log if the Product's "Config changes require a reason" preference is turned on.
           in: query
           name: reason
           schema:
@@ -889,8 +861,7 @@ paths:
           application/*+json:
             examples:
               advanced:
-                description: This example turns on a feature flag and adds two items to its
-                  percentage evaluation rules.
+                description: This example turns on a feature flag and adds two items to its percentage evaluation rules.
                 value:
                   rolloutPercentageItems:
                     - percentage: 30
@@ -907,8 +878,7 @@ paths:
           application/json:
             examples:
               advanced:
-                description: This example turns on a feature flag and adds two items to its
-                  percentage evaluation rules.
+                description: This example turns on a feature flag and adds two items to its percentage evaluation rules.
                 value:
                   rolloutPercentageItems:
                     - percentage: 30
@@ -925,8 +895,7 @@ paths:
           text/json:
             examples:
               advanced:
-                description: This example turns on a feature flag and adds two items to its
-                  percentage evaluation rules.
+                description: This example turns on a feature flag and adds two items to its percentage evaluation rules.
                 value:
                   rolloutPercentageItems:
                     - percentage: 30
@@ -954,13 +923,11 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Unauthorized. In case of the Public Management API credentials are
-            invalid.
+          description: Unauthorized. In case of the Public Management API credentials are invalid.
         "404":
           description: Not found.
         "429":
-          description: Too many requests. In case of the request rate exceeds the rate
-            limits.
+          description: Too many requests. In case of the request rate exceeds the rate limits.
       summary: Replace value
       tags:
         - Feature Flag & Setting values
@@ -994,13 +961,11 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Unauthorized. In case of the Public Management API credentials are
-            invalid.
+          description: Unauthorized. In case of the Public Management API credentials are invalid.
         "404":
           description: Not found.
         "429":
-          description: Too many requests. In case of the request rate exceeds the rate
-            limits.
+          description: Too many requests. In case of the request rate exceeds the rate limits.
       summary: Get Integration link
       tags:
         - Integration links
@@ -1019,11 +984,9 @@ paths:
                 $ref: "#/components/schemas/MeModel"
           description: ""
         "401":
-          description: Unauthorized. In case of the Public Management API credentials are
-            invalid.
+          description: Unauthorized. In case of the Public Management API credentials are invalid.
         "429":
-          description: Too many requests. In case of the request rate exceeds the rate
-            limits.
+          description: Too many requests. In case of the request rate exceeds the rate limits.
       summary: Get authenticated user details
       tags:
         - Me
@@ -1046,18 +1009,17 @@ paths:
                 type: array
           description: ""
         "401":
-          description: Unauthorized. In case of the Public Management API credentials are
-            invalid.
+          description: Unauthorized. In case of the Public Management API credentials are invalid.
         "429":
-          description: Too many requests. In case of the request rate exceeds the rate
-            limits.
+          description: Too many requests. In case of the request rate exceeds the rate limits.
       summary: List Products
       tags:
         - Products
   "/v1/products/{productId}/auditlogs":
     get:
-      description: |-
+      description: >-
         This endpoint returns the list of Audit logs for a given Product 
+
         and the result can be optionally filtered by Config and/or Environment.
       operationId: get-auditlogs
       parameters:
@@ -1120,21 +1082,18 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Unauthorized. In case of the Public Management API credentials are
-            invalid.
+          description: Unauthorized. In case of the Public Management API credentials are invalid.
         "404":
           description: Not found.
         "429":
-          description: Too many requests. In case of the request rate exceeds the rate
-            limits.
+          description: Too many requests. In case of the request rate exceeds the rate limits.
       summary: List Audit logs
       tags:
         - Audit logs
   "/v1/products/{productId}/configs":
     get:
       description: >-
-        This endpoint returns the list of the Configs that belongs to the given
-        Product identified by the
+        This endpoint returns the list of the Configs that belongs to the given Product identified by the
 
         `productId` parameter, which can be obtained from the [List Products](#operation/get-products) endpoint.
       operationId: get-configs
@@ -1163,21 +1122,18 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Unauthorized. In case of the Public Management API credentials are
-            invalid.
+          description: Unauthorized. In case of the Public Management API credentials are invalid.
         "404":
           description: Not found.
         "429":
-          description: Too many requests. In case of the request rate exceeds the rate
-            limits.
+          description: Too many requests. In case of the request rate exceeds the rate limits.
       summary: List Configs
       tags:
         - Configs
   "/v1/products/{productId}/environments":
     get:
       description: >-
-        This endpoint returns the list of the Environments that belongs to the
-        given Product identified by the
+        This endpoint returns the list of the Environments that belongs to the given Product identified by the
 
         `productId` parameter, which can be obtained from the [List Products](#operation/get-products) endpoint.
       operationId: get-environments
@@ -1206,13 +1162,11 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Unauthorized. In case of the Public Management API credentials are
-            invalid.
+          description: Unauthorized. In case of the Public Management API credentials are invalid.
         "404":
           description: Not found.
         "429":
-          description: Too many requests. In case of the request rate exceeds the rate
-            limits.
+          description: Too many requests. In case of the request rate exceeds the rate limits.
       summary: List Environments
       tags:
         - Environments
@@ -1255,21 +1209,18 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Unauthorized. In case of the Public Management API credentials are
-            invalid.
+          description: Unauthorized. In case of the Public Management API credentials are invalid.
         "404":
           description: Not found.
         "429":
-          description: Too many requests. In case of the request rate exceeds the rate
-            limits.
+          description: Too many requests. In case of the request rate exceeds the rate limits.
       summary: Create Environment
       tags:
         - Environments
   "/v1/settings/{settingId}":
     delete:
       description: >-
-        This endpoint removes a Feature Flag or Setting from a specified
-        Config, 
+        This endpoint removes a Feature Flag or Setting from a specified Config, 
 
         identified by the `configId` parameter.
       operationId: delete-setting
@@ -1287,20 +1238,17 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Unauthorized. In case of the Public Management API credentials are
-            invalid.
+          description: Unauthorized. In case of the Public Management API credentials are invalid.
         "404":
           description: Not found.
         "429":
-          description: Too many requests. In case of the request rate exceeds the rate
-            limits.
+          description: Too many requests. In case of the request rate exceeds the rate limits.
       summary: Delete Flag
       tags:
         - Feature Flags & Settings
     get:
       description: >-
-        This endpoint returns the metadata attributes of a Feature Flag or
-        Setting 
+        This endpoint returns the metadata attributes of a Feature Flag or Setting 
 
         identified by the `settingId` parameter.
       operationId: get-setting
@@ -1325,13 +1273,11 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Unauthorized. In case of the Public Management API credentials are
-            invalid.
+          description: Unauthorized. In case of the Public Management API credentials are invalid.
         "404":
           description: Not found.
         "429":
-          description: Too many requests. In case of the request rate exceeds the rate
-            limits.
+          description: Too many requests. In case of the request rate exceeds the rate limits.
       summary: Get Flag
       tags:
         - Feature Flags & Settings
@@ -1438,13 +1384,11 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Unauthorized. In case of the Public Management API credentials are
-            invalid.
+          description: Unauthorized. In case of the Public Management API credentials are invalid.
         "404":
           description: Not found.
         "429":
-          description: Too many requests. In case of the request rate exceeds the rate
-            limits.
+          description: Too many requests. In case of the request rate exceeds the rate limits.
       summary: Update Flag
       tags:
         - Feature Flags & Settings
@@ -1497,13 +1441,11 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Unauthorized. In case of the Public Management API credentials are
-            invalid.
+          description: Unauthorized. In case of the Public Management API credentials are invalid.
         "404":
           description: Not found.
         "429":
-          description: Too many requests. In case of the request rate exceeds the rate
-            limits.
+          description: Too many requests. In case of the request rate exceeds the rate limits.
       summary: Get value
       tags:
         - Feature Flag & Setting values using SDK Key
@@ -1591,8 +1533,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: The reason note for the Audit Log if the Product's "Config changes
-            require a reason" preference is turned on.
+        - description: The reason note for the Audit Log if the Product's "Config changes require a reason" preference is turned on.
           in: query
           name: reason
           schema:
@@ -1639,8 +1580,7 @@ paths:
                       comparisonValue: "@blacklist.com"
                       value: false
               reorder targeting rules:
-                description: This example swaps the first and the second targeting evaluation
-                  rule.
+                description: This example swaps the first and the second targeting evaluation rule.
                 value:
                   - from: /rolloutRules/0
                     op: move
@@ -1688,8 +1628,7 @@ paths:
                       comparisonValue: "@blacklist.com"
                       value: false
               reorder targeting rules:
-                description: This example swaps the first and the second targeting evaluation
-                  rule.
+                description: This example swaps the first and the second targeting evaluation rule.
                 value:
                   - from: /rolloutRules/0
                     op: move
@@ -1737,8 +1676,7 @@ paths:
                       comparisonValue: "@blacklist.com"
                       value: false
               reorder targeting rules:
-                description: This example swaps the first and the second targeting evaluation
-                  rule.
+                description: This example swaps the first and the second targeting evaluation rule.
                 value:
                   - from: /rolloutRules/0
                     op: move
@@ -1786,8 +1724,7 @@ paths:
                       comparisonValue: "@blacklist.com"
                       value: false
               reorder targeting rules:
-                description: This example swaps the first and the second targeting evaluation
-                  rule.
+                description: This example swaps the first and the second targeting evaluation rule.
                 value:
                   - from: /rolloutRules/0
                     op: move
@@ -1818,13 +1755,11 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Unauthorized. In case of the Public Management API credentials are
-            invalid.
+          description: Unauthorized. In case of the Public Management API credentials are invalid.
         "404":
           description: Not found.
         "429":
-          description: Too many requests. In case of the request rate exceeds the rate
-            limits.
+          description: Too many requests. In case of the request rate exceeds the rate limits.
       summary: Update value
       tags:
         - Feature Flag & Setting values using SDK Key
@@ -1895,8 +1830,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: The reason note for the Audit Log if the Product's "Config changes
-            require a reason" preference is turned on.
+        - description: The reason note for the Audit Log if the Product's "Config changes require a reason" preference is turned on.
           in: query
           name: reason
           schema:
@@ -1913,8 +1847,7 @@ paths:
           application/*+json:
             examples:
               advanced:
-                description: This example turns on a feature flag and adds two items to its
-                  percentage evaluation rules.
+                description: This example turns on a feature flag and adds two items to its percentage evaluation rules.
                 value:
                   rolloutPercentageItems:
                     - percentage: 30
@@ -1931,8 +1864,7 @@ paths:
           application/json:
             examples:
               advanced:
-                description: This example turns on a feature flag and adds two items to its
-                  percentage evaluation rules.
+                description: This example turns on a feature flag and adds two items to its percentage evaluation rules.
                 value:
                   rolloutPercentageItems:
                     - percentage: 30
@@ -1949,8 +1881,7 @@ paths:
           text/json:
             examples:
               advanced:
-                description: This example turns on a feature flag and adds two items to its
-                  percentage evaluation rules.
+                description: This example turns on a feature flag and adds two items to its percentage evaluation rules.
                 value:
                   rolloutPercentageItems:
                     - percentage: 30
@@ -1978,13 +1909,11 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Unauthorized. In case of the Public Management API credentials are
-            invalid.
+          description: Unauthorized. In case of the Public Management API credentials are invalid.
         "404":
           description: Not found.
         "429":
-          description: Too many requests. In case of the request rate exceeds the rate
-            limits.
+          description: Too many requests. In case of the request rate exceeds the rate limits.
       summary: Replace value
       tags:
         - Feature Flag & Setting values using SDK Key
@@ -2305,8 +2234,7 @@ components:
           type: integer
         value:
           additionalProperties: false
-          description: The value to serve when the user falls in the percentage rule. It
-            must respect the setting type.
+          description: The value to serve when the user falls in the percentage rule. It must respect the setting type.
           type: object
       required:
         - percentage
@@ -2350,8 +2278,7 @@ components:
           type: string
         value:
           additionalProperties: false
-          description: The value to serve when the comparison matches. It must respect the
-            setting type.
+          description: The value to serve when the comparison matches. It must respect the setting type.
           type: object
       required:
         - comparisonAttribute
@@ -2361,6 +2288,23 @@ components:
     SettingDataModel:
       additionalProperties: false
       properties:
+        createdAt:
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
+        creatorEmail:
+          nullable: true
+          readOnly: true
+          type: string
+        creatorFullName:
+          nullable: true
+          readOnly: true
+          type: string
+        expirationWarningAt:
+          format: date-time
+          nullable: true
+          type: string
         hint:
           nullable: true
           readOnly: true
@@ -2372,6 +2316,12 @@ components:
         name:
           nullable: true
           readOnly: true
+          type: string
+        ownerEmail:
+          nullable: true
+          type: string
+        ownerFullName:
+          nullable: true
           type: string
         settingId:
           format: int32
@@ -2383,6 +2333,16 @@ components:
     SettingModel:
       additionalProperties: false
       properties:
+        configId:
+          format: uuid
+          type: string
+        configName:
+          nullable: true
+          type: string
+        expirationWarningAt:
+          format: date-time
+          nullable: true
+          type: string
         hint:
           nullable: true
           type: string
@@ -2390,6 +2350,12 @@ components:
           nullable: true
           type: string
         name:
+          nullable: true
+          type: string
+        ownerUserEmail:
+          nullable: true
+          type: string
+        ownerUserFullName:
           nullable: true
           type: string
         settingId:
@@ -2433,6 +2399,12 @@ components:
             $ref: "#/components/schemas/IntegrationLinkModel"
           nullable: true
           type: array
+        lastUpdaterUserEmail:
+          nullable: true
+          type: string
+        lastUpdaterUserFullName:
+          nullable: true
+          type: string
         readOnly:
           type: boolean
         rolloutPercentageItems:
@@ -2454,6 +2426,10 @@ components:
             $ref: "#/components/schemas/SettingTagModel"
           nullable: true
           type: array
+        updatedAt:
+          format: date-time
+          nullable: true
+          type: string
         value:
           additionalProperties: false
           description: The value to serve. It must respect the setting type.
@@ -2508,6 +2484,23 @@ components:
             setting:
               additionalProperties: false
               properties:
+                createdAt:
+                  format: date-time
+                  nullable: true
+                  readOnly: true
+                  type: string
+                creatorEmail:
+                  nullable: true
+                  readOnly: true
+                  type: string
+                creatorFullName:
+                  nullable: true
+                  readOnly: true
+                  type: string
+                expirationWarningAt:
+                  format: date-time
+                  nullable: true
+                  type: string
                 hint:
                   nullable: true
                   readOnly: true
@@ -2519,6 +2512,12 @@ components:
                 name:
                   nullable: true
                   readOnly: true
+                  type: string
+                ownerEmail:
+                  nullable: true
+                  type: string
+                ownerFullName:
+                  nullable: true
                   type: string
                 settingId:
                   format: int32
@@ -2551,6 +2550,12 @@ components:
             self:
               type: string
           type: object
+        lastUpdaterUserEmail:
+          nullable: true
+          type: string
+        lastUpdaterUserFullName:
+          nullable: true
+          type: string
         readOnly:
           type: boolean
         rolloutPercentageItems:
@@ -2565,6 +2570,10 @@ components:
             $ref: "#/components/schemas/RolloutRuleModel"
           nullable: true
           type: array
+        updatedAt:
+          format: date-time
+          nullable: true
+          type: string
         value:
           additionalProperties: false
           description: The value to serve. It must respect the setting type.
@@ -2604,8 +2613,7 @@ components:
   securitySchemes:
     Basic:
       description: >-
-        To authenticate with the API you have to fill the `Authorization` HTTP
-        request header with your Public API credentials.
+        To authenticate with the API you have to fill the `Authorization` HTTP request header with your Public API credentials.
 
 
         You can create your credentials on the <a target="_blank" href="https://app.configcat.com/my-account/public-api-credentials">Public API credentials management page</a>.

@@ -6,8 +6,7 @@ basePath: /v1
 info:
   contact:
     x-twitter: thesmsworks
-  description: The SMS Works provides a low-cost, reliable SMS API for developers.
-    Pay only for delivered texts, all failed messages are refunded.
+  description: The SMS Works provides a low-cost, reliable SMS API for developers. Pay only for delivered texts, all failed messages are refunded.
   title: The SMS Works API
   version: 1.4.0
   x-apisguru-categories:
@@ -31,14 +30,10 @@ securityDefinitions:
 paths:
   /auth/getApiKey:
     get:
-      description: Utility method. Please generate your API key by following the
-        instructions on your account page at
-        https://thesmsworks.co.uk/user/login
+      description: Utility method. Please generate your API key by following the instructions on your account page at https://thesmsworks.co.uk/user/login
       operationId: keySecret
       parameters:
-        - description: Utility method. Please generate your API key by following the
-            instructions on your account page at
-            https://thesmsworks.co.uk/user/login
+        - description: Utility method. Please generate your API key by following the instructions on your account page at https://thesmsworks.co.uk/user/login
           in: query
           name: customerid
           required: true
@@ -57,10 +52,7 @@ paths:
     x-swagger-router-controller: authentication
   /auth/token:
     post:
-      description: Generates a JSON Web Token for including in the Authorization
-        header of all your calls to the API. This only needs to be done once.
-        Generate the customer ID, API Key & Secret required for this call from
-        the API Key tab your account page.
+      description: Generates a JSON Web Token for including in the Authorization header of all your calls to the API. This only needs to be done once. Generate the customer ID, API Key & Secret required for this call from the API Key tab your account page.
       operationId: login
       parameters:
         - description: API Key & Secret
@@ -417,8 +409,7 @@ paths:
     x-swagger-pipe: swagger_raw
   "/utils/errors/{errorcode}":
     get:
-      description: Returns a sample error object for the given error code. Useful for
-        designing code to react to errors when they occur for real.
+      description: Returns a sample error object for the given error code. Useful for designing code to react to errors when they occur for real.
       operationId: getError
       parameters:
         - description: The code of the error you would like returned
@@ -459,9 +450,7 @@ definitions:
         example: My super awesome batch message
         type: string
       deliveryreporturl:
-        description: The url to which we should POST delivery reports to for this
-          message. If none is specified, we'll use the global delivery report
-          URL that you've configured on your account page.
+        description: The url to which we should POST delivery reports to for this message. If none is specified, we'll use the global delivery report URL that you've configured on your account page.
         example: http://your.domain.com/delivery/report/path
         type: string
       destinations:
@@ -474,25 +463,19 @@ definitions:
           type: string
         type: array
       schedule:
-        description: Date-time at which to send the batch. This is only used by the
-          batch/schedule service.
+        description: Date-time at which to send the batch. This is only used by the batch/schedule service.
         example: Wed Jul 19 2017 20:26:28 GMT+0100 (BST)
         type: string
       sender:
-        description: The sender of the message. Should be no longer than 11 characters
-          for alphanumeric or 15 characters for numeric sender ID's. No spaces
-          or special characters.
+        description: The sender of the message. Should be no longer than 11 characters for alphanumeric or 15 characters for numeric sender ID's. No spaces or special characters.
         example: YourCompany
         type: string
       tag:
-        description: An identifying label for the message, which you can use to filter
-          and report on messages you've sent later. Ideal for campaigns. A
-          maximum of 280 characters.
+        description: An identifying label for the message, which you can use to filter and report on messages you've sent later. Ideal for campaigns. A maximum of 280 characters.
         example: SummerSpecial
         type: string
       ttl:
-        description: The number of minutes before the message is deleted. Optional. Omit
-          to prevent delivery report deletion. Integer.
+        description: The number of minutes before the message is deleted. Optional. Omit to prevent delivery report deletion. Integer.
         example: 10
         type: number
     required:
@@ -524,8 +507,7 @@ definitions:
   CreditsResponse:
     properties:
       credits:
-        description: The number of remaining credits on your SMS Works account. Floating
-          point number.
+        description: The number of remaining credits on your SMS Works account. Floating point number.
         example: 180
         type: number
     required:
@@ -556,36 +538,23 @@ definitions:
     description: authorisation object
     properties:
       customerid:
-        description: Your customer ID, available from your account area at
-          https://thesmsworks.co.uk/user/login
+        description: Your customer ID, available from your account area at https://thesmsworks.co.uk/user/login
         type: string
       key:
-        description: API Key, available from your account area at
-          https://thesmsworks.co.uk/user/login
+        description: API Key, available from your account area at https://thesmsworks.co.uk/user/login
         type: string
       secret:
-        description: API Secret, available from your account area at
-          https://thesmsworks.co.uk/user/login
+        description: API Secret, available from your account area at https://thesmsworks.co.uk/user/login
         type: string
   Message:
     description: SMS message object
     properties:
       content:
-        description: Message to send to the recipient. Content can be up to 1280
-          characters in length. Messages of 160 characters or fewer are charged
-          1 credit. If your message is longer than 160 characters then it will
-          be broken down in to chunks of 153 characters before being sent to the
-          recipient's handset, and you will be charged 1 credit for each 153
-          characters. Messages sent to numbers registered outside the UK will be
-          typically charged double credits, but for certain countries may be
-          charged fractions of credits (e.g. 2.5). Please contact us for rates
-          for each country.
+        description: Message to send to the recipient. Content can be up to 1280 characters in length. Messages of 160 characters or fewer are charged 1 credit. If your message is longer than 160 characters then it will be broken down in to chunks of 153 characters before being sent to the recipient's handset, and you will be charged 1 credit for each 153 characters. Messages sent to numbers registered outside the UK will be typically charged double credits, but for certain countries may be charged fractions of credits (e.g. 2.5). Please contact us for rates for each country.
         example: Your super awesome message
         type: string
       deliveryreporturl:
-        description: The url to which we should POST delivery reports to for this
-          message. If none is specified, we'll use the global delivery report
-          URL that you've configured on your account page.
+        description: The url to which we should POST delivery reports to for this message. If none is specified, we'll use the global delivery report URL that you've configured on your account page.
         example: http://your.domain.com/delivery/report/path
         type: string
       destination:
@@ -605,9 +574,7 @@ definitions:
             $ref: "#/definitions/MetaData"
         type: array
       responseemail:
-        description: An optional list of email addresses to forward responses to this
-          specific message to. An SMS Works Reply Number is required to use this
-          feature.
+        description: An optional list of email addresses to forward responses to this specific message to. An SMS Works Reply Number is required to use this feature.
         example:
           - my.email@mycompany.co.uk
           - my.other.email@mycompany.co.uk
@@ -615,25 +582,19 @@ definitions:
           type: string
         type: array
       schedule:
-        description: Date at which to send the message. This is only used by the
-          message/schedule service and can be left empty for other services.
+        description: Date at which to send the message. This is only used by the message/schedule service and can be left empty for other services.
         example: Sun Sep 03 2020 15:34:23 GMT+0100 (BST)
         type: string
       sender:
-        description: The sender of the message. Should be no longer than 11 characters
-          for alphanumeric or 15 characters for numeric sender ID's. No spaces
-          or special characters.
+        description: The sender of the message. Should be no longer than 11 characters for alphanumeric or 15 characters for numeric sender ID's. No spaces or special characters.
         example: YourCompany
         type: string
       tag:
-        description: An identifying label for the message, which you can use to filter
-          and report on messages you've sent later. Ideal for campaigns. A
-          maximum of 280 characters.
+        description: An identifying label for the message, which you can use to filter and report on messages you've sent later. Ideal for campaigns. A maximum of 280 characters.
         example: SummerSpecial
         type: string
       ttl:
-        description: The optional number of minutes before the message is deleted.
-          Optional. Omit to prevent delivery report deletion. Integer.
+        description: The optional number of minutes before the message is deleted. Optional. Omit to prevent delivery report deletion. Integer.
         example: 10
         type: number
     required:
@@ -730,8 +691,7 @@ definitions:
         example: 2
         type: number
       destination:
-        description: The phone number of the recipient. Start UK numbers with 44 and
-          drop the leading 0.
+        description: The phone number of the recipient. Start UK numbers with 44 and drop the leading 0.
         example: "447777777777"
         type: string
       from:
@@ -743,8 +703,7 @@ definitions:
         example: SKYWALKER
         type: string
       metadata:
-        description: An array of objects containing metadata key/value pairs that have
-          been saved on messages.
+        description: An array of objects containing metadata key/value pairs that have been saved on messages.
         example:
           - key: myKey1
             value: myValue1
@@ -757,14 +716,11 @@ definitions:
             $ref: "#/definitions/MetaData"
         type: array
       sender:
-        description: The sender of the message (this can be the configured sender name
-          for an outbound message or the senders phone number for an inbound
-          message).
+        description: The sender of the message (this can be the configured sender name for an outbound message or the senders phone number for an inbound message).
         example: YourCompany
         type: string
       status:
-        description: The status of the messages you would like returned (either 'SENT',
-          'DELIVERED', 'EXPIRED', 'UNDELIVERABLE', 'REJECTED' or 'INCOMING')
+        description: The status of the messages you would like returned (either 'SENT', 'DELIVERED', 'EXPIRED', 'UNDELIVERABLE', 'REJECTED' or 'INCOMING')
         example: SENT
         type: string
       to:
@@ -772,9 +728,7 @@ definitions:
         example: Wed Jul 19 2017 20:26:28 GMT+0100 (BST)
         type: string
       unread:
-        description: In queries for incoming messages ('status' is 'INCOMING'), specify
-          whether you explicitly want unread messages (true) or read messages
-          (false). Omit this parameter in other circumstances.
+        description: In queries for incoming messages ('status' is 'INCOMING'), specify whether you explicitly want unread messages (true) or read messages (false). Omit this parameter in other circumstances.
         type: boolean
   ScheduledBatchResponse:
     properties:
@@ -801,8 +755,7 @@ definitions:
   SendMessageResponse:
     properties:
       credits:
-        description: The number of remaining credits on your SMS Works account. Floating
-          point number.
+        description: The number of remaining credits on your SMS Works account. Floating point number.
         example: 180
         type: number
       creditsUsed:
@@ -829,8 +782,7 @@ definitions:
   TokenResponse:
     properties:
       token:
-        example: JWT
-          eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjE1MDA0OTU2NjEsImV4cCI6MTUzMjAzMTY2MSwiYXVkIjoid3d3LmV4YW1wbGUuY29tIiwic3ViIjoianJvY2tldEBleGFtcGxlLmNvbSIsIkdpdmVuTmFtZSI6IkpvaG5ueSIsIlN1cm5hbWUiOiJSb2NrZXQiLCJFbWFpbCI6Impyb2NrZXRAZXhhbXBsZS5jb20iLCJSb2xlIjpbIk1hbmFnZXIiLCJQcm9qZWN0IEFkbWluaXN0cmF0b3IiXX0.BR1BIDy0Mw3R4ilfqAojsnh7bp_pgeX2jfjhhZyaexQ
+        example: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjE1MDA0OTU2NjEsImV4cCI6MTUzMjAzMTY2MSwiYXVkIjoid3d3LmV4YW1wbGUuY29tIiwic3ViIjoianJvY2tldEBleGFtcGxlLmNvbSIsIkdpdmVuTmFtZSI6IkpvaG5ueSIsIlN1cm5hbWUiOiJSb2NrZXQiLCJFbWFpbCI6Impyb2NrZXRAZXhhbXBsZS5jb20iLCJSb2xlIjpbIk1hbmFnZXIiLCJQcm9qZWN0IEFkbWluaXN0cmF0b3IiXX0.BR1BIDy0Mw3R4ilfqAojsnh7bp_pgeX2jfjhhZyaexQ
         type: string
     required:
       - token

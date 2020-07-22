@@ -2,8 +2,7 @@ swagger: "2.0"
 host: www.refugerestrooms.org
 basePath: /api
 info:
-  description: REFUGE is a web application that seeks to provide safe restroom
-    access for transgender, intersex, and gender nonconforming individuals.
+  description: REFUGE is a web application that seeks to provide safe restroom access for transgender, intersex, and gender nonconforming individuals.
   title: API title
   version: 0.0.1
   x-apisguru-categories:
@@ -105,8 +104,7 @@ paths:
           name: unisex
           required: false
           type: boolean
-        - description: Return restroom records updated (rather than created) since given
-            date
+        - description: Return restroom records updated (rather than created) since given date
           in: query
           name: updated
           required: false
@@ -133,8 +131,7 @@ paths:
         - application/json
       responses:
         "200":
-          description: Search for restroom records updated or created on or after a given
-            date
+          description: Search for restroom records updated or created on or after a given date
       tags:
         - restrooms
   /v1/restrooms/by_location:

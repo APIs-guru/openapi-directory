@@ -6,8 +6,7 @@ info:
   contact:
     x-twitter: waterlinkedas
   description: >-
-    API for the Water Linked Underwater GPS. For more details:
-    http://www.waterlinked.com
+    API for the Water Linked Underwater GPS. For more details: http://www.waterlinked.com
 
 
     Recommended approach for connecting to a Underwater GPS via the API is:
@@ -258,8 +257,7 @@ paths:
       tags:
         - config
     put:
-      description: Modify receiver configuration, does not apply the change until
-        generic modify is called. Calling list will discard changes
+      description: Modify receiver configuration, does not apply the change until generic modify is called. Calling list will discard changes
       operationId: config#ModifyReceiver
       parameters:
         - description: Identifier
@@ -285,8 +283,7 @@ paths:
         - config
   /api/v1/external/depth:
     put:
-      description: Set depth from external source. If Locator A1 is used, this is
-        required to get a position
+      description: Set depth from external source. If Locator A1 is used, this is required to get a position
       operationId: external#SetDepth
       parameters:
         - description: Current locator depth and temperature
@@ -313,8 +310,7 @@ paths:
         - external
   /api/v1/external/imu:
     get:
-      description: Get rotation and acceleration of vehicle Locator is mounted on
-        which was previously set
+      description: Get rotation and acceleration of vehicle Locator is mounted on which was previously set
       operationId: external#GetVehicleIMU
       produces:
         - application/vnd.wl.external.vehicle.imu+json
@@ -331,8 +327,7 @@ paths:
       tags:
         - external
     put:
-      description: Set rotation and acceleration of vehicle Locator is mounted on.
-        This is used to improve positioning of vehicle
+      description: Set rotation and acceleration of vehicle Locator is mounted on. This is used to improve positioning of vehicle
       operationId: external#SetVehicleIMU
       parameters:
         - description: Set current rotation and acceleration of vehicle
@@ -359,8 +354,7 @@ paths:
         - external
   /api/v1/external/master:
     put:
-      description: Set current global position of master electronics from external
-        source. Values are only used if GPS mode is set to use external GPS
+      description: Set current global position of master electronics from external source. Values are only used if GPS mode is set to use external GPS
       operationId: external#SetMaster
       parameters:
         - description: Global master position from external source
@@ -407,8 +401,7 @@ paths:
       tags:
         - external
     put:
-      description: Set orientation/compass heading of Vehicle/ROV/Locator. This is
-        used only for visualization in GUI
+      description: Set orientation/compass heading of Vehicle/ROV/Locator. This is used only for visualization in GUI
       operationId: external#SetOrientation
       parameters:
         - description: Set current compass heading of ROV/locator
@@ -560,8 +553,7 @@ paths:
         - poi
   /api/v1/position/acoustic/filtered:
     get:
-      description: "Get current Kalman filtered acoustic position relative to master
-        acoustics. Expected update frequency: 4 Hz"
+      description: "Get current Kalman filtered acoustic position relative to master acoustics. Expected update frequency: 4 Hz"
       operationId: position#AcousticFiltered
       produces:
         - application/vnd.waterlinked.accoustic.position+json
@@ -579,8 +571,7 @@ paths:
         - position
   /api/v1/position/acoustic/raw:
     get:
-      description: "Get current unfiltered acoustic position relative to master
-        acoustics. Expected update frequency: 4 Hz"
+      description: "Get current unfiltered acoustic position relative to master acoustics. Expected update frequency: 4 Hz"
       operationId: position#AcousticRaw
       produces:
         - application/vnd.waterlinked.accoustic.position+json
@@ -598,9 +589,7 @@ paths:
         - position
   /api/v1/position/global:
     get:
-      description: "Get current global position of locator. Locator position is
-        calculated from the current acoustic position and the global position of
-        the master electronics. Expected update frequency: 4 Hz"
+      description: "Get current global position of locator. Locator position is calculated from the current acoustic position and the global position of the master electronics. Expected update frequency: 4 Hz"
       operationId: position#Get
       produces:
         - application/vnd.wl.satellite.position+json
@@ -618,8 +607,7 @@ paths:
         - position
   /api/v1/position/master:
     get:
-      description: "Get current global position of master electronics. Expected update
-        frequency: 1 Hz"
+      description: "Get current global position of master electronics. Expected update frequency: 1 Hz"
       operationId: position#GetMaster
       produces:
         - application/vnd.wl.satellite.position+json
@@ -992,8 +980,7 @@ definitions:
       orientation: 42
     properties:
       orientation:
-        description: Current orientation/compass heading (degrees). -1 means no
-          orientation set
+        description: Current orientation/compass heading (degrees). -1 means no orientation set
         example: 42
         maximum: 359.999
         minimum: -1
@@ -1132,8 +1119,7 @@ definitions:
       - version
       - version_short
       - chipid
-    title: "Mediatype identifier: application/vnd.waterlinked.about+json;
-      view=default"
+    title: "Mediatype identifier: application/vnd.waterlinked.about+json; view=default"
     type: object
   WaterlinkedAccousticPosition:
     description: Current relative Locator position (default view)
@@ -1165,8 +1151,7 @@ definitions:
         format: double
         type: number
       z:
-        description: Current acoustic z position (depth) relative to master electronics
-          (meter)
+        description: Current acoustic z position (depth) relative to master electronics (meter)
         example: 10.2
         minimum: 0
         type: number
@@ -1176,8 +1161,7 @@ definitions:
       - z
       - std
       - temp
-    title: "Mediatype identifier:
-      application/vnd.waterlinked.accoustic.position+json; view=default"
+    title: "Mediatype identifier: application/vnd.waterlinked.accoustic.position+json; view=default"
     type: object
   WaterlinkedConfiguration:
     description: Configuration parameters (default view)
@@ -1306,8 +1290,7 @@ definitions:
       - static_lat
       - static_lon
       - static_orientation
-    title: "Mediatype identifier: application/vnd.waterlinked.configuration+json;
-      view=default"
+    title: "Mediatype identifier: application/vnd.waterlinked.configuration+json; view=default"
     type: object
   WaterlinkedIp_config:
     description: Configuration parameters (default view)
@@ -1340,8 +1323,7 @@ definitions:
       - gateway
       - prefix
       - dns
-    title: "Mediatype identifier: application/vnd.waterlinked.ip_config+json;
-      view=default"
+    title: "Mediatype identifier: application/vnd.waterlinked.ip_config+json; view=default"
     type: object
   WaterlinkedOperation_response:
     description: Response from server on operations performed (default view)
@@ -1359,8 +1341,7 @@ definitions:
         type: boolean
     required:
       - success
-    title: "Mediatype identifier:
-      application/vnd.waterlinked.operation_response+json; view=default"
+    title: "Mediatype identifier: application/vnd.waterlinked.operation_response+json; view=default"
     type: object
   WaterlinkedPoi:
     description: A list of all POI (default view)
@@ -1415,8 +1396,7 @@ definitions:
     title: "Mediatype identifier: application/vnd.waterlinked.poi+json; view=default"
     type: object
   WaterlinkedPoiCollection:
-    description: WaterlinkedPoiCollection is the media type for an array of
-      WaterlinkedPoi (default view)
+    description: WaterlinkedPoiCollection is the media type for an array of WaterlinkedPoi (default view)
     example:
       - depth: 0.768439233512868
         icon: Fugit quis vero in deleniti qui nihil.
@@ -1441,8 +1421,7 @@ definitions:
         visible: false
     items:
       $ref: "#/definitions/WaterlinkedPoi"
-    title: "Mediatype identifier: application/vnd.waterlinked.poi+json;
-      type=collection; view=default"
+    title: "Mediatype identifier: application/vnd.waterlinked.poi+json; type=collection; view=default"
     type: array
   WaterlinkedReceiver:
     description: A receiver configuration (default view)
@@ -1477,12 +1456,10 @@ definitions:
       - x
       - y
       - z
-    title: "Mediatype identifier: application/vnd.waterlinked.receiver+json;
-      view=default"
+    title: "Mediatype identifier: application/vnd.waterlinked.receiver+json; view=default"
     type: object
   WaterlinkedReceiverCollection:
-    description: WaterlinkedReceiverCollection is the media type for an array of
-      WaterlinkedReceiver (default view)
+    description: WaterlinkedReceiverCollection is the media type for an array of WaterlinkedReceiver (default view)
     example:
       - id: 831253423044275100
         x: 0.6812896786410381
@@ -1490,8 +1467,7 @@ definitions:
         z: 0.25362356554993554
     items:
       $ref: "#/definitions/WaterlinkedReceiver"
-    title: "Mediatype identifier: application/vnd.waterlinked.receiver+json;
-      type=collection; view=default"
+    title: "Mediatype identifier: application/vnd.waterlinked.receiver+json; type=collection; view=default"
     type: array
   WaterlinkedStatus:
     description: Status information (default view)
@@ -1522,8 +1498,7 @@ definitions:
       - imu
       - gps
       - battery
-    title: "Mediatype identifier: application/vnd.waterlinked.status+json;
-      view=default"
+    title: "Mediatype identifier: application/vnd.waterlinked.status+json; view=default"
     type: object
   WaterlinkedTemperature:
     description: Temperature information (default view)
@@ -1544,8 +1519,7 @@ definitions:
     required:
       - board
       - water
-    title: "Mediatype identifier: application/vnd.waterlinked.temperature+json;
-      view=default"
+    title: "Mediatype identifier: application/vnd.waterlinked.temperature+json; view=default"
     type: object
   WlExternalLocatorOrientation:
     description: Set current compass heading of ROV/locator (default view)
@@ -1553,16 +1527,14 @@ definitions:
       orientation: 42
     properties:
       orientation:
-        description: Current orientation/compass heading (degrees). -1 means no
-          orientation set
+        description: Current orientation/compass heading (degrees). -1 means no orientation set
         example: 42
         maximum: 359.999
         minimum: -1
         type: number
     required:
       - orientation
-    title: "Mediatype identifier:
-      application/vnd.wl.external.locator.orientation+json; view=default"
+    title: "Mediatype identifier: application/vnd.wl.external.locator.orientation+json; view=default"
     type: object
   WlExternalVehicleImu:
     description: Set current rotation and acceleration of vehicle (default view)
@@ -1617,8 +1589,7 @@ definitions:
       - x
       - y
       - z
-    title: "Mediatype identifier: application/vnd.wl.external.vehicle.imu+json;
-      view=default"
+    title: "Mediatype identifier: application/vnd.wl.external.vehicle.imu+json; view=default"
     type: object
   WlSatellitePosition:
     description: GPS and IMU position (default view)
@@ -1685,8 +1656,7 @@ definitions:
       - hdop
       - numsats
       - fix_quality
-    title: "Mediatype identifier: application/vnd.wl.satellite.position+json;
-      view=default"
+    title: "Mediatype identifier: application/vnd.wl.satellite.position+json; view=default"
     type: object
   WlWarning:
     description: Warning message (default view)
@@ -1714,8 +1684,7 @@ definitions:
     title: "Mediatype identifier: application/vnd.wl.warning+json; view=default"
     type: object
   WlWarningCollection:
-    description: WlWarningCollection is the media type for an array of WlWarning
-      (default view)
+    description: WlWarningCollection is the media type for an array of WlWarning (default view)
     example:
       - id: Libero pariatur quia id modi.
         message: Itaque nemo dolorem ea.
@@ -1725,8 +1694,7 @@ definitions:
         severity: Dolorum nihil.
     items:
       $ref: "#/definitions/WlWarning"
-    title: "Mediatype identifier: application/vnd.wl.warning+json; type=collection;
-      view=default"
+    title: "Mediatype identifier: application/vnd.wl.warning+json; type=collection; view=default"
     type: array
   WupdaterApiversion:
     description: Returns supported api versions (default view)
@@ -1763,8 +1731,7 @@ definitions:
         example: invalid_value
         type: string
       detail:
-        description: a human-readable explanation specific to this occurrence of the
-          problem.
+        description: a human-readable explanation specific to this occurrence of the problem.
         example: Value of ID must be an integer
         type: string
       id:
@@ -1778,8 +1745,7 @@ definitions:
           timestamp: 1458609066
         type: object
       status:
-        description: the HTTP status code applicable to this problem, expressed as a
-          string value.
+        description: the HTTP status code applicable to this problem, expressed as a string value.
         example: "400"
         type: string
     title: "Mediatype identifier: application/vnd.goa.error; view=default"

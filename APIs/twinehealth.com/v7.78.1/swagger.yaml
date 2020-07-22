@@ -108,8 +108,7 @@ produces:
 securityDefinitions:
   OAuth2:
     description: >
-      Fitbit Plus allows customers to access data for their organization using
-      client credentials.
+      Fitbit Plus allows customers to access data for their organization using client credentials.
 
       OAuth2 is a safe and secure way to give you access.
     flow: application
@@ -121,50 +120,33 @@ securityDefinitions:
 tags:
   - description: Authentication operations
     name: oauth
-  - description: An organization is a Fitbit Plus customer. No data is accessible
-      across organizations.
+  - description: An organization is a Fitbit Plus customer. No data is accessible across organizations.
     name: organization
-  - description: A group is a cohort of patients within an organization. The
-      creation of groups allows for the segmentation of dashboards and
-      analytics. For example, a group might correspond to the patients in a
-      particular practice or the employees of a particular employer.
+  - description: A group is a cohort of patients within an organization. The creation of groups allows for the segmentation of dashboards and analytics. For example, a group might correspond to the patients in a particular practice or the employees of a particular employer.
     name: group
   - description: A coach is a person that supports a patient
     name: coach
-  - description: A reward program provides the details for a rewards program for a
-      group. Different rewards programs can be created for different periods of
-      time specified by the start_at and end_at dates. A reward program can
-      activated for a patient any time between these dates. An activated reward
-      program for a patient is called a reward program activation.
+  - description: A reward program provides the details for a rewards program for a group. Different rewards programs can be created for different periods of time specified by the start_at and end_at dates. A reward program can activated for a patient any time between these dates. An activated reward program for a patient is called a reward program activation.
     name: reward program
   - description: An action is an actionable item in a patient's plan.
     name: action
-  - description: A bundle is a collection of actions (an action plan) in a patient's
-      plan summary.
+  - description: A bundle is a collection of actions (an action plan) in a patient's plan summary.
     name: bundle
-  - description: A calendar event represents an event involving or relevant to a
-      patient which will or has occurred on a specific date or during a specific
-      period of time.
+  - description: A calendar event represents an event involving or relevant to a patient which will or has occurred on a specific date or during a specific period of time.
     name: calendar event
-  - description: A calendar event response indicates the attendee's response to a
-      calendar event.  Only `POST` for creation is allowed as the responses are
-      updated into the corresponding calendar events.
+  - description: A calendar event response indicates the attendee's response to a calendar event.  Only `POST` for creation is allowed as the responses are updated into the corresponding calendar events.
     name: calendar event response
   - description: Email history represents a single email that was sent using Fitbit Plus.
     name: email history
-  - description: A health profile contains a set of health questions and answers for
-      a patient.
+  - description: A health profile contains a set of health questions and answers for a patient.
     name: health profile
   - description: A health profile answer is the answer to a question for a patient.
     name: health profile answer
-  - description: A health profile question contains a health question and the
-      corresponding answer for a patient.
+  - description: A health profile question contains a health question and the corresponding answer for a patient.
     name: health profile question
-  - description: A health question definition specifies a health question and the
-      corresponding answer choices.
+  - description: A health question definition specifies a health question and the corresponding answer choices.
     name: health question definition
-  - description: A metric is a quantitative result for a patient. For example, vital
-      signs, lab results, etc. are all metrics.
+  - description: A metric is a quantitative result for a patient. For example, vital signs, lab results, etc. are all metrics.
     name: metric
   - description: A patient is the core user of Fitbit Plus.
     name: patient
@@ -172,17 +154,13 @@ tags:
     name: plan
   - description: A patient health result is a quantitative result for a patient.
     name: result
-  - description: A reward allocates a portion of the budget from the reward program
-      activation for achieving a particular goal and sets a target date.
+  - description: A reward allocates a portion of the budget from the reward program activation for achieving a particular goal and sets a target date.
     name: reward
-  - description: A reward earning specifies the portion of a reward that was earned
-      and at what date.
+  - description: A reward earning specifies the portion of a reward that was earned and at what date.
     name: reward earning
-  - description: A reward earning fulfillment specifies the portion of a reward
-      earning that was fulfilled and at what date.
+  - description: A reward earning fulfillment specifies the portion of a reward earning that was fulfilled and at what date.
     name: reward earning fulfillment
-  - description: A reward program activation is the activation of a reward program
-      for a specific patient.
+  - description: A reward program activation is the activation of a reward program for a specific patient.
     name: reward program activation
 paths:
   /action:
@@ -371,30 +349,22 @@ paths:
       operationId: fetchCalendarEvents
       parameters:
         - description: >
-            Patient id to fetch calendar event. Note that one of the following
-            filters must be specified: `filter[patient]`, `filter[group]`,
-            `filter[organization]`, or `filter[attendees]`.
+            Patient id to fetch calendar event. Note that one of the following filters must be specified: `filter[patient]`, `filter[group]`, `filter[organization]`, or `filter[attendees]`.
           in: query
           name: filter[patient]
           type: string
         - description: >
-            Comma-separated list of group ids. Note that one of the following
-            filters must be specified: `filter[patient]`, `filter[group]`,
-            `filter[organization]`, or `filter[attendees]`.
+            Comma-separated list of group ids. Note that one of the following filters must be specified: `filter[patient]`, `filter[group]`, `filter[organization]`, or `filter[attendees]`.
           in: query
           name: filter[groups]
           type: string
         - description: >
-            Fitbit Plus organization id. Note that one of the following filters
-            must be specified: `filter[patient]`, `filter[group]`,
-            `filter[organization]`, or `filter[attendees]`.
+            Fitbit Plus organization id. Note that one of the following filters must be specified: `filter[patient]`, `filter[group]`, `filter[organization]`, or `filter[attendees]`.
           in: query
           name: filter[organization]
           type: string
         - description: >
-            Comma-separated list of coach or patient ids. Note that one of the
-            following filters must be specified: `filter[patient]`,
-            `filter[group]`, `filter[organization]`, or `filter[attendees]`.
+            Comma-separated list of coach or patient ids. Note that one of the following filters must be specified: `filter[patient]`, `filter[group]`, `filter[organization]`, or `filter[attendees]`.
           in: query
           name: filter[attendees]
           type: string
@@ -408,49 +378,32 @@ paths:
           in: query
           name: filter[type]
           type: string
-        - description: If not specified, return all calendar events. If set to `true`
-            return only events marked as completed, if set to `false`, return
-            only events not marked as completed yet.
+        - description: If not specified, return all calendar events. If set to `true` return only events marked as completed, if set to `false`, return only events not marked as completed yet.
           in: query
           name: filter[completed]
           type: boolean
         - description: >
-            The start (inclusive) and end (exclusive) dates are ISO date and
-            time strings separated by `..`. Example for events starting in
-            November 2017 (America/New_York):
-            `filter[start_at]=2017-11-01T00:00:00-04:00..2017-12-01T00:00:00-05:00`
+            The start (inclusive) and end (exclusive) dates are ISO date and time strings separated by `..`. Example for events starting in November 2017 (America/New_York): `filter[start_at]=2017-11-01T00:00:00-04:00..2017-12-01T00:00:00-05:00`
           in: query
           name: filter[start_at]
           type: string
         - description: >
-            The start (inclusive) and end (exclusive) dates are ISO date and
-            time strings separated by `..`. Example for events ending in
-            November 2017 (America/New_York):
-            `filter[end_at]=2017-11-01T00:00:00-04:00..2017-12-01T00:00:00-05:00`
+            The start (inclusive) and end (exclusive) dates are ISO date and time strings separated by `..`. Example for events ending in November 2017 (America/New_York): `filter[end_at]=2017-11-01T00:00:00-04:00..2017-12-01T00:00:00-05:00`
           in: query
           name: filter[end_at]
           type: string
         - description: >
-            The start (inclusive) and end (exclusive) dates are ISO date and
-            time strings separated by `..`. Example for events completed in
-            November 2017 (America/New_York):
-            `filter[completed_at]=2017-11-01T00:00:00-04:00..2017-12-01T00:00:00-05:00`
+            The start (inclusive) and end (exclusive) dates are ISO date and time strings separated by `..`. Example for events completed in November 2017 (America/New_York): `filter[completed_at]=2017-11-01T00:00:00-04:00..2017-12-01T00:00:00-05:00`
           in: query
           name: filter[completed_at]
           type: string
         - description: >
-            The start (inclusive) and end (exclusive) dates are ISO date and
-            time strings separated by `..`. Example for events created in
-            November 2017 (America/New_York):
-            `filter[created_at]=2017-11-01T00:00:00-04:00..2017-12-01T00:00:00-05:00`
+            The start (inclusive) and end (exclusive) dates are ISO date and time strings separated by `..`. Example for events created in November 2017 (America/New_York): `filter[created_at]=2017-11-01T00:00:00-04:00..2017-12-01T00:00:00-05:00`
           in: query
           name: filter[created_at]
           type: string
         - description: >
-            The start (inclusive) and end (exclusive) dates are ISO date and
-            time strings separated by `..`. Example for events updated in
-            November 2017 (America/New_York):
-            `filter[updated_at]=2017-11-01T00:00:00-04:00..2017-12-01T00:00:00-05:00`
+            The start (inclusive) and end (exclusive) dates are ISO date and time strings separated by `..`. Example for events updated in November 2017 (America/New_York): `filter[updated_at]=2017-11-01T00:00:00-04:00..2017-12-01T00:00:00-05:00`
           in: query
           name: filter[updated_at]
           type: string
@@ -508,8 +461,7 @@ paths:
       tags:
         - calendar event
     post:
-      description: Create a calendar event for a patient. Attribute `all_day` must be
-        set to `true` and `end_at` cannot be set for `plan-check-in` event type.
+      description: Create a calendar event for a patient. Attribute `all_day` must be set to `true` and `end_at` cannot be set for `plan-check-in` event type.
       operationId: createCalendarEvent
       parameters:
         - in: body
@@ -587,14 +539,7 @@ paths:
       tags:
         - calendar event
     patch:
-      description: Update a calendar event for a patient. Attribute `all_day` must be
-        true and `end_at` cannot be specified for `plan-check-in` event type. To
-        mark a calendar event as 'completed', set `completed_at` and
-        `completed_by` to desired values.  To mark a completed calendar event as
-        'not completed', set `completed_at` and `completed_by` to `null`.
-        Attendees can be added or removed, but response status cannot be
-        updated. Use the calendar event response api for response status updates
-        instead.
+      description: Update a calendar event for a patient. Attribute `all_day` must be true and `end_at` cannot be specified for `plan-check-in` event type. To mark a calendar event as 'completed', set `completed_at` and `completed_by` to desired values.  To mark a completed calendar event as 'not completed', set `completed_at` and `completed_by` to `null`. Attendees can be added or removed, but response status cannot be updated. Use the calendar event response api for response status updates instead.
       operationId: updateCalendarEvent
       parameters:
         - description: Calendar event identifier
@@ -629,10 +574,7 @@ paths:
         - calendar event
   /calendar_event_response:
     post:
-      description: Create a calendar event response for an attendee of a calendar
-        event, the attendee can be a coach or patient.  Calendar event responses
-        cannot be fetched, updated nor deleted.  Use calendar event api to fetch
-        the response status for attendees.
+      description: Create a calendar event response for an attendee of a calendar event, the attendee can be a coach or patient.  Calendar event responses cannot be fetched, updated nor deleted.  Use calendar event api to fetch the response status for attendees.
       operationId: createCalendarEventResponse
       parameters:
         - in: body
@@ -666,14 +608,12 @@ paths:
       operationId: fetchCoaches
       parameters:
         - description: >
-            Comma-separated list of group ids. Note that one of the following
-            filters must be specified: `filter[groups]`, `filter[organization]`.
+            Comma-separated list of group ids. Note that one of the following filters must be specified: `filter[groups]`, `filter[organization]`.
           in: query
           name: filter[groups]
           type: string
         - description: >
-            Fitbit Plus organization id. Note that one of the following filters
-            must be specified: `filter[groups]`, `filter[organization]`.
+            Fitbit Plus organization id. Note that one of the following filters must be specified: `filter[groups]`, `filter[organization]`.
           in: query
           name: filter[organization]
           type: string
@@ -724,13 +664,11 @@ paths:
       description: Get a list of email histories
       operationId: fetchEmailHistories
       parameters:
-        - description: Fitbit Plus user id of email recipient. Required if filter[sender]
-            is not defined.
+        - description: Fitbit Plus user id of email recipient. Required if filter[sender] is not defined.
           in: query
           name: filter[receiver]
           type: string
-        - description: Fitbit Plus user id of email sender. Required if filter[receiver]
-            is not defined.
+        - description: Fitbit Plus user id of email sender. Required if filter[receiver] is not defined.
           in: query
           name: filter[sender]
           type: string
@@ -738,7 +676,7 @@ paths:
           in: query
           name: filter[emailType]
           type: string
-        - description: |
+        - description: >
             valid sorts:
               * send_time - ascending by send_time
               * -send_time - descending by send_time
@@ -886,23 +824,17 @@ paths:
       operationId: fetchHealthProfiles
       parameters:
         - description: >
-            Patient id to fetch health profile. Note that one of the following
-            filters must be specified: `filter[patient]`, `filter[group]`, or
-            `filter[organization]`.
+            Patient id to fetch health profile. Note that one of the following filters must be specified: `filter[patient]`, `filter[group]`, or `filter[organization]`.
           in: query
           name: filter[patient]
           type: string
         - description: >
-            Comma-separated list of group ids. Note that one of the following
-            filters must be specified: `filter[patient]`, `filter[group]`, or
-            `filter[organization]`.
+            Comma-separated list of group ids. Note that one of the following filters must be specified: `filter[patient]`, `filter[group]`, or `filter[organization]`.
           in: query
           name: filter[groups]
           type: string
         - description: >
-            Fitbit Plus organization id. Note that one of the following filters
-            must be specified: `filter[patient]`, `filter[group]`, or
-            `filter[organization]`.
+            Fitbit Plus organization id. Note that one of the following filters must be specified: `filter[patient]`, `filter[group]`, or `filter[organization]`.
           in: query
           name: filter[organization]
           type: string
@@ -1000,23 +932,17 @@ paths:
       operationId: fetchHealthProfileAnswers
       parameters:
         - description: >
-            Patient id to fetch healt profile answers. Note that one of the
-            following filters must be specified: `filter[patient]`,
-            `filter[group]`, or `filter[organization]`.
+            Patient id to fetch healt profile answers. Note that one of the following filters must be specified: `filter[patient]`, `filter[group]`, or `filter[organization]`.
           in: query
           name: filter[patient]
           type: string
         - description: >
-            Comma-separated list of group ids. Note that one of the following
-            filters must be specified: `filter[patient]`, `filter[group]`, or
-            `filter[organization]`.
+            Comma-separated list of group ids. Note that one of the following filters must be specified: `filter[patient]`, `filter[group]`, or `filter[organization]`.
           in: query
           name: filter[groups]
           type: string
         - description: >
-            Fitbit Plus organization id. Note that one of the following filters
-            must be specified: `filter[patient]`, `filter[group]`, or
-            `filter[organization]`.
+            Fitbit Plus organization id. Note that one of the following filters must be specified: `filter[patient]`, `filter[group]`, or `filter[organization]`.
           in: query
           name: filter[organization]
           type: string
@@ -1112,23 +1038,17 @@ paths:
       operationId: fetchHealthProfileQuestions
       parameters:
         - description: >
-            Patient id to fetch healt profile questions. Note that one of the
-            following filters must be specified: `filter[patient]`,
-            `filter[group]`, or `filter[organization]`.
+            Patient id to fetch healt profile questions. Note that one of the following filters must be specified: `filter[patient]`, `filter[group]`, or `filter[organization]`.
           in: query
           name: filter[patient]
           type: string
         - description: >
-            Comma-separated list of group ids. Note that one of the following
-            filters must be specified: `filter[patient]`, `filter[group]`, or
-            `filter[organization]`.
+            Comma-separated list of group ids. Note that one of the following filters must be specified: `filter[patient]`, `filter[group]`, or `filter[organization]`.
           in: query
           name: filter[groups]
           type: string
         - description: >
-            Fitbit Plus organization id. Note that one of the following filters
-            must be specified: `filter[patient]`, `filter[group]`, or
-            `filter[organization]`.
+            Fitbit Plus organization id. Note that one of the following filters must be specified: `filter[patient]`, `filter[group]`, or `filter[organization]`.
           in: query
           name: filter[organization]
           type: string
@@ -1250,8 +1170,7 @@ paths:
         - application/vnd.api+json
         - application/json
       description: >
-        Create an OAuth 2.0 Bearer token. A valid bearer token is required for
-        all other API requests.
+        Create an OAuth 2.0 Bearer token. A valid bearer token is required for all other API requests.
 
 
         Be sure to set the header `Content-Type: "application/vnd.api+json"`. Otherwise, you will get an error
@@ -1397,45 +1316,33 @@ paths:
       description: Get a list of patients.
       operationId: fetchPatients
       parameters:
-        - description: Comma-separated list of group ids. Note that either `filter[group]`
-            or `filter[organization]` must be specified.
+        - description: Comma-separated list of group ids. Note that either `filter[group]` or `filter[organization]` must be specified.
           in: query
           name: filter[groups]
           type: string
-        - description: Fitbit Plus organization id. Note that either `filter[group]` or
-            `filter[organization]` must be specified.
+        - description: Fitbit Plus organization id. Note that either `filter[group]` or `filter[organization]` must be specified.
           in: query
           name: filter[organization]
           type: string
-        - description: 'Identifier system (example: "MyEHR") - requires a
-            "filter[identifier][value]" parameter'
+        - description: 'Identifier system (example: "MyEHR") - requires a "filter[identifier][value]" parameter'
           in: query
           name: filter[identifier][system]
           type: string
-        - description: 'Identifier value (example: "12345") - requires a
-            "filter[identifier][system]" parameter'
+        - description: 'Identifier value (example: "12345") - requires a "filter[identifier][system]" parameter'
           in: query
           name: filter[identifier][value]
           type: string
-        - description: If not specified, return all patients. If set to 'true' return only
-            archived patients, if set to 'false', return only patients who are
-            not archived.
+        - description: If not specified, return all patients. If set to 'true' return only archived patients, if set to 'false', return only patients who are not archived.
           in: query
           name: filter[archived]
           type: boolean
         - description: >
-            The start (inclusive) and end (exclusive) dates are ISO date and
-            time strings separated by `..`. Example for patients created in
-            November 2017 (America/New_York):
-            `filter[created_at]=2017-11-01T00:00:00-04:00..2017-12-01T00:00:00-05:00`
+            The start (inclusive) and end (exclusive) dates are ISO date and time strings separated by `..`. Example for patients created in November 2017 (America/New_York): `filter[created_at]=2017-11-01T00:00:00-04:00..2017-12-01T00:00:00-05:00`
           in: query
           name: filter[created_at]
           type: string
         - description: >
-            The start (inclusive) and end (exclusive) dates are ISO date and
-            time strings separated by `..`. Example for patients updated in
-            November 2017 (America/New_York):
-            `filter[updated_at]=2017-11-01T00:00:00-04:00..2017-12-01T00:00:00-05:00`
+            The start (inclusive) and end (exclusive) dates are ISO date and time strings separated by `..`. Example for patients updated in November 2017 (America/New_York): `filter[updated_at]=2017-11-01T00:00:00-04:00..2017-12-01T00:00:00-05:00`
           in: query
           name: filter[updated_at]
           type: string
@@ -1695,23 +1602,17 @@ paths:
       operationId: fetchPatientHealthMetrics
       parameters:
         - description: >
-            Filter the patient health metrics for a specified patient. Note that
-            one of the following filters must be specified: `filter[patient]`,
-            `filter[groups]`, `filter[organization]`.
+            Filter the patient health metrics for a specified patient. Note that one of the following filters must be specified: `filter[patient]`, `filter[groups]`, `filter[organization]`.
           in: query
           name: filter[patient]
           type: string
         - description: >
-            Comma-separated list of group ids. Note that one of the following
-            filters must be specified: `filter[patient]`, `filter[groups]`,
-            `filter[organization]`.
+            Comma-separated list of group ids. Note that one of the following filters must be specified: `filter[patient]`, `filter[groups]`, `filter[organization]`.
           in: query
           name: filter[groups]
           type: string
         - description: >
-            Fitbit Plus organization id. Note that one of the following filters
-            must be specified: `filter[patient]`, `filter[groups]`,
-            `filter[organization]`.
+            Fitbit Plus organization id. Note that one of the following filters must be specified: `filter[patient]`, `filter[groups]`, `filter[organization]`.
           in: query
           name: filter[organization]
           type: string
@@ -1861,23 +1762,17 @@ paths:
       operationId: fetchPatientPlanSummaries
       parameters:
         - description: >
-            Patient id to fetch plan summary for. Note that one of the following
-            filters must be specified: `filter[patient]`, `filter[groups]`,
-            `filter[organization]`.
+            Patient id to fetch plan summary for. Note that one of the following filters must be specified: `filter[patient]`, `filter[groups]`, `filter[organization]`.
           in: query
           name: filter[patient]
           type: string
         - description: >
-            Comma-separated list of group ids. Note that one of the following
-            filters must be specified: `filter[patient]`, `filter[groups]`,
-            `filter[organization]`.
+            Comma-separated list of group ids. Note that one of the following filters must be specified: `filter[patient]`, `filter[groups]`, `filter[organization]`.
           in: query
           name: filter[groups]
           type: string
         - description: >
-            Fitbit Plus organization id. Note that one of the following filters
-            must be specified: `filter[patient]`, `filter[groups]`,
-            `filter[organization]`.
+            Fitbit Plus organization id. Note that one of the following filters must be specified: `filter[patient]`, `filter[groups]`, `filter[organization]`.
           in: query
           name: filter[organization]
           type: string
@@ -1991,14 +1886,12 @@ paths:
           in: query
           name: filter[actions]
           type: string
-        - description: Filter results that occurred after the passed ISO date and time
-            string
+        - description: Filter results that occurred after the passed ISO date and time string
           format: dateTime
           in: query
           name: filter[start_at]
           type: string
-        - description: Filter results that occurred before the passed ISO date and time
-            string
+        - description: Filter results that occurred before the passed ISO date and time string
           format: dateTime
           in: query
           name: filter[end_at]
@@ -2008,18 +1901,12 @@ paths:
           name: filter[threads]
           type: string
         - description: >
-            The start (inclusive) and end (exclusive) dates are ISO date and
-            time strings separated by `..`. Example for results created in
-            November 2017 (America/New_York):
-            `filter[created_at]=2017-11-01T00:00:00-04:00..2017-12-01T00:00:00-05:00`
+            The start (inclusive) and end (exclusive) dates are ISO date and time strings separated by `..`. Example for results created in November 2017 (America/New_York): `filter[created_at]=2017-11-01T00:00:00-04:00..2017-12-01T00:00:00-05:00`
           in: query
           name: filter[created_at]
           type: string
         - description: >
-            The start (inclusive) and end (exclusive) dates are ISO date and
-            time strings separated by `..`. Example for results updated in
-            November 2017 (America/New_York):
-            `filter[updated_at]=2017-11-01T00:00:00-04:00..2017-12-01T00:00:00-05:00`
+            The start (inclusive) and end (exclusive) dates are ISO date and time strings separated by `..`. Example for results updated in November 2017 (America/New_York): `filter[updated_at]=2017-11-01T00:00:00-04:00..2017-12-01T00:00:00-05:00`
           in: query
           name: filter[updated_at]
           type: string
@@ -2101,9 +1988,7 @@ paths:
       operationId: fetchRewards
       parameters:
         - description: >
-            Patient identifier. Note that one of the following filters must be
-            specified: `filter[patient]`, `filter[groups]`,
-            `filter[organization]`.
+            Patient identifier. Note that one of the following filters must be specified: `filter[patient]`, `filter[groups]`, `filter[organization]`.
           in: query
           name: filter[patient]
           type: string
@@ -2116,16 +2001,12 @@ paths:
           name: filter[thread]
           type: string
         - description: >
-            Comma-separated list of group ids. Note that one of the following
-            filters must be specified: `filter[patient]`, `filter[groups]`,
-            `filter[organization]`.
+            Comma-separated list of group ids. Note that one of the following filters must be specified: `filter[patient]`, `filter[groups]`, `filter[organization]`.
           in: query
           name: filter[groups]
           type: string
         - description: >
-            Fitbit Plus organization id. Note that one of the following filters
-            must be specified: `filter[patient]`, `filter[groups]`,
-            `filter[organization]`.
+            Fitbit Plus organization id. Note that one of the following filters must be specified: `filter[patient]`, `filter[groups]`, `filter[organization]`.
           in: query
           name: filter[organization]
           type: string
@@ -2215,10 +2096,7 @@ paths:
           name: filter[patient]
           required: true
           type: string
-        - description: If true, only returns those reward earnings for which
-            ready_for_fulfillment is true and fulfilled_at is null. If false,
-            only returns those reward earnings for which ready_for_fulfillment
-            is false and fulfilled_at is null.
+        - description: If true, only returns those reward earnings for which ready_for_fulfillment is true and fulfilled_at is null. If false, only returns those reward earnings for which ready_for_fulfillment is false and fulfilled_at is null.
           in: query
           name: filter[ready_for_fulfillment]
           type: boolean
@@ -2239,10 +2117,7 @@ paths:
       tags:
         - reward earning
     post:
-      description: Create a reward earning for a reward. There can only be one earning
-        for a reward. It is possilble to create multiple reward earnings
-        simultaneously by providing and array of reward earnings in the data
-        property.
+      description: Create a reward earning for a reward. There can only be one earning for a reward. It is possilble to create multiple reward earnings simultaneously by providing and array of reward earnings in the data property.
       operationId: createRewardEarning
       parameters:
         - in: body
@@ -2323,8 +2198,7 @@ paths:
       tags:
         - reward earning fulfillment
     post:
-      description: Create a reward earning fulfillment for a reward earning. There can
-        only be one fulfillment for each earning.
+      description: Create a reward earning fulfillment for a reward earning. There can only be one fulfillment for each earning.
       operationId: createRewardEarningFulfillment
       parameters:
         - in: body
@@ -2384,15 +2258,12 @@ paths:
       operationId: fetchRewardPrograms
       parameters:
         - description: >
-            Comma-separated list of group identifiers. Note that one of the
-            following filters must be specified: `filter[groups]`,
-            `filter[organization]`.
+            Comma-separated list of group identifiers. Note that one of the following filters must be specified: `filter[groups]`, `filter[organization]`.
           in: query
           name: filter[groups]
           type: string
         - description: >
-            Fitbit Plus organization id. Note that one of the following filters
-            must be specified: `filter[groups]`, `filter[organization]`.
+            Fitbit Plus organization id. Note that one of the following filters must be specified: `filter[groups]`, `filter[organization]`.
           in: query
           name: filter[organization]
           type: string
@@ -2499,23 +2370,17 @@ paths:
       operationId: fetchRewardProgramActivations
       parameters:
         - description: >
-            Patient identifier. Note that one of the following filters must be
-            specified: `filter[patient]`, `filter[groups]`,
-            `filter[organization]`.
+            Patient identifier. Note that one of the following filters must be specified: `filter[patient]`, `filter[groups]`, `filter[organization]`.
           in: query
           name: filter[patient]
           type: string
         - description: >
-            Comma-separated list of group ids. Note that one of the following
-            filters must be specified: `filter[patient]`, `filter[groups]`,
-            `filter[organization]`.
+            Comma-separated list of group ids. Note that one of the following filters must be specified: `filter[patient]`, `filter[groups]`, `filter[organization]`.
           in: query
           name: filter[groups]
           type: string
         - description: >
-            Fitbit Plus organization id. Note that one of the following filters
-            must be specified: `filter[patient]`, `filter[groups]`,
-            `filter[organization]`.
+            Fitbit Plus organization id. Note that one of the following filters must be specified: `filter[patient]`, `filter[groups]`, `filter[organization]`.
           in: query
           name: filter[organization]
           type: string
@@ -2536,8 +2401,7 @@ paths:
       tags:
         - reward program activation
     post:
-      description: Create a reward program activation for a patient. There can only be
-        one activation for a patient for a given reward program.
+      description: Create a reward program activation for a patient. There can only be one activation for a patient for a given reward program.
       operationId: createRewardProgramActivation
       parameters:
         - in: body
@@ -2655,8 +2519,7 @@ definitions:
                 properties:
                   days:
                     items:
-                      description: Days of week that the action is scheduled for. Zero-indexed, ex 0
-                        represents Sunday, etc.
+                      description: Days of week that the action is scheduled for. Zero-indexed, ex 0 represents Sunday, etc.
                       enum:
                         - 0
                         - 1
@@ -2874,12 +2737,7 @@ definitions:
       attributes:
         properties:
           all_day:
-            description: True if the calendar event is an all day event, false otherwise.
-              Must be set to true for `plan-check-in` event type. If it is true,
-              then `start_at` and `end_at` must also be set to beginning of day,
-              except `plan-check-in` event type does not need an `end_at` date.
-              If it is false, then `start_at` and `end_at` must be on the same
-              day.
+            description: True if the calendar event is an all day event, false otherwise. Must be set to true for `plan-check-in` event type. If it is true, then `start_at` and `end_at` must also be set to beginning of day, except `plan-check-in` event type does not need an `end_at` date. If it is false, then `start_at` and `end_at` must be on the same day.
             type: boolean
           attendees:
             description: List of attendees for the calendar event
@@ -2898,20 +2756,17 @@ definitions:
               type: object
             type: array
           completed_at:
-            description: The date and time when the calendar event is marked as completed.
-              Only valid for `plan-check-in` event type.
+            description: The date and time when the calendar event is marked as completed. Only valid for `plan-check-in` event type.
             example: 2017-11-03T06:17:34.652Z
             format: ISODate
             type: string
           completed_by:
-            description: The coach who marked the calendar event as completed. Only valid
-              for `plan-check-in` event type.
+            description: The coach who marked the calendar event as completed. Only valid for `plan-check-in` event type.
             type: object
           description:
             type: string
           end_at:
-            description: The date and time when the calendar event ends. Not valid for
-              `plan-check-in` event type.
+            description: The date and time when the calendar event ends. Not valid for `plan-check-in` event type.
             example: 2017-11-03T08:00:00.000Z
             format: ISODate
             type: string
@@ -2923,8 +2778,7 @@ definitions:
             format: ISODate
             type: string
           time_zone:
-            description: The time zone in which the dates for the calendar event are
-              specified
+            description: The time zone in which the dates for the calendar event are specified
             example: America/New_York
             type: string
           title:
@@ -2952,8 +2806,7 @@ definitions:
       relationships:
         properties:
           owner:
-            description: The owner is the patient for whom the calendar event is created
-              specificially for
+            description: The owner is the patient for whom the calendar event is created specificially for
             properties:
               data:
                 properties:
@@ -3026,8 +2879,7 @@ definitions:
       relationships:
         properties:
           calendar_event:
-            description: The calendar_event is the calendar event for which the calendar
-              event response is created specificially for
+            description: The calendar_event is the calendar event for which the calendar event response is created specificially for
             properties:
               data:
                 properties:
@@ -3047,8 +2899,7 @@ definitions:
               - data
             type: object
           user:
-            description: The user is the coach or patient for whom the calendar event
-              response is created specificially for
+            description: The user is the coach or patient for whom the calendar event response is created specificially for
             properties:
               data:
                 properties:
@@ -3274,8 +3125,7 @@ definitions:
               owner:
                 properties:
                   data:
-                    $ref: "#/definitions/CalendarEventResource/properties/relationships/properties/\
-                      owner/properties/data"
+                    $ref: "#/definitions/CalendarEventResource/properties/relationships/properties/owner/properties/data"
                 required:
                   - data
                 type: object
@@ -3327,16 +3177,14 @@ definitions:
               calendar_event:
                 properties:
                   data:
-                    $ref: "#/definitions/CalendarEventResponseResource/properties/relationships/pro\
-                      perties/calendar_event/properties/data"
+                    $ref: "#/definitions/CalendarEventResponseResource/properties/relationships/properties/calendar_event/properties/data"
                 required:
                   - data
                 type: object
               user:
                 properties:
                   data:
-                    $ref: "#/definitions/CalendarEventResponseResource/properties/relationships/pro\
-                      perties/user/properties/data"
+                    $ref: "#/definitions/CalendarEventResponseResource/properties/relationships/properties/user/properties/data"
                 required:
                   - data
                 type: object
@@ -3413,8 +3261,7 @@ definitions:
         properties:
           ignore_duplicates:
             description: >
-              If `true`, the patient health metric will be ignored if there is
-              an existing patient health metric for
+              If `true`, the patient health metric will be ignored if there is an existing patient health metric for
 
               the same patient, with the same `type` and same `occurred_at`.
             type: boolean
@@ -3451,8 +3298,7 @@ definitions:
           ignore_duplicates:
             default: false
             description: >
-              If `true`, patients with any conflicting identifiers (same
-              `system` and `value`) will be ignored.
+              If `true`, patients with any conflicting identifiers (same `system` and `value`) will be ignored.
 
               Useful for gracefully skipping duplicates after errors occur during bulk create.
             type: boolean
@@ -3597,8 +3443,7 @@ definitions:
                 example: 19391dc5-8af8-4152-93e8-74ff9361607e
                 type: string
               client_secret:
-                description: Contact Fitbit Plus API Support to get a client id and secret.
-                  Secret is required if grant_type is "client_credentials"
+                description: Contact Fitbit Plus API Support to get a client id and secret. Secret is required if grant_type is "client_credentials"
                 example: 63eca384-7a65-42e2-872b-afd3e8659d0a
                 type: string
               grant_type:
@@ -3700,8 +3545,7 @@ definitions:
             format: dateTime
             type: string
           status_times:
-            description: Status of email. Multiple statuses may be defined. The current
-              status is the one with the most recent date.
+            description: Status of email. Multiple statuses may be defined. The current status is the one with the most recent date.
             properties:
               bounce:
                 description: Time email was bounced.
@@ -3915,8 +3759,7 @@ definitions:
         $ref: "#/definitions/CalendarEventResource"
       included:
         description: >
-          Related resources which are included in the response based on the
-          `include` param.
+          Related resources which are included in the response based on the `include` param.
 
           Attributes of each resource will vary depending on the type.
 
@@ -3935,8 +3778,7 @@ definitions:
         type: array
       included:
         description: >
-          Related resources which are included in the response based on the
-          `include` param.
+          Related resources which are included in the response based on the `include` param.
 
           Attributes of each resource will vary depending on the type.
 
@@ -4079,8 +3921,7 @@ definitions:
         $ref: "#/definitions/HealthProfileAnswerResource"
       included:
         description: >
-          Related resources which are included in the response based on the
-          `include` param.
+          Related resources which are included in the response based on the `include` param.
 
           Attributes of each resource will vary depending on the type.
 
@@ -4101,8 +3942,7 @@ definitions:
         type: array
       included:
         description: >
-          Related resources which are included in the response based on the
-          `include` param.
+          Related resources which are included in the response based on the `include` param.
 
           Attributes of each resource will vary depending on the type.
 
@@ -4123,8 +3963,7 @@ definitions:
         $ref: "#/definitions/HealthProfileQuestionResource"
       included:
         description: >
-          Related resources which are included in the response based on the
-          `include` param.
+          Related resources which are included in the response based on the `include` param.
 
           Attributes of each resource will vary depending on the type.
 
@@ -4145,8 +3984,7 @@ definitions:
         type: array
       included:
         description: >
-          Related resources which are included in the response based on the
-          `include` param.
+          Related resources which are included in the response based on the `include` param.
 
           Attributes of each resource will vary depending on the type.
 
@@ -4167,8 +4005,7 @@ definitions:
         $ref: "#/definitions/HealthProfileResource"
       included:
         description: >
-          Related resources which are included in the response based on the
-          `include` param.
+          Related resources which are included in the response based on the `include` param.
 
           Attributes of each resource will vary depending on the type.
 
@@ -4189,8 +4026,7 @@ definitions:
         type: array
       included:
         description: >
-          Related resources which are included in the response based on the
-          `include` param.
+          Related resources which are included in the response based on the `include` param.
 
           Attributes of each resource will vary depending on the type.
 
@@ -4287,8 +4123,7 @@ definitions:
         type: array
       included:
         description: >
-          Related resources which are included in the response based on the
-          `include` param.
+          Related resources which are included in the response based on the `include` param.
 
           Attributes of each resource will vary depending on the type.
 
@@ -4411,8 +4246,7 @@ definitions:
         $ref: "#/definitions/PatientPlanSummaryResource"
       included:
         description: >
-          Related resources which are included in the response based on the
-          `include` param.
+          Related resources which are included in the response based on the `include` param.
 
           Attributes of each resource will vary depending on the type.
 
@@ -4784,8 +4618,7 @@ definitions:
               description: The details of a previous answer for a health profile question
               properties:
                 _created_by:
-                  description: The id of the patient or coach who answered the health profile
-                    question
+                  description: The id of the patient or coach who answered the health profile question
                   type: string
                 answered_at:
                   description: The date when the health profile question is answered
@@ -4800,8 +4633,7 @@ definitions:
             description: The details of the latest answer for a health profile question
             properties:
               _created_by:
-                description: The id of the patient or coach who answered the health profile
-                  question
+                description: The id of the patient or coach who answered the health profile question
                 type: string
               answered_at:
                 description: The date when the health profile question is answered
@@ -4880,8 +4712,7 @@ definitions:
     properties:
       attributes:
         description: >
-          A health profile question does not have any attribute since it only
-          relates an answer to the corresponding question definition.
+          A health profile question does not have any attribute since it only relates an answer to the corresponding question definition.
         type: object
       id:
         type: string
@@ -4993,11 +4824,9 @@ definitions:
       attributes:
         properties:
           stats:
-            description: List of category, answered and total counts for questions in the
-              health profile
+            description: List of category, answered and total counts for questions in the health profile
             items:
-              description: The category, answered and total counts for questions in the health
-                profile
+              description: The category, answered and total counts for questions in the health profile
               properties:
                 answered:
                   type: number
@@ -5122,28 +4951,23 @@ definitions:
                 type: string
             type: object
           requirements:
-            description: The lsit of age and gender requirements for the question to be
-              included
+            description: The lsit of age and gender requirements for the question to be included
             items:
               description: The age and gender requirement for the question to be included
               properties:
                 property:
                   type: string
                 shouldBeEqual:
-                  description: Specifies if the value in property should be equal to the one in
-                    value
+                  description: Specifies if the value in property should be equal to the one in value
                   type: boolean
                 shouldBeGreaterThan:
-                  description: Specifies if the value in property should be greater than the one
-                    in value
+                  description: Specifies if the value in property should be greater than the one in value
                   type: number
                 shouldBeLessThan:
-                  description: Specifies if the value in property should be less than the one in
-                    value
+                  description: Specifies if the value in property should be less than the one in value
                   type: number
                 value:
-                  description: The value to be compared with the one in property, based on
-                    shouldBeEqual, shouldBeGreaterThan, or shouldBeLessThan
+                  description: The value to be compared with the one in property, based on shouldBeEqual, shouldBeGreaterThan, or shouldBeLessThan
                   type: string
               type: object
             type: array
@@ -5218,8 +5042,7 @@ definitions:
     allOf:
       - $ref: "#/definitions/PatientResource"
       - description: >
-          Note that `data` can either be a single object or an array of objects
-          matching the schema specified here
+          Note that `data` can either be a single object or an array of objects matching the schema specified here
 
           (bulk create).
       - properties:
@@ -5268,14 +5091,11 @@ definitions:
                           example: 57b3708b04ad8c2224f2af3b
                           type: string
                         meta:
-                          description: Allows the specification of a query for a group rather than
-                            providing a group id directly
+                          description: Allows the specification of a query for a group rather than providing a group id directly
                           properties:
                             query:
                               description: >
-                                1. If the query does not return any groups, a
-                                group with the specified name will be created
-                                and related to the patient.
+                                1. If the query does not return any groups, a group with the specified name will be created and related to the patient.
 
                                 2. If the query returns one group, that group will be related to the patient.
 
@@ -5312,8 +5132,7 @@ definitions:
     allOf:
       - $ref: "#/definitions/PatientHealthMetricResource"
       - description: >
-          Note that `data` can either be a single object or an array of objects
-          matching the schema specified here
+          Note that `data` can either be a single object or an array of objects matching the schema specified here
 
           (bulk create).
     type: object
@@ -5402,8 +5221,7 @@ definitions:
           unit:
             type: string
           value:
-            description: Can be any value (number, boolean, string, object) depending on the
-              metric type. Most values are of type number.
+            description: Can be any value (number, boolean, string, object) depending on the metric type. Most values are of type number.
         type: object
       id:
         type: string
@@ -5418,8 +5236,7 @@ definitions:
                     example: 5817ead56f5316c0d05ba8bf
                     type: string
                   meta:
-                    description: Allows the specification of a query for a patient rather than
-                      providing a patient id directly
+                    description: Allows the specification of a query for a patient rather than providing a patient id directly
                     properties:
                       query:
                         description: The query must return one and only one patient.
@@ -5495,8 +5312,7 @@ definitions:
       attributes:
         properties:
           _thread:
-            description: Links together results. This should be the same as the thread of
-              _action, if it is defined
+            description: Links together results. This should be the same as the thread of _action, if it is defined
             type: string
           aggregation:
             type: string
@@ -5514,8 +5330,7 @@ definitions:
           data:
             properties:
               value:
-                description: Can be any value (number, boolean, string, object) depending on the
-                  metric type. Most values are of type number
+                description: Can be any value (number, boolean, string, object) depending on the metric type. Most values are of type number
             type: object
           external_id:
             type: string
@@ -5583,8 +5398,7 @@ definitions:
                 type: string
             type: object
           type:
-            description: Type of result. Usually the same as metric_type except for
-              lifestyle actions
+            description: Type of result. Usually the same as metric_type except for lifestyle actions
             type: string
           window:
             type: string
@@ -5626,8 +5440,7 @@ definitions:
                     example: 5c0fc0d02d02421ed70ca1d1
                     type: string
                   meta:
-                    description: Allows the specification of a query for a patient rather than
-                      providing a patient id directly
+                    description: Allows the specification of a query for a patient rather than providing a patient id directly
                     properties:
                       query:
                         description: The query must return one and only one patient.
@@ -5675,8 +5488,7 @@ definitions:
         type: string
       unique:
         default: true
-        description: If `true`, the combination of system and value must be global
-          unique among all patients and coaches in Fitbit Plus.
+        description: If `true`, the combination of system and value must be global unique among all patients and coaches in Fitbit Plus.
         type: boolean
       value:
         type: string
@@ -6034,18 +5846,15 @@ definitions:
       attributes:
         properties:
           fulfilled_at:
-            description: Date at which the reward earning was fulfilled. (Must be at the
-              same time or after the reward was earned)
+            description: Date at which the reward earning was fulfilled. (Must be at the same time or after the reward was earned)
             format: dateTime
             type: string
           fulfilled_unit:
-            description: Unit of the earned reward that has been fulfilled. (Read-only
-              property)
+            description: Unit of the earned reward that has been fulfilled. (Read-only property)
             readOnly: true
             type: string
           fulfilled_value:
-            description: Value of the earned reward that has been fulfilled. (Must be
-              greater than or equal to 0)
+            description: Value of the earned reward that has been fulfilled. (Must be greater than or equal to 0)
             type: number
         required:
           - fulfilled_value
@@ -6089,9 +5898,7 @@ definitions:
       attributes:
         properties:
           earned_at:
-            description: Date at which the reward was earned. (Must be after the reward was
-              allocated and before the reward program activation was deactivated
-              or expired)
+            description: Date at which the reward was earned. (Must be after the reward was allocated and before the reward program activation was deactivated or expired)
             format: dateTime
             type: string
           earned_unit:
@@ -6099,25 +5906,19 @@ definitions:
             readOnly: true
             type: string
           earned_value:
-            description: Value of the reward that has been earned. (Must not exceed the
-              allocated value for the reward)
+            description: Value of the reward that has been earned. (Must not exceed the allocated value for the reward)
             type: number
           fulfilled_at:
-            description: Date at which the reward earning was fulfilled. (Read-only
-              property)
+            description: Date at which the reward earning was fulfilled. (Read-only property)
             format: dateTime
             readOnly: true
             type: string
           fulfilled_value:
-            description: Value of the earned reward that has been fulfilled. (Read-only
-              property)
+            description: Value of the earned reward that has been fulfilled. (Read-only property)
             readOnly: true
             type: number
           ready_for_fulfillment:
-            description: If true, the reward earning is ready to be fulfilled, either
-              because the reward program activation was fulfill_as_earned or
-              because the reward program activation has been deactivated.
-              (Read-only property)
+            description: If true, the reward earning is ready to be fulfilled, either because the reward program activation was fulfill_as_earned or because the reward program activation has been deactivated. (Read-only property)
             readOnly: true
             type: boolean
         required:
@@ -6184,9 +5985,7 @@ definitions:
       attributes:
         properties:
           activated_at:
-            description: Date at which the reward program was activated for the patient.
-              (Must be between the start_at and end_at dates for the reward
-              program)
+            description: Date at which the reward program was activated for the patient. (Must be between the start_at and end_at dates for the reward program)
             format: dateTime
             type: string
           active:
@@ -6202,8 +6001,7 @@ definitions:
             readOnly: true
             type: string
           deactivated_at:
-            description: Date at which the reward program was deactivated. (Must be after
-              the activated_at date)
+            description: Date at which the reward program was deactivated. (Must be after the activated_at date)
             format: dateTime
             type: string
           earned_count:
@@ -6211,17 +6009,12 @@ definitions:
             readOnly: true
             type: number
           expires_at:
-            description: Date at which the reward program activation expires. (Read-only
-              property set by adding the days_active from the reward program to
-              the activated_at date)
+            description: Date at which the reward program activation expires. (Read-only property set by adding the days_active from the reward program to the activated_at date)
             format: dateTime
             readOnly: true
             type: string
           fulfill_as_earned:
-            description: If true, the rewards created for a patient for the program can be
-              fulfulled as they are earned. If false, the rewards should only be
-              fulfilled when the program is deactivated. (Read-only property
-              denormalized from the reward program)
+            description: If true, the rewards created for a patient for the program can be fulfulled as they are earned. If false, the rewards should only be fulfilled when the program is deactivated. (Read-only property denormalized from the reward program)
             readOnly: true
             type: boolean
           total_allocated_value:
@@ -6281,17 +6074,14 @@ definitions:
               - credit
             type: string
           budget_value:
-            description: Value of the budget for the reward program. (Must be greater than
-              0)
+            description: Value of the budget for the reward program. (Must be greater than 0)
             type: number
           description:
-            description: Description of the reward program - designed to be a comprehensive
-              text description
+            description: Description of the reward program - designed to be a comprehensive text description
             type: string
           duration_active:
             default: 540
-            description: Number of days that a program can be active after it has been
-              activated for a patient. (Must be greater than 0)
+            description: Number of days that a program can be active after it has been activated for a patient. (Must be greater than 0)
             type: number
           end_at:
             description: Date at which the reward program ends. (Must be after the start_at)
@@ -6299,14 +6089,11 @@ definitions:
             type: string
           frozen:
             default: false
-            description: If true, the reward program cannot be activated for a patient and
-              new rewards cannot be created for the program.
+            description: If true, the reward program cannot be activated for a patient and new rewards cannot be created for the program.
             type: boolean
           fulfill_as_earned:
             default: false
-            description: If true, the rewards created for a patient for the program can be
-              fulfulled as they are earned. If false, the rewards should only be
-              fulfilled when the program is deactivated.
+            description: If true, the rewards created for a patient for the program can be fulfulled as they are earned. If false, the rewards should only be fulfilled when the program is deactivated.
             type: boolean
           name:
             description: Name of the reward program
@@ -6356,12 +6143,10 @@ definitions:
       attributes:
         properties:
           _thread:
-            description: Unique string identifying the health action with which the reward
-              is associated.
+            description: Unique string identifying the health action with which the reward is associated.
             type: string
           allocated_at:
-            description: Date at which the reward was allocated. (Must be after the reward
-              program is activated and before it is deactivated or expires)
+            description: Date at which the reward was allocated. (Must be after the reward program is activated and before it is deactivated or expires)
             format: dateTime
             type: string
           allocated_unit:
@@ -6369,8 +6154,7 @@ definitions:
             readOnly: true
             type: string
           allocated_value:
-            description: Value of the reward program budget allocated for the reward. (Must
-              not exceed the remaining budget for the reward program activation)
+            description: Value of the reward program budget allocated for the reward. (Must not exceed the remaining budget for the reward program activation)
             type: number
           description:
             description: Description of the reward.
@@ -6385,19 +6169,16 @@ definitions:
             readOnly: true
             type: number
           fulfilled_at:
-            description: Date at which the reward earning was fulfilled. (Read-only
-              property)
+            description: Date at which the reward earning was fulfilled. (Read-only property)
             format: dateTime
             readOnly: true
             type: string
           fulfilled_value:
-            description: Value of the earned reward that has been fulfilled. (Read-only
-              property)
+            description: Value of the earned reward that has been fulfilled. (Read-only property)
             readOnly: true
             type: number
           target_at:
-            description: Date at which the patient aspires to achieve the reward. (Must be
-              the same or after the allocated_at date)
+            description: Date at which the patient aspires to achieve the reward. (Must be the same or after the allocated_at date)
             format: dateTime
             type: string
         required:
@@ -6598,8 +6379,7 @@ definitions:
               owner:
                 properties:
                   data:
-                    $ref: "#/definitions/CalendarEventResource/properties/relationships/properties/\
-                      owner/properties/data"
+                    $ref: "#/definitions/CalendarEventResource/properties/relationships/properties/owner/properties/data"
                 type: object
             type: object
           type:

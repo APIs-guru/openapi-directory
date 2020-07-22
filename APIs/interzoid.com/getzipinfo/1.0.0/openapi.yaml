@@ -7,9 +7,7 @@ info:
     name: API Support
     url: https://www.interzoid.com
     x-twitter: interzoid
-  description: This API provides detailed information for a given zip code,
-    including city, state, latitude, longitude, area size, and various
-    population demographics.
+  description: This API provides detailed information for a given zip code, including city, state, latitude, longitude, area size, and various population demographics.
   license:
     name: Interzoid license
     url: https://www.interzoid.com/license
@@ -32,13 +30,10 @@ externalDocs:
 paths:
   /getzipcodeinfo:
     get:
-      description: For a given zip code, detailed information is returned, including
-        city, state, latitude, longitude, area size, and various population
-        demographics, including income, age, and presence of farming data.
+      description: For a given zip code, detailed information is returned, including city, state, latitude, longitude, area size, and various population demographics, including income, age, and presence of farming data.
       operationId: getzipcodeinfo
       parameters:
-        - description: Your Interzoid license API key. Register at
-            www.interzoid.com/register
+        - description: Your Interzoid license API key. Register at www.interzoid.com/register
           in: query
           name: license
           required: true

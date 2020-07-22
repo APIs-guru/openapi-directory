@@ -47,14 +47,11 @@ info:
 paths:
   "/artists/{artistname}":
     get:
-      description: |
+      description: >
         Get artist information
       operationId: artist
       parameters:
-        - description: 'The name of the artist. If it contains one of the special
-            characters below, please be sure to replace it by the corresponding
-            code: for / use %252F, for ? use %253F, for * use %252A, and for "
-            use %27C'
+        - description: 'The name of the artist. If it contains one of the special characters below, please be sure to replace it by the corresponding code: for / use %252F, for ? use %253F, for * use %252A, and for " use %27C'
           in: path
           name: artistname
           required: true
@@ -76,14 +73,11 @@ paths:
         - artist information
   "/artists/{artistname}/events":
     get:
-      description: |
+      description: >
         artist events
       operationId: artistEvents
       parameters:
-        - description: 'The name of the artist. If it contains one of the special
-            characters below, please be sure to replace it by the corresponding
-            code: for / use %252F, for ? use %253F, for * use %252A, and for "
-            use %27C'
+        - description: 'The name of the artist. If it contains one of the special characters below, please be sure to replace it by the corresponding code: for / use %252F, for ? use %253F, for * use %252A, and for " use %27C'
           in: path
           name: artistname
           required: true
@@ -93,9 +87,7 @@ paths:
           name: app_id
           required: true
           type: string
-        - description: 'Can be one of the following values: "upcoming", "past", "all", or
-            a date range e.g. "2015-05-05,2017-05-05". If not specified, only
-            upcoming shows are returned'
+        - description: 'Can be one of the following values: "upcoming", "past", "all", or a date range e.g. "2015-05-05,2017-05-05". If not specified, only upcoming shows are returned'
           in: query
           name: date
           required: false

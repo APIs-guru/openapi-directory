@@ -18,8 +18,7 @@ paths:
   /tyk/apis/:
     get:
       description: >
-        Gets a list of *API Definition* objects that are currently live on the
-        gateway 
+        Gets a list of *API Definition* objects that are currently live on the gateway 
       parameters:
         - description: tyk gateway shared secret
           format: string
@@ -33,7 +32,7 @@ paths:
           schema:
             $ref: "#/definitions/APIDefinitionList"
     post:
-      description: |
+      description: >
         Create an *API Definition* object
       parameters:
         - in: body
@@ -59,7 +58,7 @@ paths:
             type: object
   "/tyk/apis/{apiID}":
     delete:
-      description: |
+      description: >
         Deletes an *API Definition* object, if it exists
       parameters:
         - description: tyk gateway shared secret
@@ -91,7 +90,7 @@ paths:
                 type: string
             type: object
     get:
-      description: |
+      description: >
         Gets an *API Definition* object, if it exists
       parameters:
         - description: tyk gateway shared secret
@@ -111,7 +110,7 @@ paths:
           schema:
             $ref: "#/definitions/APIDefinition"
     put:
-      description: |
+      description: >
         Updates an *API Definition* object, if it exists
       parameters:
         - description: tyk gateway shared secret
@@ -148,7 +147,7 @@ paths:
             type: object
   /tyk/health/:
     get:
-      description: |
+      description: >
         Gets the health check values for an API if it is being recorded
       parameters:
         - description: tyk gateway shared secret
@@ -181,7 +180,7 @@ paths:
             type: object
   /tyk/keys/:
     get:
-      description: |
+      description: >
         Gets a list of *key* IDs (will only work with non-hashed installations)
       parameters:
         - description: Back-end to target
@@ -208,7 +207,7 @@ paths:
             type: object
   /tyk/keys/create:
     post:
-      description: |
+      description: >
         Create a new *API token* with the *session object* defined in the body
       parameters:
         - description: tyk gateway shared secret
@@ -217,12 +216,7 @@ paths:
           name: x-tyk-authorization
           required: true
           type: string
-        - description: Adding the `suppress_reset` parameter and setting it to `1`, will
-            cause Tyk to not reset the quota limit that is in the current live
-            quota manager. By default Tyk will reset the quota in the live quota
-            manager (initialising it) when ADDing a key. Adding the
-            `suppress_reset` flag to the URL parameters will avoid this
-            behaviour.
+        - description: Adding the `suppress_reset` parameter and setting it to `1`, will cause Tyk to not reset the quota limit that is in the current live quota manager. By default Tyk will reset the quota in the live quota manager (initialising it) when ADDing a key. Adding the `suppress_reset` flag to the URL parameters will avoid this behaviour.
           format: integer
           in: query
           name: suppress_reset
@@ -252,9 +246,7 @@ paths:
   "/tyk/keys/{keyId}":
     delete:
       description: >
-        Remove this *API token* from the gateway, this will completely destroy
-        the token and metadata associated with the token and instantly stop
-        access from being granted
+        Remove this *API token* from the gateway, this will completely destroy the token and metadata associated with the token and instantly stop access from being granted
       parameters:
         - description: tyk gateway shared secret
           format: string
@@ -292,9 +284,7 @@ paths:
             type: object
     post:
       description: >
-        Add a pre-specified *API token* with the *session object* defined in the
-        body, this operatin creates a custom token that dsoes not use the
-        gateway naming convention for tokens
+        Add a pre-specified *API token* with the *session object* defined in the body, this operatin creates a custom token that dsoes not use the gateway naming convention for tokens
       parameters:
         - description: tyk gateway shared secret
           format: string
@@ -330,8 +320,7 @@ paths:
             type: object
     put:
       description: >
-        Update an *API token* with the *session object* defined in the body,
-        this operatin overwrites the existing object
+        Update an *API token* with the *session object* defined in the body, this operatin overwrites the existing object
       parameters:
         - description: tyk gateway shared secret
           format: string
@@ -344,12 +333,7 @@ paths:
           name: keyId
           required: true
           type: string
-        - description: Adding the `suppress_reset` parameter and setting it to `1`, will
-            cause Tyk to not reset the quota limit that is in the current live
-            quota manager. By default Tyk will reset the quota in the live quota
-            manager (initialising it) when ADDing a key. Adding the
-            `suppress_reset` flag to the URL parameters will avoid this
-            behaviour.
+        - description: Adding the `suppress_reset` parameter and setting it to `1`, will cause Tyk to not reset the quota limit that is in the current live quota manager. By default Tyk will reset the quota in the live quota manager (initialising it) when ADDing a key. Adding the `suppress_reset` flag to the URL parameters will avoid this behaviour.
           format: integer
           in: query
           name: suppress_reset
@@ -385,8 +369,7 @@ paths:
   /tyk/oauth/authorize-client/:
     post:
       description: >
-        The final request from an authorising party for a redirect URI during
-        the Tyk OAuth flow
+        The final request from an authorising party for a redirect URI during the Tyk OAuth flow
       parameters:
         - description: tyk gateway shared secret
           format: string
@@ -394,31 +377,25 @@ paths:
           name: x-tyk-authorization
           required: true
           type: string
-        - description: Should be provided by requesting client as part of authorisation
-            request, this should be either `code` or `token` depending on the
-            methods you have specified for the API
+        - description: Should be provided by requesting client as part of authorisation request, this should be either `code` or `token` depending on the methods you have specified for the API
           format: string
           in: formData
           name: response_type
           required: true
           type: string
-        - description: Should be provided by requesting client as part of authorisation
-            request. The Client ID that is making the request
+        - description: Should be provided by requesting client as part of authorisation request. The Client ID that is making the request
           format: string
           in: formData
           name: client_id
           required: true
           type: string
-        - description: Should be provided by requesting client as part of authorisation
-            request. Must match with the record stored with Tyk
+        - description: Should be provided by requesting client as part of authorisation request. Must match with the record stored with Tyk
           format: string
           in: formData
           name: redirect_uri
           required: true
           type: string
-        - description: A string representation of a *Session Object (form-encoded)*. This
-            should be provided by your application in order to apply any quotas
-            or rules to the key
+        - description: A string representation of a *Session Object (form-encoded)*. This should be provided by your application in order to apply any quotas or rules to the key
           format: string
           in: formData
           name: key_rules
@@ -442,7 +419,7 @@ paths:
             type: object
   /tyk/oauth/clients/create:
     post:
-      description: |
+      description: >
         Create a new OAuth client
       parameters:
         - description: tyk gateway shared secret
@@ -467,7 +444,7 @@ paths:
             $ref: "#/definitions/OAuthClient"
   "/tyk/oauth/clients/{apiId}":
     get:
-      description: |
+      description: >
         Get a list of OAuth clients bound to this back end 
       parameters:
         - description: tyk gateway shared secret
@@ -489,7 +466,7 @@ paths:
             $ref: "#/definitions/OAuthClients"
   "/tyk/oauth/clients/{apiId}/{clientId}":
     delete:
-      description: |
+      description: >
         Delete the OAuth client
       parameters:
         - description: tyk gateway shared secret
@@ -529,7 +506,7 @@ paths:
             type: object
   "/tyk/oauth/refresh/{keyId}":
     delete:
-      description: |
+      description: >
         Invalidate a refresh token
       parameters:
         - description: tyk gateway shared secret
@@ -567,7 +544,7 @@ paths:
             type: object
   /tyk/reload/:
     get:
-      description: |
+      description: >
         Will reload the targetted gateway
       parameters:
         - description: tyk gateway shared secret
@@ -588,7 +565,7 @@ paths:
             type: object
   /tyk/reload/group:
     get:
-      description: |
+      description: >
         Will reload the cluster via the targeted gateway
       parameters:
         - description: tyk gateway shared secret

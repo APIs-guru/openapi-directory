@@ -2,8 +2,7 @@ openapi: 3.0.0
 servers:
   - url: https://api.cloudmersive.com
 info:
-  description: The powerful Optical Character Recognition (OCR) APIs let you
-    convert scanned images of pages into recognized text.
+  description: The powerful Optical Character Recognition (OCR) APIs let you convert scanned images of pages into recognized text.
   title: ocrapi
   version: v1
   x-apisguru-categories:
@@ -23,51 +22,16 @@ info:
 paths:
   /ocr/image/to/lines-with-location:
     post:
-      description: Converts an uploaded image in common formats such as JPEG, PNG into
-        lines/text with location information and other metdata via Optical
-        Character Recognition.  This API is intended to be run on scanned
-        documents.  If you want to OCR photos (e.g. taken with a smart phone
-        camera), be sure to use the photo/toText API instead, as it is designed
-        to unskew the image first.
+      description: Converts an uploaded image in common formats such as JPEG, PNG into lines/text with location information and other metdata via Optical Character Recognition.  This API is intended to be run on scanned documents.  If you want to OCR photos (e.g. taken with a smart phone camera), be sure to use the photo/toText API instead, as it is designed to unskew the image first.
       operationId: ImageOcr_ImageLinesWithLocation
       parameters:
-        - description: Optional, language of the input document, default is English
-            (ENG).  Possible values are ENG (English), ARA (Arabic), ZHO
-            (Chinese - Simplified), ZHO-HANT (Chinese - Traditional), ASM
-            (Assamese), AFR (Afrikaans), AMH (Amharic), AZE (Azerbaijani),
-            AZE-CYRL (Azerbaijani - Cyrillic), BEL (Belarusian), BEN (Bengali),
-            BOD (Tibetan), BOS (Bosnian), BUL (Bulgarian), CAT (Catalan;
-            Valencian), CEB (Cebuano), CES (Czech), CHR (Cherokee), CYM (Welsh),
-            DAN (Danish), DEU (German), DZO (Dzongkha), ELL (Greek), ENM
-            (Archaic/Middle English), EPO (Esperanto), EST (Estonian), EUS
-            (Basque), FAS (Persian), FIN (Finnish), FRA (French), FRK
-            (Frankish), FRM (Middle-French), GLE (Irish), GLG (Galician), GRC
-            (Ancient Greek), HAT (Hatian), HEB (Hebrew), HIN (Hindi), HRV
-            (Croatian), HUN (Hungarian), IKU (Inuktitut), IND (Indonesian), ISL
-            (Icelandic), ITA (Italian), ITA-OLD (Old - Italian), JAV (Javanese),
-            JPN (Japanese), KAN (Kannada), KAT (Georgian), KAT-OLD
-            (Old-Georgian), KAZ (Kazakh), KHM (Central Khmer), KIR (Kirghiz),
-            KOR (Korean), KUR (Kurdish), LAO (Lao), LAT (Latin), LAV (Latvian),
-            LIT (Lithuanian), MAL (Malayalam), MAR (Marathi), MKD (Macedonian),
-            MLT (Maltese), MSA (Malay), MYA (Burmese), NEP (Nepali), NLD
-            (Dutch), NOR (Norwegian), ORI (Oriya), PAN (Panjabi), POL (Polish),
-            POR (Portuguese), PUS (Pushto), RON (Romanian), RUS (Russian), SAN
-            (Sanskrit), SIN (Sinhala), SLK (Slovak), SLV (Slovenian), SPA
-            (Spanish), SPA-OLD (Old Spanish), SQI (Albanian), SRP (Serbian),
-            SRP-LAT (Latin Serbian), SWA (Swahili), SWE (Swedish), SYR (Syriac),
-            TAM (Tamil), TEL (Telugu), TGK (Tajik), TGL (Tagalog), THA (Thai),
-            TIR (Tigrinya), TUR (Turkish), UIG (Uighur), UKR (Ukrainian), URD
-            (Urdu), UZB (Uzbek), UZB-CYR (Cyrillic Uzbek), VIE (Vietnamese), YID
-            (Yiddish)
+        - description: Optional, language of the input document, default is English (ENG).  Possible values are ENG (English), ARA (Arabic), ZHO (Chinese - Simplified), ZHO-HANT (Chinese - Traditional), ASM (Assamese), AFR (Afrikaans), AMH (Amharic), AZE (Azerbaijani), AZE-CYRL (Azerbaijani - Cyrillic), BEL (Belarusian), BEN (Bengali), BOD (Tibetan), BOS (Bosnian), BUL (Bulgarian), CAT (Catalan; Valencian), CEB (Cebuano), CES (Czech), CHR (Cherokee), CYM (Welsh), DAN (Danish), DEU (German), DZO (Dzongkha), ELL (Greek), ENM (Archaic/Middle English), EPO (Esperanto), EST (Estonian), EUS (Basque), FAS (Persian), FIN (Finnish), FRA (French), FRK (Frankish), FRM (Middle-French), GLE (Irish), GLG (Galician), GRC (Ancient Greek), HAT (Hatian), HEB (Hebrew), HIN (Hindi), HRV (Croatian), HUN (Hungarian), IKU (Inuktitut), IND (Indonesian), ISL (Icelandic), ITA (Italian), ITA-OLD (Old - Italian), JAV (Javanese), JPN (Japanese), KAN (Kannada), KAT (Georgian), KAT-OLD (Old-Georgian), KAZ (Kazakh), KHM (Central Khmer), KIR (Kirghiz), KOR (Korean), KUR (Kurdish), LAO (Lao), LAT (Latin), LAV (Latvian), LIT (Lithuanian), MAL (Malayalam), MAR (Marathi), MKD (Macedonian), MLT (Maltese), MSA (Malay), MYA (Burmese), NEP (Nepali), NLD (Dutch), NOR (Norwegian), ORI (Oriya), PAN (Panjabi), POL (Polish), POR (Portuguese), PUS (Pushto), RON (Romanian), RUS (Russian), SAN (Sanskrit), SIN (Sinhala), SLK (Slovak), SLV (Slovenian), SPA (Spanish), SPA-OLD (Old Spanish), SQI (Albanian), SRP (Serbian), SRP-LAT (Latin Serbian), SWA (Swahili), SWE (Swedish), SYR (Syriac), TAM (Tamil), TEL (Telugu), TGK (Tajik), TGL (Tagalog), THA (Thai), TIR (Tigrinya), TUR (Turkish), UIG (Uighur), UKR (Ukrainian), URD (Urdu), UZB (Uzbek), UZB-CYR (Cyrillic Uzbek), VIE (Vietnamese), YID (Yiddish)
           in: header
           name: language
           required: false
           schema:
             type: string
-        - description: Optional, preprocessing mode, default is 'Auto'.  Possible values
-            are None (no preprocessing of the image), and Auto (automatic image
-            enhancement of the image before OCR is applied; this is
-            recommended).
+        - description: Optional, preprocessing mode, default is 'Auto'.  Possible values are None (no preprocessing of the image), and Auto (automatic image enhancement of the image before OCR is applied; this is recommended).
           in: header
           name: preprocessing
           required: false
@@ -98,51 +62,16 @@ paths:
         - ImageOcr
   /ocr/image/to/words-with-location:
     post:
-      description: Converts an uploaded image in common formats such as JPEG, PNG into
-        words/text with location information and other metdata via Optical
-        Character Recognition.  This API is intended to be run on scanned
-        documents.  If you want to OCR photos (e.g. taken with a smart phone
-        camera), be sure to use the photo/toText API instead, as it is designed
-        to unskew the image first.
+      description: Converts an uploaded image in common formats such as JPEG, PNG into words/text with location information and other metdata via Optical Character Recognition.  This API is intended to be run on scanned documents.  If you want to OCR photos (e.g. taken with a smart phone camera), be sure to use the photo/toText API instead, as it is designed to unskew the image first.
       operationId: ImageOcr_ImageWordsWithLocation
       parameters:
-        - description: Optional, language of the input document, default is English
-            (ENG).  Possible values are ENG (English), ARA (Arabic), ZHO
-            (Chinese - Simplified), ZHO-HANT (Chinese - Traditional), ASM
-            (Assamese), AFR (Afrikaans), AMH (Amharic), AZE (Azerbaijani),
-            AZE-CYRL (Azerbaijani - Cyrillic), BEL (Belarusian), BEN (Bengali),
-            BOD (Tibetan), BOS (Bosnian), BUL (Bulgarian), CAT (Catalan;
-            Valencian), CEB (Cebuano), CES (Czech), CHR (Cherokee), CYM (Welsh),
-            DAN (Danish), DEU (German), DZO (Dzongkha), ELL (Greek), ENM
-            (Archaic/Middle English), EPO (Esperanto), EST (Estonian), EUS
-            (Basque), FAS (Persian), FIN (Finnish), FRA (French), FRK
-            (Frankish), FRM (Middle-French), GLE (Irish), GLG (Galician), GRC
-            (Ancient Greek), HAT (Hatian), HEB (Hebrew), HIN (Hindi), HRV
-            (Croatian), HUN (Hungarian), IKU (Inuktitut), IND (Indonesian), ISL
-            (Icelandic), ITA (Italian), ITA-OLD (Old - Italian), JAV (Javanese),
-            JPN (Japanese), KAN (Kannada), KAT (Georgian), KAT-OLD
-            (Old-Georgian), KAZ (Kazakh), KHM (Central Khmer), KIR (Kirghiz),
-            KOR (Korean), KUR (Kurdish), LAO (Lao), LAT (Latin), LAV (Latvian),
-            LIT (Lithuanian), MAL (Malayalam), MAR (Marathi), MKD (Macedonian),
-            MLT (Maltese), MSA (Malay), MYA (Burmese), NEP (Nepali), NLD
-            (Dutch), NOR (Norwegian), ORI (Oriya), PAN (Panjabi), POL (Polish),
-            POR (Portuguese), PUS (Pushto), RON (Romanian), RUS (Russian), SAN
-            (Sanskrit), SIN (Sinhala), SLK (Slovak), SLV (Slovenian), SPA
-            (Spanish), SPA-OLD (Old Spanish), SQI (Albanian), SRP (Serbian),
-            SRP-LAT (Latin Serbian), SWA (Swahili), SWE (Swedish), SYR (Syriac),
-            TAM (Tamil), TEL (Telugu), TGK (Tajik), TGL (Tagalog), THA (Thai),
-            TIR (Tigrinya), TUR (Turkish), UIG (Uighur), UKR (Ukrainian), URD
-            (Urdu), UZB (Uzbek), UZB-CYR (Cyrillic Uzbek), VIE (Vietnamese), YID
-            (Yiddish)
+        - description: Optional, language of the input document, default is English (ENG).  Possible values are ENG (English), ARA (Arabic), ZHO (Chinese - Simplified), ZHO-HANT (Chinese - Traditional), ASM (Assamese), AFR (Afrikaans), AMH (Amharic), AZE (Azerbaijani), AZE-CYRL (Azerbaijani - Cyrillic), BEL (Belarusian), BEN (Bengali), BOD (Tibetan), BOS (Bosnian), BUL (Bulgarian), CAT (Catalan; Valencian), CEB (Cebuano), CES (Czech), CHR (Cherokee), CYM (Welsh), DAN (Danish), DEU (German), DZO (Dzongkha), ELL (Greek), ENM (Archaic/Middle English), EPO (Esperanto), EST (Estonian), EUS (Basque), FAS (Persian), FIN (Finnish), FRA (French), FRK (Frankish), FRM (Middle-French), GLE (Irish), GLG (Galician), GRC (Ancient Greek), HAT (Hatian), HEB (Hebrew), HIN (Hindi), HRV (Croatian), HUN (Hungarian), IKU (Inuktitut), IND (Indonesian), ISL (Icelandic), ITA (Italian), ITA-OLD (Old - Italian), JAV (Javanese), JPN (Japanese), KAN (Kannada), KAT (Georgian), KAT-OLD (Old-Georgian), KAZ (Kazakh), KHM (Central Khmer), KIR (Kirghiz), KOR (Korean), KUR (Kurdish), LAO (Lao), LAT (Latin), LAV (Latvian), LIT (Lithuanian), MAL (Malayalam), MAR (Marathi), MKD (Macedonian), MLT (Maltese), MSA (Malay), MYA (Burmese), NEP (Nepali), NLD (Dutch), NOR (Norwegian), ORI (Oriya), PAN (Panjabi), POL (Polish), POR (Portuguese), PUS (Pushto), RON (Romanian), RUS (Russian), SAN (Sanskrit), SIN (Sinhala), SLK (Slovak), SLV (Slovenian), SPA (Spanish), SPA-OLD (Old Spanish), SQI (Albanian), SRP (Serbian), SRP-LAT (Latin Serbian), SWA (Swahili), SWE (Swedish), SYR (Syriac), TAM (Tamil), TEL (Telugu), TGK (Tajik), TGL (Tagalog), THA (Thai), TIR (Tigrinya), TUR (Turkish), UIG (Uighur), UKR (Ukrainian), URD (Urdu), UZB (Uzbek), UZB-CYR (Cyrillic Uzbek), VIE (Vietnamese), YID (Yiddish)
           in: header
           name: language
           required: false
           schema:
             type: string
-        - description: Optional, preprocessing mode, default is 'Auto'.  Possible values
-            are None (no preprocessing of the image), and Auto (automatic image
-            enhancement of the image before OCR is applied; this is
-            recommended).
+        - description: Optional, preprocessing mode, default is 'Auto'.  Possible values are None (no preprocessing of the image), and Auto (automatic image enhancement of the image before OCR is applied; this is recommended).
           in: header
           name: preprocessing
           required: false
@@ -173,62 +102,22 @@ paths:
         - ImageOcr
   /ocr/image/toText:
     post:
-      description: Converts an uploaded image in common formats such as JPEG, PNG into
-        text via Optical Character Recognition.  This API is intended to be run
-        on scanned documents.  If you want to OCR photos (e.g. taken with a
-        smart phone camera), be sure to use the photo/toText API instead, as it
-        is designed to unskew the image first.
+      description: Converts an uploaded image in common formats such as JPEG, PNG into text via Optical Character Recognition.  This API is intended to be run on scanned documents.  If you want to OCR photos (e.g. taken with a smart phone camera), be sure to use the photo/toText API instead, as it is designed to unskew the image first.
       operationId: ImageOcr_Post
       parameters:
-        - description: Optional; possible values are 'Basic' which provides basic
-            recognition and is not resillient to page rotation, skew or low
-            quality images uses 1-2 API calls; 'Normal' which provides highly
-            fault tolerant OCR recognition uses 26-30 API calls; and 'Advanced'
-            which provides the highest quality and most fault-tolerant
-            recognition uses 28-30 API calls.  Default recognition mode is
-            'Advanced'
+        - description: Optional; possible values are 'Basic' which provides basic recognition and is not resillient to page rotation, skew or low quality images uses 1-2 API calls; 'Normal' which provides highly fault tolerant OCR recognition uses 26-30 API calls; and 'Advanced' which provides the highest quality and most fault-tolerant recognition uses 28-30 API calls.  Default recognition mode is 'Advanced'
           in: header
           name: recognitionMode
           required: false
           schema:
             type: string
-        - description: Optional, language of the input document, default is English
-            (ENG).  Possible values are ENG (English), ARA (Arabic), ZHO
-            (Chinese - Simplified), ZHO-HANT (Chinese - Traditional), ASM
-            (Assamese), AFR (Afrikaans), AMH (Amharic), AZE (Azerbaijani),
-            AZE-CYRL (Azerbaijani - Cyrillic), BEL (Belarusian), BEN (Bengali),
-            BOD (Tibetan), BOS (Bosnian), BUL (Bulgarian), CAT (Catalan;
-            Valencian), CEB (Cebuano), CES (Czech), CHR (Cherokee), CYM (Welsh),
-            DAN (Danish), DEU (German), DZO (Dzongkha), ELL (Greek), ENM
-            (Archaic/Middle English), EPO (Esperanto), EST (Estonian), EUS
-            (Basque), FAS (Persian), FIN (Finnish), FRA (French), FRK
-            (Frankish), FRM (Middle-French), GLE (Irish), GLG (Galician), GRC
-            (Ancient Greek), HAT (Hatian), HEB (Hebrew), HIN (Hindi), HRV
-            (Croatian), HUN (Hungarian), IKU (Inuktitut), IND (Indonesian), ISL
-            (Icelandic), ITA (Italian), ITA-OLD (Old - Italian), JAV (Javanese),
-            JPN (Japanese), KAN (Kannada), KAT (Georgian), KAT-OLD
-            (Old-Georgian), KAZ (Kazakh), KHM (Central Khmer), KIR (Kirghiz),
-            KOR (Korean), KUR (Kurdish), LAO (Lao), LAT (Latin), LAV (Latvian),
-            LIT (Lithuanian), MAL (Malayalam), MAR (Marathi), MKD (Macedonian),
-            MLT (Maltese), MSA (Malay), MYA (Burmese), NEP (Nepali), NLD
-            (Dutch), NOR (Norwegian), ORI (Oriya), PAN (Panjabi), POL (Polish),
-            POR (Portuguese), PUS (Pushto), RON (Romanian), RUS (Russian), SAN
-            (Sanskrit), SIN (Sinhala), SLK (Slovak), SLV (Slovenian), SPA
-            (Spanish), SPA-OLD (Old Spanish), SQI (Albanian), SRP (Serbian),
-            SRP-LAT (Latin Serbian), SWA (Swahili), SWE (Swedish), SYR (Syriac),
-            TAM (Tamil), TEL (Telugu), TGK (Tajik), TGL (Tagalog), THA (Thai),
-            TIR (Tigrinya), TUR (Turkish), UIG (Uighur), UKR (Ukrainian), URD
-            (Urdu), UZB (Uzbek), UZB-CYR (Cyrillic Uzbek), VIE (Vietnamese), YID
-            (Yiddish)
+        - description: Optional, language of the input document, default is English (ENG).  Possible values are ENG (English), ARA (Arabic), ZHO (Chinese - Simplified), ZHO-HANT (Chinese - Traditional), ASM (Assamese), AFR (Afrikaans), AMH (Amharic), AZE (Azerbaijani), AZE-CYRL (Azerbaijani - Cyrillic), BEL (Belarusian), BEN (Bengali), BOD (Tibetan), BOS (Bosnian), BUL (Bulgarian), CAT (Catalan; Valencian), CEB (Cebuano), CES (Czech), CHR (Cherokee), CYM (Welsh), DAN (Danish), DEU (German), DZO (Dzongkha), ELL (Greek), ENM (Archaic/Middle English), EPO (Esperanto), EST (Estonian), EUS (Basque), FAS (Persian), FIN (Finnish), FRA (French), FRK (Frankish), FRM (Middle-French), GLE (Irish), GLG (Galician), GRC (Ancient Greek), HAT (Hatian), HEB (Hebrew), HIN (Hindi), HRV (Croatian), HUN (Hungarian), IKU (Inuktitut), IND (Indonesian), ISL (Icelandic), ITA (Italian), ITA-OLD (Old - Italian), JAV (Javanese), JPN (Japanese), KAN (Kannada), KAT (Georgian), KAT-OLD (Old-Georgian), KAZ (Kazakh), KHM (Central Khmer), KIR (Kirghiz), KOR (Korean), KUR (Kurdish), LAO (Lao), LAT (Latin), LAV (Latvian), LIT (Lithuanian), MAL (Malayalam), MAR (Marathi), MKD (Macedonian), MLT (Maltese), MSA (Malay), MYA (Burmese), NEP (Nepali), NLD (Dutch), NOR (Norwegian), ORI (Oriya), PAN (Panjabi), POL (Polish), POR (Portuguese), PUS (Pushto), RON (Romanian), RUS (Russian), SAN (Sanskrit), SIN (Sinhala), SLK (Slovak), SLV (Slovenian), SPA (Spanish), SPA-OLD (Old Spanish), SQI (Albanian), SRP (Serbian), SRP-LAT (Latin Serbian), SWA (Swahili), SWE (Swedish), SYR (Syriac), TAM (Tamil), TEL (Telugu), TGK (Tajik), TGL (Tagalog), THA (Thai), TIR (Tigrinya), TUR (Turkish), UIG (Uighur), UKR (Ukrainian), URD (Urdu), UZB (Uzbek), UZB-CYR (Cyrillic Uzbek), VIE (Vietnamese), YID (Yiddish)
           in: header
           name: language
           required: false
           schema:
             type: string
-        - description: Optional, preprocessing mode, default is 'Auto'.  Possible values
-            are None (no preprocessing of the image), and Auto (automatic image
-            enhancement of the image before OCR is applied; this is
-            recommended).
+        - description: Optional, preprocessing mode, default is 'Auto'.  Possible values are None (no preprocessing of the image), and Auto (automatic image enhancement of the image before OCR is applied; this is recommended).
           in: header
           name: preprocessing
           required: false
@@ -259,50 +148,16 @@ paths:
         - ImageOcr
   /ocr/pdf/to/lines-with-location:
     post:
-      description: Converts a PDF into lines/text with location information and other
-        metdata via Optical Character Recognition.  This API is intended to be
-        run on scanned documents.  If you want to OCR photos (e.g. taken with a
-        smart phone camera), be sure to use the photo/toText API instead, as it
-        is designed to unskew the image first.
+      description: Converts a PDF into lines/text with location information and other metdata via Optical Character Recognition.  This API is intended to be run on scanned documents.  If you want to OCR photos (e.g. taken with a smart phone camera), be sure to use the photo/toText API instead, as it is designed to unskew the image first.
       operationId: PdfOcr_PdfToLinesWithLocation
       parameters:
-        - description: Optional, language of the input document, default is English
-            (ENG).  Possible values are ENG (English), ARA (Arabic), ZHO
-            (Chinese - Simplified), ZHO-HANT (Chinese - Traditional), ASM
-            (Assamese), AFR (Afrikaans), AMH (Amharic), AZE (Azerbaijani),
-            AZE-CYRL (Azerbaijani - Cyrillic), BEL (Belarusian), BEN (Bengali),
-            BOD (Tibetan), BOS (Bosnian), BUL (Bulgarian), CAT (Catalan;
-            Valencian), CEB (Cebuano), CES (Czech), CHR (Cherokee), CYM (Welsh),
-            DAN (Danish), DEU (German), DZO (Dzongkha), ELL (Greek), ENM
-            (Archaic/Middle English), EPO (Esperanto), EST (Estonian), EUS
-            (Basque), FAS (Persian), FIN (Finnish), FRA (French), FRK
-            (Frankish), FRM (Middle-French), GLE (Irish), GLG (Galician), GRC
-            (Ancient Greek), HAT (Hatian), HEB (Hebrew), HIN (Hindi), HRV
-            (Croatian), HUN (Hungarian), IKU (Inuktitut), IND (Indonesian), ISL
-            (Icelandic), ITA (Italian), ITA-OLD (Old - Italian), JAV (Javanese),
-            JPN (Japanese), KAN (Kannada), KAT (Georgian), KAT-OLD
-            (Old-Georgian), KAZ (Kazakh), KHM (Central Khmer), KIR (Kirghiz),
-            KOR (Korean), KUR (Kurdish), LAO (Lao), LAT (Latin), LAV (Latvian),
-            LIT (Lithuanian), MAL (Malayalam), MAR (Marathi), MKD (Macedonian),
-            MLT (Maltese), MSA (Malay), MYA (Burmese), NEP (Nepali), NLD
-            (Dutch), NOR (Norwegian), ORI (Oriya), PAN (Panjabi), POL (Polish),
-            POR (Portuguese), PUS (Pushto), RON (Romanian), RUS (Russian), SAN
-            (Sanskrit), SIN (Sinhala), SLK (Slovak), SLV (Slovenian), SPA
-            (Spanish), SPA-OLD (Old Spanish), SQI (Albanian), SRP (Serbian),
-            SRP-LAT (Latin Serbian), SWA (Swahili), SWE (Swedish), SYR (Syriac),
-            TAM (Tamil), TEL (Telugu), TGK (Tajik), TGL (Tagalog), THA (Thai),
-            TIR (Tigrinya), TUR (Turkish), UIG (Uighur), UKR (Ukrainian), URD
-            (Urdu), UZB (Uzbek), UZB-CYR (Cyrillic Uzbek), VIE (Vietnamese), YID
-            (Yiddish)
+        - description: Optional, language of the input document, default is English (ENG).  Possible values are ENG (English), ARA (Arabic), ZHO (Chinese - Simplified), ZHO-HANT (Chinese - Traditional), ASM (Assamese), AFR (Afrikaans), AMH (Amharic), AZE (Azerbaijani), AZE-CYRL (Azerbaijani - Cyrillic), BEL (Belarusian), BEN (Bengali), BOD (Tibetan), BOS (Bosnian), BUL (Bulgarian), CAT (Catalan; Valencian), CEB (Cebuano), CES (Czech), CHR (Cherokee), CYM (Welsh), DAN (Danish), DEU (German), DZO (Dzongkha), ELL (Greek), ENM (Archaic/Middle English), EPO (Esperanto), EST (Estonian), EUS (Basque), FAS (Persian), FIN (Finnish), FRA (French), FRK (Frankish), FRM (Middle-French), GLE (Irish), GLG (Galician), GRC (Ancient Greek), HAT (Hatian), HEB (Hebrew), HIN (Hindi), HRV (Croatian), HUN (Hungarian), IKU (Inuktitut), IND (Indonesian), ISL (Icelandic), ITA (Italian), ITA-OLD (Old - Italian), JAV (Javanese), JPN (Japanese), KAN (Kannada), KAT (Georgian), KAT-OLD (Old-Georgian), KAZ (Kazakh), KHM (Central Khmer), KIR (Kirghiz), KOR (Korean), KUR (Kurdish), LAO (Lao), LAT (Latin), LAV (Latvian), LIT (Lithuanian), MAL (Malayalam), MAR (Marathi), MKD (Macedonian), MLT (Maltese), MSA (Malay), MYA (Burmese), NEP (Nepali), NLD (Dutch), NOR (Norwegian), ORI (Oriya), PAN (Panjabi), POL (Polish), POR (Portuguese), PUS (Pushto), RON (Romanian), RUS (Russian), SAN (Sanskrit), SIN (Sinhala), SLK (Slovak), SLV (Slovenian), SPA (Spanish), SPA-OLD (Old Spanish), SQI (Albanian), SRP (Serbian), SRP-LAT (Latin Serbian), SWA (Swahili), SWE (Swedish), SYR (Syriac), TAM (Tamil), TEL (Telugu), TGK (Tajik), TGL (Tagalog), THA (Thai), TIR (Tigrinya), TUR (Turkish), UIG (Uighur), UKR (Ukrainian), URD (Urdu), UZB (Uzbek), UZB-CYR (Cyrillic Uzbek), VIE (Vietnamese), YID (Yiddish)
           in: header
           name: language
           required: false
           schema:
             type: string
-        - description: Optional, preprocessing mode, default is 'Auto'.  Possible values
-            are None (no preprocessing of the image), and Auto (automatic image
-            enhancement of the image before OCR is applied; this is
-            recommended).
+        - description: Optional, preprocessing mode, default is 'Auto'.  Possible values are None (no preprocessing of the image), and Auto (automatic image enhancement of the image before OCR is applied; this is recommended).
           in: header
           name: preprocessing
           required: false
@@ -333,50 +188,16 @@ paths:
         - PdfOcr
   /ocr/pdf/to/words-with-location:
     post:
-      description: Converts a PDF into words/text with location information and other
-        metdata via Optical Character Recognition.  This API is intended to be
-        run on scanned documents.  If you want to OCR photos (e.g. taken with a
-        smart phone camera), be sure to use the photo/toText API instead, as it
-        is designed to unskew the image first.
+      description: Converts a PDF into words/text with location information and other metdata via Optical Character Recognition.  This API is intended to be run on scanned documents.  If you want to OCR photos (e.g. taken with a smart phone camera), be sure to use the photo/toText API instead, as it is designed to unskew the image first.
       operationId: PdfOcr_PdfToWordsWithLocation
       parameters:
-        - description: Optional, language of the input document, default is English
-            (ENG).  Possible values are ENG (English), ARA (Arabic), ZHO
-            (Chinese - Simplified), ZHO-HANT (Chinese - Traditional), ASM
-            (Assamese), AFR (Afrikaans), AMH (Amharic), AZE (Azerbaijani),
-            AZE-CYRL (Azerbaijani - Cyrillic), BEL (Belarusian), BEN (Bengali),
-            BOD (Tibetan), BOS (Bosnian), BUL (Bulgarian), CAT (Catalan;
-            Valencian), CEB (Cebuano), CES (Czech), CHR (Cherokee), CYM (Welsh),
-            DAN (Danish), DEU (German), DZO (Dzongkha), ELL (Greek), ENM
-            (Archaic/Middle English), EPO (Esperanto), EST (Estonian), EUS
-            (Basque), FAS (Persian), FIN (Finnish), FRA (French), FRK
-            (Frankish), FRM (Middle-French), GLE (Irish), GLG (Galician), GRC
-            (Ancient Greek), HAT (Hatian), HEB (Hebrew), HIN (Hindi), HRV
-            (Croatian), HUN (Hungarian), IKU (Inuktitut), IND (Indonesian), ISL
-            (Icelandic), ITA (Italian), ITA-OLD (Old - Italian), JAV (Javanese),
-            JPN (Japanese), KAN (Kannada), KAT (Georgian), KAT-OLD
-            (Old-Georgian), KAZ (Kazakh), KHM (Central Khmer), KIR (Kirghiz),
-            KOR (Korean), KUR (Kurdish), LAO (Lao), LAT (Latin), LAV (Latvian),
-            LIT (Lithuanian), MAL (Malayalam), MAR (Marathi), MKD (Macedonian),
-            MLT (Maltese), MSA (Malay), MYA (Burmese), NEP (Nepali), NLD
-            (Dutch), NOR (Norwegian), ORI (Oriya), PAN (Panjabi), POL (Polish),
-            POR (Portuguese), PUS (Pushto), RON (Romanian), RUS (Russian), SAN
-            (Sanskrit), SIN (Sinhala), SLK (Slovak), SLV (Slovenian), SPA
-            (Spanish), SPA-OLD (Old Spanish), SQI (Albanian), SRP (Serbian),
-            SRP-LAT (Latin Serbian), SWA (Swahili), SWE (Swedish), SYR (Syriac),
-            TAM (Tamil), TEL (Telugu), TGK (Tajik), TGL (Tagalog), THA (Thai),
-            TIR (Tigrinya), TUR (Turkish), UIG (Uighur), UKR (Ukrainian), URD
-            (Urdu), UZB (Uzbek), UZB-CYR (Cyrillic Uzbek), VIE (Vietnamese), YID
-            (Yiddish)
+        - description: Optional, language of the input document, default is English (ENG).  Possible values are ENG (English), ARA (Arabic), ZHO (Chinese - Simplified), ZHO-HANT (Chinese - Traditional), ASM (Assamese), AFR (Afrikaans), AMH (Amharic), AZE (Azerbaijani), AZE-CYRL (Azerbaijani - Cyrillic), BEL (Belarusian), BEN (Bengali), BOD (Tibetan), BOS (Bosnian), BUL (Bulgarian), CAT (Catalan; Valencian), CEB (Cebuano), CES (Czech), CHR (Cherokee), CYM (Welsh), DAN (Danish), DEU (German), DZO (Dzongkha), ELL (Greek), ENM (Archaic/Middle English), EPO (Esperanto), EST (Estonian), EUS (Basque), FAS (Persian), FIN (Finnish), FRA (French), FRK (Frankish), FRM (Middle-French), GLE (Irish), GLG (Galician), GRC (Ancient Greek), HAT (Hatian), HEB (Hebrew), HIN (Hindi), HRV (Croatian), HUN (Hungarian), IKU (Inuktitut), IND (Indonesian), ISL (Icelandic), ITA (Italian), ITA-OLD (Old - Italian), JAV (Javanese), JPN (Japanese), KAN (Kannada), KAT (Georgian), KAT-OLD (Old-Georgian), KAZ (Kazakh), KHM (Central Khmer), KIR (Kirghiz), KOR (Korean), KUR (Kurdish), LAO (Lao), LAT (Latin), LAV (Latvian), LIT (Lithuanian), MAL (Malayalam), MAR (Marathi), MKD (Macedonian), MLT (Maltese), MSA (Malay), MYA (Burmese), NEP (Nepali), NLD (Dutch), NOR (Norwegian), ORI (Oriya), PAN (Panjabi), POL (Polish), POR (Portuguese), PUS (Pushto), RON (Romanian), RUS (Russian), SAN (Sanskrit), SIN (Sinhala), SLK (Slovak), SLV (Slovenian), SPA (Spanish), SPA-OLD (Old Spanish), SQI (Albanian), SRP (Serbian), SRP-LAT (Latin Serbian), SWA (Swahili), SWE (Swedish), SYR (Syriac), TAM (Tamil), TEL (Telugu), TGK (Tajik), TGL (Tagalog), THA (Thai), TIR (Tigrinya), TUR (Turkish), UIG (Uighur), UKR (Ukrainian), URD (Urdu), UZB (Uzbek), UZB-CYR (Cyrillic Uzbek), VIE (Vietnamese), YID (Yiddish)
           in: header
           name: language
           required: false
           schema:
             type: string
-        - description: Optional, preprocessing mode, default is 'Auto'.  Possible values
-            are None (no preprocessing of the image), and Auto (automatic image
-            enhancement of the image before OCR is applied; this is
-            recommended).
+        - description: Optional, preprocessing mode, default is 'Auto'.  Possible values are None (no preprocessing of the image), and Auto (automatic image enhancement of the image before OCR is applied; this is recommended).
           in: header
           name: preprocessing
           required: false
@@ -409,55 +230,19 @@ paths:
     post:
       operationId: PdfOcr_Post
       parameters:
-        - description: Optional; possible values are 'Basic' which provides basic
-            recognition and is not resillient to page rotation, skew or low
-            quality images uses 1-2 API calls per page; 'Normal' which provides
-            highly fault tolerant OCR recognition uses 26-30 API calls per page;
-            and 'Advanced' which provides the highest quality and most
-            fault-tolerant recognition uses 28-30 API calls per page.  Default
-            recognition mode is 'Basic'
+        - description: Optional; possible values are 'Basic' which provides basic recognition and is not resillient to page rotation, skew or low quality images uses 1-2 API calls per page; 'Normal' which provides highly fault tolerant OCR recognition uses 26-30 API calls per page; and 'Advanced' which provides the highest quality and most fault-tolerant recognition uses 28-30 API calls per page.  Default recognition mode is 'Basic'
           in: header
           name: recognitionMode
           required: false
           schema:
             type: string
-        - description: Optional, language of the input document, default is English
-            (ENG).  Possible values are ENG (English), ARA (Arabic), ZHO
-            (Chinese - Simplified), ZHO-HANT (Chinese - Traditional), ASM
-            (Assamese), AFR (Afrikaans), AMH (Amharic), AZE (Azerbaijani),
-            AZE-CYRL (Azerbaijani - Cyrillic), BEL (Belarusian), BEN (Bengali),
-            BOD (Tibetan), BOS (Bosnian), BUL (Bulgarian), CAT (Catalan;
-            Valencian), CEB (Cebuano), CES (Czech), CHR (Cherokee), CYM (Welsh),
-            DAN (Danish), DEU (German), DZO (Dzongkha), ELL (Greek), ENM
-            (Archaic/Middle English), EPO (Esperanto), EST (Estonian), EUS
-            (Basque), FAS (Persian), FIN (Finnish), FRA (French), FRK
-            (Frankish), FRM (Middle-French), GLE (Irish), GLG (Galician), GRC
-            (Ancient Greek), HAT (Hatian), HEB (Hebrew), HIN (Hindi), HRV
-            (Croatian), HUN (Hungarian), IKU (Inuktitut), IND (Indonesian), ISL
-            (Icelandic), ITA (Italian), ITA-OLD (Old - Italian), JAV (Javanese),
-            JPN (Japanese), KAN (Kannada), KAT (Georgian), KAT-OLD
-            (Old-Georgian), KAZ (Kazakh), KHM (Central Khmer), KIR (Kirghiz),
-            KOR (Korean), KUR (Kurdish), LAO (Lao), LAT (Latin), LAV (Latvian),
-            LIT (Lithuanian), MAL (Malayalam), MAR (Marathi), MKD (Macedonian),
-            MLT (Maltese), MSA (Malay), MYA (Burmese), NEP (Nepali), NLD
-            (Dutch), NOR (Norwegian), ORI (Oriya), PAN (Panjabi), POL (Polish),
-            POR (Portuguese), PUS (Pushto), RON (Romanian), RUS (Russian), SAN
-            (Sanskrit), SIN (Sinhala), SLK (Slovak), SLV (Slovenian), SPA
-            (Spanish), SPA-OLD (Old Spanish), SQI (Albanian), SRP (Serbian),
-            SRP-LAT (Latin Serbian), SWA (Swahili), SWE (Swedish), SYR (Syriac),
-            TAM (Tamil), TEL (Telugu), TGK (Tajik), TGL (Tagalog), THA (Thai),
-            TIR (Tigrinya), TUR (Turkish), UIG (Uighur), UKR (Ukrainian), URD
-            (Urdu), UZB (Uzbek), UZB-CYR (Cyrillic Uzbek), VIE (Vietnamese), YID
-            (Yiddish)
+        - description: Optional, language of the input document, default is English (ENG).  Possible values are ENG (English), ARA (Arabic), ZHO (Chinese - Simplified), ZHO-HANT (Chinese - Traditional), ASM (Assamese), AFR (Afrikaans), AMH (Amharic), AZE (Azerbaijani), AZE-CYRL (Azerbaijani - Cyrillic), BEL (Belarusian), BEN (Bengali), BOD (Tibetan), BOS (Bosnian), BUL (Bulgarian), CAT (Catalan; Valencian), CEB (Cebuano), CES (Czech), CHR (Cherokee), CYM (Welsh), DAN (Danish), DEU (German), DZO (Dzongkha), ELL (Greek), ENM (Archaic/Middle English), EPO (Esperanto), EST (Estonian), EUS (Basque), FAS (Persian), FIN (Finnish), FRA (French), FRK (Frankish), FRM (Middle-French), GLE (Irish), GLG (Galician), GRC (Ancient Greek), HAT (Hatian), HEB (Hebrew), HIN (Hindi), HRV (Croatian), HUN (Hungarian), IKU (Inuktitut), IND (Indonesian), ISL (Icelandic), ITA (Italian), ITA-OLD (Old - Italian), JAV (Javanese), JPN (Japanese), KAN (Kannada), KAT (Georgian), KAT-OLD (Old-Georgian), KAZ (Kazakh), KHM (Central Khmer), KIR (Kirghiz), KOR (Korean), KUR (Kurdish), LAO (Lao), LAT (Latin), LAV (Latvian), LIT (Lithuanian), MAL (Malayalam), MAR (Marathi), MKD (Macedonian), MLT (Maltese), MSA (Malay), MYA (Burmese), NEP (Nepali), NLD (Dutch), NOR (Norwegian), ORI (Oriya), PAN (Panjabi), POL (Polish), POR (Portuguese), PUS (Pushto), RON (Romanian), RUS (Russian), SAN (Sanskrit), SIN (Sinhala), SLK (Slovak), SLV (Slovenian), SPA (Spanish), SPA-OLD (Old Spanish), SQI (Albanian), SRP (Serbian), SRP-LAT (Latin Serbian), SWA (Swahili), SWE (Swedish), SYR (Syriac), TAM (Tamil), TEL (Telugu), TGK (Tajik), TGL (Tagalog), THA (Thai), TIR (Tigrinya), TUR (Turkish), UIG (Uighur), UKR (Ukrainian), URD (Urdu), UZB (Uzbek), UZB-CYR (Cyrillic Uzbek), VIE (Vietnamese), YID (Yiddish)
           in: header
           name: language
           required: false
           schema:
             type: string
-        - description: Optional, preprocessing mode, default is 'Auto'.  Possible values
-            are None (no preprocessing of the image), and Auto (automatic image
-            enhancement of the image before OCR is applied; this is
-            recommended).
+        - description: Optional, preprocessing mode, default is 'Auto'.  Possible values are None (no preprocessing of the image), and Auto (automatic image enhancement of the image before OCR is applied; this is recommended).
           in: header
           name: preprocessing
           required: false
@@ -483,16 +268,12 @@ paths:
           description: OK
       security:
         - Apikey: []
-      summary: Converts an uploaded PDF file into text via Optical Character
-        Recognition.
+      summary: Converts an uploaded PDF file into text via Optical Character Recognition.
       tags:
         - PdfOcr
   /ocr/photo/recognize/business-card:
     post:
-      description: Analyzes a photograph of a business card as input, and outputs key
-        business information such as the name of the person, name of the
-        business, the address of the business, the phone number, the email
-        address and more.
+      description: Analyzes a photograph of a business card as input, and outputs key business information such as the name of the person, name of the business, the address of the business, the phone number, the email address and more.
       operationId: ImageOcr_PhotoRecognizeBusinessCard
       requestBody:
         $ref: "#/components/requestBodies/ImageOcr_Post"
@@ -519,9 +300,7 @@ paths:
         - ImageOcr
   /ocr/photo/recognize/form:
     post:
-      description: Analyzes a photograph of a form as input, and outputs key business
-        fields and information.  Customzie data to be extracted by defining
-        fields for the form.
+      description: Analyzes a photograph of a form as input, and outputs key business fields and information.  Customzie data to be extracted by defining fields for the form.
       operationId: ImageOcr_PhotoRecognizeForm
       parameters:
         - description: Form field definitions
@@ -531,62 +310,25 @@ paths:
           schema:
             $ref: "#/components/schemas/FormDefinitionTemplate"
             type: application/json
-        - description: Optional, enable advanced recognition mode by specifying
-            'Advanced', enable handwriting recognition by specifying
-            'EnableHandwriting'.  Default is disabled.
+        - description: Optional, enable advanced recognition mode by specifying 'Advanced', enable handwriting recognition by specifying 'EnableHandwriting'.  Default is disabled.
           in: header
           name: recognitionMode
           required: false
           schema:
             type: string
-        - description: Optional, preprocessing mode, default is 'Auto'.  Possible values
-            are None (no preprocessing of the image), and Auto (automatic image
-            enhancement of the image - including automatic unrotation of the
-            image - before OCR is applied; this is recommended).  Set this to
-            'None' if you do not want to use automatic image unrotation and
-            enhancement.
+        - description: Optional, preprocessing mode, default is 'Auto'.  Possible values are None (no preprocessing of the image), and Auto (automatic image enhancement of the image - including automatic unrotation of the image - before OCR is applied; this is recommended).  Set this to 'None' if you do not want to use automatic image unrotation and enhancement.
           in: header
           name: preprocessing
           required: false
           schema:
             type: string
-        - description: Optional, diagnostics mode, default is 'false'.  Possible values
-            are 'true' (will set DiagnosticImage to a diagnostic PNG image in
-            the result), and 'false' (no diagnostics are enabled; this is
-            recommended for best performance).
+        - description: Optional, diagnostics mode, default is 'false'.  Possible values are 'true' (will set DiagnosticImage to a diagnostic PNG image in the result), and 'false' (no diagnostics are enabled; this is recommended for best performance).
           in: header
           name: diagnostics
           required: false
           schema:
             type: string
-        - description: Optional, language of the input document, default is English
-            (ENG).  Possible values are ENG (English), ARA (Arabic), ZHO
-            (Chinese - Simplified), ZHO-HANT (Chinese - Traditional), ASM
-            (Assamese), AFR (Afrikaans), AMH (Amharic), AZE (Azerbaijani),
-            AZE-CYRL (Azerbaijani - Cyrillic), BEL (Belarusian), BEN (Bengali),
-            BOD (Tibetan), BOS (Bosnian), BUL (Bulgarian), CAT (Catalan;
-            Valencian), CEB (Cebuano), CES (Czech), CHR (Cherokee), CYM (Welsh),
-            DAN (Danish), DEU (German), DZO (Dzongkha), ELL (Greek), ENM
-            (Archaic/Middle English), EPO (Esperanto), EST (Estonian), EUS
-            (Basque), FAS (Persian), FIN (Finnish), FRA (French), FRK
-            (Frankish), FRM (Middle-French), GLE (Irish), GLG (Galician), GRC
-            (Ancient Greek), HAT (Hatian), HEB (Hebrew), HIN (Hindi), HRV
-            (Croatian), HUN (Hungarian), IKU (Inuktitut), IND (Indonesian), ISL
-            (Icelandic), ITA (Italian), ITA-OLD (Old - Italian), JAV (Javanese),
-            JPN (Japanese), KAN (Kannada), KAT (Georgian), KAT-OLD
-            (Old-Georgian), KAZ (Kazakh), KHM (Central Khmer), KIR (Kirghiz),
-            KOR (Korean), KUR (Kurdish), LAO (Lao), LAT (Latin), LAV (Latvian),
-            LIT (Lithuanian), MAL (Malayalam), MAR (Marathi), MKD (Macedonian),
-            MLT (Maltese), MSA (Malay), MYA (Burmese), NEP (Nepali), NLD
-            (Dutch), NOR (Norwegian), ORI (Oriya), PAN (Panjabi), POL (Polish),
-            POR (Portuguese), PUS (Pushto), RON (Romanian), RUS (Russian), SAN
-            (Sanskrit), SIN (Sinhala), SLK (Slovak), SLV (Slovenian), SPA
-            (Spanish), SPA-OLD (Old Spanish), SQI (Albanian), SRP (Serbian),
-            SRP-LAT (Latin Serbian), SWA (Swahili), SWE (Swedish), SYR (Syriac),
-            TAM (Tamil), TEL (Telugu), TGK (Tajik), TGL (Tagalog), THA (Thai),
-            TIR (Tigrinya), TUR (Turkish), UIG (Uighur), UKR (Ukrainian), URD
-            (Urdu), UZB (Uzbek), UZB-CYR (Cyrillic Uzbek), VIE (Vietnamese), YID
-            (Yiddish)
+        - description: Optional, language of the input document, default is English (ENG).  Possible values are ENG (English), ARA (Arabic), ZHO (Chinese - Simplified), ZHO-HANT (Chinese - Traditional), ASM (Assamese), AFR (Afrikaans), AMH (Amharic), AZE (Azerbaijani), AZE-CYRL (Azerbaijani - Cyrillic), BEL (Belarusian), BEN (Bengali), BOD (Tibetan), BOS (Bosnian), BUL (Bulgarian), CAT (Catalan; Valencian), CEB (Cebuano), CES (Czech), CHR (Cherokee), CYM (Welsh), DAN (Danish), DEU (German), DZO (Dzongkha), ELL (Greek), ENM (Archaic/Middle English), EPO (Esperanto), EST (Estonian), EUS (Basque), FAS (Persian), FIN (Finnish), FRA (French), FRK (Frankish), FRM (Middle-French), GLE (Irish), GLG (Galician), GRC (Ancient Greek), HAT (Hatian), HEB (Hebrew), HIN (Hindi), HRV (Croatian), HUN (Hungarian), IKU (Inuktitut), IND (Indonesian), ISL (Icelandic), ITA (Italian), ITA-OLD (Old - Italian), JAV (Javanese), JPN (Japanese), KAN (Kannada), KAT (Georgian), KAT-OLD (Old-Georgian), KAZ (Kazakh), KHM (Central Khmer), KIR (Kirghiz), KOR (Korean), KUR (Kurdish), LAO (Lao), LAT (Latin), LAV (Latvian), LIT (Lithuanian), MAL (Malayalam), MAR (Marathi), MKD (Macedonian), MLT (Maltese), MSA (Malay), MYA (Burmese), NEP (Nepali), NLD (Dutch), NOR (Norwegian), ORI (Oriya), PAN (Panjabi), POL (Polish), POR (Portuguese), PUS (Pushto), RON (Romanian), RUS (Russian), SAN (Sanskrit), SIN (Sinhala), SLK (Slovak), SLV (Slovenian), SPA (Spanish), SPA-OLD (Old Spanish), SQI (Albanian), SRP (Serbian), SRP-LAT (Latin Serbian), SWA (Swahili), SWE (Swedish), SYR (Syriac), TAM (Tamil), TEL (Telugu), TGK (Tajik), TGL (Tagalog), THA (Thai), TIR (Tigrinya), TUR (Turkish), UIG (Uighur), UKR (Ukrainian), URD (Urdu), UZB (Uzbek), UZB-CYR (Cyrillic Uzbek), VIE (Vietnamese), YID (Yiddish)
           in: header
           name: language
           required: false
@@ -617,12 +359,7 @@ paths:
         - ImageOcr
   /ocr/photo/recognize/form/advanced:
     post:
-      description: Analyzes a photograph of a form as input, and outputs key business
-        fields and information.  Customzie data to be extracted by defining
-        fields for the form.  Uses template definitions stored in Cloudmersive
-        Configuration; to configure stored templates in a configuration bucket,
-        log into Cloudmersive Management Portal and navigate to Settings &gt;
-        API Configuration &gt; Create Bucket
+      description: Analyzes a photograph of a form as input, and outputs key business fields and information.  Customzie data to be extracted by defining fields for the form.  Uses template definitions stored in Cloudmersive Configuration; to configure stored templates in a configuration bucket, log into Cloudmersive Management Portal and navigate to Settings &gt; API Configuration &gt; Create Bucket
       operationId: ImageOcr_PhotoRecognizeFormAdvanced
       parameters:
         - description: Bucket ID of the Configuration Bucket storing the form templates
@@ -631,36 +368,25 @@ paths:
           required: false
           schema:
             type: string
-        - description: Bucket Secret Key of the Configuration Bucket storing the form
-            templates
+        - description: Bucket Secret Key of the Configuration Bucket storing the form templates
           in: header
           name: bucketSecretKey
           required: false
           schema:
             type: string
-        - description: Optional, enable advanced recognition mode by specifying
-            'Advanced', enable handwriting recognition by specifying
-            'EnableHandwriting'.  Default is disabled.
+        - description: Optional, enable advanced recognition mode by specifying 'Advanced', enable handwriting recognition by specifying 'EnableHandwriting'.  Default is disabled.
           in: header
           name: recognitionMode
           required: false
           schema:
             type: string
-        - description: Optional, preprocessing mode, default is 'Auto'.  Possible values
-            are None (no preprocessing of the image), and Auto (automatic image
-            enhancement of the image - including automatic unrotation of the
-            image - before OCR is applied; this is recommended).  Set this to
-            'None' if you do not want to use automatic image unrotation and
-            enhancement.
+        - description: Optional, preprocessing mode, default is 'Auto'.  Possible values are None (no preprocessing of the image), and Auto (automatic image enhancement of the image - including automatic unrotation of the image - before OCR is applied; this is recommended).  Set this to 'None' if you do not want to use automatic image unrotation and enhancement.
           in: header
           name: preprocessing
           required: false
           schema:
             type: string
-        - description: Optional, diagnostics mode, default is 'false'.  Possible values
-            are 'true' (will set DiagnosticImage to a diagnostic PNG image in
-            the result), and 'false' (no diagnostics are enabled; this is
-            recommended for best performance).
+        - description: Optional, diagnostics mode, default is 'false'.  Possible values are 'true' (will set DiagnosticImage to a diagnostic PNG image in the result), and 'false' (no diagnostics are enabled; this is recommended for best performance).
           in: header
           name: diagnostics
           required: false
@@ -691,57 +417,22 @@ paths:
         - ImageOcr
   /ocr/photo/recognize/receipt:
     post:
-      description: Analyzes a photograph of a receipt as input, and outputs key
-        business information such as the name of the business, the address of
-        the business, the phone number of the business, the total of the
-        receipt, the date of the receipt, and more.
+      description: Analyzes a photograph of a receipt as input, and outputs key business information such as the name of the business, the address of the business, the phone number of the business, the total of the receipt, the date of the receipt, and more.
       operationId: ImageOcr_PhotoRecognizeReceipt
       parameters:
-        - description: Optional, enable advanced recognition mode by specifying
-            'Advanced', enable handwriting recognition by specifying
-            'EnableHandwriting'.  Default is disabled.
+        - description: Optional, enable advanced recognition mode by specifying 'Advanced', enable handwriting recognition by specifying 'EnableHandwriting'.  Default is disabled.
           in: header
           name: recognitionMode
           required: false
           schema:
             type: string
-        - description: Optional, language of the input document, default is English
-            (ENG).  Possible values are ENG (English), ARA (Arabic), ZHO
-            (Chinese - Simplified), ZHO-HANT (Chinese - Traditional), ASM
-            (Assamese), AFR (Afrikaans), AMH (Amharic), AZE (Azerbaijani),
-            AZE-CYRL (Azerbaijani - Cyrillic), BEL (Belarusian), BEN (Bengali),
-            BOD (Tibetan), BOS (Bosnian), BUL (Bulgarian), CAT (Catalan;
-            Valencian), CEB (Cebuano), CES (Czech), CHR (Cherokee), CYM (Welsh),
-            DAN (Danish), DEU (German), DZO (Dzongkha), ELL (Greek), ENM
-            (Archaic/Middle English), EPO (Esperanto), EST (Estonian), EUS
-            (Basque), FAS (Persian), FIN (Finnish), FRA (French), FRK
-            (Frankish), FRM (Middle-French), GLE (Irish), GLG (Galician), GRC
-            (Ancient Greek), HAT (Hatian), HEB (Hebrew), HIN (Hindi), HRV
-            (Croatian), HUN (Hungarian), IKU (Inuktitut), IND (Indonesian), ISL
-            (Icelandic), ITA (Italian), ITA-OLD (Old - Italian), JAV (Javanese),
-            JPN (Japanese), KAN (Kannada), KAT (Georgian), KAT-OLD
-            (Old-Georgian), KAZ (Kazakh), KHM (Central Khmer), KIR (Kirghiz),
-            KOR (Korean), KUR (Kurdish), LAO (Lao), LAT (Latin), LAV (Latvian),
-            LIT (Lithuanian), MAL (Malayalam), MAR (Marathi), MKD (Macedonian),
-            MLT (Maltese), MSA (Malay), MYA (Burmese), NEP (Nepali), NLD
-            (Dutch), NOR (Norwegian), ORI (Oriya), PAN (Panjabi), POL (Polish),
-            POR (Portuguese), PUS (Pushto), RON (Romanian), RUS (Russian), SAN
-            (Sanskrit), SIN (Sinhala), SLK (Slovak), SLV (Slovenian), SPA
-            (Spanish), SPA-OLD (Old Spanish), SQI (Albanian), SRP (Serbian),
-            SRP-LAT (Latin Serbian), SWA (Swahili), SWE (Swedish), SYR (Syriac),
-            TAM (Tamil), TEL (Telugu), TGK (Tajik), TGL (Tagalog), THA (Thai),
-            TIR (Tigrinya), TUR (Turkish), UIG (Uighur), UKR (Ukrainian), URD
-            (Urdu), UZB (Uzbek), UZB-CYR (Cyrillic Uzbek), VIE (Vietnamese), YID
-            (Yiddish)
+        - description: Optional, language of the input document, default is English (ENG).  Possible values are ENG (English), ARA (Arabic), ZHO (Chinese - Simplified), ZHO-HANT (Chinese - Traditional), ASM (Assamese), AFR (Afrikaans), AMH (Amharic), AZE (Azerbaijani), AZE-CYRL (Azerbaijani - Cyrillic), BEL (Belarusian), BEN (Bengali), BOD (Tibetan), BOS (Bosnian), BUL (Bulgarian), CAT (Catalan; Valencian), CEB (Cebuano), CES (Czech), CHR (Cherokee), CYM (Welsh), DAN (Danish), DEU (German), DZO (Dzongkha), ELL (Greek), ENM (Archaic/Middle English), EPO (Esperanto), EST (Estonian), EUS (Basque), FAS (Persian), FIN (Finnish), FRA (French), FRK (Frankish), FRM (Middle-French), GLE (Irish), GLG (Galician), GRC (Ancient Greek), HAT (Hatian), HEB (Hebrew), HIN (Hindi), HRV (Croatian), HUN (Hungarian), IKU (Inuktitut), IND (Indonesian), ISL (Icelandic), ITA (Italian), ITA-OLD (Old - Italian), JAV (Javanese), JPN (Japanese), KAN (Kannada), KAT (Georgian), KAT-OLD (Old-Georgian), KAZ (Kazakh), KHM (Central Khmer), KIR (Kirghiz), KOR (Korean), KUR (Kurdish), LAO (Lao), LAT (Latin), LAV (Latvian), LIT (Lithuanian), MAL (Malayalam), MAR (Marathi), MKD (Macedonian), MLT (Maltese), MSA (Malay), MYA (Burmese), NEP (Nepali), NLD (Dutch), NOR (Norwegian), ORI (Oriya), PAN (Panjabi), POL (Polish), POR (Portuguese), PUS (Pushto), RON (Romanian), RUS (Russian), SAN (Sanskrit), SIN (Sinhala), SLK (Slovak), SLV (Slovenian), SPA (Spanish), SPA-OLD (Old Spanish), SQI (Albanian), SRP (Serbian), SRP-LAT (Latin Serbian), SWA (Swahili), SWE (Swedish), SYR (Syriac), TAM (Tamil), TEL (Telugu), TGK (Tajik), TGL (Tagalog), THA (Thai), TIR (Tigrinya), TUR (Turkish), UIG (Uighur), UKR (Ukrainian), URD (Urdu), UZB (Uzbek), UZB-CYR (Cyrillic Uzbek), VIE (Vietnamese), YID (Yiddish)
           in: header
           name: language
           required: false
           schema:
             type: string
-        - description: Optional, preprocessing mode, default is 'None'.  Possible values
-            are None (no preprocessing of the image), and 'Advanced' (automatic
-            image enhancement of the image before OCR is applied; this is
-            recommended and needed to handle rotated receipts).
+        - description: Optional, preprocessing mode, default is 'None'.  Possible values are None (no preprocessing of the image), and 'Advanced' (automatic image enhancement of the image before OCR is applied; this is recommended and needed to handle rotated receipts).
           in: header
           name: preprocessing
           required: false
@@ -772,69 +463,28 @@ paths:
         - ImageOcr
   /ocr/photo/to/words-with-location:
     post:
-      description: Converts a photo of a document or receipt in common formats such as
-        JPEG, PNG into words/text with location information and other metdata
-        via Optical Character Recognition.  This API is intended to be run on
-        photographs of documents.  If you want to OCR scanned documents (e.g.
-        taken with a scanner), be sure to use the image/toText API instead, as
-        it is designed for that use case.
+      description: Converts a photo of a document or receipt in common formats such as JPEG, PNG into words/text with location information and other metdata via Optical Character Recognition.  This API is intended to be run on photographs of documents.  If you want to OCR scanned documents (e.g. taken with a scanner), be sure to use the image/toText API instead, as it is designed for that use case.
       operationId: ImageOcr_PhotoWordsWithLocation
       parameters:
-        - description: Optional; possible values are 'Normal' which provides highly fault
-            tolerant OCR recognition uses 26-30 API calls; and 'Advanced' which
-            provides the highest quality and most fault-tolerant recognition
-            uses 28-30 API calls.  Default recognition mode is 'Advanced'
+        - description: Optional; possible values are 'Normal' which provides highly fault tolerant OCR recognition uses 26-30 API calls; and 'Advanced' which provides the highest quality and most fault-tolerant recognition uses 28-30 API calls.  Default recognition mode is 'Advanced'
           in: header
           name: recognitionMode
           required: false
           schema:
             type: string
-        - description: Optional, language of the input document, default is English
-            (ENG).  Possible values are ENG (English), ARA (Arabic), ZHO
-            (Chinese - Simplified), ZHO-HANT (Chinese - Traditional), ASM
-            (Assamese), AFR (Afrikaans), AMH (Amharic), AZE (Azerbaijani),
-            AZE-CYRL (Azerbaijani - Cyrillic), BEL (Belarusian), BEN (Bengali),
-            BOD (Tibetan), BOS (Bosnian), BUL (Bulgarian), CAT (Catalan;
-            Valencian), CEB (Cebuano), CES (Czech), CHR (Cherokee), CYM (Welsh),
-            DAN (Danish), DEU (German), DZO (Dzongkha), ELL (Greek), ENM
-            (Archaic/Middle English), EPO (Esperanto), EST (Estonian), EUS
-            (Basque), FAS (Persian), FIN (Finnish), FRA (French), FRK
-            (Frankish), FRM (Middle-French), GLE (Irish), GLG (Galician), GRC
-            (Ancient Greek), HAT (Hatian), HEB (Hebrew), HIN (Hindi), HRV
-            (Croatian), HUN (Hungarian), IKU (Inuktitut), IND (Indonesian), ISL
-            (Icelandic), ITA (Italian), ITA-OLD (Old - Italian), JAV (Javanese),
-            JPN (Japanese), KAN (Kannada), KAT (Georgian), KAT-OLD
-            (Old-Georgian), KAZ (Kazakh), KHM (Central Khmer), KIR (Kirghiz),
-            KOR (Korean), KUR (Kurdish), LAO (Lao), LAT (Latin), LAV (Latvian),
-            LIT (Lithuanian), MAL (Malayalam), MAR (Marathi), MKD (Macedonian),
-            MLT (Maltese), MSA (Malay), MYA (Burmese), NEP (Nepali), NLD
-            (Dutch), NOR (Norwegian), ORI (Oriya), PAN (Panjabi), POL (Polish),
-            POR (Portuguese), PUS (Pushto), RON (Romanian), RUS (Russian), SAN
-            (Sanskrit), SIN (Sinhala), SLK (Slovak), SLV (Slovenian), SPA
-            (Spanish), SPA-OLD (Old Spanish), SQI (Albanian), SRP (Serbian),
-            SRP-LAT (Latin Serbian), SWA (Swahili), SWE (Swedish), SYR (Syriac),
-            TAM (Tamil), TEL (Telugu), TGK (Tajik), TGL (Tagalog), THA (Thai),
-            TIR (Tigrinya), TUR (Turkish), UIG (Uighur), UKR (Ukrainian), URD
-            (Urdu), UZB (Uzbek), UZB-CYR (Cyrillic Uzbek), VIE (Vietnamese), YID
-            (Yiddish)
+        - description: Optional, language of the input document, default is English (ENG).  Possible values are ENG (English), ARA (Arabic), ZHO (Chinese - Simplified), ZHO-HANT (Chinese - Traditional), ASM (Assamese), AFR (Afrikaans), AMH (Amharic), AZE (Azerbaijani), AZE-CYRL (Azerbaijani - Cyrillic), BEL (Belarusian), BEN (Bengali), BOD (Tibetan), BOS (Bosnian), BUL (Bulgarian), CAT (Catalan; Valencian), CEB (Cebuano), CES (Czech), CHR (Cherokee), CYM (Welsh), DAN (Danish), DEU (German), DZO (Dzongkha), ELL (Greek), ENM (Archaic/Middle English), EPO (Esperanto), EST (Estonian), EUS (Basque), FAS (Persian), FIN (Finnish), FRA (French), FRK (Frankish), FRM (Middle-French), GLE (Irish), GLG (Galician), GRC (Ancient Greek), HAT (Hatian), HEB (Hebrew), HIN (Hindi), HRV (Croatian), HUN (Hungarian), IKU (Inuktitut), IND (Indonesian), ISL (Icelandic), ITA (Italian), ITA-OLD (Old - Italian), JAV (Javanese), JPN (Japanese), KAN (Kannada), KAT (Georgian), KAT-OLD (Old-Georgian), KAZ (Kazakh), KHM (Central Khmer), KIR (Kirghiz), KOR (Korean), KUR (Kurdish), LAO (Lao), LAT (Latin), LAV (Latvian), LIT (Lithuanian), MAL (Malayalam), MAR (Marathi), MKD (Macedonian), MLT (Maltese), MSA (Malay), MYA (Burmese), NEP (Nepali), NLD (Dutch), NOR (Norwegian), ORI (Oriya), PAN (Panjabi), POL (Polish), POR (Portuguese), PUS (Pushto), RON (Romanian), RUS (Russian), SAN (Sanskrit), SIN (Sinhala), SLK (Slovak), SLV (Slovenian), SPA (Spanish), SPA-OLD (Old Spanish), SQI (Albanian), SRP (Serbian), SRP-LAT (Latin Serbian), SWA (Swahili), SWE (Swedish), SYR (Syriac), TAM (Tamil), TEL (Telugu), TGK (Tajik), TGL (Tagalog), THA (Thai), TIR (Tigrinya), TUR (Turkish), UIG (Uighur), UKR (Ukrainian), URD (Urdu), UZB (Uzbek), UZB-CYR (Cyrillic Uzbek), VIE (Vietnamese), YID (Yiddish)
           in: header
           name: language
           required: false
           schema:
             type: string
-        - description: Optional, preprocessing mode, default is 'Auto'.  Possible values
-            are None (no preprocessing of the image), and Auto (automatic image
-            enhancement of the image before OCR is applied; this is
-            recommended).
+        - description: Optional, preprocessing mode, default is 'Auto'.  Possible values are None (no preprocessing of the image), and Auto (automatic image enhancement of the image before OCR is applied; this is recommended).
           in: header
           name: preprocessing
           required: false
           schema:
             type: string
-        - description: Optional, diagnostics mode, default is 'false'.  Possible values
-            are 'true' (will set DiagnosticImage to a diagnostic PNG image in
-            the result), and 'false' (no diagnostics are enabled; this is
-            recommended for best performance).
+        - description: Optional, diagnostics mode, default is 'false'.  Possible values are 'true' (will set DiagnosticImage to a diagnostic PNG image in the result), and 'false' (no diagnostics are enabled; this is recommended for best performance).
           in: header
           name: diagnostics
           required: false
@@ -865,54 +515,16 @@ paths:
         - ImageOcr
   /ocr/photo/toText:
     post:
-      description: Converts an uploaded photo of a document in common formats such as
-        JPEG, PNG into text via Optical Character Recognition.  This API is
-        intended to be run on photos of documents, e.g. taken with a smartphone
-        and supports cases where other content, such as a desk, are in the frame
-        and the camera is crooked.  If you want to OCR a scanned image, use the
-        image/toText API call instead as it is designed for scanned images.
+      description: Converts an uploaded photo of a document in common formats such as JPEG, PNG into text via Optical Character Recognition.  This API is intended to be run on photos of documents, e.g. taken with a smartphone and supports cases where other content, such as a desk, are in the frame and the camera is crooked.  If you want to OCR a scanned image, use the image/toText API call instead as it is designed for scanned images.
       operationId: ImageOcr_PhotoToText
       parameters:
-        - description: Optional; possible values are 'Basic' which provides basic
-            recognition and is not resillient to page rotation, skew or low
-            quality images uses 1-2 API calls; 'Normal' which provides highly
-            fault tolerant OCR recognition uses 26-30 API calls; and 'Advanced'
-            which provides the highest quality and most fault-tolerant
-            recognition uses 28-30 API calls.  Default recognition mode is
-            'Advanced'
+        - description: Optional; possible values are 'Basic' which provides basic recognition and is not resillient to page rotation, skew or low quality images uses 1-2 API calls; 'Normal' which provides highly fault tolerant OCR recognition uses 26-30 API calls; and 'Advanced' which provides the highest quality and most fault-tolerant recognition uses 28-30 API calls.  Default recognition mode is 'Advanced'
           in: header
           name: recognitionMode
           required: false
           schema:
             type: string
-        - description: Optional, language of the input document, default is English
-            (ENG).  Possible values are ENG (English), ARA (Arabic), ZHO
-            (Chinese - Simplified), ZHO-HANT (Chinese - Traditional), ASM
-            (Assamese), AFR (Afrikaans), AMH (Amharic), AZE (Azerbaijani),
-            AZE-CYRL (Azerbaijani - Cyrillic), BEL (Belarusian), BEN (Bengali),
-            BOD (Tibetan), BOS (Bosnian), BUL (Bulgarian), CAT (Catalan;
-            Valencian), CEB (Cebuano), CES (Czech), CHR (Cherokee), CYM (Welsh),
-            DAN (Danish), DEU (German), DZO (Dzongkha), ELL (Greek), ENM
-            (Archaic/Middle English), EPO (Esperanto), EST (Estonian), EUS
-            (Basque), FAS (Persian), FIN (Finnish), FRA (French), FRK
-            (Frankish), FRM (Middle-French), GLE (Irish), GLG (Galician), GRC
-            (Ancient Greek), HAT (Hatian), HEB (Hebrew), HIN (Hindi), HRV
-            (Croatian), HUN (Hungarian), IKU (Inuktitut), IND (Indonesian), ISL
-            (Icelandic), ITA (Italian), ITA-OLD (Old - Italian), JAV (Javanese),
-            JPN (Japanese), KAN (Kannada), KAT (Georgian), KAT-OLD
-            (Old-Georgian), KAZ (Kazakh), KHM (Central Khmer), KIR (Kirghiz),
-            KOR (Korean), KUR (Kurdish), LAO (Lao), LAT (Latin), LAV (Latvian),
-            LIT (Lithuanian), MAL (Malayalam), MAR (Marathi), MKD (Macedonian),
-            MLT (Maltese), MSA (Malay), MYA (Burmese), NEP (Nepali), NLD
-            (Dutch), NOR (Norwegian), ORI (Oriya), PAN (Panjabi), POL (Polish),
-            POR (Portuguese), PUS (Pushto), RON (Romanian), RUS (Russian), SAN
-            (Sanskrit), SIN (Sinhala), SLK (Slovak), SLV (Slovenian), SPA
-            (Spanish), SPA-OLD (Old Spanish), SQI (Albanian), SRP (Serbian),
-            SRP-LAT (Latin Serbian), SWA (Swahili), SWE (Swedish), SYR (Syriac),
-            TAM (Tamil), TEL (Telugu), TGK (Tajik), TGL (Tagalog), THA (Thai),
-            TIR (Tigrinya), TUR (Turkish), UIG (Uighur), UKR (Ukrainian), URD
-            (Urdu), UZB (Uzbek), UZB-CYR (Cyrillic Uzbek), VIE (Vietnamese), YID
-            (Yiddish)
+        - description: Optional, language of the input document, default is English (ENG).  Possible values are ENG (English), ARA (Arabic), ZHO (Chinese - Simplified), ZHO-HANT (Chinese - Traditional), ASM (Assamese), AFR (Afrikaans), AMH (Amharic), AZE (Azerbaijani), AZE-CYRL (Azerbaijani - Cyrillic), BEL (Belarusian), BEN (Bengali), BOD (Tibetan), BOS (Bosnian), BUL (Bulgarian), CAT (Catalan; Valencian), CEB (Cebuano), CES (Czech), CHR (Cherokee), CYM (Welsh), DAN (Danish), DEU (German), DZO (Dzongkha), ELL (Greek), ENM (Archaic/Middle English), EPO (Esperanto), EST (Estonian), EUS (Basque), FAS (Persian), FIN (Finnish), FRA (French), FRK (Frankish), FRM (Middle-French), GLE (Irish), GLG (Galician), GRC (Ancient Greek), HAT (Hatian), HEB (Hebrew), HIN (Hindi), HRV (Croatian), HUN (Hungarian), IKU (Inuktitut), IND (Indonesian), ISL (Icelandic), ITA (Italian), ITA-OLD (Old - Italian), JAV (Javanese), JPN (Japanese), KAN (Kannada), KAT (Georgian), KAT-OLD (Old-Georgian), KAZ (Kazakh), KHM (Central Khmer), KIR (Kirghiz), KOR (Korean), KUR (Kurdish), LAO (Lao), LAT (Latin), LAV (Latvian), LIT (Lithuanian), MAL (Malayalam), MAR (Marathi), MKD (Macedonian), MLT (Maltese), MSA (Malay), MYA (Burmese), NEP (Nepali), NLD (Dutch), NOR (Norwegian), ORI (Oriya), PAN (Panjabi), POL (Polish), POR (Portuguese), PUS (Pushto), RON (Romanian), RUS (Russian), SAN (Sanskrit), SIN (Sinhala), SLK (Slovak), SLV (Slovenian), SPA (Spanish), SPA-OLD (Old Spanish), SQI (Albanian), SRP (Serbian), SRP-LAT (Latin Serbian), SWA (Swahili), SWE (Swedish), SYR (Syriac), TAM (Tamil), TEL (Telugu), TGK (Tajik), TGL (Tagalog), THA (Thai), TIR (Tigrinya), TUR (Turkish), UIG (Uighur), UKR (Ukrainian), URD (Urdu), UZB (Uzbek), UZB-CYR (Cyrillic Uzbek), VIE (Vietnamese), YID (Yiddish)
           in: header
           name: language
           required: false
@@ -943,8 +555,7 @@ paths:
         - ImageOcr
   /ocr/preprocessing/image/binarize:
     post:
-      description: Perform an adaptive binarization algorithm on the input image to
-        prepare it for further OCR operations.
+      description: Perform an adaptive binarization algorithm on the input image to prepare it for further OCR operations.
       operationId: Preprocessing_Binarize
       requestBody:
         $ref: "#/components/requestBodies/ImageOcr_Post"
@@ -975,11 +586,7 @@ paths:
         - Preprocessing
   /ocr/preprocessing/image/binarize/advanced:
     post:
-      description: Perform an advanced adaptive, Deep Learning-based binarization
-        algorithm on the input image to prepare it for further OCR
-        operations.  Provides enhanced accuracy than adaptive
-        binarization.  Image will be upsampled to 300 DPI if it has a DPI below
-        300.
+      description: Perform an advanced adaptive, Deep Learning-based binarization algorithm on the input image to prepare it for further OCR operations.  Provides enhanced accuracy than adaptive binarization.  Image will be upsampled to 300 DPI if it has a DPI below 300.
       operationId: Preprocessing_BinarizeAdvanced
       requestBody:
         $ref: "#/components/requestBodies/ImageOcr_Post"
@@ -1010,8 +617,7 @@ paths:
         - Preprocessing
   /ocr/preprocessing/image/get-page-angle:
     post:
-      description: Analyzes a photo or image of a document and identifies the rotation
-        angle of the page.
+      description: Analyzes a photo or image of a document and identifies the rotation angle of the page.
       operationId: Preprocessing_GetPageAngle
       requestBody:
         $ref: "#/components/requestBodies/ImageOcr_Post"
@@ -1038,10 +644,7 @@ paths:
         - Preprocessing
   /ocr/preprocessing/image/unrotate:
     post:
-      description: Detect and unrotate an image of a document (e.g. that was scanned
-        at an angle).  Great for document scanning applications; once unskewed,
-        this image is perfect for converting to PDF using the Convert API or
-        optical character recognition using the OCR API.
+      description: Detect and unrotate an image of a document (e.g. that was scanned at an angle).  Great for document scanning applications; once unskewed, this image is perfect for converting to PDF using the Convert API or optical character recognition using the OCR API.
       operationId: Preprocessing_Unrotate
       requestBody:
         $ref: "#/components/requestBodies/ImageOcr_Post"
@@ -1072,11 +675,7 @@ paths:
         - Preprocessing
   /ocr/preprocessing/image/unrotate/advanced:
     post:
-      description: Detect and unrotate an image of a document (e.g. that was scanned
-        at an angle) using deep learning.  Great for document scanning
-        applications; once unskewed, this image is perfect for converting to PDF
-        using the Convert API or optical character recognition using the OCR
-        API.
+      description: Detect and unrotate an image of a document (e.g. that was scanned at an angle) using deep learning.  Great for document scanning applications; once unskewed, this image is perfect for converting to PDF using the Convert API or optical character recognition using the OCR API.
       operationId: Preprocessing_UnrotateAdvanced
       requestBody:
         $ref: "#/components/requestBodies/ImageOcr_Post"
@@ -1107,11 +706,7 @@ paths:
         - Preprocessing
   /ocr/preprocessing/image/unskew:
     post:
-      description: Detect and unskew a photo of a document (e.g. taken on a cell
-        phone) into a perfectly square image.  Great for document scanning
-        applications; once unskewed, this image is perfect for converting to PDF
-        using the Convert API or optical character recognition using the OCR
-        API.
+      description: Detect and unskew a photo of a document (e.g. taken on a cell phone) into a perfectly square image.  Great for document scanning applications; once unskewed, this image is perfect for converting to PDF using the Convert API or optical character recognition using the OCR API.
       operationId: Preprocessing_Unskew
       requestBody:
         $ref: "#/components/requestBodies/ImageOcr_Post"
@@ -1143,8 +738,7 @@ paths:
   /ocr/receipts/photo/to/csv:
     post:
       deprecated: true
-      description: Leverage Deep Learning to automatically turn a photo of a receipt
-        into a CSV file containing the structured information from the receipt.
+      description: Leverage Deep Learning to automatically turn a photo of a receipt into a CSV file containing the structured information from the receipt.
       operationId: Receipts_PhotoToCSV
       requestBody:
         $ref: "#/components/requestBodies/ImageOcr_Post"
@@ -1166,8 +760,7 @@ paths:
           description: OK
       security:
         - Apikey: []
-      summary: Convert a photo of a receipt into a CSV file containing structured
-        information from the receipt
+      summary: Convert a photo of a receipt into a CSV file containing structured information from the receipt
       tags:
         - Receipts
 components:
@@ -1178,8 +771,7 @@ components:
           schema:
             properties:
               imageFile:
-                description: Image file to perform OCR on.  Common file formats such as PNG,
-                  JPEG are supported.
+                description: Image file to perform OCR on.  Common file formats such as PNG, JPEG are supported.
                 format: binary
                 type: string
             required:
@@ -1201,39 +793,31 @@ components:
       required: true
   schemas:
     BusinessCardRecognitionResult:
-      description: Result of recognizing a business card, to extract the key
-        information from the business card
+      description: Result of recognizing a business card, to extract the key information from the business card
       properties:
         AddressString:
-          description: The address printed on the business card (if included on the
-            business card)
+          description: The address printed on the business card (if included on the business card)
           type: string
         BusinessName:
-          description: The name of the business printed on the business card (if included
-            on the business card)
+          description: The name of the business printed on the business card (if included on the business card)
           type: string
         EmailAddress:
-          description: The email address printed on the business card (if included on the
-            business card)
+          description: The email address printed on the business card (if included on the business card)
           type: string
         PersonName:
-          description: The name of the person printed on the business card (if included on
-            the business card)
+          description: The name of the person printed on the business card (if included on the business card)
           type: string
         PersonTitle:
-          description: The title of the person printed on the business card (if included
-            on the business card)
+          description: The title of the person printed on the business card (if included on the business card)
           type: string
         PhoneNumber:
-          description: The phone number printed on the business card (if included on the
-            business card)
+          description: The phone number printed on the business card (if included on the business card)
           type: string
         Successful:
           description: True if the operation was successful, false otherwise
           type: boolean
         Timestamp:
-          description: The date and time printed on the business card (if included on the
-            business card)
+          description: The date and time printed on the business card (if included on the business card)
           format: date-time
           type: string
       type: object
@@ -1249,19 +833,15 @@ components:
           $ref: "#/components/schemas/FormFieldDefinition"
       type: object
     FormDefinitionTemplate:
-      description: Definition of a form template; use a form template definition to
-        recognize the fields in a form with Cloudmersive OCR
+      description: Definition of a form template; use a form template definition to recognize the fields in a form with Cloudmersive OCR
       properties:
         FieldDefinitions:
-          description: Field definitions in the template; a field is comprised of a
-            key/value pair
+          description: Field definitions in the template; a field is comprised of a key/value pair
           items:
             $ref: "#/components/schemas/FormFieldDefinition"
           type: array
         TableDefinitions:
-          description: Table definitions in the template; a table is comprised of columns
-            and rows and exists in a 2-dimensional layout; a common example of a
-            table would be an invoice
+          description: Table definitions in the template; a table is comprised of columns and rows and exists in a 2-dimensional layout; a common example of a table would be an invoice
           items:
             $ref: "#/components/schemas/FormTableDefinition"
           type: array
@@ -1270,44 +850,28 @@ components:
       description: Definition of a form field for OCR data extraction from images
       properties:
         AllowNumericDigits:
-          description: Optional - set to false to block values that contain numeric
-            digits, set to true to allow numeric digits
+          description: Optional - set to false to block values that contain numeric digits, set to true to allow numeric digits
           type: boolean
         AlternateAnchor:
           description: Optional - alterate match text for the specified anchor
           type: string
         AnchorMode:
-          description: Optional - the matching mode for the anchor.  Possible values are
-            Complete (requires the entire anchor to match) and Partial (allows
-            only part of the anchor to match) and Horizontal (anchor must be
-            laid out horizontally).  Default is Partial.
+          description: Optional - the matching mode for the anchor.  Possible values are Complete (requires the entire anchor to match) and Partial (allows only part of the anchor to match) and Horizontal (anchor must be laid out horizontally).  Default is Partial.
           type: string
         BottomAnchor:
           description: Optional - the bottom anchor of the field
           type: string
         DataType:
-          description: The data type of the field; possible values are INTEGER (Integer
-            value), STRING (Arbitrary string value, spaces are permitted), DATE
-            (Date in a structured format), DECIMAL (Decimal number),
-            ALPHANUMERIC (Continuous alphanumeric string with no spaces),
-            STRINGNOWHITESPACE (A string that contains no whitespace
-            characters), SERIALNUMBER (A serial-number style string that
-            contains letters and numbers, and certain symbols; must contain at
-            least one number), ALPHAONLY (Alphabet characters only, no numbers
-            or symbols or whitespace)
+          description: The data type of the field; possible values are INTEGER (Integer value), STRING (Arbitrary string value, spaces are permitted), DATE (Date in a structured format), DECIMAL (Decimal number), ALPHANUMERIC (Continuous alphanumeric string with no spaces), STRINGNOWHITESPACE (A string that contains no whitespace characters), SERIALNUMBER (A serial-number style string that contains letters and numbers, and certain symbols; must contain at least one number), ALPHAONLY (Alphabet characters only, no numbers or symbols or whitespace)
           type: string
         FieldID:
-          description: The identifier of the field; use this to identify which field is
-            being referenced.  Set to SkipField if you do not wish to return the
-            value of this field in the result.
+          description: The identifier of the field; use this to identify which field is being referenced.  Set to SkipField if you do not wish to return the value of this field in the result.
           type: string
         HorizontalAlignmentType:
-          description: Horizontal alignment of target value area relative to the field
-            anchor; Possible values are Left, Right
+          description: Horizontal alignment of target value area relative to the field anchor; Possible values are Left, Right
           type: string
         Ignore:
-          description: Optional - Ignore any result items that contain a partial or
-            complete match with these text strings
+          description: Optional - Ignore any result items that contain a partial or complete match with these text strings
           items:
             type: string
           type: array
@@ -1315,24 +879,18 @@ components:
           description: Optional - the left-hand anchor of the field
           type: string
         MinimumCharacterCount:
-          description: Optional - the target number of digits in the field; useful for
-            fixed-length fields
+          description: Optional - the target number of digits in the field; useful for fixed-length fields
           format: int32
           type: integer
         Options:
-          description: Optional - additional options that can be set for this field
-            definition, separated by commas.  Possible values are
-            AllowMultiMatch (allow the same anchor to be matched to multiple
-            fields)
+          description: Optional - additional options that can be set for this field definition, separated by commas.  Possible values are AllowMultiMatch (allow the same anchor to be matched to multiple fields)
           type: string
         TargetDigitCount:
-          description: Optional - the target number of digits in the field; useful for
-            fixed-length fields
+          description: Optional - the target number of digits in the field; useful for fixed-length fields
           format: int32
           type: integer
         TargetFieldHeight_Relative:
-          description: Optional - scale factor for target field height - relative to
-            height of field title
+          description: Optional - scale factor for target field height - relative to height of field title
           format: double
           type: number
         TargetFieldHorizontalAdjustment:
@@ -1344,31 +902,24 @@ components:
           format: double
           type: number
         TargetFieldWidth_Relative:
-          description: Optional - scale factor for target field width - relative to width
-            of field title; a value of 1.0 indicates the target value area has
-            the same width as the field value as occurring in the image; a value
-            of 2.0 would indicate that the target value area has 2 times the
-            width of the field value as occurring in the image.
+          description: Optional - scale factor for target field width - relative to width of field title; a value of 1.0 indicates the target value area has the same width as the field value as occurring in the image; a value of 2.0 would indicate that the target value area has 2 times the width of the field value as occurring in the image.
           format: double
           type: number
         TopAnchor:
           description: Optional - the top anchor of the field
           type: string
         VerticalAlignmentType:
-          description: Vertical alignment of target value area relative to the field
-            anchor; Possible values are VCenter, Top, Bottom
+          description: Vertical alignment of target value area relative to the field anchor; Possible values are VCenter, Top, Bottom
           type: string
       type: object
     FormRecognitionResult:
       description: The result of extracting form field values
       properties:
         BestMatchFormSettingName:
-          description: Optional; populated when using photo/recognize/form/advanced with
-            the Setting Name of the best-matching highest-relevance form
+          description: Optional; populated when using photo/recognize/form/advanced with the Setting Name of the best-matching highest-relevance form
           type: string
         Diagnostics:
-          description: Diagnostic images - default is null, enable diagnostics=true to
-            populate this parameter with one image per field
+          description: Diagnostic images - default is null, enable diagnostics=true to populate this parameter with one image per field
           items:
             type: string
           type: array
@@ -1390,32 +941,19 @@ components:
       description: Definition of a column within a table for OCR data extraction from images
       properties:
         AllowNumericDigits:
-          description: Optional - set to false to block values that contain numeric
-            digits, set to true to allow numeric digits
+          description: Optional - set to false to block values that contain numeric digits, set to true to allow numeric digits
           type: boolean
         AnchorMode:
-          description: Optional - the matching mode for the anchor.  Possible values are
-            Complete (requires the entire anchor to match) and Partial (allows
-            only part of the anchor to match).  Default is Partial.
+          description: Optional - the matching mode for the anchor.  Possible values are Complete (requires the entire anchor to match) and Partial (allows only part of the anchor to match).  Default is Partial.
           type: string
         ColumnID:
-          description: The identifier of the field; use this to identify which field is
-            being referenced
+          description: The identifier of the field; use this to identify which field is being referenced
           type: string
         DataType:
-          description: The data type of the field; possible values are INTEGER (Integer
-            value), STRING (Arbitrary string value, spaces are permitted), DATE
-            (Date in a structured format), DECIMAL (Decimal number),
-            ALPHANUMERIC (Continuous alphanumeric string with no spaces),
-            STRINGNOWHITESPACE (A string that contains no whitespace
-            characters), SERIALNUMBER (A serial-number style string that
-            contains letters and numbers, and certain symbols; must contain at
-            least one number), ALPHAONLY (Alphabet characters only, no numbers
-            or symbols or whitespace)
+          description: The data type of the field; possible values are INTEGER (Integer value), STRING (Arbitrary string value, spaces are permitted), DATE (Date in a structured format), DECIMAL (Decimal number), ALPHANUMERIC (Continuous alphanumeric string with no spaces), STRINGNOWHITESPACE (A string that contains no whitespace characters), SERIALNUMBER (A serial-number style string that contains letters and numbers, and certain symbols; must contain at least one number), ALPHAONLY (Alphabet characters only, no numbers or symbols or whitespace)
           type: string
         MinimumCharacterCount:
-          description: Optional - the target number of digits in the field; useful for
-            fixed-length fields
+          description: Optional - the target number of digits in the field; useful for fixed-length fields
           format: int32
           type: integer
         TopAnchor:
@@ -1434,13 +972,11 @@ components:
           description: Optional; the ID of the table
           type: string
         TargetRowHeight_Relative:
-          description: Optional - scale factor for target row height - relative to height
-            of column header
+          description: Optional - scale factor for target row height - relative to height of column header
           format: double
           type: number
         TargetTableHeight_Relative:
-          description: Optional - scale factor for target table height - relative to
-            maximum height of headers of columns
+          description: Optional - scale factor for target table height - relative to maximum height of headers of columns
           format: double
           type: number
       type: object
@@ -1468,12 +1004,10 @@ components:
           type: boolean
       type: object
     ImageToTextResponse:
-      description: Response from an OCR to text operation.  Includes the confience
-        rating and converted text result.
+      description: Response from an OCR to text operation.  Includes the confience rating and converted text result.
       properties:
         MeanConfidenceLevel:
-          description: Confidence level rating of the OCR operation; ratings above 80% are
-            strong.
+          description: Confidence level rating of the OCR operation; ratings above 80% are strong.
           format: float
           type: number
         TextResult:
@@ -1507,13 +1041,11 @@ components:
     OcrPageResult:
       properties:
         MeanConfidenceLevel:
-          description: Confidence level rating of the OCR operation; ratings above 80% are
-            strong.
+          description: Confidence level rating of the OCR operation; ratings above 80% are strong.
           format: float
           type: number
         PageNumber:
-          description: Page number of the page that was OCR-ed, starting with 1 for the
-            first page in the PDF file
+          description: Page number of the page that was OCR-ed, starting with 1 for the first page in the PDF file
           format: int32
           type: integer
         TextResult:
@@ -1529,8 +1061,7 @@ components:
             $ref: "#/components/schemas/OcrLineElement"
           type: array
         PageNumber:
-          description: Page number of the page that was OCR-ed, starting with 1 for the
-            first page in the PDF file
+          description: Page number of the page that was OCR-ed, starting with 1 for the first page in the PDF file
           format: int32
           type: integer
         Successful:
@@ -1541,8 +1072,7 @@ components:
       description: OCR results of a page, including words of text and their location
       properties:
         PageNumber:
-          description: Page number of the page that was OCR-ed, starting with 1 for the
-            first page in the PDF file
+          description: Page number of the page that was OCR-ed, starting with 1 for the first page in the PDF file
           format: int32
           type: integer
         Successful:
@@ -1563,8 +1093,7 @@ components:
             $ref: "#/components/schemas/Point"
           type: array
         ConfidenceLevel:
-          description: Confidence level of the machine learning result; possible values
-            are 0.0 (lowest accuracy) - 1.0 (highest accuracy)
+          description: Confidence level of the machine learning result; possible values are 0.0 (lowest accuracy) - 1.0 (highest accuracy)
           format: double
           type: number
         Height:
@@ -1595,8 +1124,7 @@ components:
           format: int32
           type: integer
         ConfidenceLevel:
-          description: Confidence level of the machine learning result; possible values
-            are 0.0 (lowest accuracy) - 1.0 (highest accuracy)
+          description: Confidence level of the machine learning result; possible values are 0.0 (lowest accuracy) - 1.0 (highest accuracy)
           format: double
           type: number
         Height:
@@ -1636,9 +1164,7 @@ components:
           type: integer
       type: object
     PdfToLinesWithLocationResult:
-      description: Response from an OCR to lines with location operation.  Includes
-        the confience rating and converted text result, along with the locations
-        of the lines in the pages.
+      description: Response from an OCR to lines with location operation.  Includes the confience rating and converted text result, along with the locations of the lines in the pages.
       properties:
         OcrPages:
           description: OCR results for each page
@@ -1650,8 +1176,7 @@ components:
           type: boolean
       type: object
     PdfToTextResponse:
-      description: Response from an OCR to text operation.  Includes the confidence
-        rating and converted text result.
+      description: Response from an OCR to text operation.  Includes the confidence rating and converted text result.
       properties:
         OcrPages:
           description: Page OCR results
@@ -1663,9 +1188,7 @@ components:
           type: boolean
       type: object
     PdfToWordsWithLocationResult:
-      description: Response from an OCR to words with location operation.  Includes
-        the confience rating and converted text result, along with the locations
-        of the words in the pages.
+      description: Response from an OCR to words with location operation.  Includes the confience rating and converted text result, along with the locations of the words in the pages.
       properties:
         OcrPages:
           description: OCR page results
@@ -1680,10 +1203,7 @@ components:
       description: Result of an photo to words-with-location OCR operation
       properties:
         DiagnosticImage:
-          description: Typically null.  To analyze OCR performance, enable diagnostic mode
-            by adding the HTTP header "DiagnosticMode" with the value
-            "true".  When this is true, a diagnostic image showing the details
-            of the OCR result will be set in PNG format into DiagnosticImage.
+          description: Typically null.  To analyze OCR performance, enable diagnostic mode by adding the HTTP header "DiagnosticMode" with the value "true".  When this is true, a diagnostic image showing the details of the OCR result will be set in PNG format into DiagnosticImage.
           format: byte
           type: string
         Successful:
@@ -1696,23 +1216,19 @@ components:
           type: array
       type: object
     Point:
-      description: Point location in 2D in an image, where 0, 0 represents the
-        top/left corner of the image
+      description: Point location in 2D in an image, where 0, 0 represents the top/left corner of the image
       properties:
         X:
-          description: X location in 2D in the image, where 0 represents the left edge of
-            the image
+          description: X location in 2D in the image, where 0 represents the left edge of the image
           format: int32
           type: integer
         Y:
-          description: Y location in 2D in the image, where 0 represents the top edge of
-            the image
+          description: Y location in 2D in the image, where 0 represents the top edge of the image
           format: int32
           type: integer
       type: object
     ReceiptLineItem:
-      description: Receipt line item, comprised of a product or item and a price (if
-        available)
+      description: Receipt line item, comprised of a product or item and a price (if available)
       properties:
         ItemDescription:
           description: Description of the item
@@ -1723,34 +1239,27 @@ components:
           type: number
       type: object
     ReceiptRecognitionResult:
-      description: Result of recognizing a receipt, to extract the key information
-        from the receipt
+      description: Result of recognizing a receipt, to extract the key information from the receipt
       properties:
         AddressString:
-          description: The address of the business printed on the receipt (if included on
-            the receipt)
+          description: The address of the business printed on the receipt (if included on the receipt)
           type: string
         BusinessName:
-          description: The name of the business printed on the receipt (if included on the
-            receipt)
+          description: The name of the business printed on the receipt (if included on the receipt)
           type: string
         BusinessWebsite:
-          description: The website URL of the business printed on the receipt (if included
-            on the receipt)
+          description: The website URL of the business printed on the receipt (if included on the receipt)
           type: string
         PhoneNumber:
           description: The phone number printed on the receipt (if included on the receipt)
           type: string
         ReceiptItems:
-          description: The individual line items comprising the order; does not include
-            total (see ReceiptTotal)
+          description: The individual line items comprising the order; does not include total (see ReceiptTotal)
           items:
             $ref: "#/components/schemas/ReceiptLineItem"
           type: array
         ReceiptSubTotal:
-          description: Optional; if available, the monetary value of the receipt subtotal
-            - typically not including specialized line items such as Tax. If
-            this value is not available, it will be 0.
+          description: Optional; if available, the monetary value of the receipt subtotal - typically not including specialized line items such as Tax. If this value is not available, it will be 0.
           format: double
           type: number
         ReceiptTotal:

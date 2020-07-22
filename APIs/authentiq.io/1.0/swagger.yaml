@@ -135,94 +135,70 @@ paths:
       operationId: authorize
       parameters:
         - description: >
-            A client ID obtained from the
-            [Dashboard](https://dashboard.authentiq.com/).
+            A client ID obtained from the [Dashboard](https://dashboard.authentiq.com/).
           in: query
           name: client_id
           required: true
           type: string
         - description: >
-            The OIDC response type to use for this authentication flow. Valid
-            choices are `code`, `id_token`, `token`, `token id_token`, `code
-            id_token` `code token` and `code token id_token`, but a client can
-            be configured with a more restricted set.
+            The OIDC response type to use for this authentication flow. Valid choices are `code`, `id_token`, `token`, `token id_token`, `code id_token` `code token` and `code token id_token`, but a client can be configured with a more restricted set.
           in: query
           name: response_type
           required: true
           type: string
         - description: >
-            The space-separated identity claims to request from the end-user.
-            Always include `openid` as a scope for compatibility with OIDC.
+            The space-separated identity claims to request from the end-user. Always include `openid` as a scope for compatibility with OIDC.
           in: query
           name: scope
           required: true
           type: string
         - description: >
-            The location to redirect to after (un)successful authentication. See
-            OIDC for the parameters passed in the query string
-            (`response_mode=query`) or as fragments (`response_mode=fragment`).
-            Unless the client is in test-mode this must be one of the registered
-            redirect URLs.
+            The location to redirect to after (un)successful authentication. See OIDC for the parameters passed in the query string (`response_mode=query`) or as fragments (`response_mode=fragment`). Unless the client is in test-mode this must be one of the registered redirect URLs.
           in: query
           name: redirect_uri
           required: true
           type: string
         - description: >
-            An opaque string that will be passed back to the redirect URL and
-            therefore can be used to communicate client side state and prevent
-            CSRF attacks.
+            An opaque string that will be passed back to the redirect URL and therefore can be used to communicate client side state and prevent CSRF attacks.
           in: query
           name: state
           required: true
           type: string
         - description: >
-            Whether to append parameters to the redirect URL in the query string
-            (`query`) or as fragments (`fragment`). This option usually has a
-            sensible default for each of the response types.
+            Whether to append parameters to the redirect URL in the query string (`query`) or as fragments (`fragment`). This option usually has a sensible default for each of the response types.
           in: query
           name: response_mode
           required: false
           type: string
         - description: >
-            An nonce provided by the client (and opaque to Authentiq Connect)
-            that will be included in any ID Token generated for this session.
-            Clients should use the nonce to mitigate replay attacks.
+            An nonce provided by the client (and opaque to Authentiq Connect) that will be included in any ID Token generated for this session. Clients should use the nonce to mitigate replay attacks.
           in: query
           name: nonce
           required: false
           type: string
         - default: page
           description: >
-            The authentication display mode, which can be one of `page`, `popup`
-            or `modal`. Defaults to `page`.
+            The authentication display mode, which can be one of `page`, `popup` or `modal`. Defaults to `page`.
           in: query
           name: display
           required: false
           type: string
         - default: login
           description: >
-            Space-delimited, case sensitive list of ASCII string values that
-            specifies whether the Authorization Server prompts the End-User for
-            reauthentication and consent. The supported values are: `none`,
-            `login`, `consent`. If `consent` the end-user is asked to
-            (re)confirm what claims they share. Use `none` to check for an
-            active session.
+            Space-delimited, case sensitive list of ASCII string values that specifies whether the Authorization Server prompts the End-User for reauthentication and consent. The supported values are: `none`, `login`, `consent`. If `consent` the end-user is asked to (re)confirm what claims they share. Use `none` to check for an active session.
           in: query
           name: prompt
           required: false
           type: string
         - default: 0
           description: >
-            Specifies the allowable elapsed time in seconds since the last time
-            the end-user was actively authenticated.
+            Specifies the allowable elapsed time in seconds since the last time the end-user was actively authenticated.
           in: query
           name: max_age
           required: false
           type: integer
         - description: >
-            Specifies the preferred language to use on the authorization page,
-            as a space-separated list of BCP47 language tags. Ignored at the
-            moment.
+            Specifies the preferred language to use on the authorization page, as a space-separated list of BCP47 language tags. Ignored at the moment.
           in: query
           name: ui_locales
           required: false
@@ -231,17 +207,17 @@ paths:
         - text/html
       responses:
         "302":
-          description: |
+          description: >
             A successful or erroneous authentication response.
         "303":
-          description: |
+          description: >
             *Sign in with Authentiq* page, popup or modal.
       summary: Authenticate a user
       tags:
         - Authentication
   /client:
     get:
-      description: |
+      description: >
         Retrieve a list of clients.
       operationId: client
       produces:
@@ -295,7 +271,7 @@ paths:
         - Client Management
   "/client/{client_id}":
     delete:
-      description: |
+      description: >
         Delete a previously registered client.
       externalDocs:
         description: OIDC Client Configuration Endpoint
@@ -316,7 +292,7 @@ paths:
       tags:
         - Client Management
     get:
-      description: |
+      description: >
         Retrieve the configuration of a previously registered client.
       externalDocs:
         description: OIDC Client Configuration Endpoint
@@ -344,7 +320,7 @@ paths:
       consumes:
         - application/json
         - multipart/form-data
-      description: |
+      description: >
         Update the configuration of a previously registered client.
       externalDocs:
         description: OIDC Client Configuration Endpoint
@@ -383,41 +359,39 @@ paths:
         url: http://openid.net/specs/openid-connect-core-1_0.html#TokenEndpoint
       operationId: token
       parameters:
-        - description: |
+        - description: >
             HTTP Basic authorization header.
           in: header
           name: Authorization
           required: false
           type: string
-        - description: |
+        - description: >
             The registered client ID.
           in: formData
           name: client_id
           required: true
           type: string
-        - description: |
+        - description: >
             The registered client ID secret.
           format: password
           in: formData
           name: client_secret
           required: true
           type: string
-        - description: |
+        - description: >
             The authorization grant type, must be `authorization_code`.
           in: formData
           name: grant_type
           required: true
           type: string
         - description: >
-            The authorization code previously obtained from the Authentication
-            endpoint.
+            The authorization code previously obtained from the Authentication endpoint.
           in: formData
           name: code
           required: true
           type: string
         - description: >
-            The redirect URL that was used previously with the Authentication
-            endpoint.
+            The redirect URL that was used previously with the Authentication endpoint.
           in: formData
           name: redirect_uri
           required: true
@@ -437,9 +411,7 @@ paths:
   /userinfo:
     get:
       description: >
-        Use this endpoint to retrieve a user's profile in case you are unable to
-        parse an ID Token or you've not already obtained enough details from the
-        ID Token via the Token Endpoint.
+        Use this endpoint to retrieve a user's profile in case you are unable to parse an ID Token or you've not already obtained enough details from the ID Token via the Token Endpoint.
       externalDocs:
         description: OIDC UserInfo Endpoint
         url: http://openid.net/specs/openid-connect-core-1_0.html#UserInfo
@@ -476,8 +448,7 @@ paths:
   "/{client_id}/iframe":
     get:
       description: >
-        An OpenID Connect Session Management iframe to facilitate e.g. single
-        sign-on or remote logouts.
+        An OpenID Connect Session Management iframe to facilitate e.g. single sign-on or remote logouts.
 
 
         The iframe implements the OIDC postMessage-based [change notification protocol](http://openid.net/specs/openid-connect-session-1_0.html#ChangeNotification) via which a client can receive notifications about session state changes.
@@ -557,7 +528,7 @@ definitions:
       - client_name
       - client_uri
   OAuth2Error:
-    description: |
+    description: >
       Error Response defined as in Section 5.2 of OAuth 2.0 [RFC6749].
     properties:
       error:
@@ -567,19 +538,19 @@ definitions:
     required:
       - error
   ProblemDetail:
-    description: |
+    description: >
       HTTP Problem Detail
     properties:
       detail:
-        description: |
+        description: >
           Human-readable explanation specific to this occurrence of the problem.
         type: string
       status:
-        description: |
+        description: >
           The HTTP status code for this occurrence of the problem.
         type: integer
       title:
-        description: |
+        description: >
           Human-readable summary of the problem type.
         type: string
       type:
@@ -664,7 +635,7 @@ definitions:
       version:
         type: integer
   Token:
-    description: |
+    description: >
       Successful token response
     properties:
       access_token:

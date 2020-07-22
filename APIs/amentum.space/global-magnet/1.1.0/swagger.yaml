@@ -18,8 +18,7 @@ info:
     The API is rate limited to 10,000 calls per month for non commercial use.  Contact <a href="mailto:team@amentum.space">team@amentum.space</a> to  discuss paid plans and commercial use. <br><br>
 
     Copyright <a href='https://amentum.space'>Amentum Pty Ltd</a> 2020.
-  title: Global Magnet API - calculate main components of the geomagnetic field at
-    or near Earth's surface
+  title: Global Magnet API - calculate main components of the geomagnetic field at or near Earth's surface
   version: 1.1.0
   x-apisguru-categories:
     - location
@@ -55,8 +54,7 @@ parameters:
     required: true
     type: number
   Year:
-    description: Year as a decimal in the range 2015-2025 (2017.5 would be half way
-      through 2017)
+    description: Year as a decimal in the range 2015-2025 (2017.5 would be half way through 2017)
     in: query
     name: year
     required: true
@@ -65,16 +63,7 @@ paths:
   /magnetic_field:
     get:
       description: >
-        <b>Declination (degrees)</b> - angle in the horizontal plane between
-        magnetic north and true north. Declination is positive when magnetic
-        north is east of true north. <br> <b>Inclination, or dip
-        (degrees)</b>  - angle made between the horizontal plane and the
-        magnetic field vector at some position. Positive inclination corresponds
-        to a downward pointing  magnetic field. <br> <b>Total Intensity (nano
-        Teslas)</b>  <br> <b>Grid Variation (deg)</b>  referenced to grid north.
-        Grid  north reference to 0 deg meridian of a polar stereographic
-        projection. Only defined for latitudes greater than 55 degrees  and less
-        than -55 degrees (arctic and antarctic). <br>
+        <b>Declination (degrees)</b> - angle in the horizontal plane between magnetic north and true north. Declination is positive when magnetic north is east of true north. <br> <b>Inclination, or dip (degrees)</b>  - angle made between the horizontal plane and the magnetic field vector at some position. Positive inclination corresponds to a downward pointing  magnetic field. <br> <b>Total Intensity (nano Teslas)</b>  <br> <b>Grid Variation (deg)</b>  referenced to grid north. Grid  north reference to 0 deg meridian of a polar stereographic projection. Only defined for latitudes greater than 55 degrees  and less than -55 degrees (arctic and antarctic). <br>
       operationId: app.api_wmm.endpoints.WMM.magnetic_field
       parameters:
         - $ref: "#/parameters/Altitude"
@@ -116,7 +105,6 @@ paths:
                 type: object
             type: object
       summary: >
-        Calculates the declination, inclination, total intensity, and grid
-        variation at a point.
+        Calculates the declination, inclination, total intensity, and grid variation at a point.
       tags:
         - Click to view documentation for API endpoints

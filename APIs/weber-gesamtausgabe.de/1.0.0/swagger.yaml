@@ -4,11 +4,7 @@ schemes:
 host: weber-gesamtausgabe.de
 basePath: /api/v1
 info:
-  description: The OpenAPI documentation for the RESTful interface of the
-    Carl-Maria-von-Weber-Gesamtausgabe. <br/> (No registration, authentication,
-    or API key is required) <br/> For feedback or requests about this API please
-    contact stadler@weber-gesamtausgabe.de or start the discussion at
-    https://github.com/Edirom/WeGA-WebApp
+  description: The OpenAPI documentation for the RESTful interface of the Carl-Maria-von-Weber-Gesamtausgabe. <br/> (No registration, authentication, or API key is required) <br/> For feedback or requests about this API please contact stadler@weber-gesamtausgabe.de or start the discussion at https://github.com/Edirom/WeGA-WebApp
   title: WeGA API
   version: 1.0.0
   x-apisguru-categories:
@@ -203,8 +199,7 @@ paths:
   /documents:
     get:
       description: >
-        The Documents endpoint returns a list of all documents from the WeGA
-        digital edition.
+        The Documents endpoint returns a list of all documents from the WeGA digital edition.
       parameters:
         - $ref: "#/parameters/docTypeParam"
         - $ref: "#/parameters/offsetParam"
@@ -232,15 +227,11 @@ paths:
   "/documents/findByAuthor/{authorID}":
     get:
       description: >
-        This endpoint returns a list of documents by a given author – optionally
-        filtered by document type 
+        This endpoint returns a list of documents by a given author – optionally filtered by document type 
       parameters:
         - default: A002068
           description: >
-            The author ID to search for. Accepted ID formats are WeGA, e.g.
-            A002068 or http://weber-gesamtausgabe.de/A002068, VIAF, e.g.
-            http://viaf.org/viaf/14959938, or  GND, e.g.
-            http://d-nb.info/gnd/118629662
+            The author ID to search for. Accepted ID formats are WeGA, e.g. A002068 or http://weber-gesamtausgabe.de/A002068, VIAF, e.g. http://viaf.org/viaf/14959938, or  GND, e.g. http://d-nb.info/gnd/118629662
           in: path
           name: authorID
           required: true
@@ -271,8 +262,7 @@ paths:
   /documents/findByDate:
     get:
       description: >
-        This endpoint returns a list of documents related to the given date –
-        optionally filtered by document type. 
+        This endpoint returns a list of documents related to the given date – optionally filtered by document type. 
       parameters:
         - default: 1786-11-18
           description: The min date to search for
@@ -313,15 +303,11 @@ paths:
   "/documents/findByMention/{docID}":
     get:
       description: >
-        This endpoint returns a list of documents that reference a particular
-        docID – optionally filtered by document type. 
+        This endpoint returns a list of documents that reference a particular docID – optionally filtered by document type. 
       parameters:
         - default: A002068
           description: >
-            The document ID that is to be mentioned. Accepted ID formats are
-            WeGA, e.g. A002068 or http://weber-gesamtausgabe.de/A002068, VIAF,
-            e.g. http://viaf.org/viaf/14959938, or  GND, e.g.
-            http://d-nb.info/gnd/118629662
+            The document ID that is to be mentioned. Accepted ID formats are WeGA, e.g. A002068 or http://weber-gesamtausgabe.de/A002068, VIAF, e.g. http://viaf.org/viaf/14959938, or  GND, e.g. http://d-nb.info/gnd/118629662
           in: path
           name: docID
           required: true

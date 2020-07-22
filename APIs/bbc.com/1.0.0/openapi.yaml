@@ -6,8 +6,7 @@ info:
     email: nitro@bbc.co.uk
     name: Open Nitro Project
     url: http://developer.bbc.co.uk/
-  description: BBC Nitro is the BBC's application programming interface (API) for
-    BBC Programmes Metadata.
+  description: BBC Nitro is the BBC's application programming interface (API) for BBC Programmes Metadata.
   license:
     name: Nitro Public License
     url: https://github.com/Mermade/bbcparse/wiki/Nitro-Public-License
@@ -75,8 +74,7 @@ paths:
         - schema
   /availabilities:
     get:
-      description: Discover details of on-demand availability for programmes and their
-        versions
+      description: Discover details of on-demand availability for programmes and their versions
       operationId: listAvailability
       parameters:
         - description: >
@@ -180,16 +178,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorModel"
           description: Unexpected error
-      summary: Discover details of on-demand availability for programmes and their
-        versions
+      summary: Discover details of on-demand availability for programmes and their versions
       tags:
         - feeds
   /broadcasts:
     get:
-      description: Fetch metadata about linear Broadcasts and Services, allowing the
-        generation of Television and Radio schedules and other datasets for
-        broadcast items. Use /schedules instead of this feed as it is more
-        efficient. Broadcasts will be deprecated in the future.
+      description: Fetch metadata about linear Broadcasts and Services, allowing the generation of Television and Radio schedules and other datasets for broadcast items. Use /schedules instead of this feed as it is more efficient. Broadcasts will be deprecated in the future.
       operationId: listBroadcasts
       parameters:
         - description: >
@@ -212,8 +206,9 @@ paths:
               - ascending
               - descending
             type: string
-        - description: |
+        - description: >
             Mixins:
+
             * titles: return ancestor programme titles
           in: query
           name: mixin
@@ -232,8 +227,7 @@ paths:
             items:
               type: string
             type: array
-        - description: filter for subset of broadcasts that are descendants of the given
-            programme PID
+        - description: filter for subset of broadcasts that are descendants of the given programme PID
           in: query
           name: descendants_of
           required: false
@@ -243,24 +237,21 @@ paths:
               pattern: ^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$
               type: string
             type: array
-        - description: filter for subset of broadcasts that end on or later than the
-            specified datetime
+        - description: filter for subset of broadcasts that end on or later than the specified datetime
           in: query
           name: end_from
           required: false
           schema:
             format: date-time
             type: string
-        - description: filter for subset of broadcasts that end on or earlier than the
-            specified datetime
+        - description: filter for subset of broadcasts that end on or earlier than the specified datetime
           in: query
           name: end_to
           required: false
           schema:
             format: date-time
             type: string
-        - description: filter for subset of broadcasts that are classified in the given
-            format ID
+        - description: filter for subset of broadcasts that are classified in the given format ID
           in: query
           name: format
           required: false
@@ -268,8 +259,7 @@ paths:
             items:
               type: string
             type: array
-        - description: filter for subset of broadcasts that are classified in the given
-            genre ID
+        - description: filter for subset of broadcasts that are classified in the given genre ID
           in: query
           name: genre
           required: false
@@ -327,31 +317,27 @@ paths:
               pattern: ^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$
               type: string
             type: array
-        - description: filter for subset of broadcasts matching supplied keyword/phrase
-            (boolean operators permitted)
+        - description: filter for subset of broadcasts matching supplied keyword/phrase (boolean operators permitted)
           in: query
           name: q
           required: false
           schema:
             type: string
-        - description: filter for subset of broadcasts that start on the specified day
-            (BBC time)
+        - description: filter for subset of broadcasts that start on the specified day (BBC time)
           in: query
           name: schedule_day
           required: false
           schema:
             format: date
             type: string
-        - description: filter for subset of broadcasts that start on or after the
-            specified day (BBC time)
+        - description: filter for subset of broadcasts that start on or after the specified day (BBC time)
           in: query
           name: schedule_day_from
           required: false
           schema:
             format: date
             type: string
-        - description: filter for subset of broadcasts that start on or before the
-            specified day (BBC time)
+        - description: filter for subset of broadcasts that start on or before the specified day (BBC time)
           in: query
           name: schedule_day_to
           required: false
@@ -366,8 +352,7 @@ paths:
             items:
               type: string
             type: array
-        - description: filter for subset of broadcasts that are on the specified linear
-            service
+        - description: filter for subset of broadcasts that are on the specified linear service
           in: query
           name: sid
           required: false
@@ -375,24 +360,21 @@ paths:
             items:
               type: string
             type: array
-        - description: filter for subset of broadcasts that start on or later than the
-            specified datetime
+        - description: filter for subset of broadcasts that start on or later than the specified datetime
           in: query
           name: start_from
           required: false
           schema:
             format: date-time
             type: string
-        - description: filter for subset of broadcasts that start on or earlier than the
-            specified datetime
+        - description: filter for subset of broadcasts that start on or earlier than the specified datetime
           in: query
           name: start_to
           required: false
           schema:
             format: date-time
             type: string
-        - description: filter for subset of broadcasts with given PID as their parent
-            version
+        - description: filter for subset of broadcasts with given PID as their parent version
           in: query
           name: version
           required: false
@@ -426,12 +408,12 @@ paths:
         - feeds
   /groups:
     get:
-      description: Long-lived curated collections of programmes and more, including
-        Collections, Seasons, Franchises and Galleries
+      description: Long-lived curated collections of programmes and more, including Collections, Seasons, Franchises and Galleries
       operationId: listGroups
       parameters:
-        - description: |
+        - description: >
             Sorts:
+
             * pid: sort alphabetically by PID
           in: query
           name: sort
@@ -507,8 +489,7 @@ paths:
                 - season
               type: string
             type: array
-        - description: filter for subset of groups which contain an entity with the given
-            pid as a member
+        - description: filter for subset of groups which contain an entity with the given pid as a member
           in: query
           name: member
           required: false
@@ -553,8 +534,7 @@ paths:
               pattern: ^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$
               type: string
             type: array
-        - description: filter for subset of seasons, collections, galleries or franchises
-            having given PID
+        - description: filter for subset of seasons, collections, galleries or franchises having given PID
           in: query
           name: pid
           required: false
@@ -564,8 +544,7 @@ paths:
               pattern: ^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$
               type: string
             type: array
-        - description: filter for subset of groups matching supplied keyword/phrase
-            (boolean operators permitted)
+        - description: filter for subset of groups matching supplied keyword/phrase (boolean operators permitted)
           in: query
           name: q
           required: false
@@ -600,8 +579,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorModel"
           description: Unexpected error
-      summary: "Find metadata for curated groups: seasons, collections, galleries or
-        franchises"
+      summary: "Find metadata for curated groups: seasons, collections, galleries or franchises"
       tags:
         - feeds
   /images:
@@ -609,9 +587,11 @@ paths:
       description: Find metadata for images, particularly those in galleries
       operationId: listImages
       parameters:
-        - description: |
+        - description: >
             Sorts:
+
             * group_position: sort numerically by position, ascending only
+
             * pid: sort alphabetically by PID
           in: query
           name: sort
@@ -715,8 +695,7 @@ paths:
               pattern: ^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$
               type: string
             type: array
-        - description: filter for subset of images matching supplied keyword/phrase
-            (boolean operators permitted)
+        - description: filter for subset of images matching supplied keyword/phrase (boolean operators permitted)
           in: query
           name: q
           required: false
@@ -759,8 +738,9 @@ paths:
       description: "Look inside programmes to find segments: chapters, tracks and more"
       operationId: listItems
       parameters:
-        - description: |
+        - description: >
             Sorts:
+
             * pid: sort by pid, descending
           in: query
           name: sort
@@ -799,8 +779,7 @@ paths:
                 - play_event
               type: string
             type: array
-        - description: filter for subset of items that have an ID issued by the given
-            authority
+        - description: filter for subset of items that have an ID issued by the given authority
           in: query
           name: authority
           required: false
@@ -895,8 +874,7 @@ paths:
             minLength: 8
             pattern: ^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$
             type: string
-        - description: filter for subset of items matching supplied keyword/phrase
-            (boolean operators permitted)
+        - description: filter for subset of items matching supplied keyword/phrase (boolean operators permitted)
           in: query
           name: q
           required: false
@@ -935,8 +913,9 @@ paths:
       description: List all Master Brands
       operationId: listMasterbrands
       parameters:
-        - description: |
+        - description: >
             Sorts:
+
             * mid: sort by mid, ascending
           in: query
           name: sort
@@ -953,8 +932,9 @@ paths:
             enum:
               - ascending
             type: string
-        - description: |
+        - description: >
             Mixins:
+
             * images: mixin to add image information for a masterbrand
           in: query
           name: mixin
@@ -1010,8 +990,7 @@ paths:
               pattern: ^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$
               type: string
             type: array
-        - description: filter for subset of masterbrands matching supplied keyword/phrase
-            (boolean operators permitted)
+        - description: filter for subset of masterbrands matching supplied keyword/phrase (boolean operators permitted)
           in: query
           name: q
           required: false
@@ -1041,14 +1020,10 @@ paths:
         - feeds
   /people:
     get:
-      description: The People feed allows you to search for the people and groups that
-        contribute to programmes. This is the starting point for cast and crew
-        credits, as well as finding contributors using external IDs (such as
-        Wikipedia URLs)
+      description: The People feed allows you to search for the people and groups that contribute to programmes. This is the starting point for cast and crew credits, as well as finding contributors using external IDs (such as Wikipedia URLs)
       operationId: listPeople
       parameters:
-        - description: filter for subset of people that have an ID issued by the given
-            authority
+        - description: filter for subset of people that have an ID issued by the given authority
           in: query
           name: authority
           required: false
@@ -1126,15 +1101,13 @@ paths:
               pattern: ^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$
               type: string
             type: array
-        - description: filter for subset of people that have contributed to the given
-            programme pid
+        - description: filter for subset of people that have contributed to the given programme pid
           in: query
           name: programme
           required: false
           schema:
             type: string
-        - description: filter for subset of people matching supplied keyword/phrase
-            (boolean operators permitted)
+        - description: filter for subset of people matching supplied keyword/phrase (boolean operators permitted)
           in: query
           name: q
           required: false
@@ -1183,8 +1156,7 @@ paths:
             default: 10
             maximum: 300
             type: integer
-        - description: filter for subset of programmes matching supplied keyword/phrase
-            (boolean operators permitted)
+        - description: filter for subset of programmes matching supplied keyword/phrase (boolean operators permitted)
           in: query
           name: q
           required: false
@@ -1273,14 +1245,7 @@ paths:
         - feeds
   /programmes:
     get:
-      description: Fetch metadata about Programmes (brands, series, episodes, clips).
-        By applying different filter restrictions this feed can be used in many
-        ways, for example to retrieve all series belonging to a brand, all the
-        episodes and/or clips for a specific series, or any TLEO objects for a
-        masterbrand. Other filters permit restricting to specific formats and/or
-        genres, and you can request specific versions (for example Signed or
-        Audio-Described). Parameters may be combined in any way suitable for
-        your application.
+      description: Fetch metadata about Programmes (brands, series, episodes, clips). By applying different filter restrictions this feed can be used in many ways, for example to retrieve all series belonging to a brand, all the episodes and/or clips for a specific series, or any TLEO objects for a masterbrand. Other filters permit restricting to specific formats and/or genres, and you can request specific versions (for example Signed or Audio-Described). Parameters may be combined in any way suitable for your application.
       operationId: listProgrammes
       parameters:
         - description: >
@@ -1425,8 +1390,7 @@ paths:
               type: string
             type: array
         - deprecated: true
-          description: filter for subset of programmes that are available after or at the
-            specified datetime
+          description: filter for subset of programmes that are available after or at the specified datetime
           in: query
           name: availability_from
           required: false
@@ -1514,9 +1478,7 @@ paths:
             minLength: 8
             pattern: ^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$
             type: string
-        - description: filter for subset of programmes with title beginning with initial
-            letter librarian style (ignoring leading 'The', 'An' (Welsh), etc)
-            0-9 a-z
+        - description: filter for subset of programmes with title beginning with initial letter librarian style (ignoring leading 'The', 'An' (Welsh), etc) 0-9 a-z
           in: query
           name: initial_letter
           required: false
@@ -1524,8 +1486,7 @@ paths:
             maxLength: 1
             minLength: 1
             type: string
-        - description: Programmes with (librarian) titles whose initial letter is
-            equal/before given letter. Use with initial_letter_start for a range
+        - description: Programmes with (librarian) titles whose initial letter is equal/before given letter. Use with initial_letter_start for a range
           in: query
           name: initial_letter_end
           required: false
@@ -1533,8 +1494,7 @@ paths:
             maxLength: 1
             minLength: 1
             type: string
-        - description: Programmes with (librarian) titles whose initial letter is
-            equal/after given letter. Use with initial_letter_end for range.
+        - description: Programmes with (librarian) titles whose initial letter is equal/after given letter. Use with initial_letter_end for range.
           in: query
           name: initial_letter_start
           required: false
@@ -1542,8 +1502,7 @@ paths:
             maxLength: 1
             minLength: 1
             type: string
-        - description: filter for subset of programmes with title beginning with initial
-            letter
+        - description: filter for subset of programmes with title beginning with initial letter
           in: query
           name: initial_letter_strict
           required: false
@@ -1553,8 +1512,7 @@ paths:
               minLength: 1
               type: string
             type: array
-        - description: filter for subset of programmes with linked to versions which have
-            the given item pids
+        - description: filter for subset of programmes with linked to versions which have the given item pids
           in: query
           name: item
           required: false
@@ -1638,8 +1596,7 @@ paths:
                 - uscansvod
               type: string
             type: array
-        - description: filter for subset of programmes with contributions by given people
-            PID
+        - description: filter for subset of programmes with contributions by given people PID
           in: query
           name: people
           required: false
@@ -1663,8 +1620,7 @@ paths:
           required: false
           schema:
             type: string
-        - description: filter for subset of programmes matching supplied keyword/phrase
-            (boolean operators permitted)
+        - description: filter for subset of programmes matching supplied keyword/phrase (boolean operators permitted)
           in: query
           name: q
           required: false
@@ -1705,8 +1661,7 @@ paths:
                 - "false"
               type: string
             type: array
-        - description: filter for subset of programmes with given PID as one of their
-            versions
+        - description: filter for subset of programmes with given PID as one of their versions
           in: query
           name: version
           required: false
@@ -1750,8 +1705,7 @@ paths:
         - feeds
   /promotions:
     get:
-      description: Details of short-term editorially curated "promotions", for
-        instance those programmes featured on iPlayer today
+      description: Details of short-term editorially curated "promotions", for instance those programmes featured on iPlayer today
       operationId: listPromotions
       parameters:
         - description: >
@@ -1838,8 +1792,7 @@ paths:
             items:
               type: string
             type: array
-        - description: filter for subset of promotions matching supplied keyword/phrase
-            (boolean operators permitted)
+        - description: filter for subset of promotions matching supplied keyword/phrase (boolean operators permitted)
           in: query
           name: q
           required: false
@@ -1902,10 +1855,13 @@ paths:
               - ascending
               - descending
             type: string
-        - description: |
+        - description: >
             Mixins:
+
             * ancestor_titles: return ancestor programme titles
+
             * images: mixin to add image information for broadcasts and webcasts
+
             * titles: return ancestor programme titles
           in: query
           name: mixin
@@ -1918,8 +1874,7 @@ paths:
                 - titles
               type: string
             type: array
-        - description: filter for subset of broadcasts and webcasts that have given
-            authority
+        - description: filter for subset of broadcasts and webcasts that have given authority
           in: query
           name: authority
           required: false
@@ -1927,8 +1882,7 @@ paths:
             items:
               type: string
             type: array
-        - description: filter for subset of broadcasts and webcasts that are descendants
-            of the given programme PID
+        - description: filter for subset of broadcasts and webcasts that are descendants of the given programme PID
           in: query
           name: descendants_of
           required: false
@@ -1938,24 +1892,21 @@ paths:
               pattern: ^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$
               type: string
             type: array
-        - description: filter for subset of broadcasts and webcasts that end on or later
-            than the specified datetime
+        - description: filter for subset of broadcasts and webcasts that end on or later than the specified datetime
           in: query
           name: end_from
           required: false
           schema:
             format: date-time
             type: string
-        - description: filter for subset of broadcasts and webcasts that end on or earlier
-            than the specified datetime
+        - description: filter for subset of broadcasts and webcasts that end on or earlier than the specified datetime
           in: query
           name: end_to
           required: false
           schema:
             format: date-time
             type: string
-        - description: filter for subset of broadcasts and webcasts that are classified in
-            the given format ID
+        - description: filter for subset of broadcasts and webcasts that are classified in the given format ID
           in: query
           name: format
           required: false
@@ -1963,8 +1914,7 @@ paths:
             items:
               type: string
             type: array
-        - description: filter for subset of broadcasts and webcasts that are classified in
-            the given genre ID
+        - description: filter for subset of broadcasts and webcasts that are classified in the given genre ID
           in: query
           name: genre
           required: false
@@ -1972,8 +1922,7 @@ paths:
             items:
               type: string
             type: array
-        - description: filter for subset of broadcasts and webcasts that have programmes
-            in the given group
+        - description: filter for subset of broadcasts and webcasts that have programmes in the given group
           in: query
           name: group
           required: false
@@ -1981,8 +1930,7 @@ paths:
             minLength: 8
             pattern: ^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$
             type: string
-        - description: filter for subset of broadcasts and webcasts that have given
-            identifier
+        - description: filter for subset of broadcasts and webcasts that have given identifier
           in: query
           name: id
           required: false
@@ -1998,8 +1946,7 @@ paths:
             items:
               type: string
             type: array
-        - description: filter for subset of broadcasts and webcasts with the given item
-            performed on it
+        - description: filter for subset of broadcasts and webcasts with the given item performed on it
           in: query
           name: item
           required: false
@@ -2046,8 +1993,7 @@ paths:
               pattern: ^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$
               type: string
             type: array
-        - description: filter for subset of broadcasts and webcasts that have given
-            contributor
+        - description: filter for subset of broadcasts and webcasts that have given contributor
           in: query
           name: people
           required: false
@@ -2063,8 +2009,7 @@ paths:
               pattern: ^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$
               type: string
             type: array
-        - description: filter for subset of broadcasts and webcasts matching supplied
-            keyword/phrase (boolean operators permitted)
+        - description: filter for subset of broadcasts and webcasts matching supplied keyword/phrase (boolean operators permitted)
           in: query
           name: q
           required: false
@@ -2076,32 +2021,28 @@ paths:
           required: false
           schema:
             type: boolean
-        - description: filter for subset of broadcasts and webcasts that start on the
-            specified day (BBC time)
+        - description: filter for subset of broadcasts and webcasts that start on the specified day (BBC time)
           in: query
           name: schedule_day
           required: false
           schema:
             format: date
             type: string
-        - description: filter for subset of broadcasts and webcasts that start on or after
-            the specified day (BBC time)
+        - description: filter for subset of broadcasts and webcasts that start on or after the specified day (BBC time)
           in: query
           name: schedule_day_from
           required: false
           schema:
             format: date
             type: string
-        - description: filter for subset of broadcasts and webcasts that start on or
-            before the specified day (BBC time)
+        - description: filter for subset of broadcasts and webcasts that start on or before the specified day (BBC time)
           in: query
           name: schedule_day_to
           required: false
           schema:
             format: date
             type: string
-        - description: filter for subset of broadcasts and webcasts with given service
-            master brand
+        - description: filter for subset of broadcasts and webcasts with given service master brand
           in: query
           name: service_master_brand
           required: false
@@ -2109,8 +2050,7 @@ paths:
             items:
               type: string
             type: array
-        - description: filter for subset of broadcasts and webcasts that are on the
-            specified linear service
+        - description: filter for subset of broadcasts and webcasts that are on the specified linear service
           in: query
           name: sid
           required: false
@@ -2118,24 +2058,21 @@ paths:
             items:
               type: string
             type: array
-        - description: filter for subset of broadcasts and webcasts that start on or later
-            than the specified datetime
+        - description: filter for subset of broadcasts and webcasts that start on or later than the specified datetime
           in: query
           name: start_from
           required: false
           schema:
             format: date-time
             type: string
-        - description: filter for subset of broadcasts and webcasts that start on or
-            earlier than the specified datetime
+        - description: filter for subset of broadcasts and webcasts that start on or earlier than the specified datetime
           in: query
           name: start_to
           required: false
           schema:
             format: date-time
             type: string
-        - description: filter for subset of broadcasts and webcasts with given PID as
-            their parent version
+        - description: filter for subset of broadcasts and webcasts with given PID as their parent version
           in: query
           name: version
           required: false
@@ -2164,8 +2101,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorModel"
           description: Unexpected error
-      summary: Build schedules and find metadata for TV and radio broadcasts and
-        webcasts
+      summary: Build schedules and find metadata for TV and radio broadcasts and webcasts
       tags:
         - feeds
   /schema:
@@ -2190,9 +2126,7 @@ paths:
         - schema
   /services:
     get:
-      description: The services feed exposes the linear broadcast "services" from
-        PIPs. These are the actual services which broadcast programmes (eg
-        bbc_one_oxford is the service for BBC One in Oxford).
+      description: The services feed exposes the linear broadcast "services" from PIPs. These are the actual services which broadcast programmes (eg bbc_one_oxford is the service for BBC One in Oxford).
       operationId: listServices
       parameters:
         - description: Return services that end on or later than the specified datetime
@@ -2202,8 +2136,7 @@ paths:
           schema:
             format: date-time
             type: string
-        - description: filter for subset of broadcasts that end on or earlier than the
-            specified datetime
+        - description: filter for subset of broadcasts that end on or earlier than the specified datetime
           in: query
           name: end_to
           required: false
@@ -2255,8 +2188,7 @@ paths:
               pattern: ^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$
               type: string
             type: array
-        - description: filter for subset of services matching supplied keyword/phrase
-            (boolean operators permitted)
+        - description: filter for subset of services matching supplied keyword/phrase (boolean operators permitted)
           in: query
           name: q
           required: false
@@ -2534,13 +2466,7 @@ paths:
         - Raw
   /versions:
     get:
-      description: 'The versions feed exposes editorial "Versions" of programmes.
-        These are concepts used to capture different presentations of an overall
-        programme: for example, versions of a programme may include one with
-        sign language, one with audio description, one edited for content and
-        more. Versions are also important to understand for broadcasts: a linear
-        broadcast or an ondemand is always of a specific version, not merely of
-        a programme.'
+      description: 'The versions feed exposes editorial "Versions" of programmes. These are concepts used to capture different presentations of an overall programme: for example, versions of a programme may include one with sign language, one with audio description, one edited for content and more. Versions are also important to understand for broadcasts: a linear broadcast or an ondemand is always of a specific version, not merely of a programme.'
       operationId: listVersions
       parameters:
         - description: filter for subset of versions that have availability
@@ -2563,8 +2489,7 @@ paths:
               pattern: ^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$
               type: string
             type: array
-        - description: filter for subset of versions with availability in the given media
-            set
+        - description: filter for subset of versions with availability in the given media set
           in: query
           name: media_set
           required: false
@@ -2660,8 +2585,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorModel"
           description: Unexpected error
-      summary: "Metadata on editorial programme versions: original, signed,
-        audio-described, etc"
+      summary: "Metadata on editorial programme versions: original, signed, audio-described, etc"
       tags:
         - feeds
 components:

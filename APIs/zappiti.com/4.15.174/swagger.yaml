@@ -4,8 +4,7 @@ schemes:
 host: 192.168.1.5:8990
 basePath: /
 info:
-  description: Move your app forward with the Zappiti Player API. Use
-    http://your-player-ip:8990/ as base URL for your requests.
+  description: Move your app forward with the Zappiti Player API. Use http://your-player-ip:8990/ as base URL for your requests.
   title: Zappiti Player API
   version: 4.15.174
   x-apisguru-categories:
@@ -25,9 +24,11 @@ paths:
     post:
       consumes:
         - application/json
-      description: |
+      description: >
         ErrorCode.NotInstalled
+
         ErrorCode.NotRunning
+
         ErrorCode.Running
       parameters:
         - in: body
@@ -83,8 +84,7 @@ paths:
           description: InstallZappitiServiceResult
           schema:
             $ref: "#/definitions/InstallZappitiServiceResult"
-      summary: Open a popup that allow the user to install Zappiti Service, if not
-        already installed
+      summary: Open a popup that allow the user to install Zappiti Service, if not already installed
       tags:
         - Zappiti Service
   /IsAlive:
@@ -131,7 +131,7 @@ paths:
     post:
       consumes:
         - application/json
-      description: |
+      description: >
         Start the playback of the speficied video.
       parameters:
         - in: body

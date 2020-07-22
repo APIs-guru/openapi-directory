@@ -5,12 +5,7 @@ servers:
 info:
   contact:
     x-twitter: TisaneLabs
-  description: <table><tr><td><img
-    src="https://apimgmtstltyu1yujd2p6hpa.blob.core.windows.net/content/MediaLibrary/images/microscope.png"
-    width="30px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Detect
-    abusive content, obtain sentiment analysis, extract entities, detect topics,
-    automatically correct spelling errors, and more, in 27
-    languages.</td></tr></table>
+  description: <table><tr><td><img src="https://apimgmtstltyu1yujd2p6hpa.blob.core.windows.net/content/MediaLibrary/images/microscope.png" width="30px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Detect abusive content, obtain sentiment analysis, extract entities, detect topics, automatically correct spelling errors, and more, in 27 languages.</td></tr></table>
   title: Text Analysis API
   version: "1.0"
   x-apisguru-categories:
@@ -31,7 +26,7 @@ security:
 paths:
   /compare/entities:
     post:
-      description: "Compares two named entities. Outputs the differences. "
+      description: "Compares two compound named entities and outputs the differences found. "
       operationId: compare-named-entities
       requestBody:
         content:
@@ -42,6 +37,19 @@ paths:
               language1: en
               language2: en
               type: person
+        description: >
+          The request body is a JSON structure made of the following elements:
+
+
+          * `language1` (string) - a standard IETF tag for the language of the first entity
+
+          * `entity1` (string) - 1st entity
+
+          * `language2` (string) - a standard IETF tag for the language of the second entity
+
+          * `entity2` (string) - 2nd entity
+
+          * `type` (string) - the type of the entity. Currently only _person_ is supported
       responses:
         "200":
           content:
@@ -51,18 +59,29 @@ paths:
                   - surname
                   - social_role
                 result: different
-          description: The list of differences, if any.
+          description: >-
+            A JSON structure containing the comparison result and the different segments, if applicable. The elements are:
+
+
+            * `result` (string) - the result of the comparison. Values: 
+              * `no_single_entity` - at least one of the entity parameters could not be parsed as a single entity. 
+              * `same` - it's the same entity, even if the order is different. Note that changing the order may mean the same or different name. For example, _Kevin Tan_ is the same as _Tan Kevin_, but _James David_ is not the same as _David James_.
+              * `different` - there are differences between the entities. They are listed in the _differences_ element as described below. 
+            * `differences` (array of strings) - the different segments. Currently supported:
+              * `given_name`
+              * `surname`
+              * `title` - Mr., Mrs., etc.
+              * `social_role` - academic degrees, etc.
+              * `suffix`
       summary: Compare named entities
   /extract_text:
     post:
-      description: "A service method to remove JavaScript, CSS tags, JSON, and other
-        markup, returning pure decoded text. "
+      description: "A service method to remove JavaScript, CSS tags, JSON, and other markup, returning pure decoded text. "
       operationId: clean-up-text
       requestBody:
         content:
           text/plain:
-            example: <p>Clean me up</p> <style>/* I'm a super kewl programmer dude who likes
-              to leave comments. Who needs style when analyzing text? */</style>
+            example: <p>Clean me up</p> <style>/* I'm a super kewl programmer dude who likes to leave comments. Who needs style when analyzing text? */</style>
         description: Text to clean up.
       responses:
         "200":
@@ -248,13 +267,28 @@ paths:
                   name: 繁體中文
                   nativeEncoding: utf-8
                   preferredFont: Arial Unicode MS
-          description: A list of languages
+          description: >-
+            An array of elements containing basic info for the supported languages. Every array member contains:
+
+
+            * `id` (string) - a standard IETF language tag
+
+            * `name` (string) - a native name of the language
+
+            * `englishName` (string) - the English name of the language
+
+            * `nativeEncoding` (string) - the encoding of the language
+
+            * `preferredFont` (string) - a font family known to be compatible with the language
+
+            * `latin` (boolean) - _true_ if the language uses Latin script, _false_ otherwise
+
+            * `rightToLeft` (boolean) - _true_ if the language uses a bidirectional script (e.g. Arabic, Persian, Hebrew), _false_ otherwise
       summary: List available languages
   /parse:
     post:
       description: >+
-        The method analyzes the input, returning high-level and low-level
-        metadata in JSON. 
+        The method analyzes the input, returning high-level and low-level metadata. 
 
 
         The request body is a JSON structure made of three elements:
@@ -285,7 +319,7 @@ paths:
         * [Sentiment Analysis](#sentiment-analysis)
 
         * [Entities](#entities)
-
+          + [Entity Types & Subtypes](#entity-types-and-subtypes)
         * [Topics](#topics)
 
         * [Advanced Low-Level Data: Sentences, Phrases, and Words](#advanced-low-level-data-sentences-phrases-and-words)
@@ -335,6 +369,8 @@ paths:
 
         * `severity` (string) - how severe the abuse is. The levels of severity are `low`, `medium`, `high`, and `extreme`
 
+        * `explanation` (string) - when available, provides rationale for the annotation; set the `explain` setting to `true` to enable.
+
 
         The currently supported types are:
 
@@ -350,6 +386,10 @@ paths:
         * `criminal_activity` - attempts to sell or procure restricted items, criminal services, issuing death threats, and so on
 
         * `external_contact` - attempts to establish contact or payment via external means of communication, e.g. phone, email, instant messaging (may violate the rules in certain communities, e.g. gig economy portals, e-commerce portals)
+
+        * `adult_only` - activities restricted for minors (e.g. consumption of alcohol)
+
+        * `mental_issues` - content indicative of suicidal thoughts or depression (LIMITED)
 
         * `spam` - (RESERVED) spam content
 
@@ -381,6 +421,8 @@ paths:
         * `targets` (array of strings) - when available, provides set of aspects and/or entities which are the targets of the sentiment. For instance, when the utterance is, _The breakfast was yummy but the staff is unfriendly_, the targets for the two sentiment expressions are `meal` and `staff`. Named entities may also be targets of the sentiment.
 
         * `reasons` (array of strings) - when available, provides reasons for the sentiment. In the example utterance above (_The breakfast was yummy but the staff is unfriendly_), the `reasons` array for the `staff` is `["unfriendly"]`, while the `reasons` array for `meal` is `["tasty"]`.
+
+        * `explanation` (string) - when available, provides rationale for the sentiment; set the `explain` setting to `true` to enable.
 
 
         Example:
@@ -426,6 +468,8 @@ paths:
         * `ref_lemma` (string) - when available, the dictionary form of the entity in the reference language (English) regardless of the input language
 
         * `type` (string) - a string or an array of strings specifying the type of the entity, such as `person`, `organization`, `numeric`, `amount_of_money`, `place`. Certain entities, like countries, may have several types (because a country is both a `place` and an `organization`).
+
+        * `subtype` (string) - a string indicating the subtype of the entity
 
         * `mentions` (array of objects) - a set of instances where the entity was mentioned in the text
 
@@ -473,6 +517,67 @@ paths:
                  }
              ]
         ```
+
+
+        #### Entity Types and Subtypes
+
+
+        The currently supported types are: 
+
+
+        * `person`, with optional subtypes: `fictional_character`, `important_person`, `spiritual_being`
+
+        * `organization` (note that a country is both an organization and a place)
+
+        * `place`
+
+        * `time_range`
+
+        * `date`
+
+        * `time`
+
+        * `hashtag`
+
+        * `email`
+
+        * `amount_of_money`
+
+        * `phone` phone number, either domestic or international, in a variety of formats
+
+        * `role` (a social role, e.g. position in an organization)
+
+        * `software`
+
+        * `website` (URL), with an optional subtype: `tor` for Onion links; note that web services may also have the `software` type assigned
+
+        * `weight`
+
+        * `bank_account` only IBAN format is supported; subtypes: `iban`
+
+        * `credit_card`, with optional subtypes: `visa`, `mastercard`, `american_express`, `diners_club`, `discovery`, `jcb`, `unionpay`
+
+        * `coordinates` (GPS coordinates)
+
+        * `credential`, with optional subtypes: `md5`, `sha-1`
+
+        * `crypto`, with optional subtypes: `bitcoin`, `ethereum`, `monero`, `monero_payment_id`, `litecoin`, `dash`
+
+        * `event`
+
+        * `file` only Windows pathnames are supported; subtypes: `windows`, `facebook` (for images downloaded from Facebook)
+
+        * `flight_code`
+
+        * `identifier`
+
+        * `ip_address`, subtypes: `v4`, `v6`
+
+        * `mac_address`
+
+        * `numeric` (an unclassified numeric entity)
+
+        * `username`
 
 
 
@@ -707,6 +812,10 @@ paths:
 
           * `proofread` - a post which was proofread. In the proofread posts, the spellchecking is switched off. 
 
+          * `alias` - a nickname in an online community. 
+
+          * `search` - a search query. Search queries may not always be grammatically correct. Certain topics and items, that we may otherwise let pass, are tagged with the `search` format.
+
 
           `disable_spellcheck` (boolean) - determines whether the automatic spellchecking is to be disabled. Default: `false`.
 
@@ -756,6 +865,8 @@ paths:
 
           `snippets` (boolean) - include the text snippets in the abuse, sentiment, and entities sections (default: `false`)
 
+
+          `explain` (boolean) - if `true`, a reasoning for the abuse and sentiment snippets is provided when possible (see the `explanation` attribute)
 
 
           #### Standards and Formats
@@ -841,8 +952,7 @@ paths:
           content:
             application/json:
               example:
-                text: An inertial force is a force that resists a change in velocity of an
-                  object.
+                text: An inertial force is a force that resists a change in velocity of an object.
                 topics:
                   - physics
           description: >-
@@ -853,7 +963,7 @@ paths:
       summary: Invoke text analysis
   /similarity:
     post:
-      description: Calculate semantic similarity between the two texts
+      description: Calculate semantic similarity between two text fragments, in the same language or in two different languages.
       operationId: semantic-similarity
       requestBody:
         content:
@@ -864,18 +974,31 @@ paths:
               language1: en
               language2: en
               settings: {}
+        description: >-
+          The request body contains the following nodes:
+
+
+          * `content1` (string) - a text fragment
+
+          * `language1` (string) - the IETF language code for `content1`
+
+          * `content2` (string) - a text fragment to compare with
+
+          * `language2` (string) - the IETF language code for `content2`
+
+          * `settings` (structure) - the settings object; same specs as in [/parse method](/docs/services/5a3b6668a3511b11cc292655/operations/5a3b7177a3511b11cc29265c?#settings-reference)
       responses:
         "200":
           content:
             application/json:
-              example: 0.5938
-          description: A number in range 0 thru 1 indicating the similarity of the
-            submitted text fragments.
+              example: 0.8341
+          description: A number in range 0 thru 1 indicating the similarity of the submitted text fragments.
       summary: Semantic similarity
   /text2picture:
     post:
-      description: |-
+      description: >-
         Finds a URL of an image (Creative Commons) best describing the text. 
+
 
         *WARNING*: may be slow, as Wikimedia servers are queried.
       operationId: generate-illustration-for-text
@@ -883,16 +1006,21 @@ paths:
         content:
           application/json:
             example:
-              content: The largest Scandinavian country by area is Sweden. This nation is also
-                the most populous with a population exceeding 10 million. Its
-                capital is Stockholm
+              content: The largest Scandinavian country by area is Sweden. This nation is also the most populous with a population exceeding 10 million. Its capital is Stockholm
               language: en
+        description: >+
+          The request body is a JSON structure made of two elements:
+
+
+          * `language` (string) - a standard IETF tag for the language to analyze
+
+          * `content` (string) - a content to analyze
+
       responses:
         "200":
           content:
             application/json: {}
-          description: The JSON-escaped URL of a Creative Commons image on Wikimedia
-            servers, if exists. Null if no image is found.
+          description: A JSON-escaped URL of a Creative Commons image on Wikimedia servers, if exists. Null if no image is found.
       summary: Generate illustration for text
 components:
   schemas:

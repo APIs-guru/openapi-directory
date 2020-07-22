@@ -2,11 +2,15 @@ openapi: 3.0.1
 servers:
   - url: https://football-prediction-api.p.rapidapi.com
 info:
-  description: The Football Prediction API allows developers to get predictions
-    for upcoming football (soccer) matches, results for past matches, and
-    performance monitoring for statistical models.
+  contact:
+    x-twitter: Rapid_API
+  description: The Football Prediction API allows developers to get predictions for upcoming football (soccer) matches, results for past matches, and performance monitoring for statistical models.
   title: Football Prediction API
   version: "2"
+  x-apisguru-categories:
+    - text
+  x-logo:
+    url: https://twitter.com/Rapid_API/profile_image?size=original
   x-origin:
     - converter:
         url: https://github.com/lucybot/api-spec-converter
@@ -73,11 +77,7 @@ paths:
             application/json:
               examples:
                 "0":
-                  value: '{"data": {"all": ["over_25", "away_over_15", "away_over_05", "classic",
-                    "home_over_05", "home_over_15", "btts", "over_35"],
-                    "allowed_for_your_subscription": ["over_25", "away_over_15",
-                    "away_over_05", "classic", "home_over_05", "home_over_15",
-                    "btts", "over_35"]}}'
+                  value: '{"data": {"all": ["over_25", "away_over_15", "away_over_05", "classic", "home_over_05", "home_over_15", "btts", "over_35"], "allowed_for_your_subscription": ["over_25", "away_over_15", "away_over_05", "classic", "home_over_05", "home_over_15", "btts", "over_35"]}}'
               schema:
                 properties:
                   data:
@@ -92,8 +92,7 @@ paths:
                         type: array
                     type: object
                 type: object
-          description: Static response, shows available markets for the current
-            subscription and all available markets in general.
+          description: Static response, shows available markets for the current subscription and all available markets in general.
         "404":
           content:
             application/json:
@@ -197,8 +196,7 @@ paths:
                         type: string
                     type: object
                 type: object
-          description: Good request, returns object that contains accuracy and other
-            datails about predictions.
+          description: Good request, returns object that contains accuracy and other datails about predictions.
         "404":
           content:
             application/json:
@@ -216,10 +214,7 @@ paths:
           description: Bad request, check response for detailed errors.
   /api/v2/predictions:
     get:
-      description: This endpoint returns by default the next non-expired football
-        predictions. URL parameters can be specified to show specific date in
-        the past or future or to filter by federation and prediction market
-        name.
+      description: This endpoint returns by default the next non-expired football predictions. URL parameters can be specified to show specific date in the past or future or to filter by federation and prediction market name.
       parameters:
         - description: Your key obtained from https://boggio-analytics.com/fp-api/
           in: header
@@ -229,8 +224,7 @@ paths:
             type: string
       responses:
         "200":
-          description: Good request, returns object that contains data array with all
-            predictions.
+          description: Good request, returns object that contains data array with all predictions.
         "404":
           content:
             application/json:
@@ -267,8 +261,7 @@ paths:
                       type: object
                     type: array
                 type: object
-          description: Good request, returns object that contains all the predictions for
-            a certain event.
+          description: Good request, returns object that contains all the predictions for a certain event.
         "404":
           content:
             application/json:

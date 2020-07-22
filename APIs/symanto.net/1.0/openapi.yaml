@@ -71,17 +71,25 @@ paths:
         - Text Analysis
   /emotion:
     post:
-      description: |-
+      description: >-
         Detect the emotions of the text.
+
 
         Supported Langauges: [`en`, `de`, `es`]
 
+
         Returned labels:
+
         * anger
+
         * joy
+
         * love
+
         * sadness
+
         * surprise
+
         * uncategorized
       operationId: emotion
       parameters:
@@ -114,8 +122,7 @@ paths:
   /language-detection:
     post:
       description: >-
-        Identifies what language a text is written in. Only languages that our
-        API supports can be analyzed.
+        Identifies what language a text is written in. Only languages that our API supports can be analyzed.
 
 
         Returned labels:
@@ -188,13 +195,17 @@ paths:
         - Text Analysis
   /sentiment:
     post:
-      description: |-
+      description: >-
         Evaluate the overall tonality of the text.
+
 
         Supported Languages: [`en`, `de`, `es`]
 
+
         Returned labels:
+
         * positive
+
         * negative
       operationId: sentiment
       parameters:

@@ -4,33 +4,7 @@ schemes:
 host: wft-geo-db.p.mashape.com
 basePath: /
 info:
-  description: The GeoDB API focuses on getting global city and region data.
-    Easily obtain country, region, and city data for use in your apps!
-    <ul><li>Filter cities by name prefix, country, location, time-zone, and even
-    minimum population.</li><li>Sort cities by name, country code, elevation,
-    and population - or any combination of these.</li> <li>Get all country
-    regions.</li> <li>Get all cities in a given region.</li><li>Display results
-    in multiple languages.</li> <li>RESTful API adheres to industry
-    best-practices, including HATEOAS-style links to facilitate paging
-    results.</li> <li>Backed by cloud-based load-balanced infrastructure for
-    resiliency and performance!</li> <li>Data is periodically refreshed from
-    GeoNames and WikiData.</li></ul><p>Notes:<ul><li>Since the database is
-    periodically updated, this may <strong>very rarely</strong> result in
-    certain cities being marked deleted (e.g., duplicates removed). By default,
-    endpoints returning city data will exclude cities marked deleted. However,
-    in the unlikely event that this occurs while your app is paging through a
-    set of affected results - and you care about the paged results suddenly
-    changing underneath - specify <tt>includeDeleted=SINCE_YESTERDAY</tt> (or
-    <tt>SINCE_LAST_WEEK</tt> if you're really
-    paranoid!).</li></ul><hr/><h3>Useful Resources</h3><ul><li>SDKs<ul><li><a
-    href='https://www.npmjs.com/package/wft-geodb-angular-client'>Angular</a>,
-    <a href='https://github.com/wirefreethought/geodb-sample-angular-app'>Sample
-    App</a></li><li><a
-    href='https://github.com/wirefreethought/geodb-java-client'>Java</a></li><li><a
-    href='https://www.npmjs.com/package/wft-geodb-js-client'>JavaScript</a></li></ul><li><a
-    href='swagger.json'>Swagger Docs</a></li><li><a
-    href='http://creativecommons.org/licenses/by/3.0/'>Usage
-    License</a></i></li></ul>
+  description: The GeoDB API focuses on getting global city and region data. Easily obtain country, region, and city data for use in your apps! <ul><li>Filter cities by name prefix, country, location, time-zone, and even minimum population.</li><li>Sort cities by name, country code, elevation, and population - or any combination of these.</li> <li>Get all country regions.</li> <li>Get all cities in a given region.</li><li>Display results in multiple languages.</li> <li>RESTful API adheres to industry best-practices, including HATEOAS-style links to facilitate paging results.</li> <li>Backed by cloud-based load-balanced infrastructure for resiliency and performance!</li> <li>Data is periodically refreshed from GeoNames and WikiData.</li></ul><p>Notes:<ul><li>Since the database is periodically updated, this may <strong>very rarely</strong> result in certain cities being marked deleted (e.g., duplicates removed). By default, endpoints returning city data will exclude cities marked deleted. However, in the unlikely event that this occurs while your app is paging through a set of affected results - and you care about the paged results suddenly changing underneath - specify <tt>includeDeleted=SINCE_YESTERDAY</tt> (or <tt>SINCE_LAST_WEEK</tt> if you're really paranoid!).</li></ul><hr/><h3>Useful Resources</h3><ul><li>SDKs<ul><li><a href='https://www.npmjs.com/package/wft-geodb-angular-client'>Angular</a>, <a href='https://github.com/wirefreethought/geodb-sample-angular-app'>Sample App</a></li><li><a href='https://github.com/wirefreethought/geodb-java-client'>Java</a></li><li><a href='https://www.npmjs.com/package/wft-geodb-js-client'>JavaScript</a></li></ul><li><a href='swagger.json'>Swagger Docs</a></li><li><a href='http://creativecommons.org/licenses/by/3.0/'>Usage License</a></i></li></ul>
   license:
     name: Creative Commons Attribution 3.0
     url: http://creativecommons.org/licenses/by/3.0/
@@ -67,12 +41,10 @@ paths:
     get:
       consumes:
         - application/json
-      description: Find administrative divisions, filtering by optional criteria. If
-        no criteria are set, you will get back all known divisions.
+      description: Find administrative divisions, filtering by optional criteria. If no criteria are set, you will get back all known divisions.
       operationId: findAdminDivisionsUsingGET
       parameters:
-        - description: "Only divisions near this location. Latitude/longitude in ISO-6709
-            format: ±DD.DDDD±DDD.DDDD"
+        - description: "Only divisions near this location. Latitude/longitude in ISO-6709 format: ±DD.DDDD±DDD.DDDD"
           in: query
           name: location
           required: false
@@ -89,14 +61,12 @@ paths:
           name: distanceUnit
           required: false
           type: string
-        - description: Only divisions in these countries (comma-delimited country codes or
-            WikiData ids)
+        - description: Only divisions in these countries (comma-delimited country codes or WikiData ids)
           in: query
           name: countryIds
           required: false
           type: string
-        - description: Only divisions NOT in these countries (comma-delimited country
-            codes or WikiData ids)
+        - description: Only divisions NOT in these countries (comma-delimited country codes or WikiData ids)
           in: query
           name: excludedCountryIds
           required: false
@@ -107,9 +77,7 @@ paths:
           name: minPopulation
           required: false
           type: integer
-        - description: Only divisions whose names start with this prefix. If languageCode
-            is set, the prefix will be matched on the name as it appears in that
-            language.
+        - description: Only divisions whose names start with this prefix. If languageCode is set, the prefix will be matched on the name as it appears in that language.
           in: query
           name: namePrefix
           required: false
@@ -150,15 +118,13 @@ paths:
           name: offset
           required: false
           type: integer
-        - description: "How to sort the results. Format: ±SORT_FIELD,±SORT_FIELD where
-            SORT_FIELD = countryCode | elevation | name | population"
+        - description: "How to sort the results. Format: ±SORT_FIELD,±SORT_FIELD where SORT_FIELD = countryCode | elevation | name | population"
           in: query
           name: sort
           required: false
           type: string
         - default: NONE
-          description: "Whether to include any divisions marked deleted: ALL |
-            SINCE_YESTERDAY | SINCE_LAST_WEEK | NONE"
+          description: "Whether to include any divisions marked deleted: ALL | SINCE_YESTERDAY | SINCE_LAST_WEEK | NONE"
           in: query
           name: includeDeleted
           required: false
@@ -183,9 +149,7 @@ paths:
     get:
       consumes:
         - application/json
-      description: Get the details for a specific administrative division, including
-        location coordinates, population, and elevation above sea-level (if
-        available).
+      description: Get the details for a specific administrative division, including location coordinates, population, and elevation above sea-level (if available).
       operationId: getAdminDivisionUsingGET
       parameters:
         - description: The division id (either native 'id' or 'wikiDataId')
@@ -224,9 +188,7 @@ paths:
     get:
       consumes:
         - application/json
-      description: Find cities near the given administrative division, filtering by
-        optional criteria. If no criteria are set, you will get back all known
-        cities.
+      description: Find cities near the given administrative division, filtering by optional criteria. If no criteria are set, you will get back all known cities.
       operationId: findCitiesNearAdminDivisionUsingGET
       parameters:
         - description: The division id (either native 'id' or 'wikiDataId')
@@ -246,14 +208,12 @@ paths:
           name: distanceUnit
           required: false
           type: string
-        - description: Only divisions in these countries (comma-delimited country codes or
-            WikiData ids)
+        - description: Only divisions in these countries (comma-delimited country codes or WikiData ids)
           in: query
           name: countryIds
           required: false
           type: string
-        - description: Only divisions NOT in these countries (comma-delimited country
-            codes or WikiData ids)
+        - description: Only divisions NOT in these countries (comma-delimited country codes or WikiData ids)
           in: query
           name: excludedCountryIds
           required: false
@@ -264,9 +224,7 @@ paths:
           name: minPopulation
           required: false
           type: integer
-        - description: Only cities whose names start with this prefix. If languageCode is
-            set, the prefix will be matched on the name as it appears in that
-            language.
+        - description: Only cities whose names start with this prefix. If languageCode is set, the prefix will be matched on the name as it appears in that language.
           in: query
           name: namePrefix
           required: false
@@ -312,15 +270,13 @@ paths:
           name: offset
           required: false
           type: integer
-        - description: "How to sort the results. Format: ±SORT_FIELD,±SORT_FIELD where
-            SORT_FIELD = countryCode | elevation | name | population"
+        - description: "How to sort the results. Format: ±SORT_FIELD,±SORT_FIELD where SORT_FIELD = countryCode | elevation | name | population"
           in: query
           name: sort
           required: false
           type: string
         - default: NONE
-          description: "Whether to include any cities marked deleted: ALL |
-            SINCE_YESTERDAY | SINCE_LAST_WEEK | NONE"
+          description: "Whether to include any cities marked deleted: ALL | SINCE_YESTERDAY | SINCE_LAST_WEEK | NONE"
           in: query
           name: includeDeleted
           required: false
@@ -345,9 +301,7 @@ paths:
     get:
       consumes:
         - application/json
-      description: Find administrative divisions near the given origin division,
-        filtering by optional criteria. If no criteria are set, you will get
-        back all known divisions.
+      description: Find administrative divisions near the given origin division, filtering by optional criteria. If no criteria are set, you will get back all known divisions.
       operationId: findDivisionsNearAdminDivisionUsingGET
       parameters:
         - description: The division id (either native 'id' or 'wikiDataId')
@@ -367,14 +321,12 @@ paths:
           name: distanceUnit
           required: false
           type: string
-        - description: Only divisions in these countries (comma-delimited country codes or
-            WikiData ids)
+        - description: Only divisions in these countries (comma-delimited country codes or WikiData ids)
           in: query
           name: countryIds
           required: false
           type: string
-        - description: Only divisions NOT in these countries (comma-delimited country
-            codes or WikiData ids)
+        - description: Only divisions NOT in these countries (comma-delimited country codes or WikiData ids)
           in: query
           name: excludedCountryIds
           required: false
@@ -385,9 +337,7 @@ paths:
           name: minPopulation
           required: false
           type: integer
-        - description: Only divisions whose names start with this prefix. If languageCode
-            is set, the prefix will be matched on the name as it appears in that
-            language.
+        - description: Only divisions whose names start with this prefix. If languageCode is set, the prefix will be matched on the name as it appears in that language.
           in: query
           name: namePrefix
           required: false
@@ -428,15 +378,13 @@ paths:
           name: offset
           required: false
           type: integer
-        - description: "How to sort the results. Format: ±SORT_FIELD,±SORT_FIELD where
-            SORT_FIELD = countryCode | elevation | name | population"
+        - description: "How to sort the results. Format: ±SORT_FIELD,±SORT_FIELD where SORT_FIELD = countryCode | elevation | name | population"
           in: query
           name: sort
           required: false
           type: string
         - default: NONE
-          description: "Whether to include any divisions marked deleted: ALL |
-            SINCE_YESTERDAY | SINCE_LAST_WEEK | NONE"
+          description: "Whether to include any divisions marked deleted: ALL | SINCE_YESTERDAY | SINCE_LAST_WEEK | NONE"
           in: query
           name: includeDeleted
           required: false
@@ -461,12 +409,10 @@ paths:
     get:
       consumes:
         - application/json
-      description: Find cities, filtering by optional criteria. If no criteria are
-        set, you will get back all known cities.
+      description: Find cities, filtering by optional criteria. If no criteria are set, you will get back all known cities.
       operationId: findCitiesUsingGET
       parameters:
-        - description: "Only cities near this location. Latitude/longitude in ISO-6709
-            format: ±DD.DDDD±DDD.DDDD"
+        - description: "Only cities near this location. Latitude/longitude in ISO-6709 format: ±DD.DDDD±DDD.DDDD"
           in: query
           name: location
           required: false
@@ -483,21 +429,17 @@ paths:
           name: distanceUnit
           required: false
           type: string
-        - description: Only cities in these countries (comma-delimited country codes or
-            WikiData ids)
+        - description: Only cities in these countries (comma-delimited country codes or WikiData ids)
           in: query
           name: countryIds
           required: false
           type: string
-        - description: Only cities NOT in these countries (comma-delimited country codes
-            or WikiData ids)
+        - description: Only cities NOT in these countries (comma-delimited country codes or WikiData ids)
           in: query
           name: excludedCountryIds
           required: false
           type: string
-        - description: Only cities whose names start with this prefix. If languageCode is
-            set, the prefix will be matched on the name as it appears in that
-            language.
+        - description: Only cities whose names start with this prefix. If languageCode is set, the prefix will be matched on the name as it appears in that language.
           in: query
           name: namePrefix
           required: false
@@ -549,15 +491,13 @@ paths:
           name: offset
           required: false
           type: integer
-        - description: "How to sort the results. Format: ±SORT_FIELD,±SORT_FIELD where
-            SORT_FIELD = countryCode | elevation | name | population"
+        - description: "How to sort the results. Format: ±SORT_FIELD,±SORT_FIELD where SORT_FIELD = countryCode | elevation | name | population"
           in: query
           name: sort
           required: false
           type: string
         - default: NONE
-          description: "Whether to include any cities marked deleted: ALL |
-            SINCE_YESTERDAY | SINCE_LAST_WEEK | NONE"
+          description: "Whether to include any cities marked deleted: ALL | SINCE_YESTERDAY | SINCE_LAST_WEEK | NONE"
           in: query
           name: includeDeleted
           required: false
@@ -582,8 +522,7 @@ paths:
     get:
       consumes:
         - application/json
-      description: Get the details for a specific city, including location
-        coordinates, population, and elevation above sea-level (if available).
+      description: Get the details for a specific city, including location coordinates, population, and elevation above sea-level (if available).
       operationId: getCityUsingGET
       parameters:
         - description: The city id (either native 'id' or 'wikiDataId')
@@ -689,8 +628,7 @@ paths:
     get:
       consumes:
         - application/json
-      description: Find cities near the given origin city, filtering by optional
-        criteria. If no criteria are set, you will get back all known cities.
+      description: Find cities near the given origin city, filtering by optional criteria. If no criteria are set, you will get back all known cities.
       operationId: findCitiesNearCityUsingGET
       parameters:
         - description: The location radius within which to find cities
@@ -710,14 +648,12 @@ paths:
           name: cityId
           required: true
           type: string
-        - description: Only divisions in these countries (comma-delimited country codes or
-            WikiData ids)
+        - description: Only divisions in these countries (comma-delimited country codes or WikiData ids)
           in: query
           name: countryIds
           required: false
           type: string
-        - description: Only divisions NOT in these countries (comma-delimited country
-            codes or WikiData ids)
+        - description: Only divisions NOT in these countries (comma-delimited country codes or WikiData ids)
           in: query
           name: excludedCountryIds
           required: false
@@ -728,9 +664,7 @@ paths:
           name: minPopulation
           required: false
           type: integer
-        - description: Only cities whose names start with this prefix. If languageCode is
-            set, the prefix will be matched on the name as it appears in that
-            language.
+        - description: Only cities whose names start with this prefix. If languageCode is set, the prefix will be matched on the name as it appears in that language.
           in: query
           name: namePrefix
           required: false
@@ -776,15 +710,13 @@ paths:
           name: offset
           required: false
           type: integer
-        - description: "How to sort the results. Format: ±SORT_FIELD,±SORT_FIELD where
-            SORT_FIELD = countryCode | elevation | name | population"
+        - description: "How to sort the results. Format: ±SORT_FIELD,±SORT_FIELD where SORT_FIELD = countryCode | elevation | name | population"
           in: query
           name: sort
           required: false
           type: string
         - default: NONE
-          description: "Whether to include any cities marked deleted: ALL |
-            SINCE_YESTERDAY | SINCE_LAST_WEEK | NONE"
+          description: "Whether to include any cities marked deleted: ALL | SINCE_YESTERDAY | SINCE_LAST_WEEK | NONE"
           in: query
           name: includeDeleted
           required: false
@@ -837,8 +769,7 @@ paths:
     get:
       consumes:
         - application/json
-      description: Find countries, filtering by optional criteria. If no criteria are
-        set, you will get back all known countries.
+      description: Find countries, filtering by optional criteria. If no criteria are set, you will get back all known countries.
       operationId: getCountriesUsingGET
       parameters:
         - description: Only countries supporting this currency
@@ -846,9 +777,7 @@ paths:
           name: currencyCode
           required: false
           type: string
-        - description: Only countries whose names start with this prefix. If languageCode
-            is set, the prefix will be matched on the name as it appears in that
-            language.
+        - description: Only countries whose names start with this prefix. If languageCode is set, the prefix will be matched on the name as it appears in that language.
           in: query
           name: namePrefix
           required: false
@@ -943,8 +872,7 @@ paths:
     get:
       consumes:
         - application/json
-      description: Get all regions in a specific country. These could be states,
-        provinces, districts, or otherwise major political divisions.
+      description: Get all regions in a specific country. These could be states, provinces, districts, or otherwise major political divisions.
       operationId: getRegionsUsingGET
       parameters:
         - description: An ISO-3166 country code or WikiData id
@@ -952,9 +880,7 @@ paths:
           name: countryId
           required: true
           type: string
-        - description: Only regions whose names start with this prefix. If languageCode is
-            set, the prefix will be matched on the name as it appears in that
-            language.
+        - description: Only regions whose names start with this prefix. If languageCode is set, the prefix will be matched on the name as it appears in that language.
           in: query
           name: namePrefix
           required: false
@@ -1054,8 +980,7 @@ paths:
     get:
       consumes:
         - application/json
-      description: Get the administrative divisions in a specific country region. The
-        country and region info is omitted in the response.
+      description: Get the administrative divisions in a specific country region. The country and region info is omitted in the response.
       operationId: findRegionDivisionsUsingGET
       parameters:
         - description: An ISO-3166 country code or WikiData id
@@ -1074,9 +999,7 @@ paths:
           name: minPopulation
           required: false
           type: integer
-        - description: Only divisions whose names start with this prefix. If languageCode
-            is set, the prefix will be matched on the name as it appears in that
-            language.
+        - description: Only divisions whose names start with this prefix. If languageCode is set, the prefix will be matched on the name as it appears in that language.
           in: query
           name: namePrefix
           required: false
@@ -1117,15 +1040,13 @@ paths:
           name: offset
           required: false
           type: integer
-        - description: "How to sort the results. Format: ±SORT_FIELD,±SORT_FIELD where
-            SORT_FIELD = elevation | name | population"
+        - description: "How to sort the results. Format: ±SORT_FIELD,±SORT_FIELD where SORT_FIELD = elevation | name | population"
           in: query
           name: sort
           required: false
           type: string
         - default: NONE
-          description: "Whether to include any divisions marked deleted: ALL |
-            SINCE_YESTERDAY | SINCE_LAST_WEEK | NONE"
+          description: "Whether to include any divisions marked deleted: ALL | SINCE_YESTERDAY | SINCE_LAST_WEEK | NONE"
           in: query
           name: includeDeleted
           required: false
@@ -1150,8 +1071,7 @@ paths:
     get:
       consumes:
         - application/json
-      description: Get the cities in a specific country region. The country and region
-        info is omitted in the response.
+      description: Get the cities in a specific country region. The country and region info is omitted in the response.
       operationId: findRegionCitiesUsingGET
       parameters:
         - description: An ISO-3166 country code or WikiData id
@@ -1170,9 +1090,7 @@ paths:
           name: minPopulation
           required: false
           type: integer
-        - description: Only cities whose names start with this prefix. If languageCode is
-            set, the prefix will be matched on the name as it appears in that
-            language.
+        - description: Only cities whose names start with this prefix. If languageCode is set, the prefix will be matched on the name as it appears in that language.
           in: query
           name: namePrefix
           required: false
@@ -1218,15 +1136,13 @@ paths:
           name: offset
           required: false
           type: integer
-        - description: "How to sort the results. Format: ±SORT_FIELD,±SORT_FIELD where
-            SORT_FIELD = elevation | name | population"
+        - description: "How to sort the results. Format: ±SORT_FIELD,±SORT_FIELD where SORT_FIELD = elevation | name | population"
           in: query
           name: sort
           required: false
           type: string
         - default: NONE
-          description: "Whether to include any cities marked deleted: ALL |
-            SINCE_YESTERDAY | SINCE_LAST_WEEK | NONE"
+          description: "Whether to include any cities marked deleted: ALL | SINCE_YESTERDAY | SINCE_LAST_WEEK | NONE"
           in: query
           name: includeDeleted
           required: false
@@ -1251,12 +1167,10 @@ paths:
     get:
       consumes:
         - application/json
-      description: Find cities near the given location, filtering by optional
-        criteria. If no criteria are set, you will get back all known cities.
+      description: Find cities near the given location, filtering by optional criteria. If no criteria are set, you will get back all known cities.
       operationId: findCitiesNearLocationUsingGET
       parameters:
-        - description: "Only cities near this location. Latitude/longitude in ISO-6709
-            format: ±DD.DDDD±DDD.DDDD"
+        - description: "Only cities near this location. Latitude/longitude in ISO-6709 format: ±DD.DDDD±DDD.DDDD"
           in: path
           name: locationId
           required: true
@@ -1273,14 +1187,12 @@ paths:
           name: distanceUnit
           required: false
           type: string
-        - description: Only divisions in these countries (comma-delimited country codes or
-            WikiData ids)
+        - description: Only divisions in these countries (comma-delimited country codes or WikiData ids)
           in: query
           name: countryIds
           required: false
           type: string
-        - description: Only divisions NOT in these countries (comma-delimited country
-            codes or WikiData ids)
+        - description: Only divisions NOT in these countries (comma-delimited country codes or WikiData ids)
           in: query
           name: excludedCountryIds
           required: false
@@ -1291,9 +1203,7 @@ paths:
           name: minPopulation
           required: false
           type: integer
-        - description: Only cities whose names start with this prefix. If languageCode is
-            set, the prefix will be matched on the name as it appears in that
-            language.
+        - description: Only cities whose names start with this prefix. If languageCode is set, the prefix will be matched on the name as it appears in that language.
           in: query
           name: namePrefix
           required: false
@@ -1339,15 +1249,13 @@ paths:
           name: offset
           required: false
           type: integer
-        - description: "How to sort the results. Format: ±SORT_FIELD,±SORT_FIELD where
-            SORT_FIELD = countryCode | elevation | name | population"
+        - description: "How to sort the results. Format: ±SORT_FIELD,±SORT_FIELD where SORT_FIELD = countryCode | elevation | name | population"
           in: query
           name: sort
           required: false
           type: string
         - default: NONE
-          description: "Whether to include any cities marked deleted: ALL |
-            SINCE_YESTERDAY | SINCE_LAST_WEEK | NONE"
+          description: "Whether to include any cities marked deleted: ALL | SINCE_YESTERDAY | SINCE_LAST_WEEK | NONE"
           in: query
           name: includeDeleted
           required: false
@@ -1372,13 +1280,10 @@ paths:
     get:
       consumes:
         - application/json
-      description: Find administrative divisions near the given location, filtering by
-        optional criteria. If no criteria are set, you will get back all known
-        divisions.
+      description: Find administrative divisions near the given location, filtering by optional criteria. If no criteria are set, you will get back all known divisions.
       operationId: findDivisionsNearLocationUsingGET
       parameters:
-        - description: "Only divisions near this location. Latitude/longitude in ISO-6709
-            format: ±DD.DDDD±DDD.DDDD"
+        - description: "Only divisions near this location. Latitude/longitude in ISO-6709 format: ±DD.DDDD±DDD.DDDD"
           in: path
           name: locationId
           required: true
@@ -1395,14 +1300,12 @@ paths:
           name: distanceUnit
           required: false
           type: string
-        - description: Only divisions in these countries (comma-delimited country codes or
-            WikiData ids)
+        - description: Only divisions in these countries (comma-delimited country codes or WikiData ids)
           in: query
           name: countryIds
           required: false
           type: string
-        - description: Only divisions NOT in these countries (comma-delimited country
-            codes or WikiData ids)
+        - description: Only divisions NOT in these countries (comma-delimited country codes or WikiData ids)
           in: query
           name: excludedCountryIds
           required: false
@@ -1413,9 +1316,7 @@ paths:
           name: minPopulation
           required: false
           type: integer
-        - description: Only divisions whose names start with this prefix. If languageCode
-            is set, the prefix will be matched on the name as it appears in that
-            language.
+        - description: Only divisions whose names start with this prefix. If languageCode is set, the prefix will be matched on the name as it appears in that language.
           in: query
           name: namePrefix
           required: false
@@ -1456,15 +1357,13 @@ paths:
           name: offset
           required: false
           type: integer
-        - description: "How to sort the results. Format: ±SORT_FIELD,±SORT_FIELD where
-            SORT_FIELD = countryCode | elevation | name | population"
+        - description: "How to sort the results. Format: ±SORT_FIELD,±SORT_FIELD where SORT_FIELD = countryCode | elevation | name | population"
           in: query
           name: sort
           required: false
           type: string
         - default: NONE
-          description: "Whether to include any divisions marked deleted: ALL |
-            SINCE_YESTERDAY | SINCE_LAST_WEEK | NONE"
+          description: "Whether to include any divisions marked deleted: ALL | SINCE_YESTERDAY | SINCE_LAST_WEEK | NONE"
           in: query
           name: includeDeleted
           required: false
@@ -1489,8 +1388,7 @@ paths:
     get:
       consumes:
         - application/json
-      description: Find currencies, filtering by optional criteria. If no criteria are
-        set, you will get back all known currencies.
+      description: Find currencies, filtering by optional criteria. If no criteria are set, you will get back all known currencies.
       operationId: getCurrenciesUsingGET
       parameters:
         - description: Only currencies supported by this country
@@ -1834,8 +1732,7 @@ definitions:
   DistanceResponse:
     properties:
       data:
-        description: The distance in units as set by the distanceUnit param (defaults to
-          miles)
+        description: The distance in units as set by the distanceUnit param (defaults to miles)
         format: double
         type: number
       errors:

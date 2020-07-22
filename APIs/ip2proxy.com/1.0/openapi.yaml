@@ -4,9 +4,7 @@ servers:
 info:
   contact:
     x-twitter: ip2location
-  description: IP2Proxy allows instant detection of anonymous proxy, VPN and TOR
-    exit nodes and search engine robots (SES) by IP address. Visit
-    https://www.ip2location.com/web-service/ip2proxy for further information.
+  description: IP2Proxy allows instant detection of anonymous proxy, VPN and TOR exit nodes and search engine robots (SES) by IP address. Visit https://www.ip2location.com/web-service/ip2proxy for further information.
   title: IP2Proxy Proxy Detection
   version: "1.0"
   x-apisguru-categories:
@@ -31,8 +29,7 @@ paths:
           name: package
           schema:
             type: string
-        - description: IP address (IPv4) for lookup purpose. If not present, the server IP
-            address will be used for the lookup.
+        - description: IP address (IPv4) for lookup purpose. If not present, the server IP address will be used for the lookup.
           in: query
           name: ip
           required: true
@@ -58,10 +55,7 @@ paths:
             text/html; charset=UTF-8:
               examples:
                 "0":
-                  value: '{"response": "","countryCode": "","countryName": "","regionName":
-                    "","cityName": "","isp": "","domain":
-                    "","usageType":"","asn":"","as": "","lastSeen":
-                    "","proxyType":"","isProxy": ""}'
+                  value: '{"response": "","countryCode": "","countryName": "","regionName": "","cityName": "","isp": "","domain": "","usageType":"","asn":"","as": "","lastSeen": "","proxyType":"","isProxy": ""}'
               schema:
                 type: string
           description: Get response from IP2Proxy

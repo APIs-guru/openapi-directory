@@ -9,9 +9,7 @@ info:
   contact:
     name: eBay Inc,
     x-twitter: ebay
-  description: This API allows third-party developers to search for and retrieve
-    details about eBay deals and events, as well as the items associated with
-    those deals and events.
+  description: This API allows third-party developers to search for and retrieve details about eBay deals and events, as well as the items associated with those deals and events.
   license:
     name: eBay API License Agreement
     url: https://go.developer.ebay.com/api-license-agreement
@@ -31,9 +29,7 @@ info:
 paths:
   /deal_item:
     get:
-      description: This method retrieves a paginated set of deal items. The result set
-        contains all deal items associated with the specified search criteria
-        and marketplace ID.
+      description: This method retrieves a paginated set of deal items. The result set contains all deal items associated with the specified search criteria and marketplace ID.
       operationId: getDealItems
       parameters:
         - description: The unique identifier of the eBay category for the search.
@@ -42,27 +38,19 @@ paths:
           required: false
           schema:
             type: string
-        - description: "A filter for commissionable deals. Restriction: This filter is
-            currently only supported for the US marketplace."
+        - description: "A filter for commissionable deals. Restriction: This filter is currently only supported for the US marketplace."
           in: query
           name: commissionable
           required: false
           schema:
             type: string
-        - description: The maximum number of items, from the current result set, returned
-            on a single page.
+        - description: The maximum number of items, from the current result set, returned on a single page.
           in: query
           name: limit
           required: false
           schema:
             type: string
-        - description: "The number of items that will be skipped in the result set. This
-            is used with the limit field to control the pagination of the
-            output. For example, if the offset is set to 0 and the limit is set
-            to 10, the method will retrieve items 1 through 10 from the list of
-            items returned. If the offset is set to 10 and the limit is set to
-            10, the method will retrieve items 11 through 20 from the list of
-            items returned. Default: 0"
+        - description: "The number of items that will be skipped in the result set. This is used with the limit field to control the pagination of the output. For example, if the offset is set to 0 and the limit is set to 10, the method will retrieve items 1 through 10 from the list of items returned. If the offset is set to 10 and the limit is set to 10, the method will retrieve items 11 through 20 from the list of items returned. Default: 0"
           in: query
           name: offset
           required: false
@@ -87,8 +75,7 @@ paths:
             errors:
               "180001":
                 category: REQUEST
-                description: Invalid, missing or unsupported marketplace. Please refer to
-                  documentation.
+                description: Invalid, missing or unsupported marketplace. Please refer to documentation.
                 domain: API_DEAL
               "180002":
                 category: REQUEST
@@ -100,13 +87,11 @@ paths:
                 domain: API_DEAL
               "180005":
                 category: REQUEST
-                description: category_ids length exceeded. Please check documentation for
-                  maximum values supported.
+                description: category_ids length exceeded. Please check documentation for maximum values supported.
                 domain: API_DEAL
               "180007":
                 category: REQUEST
-                description: Invalid or unsupported filter 'commissionable' for the requested
-                  marketplace. Please refer to documentation.
+                description: Invalid or unsupported filter 'commissionable' for the requested marketplace. Please refer to documentation.
                 domain: API_DEAL
               "180009":
                 category: REQUEST
@@ -120,8 +105,7 @@ paths:
             errors:
               "180000":
                 category: APPLICATION
-                description: There was a problem with an eBay internal system or process.
-                  Contact eBay developer support for assistance.
+                description: There was a problem with an eBay internal system or process. Contact eBay developer support for assistance.
                 domain: API_DEAL
       security:
         - api_auth:
@@ -130,24 +114,16 @@ paths:
         - deal_item
   /event:
     get:
-      description: This method returns paginated results containing all eBay events
-        for the specified marketplace.
+      description: This method returns paginated results containing all eBay events for the specified marketplace.
       operationId: getEvents
       parameters:
-        - description: "The maximum number of items, from the current result set, returned
-            on a single page. Default: 20 Maximum Value: 100"
+        - description: "The maximum number of items, from the current result set, returned on a single page. Default: 20 Maximum Value: 100"
           in: query
           name: limit
           required: false
           schema:
             type: string
-        - description: "The number of items that will be skipped in the result set. This
-            is used with the limit field to control the pagination of the
-            output. For example, if the offset is set to 0 and the limit is set
-            to 10, the method will retrieve items 1 through 10 from the list of
-            items returned. If the offset is set to 10 and the limit is set to
-            10, the method will retrieve items 11 through 20 from the list of
-            items returned. Default: 0"
+        - description: "The number of items that will be skipped in the result set. This is used with the limit field to control the pagination of the output. For example, if the offset is set to 0 and the limit is set to 10, the method will retrieve items 1 through 10 from the list of items returned. If the offset is set to 10 and the limit is set to 10, the method will retrieve items 11 through 20 from the list of items returned. Default: 0"
           in: query
           name: offset
           required: false
@@ -172,8 +148,7 @@ paths:
             errors:
               "180001":
                 category: REQUEST
-                description: Invalid, missing or unsupported marketplace. Please refer to
-                  documentation.
+                description: Invalid, missing or unsupported marketplace. Please refer to documentation.
                 domain: API_DEAL
               "180002":
                 category: REQUEST
@@ -195,8 +170,7 @@ paths:
             errors:
               "180000":
                 category: APPLICATION
-                description: There was a problem with an eBay internal system or process.
-                  Contact eBay developer support for assistance.
+                description: There was a problem with an eBay internal system or process. Contact eBay developer support for assistance.
                 domain: API_DEAL
       security:
         - api_auth:
@@ -205,9 +179,7 @@ paths:
         - event
   "/event/{event_id}":
     get:
-      description: This method retrieves the details for an eBay event. The result set
-        contains detailed information associated with the specified event ID,
-        such as applicable coupons, start and end dates, and event terms.
+      description: This method retrieves the details for an eBay event. The result set contains detailed information associated with the specified event ID, such as applicable coupons, start and end dates, and event terms.
       operationId: getEvent
       parameters:
         - description: A header used to specify the eBay marketplace ID.
@@ -251,8 +223,7 @@ paths:
             errors:
               "180000":
                 category: APPLICATION
-                description: There was a problem with an eBay internal system or process.
-                  Contact eBay developer support for assistance.
+                description: There was a problem with an eBay internal system or process. Contact eBay developer support for assistance.
                 domain: API_DEAL
       security:
         - api_auth:
@@ -261,13 +232,10 @@ paths:
         - event
   /event_item:
     get:
-      description: This method returns a paginated set of event items. The result set
-        contains all event items associated with the specified search criteria
-        and marketplace ID.
+      description: This method returns a paginated set of event items. The result set contains all event items associated with the specified search criteria and marketplace ID.
       operationId: getEventItems
       parameters:
-        - description: "The unique identifier of the eBay category for the search. Maximum
-            Value: 1"
+        - description: "The unique identifier of the eBay category for the search. Maximum Value: 1"
           in: query
           name: category_ids
           required: false
@@ -279,20 +247,13 @@ paths:
           required: true
           schema:
             type: string
-        - description: "The maximum number of items, from the current result set, returned
-            on a single page. Default: 20"
+        - description: "The maximum number of items, from the current result set, returned on a single page. Default: 20"
           in: query
           name: limit
           required: false
           schema:
             type: string
-        - description: "The number of items that will be skipped in the result set. This
-            is used with the limit field to control the pagination of the
-            output. For example, if the offset is set to 0 and the limit is set
-            to 10, the method will retrieve items 1 through 10 from the list of
-            items returned. If the offset is set to 10 and the limit is set to
-            10, the method will retrieve items 11 through 20 from the list of
-            items returned. Default: 0"
+        - description: "The number of items that will be skipped in the result set. This is used with the limit field to control the pagination of the output. For example, if the offset is set to 0 and the limit is set to 10, the method will retrieve items 1 through 10 from the list of items returned. If the offset is set to 10 and the limit is set to 10, the method will retrieve items 11 through 20 from the list of items returned. Default: 0"
           in: query
           name: offset
           required: false
@@ -317,8 +278,7 @@ paths:
             errors:
               "180001":
                 category: REQUEST
-                description: Invalid, missing or unsupported marketplace. Please refer to
-                  documentation.
+                description: Invalid, missing or unsupported marketplace. Please refer to documentation.
                 domain: API_DEAL
               "180002":
                 category: REQUEST
@@ -334,8 +294,7 @@ paths:
                 domain: API_DEAL
               "180005":
                 category: REQUEST
-                description: category_ids length exceeded. Please check documentation for
-                  maximum values supported.
+                description: category_ids length exceeded. Please check documentation for maximum values supported.
                 domain: API_DEAL
               "180006":
                 category: REQUEST
@@ -343,8 +302,7 @@ paths:
                 domain: API_DEAL
               "180008":
                 category: REQUEST
-                description: Missing eventId. Please provide a valid event Id for the
-                  marketplace.
+                description: Missing eventId. Please provide a valid event Id for the marketplace.
                 domain: API_DEAL
               "180009":
                 category: REQUEST
@@ -358,8 +316,7 @@ paths:
             errors:
               "180000":
                 category: APPLICATION
-                description: There was a problem with an eBay internal system or process.
-                  Contact eBay developer support for assistance.
+                description: There was a problem with an eBay internal system or process. Contact eBay developer support for assistance.
                 domain: API_DEAL
       security:
         - api_auth:
@@ -372,11 +329,7 @@ components:
       description: The currency and value of the item.
       properties:
         currency:
-          description: "The three-letter ISO 4217 code representing the currency of the
-            amount in the value field. Default: The currency of the
-            authenticated user's country. For implementation help, refer to <a
-            href='https://developer.ebay.com/devzone/rest/api-ref/deal/types/Cu\
-            rrencyCodeEnum.html'>eBay API documentation</a>"
+          description: "The three-letter ISO 4217 code representing the currency of the amount in the value field. Default: The currency of the authenticated user's country. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/deal/types/CurrencyCodeEnum.html'>eBay API documentation</a>"
           type: string
         value:
           description: The monetary value, in the currency specified by the currency field.
@@ -406,8 +359,7 @@ components:
             type: string
           type: array
         categoryId:
-          description: The ID of the leaf category for the deal item. A leaf category is
-            the lowest level in a category and has no children.
+          description: The ID of the leaf category for the deal item. A leaf category is the lowest level in a category and has no children.
           type: string
         commissionable:
           description: A boolean value specifying whether the listing has commission.
@@ -434,21 +386,13 @@ components:
           description: The item web URL with affiliate attribution.
           type: string
         itemGroupId:
-          description: "The unique identifier for the deal item group. This is the parent
-            item ID for the seller-defined variations. Note: This field is
-            returned for multiple-SKU items."
+          description: "The unique identifier for the deal item group. This is the parent item ID for the seller-defined variations. Note: This field is returned for multiple-SKU items."
           type: string
         itemGroupType:
-          description: An enumeration value that indicates the type of item group. An item
-            group contains items that have various aspect differences, such as
-            color, size, or storage capacity. For implementation help, refer to
-            <a
-            href='https://developer.ebay.com/devzone/rest/api-ref/deal/types/ItemGroupTypeEnum.html'>eBay
-            API documentation</a>
+          description: An enumeration value that indicates the type of item group. An item group contains items that have various aspect differences, such as color, size, or storage capacity. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/deal/types/ItemGroupTypeEnum.html'>eBay API documentation</a>
           type: string
         itemId:
-          description: "The unique identifier for the deal item. Note: This field is only
-            returned for single-SKU items."
+          description: "The unique identifier for the deal item. Note: This field is only returned for single-SKU items."
           type: string
         itemWebUrl:
           description: The web URL for the deal item.
@@ -458,17 +402,14 @@ components:
           type: string
         marketingPrice:
           $ref: "#/components/schemas/MarketingPrice"
-          description: The original price for the deal item, and the discount amount and
-            percentage.
+          description: The original price for the deal item, and the discount amount and percentage.
         price:
           $ref: "#/components/schemas/Amount"
           description: The price for the deal item.
         qualifiedPrograms:
           description: A list of programs applicable to the item.
           items:
-            description: " For implementation help, refer to <a
-              href='https://developer.ebay.com/devzone/rest/api-ref/deal/types/\
-              ProgramEnum.html'>eBay API documentation</a>"
+            description: " For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/deal/types/ProgramEnum.html'>eBay API documentation</a>"
             type: string
           type: array
         shippingOptions:
@@ -481,20 +422,9 @@ components:
           type: string
         unitPrice:
           $ref: "#/components/schemas/Amount"
-          description: "The price per unit for the deal item. Some European countries
-            require listings for certain types of products to include the price
-            per unit so that buyers can accurately compare prices. For example:
-            &quot;unitPricingMeasure&quot;: &quot;100g&quot;,
-            &quot;unitPrice&quot;: { &nbsp;&nbsp;&quot;value&quot;:
-            &quot;7.99&quot;, &nbsp;&nbsp;&quot;currency&quot;: &quot;GBP&quot;"
+          description: "The price per unit for the deal item. Some European countries require listings for certain types of products to include the price per unit so that buyers can accurately compare prices. For example: &quot;unitPricingMeasure&quot;: &quot;100g&quot;, &quot;unitPrice&quot;: { &nbsp;&nbsp;&quot;value&quot;: &quot;7.99&quot;, &nbsp;&nbsp;&quot;currency&quot;: &quot;GBP&quot;"
         unitPricingMeasure:
-          description: "The designation used to specify the quantity of the deal item,
-            such as size, weight, volume, and count. This helps buyers compare
-            prices. For example, the following tells the buyer that the item is
-            7.99 per 100 grams. &quot;unitPricingMeasure&quot;:
-            &quot;100g&quot;, &quot;unitPrice&quot;: {
-            &nbsp;&nbsp;&quot;value&quot;: &quot;7.99&quot;,
-            &nbsp;&nbsp;&quot;currency&quot;: &quot;GBP&quot;"
+          description: "The designation used to specify the quantity of the deal item, such as size, weight, volume, and count. This helps buyers compare prices. For example, the following tells the buyer that the item is 7.99 per 100 grams. &quot;unitPricingMeasure&quot;: &quot;100g&quot;, &quot;unitPrice&quot;: { &nbsp;&nbsp;&quot;value&quot;: &quot;7.99&quot;, &nbsp;&nbsp;&quot;currency&quot;: &quot;GBP&quot;"
           type: string
       type: object
     DealItemSearchResponse:
@@ -509,21 +439,14 @@ components:
           description: The relative path to the current set of results.
           type: string
         limit:
-          description: "The maximum number of items, from the current result set, returned
-            on a single page. Default: 20"
+          description: "The maximum number of items, from the current result set, returned on a single page. Default: 20"
           format: int32
           type: integer
         next:
           description: The relative path to the next set of results.
           type: string
         offset:
-          description: "The number of items that will be skipped in the result set. This
-            is used with the limit field to control the pagination of the
-            output. For example, if the offset is set to 0 and the limit is set
-            to 10, the method will retrieve items 1 through 10 from the list of
-            items returned. If the offset is set to 10 and the limit is set to
-            10, the method will retrieve items 11 through 20 from the list of
-            items returned. Default: 0"
+          description: "The number of items that will be skipped in the result set. This is used with the limit field to control the pagination of the output. For example, if the offset is set to 0 and the limit is set to 10, the method will retrieve items 1 through 10 from the list of items returned. If the offset is set to 10 and the limit is set to 10, the method will retrieve items 11 through 20 from the list of items returned. Default: 0"
           format: int32
           type: integer
         prev:
@@ -541,8 +464,7 @@ components:
           description: Identifies the type of erro.
           type: string
         domain:
-          description: Name for the primary system where the error occurred. This is
-            relevant for application errors.
+          description: Name for the primary system where the error occurred. This is relevant for application errors.
           type: string
         errorId:
           description: A unique number to identify the error.
@@ -557,8 +479,7 @@ components:
           description: A more detailed explanation of the error.
           type: string
         message:
-          description: Information on how to correct the problem, in the end user's terms
-            and language where applicable.
+          description: Information on how to correct the problem, in the end user's terms and language where applicable.
           type: string
         outputRefIds:
           description: An array of request elements most closely associated to the error.
@@ -566,15 +487,12 @@ components:
             type: string
           type: array
         parameters:
-          description: An array of name/value pairs that describe details the error
-            condition. These are useful when multiple errors are returned.
+          description: An array of name/value pairs that describe details the error condition. These are useful when multiple errors are returned.
           items:
             $ref: "#/components/schemas/ErrorParameter"
           type: array
         subdomain:
-          description: "Further helps indicate which subsystem the error is coming from.
-            System subcategories include: Initialization, Serialization,
-            Security, Monitoring, Rate Limiting, etc."
+          description: "Further helps indicate which subsystem the error is coming from. System subcategories include: Initialization, Serialization, Security, Monitoring, Rate Limiting, etc."
           type: string
       type: object
     ErrorParameter:
@@ -601,8 +519,7 @@ components:
           description: The end date for the event.
           type: string
         eventAffiliateWebUrl:
-          description: The URL of the View Event page for the event, which includes the
-            affiliate tracking ID.
+          description: The URL of the View Event page for the event, which includes the affiliate tracking ID.
           type: string
         eventId:
           description: The unique identifier for the event.
@@ -639,8 +556,7 @@ components:
             type: string
           type: array
         categoryId:
-          description: The ID of the leaf category for the event item. A leaf category is
-            the lowest level in a category and has no children.
+          description: The ID of the leaf category for the event item. A leaf category is the lowest level in a category and has no children.
           type: string
         energyEfficiencyClass:
           description: A string value specifying the Energy Efficiency class.
@@ -655,21 +571,13 @@ components:
           description: The item web URL with affiliate attribution.
           type: string
         itemGroupId:
-          description: "The unique identifier for the event item group. This is the parent
-            item ID for the seller-defined variations. Note: This field is
-            returned for multiple-SKU items."
+          description: "The unique identifier for the event item group. This is the parent item ID for the seller-defined variations. Note: This field is returned for multiple-SKU items."
           type: string
         itemGroupType:
-          description: An enumeration value that indicates the type of item group. An item
-            group contains items that have various aspect differences, such as
-            color, size, or storage capacity. For implementation help, refer to
-            <a
-            href='https://developer.ebay.com/devzone/rest/api-ref/deal/types/ItemGroupTypeEnum.html'>eBay
-            API documentation</a>
+          description: An enumeration value that indicates the type of item group. An item group contains items that have various aspect differences, such as color, size, or storage capacity. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/deal/types/ItemGroupTypeEnum.html'>eBay API documentation</a>
           type: string
         itemId:
-          description: "The unique identifier for the event item. Note: This field is only
-            returned for single-SKU items."
+          description: "The unique identifier for the event item. Note: This field is only returned for single-SKU items."
           type: string
         itemWebUrl:
           description: The web URL for the event item.
@@ -679,17 +587,14 @@ components:
           type: string
         marketingPrice:
           $ref: "#/components/schemas/MarketingPrice"
-          description: The original price for the event item, and the discount amount and
-            percentage.
+          description: The original price for the event item, and the discount amount and percentage.
         price:
           $ref: "#/components/schemas/Amount"
           description: The applicable price for the event item.
         qualifiedPrograms:
           description: A list of programs applicable to the event item.
           items:
-            description: " For implementation help, refer to <a
-              href='https://developer.ebay.com/devzone/rest/api-ref/deal/types/\
-              ProgramEnum.html'>eBay API documentation</a>"
+            description: " For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/deal/types/ProgramEnum.html'>eBay API documentation</a>"
             type: string
           type: array
         shippingOptions:
@@ -702,20 +607,9 @@ components:
           type: string
         unitPrice:
           $ref: "#/components/schemas/Amount"
-          description: "The price per unit for the event item. Some European countries
-            require listings for certain types of products to include the price
-            per unit so that buyers can accurately compare prices. For example:
-            &quot;unitPricingMeasure&quot;: &quot;100g&quot;,
-            &quot;unitPrice&quot;: { &nbsp;&nbsp;&quot;value&quot;:
-            &quot;7.99&quot;, &nbsp;&nbsp;&quot;currency&quot;: &quot;GBP&quot;"
+          description: "The price per unit for the event item. Some European countries require listings for certain types of products to include the price per unit so that buyers can accurately compare prices. For example: &quot;unitPricingMeasure&quot;: &quot;100g&quot;, &quot;unitPrice&quot;: { &nbsp;&nbsp;&quot;value&quot;: &quot;7.99&quot;, &nbsp;&nbsp;&quot;currency&quot;: &quot;GBP&quot;"
         unitPricingMeasure:
-          description: "The designation used to specify the quantity of the event item,
-            such as size, weight, volume, and count. This helps buyers compare
-            prices. For example, the following tells the buyer that the item is
-            7.99 per 100 grams. &quot;unitPricingMeasure&quot;:
-            &quot;100g&quot;, &quot;unitPrice&quot;: {
-            &nbsp;&nbsp;&quot;value&quot;: &quot;7.99&quot;,
-            &nbsp;&nbsp;&quot;currency&quot;: &quot;GBP&quot;"
+          description: "The designation used to specify the quantity of the event item, such as size, weight, volume, and count. This helps buyers compare prices. For example, the following tells the buyer that the item is 7.99 per 100 grams. &quot;unitPricingMeasure&quot;: &quot;100g&quot;, &quot;unitPrice&quot;: { &nbsp;&nbsp;&quot;value&quot;: &quot;7.99&quot;, &nbsp;&nbsp;&quot;currency&quot;: &quot;GBP&quot;"
           type: string
       type: object
     EventItemSearchResponse:
@@ -730,21 +624,14 @@ components:
           description: The relative path to the current set of results.
           type: string
         limit:
-          description: "The maximum number of items, from the current result set, returned
-            on a single page. Default: 20"
+          description: "The maximum number of items, from the current result set, returned on a single page. Default: 20"
           format: int32
           type: integer
         next:
           description: The relative path to the next set of results.
           type: string
         offset:
-          description: "The number of items that will be skipped in the result set. This
-            is used with the limit field to control the pagination of the
-            output. For example, if the offset is set to 0 and the limit is set
-            to 10, the method will retrieve items 1 through 10 from the list of
-            items returned. If the offset is set to 10 and the limit is set to
-            10, the method will retrieve items 11 through 20 from the list of
-            items returned. Default: 0"
+          description: "The number of items that will be skipped in the result set. This is used with the limit field to control the pagination of the output. For example, if the offset is set to 0 and the limit is set to 10, the method will retrieve items 1 through 10 from the list of items returned. If the offset is set to 10 and the limit is set to 10, the method will retrieve items 11 through 20 from the list of items returned. Default: 0"
           format: int32
           type: integer
         prev:
@@ -767,21 +654,14 @@ components:
           description: The relative path to the current set of results.
           type: string
         limit:
-          description: "The maximum number of items, from the current result set, returned
-            on a single page. Default: 20"
+          description: "The maximum number of items, from the current result set, returned on a single page. Default: 20"
           format: int32
           type: integer
         next:
           description: The relative path to the next set of results.
           type: string
         offset:
-          description: "The number of items that will be skipped in the result set. This
-            is used with the limit field to control the pagination of the
-            output. For example, if the offset is set to 0 and the limit is set
-            to 10, the method will retrieve items 1 through 10 from the list of
-            items returned. If the offset is set to 10 and the limit is set to
-            10, the method will retrieve items 11 through 20 from the list of
-            items returned. Default: 0"
+          description: "The number of items that will be skipped in the result set. This is used with the limit field to control the pagination of the output. For example, if the offset is set to 0 and the limit is set to 10, the method will retrieve items 1 through 10 from the list of items returned. If the offset is set to 10 and the limit is set to 10, the method will retrieve items 11 through 20 from the list of items returned. Default: 0"
           format: int32
           type: integer
         prev:
@@ -815,33 +695,23 @@ components:
           $ref: "#/components/schemas/Amount"
           description: The monetary value of the seller discount.
         discountPercentage:
-          description: The percentage of the seller discount based on the value returned
-            in the originalPrice field.
+          description: The percentage of the seller discount based on the value returned in the originalPrice field.
           type: string
         originalPrice:
           $ref: "#/components/schemas/Amount"
           description: The monetary value of the item prior to the discount.
         priceTreatment:
-          description: "The pricing treatment (discount) that was applied to the price of
-            the item. Note: The pricing treatment affects how and where the
-            discounted price can be displayed. For implementation help, refer to
-            <a
-            href='https://developer.ebay.com/devzone/rest/api-ref/deal/types/Pr\
-            iceTreatmentEnum.html'>eBay API documentation</a>"
+          description: "The pricing treatment (discount) that was applied to the price of the item. Note: The pricing treatment affects how and where the discounted price can be displayed. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/deal/types/PriceTreatmentEnum.html'>eBay API documentation</a>"
           type: string
       type: object
     ShippingOption:
-      description: The details provided for the shipping provider, such as shipping
-        cost and type.
+      description: The details provided for the shipping provider, such as shipping cost and type.
       properties:
         shippingCost:
           $ref: "#/components/schemas/Amount"
-          description: The final shipping cost for all items after all discounts are
-            applied.
+          description: The final shipping cost for all items after all discounts are applied.
         shippingCostType:
-          description: "The class of the shipping cost. Valid Values: FIXED or CALCULATED
-            Code so that your app gracefully handles any future changes to this
-            list."
+          description: "The class of the shipping cost. Valid Values: FIXED or CALCULATED Code so that your app gracefully handles any future changes to this list."
           type: string
       type: object
     Terms:
@@ -856,8 +726,7 @@ components:
       type: object
   securitySchemes:
     api_auth:
-      description: The security definitions for this API. Please check individual
-        operations for applicable scopes.
+      description: The security definitions for this API. Please check individual operations for applicable scopes.
       flows:
         clientCredentials:
           scopes:

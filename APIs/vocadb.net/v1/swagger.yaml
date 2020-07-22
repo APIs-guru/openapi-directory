@@ -26,15 +26,13 @@ paths:
         \            Activity for deleted entries is not returned."
       operationId: ActivityEntryApi_GetList
       parameters:
-        - description: Filter to return activity entries only before this date. Optional,
-            by default no filter.
+        - description: Filter to return activity entries only before this date. Optional, by default no filter.
           format: date-time
           in: query
           name: before
           required: false
           type: string
-        - description: Filter to return activity entries only after this date. Optional,
-            by default no filter.
+        - description: Filter to return activity entries only after this date. Optional, by default no filter.
           format: date-time
           in: query
           name: since
@@ -46,8 +44,7 @@ paths:
           name: userId
           required: false
           type: integer
-        - description: Filter by entry edit event (either Created or Updated). Optional,
-            by default no filter.
+        - description: Filter by entry edit event (either Created or Updated). Optional, by default no filter.
           enum:
             - Created
             - Updated
@@ -128,9 +125,7 @@ paths:
           name: query
           required: false
           type: string
-        - description: "Disc type. By default nothing. Possible values are Album, Single,
-            EP, SplitAlbum, Compilation, Video, Other. Note: only one type
-            supported for now."
+        - description: "Disc type. By default nothing. Possible values are Album, Single, EP, SplitAlbum, Compilation, Video, Other. Note: only one type supported for now."
           enum:
             - Unknown
             - Album
@@ -149,8 +144,7 @@ paths:
           required: false
           type: string
         - collectionFormat: multi
-          description: Filter by tag name (optional). This filter can be specified
-            multiple times.
+          description: Filter by tag name (optional). This filter can be specified multiple times.
           in: query
           items:
             type: string
@@ -158,8 +152,7 @@ paths:
           required: false
           type: array
         - collectionFormat: multi
-          description: Filter by tag Id (optional). This filter can be specified multiple
-            times.
+          description: Filter by tag Id (optional). This filter can be specified multiple times.
           in: query
           items:
             format: int32
@@ -181,17 +174,13 @@ paths:
           name: artistId
           required: false
           type: array
-        - description: "Filter by artist participation status. Only valid if artistId is
-            specified.\r
+        - description: "Filter by artist participation status. Only valid if artistId is specified.\r
 
-            \            Everything (default): Show all albums by
-            that artist (no filter).\r
+            \            Everything (default): Show all albums by that artist (no filter).\r
 
-            \            OnlyMainAlbums: Show only main albums by
-            that artist.\r
+            \            OnlyMainAlbums: Show only main albums by that artist.\r
 
-            \            OnlyCollaborations: Show only
-            collaborations by that artist."
+            \            OnlyCollaborations: Show only collaborations by that artist."
           enum:
             - Everything
             - OnlyMainAlbums
@@ -250,8 +239,7 @@ paths:
           name: start
           required: false
           type: integer
-        - description: Maximum number of results to be loaded (optional, defaults to 10,
-            maximum of 50).
+        - description: Maximum number of results to be loaded (optional, defaults to 10, maximum of 50).
           format: int32
           in: query
           name: maxResults
@@ -264,9 +252,7 @@ paths:
           type: boolean
         - description: "Sort rule (optional, defaults to Name). \r
 
-            \            Possible values are None, Name,
-            ReleaseDate, ReleaseDateWithNulls, AdditionDate, RatingAverage,
-            RatingTotal, NameThenReleaseDate."
+            \            Possible values are None, Name, ReleaseDate, ReleaseDateWithNulls, AdditionDate, RatingAverage, RatingTotal, NameThenReleaseDate."
           enum:
             - None
             - Name
@@ -283,26 +269,20 @@ paths:
           type: string
         - description: "Whether the search should prefer accurate matches. \r
 
-            \            If this is true, entries that match by
-            prefix will be moved first, instead of being sorted
-            alphabetically.\r
+            \            If this is true, entries that match by prefix will be moved first, instead of being sorted alphabetically.\r
 
-            \            Requires a text query. Does not support
-            pagination.\r
+            \            Requires a text query. Does not support pagination.\r
 
-            \            This is mostly useful for autocomplete
-            boxes."
+            \            This is mostly useful for autocomplete boxes."
           in: query
           name: preferAccurateMatches
           required: false
           type: boolean
         - description: "Whether to search for deleted entries.\r
 
-            \            If this is true, only deleted entries will
-            be returned.\r
+            \            If this is true, only deleted entries will be returned.\r
 
-            \            If this is false (default), deleted entries
-            are not returned."
+            \            If this is false (default), deleted entries are not returned."
           in: query
           name: deleted
           required: false
@@ -318,8 +298,7 @@ paths:
           name: nameMatchMode
           required: false
           type: string
-        - description: Optional fields (optional). Possible values are artists, names,
-            pvs, tags, tracks, webLinks.
+        - description: Optional fields (optional). Possible values are artists, names, pvs, tags, tracks, webLinks.
           enum:
             - None
             - AdditionalNames
@@ -368,8 +347,7 @@ paths:
     delete:
       consumes: []
       deprecated: false
-      description: "Normal users can delete their own comments, moderators can delete
-        all comments.\r
+      description: "Normal users can delete their own comments, moderators can delete all comments.\r
 
         \            Requires login."
       operationId: AlbumApi_DeleteComment
@@ -395,8 +373,7 @@ paths:
         - text/xml
         - application/x-www-form-urlencoded
       deprecated: false
-      description: "Normal users can edit their own comments, moderators can edit all
-        comments.\r
+      description: "Normal users can edit their own comments, moderators can edit all comments.\r
 
         \            Requires login."
       operationId: AlbumApi_PostEditComment
@@ -618,8 +595,7 @@ paths:
           name: id
           required: true
           type: integer
-        - description: Optional fields (optional). Possible values are artists, names,
-            pvs, tags, tracks, webLinks.
+        - description: Optional fields (optional). Possible values are artists, names, pvs, tags, tracks, webLinks.
           enum:
             - None
             - AdditionalNames
@@ -729,8 +705,7 @@ paths:
           name: id
           required: true
           type: integer
-        - description: Comment data. Message and author must be specified. Author must
-            match the logged in user.
+        - description: Comment data. Message and author must be specified. Author must match the logged in user.
           in: body
           name: contract
           required: true
@@ -852,8 +827,7 @@ paths:
           name: id
           required: true
           type: integer
-        - description: List of optional fields (optional). Possible values are Albums,
-            Artists, Names, PVs, Tags, ThumbUrl, WebLinks.
+        - description: List of optional fields (optional). Possible values are Albums, Artists, Names, PVs, Tags, ThumbUrl, WebLinks.
           enum:
             - None
             - AdditionalNames
@@ -1004,9 +978,7 @@ paths:
           name: artistTypes
           required: false
           type: string
-        - description: Allow base voicebanks. If false, only root voicebanks will be
-            allowed. Only affects voice synthesizers that can have base
-            voicebanks.
+        - description: Allow base voicebanks. If false, only root voicebanks will be allowed. Only affects voice synthesizers that can have base voicebanks.
           in: query
           name: allowBaseVoicebanks
           required: false
@@ -1020,8 +992,7 @@ paths:
           required: false
           type: array
         - collectionFormat: multi
-          description: Filter by tag Id (optional). This filter can be specified multiple
-            times.
+          description: Filter by tag Id (optional). This filter can be specified multiple times.
           in: query
           items:
             format: int32
@@ -1034,8 +1005,7 @@ paths:
           name: childTags
           required: false
           type: boolean
-        - description: Filter by user following the artists. By default there is no
-            filtering.
+        - description: Filter by user following the artists. By default there is no filtering.
           format: int32
           in: query
           name: followedByUserId
@@ -1064,8 +1034,7 @@ paths:
           name: start
           required: false
           type: integer
-        - description: Maximum number of results to be loaded (optional, defaults to 10,
-            maximum of 100).
+        - description: Maximum number of results to be loaded (optional, defaults to 10, maximum of 100).
           format: int32
           in: query
           name: maxResults
@@ -1076,8 +1045,7 @@ paths:
           name: getTotalCount
           required: false
           type: boolean
-        - description: Sort rule (optional, defaults to Name). Possible values are None,
-            Name, AdditionDate, AdditionDateAsc.
+        - description: Sort rule (optional, defaults to Name). Possible values are None, Name, AdditionDate, AdditionDateAsc.
           enum:
             - None
             - Name
@@ -1093,15 +1061,11 @@ paths:
           type: string
         - description: "Whether the search should prefer accurate matches. \r
 
-            \            If this is true, entries that match by
-            prefix will be moved first, instead of being sorted
-            alphabetically.\r
+            \            If this is true, entries that match by prefix will be moved first, instead of being sorted alphabetically.\r
 
-            \            Requires a text query. Does not support
-            pagination.\r
+            \            Requires a text query. Does not support pagination.\r
 
-            \            This is mostly useful for autocomplete
-            boxes."
+            \            This is mostly useful for autocomplete boxes."
           in: query
           name: preferAccurateMatches
           required: false
@@ -1117,8 +1081,7 @@ paths:
           name: nameMatchMode
           required: false
           type: string
-        - description: List of optional fields (optional). Possible values are
-            Description, Groups, Members, Names, Tags, WebLinks.
+        - description: List of optional fields (optional). Possible values are Description, Groups, Members, Names, Tags, WebLinks.
           enum:
             - None
             - AdditionalNames
@@ -1164,8 +1127,7 @@ paths:
     delete:
       consumes: []
       deprecated: false
-      description: "Normal users can delete their own comments, moderators can delete
-        all comments.\r
+      description: "Normal users can delete their own comments, moderators can delete all comments.\r
 
         \            Requires login."
       operationId: ArtistApi_DeleteComment
@@ -1191,8 +1153,7 @@ paths:
         - text/xml
         - application/x-www-form-urlencoded
       deprecated: false
-      description: "Normal users can edit their own comments, moderators can edit all
-        comments.\r
+      description: "Normal users can edit their own comments, moderators can edit all comments.\r
 
         \            Requires login."
       operationId: ArtistApi_PostEditComment
@@ -1297,8 +1258,7 @@ paths:
           name: id
           required: true
           type: integer
-        - description: List of optional fields (optional). Possible values are
-            Description, Groups, Members, Names, Tags, WebLinks.
+        - description: List of optional fields (optional). Possible values are Description, Groups, Members, Names, Tags, WebLinks.
           enum:
             - None
             - AdditionalNames
@@ -1314,8 +1274,7 @@ paths:
           name: fields
           required: false
           type: string
-        - description: List of artist relations (optional). Possible values are
-            LatestAlbums, PopularAlbums, LatestSongs, PopularSongs, All
+        - description: List of artist relations (optional). Possible values are LatestAlbums, PopularAlbums, LatestSongs, PopularSongs, All
           enum:
             - None
             - LatestAlbums
@@ -1401,8 +1360,7 @@ paths:
           name: id
           required: true
           type: integer
-        - description: Comment data. Message and author must be specified. Author must
-            match the logged in user.
+        - description: Comment data. Message and author must be specified. Author must match the logged in user.
           in: body
           name: contract
           required: true
@@ -1498,8 +1456,7 @@ paths:
           name: entryType
           required: true
           type: string
-        - description: Comment data. Message, entry and author must be specified. Author
-            must match the logged in user.
+        - description: Comment data. Message, entry and author must be specified. Author must match the logged in user.
           in: body
           name: contract
           required: true
@@ -1525,8 +1482,7 @@ paths:
     delete:
       consumes: []
       deprecated: false
-      description: "Normal users can delete their own comments, moderators can delete
-        all comments.\r
+      description: "Normal users can delete their own comments, moderators can delete all comments.\r
 
         \            Requires login."
       operationId: CommentApi_DeleteComment
@@ -1570,8 +1526,7 @@ paths:
         - text/xml
         - application/x-www-form-urlencoded
       deprecated: false
-      description: "Normal users can edit their own comments, moderators can edit all
-        comments.\r
+      description: "Normal users can edit their own comments, moderators can edit all comments.\r
 
         \            Requires login."
       operationId: CommentApi_PostEditComment
@@ -2033,8 +1988,7 @@ paths:
           name: start
           required: false
           type: integer
-        - description: Maximum number of results to be loaded (optional, defaults to 10,
-            maximum of 30).
+        - description: Maximum number of results to be loaded (optional, defaults to 10, maximum of 30).
           format: int32
           in: query
           name: maxResults
@@ -2045,8 +1999,7 @@ paths:
           name: getTotalCount
           required: false
           type: boolean
-        - description: Sort rule (optional, defaults to Name). Possible values are None,
-            Name, AdditionDate.
+        - description: Sort rule (optional, defaults to Name). Possible values are None, Name, AdditionDate.
           enum:
             - None
             - Name
@@ -2067,8 +2020,7 @@ paths:
           name: nameMatchMode
           required: false
           type: string
-        - description: List of optional fields (optional). Possible values are
-            Description, MainPicture, Names, Tags, WebLinks.
+        - description: List of optional fields (optional). Possible values are Description, MainPicture, Names, Tags, WebLinks.
           enum:
             - None
             - AdditionalNames
@@ -2375,11 +2327,9 @@ paths:
           name: notes
           required: false
           type: string
-        - description: "If true, the entry is hard deleted. Hard deleted entries cannot be
-            restored normally, but they will be moved to trash.\r
+        - description: "If true, the entry is hard deleted. Hard deleted entries cannot be restored normally, but they will be moved to trash.\r
 
-            \            If false, the entry is soft deleted,
-            meaning it can still be restored."
+            \            If false, the entry is soft deleted, meaning it can still be restored."
           in: query
           name: hardDelete
           required: false
@@ -2492,8 +2442,7 @@ paths:
           name: category
           required: false
           type: string
-        - description: Filter to include only events in user's events (interested or
-            attending).
+        - description: Filter to include only events in user's events (interested or attending).
           format: int32
           in: query
           name: userCollectionId
@@ -2561,8 +2510,7 @@ paths:
           type: boolean
         - description: "Sort rule (optional, defaults to Name). \r
 
-            \            Possible values are None, Name, Date,
-            SeriesName."
+            \            Possible values are None, Name, Date, SeriesName."
           enum:
             - None
             - Name
@@ -2830,11 +2778,9 @@ paths:
           name: notes
           required: false
           type: string
-        - description: "If true, the entry is hard deleted. Hard deleted entries cannot be
-            restored normally, but they will be moved to trash.\r
+        - description: "If true, the entry is hard deleted. Hard deleted entries cannot be restored normally, but they will be moved to trash.\r
 
-            \            If false, the entry is soft deleted,
-            meaning it can still be restored."
+            \            If false, the entry is soft deleted, meaning it can still be restored."
           in: query
           name: hardDelete
           required: false
@@ -2908,8 +2854,7 @@ paths:
           required: true
           type: string
         - collectionFormat: multi
-          description: Names of resource sets to be returned. More than one value can be
-            specified. For example "artistTypeNames"
+          description: Names of resource sets to be returned. More than one value can be specified. For example "artistTypeNames"
           in: query
           items:
             type: string
@@ -2969,8 +2914,7 @@ paths:
     delete:
       consumes: []
       deprecated: false
-      description: "Normal users can delete their own comments, moderators can delete
-        all comments.\r
+      description: "Normal users can delete their own comments, moderators can delete all comments.\r
 
         \            Requires login."
       operationId: SongListApi_DeleteComment
@@ -2996,8 +2940,7 @@ paths:
         - text/xml
         - application/x-www-form-urlencoded
       deprecated: false
-      description: "Normal users can edit their own comments, moderators can edit all
-        comments.\r
+      description: "Normal users can edit their own comments, moderators can edit all comments.\r
 
         \            Requires login."
       operationId: SongListApi_PostEditComment
@@ -3057,8 +3000,7 @@ paths:
           name: nameMatchMode
           required: false
           type: string
-        - description: Filter by a specific featured category. If empty, all categories
-            are returned.
+        - description: Filter by a specific featured category. If empty, all categories are returned.
           enum:
             - Nothing
             - Concerts
@@ -3075,8 +3017,7 @@ paths:
           name: start
           required: false
           type: integer
-        - description: Maximum number of results to be loaded (optional, defaults to 10,
-            maximum of 50).
+        - description: Maximum number of results to be loaded (optional, defaults to 10, maximum of 50).
           format: int32
           in: query
           name: maxResults
@@ -3156,8 +3097,7 @@ paths:
           name: nameMatchMode
           required: false
           type: string
-        - description: Filter by a specific featured category. If empty, all categories
-            are returned.
+        - description: Filter by a specific featured category. If empty, all categories are returned.
           enum:
             - Nothing
             - Concerts
@@ -3209,11 +3149,9 @@ paths:
           name: notes
           required: false
           type: string
-        - description: "If true, the entry is hard deleted. Hard deleted entries cannot be
-            restored normally, but they will be moved to trash.\r
+        - description: "If true, the entry is hard deleted. Hard deleted entries cannot be restored normally, but they will be moved to trash.\r
 
-            \            If false, the entry is soft deleted,
-            meaning it can still be restored."
+            \            If false, the entry is soft deleted, meaning it can still be restored."
           in: query
           name: hardDelete
           required: false
@@ -3269,8 +3207,7 @@ paths:
           name: listId
           required: true
           type: integer
-        - description: Comment data. Message and author must be specified. Author must
-            match the logged in user.
+        - description: Comment data. Message and author must be specified. Author must match the logged in user.
           in: body
           name: contract
           required: true
@@ -3314,8 +3251,7 @@ paths:
           name: songTypes
           required: false
           type: string
-        - description: Filter by one or more PV services (separated by commas). The song
-            will pass the filter if it has a PV for any of the matched services.
+        - description: Filter by one or more PV services (separated by commas). The song will pass the filter if it has a PV for any of the matched services.
           enum:
             - Nothing
             - NicoNicoDouga
@@ -3368,8 +3304,7 @@ paths:
           name: start
           required: false
           type: integer
-        - description: Maximum number of results to be loaded (optional, defaults to 10,
-            maximum of 50).
+        - description: Maximum number of results to be loaded (optional, defaults to 10, maximum of 50).
           format: int32
           in: query
           name: maxResults
@@ -3380,8 +3315,7 @@ paths:
           name: getTotalCount
           required: false
           type: boolean
-        - description: Song sort rule (optional, by default songs are sorted by song list
-            order).
+        - description: Song sort rule (optional, by default songs are sorted by song list order).
           enum:
             - None
             - Name
@@ -3405,8 +3339,7 @@ paths:
           name: nameMatchMode
           required: false
           type: string
-        - description: List of optional fields (optional). Possible values are Albums,
-            Artists, Names, PVs, Tags, ThumbUrl, WebLinks.
+        - description: List of optional fields (optional). Possible values are Albums, Artists, Names, PVs, Tags, ThumbUrl, WebLinks.
           enum:
             - None
             - AdditionalNames
@@ -3463,8 +3396,7 @@ paths:
           type: string
         - description: "Filtered song types (optional). \r
 
-            \            Possible values are Original, Remaster,
-            Remix, Cover, Instrumental, Mashup, MusicPV, DramaPV, Other."
+            \            Possible values are Original, Remaster, Remix, Cover, Instrumental, Mashup, MusicPV, DramaPV, Other."
           in: query
           name: songTypes
           required: false
@@ -3503,8 +3435,7 @@ paths:
           name: childTags
           required: false
           type: boolean
-        - description: When searching by song type, search by associated tag as well, and
-            vice versa.
+        - description: When searching by song type, search by associated tag as well, and vice versa.
           in: query
           name: unifyTypesAndTags
           required: false
@@ -3518,17 +3449,13 @@ paths:
           name: artistId
           required: false
           type: array
-        - description: "Filter by artist participation status. Only valid if artistId is
-            specified.\r
+        - description: "Filter by artist participation status. Only valid if artistId is specified.\r
 
-            \            Everything (default): Show all songs by
-            that artist (no filter).\r
+            \            Everything (default): Show all songs by that artist (no filter).\r
 
-            \            OnlyMainAlbums: Show only main songs by
-            that artist.\r
+            \            OnlyMainAlbums: Show only main songs by that artist.\r
 
-            \            OnlyCollaborations: Show only
-            collaborations by that artist."
+            \            OnlyCollaborations: Show only collaborations by that artist."
           enum:
             - Everything
             - OnlyMainAlbums
@@ -3552,8 +3479,7 @@ paths:
           name: onlyWithPvs
           required: false
           type: boolean
-        - description: Filter by one or more PV services (separated by commas). The song
-            will pass the filter if it has a PV for any of the matched services.
+        - description: Filter by one or more PV services (separated by commas). The song will pass the filter if it has a PV for any of the matched services.
           enum:
             - Nothing
             - NicoNicoDouga
@@ -3570,8 +3496,7 @@ paths:
           name: pvServices
           required: false
           type: string
-        - description: Allow only entries that have been created at most this many hours
-            ago. By default there is no filtering.
+        - description: Allow only entries that have been created at most this many hours ago. By default there is no filtering.
           format: int32
           in: query
           name: since
@@ -3624,8 +3549,7 @@ paths:
           name: start
           required: false
           type: integer
-        - description: Maximum number of results to be loaded (optional, defaults to 10,
-            maximum of 50).
+        - description: Maximum number of results to be loaded (optional, defaults to 10, maximum of 50).
           format: int32
           in: query
           name: maxResults
@@ -3636,8 +3560,7 @@ paths:
           name: getTotalCount
           required: false
           type: boolean
-        - description: Sort rule (optional, defaults to Name). Possible values are None,
-            Name, AdditionDate, FavoritedTimes, RatingScore.
+        - description: Sort rule (optional, defaults to Name). Possible values are None, Name, AdditionDate, FavoritedTimes, RatingScore.
           enum:
             - None
             - Name
@@ -3652,15 +3575,11 @@ paths:
           type: string
         - description: "Whether the search should prefer accurate matches. \r
 
-            \            If this is true, entries that match by
-            prefix will be moved first, instead of being sorted
-            alphabetically.\r
+            \            If this is true, entries that match by prefix will be moved first, instead of being sorted alphabetically.\r
 
-            \            Requires a text query. Does not support
-            pagination.\r
+            \            Requires a text query. Does not support pagination.\r
 
-            \            This is mostly useful for autocomplete
-            boxes."
+            \            This is mostly useful for autocomplete boxes."
           in: query
           name: preferAccurateMatches
           required: false
@@ -3676,8 +3595,7 @@ paths:
           name: nameMatchMode
           required: false
           type: string
-        - description: List of optional fields (optional). Possible values are Albums,
-            Artists, Names, PVs, Tags, ThumbUrl, WebLinks.
+        - description: List of optional fields (optional). Possible values are Albums, Artists, Names, PVs, Tags, ThumbUrl, WebLinks.
           enum:
             - None
             - AdditionalNames
@@ -3727,8 +3645,7 @@ paths:
       deprecated: false
       operationId: SongApi_GetByPV
       parameters:
-        - description: PV service (required). Possible values are NicoNicoDouga, Youtube,
-            SoundCloud, Vimeo, Piapro, Bilibili.
+        - description: PV service (required). Possible values are NicoNicoDouga, Youtube, SoundCloud, Vimeo, Piapro, Bilibili.
           enum:
             - NicoNicoDouga
             - Youtube
@@ -3749,8 +3666,7 @@ paths:
           name: pvId
           required: true
           type: string
-        - description: List of optional fields (optional). Possible values are Albums,
-            Artists, Names, PVs, Tags, ThumbUrl, WebLinks.
+        - description: List of optional fields (optional). Possible values are Albums, Artists, Names, PVs, Tags, ThumbUrl, WebLinks.
           enum:
             - None
             - AdditionalNames
@@ -3798,8 +3714,7 @@ paths:
     delete:
       consumes: []
       deprecated: false
-      description: "Normal users can delete their own comments, moderators can delete
-        all comments.\r
+      description: "Normal users can delete their own comments, moderators can delete all comments.\r
 
         \            Requires login."
       operationId: SongApi_DeleteComment
@@ -3825,8 +3740,7 @@ paths:
         - text/xml
         - application/x-www-form-urlencoded
       deprecated: false
-      description: "Normal users can edit their own comments, moderators can edit all
-        comments.\r
+      description: "Normal users can edit their own comments, moderators can edit all comments.\r
 
         \            Requires login."
       operationId: SongApi_PostEditComment
@@ -4102,8 +4016,7 @@ paths:
           type: integer
         - description: "List of optional fields (optional). \r
 
-            \            Possible values are Albums, Artists, Names,
-            PVs, Tags, ThumbUrl, WebLinks."
+            \            Possible values are Albums, Artists, Names, PVs, Tags, ThumbUrl, WebLinks."
           enum:
             - None
             - AdditionalNames
@@ -4194,8 +4107,7 @@ paths:
           name: id
           required: true
           type: integer
-        - description: Comment data. Message and author must be specified. Author must
-            match the logged in user.
+        - description: Comment data. Message and author must be specified. Author must match the logged in user.
           in: body
           name: contract
           required: true
@@ -4232,8 +4144,7 @@ paths:
           type: integer
         - description: "List of optional fields (optional). \r
 
-            \            Possible values are Albums, Artists, Names,
-            PVs, Tags, ThumbUrl, WebLinks."
+            \            Possible values are Albums, Artists, Names, PVs, Tags, ThumbUrl, WebLinks."
           enum:
             - None
             - AdditionalNames
@@ -4285,8 +4196,7 @@ paths:
       deprecated: false
       description: "The result includes ratings and user information.\r
 
-        \            For users who have requested not to make their
-        ratings public, the user will be empty."
+        \            For users who have requested not to make their ratings public, the user will be empty."
       operationId: SongApi_GetRatings
       parameters:
         - description: Song ID.
@@ -4341,8 +4251,7 @@ paths:
         - text/xml
         - application/x-www-form-urlencoded
       deprecated: false
-      description: "If the user has already rated the song, any previous rating is
-        replaced.\r
+      description: "If the user has already rated the song, any previous rating is replaced.\r
 
         \            Authorization cookie must be included.\r
 
@@ -4365,8 +4274,7 @@ paths:
       responses:
         "204":
           description: No Content
-      summary: Add or update rating for a specific song, for the currently logged in
-        user.
+      summary: Add or update rating for a specific song, for the currently logged in user.
       tags:
         - SongApi
   "/api/songs/{id}/related":
@@ -4436,14 +4344,12 @@ paths:
           name: query
           required: false
           type: string
-        - description: Whether to allow child tags. If this is false, only root tags (that
-            aren't children of any other tag) will be included.
+        - description: Whether to allow child tags. If this is false, only root tags (that aren't children of any other tag) will be included.
           in: query
           name: allowChildren
           required: false
           type: boolean
-        - description: Filter tags by category (optional). If specified, this must be an
-            exact match (case insensitive).
+        - description: Filter tags by category (optional). If specified, this must be an exact match (case insensitive).
           in: query
           name: categoryName
           required: false
@@ -4454,8 +4360,7 @@ paths:
           name: start
           required: false
           type: integer
-        - description: Maximum number of results to be loaded (optional, defaults to 10,
-            maximum of 30).
+        - description: Maximum number of results to be loaded (optional, defaults to 10, maximum of 30).
           format: int32
           in: query
           name: maxResults
@@ -4477,8 +4382,7 @@ paths:
           name: nameMatchMode
           required: false
           type: string
-        - description: Sort rule (optional, by default tags are sorted by name).Possible
-            values are Name and UsageCount.
+        - description: Sort rule (optional, by default tags are sorted by name).Possible values are Name and UsageCount.
           enum:
             - Nothing
             - Name
@@ -4490,15 +4394,11 @@ paths:
           type: string
         - description: "Whether the search should prefer accurate matches. \r
 
-            \            If this is true, entries that match by
-            prefix will be moved first, instead of being sorted
-            alphabetically.\r
+            \            If this is true, entries that match by prefix will be moved first, instead of being sorted alphabetically.\r
 
-            \            Requires a text query. Does not support
-            pagination.\r
+            \            Requires a text query. Does not support pagination.\r
 
-            \            This is mostly useful for autocomplete
-            boxes."
+            \            This is mostly useful for autocomplete boxes."
           in: query
           name: preferAccurateMatches
           required: false
@@ -4696,8 +4596,7 @@ paths:
           description: No Content
       summary: "Deletes a comment.\r
 
-        \            Normal users can delete their own comments,
-        moderators can delete all comments.\r
+        \            Normal users can delete their own comments, moderators can delete all comments.\r
 
         \            Requires login."
       tags:
@@ -4730,8 +4629,7 @@ paths:
           description: No Content
       summary: "Updates a comment.\r
 
-        \            Normal users can edit their own comments,
-        moderators can edit all comments.\r
+        \            Normal users can edit their own comments, moderators can edit all comments.\r
 
         \            Requires login."
       tags:
@@ -4749,8 +4647,7 @@ paths:
           type: string
         - description: "Whether to find tags that are aliases of other tags as well. \r
 
-            \            If false, only tags that are not aliases
-            will be listed."
+            \            If false, only tags that are not aliases will be listed."
           in: query
           name: allowAliases
           required: false
@@ -4789,14 +4686,12 @@ paths:
       deprecated: false
       operationId: TagApi_GetTopTags
       parameters:
-        - description: Tag category, for example "Genres". Optional - if not specified, no
-            filtering is done.
+        - description: Tag category, for example "Genres". Optional - if not specified, no filtering is done.
           in: query
           name: categoryName
           required: false
           type: string
-        - description: Tag usage entry type. Optional - if not specified, all entry types
-            are included.
+        - description: Tag usage entry type. Optional - if not specified, all entry types are included.
           enum:
             - Undefined
             - Album
@@ -4865,11 +4760,9 @@ paths:
           name: notes
           required: false
           type: string
-        - description: "If true, the entry is hard deleted. Hard deleted entries cannot be
-            restored normally, but they will be moved to trash.\r
+        - description: "If true, the entry is hard deleted. Hard deleted entries cannot be restored normally, but they will be moved to trash.\r
 
-            \            If false, the entry is soft deleted,
-            meaning it can still be restored."
+            \            If false, the entry is soft deleted, meaning it can still be restored."
           in: query
           name: hardDelete
           required: false
@@ -5038,8 +4931,7 @@ paths:
           name: tagId
           required: true
           type: integer
-        - description: Comment data. Message and author must be specified. Author must
-            match the logged in user.
+        - description: Comment data. Message and author must be specified. Author must match the logged in user.
           in: body
           name: contract
           required: true
@@ -5183,8 +5075,7 @@ paths:
           name: onlyVerified
           required: false
           type: boolean
-        - description: Filter by known language (optional). This is the ISO 639-1 language
-            code, for example "en" or "zh".
+        - description: Filter by known language (optional). This is the ISO 639-1 language code, for example "en" or "zh".
           in: query
           name: knowsLanguage
           required: false
@@ -5221,8 +5112,7 @@ paths:
       deprecated: false
       description: "Requires login information.\r
 
-        \            This API supports CORS, and is restricted to
-        specific origins."
+        \            This API supports CORS, and is restricted to specific origins."
       operationId: UserApi_GetCurrent
       parameters:
         - description: Optional fields.
@@ -5255,8 +5145,7 @@ paths:
     post:
       consumes: []
       deprecated: false
-      description: "If the user has already rated the album, any previous rating is
-        replaced.\r
+      description: "If the user has already rated the album, any previous rating is replaced.\r
 
         \            Authorization cookie must be included."
       operationId: UserApi_PostAlbumStatus
@@ -5267,8 +5156,7 @@ paths:
           name: albumId
           required: true
           type: integer
-        - description: Collection status. Possible values are Nothing, Wishlisted, Ordered
-            and Owned.
+        - description: Collection status. Possible values are Nothing, Wishlisted, Ordered and Owned.
           enum:
             - Nothing
             - Wishlisted
@@ -5278,8 +5166,7 @@ paths:
           name: collectionStatus
           required: true
           type: string
-        - description: Album media type. Possible values are PhysicalDisc, DigitalDownload
-            and Other.
+        - description: Album media type. Possible values are PhysicalDisc, DigitalDownload and Other.
           enum:
             - PhysicalDisc
             - DigitalDownload
@@ -5307,8 +5194,7 @@ paths:
           description: OK
           schema:
             type: string
-      summary: Add or update collection status, media type and rating for a specific
-        album, for the currently logged in user.
+      summary: Add or update collection status, media type and rating for a specific album, for the currently logged in user.
       tags:
         - UserApi
   "/api/users/current/followedTags/{tagId}":
@@ -5412,8 +5298,7 @@ paths:
       responses:
         "204":
           description: No Content
-      summary: Refresh entry edit status, indicating that the current user is still
-        editing that entry.
+      summary: Refresh entry edit status, indicating that the current user is still editing that entry.
       tags:
         - UserApi
   "/api/users/current/songTags/{songId}":
@@ -5425,11 +5310,9 @@ paths:
         - text/xml
         - application/x-www-form-urlencoded
       deprecated: false
-      description: "This can only be used to add tags - existing tags will not be
-        removed. \r
+      description: "This can only be used to add tags - existing tags will not be removed. \r
 
-        \            Nothing will be done for tags that are already
-        applied by the current user for the song.\r
+        \            Nothing will be done for tags that are already applied by the current user for the song.\r
 
         \            Authorization cookie is required."
       operationId: UserApi_PostSongTags
@@ -5514,8 +5397,7 @@ paths:
           name: maxResults
           required: false
           type: integer
-        - description: Whether to include disabled user accounts. If false, disabled
-            accounts are excluded.
+        - description: Whether to include disabled user accounts. If false, disabled accounts are excluded.
           in: query
           name: includeDisabled
           required: false
@@ -5542,8 +5424,7 @@ paths:
     delete:
       consumes: []
       deprecated: false
-      description: "Normal users can delete their own comments, moderators can delete
-        all comments.\r
+      description: "Normal users can delete their own comments, moderators can delete all comments.\r
 
         \            Requires login."
       operationId: UserApi_DeleteProfileComment
@@ -5569,8 +5450,7 @@ paths:
         - text/xml
         - application/x-www-form-urlencoded
       deprecated: false
-      description: "Normal users can edit their own comments, moderators can edit all
-        comments.\r
+      description: "Normal users can edit their own comments, moderators can edit all comments.\r
 
         \            Requires login."
       operationId: UserApi_PostEditComment
@@ -5636,12 +5516,9 @@ paths:
     get:
       consumes: []
       deprecated: false
-      description: "This includes albums that have been rated by the user as well as
-        albums that the user has bought or wishlisted.\r
+      description: "This includes albums that have been rated by the user as well as albums that the user has bought or wishlisted.\r
 
-        \            Note that the user might have set his album
-        ownership status and media type as private, in which case those
-        properties are not included."
+        \            Note that the user might have set his album ownership status and media type as private, in which case those properties are not included."
       operationId: UserApi_GetAlbumCollection
       parameters:
         - description: ID of the user whose albums are to be browsed.
@@ -5672,9 +5549,7 @@ paths:
           name: artistId
           required: false
           type: integer
-        - description: Filter by a comma-separated list of purchase statuses (optional).
-            Possible values are Nothing, Wishlisted, Ordered, Owned, and all
-            combinations of these.
+        - description: Filter by a comma-separated list of purchase statuses (optional). Possible values are Nothing, Wishlisted, Ordered, Owned, and all combinations of these.
           enum:
             - Nothing
             - Wishlisted
@@ -5722,8 +5597,7 @@ paths:
           name: start
           required: false
           type: integer
-        - description: Maximum number of results to be loaded (optional, defaults to 10,
-            maximum of 50).
+        - description: Maximum number of results to be loaded (optional, defaults to 10, maximum of 50).
           format: int32
           in: query
           name: maxResults
@@ -5734,9 +5608,7 @@ paths:
           name: getTotalCount
           required: false
           type: boolean
-        - description: Sort rule (optional, defaults to Name). Possible values are None,
-            Name, ReleaseDate, AdditionDate, RatingAverage, RatingTotal,
-            CollectionCount.
+        - description: Sort rule (optional, defaults to Name). Possible values are None, Name, ReleaseDate, AdditionDate, RatingAverage, RatingTotal, CollectionCount.
           enum:
             - None
             - Name
@@ -5762,8 +5634,7 @@ paths:
           name: nameMatchMode
           required: false
           type: string
-        - description: List of optional fields (optional). Possible values are Artists,
-            MainPicture, Names, PVs, Tags, WebLinks.
+        - description: List of optional fields (optional). Possible values are Artists, MainPicture, Names, PVs, Tags, WebLinks.
           enum:
             - None
             - AdditionalNames
@@ -5864,8 +5735,7 @@ paths:
           required: false
           type: string
         - collectionFormat: multi
-          description: Filter by tag Id (optional). This filter can be specified multiple
-            times.
+          description: Filter by tag Id (optional). This filter can be specified multiple times.
           in: query
           items:
             format: int32
@@ -5903,8 +5773,7 @@ paths:
           name: start
           required: false
           type: integer
-        - description: Maximum number of results to be loaded (optional, defaults to 10,
-            maximum of 50).
+        - description: Maximum number of results to be loaded (optional, defaults to 10, maximum of 50).
           format: int32
           in: query
           name: maxResults
@@ -5915,8 +5784,7 @@ paths:
           name: getTotalCount
           required: false
           type: boolean
-        - description: Sort rule (optional, defaults to Name). Possible values are None,
-            Name, AdditionDate, AdditionDateAsc.
+        - description: Sort rule (optional, defaults to Name). Possible values are None, Name, AdditionDate, AdditionDateAsc.
           enum:
             - None
             - Name
@@ -5941,8 +5809,7 @@ paths:
           name: nameMatchMode
           required: false
           type: string
-        - description: List of optional fields (optional). Possible values are
-            Description, Groups, Members, Names, Tags, WebLinks.
+        - description: List of optional fields (optional). Possible values are Description, Groups, Members, Names, Tags, WebLinks.
           enum:
             - None
             - AdditionalNames
@@ -6017,15 +5884,13 @@ paths:
       deprecated: false
       operationId: UserApi_GetMessages
       parameters:
-        - description: User ID. Must be the currently logged in user (loading messages for
-            another user is not allowed).
+        - description: User ID. Must be the currently logged in user (loading messages for another user is not allowed).
           format: int32
           in: path
           name: id
           required: true
           type: integer
-        - description: Type of inbox. Possible values are Nothing (load all, default),
-            Received, Sent, Notifications.
+        - description: Type of inbox. Possible values are Nothing (load all, default), Received, Sent, Notifications.
           enum:
             - Nothing
             - Received
@@ -6035,9 +5900,7 @@ paths:
           name: inbox
           required: false
           type: string
-        - description: Whether to only load unread messages. Loading unread messages is
-            only possible for received messages and notifications (not sent
-            messages).
+        - description: Whether to only load unread messages. Loading unread messages is only possible for received messages and notifications (not sent messages).
           in: query
           name: unread
           required: false
@@ -6180,8 +6043,7 @@ paths:
           name: id
           required: true
           type: integer
-        - description: Comment data. Message and author must be specified. Author must
-            match the logged in user.
+        - description: Comment data. Message and author must be specified. Author must match the logged in user.
           in: body
           name: contract
           required: true
@@ -6226,8 +6088,7 @@ paths:
           required: false
           type: string
         - collectionFormat: multi
-          description: Filter by tag Id (optional). This filter can be specified multiple
-            times.
+          description: Filter by tag Id (optional). This filter can be specified multiple times.
           in: query
           items:
             format: int32
@@ -6278,8 +6139,7 @@ paths:
           name: groupByRating
           required: false
           type: boolean
-        - description: Filter by one or more PV services (separated by commas). The song
-            will pass the filter if it has a PV for any of the matched services.
+        - description: Filter by one or more PV services (separated by commas). The song will pass the filter if it has a PV for any of the matched services.
           enum:
             - Nothing
             - NicoNicoDouga
@@ -6309,8 +6169,7 @@ paths:
           name: start
           required: false
           type: integer
-        - description: Maximum number of results to be loaded (optional, defaults to 10,
-            maximum of 50).
+        - description: Maximum number of results to be loaded (optional, defaults to 10, maximum of 50).
           format: int32
           in: query
           name: maxResults
@@ -6321,8 +6180,7 @@ paths:
           name: getTotalCount
           required: false
           type: boolean
-        - description: Sort rule (optional, defaults to Name). Possible values are None,
-            Name, AdditionDate, FavoritedTimes, RatingScore.
+        - description: Sort rule (optional, defaults to Name). Possible values are None, Name, AdditionDate, FavoritedTimes, RatingScore.
           enum:
             - None
             - Name
@@ -6346,8 +6204,7 @@ paths:
           name: nameMatchMode
           required: false
           type: string
-        - description: List of optional fields (optional). Possible values are Albums,
-            Artists, Names, PVs, Tags, ThumbUrl, WebLinks.
+        - description: List of optional fields (optional). Possible values are Albums, Artists, Names, PVs, Tags, ThumbUrl, WebLinks.
           enum:
             - None
             - AdditionalNames
@@ -6477,8 +6334,7 @@ paths:
       deprecated: false
       operationId: UserApi_PostSetting
       parameters:
-        - description: ID of the user to be updated. This must match the current user OR
-            be unspecified (or 0) if the user is not logged in.
+        - description: ID of the user to be updated. This must match the current user OR be unspecified (or 0) if the user is not logged in.
           format: int32
           in: path
           name: id
@@ -6648,8 +6504,7 @@ paths:
           name: lang
           required: false
           type: string
-        - description: Sort rule (optional, defaults to Name). Possible values are None,
-            Name, Distance.
+        - description: Sort rule (optional, defaults to Name). Possible values are None, Name, Distance.
           enum:
             - None
             - Name
@@ -6717,11 +6572,9 @@ paths:
           name: notes
           required: false
           type: string
-        - description: "If true, the entry is hard deleted. Hard deleted entries cannot be
-            restored normally, but they will be moved to trash.\r
+        - description: "If true, the entry is hard deleted. Hard deleted entries cannot be restored normally, but they will be moved to trash.\r
 
-            \            If false, the entry is soft deleted,
-            meaning it can still be restored."
+            \            If false, the entry is soft deleted, meaning it can still be restored."
           in: query
           name: hardDelete
           required: false

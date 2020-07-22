@@ -6,13 +6,7 @@ basePath: /associations/v1.0
 info:
   contact:
     email: contact@wordassociations.net
-  description: The Word Associations Network API allows developers to embed the
-    ability to find associations for a word or phrase into their mobile apps or
-    web services. Words are grouped by semantics, meaning, and psychological
-    perception. The Word Associations Network API currently supports English,
-    French, Spanish, German, Italian, Portuguese, and Russian vocabulary. Please
-    [register and subscribe](https://api.wordassociations.net/subscriptions/) to
-    one of available tariff plans to get a valid API key.
+  description: The Word Associations Network API allows developers to embed the ability to find associations for a word or phrase into their mobile apps or web services. Words are grouped by semantics, meaning, and psychological perception. The Word Associations Network API currently supports English, French, Spanish, German, Italian, Portuguese, and Russian vocabulary. Please [register and subscribe](https://api.wordassociations.net/subscriptions/) to one of available tariff plans to get a valid API key.
   termsOfService: https://wordassociations.net/en/api
   title: Word Associations API
   version: "1.0"
@@ -32,9 +26,7 @@ produces:
   - application/json
 securityDefinitions:
   internalApiKey:
-    description: API key. Please register and subscribe to one of available tariff
-      plans to get a valid API key
-      https://api.wordassociations.net/subscriptions/.
+    description: API key. Please register and subscribe to one of available tariff plans to get a valid API key https://api.wordassociations.net/subscriptions/.
     in: query
     name: apikey
     type: apiKey
@@ -43,7 +35,7 @@ security:
 paths:
   /json/search:
     get:
-      description: |
+      description: >
         Gets associations with the given word or phrase.
       parameters:
         - collectionFormat: multi
@@ -61,14 +53,21 @@ paths:
           name: text
           required: true
           type: array
-        - description: |
+        - description: >
             Query language. Use language code for the language of the text:
+
             * de - German;
+
             * en - English;
+
             * es - Spanish;
+
             * fr - French;
+
             * it - Italian;
+
             * pt - Portuguese;
+
             * ru - Russian;
           enum:
             - de
@@ -143,11 +142,15 @@ paths:
           required: false
           type: array
         - default: yes
-          description: |
+          description: >
             Indentation switch for pretty printing of JSON response.
+
             Allows to either turn on or off space indentation for a response.
+
             The following values are allowed:
+
             * yes - turns indentation with spaces on;
+
             * no - turn indentation with spaces off;
           enum:
             - yes
@@ -172,7 +175,7 @@ paths:
     post:
       consumes:
         - application/x-www-form-urlencoded
-      description: |
+      description: >
         Gets associations with the given word or phrase.
       parameters:
         - collectionFormat: multi
@@ -190,14 +193,21 @@ paths:
           name: text
           required: true
           type: array
-        - description: |
+        - description: >
             Query language. Use language code for the language of the text:
+
             * de - German;
+
             * en - English;
+
             * es - Spanish;
+
             * fr - French;
+
             * it - Italian;
+
             * pt - Portuguese;
+
             * ru - Russian;
           enum:
             - de
@@ -272,11 +282,15 @@ paths:
           required: false
           type: array
         - default: yes
-          description: |
+          description: >
             Indentation switch for pretty printing of JSON response.
+
             Allows to either turn on or off space indentation for a response.
+
             The following values are allowed:
+
             * yes - turns indentation with spaces on;
+
             * no - turn indentation with spaces off;
           enum:
             - yes

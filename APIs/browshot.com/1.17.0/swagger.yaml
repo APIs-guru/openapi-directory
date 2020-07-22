@@ -61,12 +61,7 @@ paths:
       consumes:
         - multipart/form-data
       description: >
-        Get hundreds or thousands of screenshots from a text file. You can use
-        this API call or the dashboard. Unlike the other API calls, you must
-        issue a POST request with the Content-Type "multipart/form-data" in
-        order to upload the text file. The text file must contain the list of
-        URLs to request, 1 URL per line. Failed screenshots will be tried up to
-        3 times before giving up.
+        Get hundreds or thousands of screenshots from a text file. You can use this API call or the dashboard. Unlike the other API calls, you must issue a POST request with the Content-Type "multipart/form-data" in order to upload the text file. The text file must contain the list of URLs to request, 1 URL per line. Failed screenshots will be tried up to 3 times before giving up.
       operationId: CreateBatch
       parameters:
         - description: instance ID to use
@@ -104,17 +99,14 @@ paths:
           name: height
           type: integer
         - default: 5
-          description: number of seconds to wait after the page has loaded. This is used
-            to let JavaScript run longer before taking the screenshot. Use
-            delay=0 to take screenshots faster.
+          description: number of seconds to wait after the page has loaded. This is used to let JavaScript run longer before taking the screenshot. Use delay=0 to take screenshots faster.
           in: formData
           maximum: 60
           minimum: 0
           name: delay
           type: integer
         - default: 10
-          description: number of seconds to wait after the page has loaded if Flash
-            elements are present. Use flash_delay=0 to take screenshots faster.
+          description: number of seconds to wait after the page has loaded if Flash elements are present. Use flash_delay=0 to take screenshots faster.
           in: formData
           maximum: 30
           minimum: 0
@@ -128,8 +120,7 @@ paths:
           name: screen_width
           type: integer
         - default: 768
-          description: "height of the browser window. For desktop browsers only. (Note:
-            full-page screenshots can have a height of up to 15,000px)"
+          description: "height of the browser window. For desktop browsers only. (Note: full-page screenshots can have a height of up to 15,000px)"
           in: formData
           maximum: 2000
           minimum: 1
@@ -145,14 +136,11 @@ paths:
           in: formData
           name: referer
           type: string
-        - description: send a POST requests with post_data, useful for filling out forms -
-            paid screenshots only
+        - description: send a POST requests with post_data, useful for filling out forms - paid screenshots only
           in: formData
           name: post_data
           type: string
-        - description: set a cookie for the URL requested (see Custom POST Data, Referer
-            and Cookie) Cookies should be separated by a ; - paid screenshots
-            only
+        - description: set a cookie for the URL requested (see Custom POST Data, Referer and Cookie) Cookies should be separated by a ; - paid screenshots only
           in: formData
           name: cookie
           type: string
@@ -168,17 +156,14 @@ paths:
           name: details
           type: integer
         - default: 0
-          description: saves the HTML of the rendered page which can be retrieved by the
-            API call screenshot/html. This feature costs *1 credit* per
-            screenshot.
+          description: saves the HTML of the rendered page which can be retrieved by the API call screenshot/html. This feature costs *1 credit* per screenshot.
           in: formData
           maximum: 1
           minimum: 0
           name: html
           type: integer
         - default: 0
-          description: "maximum number of seconds to wait before triggering the PageLoad
-            event. Note that delay will still be used. (default: 0 = disabled)"
+          description: "maximum number of seconds to wait before triggering the PageLoad event. Note that delay will still be used. (default: 0 = disabled)"
           in: formData
           maximum: 60
           minimum: 0
@@ -250,8 +235,7 @@ paths:
   /batch/info:
     get:
       description: >
-        Get the status of a batch requested through the API or through the
-        dashboard.
+        Get the status of a batch requested through the API or through the dashboard.
       operationId: GetBatchInfo
       parameters:
         - description: batch ID
@@ -354,8 +338,7 @@ paths:
   /screenshot/create:
     get:
       description: >
-        Screenshots requests to private and shared instances require a positive
-        balance.
+        Screenshots requests to private and shared instances require a positive balance.
 
 
         *IMPORTANT*: Remember that you can only do 100 free screenshots per month. To used a premium instance, use instance_id=65 for example.
@@ -380,24 +363,19 @@ paths:
           name: size
           type: string
         - default: 86400
-          description: use a previous screenshot (same URL, same instance) if it was done
-            within <cache_value> seconds. The default value is 24hours. Specify
-            cache=0 if you want a new screenshot.
+          description: use a previous screenshot (same URL, same instance) if it was done within <cache_value> seconds. The default value is 24hours. Specify cache=0 if you want a new screenshot.
           in: query
           name: cache
           type: integer
         - default: 5
-          description: number of seconds to wait after the page has loaded. This is used
-            to let JavaScript run longer before taking the screenshot. Use
-            delay=0 to take screenshots faster.
+          description: number of seconds to wait after the page has loaded. This is used to let JavaScript run longer before taking the screenshot. Use delay=0 to take screenshots faster.
           in: query
           maximum: 60
           minimum: 0
           name: delay
           type: integer
         - default: 10
-          description: number of seconds to wait after the page has loaded if Flash
-            elements are present. Use flash_delay=0 to take screenshots faster.
+          description: number of seconds to wait after the page has loaded if Flash elements are present. Use flash_delay=0 to take screenshots faster.
           in: query
           maximum: 30
           minimum: 0
@@ -411,8 +389,7 @@ paths:
           name: screen_width
           type: integer
         - default: 768
-          description: "height of the browser window. For desktop browsers only. (Note:
-            full-page screenshots can have a height of up to 15,000px)"
+          description: "height of the browser window. For desktop browsers only. (Note: full-page screenshots can have a height of up to 15,000px)"
           in: query
           maximum: 2000
           minimum: 1
@@ -428,14 +405,11 @@ paths:
           in: query
           name: referer
           type: string
-        - description: send a POST requests with post_data, useful for filling out forms -
-            paid screenshots only
+        - description: send a POST requests with post_data, useful for filling out forms - paid screenshots only
           in: query
           name: post_data
           type: string
-        - description: set a cookie for the URL requested (see Custom POST Data, Referer
-            and Cookie) Cookies should be separated by a ; - paid screenshots
-            only
+        - description: set a cookie for the URL requested (see Custom POST Data, Referer and Cookie) Cookies should be separated by a ; - paid screenshots only
           in: query
           name: cookie
           type: string
@@ -451,17 +425,14 @@ paths:
           name: details
           type: integer
         - default: 0
-          description: saves the HTML of the rendered page which can be retrieved by the
-            API call screenshot/html. This feature costs *1 credit* per
-            screenshot.
+          description: saves the HTML of the rendered page which can be retrieved by the API call screenshot/html. This feature costs *1 credit* per screenshot.
           in: query
           maximum: 1
           minimum: 0
           name: html
           type: integer
         - default: 0
-          description: "maximum number of seconds to wait before triggering the PageLoad
-            event. Note that delay will still be used. (default: 0 = disabled)"
+          description: "maximum number of seconds to wait before triggering the PageLoad event. Note that delay will still be used. (default: 0 = disabled)"
           in: query
           maximum: 60
           minimum: 0
@@ -472,8 +443,7 @@ paths:
           name: headers
           type: string
         - default: 1
-          description: take multiple screenshots of the same page. This costs 1 additional
-            credit for every 2 additional screenshots.
+          description: take multiple screenshots of the same page. This costs 1 additional credit for every 2 additional screenshots.
           in: query
           maximum: 10
           minimum: 1
@@ -539,8 +509,7 @@ paths:
   /screenshot/delete:
     get:
       description: >
-        You can delete details of your screenshots to remove any confidential
-        information.
+        You can delete details of your screenshots to remove any confidential information.
       operationId: DeleteScreenshot
       parameters:
         - description: screenshot ID
@@ -550,10 +519,7 @@ paths:
           type: integer
         - default: image
           description: >
-            data to remove. You can specify multiple of them (separated by a ,):
-            *image* (image files), *url* (url requested), *metadata* (time
-            added, time finished, post data, cookie and referer used for the
-            screenshot), *all* (all data and files)
+            data to remove. You can specify multiple of them (separated by a ,): *image* (image files), *url* (url requested), *metadata* (time added, time finished, post data, cookie and referer used for the screenshot), *all* (all data and files)
           in: query
           name: data
           type: string
@@ -574,8 +540,7 @@ paths:
       x-ms-trigger: none
   /screenshot/host:
     get:
-      description: You can host screenshots and thumbnails on your own S3 account or
-        on Browshot.
+      description: You can host screenshots and thumbnails on your own S3 account or on Browshot.
       operationId: HostScreenshot
       parameters:
         - description: screenshot ID
@@ -609,8 +574,7 @@ paths:
           in: query
           name: scale
           type: number
-        - description: S3 bucket to upload the screenshot or thumbnail - required with
-            hosting=s3
+        - description: S3 bucket to upload the screenshot or thumbnail - required with hosting=s3
           in: query
           name: bucket
           type: string
@@ -618,8 +582,7 @@ paths:
           in: query
           name: file
           type: string
-        - description: HTTP headers to add to your S3 object - optional, used with
-            hosting=s3
+        - description: HTTP headers to add to your S3 object - optional, used with hosting=s3
           in: query
           name: headers
           type: string
@@ -641,8 +604,7 @@ paths:
   /screenshot/html:
     get:
       description: >
-        Retrieve the HTML code of the rendered page. This API call should be
-        used when html=1 was specified in the screenshot request.
+        Retrieve the HTML code of the rendered page. This API call should be used when html=1 was specified in the screenshot request.
       operationId: GetHTML
       parameters:
         - description: screenshot ID
@@ -660,8 +622,7 @@ paths:
         - Screenshot
   /screenshot/info:
     get:
-      description: Once a screenshot has been requested, its status must be checked
-        until it is either "error" or "finished".
+      description: Once a screenshot has been requested, its status must be checked until it is either "error" or "finished".
       operationId: GetScreenshotInfo
       parameters:
         - description: screenshot ID received from /api/v1/screenshot/create
@@ -702,8 +663,7 @@ paths:
           minimum: 1
           name: limit
           type: integer
-        - description: get list of screenshot in a given status (error, finished,
-            in_process)
+        - description: get list of screenshot in a given status (error, finished, in_process)
           enum:
             - error
             - finished
@@ -729,20 +689,17 @@ paths:
   /screenshot/multiple:
     get:
       description: >
-        Request multiple screenshots in one API call. The API call accepts all
-        the parameters supported by screenshot/create.
+        Request multiple screenshots in one API call. The API call accepts all the parameters supported by screenshot/create.
 
         You can specify up to 10 URLs and 10 instances for a total of 100 screenshots in one API call.
       operationId: CreateMultipleScreenshots
       parameters:
-        - description: URL of the page to get a screenshot for. You can specify multiple
-            url parameters (up to 10).
+        - description: URL of the page to get a screenshot for. You can specify multiple url parameters (up to 10).
           in: query
           name: url
           required: true
           type: string
-        - description: instance ID to use. You can specify multiple instance_id parameters
-            (up to 10).
+        - description: instance ID to use. You can specify multiple instance_id parameters (up to 10).
           in: query
           name: instance_id
           required: true
@@ -756,24 +713,19 @@ paths:
           name: size
           type: string
         - default: 86400
-          description: use a previous screenshot (same URL, same instance) if it was done
-            within <cache_value> seconds. The default value is 24hours. Specify
-            cache=0 if you want a new screenshot.
+          description: use a previous screenshot (same URL, same instance) if it was done within <cache_value> seconds. The default value is 24hours. Specify cache=0 if you want a new screenshot.
           in: query
           name: cache
           type: integer
         - default: 5
-          description: number of seconds to wait after the page has loaded. This is used
-            to let JavaScript run longer before taking the screenshot. Use
-            delay=0 to take screenshots faster.
+          description: number of seconds to wait after the page has loaded. This is used to let JavaScript run longer before taking the screenshot. Use delay=0 to take screenshots faster.
           in: query
           maximum: 60
           minimum: 0
           name: delay
           type: integer
         - default: 10
-          description: number of seconds to wait after the page has loaded if Flash
-            elements are present. Use flash_delay=0 to take screenshots faster.
+          description: number of seconds to wait after the page has loaded if Flash elements are present. Use flash_delay=0 to take screenshots faster.
           in: query
           maximum: 30
           minimum: 0
@@ -787,8 +739,7 @@ paths:
           name: screen_width
           type: integer
         - default: 768
-          description: "height of the browser window. For desktop browsers only. (Note:
-            full-page screenshots can have a height of up to 15,000px)"
+          description: "height of the browser window. For desktop browsers only. (Note: full-page screenshots can have a height of up to 15,000px)"
           in: query
           maximum: 2000
           minimum: 1
@@ -804,14 +755,11 @@ paths:
           in: query
           name: referer
           type: string
-        - description: send a POST requests with post_data, useful for filling out forms -
-            paid screenshots only
+        - description: send a POST requests with post_data, useful for filling out forms - paid screenshots only
           in: query
           name: post_data
           type: string
-        - description: set a cookie for the URL requested (see Custom POST Data, Referer
-            and Cookie) Cookies should be separated by a ; - paid screenshots
-            only
+        - description: set a cookie for the URL requested (see Custom POST Data, Referer and Cookie) Cookies should be separated by a ; - paid screenshots only
           in: query
           name: cookie
           type: string
@@ -827,17 +775,14 @@ paths:
           name: details
           type: integer
         - default: 0
-          description: saves the HTML of the rendered page which can be retrieved by the
-            API call screenshot/html. This feature costs *1 credit* per
-            screenshot.
+          description: saves the HTML of the rendered page which can be retrieved by the API call screenshot/html. This feature costs *1 credit* per screenshot.
           in: query
           maximum: 1
           minimum: 0
           name: html
           type: integer
         - default: 0
-          description: "maximum number of seconds to wait before triggering the PageLoad
-            event. Note that delay will still be used. (default: 0 = disabled)"
+          description: "maximum number of seconds to wait before triggering the PageLoad event. Note that delay will still be used. (default: 0 = disabled)"
           in: query
           maximum: 60
           minimum: 0
@@ -914,8 +859,7 @@ paths:
           minimum: 1
           name: limit
           type: integer
-        - description: get list of screenshot in a given status (error, finished,
-            in_process)
+        - description: get list of screenshot in a given status (error, finished, in_process)
           enum:
             - error
             - finished
@@ -941,10 +885,7 @@ paths:
   /screenshot/share:
     get:
       description: >
-        You can make your screenshots public, add notes, and share it with your
-        friends and colleagues. Only screenshots which are successfully
-        completed can be shared.n the thumbnail. You can take a 1024x768
-        screenshot, crop it to 768x768, and get it scaled down to 300x300.
+        You can make your screenshots public, add notes, and share it with your friends and colleagues. Only screenshots which are successfully completed can be shared.n the thumbnail. You can take a 1024x768 screenshot, crop it to 768x768, and get it scaled down to 300x300.
       operationId: ShareScreenshot
       parameters:
         - description: screenshot ID
@@ -974,11 +915,7 @@ paths:
   /screenshot/thumbnail:
     get:
       description: >
-        Unlike the other API calls, this API sends back the thumbnail as a PNG
-        file, not JSON. The HTTP response code indicates whether the screenshot
-        was successful (200), or incomplete (404) or failed (404). If the
-        screenshot failed or is not finished, a default image "Not found" is
-        sent.
+        Unlike the other API calls, this API sends back the thumbnail as a PNG file, not JSON. The HTTP response code indicates whether the screenshot was successful (200), or incomplete (404) or failed (404). If the screenshot failed or is not finished, a default image "Not found" is sent.
 
 
         You can crop your screenshots. The crop is done first, then the thumbnail. You can take a 1024x768 screenshot, crop it to 768x768, and get it scaled down to 300x300.
@@ -1015,12 +952,7 @@ paths:
           name: zoom
           type: integer
         - default: fit
-          description: "Use fit to keep the original page ration, and fill to get a
-            thumbnail for the exact width and height.  specified. If you provide
-            both width and height, you need to specify the ratio: fit to keep
-            the original width/height ratio (the thumbnail might be smaller than
-            the specified width and height), or fill to crop the image if
-            necessary."
+          description: "Use fit to keep the original page ration, and fill to get a thumbnail for the exact width and height.  specified. If you provide both width and height, you need to specify the ratio: fit to keep the original width/height ratio (the thumbnail might be smaller than the specified width and height), or fill to crop the image if necessary."
           enum:
             - fit
             - fill
@@ -1058,8 +990,7 @@ paths:
           name: format
           type: string
         - default: 1
-          description: get the second or third screenshot if multiple screenshots were
-            requested
+          description: get the second or third screenshot if multiple screenshots were requested
           in: query
           maximum: 10
           minimum: 1
@@ -1100,8 +1031,7 @@ definitions:
         type: integer
       hosting_browshot:
         default: 0
-        description: 1 is your account is authorized to request hosting on Browshot, 0
-          otherwise (default)
+        description: 1 is your account is authorized to request hosting on Browshot, 0 otherwise (default)
         maximum: 1
         minimum: 0
         type: integer
@@ -1112,14 +1042,12 @@ definitions:
         type: array
       private_instances:
         default: 0
-        description: 1 is your account is authorized to create and use private
-          instances, 0 otherwise (default)
+        description: 1 is your account is authorized to create and use private instances, 0 otherwise (default)
         maximum: 1
         minimum: 0
         type: integer
       screenshots:
-        description: list of 10 latest screenshots requests as returned by
-          /api/v1/screenshot/list
+        description: list of 10 latest screenshots requests as returned by /api/v1/screenshot/list
         items:
           $ref: "#/definitions/Screenshot"
         type: array
@@ -1235,12 +1163,17 @@ definitions:
         description: instance ID (required to requests screenshots)
         type: integer
       load:
-        description: |
+        description: >
           instance load: 
+
           < 1: new screenshot requests will be processed immediately, 
+
           1-2: new screenshot requests will be processed in about two minutes, 
+
           2-3: new screenshot requests will be processed in about four minutes, 
+
           3-4: new screenshot requests will be processed in about six minutes, 
+
           etc.
         format: float
         type: number
@@ -1328,8 +1261,7 @@ definitions:
         description: custom referrer used (see Custom POST Data, Referer and Cookie)
         type: string
       scale:
-        description: image scale. Always 1 for desktop browsers; mobiles may change the
-          scale (zoom in or zoom out) to fit the page on the screen
+        description: image scale. Always 1 for desktop browsers; mobiles may change the scale (zoom in or zoom out) to fit the page on the screen
         format: double
         type: number
       screenshot_url:
@@ -1348,7 +1280,7 @@ definitions:
           - page
         type: string
       status:
-        description: |
+        description: >
           status of the request: "in_queue", "processing", "finished", "error"
         enum:
           - in_queue
@@ -1389,7 +1321,7 @@ definitions:
         description: screenshot ID
         type: integer
       status:
-        description: |
+        description: >
           status of the request: "error", "ok" or "in_queue"
         enum:
           - error
@@ -1425,7 +1357,7 @@ definitions:
         description: screenshot ID
         type: integer
       status:
-        description: |
+        description: >
           status of the request
         enum:
           - ok

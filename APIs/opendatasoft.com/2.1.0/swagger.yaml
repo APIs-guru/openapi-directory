@@ -39,8 +39,9 @@ parameters:
     required: true
     type: string
   dataset_id:
-    description: |
+    description: >
       Dataset identifier.
+
 
       Can be found in the "information" tab of the dataset page.
     in: path
@@ -50,8 +51,7 @@ parameters:
   exclude:
     collectionFormat: multi
     description: >
-      An array of facet filter. For example **city:Paris** or
-      **modified:2019/12**.
+      An array of facet filter. For example **city:Paris** or **modified:2019/12**.
 
       The request will exclude the defined facet value.
 
@@ -103,7 +103,7 @@ parameters:
     type: string
   include_app_metas:
     default: false
-    description: |
+    description: >
       Explicitely request application metas for each datasets.
     in: query
     name: include_app_metas
@@ -124,15 +124,15 @@ parameters:
     required: true
     type: string
   mime_type:
-    description: Specify one (or many) mime type(s) and return only the files
-      matching said type(s).
+    description: Specify one (or many) mime type(s) and return only the files matching said type(s).
     in: query
     name: mime_type
     required: false
     type: string
   order_by:
-    description: |
+    description: >
       A list of field names or aggregation, followed by an order (asc | desc).
+
 
       example: **sum(age) desc, name asc**
     in: query
@@ -156,8 +156,7 @@ parameters:
   refine:
     collectionFormat: multi
     description: >
-      An array of facet filter. For example **city:Paris** or
-      **modified:2019/12**.
+      An array of facet filter. For example **city:Paris** or **modified:2019/12**.
 
       The request will only include the selected facet value.
 
@@ -179,10 +178,12 @@ parameters:
     type: string
   rows:
     default: 10
-    description: |
+    description: >
       Number of items to return.
 
+
       To use in conjonction with start to implement pagination.
+
 
       Rows maximum value is 100. To retrive more data use export entry points.
     in: query
@@ -193,8 +194,9 @@ parameters:
     type: integer
   rows_export:
     default: -1
-    description: |
+    description: >
       Number of items to return in export.
+
 
       Use -1 to retrieve all records
     in: query
@@ -229,7 +231,7 @@ parameters:
     required: false
     type: string
   slug:
-    description: |
+    description: >
       Page slug.
     in: path
     name: slug
@@ -267,8 +269,7 @@ parameters:
   source:
     default: catalog
     description: >
-      Each source represents a different catalog of datasets you'll be able to
-      query.
+      Each source represents a different catalog of datasets you'll be able to query.
 
 
       There are 2 sources available:
@@ -288,8 +289,9 @@ parameters:
     type: string
   start:
     default: 0
-    description: |
+    description: >
       Index of the first item to return (starting at 0).
+
 
       To use in conjonction with rows to implement pagination.
     in: query
@@ -298,8 +300,7 @@ parameters:
     required: false
     type: integer
   thumbnail_size:
-    description: Set the size of the thumbnail representing the resource
-      (attachment, image or file)
+    description: Set the size of the thumbnail representing the resource (attachment, image or file)
     in: query
     name: thumbnail_size
     type: string
@@ -337,17 +338,19 @@ tags:
 paths:
   /:
     get:
-      description: |
+      description: >
         API entry point
 
+
         Provides links for:
+
         * catalog, your domain's list of datasets
+
         * opendatasoft, all datasets on the Opendatasoft network
       operationId: getRoot
       responses:
         "200":
-          description: Provide a set of links to the most basic entry points in the API
-            (sources)
+          description: Provide a set of links to the most basic entry points in the API (sources)
           schema:
             properties:
               links:
@@ -359,7 +362,7 @@ paths:
         - ods
   /pages:
     get:
-      description: |
+      description: >
         List of all pages from this portal.
       operationId: getPages
       responses:
@@ -387,7 +390,7 @@ paths:
         - ods
   "/pages/{slug}":
     get:
-      description: |
+      description: >
         A single page's metadata from this portal
       operationId: getPage
       parameters:
@@ -408,8 +411,9 @@ paths:
         - ods
   "/{source}":
     get:
-      description: |
+      description: >
         Source entry points
+
 
         Provides links for the source's datasets and metadata.
       operationId: getSource
@@ -417,8 +421,7 @@ paths:
         - $ref: "#/parameters/source"
       responses:
         "200":
-          description: Provide a set of links to the basic entry points for the given
-            source.
+          description: Provide a set of links to the basic entry points for the given source.
           schema:
             properties:
               links:
@@ -431,8 +434,7 @@ paths:
   "/{source}/aggregates":
     get:
       description: >
-        Compute aggregations from catalog and return a list of each aggregate
-        indexed by their names.
+        Compute aggregations from catalog and return a list of each aggregate indexed by their names.
       operationId: aggregateDatasets
       parameters:
         - $ref: "#/parameters/source"
@@ -462,13 +464,18 @@ paths:
         - ods
   "/{source}/datasets":
     get:
-      description: |
+      description: >
         List of available datasets, each with their endpoints, paginated.
 
+
         Links provided:
+
         * previous page
+
         * next page
+
         * last page
+
         * first page
       operationId: getDatasets
       parameters:
@@ -511,8 +518,7 @@ paths:
   "/{source}/datasets/{dataset_id}":
     get:
       description: >
-        List of available endpoints for the specified dataset, with metadata and
-        endpoints.
+        List of available endpoints for the specified dataset, with metadata and endpoints.
 
 
         Will provide links for:
@@ -549,8 +555,7 @@ paths:
   "/{source}/datasets/{dataset_id}/aggregates":
     get:
       description: >
-        Compute aggregations from dataset records and return a list of each
-        aggregate indexed by their names.
+        Compute aggregations from dataset records and return a list of each aggregate indexed by their names.
       operationId: aggregateRecords
       parameters:
         - $ref: "#/parameters/source"
@@ -580,7 +585,7 @@ paths:
         - ods
   "/{source}/datasets/{dataset_id}/attachments":
     get:
-      description: |
+      description: >
         Get list of all available attachments
       operationId: getDatasetAttachements
       parameters:
@@ -604,7 +609,7 @@ paths:
         - ods
   "/{source}/datasets/{dataset_id}/attachments/{attachment_id}":
     get:
-      description: |
+      description: >
         Download attachment
       operationId: downloadDatasetAttachement
       parameters:
@@ -619,7 +624,7 @@ paths:
         - ods
   "/{source}/datasets/{dataset_id}/exports/csv":
     get:
-      description: |
+      description: >
         Export dataset in CSV format
       operationId: exportRecordsCSV
       parameters:
@@ -655,7 +660,7 @@ paths:
         - ods
   "/{source}/datasets/{dataset_id}/exports/geojson":
     get:
-      description: |
+      description: >
         Export dataset in GEOJSON format
       operationId: exportRecordsGEOJSON
       parameters:
@@ -683,7 +688,7 @@ paths:
         - ods
   "/{source}/datasets/{dataset_id}/exports/ical":
     get:
-      description: |
+      description: >
         Export dataset in ICAL format
       operationId: exportRecordsICAL
       parameters:
@@ -710,7 +715,7 @@ paths:
         - ods
   "/{source}/datasets/{dataset_id}/exports/json":
     get:
-      description: |
+      description: >
         Export dataset in JSON format
       operationId: exportRecordsJSON
       parameters:
@@ -738,7 +743,7 @@ paths:
         - ods
   "/{source}/datasets/{dataset_id}/exports/ov2":
     get:
-      description: |
+      description: >
         Export dataset in OV2 format
       operationId: exportRecordsOV2
       parameters:
@@ -765,7 +770,7 @@ paths:
         - ods
   "/{source}/datasets/{dataset_id}/exports/shp":
     get:
-      description: |
+      description: >
         Export dataset in Esri shapefile (shp) format
       operationId: exportRecordsSHP
       parameters:
@@ -792,7 +797,7 @@ paths:
         - ods
   "/{source}/datasets/{dataset_id}/exports/xls":
     get:
-      description: |
+      description: >
         Export dataset in XLS (Excel) format
       operationId: exportRecordsXLS
       parameters:
@@ -820,8 +825,7 @@ paths:
   "/{source}/datasets/{dataset_id}/facets":
     get:
       description: >
-        Enumerate facets values for records and return a list of values for each
-        facet.
+        Enumerate facets values for records and return a list of values for each facet.
 
         Can be used to implement guided navigation in large result sets.
 
@@ -853,7 +857,7 @@ paths:
         - ods
   "/{source}/datasets/{dataset_id}/feedback":
     put:
-      description: |
+      description: >
         Create new feedback entry.
       operationId: sendDatasetFeedback
       parameters:
@@ -878,14 +882,14 @@ paths:
                 type: object
       responses:
         "201":
-          description: |
+          description: >
             Success message: {status: 'ok'}
       tags:
         - dataset
         - ods
   "/{source}/datasets/{dataset_id}/files/{file_id}":
     get:
-      description: |
+      description: >
         Download file
       operationId: getDatasetFile
       parameters:
@@ -901,7 +905,7 @@ paths:
         - ods
   "/{source}/datasets/{dataset_id}/records":
     get:
-      description: |
+      description: >
         Search dataset's records.
       operationId: getRecords
       parameters:
@@ -944,7 +948,7 @@ paths:
         - ods
   "/{source}/datasets/{dataset_id}/records/{record_id}":
     get:
-      description: |
+      description: >
         Retrieve a single record based on its ID.
       operationId: getRecord
       parameters:
@@ -970,7 +974,7 @@ paths:
         - ods
   "/{source}/datasets/{dataset_id}/reuses":
     get:
-      description: |
+      description: >
         Get list of reuses
       operationId: getDatasetReuses
       parameters:
@@ -981,7 +985,7 @@ paths:
         - $ref: "#/parameters/timezone"
       responses:
         "200":
-          description: |
+          description: >
             A paginated list of reuses
           schema:
             properties:
@@ -998,7 +1002,7 @@ paths:
         - ods
   "/{source}/datasets/{dataset_id}/reuses/{reuse_id}":
     get:
-      description: |
+      description: >
         Retrieve a single reuse based on its ID.
       operationId: getDatasetReuse
       parameters:
@@ -1008,7 +1012,7 @@ paths:
         - $ref: "#/parameters/timezone"
       responses:
         "200":
-          description: |
+          description: >
             A paginated list of reuses
           schema:
             properties:
@@ -1023,7 +1027,7 @@ paths:
         - ods
   "/{source}/datasets/{dataset_id}/snapshots":
     get:
-      description: |
+      description: >
         List of all snapshots for this dataset.
       operationId: getDatasetSnapshots
       parameters:
@@ -1048,7 +1052,7 @@ paths:
         - ods
   "/{source}/datasets/{dataset_id}/snapshots/{snapshot_id}":
     get:
-      description: |
+      description: >
         List of all snapshots for this dataset.
       operationId: downloadDatasetSnapshot
       parameters:
@@ -1058,14 +1062,13 @@ paths:
         - $ref: "#/parameters/timezone"
       responses:
         "200":
-          description: The full dataset in the state it was in when the snapshot was
-            created, in CSV
+          description: The full dataset in the state it was in when the snapshot was created, in CSV
       tags:
         - dataset
         - ods
   "/{source}/exports/csv":
     get:
-      description: |
+      description: >
         Export catalog (source) in CSV format
       operationId: exportDatasetsCSV
       parameters:
@@ -1100,7 +1103,7 @@ paths:
         - ods
   "/{source}/exports/json":
     get:
-      description: |
+      description: >
         Export catalog (source) in JSON format
       operationId: exportDatasetsJson
       parameters:
@@ -1126,7 +1129,7 @@ paths:
         - ods
   "/{source}/exports/rdf":
     get:
-      description: |
+      description: >
         Export catalog (source) in RDF/XML format
       operationId: exportDatasetsRDF
       parameters:
@@ -1151,7 +1154,7 @@ paths:
         - ods
   "/{source}/exports/rss":
     get:
-      description: |
+      description: >
         Export catalog (source) in RSS format
       operationId: exportDatasetsRSS
       parameters:
@@ -1176,7 +1179,7 @@ paths:
         - ods
   "/{source}/exports/ttl":
     get:
-      description: |
+      description: >
         Export catalog (source) in TTL (turtle/rdf) format
       operationId: exportDatasetsTTL
       parameters:
@@ -1201,7 +1204,7 @@ paths:
         - ods
   "/{source}/exports/xls":
     get:
-      description: |
+      description: >
         Export catalog (source) in XLS (Excel) format
       operationId: exportDatasetsXLS
       parameters:
@@ -1227,8 +1230,7 @@ paths:
   "/{source}/facets":
     get:
       description: >
-        Enumerate facets values for datasets and return a list of values for
-        each facet.
+        Enumerate facets values for datasets and return a list of values for each facet.
 
         Can be used to implement guided navigation in large result sets.
 
@@ -1259,7 +1261,7 @@ paths:
         - ods
   "/{source}/metadata_templates":
     get:
-      description: |
+      description: >
         List of available metadata templates types, each with their endpoints.
       operationId: getMetadataTemplatesTypes
       parameters:
@@ -1278,7 +1280,7 @@ paths:
         - ods
   "/{source}/metadata_templates/{metadata_template_type}":
     get:
-      description: |
+      description: >
         List of metadata templates available for this type.
       operationId: getMetadataTemplatesType
       parameters:
@@ -1309,7 +1311,7 @@ paths:
         - ods
   "/{source}/metadata_templates/{metadata_template_type}/{metadata_template_name}":
     get:
-      description: |
+      description: >
         A single metadata_template
       operationId: getMetadataTemplate
       parameters:
@@ -1355,8 +1357,7 @@ definitions:
         type: string
       features:
         description: >
-          A map of available features for a dataset, with the fields they apply
-          to.
+          A map of available features for a dataset, with the fields they apply to.
         items:
           type: string
         type: array
@@ -1436,8 +1437,7 @@ definitions:
         type: string
       title:
         description: >
-          A localized string (that is an object where the keys are language
-          codes and the values translations of a same
+          A localized string (that is an object where the keys are language codes and the values translations of a same
 
           string).
         properties:

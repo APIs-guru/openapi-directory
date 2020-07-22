@@ -4,10 +4,7 @@ schemes:
   - http
 info:
   description: >
-    MetaPub collects, normalizes and distributes publicly available program,
-    episode, and piece metadata through the public radio system. Backed by
-    ContentDepot and its data model, MetaPub allows producers to supply metadata
-    through various methods:
+    MetaPub collects, normalizes and distributes publicly available program, episode, and piece metadata through the public radio system. Backed by ContentDepot and its data model, MetaPub allows producers to supply metadata through various methods:
 
 
     1. MetaPub Agents that collect producer metadata by "crawling" existing public feeds (e.g. C24, BBC) or the producer's production system (e.g. ATC, ME, TED Radio Hour).
@@ -78,16 +75,13 @@ securityDefinitions:
       metapub:write: Write to MetaPub (e.g. metadata synchronization)
     type: oauth2
 tags:
-  - description: Endpoints to access the RadioDNS formatted electronic program guide
-      (EPG) information for stations and middleware.
+  - description: Endpoints to access the RadioDNS formatted electronic program guide (EPG) information for stations and middleware.
     externalDocs:
       url: https://radiodns.org/developers/documentation/
     name: RadioDNS
-  - description: Endpoints to access ContentDepot Drive functionality such as
-      uploading and downloading content files.
+  - description: Endpoints to access ContentDepot Drive functionality such as uploading and downloading content files.
     name: CD Drive
-  - description: Endpoints to access MetaPub functionality such as synchronizing
-      producer metadata to programs and episodes.
+  - description: Endpoints to access MetaPub functionality such as synchronizing producer metadata to programs and episodes.
     name: MetaPub
 paths:
   /api/v2/cddrive/files/content:
@@ -96,8 +90,7 @@ paths:
         - multipart/form-data
       description: Upload a file to the customer's private CD Drive.
       parameters:
-        - description: If present, the MD5 will be compared against the file received as a
-            message integrity check.
+        - description: If present, the MD5 will be compared against the file received as a message integrity check.
           format: md5
           in: header
           name: Content-MD5
@@ -125,8 +118,7 @@ paths:
         - application/json
       responses:
         "201":
-          description: The file was created successfully. The response contains the file
-            metadata.
+          description: The file was created successfully. The response contains the file metadata.
           schema:
             $ref: "#/definitions/CDDriveFile"
         "400":
@@ -197,9 +189,7 @@ paths:
     get:
       description: Download a file from the customer's private CD Drive.
       parameters:
-        - description: Can be used to limit the range of bytes retrieved. Only a single
-            byte range in the format ```bytes={start-range}-{end-range}``` is
-            supported.
+        - description: Can be used to limit the range of bytes retrieved. Only a single byte range in the format ```bytes={start-range}-{end-range}``` is supported.
           format: single byte range
           in: header
           name: Range
@@ -210,9 +200,7 @@ paths:
         "200":
           description: The file was found and will be returned in the body of the response.
         "302":
-          description: The file was found but should be downloaded at the URL presented in
-            the Location header. This return code may be used when the file is
-            available via a CDN or other optimized path.
+          description: The file was found but should be downloaded at the URL presented in the Location header. This return code may be used when the file is available via a CDN or other optimized path.
           headers:
             Location:
               description: The location the file can be downloaded from
@@ -281,8 +269,7 @@ paths:
       description: Delete a file from the customer's private CD Drive.
       parameters:
         - default: true
-          description: Flag to indicate if the folder should be deleted if it has items
-            inside of it.
+          description: Flag to indicate if the folder should be deleted if it has items inside of it.
           in: query
           name: recursive
           type: boolean
@@ -392,12 +379,7 @@ paths:
       consumes:
         - application/json
       description: >
-        Create a batch to process the metadata of one or more electronic program
-        guide (EPG) programs using metadata that has been uploaded to the
-        customer's CD Drive. If multiple EPG programs are present in the
-        metadata, they will all be updated, however updates across programs are
-        not atomic. Note that an EPG program maps to the ContentDepot concept of
-        an episode which is also known as a "program instance".
+        Create a batch to process the metadata of one or more electronic program guide (EPG) programs using metadata that has been uploaded to the customer's CD Drive. If multiple EPG programs are present in the metadata, they will all be updated, however updates across programs are not atomic. Note that an EPG program maps to the ContentDepot concept of an episode which is also known as a "program instance".
 
 
         A batch operation must be explicitly created rather than the server attempting to detect new metadata in order to allow for all the content to be uploaded including any supporting content like images. A batch operation is accepted and queued for asynchronous processing at a later time. A client can poll the batch periodically to determine when it completes and the resulting state.
@@ -408,10 +390,7 @@ paths:
             description: The batch operation definition.
             properties:
               format:
-                description: The format of the metadata file defining the create or update
-                  actions to be performed on one or more EPG programs. For more
-                  information on how RadioDNS EPG maps to ContentDepot <a
-                  href="/api/epg-cd-mapping.html">click here </a>
+                description: The format of the metadata file defining the create or update actions to be performed on one or more EPG programs. For more information on how RadioDNS EPG maps to ContentDepot <a href="/api/epg-cd-mapping.html">click here </a>
                 enum:
                   - radiodns
                 type: string
@@ -419,9 +398,7 @@ paths:
                 description: An optional human readable name for the batch.
                 type: string
               program:
-                description: The program information to associate the ingested metadata with.
-                  This is only required if the metadata format doesn't provide
-                  the program title and air date information directly.
+                description: The program information to associate the ingested metadata with. This is only required if the metadata format doesn't provide the program title and air date information directly.
                 properties:
                   airDate:
                     format: dateTime:yyyy-MM-dd'T'HH:mm:ss'Z'
@@ -433,8 +410,7 @@ paths:
                   - airDate
                 type: object
               uri:
-                description: The URI to the metadata file. Currently only the ```cddrive```
-                  scheme is supported.
+                description: The URI to the metadata file. Currently only the ```cddrive``` scheme is supported.
                 format: uri
                 type: string
             required:
@@ -463,8 +439,7 @@ paths:
         - MetaPub
   "/api/v2/metapub/program-information/batch/{batch-id}":
     get:
-      description: Gets the batch information which can be used to check the status of
-        the operation or retrieve more details if the batch fails.
+      description: Gets the batch information which can be used to check the status of the operation or retrieve more details if the batch fails.
       produces:
         - application/json
       responses:
@@ -494,20 +469,7 @@ paths:
   /radiodns/spi/3.1/GI.xml:
     get:
       description: >
-        The group information (GI) document allows programs to be put into
-        groups such as serials, series, shows, or general themes and provide
-        additional metadata for that group such as a description, links, and a
-        logo. A program in the guide can be linked to its group using the
-        "memberOf" field to allow clients to easily link programs together for a
-        given Content Depot Program/Show in the EPG. GI will be published for
-        all Content Depot programs that have the "publish metadata" option
-        enabled. By using the group information, clients have the ability to
-        access a single list of all metadata supported program titles, links,
-        images, and descriptions. This information can be used to assist a
-        station when setting up a schedule or it can be used in the end user
-        metadata to provide additional information about the content such as
-        displaying "other episodes from this program" or displaying the group,
-        program, and program event images.
+        The group information (GI) document allows programs to be put into groups such as serials, series, shows, or general themes and provide additional metadata for that group such as a description, links, and a logo. A program in the guide can be linked to its group using the "memberOf" field to allow clients to easily link programs together for a given Content Depot Program/Show in the EPG. GI will be published for all Content Depot programs that have the "publish metadata" option enabled. By using the group information, clients have the ability to access a single list of all metadata supported program titles, links, images, and descriptions. This information can be used to assist a station when setting up a schedule or it can be used in the end user metadata to provide additional information about the content such as displaying "other episodes from this program" or displaying the group, program, and program event images.
 
 
         Currently all programs with "publish metadata" enabled will be included in the group information even if they are not active in the program guide. This may change in the future if the number of programs grows.
@@ -521,11 +483,9 @@ paths:
         - application/xml
       responses:
         "200":
-          description: The group information document is returned in the body of the
-            response.
+          description: The group information document is returned in the body of the response.
           schema:
-            format: RadioDNS Service Information (SI) as defined in ETSI TS 102 818 v3.1.1
-              section 8
+            format: RadioDNS Service Information (SI) as defined in ETSI TS 102 818 v3.1.1 section 8
             type: string
       summary: Get the group information document.
       tags:
@@ -533,9 +493,7 @@ paths:
   /radiodns/spi/3.1/SI.xml:
     get:
       description: >
-        The service information (SI) document holds a definition of services
-        provided by the service provider (e.g. MetaPub), including any relevant
-        metadata and bearer details, such as:
+        The service information (SI) document holds a definition of services provided by the service provider (e.g. MetaPub), including any relevant metadata and bearer details, such as:
 
 
         * Names
@@ -568,11 +526,9 @@ paths:
         - application/xml
       responses:
         "200":
-          description: The service information document is returned in the body of the
-            response.
+          description: The service information document is returned in the body of the response.
           schema:
-            format: RadioDNS Service Information (SI) as defined in ETSI TS 102 818 v3.1.1
-              section 6
+            format: RadioDNS Service Information (SI) as defined in ETSI TS 102 818 v3.1.1 section 6
             type: string
       summary: Get the service information document.
       tags:
@@ -580,10 +536,7 @@ paths:
   "/radiodns/spi/3.1/id/{fqdn}/{sid}/{date}_PI.xml":
     get:
       description: >
-        The program information (PI) document holds the linear and the on-demand
-        schedule of programs for a service over a 24 hour period. This
-        information provides an electronic program guide (EPG) to clients that
-        defines the program metadata such as:
+        The program information (PI) document holds the linear and the on-demand schedule of programs for a service over a 24 hour period. This information provides an electronic program guide (EPG) to clients that defines the program metadata such as:
 
 
         *   Names
@@ -618,27 +571,22 @@ paths:
         "200":
           description: Program information document for the given 24 hour period.
           schema:
-            format: RadioDNS Service Information (SI) as defined in ETSI TS 102 818 v3.1.1
-              section 7
+            format: RadioDNS Service Information (SI) as defined in ETSI TS 102 818 v3.1.1 section 7
             type: string
         "403":
           description: Authorization failed, the client Id is incorrect.
         "404":
-          description: The program information for the requested day or service cannot be
-            found.
+          description: The program information for the requested day or service cannot be found.
       summary: Get the program information document.
       tags:
         - RadioDNS
     parameters:
-      - description: The fully qualified domain name for the environment where the
-          service is running. The fqdn is defined in the ```radiodns``` element
-          in the SI document in each Content Depot environment.
+      - description: The fully qualified domain name for the environment where the service is running. The fqdn is defined in the ```radiodns``` element in the SI document in each Content Depot environment.
         in: path
         name: fqdn
         required: true
         type: string
-      - description: One of the valid service ids defined in the SI document. For
-          example, "files" or "streams".
+      - description: One of the valid service ids defined in the SI document. For example, "files" or "streams".
         in: path
         name: sid
         required: true
@@ -694,8 +642,7 @@ definitions:
       - lastModifiedDate
     type: object
   CDDriveFolder:
-    description: A folder in the CD Drive that can contain other items such as files
-      or folders.
+    description: A folder in the CD Drive that can contain other items such as files or folders.
     properties:
       createdDate:
         description: The date and time the folder was created.
@@ -707,9 +654,7 @@ definitions:
         minimum: 0
         type: integer
       lastModifiedDate:
-        description: The date and time the folder was last modified. This may only
-          represent a modification to to the folder metadata itself, not to the
-          contents of the folder.
+        description: The date and time the folder was last modified. This may only represent a modification to to the folder metadata itself, not to the contents of the folder.
         format: dateTime
         type: string
       name:
@@ -750,8 +695,7 @@ definitions:
       - id
     type: object
   ProgramInformationBatch:
-    description: An electronic program guide (EPG) batch operation to create or
-      update metadata on one or more guide programs.
+    description: An electronic program guide (EPG) batch operation to create or update metadata on one or more guide programs.
     properties:
       createdDate:
         description: The date and time the batch was created.
@@ -762,8 +706,7 @@ definitions:
         format: dateTime
         type: string
       format:
-        description: The format of the metadata file defining the create or update
-          actions to be performed on one or more EPG programs.
+        description: The format of the metadata file defining the create or update actions to be performed on one or more EPG programs.
         enum:
           - radiodns
         type: string
@@ -779,11 +722,7 @@ definitions:
         description: The optional name of the batch for human reference.
         type: string
       program:
-        description: The program information to associate the ingested metadata with.
-          This is only required if the metadata format doesn't provide the
-          program title and air date information directly. If this is specified,
-          it will overrite the value specfified in the metadata file. If this is
-          specified, the metadata file should only contain one program.
+        description: The program information to associate the ingested metadata with. This is only required if the metadata format doesn't provide the program title and air date information directly. If this is specified, it will overrite the value specfified in the metadata file. If this is specified, the metadata file should only contain one program.
         properties:
           airDate:
             description: The airDate for the program in ISO 8601 format.

@@ -6,9 +6,7 @@ info:
   contact:
     email: dev@fulfillment.com
   description: >
-    Welcome to our current iteration of our REST API. While we encourage you to
-    upgrade to v2.0 we will continue support for our [SOAP
-    API](https://github.com/fulfillment/soap-integration).
+    Welcome to our current iteration of our REST API. While we encourage you to upgrade to v2.0 we will continue support for our [SOAP API](https://github.com/fulfillment/soap-integration).
 
 
     # Versioning
@@ -283,8 +281,7 @@ info:
       version: "3.0"
   x-providerName: fulfillment.com
 tags:
-  - description: Please note that in keeping with the OAuth standard, parameters are
-      underscored however all other API parameters are camelCase.
+  - description: Please note that in keeping with the OAuth standard, parameters are underscored however all other API parameters are camelCase.
     name: Auth
   - description: Creating, viewing, and canceling orders.
     name: Orders
@@ -301,12 +298,10 @@ tags:
 paths:
   /inventory:
     get:
-      description: Retrieve inventory for one or more items. This API requires
-        elevated permissions, please speak to your success manager.
+      description: Retrieve inventory for one or more items. This API requires elevated permissions, please speak to your success manager.
       operationId: get-inventory
       parameters:
-        - description: A multiplier of the number of items (limit paramater) to skip
-            before returning results
+        - description: A multiplier of the number of items (limit paramater) to skip before returning results
           in: query
           name: page
           schema:
@@ -330,8 +325,7 @@ paths:
               type: integer
             type: array
           style: form
-        - description: A CSV of sku reference names, 'skuName1' or
-            'skuName1,skuName2,skuName3'
+        - description: A CSV of sku reference names, 'skuName1' or 'skuName1,skuName2,skuName3'
           explode: false
           in: query
           name: externalSkuNames
@@ -379,11 +373,7 @@ paths:
         - Inventory
   /oauth/access_token:
     post:
-      description: By default tokens are valid for 7 days while refresh tokens are
-        valid for 30 days. If your `grant_type` is "password" include the
-        `username` and `password`, if however your `grant_type` is
-        "refresh_token" the username/password are not required, instead set the
-        `refresh_token`
+      description: By default tokens are valid for 7 days while refresh tokens are valid for 30 days. If your `grant_type` is "password" include the `username` and `password`, if however your `grant_type` is "refresh_token" the username/password are not required, instead set the `refresh_token`
       externalDocs:
         description: More Information on Refresh Tokens
         url: "#section/Getting-Started/Perpetuating-Access"
@@ -417,15 +407,13 @@ paths:
       description: Retrieve many orders at once
       operationId: get-orders
       parameters:
-        - description: Date-time in ISO 8601 format for selecting orders after, or at, the
-            specified time
+        - description: Date-time in ISO 8601 format for selecting orders after, or at, the specified time
           in: query
           name: fromDate
           required: true
           schema:
             type: string
-        - description: Date-time in ISO 8601 format for selecting orders before, or at,
-            the specified time
+        - description: Date-time in ISO 8601 format for selecting orders before, or at, the specified time
           in: query
           name: toDate
           required: true
@@ -449,8 +437,7 @@ paths:
               type: integer
             type: array
           style: form
-        - description: A multiplier of the number of items (limit paramater) to skip
-            before returning results
+        - description: A multiplier of the number of items (limit paramater) to skip before returning results
           in: query
           name: page
           schema:
@@ -573,8 +560,7 @@ paths:
       tags:
         - Orders
     get:
-      description: For the fastest results use the FDC provided `id` however you can
-        use your `merchantOrderId` as the `id`.
+      description: For the fastest results use the FDC provided `id` however you can use your `merchantOrderId` as the `id`.
       operationId: getOrder
       parameters:
         - description: The FDC order Id
@@ -583,10 +569,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Providing your `merchantId` indicates the `id` is your
-            `merchantOrderId`. Although it is not necessary to provide this it
-            will speed up your results when using your `merchantOrderId` however
-            it will slow your results when using the FDC provided `id`
+        - description: Providing your `merchantId` indicates the `id` is your `merchantOrderId`. Although it is not necessary to provide this it will speed up your results when using your `merchantOrderId` however it will slow your results when using the FDC provided `id`
           in: query
           name: merchantId
           schema:
@@ -609,8 +592,7 @@ paths:
         - Orders
   "/orders/{id}/ship":
     put:
-      description: Note, this API is used to update orders and is reserved for our
-        shipping partners.
+      description: Note, this API is used to update orders and is reserved for our shipping partners.
       operationId: put-orders-id-ship
       parameters:
         - description: The FDC order Id
@@ -646,8 +628,7 @@ paths:
       x-codegen-request-body-name: body
   "/orders/{id}/status":
     put:
-      description: Note, this API is used to update orders and is reserved for our
-        shipping partners.
+      description: Note, this API is used to update orders and is reserved for our shipping partners.
       operationId: put-orders-id-status
       parameters:
         - description: The FDC order Id
@@ -683,29 +664,22 @@ paths:
       x-codegen-request-body-name: body
   /returns:
     get:
-      description: Retrieves summary return activity during the queried timespan.
-        Although return knowledge can be learned from `GET /orders/{id}` it can
-        take an unknown amount of time for an order that is refused or
-        undeliverable to return to an FDC facility. Instead we recommend
-        regularly querying this API.
+      description: Retrieves summary return activity during the queried timespan. Although return knowledge can be learned from `GET /orders/{id}` it can take an unknown amount of time for an order that is refused or undeliverable to return to an FDC facility. Instead we recommend regularly querying this API.
       operationId: get-returns
       parameters:
-        - description: Date-time in ISO 8601 format for selecting orders after, or at, the
-            specified time
+        - description: Date-time in ISO 8601 format for selecting orders after, or at, the specified time
           in: query
           name: fromDate
           required: true
           schema:
             type: string
-        - description: Date-time in ISO 8601 format for selecting orders before, or at,
-            the specified time
+        - description: Date-time in ISO 8601 format for selecting orders before, or at, the specified time
           in: query
           name: toDate
           required: true
           schema:
             type: string
-        - description: A multiplier of the number of items (limit paramater) to skip
-            before returning results
+        - description: A multiplier of the number of items (limit paramater) to skip before returning results
           in: query
           name: page
           schema:
@@ -776,9 +750,7 @@ paths:
         - Returns
   /track:
     get:
-      description: Get uniformed tracking events for any package, this response is
-        carrier independent. Please note, an API Key is required for throttling
-        purposes, please contact your success manager for details.
+      description: Get uniformed tracking events for any package, this response is carrier independent. Please note, an API Key is required for throttling purposes, please contact your success manager for details.
       operationId: get-track
       parameters:
         - description: Publicly available tracking number
@@ -807,8 +779,7 @@ paths:
         - Tracking
   /users/me:
     get:
-      description: Returns the user profile of the access token's owner. This could be
-        useful if managing multiple accounts or confirming validity of a token.
+      description: Returns the user profile of the access token's owner. This could be useful if managing multiple accounts or confirming validity of a token.
       operationId: get-users-me
       responses:
         "200":
@@ -843,8 +814,7 @@ components:
         type: array
       style: form
     fromDateParam:
-      description: Date-time in ISO 8601 format for selecting orders after, or at, the
-        specified time
+      description: Date-time in ISO 8601 format for selecting orders after, or at, the specified time
       in: query
       name: fromDate
       required: true
@@ -870,8 +840,7 @@ components:
         type: array
       style: form
     pageParam:
-      description: A multiplier of the number of items (limit paramater) to skip
-        before returning results
+      description: A multiplier of the number of items (limit paramater) to skip before returning results
       in: query
       name: page
       schema:
@@ -879,8 +848,7 @@ components:
         minimum: 1
         type: integer
     toDateParam:
-      description: Date-time in ISO 8601 format for selecting orders before, or at,
-        the specified time
+      description: Date-time in ISO 8601 format for selecting orders before, or at, the specified time
       in: query
       name: toDate
       required: true
@@ -905,8 +873,7 @@ components:
         client_secret:
           type: string
         grant_type:
-          description: Indicates how you're authenticating your request, see `username`,
-            `password`, and `refresh_token` below
+          description: Indicates how you're authenticating your request, see `username`, `password`, and `refresh_token` below
           enum:
             - password
             - refresh_token
@@ -915,8 +882,7 @@ components:
           description: See above
           type: string
         refresh_token:
-          description: You may request future tokens with the `refresh_token` from your
-            previous `/oauth/access_token` request
+          description: You may request future tokens with the `refresh_token` from your previous `/oauth/access_token` request
           type: string
         scope:
           default: oms
@@ -1158,9 +1124,7 @@ components:
     newOrder:
       properties:
         integrator:
-          description: Use of this property requires special permission and must be
-            discussed with your account executive; values are restricted while
-            custom values need to be accepted by your AE.
+          description: Use of this property requires special permission and must be discussed with your account executive; values are restricted while custom values need to be accepted by your AE.
           enum:
             - 1ShoppingCart
             - 3dCart
@@ -1227,8 +1191,7 @@ components:
             $ref: "#/components/schemas/newOrderItem"
           type: array
         merchantId:
-          description: Necessary if you have a multitenancy account, otherwise we will
-            associate the order with your account
+          description: Necessary if you have a multitenancy account, otherwise we will associate the order with your account
           type: integer
         merchantOrderId:
           description: Unique ID provided by the merchant
@@ -1240,11 +1203,7 @@ components:
         shippingMethod:
           type: string
         warehouse:
-          description: We automatically select a warehouse based on inventory
-            availability, requested carrier and delivery schedule, and carrier
-            cost. You may however override this process. Because this is not
-            recommended please inform your AE prior to using so they may enable
-            this feature.
+          description: We automatically select a warehouse based on inventory availability, requested carrier and delivery schedule, and carrier cost. You may however override this process. Because this is not recommended please inform your AE prior to using so they may enable this feature.
           properties:
             id:
               type: integer
@@ -1258,10 +1217,7 @@ components:
     newOrderItem:
       properties:
         declaredValue:
-          description: Using USD, a per unit value of a single SKU. If your declaring a
-            kit this is the sum total for a single kit. In both scenarios we
-            will multiply the `declaredValue` against the `quantity` for customs
-            declaration.
+          description: Using USD, a per unit value of a single SKU. If your declaring a kit this is the sum total for a single kit. In both scenarios we will multiply the `declaredValue` against the `quantity` for customs declaration.
           format: double
           type: number
         quantity:
@@ -1355,8 +1311,7 @@ components:
     pagination:
       properties:
         count:
-          description: Count of records returned in response, this will be equal to or
-            less then the limit paramater
+          description: Count of records returned in response, this will be equal to or less then the limit paramater
           type: integer
         currentPage:
           description: Current page of the response, this will match the page paramater
@@ -1570,8 +1525,7 @@ components:
             id:
               type: integer
             name:
-              description: Human readable description of responsible party to resolve the
-                issue
+              description: Human readable description of responsible party to resolve the issue
               type: string
           type: object
         code:

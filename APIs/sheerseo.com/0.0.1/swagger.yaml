@@ -8,10 +8,7 @@ info:
     name: API Support
     url: https://www.sheerseo.com/seo-monitoring-tools/support.html
     x-twitter: sheerseo
-  description: "Sheerseo API has 2 stages:<br>First stage - initiating the task:
-    You fill in your task and receive in return the task id. <br>Second stage -
-    collecting the results: send a request containing the task ids you got at
-    the first stage and collecting the results."
+  description: "Sheerseo API has 2 stages:<br>First stage - initiating the task: You fill in your task and receive in return the task id. <br>Second stage - collecting the results: send a request containing the task ids you got at the first stage and collecting the results."
   title: SheerSEO API
   version: 0.0.1
   x-apisguru-categories:
@@ -188,8 +185,7 @@ definitions:
         example: seo software
         type: string
       localization_code:
-        description: A code for the localization, which is a combination of country and
-          language
+        description: A code for the localization, which is a combination of country and language
         enum:
           - us
           - uk
@@ -255,8 +251,7 @@ definitions:
         example: seo software
         type: string
       localization_code:
-        description: A code for the localization, which is a combination of country and
-          language
+        description: A code for the localization, which is a combination of country and language
         enum:
           - us
           - uk
@@ -322,8 +317,7 @@ definitions:
         example: seo software
         type: string
       localization_code:
-        description: A code for the localization, which is a combination of country and
-          language
+        description: A code for the localization, which is a combination of country and language
         enum:
           - us
           - uk
@@ -378,16 +372,14 @@ definitions:
         example: google
         type: string
       status:
-        description: status of this task request. "ok" means we're working on collecting
-          it. "invalid" means there was an error and it won't be collected
+        description: status of this task request. "ok" means we're working on collecting it. "invalid" means there was an error and it won't be collected
         enum:
           - ok
           - invalid
         example: ok
         type: string
       task_id:
-        description: the assigned task id for this task. Should be used later in the
-          serp-collect request
+        description: the assigned task id for this task. Should be used later in the serp-collect request
         example: 16ad9957b23x140753
         type: string
     required:
@@ -411,13 +403,11 @@ definitions:
                   example: seo software
                   type: string
                 local_pack_rank:
-                  description: "relevent only to google: show the local pack rank of the domain in
-                    case exist"
+                  description: "relevent only to google: show the local pack rank of the domain in case exist"
                   example: 1
                   type: integer
                 localization_code:
-                  description: A code for the localization, which is a combination of country and
-                    language
+                  description: A code for the localization, which is a combination of country and language
                   enum:
                     - us
                     - uk
@@ -496,8 +486,7 @@ definitions:
   rankSubmitRequest:
     properties:
       priority:
-        description: The priority for the keyword jobs submitted. High priority costs
-          double credits. Default value is low.
+        description: The priority for the keyword jobs submitted. High priority costs double credits. Default value is low.
         enum:
           - low
           - high
@@ -544,8 +533,7 @@ definitions:
                   example: seo software
                   type: string
                 localization_code:
-                  description: A code for the localization, which is a combination of country and
-                    language
+                  description: A code for the localization, which is a combination of country and language
                   enum:
                     - us
                     - uk
@@ -631,8 +619,7 @@ definitions:
   serpSubmitRequest:
     properties:
       priority:
-        description: The priority for the keyword jobs submitted. High priority costs
-          double credits. Default value is low.
+        description: The priority for the keyword jobs submitted. High priority costs double credits. Default value is low.
         enum:
           - low
           - high

@@ -7,8 +7,7 @@ info:
   contact:
     x-twitter: openalpr
   description: >
-    The OpenALPR CarCheck API allows you to send images to the cloud for
-    processing. 
+    The OpenALPR CarCheck API allows you to send images to the cloud for processing. 
 
     The image will be analyzed for license plates and vehicle make/models.  The results 
 
@@ -28,9 +27,11 @@ produces:
   - application/json
 parameters:
   country:
-    description: |
+    description: >
       Defines the training data used by OpenALPR.  "us" analyzes 
+
       North-American style plates.  "eu" analyzes European-style plates.
+
 
       This field is required if using the "plate" task
     in: query
@@ -39,9 +40,11 @@ parameters:
     type: string
   is_cropped:
     default: 0
-    description: |
+    description: >
       When providing a plate or vehicle that is already cropped,  
+
       this performs a recognition against the full crop and does not 
+
       attempt to localize the plate/vehicle
     enum:
       - 0
@@ -52,8 +55,9 @@ parameters:
     type: integer
   recognize_vehicle:
     default: 0
-    description: |
+    description: >
       If set to 1, the vehicle will also be recognized in the image
+
       This requires an additional credit per request
     enum:
       - 0
@@ -64,8 +68,9 @@ parameters:
     type: integer
   return_image:
     default: 0
-    description: |
+    description: >
       If set to 1, the image you uploaded will be encoded in base64 and 
+
       sent back along with the response
     enum:
       - 0
@@ -75,9 +80,11 @@ parameters:
     required: false
     type: integer
   secret_key:
-    description: |
+    description: >
       The secret key used to authenticate your account.  You can view your 
+
       secret key by visiting 
+
       https://cloud.openalpr.com/
     in: query
     name: secret_key
@@ -85,8 +92,9 @@ parameters:
     type: string
   topn:
     default: 10
-    description: |
+    description: >
       The number of results you would like to be returned for plate 
+
       candidates and vehicle classifications
     in: query
     maximum: 1000
@@ -113,8 +121,7 @@ responses:
           description: The number of API credits that were used to process this image
           type: integer
         credits_monthly_total:
-          description: The maximum number of API credits available this month according to
-            your plan
+          description: The maximum number of API credits available this month according to your plan
           type: integer
         credits_monthly_used:
           description: The number of API credits used this month
@@ -195,7 +202,7 @@ responses:
 paths:
   /config:
     get:
-      description: |
+      description: >
         Get a list of available results for plate and vehicle recognition
       operationId: getConfig
       produces:
@@ -253,12 +260,13 @@ paths:
     post:
       consumes:
         - multipart/form-data
-      description: |
+      description: >
         Send an image for OpenALPR to analyze and provide metadata back
+
         The image is sent as a file using a form data POST
       operationId: recognizeFile
       parameters:
-        - description: |
+        - description: >
             The image file that you wish to analyze
           in: formData
           name: image
@@ -287,12 +295,13 @@ paths:
     post:
       consumes:
         - application/json
-      description: |
+      description: >
         Send an image for OpenALPR to analyze and provide metadata back
+
         The image is sent as base64 encoded bytes.
       operationId: recognizeBytes
       parameters:
-        - description: |
+        - description: >
             The image file that you wish to analyze encoded in base64
           in: body
           name: image_bytes
@@ -329,7 +338,7 @@ paths:
         and process it
       operationId: recognizeUrl
       parameters:
-        - description: |
+        - description: >
             A URL to an image that you wish to analyze
           in: query
           name: image_url
@@ -384,9 +393,11 @@ definitions:
         description: Confidence percentage that the plate number is correct
         type: number
       coordinates:
-        description: |
+        description: >
           The X/Y coordinates of the license plate in the image
+
           Four coordinates are provided that form a polygon starting
+
           from the top-left and moving clockwise ending in the bottom left
         items:
           $ref: "#/definitions/coordinate"

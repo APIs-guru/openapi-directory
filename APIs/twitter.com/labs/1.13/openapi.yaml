@@ -25,6 +25,7 @@ info:
   x-preferred: false
   x-providerName: twitter.com
   x-serviceName: labs
+  x-unofficialSpec: true
 externalDocs:
   description: Find out more about Swagger
   url: http://swagger.io
@@ -57,8 +58,7 @@ tags:
 paths:
   /labs/1/openapi.json:
     get:
-      description: Full open api spec in JSON format. (See
-        https://github.com/OAI/OpenAPI-Specification/blob/master/README.md)
+      description: Full open api spec in JSON format. (See https://github.com/OAI/OpenAPI-Specification/blob/master/README.md)
       operationId: getOpenApiSpec
       parameters: []
       responses:
@@ -73,12 +73,10 @@ paths:
         - General
   /labs/1/tweets/metrics/private:
     get:
-      description: Returns various metrics about a Tweet, including metrics for an
-        embedded Video if one exists
+      description: Returns various metrics about a Tweet, including metrics for an embedded Video if one exists
       operationId: findPrivateTweetMetricsById
       parameters:
-        - description: A comma separated list of Tweet IDs. Up to 50 are allowed in a
-            single request.
+        - description: A comma separated list of Tweet IDs. Up to 50 are allowed in a single request.
           explode: false
           in: query
           name: ids
@@ -122,8 +120,7 @@ paths:
               schema:
                 description: A tweet or error that can be returned by the streaming tweet API
                 oneOf:
-                  - description: The values returned with a successful streamed tweet. Includes the
-                      user provided rules that the tweet matched.
+                  - description: The values returned with a successful streamed tweet. Includes the user provided rules that the tweet matched.
                     properties:
                       data:
                         $ref: "#/components/schemas/Tweet"
@@ -155,8 +152,7 @@ paths:
                       - errors
                     type: object
                 type: object
-          description: The request was successful. Successful responses will return a
-            stream of individual JSON Tweet payloads.
+          description: The request was successful. Successful responses will return a stream of individual JSON Tweet payloads.
         default:
           $ref: "#/components/responses/HttpErrorResponse"
       summary: Streams tweets matching a user's active rule set.
@@ -164,8 +160,7 @@ paths:
         - Tweets
   /labs/1/tweets/stream/filter/rules:
     get:
-      description: Returns rules from a user's active rule set. Users can fetch all of
-        their rules or a subset, specified by the provided rule ids.
+      description: Returns rules from a user's active rule set. Users can fetch all of their rules or a subset, specified by the provided rule ids.
       operationId: getRules
       parameters:
         - description: A comma-separated list of Rule IDs.
@@ -190,16 +185,10 @@ paths:
         - Rules
         - Tweets
     post:
-      description: Add or delete rules from a user's active rule set. Users can
-        provide unique, optionally tagged rules to add. Users can delete their
-        entire rule set or a subset specified by rule ids or values.
+      description: Add or delete rules from a user's active rule set. Users can provide unique, optionally tagged rules to add. Users can delete their entire rule set or a subset specified by rule ids or values.
       operationId: addOrDeleteRules
       parameters:
-        - description: Dry Run can be used with both the add and delete action, with the
-            expected result given, but without actually taking any action in the
-            system (meaning the end state will always be as it was when the
-            request was submitted). This is particularly useful to validate rule
-            changes.
+        - description: Dry Run can be used with both the add and delete action, with the expected result given, but without actually taking any action in the system (meaning the end state will always be as it was when the request was submitted). This is particularly useful to validate rule changes.
           in: query
           name: dry_run
           required: false
@@ -259,8 +248,7 @@ paths:
                       - errors
                     type: object
                 type: object
-          description: The request was successful. Successful responses will return a
-            stream of individual JSON Tweet payloads.
+          description: The request was successful. Successful responses will return a stream of individual JSON Tweet payloads.
         default:
           $ref: "#/components/responses/HttpErrorResponse"
       summary: Streams a deterministic 1% of public tweets.
@@ -269,8 +257,7 @@ paths:
 components:
   parameters:
     DefaultFormat:
-      description: Format for all the objects returned as part of the response,
-        including expansions.
+      description: Format for all the objects returned as part of the response, including expansions.
       in: query
       name: format
       required: false
@@ -284,18 +271,14 @@ components:
       schema:
         $ref: "#/components/schemas/FormatParamType"
     TweetFormat:
-      description: Format for all [Tweet](#Tweet) objects returned in response. Can be
-        used together with other format parameters to expand or reduce Tweet
-        objects only.
+      description: Format for all [Tweet](#Tweet) objects returned in response. Can be used together with other format parameters to expand or reduce Tweet objects only.
       in: query
       name: tweet.format
       required: false
       schema:
         $ref: "#/components/schemas/FormatParamType"
     UserFormat:
-      description: Format for all [User](#User) objects returned in response. Can be
-        used together with other format parameters to expand or reduce User
-        objects only.
+      description: Format for all [User](#User) objects returned in response. Can be used together with other format parameters to expand or reduce User objects only.
       in: query
       name: user.format
       required: false
@@ -350,8 +333,7 @@ components:
         - $ref: "#/components/schemas/EntityIndices"
         - $ref: "#/components/schemas/CashtagFields"
     CashtagFields:
-      description: Represent the portion of text recognized as a Cashtag, and its
-        start and end position within the text.
+      description: Represent the portion of text recognized as a Cashtag, and its start and end position within the text.
       properties:
         tag:
           type: string
@@ -371,8 +353,7 @@ components:
     ClientForbiddenProblem:
       allOf:
         - $ref: "#/components/schemas/ProblemFields"
-      description: A problem that indicates your client is forbidden from making this
-        request.
+      description: A problem that indicates your client is forbidden from making this request.
       properties:
         reason:
           enum:
@@ -388,8 +369,7 @@ components:
           type: string
       type: object
     CommonMediaFields:
-      description: This contains the list of the fields that are common to all media
-        returned.
+      description: This contains the list of the fields that are common to all media returned.
       properties:
         height:
           $ref: "#/components/schemas/MediaHeight"
@@ -431,15 +411,13 @@ components:
           pattern: compact
           type: string
     CompactTweetFields:
-      description: This is the list of fields returned when requesting a `compact`
-        response format for a Tweet object.
+      description: This is the list of fields returned when requesting a `compact` response format for a Tweet object.
       properties:
         attachments:
           description: Specifies the type of attachments (if any) present in this Tweet.
           properties:
             media_keys:
-              description: A list of Media Keys for each one of the media attachments (if
-                media are attached).
+              description: A list of Media Keys for each one of the media attachments (if media are attached).
               items:
                 $ref: "#/components/schemas/MediaKey"
               minItems: 1
@@ -462,9 +440,7 @@ components:
         in_reply_to_user_id:
           $ref: "#/components/schemas/UserID"
         referenced_tweets:
-          description: A list of Tweets this Tweet refers to. For example, if the parent
-            Tweet is a Retweet, a Quoted Tweet or a Reply, it will include the
-            related Tweet referenced to by its parent.
+          description: A list of Tweets this Tweet refers to. For example, if the parent Tweet is a Retweet, a Quoted Tweet or a Reply, it will include the related Tweet referenced to by its parent.
           items:
             properties:
               id:
@@ -500,8 +476,7 @@ components:
           pattern: compact
           type: string
     CompactUserFields:
-      description: This is the list of fields returned when requesting a `compact`
-        response format for a User object.
+      description: This is the list of fields returned when requesting a `compact` response format for a User object.
       properties:
         created_at:
           description: Creation time of this user.
@@ -517,8 +492,7 @@ components:
           format: uri
           type: string
         protected:
-          description: Indicates if this user has chosen to protect their Tweets (in other
-            words, if this user's Tweets are private).
+          description: Indicates if this user has chosen to protect their Tweets (in other words, if this user's Tweets are private).
           type: boolean
         username:
           $ref: "#/components/schemas/UserName"
@@ -631,9 +605,7 @@ components:
           pattern: default
           type: string
     DefaultTweetFields:
-      description: This is the list of fields returned by default for a Tweet object,
-        for example when `format` or `tweet.format` are omitted, or when they
-        are set to `default`.
+      description: This is the list of fields returned by default for a Tweet object, for example when `format` or `tweet.format` are omitted, or when they are set to `default`.
       properties:
         entities:
           $ref: "#/components/schemas/FullTextEntities"
@@ -655,13 +627,10 @@ components:
           pattern: default
           type: string
     DefaultUserFields:
-      description: This is the list of fields returned by default for a User object,
-        for example when `format` or `user.format` are omitted, or when they are
-        set to `default`.
+      description: This is the list of fields returned by default for a User object, for example when `format` or `user.format` are omitted, or when they are set to `default`.
       properties:
         description:
-          description: The text of this user's profile description (also known as bio), if
-            the user provided one.
+          description: The text of this user's profile description (also known as bio), if the user provided one.
           type: string
         entities:
           description: A list of metadata found in the user's profile description.
@@ -669,8 +638,7 @@ components:
             description:
               $ref: "#/components/schemas/FullTextEntities"
             url:
-              description: Expanded details for the URL specified in the user's profile, with
-                start and end indices.
+              description: Expanded details for the URL specified in the user's profile, with start and end indices.
               properties:
                 urls:
                   items:
@@ -680,10 +648,7 @@ components:
               type: object
           type: object
         location:
-          description: The location specified in the user's profile, if the user provided
-            one. As this is a freeform value, it may not indicate a valid
-            location, but it may be fuzzily evaluated when performing searches
-            with location queries.
+          description: The location specified in the user's profile, if the user provided one. As this is a freeform value, it may not indicate a valid location, but it may be fuzzily evaluated when performing searches with location queries.
           type: string
         most_recent_tweet_id:
           $ref: "#/components/schemas/TweetID"
@@ -738,8 +703,7 @@ components:
           pattern: detailed
           type: string
     DetailedTweetFields:
-      description: This is the list of fields for a Tweet object when `format` or
-        `tweet.format` are set to `detailed`.
+      description: This is the list of fields for a Tweet object when `format` or `tweet.format` are set to `detailed`.
       properties:
         context_annotations:
           items:
@@ -747,12 +711,10 @@ components:
           minItems: 1
           type: array
         lang:
-          description: Language of the Tweet, if detected by Twitter. Returned as a BCP47
-            language tag.
+          description: Language of the Tweet, if detected by Twitter. Returned as a BCP47 language tag.
           type: string
         possibly_sensitive:
-          description: Indicates if this Tweet contains URLs marked as sensitive, for
-            example content suitable for mature audiences.
+          description: Indicates if this Tweet contains URLs marked as sensitive, for example content suitable for mature audiences.
           type: boolean
         source:
           description: The name of the app the user Tweeted from.
@@ -791,8 +753,7 @@ components:
           pattern: detailed
           type: string
     DetailedUserFields:
-      description: This is the list of fields for a User object when `format` or
-        `user.format` are set to `detailed`.
+      description: This is the list of fields for a User object when `format` or `user.format` are set to `detailed`.
       properties:
         stats:
           description: A list of metrics for this user
@@ -819,8 +780,7 @@ components:
     DisallowedResourceProblem:
       allOf:
         - $ref: "#/components/schemas/ProblemFields"
-      description: A problem that indicates that the resource requested violates the
-        precepts of this API.
+      description: A problem that indicates that the resource requested violates the precepts of this API.
       properties:
         resource_id:
           type: string
@@ -853,9 +813,7 @@ components:
           type: string
       type: object
     EntityIndices:
-      description: Represent a boundary range (start and end index) for a recognized
-        entity (for example a hashtag or a mention). `start` must be smaller
-        than `end`.
+      description: Represent a boundary range (start and end index) for a recognized entity (for example a hashtag or a mention). `start` must be smaller than `end`.
       properties:
         end:
           description: Index (zero-based) at which position this entity ends.
@@ -908,10 +866,7 @@ components:
           type: array
       type: object
     FormatParamType:
-      description: Specifies the level of detail the response body should return.
-        Allowed values are `default` (return most fields in the response body),
-        `compact` (return only a minimum subset with the most important fields)
-        and `detailed` (return all the available fields).
+      description: Specifies the level of detail the response body should return. Allowed values are `default` (return most fields in the response body), `compact` (return only a minimum subset with the most important fields) and `detailed` (return all the available fields).
       enum:
         - compact
         - default
@@ -966,8 +921,7 @@ components:
     GenericProblem:
       allOf:
         - $ref: "#/components/schemas/ProblemFields"
-      description: A generic problem with no additional information beyond that
-        provided by the HTTP status code.
+      description: A generic problem with no additional information beyond that provided by the HTTP status code.
       properties:
         status:
           type: integer
@@ -1023,8 +977,7 @@ components:
         - $ref: "#/components/schemas/EntityIndices"
         - $ref: "#/components/schemas/HashtagFields"
     HashtagFields:
-      description: Represent the portion of text recognized as a Hashtag, and its
-        start and end position within the text.
+      description: Represent the portion of text recognized as a Hashtag, and its start and end position within the text.
       properties:
         tag:
           description: The text of the Hashtag
@@ -1112,8 +1065,7 @@ components:
         - $ref: "#/components/schemas/EntityIndices"
         - $ref: "#/components/schemas/MentionFields"
     MentionFields:
-      description: Represent the portion of text recognized as a User mention, and its
-        start and end position within the text.
+      description: Represent the portion of text recognized as a User mention, and its start and end position within the text.
       properties:
         username:
           $ref: "#/components/schemas/UserName"
@@ -1180,9 +1132,7 @@ components:
         - unknown
       type: string
     Point:
-      description: A [GeoJson
-        Point](https://tools.ietf.org/html/rfc7946#section-3.1.2) geometry
-        object.
+      description: A [GeoJson Point](https://tools.ietf.org/html/rfc7946#section-3.1.2) geometry object.
       properties:
         coordinates:
           $ref: "#/components/schemas/Position"
@@ -1243,17 +1193,14 @@ components:
         - votes
       type: object
     Position:
-      description: A [GeoJson
-        Position](https://tools.ietf.org/html/rfc7946#section-3.1.1) in the
-        format `[longitude,latitude]`.
+      description: A [GeoJson Position](https://tools.ietf.org/html/rfc7946#section-3.1.1) in the format `[longitude,latitude]`.
       items:
         type: number
       maxItems: 2
       minItems: 2
       type: array
     Problem:
-      description: An HTTP Problem Details object, as defined in IETF RFC 7807
-        (https://tools.ietf.org/html/rfc7807).
+      description: An HTTP Problem Details object, as defined in IETF RFC 7807 (https://tools.ietf.org/html/rfc7807).
       discriminator:
         mapping:
           about:blank: "#/components/schemas/GenericProblem"
@@ -1327,8 +1274,7 @@ components:
     ResourceUnauthorizedProblem:
       allOf:
         - $ref: "#/components/schemas/ProblemFields"
-      description: A problem that indicates you are not allowed to see a particular
-        Tweet, User, etc.
+      description: A problem that indicates you are not allowed to see a particular Tweet, User, etc.
       properties:
         resource_id:
           type: string
@@ -1459,8 +1405,7 @@ components:
       required:
         - format
     TweetExpansionsParamType:
-      description: The list of fields you can expand for a [Tweet](#Tweet) object. If
-        the field has an ID, it can be expanded into a full object.
+      description: The list of fields you can expand for a [Tweet](#Tweet) object. If the field has an ID, it can be expanded into a full object.
       example: author_id
       items:
         enum:
@@ -1477,9 +1422,7 @@ components:
       type: array
       uniqueItems: true
     TweetID:
-      description: Unique identifier of this Tweet. This is returned as a string in
-        order to avoid complications with languages and tools that cannot handle
-        large integers.
+      description: Unique identifier of this Tweet. This is returned as a string in order to avoid complications with languages and tools that cannot handle large integers.
       example: "120897978112909812"
       pattern: ^[0-9]{1,19}$
       type: string
@@ -1580,8 +1523,7 @@ components:
               pattern: ^[0-9]{1,19}$
               type: string
             next_token:
-              description: This value is used to get the next 'page' of results by providing
-                it to the next_token parameter.
+              description: This value is used to get the next 'page' of results by providing it to the next_token parameter.
               type: string
             oldest_id:
               description: Oldest Tweet Id returned by search query
@@ -1594,12 +1536,10 @@ components:
           type: object
       type: object
     TweetWithheld:
-      description: Indicates withholding details for [withheld
-        content](https://help.twitter.com/en/rules-and-policies/tweet-withheld-by-country).
+      description: Indicates withholding details for [withheld content](https://help.twitter.com/en/rules-and-policies/tweet-withheld-by-country).
       properties:
         copyright:
-          description: Indicates if the content is being withheld for on the basis of
-            copyright infringement.
+          description: Indicates if the content is being withheld for on the basis of copyright infringement.
           type: boolean
         country_codes:
           description: Provides a list of countries where this content is not available.
@@ -1609,8 +1549,7 @@ components:
           type: array
           uniqueItems: true
         scope:
-          description: Indicates whether the content being withheld is the `tweet` or a
-            `user`.
+          description: Indicates whether the content being withheld is the `tweet` or a `user`.
           enum:
             - tweet
             - user
@@ -1674,8 +1613,7 @@ components:
       allOf:
         - $ref: "#/components/schemas/EntityIndices"
         - $ref: "#/components/schemas/URLFields"
-      description: Represent the portion of text recognized as a URL, and its start
-        and end position within the text.
+      description: Represent the portion of text recognized as a URL, and its start and end position within the text.
     UsageCapExceededProblem:
       allOf:
         - $ref: "#/components/schemas/ProblemFields"
@@ -1717,8 +1655,7 @@ components:
       required:
         - format
     UserExpansionsParamType:
-      description: The list of fields you can expand for a [User](#User) object. If
-        the field has an ID, it can be expanded into a full object.
+      description: The list of fields you can expand for a [User](#User) object. If the field has an ID, it can be expanded into a full object.
       example: most_recent_tweet_id
       items:
         enum:
@@ -1729,9 +1666,7 @@ components:
       type: array
       uniqueItems: true
     UserID:
-      description: Unique identifier of this User. This is returned as a string in
-        order to avoid complications with languages and tools that cannot handle
-        large integers.
+      description: Unique identifier of this User. This is returned as a string in order to avoid complications with languages and tools that cannot handle large integers.
       example: "712089797812"
       pattern: ^[0-9]{1,19}$
       type: string
@@ -1756,8 +1691,7 @@ components:
       pattern: ^[A-Za-z0-9_]{1,15}$
       type: string
     UserWithheld:
-      description: Indicates withholding details for [withheld
-        content](https://help.twitter.com/en/rules-and-policies/tweet-withheld-by-country).
+      description: Indicates withholding details for [withheld content](https://help.twitter.com/en/rules-and-policies/tweet-withheld-by-country).
       properties:
         country_codes:
           description: Provides a list of countries where this content is not available.

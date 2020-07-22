@@ -4,10 +4,7 @@ servers:
 info:
   contact:
     email: hello@bintable.com
-  description: BIN lookup API, the free api service from bintable.com to lookup
-    card information using it's BIN. the service maintains updated database
-    based on the comunity and other third party services to make sure all BINs
-    in the database are accurate and up to date.
+  description: BIN lookup API, the free api service from bintable.com to lookup card information using it's BIN. the service maintains updated database based on the comunity and other third party services to make sure all BINs in the database are accurate and up to date.
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
@@ -59,8 +56,9 @@ paths:
         - Balance
   "/{bin}":
     get:
-      description: |
+      description: >
         By passing in the appropriate BIN, you can lookup for
+
         card meta data in bintable.com API
       operationId: binLookup
       parameters:

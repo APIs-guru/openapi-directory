@@ -6,8 +6,7 @@ basePath: /v2
 info:
   contact:
     x-twitter: Infermedica
-  description: Empower your healthcare services with intelligent diagnostic
-    insights of Infermedica API.
+  description: Empower your healthcare services with intelligent diagnostic insights of Infermedica API.
   title: Infermedica API
   version: v2
   x-logo:
@@ -30,6 +29,7 @@ tags:
   - name: parse
   - name: lookup
   - name: rationale
+  - name: recommend_specialist
   - name: red_flags
   - name: triage
   - name: suggest
@@ -99,8 +99,7 @@ paths:
     post:
       consumes:
         - application/json
-      description: Suggests possible diagnoses and relevant observations based on
-        provided patient information.
+      description: Suggests possible diagnoses and relevant observations based on provided patient information.
       operationId: computeDiagnosis
       parameters:
         - in: body
@@ -298,8 +297,7 @@ paths:
     post:
       consumes:
         - application/json
-      description: Suggests possible red flag symptoms based on provided patient
-        information.
+      description: Suggests possible red flag symptoms based on provided patient information.
       operationId: computeRedFlags
       parameters:
         - in: body
@@ -708,9 +706,12 @@ definitions:
   DiagnosisRequest:
     properties:
       age:
+        example: "18"
         type: object
       evaluated_at:
         description: time when diagnosis was evaluated in ISO 8601 format
+        example: 2020-06-02
+        readOnly: true
         type: string
       evidence:
         items:
@@ -754,9 +755,11 @@ definitions:
         type: string
       id:
         description: id of observation or condition
+        example: s_1
         type: string
       observed_at:
         description: time when evidence was observed in ISO 8601 format
+        example: 2020-06-02
         type: string
       source:
         description: Flag describing evidence origin
@@ -788,9 +791,12 @@ definitions:
   ExplanationRequest:
     properties:
       age:
+        example: "18"
         type: object
       evaluated_at:
         description: time when diagnosis was evaluated in ISO 8601 format
+        example: 2020-06-02
+        readOnly: true
         type: string
       evidence:
         items:
@@ -807,6 +813,7 @@ definitions:
         type: string
       target:
         description: target condition id
+        example: c_1
         type: string
     required:
       - age
@@ -977,8 +984,7 @@ definitions:
           type: string
         type: array
       context:
-        description: ordered list of ids of present symptoms that were already captured
-          and can be used as context
+        description: ordered list of ids of present symptoms that were already captured and can be used as context
         items:
           type: string
         type: array
@@ -1002,8 +1008,7 @@ definitions:
           $ref: "#/definitions/ObservationMention"
         type: array
       obvious:
-        description: indicates that entire input text has been parsed successfully and
-          unambiguously
+        description: indicates that entire input text has been parsed successfully and unambiguously
         type: boolean
       tokens:
         items:
@@ -1015,11 +1020,19 @@ definitions:
     type: object
   Question:
     properties:
+      explication:
+        description: explication of question
+        type: string
       extras:
         additionalProperties:
           type: object
         description: additional content, like images or HTML
         type: object
+      instruction:
+        description: instruction to question
+        items:
+          type: string
+        type: array
       items:
         description: one or more observations to evaluate
         items:
@@ -1045,9 +1058,17 @@ definitions:
         items:
           $ref: "#/definitions/Choice"
         type: array
+      explication:
+        description: explication of question
+        type: string
       id:
         description: observation id
         type: string
+      instruction:
+        description: instruction to question
+        items:
+          type: string
+        type: array
       name:
         description: name or alias of observation
         type: string
@@ -1074,9 +1095,12 @@ definitions:
   RationaleRequest:
     properties:
       age:
+        example: "18"
         type: object
       evaluated_at:
         description: time when diagnosis was evaluated in ISO 8601 format
+        example: 2020-06-02
+        readOnly: true
         type: string
       evidence:
         items:
@@ -1216,9 +1240,12 @@ definitions:
   SuggestRequest:
     properties:
       age:
+        example: "18"
         type: object
       evaluated_at:
         description: time when diagnosis was evaluated in ISO 8601 format
+        example: 2020-06-02
+        readOnly: true
         type: string
       evidence:
         items:
@@ -1348,8 +1375,6 @@ definitions:
     type: object
   TriageResponse:
     properties:
-      recommended_specialisation:
-        type: string
       root_cause:
         enum:
           - r1

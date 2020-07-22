@@ -9,8 +9,7 @@ info:
     name: APIs.guru
     url: http://APIs.guru
   description: >
-    Wikipedia for Web APIs. Repository of API specs in OpenAPI(fka Swagger) 2.0
-    format.
+    Wikipedia for Web APIs. Repository of API specs in OpenAPI(fka Swagger) 2.0 format.
 
 
     **Warning**: If you want to be notified about changes in advance please subscribe to our [Gitter channel](https://gitter.im/APIs-guru/api-models).
@@ -112,8 +111,9 @@ definitions:
   APIs:
     additionalProperties:
       $ref: "#/definitions/API"
-    description: |
+    description: >
       List of API details.
+
       It is a JSON object with API IDs(`<provider>[:<service>]`) as keys.
     example:
       googleapis.com:drive:
@@ -211,8 +211,7 @@ definitions:
         minimum: 1
         type: integer
       numSpecs:
-        description: Number of API specifications including different versions of the
-          same API
+        description: Number of API specifications including different versions of the same API
         minimum: 1
         type: integer
     required:

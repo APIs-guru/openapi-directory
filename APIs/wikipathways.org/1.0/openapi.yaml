@@ -4,8 +4,6 @@ servers:
 info:
   title: WikiPathways Webservices
   version: "1.0"
-  x-apisguru-categories:
-    - open_data
   x-origin:
     - format: swagger
       url: http://webservice.wikipathways.org/index.php?swagger
@@ -14,10 +12,7 @@ info:
 paths:
   /createPathway:
     post:
-      description: "createPathwayCreate a new pathway on the wiki with the given GPML
-        code.<br>Note: To create/modify pathways via the web service, you need
-        to have an account with web service write permissions. Please contact us
-        to request write access for the web service."
+      description: "createPathwayCreate a new pathway on the wiki with the given GPML code.<br>Note: To create/modify pathways via the web service, you need to have an account with web service write permissions. Please contact us to request write access for the web service."
       parameters:
         - description: The GPML code for the new pathway
           in: query
@@ -287,9 +282,7 @@ paths:
         - Curation tags
   /getCurationTags:
     get:
-      description: getCurationTagsGet all curation tags for the given tag name. Use
-        this method if you want to find all pathways that are tagged with a
-        specific curation tag.
+      description: getCurationTagsGet all curation tags for the given tag name. Use this method if you want to find all pathways that are tagged with a specific curation tag.
       parameters:
         - description: The pathway identifier
           in: query
@@ -319,9 +312,7 @@ paths:
         - Curation tags
   /getCurationTagsByName:
     get:
-      description: getCurationTagsByNameGet all curation tags for the given tag name.
-        Use this method if you want to find all pathways that are tagged with a
-        specific curation tag.
+      description: getCurationTagsByNameGet all curation tags for the given tag name. Use this method if you want to find all pathways that are tagged with a specific curation tag.
       parameters:
         - description: The tag name
           in: query
@@ -492,8 +483,7 @@ paths:
         - All functions
   /getPathwayInfo:
     get:
-      description: getPathwayInfoGet some general info about the pathway, such as the
-        name, species, without downloading the GPML.
+      description: getPathwayInfoGet some general info about the pathway, such as the name, species, without downloading the GPML.
       parameters:
         - description: The pathway identifier
           in: query
@@ -582,10 +572,7 @@ paths:
         - All functions
   /getRecentChanges:
     get:
-      description: "getRecentChangesGet the recently changed pathways.<br>Note: the
-        recent changes table only retains items for a limited time (2 months),
-        so there is no guarantee that you will get all changes when the
-        timestamp points to a date that is more than 2 months in the past."
+      description: "getRecentChangesGet the recently changed pathways.<br>Note: the recent changes table only retains items for a limited time (2 months), so there is no guarantee that you will get all changes when the timestamp points to a date that is more than 2 months in the past."
       parameters:
         - description: Get the changes after this time
           in: query
@@ -730,12 +717,9 @@ paths:
         - All functions
   /login:
     get:
-      description: loginStart a logged in session, using an existing WikiPathways
-        account. This function will return an authentication code that can be
-        used to excecute methods that need authentication (e.g. updatePathway).
+      description: loginStart a logged in session, using an existing WikiPathways account. This function will return an authentication code that can be used to excecute methods that need authentication (e.g. updatePathway).
       parameters:
-        - description: The
-            usernameset_include_path(get_include_path().PATH_SEPARATOR.realpath('../includes').PATH_SEPARATOR.realpath('../').PATH_SEPARATOR);
+        - description: The usernameset_include_path(get_include_path().PATH_SEPARATOR.realpath('../includes').PATH_SEPARATOR.realpath('../').PATH_SEPARATOR);
           in: query
           name: name
           required: true
@@ -977,10 +961,7 @@ paths:
         - All functions
   /updatePathway:
     get:
-      description: "updatePathwayUpdate a pathway on the wiki with the given GPML
-        code.<br>Note: To create/modify pathways via the web service, you need
-        to have an account with web service write permissions. Please contact us
-        to request write access for the web service."
+      description: "updatePathwayUpdate a pathway on the wiki with the given GPML code.<br>Note: To create/modify pathways via the web service, you need to have an account with web service write permissions. Please contact us to request write access for the web service."
       parameters:
         - description: The pathway identifier
           in: query

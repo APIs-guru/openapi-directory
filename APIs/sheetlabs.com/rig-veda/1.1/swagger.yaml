@@ -33,7 +33,7 @@ info:
     - open_data
   x-logo:
     altText: Indica logo
-    url: 'https://twitter.com/sheetlabs/profile_image?size=original'
+    url: https://twitter.com/sheetlabs/profile_image?size=original
   x-origin:
     - format: swagger
       url: https://raw.githubusercontent.com/AninditaBasu/indica/master/rv_SDKs/rv.yaml
@@ -80,8 +80,7 @@ paths:
   /meter:
     get:
       parameters:
-        - description: The name of the meter. Wildcard characters allowed, for example
-            \*tri*
+        - description: The name of the meter. Wildcard characters allowed, for example \*tri*
           in: query
           name: meter
           required: true
@@ -95,8 +94,7 @@ paths:
   /sungby:
     get:
       parameters:
-        - description: The name of the rishi. Wildcard characters allowed, for example
-            \*mitra*
+        - description: The name of the rishi. Wildcard characters allowed, for example \*mitra*
           in: query
           name: sungby
           required: true
@@ -131,8 +129,7 @@ paths:
   /sungfor:
     get:
       parameters:
-        - description: The name of the god, goddess, or object. Wildcard characters
-            allowed, for example \*dra*
+        - description: The name of the god, goddess, or object. Wildcard characters allowed, for example \*dra*
           in: query
           name: sungfor
           required: true
@@ -141,8 +138,7 @@ paths:
         "200":
           description: Verses fetched.
         "404":
-          description: No such god or thing have verses in the Rig Veda composed in their
-            honour.
+          description: No such god or thing have verses in the Rig Veda composed in their honour.
       summary: Fetch all verses addressed to a specific god, human, or thing
   /sungforcategory:
     get:

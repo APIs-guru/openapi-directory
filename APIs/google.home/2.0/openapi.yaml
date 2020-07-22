@@ -1,6 +1,5 @@
 openapi: 3.0.0
 servers:
-  - url: http://google.home/setup
   - url: http://example.com/setup
     variables: {}
 info:
@@ -206,8 +205,6 @@ info:
     iOSGenerateCoreData: false
     iOSUseAppInfoPlist: false
   x-image-uri: ""
-  x-logo:
-    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
     - format: openapi
       url: https://raw.githubusercontent.com/rithvikvibhu/GHLocalApi/master/GoogleHome.openapi3.json
@@ -230,8 +227,7 @@ tags:
     name: Device Info
   - description: This folder consists of all endpoints to modify and control the device.
     name: Device Settings
-  - description: This folder contains all endpoints related to Assistant's tasks
-      like Do Not Disturb, Alarms and Timers, Accessibility and equalizer.
+  - description: This folder contains all endpoints related to Assistant's tasks like Do Not Disturb, Alarms and Timers, Accessibility and equalizer.
     name: Assistant
   - description: This folder contains Bluetooth related endpoints.
     name: Bluetooth
@@ -290,8 +286,7 @@ paths:
     post:
       deprecated: false
       description: >-
-        This controls Accessibility sounds. `hotword_enabled` is for 'Play start
-        sound' and `endpoint_enabled` is for 'Play end sound'.  
+        This controls Accessibility sounds. `hotword_enabled` is for 'Play start sound' and `endpoint_enabled` is for 'Play end sound'.  
 
         Sending an empty-body POST request returns the current values.  
 
@@ -353,8 +348,7 @@ paths:
             method: POST
             uri: /assistant/a11y_mode
           x-testDescription: >-
-            This controls Accessibility sounds. `hotword_enabled` is for 'Play
-            start sound' and `endpoint_enabled` is for 'Play end sound'.  
+            This controls Accessibility sounds. `hotword_enabled` is for 'Play start sound' and `endpoint_enabled` is for 'Play end sound'.  
 
             Sending an empty-body POST request returns the current values.  
 
@@ -655,8 +649,7 @@ paths:
     post:
       deprecated: false
       description: >-
-        **Update:** This seems to have changed now and is no longer possible.
-        The error is also new.
+        **Update:** This seems to have changed now and is no longer possible. The error is also new.
 
 
         Setting `play_ready_message` to true plays a welcome message on the device saying "Hi, I'm your Google Assistant. I'm here to help. To learn a few things you can do, continue in the Google Home app."
@@ -732,8 +725,7 @@ paths:
             method: POST
             uri: /assistant/check_ready_status
           x-testDescription: >-
-            **Update:** This seems to have changed now and is no longer
-            possible. The error is also new.
+            **Update:** This seems to have changed now and is no longer possible. The error is also new.
 
 
             Setting `play_ready_message` to true plays a welcome message on the device saying "Hi, I'm your Google Assistant. I'm here to help. To learn a few things you can do, continue in the Google Home app."
@@ -743,8 +735,7 @@ paths:
   /assistant/notifications:
     post:
       deprecated: false
-      description: This is for the Do Not Disturb option. Sending an empty-body POST
-        returns the current value. Sending a new value changes it.
+      description: This is for the Do Not Disturb option. Sending an empty-body POST returns the current value. Sending a new value changes it.
       operationId: DoNotDisturb
       parameters:
         - in: header
@@ -791,8 +782,7 @@ paths:
               Content-Type: application/json
             method: POST
             uri: /assistant/notifications
-          x-testDescription: This is for the Do Not Disturb option. Sending an empty-body
-            POST returns the current value. Sending a new value changes it.
+          x-testDescription: This is for the Do Not Disturb option. Sending an empty-body POST returns the current value. Sending a new value changes it.
           x-testEnabled: true
           x-testName: Do Not Disturb
           x-testShouldPass: true
@@ -1019,10 +1009,12 @@ paths:
   /bluetooth/connect:
     post:
       deprecated: false
-      description: |-
+      description: >-
         *See note for Bluetooth under `/setup/bluetooth/status`*
 
+
         **For Part 2 only**
+
 
         This pairs with other bluetooth speakers by mac address.
       operationId: PairwithSpeaker
@@ -1080,10 +1072,12 @@ paths:
               Content-Type: application/json
             method: POST
             uri: /bluetooth/connect
-          x-testDescription: |-
+          x-testDescription: >-
             *See note for Bluetooth under `/setup/bluetooth/status`*
 
+
             **For Part 2 only**
+
 
             This pairs with other bluetooth speakers by mac address.
           x-testEnabled: true
@@ -1603,23 +1597,17 @@ paths:
 
               \        \"service_uuids\": [\r
 
-              \          \"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx\",\
-              \r
+              \          \"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx\",\r
 
-              \          \"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx\",\
-              \r
+              \          \"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx\",\r
 
-              \          \"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx\",\
-              \r
+              \          \"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx\",\r
 
-              \          \"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx\",\
-              \r
+              \          \"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx\",\r
 
-              \          \"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx\",\
-              \r
+              \          \"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx\",\r
 
-              \          \"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx\"\
-              \r
+              \          \"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx\"\r
 
               \        ]\r
 
@@ -1725,11 +1713,14 @@ paths:
   /configured_networks:
     get:
       deprecated: false
-      description: |-
+      description: >-
         This gets a list of all saved Wi-Fi networks.
 
+
         Each network has `ssid`, `wpa_auth`, `wpa_cipher` and `wpa_id`.  
+
         `wpa_id` is an incrementing number used to identify a saved network.  
+
         #TODO: Add values for `wpa_auth` and `wpa_cipher`.
       operationId: GetSavedNetworks
       parameters: []
@@ -1798,10 +1789,7 @@ paths:
   /connect_wifi:
     post:
       deprecated: false
-      description: "**Note:** Not sure how the password is encrypted. Might be using
-        the public certificate from /setup/eureka_info. So this cannot be used
-        as of now. If someone figures it out, please [create a new issue
-        here](https://github.com/rithvikvibhu/GHLocalApi/issues/new)."
+      description: "**Note:** Not sure how the password is encrypted. Might be using the public certificate from /setup/eureka_info. So this cannot be used as of now. If someone figures it out, please [create a new issue here](https://github.com/rithvikvibhu/GHLocalApi/issues/new)."
       operationId: ConnecttoWi-FiNetwork
       parameters: []
       requestBody:
@@ -1858,10 +1846,7 @@ paths:
               Content-Type: application/json
             method: POST
             uri: /connect_wifi
-          x-testDescription: "**Note:** Not sure how the password is encrypted. Might be
-            using the public certificate from /setup/eureka_info. So this cannot
-            be used as of now. If someone figures it out, please [create a new
-            issue here](https://github.com/rithvikvibhu/GHLocalApi/issues/new)."
+          x-testDescription: "**Note:** Not sure how the password is encrypted. Might be using the public certificate from /setup/eureka_info. So this cannot be used as of now. If someone figures it out, please [create a new issue here](https://github.com/rithvikvibhu/GHLocalApi/issues/new)."
           x-testEnabled: true
           x-testName: Connect to Wi-Fi Network
           x-testShouldPass: true
@@ -1869,9 +1854,7 @@ paths:
     get:
       deprecated: false
       description: >-
-        This gives most of the device info. The GET parameter `param` is a comma
-        separated list of json keys to fetch. Currently, these params are known:
-        `version,audio,name,build_info,detail,device_info,net,wifi,setup,settings,opt_in,opencast,multizone,proxy,night_mode_params,user_eq,room_equalizer,sign,aogh,ultrasound,mesh`
+        This gives most of the device info. The GET parameter `param` is a comma separated list of json keys to fetch. Currently, these params are known: `version,audio,name,build_info,detail,device_info,net,wifi,setup,settings,opt_in,opencast,multizone,proxy,night_mode_params,user_eq,room_equalizer,sign,aogh,ultrasound,mesh`
 
 
         Nested items can also be filtered using the dot notation. Example: `audio.digital`
@@ -2058,14 +2041,18 @@ paths:
                     num_obtain_ip: 0
                   tos_accepted: true
                 sign:
-                  certificate: |
+                  certificate: >
                     -----BEGIN CERTIFICATE-----
+
                     MIID...Oeb0
+
                     -----END CERTIFICATE-----
                   intermediate_certs:
-                    - |
+                    - >
                       -----BEGIN CERTIFICATE-----
+
                       MIID...O/bYS
+
                       -----END CERTIFICATE-----
                   nonce: "1234512345"
                   signed_data: Rr5Q...
@@ -2128,8 +2115,7 @@ paths:
 
               \    \"preview_channel_state\": 4,\r
 
-              \    \"release_track\":
-              \"preview-joining-stable-channel\",\r
+              \    \"release_track\": \"preview-joining-stable-channel\",\r
 
               \    \"system_build_number\": \"195690\"\r
 
@@ -2157,15 +2143,13 @@ paths:
 
               \    \"locale\": {\r
 
-              \      \"display_string\": \"English (United
-              States)\"\r
+              \      \"display_string\": \"English (United States)\"\r
 
               \    },\r
 
               \    \"timezone\": {\r
 
-              \      \"display_string\": \"India Standard Time
-              (Kolkata)\",\r
+              \      \"display_string\": \"India Standard Time (Kolkata)\",\r
 
               \      \"offset\": 330\r
 
@@ -2213,8 +2197,7 @@ paths:
 
               \      \"input_management_supported\": true,\r
 
-              \      \"keep_hotspot_until_connected_supported\":
-              true,\r
+              \      \"keep_hotspot_until_connected_supported\": true,\r
 
               \      \"multi_user_supported\": true,\r
 
@@ -2260,8 +2243,7 @@ paths:
 
               \    \"hotspot_bssid\": \"FA:8F:CA:30:41:71\",\r
 
-              \    \"local_authorization_token_hash\":
-              \"hBt2...\",\r
+              \    \"local_authorization_token_hash\": \"hBt2...\",\r
 
               \    \"mac_address\": \"F4:F5:...\",\r
 
@@ -2449,13 +2431,11 @@ paths:
 
               \  \"sign\": {\r
 
-              \    \"certificate\": \"-----BEGIN
-              CERTIFICATE-----\\nMIID...Oeb0\\n-----END CERTIFICATE-----\\n\",\r
+              \    \"certificate\": \"-----BEGIN CERTIFICATE-----\\nMIID...Oeb0\\n-----END CERTIFICATE-----\\n\",\r
 
               \    \"intermediate_certs\": [\r
 
-              \      \"-----BEGIN
-              CERTIFICATE-----\\nMIID...O/bYS\\n-----END CERTIFICATE-----\\n\"\r
+              \      \"-----BEGIN CERTIFICATE-----\\nMIID...O/bYS\\n-----END CERTIFICATE-----\\n\"\r
 
               \    ],\r
 
@@ -2531,10 +2511,7 @@ paths:
             method: GET
             uri: /eureka_info?params=version%2Caudio%2Cname%2Cbuild_info%2Cdetail%2Cdevice_info%2Cnet%2Cwifi%2Csetup%2Csettings%2Copt_in%2Copencast%2Cmultizone%2Cproxy%2Cnight_mode_params%2Cuser_eq%2Croom_equalizer%2Csign%2Caogh%2Cultrasound%2Cmesh&options=detail%2Csign&nonce=1234512345
           x-testDescription: >-
-            This gives most of the device info. The GET parameter `param` is a
-            comma separated list of json keys to fetch. Currently, these params
-            are known:
-            `version,audio,name,build_info,detail,device_info,net,wifi,setup,settings,opt_in,opencast,multizone,proxy,night_mode_params,user_eq,room_equalizer,sign,aogh,ultrasound,mesh`
+            This gives most of the device info. The GET parameter `param` is a comma separated list of json keys to fetch. Currently, these params are known: `version,audio,name,build_info,detail,device_info,net,wifi,setup,settings,opt_in,opencast,multizone,proxy,night_mode_params,user_eq,room_equalizer,sign,aogh,ultrasound,mesh`
 
 
             Nested items can also be filtered using the dot notation. Example: `audio.digital`
@@ -2550,8 +2527,7 @@ paths:
   /forget_wifi:
     post:
       deprecated: false
-      description: This is to forget a saved network by `wpa_id`. Get the `wpa_id`
-        from /setup/configured_networks
+      description: This is to forget a saved network by `wpa_id`. Get the `wpa_id` from /setup/configured_networks
       operationId: ForgetWi-FiNetwork
       parameters: []
       requestBody:
@@ -2594,8 +2570,7 @@ paths:
               Content-Type: application/json
             method: POST
             uri: /forget_wifi
-          x-testDescription: This is to forget a saved network by `wpa_id`. Get the
-            `wpa_id` from /setup/configured_networks
+          x-testDescription: This is to forget a saved network by `wpa_id`. Get the `wpa_id` from /setup/configured_networks
           x-testEnabled: true
           x-testName: Forget Wi-Fi Network
           x-testShouldPass: true
@@ -2628,9 +2603,11 @@ paths:
             application/json:
               example:
                 app_device_id: ...
-                certificate: |
+                certificate: >
                   -----BEGIN CERTIFICATE-----
+
                   MIID...Oeb0
+
                   -----END CERTIFICATE-----
                 signed_data: HAjp...
               schema:
@@ -2653,8 +2630,7 @@ paths:
 
               \  \"app_device_id\": \"...\",\r
 
-              \  \"certificate\": \"-----BEGIN
-              CERTIFICATE-----\\nMIID...Oeb0\\n-----END CERTIFICATE-----\\n\",\r
+              \  \"certificate\": \"-----BEGIN CERTIFICATE-----\\nMIID...Oeb0\\n-----END CERTIFICATE-----\\n\",\r
 
               \  \"signed_data\": \"HAjp...\"\r
 
@@ -2692,8 +2668,9 @@ paths:
   /icon.png:
     get:
       deprecated: false
-      description: |-
+      description: >-
         **Update:** This no longer exists. It's not useful, anyway.
+
 
         A redirect to `http://www.gstatic.com/eureka/images/eureka_device.png`
       operationId: ChromecastIcon
@@ -2734,8 +2711,7 @@ paths:
     get:
       deprecated: false
       description: >-
-        This gives a token which is used by the Home app to get offers. The
-        offers themselves are not stored on the device.  
+        This gives a token which is used by the Home app to get offers. The offers themselves are not stored on the device.  
 
         A new token is generated for every request.
       operationId: Offer
@@ -2776,8 +2752,7 @@ paths:
             method: GET
             uri: /offer
           x-testDescription: >-
-            This gives a token which is used by the Home app to get offers. The
-            offers themselves are not stored on the device.  
+            This gives a token which is used by the Home app to get offers. The offers themselves are not stored on the device.  
 
             A new token is generated for every request.
           x-testEnabled: true
@@ -2786,8 +2761,7 @@ paths:
   /reboot:
     post:
       deprecated: false
-      description: 'This can simply reboot the device (`params: "now"`) or factory
-        reset the device (`params: "fdr"`).'
+      description: 'This can simply reboot the device (`params: "now"`) or factory reset the device (`params: "fdr"`).'
       operationId: RebootandFactoryReset
       parameters: []
       requestBody:
@@ -2833,8 +2807,7 @@ paths:
               Content-Type: application/json
             method: POST
             uri: /reboot
-          x-testDescription: 'This can simply reboot the device (`params: "now"`) or
-            factory reset the device (`params: "fdr"`).'
+          x-testDescription: 'This can simply reboot the device (`params: "now"`) or factory reset the device (`params: "fdr"`).'
           x-testEnabled: true
           x-testName: Reboot and Factory Reset
           x-testShouldPass: true
@@ -3094,7 +3067,7 @@ paths:
         IsMultiContentStreaming: false
       x-unitTests:
         - expectedResponse:
-            body: |-
+            body: >-
               [
                 {
                   "display_string": "Arabic - العربية",
@@ -3160,7 +3133,7 @@ paths:
         IsMultiContentStreaming: false
       x-unitTests:
         - expectedResponse:
-            body: |-
+            body: >-
               [
                 {
                   "display_string": "Samoa Standard Time (Midway)",
@@ -3247,9 +3220,7 @@ paths:
           request:
             body: "{\r
 
-              \  \"url\":
-              \"https://storage.googleapis.com/reliability-speedtest/random.txt\
-              \"\r
+              \  \"url\": \"https://storage.googleapis.com/reliability-speedtest/random.txt\"\r
 
               }"
             headers:
@@ -3268,8 +3239,7 @@ paths:
     post:
       deprecated: false
       description: >-
-        This can only set new equalizer values. To get already set values, use
-        /setup/eureka_info.
+        This can only set new equalizer values. To get already set values, use /setup/eureka_info.
 
 
         The body is mandatory. It can either contain `low_shelf` or `high_shelf` or both.
@@ -3344,8 +3314,7 @@ paths:
             method: POST
             uri: /user_eq/set_equalizer
           x-testDescription: >-
-            This can only set new equalizer values. To get already set values,
-            use /setup/eureka_info.
+            This can only set new equalizer values. To get already set values, use /setup/eureka_info.
 
 
             The body is mandatory. It can either contain `low_shelf` or `high_shelf` or both.
@@ -4082,14 +4051,18 @@ components:
             num_obtain_ip: 0
           tos_accepted: true
         sign:
-          certificate: |
+          certificate: >
             -----BEGIN CERTIFICATE-----
+
             MIID...Oeb0
+
             -----END CERTIFICATE-----
           intermediate_certs:
-            - |
+            - >
               -----BEGIN CERTIFICATE-----
+
               MIID...O/bYS
+
               -----END CERTIFICATE-----
           nonce: "1234512345"
           signed_data: Rr5Q...
@@ -4176,9 +4149,11 @@ components:
     Example11:
       example:
         app_device_id: ...
-        certificate: |
+        certificate: >
           -----BEGIN CERTIFICATE-----
+
           MIID...Oeb0
+
           -----END CERTIFICATE-----
         signed_data: HAjp...
       properties:
@@ -5209,14 +5184,18 @@ components:
       type: object
     Sign:
       example:
-        certificate: |
+        certificate: >
           -----BEGIN CERTIFICATE-----
+
           MIID...Oeb0
+
           -----END CERTIFICATE-----
         intermediate_certs:
-          - |
+          - >
             -----BEGIN CERTIFICATE-----
+
             MIID...O/bYS
+
             -----END CERTIFICATE-----
         nonce: "1234512345"
         signed_data: Rr5Q...
@@ -5473,8 +5452,7 @@ components:
       type: object
   securitySchemes:
     cast-local-authorization-token:
-      description: Local authorization token. For more details, check the
-        [Authentication section](#section/Google-Home-Local-API/Authentication).
+      description: Local authorization token. For more details, check the [Authentication section](#section/Google-Home-Local-API/Authentication).
       in: header
       name: cast-local-authorization-token
       type: apiKey

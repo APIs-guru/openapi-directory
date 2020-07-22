@@ -9,12 +9,7 @@ info:
   contact:
     name: eBay Inc,
     x-twitter: ebay
-  description: The <b>Recommendation API</b> returns information that sellers can
-    use to optimize the configuration of their listings on eBay.
-    <br><br>Currently, the API contains a single method,
-    <b>findListingRecommendations</b>. This method provides information that
-    sellers can use to configure Promoted Listings ad campaigns to maximize the
-    visibility of their items in the eBay marketplace.
+  description: The <b>Recommendation API</b> returns information that sellers can use to optimize the configuration of their listings on eBay. <br><br>Currently, the API contains a single method, <b>findListingRecommendations</b>. This method provides information that sellers can use to configure Promoted Listings ad campaigns to maximize the visibility of their items in the eBay marketplace.
   license:
     name: eBay API License Agreement
     url: https://go.developer.ebay.com/api-license-agreement
@@ -36,80 +31,28 @@ security:
 paths:
   /find:
     post:
-      description: "The find method returns recommendations and information that
-        sellers can use to optimize their listing configurations. The response
-        from this method includes an array of the seller's listing IDs, where
-        each element in the array contains recommendations related to the
-        associated listing ID. The AD recommendation type The method currently
-        returns information for a single recommendation type (AD) which contains
-        information that sellers can use to configure Promoted Listings ad
-        campaigns. AD contains two sets of information: The promoteWithAd
-        indicator The promoteWithAd response field indicates whether or not eBay
-        recommends you place the associated listing in a Promoted Listings ad
-        campaign. The returned value is set to either RECOMMENDED or
-        UNDETERMINED, where RECOMMENDED identifies the listings that will
-        benefit the most from having them included in an ad campaign. The bid
-        percentage Also known as the &quot;ad rate,&quot; the bidPercentage
-        field provides the current trending bid percentage of similarly promoted
-        items in the marketplace. The ad rate is a user-specified value that
-        indicates the level of promotion that eBay applies to the campaign
-        across the marketplace. The value is also used to calculate the
-        Promotion Listings fee, which is assessed to the seller if a Promoted
-        Listings action results in the sale of an item. Configuring the request
-        You can configure a request to review all of a seller's currently active
-        listings, or just a subset of them. All active listings &ndash; If you
-        leave the request body empty, the request targets all the items
-        currently listed by the seller. Here, the response is filtered to
-        contain only the items where promoteWithAd equals RECOMMENDED. In this
-        case, eBay recommends that all the returned listings should be included
-        in a Promoted Listings ad campaign. Selected listing IDs &ndash; If you
-        populate the request body with a set of listingIds, the response
-        contains data for all the specified listing IDs. In this scenario, the
-        response provides you with information on listings where the
-        promoteWithAd can be either RECOMMENDED or UNDETERMINED. The paginated
-        response Because the response can contain many listing IDs, the
-        findListingRecommendations method paginates the response set. You can
-        control size of the returned pages, as well as an offset that dictates
-        where to start the pagination, using query parameters in the request."
+      description: "The find method returns recommendations and information that sellers can use to optimize their listing configurations. The response from this method includes an array of the seller's listing IDs, where each element in the array contains recommendations related to the associated listing ID. The AD recommendation type The method currently returns information for a single recommendation type (AD) which contains information that sellers can use to configure Promoted Listings ad campaigns. AD contains two sets of information: The promoteWithAd indicator The promoteWithAd response field indicates whether or not eBay recommends you place the associated listing in a Promoted Listings ad campaign. The returned value is set to either RECOMMENDED or UNDETERMINED, where RECOMMENDED identifies the listings that will benefit the most from having them included in an ad campaign. The bid percentage Also known as the &quot;ad rate,&quot; the bidPercentage field provides the current trending bid percentage of similarly promoted items in the marketplace. The ad rate is a user-specified value that indicates the level of promotion that eBay applies to the campaign across the marketplace. The value is also used to calculate the Promotion Listings fee, which is assessed to the seller if a Promoted Listings action results in the sale of an item. Configuring the request You can configure a request to review all of a seller's currently active listings, or just a subset of them. All active listings &ndash; If you leave the request body empty, the request targets all the items currently listed by the seller. Here, the response is filtered to contain only the items where promoteWithAd equals RECOMMENDED. In this case, eBay recommends that all the returned listings should be included in a Promoted Listings ad campaign. Selected listing IDs &ndash; If you populate the request body with a set of listingIds, the response contains data for all the specified listing IDs. In this scenario, the response provides you with information on listings where the promoteWithAd can be either RECOMMENDED or UNDETERMINED. The paginated response Because the response can contain many listing IDs, the findListingRecommendations method paginates the response set. You can control size of the returned pages, as well as an offset that dictates where to start the pagination, using query parameters in the request."
       operationId: findListingRecommendations
       parameters:
-        - description: "Provide a list of key-value pairs to specify the criteria you want
-            to use to filter the response. In the list, separate each filter key
-            from its associated value with a colon (&quot;:&quot;). Currently,
-            the only supported filter value is recommendationTypes and it
-            supports only the (&quot;AD&quot;) type. Follow the
-            recommendationTypes specifier with the filter type(s) enclosed in
-            curly braces (&quot;{ }&quot;), and separate multiple types with
-            commas. Example: filter=recommendationTypes:{AD} Default:
-            recommendationTypes:{AD}"
+        - description: "Provide a list of key-value pairs to specify the criteria you want to use to filter the response. In the list, separate each filter key from its associated value with a colon (&quot;:&quot;). Currently, the only supported filter value is recommendationTypes and it supports only the (&quot;AD&quot;) type. Follow the recommendationTypes specifier with the filter type(s) enclosed in curly braces (&quot;{ }&quot;), and separate multiple types with commas. Example: filter=recommendationTypes:{AD} Default: recommendationTypes:{AD}"
           in: query
           name: filter
           required: false
           schema:
             type: string
-        - description: "Use this query parameter to set the maximum number of ads to
-            return on a page from the paginated response. Default: 10 Maximum:
-            500"
+        - description: "Use this query parameter to set the maximum number of ads to return on a page from the paginated response. Default: 10 Maximum: 500"
           in: query
           name: limit
           required: false
           schema:
             type: string
-        - description: "Specifies the number of ads to skip in the result set before
-            returning the first ad in the paginated response. Combine offset
-            with the limit query parameter to control the items returned in the
-            response. For example, if you supply an offset of 0 and a limit of
-            10, the first page of the response contains the first 10 items from
-            the complete list of items retrieved by the call. If offset is 10
-            and limit is 20, the first page of the response contains items 11-30
-            from the complete result set. Default: 0"
+        - description: "Specifies the number of ads to skip in the result set before returning the first ad in the paginated response. Combine offset with the limit query parameter to control the items returned in the response. For example, if you supply an offset of 0 and a limit of 10, the first page of the response contains the first 10 items from the complete list of items retrieved by the call. If offset is 10 and limit is 20, the first page of the response contains items 11-30 from the complete result set. Default: 0"
           in: query
           name: offset
           required: false
           schema:
             type: string
-        - description: Use this header to specify the eBay marketplace where you list the
-            items for which you want to get recommendations.
+        - description: Use this header to specify the eBay marketplace where you list the items for which you want to get recommendations.
           in: header
           name: X-EBAY-C-MARKETPLACE-ID
           required: true
@@ -136,8 +79,7 @@ paths:
             errors:
               "145101":
                 category: REQUEST
-                description: "The marketplace value {marketplaceId} is not supported. The
-                  supported values are: {marketplaceIds}. "
+                description: "The marketplace value {marketplaceId} is not supported. The supported values are: {marketplaceIds}. "
                 domain: API_RECOMMENDATION
               "145102":
                 category: REQUEST
@@ -157,8 +99,7 @@ paths:
                 domain: API_RECOMMENDATION
               "145106":
                 category: REQUEST
-                description: Listing ID limit exceeded. You can pass up to a maximum of 500
-                  listing IDs per request.
+                description: Listing ID limit exceeded. You can pass up to a maximum of 500 listing IDs per request.
                 domain: API_RECOMMENDATION
         "500":
           description: Internal Server Error
@@ -176,64 +117,30 @@ paths:
 components:
   schemas:
     Ad:
-      description: A complex type that contains recommendations and information on how
-        to configure Promoted Listings ad campaigns.
+      description: A complex type that contains recommendations and information on how to configure Promoted Listings ad campaigns.
       properties:
         bidPercentages:
-          description: This field returns information that you can use to configure the
-            bidPercentage field in a Promoted Listings campaign. While this
-            field returns an array, TRENDING is currently the only supported bid
-            percentage type, so the array is populated with just a single
-            element. The TRENDING bid percentage is calculated by reviewing the
-            average ad rates of other similar promoted listings in the
-            marketplace. Setting the bidPercentage of your ad campaign to this
-            rate will help the items in the campaign be competitive with other
-            items in the marketplace by improving their chances of being
-            displayed more often in the marketplace.
+          description: This field returns information that you can use to configure the bidPercentage field in a Promoted Listings campaign. While this field returns an array, TRENDING is currently the only supported bid percentage type, so the array is populated with just a single element. The TRENDING bid percentage is calculated by reviewing the average ad rates of other similar promoted listings in the marketplace. Setting the bidPercentage of your ad campaign to this rate will help the items in the campaign be competitive with other items in the marketplace by improving their chances of being displayed more often in the marketplace.
           items:
             $ref: "#/components/schemas/BidPercentages"
           type: array
         promoteWithAd:
           $ref: "#/components/schemas/PromoteWithAd"
-          description: "An enum whose values describe whether or not eBay recommends you
-            place the associated listing in a Promoted Listings ad campaign. IDs
-            deemed RECOMMENDED by eBay are the listings with the highest
-            potential of benefiting from being promoted. The recommendation
-            calculation is based on marketplace trends, like buyer demand and
-            the competition in the item&rsquo;s category. Note: A promoteWithAd
-            value cannot be calculated for listings that are part of Promoted
-            Listings campaigns. Because of this, if you call
-            findListingRecommendations with a specific set of listing IDs, the
-            promoteWithAd field is not returned for any of the listings that are
-            involved in a promotion. However, as long as they are eligible, the
-            trending bidPercentage is returned for all specified listings, even
-            if they are part of an ad campaign."
+          description: "An enum whose values describe whether or not eBay recommends you place the associated listing in a Promoted Listings ad campaign. IDs deemed RECOMMENDED by eBay are the listings with the highest potential of benefiting from being promoted. The recommendation calculation is based on marketplace trends, like buyer demand and the competition in the item&rsquo;s category. Note: A promoteWithAd value cannot be calculated for listings that are part of Promoted Listings campaigns. Because of this, if you call findListingRecommendations with a specific set of listing IDs, the promoteWithAd field is not returned for any of the listings that are involved in a promotion. However, as long as they are eligible, the trending bidPercentage is returned for all specified listings, even if they are part of an ad campaign."
       type: object
     Basis:
-      description: An enum that describes the different ways, or the basis, by which
-        the bid percentage value is calculated. Currently, TRENDING is the only
-        valid basis.
+      description: An enum that describes the different ways, or the basis, by which the bid percentage value is calculated. Currently, TRENDING is the only valid basis.
       enum:
         - TRENDING
       type: object
     BidPercentages:
-      description: A complex type that returns data related to Promoted Listings bid
-        percentages.
+      description: A complex type that returns data related to Promoted Listings bid percentages.
       properties:
         basis:
           $ref: "#/components/schemas/Basis"
-          description: The basis by which the ad rate is calculated. TRENDING is the
-            currently supported value.
+          description: The basis by which the ad rate is calculated. TRENDING is the currently supported value.
         value:
-          description: "The bid percentage data is a single precision value, as calculated
-            by the associated basis. A TRENDING value is calculated by taking
-            into account the average bid percentages of similar promoted
-            listings in the associated marketplace. In Promoted listings ad
-            campaigns, the bid percentage (also known as the ad rate) is a
-            user-defined value that sets the level that eBay raises the
-            visibility of the listing in the marketplace. It is also the rate
-            that is used to calculate the Promoted Listings fee. Minimum value:
-            1.0 &nbsp; Maximum value: 100.0"
+          description: "The bid percentage data is a single precision value, as calculated by the associated basis. A TRENDING value is calculated by taking into account the average bid percentages of similar promoted listings in the associated marketplace. In Promoted listings ad campaigns, the bid percentage (also known as the ad rate) is a user-defined value that sets the level that eBay raises the visibility of the listing in the marketplace. It is also the rate that is used to calculate the Promoted Listings fee. Minimum value: 1.0 &nbsp; Maximum value: 100.0"
           type: string
       type: object
     Error:
@@ -243,8 +150,7 @@ components:
           description: Identifies the type of erro.
           type: string
         domain:
-          description: Name for the primary system where the error occurred. This is
-            relevant for application errors.
+          description: Name for the primary system where the error occurred. This is relevant for application errors.
           type: string
         errorId:
           description: A unique number to identify the error.
@@ -259,8 +165,7 @@ components:
           description: A more detailed explanation of the error.
           type: string
         message:
-          description: Information on how to correct the problem, in the end user's terms
-            and language where applicable.
+          description: Information on how to correct the problem, in the end user's terms and language where applicable.
           type: string
         outputRefIds:
           description: An array of request elements most closely associated to the error.
@@ -268,15 +173,12 @@ components:
             type: string
           type: array
         parameters:
-          description: An array of name/value pairs that describe details the error
-            condition. These are useful when multiple errors are returned.
+          description: An array of name/value pairs that describe details the error condition. These are useful when multiple errors are returned.
           items:
             $ref: "#/components/schemas/ErrorParameter"
           type: array
         subdomain:
-          description: "Further helps indicate which subsystem the error is coming from.
-            System subcategories include: Initialization, Serialization,
-            Security, Monitoring, Rate Limiting, etc."
+          description: "Further helps indicate which subsystem the error is coming from. System subcategories include: Initialization, Serialization, Security, Monitoring, Rate Limiting, etc."
           type: string
       type: object
     ErrorParameter:
@@ -289,86 +191,58 @@ components:
           type: string
       type: object
     FindListingRecommendationRequest:
-      description: An list of listing ID values for which you want Promoted Listings
-        ad configuration information.
+      description: An list of listing ID values for which you want Promoted Listings ad configuration information.
       properties:
         listingIds:
-          description: "A comma-separated list of listing IDs for which you want Promoted
-            Listings ad configuration information. Currently, this method
-            accepts only listingId values from the Trading API. Max: 500 listing
-            IDs"
+          description: "A comma-separated list of listing IDs for which you want Promoted Listings ad configuration information. Currently, this method accepts only listingId values from the Trading API. Max: 500 listing IDs"
           items:
             type: string
           type: array
       type: object
     ListingRecommendation:
-      description: A complex type that contains the ID of an actively listed item and
-        a set of related listing recommendations. The recommendations contain
-        information the seller can use to optimize their listing configurations.
+      description: A complex type that contains the ID of an actively listed item and a set of related listing recommendations. The recommendations contain information the seller can use to optimize their listing configurations.
       properties:
         listingId:
-          description: An ID that identifies the active listing associated with the eBay
-            recommendations.
+          description: An ID that identifies the active listing associated with the eBay recommendations.
           type: string
         marketing:
           $ref: "#/components/schemas/MarketingRecommendation"
-          description: "This return object provides the eBay recommendations and
-            information related to the associated listing ID. The container
-            currently returns the AD recommendation type, which contains
-            information that sellers can use to configure Promoted Listings ad
-            campaigns. This container is returned with each
-            ListingRecommendation object, except when: The listing ID is not
-            eligible for Promoted Listings The listing ID is currently in a
-            Promoted Listings campaign The listing ID is invalid"
+          description: "This return object provides the eBay recommendations and information related to the associated listing ID. The container currently returns the AD recommendation type, which contains information that sellers can use to configure Promoted Listings ad campaigns. This container is returned with each ListingRecommendation object, except when: The listing ID is not eligible for Promoted Listings The listing ID is currently in a Promoted Listings campaign The listing ID is invalid"
       type: object
     MarketingRecommendation:
-      description: A complex type that contains information about how a seller can
-        improve their listing configurations. The AD object contains Promoted
-        Listings recommendations and information, which the seller can use to
-        improve buyer conversions. The response can also contain an optional
-        message about the returned data.
+      description: A complex type that contains information about how a seller can improve their listing configurations. The AD object contains Promoted Listings recommendations and information, which the seller can use to improve buyer conversions. The response can also contain an optional message about the returned data.
       properties:
         ad:
           $ref: "#/components/schemas/Ad"
-          description: An object that contains Promoted Listings recommendations and
-            information related to the associated listing ID.
+          description: An object that contains Promoted Listings recommendations and information related to the associated listing ID.
         message:
           description: A message that can conditionally accompany the listing information.
           type: string
       type: object
     PagedListingRecommendationCollection:
-      description: The high-level object used to return a set of Promoted Listings ad
-        recommendations.
+      description: The high-level object used to return a set of Promoted Listings ad recommendations.
       properties:
         href:
           description: The URI of the current page of results from the result set.
           type: string
         limit:
-          description: The number of items returned on a single page from the result set.
-            This value can be set with the limit request parameter.
+          description: The number of items returned on a single page from the result set. This value can be set with the limit request parameter.
           format: int32
           type: integer
         listingRecommendations:
-          description: Returns a list of listingRecommendations, where each element in the
-            list offers recommendations for the associated listing ID.
+          description: Returns a list of listingRecommendations, where each element in the list offers recommendations for the associated listing ID.
           items:
             $ref: "#/components/schemas/ListingRecommendation"
           type: array
         next:
-          description: "The URI for the next page of results. This value is returned only
-            if there is an additional page of results in the result set. Max
-            length: 2048"
+          description: "The URI for the next page of results. This value is returned only if there is an additional page of results in the result set. Max length: 2048"
           type: string
         offset:
-          description: The number of results skipped in the result set before listing the
-            first returned result. This value can be set with the offset request
-            parameter.
+          description: The number of results skipped in the result set before listing the first returned result. This value can be set with the offset request parameter.
           format: int32
           type: integer
         prev:
-          description: "The URI for the previous page of results. This value is returned
-            only if there is a previous page of results in the result set. Max
-            length: 2048"
+          description: "The URI for the previous page of results. This value is returned only if there is a previous page of results in the result set. Max length: 2048"
           type: string
         total:
           description: The total number of items in the result set.
@@ -376,16 +250,14 @@ components:
           type: integer
       type: object
     PromoteWithAd:
-      description: An enum that describes whether or not eBay recommends placing the
-        associated listing in a Promoted Listings ad campaign.
+      description: An enum that describes whether or not eBay recommends placing the associated listing in a Promoted Listings ad campaign.
       enum:
         - RECOMMENDED
         - UNDETERMINED
       type: object
   securitySchemes:
     api_auth:
-      description: The security definitions for this API. Please check individual
-        operations for applicable scopes.
+      description: The security definitions for this API. Please check individual operations for applicable scopes.
       flows:
         authorizationCode:
           authorizationUrl: https://auth.ebay.com/oauth2/authorize

@@ -266,8 +266,7 @@ paths:
   /search:
     get:
       description: >-
-        Returns trials based on a search query. By default, it'll search in all
-        of a trial's attributes.
+        Returns trials based on a search query. By default, it'll search in all of a trial's attributes.
 
         - `q` is a [ElasticSearch query string](https://www.elastic.co/guide/en/elasticsearch/reference/2.3/query-dsl-query-string-query.html#query-string-syntax) (e.g. `public_title:(depressive OR depression)`)
 
@@ -276,9 +275,7 @@ paths:
         - `per_page` can take a value between `10` and `100`
       operationId: searchTrials
       parameters:
-        - description: The search query (follows the [ElasticSearch Query
-            String](https://www.elastic.co/guide/en/elasticsearch/reference/2.3/query-dsl-query-string-query.html#query-string-syntax)
-            syntax)
+        - description: The search query (follows the [ElasticSearch Query String](https://www.elastic.co/guide/en/elasticsearch/reference/2.3/query-dsl-query-string-query.html#query-string-syntax) syntax)
           in: query
           name: q
           type: string
@@ -310,10 +307,7 @@ paths:
     x-swagger-router-controller: search
   "/search/autocomplete/{in}":
     get:
-      description: Autocomplete search feature for supported database entities
-        (`location`). It has the same options as a regular `search` operation,
-        with an extra **required** `in` parameter indicating the entity type to
-        search.
+      description: Autocomplete search feature for supported database entities (`location`). It has the same options as a regular `search` operation, with an extra **required** `in` parameter indicating the entity type to search.
       operationId: autocomplete
       parameters:
         - description: The entity to search for
@@ -358,16 +352,11 @@ paths:
       description: Search the FDA documents
       operationId: searchFDADocuments
       parameters:
-        - description: The search query (follows the [ElasticSearch Query
-            String](https://www.elastic.co/guide/en/elasticsearch/reference/2.3/query-dsl-query-string-query.html#query-string-syntax)
-            syntax)
+        - description: The search query (follows the [ElasticSearch Query String](https://www.elastic.co/guide/en/elasticsearch/reference/2.3/query-dsl-query-string-query.html#query-string-syntax) syntax)
           in: query
           name: q
           type: string
-        - description: Search query on the documents file's text (follows the
-            [ElasticSearch Simple Query
-            String](https://www.elastic.co/guide/en/elasticsearch/reference/2.3/query-dsl-simple-query-string-query.html#_simple_query_string_syntax)
-            syntax)
+        - description: Search query on the documents file's text (follows the [ElasticSearch Simple Query String](https://www.elastic.co/guide/en/elasticsearch/reference/2.3/query-dsl-simple-query-string-query.html#_simple_query_string_syntax) syntax)
           in: query
           name: text
           type: string
@@ -1107,14 +1096,10 @@ definitions:
       age_range:
         properties:
           max_age:
-            description: Maximum participant age (e.g. "12 Years", "1 Month", "15 Days"). If
-              unknown, it's `undefined`. If no limit, it's "any". If not
-              applicable, it's "N/A".
+            description: Maximum participant age (e.g. "12 Years", "1 Month", "15 Days"). If unknown, it's `undefined`. If no limit, it's "any". If not applicable, it's "N/A".
             type: string
           min_age:
-            description: Minimum participant age (e.g. "12 Years", "1 Month", "15 Days"). If
-              unknown, it's `undefined`. If no limit, it's "any". If not
-              applicable, it's "N/A".
+            description: Minimum participant age (e.g. "12 Years", "1 Month", "15 Days"). If unknown, it's `undefined`. If no limit, it's "any". If not applicable, it's "N/A".
             type: string
         type: object
       brief_summary:

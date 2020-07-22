@@ -57,8 +57,7 @@ paths:
       consumes:
         - application/x-www-form-urlencoded
       description: >
-        Retourne les SMS envoyés sur une période donnée en fonction d'une date
-        de début et d'une date de fin. 
+        Retourne les SMS envoyés sur une période donnée en fonction d'une date de début et d'une date de fin. 
 
 
         Les dates sont au format YYYY-MM-DD hh:mm. 
@@ -141,7 +140,7 @@ paths:
     get:
       consumes:
         - application/x-www-form-urlencoded
-      description: |
+      description: >
         Retourne le credit existant associe au compte.
       operationId: getCredit
       parameters:
@@ -151,8 +150,7 @@ paths:
           name: keyid
           required: true
           type: string
-        - description: Type de reponse demandée, 1 pour euro, 2 pour euro + estimation
-            quantité
+        - description: Type de reponse demandée, 1 pour euro, 2 pour euro + estimation quantité
           enum:
             - "1"
             - "2"
@@ -256,7 +254,7 @@ paths:
     post:
       consumes:
         - application/json
-      description: |
+      description: >
         Réalise un lookup HLR sur les numéros 
       operationId: getHlr
       parameters:
@@ -290,9 +288,7 @@ paths:
     post:
       consumes:
         - application/json
-      description: Cree un nouveau répertoire et retourne son identifiant. Cet
-        identifiant pourra être utilisé pour ajouter ou supprimer des numéros
-        via l'API.
+      description: Cree un nouveau répertoire et retourne son identifiant. Cet identifiant pourra être utilisé pour ajouter ou supprimer des numéros via l'API.
       operationId: repertoireCrea
       parameters:
         - description: Creation repertoire
@@ -345,8 +341,7 @@ paths:
     post:
       consumes:
         - application/x-www-form-urlencoded
-      description: Ajoute un numero en liste noire. Une fois ajouté, les requêtes
-        d'envoi de SMS marketing vers ce numéro seront refusées.
+      description: Ajoute un numero en liste noire. Une fois ajouté, les requêtes d'envoi de SMS marketing vers ce numéro seront refusées.
       operationId: setListeNoire
       parameters:
         - description: Clé API
@@ -453,7 +448,7 @@ paths:
     post:
       consumes:
         - application/json
-      description: |
+      description: >
         Envoi de SMS vers 1 ou plusieurs destinataires
       operationId: sendSmsMulti
       parameters:
@@ -582,13 +577,11 @@ definitions:
           - "1"
         type: string
       date_envoi:
-        description: Date d'envoi au format YYYY-MM-DD hh:mm . Ce paramètre est
-          optionnel, si il est omis l'envoi est réalisé immédiatement.
+        description: Date d'envoi au format YYYY-MM-DD hh:mm . Ce paramètre est optionnel, si il est omis l'envoi est réalisé immédiatement.
         type: string
       emetteur:
         description: >
-          - L'emetteur doit être une chaîne alphanumérique comprise entre 4 et
-          11 caractères.
+          - L'emetteur doit être une chaîne alphanumérique comprise entre 4 et 11 caractères.
 
 
           - Les caractères acceptés sont les chiffres entre 0 et 9, les lettres entre A et Z et l’espace.
@@ -697,30 +690,22 @@ definitions:
         description: Clé API
         type: string
       nostop:
-        description: Si le message n’est pas à but commercial, vous pouvez faire une
-          demande pour retirer l’obligation du STOP. Une fois votre demande
-          validée par nos services, vous pourrez supprimer la mention STOP SMS
-          en ajoutant nostop = "1"
+        description: Si le message n’est pas à but commercial, vous pouvez faire une demande pour retirer l’obligation du STOP. Une fois votre demande validée par nos services, vous pourrez supprimer la mention STOP SMS en ajoutant nostop = "1"
         type: string
       num:
-        description: Numero de téléphone au format national (exemple 0680010203) ou
-          international (example 33680010203)
+        description: Numero de téléphone au format national (exemple 0680010203) ou international (example 33680010203)
         type: string
       numAzur:
         enum:
           - "1"
         type: string
       sms:
-        description: Message à envoyer aux destinataires. Le message doit être encodé au
-          format utf-8 et ne contenir que des caractères existant dans
-          l'alphabet GSM. Il est également possible d'envoyer (à l'étranger
-          uniquement) des SMS en UCS-2, cf paramètre ucs2 pour plus de détails.
+        description: Message à envoyer aux destinataires. Le message doit être encodé au format utf-8 et ne contenir que des caractères existant dans l'alphabet GSM. Il est également possible d'envoyer (à l'étranger uniquement) des SMS en UCS-2, cf paramètre ucs2 pour plus de détails.
         type: string
       smslong:
         default: "999"
         description: >
-          Le SMS long permet de dépasser la limite de 160 caractères en envoyant
-          un message constitué
+          Le SMS long permet de dépasser la limite de 160 caractères en envoyant un message constitué
 
           de plusieurs SMS.
 
@@ -739,14 +724,11 @@ definitions:
           - "999"
         type: string
       tracker:
-        description: "Le tracker doit être une chaine alphanumérique de moins de 50
-          caractères. Ce tracker sera ensuite renvoyé en paramètre des urls pour
-          les retours des accusés de réception. "
+        description: "Le tracker doit être une chaine alphanumérique de moins de 50 caractères. Ce tracker sera ensuite renvoyé en paramètre des urls pour les retours des accusés de réception. "
         type: string
       ucs2:
         description: >
-          Il est également possible d’envoyer des SMS en alphabet non latin
-          (russe, chinois, arabe, etc) sur
+          Il est également possible d’envoyer des SMS en alphabet non latin (russe, chinois, arabe, etc) sur
 
           les numéros hors France métropolitaine.
 
@@ -791,8 +773,7 @@ definitions:
   Erreur_etat_etat:
     properties:
       code:
-        description: Code retour. Voir "tableau des code retour" dans l'annexe de la
-          documentation
+        description: Code retour. Voir "tableau des code retour" dans l'annexe de la documentation
         format: string
         type: string
       message:
@@ -871,8 +852,7 @@ definitions:
         description: Doit valoir "OK"
         type: string
       tel:
-        description: Numéro de téléphone à placer en liste noire. Format national
-          Français ou international.
+        description: Numéro de téléphone à placer en liste noire. Format national Français ou international.
         type: string
     required:
       - listeNoire
@@ -891,8 +871,7 @@ definitions:
   REPERTOIREcreatereponse_etat_etat:
     properties:
       code:
-        description: Code retour. Voir "tableau des code retour" dans l'annexe de la
-          documentation
+        description: Code retour. Voir "tableau des code retour" dans l'annexe de la documentation
         type: string
       message:
         description: Libellé associé au code retour.
@@ -937,12 +916,10 @@ definitions:
           $ref: "#/definitions/REPERTOIREmodifreponse_etat_etat"
         type: array
   REPERTOIREmodifreponse_etat_etat:
-    description: Tableau de code retour. Si succès, un code retour distinct par
-      numéro soumis.
+    description: Tableau de code retour. Si succès, un code retour distinct par numéro soumis.
     properties:
       code:
-        description: Code retour. Voir "tableau des code retour" dans l'annexe de la
-          documentation
+        description: Code retour. Voir "tableau des code retour" dans l'annexe de la documentation
         type: string
       message:
         description: Libellé associé au code retour.
@@ -1136,8 +1113,7 @@ definitions:
           type: string
         type: array
       repertoireEdit:
-        description: action à réaliser, "add" pour l'ajout de numéros, "del" pour la
-          suppression de numéros
+        description: action à réaliser, "add" pour l'ajout de numéros, "del" pour la suppression de numéros
         enum:
           - add
           - del
@@ -1165,8 +1141,7 @@ definitions:
   SMSReponse_etat_etat:
     properties:
       code:
-        description: Code retour. Voir "tableau des code retour" dans l'annexe de la
-          documentation
+        description: Code retour. Voir "tableau des code retour" dans l'annexe de la documentation
         type: integer
       message:
         description: Libellé associé au code de retour
@@ -1190,15 +1165,7 @@ definitions:
         description: Paramètre optionnel, date d'envoi au format YYYY-MM-DD hh:mm
         type: string
       emetteur:
-        description: "L'emetteur doit être une chaîne alphanumérique comprise entre 4 et
-          11 caractères. Les caractères acceptés sont les chiffres entre 0 et 9,
-          les lettres entre A et Z et l’espace. Il ne peut pas comporter
-          uniquement des chiffres. Pour la modification de l’émetteur et dans le
-          cadre de campagnes commerciales, les opérateurs imposent
-          contractuellement d’ajouter en fin de message le texte suivant : STOP
-          XXXXX De ce fait, le message envoyé ne pourra excéder une longueur de
-          148 caractères au lieu des 160 caractères, le « STOP » étant rajouté
-          automatiquement."
+        description: "L'emetteur doit être une chaîne alphanumérique comprise entre 4 et 11 caractères. Les caractères acceptés sont les chiffres entre 0 et 9, les lettres entre A et Z et l’espace. Il ne peut pas comporter uniquement des chiffres. Pour la modification de l’émetteur et dans le cadre de campagnes commerciales, les opérateurs imposent contractuellement d’ajouter en fin de message le texte suivant : STOP XXXXX De ce fait, le message envoyé ne pourra excéder une longueur de 148 caractères au lieu des 160 caractères, le « STOP » étant rajouté automatiquement."
         type: string
       gmt_zone:
         description: Fuseau horaire de la date d'envoi
@@ -1298,15 +1265,11 @@ definitions:
         description: Clé API
         type: string
       nostop:
-        description: Si le message n’est pas à but commercial, vous pouvez faire une
-          demande pour retirer l’obligation du STOP. Une fois votre demande
-          validée par nos services, vous pourrez supprimer la mention STOP SMS
-          en ajoutant nostop = "1"
+        description: Si le message n’est pas à but commercial, vous pouvez faire une demande pour retirer l’obligation du STOP. Une fois votre demande validée par nos services, vous pourrez supprimer la mention STOP SMS en ajoutant nostop = "1"
         type: string
       num:
         items:
-          description: Numeros de téléphone au format national (exemple 0680010203) ou
-            international (example 33680010203)
+          description: Numeros de téléphone au format national (exemple 0680010203) ou international (example 33680010203)
           type: string
         type: array
       numAzur:
@@ -1318,38 +1281,19 @@ definitions:
         type: string
       sms:
         items:
-          description: Message à envoyer aux destinataires. Il peut y avoir un seul
-            message ou 1 message par destintaire différent.
+          description: Message à envoyer aux destinataires. Il peut y avoir un seul message ou 1 message par destintaire différent.
           type: string
         type: array
       smslong:
-        description: 'Le SMS long permet de dépasser la limite de 160 caractères en
-          envoyant un message constitué de plusieurs SMS. Il est possible
-          d’envoyer jusqu’à 6 SMS concaténés pour une longueur totale maximale
-          de 918 caractères par message. Pour des raisons technique, la limite
-          par SMS concaténé étant de 153 caractères. En cas de modification de
-          l’émetteur, il faut considérer l’ajout automatique de 12 caractères du
-          « STOP SMS ». Pour envoyer un smslong, il faut ajouter le paramètre
-          smslong aux appels. La valeur de SMS doit être le nombre maximum de
-          sms concaténé autorisé.   Pour ne pas avoir ce message d’erreur et
-          obtenir un calcul dynamique du nombre de SMS alors il faut renseigner
-          smslong = "999" '
+        description: 'Le SMS long permet de dépasser la limite de 160 caractères en envoyant un message constitué de plusieurs SMS. Il est possible d’envoyer jusqu’à 6 SMS concaténés pour une longueur totale maximale de 918 caractères par message. Pour des raisons technique, la limite par SMS concaténé étant de 153 caractères. En cas de modification de l’émetteur, il faut considérer l’ajout automatique de 12 caractères du « STOP SMS ». Pour envoyer un smslong, il faut ajouter le paramètre smslong aux appels. La valeur de SMS doit être le nombre maximum de sms concaténé autorisé.   Pour ne pas avoir ce message d’erreur et obtenir un calcul dynamique du nombre de SMS alors il faut renseigner smslong = "999" '
         type: string
       tracker:
         items:
-          description: "Le tracker doit être une chaine alphanumérique de moins de 50
-            caractères. Ce tracker sera ensuite renvoyé en paramètre des urls
-            pour les retours des accusés de réception. "
+          description: "Le tracker doit être une chaine alphanumérique de moins de 50 caractères. Ce tracker sera ensuite renvoyé en paramètre des urls pour les retours des accusés de réception. "
           type: string
         type: array
       ucs2:
-        description: Il est également possible d’envoyer des SMS en alphabet non latin
-          (russe, chinois, arabe, etc) sur les numéros hors France
-          métropolitaine. Pour ce faire, la requête devrait être encodée au
-          format UTF-8 et contenir l’argument ucs2 = "1" Du fait de contraintes
-          techniques, 1 SMS unique ne pourra pas dépasser 70 caractères (au lieu
-          des 160 usuels) et dans le cas de SMS long, chaque sms ne pourra
-          dépasser 67 caractères.
+        description: Il est également possible d’envoyer des SMS en alphabet non latin (russe, chinois, arabe, etc) sur les numéros hors France métropolitaine. Pour ce faire, la requête devrait être encodée au format UTF-8 et contenir l’argument ucs2 = "1" Du fait de contraintes techniques, 1 SMS unique ne pourra pas dépasser 70 caractères (au lieu des 160 usuels) et dans le cas de SMS long, chaque sms ne pourra dépasser 67 caractères.
         type: string
     required:
       - keyid
@@ -1391,13 +1335,11 @@ definitions:
       sms: Bonjour! Bienvenue sur iSendPro!
     properties:
       date_envoi:
-        description: Date d'envoi au format YYYY-MM-DD hh:mm . Ce paramètre est
-          optionnel, si il est omis l'envoi est réalisé immédiatement.
+        description: Date d'envoi au format YYYY-MM-DD hh:mm . Ce paramètre est optionnel, si il est omis l'envoi est réalisé immédiatement.
         type: string
       emetteur:
         description: >
-          - L'emetteur doit être une chaîne alphanumérique comprise entre 4 et
-          11 caractères.
+          - L'emetteur doit être une chaîne alphanumérique comprise entre 4 et 11 caractères.
 
 
           - Les caractères acceptés sont les chiffres entre 0 et 9, les lettres entre A et Z et l’espace.
@@ -1506,29 +1448,21 @@ definitions:
         description: Clé API
         type: string
       nostop:
-        description: Si le message n’est pas à but commercial, vous pouvez faire une
-          demande pour retirer l’obligation du STOP. Une fois votre demande
-          validée par nos services, vous pourrez supprimer la mention STOP SMS
-          en ajoutant nostop = "1"
+        description: Si le message n’est pas à but commercial, vous pouvez faire une demande pour retirer l’obligation du STOP. Une fois votre demande validée par nos services, vous pourrez supprimer la mention STOP SMS en ajoutant nostop = "1"
         type: string
       num:
-        description: Numero de téléphone au format national (exemple 0680010203) ou
-          international (example 33680010203)
+        description: Numero de téléphone au format national (exemple 0680010203) ou international (example 33680010203)
         type: string
       numAzur:
         enum:
           - "1"
         type: string
       sms:
-        description: Message à envoyer aux destinataires. Le message doit être encodé au
-          format utf-8 et ne contenir que des caractères existant dans
-          l'alphabet GSM. Il est également possible d'envoyer (à l'étranger
-          uniquement) des SMS en UCS-2, cf paramètre ucs2 pour plus de détails.
+        description: Message à envoyer aux destinataires. Le message doit être encodé au format utf-8 et ne contenir que des caractères existant dans l'alphabet GSM. Il est également possible d'envoyer (à l'étranger uniquement) des SMS en UCS-2, cf paramètre ucs2 pour plus de détails.
         type: string
       smslong:
         description: >
-          Le SMS long permet de dépasser la limite de 160 caractères en envoyant
-          un message constitué
+          Le SMS long permet de dépasser la limite de 160 caractères en envoyant un message constitué
 
           de plusieurs SMS.
 
@@ -1545,14 +1479,11 @@ definitions:
           Pour envoyer un smslong, il faut ajouter le paramètre smslong aux appels. La valeur de SMS doit être le nombre maximum de sms concaténé autorisé.   Pour ne pas avoir ce message d’erreur et obtenir un calcul dynamique du nombre de SMS alors il faut renseigner smslong = "999"
         type: string
       tracker:
-        description: "Le tracker doit être une chaine alphanumérique de moins de 50
-          caractères. Ce tracker sera ensuite renvoyé en paramètre des urls pour
-          les retours des accusés de réception. "
+        description: "Le tracker doit être une chaine alphanumérique de moins de 50 caractères. Ce tracker sera ensuite renvoyé en paramètre des urls pour les retours des accusés de réception. "
         type: string
       ucs2:
         description: >
-          Il est également possible d’envoyer des SMS en alphabet non latin
-          (russe, chinois, arabe, etc) sur
+          Il est également possible d’envoyer des SMS en alphabet non latin (russe, chinois, arabe, etc) sur
 
           les numéros hors France métropolitaine.
 
@@ -1617,9 +1548,7 @@ definitions:
       subAccountCountryCode:
         type: string
       subAccountEdit:
-        description: action à réaliser soit setPrice pour définir un prix ou addCredit
-          pour ajouter du credit ou setRestriction modifier la restriction stop
-          /
+        description: action à réaliser soit setPrice pour définir un prix ou addCredit pour ajouter du credit ou setRestriction modifier la restriction stop /
         enum:
           - setPrice
           - addCredit

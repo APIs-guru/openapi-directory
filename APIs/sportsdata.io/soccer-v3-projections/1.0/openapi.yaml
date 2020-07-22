@@ -26,8 +26,7 @@ paths:
     get:
       operationId: DfsSlatesByDate
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or
-            <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -36,8 +35,9 @@ paths:
               - json
               - xml
             type: string
-        - description: |
+        - description: >
             The date of the game(s).
+
             <br>Examples: <code>2020-02-18</code>
           in: path
           name: date
@@ -58,8 +58,7 @@ paths:
     get:
       operationId: ProjectedPlayerGameStatsByCompetitionWDfsSalaries
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or
-            <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -69,17 +68,15 @@ paths:
               - xml
               - json
             type: string
-        - description: "An indication of a soccer competition/league. This value can be
-            the CompetitionId or the Competition Key. Possible values include:
-            <code>EPL</code>, <code>1</code>, <code>MLS</code>, <code>8</code>,
-            etc."
+        - description: "An indication of a soccer competition/league. This value can be the CompetitionId or the Competition Key. Possible values include: <code>EPL</code>, <code>1</code>, <code>MLS</code>, <code>8</code>, etc."
           in: path
           name: competition
           required: true
           schema:
             type: string
-        - description: |-
+        - description: >-
             The date of the game(s).
+
             <br>Examples: <code>2017-02-27</code>, <code>2017-09-01</code>.
           in: path
           name: date
@@ -100,8 +97,7 @@ paths:
     get:
       operationId: ProjectedPlayerGameStatsByDateWDfsSalaries
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or
-            <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -111,8 +107,9 @@ paths:
               - xml
               - json
             type: string
-        - description: |-
+        - description: >-
             The date of the game(s).
+
             <br>Examples: <code>2017-02-27</code>, <code>2017-09-01</code>.
           in: path
           name: date
@@ -133,8 +130,7 @@ paths:
     get:
       operationId: ProjectedPlayerGameStatsByPlayerWDfsSalaries
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or
-            <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -144,16 +140,18 @@ paths:
               - xml
               - json
             type: string
-        - description: |-
+        - description: >-
             The date of the game(s).
+
             <br>Examples: <code>2017-02-27</code>, <code>2017-09-01</code>.
           in: path
           name: date
           required: true
           schema:
             type: string
-        - description: |-
+        - description: >-
             Unique FantasyData Player ID.
+
             Example:<code>90026231</code>.
           in: path
           name: playerid
@@ -174,8 +172,7 @@ paths:
     get:
       operationId: UpcomingDfsSlatesByCompetition
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or
-            <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -184,8 +181,9 @@ paths:
               - json
               - xml
             type: string
-        - description: |-
+        - description: >-
             The Competition Id.
+
             <br>Examples: <code>3</code>
           in: path
           name: competitionId

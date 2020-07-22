@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
   description: Build applications using the world's most powerful imagery
-  title: Getty Images API
+  title: Getty Images
   version: "3"
   x-apisguru-categories:
     - media
@@ -83,9 +83,7 @@ paths:
           schema:
             default: ""
             type: string
-        - description: Comma separated list of fields. Allows restricting which fields are
-            returned. If no fields are selected, the summary_set of fields are
-            returned.
+        - description: Comma separated list of fields. Allows restricting which fields are returned. If no fields are selected, the summary_set of fields are returned.
           explode: false
           in: query
           name: fields
@@ -135,8 +133,7 @@ paths:
             default: 1
             format: int32
             type: integer
-        - description: Specifies page size. Default page_size is 10, maximum page_size is
-            100.
+        - description: Specifies page size. Default page_size is 10, maximum page_size is 100.
           in: query
           name: page_size
           schema:
@@ -167,9 +164,7 @@ paths:
           schema:
             default: ""
             type: string
-        - description: Comma separated list of fields. Allows restricting which fields are
-            returned. If no fields are selected, the summary_set of fields are
-            returned.
+        - description: Comma separated list of fields. Allows restricting which fields are returned. If no fields are selected, the summary_set of fields are returned.
           explode: false
           in: query
           name: fields
@@ -220,8 +215,7 @@ paths:
             default: 1
             format: int32
             type: integer
-        - description: Specifies page size. Default page_size is 10, maximum page_size is
-            100.
+        - description: Specifies page size. Default page_size is 10, maximum page_size is 100.
           in: query
           name: page_size
           schema:
@@ -240,26 +234,28 @@ paths:
         - Artists
   /v3/asset-changes/change-sets:
     put:
-      description: |
+      description: >
         # Asset Changes
+
 
         Get notifications about new, updated or deleted assets.
 
+
         ##  Quickstart
+
 
         You'll need an API key and an access token to use this resource. 
 
+
         Notifications older than 60 days will be removed from partner channels.
       parameters:
-        - description: Specifies the id of the channel for the asset data. Valid channel
-            ids can be found in the results of the Get Partner Channel query.
+        - description: Specifies the id of the channel for the asset data. Valid channel ids can be found in the results of the Get Partner Channel query.
           in: query
           name: channel_id
           schema:
             format: int32
             type: integer
-        - description: Specifies the number of assets to return. The default is 10;
-            maximum is 500.
+        - description: Specifies the number of assets to return. The default is 10; maximum is 500.
           in: query
           name: batch_size
           schema:
@@ -302,8 +298,7 @@ paths:
 
         You'll need an API key and an access token to use this resource.
       parameters:
-        - description: Specify the change-set-id associated with a transaction resource
-            whose receipt you want to confirm.
+        - description: Specify the change-set-id associated with a transaction resource whose receipt you want to confirm.
           in: path
           name: change-set-id
           required: true
@@ -390,8 +385,7 @@ paths:
           description: NotEnoughCreditsForPurchase
         "404":
           description: StandardLicenseNotFound
-      summary: Endpoint for acquiring extended licenses with iStock credits for an
-        asset.
+      summary: Endpoint for acquiring extended licenses with iStock credits for an asset.
       tags:
         - AssetLicensing
   /v3/boards:
@@ -413,8 +407,7 @@ paths:
               - invited
             nullable: true
             type: string
-        - description: Sort the list of boards by last update date or name. Defaults to
-            date_last_updated_descending.
+        - description: Sort the list of boards by last update date or name. Defaults to date_last_updated_descending.
           in: query
           name: sort_order
           schema:
@@ -652,8 +645,7 @@ paths:
           schema:
             default: ""
             type: string
-        - description: Specify the asset to add to the board. If it is already in the
-            board's asset collection, no action is taken.
+        - description: Specify the asset to add to the board. If it is already in the board's asset collection, no action is taken.
           in: path
           name: asset_id
           required: true
@@ -768,10 +760,7 @@ paths:
   /v3/collections:
     get:
       description: >
-        Use this endpoint to retrieve collections associated with your Getty
-        Images account. To browse available collections see our [Image
-        collections page](
-        http://www.gettyimages.com/creative-images/collections).
+        Use this endpoint to retrieve collections associated with your Getty Images account. To browse available collections see our [Image collections page]( http://www.gettyimages.com/creative-images/collections).
 
 
         You'll need an API key and access token to use this resource.
@@ -796,8 +785,7 @@ paths:
   /v3/countries:
     get:
       description: >
-        Returns a list of country objects that contains country name, two letter
-        ISO abbreviation and three letter ISO abbreviation.
+        Returns a list of country objects that contains country name, two letter ISO abbreviation and three letter ISO abbreviation.
 
 
         You'll need an API key and access token to use this resource.
@@ -869,41 +857,31 @@ paths:
           name: Accept-Language
           schema:
             type: string
-        - description: "If specified, selects assets downloaded on or after this date.
-            Dates should be submitted in ISO 8601 format (i.e., YYYY-MM-DD). \r
+        - description: "If specified, selects assets downloaded on or after this date. Dates should be submitted in ISO 8601 format (i.e., YYYY-MM-DD). \r
 
-            Any hour, minute, second values in the request are not
-            used, unless useTimePart parameter is included.\r
+            Any hour, minute, second values in the request are not used, unless useTimePart parameter is included.\r
 
-            Date/times in the response are UTC. Default is 30 days
-            prior to date_to"
+            Date/times in the response are UTC. Default is 30 days prior to date_to"
           in: query
           name: date_from
           schema:
             format: date-time
             nullable: true
             type: string
-        - description: "If specified, selects assets downloaded on or before this date.
-            Dates should be submitted in ISO 8601 format (i.e., YYYY-MM-DD)\r
+        - description: "If specified, selects assets downloaded on or before this date. Dates should be submitted in ISO 8601 format (i.e., YYYY-MM-DD)\r
 
-            Any hour, minute, second values in the request are not
-            used, unless useTimePart parameter is included.\r
+            Any hour, minute, second values in the request are not used, unless useTimePart parameter is included.\r
 
-            Date/times in the response are UTC. Default is current
-            date or 30 days after specified start date, whichever one is
-            earlier."
+            Date/times in the response are UTC. Default is current date or 30 days after specified start date, whichever one is earlier."
           in: query
           name: date_to
           schema:
             format: date-time
             nullable: true
             type: string
-        - description: "If specified, time values provided with date_to or date_from will
-            be used. Time values should be appended to the date value in ISO
-            8601 format\r
+        - description: "If specified, time values provided with date_to or date_from will be used. Time values should be appended to the date value in ISO 8601 format\r
 
-            i.e.: 2019-09-19T19:30:37 or 2019-09-19 19:30:37.  Time
-            zone can be specified as optional.\r
+            i.e.: 2019-09-19T19:30:37 or 2019-09-19 19:30:37.  Time zone can be specified as optional.\r
 
             Default value is false"
           in: query
@@ -925,9 +903,7 @@ paths:
             default: 30
             format: int32
             type: integer
-        - description: Specifies product type to be included in the previous download
-            results. To get previous iStockPhoto credit downloads, credit_pack
-            must be selected.
+        - description: Specifies product type to be included in the previous download results. To get previous iStockPhoto credit downloads, credit_pack must be selected.
           in: query
           name: product_type
           schema:
@@ -939,10 +915,7 @@ paths:
               - royaltyfreesubscription
             nullable: true
             type: string
-        - description: If specified, returns the list of previously downloaded images for
-            all users in your company. Your account must be enabled for this
-            functionality. Contact your Getty Images account rep for more
-            information. Default is false.
+        - description: If specified, returns the list of previously downloaded images for all users in your company. Your account must be enabled for this functionality. Contact your Getty Images account rep for more information. Default is false.
           in: query
           name: company_downloads
           schema:
@@ -967,8 +940,7 @@ paths:
   "/v3/downloads/images/{id}":
     post:
       description: >-
-        Use this endpoint to generate download URLs and related data for images
-        you are authorized to download.
+        Use this endpoint to generate download URLs and related data for images you are authorized to download.
 
 
         Most product offerings have enforced periodic download limits such as monthly, weekly, and daily. When this operation executes, the count of allowed downloads is decremented by one for the product offering. Once the download limit is reached for a given product offering, no further downloads may be requested for that product offering until the next download period.
@@ -1054,15 +1026,11 @@ paths:
             type: string
         - description: "<remarks>\r
 
-            \                    Specifies whether to auto-download
-            the image. If true is specified, a 303 SeeOther status is returned
-            with a\r
+            \                    Specifies whether to auto-download the image. If true is specified, a 303 SeeOther status is returned with a\r
 
-            \                    Location header set to the location
-            of the image.\r
+            \                    Location header set to the location of the image.\r
 
-            \                    If false is specified, the download
-            URI will be returned in the response message.\r
+            \                    If false is specified, the download URI will be returned in the response message.\r
 
             \                </remarks>"
           in: query
@@ -1072,8 +1040,7 @@ paths:
             type: boolean
         - description: "<remarks>\r
 
-            \                    File Type expressed with three
-            character file extension.\r
+            \                    File Type expressed with three character file extension.\r
 
             \                </remarks>"
           in: query
@@ -1086,14 +1053,11 @@ paths:
             type: string
         - description: "<remarks>\r
 
-            \                    Specifies the pixel height of the
-            particular image to download.\r
+            \                    Specifies the pixel height of the particular image to download.\r
 
-            \                    Available heights can be found in
-            the images/{ids} response for the specific image.\r
+            \                    Available heights can be found in the images/{ids} response for the specific image.\r
 
-            \                    If left blank, it will return the
-            largest available size.\r
+            \                    If left blank, it will return the largest available size.\r
 
             \                </remarks>"
           in: query
@@ -1102,8 +1066,7 @@ paths:
             type: string
         - description: "<remarks>\r
 
-            \                    Identifier of the instance for the
-            selected product offering type.\r
+            \                    Identifier of the instance for the selected product offering type.\r
 
             \                </remarks>"
           in: query
@@ -1128,9 +1091,7 @@ paths:
               - royaltyfreesubscription
             nullable: true
             type: string
-        - description: Specifies whether to download the image with iStock Team Credits.
-            Only applicable to iStock API keys authenticated with a user that
-            has Team Credits. Blank is the same as False.
+        - description: Specifies whether to download the image with iStock Team Credits. Only applicable to iStock API keys authenticated with a user that has Team Credits. Blank is the same as False.
           in: query
           name: use_team_credits
           schema:
@@ -1159,8 +1120,7 @@ paths:
   "/v3/downloads/videos/{id}":
     post:
       description: >-
-        Use this endpoint to generate download URLs and related data for videos
-        you are authorized to download.
+        Use this endpoint to generate download URLs and related data for videos you are authorized to download.
 
 
         Most product offerings have enforced periodic download limits such as monthly, weekly, and daily. When this operation executes, the count of allowed downloads is decremented by one for the product offering. Once the download limit is reached for a given product offering, no further downloads may be requested for that product offering until the next download period.
@@ -1246,15 +1206,11 @@ paths:
             type: string
         - description: "<remarks>\r
 
-            \                    Specifies whether to auto-download
-            the video. If true is specified, a 303 SeeOther status is returned
-            with a\r
+            \                    Specifies whether to auto-download the video. If true is specified, a 303 SeeOther status is returned with a\r
 
-            \                    Location header set to the location
-            of the video.\r
+            \                    Location header set to the location of the video.\r
 
-            \                    If false is specified, the download
-            URI will be returned in the response message.\r
+            \                    If false is specified, the download URI will be returned in the response message.\r
 
             \                </remarks>"
           in: query
@@ -1269,8 +1225,7 @@ paths:
             type: string
         - description: "<remarks>\r
 
-            \                    Identifier of the instance for the
-            selected product offering type.\r
+            \                    Identifier of the instance for the selected product offering type.\r
 
             \                </remarks>"
           in: query
@@ -1279,9 +1234,7 @@ paths:
             format: int32
             nullable: true
             type: integer
-        - description: Specifies whether to download the image with iStock Team Credits.
-            Only applicable to iStock API keys authenticated with a user that
-            has Team Credits. Blank is the same as False.
+        - description: Specifies whether to download the image with iStock Team Credits. Only applicable to iStock API keys authenticated with a user that has Team Credits. Blank is the same as False.
           in: query
           name: use_team_credits
           schema:
@@ -1309,8 +1262,7 @@ paths:
   /v3/events:
     get:
       description: >
-        This endpoint returns the detailed event metadata for all specified
-        events. Getty Images news, sports and entertainment photographers and
+        This endpoint returns the detailed event metadata for all specified events. Getty Images news, sports and entertainment photographers and
 
         videographers cover editorially relevant events occurring around the world.  All images or video clips produced in association with 
 
@@ -1374,8 +1326,7 @@ paths:
   "/v3/events/{id}":
     get:
       description: >
-        This endpoint returns the detailed event metadata for a specified event.
-        Getty Images news, sports and entertainment 
+        This endpoint returns the detailed event metadata for a specified event. Getty Images news, sports and entertainment 
 
         photographers and videographers cover editorially relevant events occurring around the world.  
 
@@ -1438,8 +1389,7 @@ paths:
   /v3/images:
     get:
       description: >
-        This endpoint returns the detailed image metadata for all specified
-        images.
+        This endpoint returns the detailed image metadata for all specified images.
 
 
         You'll need an API key and access token to use this resource.
@@ -1569,8 +1519,7 @@ paths:
           name: Accept-Language
           schema:
             type: string
-        - description: Specifies one or more image ids to return. Use comma delimiter when
-            requesting multiple ids.
+        - description: Specifies one or more image ids to return. Use comma delimiter when requesting multiple ids.
           explode: false
           in: query
           name: ids
@@ -1579,8 +1528,7 @@ paths:
               type: string
             type: array
           style: form
-        - description: "Specifies fields to return. Defaults to 'summary_set'. NOTE: Bytes
-            returned by 'download_sizes' field are estimates."
+        - description: "Specifies fields to return. Defaults to 'summary_set'. NOTE: Bytes returned by 'download_sizes' field are estimates."
           explode: false
           in: query
           name: fields
@@ -1795,16 +1743,14 @@ paths:
           name: Accept-Language
           schema:
             type: string
-        - description: An image id. For more than one image please use the /v3/images
-            endpoint.
+        - description: An image id. For more than one image please use the /v3/images endpoint.
           in: path
           name: id
           required: true
           schema:
             default: ""
             type: string
-        - description: "Specifies fields to return. Defaults to 'summary_set'. NOTE: Bytes
-            returned by 'download_sizes' field are estimates."
+        - description: "Specifies fields to return. Defaults to 'summary_set'. NOTE: Bytes returned by 'download_sizes' field are estimates."
           explode: false
           in: query
           name: fields
@@ -1899,12 +1845,9 @@ paths:
           schema:
             default: ""
             type: string
-        - description: "If specified, returns the list of previously downloaded images for
-            all users in your company.\r
+        - description: "If specified, returns the list of previously downloaded images for all users in your company.\r
 
-            \            Your account must be enabled for this
-            functionality. Contact your Getty Images account rep for more
-            information. Default is false."
+            \            Your account must be enabled for this functionality. Contact your Getty Images account rep for more information. Default is false."
           in: query
           name: company_downloads
           schema:
@@ -1926,17 +1869,13 @@ paths:
           description: ImageNotFound
         "500":
           description: InvalidIStockCollection
-      summary: Returns information about a customer's download history for a specific
-        asset
+      summary: Returns information about a customer's download history for a specific asset
       tags:
         - Images
   "/v3/images/{id}/same-series":
     get:
       description: >-
-        This endpoint will provide the list of images, if any exist, from the
-        same series as the specified creative asset id. These images are
-        typically from the same photo shoot. This functionality will not work
-        for editorial assets.
+        This endpoint will provide the list of images, if any exist, from the same series as the specified creative asset id. These images are typically from the same photo shoot. This functionality will not work for editorial assets.
 
 
         You'll need an API key and access token to use this resource.
@@ -2164,8 +2103,7 @@ paths:
   "/v3/images/{id}/similar":
     get:
       description: >-
-        This endpoint will provide a list of images that are similar to the
-        specified asset id.
+        This endpoint will provide a list of images that are similar to the specified asset id.
 
 
         You'll need an API key and access token to use this resource.
@@ -2392,9 +2330,11 @@ paths:
         - Images
   "/v3/orders/{id}":
     get:
-      description: |-
+      description: >-
         This endpoint returns detailed order metadata for a specified order.
+
         Use of this endpoint requires configuration changes to your API key. 
+
 
         You'll need an API key and access token to use this resource.
       parameters:
@@ -2429,8 +2369,7 @@ paths:
   /v3/products:
     get:
       description: >
-        This endpoint returns all products available to the username used during
-        authentication. As such, this endpoint requires the use of
+        This endpoint returns all products available to the username used during authentication. As such, this endpoint requires the use of
 
         a fully authorized access_token. The product data can then be used as search filters, restricting results to images from a specific product.
 
@@ -2442,8 +2381,7 @@ paths:
           name: Accept-Language
           schema:
             type: string
-        - description: Comma separated list of fields. Allows product download
-            requirements to be returned.
+        - description: Comma separated list of fields. Allows product download requirements to be returned.
           explode: false
           in: query
           name: fields
@@ -2473,8 +2411,7 @@ paths:
   /v3/purchased-assets:
     get:
       description: >
-        This endpoint returns a list of all assets purchased on gettyimages.com
-        by the username used for authentication. 
+        This endpoint returns a list of all assets purchased on gettyimages.com by the username used for authentication. 
 
         Use of this endpoint requires configuration changes to your API key. Please contact your sales representative
 
@@ -2488,8 +2425,7 @@ paths:
           name: Accept-Language
           schema:
             type: string
-        - description: If specified, retrieves previous purchases on or before this date.
-            Dates should be submitted in ISO 8601 format (i.e., YYYY-MM-DD).
+        - description: If specified, retrieves previous purchases on or before this date. Dates should be submitted in ISO 8601 format (i.e., YYYY-MM-DD).
           in: query
           name: date_to
           schema:
@@ -2510,8 +2446,7 @@ paths:
             default: 75
             format: int32
             type: integer
-        - description: If specified, retrieves previous purchases on or after this date.
-            Dates should be submitted in ISO 8601 format (i.e., YYYY-MM-DD).
+        - description: If specified, retrieves previous purchases on or after this date. Dates should be submitted in ISO 8601 format (i.e., YYYY-MM-DD).
           in: query
           name: date_from
           schema:
@@ -2535,16 +2470,7 @@ paths:
   /v3/search/events:
     get:
       description: >
-        Use this endpoint to search Getty Images news, sports and entertainment
-        events. Getty Images photographers and videographers cover editorially
-        relevant events occurring around the world.  All images or video clips
-        produced in association with an event, are assigned the same EventID.
-        EventIDs are part of the meta-data returned in Search Results. Only
-        content produced under a Getty Images brand name (Getty Images News,
-        Getty Images Sports, Getty Images Entertainment, Film Magic, Wire Image)
-        will be consistently assigned an EventID. The Event framework may also
-        be used to group similar content, such as "Hats from the Royal Wedding"
-        or "Odd-ballOffbeat images of the week".   
+        Use this endpoint to search Getty Images news, sports and entertainment events. Getty Images photographers and videographers cover editorially relevant events occurring around the world.  All images or video clips produced in association with an event, are assigned the same EventID. EventIDs are part of the meta-data returned in Search Results. Only content produced under a Getty Images brand name (Getty Images News, Getty Images Sports, Getty Images Entertainment, Film Magic, Wire Image) will be consistently assigned an EventID. The Event framework may also be used to group similar content, such as "Hats from the Royal Wedding" or "Odd-ballOffbeat images of the week".   
 
 
         You'll need an API key and access token to use this resource.
@@ -2573,16 +2499,14 @@ paths:
               - sport
             nullable: true
             type: string
-        - description: Filters to events that start on or after this date. Use ISO 8601
-            format (e.g., 1999-12-31).
+        - description: Filters to events that start on or after this date. Use ISO 8601 format (e.g., 1999-12-31).
           in: query
           name: date_from
           schema:
             format: date-time
             nullable: true
             type: string
-        - description: Filters to events that start on or before this date. Use ISO 8601
-            format (e.g., 1999-12-31).
+        - description: Filters to events that start on or before this date. Use ISO 8601 format (e.g., 1999-12-31).
           in: query
           name: date_to
           schema:
@@ -2609,8 +2533,7 @@ paths:
               type: string
             type: array
           style: form
-        - description: Request results starting at a page number (default is 1, maximum is
-            50).
+        - description: Request results starting at a page number (default is 1, maximum is 50).
           in: query
           name: page
           schema:
@@ -2649,15 +2572,7 @@ paths:
   /v3/search/images:
     get:
       description: >
-        Use this endpoint to search over a blend of our contemporary stock
-        photos, illustrations, archival images, editorial photos, illustrations
-        and archival images. Because this draws from such a large diversity of
-        content, the results will not be as relevant as when the more specific
-        Creative or Editorial endpoints are used. Additionally, the response
-        time for this endpoint is slower compared to that for Creative and
-        Editorial-specific endpoints. For these reasons, it is highly
-        recommended that those endpoints are used instead of this blended
-        endpoint.
+        Use this endpoint to search over a blend of our contemporary stock photos, illustrations, archival images, editorial photos, illustrations and archival images. Because this draws from such a large diversity of content, the results will not be as relevant as when the more specific Creative or Editorial endpoints are used. Additionally, the response time for this endpoint is slower compared to that for Creative and Editorial-specific endpoints. For these reasons, it is highly recommended that those endpoints are used instead of this blended endpoint.
 
 
         You'll need an API key and access token to use this resource.
@@ -2854,14 +2769,12 @@ paths:
               type: string
             type: array
           style: form
-        - description: Search for images by specific artists (free-text, comma-separated
-            list of artists).
+        - description: Search for images by specific artists (free-text, comma-separated list of artists).
           in: query
           name: artists
           schema:
             type: string
-        - description: Filter by collection codes (comma-separated list). Include or
-            exclude based on collections_filter_type.
+        - description: Filter by collection codes (comma-separated list). Include or exclude based on collections_filter_type.
           explode: false
           in: query
           name: collection_codes
@@ -2870,8 +2783,7 @@ paths:
               type: string
             type: array
           style: form
-        - description: Provides searching based on specified collection(s). The default is
-            Include
+        - description: Provides searching based on specified collection(s). The default is Include
           in: query
           name: collections_filter_type
           schema:
@@ -2879,9 +2791,7 @@ paths:
               - include
               - exclude
             type: string
-        - description: "Filter based on predominant color in an image. Use 6 character
-            hexidecimal format (e.g., #002244). Note: when specified, results
-            will not contain editorial images."
+        - description: "Filter based on predominant color in an image. Use 6 character hexidecimal format (e.g., #002244). Note: when specified, results will not contain editorial images."
           in: query
           name: color
           schema:
@@ -2913,20 +2823,13 @@ paths:
           style: form
         - description: "Filters based on which product the asset will download against.\r
 
-            \                    Allowed values are easyaccess,
-            editorialsubscription, imagepack, premiumaccess and
-            royaltyfreesubscription.\r
+            \                    Allowed values are easyaccess, editorialsubscription, imagepack, premiumaccess and royaltyfreesubscription.\r
 
-            \                    If you have more than one instance
-            of a product, you may also include the ID of the product instance
-            you wish to filter on. \r
+            \                    If you have more than one instance of a product, you may also include the ID of the product instance you wish to filter on. \r
 
-            \                    For example, some users may have
-            more than one premiumaccess product, so the download_product value
-            would be premiumaccess:1234. \r
+            \                    For example, some users may have more than one premiumaccess product, so the download_product value would be premiumaccess:1234. \r
 
-            \                    Product ID can be obtained from the
-            GET /products response."
+            \                    Product ID can be obtained from the GET /products response."
           in: query
           name: download_product
           schema:
@@ -2946,8 +2849,7 @@ paths:
               type: integer
             type: array
           style: form
-        - description: Filter search results based on the ethnicity of individuals in an
-            image.
+        - description: Filter search results based on the ethnicity of individuals in an image.
           explode: false
           in: query
           name: ethnicity
@@ -3051,8 +2953,7 @@ paths:
               type: string
             type: array
           style: form
-        - description: Provides searching based on specified graphical style(s). The
-            default is Include
+        - description: Provides searching based on specified graphical style(s). The default is Include
           in: query
           name: graphical_styles_filter_type
           schema:
@@ -3060,10 +2961,7 @@ paths:
               - include
               - exclude
             type: string
-        - description: Return only images tagged with specific keyword(s). Specify using a
-            comma-separated list of keyword Ids. If keyword Ids and phrase are
-            both specified, only those images matching the query phrase which
-            also contain the requested keyword(s) are returned.
+        - description: Return only images tagged with specific keyword(s). Specify using a comma-separated list of keyword Ids. If keyword Ids and phrase are both specified, only those images matching the query phrase which also contain the requested keyword(s) are returned.
           explode: false
           in: query
           name: keyword_ids
@@ -3144,8 +3042,7 @@ paths:
               - newest
               - random
             type: string
-        - description: Return only images associated with specific people (using a
-            comma-delimited list).
+        - description: Return only images associated with specific people (using a comma-delimited list).
           explode: false
           in: query
           name: specific_people
@@ -3173,8 +3070,7 @@ paths:
   /v3/search/images/creative:
     get:
       description: >
-        Use this endpoint to search our contemporary stock photos, illustrations
-        and archival images.
+        Use this endpoint to search our contemporary stock photos, illustrations and archival images.
 
 
         You'll need an API key and access token to use this resource.
@@ -3363,14 +3259,12 @@ paths:
               type: string
             type: array
           style: form
-        - description: Search for images by specific artists (free-text, comma-separated
-            list of artists).
+        - description: Search for images by specific artists (free-text, comma-separated list of artists).
           in: query
           name: artists
           schema:
             type: string
-        - description: Filter by collection codes (comma-separated list). Include or
-            exclude based on collections_filter_type.
+        - description: Filter by collection codes (comma-separated list). Include or exclude based on collections_filter_type.
           explode: false
           in: query
           name: collection_codes
@@ -3379,8 +3273,7 @@ paths:
               type: string
             type: array
           style: form
-        - description: Use to include or exclude collections from search. The default is
-            include
+        - description: Use to include or exclude collections from search. The default is include
           in: query
           name: collections_filter_type
           schema:
@@ -3388,8 +3281,7 @@ paths:
               - include
               - exclude
             type: string
-        - description: "Filter based on predominant color in an image. Use 6 character
-            hexidecimal format (e.g., #002244)."
+        - description: "Filter based on predominant color in an image. Use 6 character hexidecimal format (e.g., #002244)."
           in: query
           name: color
           schema:
@@ -3421,20 +3313,13 @@ paths:
           style: form
         - description: "Filters based on which product the asset will download against.\r
 
-            \                    Allowed values are easyaccess,
-            editorialsubscription, imagepack, premiumaccess and
-            royaltyfreesubscription.\r
+            \                    Allowed values are easyaccess, editorialsubscription, imagepack, premiumaccess and royaltyfreesubscription.\r
 
-            \                    If you have more than one instance
-            of a product, you may also include the ID of the product instance
-            you wish to filter on. \r
+            \                    If you have more than one instance of a product, you may also include the ID of the product instance you wish to filter on. \r
 
-            \                    For example, some users may have
-            more than one premiumaccess product, so the download_product value
-            would be premiumaccess:1234. \r
+            \                    For example, some users may have more than one premiumaccess product, so the download_product value would be premiumaccess:1234. \r
 
-            \                    Product ID can be obtained from the
-            GET /products response."
+            \                    Product ID can be obtained from the GET /products response."
           in: query
           name: download_product
           schema:
@@ -3444,8 +3329,7 @@ paths:
           name: embed_content_only
           schema:
             type: boolean
-        - description: Filter search results based on the ethnicity of individuals in an
-            image.
+        - description: Filter search results based on the ethnicity of individuals in an image.
           explode: false
           in: query
           name: ethnicity
@@ -3472,8 +3356,7 @@ paths:
           name: exclude_nudity
           schema:
             type: boolean
-        - description: Exclude images that are only available for editorial
-            (non-commercial) use. Default value is false.
+        - description: Exclude images that are only available for editorial (non-commercial) use. Default value is false.
           in: query
           name: exclude_editorial_use_only
           schema:
@@ -3550,8 +3433,7 @@ paths:
               type: string
             type: array
           style: form
-        - description: Provides searching based on specified graphical style(s). The
-            default is include.
+        - description: Provides searching based on specified graphical style(s). The default is include.
           in: query
           name: graphical_styles_filter_type
           schema:
@@ -3559,10 +3441,7 @@ paths:
               - include
               - exclude
             type: string
-        - description: Return only images tagged with specific keyword(s). Specify using a
-            comma-separated list of keyword Ids. If keyword Ids and phrase are
-            both specified, only those images matching the query phrase which
-            also contain the requested keyword(s) are returned.
+        - description: Return only images tagged with specific keyword(s). Specify using a comma-separated list of keyword Ids. If keyword Ids and phrase are both specified, only those images matching the query phrase which also contain the requested keyword(s) are returned.
           explode: false
           in: query
           name: keyword_ids
@@ -3644,11 +3523,9 @@ paths:
               - newest
               - random
             type: string
-        - description: "Specifies the facets to return in the response. Facets provide
-            additional search parameters to refine your results.\r
+        - description: "Specifies the facets to return in the response. Facets provide additional search parameters to refine your results.\r
 
-            \                   The include_facets parameter must be
-            set to \"true\" for facets to be returned."
+            \                   The include_facets parameter must be set to \"true\" for facets to be returned."
           explode: false
           in: query
           name: facet_fields
@@ -3660,15 +3537,13 @@ paths:
               type: string
             type: array
           style: form
-        - description: Specifies whether or not to include facets in the result set.
-            Default is "false".
+        - description: Specifies whether or not to include facets in the result set. Default is "false".
           in: query
           name: include_facets
           schema:
             nullable: true
             type: boolean
-        - description: Specifies the maximum number of facets to return per type. Default
-            is 300.
+        - description: Specifies the maximum number of facets to return per type. Default is 300.
           in: query
           name: facet_max_count
           schema:
@@ -3695,8 +3570,7 @@ paths:
   /v3/search/images/creative/by-image:
     get:
       description: >
-        Allows searching for similar creative images by passing the URL to an
-        existing image.
+        Allows searching for similar creative images by passing the URL to an existing image.
 
 
         Before calling the search by image endpoint, an image must be uploaded to a specific AWS S3 bucket. The bucket name is `search-by-image.s3.amazonaws.com`.
@@ -3784,19 +3658,13 @@ paths:
           style: form
         - description: "Filter images to those from one of your product types. \r
 
-            \                    Allowed values are easyaccess,
-            imagepack, premiumaccess and royaltyfreesubscription. \r
+            \                    Allowed values are easyaccess, imagepack, premiumaccess and royaltyfreesubscription. \r
 
-            \                    If you have more than one instance
-            of a product, you may also include the ID of the product instance
-            you wish to filter on. \r
+            \                    If you have more than one instance of a product, you may also include the ID of the product instance you wish to filter on. \r
 
-            \                    For example, some users may have
-            more than one premiumaccess product, so the product_types value
-            would be premiumaccess:1234. \r
+            \                    For example, some users may have more than one premiumaccess product, so the product_types value would be premiumaccess:1234. \r
 
-            \                    Product ID can be obtained from the
-            GET /products response."
+            \                    Product ID can be obtained from the GET /products response."
           explode: false
           in: query
           name: product_types
@@ -3819,11 +3687,9 @@ paths:
             default: 30
             format: int32
             type: integer
-        - description: "Specifies the facets to return in the response. Facets provide
-            additional search parameters to refine your results.\r
+        - description: "Specifies the facets to return in the response. Facets provide additional search parameters to refine your results.\r
 
-            \                    The include_facets parameter must
-            be set to \"true\" for facets to be returned."
+            \                    The include_facets parameter must be set to \"true\" for facets to be returned."
           explode: false
           in: query
           name: facet_fields
@@ -3835,15 +3701,13 @@ paths:
               type: string
             type: array
           style: form
-        - description: Specifies the maximum number of facets to return per type. Default
-            is 300.
+        - description: Specifies the maximum number of facets to return per type. Default is 300.
           in: query
           name: facet_max_count
           schema:
             format: int32
             type: integer
-        - description: Specifies whether or not to include facets in the result set.
-            Default is "false".
+        - description: Specifies whether or not to include facets in the result set. Default is "false".
           in: query
           name: include_facets
           schema:
@@ -3870,10 +3734,7 @@ paths:
   /v3/search/images/editorial:
     get:
       description: >
-        Use this endpoint to search our editorial stock photos, illustrations
-        and archival images.  Editorial images represent newsworthy events or
-        illustrate matters of general interest, such as news, sport and
-        entertainment and are generally intended for editorial use.
+        Use this endpoint to search our editorial stock photos, illustrations and archival images.  Editorial images represent newsworthy events or illustrate matters of general interest, such as news, sport and entertainment and are generally intended for editorial use.
 
 
         You'll need an API key and access token to use this resource.
@@ -4064,14 +3925,12 @@ paths:
               type: string
             type: array
           style: form
-        - description: Search for images by specific artists (free-text, comma-separated
-            list of artists).
+        - description: Search for images by specific artists (free-text, comma-separated list of artists).
           in: query
           name: artists
           schema:
             type: string
-        - description: Filter by collections (comma-separated list of collection codes).
-            Include or exclude based on collections_filter_type.
+        - description: Filter by collections (comma-separated list of collection codes). Include or exclude based on collections_filter_type.
           explode: false
           in: query
           name: collection_codes
@@ -4080,8 +3939,7 @@ paths:
               type: string
             type: array
           style: form
-        - description: Use to include or exclude collections from search. The default is
-            include
+        - description: Use to include or exclude collections from search. The default is include
           in: query
           name: collections_filter_type
           schema:
@@ -4116,20 +3974,13 @@ paths:
           style: form
         - description: "Filters based on which product the asset will download against.\r
 
-            \                    Allowed values are easyaccess,
-            editorialsubscription, imagepack, premiumaccess and
-            royaltyfreesubscription.\r
+            \                    Allowed values are easyaccess, editorialsubscription, imagepack, premiumaccess and royaltyfreesubscription.\r
 
-            \                    If you have more than one instance
-            of a product, you may also include the ID of the product instance
-            you wish to filter on. \r
+            \                    If you have more than one instance of a product, you may also include the ID of the product instance you wish to filter on. \r
 
-            \                    For example, some users may have
-            more than one premiumaccess product, so the download_product value
-            would be premiumaccess:1234. \r
+            \                    For example, some users may have more than one premiumaccess product, so the download_product value would be premiumaccess:1234. \r
 
-            \                    Product ID can be obtained from the
-            GET /products response."
+            \                    Product ID can be obtained from the GET /products response."
           in: query
           name: download_product
           schema:
@@ -4164,16 +4015,14 @@ paths:
           name: embed_content_only
           schema:
             type: boolean
-        - description: Return only images that are created on or after this date. Use ISO
-            8601 format (e.g., 1999-12-31).
+        - description: Return only images that are created on or after this date. Use ISO 8601 format (e.g., 1999-12-31).
           in: query
           name: date_from
           schema:
             format: date-time
             nullable: true
             type: string
-        - description: Return only images that are created on or before this date. Use ISO
-            8601 format (e.g., 1999-12-31).
+        - description: Return only images that are created on or before this date. Use ISO 8601 format (e.g., 1999-12-31).
           in: query
           name: date_to
           schema:
@@ -4190,8 +4039,7 @@ paths:
               type: integer
             type: array
           style: form
-        - description: Filter search results based on the ethnicity of individuals in an
-            image.
+        - description: Filter search results based on the ethnicity of individuals in an image.
           explode: false
           in: query
           name: ethnicity
@@ -4287,8 +4135,7 @@ paths:
               type: string
             type: array
           style: form
-        - description: Provides searching based on specified graphical style(s). The
-            default is include.
+        - description: Provides searching based on specified graphical style(s). The default is include.
           in: query
           name: graphical_styles_filter_type
           schema:
@@ -4296,10 +4143,7 @@ paths:
               - include
               - exclude
             type: string
-        - description: Return only images tagged with specific keyword(s). Specify using a
-            comma-separated list of keyword Ids. If keyword Ids and phrase are
-            both specified, only those images matching the query phrase which
-            also contain the requested keyword(s) are returned.
+        - description: Return only images tagged with specific keyword(s). Specify using a comma-separated list of keyword Ids. If keyword Ids and phrase are both specified, only those images matching the query phrase which also contain the requested keyword(s) are returned.
           explode: false
           in: query
           name: keyword_ids
@@ -4381,8 +4225,7 @@ paths:
               - oldest
               - random
             type: string
-        - description: Return only images associated with specific people (using a
-            comma-delimited list).
+        - description: Return only images associated with specific people (using a comma-delimited list).
           explode: false
           in: query
           name: specific_people
@@ -4391,19 +4234,16 @@ paths:
               type: string
             type: array
           style: form
-        - description: Filter search results based on minimum quality ranking. Possible
-            values 1, 2, 3 with 1 being best.
+        - description: Filter search results based on minimum quality ranking. Possible values 1, 2, 3 with 1 being best.
           in: query
           name: minimum_quality_rank
           schema:
             format: int32
             nullable: true
             type: integer
-        - description: "Specifies the facets to return in the response. Facets provide
-            additional search parameters to refine your results.\r
+        - description: "Specifies the facets to return in the response. Facets provide additional search parameters to refine your results.\r
 
-            \                   The include_facets parameter must be
-            set to \"true\" for facets to be returned."
+            \                   The include_facets parameter must be set to \"true\" for facets to be returned."
           explode: false
           in: query
           name: facet_fields
@@ -4417,15 +4257,13 @@ paths:
               type: string
             type: array
           style: form
-        - description: Specifies whether or not to include facets in the result set.
-            Default is "false".
+        - description: Specifies whether or not to include facets in the result set. Default is "false".
           in: query
           name: include_facets
           schema:
             nullable: true
             type: boolean
-        - description: Specifies the maximum number of facets to return per type. Default
-            is 300.
+        - description: Specifies the maximum number of facets to return per type. Default is 300.
           in: query
           name: facet_max_count
           schema:
@@ -4450,8 +4288,7 @@ paths:
   /v3/search/videos/creative:
     get:
       description: >-
-        Use this endpoint to search premium stock video, from archival film to
-        contemporary 4K and HD footage.
+        Use this endpoint to search premium stock video, from archival film to contemporary 4K and HD footage.
 
 
         You'll need an API key and access token to use this resource.
@@ -4651,8 +4488,7 @@ paths:
               type: string
             type: array
           style: form
-        - description: Search for images by specific artists (free-text, comma-separated
-            list of artists).
+        - description: Search for images by specific artists (free-text, comma-separated list of artists).
           in: query
           name: artists
           schema:
@@ -4666,8 +4502,7 @@ paths:
               type: string
             type: array
           style: form
-        - description: Use to include or exclude collections from search. The default is
-            include
+        - description: Use to include or exclude collections from search. The default is include
           in: query
           name: collections_filter_type
           schema:
@@ -4677,26 +4512,18 @@ paths:
             type: string
         - description: "Filters based on which product the asset will download against.\r
 
-            \                    Allowed values are easyaccess,
-            editorialsubscription, imagepack, premiumaccess and
-            royaltyfreesubscription.\r
+            \                    Allowed values are easyaccess, editorialsubscription, imagepack, premiumaccess and royaltyfreesubscription.\r
 
-            \                    If you have more than one instance
-            of a product, you may also include the ID of the product instance
-            you wish to filter on. \r
+            \                    If you have more than one instance of a product, you may also include the ID of the product instance you wish to filter on. \r
 
-            \                    For example, some users may have
-            more than one premiumaccess product, so the download_product value
-            would be premiumaccess:1234. \r
+            \                    For example, some users may have more than one premiumaccess product, so the download_product value would be premiumaccess:1234. \r
 
-            \                    Product ID can be obtained from the
-            GET /products response."
+            \                    Product ID can be obtained from the GET /products response."
           in: query
           name: download_product
           schema:
             type: string
-        - description: Filters according to the digital video format available on a film
-            asset.
+        - description: Filters according to the digital video format available on a film asset.
           in: query
           name: format_available
           schema:
@@ -4770,10 +4597,7 @@ paths:
               type: string
             type: array
           style: form
-        - description: Return only images tagged with specific keyword(s). Specify using a
-            comma-separated list of keyword Ids. If keyword Ids and phrase are
-            both specified, only those images matching the query phrase which
-            also contain the requested keyword(s) are returned.
+        - description: Return only images tagged with specific keyword(s). Specify using a comma-separated list of keyword Ids. If keyword Ids and phrase are both specified, only those images matching the query phrase which also contain the requested keyword(s) are returned.
           explode: false
           in: query
           name: keyword_ids
@@ -4848,11 +4672,9 @@ paths:
               - fully_released
             nullable: true
             type: string
-        - description: "Specifies the facets to return in the response. Facets provide
-            additional search parameters to refine your results.\r
+        - description: "Specifies the facets to return in the response. Facets provide additional search parameters to refine your results.\r
 
-            \                   The include_facets parameter must be
-            set to \"true\" for facets to be returned."
+            \                   The include_facets parameter must be set to \"true\" for facets to be returned."
           explode: false
           in: query
           name: facet_fields
@@ -4864,15 +4686,13 @@ paths:
               type: string
             type: array
           style: form
-        - description: Specifies the maximum number of facets to return per type. Default
-            is 300.
+        - description: Specifies the maximum number of facets to return per type. Default is 300.
           in: query
           name: facet_max_count
           schema:
             format: int32
             type: integer
-        - description: Specifies whether or not to include facets in the result set.
-            Default is "false".
+        - description: Specifies whether or not to include facets in the result set. Default is "false".
           in: query
           name: include_facets
           schema:
@@ -4899,8 +4719,7 @@ paths:
   /v3/search/videos/editorial:
     get:
       description: >
-        Use this endpoint to search current and archival video clips of
-        celebrities, newsmakers, and events.
+        Use this endpoint to search current and archival video clips of celebrities, newsmakers, and events.
 
 
         You'll need an API key and access token to use this resource.
@@ -5092,8 +4911,7 @@ paths:
               type: string
             type: array
           style: form
-        - description: Search for images by specific artists (free-text, comma-separated
-            list of artists).
+        - description: Search for images by specific artists (free-text, comma-separated list of artists).
           in: query
           name: artists
           schema:
@@ -5107,8 +4925,7 @@ paths:
               type: string
             type: array
           style: form
-        - description: Use to include or exclude collections from search. The default is
-            include
+        - description: Use to include or exclude collections from search. The default is include
           in: query
           name: collections_filter_type
           schema:
@@ -5118,20 +4935,13 @@ paths:
             type: string
         - description: "Filters based on which product the asset will download against.\r
 
-            \                    Allowed values are easyaccess,
-            editorialsubscription, imagepack, premiumaccess and
-            royaltyfreesubscription.\r
+            \                    Allowed values are easyaccess, editorialsubscription, imagepack, premiumaccess and royaltyfreesubscription.\r
 
-            \                    If you have more than one instance
-            of a product, you may also include the ID of the product instance
-            you wish to filter on. \r
+            \                    If you have more than one instance of a product, you may also include the ID of the product instance you wish to filter on. \r
 
-            \                    For example, some users may have
-            more than one premiumaccess product, so the download_product value
-            would be premiumaccess:1234. \r
+            \                    For example, some users may have more than one premiumaccess product, so the download_product value would be premiumaccess:1234. \r
 
-            \                    Product ID can be obtained from the
-            GET /products response."
+            \                    Product ID can be obtained from the GET /products response."
           in: query
           name: download_product
           schema:
@@ -5166,8 +4976,7 @@ paths:
               type: string
             type: array
           style: form
-        - description: Filters according to the digital video format available on a film
-            asset.
+        - description: Filters according to the digital video format available on a film asset.
           in: query
           name: format_available
           schema:
@@ -5244,10 +5053,7 @@ paths:
               type: string
             type: array
           style: form
-        - description: Return only images tagged with specific keyword(s). Specify using a
-            comma-separated list of keyword Ids. If keyword Ids and phrase are
-            both specified, only those images matching the query phrase which
-            also contain the requested keyword(s) are returned.
+        - description: Return only images tagged with specific keyword(s). Specify using a comma-separated list of keyword Ids. If keyword Ids and phrase are both specified, only those images matching the query phrase which also contain the requested keyword(s) are returned.
           explode: false
           in: query
           name: keyword_ids
@@ -5311,11 +5117,9 @@ paths:
               - fully_released
             nullable: true
             type: string
-        - description: "Specifies the facets to return in the response. Facets provide
-            additional search parameters to refine your results.\r
+        - description: "Specifies the facets to return in the response. Facets provide additional search parameters to refine your results.\r
 
-            \                   The include_facets parameter must be
-            set to \"true\" for facets to be returned."
+            \                   The include_facets parameter must be set to \"true\" for facets to be returned."
           explode: false
           in: query
           name: facet_fields
@@ -5329,15 +5133,13 @@ paths:
               type: string
             type: array
           style: form
-        - description: Specifies whether or not to include facets in the result set.
-            Default is "false".
+        - description: Specifies whether or not to include facets in the result set. Default is "false".
           in: query
           name: include_facets
           schema:
             nullable: true
             type: boolean
-        - description: Specifies the maximum number of facets to return per type. Default
-            is 300.
+        - description: Specifies the maximum number of facets to return per type. Default is 300.
           in: query
           name: facet_max_count
           schema:
@@ -5398,12 +5200,9 @@ paths:
                 $ref: "#/components/schemas/report_usage_batch_response"
           description: Success - All usages reported were successfully recorded.
         "400":
-          description: InvalidRequest - The content of the request was invalid. Most
-            commonly this is due to either too many assets specified, no assets
-            or invalid JSON.
+          description: InvalidRequest - The content of the request was invalid. Most commonly this is due to either too many assets specified, no assets or invalid JSON.
         "401":
-          description: AuthorizationTokenRequired - Authorization token was missing or not
-            valid.
+          description: AuthorizationTokenRequired - Authorization token was missing or not valid.
         "403":
           description: UnauthorizedToReportUsage
         "409":
@@ -5414,8 +5213,7 @@ paths:
   /v3/videos:
     get:
       description: >
-        Use this endpoint to return detailed video metadata for all the
-        specified video ids.
+        Use this endpoint to return detailed video metadata for all the specified video ids.
 
 
         You'll need an API key and access token to use this resource.
@@ -5556,8 +5354,7 @@ paths:
           name: Accept-Language
           schema:
             type: string
-        - description: Specifies one or more video ids to return. Use comma delimiter when
-            requesting multiple ids.
+        - description: Specifies one or more video ids to return. Use comma delimiter when requesting multiple ids.
           explode: false
           in: query
           name: ids
@@ -5633,8 +5430,7 @@ paths:
   "/v3/videos/{id}":
     get:
       description: >
-        Use this endpoint to return detailed video metadata for the specified
-        video id.
+        Use this endpoint to return detailed video metadata for the specified video id.
 
 
         You'll need an API key and access token to use this resource.
@@ -5775,8 +5571,7 @@ paths:
           name: Accept-Language
           schema:
             type: string
-        - description: A video id. For more than one video please use the /v3/video
-            endpoint.
+        - description: A video id. For more than one video please use the /v3/video endpoint.
           in: path
           name: id
           required: true
@@ -5863,12 +5658,9 @@ paths:
           schema:
             default: ""
             type: string
-        - description: "If specified, returns the list of previously downloaded images for
-            all users in your company.\r
+        - description: "If specified, returns the list of previously downloaded images for all users in your company.\r
 
-            \            Your account must be enabled for this
-            functionality. Contact your Getty Images account rep for more
-            information. Default is false."
+            \            Your account must be enabled for this functionality. Contact your Getty Images account rep for more information. Default is false."
           in: query
           name: company_downloads
           schema:
@@ -5890,17 +5682,13 @@ paths:
           description: VideosNotFound
         "500":
           description: InvalidIStockCollection
-      summary: Returns information about a customer's download history for a specific
-        asset
+      summary: Returns information about a customer's download history for a specific asset
       tags:
         - Videos
   "/v3/videos/{id}/same-series":
     get:
       description: >-
-        This endpoint will provide the list of videos, if any exist, from the
-        same series as the specified creative asset id. These images are
-        typically from the same photo shoot. This functionality will not work
-        for editorial assets.
+        This endpoint will provide the list of videos, if any exist, from the same series as the specified creative asset id. These images are typically from the same photo shoot. This functionality will not work for editorial assets.
 
 
         You'll need an API key and access token to use this resource.
@@ -6118,8 +5906,7 @@ paths:
   "/v3/videos/{id}/similar":
     get:
       description: >-
-        This endpoint will provide a list of videos that are similar to the
-        specified asset id.
+        This endpoint will provide a list of videos that are similar to the specified asset id.
 
 
         You'll need an API key and access token to use this resource.
@@ -6494,9 +6281,7 @@ components:
       additionalProperties: false
       properties:
         change_set_id:
-          description: Contains the identifier for the change-set resource. Passed into
-            ConfirmAssetChanges requests to confirm receipt of the asset changes
-            in the response.
+          description: Contains the identifier for the change-set resource. Passed into ConfirmAssetChanges requests to confirm receipt of the asset changes in the response.
           type: string
         changed_assets:
           description: Contains a list of ChangedAssetList results for the query.
@@ -6653,8 +6438,7 @@ components:
           format: date-time
           type: string
         asset_lifecycle:
-          description: Contains the type of change this asset change is. (i.e. "New,"
-            "Updated" or "Deleted")
+          description: Contains the type of change this asset change is. (i.e. "New," "Updated" or "Deleted")
           type: string
         asset_type:
           description: Contains the type of asset this asset change is (i.e. "Image").
@@ -6663,8 +6447,7 @@ components:
           description: Contains the Id for the asset change.
           type: string
         uri:
-          description: Contains the asset download URL for assets with an AssetLifecycle
-            of "New."
+          description: Contains the asset download URL for assets with an AssetLifecycle of "New."
           type: string
       type: object
     Channel:
@@ -7831,8 +7614,7 @@ components:
           format: int32
           type: integer
         usage_date:
-          description: Identifies the date the asset was used, in ISO 8601 format (e.g.,
-            YYYY-MM-DD), time is not needed.
+          description: Identifies the date the asset was used, in ISO 8601 format (e.g., YYYY-MM-DD), time is not needed.
           format: date-time
           type: string
       type: object
@@ -7841,8 +7623,7 @@ components:
       description: Specifies the request information for the Batch Usages endpoint.
       properties:
         asset_usages:
-          description: Identifies the list of asset id, usage count and date of usage
-            combinations to record.
+          description: Identifies the list of asset id, usage count and date of usage combinations to record.
           items:
             $ref: "#/components/schemas/asset_usage"
           type: array
@@ -7852,14 +7633,12 @@ components:
       description: Specifies the response from the Batch Usages endpoint.
       properties:
         invalid_assets:
-          description: Identifies a list of asset ids submitted that did not match known
-            Getty asset ids.
+          description: Identifies a list of asset ids submitted that did not match known Getty asset ids.
           items:
             type: string
           type: array
         total_asset_usages_processed:
-          description: Specifies the number of asset usage records that were successfully
-            recorded.
+          description: Specifies the number of asset usage records that were successfully recorded.
           format: int32
           nullable: true
           type: integer

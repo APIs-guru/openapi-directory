@@ -9,8 +9,7 @@ info:
     url: https://www.billbee.io
     x-twitter: billbeeio
   description: >+
-    Documentation of the Billbee REST API to connect a Billbee account to
-    external aplications.
+    Documentation of the Billbee REST API to connect a Billbee account to external aplications.
 
 
     ## Endpoint
@@ -57,14 +56,12 @@ info:
   x-providerName: billbee.io
 securityDefinitions:
   X-Billbee-Api-Key:
-    description: To identify the app developer, each API request has do contain a
-      valid API Key in the HTTP header X-Billbee-Api-Key.
+    description: To identify the app developer, each API request has do contain a valid API Key in the HTTP header X-Billbee-Api-Key.
     in: header
     name: X-Billbee-Api-Key
     type: apiKey
   basic:
-    description: To authenticate an API request, the Billbee username/email and an
-      API password have to be provided as a BasicAuth header.
+    description: To authenticate an API request, the Billbee username/email and an API password have to be provided as a BasicAuth header.
     type: basic
 paths:
   /api/v1/automaticprovision/createaccount:
@@ -81,8 +78,7 @@ paths:
           name: model
           required: true
           schema:
-            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.AutomaticProvisionin\
-              gController.CreateAccountContainer"
+            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.AutomaticProvisioningController.CreateAccountContainer"
       produces:
         - application/json
         - text/json
@@ -122,9 +118,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[System.Col\
-              lections.Generic.List[Billbee.Interfaces.BillbeeAPI.Model.CloudSt\
-              orageApiModel]]"
+            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[System.Collections.Generic.List[Billbee.Interfaces.BillbeeAPI.Model.CloudStorageApiModel]]"
       summary: Gets a list of all connected cloud storage devices
       tags:
         - CloudStorage
@@ -139,8 +133,7 @@ paths:
           name: page
           required: false
           type: integer
-        - description: The page size for the result list. Values between 1 and 250 are
-            allowed. (default is 50)
+        - description: The page size for the result list. Values between 1 and 250 are allowed. (default is 50)
           format: int32
           in: query
           name: pageSize
@@ -155,9 +148,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult[Syste\
-              m.Collections.Generic.List[Billbee.Interfaces.BillbeeAPI.Model.Cu\
-              stomerAddressApiModel]]"
+            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult[System.Collections.Generic.List[Billbee.Interfaces.BillbeeAPI.Model.CustomerAddressApiModel]]"
       summary: Get a list of all customer addresses
       tags:
         - CustomerAddresses
@@ -174,8 +165,7 @@ paths:
           name: model
           required: true
           schema:
-            $ref: "#/definitions/Billbee.Interfaces.BillbeeAPI.Model.CustomerAddressApiMode\
-              l"
+            $ref: "#/definitions/Billbee.Interfaces.BillbeeAPI.Model.CustomerAddressApiModel"
       produces:
         - application/json
         - text/json
@@ -185,8 +175,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.In\
-              terfaces.BillbeeAPI.Model.CustomerAddressApiModel]"
+            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.Interfaces.BillbeeAPI.Model.CustomerAddressApiModel]"
       summary: Creates a new customer address
       tags:
         - CustomerAddresses
@@ -210,8 +199,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.In\
-              terfaces.BillbeeAPI.Model.CustomerAddressApiModel]"
+            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.Interfaces.BillbeeAPI.Model.CustomerAddressApiModel]"
       summary: Queries a single customer address by id
       tags:
         - CustomerAddresses
@@ -228,8 +216,7 @@ paths:
           name: model
           required: true
           schema:
-            $ref: "#/definitions/Billbee.Interfaces.BillbeeAPI.Model.CustomerAddressApiMode\
-              l"
+            $ref: "#/definitions/Billbee.Interfaces.BillbeeAPI.Model.CustomerAddressApiModel"
         - description: The id of the address
           format: int32
           in: path
@@ -245,8 +232,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.In\
-              terfaces.BillbeeAPI.Model.CustomerAddressApiModel]"
+            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.Interfaces.BillbeeAPI.Model.CustomerAddressApiModel]"
       summary: Updates a customer address by id
       tags:
         - CustomerAddresses
@@ -261,8 +247,7 @@ paths:
           name: page
           required: false
           type: integer
-        - description: The pagesize for the result list. Values between 1 and 250 are
-            allowed
+        - description: The pagesize for the result list. Values between 1 and 250 are allowed
           format: int32
           in: query
           name: pageSize
@@ -277,9 +262,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult[Syste\
-              m.Collections.Generic.List[Billbee.Interfaces.BillbeeAPI.Model.Cu\
-              stomerApiModel]]"
+            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult[System.Collections.Generic.List[Billbee.Interfaces.BillbeeAPI.Model.CustomerApiModel]]"
       summary: Get a list of all customers
       tags:
         - Customers
@@ -306,8 +289,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.In\
-              terfaces.BillbeeAPI.Model.CustomerApiModel]"
+            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.Interfaces.BillbeeAPI.Model.CustomerApiModel]"
       summary: Creates a new customer
       tags:
         - Customers
@@ -331,8 +313,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.In\
-              terfaces.BillbeeAPI.Model.CustomerAddressApiModel]"
+            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.Interfaces.BillbeeAPI.Model.CustomerAddressApiModel]"
       summary: Queries a single address from a customer
       tags:
         - Customers
@@ -350,9 +331,7 @@ paths:
           name: id
           required: true
           type: integer
-        - description: The address fields to be changed. Please query an address via
-            (todo) to see all fields. Note that Id and CustomerId cannot be
-            changed.
+        - description: The address fields to be changed. Please query an address via (todo) to see all fields. Note that Id and CustomerId cannot be changed.
           in: body
           name: model
           required: true
@@ -367,8 +346,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.In\
-              terfaces.BillbeeAPI.Model.CustomerAddressApiModel]"
+            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.Interfaces.BillbeeAPI.Model.CustomerAddressApiModel]"
       summary: Updates one or more fields of an address
       tags:
         - Customers
@@ -379,18 +357,15 @@ paths:
         - application/xml
         - text/xml
         - application/x-www-form-urlencoded
-      description: Id and CustomerId cannot be changed. Fields you do not send will
-        become empty.
+      description: Id and CustomerId cannot be changed. Fields you do not send will become empty.
       operationId: Customer_UpdateAddress
       parameters:
-        - description: The updated address. Please query an address via (todo) to see all
-            fields. Note that Id and CustomerId cannot be changed.
+        - description: The updated address. Please query an address via (todo) to see all fields. Note that Id and CustomerId cannot be changed.
           in: body
           name: model
           required: true
           schema:
-            $ref: "#/definitions/Billbee.Interfaces.BillbeeAPI.Model.CustomerAddressApiMode\
-              l"
+            $ref: "#/definitions/Billbee.Interfaces.BillbeeAPI.Model.CustomerAddressApiModel"
         - description: The id of the address
           format: int32
           in: path
@@ -406,8 +381,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.In\
-              terfaces.BillbeeAPI.Model.CustomerAddressApiModel]"
+            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.Interfaces.BillbeeAPI.Model.CustomerAddressApiModel]"
       summary: Updates all fields of an address
       tags:
         - Customers
@@ -431,8 +405,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.In\
-              terfaces.BillbeeAPI.Model.CustomerApiModel]"
+            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.Interfaces.BillbeeAPI.Model.CustomerApiModel]"
       summary: Queries a single customer by id
       tags:
         - Customers
@@ -465,8 +438,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.In\
-              terfaces.BillbeeAPI.Model.CustomerApiModel]"
+            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.Interfaces.BillbeeAPI.Model.CustomerApiModel]"
       summary: Updates a customer by id
       tags:
         - Customers
@@ -487,8 +459,7 @@ paths:
           name: page
           required: false
           type: integer
-        - description: The pagesize for the result list. Values between 1 and 250 are
-            allowed
+        - description: The pagesize for the result list. Values between 1 and 250 are allowed
           format: int32
           in: query
           name: pageSize
@@ -503,9 +474,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult[Syste\
-              m.Collections.Generic.List[Billbee.Interfaces.BillbeeAPI.Model.Cu\
-              stomerAddressApiModel]]"
+            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult[System.Collections.Generic.List[Billbee.Interfaces.BillbeeAPI.Model.CustomerAddressApiModel]]"
       summary: Queries a list of addresses from a customer
       tags:
         - Customers
@@ -516,8 +485,7 @@ paths:
         - application/xml
         - text/xml
         - application/x-www-form-urlencoded
-      description: Id and  CustomerId will be ignored in model. If Id is set, the
-        addition will be stopped.
+      description: Id and  CustomerId will be ignored in model. If Id is set, the addition will be stopped.
       operationId: Customer_AddCustomerAddress
       parameters:
         - description: CustomerId to attach the new address to.
@@ -531,8 +499,7 @@ paths:
           name: model
           required: true
           schema:
-            $ref: "#/definitions/Billbee.Interfaces.BillbeeAPI.Model.CustomerAddressApiMode\
-              l"
+            $ref: "#/definitions/Billbee.Interfaces.BillbeeAPI.Model.CustomerAddressApiModel"
       produces:
         - application/json
         - text/json
@@ -542,8 +509,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.In\
-              terfaces.BillbeeAPI.Model.CustomerAddressApiModel]"
+            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.Interfaces.BillbeeAPI.Model.CustomerAddressApiModel]"
       summary: Adds a new address to a customer
       tags:
         - Customers
@@ -564,8 +530,7 @@ paths:
           name: page
           required: false
           type: integer
-        - description: The pagesize for the result list. Values between 1 and 250 are
-            allowed
+        - description: The pagesize for the result list. Values between 1 and 250 are allowed
           format: int32
           in: query
           name: pageSize
@@ -580,9 +545,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult[Syste\
-              m.Collections.Generic.List[Rechnungsdruck.WebApp.Controllers.Api.\
-              Order]]"
+            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult[System.Collections.Generic.List[Rechnungsdruck.WebApp.Controllers.Api.Order]]"
       summary: Queries a list of orders from a customer
       tags:
         - Customers
@@ -683,8 +646,7 @@ paths:
           description: OK
           schema:
             type: object
-      summary: Get a list of all events optionally filtered by date. This request is
-        extra throttled to 2 calls per page per hour.
+      summary: Get a list of all events optionally filtered by date. This request is extra throttled to 2 calls per page per hour.
       tags:
         - Events
   /api/v1/layouts:
@@ -700,9 +662,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[System.Col\
-              lections.Generic.List[Billbee.Interfaces.BillbeeAPI.Models.Layout\
-              Template]]"
+            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[System.Collections.Generic.List[Billbee.Interfaces.BillbeeAPI.Models.LayoutTemplate]]"
       tags:
         - Orders
   /api/v1/orders:
@@ -753,16 +713,14 @@ paths:
           required: false
           type: array
         - collectionFormat: multi
-          description: Specifies a list of tags the order must have attached to be
-            included in the response
+          description: Specifies a list of tags the order must have attached to be included in the response
           in: query
           items:
             type: string
           name: tag
           required: false
           type: array
-        - description: If given, all delivered orders have an Id greater than or equal to
-            the given minimumOrderId
+        - description: If given, all delivered orders have an Id greater than or equal to the given minimumOrderId
           format: int32
           in: query
           name: minimumBillBeeOrderId
@@ -774,15 +732,13 @@ paths:
           name: modifiedAtMin
           required: false
           type: string
-        - description: If given, the last modification has to be older or equal than the
-            given date.
+        - description: If given, the last modification has to be older or equal than the given date.
           format: date-time
           in: query
           name: modifiedAtMax
           required: false
           type: string
-        - description: The source field for the article title. 0 = Order Position
-            (default), 1 = Article Title, 2 = Article Invoice Text
+        - description: The source field for the article title. 0 = Order Position (default), 1 = Article Title, 2 = Article Invoice Text
           enum:
             - 0
             - 1
@@ -793,8 +749,7 @@ paths:
           name: articleTitleSource
           required: false
           type: integer
-        - description: If true the list of tags passed to the call are used to filter
-            orders to not include these tags
+        - description: If true the list of tags passed to the call are used to filter orders to not include these tags
           in: query
           name: excludeTags
           required: false
@@ -808,9 +763,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult[Syste\
-              m.Collections.Generic.List[Billbee.Interfaces.BillbeeAPI.Model.Or\
-              der]]"
+            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult[System.Collections.Generic.List[Billbee.Interfaces.BillbeeAPI.Model.Order]]"
       summary: Get a list of all orders optionally filtered by date
       tags:
         - Orders
@@ -821,8 +774,7 @@ paths:
         - application/xml
         - text/xml
         - application/x-www-form-urlencoded
-      description: "To create an order POST an JSON object to the orders endpoint with
-        the shown properties.\r
+      description: "To create an order POST an JSON object to the orders endpoint with the shown properties.\r
 
         Not all properties are required."
       operationId: OrderApi_PostNewOrder
@@ -848,8 +800,7 @@ paths:
         "201":
           description: The order was created successfully
           schema:
-            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.In\
-              terfaces.BillbeeAPI.Model.Order]"
+            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.Interfaces.BillbeeAPI.Model.Order]"
         "400":
           description: Invalid data was received in the request
         "500":
@@ -873,8 +824,7 @@ paths:
           name: includePdf
           required: false
           type: boolean
-        - description: Optionally specify the id of a billbee connected cloud device to
-            send the pdf to
+        - description: Optionally specify the id of a billbee connected cloud device to send the pdf to
           format: int32
           in: query
           name: sendToCloudId
@@ -888,8 +838,7 @@ paths:
           description: OK
           schema:
             type: object
-      summary: Create an delivery note for an existing order. This request is extra
-        throttled by order and api key to a maximum of 1 per 5 minutes.
+      summary: Create an delivery note for an existing order. This request is extra throttled by order and api key to a maximum of 1 per 5 minutes.
       tags:
         - Orders
         - DeliveryNote
@@ -909,15 +858,13 @@ paths:
           name: includeInvoicePdf
           required: false
           type: boolean
-        - description: You can pass the id of an invoice template to overwrite the
-            assigned template for invoice creation
+        - description: You can pass the id of an invoice template to overwrite the assigned template for invoice creation
           format: int32
           in: query
           name: templateId
           required: false
           type: integer
-        - description: You can pass the id of a connected cloud printer/storage to send
-            the invoice to it
+        - description: You can pass the id of a connected cloud printer/storage to send the invoice to it
           format: int32
           in: query
           name: sendToCloudId
@@ -931,8 +878,7 @@ paths:
           description: OK
           schema:
             type: object
-      summary: Create an invoice for an existing order. This request is extra
-        throttled by order and api key to a maximum of 1 per 5 minutes.
+      summary: Create an invoice for an existing order. This request is extra throttled by order and api key to a maximum of 1 per 5 minutes.
       tags:
         - Orders
         - Invoice
@@ -948,8 +894,7 @@ paths:
           description: OK
           schema:
             type: object
-      summary: Returns a list of fields which can be updated with the orders/{id}
-        patch call
+      summary: Returns a list of fields which can be updated with the orders/{id} patch call
       tags:
         - Orders
   "/api/v1/orders/find/{id}/{partner}":
@@ -998,8 +943,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.In\
-              terfaces.BillbeeAPI.Model.Order]"
+            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.Interfaces.BillbeeAPI.Model.Order]"
       summary: Get a single order by its external order number
       tags:
         - Orders
@@ -1071,8 +1015,7 @@ paths:
           name: includePositions
           required: false
           type: boolean
-        - description: If true the list of tags passed to the call are used to filter
-            orders to not include these tags
+        - description: If true the list of tags passed to the call are used to filter orders to not include these tags
           in: query
           name: excludeTags
           required: false
@@ -1085,8 +1028,7 @@ paths:
           description: OK
           schema:
             type: object
-      summary: Get a list of all invoices optionally filtered by date. This request
-        ist throttled to 1 per 1 minute for same page and minInvoiceDate
+      summary: Get a list of all invoices optionally filtered by date. This request ist throttled to 1 per 1 minute for same page and minInvoiceDate
       tags:
         - Orders
         - Invoice
@@ -1101,8 +1043,7 @@ paths:
           name: id
           required: true
           type: integer
-        - description: The source field for the article title. 0 = Order Position
-            (default), 1 = Article Title, 2 = Article Invoice Text
+        - description: The source field for the article title. 0 = Order Position (default), 1 = Article Title, 2 = Article Invoice Text
           enum:
             - 0
             - 1
@@ -1122,10 +1063,8 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.In\
-              terfaces.BillbeeAPI.Model.Order]"
-      summary: Get a single order by its internal billbee id. This request is
-        throttled to 6 calls per order in one minute
+            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.Interfaces.BillbeeAPI.Model.Order]"
+      summary: Get a single order by its internal billbee id. This request is throttled to 6 calls per order in one minute
       tags:
         - Orders
     patch:
@@ -1141,8 +1080,7 @@ paths:
           name: id
           required: true
           type: integer
-        - description: The fields which should be updated. To see order paramaters, use
-            /orders get call
+        - description: The fields which should be updated. To see order paramaters, use /orders get call
           in: body
           name: model
           required: true
@@ -1157,8 +1095,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.In\
-              terfaces.BillbeeAPI.Model.Order]"
+            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.Interfaces.BillbeeAPI.Model.Order]"
       summary: Updates one or more fields of an order
       tags:
         - Orders
@@ -1172,13 +1109,11 @@ paths:
         - application/x-www-form-urlencoded
       description: "### REMARKS ###\r
 
-        Use this call to change the state of an order to i.e. paid or
-        sent.\r
+        Use this call to change the state of an order to i.e. paid or sent.\r
 
         \r
 
-        The state is transfered to the external shop/marketplace if
-        configured.\r
+        The state is transfered to the external shop/marketplace if configured.\r
 
         This is the list of known states:\r
 
@@ -1258,8 +1193,7 @@ paths:
           name: container
           required: true
           schema:
-            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.OrderApiController.P\
-              arseTextContainer"
+            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.OrderApiController.ParseTextContainer"
       produces:
         - application/json
         - text/json
@@ -1292,8 +1226,7 @@ paths:
           name: model
           required: true
           schema:
-            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.OrderApiController.S\
-              endMessageModel"
+            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.OrderApiController.SendMessageModel"
       produces:
         - application/json
         - text/json
@@ -1326,8 +1259,7 @@ paths:
           name: model
           required: true
           schema:
-            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiAddShipmentToOrde\
-              rModel"
+            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiAddShipmentToOrderModel"
       produces:
         - application/json
         - text/json
@@ -1347,8 +1279,7 @@ paths:
         - application/xml
         - text/xml
         - application/x-www-form-urlencoded
-      description: When a tag is already attached, it is ignored. Tags are not case
-        sensitive.
+      description: When a tag is already attached, it is ignored. Tags are not case sensitive.
       operationId: OrderApi_TagsCreate
       parameters:
         - description: Tags to attach
@@ -1426,8 +1357,7 @@ paths:
           name: model
           required: true
           schema:
-            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.OrderApiController.T\
-              riggerEventContainer"
+            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.OrderApiController.TriggerEventContainer"
       produces:
         - application/json
         - text/json
@@ -1450,8 +1380,7 @@ paths:
           name: page
           required: false
           type: integer
-        - description: The pagesize for the result list. Values between 1 and 250 are
-            allowed
+        - description: The pagesize for the result list. Values between 1 and 250 are allowed
           format: int32
           in: query
           name: pageSize
@@ -1470,9 +1399,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult[Syste\
-              m.Collections.Generic.List[Billbee.Interfaces.BillbeeAPI.Model.Ar\
-              ticleApiModel]]"
+            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult[System.Collections.Generic.List[Billbee.Interfaces.BillbeeAPI.Model.ArticleApiModel]]"
       summary: Get a list of all products
       tags:
         - Products
@@ -1553,9 +1480,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult[Syste\
-              m.Collections.Generic.List[Billbee.Interfaces.BillbeeAPI.Model.Ar\
-              ticleApiCustomFieldDefinitionModel]]"
+            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult[System.Collections.Generic.List[Billbee.Interfaces.BillbeeAPI.Model.ArticleApiCustomFieldDefinitionModel]]"
       summary: Queries a list of all custom fields
       tags:
         - Products
@@ -1579,8 +1504,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.In\
-              terfaces.BillbeeAPI.Model.ArticleApiCustomFieldDefinitionModel]"
+            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.Interfaces.BillbeeAPI.Model.ArticleApiCustomFieldDefinitionModel]"
       summary: Queries a single custom field
       tags:
         - Products
@@ -1612,8 +1536,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.In\
-              terfaces.BillbeeAPI.Model.DeletedImagesModel]"
+            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.Interfaces.BillbeeAPI.Model.DeletedImagesModel]"
       summary: Delete multiple images by id
       tags:
         - Products
@@ -1658,8 +1581,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.In\
-              terfaces.BillbeeAPI.Model.ArticleImageRelationApiModel]"
+            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.Interfaces.BillbeeAPI.Model.ArticleImageRelationApiModel]"
       summary: Returns a single image by id
       tags:
         - Products
@@ -1673,8 +1595,7 @@ paths:
           name: id
           required: true
           type: string
-        - description: Either the value id or the value sku to specify the meaning of the
-            id parameter
+        - description: Either the value id or the value sku to specify the meaning of the id parameter
           in: query
           name: lookupBy
           required: false
@@ -1694,8 +1615,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.In\
-              terfaces.BillbeeAPI.Model.GetReservedAmountResponseData]"
+            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.Interfaces.BillbeeAPI.Model.GetReservedAmountResponseData]"
       summary: Queries the reserved amount for a single article by id or by sku
       tags:
         - Products
@@ -1707,8 +1627,7 @@ paths:
         - application/xml
         - text/xml
         - application/x-www-form-urlencoded
-      description: The article is specified by sku. You have to send the absolute
-        value for the current stock
+      description: The article is specified by sku. You have to send the absolute value for the current stock
       operationId: Article_UpdateStock
       parameters:
         - description: ""
@@ -1726,8 +1645,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.In\
-              terfaces.BillbeeAPI.Model.UpdateStockResponseData]"
+            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.Interfaces.BillbeeAPI.Model.UpdateStockResponseData]"
       summary: Update the stock qty of an article
       tags:
         - Products
@@ -1746,8 +1664,7 @@ paths:
           name: model
           required: true
           schema:
-            $ref: "#/definitions/Billbee.Interfaces.BillbeeAPI.Model.UpdateStockCodeApiMode\
-              l"
+            $ref: "#/definitions/Billbee.Interfaces.BillbeeAPI.Model.UpdateStockCodeApiModel"
       produces:
         - application/json
         - text/json
@@ -1757,8 +1674,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.In\
-              terfaces.BillbeeAPI.Model.UpdateStockCodeResponseData]"
+            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.Interfaces.BillbeeAPI.Model.UpdateStockCodeResponseData]"
       summary: Update the stock code of an article
       tags:
         - Products
@@ -1790,8 +1706,7 @@ paths:
           description: OK
           schema:
             items:
-              $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.In\
-                terfaces.BillbeeAPI.Model.UpdateStockResponseData]"
+              $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.Interfaces.BillbeeAPI.Model.UpdateStockResponseData]"
             type: array
       summary: Update the stock qty for multiple articles at once
       tags:
@@ -1827,8 +1742,7 @@ paths:
           name: id
           required: true
           type: string
-        - description: Either the value id, ean or the value sku to specify the meaning of
-            the id parameter
+        - description: Either the value id, ean or the value sku to specify the meaning of the id parameter
           in: query
           name: lookupBy
           required: false
@@ -1840,8 +1754,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.In\
-              terfaces.BillbeeAPI.Model.ArticleApiModel]"
+            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.Interfaces.BillbeeAPI.Model.ArticleApiModel]"
       summary: Queries a single article by id or by sku
       tags:
         - Products
@@ -1895,9 +1808,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[System.Col\
-              lections.Generic.List[Billbee.Interfaces.BillbeeAPI.Model.Article\
-              ImageRelationApiModel]]"
+            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[System.Collections.Generic.List[Billbee.Interfaces.BillbeeAPI.Model.ArticleImageRelationApiModel]]"
       summary: Returns a list of all images of the product
       tags:
         - Products
@@ -1922,11 +1833,9 @@ paths:
           required: true
           schema:
             items:
-              $ref: "#/definitions/Billbee.Interfaces.BillbeeAPI.Model.ArticleImageRelationAp\
-                iModel"
+              $ref: "#/definitions/Billbee.Interfaces.BillbeeAPI.Model.ArticleImageRelationApiModel"
             type: array
-        - description: If you pass true, the images will be replaced by the passed images.
-            Otherwise the passed images will be appended to the product.
+        - description: If you pass true, the images will be replaced by the passed images. Otherwise the passed images will be appended to the product.
           in: query
           name: replace
           required: false
@@ -1940,10 +1849,8 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.In\
-              terfaces.BillbeeAPI.Model.ArticleImageRelationApiModel]"
-      summary: Add multiple images to a product or replace the product images by the
-        given images
+            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.Interfaces.BillbeeAPI.Model.ArticleImageRelationApiModel]"
+      summary: Add multiple images to a product or replace the product images by the given images
       tags:
         - Products
   "/api/v1/products/{productId}/images/{imageId}":
@@ -1999,8 +1906,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.In\
-              terfaces.BillbeeAPI.Model.ArticleImageRelationApiModel]"
+            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.Interfaces.BillbeeAPI.Model.ArticleImageRelationApiModel]"
       summary: Returns a single image by id
       tags:
         - Products
@@ -2030,8 +1936,7 @@ paths:
           name: model
           required: true
           schema:
-            $ref: "#/definitions/Billbee.Interfaces.BillbeeAPI.Model.ArticleImageRelationAp\
-              iModel"
+            $ref: "#/definitions/Billbee.Interfaces.BillbeeAPI.Model.ArticleImageRelationApiModel"
       produces:
         - application/json
         - text/json
@@ -2041,8 +1946,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.In\
-              terfaces.BillbeeAPI.Model.ArticleImageRelationApiModel]"
+            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.Interfaces.BillbeeAPI.Model.ArticleImageRelationApiModel]"
       summary: Add or update an existing image of a product
       tags:
         - Products
@@ -2060,8 +1964,7 @@ paths:
           name: model
           required: true
           schema:
-            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.SearchController.Sea\
-              rchModel"
+            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.SearchController.SearchModel"
       produces:
         - application/json
         - text/json
@@ -2071,8 +1974,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Rechnungsd\
-              ruck.WebApp.Controllers.Api.SearchController.SearchResultsModel]"
+            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Rechnungsdruck.WebApp.Controllers.Api.SearchController.SearchResultsModel]"
       summary: "Search for products, customers and orders.\r
 
         Type can be \"order\", \"product\" and / or \"customer\"\r
@@ -2158,16 +2060,13 @@ paths:
           name: orderId
           required: false
           type: integer
-        - description: Get Shipments with a shipment greater or equal than this id. New
-            shipments have a greater id than older shipments.
+        - description: Get Shipments with a shipment greater or equal than this id. New shipments have a greater id than older shipments.
           format: int32
           in: query
           name: minimumShipmentId
           required: false
           type: integer
-        - description: Get Shippings for the specified shipping provider only. <seealso
-            cref="M:Rechnungsdruck.WebApp.Controllers.Api.ShipmentController.GetShippingproviders"
-            />
+        - description: Get Shippings for the specified shipping provider only. <seealso cref="M:Rechnungsdruck.WebApp.Controllers.Api.ShipmentController.GetShippingproviders" />
           format: int32
           in: query
           name: shippingProviderId
@@ -2182,11 +2081,8 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult[Syste\
-              m.Collections.Generic.List[Billbee.Interfaces.BillbeeAPI.Model.Sh\
-              ipment]]"
-      summary: Get a list of all shipments optionally filtered by date. All parameters
-        are optional.
+            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult[System.Collections.Generic.List[Billbee.Interfaces.BillbeeAPI.Model.Shipment]]"
+      summary: Get a list of all shipments optionally filtered by date. All parameters are optional.
       tags:
         - Shipments
   /api/v1/shipment/shippingcarriers:
@@ -2244,8 +2140,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Rechnungsd\
-              ruck.WebApp.Controllers.Api.ShipmentWithLabelResult]"
+            $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Rechnungsdruck.WebApp.Controllers.Api.ShipmentWithLabelResult]"
       summary: Creates a shipment for an order in billbee
       tags:
         - Shipments
@@ -2287,8 +2182,7 @@ paths:
         - application/x-www-form-urlencoded
       operationId: WebHookManagement_Post
       parameters:
-        - description: The webhook to create. Attach ?noecho to the uri to prevent echo
-            test.
+        - description: The webhook to create. Attach ?noecho to the uri to prevent echo test.
           in: body
           name: webHook
           required: true
@@ -2416,8 +2310,7 @@ definitions:
         format: int32
         type: integer
       Definition:
-        $ref: "#/definitions/Billbee.Interfaces.BillbeeAPI.Model.ArticleApiCustomFieldD\
-          efinitionModel"
+        $ref: "#/definitions/Billbee.Interfaces.BillbeeAPI.Model.ArticleApiCustomFieldDefinitionModel"
       DefinitionId:
         format: int32
         type: integer
@@ -2438,14 +2331,11 @@ definitions:
           $ref: "#/definitions/Billbee.Interfaces.BillbeeAPI.Model.BomSubArticleApiModel"
         type: array
       Category1:
-        $ref: "#/definitions/Billbee.Interfaces.BillbeeAPI.Model.ArticleCategoryApiMode\
-          l"
+        $ref: "#/definitions/Billbee.Interfaces.BillbeeAPI.Model.ArticleCategoryApiModel"
       Category2:
-        $ref: "#/definitions/Billbee.Interfaces.BillbeeAPI.Model.ArticleCategoryApiMode\
-          l"
+        $ref: "#/definitions/Billbee.Interfaces.BillbeeAPI.Model.ArticleCategoryApiModel"
       Category3:
-        $ref: "#/definitions/Billbee.Interfaces.BillbeeAPI.Model.ArticleCategoryApiMode\
-          l"
+        $ref: "#/definitions/Billbee.Interfaces.BillbeeAPI.Model.ArticleCategoryApiModel"
       Condition:
         format: int32
         type: integer
@@ -2456,8 +2346,7 @@ definitions:
         type: string
       CustomFields:
         items:
-          $ref: "#/definitions/Billbee.Interfaces.BillbeeAPI.Model.ArticleApiCustomFieldV\
-            alueModel"
+          $ref: "#/definitions/Billbee.Interfaces.BillbeeAPI.Model.ArticleApiCustomFieldValueModel"
         type: array
       DeliveryTime:
         format: int32
@@ -2478,8 +2367,7 @@ definitions:
         type: integer
       Images:
         items:
-          $ref: "#/definitions/Billbee.Interfaces.BillbeeAPI.Model.ArticleImageRelationAp\
-            iModel"
+          $ref: "#/definitions/Billbee.Interfaces.BillbeeAPI.Model.ArticleImageRelationApiModel"
         type: array
       InvoiceText:
         items:
@@ -2693,8 +2581,7 @@ definitions:
   Billbee.Interfaces.BillbeeAPI.Model.CreateCustomerApiModel:
     properties:
       Address:
-        $ref: "#/definitions/Billbee.Interfaces.BillbeeAPI.Model.CustomerAddressApiMode\
-          l"
+        $ref: "#/definitions/Billbee.Interfaces.BillbeeAPI.Model.CustomerAddressApiModel"
       Email:
         type: string
       Id:
@@ -2725,12 +2612,10 @@ definitions:
   Billbee.Interfaces.BillbeeAPI.Model.CreateShipmentApiModel:
     properties:
       ClientReference:
-        description: Optional specify a text to be included on the label. Not possible
-          with all carriers
+        description: Optional specify a text to be included on the label. Not possible with all carriers
         type: string
       Content:
-        description: Optional specify a text describing the content of the shipment.
-          Used for export shipments
+        description: Optional specify a text describing the content of the shipment. Used for export shipments
         type: string
       CustomerNumber:
         description: Not used anymore
@@ -2752,15 +2637,13 @@ definitions:
         description: The name of a connected Cloudprinter to sent the label to
         type: string
       ProductCode:
-        description: The productcode to be used when creating the shipment. Values
-          depends on the carrier used
+        description: The productcode to be used when creating the shipment. Values depends on the carrier used
         type: string
       ProviderName:
         description: The name of the provider as specified in the billbee account
         type: string
       ReceiverAddress:
-        $ref: "#/definitions/Billbee.Interfaces.BillbeeAPI.Model.ShipmentAddressApiMode\
-          l"
+        $ref: "#/definitions/Billbee.Interfaces.BillbeeAPI.Model.ShipmentAddressApiModel"
         description: The address of the receiver
       Services:
         description: A list of services to be used when creating the shipment
@@ -2831,8 +2714,7 @@ definitions:
       Housenumber:
         type: string
       Id:
-        description: The internal Billbee ID of the address record. Can be null if a new
-          address is created
+        description: The internal Billbee ID of the address record. Can be null if a new address is created
         format: int32
         type: integer
       LastName:
@@ -2947,8 +2829,7 @@ definitions:
         description: The customer number (not to be confused with the id of the customer)
         type: string
       DeliverySourceCountryCode:
-        description: An optional Country ISO2 Code of the country where order is shipped
-          from (FBA)
+        description: An optional Country ISO2 Code of the country where order is shipped from (FBA)
         type: string
       DistributionCenter:
         description: An optional code for the distribution center delivering this order
@@ -2978,8 +2859,7 @@ definitions:
         description: The prefix of the invoice number
         type: string
       IsCancelationFor:
-        description: An optional Order Id (externalid) for an order if this is a cancel
-          order (shopify only at the moment)
+        description: An optional Order Id (externalid) for an order if this is a cancel order (shopify only at the moment)
         type: string
       LanguageCode:
         description: The two-letter language code of the customer
@@ -3000,8 +2880,7 @@ definitions:
         format: date-time
         type: string
       PaymentInstruction:
-        description: A textfield optionaly filled with a payment instruction text for
-          printout on the invoice (z.B. Ebay Kauf auf Rechnung)
+        description: A textfield optionaly filled with a payment instruction text for printout on the invoice (z.B. Ebay Kauf auf Rechnung)
         type: string
       PaymentMethod:
         description: The payment method
@@ -3108,13 +2987,10 @@ definitions:
         format: int32
         type: integer
       PaymentReference:
-        description: A payment reference. Should not be used any more. Please use
-          'Payments' instead.
+        description: A payment reference. Should not be used any more. Please use 'Payments' instead.
         type: string
       PaymentTransactionId:
-        description: The id of the payment transaction. For example the transaction id
-          of PayPal payment. Should not be used any more. Please use 'Payments'
-          instead.
+        description: The id of the payment transaction. For example the transaction id of PayPal payment. Should not be used any more. Please use 'Payments' instead.
         type: string
       Payments:
         items:
@@ -3247,12 +3123,10 @@ definitions:
         format: double
         type: number
       DontAdjustStock:
-        description: If true, the import of this order won't adjust the stock level at
-          billbee.
+        description: If true, the import of this order won't adjust the stock level at billbee.
         type: boolean
       GetPriceFromArticleIfAny:
-        description: If true, the price will be overwritten by the known article price
-          in billbee if available
+        description: If true, the price will be overwritten by the known article price in billbee if available
         type: boolean
       IsCoupon:
         description: Determines if it is a coupon, which is interpreted as tax-free payment
@@ -3283,8 +3157,7 @@ definitions:
         format: double
         type: number
       TransactionId:
-        description: Id of the individual transaction. Only required by Ebay to detect
-          aggregated orders
+        description: Id of the individual transaction. Only required by Ebay to detect aggregated orders
         type: string
       UnrebatedTotalPrice:
         description: Is just used for the billbee api
@@ -3450,15 +3323,12 @@ definitions:
         description: True if the product is a digital good (download etc.), false if not
         type: boolean
       OldId:
-        description: "This is for migration scenarios when the internal id of a product
-          changes\r
+        description: "This is for migration scenarios when the internal id of a product changes\r
 
-          I.E. Etsy when switching to the new inventory management,
-          the ids for variants will change."
+          I.E. Etsy when switching to the new inventory management, the ids for variants will change."
         type: string
       PlatformData:
-        description: Optional platform specific Data as serialized JSON Object for the
-          product
+        description: Optional platform specific Data as serialized JSON Object for the product
         type: string
       SKU:
         description: The SKU of this product
@@ -3503,8 +3373,7 @@ definitions:
   Billbee.Interfaces.BillbeeAPI.Model.UpdateStockApiModel:
     properties:
       AutosubtractReservedAmount:
-        description: Automatically reduce the NewQuantity by the currently not fulfilled
-          amount
+        description: Automatically reduce the NewQuantity by the currently not fulfilled amount
         type: boolean
       BillbeeId:
         description: Optional the ID of the Billbee product to update
@@ -3515,8 +3384,7 @@ definitions:
         format: double
         type: number
       ForceSendStockToShops:
-        description: If true, every sent stockchange is stored and transmitted to the
-          connected shop, even if the value has not changed
+        description: If true, every sent stockchange is stored and transmitted to the connected shop, even if the value has not changed
         type: boolean
       NewQuantity:
         description: The new absolute stock quantity for the product you want to set
@@ -3734,9 +3602,7 @@ definitions:
         type: string
       PossibleValueLists:
         items:
-          $ref: "#/definitions/System.Collections.Generic.KeyValuePair[System.String,Syst\
-            em.Collections.Generic.List[System.Collections.Generic.KeyValuePair\
-            [System.Int32,System.String]]]"
+          $ref: "#/definitions/System.Collections.Generic.KeyValuePair[System.String,System.Collections.Generic.List[System.Collections.Generic.KeyValuePair[System.Int32,System.String]]]"
         readOnly: true
         type: array
       RequiresUserInput:
@@ -3795,8 +3661,7 @@ definitions:
     description: Data of the shipment to be created
     properties:
       CarrierId:
-        description: "Optional the id of a shipping carrier that should be assigend to
-          the shipment\r
+        description: "Optional the id of a shipping carrier that should be assigend to the shipment\r
 
           Will override the carrier from the shipment product.\r
 
@@ -3815,13 +3680,11 @@ definitions:
         description: The id of the shipment (Sendungsnummer/trackingid)
         type: string
       ShippingProviderId:
-        description: Optional the id of a shipping provider existing in the billbee
-          account that should be assigned to the shipment
+        description: Optional the id of a shipping provider existing in the billbee account that should be assigned to the shipment
         format: int32
         type: integer
       ShippingProviderProductId:
-        description: Optional the id of a shipping provider product that should be
-          assigend to the shipment
+        description: Optional the id of a shipping provider product that should be assigend to the shipment
         format: int32
         type: integer
     type: object
@@ -3934,8 +3797,7 @@ definitions:
     properties:
       Data:
         items:
-          $ref: "#/definitions/Billbee.Interfaces.BillbeeAPI.Model.ArticleApiCustomFieldD\
-            efinitionModel"
+          $ref: "#/definitions/Billbee.Interfaces.BillbeeAPI.Model.ArticleApiCustomFieldDefinitionModel"
         type: array
       ErrorCode:
         enum:
@@ -3971,9 +3833,7 @@ definitions:
       ErrorMessage:
         type: string
       Paging:
-        $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult.Pagin\
-          gInformation[System.Collections.Generic.List[Billbee.Interfaces.Billb\
-          eeAPI.Model.ArticleApiCustomFieldDefinitionModel]]"
+        $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult.PagingInformation[System.Collections.Generic.List[Billbee.Interfaces.BillbeeAPI.Model.ArticleApiCustomFieldDefinitionModel]]"
     type: object
   "Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult[System.Collections.Generic.List[Billbee.Interfaces.BillbeeAPI.Model.ArticleApiModel]]":
     properties:
@@ -4015,16 +3875,13 @@ definitions:
       ErrorMessage:
         type: string
       Paging:
-        $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult.Pagin\
-          gInformation[System.Collections.Generic.List[Billbee.Interfaces.Billb\
-          eeAPI.Model.ArticleApiModel]]"
+        $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult.PagingInformation[System.Collections.Generic.List[Billbee.Interfaces.BillbeeAPI.Model.ArticleApiModel]]"
     type: object
   "Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult[System.Collections.Generic.List[Billbee.Interfaces.BillbeeAPI.Model.CustomerAddressApiModel]]":
     properties:
       Data:
         items:
-          $ref: "#/definitions/Billbee.Interfaces.BillbeeAPI.Model.CustomerAddressApiMode\
-            l"
+          $ref: "#/definitions/Billbee.Interfaces.BillbeeAPI.Model.CustomerAddressApiModel"
         type: array
       ErrorCode:
         enum:
@@ -4060,9 +3917,7 @@ definitions:
       ErrorMessage:
         type: string
       Paging:
-        $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult.Pagin\
-          gInformation[System.Collections.Generic.List[Billbee.Interfaces.Billb\
-          eeAPI.Model.CustomerAddressApiModel]]"
+        $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult.PagingInformation[System.Collections.Generic.List[Billbee.Interfaces.BillbeeAPI.Model.CustomerAddressApiModel]]"
     type: object
   "Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult[System.Collections.Generic.List[Billbee.Interfaces.BillbeeAPI.Model.CustomerApiModel]]":
     properties:
@@ -4104,9 +3959,7 @@ definitions:
       ErrorMessage:
         type: string
       Paging:
-        $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult.Pagin\
-          gInformation[System.Collections.Generic.List[Billbee.Interfaces.Billb\
-          eeAPI.Model.CustomerApiModel]]"
+        $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult.PagingInformation[System.Collections.Generic.List[Billbee.Interfaces.BillbeeAPI.Model.CustomerApiModel]]"
     type: object
   "Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult[System.Collections.Generic.List[Billbee.Interfaces.BillbeeAPI.Model.Order]]":
     properties:
@@ -4148,9 +4001,7 @@ definitions:
       ErrorMessage:
         type: string
       Paging:
-        $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult.Pagin\
-          gInformation[System.Collections.Generic.List[Billbee.Interfaces.Billb\
-          eeAPI.Model.Order]]"
+        $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult.PagingInformation[System.Collections.Generic.List[Billbee.Interfaces.BillbeeAPI.Model.Order]]"
     type: object
   "Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult[System.Collections.Generic.List[Billbee.Interfaces.BillbeeAPI.Model.Shipment]]":
     properties:
@@ -4192,9 +4043,7 @@ definitions:
       ErrorMessage:
         type: string
       Paging:
-        $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult.Pagin\
-          gInformation[System.Collections.Generic.List[Billbee.Interfaces.Billb\
-          eeAPI.Model.Shipment]]"
+        $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult.PagingInformation[System.Collections.Generic.List[Billbee.Interfaces.BillbeeAPI.Model.Shipment]]"
     type: object
   "Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult[System.Collections.Generic.List[Rechnungsdruck.WebApp.Controllers.Api.Order]]":
     properties:
@@ -4236,15 +4085,12 @@ definitions:
       ErrorMessage:
         type: string
       Paging:
-        $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult.Pagin\
-          gInformation[System.Collections.Generic.List[Rechnungsdruck.WebApp.Co\
-          ntrollers.Api.Order]]"
+        $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult.PagingInformation[System.Collections.Generic.List[Rechnungsdruck.WebApp.Controllers.Api.Order]]"
     type: object
   "Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.Interfaces.BillbeeAPI.Model.ArticleApiCustomFieldDefinitionModel]":
     properties:
       Data:
-        $ref: "#/definitions/Billbee.Interfaces.BillbeeAPI.Model.ArticleApiCustomFieldD\
-          efinitionModel"
+        $ref: "#/definitions/Billbee.Interfaces.BillbeeAPI.Model.ArticleApiCustomFieldDefinitionModel"
       ErrorCode:
         enum:
           - 0
@@ -4320,8 +4166,7 @@ definitions:
   "Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.Interfaces.BillbeeAPI.Model.ArticleImageRelationApiModel]":
     properties:
       Data:
-        $ref: "#/definitions/Billbee.Interfaces.BillbeeAPI.Model.ArticleImageRelationAp\
-          iModel"
+        $ref: "#/definitions/Billbee.Interfaces.BillbeeAPI.Model.ArticleImageRelationApiModel"
       ErrorCode:
         enum:
           - 0
@@ -4359,8 +4204,7 @@ definitions:
   "Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.Interfaces.BillbeeAPI.Model.CustomerAddressApiModel]":
     properties:
       Data:
-        $ref: "#/definitions/Billbee.Interfaces.BillbeeAPI.Model.CustomerAddressApiMode\
-          l"
+        $ref: "#/definitions/Billbee.Interfaces.BillbeeAPI.Model.CustomerAddressApiModel"
       ErrorCode:
         enum:
           - 0
@@ -4474,8 +4318,7 @@ definitions:
   "Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.Interfaces.BillbeeAPI.Model.GetReservedAmountResponseData]":
     properties:
       Data:
-        $ref: "#/definitions/Billbee.Interfaces.BillbeeAPI.Model.GetReservedAmountRespo\
-          nseData"
+        $ref: "#/definitions/Billbee.Interfaces.BillbeeAPI.Model.GetReservedAmountResponseData"
       ErrorCode:
         enum:
           - 0
@@ -4551,8 +4394,7 @@ definitions:
   "Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.Interfaces.BillbeeAPI.Model.UpdateStockCodeResponseData]":
     properties:
       Data:
-        $ref: "#/definitions/Billbee.Interfaces.BillbeeAPI.Model.UpdateStockCodeRespons\
-          eData"
+        $ref: "#/definitions/Billbee.Interfaces.BillbeeAPI.Model.UpdateStockCodeResponseData"
       ErrorCode:
         enum:
           - 0
@@ -4590,8 +4432,7 @@ definitions:
   "Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.Interfaces.BillbeeAPI.Model.UpdateStockResponseData]":
     properties:
       Data:
-        $ref: "#/definitions/Billbee.Interfaces.BillbeeAPI.Model.UpdateStockResponseDat\
-          a"
+        $ref: "#/definitions/Billbee.Interfaces.BillbeeAPI.Model.UpdateStockResponseData"
       ErrorCode:
         enum:
           - 0
@@ -4629,8 +4470,7 @@ definitions:
   "Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Rechnungsdruck.WebApp.Controllers.Api.SearchController.SearchResultsModel]":
     properties:
       Data:
-        $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.SearchController.Sea\
-          rchResultsModel"
+        $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.SearchController.SearchResultsModel"
       ErrorCode:
         enum:
           - 0
@@ -4668,8 +4508,7 @@ definitions:
   "Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Rechnungsdruck.WebApp.Controllers.Api.ShipmentWithLabelResult]":
     properties:
       Data:
-        $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ShipmentWithLabelRes\
-          ult"
+        $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ShipmentWithLabelResult"
       ErrorCode:
         enum:
           - 0
@@ -4708,8 +4547,7 @@ definitions:
     properties:
       Data:
         items:
-          $ref: "#/definitions/Billbee.Interfaces.BillbeeAPI.Model.ArticleImageRelationAp\
-            iModel"
+          $ref: "#/definitions/Billbee.Interfaces.BillbeeAPI.Model.ArticleImageRelationApiModel"
         type: array
       ErrorCode:
         enum:
@@ -4829,12 +4667,10 @@ definitions:
     description: Data used to create a new Billbee user account
     properties:
       AcceptTerms:
-        description: Set to true, if the user has accepted the Billbee terms &amp;
-          conditions
+        description: Set to true, if the user has accepted the Billbee terms &amp; conditions
         type: boolean
       Address:
-        $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.AutomaticProvisionin\
-          gController.CreateAccountContainer.UserAddress"
+        $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.AutomaticProvisioningController.CreateAccountContainer.UserAddress"
         description: Gets or sets the invoice address of the Billbee user
       AffiliateCouponCode:
         description: Specifies an billbee affiliate code to attach to the user
@@ -5077,29 +4913,24 @@ definitions:
     properties:
       Customers:
         items:
-          $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.SearchController.Cus\
-            tomerResult"
+          $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.SearchController.CustomerResult"
         type: array
       Orders:
         items:
-          $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.SearchController.Ord\
-            erResult"
+          $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.SearchController.OrderResult"
         type: array
       Products:
         items:
-          $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.SearchController.Pro\
-            ductResult"
+          $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.SearchController.ProductResult"
         type: array
     type: object
   Rechnungsdruck.WebApp.Controllers.Api.ShipmentWithLabel:
     properties:
       ChangeStateToSend:
-        description: Optional parameter to automatically change the orderstate to sent
-          after creating the shipment
+        description: Optional parameter to automatically change the orderstate to sent after creating the shipment
         type: boolean
       ClientReference:
-        description: Optional specify a reference text to be included on the label.
-          Works not with all carriers
+        description: Optional specify a reference text to be included on the label. Works not with all carriers
         type: string
       Dimension:
         $ref: "#/definitions/Billbee.Interfaces.Shipping.ShipmentData.Dimensions"
@@ -5116,8 +4947,7 @@ definitions:
         format: int32
         type: integer
       ProviderId:
-        description: The id of the provider. You can query all providers with the
-          shippingproviders endpoint
+        description: The id of the provider. You can query all providers with the shippingproviders endpoint
         format: int32
         type: integer
       ShipDate:
@@ -5166,7 +4996,6 @@ definitions:
         type: string
       value:
         items:
-          $ref: "#/definitions/System.Collections.Generic.KeyValuePair[System.Int32,Syste\
-            m.String]"
+          $ref: "#/definitions/System.Collections.Generic.KeyValuePair[System.Int32,System.String]"
         type: array
     type: object

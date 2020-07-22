@@ -4,9 +4,7 @@ info:
   contact:
     x-twitter: amentumspace
   description: >
-    Instantly access empirical models of atmospheric density and  composition
-    that are recommended by the Committee on Space Research (COSPAR)
-    for  satellite drag calculations. <br><br>
+    Instantly access empirical models of atmospheric density and  composition that are recommended by the Committee on Space Research (COSPAR) for  satellite drag calculations. <br><br>
 
     <a href='https://ccmc.gsfc.nasa.gov/modelweb/atmos/nrlmsise00.html'>NRLMSISE-00</a> is recommended for composition calculations and was developed  by the US Naval Research Laboratory. <br><br>
 
@@ -25,12 +23,11 @@ info:
     Amentum Pty Ltd is not responsible nor liable for any loss or damage of any sort incurred as a result of using the API. <br><br>
 
     Copyright <a href='https://amentum.space'>Amentum Pty Ltd</a> 2020.
-  title: |
+  title: >
     Atmosphere API - calculate composition and density of the atmosphere
   version: 1.0.0
   x-apisguru-categories:
     - location
-    - open_data
   x-logo:
     url: https://twitter.com/amentumspace/profile_image?size=original
   x-origin:
@@ -46,11 +43,7 @@ produces:
 parameters:
   AP:
     description: >
-      (Optional) The Ap-index provides a daily average level for geomagnetic
-      activity F107, F107A, AP effects can be neglected below 80 km. If
-      unspecified, the average of values in the 24 hours preceding the
-      date-time  are automatically calculated from data provided by GFZ German
-      Research Centre  for Geosciences.
+      (Optional) The Ap-index provides a daily average level for geomagnetic activity F107, F107A, AP effects can be neglected below 80 km. If unspecified, the average of values in the 24 hours preceding the date-time  are automatically calculated from data provided by GFZ German Research Centre  for Geosciences.
     in: query
     name: ap
     required: false
@@ -69,24 +62,14 @@ parameters:
     type: integer
   F107:
     description: >
-      (Optional) Daily F10.7 cm radio flux for previous day (SFU). F107 and
-      F107A values correspond to the 10.7 cm radio flux at the actual distance
-      of Earth from Sun rather than radio flux at 1 AU. F107, F107A, AP effects
-      can be neglected below 80 km. If unspecified, values provided by the US
-      National Oceanic and  Atmospheric Administration are retrieved
-      automatically.
+      (Optional) Daily F10.7 cm radio flux for previous day (SFU). F107 and F107A values correspond to the 10.7 cm radio flux at the actual distance of Earth from Sun rather than radio flux at 1 AU. F107, F107A, AP effects can be neglected below 80 km. If unspecified, values provided by the US National Oceanic and  Atmospheric Administration are retrieved automatically.
     in: query
     name: f107
     required: false
     type: number
   F107A:
     description: >
-      (Optional) 81 day average of F10.7 flux (SFU) centered on the specified
-      day. F107 and F107A values correspond to the 10.7 cm radio flux at the
-      actual distance of Earth from Sun rather than radio flux at 1 AU. F107,
-      F107A, AP effects can be neglected below 80 km. If unspecified, values
-      provided by the US National Oceanic and  Atmospheric Administration are
-      retrieved automatically.
+      (Optional) 81 day average of F10.7 flux (SFU) centered on the specified day. F107 and F107A values correspond to the 10.7 cm radio flux at the actual distance of Earth from Sun rather than radio flux at 1 AU. F107, F107A, AP effects can be neglected below 80 km. If unspecified, values provided by the US National Oceanic and  Atmospheric Administration are retrieved automatically.
     in: query
     name: f107a
     required: false
@@ -124,11 +107,15 @@ parameters:
 paths:
   /jb2008:
     get:
-      description: |
+      description: >
         Computes<br><br>
+
         Exospheric temperature above the input position (K)<br><br>
+
         Temperature at the input position (K)<br><br>
+
         Total mass density at the input position (kg/m3)<br><br>
+
         Valid for altitudes in the interval [80, 40000] km
       operationId: app.api.endpoints.JB2008.sample_atmosphere
       parameters:
@@ -309,7 +296,6 @@ paths:
                     type: number
                 type: object
             type: object
-      summary: Compute the NRLSMSIE-00 atmospheric composition and density for given
-        conditions
+      summary: Compute the NRLSMSIE-00 atmospheric composition and density for given conditions
       tags:
         - Click to view documentation for API endpoints

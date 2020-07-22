@@ -8,8 +8,7 @@ info:
     name: Shine Solutions
     url: http://shinesolutions.com
     x-twitter: Adobe
-  description: Swagger AEM is an OpenAPI specification for Adobe Experience
-    Manager (AEM) API
+  description: Swagger AEM is an OpenAPI specification for Adobe Experience Manager (AEM) API
   title: Adobe Experience Manager (AEM) API
   version: 3.4.0-pre.0
   x-apisguru-categories:
@@ -2175,24 +2174,19 @@ components:
       properties:
         addGroupMemberships:
           $ref: "#/components/schemas/SamlConfigurationPropertyItemsBoolean"
-          description: Whether or not a user should be automatically added to CRX groups
-            after successful authentication.
+          description: Whether or not a user should be automatically added to CRX groups after successful authentication.
         assertionConsumerServiceURL:
           $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
-          description: The (optional) AssertionConsumerServiceURL attribute of an Authn
-            request specifies the location to which a  message MUST be sent to
-            the requester.
+          description: The (optional) AssertionConsumerServiceURL attribute of an Authn request specifies the location to which a  message MUST be sent to the requester.
         clockTolerance:
           $ref: "#/components/schemas/SamlConfigurationPropertyItemsLong"
-          description: Time tolerance in seconds to compensate clock skew between IDP and
-            SP when validating Assertions.
+          description: Time tolerance in seconds to compensate clock skew between IDP and SP when validating Assertions.
         createUser:
           $ref: "#/components/schemas/SamlConfigurationPropertyItemsBoolean"
           description: Whether or not to autocreate nonexisting users in the repository.
         defaultGroups:
           $ref: "#/components/schemas/SamlConfigurationPropertyItemsArray"
-          description: A list of default CRX groups users are added to after successful
-            authentication.
+          description: A list of default CRX groups users are added to after successful authentication.
         defaultRedirectUrl:
           $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
           description: The default location to redirect to after successful authentication.
@@ -2201,78 +2195,52 @@ components:
           description: The digest algorithm to use when signing a SAML message.
         groupMembershipAttribute:
           $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
-          description: The name of the attribute containing a list of CRX groups this user
-            should be added to.
+          description: The name of the attribute containing a list of CRX groups this user should be added to.
         handleLogout:
           $ref: "#/components/schemas/SamlConfigurationPropertyItemsBoolean"
-          description: Whether or not logout (dropCredentials) requests will be processed
-            by this handler.
+          description: Whether or not logout (dropCredentials) requests will be processed by this handler.
         idpCertAlias:
           $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
-          description: The alias of the IdP's certificate in the global truststore. If
-            this property is empty the authentication handler is disabled.
+          description: The alias of the IdP's certificate in the global truststore. If this property is empty the authentication handler is disabled.
         idpHttpRedirect:
           $ref: "#/components/schemas/SamlConfigurationPropertyItemsBoolean"
-          description: Use an HTTP Redirect to the IDP URL instead of sending an
-            AuthnRequest-message to request credentials. Use this for IDP
-            initiated authentication.
+          description: Use an HTTP Redirect to the IDP URL instead of sending an AuthnRequest-message to request credentials. Use this for IDP initiated authentication.
         idpUrl:
           $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
-          description: URL of the IDP where the SAML Authentication Request should be sent
-            to. If this property is empty the authentication handler is
-            disabled. (idpUrl)
+          description: URL of the IDP where the SAML Authentication Request should be sent to. If this property is empty the authentication handler is disabled. (idpUrl)
         keyStorePassword:
           $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
-          description: The password of the key-store of the 'authentication-service'
-            system user.
+          description: The password of the key-store of the 'authentication-service' system user.
         logoutUrl:
           $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
-          description: URL of the IDP where the SAML Logout Request should be sent to. If
-            this property is empty the authentication handler won't handle
-            logouts.
+          description: URL of the IDP where the SAML Logout Request should be sent to. If this property is empty the authentication handler won't handle logouts.
         nameIdFormat:
           $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
-          description: The value of the NameIDPolicy format parameter to send in the
-            AuthnRequest message.
+          description: The value of the NameIDPolicy format parameter to send in the AuthnRequest message.
         path:
           $ref: "#/components/schemas/SamlConfigurationPropertyItemsArray"
-          description: Repository path for which this authentication handler should be
-            used by Sling. If this is empty, the authentication handler will be
-            disabled.
+          description: Repository path for which this authentication handler should be used by Sling. If this is empty, the authentication handler will be disabled.
         service.ranking:
           $ref: "#/components/schemas/SamlConfigurationPropertyItemsLong"
-          description: OSGi Framework Service Ranking value to indicate the order in which
-            to call this service. This is an int value where higher values
-            designate higher precedence. Default value is 0.
+          description: OSGi Framework Service Ranking value to indicate the order in which to call this service. This is an int value where higher values designate higher precedence. Default value is 0.
         serviceProviderEntityId:
           $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
-          description: ID which uniquely identifies this service provider with the
-            identity provider. If this property is empty the authentication
-            handler is disabled.
+          description: ID which uniquely identifies this service provider with the identity provider. If this property is empty the authentication handler is disabled.
         signatureMethod:
           $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
           description: The signature algorithm to use when signing a SAML message.
         spPrivateKeyAlias:
           $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
-          description: The alias of the SP's private key in the key-store of the
-            'authentication-service' system user. If this property is empty the
-            handler will not be able to sign or decrypt messages.
+          description: The alias of the SP's private key in the key-store of the 'authentication-service' system user. If this property is empty the handler will not be able to sign or decrypt messages.
         synchronizeAttributes:
           $ref: "#/components/schemas/SamlConfigurationPropertyItemsArray"
-          description: A list of attribute mappings (in the format
-            \attributename=path/relative/to/user/node\) which should be stored
-            in the repository on user-synchronization.
+          description: A list of attribute mappings (in the format \attributename=path/relative/to/user/node\) which should be stored in the repository on user-synchronization.
         useEncryption:
           $ref: "#/components/schemas/SamlConfigurationPropertyItemsBoolean"
-          description: Whether or not this authentication handler expects encrypted SAML
-            assertions. If this is enabled the SP's private key must be provided
-            in the key-store of the 'authentication-service' system user (see SP
-            Private Key Alias above).
+          description: Whether or not this authentication handler expects encrypted SAML assertions. If this is enabled the SP's private key must be provided in the key-store of the 'authentication-service' system user (see SP Private Key Alias above).
         userIDAttribute:
           $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
-          description: The name of the attribute containing the user ID used to
-            authenticate and create the user in the CRX repository. Leave empty
-            to use the Subject:NameId.
+          description: The name of the attribute containing the user ID used to authenticate and create the user in the CRX repository. Leave empty to use the Subject:NameId.
         userIntermediatePath:
           $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
           description: User intermediate path to store created users.

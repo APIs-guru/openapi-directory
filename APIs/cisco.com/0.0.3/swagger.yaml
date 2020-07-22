@@ -7,12 +7,7 @@ info:
     email: os@cisco.com
     name: Omar Santos
   description: >
-    The Cisco Product Security Incident Response Team (PSIRT) openVuln API is a
-    RESTful API that allows customers to obtain Cisco Security Vulnerability
-    information in different machine-consumable formats. APIs are important for
-    customers because they allow their technical staff and programmers to build
-    tools that help them do their job more effectively (in this case, to keep up
-    with security vulnerability information).
+    The Cisco Product Security Incident Response Team (PSIRT) openVuln API is a RESTful API that allows customers to obtain Cisco Security Vulnerability information in different machine-consumable formats. APIs are important for customers because they allow their technical staff and programmers to build tools that help them do their job more effectively (in this case, to keep up with security vulnerability information).
 
     For more information about the Cisco PSIRT openVuln API visit https://developer.cisco.com/site/PSIRT/discover/overview
 
@@ -69,8 +64,7 @@ paths:
   "/security/advisories/cvrf/advisory/{advisory_id}":
     get:
       description: >
-        Used to obtain an advisory in CVRF format for a given advisory ID
-        `advisory_id` (i.e., cisco-sa-20150819-pcp)
+        Used to obtain an advisory in CVRF format for a given advisory ID `advisory_id` (i.e., cisco-sa-20150819-pcp)
       parameters:
         - description: advisory ID
           format: cisco-sa-XXX
@@ -88,11 +82,7 @@ paths:
   /security/advisories/cvrf/all:
     get:
       description: >
-        Used to obtain all advisories in Common Vulnerability Reporting Format
-        (CVRF). For more information about CVRF go to
-        https://communities.cisco.com/docs/DOC-63156 . By default the output is
-        in JSON. To obtain the output in XML use the .xml extension. For
-        example, /advisories/cvrf/all.xml
+        Used to obtain all advisories in Common Vulnerability Reporting Format (CVRF). For more information about CVRF go to https://communities.cisco.com/docs/DOC-63156 . By default the output is in JSON. To obtain the output in XML use the .xml extension. For example, /advisories/cvrf/all.xml
       responses:
         "200":
           description: Successful response
@@ -103,9 +93,7 @@ paths:
   "/security/advisories/cvrf/cve/{cve_id}":
     get:
       description: >
-        Used to obtain an advisory in CVRF format for a given Common
-        Vulnerability Enumerator (CVE). The `cve_id` format is CVE-YYYY-NNNN.
-        For more information about CVE visit http://cve.mitre.org/
+        Used to obtain an advisory in CVRF format for a given Common Vulnerability Enumerator (CVE). The `cve_id` format is CVE-YYYY-NNNN. For more information about CVE visit http://cve.mitre.org/
       parameters:
         - description: CVE Identifier (i.e., CVE-YYYY-NNNN)
           format: CVE-YYYY-NNNN
@@ -123,8 +111,7 @@ paths:
   "/security/advisories/cvrf/latest/{number}":
     get:
       description: >
-        Used to obtain all the latest security advisories in CVRF format given
-        an absolute number. For instance, the latest 10 or latest 5.
+        Used to obtain all the latest security advisories in CVRF format given an absolute number. For instance, the latest 10 or latest 5.
       parameters:
         - description: An absolute number to obtain the latest security advisories.
           format: number
@@ -141,11 +128,10 @@ paths:
             - read:oval
   /security/advisories/cvrf/product:
     get:
-      description: |
+      description: >
         Used to obtain all the advisories that affects the given product name.
       parameters:
-        - description: An product name to obtain security advisories that matches given
-            product name.
+        - description: An product name to obtain security advisories that matches given product name.
           format: string
           in: query
           name: product
@@ -161,8 +147,7 @@ paths:
   "/security/advisories/cvrf/severity/{severity}":
     get:
       description: >
-        Used to obtain all security advisories for a given security impact
-        rating (critical, high, medium, or low) in CVRF format.
+        Used to obtain all security advisories for a given security impact rating (critical, high, medium, or low) in CVRF format.
       parameters:
         - description: Critical, High, Medium, Low
           enum:
@@ -185,12 +170,9 @@ paths:
   "/security/advisories/cvrf/severity/{severity}/firstpublished":
     get:
       description: >
-        Used to obtain all security advisories for a given security impact
-        rating (critical, high, medium, or low) in CVRF format and additionally
-        filter based of firstpublished start date and enddate
+        Used to obtain all security advisories for a given security impact rating (critical, high, medium, or low) in CVRF format and additionally filter based of firstpublished start date and enddate
       parameters:
-        - description: Used to obtain all advisories that have a security impact rating of
-            critical
+        - description: Used to obtain all advisories that have a security impact rating of critical
           enum:
             - critical
             - high
@@ -221,11 +203,9 @@ paths:
   "/security/advisories/cvrf/severity/{severity}/lastpublished":
     get:
       description: >
-        Used to obtain all security advisories for a given security impact
-        rating (critical, high, medium, or low) in CVRF format.
+        Used to obtain all security advisories for a given security impact rating (critical, high, medium, or low) in CVRF format.
       parameters:
-        - description: Used to obtain all advisories that have a security impact rating of
-            critical
+        - description: Used to obtain all advisories that have a security impact rating of critical
           enum:
             - critical
             - high
@@ -256,8 +236,7 @@ paths:
   "/security/advisories/cvrf/year/{year}":
     get:
       description: >
-        Used to obtain all security advisories that have were orginally
-        published in a specific year `YYYY`.
+        Used to obtain all security advisories that have were orginally published in a specific year `YYYY`.
       parameters:
         - description: The four digit year.
           format: YYYY
@@ -274,7 +253,7 @@ paths:
             - read:oval
   /security/advisories/ios:
     get:
-      description: |
+      description: >
         Used to obtain all advisories that affects the given ios version
       parameters:
         - description: IOS version to obtain security advisories
@@ -292,7 +271,7 @@ paths:
             - read:oval
   /security/advisories/iosxe:
     get:
-      description: |
+      description: >
         Used to obtain all advisories that affects the given ios version
       parameters:
         - description: IOS version to obtain security advisories
@@ -311,8 +290,7 @@ paths:
   "/security/advisories/oval/advisory/{advisory_id}":
     get:
       description: >
-        Used to obtain OVAL definitions for a given advisory ID `advisory_id`
-        (i.e., cisco-sa-20150819-pcp)
+        Used to obtain OVAL definitions for a given advisory ID `advisory_id` (i.e., cisco-sa-20150819-pcp)
       parameters:
         - description: advisory ID
           format: cisco-sa-XXX
@@ -330,12 +308,7 @@ paths:
   /security/advisories/oval/all:
     get:
       description: >
-        Used to obtain all Open Vulnerability and Assessment Language (OVAL)
-        definitions available for Cisco security vulnerabilities. For more
-        information about OVAL go to
-        https://communities.cisco.com/docs/DOC-63158 . By default the output is
-        in JSON. To obtain the output in XML use the .xml extension. For
-        example, /advisories/oval/all.xml
+        Used to obtain all Open Vulnerability and Assessment Language (OVAL) definitions available for Cisco security vulnerabilities. For more information about OVAL go to https://communities.cisco.com/docs/DOC-63158 . By default the output is in JSON. To obtain the output in XML use the .xml extension. For example, /advisories/oval/all.xml
       responses:
         "200":
           description: Successful response
@@ -346,8 +319,7 @@ paths:
   "/security/advisories/oval/cve/{cve_id}":
     get:
       description: >
-        Used to obtain OVAL definitions for a given CVE Identifier. The `cve_id`
-        format is CVE-YYYY-NNNN.
+        Used to obtain OVAL definitions for a given CVE Identifier. The `cve_id` format is CVE-YYYY-NNNN.
       parameters:
         - description: CVE Identifier (i.e., CVE-YYYY-NNNN)
           format: CVE-YYYY-NNNN
@@ -365,8 +337,7 @@ paths:
   "/security/advisories/oval/latest/{number}":
     get:
       description: >
-        Used to obtain all the latest OVAL definitions given an absolute number.
-        For instance, the latest 10 or latest 5.
+        Used to obtain all the latest OVAL definitions given an absolute number. For instance, the latest 10 or latest 5.
       parameters:
         - description: The latest OVAL definitions (absolute number).
           format: number
@@ -384,11 +355,9 @@ paths:
   /security/advisories/oval/product:
     get:
       description: >
-        Used to obtain all the oval advisories that affects the given product
-        name.
+        Used to obtain all the oval advisories that affects the given product name.
       parameters:
-        - description: An product name to obtain security advisories that matches given
-            product name.
+        - description: An product name to obtain security advisories that matches given product name.
           format: string
           in: query
           name: product
@@ -404,11 +373,9 @@ paths:
   "/security/advisories/oval/severity/{severity}":
     get:
       description: >
-        Used to obtain all OVAL definitions for a given security impact rating
-        (critical, high, medium, or low).
+        Used to obtain all OVAL definitions for a given security impact rating (critical, high, medium, or low).
       parameters:
-        - description: Used to obtain all OVAL definitions for advisories that have a
-            security impact rating of critical
+        - description: Used to obtain all OVAL definitions for advisories that have a security impact rating of critical
           enum:
             - critical
             - high
@@ -429,8 +396,7 @@ paths:
   "/security/advisories/oval/severity/{severity}/firstpublished":
     get:
       description: >
-        Used to obtain all security advisories for a given security impact
-        rating (critical, high, medium, or low) in OVAL format.
+        Used to obtain all security advisories for a given security impact rating (critical, high, medium, or low) in OVAL format.
       parameters:
         - description: Critical, High, Medium, Low
           enum:
@@ -463,8 +429,7 @@ paths:
   "/security/advisories/oval/severity/{severity}/lastpublished":
     get:
       description: >
-        Used to obtain all security advisories for a given security impact
-        rating (critical, high, medium, or low) in OVAL format.
+        Used to obtain all security advisories for a given security impact rating (critical, high, medium, or low) in OVAL format.
       parameters:
         - description: Critical, High, Medium, Low
           enum:

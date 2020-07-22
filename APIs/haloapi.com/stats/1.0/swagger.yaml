@@ -39,8 +39,7 @@ paths:
   "/h5/arena/matches/{matchId}":
     get:
       description: >
-        <p>Retrieves detailed statistics for a Match with the Arena Game
-        Mode.</p>
+        <p>Retrieves detailed statistics for a Match with the Arena Game Mode.</p>
 
         <br />
 
@@ -86,8 +85,7 @@ paths:
         </div>
       operationId: Halo-5-Match-Result-Arena
       parameters:
-        - description: An ID that uniquely identifies a Match. Match IDs can be retrieved
-            from the "Halo 5 - Player Match History" Endpoint.
+        - description: An ID that uniquely identifies a Match. Match IDs can be retrieved from the "Halo 5 - Player Match History" Endpoint.
           in: path
           name: matchId
           required: true
@@ -289,8 +287,7 @@ paths:
   "/h5/campaign/matches/{matchId}":
     get:
       description: >
-        <p>Retrieves detailed statistics for a Match with the Campaign Game
-        Mode.</p>
+        <p>Retrieves detailed statistics for a Match with the Campaign Game Mode.</p>
 
         <p>Every time a player plays a portion of a Campaign Mission, a Match will be generated whether the player finishes the Mission or not. If the "Match" ends because the Mission was completed, this will be indicated in the response.</p>
 
@@ -328,8 +325,7 @@ paths:
         </div>
       operationId: Halo-5-Match-Result-Campaign
       parameters:
-        - description: An ID that uniquely identifies a Match. Match IDs can be retrieved
-            from the "Halo 5 - Player Match History" Endpoint.
+        - description: An ID that uniquely identifies a Match. Match IDs can be retrieved from the "Halo 5 - Player Match History" Endpoint.
           in: path
           name: matchId
           required: true
@@ -468,8 +464,7 @@ paths:
   "/h5/companies/{companyId}":
     get:
       description: >
-        <p>Retrieves information about the Company. The response will contain
-        the Company's name, status, and members.</p>
+        <p>Retrieves information about the Company. The response will contain the Company's name, status, and members.</p>
 
         <br />
 
@@ -483,9 +478,7 @@ paths:
         </div>
       operationId: Halo-5-Company
       parameters:
-        - description: The ID for the Company. The Company ID for a player can be
-            retrieved from the Profile APIs via the "Halo 5 - Player Apperance"
-            Endpoint.
+        - description: The ID for the Company. The Company ID for a player can be retrieved from the Profile APIs via the "Halo 5 - Player Apperance" Endpoint.
           in: path
           name: companyId
           required: true
@@ -586,10 +579,13 @@ paths:
       summary: Halo 5 - Company
   "/h5/companies/{companyId}/commendations":
     get:
-      description: |
+      description: >
         <p>Retrieves the commendation state for a Company.</p>
+
         <br />
+
         <h4>Changelog</h4>
+
         <div class="panel-body">
             <p><strong>July 14, 2017:</strong></p>
             <ul>
@@ -598,9 +594,7 @@ paths:
         </div>
       operationId: Halo-5-Company-Commendations
       parameters:
-        - description: The ID for the Company. The Company ID for a player can be
-            retrieved from the Profile APIs via the "Halo 5 - Player Apperance"
-            Endpoint.
+        - description: The ID for the Company. The Company ID for a player can be retrieved from the Profile APIs via the "Halo 5 - Player Apperance" Endpoint.
           in: path
           name: companyId
           required: true
@@ -609,8 +603,7 @@ paths:
         - application/json
       responses:
         "200":
-          description: The response body will contain the commendation state for the
-            Company.
+          description: The response body will contain the commendation state for the Company.
           examples:
             application/json:
               LastUpdatedDateUtc:
@@ -640,10 +633,7 @@ paths:
   "/h5/custom/matches/{matchId}":
     get:
       description: >
-        <p>Retrieves detailed statistics for a Match with the Custom Game Mode.
-        Games with the Custom Game Mode are played on Xbox Live Servers. For
-        games played on Local Servers, use the "Halo 5 - Match Result - Custom
-        Local" Endpoint.</p>
+        <p>Retrieves detailed statistics for a Match with the Custom Game Mode. Games with the Custom Game Mode are played on Xbox Live Servers. For games played on Local Servers, use the "Halo 5 - Match Result - Custom Local" Endpoint.</p>
 
         <br />
 
@@ -689,8 +679,7 @@ paths:
         </div>
       operationId: Halo-5-Match-Result-Custom
       parameters:
-        - description: An ID that uniquely identifies a Match. Match IDs can be retrieved
-            from the "Halo 5 - Player Match History" Endpoint.
+        - description: An ID that uniquely identifies a Match. Match IDs can be retrieved from the "Halo 5 - Player Match History" Endpoint.
           in: path
           name: matchId
           required: true
@@ -836,10 +825,7 @@ paths:
   "/h5/customlocal/matches/{matchId}":
     get:
       description: >
-        <p>Retrieves detailed statistics for a Match with the Custom Local Game
-        Mode. Games with the Custom Local Game Mode are played on Local Servers.
-        For games played on Xbox Live Servers, use the "Halo 5 - Match Result -
-        Custom" Endpoint.</p>
+        <p>Retrieves detailed statistics for a Match with the Custom Local Game Mode. Games with the Custom Local Game Mode are played on Local Servers. For games played on Xbox Live Servers, use the "Halo 5 - Match Result - Custom" Endpoint.</p>
 
         <br />
 
@@ -860,8 +846,7 @@ paths:
         </div>
       operationId: Halo-5-Match-Result-Custom-Local
       parameters:
-        - description: An ID that uniquely identifies a Match. Match IDs can be retrieved
-            from the "Halo 5 - Player Match History" Endpoint.
+        - description: An ID that uniquely identifies a Match. Match IDs can be retrieved from the "Halo 5 - Player Match History" Endpoint.
           in: path
           name: matchId
           required: true
@@ -1007,8 +992,7 @@ paths:
   "/h5/matches/{matchId}/events":
     get:
       description: >
-        <p>Retrieves a set of Events related to the Match specified. Events are
-        only available once the Match has completed.</p>
+        <p>Retrieves a set of Events related to the Match specified. Events are only available once the Match has completed.</p>
 
         <p>The set of Events may grow over time as data becomes available.</p>
 
@@ -1049,8 +1033,7 @@ paths:
         </div>
       operationId: Halo-5-Match-Events
       parameters:
-        - description: An ID that uniquely identifies a Match. Match IDs can be retrieved
-            from the "Halo 5 - Player Match History" Endpoint.
+        - description: An ID that uniquely identifies a Match. Match IDs can be retrieved from the "Halo 5 - Player Match History" Endpoint.
           in: path
           name: matchId
           required: true
@@ -1529,9 +1512,7 @@ paths:
   "/h5/player-leaderboards/csr/{seasonId}/{playlistId}":
     get:
       description: >
-        <p>Retrieves the Leaderboard for Player CSRs. The Leaderboard consists
-        of the top Players with a CSR of 1800 or above for a given Playlist in a
-        Season.</p>
+        <p>Retrieves the Leaderboard for Player CSRs. The Leaderboard consists of the top Players with a CSR of 1800 or above for a given Playlist in a Season.</p>
 
         <br />
 
@@ -1578,8 +1559,7 @@ paths:
           required: true
           type: string
         - description: >-
-            When specified, this indicates the maximum quantity of items the
-            client would like returned in the response.
+            When specified, this indicates the maximum quantity of items the client would like returned in the response.
 
 
             When omitted, 200 is assumed.
@@ -1599,8 +1579,7 @@ paths:
         - application/json
       responses:
         "200":
-          description: The response body will contain the Players in the Leaderboard. An
-            empty list will be returned if no Players are in the Leaderboard.
+          description: The response body will contain the Players in the Leaderboard. An empty list will be returned if no Players are in the Leaderboard.
           examples:
             application/json:
               Count: int
@@ -1619,8 +1598,7 @@ paths:
                     Tier: int
               Start: int
         "404":
-          description: The Season does not exist, or the Playlist either does not exist or
-            is not part of the given Season.
+          description: The Season does not exist, or the Playlist either does not exist or is not part of the given Season.
         "500":
           description: Internal Server Error
         "503":
@@ -1628,10 +1606,13 @@ paths:
       summary: Halo 5 - Leaderboard - Player CSR
   "/h5/players/{player}/commendations":
     get:
-      description: |
+      description: >
         <p>Retrieves the commendation state for a Player.</p>
+
         <br />
+
         <h4>Changelog</h4>
+
         <div class="panel-body">
             <p><strong>July 14, 2017:</strong></p>
             <ul>
@@ -1679,9 +1660,7 @@ paths:
   "/h5/players/{player}/matches":
     get:
       description: >
-        <p>Retrieves a list of Matches that the Player has participated in and
-        which have completed processing. If the Player is currently in a match,
-        it is not returned in this API.</p>
+        <p>Retrieves a list of Matches that the Player has participated in and which have completed processing. If the Player is currently in a match, it is not returned in this API.</p>
 
         <p>This endpoint will include games played on Local Servers with the Custom Local Game Mode for games that occurred or after December 22, 2017.</p>
 
@@ -1726,8 +1705,7 @@ paths:
           required: true
           type: string
         - description: >-
-            Indicates what Game Mode(s) the client is interested in getting
-            Matches for (arena, campaign, custom, customlocal, or warzone).
+            Indicates what Game Mode(s) the client is interested in getting Matches for (arena, campaign, custom, customlocal, or warzone).
 
 
             When the parameter is omitted or empty, Matches from all modes are returned. When a client would like to receive Matches spanning multiple Modes, separate the Modes with a comma (e.g. "arena,custom"). There is no significance to the order the Modes are specified in this parameter.
@@ -1741,11 +1719,7 @@ paths:
           name: modes
           type: string
         - description: >-
-            When specified, this indicates the starting index (0-based) for
-            which the batch of results will begin at. For example, "start=0"
-            indicates that the first qualifying result will be returned, no
-            items are 'skipped'. Passing "start=10" indicates that the result
-            will begin with the 11th item, the first 10 will be 'skipped'.
+            When specified, this indicates the starting index (0-based) for which the batch of results will begin at. For example, "start=0" indicates that the first qualifying result will be returned, no items are 'skipped'. Passing "start=10" indicates that the result will begin with the 11th item, the first 10 will be 'skipped'.
 
 
             When omitted, zero is assumed.
@@ -1756,8 +1730,7 @@ paths:
           name: start
           type: number
         - description: >-
-            When specified, this indicates the maximum quantity of items the
-            client would like returned in the response.
+            When specified, this indicates the maximum quantity of items the client would like returned in the response.
 
 
             When omitted, 25 is assumed.
@@ -1771,8 +1744,7 @@ paths:
           name: count
           type: number
         - description: >-
-            When set to "true", this indicates that the time component of the
-            "MatchCompletedDate" field should be populated.
+            When set to "true", this indicates that the time component of the "MatchCompletedDate" field should be populated.
 
 
             Otherwise, when set to "false" or when omitted, the time component will be set to "00:00:00".
@@ -1786,9 +1758,7 @@ paths:
         - application/json
       responses:
         "200":
-          description: The response body will contain the Player's recent Matches. An
-            empty list will be returned if the Player has not played any Matches
-            in the specified Game Mode(s).
+          description: The response body will contain the Player's recent Matches. An empty list will be returned if the Player has not played any Matches in the specified Game Mode(s).
           examples:
             application/json:
               Count: int
@@ -1846,9 +1816,7 @@ paths:
   /h5/servicerecords/arena:
     get:
       description: >
-        <p>Retrieves Service Records for the Arena Game Mode for one or more
-        players. A Service Record contains a player's lifetime statistics in the
-        Game Mode.</p>
+        <p>Retrieves Service Records for the Arena Game Mode for one or more players. A Service Record contains a player's lifetime statistics in the Game Mode.</p>
 
         <br />
 
@@ -1884,17 +1852,12 @@ paths:
         </div>
       operationId: Halo-5-Player-Service-Records-Arena
       parameters:
-        - description: A comma-separated list of Gamertags. Up to 32 Gamertags may be
-            specified.
+        - description: A comma-separated list of Gamertags. Up to 32 Gamertags may be specified.
           in: query
           name: players
           required: true
           type: string
-        - description: When specified, this indicates the Season to request the Arena
-            Playlist Stats for. If this is not specified, the default is the
-            current Season. Seasons are available via the Metadata API. Social
-            (Unranked) Arena Playlist Stats can be retrieved by specifying
-            "NonSeasonal".
+        - description: When specified, this indicates the Season to request the Arena Playlist Stats for. If this is not specified, the default is the current Season. Seasons are available via the Metadata API. Social (Unranked) Arena Playlist Stats can be retrieved by specifying "NonSeasonal".
           in: query
           name: seasonId
           type: string
@@ -1902,8 +1865,7 @@ paths:
         - application/json
       responses:
         "200":
-          description: The response body will contain the Service Records for the
-            requested player(s).
+          description: The response body will contain the Service Records for the requested player(s).
           examples:
             application/json: >
               {
@@ -2786,9 +2748,7 @@ paths:
   /h5/servicerecords/campaign:
     get:
       description: >
-        <p>Retrieves Service Records for the Campaign Game Mode for one or more
-        players. A Service Record contains a player's lifetime statistics in the
-        Game Mode.</p>
+        <p>Retrieves Service Records for the Campaign Game Mode for one or more players. A Service Record contains a player's lifetime statistics in the Game Mode.</p>
 
         <br />
 
@@ -2810,8 +2770,7 @@ paths:
         </div>
       operationId: Halo-5-Player-Service-Records-Campaign
       parameters:
-        - description: A comma-separated list of Gamertags. Up to 32 Gamertags may be
-            specified.
+        - description: A comma-separated list of Gamertags. Up to 32 Gamertags may be specified.
           in: query
           name: players
           required: true
@@ -2820,8 +2779,7 @@ paths:
         - application/json
       responses:
         "200":
-          description: The response body will contain the Service Records for the
-            requested player(s).
+          description: The response body will contain the Service Records for the requested player(s).
           examples:
             application/json:
               Links: null
@@ -3008,11 +2966,7 @@ paths:
   /h5/servicerecords/custom:
     get:
       description: >
-        <p>Retrieves Service Records for the Custom Game Mode for one or more
-        players. A Service Record contains a player's lifetime statistics in the
-        Game Mode. Games with the Custom Game Mode are played on Xbox Live
-        Servers. For games played on Local Servers, use the "Halo 5 - Player
-        Service Records - Custom Local" Endpoint.</p>
+        <p>Retrieves Service Records for the Custom Game Mode for one or more players. A Service Record contains a player's lifetime statistics in the Game Mode. Games with the Custom Game Mode are played on Xbox Live Servers. For games played on Local Servers, use the "Halo 5 - Player Service Records - Custom Local" Endpoint.</p>
 
         <br />
 
@@ -3034,8 +2988,7 @@ paths:
         </div>
       operationId: Halo-5-Player-Service-Records-Custom
       parameters:
-        - description: A comma-separated list of Gamertags. Up to 32 Gamertags may be
-            specified.
+        - description: A comma-separated list of Gamertags. Up to 32 Gamertags may be specified.
           in: query
           name: players
           required: true
@@ -3044,8 +2997,7 @@ paths:
         - application/json
       responses:
         "200":
-          description: The response body will contain the Service Records for the
-            requested player(s).
+          description: The response body will contain the Service Records for the requested player(s).
           examples:
             application/json:
               Links: null
@@ -3221,13 +3173,7 @@ paths:
   /h5/servicerecords/customlocal:
     get:
       description: >
-        <p>Retrieves Service Records for the Custom Local Game Mode for one or
-        more players. A Service Record contains a player's lifetime statistics
-        in the Game Mode. Games with the Custom Local Game Mode are played on
-        Local Servers. For games played on Xbox Live Servers, use the "Halo 5 -
-        Player Service Records - Custom" Endpoint. A player's Custom Local
-        Service Record summarizes games played on or after December 22,
-        2017.</p>
+        <p>Retrieves Service Records for the Custom Local Game Mode for one or more players. A Service Record contains a player's lifetime statistics in the Game Mode. Games with the Custom Local Game Mode are played on Local Servers. For games played on Xbox Live Servers, use the "Halo 5 - Player Service Records - Custom" Endpoint. A player's Custom Local Service Record summarizes games played on or after December 22, 2017.</p>
 
         <br />
 
@@ -3241,8 +3187,7 @@ paths:
         </div>
       operationId: Halo-5-Player-Service-Records-Custom-Local
       parameters:
-        - description: A comma-separated list of Gamertags. Up to 32 Gamertags may be
-            specified.
+        - description: A comma-separated list of Gamertags. Up to 32 Gamertags may be specified.
           in: query
           name: players
           required: true
@@ -3251,8 +3196,7 @@ paths:
         - application/json
       responses:
         "200":
-          description: The response body will contain the Service Records for the
-            requested player(s).
+          description: The response body will contain the Service Records for the requested player(s).
           examples:
             application/json:
               Links: null
@@ -3428,9 +3372,7 @@ paths:
   /h5/servicerecords/warzone:
     get:
       description: >
-        <p>Retrieves Service Records for the Warzone Game Mode for one or more
-        players. A Service Record contains a player's lifetime statistics in the
-        Game Mode.</p>
+        <p>Retrieves Service Records for the Warzone Game Mode for one or more players. A Service Record contains a player's lifetime statistics in the Game Mode.</p>
 
         <br />
 
@@ -3452,8 +3394,7 @@ paths:
         </div>
       operationId: Halo-5-Player-Service-Records-Warzone
       parameters:
-        - description: A comma-separated list of Gamertags. Up to 32 Gamertags may be
-            specified.
+        - description: A comma-separated list of Gamertags. Up to 32 Gamertags may be specified.
           in: query
           name: players
           required: true
@@ -3462,8 +3403,7 @@ paths:
         - application/json
       responses:
         "200":
-          description: The response body will contain the Service Records for the
-            requested player(s).
+          description: The response body will contain the Service Records for the requested player(s).
           examples:
             application/json:
               Links: null
@@ -3635,8 +3575,7 @@ paths:
   "/h5/warzone/matches/{matchId}":
     get:
       description: >
-        <p>Retrieves detailed statistics for a Match with the Warzone Game
-        Mode.</p>
+        <p>Retrieves detailed statistics for a Match with the Warzone Game Mode.</p>
 
         <br />
 
@@ -3675,8 +3614,7 @@ paths:
         </div>
       operationId: Halo-5-Match-Result-Warzone
       parameters:
-        - description: An ID that uniquely identifies a Match. Match IDs can be retrieved
-            from the "Halo 5 - Player Match History" Endpoint.
+        - description: An ID that uniquely identifies a Match. Match IDs can be retrieved from the "Halo 5 - Player Match History" Endpoint.
           in: path
           name: matchId
           required: true
@@ -3868,10 +3806,7 @@ paths:
   "/h5pc/custom/matches/{matchId}":
     get:
       description: >
-        <p>Retrieves detailed statistics for a Match with the Custom Game Mode.
-        Games with the Custom Game Mode are played on Xbox Live Servers. For
-        games played on Local Servers, use the "Halo 5 - Match Result - Custom
-        Local" Endpoint.</p>
+        <p>Retrieves detailed statistics for a Match with the Custom Game Mode. Games with the Custom Game Mode are played on Xbox Live Servers. For games played on Local Servers, use the "Halo 5 - Match Result - Custom Local" Endpoint.</p>
 
         <br />
 
@@ -3917,8 +3852,7 @@ paths:
         </div>
       operationId: Halo-5-PC-Match-Result-Custom
       parameters:
-        - description: An ID that uniquely identifies a Match. Match IDs can be retrieved
-            from the "Halo 5 PC - Player Match History" Endpoint.
+        - description: An ID that uniquely identifies a Match. Match IDs can be retrieved from the "Halo 5 PC - Player Match History" Endpoint.
           in: path
           name: matchId
           required: true
@@ -4064,9 +3998,7 @@ paths:
   "/h5pc/players/{player}/matches":
     get:
       description: >
-        <p>Retrieves a list of Matches that the Player has participated in and
-        which have completed processing. If the Player is currently in a match,
-        it is not returned in this API.</p>
+        <p>Retrieves a list of Matches that the Player has participated in and which have completed processing. If the Player is currently in a match, it is not returned in this API.</p>
 
         <p>This endpoint will include games played on Local Servers with the Custom Local Game Mode for games that occurred or after December 22, 2017.</p>
 
@@ -4111,8 +4043,7 @@ paths:
           required: true
           type: string
         - description: >-
-            Indicates what Game Mode(s) the client is interested in getting
-            Matches for (arena, campaign, custom, or warzone).
+            Indicates what Game Mode(s) the client is interested in getting Matches for (arena, campaign, custom, or warzone).
 
 
             When the parameter is omitted or empty, Matches from all modes are returned. When a client would like to receive Matches spanning multiple Modes, separate the Modes with a comma (e.g. "arena,custom"). There is no significance to the order the Modes are specified in this parameter.
@@ -4126,11 +4057,7 @@ paths:
           name: modes
           type: string
         - description: >-
-            When specified, this indicates the starting index (0-based) for
-            which the batch of results will begin at. For example, "start=0"
-            indicates that the first qualifying result will be returned, no
-            items are 'skipped'. Passing "start=10" indicates that the result
-            will begin with the 11th item, the first 10 will be 'skipped'.
+            When specified, this indicates the starting index (0-based) for which the batch of results will begin at. For example, "start=0" indicates that the first qualifying result will be returned, no items are 'skipped'. Passing "start=10" indicates that the result will begin with the 11th item, the first 10 will be 'skipped'.
 
 
             When omitted, zero is assumed.
@@ -4141,8 +4068,7 @@ paths:
           name: start
           type: number
         - description: >-
-            When specified, this indicates the maximum quantity of items the
-            client would like returned in the response.
+            When specified, this indicates the maximum quantity of items the client would like returned in the response.
 
 
             When omitted, 25 is assumed.
@@ -4156,8 +4082,7 @@ paths:
           name: count
           type: number
         - description: >-
-            When set to "true", this indicates that the time component of the
-            "MatchCompletedDate" field should be populated.
+            When set to "true", this indicates that the time component of the "MatchCompletedDate" field should be populated.
 
 
             Otherwise, when set to "false" or when omitted, the time component will be set to "00:00:00".
@@ -4171,9 +4096,7 @@ paths:
         - application/json
       responses:
         "200":
-          description: The response body will contain the Player's recent Matches. An
-            empty list will be returned if the Player has not played any Matches
-            in the specified Game Mode(s).
+          description: The response body will contain the Player's recent Matches. An empty list will be returned if the Player has not played any Matches in the specified Game Mode(s).
           examples:
             application/json:
               Count: int
@@ -4231,11 +4154,7 @@ paths:
   /h5pc/servicerecords/custom:
     get:
       description: >
-        <p>Retrieves Service Records for the Custom Game Mode for one or more
-        players. A Service Record contains a player's lifetime statistics in the
-        Game Mode. Games with the Custom Game Mode are played on Xbox Live
-        Servers. For games played on Local Servers, use the "Halo 5 - Player
-        Service Records - Custom Local" Endpoint.</p>
+        <p>Retrieves Service Records for the Custom Game Mode for one or more players. A Service Record contains a player's lifetime statistics in the Game Mode. Games with the Custom Game Mode are played on Xbox Live Servers. For games played on Local Servers, use the "Halo 5 - Player Service Records - Custom Local" Endpoint.</p>
 
         <br />
 
@@ -4257,8 +4176,7 @@ paths:
         </div>
       operationId: Halo-5-PC-Player-Service-Records-Custom
       parameters:
-        - description: A comma-separated list of Gamertags. Up to 32 Gamertags may be
-            specified.
+        - description: A comma-separated list of Gamertags. Up to 32 Gamertags may be specified.
           in: query
           name: players
           required: true
@@ -4267,8 +4185,7 @@ paths:
         - application/json
       responses:
         "200":
-          description: The response body will contain the Service Records for the
-            requested player(s).
+          description: The response body will contain the Service Records for the requested player(s).
           examples:
             application/json:
               Links: null
@@ -4444,9 +4361,7 @@ paths:
   "/hw2/matches/{matchId}":
     get:
       description: >
-        <p>Retrieves detailed statistics for a Match. Matches can be retrieved
-        before they are completed; however, the data for in-progress Matches is
-        only updated every few minutes.</p>
+        <p>Retrieves detailed statistics for a Match. Matches can be retrieved before they are completed; however, the data for in-progress Matches is only updated every few minutes.</p>
 
         <br />
 
@@ -4467,8 +4382,7 @@ paths:
         </div>
       operationId: Halo-Wars-2-Match-Result
       parameters:
-        - description: An ID that uniquely identifies a Match. Match IDs can be retrieved
-            from the "Halo Wars 2 - Player Match History" Endpoint.
+        - description: An ID that uniquely identifies a Match. Match IDs can be retrieved from the "Halo Wars 2 - Player Match History" Endpoint.
           in: path
           name: matchId
           required: true
@@ -4572,9 +4486,7 @@ paths:
   "/hw2/matches/{matchId}/events":
     get:
       description: >
-        <p>Retrieves a set of Events related to the Match specified. Events are
-        only available once the Match has completed. Events are not available
-        for Matches played with the Custom Match Type.</p>
+        <p>Retrieves a set of Events related to the Match specified. Events are only available once the Match has completed. Events are not available for Matches played with the Custom Match Type.</p>
 
         <p>The set of Events may grow over time as data becomes available.</p>
 
@@ -4597,8 +4509,7 @@ paths:
         </div>
       operationId: Halo-Wars-2-Match-Events
       parameters:
-        - description: An ID that uniquely identifies a Match. Match IDs can be retrieved
-            from the "Halo Wars 2 - Player Match History" Endpoint.
+        - description: An ID that uniquely identifies a Match. Match IDs can be retrieved from the "Halo Wars 2 - Player Match History" Endpoint.
           in: path
           name: matchId
           required: true
@@ -5810,9 +5721,7 @@ paths:
   "/hw2/player-leaderboards/csr/{seasonId}/{playlistId}":
     get:
       description: >
-        <p>Retrieves the Leaderboard for Player CSRs. The Leaderboard consists
-        of the top Players with a CSR of 1800 or above for a given Playlist in a
-        Season.</p>
+        <p>Retrieves the Leaderboard for Player CSRs. The Leaderboard consists of the top Players with a CSR of 1800 or above for a given Playlist in a Season.</p>
 
         <br />
 
@@ -5851,8 +5760,7 @@ paths:
           required: true
           type: string
         - description: >-
-            When specified, this indicates the maximum quantity of items the
-            client would like returned in the response.
+            When specified, this indicates the maximum quantity of items the client would like returned in the response.
 
 
             When omitted, 200 is assumed.
@@ -5872,8 +5780,7 @@ paths:
         - application/json
       responses:
         "200":
-          description: The response body will contain the Players in the Leaderboard. An
-            empty list will be returned if no Players are in the Leaderboard.
+          description: The response body will contain the Players in the Leaderboard. An empty list will be returned if no Players are in the Leaderboard.
           examples:
             application/json:
               Count: int
@@ -5892,8 +5799,7 @@ paths:
                     Tier: int
               Start: int
         "404":
-          description: The Season does not exist, or the Playlist either does not exist or
-            is not part of the given Season.
+          description: The Season does not exist, or the Playlist either does not exist or is not part of the given Season.
         "500":
           description: Internal Server Error
         "503":
@@ -5901,10 +5807,13 @@ paths:
       summary: Halo Wars 2 - Leaderboard - Player CSR
   "/hw2/players/{player}/campaign-progress":
     get:
-      description: |
+      description: >
         <p>Retrieves the Campaign Progress state for a Player.</p>
+
         <br />
+
         <h4>Changelog</h4>
+
         <div class="panel-body">
             <p><strong>February 21, 2017:</strong></p>
             <ul>
@@ -5956,8 +5865,7 @@ paths:
   "/hw2/players/{player}/matches":
     get:
       description: >
-        <p>Retrieves a list of Matches that the Player has participated in. If
-        the Player is currently in a Match, it is not returned in this API.</p>
+        <p>Retrieves a list of Matches that the Player has participated in. If the Player is currently in a Match, it is not returned in this API.</p>
 
         <br />
 
@@ -5984,8 +5892,7 @@ paths:
           required: true
           type: string
         - description: >-
-            Indicates what Match Type the client is interested in getting
-            Matches for ("custom" or "matchmaking").
+            Indicates what Match Type the client is interested in getting Matches for ("custom" or "matchmaking").
 
 
             When the parameter is omitted or empty, Matches from all Match Types are returned.
@@ -5996,11 +5903,7 @@ paths:
           name: matchType
           type: string
         - description: >-
-            When specified, this indicates the starting index (0-based) for
-            which the batch of results will begin at. For example, "start=0"
-            indicates that the first qualifying result will be returned, no
-            items are 'skipped'. Passing "start=10" indicates that the result
-            will begin with the 11th item, the first 10 will be 'skipped'.
+            When specified, this indicates the starting index (0-based) for which the batch of results will begin at. For example, "start=0" indicates that the first qualifying result will be returned, no items are 'skipped'. Passing "start=10" indicates that the result will begin with the 11th item, the first 10 will be 'skipped'.
 
 
             When omitted, zero is assumed.
@@ -6011,8 +5914,7 @@ paths:
           name: start
           type: number
         - description: >-
-            When specified, this indicates the maximum quantity of items the
-            client would like returned in the response.
+            When specified, this indicates the maximum quantity of items the client would like returned in the response.
 
 
             When omitted, 25 is assumed.
@@ -6099,8 +6001,7 @@ paths:
   "/hw2/players/{player}/stats":
     get:
       description: >
-        <p>Retrieves high-level aggregations across the lifetime of a
-        Player.</p>
+        <p>Retrieves high-level aggregations across the lifetime of a Player.</p>
 
         <br />
 
@@ -6412,8 +6313,7 @@ paths:
           name: player
           required: true
           type: string
-        - description: A Season ID or "current" for the current Season. Seasons are
-            available via the Metadata API.
+        - description: A Season ID or "current" for the current Season. Seasons are available via the Metadata API.
           in: path
           name: seasonId
           required: true
@@ -6468,8 +6368,7 @@ paths:
   "/hw2/playlist/{playlistId}/rating":
     get:
       description: >
-        <p>Retrieves Playlist Ratings in the current season for one or more
-        Players.</p>
+        <p>Retrieves Playlist Ratings in the current season for one or more Players.</p>
 
         <br />
 
@@ -6488,8 +6387,7 @@ paths:
           name: playlistId
           required: true
           type: string
-        - description: A comma-separated list of Gamertags. Up to 6 Gamertags may be
-            specified.
+        - description: A comma-separated list of Gamertags. Up to 6 Gamertags may be specified.
           in: query
           name: players
           required: true
@@ -6498,8 +6396,7 @@ paths:
         - application/json
       responses:
         "200":
-          description: The response body will contain the Playlist Ratings for the
-            Player(s).
+          description: The response body will contain the Playlist Ratings for the Player(s).
           examples:
             application/json:
               Links: {}
@@ -6526,10 +6423,13 @@ paths:
       summary: Halo Wars 2 - Player Playlist Ratings
   /hw2/xp:
     get:
-      description: |
+      description: >
         <p>Retrieves XP and Rank information for one or more players.</p>
+
         <br />
+
         <h4>Changelog</h4>
+
         <div class="panel-body">
             <p><strong>February 21, 2017:</strong></p>
             <ul>
@@ -6538,8 +6438,7 @@ paths:
         </div>
       operationId: Halo-Wars-2-Player-XPs
       parameters:
-        - description: A comma-separated list of Gamertags. Up to 6 Gamertags may be
-            specified.
+        - description: A comma-separated list of Gamertags. Up to 6 Gamertags may be specified.
           in: query
           name: players
           required: true

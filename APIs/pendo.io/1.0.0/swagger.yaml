@@ -51,9 +51,7 @@ produces:
   - application/json
 securityDefinitions:
   userApiKey:
-    description: Generate an API Key at
-      https://feedback.pendo.io/app/#/vendor/settings?section=integrate. This
-      key should then be added to every request URL as a query parameter.
+    description: Generate an API Key at https://feedback.pendo.io/app/#/vendor/settings?section=integrate. This key should then be added to every request URL as a query parameter.
     in: query
     name: auth-token
     type: apiKey
@@ -201,8 +199,7 @@ paths:
       responses:
         "200":
           description: >-
-            Returns an array of maps specifying tags under each tag group, for
-            example:
+            Returns an array of maps specifying tags under each tag group, for example:
 
 
             [
@@ -223,14 +220,18 @@ paths:
     post:
       parameters:
         - $ref: "#/parameters/accountIdInPath"
-        - description: |-
+        - description: >-
             An array of maps specifying tags under each tag group, for example:
+
 
             [
 
+
             {'impacts' => ['sales']},
 
+
             {'resources' => ['dev', 'test', 'support']}
+
 
             ]
           in: body
@@ -271,8 +272,7 @@ paths:
         - $ref: "#/parameters/limit"
         - $ref: "#/parameters/start"
         - $ref: "#/parameters/order_dir"
-        - description: Filter by whether the features are shown/hidden from customer, if
-            supplied.
+        - description: Filter by whether the features are shown/hidden from customer, if supplied.
           in: query
           name: is_private
           required: false
@@ -297,16 +297,12 @@ paths:
           name: order_by
           required: false
           type: string
-        - description: Tags to limit results by. Multiple tags can be provided via comma
-            delimeted string. Tags with contexts can be used. E.g.
-            "....&tags=TagExample,Multi:TagThis,Multi:TagThat".
+        - description: Tags to limit results by. Multiple tags can be provided via comma delimeted string. Tags with contexts can be used. E.g. "....&tags=TagExample,Multi:TagThis,Multi:TagThat".
           in: query
           name: tags
           required: false
           type: string
-        - description: Products to limit results by. Comma delimeted string of either ids
-            or names. E.g. "...&products=1,2,3" or
-            "...products=Product1,Product2".
+        - description: Products to limit results by. Comma delimeted string of either ids or names. E.g. "...&products=1,2,3" or "...products=Product1,Product2".
           in: query
           name: products
           required: false
@@ -358,8 +354,7 @@ paths:
       responses:
         "200":
           description: >-
-            Returns an array of maps specifying tags under each tag group, for
-            example:
+            Returns an array of maps specifying tags under each tag group, for example:
 
 
             [
@@ -399,8 +394,7 @@ paths:
         - feature
   /health-check/ping:
     get:
-      description: Provides a response for automatic checks that the API and load
-        balancers are healthy
+      description: Provides a response for automatic checks that the API and load balancers are healthy
       responses:
         "200":
           description: API is healthy
@@ -460,8 +454,7 @@ paths:
   /search:
     get:
       parameters:
-        - description: Specifies the type of entity being searched for. Must be set to
-            'feature'
+        - description: Specifies the type of entity being searched for. Must be set to 'feature'
           enum:
             - feature
           in: query
@@ -473,9 +466,7 @@ paths:
           name: q
           required: true
           type: string
-        - description: "A comma seperated list of status values to filter by, if required.
-            Valid values: 'new', 'waiting', 'planned', 'developing', 'released',
-            'declined'."
+        - description: "A comma seperated list of status values to filter by, if required. Valid values: 'new', 'waiting', 'planned', 'developing', 'released', 'declined'."
           enum:
             - new
             - waiting
@@ -487,17 +478,12 @@ paths:
           name: status
           required: false
           type: string
-        - description: Tags to limit results by - only applies when scope is 'case' or
-            'feature'. Multiple tags can be provided via comma delimeted string.
-            Tags with contexts can be used. E.g.
-            "....&tags=TagExample,Multi:TagThis,Multi:TagThat".
+        - description: Tags to limit results by - only applies when scope is 'case' or 'feature'. Multiple tags can be provided via comma delimeted string. Tags with contexts can be used. E.g. "....&tags=TagExample,Multi:TagThis,Multi:TagThat".
           in: query
           name: tags
           required: false
           type: string
-        - description: Products to limit results by. Comma delimeted string of either ids
-            or names. E.g. "...&products=1,2,3" or
-            "...products=Product1,Product2".
+        - description: Products to limit results by. Comma delimeted string of either ids or names. E.g. "...&products=1,2,3" or "...products=Product1,Product2".
           in: query
           name: products
           required: false
@@ -524,8 +510,7 @@ paths:
           name: role
           required: true
           type: string
-        - description: Filter by Account ID, if supplied. Only useful if role param is
-            endUser
+        - description: Filter by Account ID, if supplied. Only useful if role param is endUser
           in: query
           name: account
           required: false
@@ -546,17 +531,7 @@ paths:
     post:
       consumes:
         - application/json
-      description: Replicates much of the functionality of the widget ping, allowing
-        callers to create or update User records for End Users. If you call this
-        with a new User and/or Account, the record will be created. If you call
-        for an existing User/Account, the record will be updated. You can also
-        call this at EndUser login time, or more frequently, to notify Feedback
-        that the EndUser has been seen. This keeps Feedback's 'last seen' data
-        fresh and updates your reporting. This endpoint is used by our Zapier
-        integration. The only value allowed in user.roles is 'endUser'. The id
-        you supply here for the User and Account should be your own unique id,
-        which Feedback calls external_id. This probably isn't the same as
-        Feedback's id seen elsewhere in the API.
+      description: Replicates much of the functionality of the widget ping, allowing callers to create or update User records for End Users. If you call this with a new User and/or Account, the record will be created. If you call for an existing User/Account, the record will be updated. You can also call this at EndUser login time, or more frequently, to notify Feedback that the EndUser has been seen. This keeps Feedback's 'last seen' data fresh and updates your reporting. This endpoint is used by our Zapier integration. The only value allowed in user.roles is 'endUser'. The id you supply here for the User and Account should be your own unique id, which Feedback calls external_id. This probably isn't the same as Feedback's id seen elsewhere in the API.
       parameters:
         - description: the account and user
           in: body
@@ -648,14 +623,12 @@ paths:
           name: external_id
           required: false
           type: string
-        - description: Find user by their email address. Role param must be specified when
-            using this option
+        - description: Find user by their email address. Role param must be specified when using this option
           in: query
           name: email
           required: false
           type: string
-        - description: Users role ('vendorUser' or 'endUser'). Only useful when finding a
-            user by their email address
+        - description: Users role ('vendorUser' or 'endUser'). Only useful when finding a user by their email address
           enum:
             - endUser
             - vendorUser
@@ -674,9 +647,7 @@ paths:
         - user
   "/users/{id}":
     delete:
-      description: This removes most traces of a User's existence from the system. For
-        an EndUser you might want to consider just letting them churn after a
-        period of inactivity.
+      description: This removes most traces of a User's existence from the system. For an EndUser you might want to consider just letting them churn after a period of inactivity.
       parameters:
         - in: path
           name: id
@@ -761,8 +732,7 @@ paths:
       responses:
         "200":
           description: >-
-            Returns an array of maps specifying tags under each tag group, for
-            example:
+            Returns an array of maps specifying tags under each tag group, for example:
 
 
             [
@@ -787,14 +757,18 @@ paths:
           name: id
           required: true
           type: number
-        - description: |-
+        - description: >-
             An array of maps specifying tags under each tag group, for example:
+
 
             [
 
+
             {'impacts' => ['sales']},
 
+
             {'resources' => ['dev', 'test', 'support']}
+
 
             ]
           in: body
@@ -814,10 +788,7 @@ paths:
     post:
       consumes:
         - application/json
-      description: the POST /vendor_users is very similar to the POST
-        /users/invite_vendor_user but /vendor_users is intended for consumers to
-        refresh team member data periodically, rather than just a one-off user
-        creation.
+      description: the POST /vendor_users is very similar to the POST /users/invite_vendor_user but /vendor_users is intended for consumers to refresh team member data periodically, rather than just a one-off user creation.
       parameters:
         - in: body
           name: data
@@ -889,8 +860,7 @@ paths:
       tags:
         - votes
     post:
-      description: Automatically subscribes/unsubscribes the User to the specifed
-        feature depending on the quantity value
+      description: Automatically subscribes/unsubscribes the User to the specifed feature depending on the quantity value
       parameters:
         - in: body
           name: data
@@ -1011,12 +981,10 @@ definitions:
       developing_at:
         type: string
       effort:
-        description: How much Effort is assigned to the development of this Feature. Not
-          visible to EndUsers
+        description: How much Effort is assigned to the development of this Feature. Not visible to EndUsers
         type: integer
       form_entry:
-        description: a JSON serialized version of the Form containing the description
-          and other fields for this Feature.
+        description: a JSON serialized version of the Form containing the description and other fields for this Feature.
         type: string
       id:
         type: number
@@ -1024,8 +992,7 @@ definitions:
         description: Is this Feature hidden from EndUsers?
         type: boolean
       merged_to_feature_id:
-        description: If this Feature was merged into another, the ID of the preserved
-          Feature
+        description: If this Feature was merged into another, the ID of the preserved Feature
         type: integer
       planned_at:
         type: string
@@ -1067,8 +1034,7 @@ definitions:
       vendor_id:
         type: integer
       view_count:
-        description: How many times has this Feature been viewed. May only be visible to
-          VendorUsers, depending on config
+        description: How many times has this Feature been viewed. May only be visible to VendorUsers, depending on config
         type: integer
       waiting_at:
         type: string
@@ -1078,15 +1044,12 @@ definitions:
       feature_id:
         type: string
       quantity:
-        description: Value between -1 and 1000000. -1 indicates that the User is "Not
-          Interested" in the feature.
+        description: Value between -1 and 1000000. -1 indicates that the User is "Not Interested" in the feature.
         type: integer
     type: object
   Products:
     description: >-
-      Supplied as an array of maps where each map describes an existing or new
-      product e.g [{id:exising_product_id, name:existing name},
-      {id:new_product_id, name: new product name}]. 
+      Supplied as an array of maps where each map describes an existing or new product e.g [{id:exising_product_id, name:existing name}, {id:new_product_id, name: new product name}]. 
 
       Existing product id/names held in your account can be referenced at https://feedback.pendo.io/app/#/vendor/products
     items:
@@ -1150,9 +1113,7 @@ definitions:
       feature_id:
         type: integer
       quantity:
-        description: A negative number indicates that the User has indicated "Not
-          Interested" in a Features. Between 0 and 1000000 is the User's current
-          prioritization of the Feature.
+        description: A negative number indicates that the User has indicated "Not Interested" in a Features. Between 0 and 1000000 is the User's current prioritization of the Feature.
         type: integer
       updated_at:
         type: string

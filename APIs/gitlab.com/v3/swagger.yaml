@@ -4,8 +4,9 @@ schemes:
 host: gitlab.com
 basePath: /api
 info:
-  description: |-
+  description: >-
     The platform for modern developers
+
     GitLab unifies issues, code review, CI and CD into a single UI
   title: Gitlab
   version: v3
@@ -147,17 +148,14 @@ paths:
           name: default_group_visibility
           required: false
           type: integer
-        - description: Selected levels cannot be used by non-admin users for projects or
-            snippets. If the public level is restricted, user profiles are only
-            visible to logged in users.
+        - description: Selected levels cannot be used by non-admin users for projects or snippets. If the public level is restricted, user profiles are only visible to logged in users.
           in: formData
           items:
             type: string
           name: restricted_visibility_levels
           required: false
           type: array
-        - description: Enabled sources for code import during project creation. OmniAuth
-            must be configured for GitHub, Bitbucket, and GitLab.com
+        - description: Enabled sources for code import during project creation. OmniAuth must be configured for GitHub, Bitbucket, and GitLab.com
           enum:
             - github
             - bitbucket
@@ -205,15 +203,13 @@ paths:
           name: max_attachment_size
           required: false
           type: integer
-        - description: Session duration in minutes. GitLab restart is required to apply
-            changes.
+        - description: Session duration in minutes. GitLab restart is required to apply changes.
           format: int32
           in: formData
           name: session_expire_delay
           required: false
           type: integer
-        - description: Allow users to register any application to use GitLab as an OAuth
-            provider
+        - description: Allow users to register any application to use GitLab as an OAuth provider
           in: formData
           name: user_oauth_applications
           required: false
@@ -233,9 +229,7 @@ paths:
           name: send_user_confirmation_email
           required: false
           type: boolean
-        - description: "ONLY users with e-mail addresses that match these domain(s) will
-            be able to sign-up. Wildcards allowed. Use separate lines for
-            multiple entries. Ex: domain.com, *.domain.com"
+        - description: "ONLY users with e-mail addresses that match these domain(s) will be able to sign-up. Wildcards allowed. Use separate lines for multiple entries. Ex: domain.com, *.domain.com"
           in: formData
           name: domain_whitelist
           required: false
@@ -245,9 +239,7 @@ paths:
           name: domain_blacklist_enabled
           required: false
           type: boolean
-        - description: "Users with e-mail addresses that match these domain(s) will NOT be
-            able to sign-up. Wildcards allowed. Use separate lines for multiple
-            entries. Ex: domain.com, *.domain.com"
+        - description: "Users with e-mail addresses that match these domain(s) will NOT be able to sign-up. Wildcards allowed. Use separate lines for multiple entries. Ex: domain.com, *.domain.com"
           in: formData
           name: domain_blacklist
           required: true
@@ -267,8 +259,7 @@ paths:
           name: require_two_factor_authentication
           required: false
           type: boolean
-        - description: Amount of time (in hours) that users are allowed to skip forced
-            configuration of two-factor authentication
+        - description: Amount of time (in hours) that users are allowed to skip forced configuration of two-factor authentication
           format: int32
           in: formData
           name: two_factor_grace_period
@@ -338,15 +329,13 @@ paths:
           name: metrics_pool_size
           required: true
           type: integer
-        - description: The amount of seconds after which an InfluxDB connection will time
-            out
+        - description: The amount of seconds after which an InfluxDB connection will time out
           format: int32
           in: formData
           name: metrics_timeout
           required: true
           type: integer
-        - description: A method call is only tracked when it takes longer to complete than
-            the given amount of milliseconds.
+        - description: A method call is only tracked when it takes longer to complete than the given amount of milliseconds.
           format: int32
           in: formData
           name: metrics_method_call_threshold
@@ -376,8 +365,7 @@ paths:
           name: sidekiq_throttling_queus
           required: true
           type: array
-        - description: The factor by which the queues should be throttled. A value between
-            0.0 and 1.0, exclusive.
+        - description: The factor by which the queues should be throttled. A value between 0.0 and 1.0, exclusive.
           format: float
           in: formData
           name: sidekiq_throttling_factor
@@ -408,14 +396,12 @@ paths:
           name: akismet_api_key
           required: true
           type: string
-        - description: Abuse reports will be sent to this address if it is set. Abuse
-            reports are always available in the admin area.
+        - description: Abuse reports will be sent to this address if it is set. Abuse reports are always available in the admin area.
           in: formData
           name: admin_notification_email
           required: false
           type: string
-        - description: "Sentry is an error reporting and logging tool which is currently
-            not shipped with GitLab, get it here: https://getsentry.com"
+        - description: "Sentry is an error reporting and logging tool which is currently not shipped with GitLab, get it here: https://getsentry.com"
           in: formData
           name: sentry_enabled
           required: false
@@ -430,8 +416,7 @@ paths:
           name: repository_storage
           required: false
           type: string
-        - description: GitLab will periodically run 'git fsck' in all project and wiki
-            repositories to look for silent disk corruption issues.
+        - description: GitLab will periodically run 'git fsck' in all project and wiki repositories to look for silent disk corruption issues.
           in: formData
           name: repository_checks_enabled
           required: false
@@ -461,16 +446,12 @@ paths:
           name: version_check_enabled
           required: false
           type: boolean
-        - description: Some email servers do not support overriding the email sender name.
-            Enable this option to include the name of the author of the issue,
-            merge request or comment in the email body instead.
+        - description: Some email servers do not support overriding the email sender name. Enable this option to include the name of the author of the issue, merge request or comment in the email body instead.
           in: formData
           name: email_author_in_body
           required: false
           type: boolean
-        - description: By default GitLab sends emails in HTML and plain text formats so
-            mail clients can choose what format to use. Disable this option if
-            you only want to send emails in plain text format.
+        - description: By default GitLab sends emails in HTML and plain text formats so mail clients can choose what format to use. Disable this option if you only want to send emails in plain text format.
           in: formData
           name: html_emails_enabled
           required: false
@@ -480,8 +461,7 @@ paths:
           name: housekeeping_enabled
           required: false
           type: boolean
-        - description: Creating pack file bitmaps makes housekeeping take a little longer
-            but bitmaps should accelerate 'git clone' performance.
+        - description: Creating pack file bitmaps makes housekeeping take a little longer but bitmaps should accelerate 'git clone' performance.
           in: formData
           name: housekeeping_bitmaps_enabled
           required: true
@@ -546,8 +526,7 @@ paths:
         - deploy_keys
   /v3/dockerfiles:
     get:
-      description: This feature was introduced in GitLab 8.15. This endpoint is
-        deprecated and will be removed in GitLab 9.0.
+      description: This feature was introduced in GitLab 8.15. This endpoint is deprecated and will be removed in GitLab 9.0.
       operationId: getV3Dockerfiles
       produces:
         - application/json
@@ -561,8 +540,7 @@ paths:
         - dockerfiles
   "/v3/dockerfiles/{name}":
     get:
-      description: This feature was introduced in GitLab 8.15. This endpoint is
-        deprecated and will be removed in GitLab 9.0.
+      description: This feature was introduced in GitLab 8.15. This endpoint is deprecated and will be removed in GitLab 9.0.
       operationId: getV3DockerfilesName
       parameters:
         - description: The name of the template
@@ -582,8 +560,7 @@ paths:
         - dockerfiles
   /v3/gitignores:
     get:
-      description: This feature was introduced in GitLab 8.8. This endpoint is
-        deprecated and will be removed in GitLab 9.0.
+      description: This feature was introduced in GitLab 8.8. This endpoint is deprecated and will be removed in GitLab 9.0.
       operationId: getV3Gitignores
       produces:
         - application/json
@@ -597,8 +574,7 @@ paths:
         - gitignores
   "/v3/gitignores/{name}":
     get:
-      description: This feature was introduced in GitLab 8.8. This endpoint is
-        deprecated and will be removed in GitLab 9.0.
+      description: This feature was introduced in GitLab 8.8. This endpoint is deprecated and will be removed in GitLab 9.0.
       operationId: getV3GitignoresName
       parameters:
         - description: The name of the template
@@ -618,8 +594,7 @@ paths:
         - gitignores
   /v3/gitlab_ci_ymls:
     get:
-      description: This feature was introduced in GitLab 8.9. This endpoint is
-        deprecated and will be removed in GitLab 9.0.
+      description: This feature was introduced in GitLab 8.9. This endpoint is deprecated and will be removed in GitLab 9.0.
       operationId: getV3GitlabCiYmls
       produces:
         - application/json
@@ -633,8 +608,7 @@ paths:
         - gitlab_ci_ymls
   "/v3/gitlab_ci_ymls/{name}":
     get:
-      description: This feature was introduced in GitLab 8.9. This endpoint is
-        deprecated and will be removed in GitLab 9.0.
+      description: This feature was introduced in GitLab 8.9. This endpoint is deprecated and will be removed in GitLab 9.0.
       operationId: getV3GitlabCiYmlsName
       parameters:
         - description: The name of the template
@@ -1071,8 +1045,7 @@ paths:
         - groups
   "/v3/groups/{id}/members":
     get:
-      description: Gets a list of group or project members viewable by the
-        authenticated user.
+      description: Gets a list of group or project members viewable by the authenticated user.
       operationId: getV3GroupsIdMembers
       parameters:
         - description: The group ID
@@ -1101,12 +1074,10 @@ paths:
         - application/json
       responses:
         "200":
-          description: Gets a list of group or project members viewable by the
-            authenticated user.
+          description: Gets a list of group or project members viewable by the authenticated user.
           schema:
             $ref: "#/definitions/Member"
-      summary: Gets a list of group or project members viewable by the authenticated
-        user.
+      summary: Gets a list of group or project members viewable by the authenticated user.
       tags:
         - groups
     post:
@@ -1706,8 +1677,7 @@ paths:
         - keys
   /v3/licenses:
     get:
-      description: This feature was introduced in GitLab 8.7. This endpoint is
-        deprecated and will be removed in GitLab 9.0.
+      description: This feature was introduced in GitLab 8.7. This endpoint is deprecated and will be removed in GitLab 9.0.
       operationId: getV3Licenses
       parameters:
         - description: If passed, returns only popular licenses
@@ -1727,8 +1697,7 @@ paths:
         - licenses
   "/v3/licenses/{name}":
     get:
-      description: This feature was introduced in GitLab 8.7. This endpoint is
-        deprecated and will be removed in GitLab 9.0.
+      description: This feature was introduced in GitLab 8.7. This endpoint is deprecated and will be removed in GitLab 9.0.
       operationId: getV3LicensesName
       parameters:
         - description: The name of the template
@@ -1786,8 +1755,7 @@ paths:
         - application/json
       responses:
         "200":
-          description: Get global notification level settings and email, defaults to
-            Participate
+          description: Get global notification level settings and email, defaults to Participate
           schema:
             $ref: "#/definitions/GlobalNotificationSetting"
       summary: Get global notification level settings and email, defaults to Participate
@@ -1873,12 +1841,10 @@ paths:
         - application/json
       responses:
         "200":
-          description: Update global notification level settings and email, defaults to
-            Participate
+          description: Update global notification level settings and email, defaults to Participate
           schema:
             $ref: "#/definitions/GlobalNotificationSetting"
-      summary: Update global notification level settings and email, defaults to
-        Participate
+      summary: Update global notification level settings and email, defaults to Participate
       tags:
         - notification_settings
   /v3/projects:
@@ -2499,8 +2465,7 @@ paths:
         - application/json
       responses:
         "201":
-          description: Create new project for a specified user. Only available to admin
-            users.
+          description: Create new project for a specified user. Only available to admin users.
           schema:
             $ref: "#/definitions/Project"
       summary: Create new project for a specified user. Only available to admin users.
@@ -2919,8 +2884,7 @@ paths:
         - projects
   "/v3/projects/{id}/boards/{board_id}/lists":
     get:
-      description: Does not include `backlog` and `done` lists. This feature was
-        introduced in 8.13
+      description: Does not include `backlog` and `done` lists. This feature was introduced in 8.13
       operationId: getV3ProjectsIdBoardsBoardIdLists
       parameters:
         - description: The ID of a project
@@ -3880,8 +3844,7 @@ paths:
           name: enable_ssl_verification
           required: false
           type: boolean
-        - description: Secret token to validate received payloads; this will not be
-            returned in the response
+        - description: Secret token to validate received payloads; this will not be returned in the response
           in: formData
           name: token
           required: false
@@ -4014,8 +3977,7 @@ paths:
           name: enable_ssl_verification
           required: false
           type: boolean
-        - description: Secret token to validate received payloads; this will not be
-            returned in the response
+        - description: Secret token to validate received payloads; this will not be returned in the response
           in: formData
           name: token
           required: false
@@ -4122,8 +4084,7 @@ paths:
           name: title
           required: true
           type: string
-        - description: Date time when the issue was created. Available only for admins and
-            project owners.
+        - description: Date time when the issue was created. Available only for admins and project owners.
           format: date-time
           in: formData
           name: created_at
@@ -4248,8 +4209,7 @@ paths:
           name: title
           required: false
           type: string
-        - description: Date time when the issue was updated. Available only for admins and
-            project owners.
+        - description: Date time when the issue was updated. Available only for admins and project owners.
           format: date-time
           in: formData
           name: updated_at
@@ -5231,8 +5191,7 @@ paths:
           name: name
           required: true
           type: string
-        - description: "The color of the label given in 6-digit hex notation with leading
-            '#' sign (e.g. #FFAABB)"
+        - description: "The color of the label given in 6-digit hex notation with leading '#' sign (e.g. #FFAABB)"
           in: formData
           name: color
           required: true
@@ -5279,8 +5238,7 @@ paths:
           name: new_name
           required: false
           type: string
-        - description: "The new color of the label given in 6-digit hex notation with
-            leading '#' sign (e.g. #FFAABB)"
+        - description: "The new color of the label given in 6-digit hex notation with leading '#' sign (e.g. #FFAABB)"
           in: formData
           name: color
           required: false
@@ -5300,8 +5258,7 @@ paths:
         - application/json
       responses:
         "200":
-          description: Update an existing label. At least one optional parameter is
-            required.
+          description: Update an existing label. At least one optional parameter is required.
           schema:
             $ref: "#/definitions/Label"
       summary: Update an existing label. At least one optional parameter is required.
@@ -5360,8 +5317,7 @@ paths:
         - projects
   "/v3/projects/{id}/members":
     get:
-      description: Gets a list of group or project members viewable by the
-        authenticated user.
+      description: Gets a list of group or project members viewable by the authenticated user.
       operationId: getV3ProjectsIdMembers
       parameters:
         - description: The project ID
@@ -5390,12 +5346,10 @@ paths:
         - application/json
       responses:
         "200":
-          description: Gets a list of group or project members viewable by the
-            authenticated user.
+          description: Gets a list of group or project members viewable by the authenticated user.
           schema:
             $ref: "#/definitions/Member"
-      summary: Gets a list of group or project members viewable by the authenticated
-        user.
+      summary: Gets a list of group or project members viewable by the authenticated user.
       tags:
         - projects
     post:
@@ -5827,8 +5781,7 @@ paths:
           name: should_remove_source_branch
           required: false
           type: boolean
-        - description: When true, this merge request will be merged when the pipeline
-            succeeds
+        - description: When true, this merge request will be merged when the pipeline succeeds
           in: formData
           name: merge_when_build_succeeds
           required: false
@@ -5999,8 +5952,7 @@ paths:
           name: target_branch
           required: true
           type: string
-        - description: The target project of the merge request defaults to the :id of the
-            project
+        - description: The target project of the merge request defaults to the :id of the project
           format: int32
           in: formData
           name: target_project_id
@@ -6528,8 +6480,7 @@ paths:
           name: should_remove_source_branch
           required: false
           type: boolean
-        - description: When true, this merge request will be merged when the pipeline
-            succeeds
+        - description: When true, this merge request will be merged when the pipeline succeeds
           in: formData
           name: merge_when_build_succeeds
           required: false
@@ -7817,8 +7768,7 @@ paths:
           name: id
           required: true
           type: string
-        - description: The name of a repository branch or tag, if not given the default
-            branch is used
+        - description: The name of a repository branch or tag, if not given the default branch is used
           in: query
           name: ref_name
           required: false
@@ -8669,8 +8619,7 @@ paths:
           name: id
           required: true
           type: string
-        - description: The name of a repository branch or tag, if not given the default
-            branch is used
+        - description: The name of a repository branch or tag, if not given the default branch is used
           in: query
           name: ref_name
           required: false
@@ -8803,8 +8752,7 @@ paths:
           name: api_key
           required: true
           type: string
-        - description: Comma-separated list of branches which will be automatically
-            inspected. Leave blank to include all branches
+        - description: Comma-separated list of branches which will be automatically inspected. Leave blank to include all branches
           in: formData
           name: restrict_to_branch
           required: false
@@ -9154,8 +9102,7 @@ paths:
           name: push_events
           required: false
           type: string
-        - description: Event will be triggered when a merge request is
-            created/updated/merged
+        - description: Event will be triggered when a merge request is created/updated/merged
           in: formData
           name: merge_request_events
           required: false
@@ -9360,14 +9307,12 @@ paths:
           name: issue_events
           required: false
           type: string
-        - description: Event will be triggered when a confidential issue is
-            created/updated/closed
+        - description: Event will be triggered when a confidential issue is created/updated/closed
           in: formData
           name: confidential_issue_events
           required: false
           type: string
-        - description: Event will be triggered when a merge request is
-            created/updated/merged
+        - description: Event will be triggered when a merge request is created/updated/merged
           in: formData
           name: merge_request_events
           required: false
@@ -9458,8 +9403,7 @@ paths:
       description: Set jira service for project
       operationId: putV3ProjectsIdServicesJira
       parameters:
-        - description: The URL to the JIRA project which is being linked to this GitLab
-            project, e.g., https://jira.example.com
+        - description: The URL to the JIRA project which is being linked to this GitLab project, e.g., https://jira.example.com
           in: formData
           name: url
           required: true
@@ -9479,13 +9423,7 @@ paths:
           name: password
           required: false
           type: string
-        - description: The ID of a transition that moves issues to a closed state. You can
-            find this number under the JIRA workflow administration
-            (**Administration > Issues > Workflows**) by selecting **View**
-            under **Operations** of the desired workflow of your project. The ID
-            of each state can be found inside the parenthesis of each transition
-            name under the **Transitions (id)** column ([see
-            screenshot][trans]). By default, this ID is set to `2`
+        - description: The ID of a transition that moves issues to a closed state. You can find this number under the JIRA workflow administration (**Administration > Issues > Workflows**) by selecting **View** under **Operations** of the desired workflow of your project. The ID of each state can be found inside the parenthesis of each transition name under the **Transitions (id)** column ([see screenshot][trans]). By default, this ID is set to `2`
           format: int32
           in: formData
           name: jira_issue_transition_id
@@ -9496,8 +9434,7 @@ paths:
           name: commit_events
           required: false
           type: string
-        - description: Event will be triggered when a merge request is
-            created/updated/merged
+        - description: Event will be triggered when a merge request is created/updated/merged
           in: formData
           name: merge_request_events
           required: false
@@ -9527,8 +9464,7 @@ paths:
           name: namespace
           required: true
           type: string
-        - description: The URL to the Kubernetes cluster API, e.g.,
-            https://kubernetes.example.com
+        - description: The URL to the Kubernetes cluster API, e.g., https://kubernetes.example.com
           in: formData
           name: api_url
           required: true
@@ -9538,8 +9474,7 @@ paths:
           name: token
           required: true
           type: string
-        - description: A custom certificate authority bundle to verify the Kubernetes
-            cluster with (PEM format)
+        - description: A custom certificate authority bundle to verify the Kubernetes cluster with (PEM format)
           in: formData
           name: ca_pem
           required: false
@@ -9579,14 +9514,12 @@ paths:
           name: issue_events
           required: false
           type: string
-        - description: Event will be triggered when a confidential issue is
-            created/updated/closed
+        - description: Event will be triggered when a confidential issue is created/updated/closed
           in: formData
           name: confidential_issue_events
           required: false
           type: string
-        - description: Event will be triggered when a merge request is
-            created/updated/merged
+        - description: Event will be triggered when a merge request is created/updated/merged
           in: formData
           name: merge_request_events
           required: false
@@ -9724,8 +9657,7 @@ paths:
           name: token
           required: true
           type: string
-        - description: Comma-separated list of branches which will be automatically
-            inspected. Leave blank to include all branches.
+        - description: Comma-separated list of branches which will be automatically inspected. Leave blank to include all branches.
           in: formData
           name: restrict_to_branch
           required: false
@@ -9875,14 +9807,12 @@ paths:
           name: issue_events
           required: false
           type: string
-        - description: Event will be triggered when a confidential issue is
-            created/updated/closed
+        - description: Event will be triggered when a confidential issue is created/updated/closed
           in: formData
           name: confidential_issue_events
           required: false
           type: string
-        - description: Event will be triggered when a merge request is
-            created/updated/merged
+        - description: Event will be triggered when a merge request is created/updated/merged
           in: formData
           name: merge_request_events
           required: false
@@ -10929,14 +10859,12 @@ paths:
           name: description
           required: false
           type: string
-        - description: 'A string label to differentiate this status from the status of
-            other systems. Default: "default"'
+        - description: 'A string label to differentiate this status from the status of other systems. Default: "default"'
           in: formData
           name: name
           required: false
           type: string
-        - description: 'A string label to differentiate this status from the status of
-            other systems. Default: "default"'
+        - description: 'A string label to differentiate this status from the status of other systems. Default: "default"'
           in: formData
           name: context
           required: false
@@ -11479,17 +11407,14 @@ paths:
         - session
   /v3/sidekiq/compound_metrics:
     get:
-      description: Get the Sidekiq Compound metrics. Includes queue, process, and job
-        statistics
+      description: Get the Sidekiq Compound metrics. Includes queue, process, and job statistics
       operationId: getV3SidekiqCompoundMetrics
       produces:
         - application/json
       responses:
         "200":
-          description: Get the Sidekiq Compound metrics. Includes queue, process, and job
-            statistics
-      summary: Get the Sidekiq Compound metrics. Includes queue, process, and job
-        statistics
+          description: Get the Sidekiq Compound metrics. Includes queue, process, and job statistics
+      summary: Get the Sidekiq Compound metrics. Includes queue, process, and job statistics
       tags:
         - sidekiq
   /v3/sidekiq/job_stats:
@@ -12450,8 +12375,7 @@ paths:
         - application/json
       responses:
         "200":
-          description: Get the emails addresses of a specified user. Available only for
-            admins.
+          description: Get the emails addresses of a specified user. Available only for admins.
           schema:
             $ref: "#/definitions/Email"
       summary: Get the emails addresses of a specified user. Available only for admins.
@@ -12505,8 +12429,7 @@ paths:
         - application/json
       responses:
         "200":
-          description: Delete an email address of a specified user. Available only for
-            admins.
+          description: Delete an email address of a specified user. Available only for admins.
           schema:
             $ref: "#/definitions/Email"
       summary: Delete an email address of a specified user. Available only for admins.
@@ -12600,8 +12523,7 @@ paths:
         - users
   "/v3/users/{id}/keys/{key_id}":
     delete:
-      description: Delete an existing SSH key from a specified user. Available only
-        for admins.
+      description: Delete an existing SSH key from a specified user. Available only for admins.
       operationId: deleteV3UsersIdKeysKeyId
       parameters:
         - description: The ID of the user
@@ -12620,12 +12542,10 @@ paths:
         - application/json
       responses:
         "200":
-          description: Delete an existing SSH key from a specified user. Available only
-            for admins.
+          description: Delete an existing SSH key from a specified user. Available only for admins.
           schema:
             $ref: "#/definitions/SSHKey"
-      summary: Delete an existing SSH key from a specified user. Available only for
-        admins.
+      summary: Delete an existing SSH key from a specified user. Available only for admins.
       tags:
         - users
   "/v3/users/{id}/unblock":
@@ -13989,8 +13909,7 @@ definitions:
         $ref: "#/definitions/UserPublic"
     type: object
   Template:
-    description: This feature was introduced in GitLab 8.15. This endpoint is
-      deprecated and will be removed in GitLab 9.0.
+    description: This feature was introduced in GitLab 8.15. This endpoint is deprecated and will be removed in GitLab 9.0.
     properties:
       content:
         type: string
@@ -13998,8 +13917,7 @@ definitions:
         type: string
     type: object
   TemplatesList:
-    description: This feature was introduced in GitLab 8.15. This endpoint is
-      deprecated and will be removed in GitLab 9.0.
+    description: This feature was introduced in GitLab 8.15. This endpoint is deprecated and will be removed in GitLab 9.0.
     properties:
       name:
         type: string

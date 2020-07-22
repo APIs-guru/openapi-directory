@@ -4,10 +4,7 @@ servers:
 info:
   contact:
     x-twitter: MailBoxV
-  description: The MailboxValidator Free Email Checker checks if a single email
-    address is from a free email provider and returns the results in either JSON
-    or XML format. Refer to https://www.mailboxvalidator.com/api-email-freem for
-    further information.
+  description: The MailboxValidator Free Email Checker checks if a single email address is from a free email provider and returns the results in either JSON or XML format. Refer to https://www.mailboxvalidator.com/api-email-freem for further information.
   title: MailboxValidator Free Email Checker
   version: 1.0.0
   x-apisguru-categories:
@@ -26,9 +23,7 @@ info:
 paths:
   /v1/email/free:
     get:
-      description: The Free Email Checker API does validation on a single email
-        address and returns if it is from a free email provider in either JSON
-        or XML format.
+      description: The Free Email Checker API does validation on a single email address and returns if it is from a free email provider in either JSON or XML format.
       parameters:
         - description: Return the result in json (default) or xml format.
           in: query
