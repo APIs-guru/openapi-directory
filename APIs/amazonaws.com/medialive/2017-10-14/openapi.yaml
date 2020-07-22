@@ -3043,6 +3043,84 @@ paths:
                 name:
                   description: Placeholder documentation for __string
                   type: string
+  '/prod/inputDevices/{inputDeviceId}/thumbnailData#accept':
+    get:
+      operationId: DescribeInputDeviceThumbnail
+      description: Get the latest thumbnail data for the input device.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeInputDeviceThumbnailResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: BadGatewayException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadGatewayException'
+        '484':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '485':
+          description: GatewayTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GatewayTimeoutException'
+        '486':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: inputDeviceId
+          in: path
+          required: true
+          description: 'The unique ID of this input device. For example, hd-123456789abcdef.'
+          schema:
+            type: string
+            description: Placeholder documentation for __string
+        - name: accept
+          in: header
+          required: true
+          description: The HTTP Accept header. Indicates the requested type for the thumbnail.
+          schema:
+            type: string
+            enum:
+              - image/jpeg
+            description: The HTTP Accept header. Indicates the requested type for the thumbnail.
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/prod/offerings/{offeringId}':
     get:
       operationId: DescribeOffering
@@ -4696,6 +4774,13 @@ components:
           $ref: '#/components/schemas/InputDeviceType'
           description: The type of the input device.
       description: Placeholder documentation for DescribeInputDeviceResponse
+    DescribeInputDeviceThumbnailResponse:
+      type: object
+      properties:
+        Body:
+          $ref: '#/components/schemas/InputDeviceThumbnail'
+          description: The binary data for the thumbnail that the Link device has most recently sent to MediaLive.
+      description: Placeholder documentation for DescribeInputDeviceThumbnailResponse
     DescribeInputSecurityGroupResponse:
       type: object
       properties:
@@ -5728,11 +5813,11 @@ components:
         - FOLLOW_INPUT
         - USE_CONFIGURED
       description: Audio Description Audio Type Control
-    __stringMin3Max3:
+    __stringMin1Max35:
       type: string
-      description: Placeholder documentation for __stringMin3Max3
-      minLength: 3
-      maxLength: 3
+      description: Placeholder documentation for __stringMin1Max35
+      minLength: 1
+      maxLength: 35
     AudioDescriptionLanguageCodeControl:
       type: string
       enum:
@@ -5782,8 +5867,8 @@ components:
           $ref: '#/components/schemas/AudioCodecSettings'
           description: Audio codec settings.
         LanguageCode:
-          $ref: '#/components/schemas/__stringMin3Max3'
-          description: 'Indicates the language of the audio output track. Only used if languageControlMode is useConfigured, or there is no ISO 639 language code specified in the input.'
+          $ref: '#/components/schemas/__stringMin1Max35'
+          description: 'RFC 5646 language code representing the language of the audio output track. Only used if languageControlMode is useConfigured, or there is no ISO 639 language code specified in the input.'
         LanguageCodeControl:
           $ref: '#/components/schemas/AudioDescriptionLanguageCodeControl'
           description: 'Choosing followInput will cause the ISO 639 language code of the output to follow the ISO 639 language code of the input. The languageCode will be used when useConfigured is set, or when followInput is selected but there is no ISO 639 language code specified by the input.'
@@ -6355,6 +6440,11 @@ components:
       description: Placeholder documentation for __integerMin1Max4
       minimum: 1
       maximum: 4
+    __stringMin3Max3:
+      type: string
+      description: Placeholder documentation for __stringMin3Max3
+      minLength: 3
+      maxLength: 3
     CaptionLanguageMapping:
       type: object
       required:
@@ -7239,6 +7329,31 @@ components:
       enum:
         - HD
       description: 'The type of the input device. For an AWS Elemental Link device that outputs resolutions up to 1080, choose "HD".'
+    AcceptHeader:
+      type: string
+      enum:
+        - image/jpeg
+      description: The HTTP Accept header. Indicates the requested type for the thumbnail.
+    DescribeInputDeviceThumbnailRequest:
+      type: object
+      title: DescribeInputDeviceThumbnailRequest
+      properties: {}
+      description: Placeholder documentation for DescribeInputDeviceThumbnailRequest
+    InputDeviceThumbnail:
+      type: string
+      description: The binary data for the thumbnail that the Link device has most recently sent to MediaLive.
+    ContentType:
+      type: string
+      enum:
+        - image/jpeg
+      description: Specifies the media type of the thumbnail.
+    __long:
+      type: integer
+      description: Placeholder documentation for __long
+    __timestamp:
+      type: string
+      description: Placeholder documentation for __timestamp
+      format: date-time
     DescribeInputRequest:
       type: object
       title: DescribeInputRequest
@@ -8074,7 +8189,7 @@ components:
           $ref: '#/components/schemas/__integerMin1'
           description: Pixel Aspect Ratio denominator.
         ParNumerator:
-          $ref: '#/components/schemas/__integer'
+          $ref: '#/components/schemas/__integerMin1'
           description: Pixel Aspect Ratio numerator.
         Profile:
           $ref: '#/components/schemas/H264Profile'
@@ -8378,6 +8493,10 @@ components:
 
             CBR: Quality varies, depending on the video complexity. Recommended only if you distribute
             your assets to devices that cannot handle variable bitrates.
+
+            Multiplex: This rate control mode is only supported (and is required) when the video is being
+            delivered to a MediaLive Multiplex in which case the rate control configuration is controlled
+            by the properties within the Multiplex Program.
         ScanType:
           $ref: '#/components/schemas/H265ScanType'
           description: Sets the scan type of the output to progressive or top-field-first interlaced.
@@ -9173,8 +9292,6 @@ components:
       description: Input Loss Image Type
     InputPrepareScheduleActionSettings:
       type: object
-      required:
-        - InputAttachmentNameReference
       properties:
         InputAttachmentNameReference:
           $ref: '#/components/schemas/__string'

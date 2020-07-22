@@ -342,6 +342,315 @@ paths:
             pattern: '^[a-zA-Z0-9-_]+$'
             minLength: 1
             maxLength: 128
+  '/accounts/{AwsAccountId}/customizations':
+    post:
+      operationId: CreateAccountCustomization
+      description: Creates a customization for the Amazon QuickSight subscription associated with your AWS account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateAccountCustomizationResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: ResourceExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceExistsException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '486':
+          description: ResourceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceUnavailableException'
+      parameters:
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: The ID for the AWS account that you want to customize QuickSight for.
+          schema:
+            type: string
+            pattern: '^[0-9]{12}$'
+            minLength: 12
+            maxLength: 12
+        - name: namespace
+          in: query
+          required: false
+          description: The namespace associated with the customization that you're creating.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9._-]*$'
+            maxLength: 64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - AccountCustomization
+              properties:
+                AccountCustomization:
+                  description: The customizations associated with your AWS account for QuickSight.
+                  type: object
+                  properties:
+                    DefaultTheme:
+                      $ref: '#/components/schemas/Arn'
+                      description: The default theme for this QuickSight subscription.
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    delete:
+      operationId: DeleteAccountCustomization
+      description: Deletes customizations for the QuickSight subscription on your AWS account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteAccountCustomizationResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '485':
+          description: ResourceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceUnavailableException'
+      parameters:
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: The ID for the AWS account that you want to delete QuickSight customizations from.
+          schema:
+            type: string
+            pattern: '^[0-9]{12}$'
+            minLength: 12
+            maxLength: 12
+        - name: namespace
+          in: query
+          required: false
+          description: The namespace associated with the customization that you're deleting.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9._-]*$'
+            maxLength: 64
+    get:
+      operationId: DescribeAccountCustomization
+      description: Describes the customizations associated with your AWS account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeAccountCustomizationResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '485':
+          description: ResourceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceUnavailableException'
+      parameters:
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: The ID for the AWS account that you want to describe QuickSight customizations for.
+          schema:
+            type: string
+            pattern: '^[0-9]{12}$'
+            minLength: 12
+            maxLength: 12
+        - name: namespace
+          in: query
+          required: false
+          description: The namespace associated with the customization that you're describing.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9._-]*$'
+            maxLength: 64
+        - name: resolved
+          in: query
+          required: false
+          description: The status of the creation of the customization. This is an asynchronous process. A status of <code>CREATED</code> means that your customization is ready to use.
+          schema:
+            type: boolean
+    put:
+      operationId: UpdateAccountCustomization
+      description: Updates customizations associated with the QuickSight subscription on your AWS account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateAccountCustomizationResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '485':
+          description: ResourceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceUnavailableException'
+      parameters:
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: The ID for the AWS account that you want to update QuickSight customizations for.
+          schema:
+            type: string
+            pattern: '^[0-9]{12}$'
+            minLength: 12
+            maxLength: 12
+        - name: namespace
+          in: query
+          required: false
+          description: The namespace associated with the customization that you're updating.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9._-]*$'
+            maxLength: 64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - AccountCustomization
+              properties:
+                AccountCustomization:
+                  description: The customizations associated with your AWS account for QuickSight.
+                  type: object
+                  properties:
+                    DefaultTheme:
+                      $ref: '#/components/schemas/Arn'
+                      description: The default theme for this QuickSight subscription.
   '/accounts/{AwsAccountId}/dashboards/{DashboardId}':
     post:
       operationId: CreateDashboard
@@ -913,6 +1222,9 @@ paths:
                   description: The row-level security configuration for the dataset.
                   type: object
                   properties:
+                    Namespace:
+                      $ref: '#/components/schemas/Namespace'
+                      description: The namespace associated with the row-level permissions dataset.
                     Arn:
                       $ref: '#/components/schemas/Arn'
                       description: The Amazon Resource Name (ARN) of the permission dataset.
@@ -1790,6 +2102,122 @@ paths:
                   type: object
                   additionalProperties:
                     $ref: '#/components/schemas/IdentityNameList'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/accounts/{AwsAccountId}':
+    post:
+      operationId: CreateNamespace
+      description: '<p>(Enterprise edition only) Creates a new namespace for you to use with Amazon QuickSight.</p> <p>A namespace allows you to isolate the QuickSight users and groups that are registered for that namespace. Users that access the namespace can share assets only with other users or groups in the same namespace. They can''t see users and groups in other namespaces. You can create a namespace after your AWS account is subscribed to QuickSight. The namespace must be unique within the AWS account. By default, there is a limit of 100 namespaces per AWS account. To increase your limit, create a ticket with AWS Support. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateNamespaceResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '485':
+          description: ResourceExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceExistsException'
+        '486':
+          description: PreconditionNotMetException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreconditionNotMetException'
+        '487':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '488':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '489':
+          description: ResourceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceUnavailableException'
+      parameters:
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: The ID for the AWS account that you want to create the QuickSight namespace in.
+          schema:
+            type: string
+            pattern: '^[0-9]{12}$'
+            minLength: 12
+            maxLength: 12
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Namespace
+                - IdentityStore
+              properties:
+                Namespace:
+                  description: The name that you want to use to describe the new namespace.
+                  type: string
+                  pattern: '^[a-zA-Z0-9._-]*$'
+                  maxLength: 64
+                IdentityStore:
+                  description: 'Specifies the type of your user identity directory. Currently, this supports users with an identity type of <code>QUICKSIGHT</code>.'
+                  type: string
+                  enum:
+                    - QUICKSIGHT
+                Tags:
+                  description: The tags that you want to associate with the namespace that you're creating.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Tag'
+                  minItems: 1
+                  maxItems: 200
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3546,6 +3974,9 @@ paths:
                   description: The row-level security configuration for the dataset.
                   type: object
                   properties:
+                    Namespace:
+                      $ref: '#/components/schemas/Namespace'
+                      description: The namespace associated with the row-level permissions dataset.
                     Arn:
                       $ref: '#/components/schemas/Arn'
                       description: The Amazon Resource Name (ARN) of the permission dataset.
@@ -4176,6 +4607,149 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/accounts/{AwsAccountId}/namespaces/{Namespace}':
+    delete:
+      operationId: DeleteNamespace
+      description: 'Deletes a namespace and the users and groups that are associated with the namespace. This is an asynchronous process. Assets including dashboards, analyses, datasets and data sources are not deleted. To delete these assets, you use the APIs for the relevant asset. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteNamespaceResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: PreconditionNotMetException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreconditionNotMetException'
+        '485':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '486':
+          description: ResourceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceUnavailableException'
+      parameters:
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: The ID for the AWS account that you want to delete the QuickSight namespace from.
+          schema:
+            type: string
+            pattern: '^[0-9]{12}$'
+            minLength: 12
+            maxLength: 12
+        - name: Namespace
+          in: path
+          required: true
+          description: The namespace that you want to delete.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9._-]*$'
+            maxLength: 64
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: DescribeNamespace
+      description: Describes the current namespace.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeNamespaceResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '485':
+          description: ResourceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceUnavailableException'
+      parameters:
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: The ID for the AWS account that contains the QuickSight namespace that you want to describe.
+          schema:
+            type: string
+            pattern: '^[0-9]{12}$'
+            minLength: 12
+            maxLength: 12
+        - name: Namespace
+          in: path
+          required: true
+          description: The namespace that you want to describe.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9._-]*$'
+            maxLength: 64
   '/accounts/{AwsAccountId}/namespaces/{Namespace}/users/{UserName}':
     delete:
       operationId: DeleteUser
@@ -4212,12 +4786,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/ThrottlingException'
         '484':
+          description: PreconditionNotMetException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreconditionNotMetException'
+        '485':
           description: InternalFailureException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalFailureException'
-        '485':
+        '486':
           description: ResourceUnavailableException
           content:
             application/json:
@@ -4292,12 +4872,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/ThrottlingException'
         '484':
+          description: PreconditionNotMetException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreconditionNotMetException'
+        '485':
           description: InternalFailureException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalFailureException'
-        '485':
+        '486':
           description: ResourceUnavailableException
           content:
             application/json:
@@ -4364,12 +4950,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/ThrottlingException'
         '484':
+          description: PreconditionNotMetException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreconditionNotMetException'
+        '485':
           description: InternalFailureException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalFailureException'
-        '485':
+        '486':
           description: ResourceUnavailableException
           content:
             application/json:
@@ -4423,6 +5015,15 @@ paths:
                     - READER
                     - RESTRICTED_AUTHOR
                     - RESTRICTED_READER
+                CustomPermissionsName:
+                  description: 'The name of the custom permissions profile that you want to assign to this user. Currently, custom permissions profile names are assigned to permissions profiles in the QuickSight console. You use this API to assign the named set of permissions to a QuickSight user. '
+                  type: string
+                  pattern: '^[a-zA-Z0-9+=,.@_-]+$'
+                  minLength: 1
+                  maxLength: 64
+                UnapplyCustomPermissions:
+                  description: A flag that you use to indicate that you want to remove all custom permissions from this user. Using this parameter resets the user to the state it was in before a custom permissions profile was applied. This parameter defaults to NULL and it doesn't accept any other value.
+                  type: boolean
   '/accounts/{AwsAccountId}/namespaces/{Namespace}/user-principals/{PrincipalId}':
     delete:
       operationId: DeleteUserByPrincipalId
@@ -4459,12 +5060,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/ThrottlingException'
         '484':
+          description: PreconditionNotMetException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreconditionNotMetException'
+        '485':
           description: InternalFailureException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalFailureException'
-        '485':
+        '486':
           description: ResourceUnavailableException
           content:
             application/json:
@@ -4502,6 +5109,144 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/accounts/{AwsAccountId}/settings':
+    get:
+      operationId: DescribeAccountSettings
+      description: Describes the settings that were used when your QuickSight subscription was first created in this AWS Account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeAccountSettingsResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '485':
+          description: ResourceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceUnavailableException'
+      parameters:
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: The ID for the AWS account that contains the QuickSight namespaces that you want to list.
+          schema:
+            type: string
+            pattern: '^[0-9]{12}$'
+            minLength: 12
+            maxLength: 12
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    put:
+      operationId: UpdateAccountSettings
+      description: Updates the settings for the Amazon QuickSight subscription in your AWS Account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateAccountSettingsResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '485':
+          description: ResourceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceUnavailableException'
+      parameters:
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: The ID for the AWS account that contains the QuickSight namespaces that you want to list.
+          schema:
+            type: string
+            pattern: '^[0-9]{12}$'
+            minLength: 12
+            maxLength: 12
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - DefaultNamespace
+              properties:
+                DefaultNamespace:
+                  description: 'The default namespace for this AWS Account. Currently, the default is <code>default</code>. IAM users who register for the first time with QuickSight provide an email that becomes associated with the default namespace.'
+                  type: string
+                  pattern: '^[a-zA-Z0-9._-]*$'
+                  maxLength: 64
+                NotificationEmail:
+                  description: Email address used to send notifications regarding administration of QuickSight.
+                  type: string
   '/accounts/{AwsAccountId}/dashboards/{DashboardId}/permissions':
     get:
       operationId: DescribeDashboardPermissions
@@ -5586,6 +6331,111 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/accounts/{AwsAccountId}/session-embed-url':
+    get:
+      operationId: GetSessionEmbedUrl
+      description: 'Generates a session URL and authorization code that you can embed in your web server code. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSessionEmbedUrlResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: ResourceExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceExistsException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: QuickSightUserNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuickSightUserNotFoundException'
+        '486':
+          description: SessionLifetimeInMinutesInvalidException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionLifetimeInMinutesInvalidException'
+        '487':
+          description: UnsupportedUserEditionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedUserEditionException'
+        '488':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: The ID for the AWS account that contains the QuickSight session that you're embedding.
+          schema:
+            type: string
+            pattern: '^[0-9]{12}$'
+            minLength: 12
+            maxLength: 12
+        - name: entry-point
+          in: query
+          required: false
+          description: The entry point for the embedded session.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 1000
+        - name: session-lifetime
+          in: query
+          required: false
+          description: How many minutes the session is valid. The session lifetime must be 15-600 minutes.
+          schema:
+            type: integer
+            minimum: 15
+            maximum: 600
+        - name: user-arn
+          in: query
+          required: false
+          description: '<p>The Amazon QuickSight user''s Amazon Resource Name (ARN), for use with <code>QUICKSIGHT</code> identity type. You can use this for any Amazon QuickSight users in your account (readers, authors, or admins) authenticated as one of the following:</p> <ul> <li> <p>Active Directory (AD) users or group members</p> </li> <li> <p>Invited nonfederated users</p> </li> <li> <p>IAM users and IAM role-based sessions authenticated through Federated Single Sign-On using SAML, OpenID Connect, or IAM federation.</p> </li> </ul>'
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/accounts/{AwsAccountId}/dashboards/{DashboardId}/versions':
     get:
       operationId: ListDashboardVersions
@@ -6153,6 +7003,109 @@ paths:
           in: query
           required: false
           description: The maximum number of results to be returned per request.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/accounts/{AwsAccountId}/namespaces':
+    get:
+      operationId: ListNamespaces
+      description: Lists the namespaces for the specified AWS account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListNamespacesResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InvalidNextTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidNextTokenException'
+        '485':
+          description: PreconditionNotMetException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreconditionNotMetException'
+        '486':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '487':
+          description: ResourceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceUnavailableException'
+      parameters:
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: The ID for the AWS account that contains the QuickSight namespaces that you want to list.
+          schema:
+            type: string
+            pattern: '^[0-9]{12}$'
+            minLength: 12
+            maxLength: 12
+        - name: next-token
+          in: query
+          required: false
+          description: A pagination token that can be used in a subsequent request.
+          schema:
+            type: string
+        - name: max-results
+          in: query
+          required: false
+          description: The maximum number of results to return.
           schema:
             type: integer
             minimum: 1
@@ -6906,12 +7859,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/ThrottlingException'
         '484':
+          description: PreconditionNotMetException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreconditionNotMetException'
+        '485':
           description: InternalFailureException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalFailureException'
-        '485':
+        '486':
           description: ResourceUnavailableException
           content:
             application/json:
@@ -7007,12 +7966,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/InvalidNextTokenException'
         '485':
+          description: PreconditionNotMetException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreconditionNotMetException'
+        '486':
           description: InternalFailureException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalFailureException'
-        '486':
+        '487':
           description: ResourceUnavailableException
           content:
             application/json:
@@ -7183,6 +8148,12 @@ paths:
                   type: string
                   pattern: '[\u0020-\u00FF]+'
                   minLength: 1
+                CustomPermissionsName:
+                  description: '<p>(Enterprise edition only) The name of the custom permissions profile that you want to assign to this user. Currently, custom permissions profile names are assigned to permissions profiles in the QuickSight console. You use this API to assign the named set of permissions to a QuickSight user. </p> <p>Customizing permissions in the QuickSight UI allows you to control a user''s access to the following operations:</p> <ul> <li> <p/> </li> <li> <p/> </li> <li> <p/> </li> <li> <p/> </li> </ul> <p>QuickSight custom permissions are applied through IAM policies. Therefore, they override the permissions typically granted by assigning QuickSight users to one of the default security cohorts (admin, author, reader) in QuickSight.</p> <p>This feature is available only to QuickSight Enterprise edition subscriptions that use SAML 2.0-Based Federation for Single Sign-On (SSO).</p>'
+                  type: string
+                  pattern: '^[a-zA-Z0-9+=,.@_-]+$'
+                  minLength: 1
+                  maxLength: 64
   '/accounts/{AwsAccountId}/search/dashboards':
     post:
       operationId: SearchDashboards
@@ -7503,6 +8474,27 @@ components:
     ThrottlingException: {}
     ResourceExistsException: {}
     InternalFailureException: {}
+    CreateAccountCustomizationResponse:
+      type: object
+      properties:
+        AwsAccountId:
+          $ref: '#/components/schemas/AwsAccountId'
+          description: The ID for the AWS account that you want to customize QuickSight for.
+        Namespace:
+          $ref: '#/components/schemas/Namespace'
+          description: 'The namespace associated with the customization you''re creating. '
+        AccountCustomization:
+          $ref: '#/components/schemas/AccountCustomization'
+          description: The customizations you're adding to the QuickSight subscription for the AWS account.
+        RequestId:
+          $ref: '#/components/schemas/String'
+          description: The AWS request ID for this operation.
+        Status:
+          $ref: '#/components/schemas/StatusCode'
+          description: The HTTP status of the request.
+    Arn:
+      type: string
+    ResourceUnavailableException: {}
     CreateDashboardResponse:
       type: object
       properties:
@@ -7663,8 +8655,10 @@ components:
           $ref: '#/components/schemas/GeoSpatialColumnGroup'
           description: Geospatial column group that denotes a hierarchy.
       description: 'Groupings of columns that work together in certain Amazon QuickSight features. This is a variant type structure. For this structure to be valid, only one of the attributes can be non-null.'
-    Arn:
+    Namespace:
       type: string
+      pattern: '^[a-zA-Z0-9._-]*$'
+      maxLength: 64
     RowLevelPermissionPolicy:
       type: string
       enum:
@@ -7986,7 +8980,6 @@ components:
           description: The HTTP status of the request.
       description: The response object for this operation.
     PreconditionNotMetException: {}
-    ResourceUnavailableException: {}
     CreateGroupMembershipResponse:
       type: object
       properties:
@@ -8042,6 +9035,30 @@ components:
           description: The ingestion status.
         RequestId:
           $ref: '#/components/schemas/string'
+          description: The AWS request ID for this operation.
+        Status:
+          $ref: '#/components/schemas/StatusCode'
+          description: The HTTP status of the request.
+    CreateNamespaceResponse:
+      type: object
+      properties:
+        Arn:
+          $ref: '#/components/schemas/Arn'
+          description: 'The ARN of the QuickSight namespace you created. '
+        Name:
+          $ref: '#/components/schemas/Namespace'
+          description: The name of the new namespace that you created.
+        CapacityRegion:
+          $ref: '#/components/schemas/String'
+          description: 'The AWS Region that you want to use for the free SPICE capacity for the new namespace. This is set to the region that you run CreateNamespace in. '
+        CreationStatus:
+          $ref: '#/components/schemas/NamespaceStatus'
+          description: 'The status of the creation of the namespace. This is an asynchronous process. A status of <code>CREATED</code> means that your namespace is ready to use. If an error occurs, it indicates if the process is <code>retryable</code> or <code>non-retryable</code>. In the case of a non-retryable error, refer to the error message for follow-up actions.'
+        IdentityStore:
+          $ref: '#/components/schemas/IdentityStore'
+          description: 'Specifies the type of your user identity directory. Currently, this supports users with an identity type of <code>QUICKSIGHT</code>.'
+        RequestId:
+          $ref: '#/components/schemas/String'
           description: The AWS request ID for this operation.
         Status:
           $ref: '#/components/schemas/StatusCode'
@@ -8209,6 +9226,15 @@ components:
         RequestId:
           $ref: '#/components/schemas/String'
           description: The AWS request ID for this operation.
+    DeleteAccountCustomizationResponse:
+      type: object
+      properties:
+        RequestId:
+          $ref: '#/components/schemas/String'
+          description: The AWS request ID for this operation.
+        Status:
+          $ref: '#/components/schemas/StatusCode'
+          description: The HTTP status of the request.
     DeleteDashboardResponse:
       type: object
       properties:
@@ -8278,6 +9304,15 @@ components:
         AssignmentName:
           $ref: '#/components/schemas/IAMPolicyAssignmentName'
           description: 'The name of the assignment. '
+        RequestId:
+          $ref: '#/components/schemas/String'
+          description: The AWS request ID for this operation.
+        Status:
+          $ref: '#/components/schemas/StatusCode'
+          description: The HTTP status of the request.
+    DeleteNamespaceResponse:
+      type: object
+      properties:
         RequestId:
           $ref: '#/components/schemas/String'
           description: The AWS request ID for this operation.
@@ -8362,6 +9397,36 @@ components:
     DeleteUserByPrincipalIdResponse:
       type: object
       properties:
+        RequestId:
+          $ref: '#/components/schemas/String'
+          description: The AWS request ID for this operation.
+        Status:
+          $ref: '#/components/schemas/StatusCode'
+          description: The HTTP status of the request.
+    DescribeAccountCustomizationResponse:
+      type: object
+      properties:
+        AwsAccountId:
+          $ref: '#/components/schemas/AwsAccountId'
+          description: The ID for the AWS account that you want to describe QuickSight customizations for.
+        Namespace:
+          $ref: '#/components/schemas/Namespace'
+          description: The namespace associated with the customization that you're describing.
+        AccountCustomization:
+          $ref: '#/components/schemas/AccountCustomization'
+          description: The customizations associated with QuickSight.
+        RequestId:
+          $ref: '#/components/schemas/String'
+          description: The AWS request ID for this operation.
+        Status:
+          $ref: '#/components/schemas/StatusCode'
+          description: The HTTP status of the request.
+    DescribeAccountSettingsResponse:
+      type: object
+      properties:
+        AccountSettings:
+          $ref: '#/components/schemas/AccountSettings'
+          description: 'The settings associated with the QuickSight subscription associated with this AWS account. This information includes the edition of Amazon QuickSight that you subscribed to (Standard or Enterprise) and the notification email for the QuickSight subscription. The QuickSight console, the QuickSight subscription is sometimes referred to as a QuickSight "account" even though it is technically not an account, but a subscription in your AWS account.'
         RequestId:
           $ref: '#/components/schemas/String'
           description: The AWS request ID for this operation.
@@ -8495,6 +9560,18 @@ components:
         Status:
           $ref: '#/components/schemas/StatusCode'
           description: The HTTP status of the request.
+    DescribeNamespaceResponse:
+      type: object
+      properties:
+        Namespace:
+          $ref: '#/components/schemas/NamespaceInfoV2'
+          description: 'The information about the namespace that you''re describing. The response includes the namespace ARN, name, AWS Region, creation status, and identity store. <code>DescribeNamespace</code> also works for namespaces that are in the process of being created. For incomplete namespaces, this API lists the namespace error types and messages associated with the creation process.'
+        RequestId:
+          $ref: '#/components/schemas/String'
+          description: The AWS request ID for this operation.
+        Status:
+          $ref: '#/components/schemas/StatusCode'
+          description: The HTTP status of the request.
     DescribeTemplateResponse:
       type: object
       properties:
@@ -8506,6 +9583,7 @@ components:
           description: The HTTP status of the request.
         RequestId:
           $ref: '#/components/schemas/String'
+          description: The AWS request ID for this operation.
     DescribeTemplateAliasResponse:
       type: object
       properties:
@@ -8606,6 +9684,18 @@ components:
     QuickSightUserNotFoundException: {}
     IdentityTypeNotSupportedException: {}
     SessionLifetimeInMinutesInvalidException: {}
+    GetSessionEmbedUrlResponse:
+      type: object
+      properties:
+        EmbedUrl:
+          $ref: '#/components/schemas/EmbeddingUrl'
+          description: 'A single-use URL that you can put into your server-side web page to embed your QuickSight session. This URL is valid for 5 minutes. The API provides the URL with an <code>auth_code</code> value that enables one (and only one) sign-on to a user session that is valid for 10 hours. '
+        Status:
+          $ref: '#/components/schemas/StatusCode'
+          description: The HTTP status of the request.
+        RequestId:
+          $ref: '#/components/schemas/String'
+          description: The AWS request ID for this operation.
     ListDashboardVersionsResponse:
       type: object
       properties:
@@ -8737,6 +9827,21 @@ components:
           description: 'The token for the next set of results, or null if there are no more results.'
         RequestId:
           $ref: '#/components/schemas/string'
+          description: The AWS request ID for this operation.
+        Status:
+          $ref: '#/components/schemas/StatusCode'
+          description: The HTTP status of the request.
+    ListNamespacesResponse:
+      type: object
+      properties:
+        Namespaces:
+          $ref: '#/components/schemas/Namespaces'
+          description: 'The information about the namespaces in this AWS account. The response includes the namespace ARN, name, AWS Region, notification email address, creation status, and identity store.'
+        NextToken:
+          $ref: '#/components/schemas/String'
+          description: A pagination token that can be used in a subsequent request.
+        RequestId:
+          $ref: '#/components/schemas/String'
           description: The AWS request ID for this operation.
         Status:
           $ref: '#/components/schemas/StatusCode'
@@ -8940,6 +10045,33 @@ components:
       type: string
       minLength: 1
       maxLength: 128
+    UpdateAccountCustomizationResponse:
+      type: object
+      properties:
+        AwsAccountId:
+          $ref: '#/components/schemas/AwsAccountId'
+          description: The ID for the AWS account that you want to update QuickSight customizations for.
+        Namespace:
+          $ref: '#/components/schemas/Namespace'
+          description: The namespace associated with the customization that you're updating.
+        AccountCustomization:
+          $ref: '#/components/schemas/AccountCustomization'
+          description: The customizations associated with your QuickSight subscription.
+        RequestId:
+          $ref: '#/components/schemas/String'
+          description: The AWS request ID for this operation.
+        Status:
+          $ref: '#/components/schemas/StatusCode'
+          description: The HTTP status of the request.
+    UpdateAccountSettingsResponse:
+      type: object
+      properties:
+        RequestId:
+          $ref: '#/components/schemas/String'
+          description: The AWS request ID for this operation.
+        Status:
+          $ref: '#/components/schemas/StatusCode'
+          description: The HTTP status of the request.
     UpdateDashboardResponse:
       type: object
       properties:
@@ -9213,8 +10345,36 @@ components:
         Status:
           $ref: '#/components/schemas/StatusCode'
           description: The HTTP status of the request.
+    AccountCustomization:
+      type: object
+      properties:
+        DefaultTheme:
+          $ref: '#/components/schemas/Arn'
+          description: The default theme for this QuickSight subscription.
+      description: The customizations associated with your AWS account for QuickSight.
     String:
       type: string
+    Edition:
+      type: string
+      enum:
+        - STANDARD
+        - ENTERPRISE
+    AccountSettings:
+      type: object
+      properties:
+        AccountName:
+          $ref: '#/components/schemas/String'
+          description: The name associated with the QuickSight subscription in your AWS account.
+        Edition:
+          $ref: '#/components/schemas/Edition'
+          description: The edition of QuickSight that you're currently subscribed to.
+        DefaultNamespace:
+          $ref: '#/components/schemas/Namespace'
+          description: The default QuickSight namespace for your AWS account.
+        NotificationEmail:
+          $ref: '#/components/schemas/String'
+          description: The main notification email for your QuickSight subscription.
+      description: The QuickSight settings associated with your AWS account.
     ActionList:
       type: array
       items:
@@ -9486,6 +10646,15 @@ components:
         $ref: '#/components/schemas/ColumnTag'
       minItems: 1
       maxItems: 16
+    CreateAccountCustomizationRequest:
+      type: object
+      required:
+        - AccountCustomization
+      title: CreateAccountCustomizationRequest
+      properties:
+        AccountCustomization:
+          $ref: '#/components/schemas/AccountCustomization'
+          description: 'The customizations you''re adding to the QuickSight subscription for the AWS account. For example, you could add a default theme by setting <code>AccountCustomization</code> to the midnight theme (<code>DefaultTheme="arn:aws:quicksight::aws:theme/MIDNIGHT"</code>) or to a custom theme (<code>DefaultTheme="arn:aws:quicksight:us-west-2:111122223333:theme/bdb844d0-0fe9-4d9d-b520-0fe602d93639"</code>).'
     CreateColumnsOperation:
       type: object
       required:
@@ -9626,6 +10795,9 @@ components:
         - Arn
         - PermissionPolicy
       properties:
+        Namespace:
+          $ref: '#/components/schemas/Namespace'
+          description: The namespace associated with the row-level permissions dataset.
         Arn:
           $ref: '#/components/schemas/Arn'
           description: The Amazon Resource Name (ARN) of the permission dataset.
@@ -9824,10 +10996,6 @@ components:
       type: string
       pattern: '[\u0020-\u00FF]+'
       minLength: 1
-    Namespace:
-      type: string
-      pattern: '^[a-zA-Z0-9._-]*$'
-      maxLength: 64
     CreateGroupMembershipRequest:
       type: object
       title: CreateGroupMembershipRequest
@@ -9911,6 +11079,34 @@ components:
         - FAILED
         - COMPLETED
         - CANCELLED
+    IdentityStore:
+      type: string
+      enum:
+        - QUICKSIGHT
+    CreateNamespaceRequest:
+      type: object
+      required:
+        - Namespace
+        - IdentityStore
+      title: CreateNamespaceRequest
+      properties:
+        Namespace:
+          $ref: '#/components/schemas/Namespace'
+          description: The name that you want to use to describe the new namespace.
+        IdentityStore:
+          $ref: '#/components/schemas/IdentityStore'
+          description: 'Specifies the type of your user identity directory. Currently, this supports users with an identity type of <code>QUICKSIGHT</code>.'
+        Tags:
+          $ref: '#/components/schemas/TagList'
+          description: The tags that you want to associate with the namespace that you're creating.
+    NamespaceStatus:
+      type: string
+      enum:
+        - CREATED
+        - CREATING
+        - DELETING
+        - RETRYABLE_FAILURE
+        - NON_RETRYABLE_FAILURE
     VersionNumber:
       type: integer
       minimum: 1
@@ -10469,6 +11665,10 @@ components:
           $ref: '#/components/schemas/DoubleList'
           description: Values.
       description: Decimal parameter.
+    DeleteAccountCustomizationRequest:
+      type: object
+      title: DeleteAccountCustomizationRequest
+      properties: {}
     DeleteDashboardRequest:
       type: object
       title: DeleteDashboardRequest
@@ -10492,6 +11692,10 @@ components:
     DeleteIAMPolicyAssignmentRequest:
       type: object
       title: DeleteIAMPolicyAssignmentRequest
+      properties: {}
+    DeleteNamespaceRequest:
+      type: object
+      title: DeleteNamespaceRequest
       properties: {}
     DeleteTemplateAliasRequest:
       type: object
@@ -10526,6 +11730,14 @@ components:
       type: string
       minLength: 1
       maxLength: 1
+    DescribeAccountCustomizationRequest:
+      type: object
+      title: DescribeAccountCustomizationRequest
+      properties: {}
+    DescribeAccountSettingsRequest:
+      type: object
+      title: DescribeAccountSettingsRequest
+      properties: {}
     DescribeDashboardPermissionsRequest:
       type: object
       title: DescribeDashboardPermissionsRequest
@@ -10623,6 +11835,32 @@ components:
           $ref: '#/components/schemas/IngestionRequestType'
           description: Type of this ingestion.
       description: Information about the SPICE ingestion for a dataset.
+    DescribeNamespaceRequest:
+      type: object
+      title: DescribeNamespaceRequest
+      properties: {}
+    NamespaceInfoV2:
+      type: object
+      properties:
+        Name:
+          $ref: '#/components/schemas/Namespace'
+          description: The name of the error.
+        Arn:
+          $ref: '#/components/schemas/Arn'
+          description: The namespace ARN.
+        CapacityRegion:
+          $ref: '#/components/schemas/String'
+          description: The namespace AWS Region.
+        CreationStatus:
+          $ref: '#/components/schemas/NamespaceStatus'
+          description: The creation status of a namespace that is not yet completely created.
+        IdentityStore:
+          $ref: '#/components/schemas/IdentityStore'
+          description: The identity store used for the namespace.
+        NamespaceError:
+          $ref: '#/components/schemas/NamespaceError'
+          description: An error that occured when the namespace was created.
+      description: The error type.
     DescribeTemplateAliasRequest:
       type: object
       title: DescribeTemplateAliasRequest
@@ -10721,6 +11959,9 @@ components:
         PrincipalId:
           $ref: '#/components/schemas/String'
           description: The principal ID of the user.
+        CustomPermissionsName:
+          $ref: '#/components/schemas/RoleName'
+          description: The custom permissions profile associated with this user.
       description: 'A registered user of Amazon QuickSight. Currently, an Amazon QuickSight subscription can''t contain more than 20 million users.'
     Double:
       type: number
@@ -10728,6 +11969,10 @@ components:
     EmbeddingUrl:
       type: string
       format: password
+    EntryPoint:
+      type: string
+      minLength: 1
+      maxLength: 1000
     IngestionErrorType:
       type: string
       enum:
@@ -10815,6 +12060,10 @@ components:
     GetDashboardEmbedUrlRequest:
       type: object
       title: GetDashboardEmbedUrlRequest
+      properties: {}
+    GetSessionEmbedUrlRequest:
+      type: object
+      title: GetSessionEmbedUrlRequest
       properties: {}
     GroupList:
       type: array
@@ -11025,6 +12274,14 @@ components:
       type: object
       title: ListIngestionsRequest
       properties: {}
+    ListNamespacesRequest:
+      type: object
+      title: ListNamespacesRequest
+      properties: {}
+    Namespaces:
+      type: array
+      items:
+        $ref: '#/components/schemas/NamespaceInfoV2'
     ListTagsForResourceRequest:
       type: object
       title: ListTagsForResourceRequest
@@ -11154,6 +12411,21 @@ components:
           $ref: '#/components/schemas/boolean'
           description: This Boolean value controls whether to display sheet margins.
       description: The display options for margins around the outside edge of sheets.
+    NamespaceErrorType:
+      type: string
+      enum:
+        - PERMISSION_DENIED
+        - INTERNAL_SERVICE_ERROR
+    NamespaceError:
+      type: object
+      properties:
+        Type:
+          $ref: '#/components/schemas/NamespaceErrorType'
+          description: The error type.
+        Message:
+          $ref: '#/components/schemas/String'
+          description: The message for the error.
+      description: Errors that occur during namespace creation.
     OptionalPort:
       type: integer
       minimum: 0
@@ -11243,6 +12515,11 @@ components:
       pattern: '[\w+=.@-]*'
       minLength: 2
       maxLength: 64
+    RoleName:
+      type: string
+      pattern: '^[a-zA-Z0-9+=,.@_-]+$'
+      minLength: 1
+      maxLength: 64
     RegisterUserRequest:
       type: object
       required:
@@ -11269,6 +12546,9 @@ components:
         UserName:
           $ref: '#/components/schemas/UserName'
           description: The Amazon QuickSight user name that you want to create for the user you are registering.
+        CustomPermissionsName:
+          $ref: '#/components/schemas/RoleName'
+          description: '<p>(Enterprise edition only) The name of the custom permissions profile that you want to assign to this user. Currently, custom permissions profile names are assigned to permissions profiles in the QuickSight console. You use this API to assign the named set of permissions to a QuickSight user. </p> <p>Customizing permissions in the QuickSight UI allows you to control a user''s access to the following operations:</p> <ul> <li> <p/> </li> <li> <p/> </li> <li> <p/> </li> <li> <p/> </li> </ul> <p>QuickSight custom permissions are applied through IAM policies. Therefore, they override the permissions typically granted by assigning QuickSight users to one of the default security cohorts (admin, author, reader) in QuickSight.</p> <p>This feature is available only to QuickSight Enterprise edition subscriptions that use SAML 2.0-Based Federation for Single Sign-On (SSO).</p>'
     RelationalTableSchema:
       type: string
       maxLength: 64
@@ -11598,6 +12878,27 @@ components:
       type: object
       title: UntagResourceRequest
       properties: {}
+    UpdateAccountCustomizationRequest:
+      type: object
+      required:
+        - AccountCustomization
+      title: UpdateAccountCustomizationRequest
+      properties:
+        AccountCustomization:
+          $ref: '#/components/schemas/AccountCustomization'
+          description: The customizations you want to update in QuickSight.
+    UpdateAccountSettingsRequest:
+      type: object
+      required:
+        - DefaultNamespace
+      title: UpdateAccountSettingsRequest
+      properties:
+        DefaultNamespace:
+          $ref: '#/components/schemas/Namespace'
+          description: 'The default namespace for this AWS Account. Currently, the default is <code>default</code>. IAM users who register for the first time with QuickSight provide an email that becomes associated with the default namespace.'
+        NotificationEmail:
+          $ref: '#/components/schemas/String'
+          description: Email address used to send notifications regarding administration of QuickSight.
     UpdateResourcePermissionList:
       type: array
       items:
@@ -11813,5 +13114,11 @@ components:
         Role:
           $ref: '#/components/schemas/UserRole'
           description: '<p>The Amazon QuickSight role of the user. The user role can be one of the following:</p> <ul> <li> <p> <code>READER</code>: A user who has read-only access to dashboards.</p> </li> <li> <p> <code>AUTHOR</code>: A user who can create data sources, datasets, analyses, and dashboards.</p> </li> <li> <p> <code>ADMIN</code>: A user who is an author, who can also manage Amazon QuickSight settings.</p> </li> </ul>'
+        CustomPermissionsName:
+          $ref: '#/components/schemas/RoleName'
+          description: 'The name of the custom permissions profile that you want to assign to this user. Currently, custom permissions profile names are assigned to permissions profiles in the QuickSight console. You use this API to assign the named set of permissions to a QuickSight user. '
+        UnapplyCustomPermissions:
+          $ref: '#/components/schemas/Boolean'
+          description: A flag that you use to indicate that you want to remove all custom permissions from this user. Using this parameter resets the user to the state it was in before a custom permissions profile was applied. This parameter defaults to NULL and it doesn't accept any other value.
 security:
   - hmac: []
