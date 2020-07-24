@@ -480,7 +480,7 @@ paths:
   /#X-Amz-Target=StarlingDoveService.DeleteOrganizationConfigRule:
     post:
       operationId: DeleteOrganizationConfigRule
-      description: <p>Deletes the specified organization config rule and all of its evaluation results from all member accounts in that organization. Only a master account can delete an organization config rule.</p> <p>AWS Config sets the state of a rule to DELETE_IN_PROGRESS until the deletion is complete. You cannot update a rule while it is in this state.</p>
+      description: '<p>Deletes the specified organization config rule and all of its evaluation results from all member accounts in that organization. </p> <p>Only a master account and a delegated administrator account can delete an organization config rule. When calling this API with a delegated administrator, you must ensure AWS Organizations <code>ListDelegatedAdministrator</code> permissions are added.</p> <p>AWS Config sets the state of a rule to DELETE_IN_PROGRESS until the deletion is complete. You cannot update a rule while it is in this state.</p>'
       responses:
         '200':
           description: Success
@@ -527,7 +527,7 @@ paths:
   /#X-Amz-Target=StarlingDoveService.DeleteOrganizationConformancePack:
     post:
       operationId: DeleteOrganizationConformancePack
-      description: <p>Deletes the specified organization conformance pack and all of the config rules and remediation actions from all member accounts in that organization. Only a master account can delete an organization conformance pack.</p> <p>AWS Config sets the state of a conformance pack to DELETE_IN_PROGRESS until the deletion is complete. You cannot update a conformance pack while it is in this state. </p>
+      description: '<p>Deletes the specified organization conformance pack and all of the config rules and remediation actions from all member accounts in that organization. </p> <p> Only a master account or a delegated administrator account can delete an organization conformance pack. When calling this API with a delegated administrator, you must ensure AWS Organizations <code>ListDelegatedAdministrator</code> permissions are added.</p> <p>AWS Config sets the state of a conformance pack to DELETE_IN_PROGRESS until the deletion is complete. You cannot update a conformance pack while it is in this state. </p>'
       responses:
         '200':
           description: Success
@@ -660,7 +660,7 @@ paths:
   /#X-Amz-Target=StarlingDoveService.DeleteRemediationExceptions:
     post:
       operationId: DeleteRemediationExceptions
-      description: Deletes one or more remediation exceptions mentioned in the resource keys.
+      description: <p>Deletes one or more remediation exceptions mentioned in the resource keys.</p> <note> <p>AWS Config generates a remediation exception when a problem occurs executing a remediation action to a specific resource. Remediation exceptions blocks auto-remediation until the exception is cleared.</p> </note>
       responses:
         '200':
           description: Success
@@ -1407,6 +1407,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/InvalidNextTokenException'
+        '482':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
       requestBody:
         required: true
         content:
@@ -1458,6 +1464,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/InvalidNextTokenException'
+        '483':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
       requestBody:
         required: true
         content:
@@ -1561,7 +1573,7 @@ paths:
   /#X-Amz-Target=StarlingDoveService.DescribeOrganizationConfigRuleStatuses:
     post:
       operationId: DescribeOrganizationConfigRuleStatuses
-      description: '<p>Provides organization config rule deployment status for an organization.</p> <note> <p>The status is not considered successful until organization config rule is successfully deployed in all the member accounts with an exception of excluded accounts.</p> <p>When you specify the limit and the next token, you receive a paginated response. Limit and next token are not applicable if you specify organization config rule names. It is only applicable, when you request all the organization config rules.</p> <p>Only a master account can call this API.</p> </note>'
+      description: '<p>Provides organization config rule deployment status for an organization.</p> <p>Only a master account and a delegated administrator account can call this API. When calling this API with a delegated administrator, you must ensure AWS Organizations <code>ListDelegatedAdministrator</code> permissions are added.</p> <note> <p>The status is not considered successful until organization config rule is successfully deployed in all the member accounts with an exception of excluded accounts.</p> <p>When you specify the limit and the next token, you receive a paginated response. Limit and next token are not applicable if you specify organization config rule names. It is only applicable, when you request all the organization config rules.</p> </note>'
       responses:
         '200':
           description: Success
@@ -1618,7 +1630,7 @@ paths:
   /#X-Amz-Target=StarlingDoveService.DescribeOrganizationConfigRules:
     post:
       operationId: DescribeOrganizationConfigRules
-      description: '<p>Returns a list of organization config rules.</p> <note> <p>When you specify the limit and the next token, you receive a paginated response. Limit and next token are not applicable if you specify organization config rule names. It is only applicable, when you request all the organization config rules.</p> <p>Only a master account can call this API.</p> </note>'
+      description: '<p>Returns a list of organization config rules. </p> <p>Only a master account and a delegated administrator account can call this API. When calling this API with a delegated administrator, you must ensure AWS Organizations <code>ListDelegatedAdministrator</code> permissions are added.&#x2028;</p> <note> <p>When you specify the limit and the next token, you receive a paginated response. Limit and next token are not applicable if you specify organization config rule names. It is only applicable, when you request all the organization config rules.</p> </note>'
       responses:
         '200':
           description: Success
@@ -1675,7 +1687,7 @@ paths:
   /#X-Amz-Target=StarlingDoveService.DescribeOrganizationConformancePackStatuses:
     post:
       operationId: DescribeOrganizationConformancePackStatuses
-      description: '<p>Provides organization conformance pack deployment status for an organization.</p> <note> <p>The status is not considered successful until organization conformance pack is successfully deployed in all the member accounts with an exception of excluded accounts.</p> <p>When you specify the limit and the next token, you receive a paginated response. Limit and next token are not applicable if you specify organization conformance pack names. They are only applicable, when you request all the organization conformance packs.</p> <p>Only a master account can call this API.</p> </note>'
+      description: '<p>Provides organization conformance pack deployment status for an organization. </p> <p> Only a master account and a delegated administrator account can call this API. When calling this API with a delegated administrator, you must ensure AWS Organizations <code>ListDelegatedAdministrator</code> permissions are added.</p> <note> <p>The status is not considered successful until organization conformance pack is successfully deployed in all the member accounts with an exception of excluded accounts.</p> <p>When you specify the limit and the next token, you receive a paginated response. Limit and next token are not applicable if you specify organization conformance pack names. They are only applicable, when you request all the organization conformance packs.</p> </note>'
       responses:
         '200':
           description: Success
@@ -1732,7 +1744,7 @@ paths:
   /#X-Amz-Target=StarlingDoveService.DescribeOrganizationConformancePacks:
     post:
       operationId: DescribeOrganizationConformancePacks
-      description: '<p>Returns a list of organization conformance packs.</p> <note> <p>When you specify the limit and the next token, you receive a paginated response. </p> <p>Limit and next token are not applicable if you specify organization conformance packs names. They are only applicable, when you request all the organization conformance packs. </p> <p>Only a master account can call this API.</p> </note>'
+      description: '<p>Returns a list of organization conformance packs. </p> <p>Only a master account and a delegated administrator account can call this API. When calling this API with a delegated administrator, you must ensure AWS Organizations <code>ListDelegatedAdministrator</code> permissions are added.</p> <note> <p>When you specify the limit and the next token, you receive a paginated response. </p> <p>Limit and next token are not applicable if you specify organization conformance packs names. They are only applicable, when you request all the organization conformance packs. </p> </note>'
       responses:
         '200':
           description: Success
@@ -1873,7 +1885,7 @@ paths:
   /#X-Amz-Target=StarlingDoveService.DescribeRemediationExceptions:
     post:
       operationId: DescribeRemediationExceptions
-      description: '<p>Returns the details of one or more remediation exceptions. A detailed view of a remediation exception for a set of resources that includes an explanation of an exception and the time when the exception will be deleted. When you specify the limit and the next token, you receive a paginated response. </p> <note> <p>When you specify the limit and the next token, you receive a paginated response. </p> <p>Limit and next token are not applicable if you request resources in batch. It is only applicable, when you request all resources.</p> </note>'
+      description: '<p>Returns the details of one or more remediation exceptions. A detailed view of a remediation exception for a set of resources that includes an explanation of an exception and the time when the exception will be deleted. When you specify the limit and the next token, you receive a paginated response. </p> <note> <p>AWS Config generates a remediation exception when a problem occurs executing a remediation action to a specific resource. Remediation exceptions blocks auto-remediation until the exception is cleared.</p> <p>When you specify the limit and the next token, you receive a paginated response. </p> <p>Limit and next token are not applicable if you request resources in batch. It is only applicable, when you request all resources.</p> </note>'
       responses:
         '200':
           description: Success
@@ -2587,7 +2599,7 @@ paths:
   /#X-Amz-Target=StarlingDoveService.GetOrganizationConfigRuleDetailedStatus:
     post:
       operationId: GetOrganizationConfigRuleDetailedStatus
-      description: <p>Returns detailed status for each member account within an organization for a given organization config rule.</p> <note> <p>Only a master account can call this API.</p> </note>
+      description: '<p>Returns detailed status for each member account within an organization for a given organization config rule.</p> <p>Only a master account and a delegated administrator account can call this API. When calling this API with a delegated administrator, you must ensure AWS Organizations <code>ListDelegatedAdministrator</code> permissions are added.</p>'
       responses:
         '200':
           description: Success
@@ -2644,7 +2656,7 @@ paths:
   /#X-Amz-Target=StarlingDoveService.GetOrganizationConformancePackDetailedStatus:
     post:
       operationId: GetOrganizationConformancePackDetailedStatus
-      description: <p>Returns detailed status for each member account within an organization for a given organization conformance pack.</p> <p>Only a master account can call this API.</p>
+      description: '<p>Returns detailed status for each member account within an organization for a given organization conformance pack.</p> <p>Only a master account and a delegated administrator account can call this API. When calling this API with a delegated administrator, you must ensure AWS Organizations <code>ListDelegatedAdministrator</code> permissions are added.</p>'
       responses:
         '200':
           description: Success
@@ -3173,7 +3185,7 @@ paths:
   /#X-Amz-Target=StarlingDoveService.PutConformancePack:
     post:
       operationId: PutConformancePack
-      description: '<p>Creates or updates a conformance pack. A conformance pack is a collection of AWS Config rules that can be easily deployed in an account and a region and across AWS Organization.</p> <p>This API creates a service linked role <code>AWSServiceRoleForConfigConforms</code> in your account. The service linked role is created only when the role does not exist in your account. AWS Config verifies the existence of role with <code>GetRole</code> action.</p> <note> <p>You must specify either the <code>TemplateS3Uri</code> or the <code>TemplateBody</code> parameter, but not both. If you provide both AWS Config uses the <code>TemplateS3Uri</code> parameter and ignores the <code>TemplateBody</code> parameter.</p> </note>'
+      description: '<p>Creates or updates a conformance pack. A conformance pack is a collection of AWS Config rules that can be easily deployed in an account and a region and across AWS Organization.</p> <p>This API creates a service linked role <code>AWSServiceRoleForConfigConforms</code> in your account. The service linked role is created only when the role does not exist in your account. </p> <note> <p>You must specify either the <code>TemplateS3Uri</code> or the <code>TemplateBody</code> parameter, but not both. If you provide both AWS Config uses the <code>TemplateS3Uri</code> parameter and ignores the <code>TemplateBody</code> parameter.</p> </note>'
       responses:
         '200':
           description: Success
@@ -3358,7 +3370,7 @@ paths:
   /#X-Amz-Target=StarlingDoveService.PutOrganizationConfigRule:
     post:
       operationId: PutOrganizationConfigRule
-      description: '<p>Adds or updates organization config rule for your entire organization evaluating whether your AWS resources comply with your desired configurations. Only a master account can create or update an organization config rule.</p> <p>This API enables organization service access through the <code>EnableAWSServiceAccess</code> action and creates a service linked role <code>AWSServiceRoleForConfigMultiAccountSetup</code> in the master account of your organization. The service linked role is created only when the role does not exist in the master account. AWS Config verifies the existence of role with <code>GetRole</code> action.</p> <p>You can use this action to create both custom AWS Config rules and AWS managed Config rules. If you are adding a new custom AWS Config rule, you must first create AWS Lambda function in the master account that the rule invokes to evaluate your resources. When you use the <code>PutOrganizationConfigRule</code> action to add the rule to AWS Config, you must specify the Amazon Resource Name (ARN) that AWS Lambda assigns to the function. If you are adding an AWS managed Config rule, specify the rule''s identifier for the <code>RuleIdentifier</code> key.</p> <p>The maximum number of organization config rules that AWS Config supports is 150.</p> <note> <p>Specify either <code>OrganizationCustomRuleMetadata</code> or <code>OrganizationManagedRuleMetadata</code>.</p> </note>'
+      description: '<p>Adds or updates organization config rule for your entire organization evaluating whether your AWS resources comply with your desired configurations.</p> <p> Only a master account and a delegated administrator can create or update an organization config rule. When calling this API with a delegated administrator, you must ensure AWS Organizations <code>ListDelegatedAdministrator</code> permissions are added. </p> <p>This API enables organization service access through the <code>EnableAWSServiceAccess</code> action and creates a service linked role <code>AWSServiceRoleForConfigMultiAccountSetup</code> in the master or delegated administrator account of your organization. The service linked role is created only when the role does not exist in the caller account. AWS Config verifies the existence of role with <code>GetRole</code> action.</p> <p>To use this API with delegated administrator, register a delegated administrator by calling AWS Organization <code>register-delegated-administrator</code> for <code>config-multiaccountsetup.amazonaws.com</code>. </p> <p>You can use this action to create both custom AWS Config rules and AWS managed Config rules. If you are adding a new custom AWS Config rule, you must first create AWS Lambda function in the master account or a delegated administrator that the rule invokes to evaluate your resources. When you use the <code>PutOrganizationConfigRule</code> action to add the rule to AWS Config, you must specify the Amazon Resource Name (ARN) that AWS Lambda assigns to the function. If you are adding an AWS managed Config rule, specify the rule''s identifier for the <code>RuleIdentifier</code> key.</p> <p>The maximum number of organization config rules that AWS Config supports is 150 and 3 delegated administrator per organization. </p> <note> <p>Prerequisite: Ensure you call <code>EnableAllFeatures</code> API to enable all features in an organization.</p> <p>Specify either <code>OrganizationCustomRuleMetadata</code> or <code>OrganizationManagedRuleMetadata</code>.</p> </note>'
       responses:
         '200':
           description: Success
@@ -3439,7 +3451,7 @@ paths:
   /#X-Amz-Target=StarlingDoveService.PutOrganizationConformancePack:
     post:
       operationId: PutOrganizationConformancePack
-      description: '<p>Deploys conformance packs across member accounts in an AWS Organization.</p> <p>This API enables organization service access for <code>config-multiaccountsetup.amazonaws.com</code> through the <code>EnableAWSServiceAccess</code> action and creates a service linked role <code>AWSServiceRoleForConfigMultiAccountSetup</code> in the master account of your organization. The service linked role is created only when the role does not exist in the master account. AWS Config verifies the existence of role with GetRole action.</p> <note> <p>You must specify either the <code>TemplateS3Uri</code> or the <code>TemplateBody</code> parameter, but not both. If you provide both AWS Config uses the <code>TemplateS3Uri</code> parameter and ignores the <code>TemplateBody</code> parameter.</p> <p>AWS Config sets the state of a conformance pack to CREATE_IN_PROGRESS and UPDATE_IN_PROGRESS until the confomance pack is created or updated. You cannot update a conformance pack while it is in this state.</p> <p>You can create 6 conformance packs with 25 AWS Config rules in each pack.</p> </note>'
+      description: '<p>Deploys conformance packs across member accounts in an AWS Organization.</p> <p>Only a master account and a delegated administrator can call this API. When calling this API with a delegated administrator, you must ensure AWS Organizations <code>ListDelegatedAdministrator</code> permissions are added.</p> <p>This API enables organization service access for <code>config-multiaccountsetup.amazonaws.com</code> through the <code>EnableAWSServiceAccess</code> action and creates a service linked role <code>AWSServiceRoleForConfigMultiAccountSetup</code> in the master or delegated administrator account of your organization. The service linked role is created only when the role does not exist in the caller account. To use this API with delegated administrator, register a delegated administrator by calling AWS Organization <code>register-delegate-admin</code> for <code>config-multiaccountsetup.amazonaws.com</code>.</p> <note> <p>Prerequisite: Ensure you call <code>EnableAllFeatures</code> API to enable all features in an organization.</p> <p>You must specify either the <code>TemplateS3Uri</code> or the <code>TemplateBody</code> parameter, but not both. If you provide both AWS Config uses the <code>TemplateS3Uri</code> parameter and ignores the <code>TemplateBody</code> parameter.</p> <p>AWS Config sets the state of a conformance pack to CREATE_IN_PROGRESS and UPDATE_IN_PROGRESS until the conformance pack is created or updated. You cannot update a conformance pack while it is in this state.</p> <p>You can create 6 conformance packs with 25 AWS Config rules in each pack and 3 delegated administrator per organization. </p> </note>'
       responses:
         '200':
           description: Success
@@ -3520,7 +3532,7 @@ paths:
   /#X-Amz-Target=StarlingDoveService.PutRemediationConfigurations:
     post:
       operationId: PutRemediationConfigurations
-      description: 'Adds or updates the remediation configuration with a specific AWS Config rule with the selected target or action. The API creates the <code>RemediationConfiguration</code> object for the AWS Config rule. The AWS Config rule must already exist for you to add a remediation configuration. The target (SSM document) must exist and have permissions to use the target. '
+      description: '<p>Adds or updates the remediation configuration with a specific AWS Config rule with the selected target or action. The API creates the <code>RemediationConfiguration</code> object for the AWS Config rule. The AWS Config rule must already exist for you to add a remediation configuration. The target (SSM document) must exist and have permissions to use the target. </p> <note> <p>If you make backward incompatible changes to the SSM document, you must call this again to ensure the remediations can run.</p> </note>'
       responses:
         '200':
           description: Success
@@ -3565,7 +3577,7 @@ paths:
   /#X-Amz-Target=StarlingDoveService.PutRemediationExceptions:
     post:
       operationId: PutRemediationExceptions
-      description: 'A remediation exception is when a specific resource is no longer considered for auto-remediation. This API adds a new exception or updates an exisiting exception for a specific resource with a specific AWS Config rule. '
+      description: <p>A remediation exception is when a specific resource is no longer considered for auto-remediation. This API adds a new exception or updates an exisiting exception for a specific resource with a specific AWS Config rule. </p> <note> <p>AWS Config generates a remediation exception when a problem occurs executing a remediation action to a specific resource. Remediation exceptions blocks auto-remediation until the exception is cleared.</p> </note>
       responses:
         '200':
           description: Success
@@ -3579,6 +3591,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/InvalidParameterValueException'
+        '481':
+          description: InsufficientPermissionsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InsufficientPermissionsException'
       requestBody:
         required: true
         content:
@@ -3604,7 +3622,7 @@ paths:
   /#X-Amz-Target=StarlingDoveService.PutResourceConfig:
     post:
       operationId: PutResourceConfig
-      description: '<p>Records the configuration state for the resource provided in the request. The configuration state of a resource is represented in AWS Config as Configuration Items. Once this API records the configuration item, you can retrieve the list of configuration items for the custom resource type using existing AWS Config APIs. </p> <note> <p>The custom resource type must be registered with AWS CloudFormation. This API accepts the configuration item registered with AWS CloudFormation.</p> <p>When you call this API, AWS Config only stores configuration state of the resource provided in the request. This API does not change or remediate the configuration of the resource. </p> </note>'
+      description: '<p>Records the configuration state for the resource provided in the request. The configuration state of a resource is represented in AWS Config as Configuration Items. Once this API records the configuration item, you can retrieve the list of configuration items for the custom resource type using existing AWS Config APIs. </p> <note> <p>The custom resource type must be registered with AWS CloudFormation. This API accepts the configuration item registered with AWS CloudFormation.</p> <p>When you call this API, AWS Config only stores configuration state of the resource provided in the request. This API does not change or remediate the configuration of the resource. </p> <p>Write-only schema properites are not recorded as part of the published configuration item.</p> </note>'
       responses:
         '200':
           description: Success
@@ -5711,6 +5729,7 @@ components:
           description: 'The maximum number of query results returned on each page. '
         MaxResults:
           $ref: '#/components/schemas/Limit'
+          description: The maximum number of query results returned on each page. AWS Config also allows the Limit request parameter.
         NextToken:
           $ref: '#/components/schemas/NextToken'
           description: 'The nextToken string returned in a previous request that you use to request the next page of results in a paginated response. '
@@ -6078,6 +6097,9 @@ components:
         - 'AWS::SQS::Queue'
         - 'AWS::KMS::Key'
         - 'AWS::QLDB::Ledger'
+        - 'AWS::SecretsManager::Secret'
+        - 'AWS::SNS::Topic'
+        - 'AWS::SSM::FileData'
     ResourceName:
       type: string
     AggregateResourceIdentifier:
@@ -6229,7 +6251,7 @@ components:
           description: The time when the configuration recording was initiated.
         configurationItemStatus:
           $ref: '#/components/schemas/ConfigurationItemStatus'
-          description: The configuration item status.
+          description: '<p>The configuration item status. The valid values are:</p> <ul> <li> <p>OK – The resource configuration has been updated</p> </li> <li> <p>ResourceDiscovered – The resource was newly discovered</p> </li> <li> <p>ResourceNotRecorded – The resource was discovered but its configuration was not recorded since the recorder excludes the recording of resources of this type</p> </li> <li> <p>ResourceDeleted – The resource was deleted</p> </li> <li> <p>ResourceDeletedNotRecorded – The resource was deleted but its configuration was not recorded since the recorder excludes the recording of resources of this type</p> </li> </ul> <note> <p>The CIs do not incur any cost.</p> </note>'
         configurationStateId:
           $ref: '#/components/schemas/ConfigurationStateId'
           description: An identifier that indicates the ordering of the configuration items of a resource.
@@ -6474,7 +6496,7 @@ components:
           description: The description that you provide for the AWS Config rule.
         Scope:
           $ref: '#/components/schemas/Scope'
-          description: 'Defines which resources can trigger an evaluation for the rule. The scope can include one or more resource types, a combination of one resource type and one resource ID, or a combination of a tag key and value. Specify a scope to constrain the resources that can trigger an evaluation for the rule. If you do not specify a scope, evaluations are triggered when any resource in the recording group changes.'
+          description: '<p>Defines which resources can trigger an evaluation for the rule. The scope can include one or more resource types, a combination of one resource type and one resource ID, or a combination of a tag key and value. Specify a scope to constrain the resources that can trigger an evaluation for the rule. If you do not specify a scope, evaluations are triggered when any resource in the recording group changes.</p> <note> <p>The scope can be empty. </p> </note>'
         Source:
           $ref: '#/components/schemas/Source'
           description: 'Provides the rule owner (AWS or customer), the rule identifier, and the notifications that cause the function to evaluate your AWS resources.'
@@ -6551,6 +6573,7 @@ components:
           description: The time that you first activated the AWS Config rule.
         LastDeactivatedTime:
           $ref: '#/components/schemas/Date'
+          description: The time that you last turned off the AWS Config rule.
         LastErrorCode:
           $ref: '#/components/schemas/String'
           description: The error code that AWS Config returned when the rule last failed.
@@ -6637,6 +6660,9 @@ components:
         LastUpdatedTime:
           $ref: '#/components/schemas/Date'
           description: The time of the last update.
+        CreatedBy:
+          $ref: '#/components/schemas/StringWithCharLimit256'
+          description: AWS service that created the configuration aggregator.
       description: 'The details about the configuration aggregator, including information about source accounts, regions, and metadata of the aggregator. '
     ConfigurationAggregatorList:
       type: array
@@ -6676,7 +6702,7 @@ components:
           description: The time when the configuration recording was initiated.
         configurationItemStatus:
           $ref: '#/components/schemas/ConfigurationItemStatus'
-          description: The configuration item status.
+          description: '<p>The configuration item status. The valid values are:</p> <ul> <li> <p>OK – The resource configuration has been updated</p> </li> <li> <p>ResourceDiscovered – The resource was newly discovered</p> </li> <li> <p>ResourceNotRecorded – The resource was discovered but its configuration was not recorded since the recorder excludes the recording of resources of this type</p> </li> <li> <p>ResourceDeleted – The resource was deleted</p> </li> <li> <p>ResourceDeletedNotRecorded – The resource was deleted but its configuration was not recorded since the recorder excludes the recording of resources of this type</p> </li> </ul> <note> <p>The CIs do not incur any cost.</p> </note>'
         configurationStateId:
           $ref: '#/components/schemas/ConfigurationStateId'
           description: An identifier that indicates the ordering of the configuration items of a resource.
@@ -6971,7 +6997,7 @@ components:
         ParameterValue:
           $ref: '#/components/schemas/ParameterValue'
           description: 'Another part of the key-value pair. '
-      description: 'Input parameters in the form of key-value pairs for the conformance pack, both of which you define. Keys can have a maximum character length of 128 characters, and values can have a maximum length of 256 characters.'
+      description: 'Input parameters in the form of key-value pairs for the conformance pack, both of which you define. Keys can have a maximum character length of 255 characters, and values can have a maximum length of 4096 characters.'
     ConformancePackNamesList:
       type: array
       items:
@@ -7928,7 +7954,7 @@ components:
           description: Target ID is the name of the public document.
         TargetVersion:
           $ref: '#/components/schemas/String'
-          description: 'Version of the target. For example, version of the SSM document.'
+          description: '<p>Version of the target. For example, version of the SSM document.</p> <note> <p>If you make backward incompatible changes to the SSM document, you must call PutRemediationConfiguration API again to ensure the remediations can run.</p> </note>'
         Parameters:
           $ref: '#/components/schemas/RemediationParameters'
           description: An object of the RemediationParameterValue.
@@ -7943,10 +7969,10 @@ components:
           description: An ExecutionControls object.
         MaximumAutomaticAttempts:
           $ref: '#/components/schemas/AutoRemediationAttempts'
-          description: '<p>The maximum number of failed attempts for auto-remediation. If you do not select a number, the default is 5.</p> <p>For example, if you specify MaximumAutomaticAttempts as 5 with RetryAttemptsSeconds as 50 seconds, AWS Config throws an exception after the 5th failed attempt within 50 seconds.</p>'
+          description: '<p>The maximum number of failed attempts for auto-remediation. If you do not select a number, the default is 5.</p> <p>For example, if you specify MaximumAutomaticAttempts as 5 with RetryAttemptsSeconds as 50 seconds, AWS Config will put a RemediationException on your behalf for the failing resource after the 5th failed attempt within 50 seconds.</p>'
         RetryAttemptSeconds:
           $ref: '#/components/schemas/AutoRemediationAttemptSeconds'
-          description: '<p>Maximum time in seconds that AWS Config runs auto-remediation. If you do not select a number, the default is 60 seconds. </p> <p>For example, if you specify RetryAttemptsSeconds as 50 seconds and MaximumAutomaticAttempts as 5, AWS Config will run auto-remediations 5 times within 50 seconds before throwing an exception. </p>'
+          description: '<p>Maximum time in seconds that AWS Config runs auto-remediation. If you do not select a number, the default is 60 seconds. </p> <p>For example, if you specify RetryAttemptsSeconds as 50 seconds and MaximumAutomaticAttempts as 5, AWS Config will run auto-remediations 5 times within 50 seconds before throwing an exception.</p>'
         Arn:
           $ref: '#/components/schemas/StringWithCharLimit1024'
           description: Amazon Resource Name (ARN) of remediation configuration.

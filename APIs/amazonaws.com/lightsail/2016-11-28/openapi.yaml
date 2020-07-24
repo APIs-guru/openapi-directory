@@ -3,7 +3,7 @@ info:
   version: '2016-11-28'
   x-release: v4
   title: Amazon Lightsail
-  description: '<p>Amazon Lightsail is the easiest way to get started with AWS for developers who just need virtual private servers. Lightsail includes everything you need to launch your project quickly - a virtual machine, a managed database, SSD-based storage, data transfer, DNS management, and a static IP - for a low, predictable price. You manage those Lightsail servers through the Lightsail console or by using the API or command-line interface (CLI).</p> <p>For more information about Lightsail concepts and tasks, see the <a href="https://lightsail.aws.amazon.com/ls/docs/all">Lightsail Dev Guide</a>.</p> <p>To use the Lightsail API or the CLI, you will need to use AWS Identity and Access Management (IAM) to generate access keys. For details about how to set this up, see the <a href="http://lightsail.aws.amazon.com/ls/docs/how-to/article/lightsail-how-to-set-up-access-keys-to-use-sdk-api-cli">Lightsail Dev Guide</a>.</p>'
+  description: '<p>Amazon Lightsail is the easiest way to get started with Amazon Web Services (AWS) for developers who need to build websites or web applications. It includes everything you need to launch your project quickly – instances (virtual private servers), managed databases, SSD-based block storage, static IP addresses, load balancers, content delivery network (CDN) distributions, DNS management of registered domains, and snapshots (backups) – for a low, predictable monthly price.</p> <p>You can manage your Lightsail resources using the Lightsail console, Lightsail API, AWS Command Line Interface (AWS CLI), or SDKs. For more information about Lightsail concepts and tasks, see the <a href="http://lightsail.aws.amazon.com/ls/docs/how-to/article/lightsail-how-to-set-up-access-keys-to-use-sdk-api-cli">Lightsail Dev Guide</a>.</p> <p>This API Reference provides detailed information about the actions, data types, parameters, and errors of the Lightsail service. For more information about the supported AWS Regions, endpoints, and service quotas for the Lightsail service, see <a href="https://docs.aws.amazon.com/general/latest/gr/lightsail.html">Amazon Lightsail Endpoints and Quotas</a> in the <i>AWS General Reference</i>.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -181,6 +181,75 @@ paths:
             type: string
             enum:
               - Lightsail_20161128.AllocateStaticIp
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Lightsail_20161128.AttachCertificateToDistribution:
+    post:
+      operationId: AttachCertificateToDistribution
+      description: '<p>Attaches an SSL/TLS certificate to your Amazon Lightsail content delivery network (CDN) distribution.</p> <p>After the certificate is attached, your distribution accepts HTTPS traffic for all of the domains that are associated with the certificate.</p> <p>Use the <code>CreateCertificate</code> action to create a certificate that you can attach to your distribution.</p> <important> <p>Only certificates created in the <code>us-east-1</code> AWS Region can be attached to Lightsail distributions. Lightsail distributions are global resources that can reference an origin in any AWS Region, and distribute its content globally. However, all distributions are located in the <code>us-east-1</code> Region.</p> </important>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AttachCertificateToDistributionResult'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: OperationFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AttachCertificateToDistributionRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Lightsail_20161128.AttachCertificateToDistribution
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -639,6 +708,69 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Lightsail_20161128.CreateCertificate:
+    post:
+      operationId: CreateCertificate
+      description: '<p>Creates an SSL/TLS certificate for a Amazon Lightsail content delivery network (CDN) distribution.</p> <p>After the certificate is created, use the <code>AttachCertificateToDistribution</code> action to attach the certificate to your distribution.</p> <important> <p>Only certificates created in the <code>us-east-1</code> AWS Region can be attached to Lightsail distributions. Lightsail distributions are global resources that can reference an origin in any AWS Region, and distribute its content globally. However, all distributions are located in the <code>us-east-1</code> Region.</p> </important>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateCertificateResult'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCertificateRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Lightsail_20161128.CreateCertificate
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=Lightsail_20161128.CreateCloudFormationStack:
     post:
       operationId: CreateCloudFormationStack
@@ -1000,6 +1132,75 @@ paths:
             type: string
             enum:
               - Lightsail_20161128.CreateDiskSnapshot
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Lightsail_20161128.CreateDistribution:
+    post:
+      operationId: CreateDistribution
+      description: '<p>Creates an Amazon Lightsail content delivery network (CDN) distribution.</p> <p>A distribution is a globally distributed network of caching servers that improve the performance of your website or web application hosted on a Lightsail instance. For more information, see <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-content-delivery-networks">Content delivery networks in Amazon Lightsail</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateDistributionResult'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: OperationFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDistributionRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Lightsail_20161128.CreateDistribution
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1971,6 +2172,69 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Lightsail_20161128.DeleteCertificate:
+    post:
+      operationId: DeleteCertificate
+      description: <p>Deletes an SSL/TLS certificate for your Amazon Lightsail content delivery network (CDN) distribution.</p> <p>Certificates that are currently attached to a distribution cannot be deleted. Use the <code>DetachCertificateFromDistribution</code> action to detach a certificate from a distribution.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteCertificateResult'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteCertificateRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Lightsail_20161128.DeleteCertificate
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=Lightsail_20161128.DeleteContactMethod:
     post:
       operationId: DeleteContactMethod
@@ -2182,6 +2446,75 @@ paths:
             type: string
             enum:
               - Lightsail_20161128.DeleteDiskSnapshot
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Lightsail_20161128.DeleteDistribution:
+    post:
+      operationId: DeleteDistribution
+      description: Deletes your Amazon Lightsail content delivery network (CDN) distribution.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteDistributionResult'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: OperationFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteDistributionRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Lightsail_20161128.DeleteDistribution
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2932,6 +3265,75 @@ paths:
             type: string
             enum:
               - Lightsail_20161128.DeleteRelationalDatabaseSnapshot
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Lightsail_20161128.DetachCertificateFromDistribution:
+    post:
+      operationId: DetachCertificateFromDistribution
+      description: '<p>Detaches an SSL/TLS certificate from your Amazon Lightsail content delivery network (CDN) distribution.</p> <p>After the certificate is detached, your distribution stops accepting traffic for all of the domains that are associated with the certificate.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DetachCertificateFromDistributionResult'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: OperationFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DetachCertificateFromDistributionRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Lightsail_20161128.DetachCertificateFromDistribution
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3816,6 +4218,69 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Lightsail_20161128.GetCertificates:
+    post:
+      operationId: GetCertificates
+      description: '<p>Returns information about one or more Amazon Lightsail SSL/TLS certificates.</p> <note> <p>To get a summary of a certificate, ommit <code>includeCertificateDetails</code> from your request. The response will include only the certificate Amazon Resource Name (ARN), certificate name, domain name, and tags.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCertificatesResult'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetCertificatesRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Lightsail_20161128.GetCertificates
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=Lightsail_20161128.GetCloudFormationStackRecords:
     post:
       operationId: GetCloudFormationStackRecords
@@ -4252,6 +4717,282 @@ paths:
             type: string
             enum:
               - Lightsail_20161128.GetDisks
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Lightsail_20161128.GetDistributionBundles:
+    post:
+      operationId: GetDistributionBundles
+      description: <p>Returns the list bundles that can be applied to you Amazon Lightsail content delivery network (CDN) distributions.</p> <p>A distribution bundle specifies the monthly network transfer quota and monthly cost of your dsitribution.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDistributionBundlesResult'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: OperationFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetDistributionBundlesRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Lightsail_20161128.GetDistributionBundles
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Lightsail_20161128.GetDistributionLatestCacheReset:
+    post:
+      operationId: GetDistributionLatestCacheReset
+      description: Returns the timestamp and status of the last cache reset of a specific Amazon Lightsail content delivery network (CDN) distribution.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDistributionLatestCacheResetResult'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: OperationFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetDistributionLatestCacheResetRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Lightsail_20161128.GetDistributionLatestCacheReset
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Lightsail_20161128.GetDistributionMetricData:
+    post:
+      operationId: GetDistributionMetricData
+      description: '<p>Returns the data points of a specific metric for an Amazon Lightsail content delivery network (CDN) distribution.</p> <p>Metrics report the utilization of your resources, and the error counts generated by them. Monitor and collect metric data regularly to maintain the reliability, availability, and performance of your resources.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDistributionMetricDataResult'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: OperationFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetDistributionMetricDataRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Lightsail_20161128.GetDistributionMetricData
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Lightsail_20161128.GetDistributions:
+    post:
+      operationId: GetDistributions
+      description: Returns information about one or more of your Amazon Lightsail content delivery network (CDN) distributions.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDistributionsResult'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: OperationFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetDistributionsRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Lightsail_20161128.GetDistributions
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -7554,6 +8295,75 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Lightsail_20161128.ResetDistributionCache:
+    post:
+      operationId: ResetDistributionCache
+      description: '<p>Deletes currently cached content from your Amazon Lightsail content delivery network (CDN) distribution.</p> <p>After resetting the cache, the next time a content request is made, your distribution pulls, serves, and caches it from the origin.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResetDistributionCacheResult'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: OperationFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResetDistributionCacheRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Lightsail_20161128.ResetDistributionCache
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=Lightsail_20161128.SendContactMethodVerification:
     post:
       operationId: SendContactMethodVerification
@@ -8217,6 +9027,144 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Lightsail_20161128.UpdateDistribution:
+    post:
+      operationId: UpdateDistribution
+      description: <p>Updates an existing Amazon Lightsail content delivery network (CDN) distribution.</p> <p>Use this action to update the configuration of your existing distribution</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateDistributionResult'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: OperationFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateDistributionRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Lightsail_20161128.UpdateDistribution
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Lightsail_20161128.UpdateDistributionBundle:
+    post:
+      operationId: UpdateDistributionBundle
+      description: '<p>Updates the bundle of your Amazon Lightsail content delivery network (CDN) distribution.</p> <p>A distribution bundle specifies the monthly network transfer quota and monthly cost of your dsitribution.</p> <p>Update your distribution''s bundle if your distribution is going over its monthly network transfer quota and is incurring an overage fee.</p> <p>You can update your distribution''s bundle only one time within your monthly AWS billing cycle. To determine if you can update your distribution''s bundle, use the <code>GetDistributions</code> action. The <code>ableToUpdateBundle</code> parameter in the result will indicate whether you can currently update your distribution''s bundle.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateDistributionBundleResult'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: OperationFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateDistributionBundleRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Lightsail_20161128.UpdateDistributionBundle
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=Lightsail_20161128.UpdateDomainEntry:
     post:
       operationId: UpdateDomainEntry
@@ -8591,6 +9539,25 @@ components:
     AccessDeniedException: {}
     AccountSetupInProgressException: {}
     UnauthenticatedException: {}
+    AttachCertificateToDistributionResult:
+      type: object
+      properties:
+        operation:
+          $ref: '#/components/schemas/Operation'
+          description: 'An object that describes the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.'
+    AttachCertificateToDistributionRequest:
+      type: object
+      required:
+        - distributionName
+        - certificateName
+      title: AttachCertificateToDistributionRequest
+      properties:
+        distributionName:
+          $ref: '#/components/schemas/ResourceName'
+          description: <p>The name of the distribution that the certificate will be attached to.</p> <p>Use the <code>GetDistributions</code> action to get a list of distribution names that you can specify.</p>
+        certificateName:
+          $ref: '#/components/schemas/ResourceName'
+          description: '<p>The name of the certificate to attach to a distribution.</p> <p>Only certificates with a status of <code>ISSUED</code> can be attached to a distribution.</p> <p>Use the <code>GetCertificates</code> action to get a list of certificate names that you can specify.</p> <note> <p>This is the name of the certificate resource type and is used only to reference the certificate in other API actions. It can be different than the domain name of the certificate. For example, your certificate name might be <code>WordPress-Blog-Certificate</code> and the domain name of the certificate might be <code>example.com</code>.</p> </note>'
     AttachDiskResult:
       type: object
       properties:
@@ -8721,6 +9688,34 @@ components:
         sourceRegion:
           $ref: '#/components/schemas/RegionName'
           description: The AWS Region where the source manual or automatic snapshot is located.
+    CreateCertificateResult:
+      type: object
+      properties:
+        certificate:
+          $ref: '#/components/schemas/CertificateSummary'
+          description: An object that describes the certificate created.
+        operations:
+          $ref: '#/components/schemas/OperationList'
+          description: 'An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.'
+    CreateCertificateRequest:
+      type: object
+      required:
+        - certificateName
+        - domainName
+      title: CreateCertificateRequest
+      properties:
+        certificateName:
+          $ref: '#/components/schemas/CertificateName'
+          description: The name for the certificate.
+        domainName:
+          $ref: '#/components/schemas/DomainName'
+          description: 'The domain name (e.g., <code>example.com</code>) for the certificate.'
+        subjectAlternativeNames:
+          $ref: '#/components/schemas/SubjectAlternativeNameList'
+          description: '<p>An array of strings that specify the alternate domains (e.g., <code>example2.com</code>) and subdomains (e.g., <code>blog.example.com</code>) for the certificate.</p> <p>You can specify a maximum of nine alternate domains (in addition to the primary domain name).</p> <p>Wildcard domain entries (e.g., <code>*.example.com</code>) are not supported.</p>'
+        tags:
+          $ref: '#/components/schemas/TagList'
+          description: <p>The tag keys and optional values to add to the certificate during create.</p> <p>Use the <code>TagResource</code> action to tag a resource after it's created.</p>
     CreateCloudFormationStackResult:
       type: object
       properties:
@@ -8780,7 +9775,7 @@ components:
           description: 'The size of the disk in GB (e.g., <code>32</code>).'
         tags:
           $ref: '#/components/schemas/TagList'
-          description: '<p>The tag keys and optional values to add to the resource during create.</p> <p>To tag a resource after it has been created, see the <code>tag resource</code> operation.</p>'
+          description: <p>The tag keys and optional values to add to the resource during create.</p> <p>Use the <code>TagResource</code> action to tag a resource after it's created.</p>
         addOns:
           $ref: '#/components/schemas/AddOnRequestList'
           description: An array of objects that represent the add-ons to enable for the new disk.
@@ -8812,7 +9807,7 @@ components:
           description: 'The size of the disk in GB (e.g., <code>32</code>).'
         tags:
           $ref: '#/components/schemas/TagList'
-          description: '<p>The tag keys and optional values to add to the resource during create.</p> <p>To tag a resource after it has been created, see the <code>tag resource</code> operation.</p>'
+          description: <p>The tag keys and optional values to add to the resource during create.</p> <p>Use the <code>TagResource</code> action to tag a resource after it's created.</p>
         addOns:
           $ref: '#/components/schemas/AddOnRequestList'
           description: An array of objects that represent the add-ons to enable for the new disk.
@@ -8848,7 +9843,46 @@ components:
           description: '<p>The unique name of the source instance (e.g., <code>Amazon_Linux-512MB-Virginia-1</code>). When this is defined, a snapshot of the instance''s system volume is created.</p> <note> <p>This parameter cannot be defined together with the <code>disk name</code> parameter. The <code>instance name</code> and <code>disk name</code> parameters are mutually exclusive.</p> </note>'
         tags:
           $ref: '#/components/schemas/TagList'
-          description: '<p>The tag keys and optional values to add to the resource during create.</p> <p>To tag a resource after it has been created, see the <code>tag resource</code> operation.</p>'
+          description: <p>The tag keys and optional values to add to the resource during create.</p> <p>Use the <code>TagResource</code> action to tag a resource after it's created.</p>
+    CreateDistributionResult:
+      type: object
+      properties:
+        distribution:
+          $ref: '#/components/schemas/LightsailDistribution'
+          description: An object that describes the distribution created.
+        operation:
+          $ref: '#/components/schemas/Operation'
+          description: 'An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.'
+    CreateDistributionRequest:
+      type: object
+      required:
+        - distributionName
+        - origin
+        - defaultCacheBehavior
+        - bundleId
+      title: CreateDistributionRequest
+      properties:
+        distributionName:
+          $ref: '#/components/schemas/ResourceName'
+          description: The name for the distribution.
+        origin:
+          $ref: '#/components/schemas/InputOrigin'
+          description: '<p>An object that describes the origin resource for the distribution, such as a Lightsail instance or load balancer.</p> <p>The distribution pulls, caches, and serves content from the origin.</p>'
+        defaultCacheBehavior:
+          $ref: '#/components/schemas/CacheBehavior'
+          description: An object that describes the default cache behavior for the distribution.
+        cacheBehaviorSettings:
+          $ref: '#/components/schemas/CacheSettings'
+          description: An object that describes the cache behavior settings for the distribution.
+        cacheBehaviors:
+          $ref: '#/components/schemas/CacheBehaviorList'
+          description: An array of objects that describe the per-path cache behavior for the distribution.
+        bundleId:
+          $ref: '#/components/schemas/string'
+          description: '<p>The bundle ID to use for the distribution.</p> <p>A distribution bundle describes the specifications of your distribution, such as the monthly cost and monthly network transfer quota.</p> <p>Use the <code>GetDistributionBundles</code> action to get a list of distribution bundle IDs that you can specify.</p>'
+        tags:
+          $ref: '#/components/schemas/TagList'
+          description: <p>The tag keys and optional values to add to the distribution during create.</p> <p>Use the <code>TagResource</code> action to tag a resource after it's created.</p>
     CreateDomainResult:
       type: object
       properties:
@@ -8866,7 +9900,7 @@ components:
           description: '<p>The domain name to manage (e.g., <code>example.com</code>).</p> <note> <p>You cannot register a new domain name using Lightsail. You must register a domain name using Amazon Route 53 or another domain name registrar. If you have already registered your domain, you can enter its name in this parameter to manage the DNS records for that domain.</p> </note>'
         tags:
           $ref: '#/components/schemas/TagList'
-          description: '<p>The tag keys and optional values to add to the resource during create.</p> <p>To tag a resource after it has been created, see the <code>tag resource</code> operation.</p>'
+          description: <p>The tag keys and optional values to add to the resource during create.</p> <p>Use the <code>TagResource</code> action to tag a resource after it's created.</p>
     CreateDomainEntryResult:
       type: object
       properties:
@@ -8907,7 +9941,7 @@ components:
           description: The Lightsail instance on which to base your snapshot.
         tags:
           $ref: '#/components/schemas/TagList'
-          description: '<p>The tag keys and optional values to add to the resource during create.</p> <p>To tag a resource after it has been created, see the <code>tag resource</code> operation.</p>'
+          description: <p>The tag keys and optional values to add to the resource during create.</p> <p>Use the <code>TagResource</code> action to tag a resource after it's created.</p>
     CreateInstancesResult:
       type: object
       properties:
@@ -8947,7 +9981,7 @@ components:
           description: The name of your key pair.
         tags:
           $ref: '#/components/schemas/TagList'
-          description: '<p>The tag keys and optional values to add to the resource during create.</p> <p>To tag a resource after it has been created, see the <code>tag resource</code> operation.</p>'
+          description: <p>The tag keys and optional values to add to the resource during create.</p> <p>Use the <code>TagResource</code> action to tag a resource after it's created.</p>
         addOns:
           $ref: '#/components/schemas/AddOnRequestList'
           description: An array of objects representing the add-ons to enable for the new instance.
@@ -8988,7 +10022,7 @@ components:
           description: The name for your key pair.
         tags:
           $ref: '#/components/schemas/TagList'
-          description: '<p>The tag keys and optional values to add to the resource during create.</p> <p>To tag a resource after it has been created, see the <code>tag resource</code> operation.</p>'
+          description: <p>The tag keys and optional values to add to the resource during create.</p> <p>Use the <code>TagResource</code> action to tag a resource after it's created.</p>
         addOns:
           $ref: '#/components/schemas/AddOnRequestList'
           description: An array of objects representing the add-ons to enable for the new instance.
@@ -9027,7 +10061,7 @@ components:
           description: The name for your new key pair.
         tags:
           $ref: '#/components/schemas/TagList'
-          description: '<p>The tag keys and optional values to add to the resource during create.</p> <p>To tag a resource after it has been created, see the <code>tag resource</code> operation.</p>'
+          description: <p>The tag keys and optional values to add to the resource during create.</p> <p>Use the <code>TagResource</code> action to tag a resource after it's created.</p>
     CreateLoadBalancerResult:
       type: object
       properties:
@@ -9061,7 +10095,7 @@ components:
           description: 'The optional alternative domains and subdomains to use with your SSL/TLS certificate (e.g., <code>www.example.com</code>, <code>example.com</code>, <code>m.example.com</code>, <code>blog.example.com</code>).'
         tags:
           $ref: '#/components/schemas/TagList'
-          description: '<p>The tag keys and optional values to add to the resource during create.</p> <p>To tag a resource after it has been created, see the <code>tag resource</code> operation.</p>'
+          description: <p>The tag keys and optional values to add to the resource during create.</p> <p>Use the <code>TagResource</code> action to tag a resource after it's created.</p>
     CreateLoadBalancerTlsCertificateResult:
       type: object
       properties:
@@ -9090,7 +10124,7 @@ components:
           description: 'An array of strings listing alternative domains and subdomains for your SSL/TLS certificate. Lightsail will de-dupe the names for you. You can have a maximum of 9 alternative names (in addition to the 1 primary domain). We do not support wildcards (e.g., <code>*.example.com</code>).'
         tags:
           $ref: '#/components/schemas/TagList'
-          description: '<p>The tag keys and optional values to add to the resource during create.</p> <p>To tag a resource after it has been created, see the <code>tag resource</code> operation.</p>'
+          description: <p>The tag keys and optional values to add to the resource during create.</p> <p>Use the <code>TagResource</code> action to tag a resource after it's created.</p>
     CreateRelationalDatabaseResult:
       type: object
       properties:
@@ -9139,7 +10173,7 @@ components:
           description: Specifies the accessibility options for your new database. A value of <code>true</code> specifies a database that is available to resources outside of your Lightsail account. A value of <code>false</code> specifies a database that is available only to your Lightsail resources in the same region as your database.
         tags:
           $ref: '#/components/schemas/TagList'
-          description: '<p>The tag keys and optional values to add to the resource during create.</p> <p>To tag a resource after it has been created, see the <code>tag resource</code> operation.</p>'
+          description: <p>The tag keys and optional values to add to the resource during create.</p> <p>Use the <code>TagResource</code> action to tag a resource after it's created.</p>
     CreateRelationalDatabaseFromSnapshotResult:
       type: object
       properties:
@@ -9178,7 +10212,7 @@ components:
           description: '<p>Specifies whether your database is restored from the latest backup time. A value of <code>true</code> restores from the latest backup time. </p> <p>Default: <code>false</code> </p> <p>Constraints: Cannot be specified if the <code>restore time</code> parameter is provided.</p>'
         tags:
           $ref: '#/components/schemas/TagList'
-          description: '<p>The tag keys and optional values to add to the resource during create.</p> <p>To tag a resource after it has been created, see the <code>tag resource</code> operation.</p>'
+          description: <p>The tag keys and optional values to add to the resource during create.</p> <p>Use the <code>TagResource</code> action to tag a resource after it's created.</p>
     CreateRelationalDatabaseSnapshotResult:
       type: object
       properties:
@@ -9200,7 +10234,7 @@ components:
           description: '<p>The name for your new database snapshot.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 2 to 255 alphanumeric characters, or hyphens.</p> </li> <li> <p>The first and last character must be a letter or number.</p> </li> </ul>'
         tags:
           $ref: '#/components/schemas/TagList'
-          description: '<p>The tag keys and optional values to add to the resource during create.</p> <p>To tag a resource after it has been created, see the <code>tag resource</code> operation.</p>'
+          description: <p>The tag keys and optional values to add to the resource during create.</p> <p>Use the <code>TagResource</code> action to tag a resource after it's created.</p>
     DeleteAlarmResult:
       type: object
       properties:
@@ -9235,6 +10269,21 @@ components:
         date:
           $ref: '#/components/schemas/AutoSnapshotDate'
           description: The date of the automatic snapshot to delete in <code>YYYY-MM-DD</code> format. Use the <code>get auto snapshots</code> operation to get the available automatic snapshots for a resource.
+    DeleteCertificateResult:
+      type: object
+      properties:
+        operations:
+          $ref: '#/components/schemas/OperationList'
+          description: 'An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.'
+    DeleteCertificateRequest:
+      type: object
+      required:
+        - certificateName
+      title: DeleteCertificateRequest
+      properties:
+        certificateName:
+          $ref: '#/components/schemas/CertificateName'
+          description: <p>The name of the certificate to delete.</p> <p>Use the <code>GetCertificates</code> action to get a list of certificate names that you can specify.</p>
     DeleteContactMethodResult:
       type: object
       properties:
@@ -9283,6 +10332,19 @@ components:
         diskSnapshotName:
           $ref: '#/components/schemas/ResourceName'
           description: 'The name of the disk snapshot you want to delete (e.g., <code>my-disk-snapshot</code>).'
+    DeleteDistributionResult:
+      type: object
+      properties:
+        operation:
+          $ref: '#/components/schemas/Operation'
+          description: 'An object that describes the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.'
+    DeleteDistributionRequest:
+      type: object
+      title: DeleteDistributionRequest
+      properties:
+        distributionName:
+          $ref: '#/components/schemas/ResourceName'
+          description: <p>The name of the distribution to delete.</p> <p>Use the <code>GetDistributions</code> action to get a list of distribution names that you can specify.</p>
     DeleteDomainResult:
       type: object
       properties:
@@ -9453,6 +10515,21 @@ components:
         relationalDatabaseSnapshotName:
           $ref: '#/components/schemas/ResourceName'
           description: The name of the database snapshot that you are deleting.
+    DetachCertificateFromDistributionResult:
+      type: object
+      properties:
+        operation:
+          $ref: '#/components/schemas/Operation'
+          description: 'An object that describes the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.'
+    DetachCertificateFromDistributionRequest:
+      type: object
+      required:
+        - distributionName
+      title: DetachCertificateFromDistributionRequest
+      properties:
+        distributionName:
+          $ref: '#/components/schemas/ResourceName'
+          description: <p>The name of the distribution from which to detach the certificate.</p> <p>Use the <code>GetDistributions</code> action to get a list of distribution names that you can specify.</p>
     DetachDiskResult:
       type: object
       properties:
@@ -9665,6 +10742,25 @@ components:
         pageToken:
           $ref: '#/components/schemas/string'
           description: '<p>The token to advance to the next page of results from your request.</p> <p>To get a page token, perform an initial <code>GetBundles</code> request. If your results are paginated, the response will return a next page token that you can specify as the page token in a subsequent request.</p>'
+    GetCertificatesResult:
+      type: object
+      properties:
+        certificates:
+          $ref: '#/components/schemas/CertificateSummaryList'
+          description: An object that describes certificates.
+    GetCertificatesRequest:
+      type: object
+      title: GetCertificatesRequest
+      properties:
+        certificateStatuses:
+          $ref: '#/components/schemas/CertificateStatusList'
+          description: '<p>The status of the certificates for which to return information.</p> <p>For example, specify <code>ISSUED</code> to return only certificates with an <code>ISSUED</code> status.</p> <p>When omitted, the response includes all of your certificates in the AWS region where the request is made, regardless of their current status.</p>'
+        includeCertificateDetails:
+          $ref: '#/components/schemas/IncludeCertificateDetails'
+          description: '<p>Indicates whether to include detailed information about the certificates in the response.</p> <p>When omitted, the response includes only the certificate names, Amazon Resource Names (ARNs), domain names, and tags.</p>'
+        certificateName:
+          $ref: '#/components/schemas/CertificateName'
+          description: '<p>The name for the certificate for which to return information.</p> <p>When omitted, the response includes all of your certificates in the AWS region where the request is made.</p>'
     GetCloudFormationStackRecordsResult:
       type: object
       properties:
@@ -9756,6 +10852,93 @@ components:
         pageToken:
           $ref: '#/components/schemas/string'
           description: '<p>The token to advance to the next page of results from your request.</p> <p>To get a page token, perform an initial <code>GetDisks</code> request. If your results are paginated, the response will return a next page token that you can specify as the page token in a subsequent request.</p>'
+    GetDistributionBundlesResult:
+      type: object
+      properties:
+        bundles:
+          $ref: '#/components/schemas/DistributionBundleList'
+          description: An object that describes a distribution bundle.
+    GetDistributionBundlesRequest:
+      type: object
+      title: GetDistributionBundlesRequest
+      properties: {}
+    GetDistributionLatestCacheResetResult:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/string'
+          description: The status of the last cache reset.
+        createTime:
+          $ref: '#/components/schemas/IsoDate'
+          description: 'The timestamp of the last cache reset (e.g., <code>1479734909.17</code>) in Unix time format.'
+    GetDistributionLatestCacheResetRequest:
+      type: object
+      title: GetDistributionLatestCacheResetRequest
+      properties:
+        distributionName:
+          $ref: '#/components/schemas/ResourceName'
+          description: '<p>The name of the distribution for which to return the timestamp of the last cache reset.</p> <p>Use the <code>GetDistributions</code> action to get a list of distribution names that you can specify.</p> <p>When omitted, the response includes the latest cache reset timestamp of all your distributions.</p>'
+    GetDistributionMetricDataResult:
+      type: object
+      properties:
+        metricName:
+          $ref: '#/components/schemas/DistributionMetricName'
+          description: The name of the metric returned.
+        metricData:
+          $ref: '#/components/schemas/MetricDatapointList'
+          description: An array of objects that describe the metric data returned.
+    GetDistributionMetricDataRequest:
+      type: object
+      required:
+        - distributionName
+        - metricName
+        - startTime
+        - endTime
+        - period
+        - unit
+        - statistics
+      title: GetDistributionMetricDataRequest
+      properties:
+        distributionName:
+          $ref: '#/components/schemas/ResourceName'
+          description: <p>The name of the distribution for which to get metric data.</p> <p>Use the <code>GetDistributions</code> action to get a list of distribution names that you can specify.</p>
+        metricName:
+          $ref: '#/components/schemas/DistributionMetricName'
+          description: '<p>The metric for which you want to return information.</p> <p>Valid distribution metric names are listed below, along with the most useful <code>statistics</code> to include in your request, and the published <code>unit</code> value.</p> <ul> <li> <p> <b> <code>Requests</code> </b> - The total number of viewer requests received by your Lightsail distribution, for all HTTP methods, and for both HTTP and HTTPS requests.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p> <p> <code>Unit</code>: The published unit is <code>None</code>.</p> </li> <li> <p> <b> <code>BytesDownloaded</code> </b> - The number of bytes downloaded by viewers for GET, HEAD, and OPTIONS requests.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p> <p> <code>Unit</code>: The published unit is <code>None</code>.</p> </li> <li> <p> <b> <code>BytesUploaded </code> </b> - The number of bytes uploaded to your origin by your Lightsail distribution, using POST and PUT requests.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p> <p> <code>Unit</code>: The published unit is <code>None</code>.</p> </li> <li> <p> <b> <code>TotalErrorRate</code> </b> - The percentage of all viewer requests for which the response''s HTTP status code was 4xx or 5xx.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Average</code>.</p> <p> <code>Unit</code>: The published unit is <code>Percent</code>.</p> </li> <li> <p> <b> <code>4xxErrorRate</code> </b> - The percentage of all viewer requests for which the response''s HTTP status cod was 4xx. In these cases, the client or client viewer may have made an error. For example, a status code of 404 (Not Found) means that the client requested an object that could not be found.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Average</code>.</p> <p> <code>Unit</code>: The published unit is <code>Percent</code>.</p> </li> <li> <p> <b> <code>5xxErrorRate</code> </b> - The percentage of all viewer requests for which the response''s HTTP status code was 5xx. In these cases, the origin server did not satisfy the requests. For example, a status code of 503 (Service Unavailable) means that the origin server is currently unavailable.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Average</code>.</p> <p> <code>Unit</code>: The published unit is <code>Percent</code>.</p> </li> </ul>'
+        startTime:
+          $ref: '#/components/schemas/timestamp'
+          description: '<p>The start of the time interval for which to get metric data.</p> <p>Constraints:</p> <ul> <li> <p>Specified in Coordinated Universal Time (UTC).</p> </li> <li> <p>Specified in the Unix time format.</p> <p>For example, if you wish to use a start time of October 1, 2018, at 8 PM UTC, specify <code>1538424000</code> as the start time.</p> </li> </ul> <p>You can convert a human-friendly time to Unix time format using a converter like <a href="https://www.epochconverter.com/">Epoch converter</a>.</p>'
+        endTime:
+          $ref: '#/components/schemas/timestamp'
+          description: '<p>The end of the time interval for which to get metric data.</p> <p>Constraints:</p> <ul> <li> <p>Specified in Coordinated Universal Time (UTC).</p> </li> <li> <p>Specified in the Unix time format.</p> <p>For example, if you wish to use an end time of October 1, 2018, at 9 PM UTC, specify <code>1538427600</code> as the end time.</p> </li> </ul> <p>You can convert a human-friendly time to Unix time format using a converter like <a href="https://www.epochconverter.com/">Epoch converter</a>.</p>'
+        period:
+          $ref: '#/components/schemas/MetricPeriod'
+          description: 'The granularity, in seconds, for the metric data points that will be returned.'
+        unit:
+          $ref: '#/components/schemas/MetricUnit'
+          description: '<p>The unit for the metric data request.</p> <p>Valid units depend on the metric data being requested. For the valid units with each available metric, see the <code>metricName</code> parameter.</p>'
+        statistics:
+          $ref: '#/components/schemas/MetricStatisticList'
+          description: '<p>The statistic for the metric.</p> <p>The following statistics are available:</p> <ul> <li> <p> <code>Minimum</code> - The lowest value observed during the specified period. Use this value to determine low volumes of activity for your application.</p> </li> <li> <p> <code>Maximum</code> - The highest value observed during the specified period. Use this value to determine high volumes of activity for your application.</p> </li> <li> <p> <code>Sum</code> - All values submitted for the matching metric added together. You can use this statistic to determine the total volume of a metric.</p> </li> <li> <p> <code>Average</code> - The value of Sum / SampleCount during the specified period. By comparing this statistic with the Minimum and Maximum values, you can determine the full scope of a metric and how close the average use is to the Minimum and Maximum values. This comparison helps you to know when to increase or decrease your resources.</p> </li> <li> <p> <code>SampleCount</code> - The count, or number, of data points used for the statistical calculation.</p> </li> </ul>'
+    GetDistributionsResult:
+      type: object
+      properties:
+        distributions:
+          $ref: '#/components/schemas/DistributionList'
+          description: An array of objects that describe your distributions.
+        nextPageToken:
+          $ref: '#/components/schemas/string'
+          description: '<p>The token to advance to the next page of results from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetDistributions</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>'
+    GetDistributionsRequest:
+      type: object
+      title: GetDistributionsRequest
+      properties:
+        distributionName:
+          $ref: '#/components/schemas/ResourceName'
+          description: '<p>The name of the distribution for which to return information.</p> <p>Use the <code>GetDistributions</code> action to get a list of distribution names that you can specify.</p> <p>When omitted, the response includes all of your distributions in the AWS Region where the request is made.</p>'
+        pageToken:
+          $ref: '#/components/schemas/string'
+          description: '<p>The token to advance to the next page of results from your request.</p> <p>To get a page token, perform an initial <code>GetDistributions</code> request. If your results are paginated, the response will return a next page token that you can specify as the page token in a subsequent request.</p>'
     GetDomainResult:
       type: object
       properties:
@@ -10603,6 +11786,25 @@ components:
         staticIpName:
           $ref: '#/components/schemas/ResourceName'
           description: The name of the static IP to delete.
+    ResetDistributionCacheResult:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/string'
+          description: The status of the reset cache request.
+        createTime:
+          $ref: '#/components/schemas/IsoDate'
+          description: 'The timestamp of the reset cache request (e.g., <code>1479734909.17</code>) in Unix time format.'
+        operation:
+          $ref: '#/components/schemas/Operation'
+          description: 'An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.'
+    ResetDistributionCacheRequest:
+      type: object
+      title: ResetDistributionCacheRequest
+      properties:
+        distributionName:
+          $ref: '#/components/schemas/ResourceName'
+          description: <p>The name of the distribution for which to reset cache.</p> <p>Use the <code>GetDistributions</code> action to get a list of distribution names that you can specify.</p>
     SendContactMethodVerificationResult:
       type: object
       properties:
@@ -10757,6 +11959,51 @@ components:
         tagKeys:
           $ref: '#/components/schemas/TagKeyList'
           description: The tag keys to delete from the specified resource.
+    UpdateDistributionResult:
+      type: object
+      properties:
+        operation:
+          $ref: '#/components/schemas/Operation'
+          description: 'An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.'
+    UpdateDistributionRequest:
+      type: object
+      required:
+        - distributionName
+      title: UpdateDistributionRequest
+      properties:
+        distributionName:
+          $ref: '#/components/schemas/ResourceName'
+          description: <p>The name of the distribution to update.</p> <p>Use the <code>GetDistributions</code> action to get a list of distribution names that you can specify.</p>
+        origin:
+          $ref: '#/components/schemas/InputOrigin'
+          description: '<p>An object that describes the origin resource for the distribution, such as a Lightsail instance or load balancer.</p> <p>The distribution pulls, caches, and serves content from the origin.</p>'
+        defaultCacheBehavior:
+          $ref: '#/components/schemas/CacheBehavior'
+          description: An object that describes the default cache behavior for the distribution.
+        cacheBehaviorSettings:
+          $ref: '#/components/schemas/CacheSettings'
+          description: <p>An object that describes the cache behavior settings for the distribution.</p> <note> <p>The <code>cacheBehaviorSettings</code> specified in your <code>UpdateDistributionRequest</code> will replace your distribution's existing settings.</p> </note>
+        cacheBehaviors:
+          $ref: '#/components/schemas/CacheBehaviorList'
+          description: An array of objects that describe the per-path cache behavior for the distribution.
+        isEnabled:
+          $ref: '#/components/schemas/boolean'
+          description: Indicates whether to enable the distribution.
+    UpdateDistributionBundleResult:
+      type: object
+      properties:
+        operation:
+          $ref: '#/components/schemas/Operation'
+    UpdateDistributionBundleRequest:
+      type: object
+      title: UpdateDistributionBundleRequest
+      properties:
+        distributionName:
+          $ref: '#/components/schemas/ResourceName'
+          description: <p>The name of the distribution for which to update the bundle.</p> <p>Use the <code>GetDistributions</code> action to get a list of distribution names that you can specify.</p>
+        bundleId:
+          $ref: '#/components/schemas/string'
+          description: <p>The bundle ID of the new bundle to apply to your distribution.</p> <p>Use the <code>GetDistributionBundles</code> action to get a list of distribution bundle IDs that you can specify.</p>
     UpdateDomainEntryResult:
       type: object
       properties:
@@ -10955,6 +12202,8 @@ components:
         - CloudFormationStackRecord
         - Alarm
         - ContactMethod
+        - Distribution
+        - Certificate
     MonitoredResourceInfo:
       type: object
       properties:
@@ -11145,6 +12394,46 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Operation'
+    Operation:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The ID of the operation.
+        resourceName:
+          $ref: '#/components/schemas/ResourceName'
+          description: The resource name.
+        resourceType:
+          $ref: '#/components/schemas/ResourceType'
+          description: 'The resource type. '
+        createdAt:
+          $ref: '#/components/schemas/IsoDate'
+          description: 'The timestamp when the operation was initialized (e.g., <code>1479816991.349</code>).'
+        location:
+          $ref: '#/components/schemas/ResourceLocation'
+          description: The AWS Region and Availability Zone.
+        isTerminal:
+          $ref: '#/components/schemas/boolean'
+          description: A Boolean value indicating whether the operation is terminal.
+        operationDetails:
+          $ref: '#/components/schemas/string'
+          description: 'Details about the operation (e.g., <code>Debian-1GB-Ohio-1</code>).'
+        operationType:
+          $ref: '#/components/schemas/OperationType'
+          description: 'The type of operation. '
+        status:
+          $ref: '#/components/schemas/OperationStatus'
+          description: 'The status of the operation. '
+        statusChangedAt:
+          $ref: '#/components/schemas/IsoDate'
+          description: 'The timestamp when the status was changed (e.g., <code>1479816991.349</code>).'
+        errorCode:
+          $ref: '#/components/schemas/string'
+          description: The error code.
+        errorDetails:
+          $ref: '#/components/schemas/string'
+          description: The error details.
+      description: Describes the API operation.
     ResourceNameList:
       type: array
       items:
@@ -11217,6 +12506,11 @@ components:
         $ref: '#/components/schemas/AvailabilityZone'
     Base64:
       type: string
+    BehaviorEnum:
+      type: string
+      enum:
+        - dont-cache
+        - cache
     BlueprintType:
       type: string
       enum:
@@ -11319,6 +12613,237 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Bundle'
+    CacheBehavior:
+      type: object
+      properties:
+        behavior:
+          $ref: '#/components/schemas/BehaviorEnum'
+          description: '<p>The cache behavior of the distribution.</p> <p>The following cache behaviors can be specified:</p> <ul> <li> <p> <b> <code>cache</code> </b> - This option is best for static sites. When specified, your distribution caches and serves your entire website as static content. This behavior is ideal for websites with static content that doesn''t change depending on who views it, or for websites that don''t use cookies, headers, or query strings to personalize content.</p> </li> <li> <p> <b> <code>dont-cache</code> </b> - This option is best for sites that serve a mix of static and dynamic content. When specified, your distribution caches and serve only the content that is specified in the distribution''s <code>CacheBehaviorPerPath</code> parameter. This behavior is ideal for websites or web applications that use cookies, headers, and query strings to personalize content for individual users.</p> </li> </ul>'
+      description: Describes the default cache behavior of an Amazon Lightsail content delivery network (CDN) distribution.
+    CacheBehaviorPerPath:
+      type: object
+      properties:
+        path:
+          $ref: '#/components/schemas/string'
+          description: '<p>The path to a directory or file to cached, or not cache. Use an asterisk symbol to specify wildcard directories (<code>path/to/assets/*</code>), and file types (<code>*.html, *jpg, *js</code>). Directories and file paths are case-sensitive.</p> <p>Examples:</p> <ul> <li> <p>Specify the following to cache all files in the document root of an Apache web server running on a Lightsail instance.</p> <p> <code>var/www/html/</code> </p> </li> <li> <p>Specify the following file to cache only the index page in the document root of an Apache web server.</p> <p> <code>var/www/html/index.html</code> </p> </li> <li> <p>Specify the following to cache only the .html files in the document root of an Apache web server.</p> <p> <code>var/www/html/*.html</code> </p> </li> <li> <p>Specify the following to cache only the .jpg, .png, and .gif files in the images sub-directory of the document root of an Apache web server.</p> <p> <code>var/www/html/images/*.jpg</code> </p> <p> <code>var/www/html/images/*.png</code> </p> <p> <code>var/www/html/images/*.gif</code> </p> <p>Specify the following to cache all files in the images sub-directory of the document root of an Apache web server.</p> <p> <code>var/www/html/images/</code> </p> </li> </ul>'
+        behavior:
+          $ref: '#/components/schemas/BehaviorEnum'
+          description: '<p>The cache behavior for the specified path.</p> <p>You can specify one of the following per-path cache behaviors:</p> <ul> <li> <p> <b> <code>cache</code> </b> - This behavior caches the specified path. </p> </li> <li> <p> <b> <code>dont-cache</code> </b> - This behavior doesn''t cache the specified path. </p> </li> </ul>'
+      description: '<p>Describes the per-path cache behavior of an Amazon Lightsail content delivery network (CDN) distribution.</p> <p>A per-path cache behavior is used to override, or add an exception to, the default cache behavior of a distribution. For example, if the <code>cacheBehavior</code> is set to <code>cache</code>, then a per-path cache behavior can be used to specify a directory, file, or file type that your distribution will cache. Alternately, if the distribution''s <code>cacheBehavior</code> is <code>dont-cache</code>, then a per-path cache behavior can be used to specify a directory, file, or file type that your distribution will not cache.</p> <p>if the cacheBehavior''s behavior is set to ''cache'', then</p>'
+    CacheBehaviorList:
+      type: array
+      items:
+        $ref: '#/components/schemas/CacheBehaviorPerPath'
+    long:
+      type: integer
+    CookieObject:
+      type: object
+      properties:
+        option:
+          $ref: '#/components/schemas/ForwardValues'
+          description: 'Specifies which cookies to forward to the distribution''s origin for a cache behavior: <code>all</code>, <code>none</code>, or <code>allow-list</code> to forward only the cookies specified in the <code>cookiesAllowList</code> parameter.'
+        cookiesAllowList:
+          $ref: '#/components/schemas/StringList'
+          description: The specific cookies to forward to your distribution's origin.
+      description: '<p>Describes whether an Amazon Lightsail content delivery network (CDN) distribution forwards cookies to the origin and, if so, which ones.</p> <p>For the cookies that you specify, your distribution caches separate versions of the specified content based on the cookie values in viewer requests.</p>'
+    HeaderObject:
+      type: object
+      properties:
+        option:
+          $ref: '#/components/schemas/ForwardValues'
+          description: '<p>The headers that you want your distribution to forward to your origin and base caching on.</p> <p>You can configure your distribution to do one of the following:</p> <ul> <li> <p> <b> <code>all</code> </b> - Forward all headers to your origin.</p> </li> <li> <p> <b> <code>none</code> </b> - Forward only the default headers.</p> </li> <li> <p> <b> <code>allow-list</code> </b> - Forward only the headers you specify using the <code>headersAllowList</code> parameter.</p> </li> </ul>'
+        headersAllowList:
+          $ref: '#/components/schemas/HeaderForwardList'
+          description: The specific headers to forward to your distribution's origin.
+      description: '<p>Describes the request headers that a Lightsail distribution bases caching on.</p> <p>For the headers that you specify, your distribution caches separate versions of the specified content based on the header values in viewer requests. For example, suppose viewer requests for <code>logo.jpg</code> contain a custom <code>product</code> header that has a value of either <code>acme</code> or <code>apex</code>, and you configure your distribution to cache your content based on values in the <code>product</code> header. Your distribution forwards the <code>product</code> header to the origin and caches the response from the origin once for each header value. </p>'
+    QueryStringObject:
+      type: object
+      properties:
+        option:
+          $ref: '#/components/schemas/boolean'
+          description: Indicates whether the distribution forwards and caches based on query strings.
+        queryStringsAllowList:
+          $ref: '#/components/schemas/StringList'
+          description: '<p>The specific query strings that the distribution forwards to the origin.</p> <p>Your distribution will cache content based on the specified query strings.</p> <p>If the <code>option</code> parameter is true, then your distribution forwards all query strings, regardless of what you specify using the <code>queryStringsAllowList</code> parameter.</p>'
+      description: '<p>Describes the query string parameters that an Amazon Lightsail content delivery network (CDN) distribution to bases caching on.</p> <p>For the query strings that you specify, your distribution caches separate versions of the specified content based on the query string values in viewer requests.</p>'
+    CacheSettings:
+      type: object
+      properties:
+        defaultTTL:
+          $ref: '#/components/schemas/long'
+          description: '<p>The default amount of time that objects stay in the distribution''s cache before the distribution forwards another request to the origin to determine whether the content has been updated.</p> <note> <p>The value specified applies only when the origin does not add HTTP headers such as <code>Cache-Control max-age</code>, <code>Cache-Control s-maxage</code>, and <code>Expires</code> to objects.</p> </note>'
+        minimumTTL:
+          $ref: '#/components/schemas/long'
+          description: <p>The minimum amount of time that objects stay in the distribution's cache before the distribution forwards another request to the origin to determine whether the object has been updated.</p> <p>A value of <code>0</code> must be specified for <code>minimumTTL</code> if the distribution is configured to forward all headers to the origin.</p>
+        maximumTTL:
+          $ref: '#/components/schemas/long'
+          description: '<p>The maximum amount of time that objects stay in the distribution''s cache before the distribution forwards another request to the origin to determine whether the object has been updated.</p> <p>The value specified applies only when the origin adds HTTP headers such as <code>Cache-Control max-age</code>, <code>Cache-Control s-maxage</code>, and <code>Expires</code> to objects.</p>'
+        allowedHTTPMethods:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: '<p>The HTTP methods that are processed and forwarded to the distribution''s origin.</p> <p>You can specify the following options:</p> <ul> <li> <p> <code>GET,HEAD</code> - The distribution forwards the <code>GET</code> and <code>HEAD</code> methods.</p> </li> <li> <p> <code>GET,HEAD,OPTIONS</code> - The distribution forwards the <code>GET</code>, <code>HEAD</code>, and <code>OPTIONS</code> methods.</p> </li> <li> <p> <code>GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE</code> - The distribution forwards the <code>GET</code>, <code>HEAD</code>, <code>OPTIONS</code>, <code>PUT</code>, <code>PATCH</code>, <code>POST</code>, and <code>DELETE</code> methods.</p> </li> </ul> <p>If you specify the third option, you might need to restrict access to your distribution''s origin so users can''t perform operations that you don''t want them to. For example, you might not want users to have permission to delete objects from your origin.</p>'
+        cachedHTTPMethods:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: '<p>The HTTP method responses that are cached by your distribution.</p> <p>You can specify the following options:</p> <ul> <li> <p> <code>GET,HEAD</code> - The distribution caches responses to the <code>GET</code> and <code>HEAD</code> methods.</p> </li> <li> <p> <code>GET,HEAD,OPTIONS</code> - The distribution caches responses to the <code>GET</code>, <code>HEAD</code>, and <code>OPTIONS</code> methods.</p> </li> </ul>'
+        forwardedCookies:
+          $ref: '#/components/schemas/CookieObject'
+          description: An object that describes the cookies that are forwarded to the origin. Your content is cached based on the cookies that are forwarded.
+        forwardedHeaders:
+          $ref: '#/components/schemas/HeaderObject'
+          description: An object that describes the headers that are forwarded to the origin. Your content is cached based on the headers that are forwarded.
+        forwardedQueryStrings:
+          $ref: '#/components/schemas/QueryStringObject'
+          description: An object that describes the query strings that are forwarded to the origin. Your content is cached based on the query strings that are forwarded.
+      description: <p>Describes the cache settings of an Amazon Lightsail content delivery network (CDN) distribution.</p> <p>These settings apply only to your distribution's <code>cacheBehaviors</code> (including the <code>defaultCacheBehavior</code>) that have a <code>behavior</code> of <code>cache</code>.</p>
+    CertificateName:
+      type: string
+    DomainName:
+      type: string
+    CertificateStatus:
+      type: string
+      enum:
+        - PENDING_VALIDATION
+        - ISSUED
+        - INACTIVE
+        - EXPIRED
+        - VALIDATION_TIMED_OUT
+        - REVOKED
+        - FAILED
+    SerialNumber:
+      type: string
+    SubjectAlternativeNameList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DomainName'
+    DomainValidationRecordList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DomainValidationRecord'
+    RequestFailureReason:
+      type: string
+    InUseResourceCount:
+      type: integer
+    KeyAlgorithm:
+      type: string
+    IssuerCA:
+      type: string
+    EligibleToRenew:
+      type: string
+    RenewalSummary:
+      type: object
+      properties:
+        domainValidationRecords:
+          $ref: '#/components/schemas/DomainValidationRecordList'
+          description: An array of objects that describe the domain validation records of the certificate.
+        renewalStatus:
+          $ref: '#/components/schemas/RenewalStatus'
+          description: '<p>The renewal status of the certificate.</p> <p>The following renewal status are possible:</p> <ul> <li> <p> <b> <code>PendingAutoRenewal</code> </b> - Lightsail is attempting to automatically validate the domain names of the certificate. No further action is required. </p> </li> <li> <p> <b> <code>PendingValidation</code> </b> - Lightsail couldn''t automatically validate one or more domain names of the certificate. You must take action to validate these domain names or the certificate won''t be renewed. Check to make sure your certificate''s domain validation records exist in your domain''s DNS, and that your certificate remains in use.</p> </li> <li> <p> <b> <code>Success</code> </b> - All domain names in the certificate are validated, and Lightsail renewed the certificate. No further action is required. </p> </li> <li> <p> <b> <code>Failed</code> </b> - One or more domain names were not validated before the certificate expired, and Lightsail did not renew the certificate. You can request a new certificate using the <code>CreateCertificate</code> action.</p> </li> </ul>'
+        renewalStatusReason:
+          $ref: '#/components/schemas/RenewalStatusReason'
+          description: The reason for the renewal status of the certificate.
+        updatedAt:
+          $ref: '#/components/schemas/IsoDate'
+          description: The timestamp when the certificate was last updated.
+      description: Describes the status of a SSL/TLS certificate renewal managed by Amazon Lightsail.
+    RevocationReason:
+      type: string
+    TagList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Tag'
+    Certificate:
+      type: object
+      properties:
+        arn:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The Amazon Resource Name (ARN) of the certificate.
+        name:
+          $ref: '#/components/schemas/CertificateName'
+          description: 'The name of the certificate (e.g., <code>my-certificate</code>).'
+        domainName:
+          $ref: '#/components/schemas/DomainName'
+          description: The domain name of the certificate.
+        status:
+          $ref: '#/components/schemas/CertificateStatus'
+          description: The validation status of the certificate.
+        serialNumber:
+          $ref: '#/components/schemas/SerialNumber'
+          description: The serial number of the certificate.
+        subjectAlternativeNames:
+          $ref: '#/components/schemas/SubjectAlternativeNameList'
+          description: 'An array of strings that specify the alternate domains (e.g., <code>example2.com</code>) and subdomains (e.g., <code>blog.example.com</code>) of the certificate.'
+        domainValidationRecords:
+          $ref: '#/components/schemas/DomainValidationRecordList'
+          description: An array of objects that describe the domain validation records of the certificate.
+        requestFailureReason:
+          $ref: '#/components/schemas/RequestFailureReason'
+          description: '<p>The validation failure reason, if any, of the certificate.</p> <p>The following failure reasons are possible:</p> <ul> <li> <p> <b> <code>NO_AVAILABLE_CONTACTS</code> </b> - This failure applies to email validation, which is not available for Lightsail certificates.</p> </li> <li> <p> <b> <code>ADDITIONAL_VERIFICATION_REQUIRED</code> </b> - Lightsail requires additional information to process this certificate request. This can happen as a fraud-protection measure, such as when the domain ranks within the Alexa top 1000 websites. To provide the required information, use the <a href="https://console.aws.amazon.com/support/home">AWS Support Center</a> to contact AWS Support.</p> <note> <p>You cannot request a certificate for Amazon-owned domain names such as those ending in amazonaws.com, cloudfront.net, or elasticbeanstalk.com.</p> </note> </li> <li> <p> <b> <code>DOMAIN_NOT_ALLOWED</code> </b> - One or more of the domain names in the certificate request was reported as an unsafe domain by <a href="https://www.virustotal.com/gui/home/url">VirusTotal</a>. To correct the problem, search for your domain name on the <a href="https://www.virustotal.com/gui/home/url">VirusTotal</a> website. If your domain is reported as suspicious, see <a href="https://www.google.com/webmasters/hacked/?hl=en">Google Help for Hacked Websites</a> to learn what you can do.</p> <p>If you believe that the result is a false positive, notify the organization that is reporting the domain. VirusTotal is an aggregate of several antivirus and URL scanners and cannot remove your domain from a block list itself. After you correct the problem and the VirusTotal registry has been updated, request a new certificate.</p> <p>If you see this error and your domain is not included in the VirusTotal list, visit the <a href="https://console.aws.amazon.com/support/home">AWS Support Center</a> and create a case.</p> </li> <li> <p> <b> <code>INVALID_PUBLIC_DOMAIN</code> </b> - One or more of the domain names in the certificate request is not valid. Typically, this is because a domain name in the request is not a valid top-level domain. Try to request a certificate again, correcting any spelling errors or typos that were in the failed request, and ensure that all domain names in the request are for valid top-level domains. For example, you cannot request a certificate for <code>example.invalidpublicdomain</code> because <code>invalidpublicdomain</code> is not a valid top-level domain.</p> </li> <li> <p> <b> <code>OTHER</code> </b> - Typically, this failure occurs when there is a typographical error in one or more of the domain names in the certificate request. Try to request a certificate again, correcting any spelling errors or typos that were in the failed request. </p> </li> </ul>'
+        inUseResourceCount:
+          $ref: '#/components/schemas/InUseResourceCount'
+          description: The number of Lightsail resources that the certificate is attached to.
+        keyAlgorithm:
+          $ref: '#/components/schemas/KeyAlgorithm'
+          description: The algorithm used to generate the key pair (the public and private key) of the certificate.
+        createdAt:
+          $ref: '#/components/schemas/IsoDate'
+          description: The timestamp when the certificate was created.
+        issuedAt:
+          $ref: '#/components/schemas/IsoDate'
+          description: The timestamp when the certificate was issued.
+        issuerCA:
+          $ref: '#/components/schemas/IssuerCA'
+          description: The certificate authority that issued the certificate.
+        notBefore:
+          $ref: '#/components/schemas/IsoDate'
+          description: The timestamp when the certificate is first valid.
+        notAfter:
+          $ref: '#/components/schemas/IsoDate'
+          description: The timestamp when the certificate expires.
+        eligibleToRenew:
+          $ref: '#/components/schemas/EligibleToRenew'
+          description: The renewal eligibility of the certificate.
+        renewalSummary:
+          $ref: '#/components/schemas/RenewalSummary'
+          description: An object that describes the status of the certificate renewal managed by Lightsail.
+        revokedAt:
+          $ref: '#/components/schemas/IsoDate'
+          description: The timestamp when the certificate was revoked. This value is present only when the certificate status is <code>REVOKED</code>.
+        revocationReason:
+          $ref: '#/components/schemas/RevocationReason'
+          description: The reason the certificate was revoked. This value is present only when the certificate status is <code>REVOKED</code>.
+        tags:
+          $ref: '#/components/schemas/TagList'
+          description: 'The tag keys and optional values for the resource. For more information about tags in Lightsail, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags">Lightsail Dev Guide</a>.'
+        supportCode:
+          $ref: '#/components/schemas/string'
+          description: The support code. Include this code in your email to support when you have questions about your Lightsail certificate. This code enables our support team to look up your Lightsail information more easily.
+      description: '<p>Describes the full details of an Amazon Lightsail SSL/TLS certificate.</p> <note> <p>To get a summary of a certificate, use the <code>GetCertificates</code> action and ommit <code>includeCertificateDetails</code> from your request. The response will include only the certificate Amazon Resource Name (ARN), certificate name, domain name, and tags.</p> </note>'
+    CertificateStatusList:
+      type: array
+      items:
+        $ref: '#/components/schemas/CertificateStatus'
+    CertificateSummary:
+      type: object
+      properties:
+        certificateArn:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The Amazon Resource Name (ARN) of the certificate.
+        certificateName:
+          $ref: '#/components/schemas/CertificateName'
+          description: The name of the certificate.
+        domainName:
+          $ref: '#/components/schemas/DomainName'
+          description: The domain name of the certificate.
+        certificateDetail:
+          $ref: '#/components/schemas/Certificate'
+          description: An object that describes a certificate in detail.
+        tags:
+          $ref: '#/components/schemas/TagList'
+          description: 'The tag keys and optional values for the resource. For more information about tags in Lightsail, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags">Lightsail Dev Guide</a>.'
+      description: Describes an Amazon Lightsail SSL/TLS certificate.
+    CertificateSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/CertificateSummary'
     PortInfo:
       type: object
       properties:
@@ -11338,46 +12863,6 @@ components:
           $ref: '#/components/schemas/StringList'
           description: '<p>An alias that defines access for a preconfigured range of IP addresses.</p> <p>The only alias currently supported is <code>lightsail-connect</code>, which allows IP addresses of the browser-based RDP/SSH client in the Lightsail console to connect to your instance.</p>'
       description: 'Describes ports to open on an instance, the IP addresses allowed to connect to the instance through the ports, and the protocol.'
-    Operation:
-      type: object
-      properties:
-        id:
-          $ref: '#/components/schemas/NonEmptyString'
-          description: The ID of the operation.
-        resourceName:
-          $ref: '#/components/schemas/ResourceName'
-          description: The resource name.
-        resourceType:
-          $ref: '#/components/schemas/ResourceType'
-          description: 'The resource type. '
-        createdAt:
-          $ref: '#/components/schemas/IsoDate'
-          description: 'The timestamp when the operation was initialized (e.g., <code>1479816991.349</code>).'
-        location:
-          $ref: '#/components/schemas/ResourceLocation'
-          description: The AWS Region and Availability Zone.
-        isTerminal:
-          $ref: '#/components/schemas/boolean'
-          description: A Boolean value indicating whether the operation is terminal.
-        operationDetails:
-          $ref: '#/components/schemas/string'
-          description: 'Details about the operation (e.g., <code>Debian-1GB-Ohio-1</code>).'
-        operationType:
-          $ref: '#/components/schemas/OperationType'
-          description: 'The type of operation. '
-        status:
-          $ref: '#/components/schemas/OperationStatus'
-          description: 'The status of the operation. '
-        statusChangedAt:
-          $ref: '#/components/schemas/IsoDate'
-          description: 'The timestamp when the status was changed (e.g., <code>1479816991.349</code>).'
-        errorCode:
-          $ref: '#/components/schemas/string'
-          description: The error code.
-        errorDetails:
-          $ref: '#/components/schemas/string'
-          description: The error details.
-      description: Describes the API operation.
     RecordState:
       type: string
       enum:
@@ -11496,6 +12981,16 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ContactMethod'
+    ForwardValues:
+      type: string
+      enum:
+        - none
+        - allow-list
+        - all
+    StringList:
+      type: array
+      items:
+        $ref: '#/components/schemas/string'
     RegionName:
       type: string
       enum:
@@ -11521,12 +13016,80 @@ components:
       type: string
       minLength: 1
       maxLength: 256
-    TagList:
-      type: array
-      items:
-        $ref: '#/components/schemas/Tag'
-    DomainName:
-      type: string
+    InputOrigin:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the origin resource.
+        regionName:
+          $ref: '#/components/schemas/RegionName'
+          description: The AWS Region name of the origin resource.
+        protocolPolicy:
+          $ref: '#/components/schemas/OriginProtocolPolicyEnum'
+          description: The protocol that your Amazon Lightsail distribution uses when establishing a connection with your origin to pull content.
+      description: '<p>Describes the origin resource of an Amazon Lightsail content delivery network (CDN) distribution.</p> <p>An origin can be a Lightsail instance or load balancer. A distribution pulls content from an origin, caches it, and serves it to viewers via a worldwide network of edge servers.</p>'
+    LightsailDistribution:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the distribution.
+        arn:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The Amazon Resource Name (ARN) of the distribution.
+        supportCode:
+          $ref: '#/components/schemas/string'
+          description: The support code. Include this code in your email to support when you have questions about your Lightsail distribution. This code enables our support team to look up your Lightsail information more easily.
+        createdAt:
+          $ref: '#/components/schemas/IsoDate'
+          description: The timestamp when the distribution was created.
+        location:
+          $ref: '#/components/schemas/ResourceLocation'
+          description: '<p>An object that describes the location of the distribution, such as the AWS Region and Availability Zone.</p> <note> <p>Lightsail distributions are global resources that can reference an origin in any AWS Region, and distribute its content globally. However, all distributions are located in the <code>us-east-1</code> Region.</p> </note>'
+        resourceType:
+          $ref: '#/components/schemas/ResourceType'
+          description: 'The Lightsail resource type (e.g., <code>Distribution</code>).'
+        alternativeDomainNames:
+          $ref: '#/components/schemas/StringList'
+          description: The alternate domain names of the distribution.
+        status:
+          $ref: '#/components/schemas/string'
+          description: The status of the distribution.
+        isEnabled:
+          $ref: '#/components/schemas/boolean'
+          description: Indicates whether the distribution is enabled.
+        domainName:
+          $ref: '#/components/schemas/string'
+          description: The domain name of the distribution.
+        bundleId:
+          $ref: '#/components/schemas/string'
+          description: The ID of the bundle currently applied to the distribution.
+        certificateName:
+          $ref: '#/components/schemas/ResourceName'
+          description: 'The name of the SSL/TLS certificate attached to the distribution, if any.'
+        origin:
+          $ref: '#/components/schemas/Origin'
+          description: '<p>An object that describes the origin resource of the distribution, such as a Lightsail instance or load balancer.</p> <p>The distribution pulls, caches, and serves content from the origin.</p>'
+        originPublicDNS:
+          $ref: '#/components/schemas/string'
+          description: The public DNS of the origin.
+        defaultCacheBehavior:
+          $ref: '#/components/schemas/CacheBehavior'
+          description: An object that describes the default cache behavior of the distribution.
+        cacheBehaviorSettings:
+          $ref: '#/components/schemas/CacheSettings'
+          description: An object that describes the cache behavior settings of the distribution.
+        cacheBehaviors:
+          $ref: '#/components/schemas/CacheBehaviorList'
+          description: An array of objects that describe the per-path cache behavior of the distribution.
+        ableToUpdateBundle:
+          $ref: '#/components/schemas/boolean'
+          description: '<p>Indicates whether the bundle that is currently applied to your distribution, specified using the <code>distributionName</code> parameter, can be changed to another bundle.</p> <p>Use the <code>UpdateDistributionBundle</code> action to change your distribution''s bundle.</p>'
+        tags:
+          $ref: '#/components/schemas/TagList'
+          description: 'The tag keys and optional values for the resource. For more information about tags in Lightsail, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags">Lightsail Dev Guide</a>.'
+      description: Describes an Amazon Lightsail content delivery network (CDN) distribution.
     DomainEntry:
       type: object
       properties:
@@ -11550,10 +13113,6 @@ components:
           $ref: '#/components/schemas/DomainEntryOptions'
           description: '<p>(Deprecated) The options for the domain entry.</p> <note> <p>In releases prior to November 29, 2017, this parameter was not included in the API response. It is now deprecated.</p> </note>'
       description: Describes a domain recordset entry.
-    StringList:
-      type: array
-      items:
-        $ref: '#/components/schemas/string'
     KeyPair:
       type: object
       properties:
@@ -11759,6 +13318,42 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/DiskSnapshot'
+    DistributionBundle:
+      type: object
+      properties:
+        bundleId:
+          $ref: '#/components/schemas/string'
+          description: The ID of the bundle.
+        name:
+          $ref: '#/components/schemas/string'
+          description: The name of the distribution bundle.
+        price:
+          $ref: '#/components/schemas/float'
+          description: 'The monthly price, in US dollars, of the bundle.'
+        transferPerMonthInGb:
+          $ref: '#/components/schemas/integer'
+          description: The monthly network transfer quota of the bundle.
+        isActive:
+          $ref: '#/components/schemas/boolean'
+          description: 'Indicates whether the bundle is active, and can be specified for a new distribution.'
+      description: Describes the specifications of a distribution bundle.
+    DistributionBundleList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DistributionBundle'
+    DistributionList:
+      type: array
+      items:
+        $ref: '#/components/schemas/LightsailDistribution'
+    DistributionMetricName:
+      type: string
+      enum:
+        - Requests
+        - BytesDownloaded
+        - BytesUploaded
+        - TotalErrorRate
+        - Http4xxErrorRate
+        - Http5xxErrorRate
     DomainEntryList:
       type: array
       items:
@@ -11803,6 +13398,29 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Domain'
+    ResourceRecord:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/string'
+          description: The name of the record.
+        type:
+          $ref: '#/components/schemas/string'
+          description: The DNS record type.
+        value:
+          $ref: '#/components/schemas/string'
+          description: The value for the DNS record.
+      description: Describes the domain name system (DNS) records to add to your domain's DNS to validate it for an Amazon Lightsail certificate.
+    DomainValidationRecord:
+      type: object
+      properties:
+        domainName:
+          $ref: '#/components/schemas/DomainName'
+          description: 'The domain name of the certificate validation record. For example, <code>example.com</code> or <code>www.example.com</code>.'
+        resourceRecord:
+          $ref: '#/components/schemas/ResourceRecord'
+          description: An object that describes the DNS records to add to your domain's DNS to validate it for the certificate.
+      description: Describes the domain validation records of an Amazon Lightsail SSL/TLS certificate.
     ExportSnapshotRecordSourceInfo:
       type: object
       properties:
@@ -11881,6 +13499,19 @@ components:
           $ref: '#/components/schemas/DiskInfoList'
           description: A list of objects describing the disks that were attached to the source instance.
       description: Describes an instance snapshot.
+    IncludeCertificateDetails:
+      type: boolean
+    timestamp:
+      type: string
+      format: date-time
+    MetricStatisticList:
+      type: array
+      items:
+        $ref: '#/components/schemas/MetricStatistic'
+    MetricDatapointList:
+      type: array
+      items:
+        $ref: '#/components/schemas/MetricDatapoint'
     InstanceAccessProtocol:
       type: string
       enum:
@@ -11931,17 +13562,6 @@ components:
         - StatusCheckFailed_System
         - BurstCapacityTime
         - BurstCapacityPercentage
-    timestamp:
-      type: string
-      format: date-time
-    MetricStatisticList:
-      type: array
-      items:
-        $ref: '#/components/schemas/MetricStatistic'
-    MetricDatapointList:
-      type: array
-      items:
-        $ref: '#/components/schemas/MetricDatapoint'
     InstancePortStateList:
       type: array
       items:
@@ -11960,7 +13580,7 @@ components:
           description: The support code. Include this code in your email to support when you have questions about an instance or another resource in Lightsail. This code enables our support team to look up your Lightsail information more easily.
         createdAt:
           $ref: '#/components/schemas/IsoDate'
-          description: 'The timestamp when the instance was created (e.g., <code>1479734909.17</code>).'
+          description: 'The timestamp when the instance was created (e.g., <code>1479734909.17</code>) in Unix time format.'
         location:
           $ref: '#/components/schemas/ResourceLocation'
           description: The region name and Availability Zone where the instance is located.
@@ -12372,6 +13992,28 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/StaticIp'
+    HeaderEnum:
+      type: string
+      enum:
+        - Accept
+        - Accept-Charset
+        - Accept-Datetime
+        - Accept-Encoding
+        - Accept-Language
+        - Authorization
+        - CloudFront-Forwarded-Proto
+        - CloudFront-Is-Desktop-Viewer
+        - CloudFront-Is-Mobile-Viewer
+        - CloudFront-Is-SmartTV-Viewer
+        - CloudFront-Is-Tablet-Viewer
+        - CloudFront-Viewer-Country
+        - Host
+        - Origin
+        - Referer
+    HeaderForwardList:
+      type: array
+      items:
+        $ref: '#/components/schemas/HeaderEnum'
     HostKeyAttributes:
       type: object
       properties:
@@ -12401,6 +14043,11 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/HostKeyAttributes'
+    OriginProtocolPolicyEnum:
+      type: string
+      enum:
+        - http-only
+        - https-only
     IpAddress:
       type: string
       pattern: '([0-9]{1,3}\.){3}[0-9]{1,3}'
@@ -12598,6 +14245,22 @@ components:
         - pending
         - error
         - available
+    Origin:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the origin resource.
+        resourceType:
+          $ref: '#/components/schemas/ResourceType'
+          description: 'The resource type of the origin resource (e.g., <i>Instance</i>).'
+        regionName:
+          $ref: '#/components/schemas/RegionName'
+          description: The AWS Region name of the origin resource.
+        protocolPolicy:
+          $ref: '#/components/schemas/OriginProtocolPolicyEnum'
+          description: The protocol that your Amazon Lightsail distribution uses when establishing a connection with your origin to pull content.
+      description: '<p>Describes the origin resource of an Amazon Lightsail content delivery network (CDN) distribution.</p> <p>An origin can be a Lightsail instance or load balancer. A distribution pulls content from an origin, caches it, and serves it to viewers via a worldwide network of edge servers.</p>'
     LoadBalancerState:
       type: string
       enum:
@@ -12657,11 +14320,11 @@ components:
       properties:
         renewalStatus:
           $ref: '#/components/schemas/LoadBalancerTlsCertificateRenewalStatus'
-          description: The status of Lightsail's managed renewal of the certificate. Valid values are listed below.
+          description: '<p>The renewal status of the certificate.</p> <p>The following renewal status are possible:</p> <ul> <li> <p> <b> <code>PendingAutoRenewal</code> </b> - Lightsail is attempting to automatically validate the domain names of the certificate. No further action is required. </p> </li> <li> <p> <b> <code>PendingValidation</code> </b> - Lightsail couldn''t automatically validate one or more domain names of the certificate. You must take action to validate these domain names or the certificate won''t be renewed. Check to make sure your certificate''s domain validation records exist in your domain''s DNS, and that your certificate remains in use.</p> </li> <li> <p> <b> <code>Success</code> </b> - All domain names in the certificate are validated, and Lightsail renewed the certificate. No further action is required. </p> </li> <li> <p> <b> <code>Failed</code> </b> - One or more domain names were not validated before the certificate expired, and Lightsail did not renew the certificate. You can request a new certificate using the <code>CreateCertificate</code> action.</p> </li> </ul>'
         domainValidationOptions:
           $ref: '#/components/schemas/LoadBalancerTlsCertificateDomainValidationOptionList'
           description: 'Contains information about the validation of each domain name in the certificate, as it pertains to Lightsail''s managed renewal. This is different from the initial validation that occurs as a result of the RequestCertificate request.'
-      description: Contains information about the status of Lightsail's managed renewal for the certificate.
+      description: '<p>Contains information about the status of Lightsail''s managed renewal for the certificate.</p> <p>The renewal status of the certificate.</p> <p>The following renewal status are possible:</p> <ul> <li> <p> <b> <code>PendingAutoRenewal</code> </b> - Lightsail is attempting to automatically validate the domain names in the certificate. No further action is required. </p> </li> <li> <p> <b> <code>PendingValidation</code> </b> - Lightsail couldn''t automatically validate one or more domain names in the certificate. You must take action to validate these domain names or the certificate won''t be renewed. If you used DNS validation, check to make sure your certificate''s domain validation records exist in your domain''s DNS, and that your certificate remains in use.</p> </li> <li> <p> <b> <code>Success</code> </b> - All domain names in the certificate are validated, and Lightsail renewed the certificate. No further action is required. </p> </li> <li> <p> <b> <code>Failed</code> </b> - One or more domain names were not validated before the certificate expired, and Lightsail did not renew the certificate. You can request a new certificate using the <code>CreateCertificate</code> action.</p> </li> </ul>'
     LoadBalancerTlsCertificateRevocationReason:
       type: string
       enum:
@@ -12716,7 +14379,7 @@ components:
           description: An array of LoadBalancerTlsCertificateDomainValidationRecord objects describing the records.
         failureReason:
           $ref: '#/components/schemas/LoadBalancerTlsCertificateFailureReason'
-          description: The reason for the SSL/TLS certificate validation failure.
+          description: '<p>The validation failure reason, if any, of the certificate.</p> <p>The following failure reasons are possible:</p> <ul> <li> <p> <b> <code>NO_AVAILABLE_CONTACTS</code> </b> - This failure applies to email validation, which is not available for Lightsail certificates.</p> </li> <li> <p> <b> <code>ADDITIONAL_VERIFICATION_REQUIRED</code> </b> - Lightsail requires additional information to process this certificate request. This can happen as a fraud-protection measure, such as when the domain ranks within the Alexa top 1000 websites. To provide the required information, use the <a href="https://console.aws.amazon.com/support/home">AWS Support Center</a> to contact AWS Support.</p> <note> <p>You cannot request a certificate for Amazon-owned domain names such as those ending in amazonaws.com, cloudfront.net, or elasticbeanstalk.com.</p> </note> </li> <li> <p> <b> <code>DOMAIN_NOT_ALLOWED</code> </b> - One or more of the domain names in the certificate request was reported as an unsafe domain by <a href="https://www.virustotal.com/gui/home/url">VirusTotal</a>. To correct the problem, search for your domain name on the <a href="https://www.virustotal.com/gui/home/url">VirusTotal</a> website. If your domain is reported as suspicious, see <a href="https://www.google.com/webmasters/hacked/?hl=en">Google Help for Hacked Websites</a> to learn what you can do.</p> <p>If you believe that the result is a false positive, notify the organization that is reporting the domain. VirusTotal is an aggregate of several antivirus and URL scanners and cannot remove your domain from a block list itself. After you correct the problem and the VirusTotal registry has been updated, request a new certificate.</p> <p>If you see this error and your domain is not included in the VirusTotal list, visit the <a href="https://console.aws.amazon.com/support/home">AWS Support Center</a> and create a case.</p> </li> <li> <p> <b> <code>INVALID_PUBLIC_DOMAIN</code> </b> - One or more of the domain names in the certificate request is not valid. Typically, this is because a domain name in the request is not a valid top-level domain. Try to request a certificate again, correcting any spelling errors or typos that were in the failed request, and ensure that all domain names in the request are for valid top-level domains. For example, you cannot request a certificate for <code>example.invalidpublicdomain</code> because <code>invalidpublicdomain</code> is not a valid top-level domain.</p> </li> <li> <p> <b> <code>OTHER</code> </b> - Typically, this failure occurs when there is a typographical error in one or more of the domain names in the certificate request. Try to request a certificate again, correcting any spelling errors or typos that were in the failed request. </p> </li> </ul>'
         issuedAt:
           $ref: '#/components/schemas/IsoDate'
           description: The time when the SSL/TLS certificate was issued.
@@ -12725,7 +14388,7 @@ components:
           description: The issuer of the certificate.
         keyAlgorithm:
           $ref: '#/components/schemas/NonEmptyString'
-          description: The algorithm that was used to generate the key pair (the public and private key).
+          description: The algorithm used to generate the key pair (the public and private key).
         notAfter:
           $ref: '#/components/schemas/IsoDate'
           description: The timestamp when the SSL/TLS certificate expires.
@@ -12734,13 +14397,13 @@ components:
           description: The timestamp when the SSL/TLS certificate is first valid.
         renewalSummary:
           $ref: '#/components/schemas/LoadBalancerTlsCertificateRenewalSummary'
-          description: An object containing information about the status of Lightsail's managed renewal for the certificate.
+          description: An object that describes the status of the certificate renewal managed by Lightsail.
         revocationReason:
           $ref: '#/components/schemas/LoadBalancerTlsCertificateRevocationReason'
-          description: The reason the certificate was revoked. Valid values are below.
+          description: The reason the certificate was revoked. This value is present only when the certificate status is <code>REVOKED</code>.
         revokedAt:
           $ref: '#/components/schemas/IsoDate'
-          description: The timestamp when the SSL/TLS certificate was revoked.
+          description: The timestamp when the certificate was revoked. This value is present only when the certificate status is <code>REVOKED</code>.
         serial:
           $ref: '#/components/schemas/NonEmptyString'
           description: The serial number of the certificate.
@@ -12752,7 +14415,7 @@ components:
           description: The name of the entity that is associated with the public key contained in the certificate.
         subjectAlternativeNames:
           $ref: '#/components/schemas/StringList'
-          description: 'One or more domains or subdomains included in the certificate. This list contains the domain names that are bound to the public key that is contained in the certificate. The subject alternative names include the canonical domain name (CNAME) of the certificate and additional domain names that can be used to connect to the website, such as <code>example.com</code>, <code>www.example.com</code>, or <code>m.example.com</code>.'
+          description: 'An array of strings that specify the alternate domains (e.g., <code>example2.com</code>) and subdomains (e.g., <code>blog.example.com</code>) for the certificate.'
       description: '<p>Describes a load balancer SSL/TLS certificate.</p> <p>TLS is just an updated, more secure version of Secure Socket Layer (SSL).</p>'
     LoadBalancerTlsCertificateDomainStatus:
       type: string
@@ -12906,6 +14569,15 @@ components:
         - GetContactMethods
         - SendContactMethodVerification
         - DeleteContactMethod
+        - CreateDistribution
+        - UpdateDistribution
+        - DeleteDistribution
+        - ResetDistributionCache
+        - AttachCertificateToDistribution
+        - DetachCertificateFromDistribution
+        - UpdateDistributionBundle
+        - CreateCertificate
+        - DeleteCertificate
     OperationStatus:
       type: string
       enum:
@@ -13094,6 +14766,15 @@ components:
           $ref: '#/components/schemas/string'
           description: Specifies the value of the parameter.
       description: Describes the parameters of a database.
+    RenewalStatus:
+      type: string
+      enum:
+        - PendingAutoRenewal
+        - PendingValidation
+        - Success
+        - Failed
+    RenewalStatusReason:
+      type: string
     TagKey:
       type: string
     TagValue:

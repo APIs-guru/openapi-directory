@@ -585,7 +585,7 @@ paths:
   /#X-Amz-Target=WorkspacesService.DeleteWorkspaceImage:
     post:
       operationId: DeleteWorkspaceImage
-      description: 'Deletes the specified image from your account. To delete an image, you must first delete any bundles that are associated with the image and un-share the image if it is shared with other accounts. '
+      description: 'Deletes the specified image from your account. To delete an image, you must first delete any bundles that are associated with the image and unshare the image if it is shared with other accounts. '
       responses:
         '200':
           description: Success
@@ -991,6 +991,57 @@ paths:
             type: string
             enum:
               - WorkspacesService.DescribeWorkspaceDirectories
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=WorkspacesService.DescribeWorkspaceImagePermissions:
+    post:
+      operationId: DescribeWorkspaceImagePermissions
+      description: Describes the permissions that the owner of an image has granted to other AWS accounts for an image.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeWorkspaceImagePermissionsResult'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: InvalidParameterValuesException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValuesException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeWorkspaceImagePermissionsRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - WorkspacesService.DescribeWorkspaceImagePermissions
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1689,7 +1740,7 @@ paths:
   /#X-Amz-Target=WorkspacesService.ModifyWorkspaceProperties:
     post:
       operationId: ModifyWorkspaceProperties
-      description: Modifies the specified WorkSpace properties.
+      description: 'Modifies the specified WorkSpace properties. For important information about how to modify the size of the root and user volumes, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/modify-workspaces.html"> Modify a WorkSpace</a>. '
       responses:
         '200':
           description: Success
@@ -1848,7 +1899,7 @@ paths:
   /#X-Amz-Target=WorkspacesService.RebuildWorkspaces:
     post:
       operationId: RebuildWorkspaces
-      description: '<p>Rebuilds the specified WorkSpace.</p> <p>You cannot rebuild a WorkSpace unless its state is <code>AVAILABLE</code>, <code>ERROR</code>, <code>UNHEALTHY</code>, or <code>STOPPED</code>.</p> <p>Rebuilding a WorkSpace is a potentially destructive action that can result in the loss of data. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/reset-workspace.html">Rebuild a WorkSpace</a>.</p> <p>This operation is asynchronous and returns before the WorkSpaces have been completely rebuilt.</p>'
+      description: '<p>Rebuilds the specified WorkSpace.</p> <p>You cannot rebuild a WorkSpace unless its state is <code>AVAILABLE</code>, <code>ERROR</code>, <code>UNHEALTHY</code>, <code>STOPPED</code>, or <code>REBOOTING</code>.</p> <p>Rebuilding a WorkSpace is a potentially destructive action that can result in the loss of data. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/reset-workspace.html">Rebuild a WorkSpace</a>.</p> <p>This operation is asynchronous and returns before the WorkSpaces have been completely rebuilt.</p>'
       responses:
         '200':
           description: Success
@@ -2229,6 +2280,69 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=WorkspacesService.UpdateWorkspaceImagePermission:
+    post:
+      operationId: UpdateWorkspaceImagePermission
+      description: '<p>Shares or unshares an image with one account by specifying whether that account has permission to copy the image. If the copy image permission is granted, the image is shared with that account. If the copy image permission is revoked, the image is unshared with the account.</p> <note> <ul> <li> <p>To delete an image that has been shared, you must unshare the image before you delete it.</p> </li> <li> <p>Sharing Bring Your Own License (BYOL) images across AWS accounts isn''t supported at this time in the AWS GovCloud (US-West) Region. To share BYOL images across accounts in the AWS GovCloud (US-West) Region, contact AWS Support.</p> </li> </ul> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateWorkspaceImagePermissionResult'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ResourceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceUnavailableException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: InvalidParameterValuesException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValuesException'
+        '484':
+          description: OperationNotSupportedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationNotSupportedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateWorkspaceImagePermissionRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - WorkspacesService.UpdateWorkspaceImagePermission
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
 components:
   parameters:
     X-Amz-Content-Sha256:
@@ -2587,6 +2701,33 @@ components:
         NextToken:
           $ref: '#/components/schemas/PaginationToken'
           description: 'If you received a <code>NextToken</code> from a previous call that was paginated, provide this token to receive the next set of results.'
+    DescribeWorkspaceImagePermissionsResult:
+      type: object
+      properties:
+        ImageId:
+          $ref: '#/components/schemas/WorkspaceImageId'
+          description: The identifier of the image.
+        ImagePermissions:
+          $ref: '#/components/schemas/ImagePermissions'
+          description: The identifiers of the AWS accounts that the image has been shared with.
+        NextToken:
+          $ref: '#/components/schemas/PaginationToken'
+          description: 'The token to use to retrieve the next set of results, or null if no more results are available.'
+    DescribeWorkspaceImagePermissionsRequest:
+      type: object
+      required:
+        - ImageId
+      title: DescribeWorkspaceImagePermissionsRequest
+      properties:
+        ImageId:
+          $ref: '#/components/schemas/WorkspaceImageId'
+          description: The identifier of the image.
+        NextToken:
+          $ref: '#/components/schemas/PaginationToken'
+          description: 'If you received a <code>NextToken</code> from a previous call that was paginated, provide this token to receive the next set of results.'
+        MaxResults:
+          $ref: '#/components/schemas/Limit'
+          description: The maximum number of items to return.
     DescribeWorkspaceImagesResult:
       type: object
       properties:
@@ -2603,6 +2744,9 @@ components:
         ImageIds:
           $ref: '#/components/schemas/WorkspaceImageIdList'
           description: The identifier of the image.
+        ImageType:
+          $ref: '#/components/schemas/ImageType'
+          description: The type (owned or shared) of the image.
         NextToken:
           $ref: '#/components/schemas/PaginationToken'
           description: 'If you received a <code>NextToken</code> from a previous call that was paginated, provide this token to receive the next set of results.'
@@ -3029,6 +3173,26 @@ components:
         UserRules:
           $ref: '#/components/schemas/IpRuleList'
           description: One or more rules.
+    UpdateWorkspaceImagePermissionResult:
+      type: object
+      properties: {}
+    UpdateWorkspaceImagePermissionRequest:
+      type: object
+      required:
+        - ImageId
+        - AllowCopyImage
+        - SharedAccountId
+      title: UpdateWorkspaceImagePermissionRequest
+      properties:
+        ImageId:
+          $ref: '#/components/schemas/WorkspaceImageId'
+          description: The identifier of the image.
+        AllowCopyImage:
+          $ref: '#/components/schemas/BooleanObject'
+          description: The permission to copy the image. This permission can be revoked only after an image has been shared.
+        SharedAccountId:
+          $ref: '#/components/schemas/AwsAccount'
+          description: The identifier of the AWS account to share or unshare the image with.
     ARN:
       type: string
       pattern: '^arn:aws:[A-Za-z0-9][A-za-z0-9_/.-]{0,62}:[A-za-z0-9_/.-]{0,63}:[A-za-z0-9_/.-]{0,63}:[A-Za-z0-9][A-za-z0-9_/.-]{0,127}$'
@@ -3102,6 +3266,9 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/IpRuleItem'
+    AwsAccount:
+      type: string
+      pattern: '^\d{12}$'
     BooleanObject:
       type: boolean
     BundleId:
@@ -3273,7 +3440,7 @@ components:
           description: The organizational unit (OU) in the directory for the WorkSpace machine accounts.
         CustomSecurityGroupId:
           $ref: '#/components/schemas/SecurityGroupId'
-          description: The identifier of any security groups to apply to WorkSpaces when they are created.
+          description: 'The identifier of the default security group to apply to WorkSpaces when they are created. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/amazon-workspaces-security-groups.html"> Security Groups for Your WorkSpaces</a>.'
         UserEnabledAsLocalAdministrator:
           $ref: '#/components/schemas/BooleanObject'
           description: Specifies whether WorkSpace users are local administrators on their WorkSpaces.
@@ -3313,12 +3480,21 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/WorkspaceDirectory'
+    ImagePermissions:
+      type: array
+      items:
+        $ref: '#/components/schemas/ImagePermission'
     WorkspaceImageIdList:
       type: array
       items:
         $ref: '#/components/schemas/WorkspaceImageId'
       minItems: 1
       maxItems: 25
+    ImageType:
+      type: string
+      enum:
+        - OWNED
+        - SHARED
     WorkspaceImageList:
       type: array
       items:
@@ -3487,6 +3663,13 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/FailedWorkspaceChangeRequest'
+    ImagePermission:
+      type: object
+      properties:
+        SharedAccountId:
+          $ref: '#/components/schemas/AwsAccount'
+          description: The identifier of the AWS account that an image has been shared with.
+      description: Describes the AWS accounts that have been granted permission to use a shared image.
     WorkspaceImageIngestionProcess:
       type: string
       enum:
@@ -3617,10 +3800,10 @@ components:
           description: The time after a user logs off when WorkSpaces are automatically stopped. Configured in 60-minute intervals.
         RootVolumeSizeGib:
           $ref: '#/components/schemas/RootVolumeSizeGib'
-          description: The size of the root volume.
+          description: 'The size of the root volume. For important information about how to modify the size of the root and user volumes, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/modify-workspaces.html">Modify a WorkSpace</a>.'
         UserVolumeSizeGib:
           $ref: '#/components/schemas/UserVolumeSizeGib'
-          description: The size of the user storage.
+          description: 'The size of the user storage. For important information about how to modify the size of the root and user volumes, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/modify-workspaces.html">Modify a WorkSpace</a>.'
         ComputeTypeName:
           $ref: '#/components/schemas/Compute'
           description: 'The compute type. For more information, see <a href="http://aws.amazon.com/workspaces/details/#Amazon_WorkSpaces_Bundles">Amazon WorkSpaces Bundles</a>.'
@@ -3923,6 +4106,12 @@ components:
         ErrorMessage:
           $ref: '#/components/schemas/Description'
           description: The text of the error message that is returned for the image.
+        Created:
+          $ref: '#/components/schemas/Timestamp'
+          description: 'The date when the image was created. If the image has been shared, the AWS account that the image has been shared with sees the original creation date of the image.'
+        OwnerAccountId:
+          $ref: '#/components/schemas/AwsAccount'
+          description: The identifier of the AWS account that owns the image.
       description: Describes a WorkSpace image.
     WorkspacesIpGroup:
       type: object
