@@ -608,6 +608,9 @@ paths:
                         markers (comments) taken directly from the input HTTP Live Streaming (HLS) manifest.
                         "SCTE35_ENHANCED" generates ad markers and blackout tags based on SCTE-35
                         messages in the input source.
+                        "DATERANGE" inserts EXT-X-DATERANGE tags to signal ad and program transition events 
+                        in HLS and CMAF manifests. For this option, you must set a programDateTimeIntervalSeconds value 
+                        that is greater than 0.
                       $ref: '#/components/schemas/AdMarkers'
                     AdTriggers:
                       $ref: '#/components/schemas/AdTriggers'
@@ -1231,6 +1234,9 @@ paths:
                         markers (comments) taken directly from the input HTTP Live Streaming (HLS) manifest.
                         "SCTE35_ENHANCED" generates ad markers and blackout tags based on SCTE-35
                         messages in the input source.
+                        "DATERANGE" inserts EXT-X-DATERANGE tags to signal ad and program transition events 
+                        in HLS and CMAF manifests. For this option, you must set a programDateTimeIntervalSeconds value 
+                        that is greater than 0.
                       $ref: '#/components/schemas/AdMarkers'
                     AdTriggers:
                       $ref: '#/components/schemas/AdTriggers'
@@ -1848,6 +1854,7 @@ components:
         - NONE
         - SCTE35_ENHANCED
         - PASSTHROUGH
+        - DATERANGE
       type: string
     HlsEncryption:
       required:
@@ -2392,6 +2399,9 @@ components:
             markers (comments) taken directly from the input HTTP Live Streaming (HLS) manifest.
             "SCTE35_ENHANCED" generates ad markers and blackout tags based on SCTE-35
             messages in the input source.
+            "DATERANGE" inserts EXT-X-DATERANGE tags to signal ad and program transition events 
+            in HLS and CMAF manifests. For this option, you must set a programDateTimeIntervalSeconds value 
+            that is greater than 0.
           $ref: '#/components/schemas/AdMarkers'
         AdTriggers:
           $ref: '#/components/schemas/AdTriggers'
@@ -2459,8 +2469,8 @@ components:
         $ref: '#/components/schemas/__string'
     CreateOriginEndpointRequest:
       required:
-        - Id
         - ChannelId
+        - Id
       type: object
       title: CreateOriginEndpointRequest
       properties:
@@ -2596,6 +2606,9 @@ components:
             markers (comments) taken directly from the input HTTP Live Streaming (HLS) manifest.
             "SCTE35_ENHANCED" generates ad markers and blackout tags based on SCTE-35
             messages in the input source.
+            "DATERANGE" inserts EXT-X-DATERANGE tags to signal ad and program transition events 
+            in HLS and CMAF manifests. For this option, you must set a programDateTimeIntervalSeconds value 
+            that is greater than 0.
           $ref: '#/components/schemas/AdMarkers'
         Id:
           description: The ID of the manifest. The ID must be unique within the OriginEndpoint and it cannot be changed after it is created.
@@ -2644,6 +2657,9 @@ components:
             markers (comments) taken directly from the input HTTP Live Streaming (HLS) manifest.
             "SCTE35_ENHANCED" generates ad markers and blackout tags based on SCTE-35
             messages in the input source.
+            "DATERANGE" inserts EXT-X-DATERANGE tags to signal ad and program transition events 
+            in HLS and CMAF manifests. For this option, you must set a programDateTimeIntervalSeconds value 
+            that is greater than 0.
           $ref: '#/components/schemas/AdMarkers'
         AdTriggers:
           $ref: '#/components/schemas/AdTriggers'

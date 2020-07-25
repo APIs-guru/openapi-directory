@@ -1620,69 +1620,6 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  /#X-Amz-Target=AWSHawksNestServiceFacade.GetPrediction:
-    post:
-      operationId: GetPrediction
-      description: 'Evaluates an event against a detector version. If a version ID is not provided, the detector’s (<code>ACTIVE</code>) version is used. '
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GetPredictionResult'
-        '480':
-          description: ValidationException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ValidationException'
-        '481':
-          description: ResourceNotFoundException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ResourceNotFoundException'
-        '482':
-          description: InternalServerException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InternalServerException'
-        '483':
-          description: ThrottlingException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ThrottlingException'
-        '484':
-          description: AccessDeniedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AccessDeniedException'
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/GetPredictionRequest'
-      parameters:
-        - name: X-Amz-Target
-          in: header
-          required: true
-          schema:
-            type: string
-            enum:
-              - AWSHawksNestServiceFacade.GetPrediction
-    parameters:
-      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/components/parameters/X-Amz-Date'
-      - $ref: '#/components/parameters/X-Amz-Algorithm'
-      - $ref: '#/components/parameters/X-Amz-Credential'
-      - $ref: '#/components/parameters/X-Amz-Security-Token'
-      - $ref: '#/components/parameters/X-Amz-Signature'
-      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AWSHawksNestServiceFacade.GetRules:
     post:
       operationId: GetRules
@@ -3189,7 +3126,7 @@ components:
           description: The description.
         variableType:
           $ref: '#/components/schemas/string'
-          description: '<p>The variable type.</p> <p>Valid Values: <code>AUTH_CODE | AVS | BILLING_ADDRESS_L1 | BILLING_ADDRESS_L2 | BILLING_CITY | BILLING_COUNTRY | BILLING_NAME | BILLING_PHONE | BILLING_STATE | BILLING_ZIP | CARD_BIN | CATEGORICAL | CURRENCY_CODE | EMAIL_ADDRESS | FINGERPRINT | FRAUD_LABEL | FREE_FORM_TEXT | IP_ADDRESS | NUMERIC | ORDER_ID | PAYMENT_TYPE | PHONE_NUMBER | PRICE | PRODUCT_CATEGORY | SHIPPING_ADDRESS_L1 | SHIPPING_ADDRESS_L2 | SHIPPING_CITY | SHIPPING_COUNTRY | SHIPPING_NAME | SHIPPING_PHONE | SHIPPING_STATE | SHIPPING_ZIP | USERAGENT | SHIPPING_ZIP | USERAGENT</code> </p>'
+          description: '<p>The variable type. For more information see <a href="https://docs.aws.amazon.com/frauddetector/latest/ug/create-a-variable.html#variable-types">Variable types</a>. </p> <p>Valid Values: <code>AUTH_CODE | AVS | BILLING_ADDRESS_L1 | BILLING_ADDRESS_L2 | BILLING_CITY | BILLING_COUNTRY | BILLING_NAME | BILLING_PHONE | BILLING_STATE | BILLING_ZIP | CARD_BIN | CATEGORICAL | CURRENCY_CODE | EMAIL_ADDRESS | FINGERPRINT | FRAUD_LABEL | FREE_FORM_TEXT | IP_ADDRESS | NUMERIC | ORDER_ID | PAYMENT_TYPE | PHONE_NUMBER | PRICE | PRODUCT_CATEGORY | SHIPPING_ADDRESS_L1 | SHIPPING_ADDRESS_L2 | SHIPPING_CITY | SHIPPING_COUNTRY | SHIPPING_NAME | SHIPPING_PHONE | SHIPPING_STATE | SHIPPING_ZIP | USERAGENT | SHIPPING_ZIP | USERAGENT</code> </p>'
         tags:
           $ref: '#/components/schemas/tagList'
           description: A collection of key and value pairs.
@@ -3424,7 +3361,7 @@ components:
           $ref: '#/components/schemas/string'
           description: The detector ID.
         detectorVersionId:
-          $ref: '#/components/schemas/string'
+          $ref: '#/components/schemas/wholeNumberVersionString'
           description: The detector version ID.
         eventId:
           $ref: '#/components/schemas/string'
@@ -3607,40 +3544,6 @@ components:
         maxResults:
           $ref: '#/components/schemas/OutcomesMaxResults'
           description: 'The maximum number of objects to return for the request. '
-    GetPredictionResult:
-      type: object
-      properties:
-        outcomes:
-          $ref: '#/components/schemas/ListOfStrings'
-          description: The prediction outcomes.
-        modelScores:
-          $ref: '#/components/schemas/ListOfModelScores'
-          description: The model scores for models used in the detector version.
-        ruleResults:
-          $ref: '#/components/schemas/ListOfRuleResults'
-          description: The rule results in the prediction.
-    GetPredictionRequest:
-      type: object
-      required:
-        - detectorId
-        - eventId
-      title: GetPredictionRequest
-      properties:
-        detectorId:
-          $ref: '#/components/schemas/string'
-          description: 'The detector ID. '
-        detectorVersionId:
-          $ref: '#/components/schemas/string'
-          description: The detector version ID.
-        eventId:
-          $ref: '#/components/schemas/string'
-          description: The unique ID used to identify the event.
-        eventAttributes:
-          $ref: '#/components/schemas/EventAttributeMap'
-          description: Names of variables you defined in Amazon Fraud Detector to represent event data elements and their corresponding values for the event you are sending for evaluation.
-        externalModelEndpointDataBlobs:
-          $ref: '#/components/schemas/ExternalModelEndpointDataBlobMap'
-          description: The Amazon SageMaker model endpoint input data blobs.
     GetRulesResult:
       type: object
       properties:
@@ -3794,7 +3697,7 @@ components:
       required:
         - modelEndpoint
         - modelSource
-        - role
+        - invokeModelEndpointRoleArn
         - inputConfiguration
         - outputConfiguration
         - modelEndpointStatus
@@ -3809,8 +3712,8 @@ components:
         modelSource:
           $ref: '#/components/schemas/ModelSource'
           description: The source of the model.
-        role:
-          $ref: '#/components/schemas/Role'
+        invokeModelEndpointRoleArn:
+          $ref: '#/components/schemas/string'
           description: The IAM role used to invoke the model endpoint.
         inputConfiguration:
           $ref: '#/components/schemas/ModelInputConfiguration'
@@ -4127,7 +4030,7 @@ components:
           description: The new description.
         variableType:
           $ref: '#/components/schemas/string'
-          description: The variable type.
+          description: 'The variable type. For more information see <a href="https://docs.aws.amazon.com/frauddetector/latest/ug/create-a-variable.html#variable-types">Variable types</a>.'
     string:
       type: string
     integer:
@@ -4325,6 +4228,8 @@ components:
     wholeNumberVersionString:
       type: string
       pattern: '^([1-9][0-9]*)$'
+      minLength: 1
+      maxLength: 5
     DetectorVersionMaxResults:
       type: integer
       minimum: 1000
@@ -4341,6 +4246,8 @@ components:
     floatVersionString:
       type: string
       pattern: '^[1-9][0-9]{0,3}\.[0-9]{1,2}$'
+      minLength: 3
+      maxLength: 7
     modelsMaxPageSize:
       type: integer
       minimum: 1
@@ -4426,15 +4333,6 @@ components:
           $ref: '#/components/schemas/fraudDetectorArn'
           description: The entity type ARN.
       description: The entity type details.
-    attributeValue:
-      type: string
-      minLength: 1
-      maxLength: 256
-      format: password
-    EventAttributeMap:
-      type: object
-      additionalProperties:
-        $ref: '#/components/schemas/attributeValue'
     EventType:
       type: object
       properties:
@@ -4487,19 +4385,6 @@ components:
       type: string
       enum:
         - SAGEMAKER
-    Role:
-      type: object
-      required:
-        - arn
-        - name
-      properties:
-        arn:
-          $ref: '#/components/schemas/string'
-          description: The role ARN.
-        name:
-          $ref: '#/components/schemas/string'
-          description: The role name.
-      description: The role used to invoke external model endpoints.
     ModelInputConfiguration:
       type: object
       required:
@@ -4550,8 +4435,8 @@ components:
         modelSource:
           $ref: '#/components/schemas/ModelSource'
           description: The source of the model.
-        role:
-          $ref: '#/components/schemas/Role'
+        invokeModelEndpointRoleArn:
+          $ref: '#/components/schemas/string'
           description: 'The role used to invoke the model. '
         inputConfiguration:
           $ref: '#/components/schemas/ModelInputConfiguration'
@@ -4894,16 +4779,8 @@ components:
     ModelVersionStatus:
       type: string
       enum:
-        - TRAINING_IN_PROGRESS
-        - TRAINING_COMPLETE
-        - ACTIVATE_REQUESTED
-        - ACTIVATE_IN_PROGRESS
         - ACTIVE
-        - INACTIVATE_IN_PROGRESS
         - INACTIVE
-        - DELETE_REQUESTED
-        - DELETE_IN_PROGRESS
-        - ERROR
     Outcome:
       type: object
       properties:
@@ -5012,7 +4889,7 @@ components:
           description: The name of the variable.
         dataType:
           $ref: '#/components/schemas/DataType'
-          description: The data type of the variable.
+          description: 'The data type of the variable. For more information see <a href="https://docs.aws.amazon.com/frauddetector/latest/ug/create-a-variable.html#variable-types">Variable types</a>.'
         dataSource:
           $ref: '#/components/schemas/DataSource'
           description: The data source of the variable.
@@ -5055,12 +4932,8 @@ components:
           description: The description of the variable.
         variableType:
           $ref: '#/components/schemas/string'
-          description: '<p>The type of the variable.</p> <p>Valid Values: <code>AUTH_CODE | AVS | BILLING_ADDRESS_L1 | BILLING_ADDRESS_L2 | BILLING_CITY | BILLING_COUNTRY | BILLING_NAME | BILLING_PHONE | BILLING_STATE | BILLING_ZIP | CARD_BIN | CATEGORICAL | CURRENCY_CODE | EMAIL_ADDRESS | FINGERPRINT | FRAUD_LABEL | FREE_FORM_TEXT | IP_ADDRESS | NUMERIC | ORDER_ID | PAYMENT_TYPE | PHONE_NUMBER | PRICE | PRODUCT_CATEGORY | SHIPPING_ADDRESS_L1 | SHIPPING_ADDRESS_L2 | SHIPPING_CITY | SHIPPING_COUNTRY | SHIPPING_NAME | SHIPPING_PHONE | SHIPPING_STATE | SHIPPING_ZIP | USERAGENT | SHIPPING_ZIP | USERAGENT</code> </p>'
+          description: '<p>The type of the variable. For more information see <a href="https://docs.aws.amazon.com/frauddetector/latest/ug/create-a-variable.html#variable-types">Variable types</a>.</p> <p>Valid Values: <code>AUTH_CODE | AVS | BILLING_ADDRESS_L1 | BILLING_ADDRESS_L2 | BILLING_CITY | BILLING_COUNTRY | BILLING_NAME | BILLING_PHONE | BILLING_STATE | BILLING_ZIP | CARD_BIN | CATEGORICAL | CURRENCY_CODE | EMAIL_ADDRESS | FINGERPRINT | FRAUD_LABEL | FREE_FORM_TEXT | IP_ADDRESS | NUMERIC | ORDER_ID | PAYMENT_TYPE | PHONE_NUMBER | PRICE | PRODUCT_CATEGORY | SHIPPING_ADDRESS_L1 | SHIPPING_ADDRESS_L2 | SHIPPING_CITY | SHIPPING_COUNTRY | SHIPPING_NAME | SHIPPING_PHONE | SHIPPING_STATE | SHIPPING_ZIP | USERAGENT | SHIPPING_ZIP | USERAGENT</code> </p>'
       description: A variable in the list of variables for the batch create variable request.
-    attributeKey:
-      type: string
-      minLength: 1
-      maxLength: 64
     variableName:
       type: string
       minLength: 1

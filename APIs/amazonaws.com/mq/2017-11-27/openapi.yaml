@@ -163,6 +163,12 @@ paths:
             schema:
               type: object
               properties:
+                authenticationStrategy:
+                  description: The authentication strategy used to secure the broker.
+                  type: string
+                  enum:
+                    - SIMPLE
+                    - LDAP
                 autoMinorVersionUpgrade:
                   description: 'Required. Enables automatic upgrades to new minor versions for brokers, as Apache releases the versions. The automatic upgrades occur during the maintenance window of the broker or after a manual broker reboot.'
                   type: boolean
@@ -194,7 +200,7 @@ paths:
                   properties:
                     KmsKeyId:
                       $ref: '#/components/schemas/__string'
-                      description: 'The customer master key (CMK) to use for the AWS Key Management Service (KMS). This key is used to encrypt your data at rest. If not provided, Amazon MQ will use a default CMK to encrypt your data.'
+                      description: 'The symmetric customer master key (CMK) to use for the AWS Key Management Service (KMS). This key is used to encrypt your data at rest. If not provided, Amazon MQ will use a default CMK to encrypt your data.'
                     UseAwsOwnedKey:
                       $ref: '#/components/schemas/__boolean'
                       description: Enables the use of an AWS owned CMK using AWS Key Management Service (KMS).
@@ -209,6 +215,43 @@ paths:
                 hostInstanceType:
                   description: Required. The broker's instance type.
                   type: string
+                ldapServerMetadata:
+                  description: The metadata of the LDAP server used to authenticate and authorize connections to the broker.
+                  type: object
+                  properties:
+                    Hosts:
+                      $ref: '#/components/schemas/__listOf__string'
+                      description: Fully qualified domain name of the LDAP server. Optional failover server.
+                    RoleBase:
+                      $ref: '#/components/schemas/__string'
+                      description: Fully qualified name of the directory to search for a user’s groups.
+                    RoleName:
+                      $ref: '#/components/schemas/__string'
+                      description: Specifies the LDAP attribute that identifies the group name attribute in the object returned from the group membership query.
+                    RoleSearchMatching:
+                      $ref: '#/components/schemas/__string'
+                      description: The search criteria for groups.
+                    RoleSearchSubtree:
+                      $ref: '#/components/schemas/__boolean'
+                      description: 'The directory search scope for the role. If set to true, scope is to search the entire sub-tree.'
+                    ServiceAccountPassword:
+                      $ref: '#/components/schemas/__string'
+                      description: Service account password.
+                    ServiceAccountUsername:
+                      $ref: '#/components/schemas/__string'
+                      description: Service account username.
+                    UserBase:
+                      $ref: '#/components/schemas/__string'
+                      description: Fully qualified name of the directory where you want to search for users.
+                    UserRoleName:
+                      $ref: '#/components/schemas/__string'
+                      description: Specifies the name of the LDAP attribute for the user group membership.
+                    UserSearchMatching:
+                      $ref: '#/components/schemas/__string'
+                      description: The search criteria for users.
+                    UserSearchSubtree:
+                      $ref: '#/components/schemas/__boolean'
+                      description: 'The directory search scope for the user. If set to true, scope is to search the entire sub-tree.'
                 logs:
                   description: The list of information about logs to be enabled for the specified broker.
                   type: object
@@ -312,6 +355,18 @@ paths:
           description: 'The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.'
           schema:
             type: string
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
   /v1/configurations:
     post:
       operationId: CreateConfiguration
@@ -355,6 +410,12 @@ paths:
             schema:
               type: object
               properties:
+                authenticationStrategy:
+                  description: The authentication strategy used to secure the broker.
+                  type: string
+                  enum:
+                    - SIMPLE
+                    - LDAP
                 engineType:
                   description: 'The type of broker engine. Note: Currently, Amazon MQ supports only ActiveMQ.'
                   type: string
@@ -805,7 +866,7 @@ paths:
         - name: broker-id
           in: path
           required: true
-          description: 'The name of the broker. This value must be unique in your AWS account, 1-50 characters long, must contain only letters, numbers, dashes, and underscores, and must not contain whitespaces, brackets, wildcard characters, or special characters.'
+          description: The unique ID that Amazon MQ generates for the broker.
           schema:
             type: string
     parameters:
@@ -901,7 +962,7 @@ paths:
         - name: broker-id
           in: path
           required: true
-          description: 'The name of the broker. This value must be unique in your AWS account, 1-50 characters long, must contain only letters, numbers, dashes, and underscores, and must not contain whitespaces, brackets, wildcard characters, or special characters.'
+          description: The unique ID that Amazon MQ generates for the broker.
           schema:
             type: string
       requestBody:
@@ -911,6 +972,12 @@ paths:
             schema:
               type: object
               properties:
+                authenticationStrategy:
+                  description: The authentication strategy used to secure the broker.
+                  type: string
+                  enum:
+                    - SIMPLE
+                    - LDAP
                 autoMinorVersionUpgrade:
                   description: 'Enables automatic upgrades to new minor versions for brokers, as Apache releases the versions. The automatic upgrades occur during the maintenance window of the broker or after a manual broker reboot.'
                   type: boolean
@@ -930,6 +997,43 @@ paths:
                 hostInstanceType:
                   description: 'The host instance type of the broker to upgrade to. For a list of supported instance types, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide//broker.html#broker-instance-types'
                   type: string
+                ldapServerMetadata:
+                  description: The metadata of the LDAP server used to authenticate and authorize connections to the broker.
+                  type: object
+                  properties:
+                    Hosts:
+                      $ref: '#/components/schemas/__listOf__string'
+                      description: Fully qualified domain name of the LDAP server. Optional failover server.
+                    RoleBase:
+                      $ref: '#/components/schemas/__string'
+                      description: Fully qualified name of the directory to search for a user’s groups.
+                    RoleName:
+                      $ref: '#/components/schemas/__string'
+                      description: Specifies the LDAP attribute that identifies the group name attribute in the object returned from the group membership query.
+                    RoleSearchMatching:
+                      $ref: '#/components/schemas/__string'
+                      description: The search criteria for groups.
+                    RoleSearchSubtree:
+                      $ref: '#/components/schemas/__boolean'
+                      description: 'The directory search scope for the role. If set to true, scope is to search the entire sub-tree.'
+                    ServiceAccountPassword:
+                      $ref: '#/components/schemas/__string'
+                      description: Service account password.
+                    ServiceAccountUsername:
+                      $ref: '#/components/schemas/__string'
+                      description: Service account username.
+                    UserBase:
+                      $ref: '#/components/schemas/__string'
+                      description: Fully qualified name of the directory where you want to search for users.
+                    UserRoleName:
+                      $ref: '#/components/schemas/__string'
+                      description: Specifies the name of the LDAP attribute for the user group membership.
+                    UserSearchMatching:
+                      $ref: '#/components/schemas/__string'
+                      description: The search criteria for users.
+                    UserSearchSubtree:
+                      $ref: '#/components/schemas/__boolean'
+                      description: 'The directory search scope for the user. If set to true, scope is to search the entire sub-tree.'
                 logs:
                   description: The list of information about logs to be enabled for the specified broker.
                   type: object
@@ -1538,6 +1642,10 @@ components:
       type: integer
     __boolean:
       type: boolean
+    __listOf__string:
+      type: array
+      items:
+        $ref: '#/components/schemas/__string'
     DayOfWeek:
       type: string
       enum:
@@ -1575,6 +1683,9 @@ components:
         Arn:
           $ref: '#/components/schemas/__string'
           description: Required. The Amazon Resource Name (ARN) of the configuration.
+        AuthenticationStrategy:
+          $ref: '#/components/schemas/AuthenticationStrategy'
+          description: The authentication strategy associated with the configuration.
         Created:
           $ref: '#/components/schemas/__timestampIso8601'
           description: Required. The date and time of the configuration.
@@ -1603,6 +1714,9 @@ components:
     DescribeBrokerResponse:
       type: object
       properties:
+        AuthenticationStrategy:
+          $ref: '#/components/schemas/AuthenticationStrategy'
+          description: The authentication strategy used to secure the broker.
         AutoMinorVersionUpgrade:
           $ref: '#/components/schemas/__boolean'
           description: 'Required. Enables automatic upgrades to new minor versions for brokers, as Apache releases the versions. The automatic upgrades occur during the maintenance window of the broker or after a manual broker reboot.'
@@ -1642,18 +1756,27 @@ components:
         HostInstanceType:
           $ref: '#/components/schemas/__string'
           description: The broker's instance type.
+        LdapServerMetadata:
+          $ref: '#/components/schemas/LdapServerMetadataOutput'
+          description: The metadata of the LDAP server used to authenticate and authorize connections to the broker.
         Logs:
           $ref: '#/components/schemas/LogsSummary'
           description: The list of information about logs currently enabled and pending to be deployed for the specified broker.
         MaintenanceWindowStartTime:
           $ref: '#/components/schemas/WeeklyStartTime'
           description: The parameters that determine the WeeklyStartTime.
+        PendingAuthenticationStrategy:
+          $ref: '#/components/schemas/AuthenticationStrategy'
+          description: The authentication strategy that will be applied when the broker is rebooted.
         PendingEngineVersion:
           $ref: '#/components/schemas/__string'
           description: 'The version of the broker engine to upgrade to. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html'
         PendingHostInstanceType:
           $ref: '#/components/schemas/__string'
           description: 'The host instance type of the broker to upgrade to. For a list of supported instance types, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide//broker.html#broker-instance-types'
+        PendingLdapServerMetadata:
+          $ref: '#/components/schemas/LdapServerMetadataOutput'
+          description: The metadata of the LDAP server that will be used to authenticate and authorize connections to the broker once it is rebooted.
         PendingSecurityGroups:
           $ref: '#/components/schemas/__listOf__string'
           description: The list of pending security groups to authorize connections to brokers.
@@ -1705,6 +1828,9 @@ components:
         Arn:
           $ref: '#/components/schemas/__string'
           description: Required. The ARN of the configuration.
+        AuthenticationStrategy:
+          $ref: '#/components/schemas/AuthenticationStrategy'
+          description: The authentication strategy associated with the configuration.
         Created:
           $ref: '#/components/schemas/__timestampIso8601'
           description: Required. The date and time of the configuration revision.
@@ -1825,6 +1951,9 @@ components:
     UpdateBrokerResponse:
       type: object
       properties:
+        AuthenticationStrategy:
+          $ref: '#/components/schemas/AuthenticationStrategy'
+          description: The authentication strategy used to secure the broker.
         AutoMinorVersionUpgrade:
           $ref: '#/components/schemas/__boolean'
           description: The new value of automatic upgrades to new minor version for brokers.
@@ -1840,6 +1969,9 @@ components:
         HostInstanceType:
           $ref: '#/components/schemas/__string'
           description: 'The host instance type of the broker to upgrade to. For a list of supported instance types, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide//broker.html#broker-instance-types'
+        LdapServerMetadata:
+          $ref: '#/components/schemas/LdapServerMetadataOutput'
+          description: The metadata of the LDAP server used to authenticate and authorize connections to the broker.
         Logs:
           $ref: '#/components/schemas/Logs'
           description: The list of information about logs to be enabled for the specified broker.
@@ -1870,6 +2002,12 @@ components:
     UpdateUserResponse:
       type: object
       properties: {}
+    AuthenticationStrategy:
+      type: string
+      enum:
+        - SIMPLE
+        - LDAP
+      description: The authentication strategy used to secure the broker.
     AvailabilityZone:
       type: object
       properties:
@@ -1896,10 +2034,6 @@ components:
           $ref: '#/components/schemas/__listOfEngineVersion'
           description: The list of engine versions.
       description: Types of broker engines.
-    __listOf__string:
-      type: array
-      items:
-        $ref: '#/components/schemas/__string'
     BrokerInstance:
       type: object
       properties:
@@ -2022,6 +2156,9 @@ components:
         Arn:
           $ref: '#/components/schemas/__string'
           description: Required. The ARN of the configuration.
+        AuthenticationStrategy:
+          $ref: '#/components/schemas/AuthenticationStrategy'
+          description: The authentication strategy associated with the configuration.
         Created:
           $ref: '#/components/schemas/__timestampIso8601'
           description: Required. The date and time of the configuration revision.
@@ -2081,11 +2218,48 @@ components:
       properties:
         KmsKeyId:
           $ref: '#/components/schemas/__string'
-          description: 'The customer master key (CMK) to use for the AWS Key Management Service (KMS). This key is used to encrypt your data at rest. If not provided, Amazon MQ will use a default CMK to encrypt your data.'
+          description: 'The symmetric customer master key (CMK) to use for the AWS Key Management Service (KMS). This key is used to encrypt your data at rest. If not provided, Amazon MQ will use a default CMK to encrypt your data.'
         UseAwsOwnedKey:
           $ref: '#/components/schemas/__boolean'
           description: Enables the use of an AWS owned CMK using AWS Key Management Service (KMS).
       description: Encryption options for the broker.
+    LdapServerMetadataInput:
+      type: object
+      properties:
+        Hosts:
+          $ref: '#/components/schemas/__listOf__string'
+          description: Fully qualified domain name of the LDAP server. Optional failover server.
+        RoleBase:
+          $ref: '#/components/schemas/__string'
+          description: Fully qualified name of the directory to search for a user’s groups.
+        RoleName:
+          $ref: '#/components/schemas/__string'
+          description: Specifies the LDAP attribute that identifies the group name attribute in the object returned from the group membership query.
+        RoleSearchMatching:
+          $ref: '#/components/schemas/__string'
+          description: The search criteria for groups.
+        RoleSearchSubtree:
+          $ref: '#/components/schemas/__boolean'
+          description: 'The directory search scope for the role. If set to true, scope is to search the entire sub-tree.'
+        ServiceAccountPassword:
+          $ref: '#/components/schemas/__string'
+          description: Service account password.
+        ServiceAccountUsername:
+          $ref: '#/components/schemas/__string'
+          description: Service account username.
+        UserBase:
+          $ref: '#/components/schemas/__string'
+          description: Fully qualified name of the directory where you want to search for users.
+        UserRoleName:
+          $ref: '#/components/schemas/__string'
+          description: Specifies the name of the LDAP attribute for the user group membership.
+        UserSearchMatching:
+          $ref: '#/components/schemas/__string'
+          description: The search criteria for users.
+        UserSearchSubtree:
+          $ref: '#/components/schemas/__boolean'
+          description: 'The directory search scope for the user. If set to true, scope is to search the entire sub-tree.'
+      description: The metadata of the LDAP server used to authenticate and authorize connections to the broker.
     Logs:
       type: object
       properties:
@@ -2117,6 +2291,9 @@ components:
       type: object
       title: CreateBrokerRequest
       properties:
+        AuthenticationStrategy:
+          $ref: '#/components/schemas/AuthenticationStrategy'
+          description: The authentication strategy used to secure the broker.
         AutoMinorVersionUpgrade:
           $ref: '#/components/schemas/__boolean'
           description: 'Required. Enables automatic upgrades to new minor versions for brokers, as Apache releases the versions. The automatic upgrades occur during the maintenance window of the broker or after a manual broker reboot.'
@@ -2144,6 +2321,9 @@ components:
         HostInstanceType:
           $ref: '#/components/schemas/__string'
           description: Required. The broker's instance type.
+        LdapServerMetadata:
+          $ref: '#/components/schemas/LdapServerMetadataInput'
+          description: The metadata of the LDAP server used to authenticate and authorize connections to the broker.
         Logs:
           $ref: '#/components/schemas/Logs'
           description: Enables Amazon CloudWatch logging for brokers.
@@ -2173,6 +2353,9 @@ components:
       type: object
       title: CreateConfigurationRequest
       properties:
+        AuthenticationStrategy:
+          $ref: '#/components/schemas/AuthenticationStrategy'
+          description: The authentication strategy associated with the configuration.
         EngineType:
           $ref: '#/components/schemas/EngineType'
           description: 'Required. The type of broker engine. Note: Currently, Amazon MQ supports only ACTIVEMQ.'
@@ -2252,6 +2435,40 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/BrokerInstance'
+    LdapServerMetadataOutput:
+      type: object
+      properties:
+        Hosts:
+          $ref: '#/components/schemas/__listOf__string'
+          description: Fully qualified domain name of the LDAP server. Optional failover server.
+        RoleBase:
+          $ref: '#/components/schemas/__string'
+          description: Fully qualified name of the directory to search for a user’s groups.
+        RoleName:
+          $ref: '#/components/schemas/__string'
+          description: Specifies the LDAP attribute that identifies the group name attribute in the object returned from the group membership query.
+        RoleSearchMatching:
+          $ref: '#/components/schemas/__string'
+          description: The search criteria for groups.
+        RoleSearchSubtree:
+          $ref: '#/components/schemas/__boolean'
+          description: 'The directory search scope for the role. If set to true, scope is to search the entire sub-tree.'
+        ServiceAccountUsername:
+          $ref: '#/components/schemas/__string'
+          description: Service account username.
+        UserBase:
+          $ref: '#/components/schemas/__string'
+          description: Fully qualified name of the directory where you want to search for users.
+        UserRoleName:
+          $ref: '#/components/schemas/__string'
+          description: Specifies the name of the LDAP attribute for the user group membership.
+        UserSearchMatching:
+          $ref: '#/components/schemas/__string'
+          description: The search criteria for users.
+        UserSearchSubtree:
+          $ref: '#/components/schemas/__boolean'
+          description: 'The directory search scope for the user. If set to true, scope is to search the entire sub-tree.'
+      description: The metadata of the LDAP server used to authenticate and authorize connections to the broker.
     LogsSummary:
       type: object
       properties:
@@ -2377,6 +2594,9 @@ components:
       type: object
       title: UpdateBrokerRequest
       properties:
+        AuthenticationStrategy:
+          $ref: '#/components/schemas/AuthenticationStrategy'
+          description: The authentication strategy used to secure the broker.
         AutoMinorVersionUpgrade:
           $ref: '#/components/schemas/__boolean'
           description: 'Enables automatic upgrades to new minor versions for brokers, as Apache releases the versions. The automatic upgrades occur during the maintenance window of the broker or after a manual broker reboot.'
@@ -2389,6 +2609,9 @@ components:
         HostInstanceType:
           $ref: '#/components/schemas/__string'
           description: 'The host instance type of the broker to upgrade to. For a list of supported instance types, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide//broker.html#broker-instance-types'
+        LdapServerMetadata:
+          $ref: '#/components/schemas/LdapServerMetadataInput'
+          description: The metadata of the LDAP server used to authenticate and authorize connections to the broker.
         Logs:
           $ref: '#/components/schemas/Logs'
           description: Enables Amazon CloudWatch logging for brokers.

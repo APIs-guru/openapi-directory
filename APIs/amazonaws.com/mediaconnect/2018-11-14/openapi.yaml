@@ -1612,6 +1612,12 @@ paths:
                     Url:
                       $ref: '#/components/schemas/__string'
                       description: The URL from the API Gateway proxy that you set up to talk to your key server. This parameter is required for SPEKE encryption and is not valid for static key encryption.
+                entitlementStatus:
+                  description: 'An indication of whether you want to enable the entitlement to allow access, or disable it to stop streaming content to the subscriber’s flow temporarily. If you don’t specify the entitlementStatus field in your request, MediaConnect leaves the value unchanged.'
+                  type: string
+                  enum:
+                    - ENABLED
+                    - DISABLED
                 subscribers:
                   description: The AWS account IDs that you want to share your content with. The receiving accounts (subscribers) will be allowed to create their own flow using your content as the source.
                   type: array
@@ -1994,6 +2000,9 @@ components:
         Encryption:
           $ref: '#/components/schemas/Encryption'
           description: The type of encryption that will be used on the output that is associated with this entitlement.
+        EntitlementStatus:
+          $ref: '#/components/schemas/EntitlementStatus'
+          description: 'An indication of whether the new entitlement should be enabled or disabled as soon as it is created. If you don’t specify the entitlementStatus field in your request, MediaConnect sets it to ENABLED.'
         Name:
           $ref: '#/components/schemas/__string'
           description: The name of the entitlement. This value must be unique within the current flow.
@@ -2379,6 +2388,11 @@ components:
           $ref: '#/components/schemas/__listOf__string'
           description: A list of errors that might have been generated from processes on this flow.
       description: Messages that provide the state of the flow.
+    EntitlementStatus:
+      type: string
+      enum:
+        - ENABLED
+        - DISABLED
     Entitlement:
       type: object
       required:
@@ -2398,6 +2412,9 @@ components:
         EntitlementArn:
           $ref: '#/components/schemas/__string'
           description: The ARN of the entitlement.
+        EntitlementStatus:
+          $ref: '#/components/schemas/EntitlementStatus'
+          description: An indication of whether the entitlement is enabled.
         Name:
           $ref: '#/components/schemas/__string'
           description: The name of the entitlement.
@@ -2692,6 +2709,9 @@ components:
         Encryption:
           $ref: '#/components/schemas/UpdateEncryption'
           description: The type of encryption that will be used on the output associated with this entitlement.
+        EntitlementStatus:
+          $ref: '#/components/schemas/EntitlementStatus'
+          description: 'An indication of whether you want to enable the entitlement to allow access, or disable it to stop streaming content to the subscriber’s flow temporarily. If you don’t specify the entitlementStatus field in your request, MediaConnect leaves the value unchanged.'
         Subscribers:
           $ref: '#/components/schemas/__listOf__string'
           description: The AWS account IDs that you want to share your content with. The receiving accounts (subscribers) will be allowed to create their own flow using your content as the source.

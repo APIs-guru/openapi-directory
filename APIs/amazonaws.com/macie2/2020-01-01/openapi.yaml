@@ -3232,7 +3232,7 @@ paths:
               type: object
               properties:
                 filterBy:
-                  description: The criteria to use to filter the query results.
+                  description: 'An array of objects, one for each condition to use to filter the query results. If the array contains more than one object, Amazon Macie uses an AND operator to join the conditions specified by the objects.'
                   type: array
                   items:
                     $ref: '#/components/schemas/UsageStatisticsFilter'
@@ -4372,18 +4372,23 @@ components:
     UsageStatisticsFilter:
       type: object
       properties:
+        comparator:
+          $ref: '#/components/schemas/UsageStatisticsFilterComparator'
+          description: 'The operator to use in the condition. If the value for the key property is accountId, this value must be CONTAINS. If the value for the key property is any other supported field, this value can be EQ, GT, GTE, LT, LTE, or NE.'
         key:
           $ref: '#/components/schemas/UsageStatisticsFilterKey'
-          description: The field to use to filter the results. The only supported value is accountId.
+          description: The field to use in the condition.
         values:
           $ref: '#/components/schemas/__listOf__string'
-          description: An array that lists the AWS account ID for each account to include in the results.
-      description: Specifies criteria for filtering the results of a query for account quotas and usage data.
+          description: '<p>An array that lists values to use in the condition, based on the value for the field specified by the key property. If the value for the key property is accountId, this array can specify multiple values. Otherwise, this array can specify only one value.</p> <p>Valid values for each supported field are:</p> <ul><li><p>accountId - The unique identifier for an AWS account.</p></li></ul> <ul><li><p>freeTrialStartDate - The date and time, in UTC and extended ISO 8601 format, when the free trial started for an account.</p></li></ul> <ul><li><p>serviceLimit - A Boolean (true or false) value that indicates whether an account has reached its monthly quota.</p></li></ul> <ul><li><p>total - A string that represents the current, estimated month-to-date cost for an account.</p></li></ul>'
+      description: Specifies a condition for filtering the results of a query for account quotas and usage data.
     UsageStatisticsSortKey:
       type: string
       enum:
         - accountId
         - total
+        - serviceLimitValue
+        - freeTrialStartDate
       description: 'The field to use to sort the results of a query for account quotas and usage data. Valid values are:'
     GetUsageTotalsResponse:
       type: object
@@ -4780,17 +4785,17 @@ components:
       properties:
         customerManaged:
           $ref: '#/components/schemas/__long'
-          description: Reserved for future use.
+          description: The total number of objects that are encrypted using a customer-managed key. The objects use customer-provided server-side (SSE-C) encryption.
         kmsManaged:
           $ref: '#/components/schemas/__long'
-          description: Reserved for future use.
+          description: The total number of objects that are encrypted using an AWS Key Management Service (AWS KMS) customer master key (CMK). The objects use AWS KMS AWS-managed (AWS-KMS) encryption or AWS KMS customer-managed (SSE-KMS) encryption.
         s3Managed:
           $ref: '#/components/schemas/__long'
-          description: Reserved for future use.
+          description: The total number of objects that are encrypted using an Amazon S3-managed key. The objects use Amazon S3-managed (SSE-S3) encryption.
         unencrypted:
           $ref: '#/components/schemas/__long'
-          description: Reserved for future use.
-      description: 'The total number of objects that are in the bucket, grouped by server-side encryption type. This includes a grouping that reports the total number of objects that aren''t encrypted.'
+          description: The total number of objects that aren't encrypted or use client-side encryption.
+      description: 'Provides information about the number of objects that are in an S3 bucket and use certain types of server-side encryption, use client-side encryption, or aren''t encrypted.'
     BucketPublicAccess:
       type: object
       properties:
@@ -4850,7 +4855,7 @@ components:
           description: The total number of objects in the bucket.
         objectCountByEncryptionType:
           $ref: '#/components/schemas/ObjectCountByEncryptionType'
-          description: 'The total number of objects that are in the bucket, grouped by server-side encryption type. This includes a grouping that reports the total number of objects that aren''t encrypted.'
+          description: 'The total number of objects that are in the bucket, grouped by server-side encryption type. This includes a grouping that reports the total number of objects that aren''t encrypted or use client-side encryption.'
         publicAccess:
           $ref: '#/components/schemas/BucketPublicAccess'
           description: 'Specifies whether the bucket is publicly accessible. If this value is true, an access control list (ACL), bucket policy, or block public access settings allow the bucket to be accessed by the general public.'
@@ -5750,7 +5755,7 @@ components:
       properties:
         filterBy:
           $ref: '#/components/schemas/__listOfUsageStatisticsFilter'
-          description: The criteria to use to filter the query results.
+          description: 'An array of objects, one for each condition to use to filter the query results. If the array contains more than one object, Amazon Macie uses an AND operator to join the conditions specified by the objects.'
         maxResults:
           $ref: '#/components/schemas/__integer'
           description: The maximum number of items to include in each page of the response.
@@ -6456,16 +6461,30 @@ components:
           description: The unique identifier for the AWS account that the data applies to.
         freeTrialStartDate:
           $ref: '#/components/schemas/__timestampIso8601'
-          description: 'The date and time, in UTC and extended ISO 8601 format, when the free trial period started for the account. This value is null if the account didn''t participate in the free trial.'
+          description: 'The date and time, in UTC and extended ISO 8601 format, when the free trial started for the account.'
         usage:
           $ref: '#/components/schemas/__listOfUsageByAccount'
           description: An array of objects that contains usage data and quotas for the account. Each object contains the data for a specific usage metric and the corresponding quota.
       description: Provides quota and aggregated usage data for an account.
+    UsageStatisticsFilterComparator:
+      type: string
+      enum:
+        - GT
+        - GTE
+        - LT
+        - LTE
+        - EQ
+        - NE
+        - CONTAINS
+      description: 'The operator to use in a condition that filters the results of a query for account quotas and usage data. Valid values are:'
     UsageStatisticsFilterKey:
       type: string
       enum:
         - accountId
-      description: 'The field to use to filter the results of a query for account quotas and usage data:'
+        - serviceLimit
+        - freeTrialStartDate
+        - total
+      description: 'The field to use in a condition that filters the results of a query for account quotas and usage data. Valid values are:'
     UsageTotal:
       type: object
       properties:
