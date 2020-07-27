@@ -3004,7 +3004,7 @@ components:
       title: CreateModelRequest
       properties:
         modelId:
-          $ref: '#/components/schemas/identifier'
+          $ref: '#/components/schemas/modelIdentifier'
           description: The model ID.
         modelType:
           $ref: '#/components/schemas/ModelTypeEnum'
@@ -3022,7 +3022,7 @@ components:
       type: object
       properties:
         modelId:
-          $ref: '#/components/schemas/identifier'
+          $ref: '#/components/schemas/modelIdentifier'
           description: The model ID.
         modelType:
           $ref: '#/components/schemas/ModelTypeEnum'
@@ -3043,7 +3043,7 @@ components:
       title: CreateModelVersionRequest
       properties:
         modelId:
-          $ref: '#/components/schemas/identifier'
+          $ref: '#/components/schemas/modelIdentifier'
           description: 'The model ID. '
         modelType:
           $ref: '#/components/schemas/ModelTypeEnum'
@@ -3230,7 +3230,7 @@ components:
       title: DescribeModelVersionsRequest
       properties:
         modelId:
-          $ref: '#/components/schemas/identifier'
+          $ref: '#/components/schemas/modelIdentifier'
           description: The model ID.
         modelVersionNumber:
           $ref: '#/components/schemas/floatVersionString'
@@ -3457,7 +3457,7 @@ components:
       type: object
       properties:
         modelId:
-          $ref: '#/components/schemas/identifier'
+          $ref: '#/components/schemas/modelIdentifier'
           description: The model ID.
         modelType:
           $ref: '#/components/schemas/ModelTypeEnum'
@@ -3489,7 +3489,7 @@ components:
       title: GetModelVersionRequest
       properties:
         modelId:
-          $ref: '#/components/schemas/identifier'
+          $ref: '#/components/schemas/modelIdentifier'
           description: The model ID.
         modelType:
           $ref: '#/components/schemas/ModelTypeEnum'
@@ -3511,7 +3511,7 @@ components:
       title: GetModelsRequest
       properties:
         modelId:
-          $ref: '#/components/schemas/identifier'
+          $ref: '#/components/schemas/modelIdentifier'
           description: The model ID.
         modelType:
           $ref: '#/components/schemas/ModelTypeEnum'
@@ -3706,9 +3706,6 @@ components:
         modelEndpoint:
           $ref: '#/components/schemas/sageMakerEndpointIdentifier'
           description: The model endpoints name.
-        eventTypeName:
-          $ref: '#/components/schemas/identifier'
-          description: The event type name.
         modelSource:
           $ref: '#/components/schemas/ModelSource'
           description: The source of the model.
@@ -3891,7 +3888,7 @@ components:
       title: UpdateModelRequest
       properties:
         modelId:
-          $ref: '#/components/schemas/identifier'
+          $ref: '#/components/schemas/modelIdentifier'
           description: The model ID.
         modelType:
           $ref: '#/components/schemas/ModelTypeEnum'
@@ -3903,7 +3900,7 @@ components:
       type: object
       properties:
         modelId:
-          $ref: '#/components/schemas/identifier'
+          $ref: '#/components/schemas/modelIdentifier'
           description: The model ID.
         modelType:
           $ref: '#/components/schemas/ModelTypeEnum'
@@ -3923,7 +3920,7 @@ components:
       title: UpdateModelVersionRequest
       properties:
         modelId:
-          $ref: '#/components/schemas/identifier'
+          $ref: '#/components/schemas/modelIdentifier'
           description: The model ID.
         modelType:
           $ref: '#/components/schemas/ModelTypeEnum'
@@ -3950,7 +3947,7 @@ components:
       title: UpdateModelVersionStatusRequest
       properties:
         modelId:
-          $ref: '#/components/schemas/identifier'
+          $ref: '#/components/schemas/modelIdentifier'
           description: The model ID of the model version to update.
         modelType:
           $ref: '#/components/schemas/ModelTypeEnum'
@@ -4126,6 +4123,11 @@ components:
         - DRAFT
         - ACTIVE
         - INACTIVE
+    modelIdentifier:
+      type: string
+      pattern: '^[0-9a-z_]+$'
+      minLength: 1
+      maxLength: 64
     ModelTypeEnum:
       type: string
       enum:
@@ -4306,6 +4308,9 @@ components:
       maximum: 10
     Entity:
       type: object
+      required:
+        - entityType
+        - entityId
       properties:
         entityType:
           $ref: '#/components/schemas/string'
@@ -4390,6 +4395,9 @@ components:
       required:
         - useEventVariables
       properties:
+        eventTypeName:
+          $ref: '#/components/schemas/identifier'
+          description: The event type name.
         format:
           $ref: '#/components/schemas/ModelInputDataFormat'
           description: ' The format of the model input configuration. The format differs depending on if it is passed through to SageMaker or constructed by Amazon Fraud Detector.'
@@ -4429,9 +4437,6 @@ components:
         modelEndpoint:
           $ref: '#/components/schemas/string'
           description: The Amazon SageMaker model endpoints.
-        eventTypeName:
-          $ref: '#/components/schemas/identifier'
-          description: The event type names.
         modelSource:
           $ref: '#/components/schemas/ModelSource'
           description: The source of the model.
@@ -4637,7 +4642,7 @@ components:
         - modelVersionNumber
       properties:
         modelId:
-          $ref: '#/components/schemas/identifier'
+          $ref: '#/components/schemas/modelIdentifier'
           description: The model ID.
         modelType:
           $ref: '#/components/schemas/ModelTypeEnum'
@@ -4686,7 +4691,7 @@ components:
       type: object
       properties:
         modelId:
-          $ref: '#/components/schemas/identifier'
+          $ref: '#/components/schemas/modelIdentifier'
           description: The model ID.
         modelType:
           $ref: '#/components/schemas/ModelTypeEnum'
@@ -4743,7 +4748,7 @@ components:
       type: object
       properties:
         modelId:
-          $ref: '#/components/schemas/identifier'
+          $ref: '#/components/schemas/modelIdentifier'
           description: The model ID.
         modelType:
           $ref: '#/components/schemas/ModelTypeEnum'

@@ -6219,6 +6219,75 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSGlue.ResumeWorkflowRun:
+    post:
+      operationId: ResumeWorkflowRun
+      description: Restarts any completed nodes in a workflow run and resumes the run execution.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResumeWorkflowRunResponse'
+        '480':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '481':
+          description: EntityNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityNotFoundException'
+        '482':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+        '483':
+          description: OperationTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationTimeoutException'
+        '484':
+          description: ConcurrentRunsExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentRunsExceededException'
+        '485':
+          description: IllegalWorkflowStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IllegalWorkflowStateException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResumeWorkflowRunRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSGlue.ResumeWorkflowRun
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AWSGlue.SearchTables:
     post:
       operationId: SearchTables
@@ -8773,7 +8842,7 @@ components:
           description: 'The job timeout in minutes. This is the maximum time that a job run can consume resources before it is terminated and enters <code>TIMEOUT</code> status. The default is 2,880 minutes (48 hours).'
         MaxCapacity:
           $ref: '#/components/schemas/NullableDouble'
-          description: '<p>The number of AWS Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href="https://aws.amazon.com/glue/pricing/">AWS Glue pricing page</a>.</p> <p>Do not set <code>Max Capacity</code> if using <code>WorkerType</code> and <code>NumberOfWorkers</code>.</p> <p>The value that can be allocated for <code>MaxCapacity</code> depends on whether you are running a Python shell job or an Apache Spark ETL job:</p> <ul> <li> <p>When you specify a Python shell job (<code>JobCommand.Name</code>="pythonshell"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.</p> </li> <li> <p>When you specify an Apache Spark ETL job (<code>JobCommand.Name</code>="glueetl"), you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.</p> </li> </ul>'
+          description: '<p>The number of AWS Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href="https://aws.amazon.com/glue/pricing/">AWS Glue pricing page</a>.</p> <p>Do not set <code>Max Capacity</code> if using <code>WorkerType</code> and <code>NumberOfWorkers</code>.</p> <p>The value that can be allocated for <code>MaxCapacity</code> depends on whether you are running a Python shell job or an Apache Spark ETL job:</p> <ul> <li> <p>When you specify a Python shell job (<code>JobCommand.Name</code>="pythonshell"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.</p> </li> <li> <p>When you specify an Apache Spark ETL job (<code>JobCommand.Name</code>="glueetl") or Apache Spark streaming ETL job (<code>JobCommand.Name</code>="gluestreaming"), you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.</p> </li> </ul>'
         SecurityConfiguration:
           $ref: '#/components/schemas/NameString'
           description: The name of the <code>SecurityConfiguration</code> structure to be used with this job.
@@ -10611,6 +10680,34 @@ components:
         RunId:
           $ref: '#/components/schemas/RunId'
           description: The unique run identifier associated with this job run.
+    ResumeWorkflowRunResponse:
+      type: object
+      properties:
+        RunId:
+          $ref: '#/components/schemas/IdString'
+          description: The new ID assigned to the resumed workflow run. Each resume of a workflow run will have a new run ID.
+        NodeIds:
+          $ref: '#/components/schemas/NodeIdList'
+          description: A list of the node IDs for the nodes that were actually restarted.
+    ResumeWorkflowRunRequest:
+      type: object
+      required:
+        - Name
+        - RunId
+        - NodeIds
+      title: ResumeWorkflowRunRequest
+      properties:
+        Name:
+          $ref: '#/components/schemas/NameString'
+          description: The name of the workflow to resume.
+        RunId:
+          $ref: '#/components/schemas/IdString'
+          description: The ID of the workflow run to resume.
+        NodeIds:
+          $ref: '#/components/schemas/NodeIdList'
+          description: A list of the node IDs for the nodes you want to restart. The nodes that are to be restarted must have an execution attempt in the original run.
+    ConcurrentRunsExceededException: {}
+    IllegalWorkflowStateException: {}
     SearchTablesResponse:
       type: object
       properties:
@@ -10755,7 +10852,6 @@ components:
         NumberOfWorkers:
           $ref: '#/components/schemas/NullableInteger'
           description: '<p>The number of workers of a defined <code>workerType</code> that are allocated when a job runs.</p> <p>The maximum number of workers you can define are 299 for <code>G.1X</code>, and 149 for <code>G.2X</code>. </p>'
-    ConcurrentRunsExceededException: {}
     StartMLEvaluationTaskRunResponse:
       type: object
       properties:
@@ -10879,7 +10975,6 @@ components:
         RunId:
           $ref: '#/components/schemas/IdString'
           description: The ID of the workflow run to stop.
-    IllegalWorkflowStateException: {}
     TagResourceResponse:
       type: object
       properties: {}
@@ -12163,7 +12258,7 @@ components:
           description: 'The name of the job whose <code>JobRuns</code> this condition applies to, and on which this trigger waits.'
         State:
           $ref: '#/components/schemas/JobRunState'
-          description: 'The condition state. Currently, the only job states that a trigger can listen for are <code>SUCCEEDED</code>, <code>STOPPED</code>, <code>FAILED</code>, and <code>TIMEOUT</code>. The only crawler states that a trigger can listen for are <code>SUCCEEDED</code>, <code>FAILED</code>, and <code>CANCELLED</code>.'
+          description: 'The condition state. Currently, the values supported are <code>SUCCEEDED</code>, <code>STOPPED</code>, <code>TIMEOUT</code>, and <code>FAILED</code>.'
         CrawlerName:
           $ref: '#/components/schemas/NameString'
           description: The name of the crawler to which this condition applies.
@@ -12759,7 +12854,7 @@ components:
       properties:
         Name:
           $ref: '#/components/schemas/GenericString'
-          description: 'The name of the job command. For an Apache Spark ETL job, this must be <code>glueetl</code>. For a Python shell job, it must be <code>pythonshell</code>.'
+          description: 'The name of the job command. For an Apache Spark ETL job, this must be <code>glueetl</code>. For a Python shell job, it must be <code>pythonshell</code>. For an Apache Spark streaming ETL job, this must be <code>gluestreaming</code>.'
         ScriptLocation:
           $ref: '#/components/schemas/ScriptLocationString'
           description: Specifies the Amazon Simple Storage Service (Amazon S3) path to a script that executes a job.
@@ -13166,7 +13261,7 @@ components:
         DestinationId:
           $ref: '#/components/schemas/NameString'
           description: The unique of the node within the workflow where the edge ends.
-      description: An edge represents a directed connection between two AWS Glue components which are part of the workflow the edge belongs to.
+      description: An edge represents a directed connection between two AWS Glue components that are part of the workflow the edge belongs to.
     EdgeList:
       type: array
       items:
@@ -13393,7 +13488,7 @@ components:
           description: 'The job timeout in minutes. This is the maximum time that a job run can consume resources before it is terminated and enters <code>TIMEOUT</code> status. The default is 2,880 minutes (48 hours).'
         MaxCapacity:
           $ref: '#/components/schemas/NullableDouble'
-          description: '<p>The number of AWS Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href="https://aws.amazon.com/glue/pricing/">AWS Glue pricing page</a>.</p> <p>Do not set <code>Max Capacity</code> if using <code>WorkerType</code> and <code>NumberOfWorkers</code>.</p> <p>The value that can be allocated for <code>MaxCapacity</code> depends on whether you are running a Python shell job or an Apache Spark ETL job:</p> <ul> <li> <p>When you specify a Python shell job (<code>JobCommand.Name</code>="pythonshell"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.</p> </li> <li> <p>When you specify an Apache Spark ETL job (<code>JobCommand.Name</code>="glueetl"), you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.</p> </li> </ul>'
+          description: '<p>The number of AWS Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href="https://aws.amazon.com/glue/pricing/">AWS Glue pricing page</a>.</p> <p>Do not set <code>Max Capacity</code> if using <code>WorkerType</code> and <code>NumberOfWorkers</code>.</p> <p>The value that can be allocated for <code>MaxCapacity</code> depends on whether you are running a Python shell job, an Apache Spark ETL job, or an Apache Spark streaming ETL job:</p> <ul> <li> <p>When you specify a Python shell job (<code>JobCommand.Name</code>="pythonshell"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.</p> </li> <li> <p>When you specify an Apache Spark ETL job (<code>JobCommand.Name</code>="glueetl") or Apache Spark streaming ETL job (<code>JobCommand.Name</code>="gluestreaming"), you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.</p> </li> </ul>'
         WorkerType:
           $ref: '#/components/schemas/WorkerType'
           description: '<p>The type of predefined worker that is allocated when a job runs. Accepts a value of Standard, G.1X, or G.2X.</p> <ul> <li> <p>For the <code>Standard</code> worker type, each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.</p> </li> <li> <p>For the <code>G.1X</code> worker type, each worker maps to 1 DPU (4 vCPU, 16 GB of memory, 64 GB disk), and provides 1 executor per worker. We recommend this worker type for memory-intensive jobs.</p> </li> <li> <p>For the <code>G.2X</code> worker type, each worker maps to 2 DPU (8 vCPU, 32 GB of memory, 128 GB disk), and provides 1 executor per worker. We recommend this worker type for memory-intensive jobs.</p> </li> </ul>'
@@ -13439,7 +13534,7 @@ components:
           description: The date and time that this job run completed.
         JobRunState:
           $ref: '#/components/schemas/JobRunState'
-          description: 'The current state of the job run. For more information about the statuses of jobs that have terminated abnormally, see <a href="https://docs.aws.amazon.com/glue/latest/dg/job-run-statuses.html">AWS Glue Job Run Statuses</a>.'
+          description: The current state of the job run.
         Arguments:
           $ref: '#/components/schemas/GenericMap'
           description: '<p>The job arguments associated with this run. For this job run, they replace the default arguments set in the job definition itself.</p> <p>You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes.</p> <p>For information about how to specify and consume your own job arguments, see the <a href="https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html">Calling AWS Glue APIs in Python</a> topic in the developer guide.</p> <p>For information about the key-value pairs that AWS Glue consumes to set up your job, see the <a href="https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html">Special Parameters Used by AWS Glue</a> topic in the developer guide.</p>'
@@ -13881,10 +13976,13 @@ components:
       properties:
         Name:
           $ref: '#/components/schemas/NameString'
-          description: Name of the workflow which was executed.
+          description: Name of the workflow that was executed.
         WorkflowRunId:
           $ref: '#/components/schemas/IdString'
           description: The ID of this workflow run.
+        PreviousRunId:
+          $ref: '#/components/schemas/IdString'
+          description: The ID of the previous workflow run.
         WorkflowRunProperties:
           $ref: '#/components/schemas/WorkflowRunProperties'
           description: The workflow run properties which were set during the run.
@@ -14024,7 +14122,7 @@ components:
           description: 'The job timeout in minutes. This is the maximum time that a job run can consume resources before it is terminated and enters <code>TIMEOUT</code> status. The default is 2,880 minutes (48 hours).'
         MaxCapacity:
           $ref: '#/components/schemas/NullableDouble'
-          description: '<p>The number of AWS Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href="https://aws.amazon.com/glue/pricing/">AWS Glue pricing page</a>.</p> <p>Do not set <code>Max Capacity</code> if using <code>WorkerType</code> and <code>NumberOfWorkers</code>.</p> <p>The value that can be allocated for <code>MaxCapacity</code> depends on whether you are running a Python shell job or an Apache Spark ETL job:</p> <ul> <li> <p>When you specify a Python shell job (<code>JobCommand.Name</code>="pythonshell"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.</p> </li> <li> <p>When you specify an Apache Spark ETL job (<code>JobCommand.Name</code>="glueetl"), you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.</p> </li> </ul>'
+          description: '<p>The number of AWS Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href="https://aws.amazon.com/glue/pricing/">AWS Glue pricing page</a>.</p> <p>Do not set <code>Max Capacity</code> if using <code>WorkerType</code> and <code>NumberOfWorkers</code>.</p> <p>The value that can be allocated for <code>MaxCapacity</code> depends on whether you are running a Python shell job or an Apache Spark ETL job:</p> <ul> <li> <p>When you specify a Python shell job (<code>JobCommand.Name</code>="pythonshell"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.</p> </li> <li> <p>When you specify an Apache Spark ETL job (<code>JobCommand.Name</code>="glueetl") or Apache Spark streaming ETL job (<code>JobCommand.Name</code>="gluestreaming"), you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.</p> </li> </ul>'
         WorkerType:
           $ref: '#/components/schemas/WorkerType'
           description: '<p>The type of predefined worker that is allocated when a job runs. Accepts a value of Standard, G.1X, or G.2X.</p> <ul> <li> <p>For the <code>Standard</code> worker type, each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.</p> </li> <li> <p>For the <code>G.1X</code> worker type, each worker maps to 1 DPU (4 vCPU, 16 GB of memory, 64 GB disk), and provides 1 executor per worker. We recommend this worker type for memory-intensive jobs.</p> </li> <li> <p>For the <code>G.2X</code> worker type, each worker maps to 2 DPU (8 vCPU, 32 GB of memory, 128 GB disk), and provides 1 executor per worker. We recommend this worker type for memory-intensive jobs.</p> </li> </ul>'
@@ -14201,7 +14299,11 @@ components:
         CrawlerDetails:
           $ref: '#/components/schemas/CrawlerNodeDetails'
           description: Details of the crawler when the node represents a crawler.
-      description: 'A node represents an AWS Glue component like Trigger, Job etc. which is part of a workflow.'
+      description: 'A node represents an AWS Glue component such as a trigger, or job, etc., that is part of a workflow.'
+    NodeIdList:
+      type: array
+      items:
+        $ref: '#/components/schemas/NameString'
     NodeList:
       type: array
       items:
@@ -14714,16 +14816,16 @@ components:
           description: Total number of Actions in the workflow run.
         TimeoutActions:
           $ref: '#/components/schemas/IntegerValue'
-          description: Total number of Actions which timed out.
+          description: Total number of Actions that timed out.
         FailedActions:
           $ref: '#/components/schemas/IntegerValue'
-          description: Total number of Actions which have failed.
+          description: Total number of Actions that have failed.
         StoppedActions:
           $ref: '#/components/schemas/IntegerValue'
-          description: Total number of Actions which have stopped.
+          description: Total number of Actions that have stopped.
         SucceededActions:
           $ref: '#/components/schemas/IntegerValue'
-          description: Total number of Actions which have succeeded.
+          description: Total number of Actions that have succeeded.
         RunningActions:
           $ref: '#/components/schemas/IntegerValue'
           description: Total number Actions in running state.

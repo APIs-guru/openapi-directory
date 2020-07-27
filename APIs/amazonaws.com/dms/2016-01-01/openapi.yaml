@@ -192,6 +192,57 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonDMSv20160101.CancelReplicationTaskAssessmentRun:
+    post:
+      operationId: CancelReplicationTaskAssessmentRun
+      description: <p>Cancels a single premigration assessment run.</p> <p>This operation prevents any individual assessments from running if they haven't started running. It also attempts to cancel any individual assessments that are currently running.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CancelReplicationTaskAssessmentRunResponse'
+        '480':
+          description: AccessDeniedFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedFault'
+        '481':
+          description: ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundFault'
+        '482':
+          description: InvalidResourceStateFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidResourceStateFault'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CancelReplicationTaskAssessmentRunMessage'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonDMSv20160101.CancelReplicationTaskAssessmentRun
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AmazonDMSv20160101.CreateEndpoint:
     post:
       operationId: CreateEndpoint
@@ -906,6 +957,57 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonDMSv20160101.DeleteReplicationTaskAssessmentRun:
+    post:
+      operationId: DeleteReplicationTaskAssessmentRun
+      description: '<p>Deletes the record of a single premigration assessment run.</p> <p>This operation removes all metadata that AWS DMS maintains about this assessment run. However, the operation leaves untouched all information about this assessment run that is stored in your Amazon S3 bucket.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteReplicationTaskAssessmentRunResponse'
+        '480':
+          description: AccessDeniedFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedFault'
+        '481':
+          description: ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundFault'
+        '482':
+          description: InvalidResourceStateFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidResourceStateFault'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteReplicationTaskAssessmentRunMessage'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonDMSv20160101.DeleteReplicationTaskAssessmentRun
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AmazonDMSv20160101.DescribeAccountAttributes:
     post:
       operationId: DescribeAccountAttributes
@@ -931,6 +1033,69 @@ paths:
             type: string
             enum:
               - AmazonDMSv20160101.DescribeAccountAttributes
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonDMSv20160101.DescribeApplicableIndividualAssessments:
+    post:
+      operationId: DescribeApplicableIndividualAssessments
+      description: '<p>Provides a list of individual assessments that you can specify for a new premigration assessment run, given one or more parameters.</p> <p>If you specify an existing migration task, this operation provides the default individual assessments you can specify for that task. Otherwise, the specified parameters model elements of a possible migration task on which to base a premigration assessment run.</p> <p>To use these migration task modeling parameters, you must specify an existing replication instance, a source database engine, a target database engine, and a migration type. This combination of parameters potentially limits the default individual assessments available for an assessment run created for a corresponding migration task.</p> <p>If you specify no parameters, this operation provides a list of all possible individual assessments that you can specify for an assessment run. If you specify any one of the task modeling parameters, you must specify all of them or the operation cannot provide a list of individual assessments. The only parameter that you can specify alone is for an existing migration task. The specified task definition then determines the default list of individual assessments that you can specify in an assessment run for the task.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeApplicableIndividualAssessmentsResponse'
+        '480':
+          description: AccessDeniedFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedFault'
+        '481':
+          description: ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundFault'
+        '482':
+          description: InvalidResourceStateFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidResourceStateFault'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeApplicableIndividualAssessmentsMessage'
+      parameters:
+        - name: MaxRecords
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: Marker
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonDMSv20160101.DescribeApplicableIndividualAssessments
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1609,6 +1774,108 @@ paths:
             type: string
             enum:
               - AmazonDMSv20160101.DescribeReplicationTaskAssessmentResults
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonDMSv20160101.DescribeReplicationTaskAssessmentRuns:
+    post:
+      operationId: DescribeReplicationTaskAssessmentRuns
+      description: '<p>Returns a paginated list of premigration assessment runs based on filter settings.</p> <p>These filter settings can specify a combination of premigration assessment runs, migration tasks, replication instances, and assessment run status values.</p> <note> <p>This operation doesn''t return information about individual assessments. For this information, see the <code>DescribeReplicationTaskIndividualAssessments</code> operation. </p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeReplicationTaskAssessmentRunsResponse'
+        '480':
+          description: ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundFault'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeReplicationTaskAssessmentRunsMessage'
+      parameters:
+        - name: MaxRecords
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: Marker
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonDMSv20160101.DescribeReplicationTaskAssessmentRuns
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonDMSv20160101.DescribeReplicationTaskIndividualAssessments:
+    post:
+      operationId: DescribeReplicationTaskIndividualAssessments
+      description: '<p>Returns a paginated list of individual assessments based on filter settings.</p> <p>These filter settings can specify a combination of premigration assessment runs, migration tasks, and assessment status values.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeReplicationTaskIndividualAssessmentsResponse'
+        '480':
+          description: ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundFault'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeReplicationTaskIndividualAssessmentsMessage'
+      parameters:
+        - name: MaxRecords
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: Marker
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonDMSv20160101.DescribeReplicationTaskIndividualAssessments
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2505,10 +2772,115 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonDMSv20160101.StartReplicationTaskAssessmentRun:
+    post:
+      operationId: StartReplicationTaskAssessmentRun
+      description: '<p>Starts a new premigration assessment run for one or more individual assessments of a migration task.</p> <p>The assessments that you can specify depend on the source and target database engine and the migration type defined for the given task. To run this operation, your migration task must already be created. After you run this operation, you can review the status of each individual assessment. You can also run the migration task manually after the assessment run and its individual assessments complete.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartReplicationTaskAssessmentRunResponse'
+        '480':
+          description: AccessDeniedFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedFault'
+        '481':
+          description: ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundFault'
+        '482':
+          description: InvalidResourceStateFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidResourceStateFault'
+        '483':
+          description: KMSAccessDeniedFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSAccessDeniedFault'
+        '484':
+          description: KMSDisabledFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSDisabledFault'
+        '485':
+          description: KMSFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSFault'
+        '486':
+          description: KMSInvalidStateFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSInvalidStateFault'
+        '487':
+          description: KMSNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSNotFoundFault'
+        '488':
+          description: KMSKeyNotAccessibleFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSKeyNotAccessibleFault'
+        '489':
+          description: S3AccessDeniedFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/S3AccessDeniedFault'
+        '490':
+          description: S3ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/S3ResourceNotFoundFault'
+        '491':
+          description: ResourceAlreadyExistsFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceAlreadyExistsFault'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StartReplicationTaskAssessmentRunMessage'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonDMSv20160101.StartReplicationTaskAssessmentRun
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AmazonDMSv20160101.StopReplicationTask:
     post:
       operationId: StopReplicationTask
-      description: <p>Stops the replication task.</p> <p/>
+      description: Stops the replication task.
       responses:
         '200':
           description: Success
@@ -2704,6 +3076,25 @@ components:
           $ref: '#/components/schemas/String'
           description: '<p>A value that specifies the type of opt-in request, or undoes an opt-in request. You can''t undo an opt-in request of type <code>immediate</code>.</p> <p>Valid values:</p> <ul> <li> <p> <code>immediate</code> - Apply the maintenance action immediately.</p> </li> <li> <p> <code>next-maintenance</code> - Apply the maintenance action during the next maintenance window for the resource.</p> </li> <li> <p> <code>undo-opt-in</code> - Cancel any existing <code>next-maintenance</code> opt-in requests.</p> </li> </ul>'
       description: <p/>
+    CancelReplicationTaskAssessmentRunResponse:
+      type: object
+      properties:
+        ReplicationTaskAssessmentRun:
+          $ref: '#/components/schemas/ReplicationTaskAssessmentRun'
+          description: The <code>ReplicationTaskAssessmentRun</code> object for the canceled assessment run.
+      description: <p/>
+    CancelReplicationTaskAssessmentRunMessage:
+      type: object
+      required:
+        - ReplicationTaskAssessmentRunArn
+      title: CancelReplicationTaskAssessmentRunMessage
+      properties:
+        ReplicationTaskAssessmentRunArn:
+          $ref: '#/components/schemas/String'
+          description: Amazon Resource Name (ARN) of the premigration assessment run to be canceled.
+      description: <p/>
+    AccessDeniedFault: {}
+    InvalidResourceStateFault: {}
     CreateEndpointResponse:
       type: object
       example:
@@ -2801,12 +3192,28 @@ components:
           description: 'Settings in JSON format for the target Amazon Neptune endpoint. For more information about the available settings, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Neptune.html#CHAP_Target.Neptune.EndpointSettings">Specifying Endpoint Settings for Amazon Neptune as a Target</a> in the <i>AWS Database Migration Service User Guide.</i> '
         RedshiftSettings:
           $ref: '#/components/schemas/RedshiftSettings'
+        PostgreSQLSettings:
+          $ref: '#/components/schemas/PostgreSQLSettings'
+          description: 'Settings in JSON format for the source and target PostgreSQL endpoint. For information about other available settings, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.PostgreSQL.ConnectionAttrib">Extra connection attributes when using PostgreSQL as a source for AWS DMS</a> and <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.PostgreSQL.ConnectionAttrib"> Extra connection attributes when using PostgreSQL as a target for AWS DMS</a> in the <i>AWS Database Migration Service User Guide.</i> '
+        MySQLSettings:
+          $ref: '#/components/schemas/MySQLSettings'
+          description: 'Settings in JSON format for the source and target MySQL endpoint. For information about other available settings, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MySQL.ConnectionAttrib">Extra connection attributes when using MySQL as a source for AWS DMS</a> and <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.MySQL.ConnectionAttrib">Extra connection attributes when using a MySQL-compatible database as a target for AWS DMS</a> in the <i>AWS Database Migration Service User Guide.</i> '
+        OracleSettings:
+          $ref: '#/components/schemas/OracleSettings'
+          description: 'Settings in JSON format for the source and target Oracle endpoint. For information about other available settings, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.ConnectionAttrib">Extra connection attributes when using Oracle as a source for AWS DMS</a> and <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Oracle.ConnectionAttrib"> Extra connection attributes when using Oracle as a target for AWS DMS</a> in the <i>AWS Database Migration Service User Guide.</i> '
+        SybaseSettings:
+          $ref: '#/components/schemas/SybaseSettings'
+          description: 'Settings in JSON format for the source and target SAP ASE endpoint. For information about other available settings, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.SAP.ConnectionAttrib">Extra connection attributes when using SAP ASE as a source for AWS DMS</a> and <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.SAP.ConnectionAttrib">Extra connection attributes when using SAP ASE as a target for AWS DMS</a> in the <i>AWS Database Migration Service User Guide.</i> '
+        MicrosoftSQLServerSettings:
+          $ref: '#/components/schemas/MicrosoftSQLServerSettings'
+          description: 'Settings in JSON format for the source and target Microsoft SQL Server endpoint. For information about other available settings, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.SQLServer.ConnectionAttrib">Extra connection attributes when using SQL Server as a source for AWS DMS</a> and <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.SQLServer.ConnectionAttrib"> Extra connection attributes when using SQL Server as a target for AWS DMS</a> in the <i>AWS Database Migration Service User Guide.</i> '
+        IBMDb2Settings:
+          $ref: '#/components/schemas/IBMDb2Settings'
+          description: 'Settings in JSON format for the source IBM Db2 LUW endpoint. For information about other available settings, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.DB2.ConnectionAttrib">Extra connection attributes when using Db2 LUW as a source for AWS DMS</a> in the <i>AWS Database Migration Service User Guide.</i> '
       description: <p/>
     KMSKeyNotAccessibleFault: {}
     ResourceAlreadyExistsFault: {}
     ResourceQuotaExceededFault: {}
-    InvalidResourceStateFault: {}
-    AccessDeniedFault: {}
     CreateEventSubscriptionResponse:
       type: object
       properties:
@@ -3224,6 +3631,23 @@ components:
           $ref: '#/components/schemas/String'
           description: The Amazon Resource Name (ARN) of the replication task to be deleted.
       description: <p/>
+    DeleteReplicationTaskAssessmentRunResponse:
+      type: object
+      properties:
+        ReplicationTaskAssessmentRun:
+          $ref: '#/components/schemas/ReplicationTaskAssessmentRun'
+          description: The <code>ReplicationTaskAssessmentRun</code> object for the deleted assessment run.
+      description: <p/>
+    DeleteReplicationTaskAssessmentRunMessage:
+      type: object
+      required:
+        - ReplicationTaskAssessmentRunArn
+      title: DeleteReplicationTaskAssessmentRunMessage
+      properties:
+        ReplicationTaskAssessmentRunArn:
+          $ref: '#/components/schemas/String'
+          description: Amazon Resource Name (ARN) of the premigration assessment run to be deleted.
+      description: <p/>
     DescribeAccountAttributesResponse:
       type: object
       example:
@@ -3250,6 +3674,42 @@ components:
       title: DescribeAccountAttributesMessage
       properties: {}
       description: <p/>
+    DescribeApplicableIndividualAssessmentsResponse:
+      type: object
+      properties:
+        IndividualAssessmentNames:
+          $ref: '#/components/schemas/IndividualAssessmentNameList'
+          description: 'List of names for the individual assessments supported by the premigration assessment run that you start based on the specified request parameters. For more information on the available individual assessments, including compatibility with different migration task configurations, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.AssessmentReport.html">Working with premigration assessment runs</a> in the <i>AWS Database Migration Service User Guide.</i> '
+        Marker:
+          $ref: '#/components/schemas/String'
+          description: 'Pagination token returned for you to pass to a subsequent request. If you pass this token as the <code>Marker</code> value in a subsequent request, the response includes only records beyond the marker, up to the value specified in the request by <code>MaxRecords</code>.'
+      description: <p/>
+    DescribeApplicableIndividualAssessmentsMessage:
+      type: object
+      title: DescribeApplicableIndividualAssessmentsMessage
+      properties:
+        ReplicationTaskArn:
+          $ref: '#/components/schemas/String'
+          description: Amazon Resource Name (ARN) of a migration task on which you want to base the default list of individual assessments.
+        ReplicationInstanceArn:
+          $ref: '#/components/schemas/String'
+          description: ARN of a replication instance on which you want to base the default list of individual assessments.
+        SourceEngineName:
+          $ref: '#/components/schemas/String'
+          description: Name of a database engine that the specified replication instance supports as a source.
+        TargetEngineName:
+          $ref: '#/components/schemas/String'
+          description: Name of a database engine that the specified replication instance supports as a target.
+        MigrationType:
+          $ref: '#/components/schemas/MigrationTypeValue'
+          description: Name of the migration type that each provided individual assessment must support.
+        MaxRecords:
+          $ref: '#/components/schemas/IntegerOptional'
+          description: 'Maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.'
+        Marker:
+          $ref: '#/components/schemas/String'
+          description: 'Optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.'
+      description: <p/>
     DescribeCertificatesResponse:
       type: object
       example:
@@ -3268,7 +3728,7 @@ components:
       properties:
         Filters:
           $ref: '#/components/schemas/FilterList'
-          description: Filters applied to the certificate described in the form of key-value pairs.
+          description: Filters applied to the certificates described in the form of key-value pairs.
         MaxRecords:
           $ref: '#/components/schemas/IntegerOptional'
           description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 10</p>'
@@ -3326,7 +3786,7 @@ components:
       properties:
         Filters:
           $ref: '#/components/schemas/FilterList'
-          description: '<p>Filters applied to the describe action.</p> <p>Valid filter names: engine-name | endpoint-type</p>'
+          description: '<p>Filters applied to the endpoint types.</p> <p>Valid filter names: engine-name | endpoint-type</p>'
         MaxRecords:
           $ref: '#/components/schemas/IntegerOptional'
           description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
@@ -3353,7 +3813,7 @@ components:
       properties:
         Filters:
           $ref: '#/components/schemas/FilterList'
-          description: '<p>Filters applied to the describe action.</p> <p>Valid filter names: endpoint-arn | endpoint-type | endpoint-id | engine-name</p>'
+          description: '<p>Filters applied to the endpoints.</p> <p>Valid filter names: endpoint-arn | endpoint-type | endpoint-id | engine-name</p>'
         MaxRecords:
           $ref: '#/components/schemas/IntegerOptional'
           description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
@@ -3377,7 +3837,7 @@ components:
           description: '<p> The type of AWS DMS resource that generates events. </p> <p>Valid values: replication-instance | replication-task</p>'
         Filters:
           $ref: '#/components/schemas/FilterList'
-          description: Filters applied to the action.
+          description: Filters applied to the event categories.
       description: <p/>
     DescribeEventSubscriptionsResponse:
       type: object
@@ -3398,7 +3858,7 @@ components:
           description: The name of the AWS DMS event subscription to be described.
         Filters:
           $ref: '#/components/schemas/FilterList'
-          description: Filters applied to the action.
+          description: Filters applied to event subscriptions.
         MaxRecords:
           $ref: '#/components/schemas/IntegerOptional'
           description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
@@ -3440,7 +3900,7 @@ components:
           description: A list of event categories for the source type that you've chosen.
         Filters:
           $ref: '#/components/schemas/FilterList'
-          description: Filters applied to the action.
+          description: Filters applied to events.
         MaxRecords:
           $ref: '#/components/schemas/IntegerOptional'
           description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
@@ -3564,7 +4024,7 @@ components:
       properties:
         Filters:
           $ref: '#/components/schemas/FilterList'
-          description: '<p>Filters applied to the describe action.</p> <p>Valid filter names: replication-instance-arn | replication-instance-id | replication-instance-class | engine-version</p>'
+          description: '<p>Filters applied to replication instances.</p> <p>Valid filter names: replication-instance-arn | replication-instance-id | replication-instance-class | engine-version</p>'
         MaxRecords:
           $ref: '#/components/schemas/IntegerOptional'
           description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
@@ -3591,7 +4051,7 @@ components:
       properties:
         Filters:
           $ref: '#/components/schemas/FilterList'
-          description: '<p>Filters applied to the describe action.</p> <p>Valid filter names: replication-subnet-group-id</p>'
+          description: '<p>Filters applied to replication subnet groups.</p> <p>Valid filter names: replication-subnet-group-id</p>'
         MaxRecords:
           $ref: '#/components/schemas/IntegerOptional'
           description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
@@ -3626,6 +4086,54 @@ components:
           $ref: '#/components/schemas/String'
           description: ' An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
       description: <p/>
+    DescribeReplicationTaskAssessmentRunsResponse:
+      type: object
+      properties:
+        Marker:
+          $ref: '#/components/schemas/String'
+          description: 'A pagination token returned for you to pass to a subsequent request. If you pass this token as the <code>Marker</code> value in a subsequent request, the response includes only records beyond the marker, up to the value specified in the request by <code>MaxRecords</code>.'
+        ReplicationTaskAssessmentRuns:
+          $ref: '#/components/schemas/ReplicationTaskAssessmentRunList'
+          description: One or more premigration assessment runs as specified by <code>Filters</code>.
+      description: <p/>
+    DescribeReplicationTaskAssessmentRunsMessage:
+      type: object
+      title: DescribeReplicationTaskAssessmentRunsMessage
+      properties:
+        Filters:
+          $ref: '#/components/schemas/FilterList'
+          description: '<p>Filters applied to the premigration assessment runs described in the form of key-value pairs.</p> <p>Valid filter names: <code>replication-task-assessment-run-arn</code>, <code>replication-task-arn</code>, <code>replication-instance-arn</code>, <code>status</code> </p>'
+        MaxRecords:
+          $ref: '#/components/schemas/IntegerOptional'
+          description: 'The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.'
+        Marker:
+          $ref: '#/components/schemas/String'
+          description: 'An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.'
+      description: <p/>
+    DescribeReplicationTaskIndividualAssessmentsResponse:
+      type: object
+      properties:
+        Marker:
+          $ref: '#/components/schemas/String'
+          description: 'A pagination token returned for you to pass to a subsequent request. If you pass this token as the <code>Marker</code> value in a subsequent request, the response includes only records beyond the marker, up to the value specified in the request by <code>MaxRecords</code>.'
+        ReplicationTaskIndividualAssessments:
+          $ref: '#/components/schemas/ReplicationTaskIndividualAssessmentList'
+          description: One or more individual assessments as specified by <code>Filters</code>.
+      description: <p/>
+    DescribeReplicationTaskIndividualAssessmentsMessage:
+      type: object
+      title: DescribeReplicationTaskIndividualAssessmentsMessage
+      properties:
+        Filters:
+          $ref: '#/components/schemas/FilterList'
+          description: '<p>Filters applied to the individual assessments described in the form of key-value pairs.</p> <p>Valid filter names: <code>replication-task-assessment-run-arn</code>, <code>replication-task-arn</code>, <code>status</code> </p>'
+        MaxRecords:
+          $ref: '#/components/schemas/IntegerOptional'
+          description: 'The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.'
+        Marker:
+          $ref: '#/components/schemas/String'
+          description: 'An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.'
+      description: <p/>
     DescribeReplicationTasksResponse:
       type: object
       example:
@@ -3645,7 +4153,7 @@ components:
       properties:
         Filters:
           $ref: '#/components/schemas/FilterList'
-          description: '<p>Filters applied to the describe action.</p> <p>Valid filter names: replication-task-arn | replication-task-id | migration-type | endpoint-arn | replication-instance-arn</p>'
+          description: '<p>Filters applied to replication tasks.</p> <p>Valid filter names: replication-task-arn | replication-task-id | migration-type | endpoint-arn | replication-instance-arn</p>'
         MaxRecords:
           $ref: '#/components/schemas/IntegerOptional'
           description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
@@ -3719,7 +4227,7 @@ components:
           description: ' An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
         Filters:
           $ref: '#/components/schemas/FilterList'
-          description: '<p>Filters applied to the describe table statistics action.</p> <p>Valid filter names: schema-name | table-name | table-state</p> <p>A combination of filters creates an AND condition where each record matches all specified filters.</p>'
+          description: '<p>Filters applied to table statistics.</p> <p>Valid filter names: schema-name | table-name | table-state</p> <p>A combination of filters creates an AND condition where each record matches all specified filters.</p>'
       description: <p/>
     ImportCertificateResponse:
       type: object
@@ -3850,6 +4358,24 @@ components:
           description: 'Settings in JSON format for the target Amazon Neptune endpoint. For more information about the available settings, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Neptune.html#CHAP_Target.Neptune.EndpointSettings">Specifying Endpoint Settings for Amazon Neptune as a Target</a> in the <i>AWS Database Migration Service User Guide.</i> '
         RedshiftSettings:
           $ref: '#/components/schemas/RedshiftSettings'
+        PostgreSQLSettings:
+          $ref: '#/components/schemas/PostgreSQLSettings'
+          description: 'Settings in JSON format for the source and target PostgreSQL endpoint. For information about other available settings, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.PostgreSQL.ConnectionAttrib">Extra connection attributes when using PostgreSQL as a source for AWS DMS</a> and <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.PostgreSQL.ConnectionAttrib"> Extra connection attributes when using PostgreSQL as a target for AWS DMS</a> in the <i>AWS Database Migration Service User Guide.</i> '
+        MySQLSettings:
+          $ref: '#/components/schemas/MySQLSettings'
+          description: 'Settings in JSON format for the source and target MySQL endpoint. For information about other available settings, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MySQL.ConnectionAttrib">Extra connection attributes when using MySQL as a source for AWS DMS</a> and <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.MySQL.ConnectionAttrib">Extra connection attributes when using a MySQL-compatible database as a target for AWS DMS</a> in the <i>AWS Database Migration Service User Guide.</i> '
+        OracleSettings:
+          $ref: '#/components/schemas/OracleSettings'
+          description: 'Settings in JSON format for the source and target Oracle endpoint. For information about other available settings, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.ConnectionAttrib">Extra connection attributes when using Oracle as a source for AWS DMS</a> and <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Oracle.ConnectionAttrib"> Extra connection attributes when using Oracle as a target for AWS DMS</a> in the <i>AWS Database Migration Service User Guide.</i> '
+        SybaseSettings:
+          $ref: '#/components/schemas/SybaseSettings'
+          description: 'Settings in JSON format for the source and target SAP ASE endpoint. For information about other available settings, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.SAP.ConnectionAttrib">Extra connection attributes when using SAP ASE as a source for AWS DMS</a> and <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.SAP.ConnectionAttrib">Extra connection attributes when using SAP ASE as a target for AWS DMS</a> in the <i>AWS Database Migration Service User Guide.</i> '
+        MicrosoftSQLServerSettings:
+          $ref: '#/components/schemas/MicrosoftSQLServerSettings'
+          description: 'Settings in JSON format for the source and target Microsoft SQL Server endpoint. For information about other available settings, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.SQLServer.ConnectionAttrib">Extra connection attributes when using SQL Server as a source for AWS DMS</a> and <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.SQLServer.ConnectionAttrib"> Extra connection attributes when using SQL Server as a target for AWS DMS</a> in the <i>AWS Database Migration Service User Guide.</i> '
+        IBMDb2Settings:
+          $ref: '#/components/schemas/IBMDb2Settings'
+          description: 'Settings in JSON format for the source IBM Db2 LUW endpoint. For information about other available settings, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.DB2.ConnectionAttrib">Extra connection attributes when using Db2 LUW as a source for AWS DMS</a> in the <i>AWS Database Migration Service User Guide.</i> '
       description: <p/>
     ModifyEventSubscriptionResponse:
       type: object
@@ -4172,6 +4698,53 @@ components:
           $ref: '#/components/schemas/String'
           description: ' The Amazon Resource Name (ARN) of the replication task. '
       description: <p/>
+    StartReplicationTaskAssessmentRunResponse:
+      type: object
+      properties:
+        ReplicationTaskAssessmentRun:
+          $ref: '#/components/schemas/ReplicationTaskAssessmentRun'
+          description: The premigration assessment run that was started.
+      description: <p/>
+    StartReplicationTaskAssessmentRunMessage:
+      type: object
+      required:
+        - ReplicationTaskArn
+        - ServiceAccessRoleArn
+        - ResultLocationBucket
+        - AssessmentRunName
+      title: StartReplicationTaskAssessmentRunMessage
+      properties:
+        ReplicationTaskArn:
+          $ref: '#/components/schemas/String'
+          description: Amazon Resource Name (ARN) of the migration task associated with the premigration assessment run that you want to start.
+        ServiceAccessRoleArn:
+          $ref: '#/components/schemas/String'
+          description: ARN of a service role needed to start the assessment run.
+        ResultLocationBucket:
+          $ref: '#/components/schemas/String'
+          description: Amazon S3 bucket where you want AWS DMS to store the results of this assessment run.
+        ResultLocationFolder:
+          $ref: '#/components/schemas/String'
+          description: Folder within an Amazon S3 bucket where you want AWS DMS to store the results of this assessment run.
+        ResultEncryptionMode:
+          $ref: '#/components/schemas/String'
+          description: '<p>Encryption mode that you can specify to encrypt the results of this assessment run. If you don''t specify this request parameter, AWS DMS stores the assessment run results without encryption. You can specify one of the options following:</p> <ul> <li> <p> <code>"SSE_S3"</code> – The server-side encryption provided as a default by Amazon S3.</p> </li> <li> <p> <code>"SSE_KMS"</code> – AWS Key Management Service (AWS KMS) encryption. This encryption can use either a custom KMS encryption key that you specify or the default KMS encryption key that DMS provides.</p> </li> </ul>'
+        ResultKmsKeyArn:
+          $ref: '#/components/schemas/String'
+          description: ARN of a custom KMS encryption key that you specify when you set <code>ResultEncryptionMode</code> to <code>"SSE_KMS</code>".
+        AssessmentRunName:
+          $ref: '#/components/schemas/String'
+          description: Unique name to identify the assessment run.
+        IncludeOnly:
+          $ref: '#/components/schemas/IncludeTestList'
+          description: '<p>Space-separated list of names for specific individual assessments that you want to include. These names come from the default list of individual assessments that AWS DMS supports for the associated migration task. This task is specified by <code>ReplicationTaskArn</code>.</p> <note> <p>You can''t set a value for <code>IncludeOnly</code> if you also set a value for <code>Exclude</code> in the API operation. </p> <p>To identify the names of the default individual assessments that AWS DMS supports for the associated migration task, run the <code>DescribeApplicableIndividualAssessments</code> operation using its own <code>ReplicationTaskArn</code> request parameter.</p> </note>'
+        Exclude:
+          $ref: '#/components/schemas/ExcludeTestList'
+          description: '<p>Space-separated list of names for specific individual assessments that you want to exclude. These names come from the default list of individual assessments that AWS DMS supports for the associated migration task. This task is specified by <code>ReplicationTaskArn</code>.</p> <note> <p>You can''t set a value for <code>Exclude</code> if you also set a value for <code>IncludeOnly</code> in the API operation.</p> <p>To identify the names of the default individual assessments that AWS DMS supports for the associated migration task, run the <code>DescribeApplicableIndividualAssessments</code> operation using its own <code>ReplicationTaskArn</code> request parameter.</p> </note>'
+      description: <p/>
+    KMSFault: {}
+    S3AccessDeniedFault: {}
+    S3ResourceNotFoundFault: {}
     StopReplicationTaskResponse:
       type: object
       example:
@@ -4285,6 +4858,46 @@ components:
       type: boolean
     BooleanOptional:
       type: boolean
+    ReplicationTaskAssessmentRun:
+      type: object
+      properties:
+        ReplicationTaskAssessmentRunArn:
+          $ref: '#/components/schemas/String'
+          description: Amazon Resource Name (ARN) of this assessment run.
+        ReplicationTaskArn:
+          $ref: '#/components/schemas/String'
+          description: ARN of the migration task associated with this premigration assessment run.
+        Status:
+          $ref: '#/components/schemas/String'
+          description: '<p>Assessment run status. </p> <p>This status can have one of the following values:</p> <ul> <li> <p> <code>"cancelling"</code> – The assessment run was canceled by the <code>CancelReplicationTaskAssessmentRun</code> operation.</p> </li> <li> <p> <code>"deleting"</code> – The assessment run was deleted by the <code>DeleteReplicationTaskAssessmentRun</code> operation.</p> </li> <li> <p> <code>"failed"</code> – At least one individual assessment completed with a <code>failed</code> status.</p> </li> <li> <p> <code>"error-provisioning"</code> – An internal error occurred while resources were provisioned (during <code>provisioning</code> status).</p> </li> <li> <p> <code>"error-executing"</code> – An internal error occurred while individual assessments ran (during <code>running</code> status).</p> </li> <li> <p> <code>"invalid state"</code> – The assessment run is in an unknown state.</p> </li> <li> <p> <code>"passed"</code> – All individual assessments have completed, and none has a <code>failed</code> status.</p> </li> <li> <p> <code>"provisioning"</code> – Resources required to run individual assessments are being provisioned.</p> </li> <li> <p> <code>"running"</code> – Individual assessments are being run.</p> </li> <li> <p> <code>"starting"</code> – The assessment run is starting, but resources are not yet being provisioned for individual assessments.</p> </li> </ul>'
+        ReplicationTaskAssessmentRunCreationDate:
+          $ref: '#/components/schemas/TStamp'
+          description: Date on which the assessment run was created using the <code>StartReplicationTaskAssessmentRun</code> operation.
+        AssessmentProgress:
+          $ref: '#/components/schemas/ReplicationTaskAssessmentRunProgress'
+          description: Indication of the completion progress for the individual assessments specified to run.
+        LastFailureMessage:
+          $ref: '#/components/schemas/String'
+          description: Last message generated by an individual assessment failure.
+        ServiceAccessRoleArn:
+          $ref: '#/components/schemas/String'
+          description: ARN of the service role used to start the assessment run using the <code>StartReplicationTaskAssessmentRun</code> operation.
+        ResultLocationBucket:
+          $ref: '#/components/schemas/String'
+          description: Amazon S3 bucket where AWS DMS stores the results of this assessment run.
+        ResultLocationFolder:
+          $ref: '#/components/schemas/String'
+          description: Folder in an Amazon S3 bucket where AWS DMS stores the results of this assessment run.
+        ResultEncryptionMode:
+          $ref: '#/components/schemas/String'
+          description: Encryption mode used to encrypt the assessment run results.
+        ResultKmsKeyArn:
+          $ref: '#/components/schemas/String'
+          description: ARN of the AWS KMS encryption key used to encrypt the assessment run results.
+        AssessmentRunName:
+          $ref: '#/components/schemas/String'
+          description: Unique name of the assessment run.
+      description: <p>Provides information that describes a premigration assessment run that you have started using the <code>StartReplicationTaskAssessmentRun</code> operation.</p> <p>Some of the information appears based on other operations that can return the <code>ReplicationTaskAssessmentRun</code> object.</p>
     TStamp:
       type: string
       format: date-time
@@ -4539,6 +5152,24 @@ components:
         Topic:
           $ref: '#/components/schemas/String'
           description: 'The topic to which you migrate the data. If you don''t specify a topic, AWS DMS specifies <code>"kafka-default-topic"</code> as the migration topic.'
+        MessageFormat:
+          $ref: '#/components/schemas/MessageFormatValue'
+          description: The output format for the records created on the endpoint. The message format is <code>JSON</code> (default) or <code>JSON_UNFORMATTED</code> (a single line with no tab).
+        IncludeTransactionDetails:
+          $ref: '#/components/schemas/BooleanOptional'
+          description: 'Provides detailed transaction information from the source database. This information includes a commit timestamp, a log position, and values for <code>transaction_id</code>, previous <code>transaction_id</code>, and <code>transaction_record_id</code> (the record offset within a transaction). The default is <code>False</code>.'
+        IncludePartitionValue:
+          $ref: '#/components/schemas/BooleanOptional'
+          description: 'Shows the partition value within the Kafka message output, unless the partition type is <code>schema-table-type</code>. The default is <code>False</code>.'
+        PartitionIncludeSchemaTable:
+          $ref: '#/components/schemas/BooleanOptional'
+          description: 'Prefixes schema and table names to partition values, when the partition type is <code>primary-key-type</code>. Doing this increases data distribution among Kafka partitions. For example, suppose that a SysBench schema has thousands of tables and each table has only limited range for a primary key. In this case, the same primary key is sent from thousands of tables to the same partition, which causes throttling. The default is <code>False</code>.'
+        IncludeTableAlterOperations:
+          $ref: '#/components/schemas/BooleanOptional'
+          description: 'Includes any data definition language (DDL) operations that change the table in the control data, such as <code>rename-table</code>, <code>drop-table</code>, <code>add-column</code>, <code>drop-column</code>, and <code>rename-column</code>. The default is <code>False</code>.'
+        IncludeControlDetails:
+          $ref: '#/components/schemas/BooleanOptional'
+          description: 'Shows detailed control information for table definition, column definition, and table and column changes in the Kafka message output. The default is <code>False</code>.'
       description: Provides information that describes an Apache Kafka endpoint. This information includes the output format of records applied to the endpoint and details of transaction and control table data information.
     ElasticsearchSettings:
       type: object
@@ -4666,6 +5297,135 @@ components:
           $ref: '#/components/schemas/IntegerOptional'
           description: 'The size of the write buffer to use in rows. Valid values range from 1 through 2,048. The default is 1,024. Use this setting to tune performance. '
       description: Provides information that defines an Amazon Redshift endpoint.
+    PostgreSQLSettings:
+      type: object
+      properties:
+        DatabaseName:
+          $ref: '#/components/schemas/String'
+          description: Database name for the endpoint.
+        Password:
+          $ref: '#/components/schemas/SecretString'
+          description: Endpoint connection password.
+        Port:
+          $ref: '#/components/schemas/IntegerOptional'
+          description: Endpoint TCP port.
+        ServerName:
+          $ref: '#/components/schemas/String'
+          description: Fully qualified domain name of the endpoint.
+        Username:
+          $ref: '#/components/schemas/String'
+          description: Endpoint connection user name.
+      description: Provides information that defines a PostgreSQL endpoint.
+    MySQLSettings:
+      type: object
+      properties:
+        DatabaseName:
+          $ref: '#/components/schemas/String'
+          description: Database name for the endpoint.
+        Password:
+          $ref: '#/components/schemas/SecretString'
+          description: Endpoint connection password.
+        Port:
+          $ref: '#/components/schemas/IntegerOptional'
+          description: Endpoint TCP port.
+        ServerName:
+          $ref: '#/components/schemas/String'
+          description: Fully qualified domain name of the endpoint.
+        Username:
+          $ref: '#/components/schemas/String'
+          description: Endpoint connection user name.
+      description: Provides information that defines a MySQL endpoint.
+    OracleSettings:
+      type: object
+      properties:
+        AsmPassword:
+          $ref: '#/components/schemas/SecretString'
+          description: 'For an Oracle source endpoint, your Oracle Automatic Storage Management (ASM) password. You can set this value from the <code> <i>asm_user_password</i> </code> value. You set this value as part of the comma-separated value that you set to the <code>Password</code> request parameter when you create the endpoint to access transaction logs using Binary Reader. For more information, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.html#dms/latest/userguide/CHAP_Source.Oracle.html#CHAP_Source.Oracle.CDC.Configuration">Configuration for change data capture (CDC) on an Oracle source database</a>.'
+        AsmServer:
+          $ref: '#/components/schemas/String'
+          description: 'For an Oracle source endpoint, your ASM server address. You can set this value from the <code>asm_server</code> value. You set <code>asm_server</code> as part of the extra connection attribute string to access an Oracle server with Binary Reader that uses ASM. For more information, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.html#dms/latest/userguide/CHAP_Source.Oracle.html#CHAP_Source.Oracle.CDC.Configuration">Configuration for change data capture (CDC) on an Oracle source database</a>.'
+        AsmUser:
+          $ref: '#/components/schemas/String'
+          description: 'For an Oracle source endpoint, your ASM user name. You can set this value from the <code>asm_user</code> value. You set <code>asm_user</code> as part of the extra connection attribute string to access an Oracle server with Binary Reader that uses ASM. For more information, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.html#dms/latest/userguide/CHAP_Source.Oracle.html#CHAP_Source.Oracle.CDC.Configuration">Configuration for change data capture (CDC) on an Oracle source database</a>.'
+        DatabaseName:
+          $ref: '#/components/schemas/String'
+          description: Database name for the endpoint.
+        Password:
+          $ref: '#/components/schemas/SecretString'
+          description: Endpoint connection password.
+        Port:
+          $ref: '#/components/schemas/IntegerOptional'
+          description: Endpoint TCP port.
+        SecurityDbEncryption:
+          $ref: '#/components/schemas/SecretString'
+          description: 'For an Oracle source endpoint, the transparent data encryption (TDE) password required by AWM DMS to access Oracle redo logs encrypted by TDE using Binary Reader. It is also the <code> <i>TDE_Password</i> </code> part of the comma-separated value you set to the <code>Password</code> request parameter when you create the endpoint. The <code>SecurityDbEncryptian</code> setting is related to this <code>SecurityDbEncryptionName</code> setting. For more information, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.html#CHAP_Source.Oracle.Encryption"> Supported encryption methods for using Oracle as a source for AWS DMS</a> in the <i>AWS Database Migration Service User Guide</i>. '
+        SecurityDbEncryptionName:
+          $ref: '#/components/schemas/String'
+          description: 'For an Oracle source endpoint, the name of a key used for the transparent data encryption (TDE) of the columns and tablespaces in an Oracle source database that is encrypted using TDE. The key value is the value of the <code>SecurityDbEncryption</code> setting. For more information on setting the key name value of <code>SecurityDbEncryptionName</code>, see the information and example for setting the <code>securityDbEncryptionName</code> extra connection attribute in <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.html#CHAP_Source.Oracle.Encryption"> Supported encryption methods for using Oracle as a source for AWS DMS</a> in the <i>AWS Database Migration Service User Guide</i>.'
+        ServerName:
+          $ref: '#/components/schemas/String'
+          description: Fully qualified domain name of the endpoint.
+        Username:
+          $ref: '#/components/schemas/String'
+          description: Endpoint connection user name.
+      description: Provides information that defines an Oracle endpoint.
+    SybaseSettings:
+      type: object
+      properties:
+        DatabaseName:
+          $ref: '#/components/schemas/String'
+          description: Database name for the endpoint.
+        Password:
+          $ref: '#/components/schemas/SecretString'
+          description: Endpoint connection password.
+        Port:
+          $ref: '#/components/schemas/IntegerOptional'
+          description: Endpoint TCP port.
+        ServerName:
+          $ref: '#/components/schemas/String'
+          description: Fully qualified domain name of the endpoint.
+        Username:
+          $ref: '#/components/schemas/String'
+          description: Endpoint connection user name.
+      description: Provides information that defines a SAP ASE endpoint.
+    MicrosoftSQLServerSettings:
+      type: object
+      properties:
+        Port:
+          $ref: '#/components/schemas/IntegerOptional'
+          description: Endpoint TCP port.
+        DatabaseName:
+          $ref: '#/components/schemas/String'
+          description: Database name for the endpoint.
+        Password:
+          $ref: '#/components/schemas/SecretString'
+          description: Endpoint connection password.
+        ServerName:
+          $ref: '#/components/schemas/String'
+          description: Fully qualified domain name of the endpoint.
+        Username:
+          $ref: '#/components/schemas/String'
+          description: Endpoint connection user name.
+      description: Provides information that defines a Microsoft SQL Server endpoint.
+    IBMDb2Settings:
+      type: object
+      properties:
+        DatabaseName:
+          $ref: '#/components/schemas/String'
+          description: Database name for the endpoint.
+        Password:
+          $ref: '#/components/schemas/SecretString'
+          description: Endpoint connection password.
+        Port:
+          $ref: '#/components/schemas/IntegerOptional'
+          description: Endpoint TCP port.
+        ServerName:
+          $ref: '#/components/schemas/String'
+          description: Fully qualified domain name of the endpoint.
+        Username:
+          $ref: '#/components/schemas/String'
+          description: Endpoint connection user name.
+      description: Provides information that defines an IBM Db2 LUW endpoint.
     Endpoint:
       type: object
       properties:
@@ -4722,7 +5482,7 @@ components:
           description: ' Value returned by a call to CreateEndpoint that can be used for cross-account validation. Use it on a subsequent call to CreateEndpoint to create the endpoint with a cross-account. '
         DynamoDbSettings:
           $ref: '#/components/schemas/DynamoDbSettings'
-          description: 'The settings for the target DynamoDB database. For more information, see the <code>DynamoDBSettings</code> structure.'
+          description: 'The settings for the DynamoDB target endpoint. For more information, see the <code>DynamoDBSettings</code> structure.'
         S3Settings:
           $ref: '#/components/schemas/S3Settings'
           description: 'The settings for the S3 target endpoint. For more information, see the <code>S3Settings</code> structure.'
@@ -4747,6 +5507,24 @@ components:
         RedshiftSettings:
           $ref: '#/components/schemas/RedshiftSettings'
           description: Settings for the Amazon Redshift endpoint.
+        PostgreSQLSettings:
+          $ref: '#/components/schemas/PostgreSQLSettings'
+          description: 'The settings for the PostgreSQL source and target endpoint. For more information, see the <code>PostgreSQLSettings</code> structure.'
+        MySQLSettings:
+          $ref: '#/components/schemas/MySQLSettings'
+          description: 'The settings for the MySQL source and target endpoint. For more information, see the <code>MySQLSettings</code> structure.'
+        OracleSettings:
+          $ref: '#/components/schemas/OracleSettings'
+          description: 'The settings for the Oracle source and target endpoint. For more information, see the <code>OracleSettings</code> structure.'
+        SybaseSettings:
+          $ref: '#/components/schemas/SybaseSettings'
+          description: 'The settings for the SAP ASE source and target endpoint. For more information, see the <code>SybaseSettings</code> structure.'
+        MicrosoftSQLServerSettings:
+          $ref: '#/components/schemas/MicrosoftSQLServerSettings'
+          description: 'The settings for the Microsoft SQL Server source and target endpoint. For more information, see the <code>MicrosoftSQLServerSettings</code> structure.'
+        IBMDb2Settings:
+          $ref: '#/components/schemas/IBMDb2Settings'
+          description: 'The settings for the IBM Db2 LUW source endpoint. For more information, see the <code>IBMDb2Settings</code> structure. '
       description: '<p>Describes an endpoint of a database instance in response to operations such as the following:</p> <ul> <li> <p> <code>CreateEndpoint</code> </p> </li> <li> <p> <code>DescribeEndpoint</code> </p> </li> <li> <p> <code>DescribeEndpointTypes</code> </p> </li> <li> <p> <code>ModifyEndpoint</code> </p> </li> </ul>'
     EventCategoriesList:
       type: array
@@ -4958,6 +5736,10 @@ components:
       enum:
         - csv
         - parquet
+    IndividualAssessmentNameList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
     FilterList:
       type: array
       items:
@@ -5029,6 +5811,14 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ReplicationTaskAssessmentResult'
+    ReplicationTaskAssessmentRunList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ReplicationTaskAssessmentRun'
+    ReplicationTaskIndividualAssessmentList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ReplicationTaskIndividualAssessment'
     ReplicationTaskList:
       type: array
       items:
@@ -5081,6 +5871,10 @@ components:
           $ref: '#/components/schemas/EventCategoriesList'
           description: ' A list of event categories from a source type that you''ve chosen.'
       description: 'Lists categories of events subscribed to, and generated by, the applicable AWS DMS resource type.'
+    ExcludeTestList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
     FilterValueList:
       type: array
       items:
@@ -5093,22 +5887,26 @@ components:
       properties:
         Name:
           $ref: '#/components/schemas/String'
-          description: The name of the filter.
+          description: The name of the filter as specified for a <code>Describe*</code> or similar operation.
         Values:
           $ref: '#/components/schemas/FilterValueList'
-          description: The filter value.
-      description: Identifies the name and value of a source filter object used to limit the number and type of records transferred from your source to your target.
-    Integer:
-      type: integer
-    KeyList:
+          description: 'The filter value, which can specify one or more values used to narrow the returned results.'
+      description: Identifies the name and value of a filter object. This filter is used to limit the number and type of AWS DMS objects that are returned for a particular <code>Describe*</code> or similar operation.
+    IncludeTestList:
       type: array
       items:
         $ref: '#/components/schemas/String'
+    Integer:
+      type: integer
     MessageFormatValue:
       type: string
       enum:
         - json
         - json-unformatted
+    KeyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
     NestingLevelValue:
       type: string
       enum:
@@ -5302,6 +6100,35 @@ components:
           $ref: '#/components/schemas/String'
           description: ' The URL of the S3 object containing the task assessment results. '
       description: ' The task assessment report in JSON format. '
+    ReplicationTaskAssessmentRunProgress:
+      type: object
+      properties:
+        IndividualAssessmentCount:
+          $ref: '#/components/schemas/Integer'
+          description: The number of individual assessments that are specified to run.
+        IndividualAssessmentCompletedCount:
+          $ref: '#/components/schemas/Integer'
+          description: 'The number of individual assessments that have completed, successfully or not.'
+      description: The progress values reported by the <code>AssessmentProgress</code> response element.
+    ReplicationTaskIndividualAssessment:
+      type: object
+      properties:
+        ReplicationTaskIndividualAssessmentArn:
+          $ref: '#/components/schemas/String'
+          description: Amazon Resource Name (ARN) of this individual assessment.
+        ReplicationTaskAssessmentRunArn:
+          $ref: '#/components/schemas/String'
+          description: ARN of the premigration assessment run that is created to run this individual assessment.
+        IndividualAssessmentName:
+          $ref: '#/components/schemas/String'
+          description: Name of this individual assessment.
+        Status:
+          $ref: '#/components/schemas/String'
+          description: '<p>Individual assessment status.</p> <p>This status can have one of the following values:</p> <ul> <li> <p> <code>"cancelled"</code> </p> </li> <li> <p> <code>"error"</code> </p> </li> <li> <p> <code>"failed"</code> </p> </li> <li> <p> <code>"passed"</code> </p> </li> <li> <p> <code>"pending"</code> </p> </li> <li> <p> <code>"running"</code> </p> </li> </ul>'
+        ReplicationTaskIndividualAssessmentStartDate:
+          $ref: '#/components/schemas/TStamp'
+          description: Date when this individual assessment was started as part of running the <code>StartReplicationTaskAssessmentRun</code> operation.
+      description: Provides information that describes an individual assessment from a premigration assessment run.
     StartReplicationTaskTypeValue:
       type: string
       enum:
@@ -5342,6 +6169,9 @@ components:
       description: 'Provides information about types of supported endpoints in response to a request by the <code>DescribeEndpointTypes</code> operation. This information includes the type of endpoint, the database engine name, and whether change data capture (CDC) is supported.'
     TableToReload:
       type: object
+      required:
+        - SchemaName
+        - TableName
       properties:
         SchemaName:
           $ref: '#/components/schemas/String'

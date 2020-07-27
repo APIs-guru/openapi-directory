@@ -117,7 +117,7 @@ paths:
   /#X-Amz-Target=FmrsService.CancelTaskExecution:
     post:
       operationId: CancelTaskExecution
-      description: '<p>Cancels execution of a task. </p> <p>When you cancel a task execution, the transfer of some files are abruptly interrupted. The contents of files that are transferred to the destination might be incomplete or inconsistent with the source files. However, if you start a new task execution on the same task and you allow the task execution to complete, file content on the destination is complete and consistent. This applies to other unexpected failures that interrupt a task execution. In all of these cases, AWS DataSync successfully complete the transfer when you start the next task execution.</p>'
+      description: '<p>Cancels execution of a task. </p> <p>When you cancel a task execution, the transfer of some files is abruptly interrupted. The contents of files that are transferred to the destination might be incomplete or inconsistent with the source files. However, if you start a new task execution on the same task and you allow the task execution to complete, file content on the destination is complete and consistent. This applies to other unexpected failures that interrupt a task execution. In all of these cases, AWS DataSync successfully complete the transfer when you start the next task execution.</p>'
       responses:
         '200':
           description: Success
@@ -162,7 +162,7 @@ paths:
   /#X-Amz-Target=FmrsService.CreateAgent:
     post:
       operationId: CreateAgent
-      description: '<p>Activates an AWS DataSync agent that you have deployed on your host. The activation process associates your agent with your account. In the activation process, you specify information such as the AWS Region that you want to activate the agent in. You activate the agent in the AWS Region where your target locations (in Amazon S3 or Amazon EFS) reside. Your tasks are created in this AWS Region.</p> <p>You can activate the agent in a VPC (Virtual private Cloud) or provide the agent access to a VPC endpoint so you can run tasks without going over the public Internet.</p> <p>You can use an agent for more than one location. If a task uses multiple agents, all of them need to have status AVAILABLE for the task to run. If you use multiple agents for a source location, the status of all the agents must be AVAILABLE for the task to run. </p> <p>Agents are automatically updated by AWS on a regular basis, using a mechanism that ensures minimal interruption to your tasks.</p> <p/>'
+      description: '<p>Activates an AWS DataSync agent that you have deployed on your host. The activation process associates your agent with your account. In the activation process, you specify information such as the AWS Region that you want to activate the agent in. You activate the agent in the AWS Region where your target locations (in Amazon S3 or Amazon EFS) reside. Your tasks are created in this AWS Region.</p> <p>You can activate the agent in a VPC (virtual private cloud) or provide the agent access to a VPC endpoint so you can run tasks without going over the public Internet.</p> <p>You can use an agent for more than one location. If a task uses multiple agents, all of them need to have status AVAILABLE for the task to run. If you use multiple agents for a source location, the status of all the agents must be AVAILABLE for the task to run. </p> <p>Agents are automatically updated by AWS on a regular basis, using a mechanism that ensures minimal interruption to your tasks.</p> <p/>'
       responses:
         '200':
           description: Success
@@ -297,7 +297,7 @@ paths:
   /#X-Amz-Target=FmrsService.CreateLocationNfs:
     post:
       operationId: CreateLocationNfs
-      description: Defines a file system on a Network File System (NFS) server that can be read from or written to
+      description: Defines a file system on a Network File System (NFS) server that can be read from or written to.
       responses:
         '200':
           description: Success
@@ -331,6 +331,51 @@ paths:
             type: string
             enum:
               - FmrsService.CreateLocationNfs
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=FmrsService.CreateLocationObjectStorage:
+    post:
+      operationId: CreateLocationObjectStorage
+      description: Creates an endpoint for a self-managed object storage bucket.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateLocationObjectStorageResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateLocationObjectStorageRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - FmrsService.CreateLocationObjectStorage
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -387,7 +432,7 @@ paths:
   /#X-Amz-Target=FmrsService.CreateLocationSmb:
     post:
       operationId: CreateLocationSmb
-      description: Defines a file system on an Server Message Block (SMB) server that can be read from or written to.
+      description: Defines a file system on a Server Message Block (SMB) server that can be read from or written to.
       responses:
         '200':
           description: Success
@@ -747,7 +792,7 @@ paths:
   /#X-Amz-Target=FmrsService.DescribeLocationNfs:
     post:
       operationId: DescribeLocationNfs
-      description: 'Returns metadata, such as the path information, about a NFS location.'
+      description: 'Returns metadata, such as the path information, about an NFS location.'
       responses:
         '200':
           description: Success
@@ -781,6 +826,51 @@ paths:
             type: string
             enum:
               - FmrsService.DescribeLocationNfs
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=FmrsService.DescribeLocationObjectStorage:
+    post:
+      operationId: DescribeLocationObjectStorage
+      description: Returns metadata about a self-managed object storage server location.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeLocationObjectStorageResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeLocationObjectStorageRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - FmrsService.DescribeLocationObjectStorage
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -837,7 +927,7 @@ paths:
   /#X-Amz-Target=FmrsService.DescribeLocationSmb:
     post:
       operationId: DescribeLocationSmb
-      description: 'Returns metadata, such as the path and user information about a SMB location.'
+      description: 'Returns metadata, such as the path and user information about an SMB location.'
       responses:
         '200':
           description: Success
@@ -1029,7 +1119,7 @@ paths:
   /#X-Amz-Target=FmrsService.ListLocations:
     post:
       operationId: ListLocations
-      description: '<p>Returns a lists of source and destination locations.</p> <p>If you have more locations than are returned in a response (that is, the response returns only a truncated list of your agents), the response contains a token that you can specify in your next request to fetch the next page of locations.</p>'
+      description: '<p>Returns a list of source and destination locations.</p> <p>If you have more locations than are returned in a response (that is, the response returns only a truncated list of your agents), the response contains a token that you can specify in your next request to fetch the next page of locations.</p>'
       responses:
         '200':
           description: Success
@@ -1086,7 +1176,7 @@ paths:
   /#X-Amz-Target=FmrsService.ListTagsForResource:
     post:
       operationId: ListTagsForResource
-      description: 'Returns all the tags associated with a specified resources. '
+      description: 'Returns all the tags associated with a specified resource. '
       responses:
         '200':
           description: Success
@@ -1566,11 +1656,11 @@ components:
           $ref: '#/components/schemas/TagValue'
           description: The name you configured for your agent. This value is a text reference that is used to identify the agent in the console.
         Tags:
-          $ref: '#/components/schemas/TagList'
+          $ref: '#/components/schemas/InputTagList'
           description: '<p>The key-value pair that represents the tag that you want to associate with the agent. The value can be an empty string. This value helps you manage, filter, and search for your agents.</p> <note> <p>Valid characters for key and value are letters, spaces, and numbers representable in UTF-8 format, and the following special characters: + - = . _ : / @. </p> </note>'
         VpcEndpointId:
           $ref: '#/components/schemas/VpcEndpointId'
-          description: '<p>The ID of the VPC (Virtual Private Cloud) endpoint that the agent has access to. This is the client-side VPC endpoint, also called a PrivateLink. If you don''t have a PrivateLink VPC endpoint, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-service.html#create-endpoint-service">Creating a VPC Endpoint Service Configuration</a> in the AWS VPC User Guide.</p> <p>VPC endpoint ID looks like this: <code>vpce-01234d5aff67890e1</code>.</p>'
+          description: '<p>The ID of the VPC (virtual private cloud) endpoint that the agent has access to. This is the client-side VPC endpoint, also called a PrivateLink. If you don''t have a PrivateLink VPC endpoint, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-service.html#create-endpoint-service">Creating a VPC Endpoint Service Configuration</a> in the Amazon VPC User Guide.</p> <p>VPC endpoint ID looks like this: <code>vpce-01234d5aff67890e1</code>.</p>'
         SubnetArns:
           $ref: '#/components/schemas/PLSubnetArnList'
           description: 'The Amazon Resource Names (ARNs) of the subnets in which DataSync will create elastic network interfaces for each data transfer task. The agent that runs a task must be private. When you start a task that is associated with an agent created in a VPC, or one that has access to an IP address in a VPC, then the task is also private. In this case, DataSync creates four network interfaces for each task in your subnet. For a data transfer to work, the agent must be able to route to all these four network interfaces.'
@@ -1594,7 +1684,7 @@ components:
       properties:
         Subdirectory:
           $ref: '#/components/schemas/EfsSubdirectory'
-          description: '<p>A subdirectory in the location’s path. This subdirectory in the EFS file system is used to read data from the EFS source location or write data to the EFS destination. By default, AWS DataSync uses the root directory.</p> <note> <p> <code>Subdirectory</code> must be specified with forward slashes. For example <code>/path/to/folder</code>.</p> </note>'
+          description: '<p>A subdirectory in the location’s path. This subdirectory in the EFS file system is used to read data from the EFS source location or write data to the EFS destination. By default, AWS DataSync uses the root directory.</p> <note> <p> <code>Subdirectory</code> must be specified with forward slashes. For example, <code>/path/to/folder</code>.</p> </note>'
         EfsFilesystemArn:
           $ref: '#/components/schemas/EfsFilesystemArn'
           description: The Amazon Resource Name (ARN) for the Amazon EFS file system.
@@ -1602,7 +1692,7 @@ components:
           $ref: '#/components/schemas/Ec2Config'
           description: '<p>The subnet and security group that the Amazon EFS file system uses. The security group that you provide needs to be able to communicate with the security group on the mount target in the subnet specified.</p> <p>The exact relationship between security group M (of the mount target) and security group S (which you provide for DataSync to use at this stage) is as follows: </p> <ul> <li> <p> Security group M (which you associate with the mount target) must allow inbound access for the Transmission Control Protocol (TCP) on the NFS port (2049) from security group S. You can enable inbound connections either by IP address (CIDR range) or security group. </p> </li> <li> <p>Security group S (provided to DataSync to access EFS) should have a rule that enables outbound connections to the NFS port on one of the file system’s mount targets. You can enable outbound connections either by IP address (CIDR range) or security group.</p> <p>For information about security groups and mount targets, see Security Groups for Amazon EC2 Instances and Mount Targets in the <i>Amazon EFS User Guide.</i> </p> </li> </ul>'
         Tags:
-          $ref: '#/components/schemas/TagList'
+          $ref: '#/components/schemas/InputTagList'
           description: 'The key-value pair that represents a tag that you want to add to the resource. The value can be an empty string. This value helps you manage, filter, and search for your resources. We recommend that you create a name tag for your location.'
       description: CreateLocationEfsRequest
     CreateLocationFsxWindowsResponse:
@@ -1630,7 +1720,7 @@ components:
           $ref: '#/components/schemas/Ec2SecurityGroupArnList'
           description: The Amazon Resource Names (ARNs) of the security groups that are to use to configure the FSx for Windows file system.
         Tags:
-          $ref: '#/components/schemas/TagList'
+          $ref: '#/components/schemas/InputTagList'
           description: 'The key-value pair that represents a tag that you want to add to the resource. The value can be an empty string. This value helps you manage, filter, and search for your resources. We recommend that you create a name tag for your location.'
         User:
           $ref: '#/components/schemas/SmbUser'
@@ -1658,20 +1748,63 @@ components:
       properties:
         Subdirectory:
           $ref: '#/components/schemas/NfsSubdirectory'
-          description: '<p>The subdirectory in the NFS file system that is used to read data from the NFS source location or write data to the NFS destination. The NFS path should be a path that''s exported by the NFS server, or a subdirectory of that path. The path should be such that it can be mounted by other NFS clients in your network. </p> <p>To see all the paths exported by your NFS server. run "<code>showmount -e nfs-server-name</code>" from an NFS client that has access to your server. You can specify any directory that appears in the results, and any subdirectory of that directory. Ensure that the NFS export is accessible without Kerberos authentication. </p> <p>To transfer all the data in the folder you specified, DataSync needs to have permissions to read all the data. To ensure this, either configure the NFS export with <code>no_root_squash,</code> or ensure that the permissions for all of the files that you want DataSync allow read access for all users. Doing either enables the agent to read the files. For the agent to access directories, you must additionally enable all execute access.</p> <p>For information about NFS export configuration, see 18.7. The /etc/exports Configuration File in the Red Hat Enterprise Linux documentation.</p>'
+          description: '<p>The subdirectory in the NFS file system that is used to read data from the NFS source location or write data to the NFS destination. The NFS path should be a path that''s exported by the NFS server, or a subdirectory of that path. The path should be such that it can be mounted by other NFS clients in your network. </p> <p>To see all the paths exported by your NFS server. run "<code>showmount -e nfs-server-name</code>" from an NFS client that has access to your server. You can specify any directory that appears in the results, and any subdirectory of that directory. Ensure that the NFS export is accessible without Kerberos authentication. </p> <p>To transfer all the data in the folder you specified, DataSync needs to have permissions to read all the data. To ensure this, either configure the NFS export with <code>no_root_squash,</code> or ensure that the permissions for all of the files that you want DataSync allow read access for all users. Doing either enables the agent to read the files. For the agent to access directories, you must additionally enable all execute access.</p> <p>If you are copying data to or from your AWS Snowcone device, see <a href="https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone">NFS Server on AWS Snowcone</a> for more information.</p> <p>For information about NFS export configuration, see 18.7. The /etc/exports Configuration File in the Red Hat Enterprise Linux documentation.</p>'
         ServerHostname:
           $ref: '#/components/schemas/ServerHostname'
-          description: <p>The name of the NFS server. This value is the IP address or Domain Name Service (DNS) name of the NFS server. An agent that is installed on-premises uses this host name to mount the NFS server in a network. </p> <note> <p>This name must either be DNS-compliant or must be an IP version 4 (IPv4) address.</p> </note>
+          description: '<p>The name of the NFS server. This value is the IP address or Domain Name Service (DNS) name of the NFS server. An agent that is installed on-premises uses this host name to mount the NFS server in a network. </p> <p>If you are copying data to or from your AWS Snowcone device, see <a href="https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone">NFS Server on AWS Snowcone</a> for more information.</p> <note> <p>This name must either be DNS-compliant or must be an IP version 4 (IPv4) address.</p> </note>'
         OnPremConfig:
           $ref: '#/components/schemas/OnPremConfig'
-          description: Contains a list of Amazon Resource Names (ARNs) of agents that are used to connect to an NFS server.
+          description: '<p>Contains a list of Amazon Resource Names (ARNs) of agents that are used to connect to an NFS server. </p> <p>If you are copying data to or from your AWS Snowcone device, see <a href="https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone">NFS Server on AWS Snowcone</a> for more information.</p>'
         MountOptions:
           $ref: '#/components/schemas/NfsMountOptions'
           description: The NFS mount options that DataSync can use to mount your NFS share.
         Tags:
-          $ref: '#/components/schemas/TagList'
+          $ref: '#/components/schemas/InputTagList'
           description: The key-value pair that represents the tag that you want to add to the location. The value can be an empty string. We recommend using tags to name your resources.
       description: CreateLocationNfsRequest
+    CreateLocationObjectStorageResponse:
+      type: object
+      properties:
+        LocationArn:
+          $ref: '#/components/schemas/LocationArn'
+          description: The Amazon Resource Name (ARN) of the agents associated with the self-managed object storage server location.
+      description: CreateLocationObjectStorageResponse
+    CreateLocationObjectStorageRequest:
+      type: object
+      required:
+        - ServerHostname
+        - BucketName
+        - AgentArns
+      title: CreateLocationObjectStorageRequest
+      properties:
+        ServerHostname:
+          $ref: '#/components/schemas/ServerHostname'
+          description: 'The name of the self-managed object storage server. This value is the IP address or Domain Name Service (DNS) name of the object storage server. An agent uses this host name to mount the object storage server in a network. '
+        ServerPort:
+          $ref: '#/components/schemas/ObjectStorageServerPort'
+          description: The port that your self-managed object storage server accepts inbound network traffic on. The server port is set by default to TCP 80 (HTTP) or TCP 443 (HTTPS). You can specify a custom port if your self-managed object storage server requires one.
+        ServerProtocol:
+          $ref: '#/components/schemas/ObjectStorageServerProtocol'
+          description: The protocol that the object storage server uses to communicate. Valid values are HTTP or HTTPS.
+        Subdirectory:
+          $ref: '#/components/schemas/S3Subdirectory'
+          description: The subdirectory in the self-managed object storage server that is used to read data from.
+        BucketName:
+          $ref: '#/components/schemas/ObjectStorageBucketName'
+          description: The bucket on the self-managed object storage server that is used to read data from.
+        AccessKey:
+          $ref: '#/components/schemas/ObjectStorageAccessKey'
+          description: Optional. The access key is used if credentials are required to access the self-managed object storage server.
+        SecretKey:
+          $ref: '#/components/schemas/ObjectStorageSecretKey'
+          description: Optional. The secret key is used if credentials are required to access the self-managed object storage server.
+        AgentArns:
+          $ref: '#/components/schemas/AgentArnList'
+          description: The Amazon Resource Name (ARN) of the agents associated with the self-managed object storage server location.
+        Tags:
+          $ref: '#/components/schemas/InputTagList'
+          description: The key-value pair that represents the tag that you want to add to the location. The value can be an empty string. We recommend using tags to name your resources.
+      description: CreateLocationObjectStorageRequest
     CreateLocationS3Response:
       type: object
       properties:
@@ -1698,7 +1831,7 @@ components:
         S3Config:
           $ref: '#/components/schemas/S3Config'
         Tags:
-          $ref: '#/components/schemas/TagList'
+          $ref: '#/components/schemas/InputTagList'
           description: The key-value pair that represents the tag that you want to add to the location. The value can be an empty string. We recommend using tags to name your resources.
       description: CreateLocationS3Request
     CreateLocationSmbResponse:
@@ -1720,7 +1853,7 @@ components:
       properties:
         Subdirectory:
           $ref: '#/components/schemas/SmbSubdirectory'
-          description: '<p>The subdirectory in the SMB file system that is used to read data from the SMB source location or write data to the SMB destination. The SMB path should be a path that''s exported by the SMB server, or a subdirectory of that path. The path should be such that it can be mounted by other SMB clients in your network.</p> <note> <p> <code>Subdirectory</code> must be specified with forward slashes. For example <code>/path/to/folder</code>.</p> </note> <p>To transfer all the data in the folder you specified, DataSync needs to have permissions to mount the SMB share, as well as to access all the data in that share. To ensure this, either ensure that the user/password specified belongs to the user who can mount the share, and who has the appropriate permissions for all of the files and directories that you want DataSync to access, or use credentials of a member of the Backup Operators group to mount the share. Doing either enables the agent to access the data. For the agent to access directories, you must additionally enable all execute access.</p>'
+          description: '<p>The subdirectory in the SMB file system that is used to read data from the SMB source location or write data to the SMB destination. The SMB path should be a path that''s exported by the SMB server, or a subdirectory of that path. The path should be such that it can be mounted by other SMB clients in your network.</p> <note> <p> <code>Subdirectory</code> must be specified with forward slashes. For example, <code>/path/to/folder</code>.</p> </note> <p>To transfer all the data in the folder you specified, DataSync needs to have permissions to mount the SMB share, as well as to access all the data in that share. To ensure this, either ensure that the user/password specified belongs to the user who can mount the share, and who has the appropriate permissions for all of the files and directories that you want DataSync to access, or use credentials of a member of the Backup Operators group to mount the share. Doing either enables the agent to access the data. For the agent to access directories, you must additionally enable all execute access.</p>'
         ServerHostname:
           $ref: '#/components/schemas/ServerHostname'
           description: <p>The name of the SMB server. This value is the IP address or Domain Name Service (DNS) name of the SMB server. An agent that is installed on-premises uses this hostname to mount the SMB server in a network.</p> <note> <p>This name must either be DNS-compliant or must be an IP version 4 (IPv4) address.</p> </note>
@@ -1740,7 +1873,7 @@ components:
           $ref: '#/components/schemas/SmbMountOptions'
           description: The mount options used by DataSync to access the SMB server.
         Tags:
-          $ref: '#/components/schemas/TagList'
+          $ref: '#/components/schemas/InputTagList'
           description: The key-value pair that represents the tag that you want to add to the location. The value can be an empty string. We recommend using tags to name your resources.
       description: CreateLocationSmbRequest
     CreateTaskResponse:
@@ -1765,13 +1898,13 @@ components:
           description: 'The Amazon Resource Name (ARN) of an AWS storage resource''s location. '
         CloudWatchLogGroupArn:
           $ref: '#/components/schemas/LogGroupArn'
-          description: '<p>The Amazon Resource Name (ARN) of the Amazon CloudWatch log group that is used to monitor and log events in the task. </p> <p>For more information on these groups, see Working with Log Groups and Log Streams in the <i>Amazon CloudWatch User Guide.</i> </p> <p>For more information about how to use CloudWatch Logs with DataSync, see Monitoring Your Task in the <i>AWS DataSync User Guide.</i> </p>'
+          description: 'The Amazon Resource Name (ARN) of the Amazon CloudWatch log group that is used to monitor and log events in the task. '
         Name:
           $ref: '#/components/schemas/TagValue'
           description: 'The name of a task. This value is a text reference that is used to identify the task in the console. '
         Options:
           $ref: '#/components/schemas/Options'
-          description: '<p>The set of configuration options that control the behavior of a single execution of the task that occurs when you call <code>StartTaskExecution</code>. You can configure these options to preserve metadata such as user ID (UID) and group ID (GID), file permissions, data integrity verification, and so on.</p> <p>For each individual task execution, you can override these options by specifying the <code>OverrideOptions</code> before starting a the task execution. For more information, see the operation. </p>'
+          description: '<p>The set of configuration options that control the behavior of a single execution of the task that occurs when you call <code>StartTaskExecution</code>. You can configure these options to preserve metadata such as user ID (UID) and group ID (GID), file permissions, data integrity verification, and so on.</p> <p>For each individual task execution, you can override these options by specifying the <code>OverrideOptions</code> before starting the task execution. For more information, see the operation. </p>'
         Excludes:
           $ref: '#/components/schemas/FilterList'
           description: '<p>A list of filter rules that determines which files to exclude from a task. The list should contain a single filter string that consists of the patterns to exclude. The patterns are delimited by "|" (that is, a pipe), for example, <code>"/folder1|/folder2"</code> </p> <p> </p>'
@@ -1779,7 +1912,7 @@ components:
           $ref: '#/components/schemas/TaskSchedule'
           description: 'Specifies a schedule used to periodically transfer files from a source to a destination location. The schedule should be specified in UTC time. For more information, see <a>task-scheduling</a>.'
         Tags:
-          $ref: '#/components/schemas/TagList'
+          $ref: '#/components/schemas/InputTagList'
           description: 'The key-value pair that represents the tag that you want to add to the resource. The value can be an empty string. '
       description: CreateTaskRequest
     DeleteAgentResponse:
@@ -1841,7 +1974,7 @@ components:
           description: 'The time that the agent was activated (that is, created in your account).'
         EndpointType:
           $ref: '#/components/schemas/EndpointType'
-          description: 'The type of endpoint that your agent is connected to. If the endpoint is a VPC endpoint, the agent is not accessible over the public Internet. '
+          description: 'The type of endpoint that your agent is connected to. If the endpoint is a VPC endpoint, the agent is not accessible over the public internet. '
         PrivateLinkConfig:
           $ref: '#/components/schemas/PrivateLinkConfig'
           description: The subnet and the security group that DataSync used to access a VPC endpoint.
@@ -1861,7 +1994,7 @@ components:
       properties:
         LocationArn:
           $ref: '#/components/schemas/LocationArn'
-          description: The Amazon resource Name (ARN) of the EFS location that was described.
+          description: The Amazon Resource Name (ARN) of the EFS location that was described.
         LocationUri:
           $ref: '#/components/schemas/LocationUri'
           description: The URL of the EFS location that was described.
@@ -1886,13 +2019,13 @@ components:
       properties:
         LocationArn:
           $ref: '#/components/schemas/LocationArn'
-          description: The Amazon resource Name (ARN) of the FSx for Windows location that was described.
+          description: The Amazon Resource Name (ARN) of the FSx for Windows location that was described.
         LocationUri:
           $ref: '#/components/schemas/LocationUri'
           description: The URL of the FSx for Windows location that was described.
         SecurityGroupArns:
           $ref: '#/components/schemas/Ec2SecurityGroupArnList'
-          description: The Amazon Resource Names (ARNs) of the security groups that are configured for the for the FSx for Windows file system.
+          description: The Amazon Resource Names (ARNs) of the security groups that are configured for the FSx for Windows file system.
         CreationTime:
           $ref: '#/components/schemas/Time'
           description: The time that the FSx for Windows location was created.
@@ -1916,7 +2049,7 @@ components:
       properties:
         LocationArn:
           $ref: '#/components/schemas/LocationArn'
-          description: The Amazon resource Name (ARN) of the NFS location that was described.
+          description: The Amazon Resource Name (ARN) of the NFS location that was described.
         LocationUri:
           $ref: '#/components/schemas/LocationUri'
           description: The URL of the source NFS location that was described.
@@ -1937,8 +2070,43 @@ components:
       properties:
         LocationArn:
           $ref: '#/components/schemas/LocationArn'
-          description: The Amazon resource Name (ARN) of the NFS location to describe.
+          description: The Amazon Resource Name (ARN) of the NFS location to describe.
       description: DescribeLocationNfsRequest
+    DescribeLocationObjectStorageResponse:
+      type: object
+      properties:
+        LocationArn:
+          $ref: '#/components/schemas/LocationArn'
+          description: The Amazon Resource Name (ARN) of the self-managed object storage server location to describe.
+        LocationUri:
+          $ref: '#/components/schemas/LocationUri'
+          description: The URL of the source self-managed object storage server location that was described.
+        AccessKey:
+          $ref: '#/components/schemas/ObjectStorageAccessKey'
+          description: Optional. The access key is used if credentials are required to access the self-managed object storage server.
+        ServerPort:
+          $ref: '#/components/schemas/ObjectStorageServerPort'
+          description: The port that your self-managed object storage server accepts inbound network traffic on. The server port is set by default to TCP 80 (HTTP) or TCP 443 (HTTPS).
+        ServerProtocol:
+          $ref: '#/components/schemas/ObjectStorageServerProtocol'
+          description: The protocol that the object storage server uses to communicate. Valid values are HTTP or HTTPS.
+        AgentArns:
+          $ref: '#/components/schemas/AgentArnList'
+          description: The Amazon Resource Name (ARN) of the agents associated with the self-managed object storage server location.
+        CreationTime:
+          $ref: '#/components/schemas/Time'
+          description: The time that the self-managed object storage server agent was created.
+      description: DescribeLocationObjectStorageResponse
+    DescribeLocationObjectStorageRequest:
+      type: object
+      required:
+        - LocationArn
+      title: DescribeLocationObjectStorageRequest
+      properties:
+        LocationArn:
+          $ref: '#/components/schemas/LocationArn'
+          description: The Amazon Resource Name (ARN) of the self-managed object storage server location that was described.
+      description: DescribeLocationObjectStorageRequest
     DescribeLocationS3Response:
       type: object
       properties:
@@ -1972,7 +2140,7 @@ components:
       properties:
         LocationArn:
           $ref: '#/components/schemas/LocationArn'
-          description: The Amazon resource Name (ARN) of the SMB location that was described.
+          description: The Amazon Resource Name (ARN) of the SMB location that was described.
         LocationUri:
           $ref: '#/components/schemas/LocationUri'
           description: The URL of the source SBM location that was described.
@@ -2000,7 +2168,7 @@ components:
       properties:
         LocationArn:
           $ref: '#/components/schemas/LocationArn'
-          description: The Amazon resource Name (ARN) of the SMB location to describe.
+          description: The Amazon Resource Name (ARN) of the SMB location to describe.
       description: DescribeLocationSmbRequest
     DescribeTaskResponse:
       type: object
@@ -2156,7 +2324,7 @@ components:
       type: object
       properties:
         Tags:
-          $ref: '#/components/schemas/TagList'
+          $ref: '#/components/schemas/OutputTagList'
           description: Array of resource tags.
         NextToken:
           $ref: '#/components/schemas/NextToken'
@@ -2259,7 +2427,7 @@ components:
           $ref: '#/components/schemas/TaggableResourceArn'
           description: The Amazon Resource Name (ARN) of the resource to apply the tag to.
         Tags:
-          $ref: '#/components/schemas/TagList'
+          $ref: '#/components/schemas/InputTagList'
           description: The tags to apply.
       description: TagResourceRequest
     UntagResourceResponse:
@@ -2335,7 +2503,7 @@ components:
       items:
         $ref: '#/components/schemas/AgentArn'
       minItems: 1
-      maxItems: 64
+      maxItems: 4
     AgentListEntry:
       type: object
       properties:
@@ -2375,12 +2543,12 @@ components:
       type: string
       pattern: '^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\-0-9]*:[0-9]{12}:task/task-[0-9a-f]{17}/execution/exec-[0-9a-f]{17}$'
       maxLength: 128
-    TagList:
+    InputTagList:
       type: array
       items:
         $ref: '#/components/schemas/TagListEntry'
       minItems: 0
-      maxItems: 55
+      maxItems: 50
     VpcEndpointId:
       type: string
       pattern: '^vpce-[0-9a-f]{17}$'
@@ -2472,10 +2640,35 @@ components:
           $ref: '#/components/schemas/NfsVersion'
           description: '<p>The specific NFS version that you want DataSync to use to mount your NFS share. If the server refuses to use the version specified, the sync will fail. If you don''t specify a version, DataSync defaults to <code>AUTOMATIC</code>. That is, DataSync automatically selects a version based on negotiation with the NFS server.</p> <p>You can specify the following NFS versions:</p> <ul> <li> <p> <b> <a href="https://tools.ietf.org/html/rfc1813">NFSv3</a> </b> - stateless protocol version that allows for asynchronous writes on the server.</p> </li> <li> <p> <b> <a href="https://tools.ietf.org/html/rfc3530">NFSv4.0</a> </b> - stateful, firewall-friendly protocol version that supports delegations and pseudo filesystems.</p> </li> <li> <p> <b> <a href="https://tools.ietf.org/html/rfc5661">NFSv4.1</a> </b> - stateful protocol version that supports sessions, directory delegations, and parallel data processing. Version 4.1 also includes all features available in version 4.0.</p> </li> </ul>'
       description: Represents the mount options that are available for DataSync to access an NFS location.
+    ObjectStorageServerPort:
+      type: integer
+      minimum: 1
+      maximum: 65536
+    ObjectStorageServerProtocol:
+      type: string
+      enum:
+        - HTTPS
+        - HTTP
     S3Subdirectory:
       type: string
       pattern: '^[a-zA-Z0-9_\-\+\./\(\)\p{Zs}]*$'
       maxLength: 4096
+    ObjectStorageBucketName:
+      type: string
+      pattern: '^[a-zA-Z0-9_\-\+\./\(\)\$\p{Zs}]+$'
+      minLength: 3
+      maxLength: 63
+    ObjectStorageAccessKey:
+      type: string
+      pattern: ^.+$
+      minLength: 8
+      maxLength: 200
+    ObjectStorageSecretKey:
+      type: string
+      pattern: ^.+$
+      minLength: 8
+      maxLength: 200
+      format: password
     S3BucketArn:
       type: string
       pattern: '^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):s3:::([^/]*)$'
@@ -2511,14 +2704,14 @@ components:
       description: Represents the mount options that are available for DataSync to access an SMB location.
     LogGroupArn:
       type: string
-      pattern: '^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):logs:[a-z\-0-9]*:[0-9]{12}:log-group:([^:\*]*)$'
+      pattern: '^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):logs:[a-z\-0-9]*:[0-9]{12}:log-group:([^:\*]*)(:\*)?$'
       maxLength: 562
     Options:
       type: object
       properties:
         VerifyMode:
           $ref: '#/components/schemas/VerifyMode'
-          description: '<p>A value that determines whether a data integrity verification should be performed at the end of a task execution after all data and metadata have been transferred. </p> <p>Default value: POINT_IN_TIME_CONSISTENT.</p> <p>POINT_IN_TIME_CONSISTENT: Perform verification (recommended). </p> <p>ONLY_FILES_TRANSFERRED: Perform verification on only files that were transferred.</p> <p>NONE: Skip verification.</p>'
+          description: '<p>A value that determines whether a data integrity verification should be performed at the end of a task execution after all data and metadata have been transferred. For more information, see <a>create-task</a> </p> <p>Default value: POINT_IN_TIME_CONSISTENT.</p> <p>ONLY_FILES_TRANSFERRED (recommended): Perform verification only on files that were transferred. </p> <p>POINT_IN_TIME_CONSISTENT: Scan the entire source and entire destination at the end of the transfer to verify that source and destination are fully synchronized. This option isn''t supported when transferring to S3 Glacier or S3 Glacier Deep Archive storage classes.</p> <p>NONE: No additional verification is done at the end of the transfer, but all data transmissions are integrity-checked with checksum verification during the transfer.</p>'
         OverwriteMode:
           $ref: '#/components/schemas/OverwriteMode'
           description: '<p>A value that determines whether files at the destination should be overwritten or preserved when copying files. If set to <code>NEVER</code> a destination file will not be replaced by a source file, even if the destination file differs from the source file. If you modify files in the destination and you sync the files, you can use this value to protect against overwriting those changes. </p> <p>Some storage classes have specific behaviors that can affect your S3 storage cost. For detailed information, see <a>using-storage-classes</a> in the <i>AWS DataSync User Guide</i>.</p>'
@@ -2548,10 +2741,13 @@ components:
           description: 'A value that limits the bandwidth used by AWS DataSync. For example, if you want AWS DataSync to use a maximum of 1 MB, set this value to <code>1048576</code> (<code>=1024*1024</code>).'
         TaskQueueing:
           $ref: '#/components/schemas/TaskQueueing'
-          description: '<p>A value that determines whether tasks should be queued before executing the tasks. If set to <code>ENABLED</code>, the tasks will be queued. The default is <code>ENABLED</code>.</p> <p>If you use the same agent to run multiple tasks you can enable the tasks to run in series. For more information see <a>queue-task-execution</a>.</p>'
+          description: '<p>A value that determines whether tasks should be queued before executing the tasks. If set to <code>ENABLED</code>, the tasks will be queued. The default is <code>ENABLED</code>.</p> <p>If you use the same agent to run multiple tasks, you can enable the tasks to run in series. For more information, see <a>queue-task-execution</a>.</p>'
         LogLevel:
           $ref: '#/components/schemas/LogLevel'
-          description: 'A value that determines the type of logs DataSync will deliver to your AWS CloudWatch Logs file. If set to <code>OFF</code>, no logs will be delivered. <code>BASIC</code> will deliver a few logs per transfer operation and <code>TRANSFER</code> will deliver a verbose log that contains logs for every file that is transferred.'
+          description: 'A value that determines the type of logs that DataSync publishes to a log stream in the Amazon CloudWatch log group that you provide. For more information about providing a log group for DataSync, see <a href="https://docs.aws.amazon.com/datasync/latest/userguide/API_CreateTask.html#DataSync-CreateTask-request-CloudWatchLogGroupArn">CloudWatchLogGroupArn</a>. If set to <code>OFF</code>, no logs are published. <code>BASIC</code> publishes logs on errors for individual files transferred, and <code>TRANSFER</code> publishes logs for every file or object that is transferred and integrity checked.'
+        TransferMode:
+          $ref: '#/components/schemas/TransferMode'
+          description: 'TransferMode has two values: CHANGED and ALL. CHANGED performs an "incremental" or "delta sync", it compares file modification time between source and destination to determine which files need to be transferred. ALL skips destination inventory and transfers all files discovered on the source.'
       description: '<p>Represents the options that are available to control the behavior of a <a>StartTaskExecution</a> operation. Behavior includes preserving metadata such as user ID (UID), group ID (GID), and file permissions, and also overwriting files in the destination, data integrity verification, and so on.</p> <p>A task has a set of default options associated with it. If you don''t specify an option in <a>StartTaskExecution</a>, the default value is used. You can override the defaults options on each task execution by specifying an overriding <code>Options</code> value to <a>StartTaskExecution</a>.</p>'
     FilterList:
       type: array
@@ -2586,17 +2782,17 @@ components:
       properties:
         VpcEndpointId:
           $ref: '#/components/schemas/VpcEndpointId'
-          description: The ID of the VPC endpoint that is configured for an agent. An agent that is configured with a VPC endpoint will not be accessible over the public Internet.
+          description: The ID of the VPC endpoint that is configured for an agent. An agent that is configured with a VPC endpoint will not be accessible over the public internet.
         PrivateLinkEndpoint:
           $ref: '#/components/schemas/Endpoint'
-          description: 'The private endpoint that is configured for an agent that has access to IP addresses in a <a href="https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-service.html">PrivateLink</a>. An agent that is configured with this endpoint will not be accessible over the public Internet.'
+          description: 'The private endpoint that is configured for an agent that has access to IP addresses in a <a href="https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-service.html">PrivateLink</a>. An agent that is configured with this endpoint will not be accessible over the public internet.'
         SubnetArns:
           $ref: '#/components/schemas/PLSubnetArnList'
           description: The Amazon Resource Names (ARNs) of the subnets that are configured for an agent activated in a VPC or an agent that has access to a VPC endpoint.
         SecurityGroupArns:
           $ref: '#/components/schemas/PLSecurityGroupArnList'
           description: The Amazon Resource Names (ARNs) of the security groups that are configured for the EC2 resource that hosts an agent activated in a VPC or an agent that has access to a VPC endpoint.
-      description: 'The VPC endpoint, subnet and security group that an agent uses to access IP addresses in a VPC (Virtual Private Cloud).'
+      description: 'The VPC endpoint, subnet, and security group that an agent uses to access IP addresses in a VPC (Virtual Private Cloud).'
     LocationUri:
       type: string
       pattern: '^(efs|nfs|s3|smb|fsxw)://[a-zA-Z0-9.\-]+$'
@@ -2713,6 +2909,18 @@ components:
       type: string
       pattern: '^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):iam::[0-9]{12}:role/.*$'
       maxLength: 2048
+    TagListEntry:
+      type: object
+      required:
+        - Key
+      properties:
+        Key:
+          $ref: '#/components/schemas/TagKey'
+          description: The key for an AWS resource tag.
+        Value:
+          $ref: '#/components/schemas/TagValue'
+          description: The value for an AWS resource tag.
+      description: Represents a single entry in a list of AWS resource tags. <code>TagListEntry</code> returns an array that contains a list of tasks when the <a>ListTagsForResource</a> operation is called.
     MaxResults:
       type: integer
       minimum: 0
@@ -2729,6 +2937,12 @@ components:
       type: string
       pattern: '^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\-0-9]+:[0-9]{12}:(agent|task|location)/(agent|task|loc)-[0-9a-z]{17}$'
       maxLength: 128
+    OutputTagList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TagListEntry'
+      minItems: 0
+      maxItems: 55
     TaskExecutionList:
       type: array
       items:
@@ -2803,6 +3017,11 @@ components:
       enum:
         - ENABLED
         - DISABLED
+    TransferMode:
+      type: string
+      enum:
+        - CHANGED
+        - ALL
     PhaseStatus:
       type: string
       enum:
@@ -2830,18 +3049,6 @@ components:
         $ref: '#/components/schemas/TagKey'
       minItems: 1
       maxItems: 50
-    TagListEntry:
-      type: object
-      required:
-        - Key
-      properties:
-        Key:
-          $ref: '#/components/schemas/TagKey'
-          description: The key for an AWS resource tag.
-        Value:
-          $ref: '#/components/schemas/TagValue'
-          description: The value for an AWS resource tag.
-      description: Represents a single entry in a list of AWS resource tags. <code>TagListEntry</code> returns an array that contains a list of tasks when the <a>ListTagsForResource</a> operation is called.
     TaskExecutionListEntry:
       type: object
       properties:
