@@ -6300,6 +6300,8 @@ components:
           $ref: '#/components/schemas/BurnInDestinationSettings'
         DvbSubDestinationSettings:
           $ref: '#/components/schemas/DvbSubDestinationSettings'
+        EbuTtDDestinationSettings:
+          $ref: '#/components/schemas/EbuTtDDestinationSettings'
         EmbeddedDestinationSettings:
           $ref: '#/components/schemas/EmbeddedDestinationSettings'
         EmbeddedPlusScte20DestinationSettings:
@@ -6396,6 +6398,33 @@ components:
           $ref: '#/components/schemas/__integerMin0'
           description: 'Specifies the vertical position of the caption relative to the top of the output in pixels. A value of 10 would result in the captions starting 10 pixels from the top of the output. If no explicit yPosition is provided, the caption will be positioned towards the bottom of the output.  This option is not valid for source captions that are STL, 608/embedded or teletext.  These source settings are already pre-defined by the caption stream.  All burn-in and DVB-Sub font settings must match.'
       description: Dvb Sub Destination Settings
+    EbuTtDDestinationSettings:
+      type: object
+      properties:
+        FillLineGap:
+          $ref: '#/components/schemas/EbuTtDFillLineGapControl'
+          description: |-
+            Specifies how to handle the gap between the lines (in multi-line captions).
+
+            - enabled: Fill with the captions background color (as specified in the input captions).
+            - disabled: Leave the gap unfilled.
+        FontFamily:
+          $ref: '#/components/schemas/__string'
+          description: |-
+            Specifies the font family to include in the font data attached to the EBU-TT captions. Valid only if styleControl is set to include. If you leave this field empty, the font family is set to "monospaced". (If styleControl is set to exclude, the font family is always set to "monospaced".)
+
+            You specify only the font family. All other style information (color, bold, position and so on) is copied from the input captions. The size is always set to 100% to allow the downstream player to choose the size.
+
+            - Enter a list of font families, as a comma-separated list of font names, in order of preference. The name can be a font family (such as “Arial”), or a generic font family (such as “serif”), or “default” (to let the downstream player choose the font).
+            - Leave blank to set the family to “monospace”.
+        StyleControl:
+          $ref: '#/components/schemas/EbuTtDDestinationStyleControl'
+          description: |-
+            Specifies the style information (font color, font position, and so on) to include in the font data that is attached to the EBU-TT captions.
+
+            - include: Take the style information (font color, font position, and so on) from the source captions and include that information in the font data attached to the EBU-TT captions. This option is valid only if the source captions are Embedded or Teletext.
+            - exclude: In the font data attached to the EBU-TT captions, set the font family to "monospaced". Do not include any other style information.
+      description: Ebu Tt DDestination Settings
     EmbeddedDestinationSettings:
       type: object
       properties: {}
@@ -7665,6 +7694,18 @@ components:
         - ENABLED
         - NOT_INDICATED
       description: Eac3 Surround Mode
+    EbuTtDFillLineGapControl:
+      type: string
+      enum:
+        - DISABLED
+        - ENABLED
+      description: Ebu Tt DFill Line Gap Control
+    EbuTtDDestinationStyleControl:
+      type: string
+      enum:
+        - EXCLUDE
+        - INCLUDE
+      description: Ebu Tt DDestination Style Control
     EmbeddedConvert608To708:
       type: string
       enum:
@@ -8311,6 +8352,12 @@ components:
         Rec709Settings:
           $ref: '#/components/schemas/Rec709Settings'
       description: H265 Color Space Settings
+    H265FilterSettings:
+      type: object
+      properties:
+        TemporalFilterSettings:
+          $ref: '#/components/schemas/TemporalFilterSettings'
+      description: H265 Filter Settings
     H265FlickerAq:
       type: string
       enum:
@@ -8364,6 +8411,7 @@ components:
     H265ScanType:
       type: string
       enum:
+        - INTERLACED
         - PROGRESSIVE
       description: H265 Scan Type
     H265SceneChangeDetect:
@@ -8431,6 +8479,9 @@ components:
         ColorSpaceSettings:
           $ref: '#/components/schemas/H265ColorSpaceSettings'
           description: Color Space settings
+        FilterSettings:
+          $ref: '#/components/schemas/H265FilterSettings'
+          description: Optional filters that you can apply to an encode.
         FixedAfd:
           $ref: '#/components/schemas/FixedAfd'
           description: Four bit AFD value to write on all frames of video in the output stream. Only valid when afdSignaling is set to 'Fixed'.
@@ -8746,6 +8797,7 @@ components:
       enum:
         - MANIFESTS_AND_SEGMENTS
         - SEGMENTS_ONLY
+        - VARIANT_MANIFESTS_AND_SEGMENTS
       description: Hls Output Selection
     HlsProgramDateTime:
       type: string

@@ -2468,7 +2468,7 @@ paths:
               type: object
               properties:
                 filters:
-                  description: 'The filters. '
+                  description: <p>The filters. </p> <ul> <li> <p> <code>name</code> - The name of this distribution configuration.</p> </li> </ul>
                   type: array
                   items:
                     $ref: '#/components/schemas/Filter'
@@ -4614,7 +4614,7 @@ components:
       description: ' Details of an EC2 AMI. '
     AmiNameString:
       type: string
-      pattern: '^[-_A-Za-z0-9{][-_A-Za-z0-9\s:{}]+[-_A-Za-z0-9}]$'
+      pattern: '^[-_A-Za-z0-9{][-_A-Za-z0-9\s:{}\.]+[-_A-Za-z0-9}]$'
       minLength: 1
       maxLength: 127
     TagMap:
@@ -5781,7 +5781,7 @@ components:
       properties:
         filters:
           $ref: '#/components/schemas/FilterList'
-          description: 'The filters. '
+          description: <p>The filters. </p> <ul> <li> <p> <code>name</code> - The name of this distribution configuration.</p> </li> </ul>
         maxResults:
           $ref: '#/components/schemas/RestrictedInteger'
           description: 'The maximum items to return in a request. '

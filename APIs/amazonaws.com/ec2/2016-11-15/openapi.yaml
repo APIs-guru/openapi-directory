@@ -3936,6 +3936,14 @@ paths:
             type: string
             enum:
               - ipsec.1
+        - name: TagSpecification
+          in: query
+          required: false
+          description: The tags to apply to the customer gateway.
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/TagSpecification'
         - name: DeviceName
           in: query
           required: false
@@ -8895,6 +8903,14 @@ paths:
                 $ref: '#/components/schemas/VpnTunnelOptionsSpecificationsList'
                 description: The tunnel options for the VPN connection.
             description: Describes VPN connection options.
+        - name: TagSpecification
+          in: query
+          required: false
+          description: The tags to apply to the VPN connection.
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/TagSpecification'
         - name: Action
           in: query
           required: true
@@ -9033,6 +9049,14 @@ paths:
             type: string
             enum:
               - ipsec.1
+        - name: TagSpecification
+          in: query
+          required: false
+          description: The tags to apply to the virtual private gateway.
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/TagSpecification'
         - name: AmazonSideAsn
           in: query
           required: false
@@ -38324,7 +38348,7 @@ components:
       properties:
         ResourceType:
           $ref: '#/components/schemas/ResourceType'
-          description: '<p>The type of resource to tag. Currently, the resource types that support tagging on creation are: <code>capacity-reservation</code> | <code>client-vpn-endpoint</code> | <code>dedicated-host</code> | <code>dhcp-options</code> | <code>export-image-task</code> | <code>export-instance-task</code> | <code>fleet</code> | <code>fpga-image</code> | <code>host-reservation</code> | <code>import-image-task</code> | <code>import-snapshot-task</code> | <code>instance</code> | <code>internet-gateway</code> | <code>ipv4pool-ec2</code> | <code>ipv6pool-ec2</code> | <code>key-pair</code> | <code>launch-template</code> | <code>placement-group</code> | <code>prefix-list</code> | <code>natgateway</code> | <code>network-acl</code> | <code>security-group</code> | <code>spot-fleet-request</code> | <code>spot-instances-request</code> | <code>snapshot</code> | <code>subnet</code> | <code>traffic-mirror-filter</code> | <code>traffic-mirror-session</code> | <code>traffic-mirror-target</code> | <code>transit-gateway</code> | <code>transit-gateway-attachment</code> | <code>transit-gateway-route-table</code> | <code>volume</code> |<code>vpc</code> | <code>vpc-endpoint</code> (for interface and gateway endpoints) | <code>vpc-endpoint-service</code> (for AWS PrivateLink) | <code>vpc-flow-log</code>.</p> <p>To tag a resource after it has been created, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html">CreateTags</a>.</p>'
+          description: '<p>The type of resource to tag. Currently, the resource types that support tagging on creation are: <code>capacity-reservation</code> | <code>client-vpn-endpoint</code> | <code>customer-gateway</code> | <code>dedicated-host</code> | <code>dhcp-options</code> | <code>export-image-task</code> | <code>export-instance-task</code> | <code>fleet</code> | <code>fpga-image</code> | <code>host-reservation</code> | <code>import-image-task</code> | <code>import-snapshot-task</code> | <code>instance</code> | <code>internet-gateway</code> | <code>ipv4pool-ec2</code> | <code>ipv6pool-ec2</code> | <code>key-pair</code> | <code>launch-template</code> | <code>placement-group</code> | <code>prefix-list</code> | <code>natgateway</code> | <code>network-acl</code> | <code>route-table</code> | <code>security-group</code> | <code>spot-fleet-request</code> | <code>spot-instances-request</code> | <code>snapshot</code> | <code>subnet</code> | <code>traffic-mirror-filter</code> | <code>traffic-mirror-session</code> | <code>traffic-mirror-target</code> | <code>transit-gateway</code> | <code>transit-gateway-attachment</code> | <code>transit-gateway-route-table</code> | <code>volume</code> |<code>vpc</code> | <code> vpc-peering-connection</code> | <code>vpc-endpoint</code> (for interface and gateway endpoints) | <code>vpc-endpoint-service</code> (for AWS PrivateLink) | <code>vpc-flow-log</code> | <code>vpn-connection</code> | <code>vpn-gateway</code>.</p> <p>To tag a resource after it has been created, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html">CreateTags</a>.</p>'
         Tags:
           $ref: '#/components/schemas/TagList'
           description: The tags to apply to the resource.
@@ -46065,6 +46089,9 @@ components:
         Type:
           $ref: '#/components/schemas/GatewayType'
           description: The type of VPN connection that this customer gateway supports (<code>ipsec.1</code>).
+        TagSpecifications:
+          $ref: '#/components/schemas/TagSpecificationList'
+          description: The tags to apply to the customer gateway.
         DeviceName:
           $ref: '#/components/schemas/String'
           description: '<p>A name for the customer gateway device.</p> <p>Length Constraints: Up to 255 characters.</p>'
@@ -48564,6 +48591,9 @@ components:
         Options:
           $ref: '#/components/schemas/VpnConnectionOptionsSpecification'
           description: The options for the VPN connection.
+        TagSpecifications:
+          $ref: '#/components/schemas/TagSpecificationList'
+          description: The tags to apply to the VPN connection.
       description: Contains the parameters for CreateVpnConnection.
     VpnConnection:
       type: object
@@ -48631,6 +48661,9 @@ components:
         Type:
           $ref: '#/components/schemas/GatewayType'
           description: The type of VPN connection this virtual private gateway supports.
+        TagSpecifications:
+          $ref: '#/components/schemas/TagSpecificationList'
+          description: The tags to apply to the virtual private gateway.
         AmazonSideAsn:
           $ref: '#/components/schemas/Long'
           description: '<p>A private Autonomous System Number (ASN) for the Amazon side of a BGP session. If you''re using a 16-bit ASN, it must be in the 64512 to 65534 range. If you''re using a 32-bit ASN, it must be in the 4200000000 to 4294967294 range.</p> <p>Default: 64512</p>'

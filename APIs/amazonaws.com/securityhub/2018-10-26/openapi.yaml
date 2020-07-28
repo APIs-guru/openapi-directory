@@ -883,7 +883,7 @@ paths:
                       description: The veracity of a finding.
                     WorkflowState:
                       $ref: '#/components/schemas/StringFilterList'
-                      description: The workflow state of a finding.
+                      description: '<p>The workflow state of a finding.</p> <p>Note that this field is deprecated. To search for a finding based on its workflow status, use <code>WorkflowStatus</code>.</p>'
                     WorkflowStatus:
                       $ref: '#/components/schemas/StringFilterList'
                       description: '<p>The status of the investigation into a finding. Allowed values are the following.</p> <ul> <li> <p> <code>NEW</code> - The initial state of a finding, before it is reviewed.</p> </li> <li> <p> <code>NOTIFIED</code> - Indicates that the resource owner has been notified about the security issue. Used when the initial reviewer is not the resource owner, and needs intervention from the resource owner.</p> </li> <li> <p> <code>SUPPRESSED</code> - The finding will not be reviewed again and will not be acted upon.</p> </li> <li> <p> <code>RESOLVED</code> - The finding was reviewed and remediated and is now considered resolved. </p> </li> </ul>'
@@ -1556,7 +1556,7 @@ paths:
                       description: The veracity of a finding.
                     WorkflowState:
                       $ref: '#/components/schemas/StringFilterList'
-                      description: The workflow state of a finding.
+                      description: '<p>The workflow state of a finding.</p> <p>Note that this field is deprecated. To search for a finding based on its workflow status, use <code>WorkflowStatus</code>.</p>'
                     WorkflowStatus:
                       $ref: '#/components/schemas/StringFilterList'
                       description: '<p>The status of the investigation into a finding. Allowed values are the following.</p> <ul> <li> <p> <code>NEW</code> - The initial state of a finding, before it is reviewed.</p> </li> <li> <p> <code>NOTIFIED</code> - Indicates that the resource owner has been notified about the security issue. Used when the initial reviewer is not the resource owner, and needs intervention from the resource owner.</p> </li> <li> <p> <code>SUPPRESSED</code> - The finding will not be reviewed again and will not be acted upon.</p> </li> <li> <p> <code>RESOLVED</code> - The finding was reviewed and remediated and is now considered resolved. </p> </li> </ul>'
@@ -1936,6 +1936,57 @@ paths:
                     $ref: '#/components/schemas/TagValue'
                 EnableDefaultStandards:
                   description: 'Whether to enable the security standards that Security Hub has designated as automatically enabled. If you do not provide a value for <code>EnableDefaultStandards</code>, it is set to <code>true</code>. To not enable the automatically enabled standards, set <code>EnableDefaultStandards</code> to <code>false</code>.'
+                  type: boolean
+    patch:
+      operationId: UpdateSecurityHubConfiguration
+      description: Updates configuration options for Security Hub.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateSecurityHubConfigurationResponse'
+        '480':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: InvalidAccessException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidAccessException'
+        '483':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                AutoEnableControls:
+                  description: '<p>Whether to automatically enable new controls when they are added to standards that are enabled.</p> <p>By default, this is set to <code>true</code>, and new controls are enabled automatically. To not automatically enable new controls, set this to <code>false</code>. </p>'
                   type: boolean
   /products:
     get:
@@ -2751,7 +2802,7 @@ paths:
                       description: The veracity of a finding.
                     WorkflowState:
                       $ref: '#/components/schemas/StringFilterList'
-                      description: The workflow state of a finding.
+                      description: '<p>The workflow state of a finding.</p> <p>Note that this field is deprecated. To search for a finding based on its workflow status, use <code>WorkflowStatus</code>.</p>'
                     WorkflowStatus:
                       $ref: '#/components/schemas/StringFilterList'
                       description: '<p>The status of the investigation into a finding. Allowed values are the following.</p> <ul> <li> <p> <code>NEW</code> - The initial state of a finding, before it is reviewed.</p> </li> <li> <p> <code>NOTIFIED</code> - Indicates that the resource owner has been notified about the security issue. Used when the initial reviewer is not the resource owner, and needs intervention from the resource owner.</p> </li> <li> <p> <code>SUPPRESSED</code> - The finding will not be reviewed again and will not be acted upon.</p> </li> <li> <p> <code>RESOLVED</code> - The finding was reviewed and remediated and is now considered resolved. </p> </li> </ul>'
@@ -3078,7 +3129,7 @@ paths:
                       description: The veracity of a finding.
                     WorkflowState:
                       $ref: '#/components/schemas/StringFilterList'
-                      description: The workflow state of a finding.
+                      description: '<p>The workflow state of a finding.</p> <p>Note that this field is deprecated. To search for a finding based on its workflow status, use <code>WorkflowStatus</code>.</p>'
                     WorkflowStatus:
                       $ref: '#/components/schemas/StringFilterList'
                       description: '<p>The status of the investigation into a finding. Allowed values are the following.</p> <ul> <li> <p> <code>NEW</code> - The initial state of a finding, before it is reviewed.</p> </li> <li> <p> <code>NOTIFIED</code> - Indicates that the resource owner has been notified about the security issue. Used when the initial reviewer is not the resource owner, and needs intervention from the resource owner.</p> </li> <li> <p> <code>SUPPRESSED</code> - The finding will not be reviewed again and will not be acted upon.</p> </li> <li> <p> <code>RESOLVED</code> - The finding was reviewed and remediated and is now considered resolved. </p> </li> </ul>'
@@ -4095,6 +4146,9 @@ components:
         SubscribedAt:
           $ref: '#/components/schemas/NonEmptyString'
           description: The date and time when Security Hub was enabled in the account.
+        AutoEnableControls:
+          $ref: '#/components/schemas/Boolean'
+          description: '<p>Whether to automatically enable new controls when they are added to standards that are enabled.</p> <p>If set to <code>true</code>, then new controls for enabled standards are enabled automatically. If set to <code>false</code>, then new controls are not enabled.</p>'
     DescribeProductsResponse:
       type: object
       required:
@@ -4276,6 +4330,9 @@ components:
       type: object
       properties: {}
     UpdateInsightResponse:
+      type: object
+      properties: {}
+    UpdateSecurityHubConfigurationResponse:
       type: object
       properties: {}
     UpdateStandardsControlResponse:
@@ -5320,14 +5377,14 @@ components:
           description: '<p>Deprecated. This attribute is being deprecated. Instead of providing <code>Product</code>, provide <code>Original</code>.</p> <p>The native severity as defined by the AWS service or integrated partner product that generated the finding.</p>'
         Label:
           $ref: '#/components/schemas/SeverityLabel'
-          description: <p>The severity value of the finding. The allowed values are the following.</p> <ul> <li> <p> <code>INFORMATIONAL</code> - No issue was found.</p> </li> <li> <p> <code>LOW</code> - The issue does not require action on its own.</p> </li> <li> <p> <code>MEDIUM</code> - The issue must be addressed but not urgently.</p> </li> <li> <p> <code>HIGH</code> - The issue must be addressed as a priority.</p> </li> <li> <p> <code>CRITICAL</code> - The issue must be remediated immediately to avoid it escalating.</p> </li> </ul>
+          description: '<p>The severity value of the finding. The allowed values are the following.</p> <ul> <li> <p> <code>INFORMATIONAL</code> - No issue was found.</p> </li> <li> <p> <code>LOW</code> - The issue does not require action on its own.</p> </li> <li> <p> <code>MEDIUM</code> - The issue must be addressed but not urgently.</p> </li> <li> <p> <code>HIGH</code> - The issue must be addressed as a priority.</p> </li> <li> <p> <code>CRITICAL</code> - The issue must be remediated immediately to avoid it escalating.</p> </li> </ul> <p>If you provide <code>Normalized</code> and do not provide <code>Label</code>, then <code>Label</code> is set automatically as follows. </p> <ul> <li> <p>0 - <code>INFORMATIONAL</code> </p> </li> <li> <p>1–39 - <code>LOW</code> </p> </li> <li> <p>40–69 - <code>MEDIUM</code> </p> </li> <li> <p>70–89 - <code>HIGH</code> </p> </li> <li> <p>90–100 - <code>CRITICAL</code> </p> </li> </ul>'
         Normalized:
           $ref: '#/components/schemas/Integer'
-          description: '<p>Deprecated. This attribute is being deprecated. Instead of providing <code>Normalized</code>, provide <code>Label</code>.</p> <p>If you provide <code>Normalized</code> and do not provide <code>Label</code>, <code>Label</code> is set automatically as follows. </p> <ul> <li> <p>0 - <code>INFORMATIONAL</code> </p> </li> <li> <p>1–39 - <code>LOW</code> </p> </li> <li> <p>40–69 - <code>MEDIUM</code> </p> </li> <li> <p>70–89 - <code>HIGH</code> </p> </li> <li> <p>90–100 - <code>CRITICAL</code> </p> </li> </ul>'
+          description: '<p>Deprecated. The normalized severity of a finding. This attribute is being deprecated. Instead of providing <code>Normalized</code>, provide <code>Label</code>.</p> <p>If you provide <code>Label</code> and do not provide <code>Normalized</code>, then <code>Normalized</code> is set automatically as follows.</p> <ul> <li> <p> <code>INFORMATIONAL</code> - 0</p> </li> <li> <p> <code>LOW</code> - 1</p> </li> <li> <p> <code>MEDIUM</code> - 40</p> </li> <li> <p> <code>HIGH</code> - 70</p> </li> <li> <p> <code>CRITICAL</code> - 90</p> </li> </ul>'
         Original:
           $ref: '#/components/schemas/NonEmptyString'
           description: The native severity from the finding product that generated the finding.
-      description: The severity of the finding.
+      description: '<p>The severity of the finding.</p> <p>The finding provider can provide the initial severity, but cannot update it after that. The severity can only be updated by a master account. It cannot be updated by a member account.</p> <p>The finding must have either <code>Label</code> or <code>Normalized</code> populated. If only one of these attributes is populated, then Security Hub automatically populates the other one. If neither attribute is populated, then the finding is invalid. <code>Label</code> is the preferred attribute.</p>'
     Remediation:
       type: object
       properties:
@@ -5710,7 +5767,7 @@ components:
           description: The veracity of a finding.
         WorkflowState:
           $ref: '#/components/schemas/StringFilterList'
-          description: The workflow state of a finding.
+          description: '<p>The workflow state of a finding.</p> <p>Note that this field is deprecated. To search for a finding based on its workflow status, use <code>WorkflowStatus</code>.</p>'
         WorkflowStatus:
           $ref: '#/components/schemas/StringFilterList'
           description: '<p>The status of the investigation into a finding. Allowed values are the following.</p> <ul> <li> <p> <code>NEW</code> - The initial state of a finding, before it is reviewed.</p> </li> <li> <p> <code>NOTIFIED</code> - Indicates that the resource owner has been notified about the security issue. Used when the initial reviewer is not the resource owner, and needs intervention from the resource owner.</p> </li> <li> <p> <code>SUPPRESSED</code> - The finding will not be reviewed again and will not be acted upon.</p> </li> <li> <p> <code>RESOLVED</code> - The finding was reviewed and remediated and is now considered resolved. </p> </li> </ul>'
@@ -6275,7 +6332,7 @@ components:
       properties:
         Filters:
           $ref: '#/components/schemas/AwsSecurityFindingFilters'
-          description: The finding attributes used to define a condition to filter the returned findings.
+          description: '<p>The finding attributes used to define a condition to filter the returned findings.</p> <p>Note that in the available filter fields, <code>WorkflowState</code> is deprecated. To search for a finding based on its workflow status, use <code>WorkflowStatus</code>.</p>'
         SortCriteria:
           $ref: '#/components/schemas/SortCriteria'
           description: The finding attributes used to sort the list of returned findings.
@@ -7044,6 +7101,13 @@ components:
         GroupByAttribute:
           $ref: '#/components/schemas/NonEmptyString'
           description: The updated <code>GroupBy</code> attribute that defines this insight.
+    UpdateSecurityHubConfigurationRequest:
+      type: object
+      title: UpdateSecurityHubConfigurationRequest
+      properties:
+        AutoEnableControls:
+          $ref: '#/components/schemas/Boolean'
+          description: '<p>Whether to automatically enable new controls when they are added to standards that are enabled.</p> <p>By default, this is set to <code>true</code>, and new controls are enabled automatically. To not automatically enable new controls, set this to <code>false</code>. </p>'
     UpdateStandardsControlRequest:
       type: object
       title: UpdateStandardsControlRequest
