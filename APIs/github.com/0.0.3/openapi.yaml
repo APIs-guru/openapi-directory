@@ -10,8 +10,9 @@ info:
     name: MIT
     url: https://help.github.com/articles/github-terms-of-service/
   title: GitHub v3 REST API
-  version: 0.0.1
+  version: 0.0.3
   x-apisguru-categories:
+    - collaboration
     - developer_tools
   x-logo:
     url: https://twitter.com/github/profile_image?size=original
@@ -31477,7 +31478,7 @@ components:
       value:
         content: Q29udGVudCBvZiB0aGUgYmxvYg==
         encoding: base64
-        node_id: string
+        node_id: Q29udGVudCBvZiB0aGUgYmxvYg==
         sha: 3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15
         size: 19
         url: https://api.github.com/repos/octocat/example/git/blobs/3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15
@@ -31538,7 +31539,7 @@ components:
           contexts:
             - continuous-integration/travis-ci
           contexts_url: https://api.github.com/repos/octocat/Hello-World/branches/master/protection/required_status_checks/contexts
-          enforcement_level: string
+          enforcement_level: non_admins
           url: https://api.github.com/repos/octocat/Hello-World/branches/master/protection/required_status_checks
         restrictions:
           apps:
@@ -31776,7 +31777,7 @@ components:
     check-annotation-items:
       value:
         - annotation_level: warning
-          blob_href: string
+          blob_href: https://api.github.com/repos/github/rest-api-description/git/blobs/abc
           end_column: 10
           end_line: 2
           message: Check your spelling for 'banaas'.
@@ -32138,7 +32139,7 @@ components:
           slug: octoapp
           updated_at: 2017-07-08T16:18:44-04:00
         before: 146e867f55c26428e5f9fade55a9bbf5e95a7912
-        check_runs_url: string
+        check_runs_url: https://api.github.com/repos/octocat/Hello-World/check-suites/5/check-runs
         conclusion: neutral
         created_at: 2017-07-08T16:18:44-04:00
         head_branch: master
@@ -32311,7 +32312,7 @@ components:
               slug: octoapp
               updated_at: 2017-07-08T16:18:44-04:00
             before: 146e867f55c26428e5f9fade55a9bbf5e95a7912
-            check_runs_url: string
+            check_runs_url: https://api.github.com/repos/octocat/Hello-World/check-suites/5/check-runs
             conclusion: neutral
             created_at: 2011-01-26T19:01:12Z
             head_branch: master
@@ -33142,7 +33143,7 @@ components:
           week: 1336280400
     commit-comment:
       value:
-        author_association: string
+        author_association: collaborator
         body: Great stuff
         commit_id: 6dcb09b5b57875f334f61aebed695e2e4193db5e
         created_at: 2011-04-14T16:00:49Z
@@ -33175,7 +33176,7 @@ components:
           url: https://api.github.com/users/octocat
     commit-comment-2:
       value:
-        author_association: string
+        author_association: collaborator
         body: Nice change
         commit_id: 6dcb09b5b57875f334f61aebed695e2e4193db5e
         created_at: 2011-04-14T16:00:49Z
@@ -33208,7 +33209,7 @@ components:
           url: https://api.github.com/users/octocat
     commit-comment-items:
       value:
-        - author_association: string
+        - author_association: collaborator
           body: Great stuff
           commit_id: 6dcb09b5b57875f334f61aebed695e2e4193db5e
           created_at: 2011-04-14T16:00:49Z
@@ -33503,7 +33504,7 @@ components:
               url: https://api.github.com/repos/octocat/Spoon-Knife/git/commits/bb4cc8d3b2e14b3af5df699876dd4ff3acd00b7f
             committer: {}
             html_url: https://github.com/octocat/Spoon-Knife/commit/bb4cc8d3b2e14b3af5df699876dd4ff3acd00b7f
-            node_id: string
+            node_id: MDQ6VXNlcjU4MzIzMQ==
             parents:
               - html_url: https://github.com/octocat/Spoon-Knife/commit/a30c19e3f13765a3b48829788bc1cb8b4e95cee4
                 sha: a30c19e3f13765a3b48829788bc1cb8b4e95cee4
@@ -35140,7 +35141,7 @@ components:
         url: https://api.github.com/gists/aa5a315d61ae9438b18d
     gist-comment:
       value:
-        author_association: string
+        author_association: collaborator
         body: Just commenting for the sake of commenting
         created_at: 2011-04-18T23:23:56Z
         id: 1
@@ -35168,7 +35169,7 @@ components:
           url: https://api.github.com/users/octocat
     gist-comment-items:
       value:
-        - author_association: string
+        - author_association: collaborator
           body: Just commenting for the sake of commenting
           created_at: 2011-04-18T23:23:56Z
           id: 1
@@ -36044,7 +36045,7 @@ components:
             subscriptions_url: https://api.github.com/users/octocat/subscriptions
             type: User
             url: https://api.github.com/users/octocat
-        author_association: string
+        author_association: collaborator
         body: I'm having a problem with this.
         closed_at: null
         closed_by:
@@ -36150,7 +36151,7 @@ components:
           url: https://api.github.com/users/octocat
     issue-comment:
       value:
-        author_association: string
+        author_association: collaborator
         body: Me too
         created_at: 2011-04-14T16:00:49Z
         html_url: https://github.com/octocat/Hello-World/issues/1347#issuecomment-1
@@ -36180,7 +36181,7 @@ components:
           url: https://api.github.com/users/octocat
     issue-comment-items:
       value:
-        - author_association: string
+        - author_association: collaborator
           body: Me too
           created_at: 2011-04-14T16:00:49Z
           html_url: https://github.com/octocat/Hello-World/issues/1347#issuecomment-1
@@ -36274,7 +36275,7 @@ components:
               subscriptions_url: https://api.github.com/users/octocat/subscriptions
               type: User
               url: https://api.github.com/users/octocat
-          author_association: string
+          author_association: collaborator
           body: I'm having a problem with this.
           closed_at: null
           comments: 0
@@ -36455,7 +36456,7 @@ components:
                 subscriptions_url: https://api.github.com/users/octocat/subscriptions
                 type: User
                 url: https://api.github.com/users/octocat
-            author_association: string
+            author_association: collaborator
             body: I'm having a problem with this.
             closed_at: null
             comments: 0
@@ -36547,7 +36548,7 @@ components:
         incomplete_results: false
         items:
           - assignee: null
-            author_association: string
+            author_association: collaborator
             body: ...
             closed_at: null
             comments: 15
@@ -36709,7 +36710,7 @@ components:
             subscriptions_url: https://api.github.com/users/other_user/subscriptions
             type: User
             url: https://api.github.com/users/other_user
-        author_association: string
+        author_association: collaborator
         body: I'm having a problem with this.
         closed_at: null
         comments: 0
@@ -36835,7 +36836,7 @@ components:
               subscriptions_url: https://api.github.com/users/octocat/subscriptions
               type: User
               url: https://api.github.com/users/octocat
-          author_association: string
+          author_association: collaborator
           body: I'm having a problem with this.
           closed_at: null
           comments: 0
@@ -36961,7 +36962,7 @@ components:
               subscriptions_url: https://api.github.com/users/octocat/subscriptions
               type: User
               url: https://api.github.com/users/octocat
-          author_association: string
+          author_association: collaborator
           body: I'm having a problem with this.
           closed_at: null
           comments: 0
@@ -38003,7 +38004,7 @@ components:
           guid: 0b989ba4-242f-11e5-81e1-c7b6966d2516
           id: 79
           lock_repositories: true
-          node_id: string
+          node_id: MDQ6VXNlcjE=
           owner:
             avatar_url: https://github.com/images/error/octocat_happy.gif
             events_url: https://api.github.com/users/octocat/events{/privacy}
@@ -38444,7 +38445,7 @@ components:
           guid: 0b989ba4-242f-11e5-81e1-c7b6966d2516
           id: 79
           lock_repositories: true
-          node_id: string
+          node_id: MDQ6VXNlcjE=
           owner:
             avatar_url: https://github.com/images/error/octocat_happy.gif
             events_url: https://api.github.com/orgs/github/events
@@ -38890,7 +38891,7 @@ components:
         id: 1
         name: web
         ping_url: https://api.github.com/orgs/octocat/hooks/1/pings
-        type: string
+        type: Organization
         updated_at: 2011-09-06T20:39:23Z
         url: https://api.github.com/orgs/octocat/hooks/1
     org-hook-2:
@@ -38905,7 +38906,7 @@ components:
         id: 1
         name: web
         ping_url: https://api.github.com/orgs/octocat/hooks/1/pings
-        type: string
+        type: Organization
         updated_at: 2011-09-06T20:39:23Z
         url: https://api.github.com/orgs/octocat/hooks/1
     org-hook-items:
@@ -38921,7 +38922,7 @@ components:
           id: 1
           name: web
           ping_url: https://api.github.com/orgs/octocat/hooks/1/pings
-          type: string
+          type: Organization
           updated_at: 2011-09-06T20:39:23Z
           url: https://api.github.com/orgs/octocat/hooks/1
     org-membership:
@@ -39510,7 +39511,7 @@ components:
         html_url: https://developer.github.com
         source:
           branch: master
-          path: string
+          path: /
         status: built
         url: https://api.github.com/repos/github/developer.github.com/pages
     page-build:
@@ -40899,7 +40900,7 @@ components:
             href: https://github.com/octocat/Hello-World/pull/12#pullrequestreview-80
           pull_request:
             href: https://api.github.com/repos/octocat/Hello-World/pulls/12
-        author_association: string
+        author_association: collaborator
         body: This is close to perfect! Please address the suggested inline change.
         commit_id: ecdd80bb57125d7ba9641ffaa4d7d2c19d3f3091
         html_url: https://github.com/octocat/Hello-World/pull/12#pullrequestreview-80
@@ -40934,7 +40935,7 @@ components:
             href: https://github.com/octocat/Hello-World/pull/12#pullrequestreview-80
           pull_request:
             href: https://api.github.com/repos/octocat/Hello-World/pulls/12
-        author_association: string
+        author_association: collaborator
         body: Here is the body for the review.
         commit_id: ecdd80bb57125d7ba9641ffaa4d7d2c19d3f3091
         html_url: https://github.com/octocat/Hello-World/pull/12#pullrequestreview-80
@@ -40969,7 +40970,7 @@ components:
             href: https://github.com/octocat/Hello-World/pull/12#pullrequestreview-80
           pull_request:
             href: https://api.github.com/repos/octocat/Hello-World/pulls/12
-        author_association: string
+        author_association: collaborator
         body: Here is the body for the review.
         commit_id: ecdd80bb57125d7ba9641ffaa4d7d2c19d3f3091
         html_url: https://github.com/octocat/Hello-World/pull/12#pullrequestreview-80
@@ -41004,7 +41005,7 @@ components:
             href: https://github.com/octocat/Hello-World/pull/12#pullrequestreview-80
           pull_request:
             href: https://api.github.com/repos/octocat/Hello-World/pulls/12
-        author_association: string
+        author_association: collaborator
         body: This is close to perfect! Please address the suggested inline change. And add more about this.
         commit_id: ecdd80bb57125d7ba9641ffaa4d7d2c19d3f3091
         html_url: https://github.com/octocat/Hello-World/pull/12#pullrequestreview-80
@@ -41243,7 +41244,7 @@ components:
               href: https://github.com/octocat/Hello-World/pull/12#pullrequestreview-80
             pull_request:
               href: https://api.github.com/repos/octocat/Hello-World/pulls/12
-          author_association: string
+          author_association: collaborator
           body: Here is the body for the review.
           commit_id: ecdd80bb57125d7ba9641ffaa4d7d2c19d3f3091
           html_url: https://github.com/octocat/Hello-World/pull/12#pullrequestreview-80
@@ -43110,7 +43111,7 @@ components:
             subscriptions_url: https://api.github.com/users/octocat/subscriptions
             type: User
             url: https://api.github.com/users/octocat
-          node_id: string
+          node_id: MDQ6VXNlcjE=
           permissions: write
           repository:
             archive_url: https://api.github.com/repos/octocat/Hello-World/{archive_format}{/ref}
@@ -44180,7 +44181,7 @@ components:
             sha: c5b97d5ae6c19d5c5df71a34c7fbeeda2479ccbc
             url: https://api.github.com/repos/octocat/Hello-World/commits/c5b97d5ae6c19d5c5df71a34c7fbeeda2479ccbc
           name: v0.1
-          node_id: string
+          node_id: MDQ6VXNlcjE=
           tarball_url: https://github.com/octocat/Hello-World/tarball/v0.1
           zipball_url: https://github.com/octocat/Hello-World/zipball/v0.1
     team-discussion:
@@ -45215,10 +45216,10 @@ components:
         incomplete_results: false
         items:
           - avatar_url: https://secure.gravatar.com/avatar/25c7c18223fb42a4c6ae1c8db6f50f9b?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png
-            events_url: string
+            events_url: https://api.github.com/users/mojombo/events{/privacy}
             followers_url: https://api.github.com/users/mojombo/followers
-            following_url: string
-            gists_url: string
+            following_url: https://api.github.com/users/mojombo/following{/other_user}
+            gists_url: https://api.github.com/users/mojombo/gists{/gist_id}
             gravatar_id: ""
             html_url: https://github.com/mojombo
             id: 1
@@ -45229,7 +45230,7 @@ components:
             repos_url: https://api.github.com/users/mojombo/repos
             score: 1
             site_admin: true
-            starred_url: string
+            starred_url: https://api.github.com/users/mojombo/starred{/owner}{/repo}
             subscriptions_url: https://api.github.com/users/mojombo/subscriptions
             type: User
             url: https://api.github.com/users/mojombo
@@ -46352,7 +46353,7 @@ components:
       description: The public key used for setting Actions Secrets.
       properties:
         created_at:
-          example: 2020-06-11T21:31:57.000Z
+          example: 2011-01-26T19:01:12Z
           type: string
         id:
           example: 2
