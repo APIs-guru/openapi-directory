@@ -3492,7 +3492,7 @@ paths:
         - name: ClientToken
           in: query
           required: false
-          description: '<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html">How to Ensure Idempotency</a>.</p> <p>Constraint: Maximum 64 ASCII characters.</p>'
+          description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html">How to Ensure Idempotency</a>.'
           schema:
             type: string
         - name: InstanceType
@@ -13392,13 +13392,13 @@ paths:
         - name: NextToken
           in: query
           required: false
-          description: The token to retrieve the next page of results.
+          description: The token to use to retrieve the next page of results.
           schema:
             type: string
         - name: MaxResults
           in: query
           required: false
-          description: The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the returned nextToken value.
+          description: 'The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the returned <code>nextToken</code> value. This value can be between 5 and 500. If <code>maxResults</code> is given a larger value than 500, you receive an error.'
           schema:
             type: integer
             minimum: 1
@@ -26730,13 +26730,13 @@ paths:
         - name: NextToken
           in: query
           required: false
-          description: The token to retrieve the next page of results.
+          description: The token to use to retrieve the next page of results.
           schema:
             type: string
         - name: MaxResults
           in: query
           required: false
-          description: '<p>The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the returned nextToken value.</p> <p>Valid range: Minimum value of 1. Maximum value of 1000.</p>'
+          description: '<p>The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the returned <code>nextToken</code> value. This value can be between 5 and 500. If <code>maxResults</code> is given a larger value than 500, you receive an error.</p> <p>Valid range: Minimum value of 1. Maximum value of 1000.</p>'
           schema:
             type: integer
             minimum: 1
@@ -27227,6 +27227,101 @@ paths:
             type: string
             enum:
               - GetEbsEncryptionByDefault
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2016-11-15'
+  /#Action=GetGroupsForCapacityReservation:
+    get:
+      x-aws-operation-name: GetGroupsForCapacityReservation
+      operationId: GET_GetGroupsForCapacityReservation
+      description: Lists the resource groups to which a Capacity Reservation has been added.
+      responses:
+        '200':
+          description: Success
+          content: {}
+      parameters:
+        - name: CapacityReservationId
+          in: query
+          required: true
+          description: The ID of the Capacity Reservation.
+          schema:
+            type: string
+        - name: NextToken
+          in: query
+          required: false
+          description: The token to use to retrieve the next page of results.
+          schema:
+            type: string
+        - name: MaxResults
+          in: query
+          required: false
+          description: 'The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the returned <code>nextToken</code> value. This value can be between 5 and 500. If <code>maxResults</code> is given a larger value than 500, you receive an error.'
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+        - name: DryRun
+          in: query
+          required: false
+          description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+          schema:
+            type: boolean
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - GetGroupsForCapacityReservation
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2016-11-15'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: GetGroupsForCapacityReservation
+      operationId: POST_GetGroupsForCapacityReservation
+      description: Lists the resource groups to which a Capacity Reservation has been added.
+      responses:
+        '200':
+          description: Success
+          content: {}
+      requestBody:
+        content: {}
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - GetGroupsForCapacityReservation
         - name: Version
           in: query
           required: true
@@ -30134,11 +30229,11 @@ paths:
             properties:
               CapacityReservationPreference:
                 $ref: '#/components/schemas/CapacityReservationPreference'
-                description: '<p>Indicates the instance''s Capacity Reservation preferences. Possible preferences include:</p> <ul> <li> <p> <code>open</code> - The instance can run in any <code>open</code> Capacity Reservation that has matching attributes (instance type, platform, Availability Zone).</p> </li> <li> <p> <code>none</code> - The instance avoids running in a Capacity Reservation even if one is available. The instance runs as an On-Demand Instance.</p> </li> </ul> <p>When <code>CapacityReservationPreference</code> is not specified, it defaults to <code>open</code>.</p>'
+                description: '<p>Indicates the instance''s Capacity Reservation preferences. Possible preferences include:</p> <ul> <li> <p> <code>open</code> - The instance can run in any <code>open</code> Capacity Reservation that has matching attributes (instance type, platform, Availability Zone).</p> </li> <li> <p> <code>none</code> - The instance avoids running in a Capacity Reservation even if one is available. The instance runs as an On-Demand Instance.</p> </li> </ul>'
               CapacityReservationTarget:
                 $ref: '#/components/schemas/CapacityReservationTarget'
-                description: Information about the target Capacity Reservation.
-            description: '<p>Describes an instance''s Capacity Reservation targeting option. You can specify only one parameter at a time. If you specify <code>CapacityReservationPreference</code> and <code>CapacityReservationTarget</code>, the request fails.</p> <p>Use the <code>CapacityReservationPreference</code> parameter to configure the instance to run as an On-Demand Instance or to run in any <code>open</code> Capacity Reservation that has matching attributes (instance type, platform, Availability Zone). Use the <code>CapacityReservationTarget</code> parameter to explicitly target a specific Capacity Reservation.</p>'
+                description: Information about the target Capacity Reservation or Capacity Reservation group.
+            description: '<p>Describes an instance''s Capacity Reservation targeting option. You can specify only one parameter at a time. If you specify <code>CapacityReservationPreference</code> and <code>CapacityReservationTarget</code>, the request fails.</p> <p>Use the <code>CapacityReservationPreference</code> parameter to configure the instance to run as an On-Demand Instance or to run in any <code>open</code> Capacity Reservation that has matching attributes (instance type, platform, Availability Zone). Use the <code>CapacityReservationTarget</code> parameter to explicitly target a specific Capacity Reservation or a Capacity Reservation group.</p>'
         - name: DryRun
           in: query
           required: false
@@ -36800,11 +36895,11 @@ paths:
             properties:
               CapacityReservationPreference:
                 $ref: '#/components/schemas/CapacityReservationPreference'
-                description: '<p>Indicates the instance''s Capacity Reservation preferences. Possible preferences include:</p> <ul> <li> <p> <code>open</code> - The instance can run in any <code>open</code> Capacity Reservation that has matching attributes (instance type, platform, Availability Zone).</p> </li> <li> <p> <code>none</code> - The instance avoids running in a Capacity Reservation even if one is available. The instance runs as an On-Demand Instance.</p> </li> </ul> <p>When <code>CapacityReservationPreference</code> is not specified, it defaults to <code>open</code>.</p>'
+                description: '<p>Indicates the instance''s Capacity Reservation preferences. Possible preferences include:</p> <ul> <li> <p> <code>open</code> - The instance can run in any <code>open</code> Capacity Reservation that has matching attributes (instance type, platform, Availability Zone).</p> </li> <li> <p> <code>none</code> - The instance avoids running in a Capacity Reservation even if one is available. The instance runs as an On-Demand Instance.</p> </li> </ul>'
               CapacityReservationTarget:
                 $ref: '#/components/schemas/CapacityReservationTarget'
-                description: Information about the target Capacity Reservation.
-            description: '<p>Describes an instance''s Capacity Reservation targeting option. You can specify only one parameter at a time. If you specify <code>CapacityReservationPreference</code> and <code>CapacityReservationTarget</code>, the request fails.</p> <p>Use the <code>CapacityReservationPreference</code> parameter to configure the instance to run as an On-Demand Instance or to run in any <code>open</code> Capacity Reservation that has matching attributes (instance type, platform, Availability Zone). Use the <code>CapacityReservationTarget</code> parameter to explicitly target a specific Capacity Reservation.</p>'
+                description: Information about the target Capacity Reservation or Capacity Reservation group.
+            description: '<p>Describes an instance''s Capacity Reservation targeting option. You can specify only one parameter at a time. If you specify <code>CapacityReservationPreference</code> and <code>CapacityReservationTarget</code>, the request fails.</p> <p>Use the <code>CapacityReservationPreference</code> parameter to configure the instance to run as an On-Demand Instance or to run in any <code>open</code> Capacity Reservation that has matching attributes (instance type, platform, Availability Zone). Use the <code>CapacityReservationTarget</code> parameter to explicitly target a specific Capacity Reservation or a Capacity Reservation group.</p>'
         - name: HibernationOptions
           in: query
           required: false
@@ -39383,8 +39478,8 @@ components:
           description: '<p>Indicates the instance''s Capacity Reservation preferences. Possible preferences include:</p> <ul> <li> <p> <code>open</code> - The instance can run in any <code>open</code> Capacity Reservation that has matching attributes (instance type, platform, Availability Zone).</p> </li> <li> <p> <code>none</code> - The instance avoids running in a Capacity Reservation even if one is available. The instance runs in On-Demand capacity.</p> </li> </ul>'
         CapacityReservationTarget:
           $ref: '#/components/schemas/CapacityReservationTarget'
-          description: Information about the target Capacity Reservation.
-      description: 'Describes an instance''s Capacity Reservation targeting option. You can specify only one option at a time. Use the <code>CapacityReservationPreference</code> parameter to configure the instance to run in On-Demand capacity or to run in any <code>open</code> Capacity Reservation that has matching attributes (instance type, platform, Availability Zone). Use the <code>CapacityReservationTarget</code> parameter to explicitly target a specific Capacity Reservation.'
+          description: Information about the target Capacity Reservation or Capacity Reservation group.
+      description: 'Describes an instance''s Capacity Reservation targeting option. You can specify only one option at a time. Use the <code>CapacityReservationPreference</code> parameter to configure the instance to run in On-Demand capacity or to run in any <code>open</code> Capacity Reservation that has matching attributes (instance type, platform, Availability Zone). Use the <code>CapacityReservationTarget</code> parameter to explicitly target a specific Capacity Reservation or a Capacity Reservation group.'
     LaunchTemplateLicenseSpecificationListRequest:
       type: array
       items:
@@ -42202,6 +42297,15 @@ components:
         EbsEncryptionByDefault:
           $ref: '#/components/schemas/Boolean'
           description: Indicates whether encryption by default is enabled.
+    GetGroupsForCapacityReservationResult:
+      type: object
+      properties:
+        NextToken:
+          $ref: '#/components/schemas/String'
+          description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+        CapacityReservationGroups:
+          $ref: '#/components/schemas/CapacityReservationGroupSet'
+          description: Information about the resource groups to which the Capacity Reservation has been added.
     GetHostReservationPurchasePreviewResult:
       type: object
       properties:
@@ -42644,8 +42748,11 @@ components:
       properties:
         CapacityReservationId:
           $ref: '#/components/schemas/CapacityReservationId'
-          description: The ID of the Capacity Reservation.
-      description: Describes a target Capacity Reservation.
+          description: The ID of the Capacity Reservation in which to run the instance.
+        CapacityReservationResourceGroupArn:
+          $ref: '#/components/schemas/String'
+          description: The ARN of the Capacity Reservation resource group in which to run the instance.
+      description: Describes a target Capacity Reservation or Capacity Reservation group.
     ModifyInstanceCreditSpecificationResult:
       type: object
       properties:
@@ -45163,6 +45270,20 @@ components:
           $ref: '#/components/schemas/TagList'
           description: Any tags assigned to the Capacity Reservation.
       description: Describes a Capacity Reservation.
+    CapacityReservationGroup:
+      type: object
+      properties:
+        GroupArn:
+          $ref: '#/components/schemas/String'
+          description: The ARN of the resource group.
+        OwnerId:
+          $ref: '#/components/schemas/String'
+          description: The ID of the AWS account that owns the resource group.
+      description: Describes a resource group to which a Capacity Reservation has been added.
+    CapacityReservationGroupSet:
+      type: array
+      items:
+        $ref: '#/components/schemas/CapacityReservationGroup'
     CapacityReservationIdSet:
       type: array
       items:
@@ -45187,18 +45308,21 @@ components:
       properties:
         CapacityReservationPreference:
           $ref: '#/components/schemas/CapacityReservationPreference'
-          description: '<p>Indicates the instance''s Capacity Reservation preferences. Possible preferences include:</p> <ul> <li> <p> <code>open</code> - The instance can run in any <code>open</code> Capacity Reservation that has matching attributes (instance type, platform, Availability Zone).</p> </li> <li> <p> <code>none</code> - The instance avoids running in a Capacity Reservation even if one is available. The instance runs as an On-Demand Instance.</p> </li> </ul> <p>When <code>CapacityReservationPreference</code> is not specified, it defaults to <code>open</code>.</p>'
+          description: '<p>Indicates the instance''s Capacity Reservation preferences. Possible preferences include:</p> <ul> <li> <p> <code>open</code> - The instance can run in any <code>open</code> Capacity Reservation that has matching attributes (instance type, platform, Availability Zone).</p> </li> <li> <p> <code>none</code> - The instance avoids running in a Capacity Reservation even if one is available. The instance runs as an On-Demand Instance.</p> </li> </ul>'
         CapacityReservationTarget:
           $ref: '#/components/schemas/CapacityReservationTarget'
-          description: Information about the target Capacity Reservation.
-      description: '<p>Describes an instance''s Capacity Reservation targeting option. You can specify only one parameter at a time. If you specify <code>CapacityReservationPreference</code> and <code>CapacityReservationTarget</code>, the request fails.</p> <p>Use the <code>CapacityReservationPreference</code> parameter to configure the instance to run as an On-Demand Instance or to run in any <code>open</code> Capacity Reservation that has matching attributes (instance type, platform, Availability Zone). Use the <code>CapacityReservationTarget</code> parameter to explicitly target a specific Capacity Reservation.</p>'
+          description: Information about the target Capacity Reservation or Capacity Reservation group.
+      description: '<p>Describes an instance''s Capacity Reservation targeting option. You can specify only one parameter at a time. If you specify <code>CapacityReservationPreference</code> and <code>CapacityReservationTarget</code>, the request fails.</p> <p>Use the <code>CapacityReservationPreference</code> parameter to configure the instance to run as an On-Demand Instance or to run in any <code>open</code> Capacity Reservation that has matching attributes (instance type, platform, Availability Zone). Use the <code>CapacityReservationTarget</code> parameter to explicitly target a specific Capacity Reservation or a Capacity Reservation group.</p>'
     CapacityReservationTargetResponse:
       type: object
       properties:
         CapacityReservationId:
           $ref: '#/components/schemas/String'
-          description: The ID of the Capacity Reservation.
-      description: Describes a target Capacity Reservation.
+          description: The ID of the targeted Capacity Reservation.
+        CapacityReservationResourceGroupArn:
+          $ref: '#/components/schemas/String'
+          description: The ARN of the targeted Capacity Reservation group.
+      description: Describes a target Capacity Reservation or Capacity Reservation group.
     CapacityReservationSpecificationResponse:
       type: object
       properties:
@@ -45207,8 +45331,8 @@ components:
           description: '<p>Describes the instance''s Capacity Reservation preferences. Possible preferences include:</p> <ul> <li> <p> <code>open</code> - The instance can run in any <code>open</code> Capacity Reservation that has matching attributes (instance type, platform, Availability Zone).</p> </li> <li> <p> <code>none</code> - The instance avoids running in a Capacity Reservation even if one is available. The instance runs in On-Demand capacity.</p> </li> </ul>'
         CapacityReservationTarget:
           $ref: '#/components/schemas/CapacityReservationTargetResponse'
-          description: Information about the targeted Capacity Reservation.
-      description: 'Describes the instance''s Capacity Reservation targeting preferences. The action returns the <code>capacityReservationPreference</code> response element if the instance is configured to run in On-Demand capacity, or if it is configured in run in any <code>open</code> Capacity Reservation that has matching attributes (instance type, platform, Availability Zone). The action returns the <code>capacityReservationTarget</code> response element if the instance explicily targets a specific Capacity Reservation.'
+          description: Information about the targeted Capacity Reservation or Capacity Reservation group.
+      description: 'Describes the instance''s Capacity Reservation targeting preferences. The action returns the <code>capacityReservationPreference</code> response element if the instance is configured to run in On-Demand capacity, or if it is configured in run in any <code>open</code> Capacity Reservation that has matching attributes (instance type, platform, Availability Zone). The action returns the <code>capacityReservationTarget</code> response element if the instance explicily targets a specific Capacity Reservation or Capacity Reservation group.'
     CertificateAuthentication:
       type: object
       properties:
@@ -45949,7 +46073,7 @@ components:
       properties:
         ClientToken:
           $ref: '#/components/schemas/String'
-          description: '<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html">How to Ensure Idempotency</a>.</p> <p>Constraint: Maximum 64 ASCII characters.</p>'
+          description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html">How to Ensure Idempotency</a>.'
         InstanceType:
           $ref: '#/components/schemas/String'
           description: 'The instance type for which to reserve capacity. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html">Instance Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.'
@@ -49748,10 +49872,10 @@ components:
           description: The ID of the Capacity Reservation.
         NextToken:
           $ref: '#/components/schemas/String'
-          description: The token to retrieve the next page of results.
+          description: The token to use to retrieve the next page of results.
         MaxResults:
           $ref: '#/components/schemas/DescribeCapacityReservationsMaxResults'
-          description: The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the returned nextToken value.
+          description: 'The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the returned <code>nextToken</code> value. This value can be between 5 and 500. If <code>maxResults</code> is given a larger value than 500, you receive an error.'
         Filters:
           $ref: '#/components/schemas/FilterList'
           description: '<p>One or more filters.</p> <ul> <li> <p> <code>instance-type</code> - The type of instance for which the Capacity Reservation reserves capacity.</p> </li> <li> <p> <code>owner-id</code> - The ID of the AWS account that owns the Capacity Reservation.</p> </li> <li> <p> <code>availability-zone-id</code> - The Availability Zone ID of the Capacity Reservation.</p> </li> <li> <p> <code>instance-platform</code> - The type of operating system for which the Capacity Reservation reserves capacity.</p> </li> <li> <p> <code>availability-zone</code> - The Availability Zone ID of the Capacity Reservation.</p> </li> <li> <p> <code>tenancy</code> - Indicates the tenancy of the Capacity Reservation. A Capacity Reservation can have one of the following tenancy settings:</p> <ul> <li> <p> <code>default</code> - The Capacity Reservation is created on hardware that is shared with other AWS accounts.</p> </li> <li> <p> <code>dedicated</code> - The Capacity Reservation is created on single-tenant hardware that is dedicated to a single AWS account.</p> </li> </ul> </li> <li> <p> <code>state</code> - The current state of the Capacity Reservation. A Capacity Reservation can be in one of the following states:</p> <ul> <li> <p> <code>active</code>- The Capacity Reservation is active and the capacity is available for your use.</p> </li> <li> <p> <code>expired</code> - The Capacity Reservation expired automatically at the date and time specified in your request. The reserved capacity is no longer available for your use.</p> </li> <li> <p> <code>cancelled</code> - The Capacity Reservation was manually cancelled. The reserved capacity is no longer available for your use.</p> </li> <li> <p> <code>pending</code> - The Capacity Reservation request was successful but the capacity provisioning is still pending.</p> </li> <li> <p> <code>failed</code> - The Capacity Reservation request has failed. A request might fail due to invalid request parameters, capacity constraints, or instance limit constraints. Failed requests are retained for 60 minutes.</p> </li> </ul> </li> <li> <p> <code>end-date</code> - The date and time at which the Capacity Reservation expires. When a Capacity Reservation expires, the reserved capacity is released and you can no longer launch instances into it. The Capacity Reservation''s state changes to expired when it reaches its end date and time.</p> </li> <li> <p> <code>end-date-type</code> - Indicates the way in which the Capacity Reservation ends. A Capacity Reservation can have one of the following end types:</p> <ul> <li> <p> <code>unlimited</code> - The Capacity Reservation remains active until you explicitly cancel it.</p> </li> <li> <p> <code>limited</code> - The Capacity Reservation expires automatically at a specified date and time.</p> </li> </ul> </li> <li> <p> <code>instance-match-criteria</code> - Indicates the type of instance launches that the Capacity Reservation accepts. The options include:</p> <ul> <li> <p> <code>open</code> - The Capacity Reservation accepts all instances that have matching attributes (instance type, platform, and Availability Zone). Instances that have matching attributes launch into the Capacity Reservation automatically without specifying any additional parameters.</p> </li> <li> <p> <code>targeted</code> - The Capacity Reservation only accepts instances that have matching attributes (instance type, platform, and Availability Zone), and explicitly target the Capacity Reservation. This ensures that only permitted instances can use the reserved capacity.</p> </li> </ul> </li> </ul>'
@@ -54319,10 +54443,10 @@ components:
           description: The ID of the Capacity Reservation.
         NextToken:
           $ref: '#/components/schemas/String'
-          description: The token to retrieve the next page of results.
+          description: The token to use to retrieve the next page of results.
         MaxResults:
           $ref: '#/components/schemas/GetCapacityReservationUsageRequestMaxResults'
-          description: '<p>The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the returned nextToken value.</p> <p>Valid range: Minimum value of 1. Maximum value of 1000.</p>'
+          description: '<p>The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the returned <code>nextToken</code> value. This value can be between 5 and 500. If <code>maxResults</code> is given a larger value than 500, you receive an error.</p> <p>Valid range: Minimum value of 1. Maximum value of 1000.</p>'
         DryRun:
           $ref: '#/components/schemas/Boolean'
           description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
@@ -54420,6 +54544,28 @@ components:
       type: object
       title: GetEbsEncryptionByDefaultRequest
       properties:
+        DryRun:
+          $ref: '#/components/schemas/Boolean'
+          description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+    GetGroupsForCapacityReservationRequestMaxResults:
+      type: integer
+      minimum: 1
+      maximum: 1000
+    GetGroupsForCapacityReservationRequest:
+      type: object
+      required:
+        - CapacityReservationId
+      title: GetGroupsForCapacityReservationRequest
+      properties:
+        CapacityReservationId:
+          $ref: '#/components/schemas/CapacityReservationId'
+          description: The ID of the Capacity Reservation.
+        NextToken:
+          $ref: '#/components/schemas/String'
+          description: The token to use to retrieve the next page of results.
+        MaxResults:
+          $ref: '#/components/schemas/GetGroupsForCapacityReservationRequestMaxResults'
+          description: 'The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the returned <code>nextToken</code> value. This value can be between 5 and 500. If <code>maxResults</code> is given a larger value than 500, you receive an error.'
         DryRun:
           $ref: '#/components/schemas/Boolean'
           description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
@@ -56673,7 +56819,7 @@ components:
           description: '<p>Indicates the instance''s Capacity Reservation preferences. Possible preferences include:</p> <ul> <li> <p> <code>open</code> - The instance can run in any <code>open</code> Capacity Reservation that has matching attributes (instance type, platform, Availability Zone).</p> </li> <li> <p> <code>none</code> - The instance avoids running in a Capacity Reservation even if one is available. The instance runs in On-Demand capacity.</p> </li> </ul>'
         CapacityReservationTarget:
           $ref: '#/components/schemas/CapacityReservationTargetResponse'
-          description: Information about the target Capacity Reservation.
+          description: Information about the target Capacity Reservation or Capacity Reservation group.
       description: Information about the Capacity Reservation targeting option.
     LaunchTemplateOverridesList:
       type: array

@@ -3,7 +3,7 @@ info:
   version: '2015-09-21'
   x-release: v4
   title: Amazon EC2 Container Registry
-  description: '<fullname>Amazon Elastic Container Registry</fullname> <p>Amazon Elastic Container Registry (Amazon ECR) is a managed Docker registry service. Customers can use the familiar Docker CLI to push, pull, and manage images. Amazon ECR provides a secure, scalable, and reliable registry. Amazon ECR supports private Docker repositories with resource-based permissions using IAM so that specific users or Amazon EC2 instances can access repositories and images. Developers can use the Docker CLI to author and manage images.</p>'
+  description: '<fullname>Amazon Elastic Container Registry</fullname> <p>Amazon Elastic Container Registry (Amazon ECR) is a managed container image registry service. Customers can use the familiar Docker CLI, or their preferred client, to push, pull, and manage images. Amazon ECR provides a secure, scalable, and reliable registry for your Docker or Open Container Initiative (OCI) images. Amazon ECR supports private repositories with resource-based permissions using IAM so that specific users or Amazon EC2 instances can access repositories and images.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -326,6 +326,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EmptyUploadException'
+        '488':
+          description: KmsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KmsException'
       requestBody:
         required: true
         content:
@@ -395,6 +401,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/LimitExceededException'
+        '486':
+          description: KmsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KmsException'
       requestBody:
         required: true
         content:
@@ -509,6 +521,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/RepositoryNotEmptyException'
+        '484':
+          description: KmsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KmsException'
       requestBody:
         required: true
         content:
@@ -1115,6 +1133,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/RepositoryNotFoundException'
+        '483':
+          description: KmsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KmsException'
       requestBody:
         required: true
         content:
@@ -1316,6 +1340,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ImageDigestDoesNotMatchException'
+        '489':
+          description: KmsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KmsException'
       requestBody:
         required: true
         content:
@@ -1847,6 +1877,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/LimitExceededException'
+        '486':
+          description: KmsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KmsException'
       requestBody:
         required: true
         content:
@@ -2062,6 +2098,7 @@ components:
     LayerPartTooSmallException: {}
     LayerAlreadyExistsException: {}
     EmptyUploadException: {}
+    KmsException: {}
     CreateRepositoryResponse:
       type: object
       example:
@@ -2090,7 +2127,10 @@ components:
           description: 'The tag mutability setting for the repository. If this parameter is omitted, the default setting of <code>MUTABLE</code> will be used which will allow image tags to be overwritten. If <code>IMMUTABLE</code> is specified, all image tags within the repository will be immutable which will prevent them from being overwritten.'
         imageScanningConfiguration:
           $ref: '#/components/schemas/ImageScanningConfiguration'
-          description: The image scanning configuration for the repository. This setting determines whether images are scanned for known vulnerabilities after being pushed to the repository.
+          description: The image scanning configuration for the repository. This determines whether images are scanned for known vulnerabilities after being pushed to the repository.
+        encryptionConfiguration:
+          $ref: '#/components/schemas/EncryptionConfiguration'
+          description: The encryption configuration for the repository. This determines how the contents of your repository are encrypted at rest.
     InvalidTagParameterException: {}
     TooManyTagsException: {}
     RepositoryAlreadyExistsException: {}
@@ -2545,7 +2585,7 @@ components:
           description: 'The media type of the image manifest. If you push an image manifest that does not contain the <code>mediaType</code> field, you must specify the <code>imageManifestMediaType</code> in the request.'
         imageTag:
           $ref: '#/components/schemas/ImageTag'
-          description: The tag to associate with the image. This parameter is required for images that use the Docker Image Manifest V2 Schema 2 or OCI formats.
+          description: The tag to associate with the image. This parameter is required for images that use the Docker Image Manifest V2 Schema 2 or Open Container Initiative (OCI) formats.
         imageDigest:
           $ref: '#/components/schemas/ImageDigest'
           description: The image digest of the image manifest corresponding to the image.
@@ -2932,6 +2972,18 @@ components:
           $ref: '#/components/schemas/ScanOnPushFlag'
           description: 'The setting that determines whether images are scanned after being pushed to a repository. If set to <code>true</code>, images will be scanned after being pushed. If this parameter is not specified, it will default to <code>false</code> and images will not be scanned unless a scan is manually started with the <a>StartImageScan</a> API.'
       description: The image scanning configuration for a repository.
+    EncryptionConfiguration:
+      type: object
+      required:
+        - encryptionType
+      properties:
+        encryptionType:
+          $ref: '#/components/schemas/EncryptionType'
+          description: '<p>The encryption type to use.</p> <p>If you use the <code>KMS</code> encryption type, the contents of the repository will be encrypted using server-side encryption with customer master keys (CMKs) stored in AWS KMS. When you use AWS KMS to encrypt your data, you can either use the default AWS managed CMK for Amazon ECR, or specify your own CMK, which you already created. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html">Protecting Data Using Server-Side Encryption with CMKs Stored in AWS Key Management Service (SSE-KMS)</a> in the <i>Amazon Simple Storage Service Console Developer Guide.</i>.</p> <p>If you use the <code>AES256</code> encryption type, Amazon ECR uses server-side encryption with Amazon S3-managed encryption keys which encrypts the images in the repository using an AES-256 encryption algorithm. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html">Protecting Data Using Server-Side Encryption with Amazon S3-Managed Encryption Keys (SSE-S3)</a> in the <i>Amazon Simple Storage Service Console Developer Guide.</i>.</p>'
+        kmsKey:
+          $ref: '#/components/schemas/KmsKey'
+          description: 'If you use the <code>KMS</code> encryption type, specify the CMK to use for encryption. The alias, key ID, or full ARN of the CMK can be specified. The key must exist in the same Region as the repository. If no key is specified, the default AWS managed CMK for Amazon ECR will be used.'
+      description: '<p>The encryption configuration for the repository. This determines how the contents of your repository are encrypted at rest.</p> <p>By default, when no encryption configuration is set or the <code>AES256</code> encryption type is used, Amazon ECR uses server-side encryption with Amazon S3-managed encryption keys which encrypts your data at rest using an AES-256 encryption algorithm. This does not require any action on your part.</p> <p>For more control over the encryption of the contents of your repository, you can use server-side encryption with customer master keys (CMKs) stored in AWS Key Management Service (AWS KMS) to encrypt your images. For more information, see <a href="https://docs.aws.amazon.com/AmazonECR/latest/userguide/encryption-at-rest.html">Amazon ECR encryption at rest</a> in the <i>Amazon Elastic Container Registry User Guide</i>.</p>'
     Repository:
       type: object
       properties:
@@ -2946,7 +2998,7 @@ components:
           description: The name of the repository.
         repositoryUri:
           $ref: '#/components/schemas/Url'
-          description: The URI for the repository. You can use this URI for Docker <code>push</code> or <code>pull</code> operations.
+          description: The URI for the repository. You can use this URI for container image <code>push</code> and <code>pull</code> operations.
         createdAt:
           $ref: '#/components/schemas/CreationTimestamp'
           description: 'The date and time, in JavaScript date format, when the repository was created.'
@@ -2955,6 +3007,9 @@ components:
           description: The tag mutability setting for the repository.
         imageScanningConfiguration:
           $ref: '#/components/schemas/ImageScanningConfiguration'
+        encryptionConfiguration:
+          $ref: '#/components/schemas/EncryptionConfiguration'
+          description: The encryption configuration for the repository. This determines how the contents of your repository are encrypted at rest.
       description: An object representing a repository.
     CreationTimestamp:
       type: string
@@ -3041,6 +3096,15 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Repository'
+    EncryptionType:
+      type: string
+      enum:
+        - AES256
+        - KMS
+    KmsKey:
+      type: string
+      minLength: 1
+      maxLength: 2048
     FindingDescription:
       type: string
     FindingName:
@@ -3191,6 +3255,7 @@ components:
         - ImageNotFound
         - MissingDigestAndTag
         - ImageReferencedByManifestList
+        - KmsError
     ImageFailureReason:
       type: string
     ImageFailure:

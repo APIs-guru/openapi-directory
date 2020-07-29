@@ -305,6 +305,13 @@ paths:
                     - FIFTEEN_MINUTES
                     - ONE_HOUR
                     - SIX_HOURS
+                dataSources:
+                  description: Contains information about which data sources are enabled.
+                  type: object
+                  properties:
+                    S3Logs:
+                      $ref: '#/components/schemas/S3LogsConfiguration'
+                      description: Describes whether S3 data event logs are enabled as a data source.
                 tags:
                   description: The tags to be added to a new detector resource.
                   type: object
@@ -580,7 +587,7 @@ paths:
                   minLength: 1
                   maxLength: 300
                 location:
-                  description: 'The URI of the file that contains the IPSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.'
+                  description: The URI of the file that contains the IPSet.
                   type: string
                   minLength: 1
                   maxLength: 300
@@ -722,7 +729,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListMembers
-      description: Lists details about all member accounts for the current GuardDuty master account.
+      description: Lists details about associated member accounts for the current GuardDuty master account.
       responses:
         '200':
           description: Success
@@ -768,7 +775,7 @@ paths:
         - name: onlyAssociated
           in: query
           required: false
-          description: Specifies whether to only return associated members or to return all members (including members who haven't been invited yet or have been disassociated).
+          description: Specifies what member accounts the response includes based on their relationship status with the master account. The default value is "true". If set to "false" the response includes all existing member accounts (including members who haven't been invited yet or have been disassociated).
           schema:
             type: string
         - name: MaxResults
@@ -1028,7 +1035,7 @@ paths:
                   minLength: 1
                   maxLength: 300
                 location:
-                  description: 'The URI of the file that contains the ThreatIntelSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.'
+                  description: The URI of the file that contains the ThreatIntelSet.
                   type: string
                   minLength: 1
                   maxLength: 300
@@ -1279,6 +1286,13 @@ paths:
                     - FIFTEEN_MINUTES
                     - ONE_HOUR
                     - SIX_HOURS
+                dataSources:
+                  description: Contains information about which data sources are enabled.
+                  type: object
+                  properties:
+                    S3Logs:
+                      $ref: '#/components/schemas/S3LogsConfiguration'
+                      description: Describes whether S3 data event logs are enabled as a data source.
   '/detector/{detectorId}/filter/{filterName}':
     delete:
       operationId: DeleteFilter
@@ -1564,7 +1578,7 @@ paths:
                   minLength: 1
                   maxLength: 300
                 location:
-                  description: 'The updated URI of the file that contains the IPSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.'
+                  description: The updated URI of the file that contains the IPSet.
                   type: string
                   minLength: 1
                   maxLength: 300
@@ -1945,7 +1959,7 @@ paths:
                   minLength: 1
                   maxLength: 300
                 location:
-                  description: 'The updated URI of the file that contains the ThreateIntelSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.'
+                  description: The updated URI of the file that contains the ThreateIntelSet.
                   type: string
                   minLength: 1
                   maxLength: 300
@@ -2035,6 +2049,13 @@ paths:
                 autoEnable:
                   description: Indicates whether to automatically enable member accounts in the organization.
                   type: boolean
+                dataSources:
+                  description: An object that contains information on which data sources will be configured to be automatically enabled for new members within the organization.
+                  type: object
+                  properties:
+                    S3Logs:
+                      $ref: '#/components/schemas/OrganizationS3LogsConfiguration'
+                      description: Describes whether S3 data event logs are enabled for new members of the organization.
   /admin/disable:
     post:
       operationId: DisableOrganizationAdminAccount
@@ -2372,6 +2393,62 @@ paths:
               schema:
                 $ref: '#/components/schemas/InternalServerErrorException'
       parameters: []
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/detector/{detectorId}/member/detector/get':
+    post:
+      operationId: GetMemberDetectors
+      description: Describes which data sources are enabled for the member account's detector.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetMemberDetectorsResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+      parameters:
+        - name: detectorId
+          in: path
+          required: true
+          description: The detector ID for the master account.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 300
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - accountIds
+              properties:
+                accountIds:
+                  description: The account ID of the member account.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/AccountId'
+                  minItems: 1
+                  maxItems: 50
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3066,6 +3143,69 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/detector/{detectorId}/member/detector/update':
+    post:
+      operationId: UpdateMemberDetectors
+      description: Contains information on member accounts to be updated.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateMemberDetectorsResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+      parameters:
+        - name: detectorId
+          in: path
+          required: true
+          description: The detector ID of the master account.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 300
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - accountIds
+              properties:
+                accountIds:
+                  description: A list of member account IDs to be updated.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/AccountId'
+                  minItems: 1
+                  maxItems: 50
+                dataSources:
+                  description: Contains information about which data sources are enabled.
+                  type: object
+                  properties:
+                    S3Logs:
+                      $ref: '#/components/schemas/S3LogsConfiguration'
+                      description: Describes whether S3 data event logs are enabled as a data source.
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
 components:
   parameters:
     X-Amz-Content-Sha256:
@@ -3136,6 +3276,15 @@ components:
         DetectorId:
           $ref: '#/components/schemas/DetectorId'
           description: The unique ID of the created detector.
+    S3LogsConfiguration:
+      type: object
+      required:
+        - Enable
+      properties:
+        Enable:
+          $ref: '#/components/schemas/Boolean'
+          description: ' The status of S3 data event logs as a data source.'
+      description: Describes whether S3 data event logs will be enabled as a data source.
     TagValue:
       type: string
       maxLength: 256
@@ -3260,6 +3409,9 @@ components:
         MemberAccountLimitReached:
           $ref: '#/components/schemas/Boolean'
           description: Indicates whether the maximum number of allowed member accounts are already associated with the delegated administrator master account.
+        DataSources:
+          $ref: '#/components/schemas/OrganizationDataSourceConfigurationsResult'
+          description: An object that describes which data sources are enabled automatically for member accounts.
     DescribePublishingDestinationResponse:
       type: object
       required:
@@ -3322,6 +3474,9 @@ components:
         UpdatedAt:
           $ref: '#/components/schemas/String'
           description: The last-updated timestamp for the detector.
+        DataSources:
+          $ref: '#/components/schemas/DataSourceConfigurationsResult'
+          description: An object that describes which data sources are enabled for the detector.
         Tags:
           $ref: '#/components/schemas/TagMap'
           description: The tags of the detector resource.
@@ -3391,7 +3546,7 @@ components:
           description: The format of the file that contains the IPSet.
         Location:
           $ref: '#/components/schemas/Location'
-          description: 'The URI of the file that contains the IPSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.'
+          description: The URI of the file that contains the IPSet.
         Status:
           $ref: '#/components/schemas/IpSetStatus'
           description: The status of IPSet file that was uploaded.
@@ -3412,6 +3567,18 @@ components:
         Master:
           $ref: '#/components/schemas/Master'
           description: The master account details.
+    GetMemberDetectorsResponse:
+      type: object
+      required:
+        - MemberDataSourceConfigurations
+        - UnprocessedAccounts
+      properties:
+        MemberDataSourceConfigurations:
+          $ref: '#/components/schemas/MemberDataSourceConfigurations'
+          description: An object that describes which data sources are enabled for a member account.
+        UnprocessedAccounts:
+          $ref: '#/components/schemas/UnprocessedAccounts'
+          description: A list of member account IDs that were unable to be processed along with an explanation for why they were not processed.
     GetMembersResponse:
       type: object
       required:
@@ -3440,7 +3607,7 @@ components:
           description: The format of the threatIntelSet.
         Location:
           $ref: '#/components/schemas/Location'
-          description: 'The URI of the file that contains the ThreatIntelSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.'
+          description: The URI of the file that contains the ThreatIntelSet.
         Status:
           $ref: '#/components/schemas/ThreatIntelSetStatus'
           description: The status of threatIntelSet file uploaded.
@@ -3601,9 +3768,26 @@ components:
     UpdateIPSetResponse:
       type: object
       properties: {}
+    UpdateMemberDetectorsResponse:
+      type: object
+      required:
+        - UnprocessedAccounts
+      properties:
+        UnprocessedAccounts:
+          $ref: '#/components/schemas/UnprocessedAccounts'
+          description: A list of member account IDs that were unable to be processed along with an explanation for why they were not processed.
     UpdateOrganizationConfigurationResponse:
       type: object
       properties: {}
+    OrganizationS3LogsConfiguration:
+      type: object
+      required:
+        - AutoEnable
+      properties:
+        AutoEnable:
+          $ref: '#/components/schemas/Boolean'
+          description: A value that contains information on whether S3 data event logs will be enabled automatically as a data source for the organization.
+      description: Describes whether S3 data event logs will be automatically enabled for new members of the organization.
     UpdatePublishingDestinationResponse:
       type: object
       properties: {}
@@ -3872,6 +4056,22 @@ components:
       type: string
       minLength: 0
       maxLength: 64
+    DataSourceStatus:
+      type: string
+      enum:
+        - ENABLED
+        - DISABLED
+      minLength: 1
+      maxLength: 300
+    CloudTrailConfigurationResult:
+      type: object
+      required:
+        - Status
+      properties:
+        Status:
+          $ref: '#/components/schemas/DataSourceStatus'
+          description: Describes whether CloudTrail is enabled as a data source for the detector.
+      description: Contains information on the status of CloudTrail as a data source for the detector.
     Eq:
       type: array
       items:
@@ -3958,6 +4158,13 @@ components:
         - FIFTEEN_MINUTES
         - ONE_HOUR
         - SIX_HOURS
+    DataSourceConfigurations:
+      type: object
+      properties:
+        S3Logs:
+          $ref: '#/components/schemas/S3LogsConfiguration'
+          description: Describes whether S3 data event logs are enabled as a data source.
+      description: Contains information about which data sources are enabled.
     TagMap:
       type: object
       minProperties: 1
@@ -3979,6 +4186,9 @@ components:
         FindingPublishingFrequency:
           $ref: '#/components/schemas/FindingPublishingFrequency'
           description: An enum value that specifies how frequently updated findings are exported.
+        DataSources:
+          $ref: '#/components/schemas/DataSourceConfigurations'
+          description: An object that describes which data sources will be enabled for the detector.
         Tags:
           $ref: '#/components/schemas/TagMap'
           description: The tags to be added to a new detector resource.
@@ -4072,7 +4282,7 @@ components:
           description: The format of the file that contains the IPSet.
         Location:
           $ref: '#/components/schemas/Location'
-          description: 'The URI of the file that contains the IPSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.'
+          description: The URI of the file that contains the IPSet.
         Activate:
           $ref: '#/components/schemas/Boolean'
           description: A Boolean value that indicates whether GuardDuty is to start using the uploaded IPSet.
@@ -4170,7 +4380,7 @@ components:
           description: The format of the file that contains the ThreatIntelSet.
         Location:
           $ref: '#/components/schemas/Location'
-          description: 'The URI of the file that contains the ThreatIntelSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.'
+          description: The URI of the file that contains the ThreatIntelSet.
         Activate:
           $ref: '#/components/schemas/Boolean'
           description: A Boolean value that indicates whether GuardDuty is to start using the uploaded ThreatIntelSet.
@@ -4180,6 +4390,54 @@ components:
         Tags:
           $ref: '#/components/schemas/TagMap'
           description: The tags to be added to a new threat list resource.
+    DNSLogsConfigurationResult:
+      type: object
+      required:
+        - Status
+      properties:
+        Status:
+          $ref: '#/components/schemas/DataSourceStatus'
+          description: Denotes whether DNS logs is enabled as a data source.
+      description: Contains information on the status of DNS logs as a data source.
+    FlowLogsConfigurationResult:
+      type: object
+      required:
+        - Status
+      properties:
+        Status:
+          $ref: '#/components/schemas/DataSourceStatus'
+          description: Denotes whether VPC flow logs is enabled as a data source.
+      description: Contains information on the status of VPC flow logs as a data source.
+    S3LogsConfigurationResult:
+      type: object
+      required:
+        - Status
+      properties:
+        Status:
+          $ref: '#/components/schemas/DataSourceStatus'
+          description: A value that describes whether S3 data event logs are automatically enabled for new members of the organization.
+      description: Describes whether S3 data event logs will be enabled as a data source.
+    DataSourceConfigurationsResult:
+      type: object
+      required:
+        - CloudTrail
+        - DNSLogs
+        - FlowLogs
+        - S3Logs
+      properties:
+        CloudTrail:
+          $ref: '#/components/schemas/CloudTrailConfigurationResult'
+          description: An object that contains information on the status of CloudTrail as a data source.
+        DNSLogs:
+          $ref: '#/components/schemas/DNSLogsConfigurationResult'
+          description: An object that contains information on the status of DNS logs as a data source.
+        FlowLogs:
+          $ref: '#/components/schemas/FlowLogsConfigurationResult'
+          description: An object that contains information on the status of VPC flow logs as a data source.
+        S3Logs:
+          $ref: '#/components/schemas/S3LogsConfigurationResult'
+          description: An object that contains information on the status of S3 Data event logs as a data source.
+      description: Contains information on the status of data sources for the detector.
     DeclineInvitationsRequest:
       type: object
       required:
@@ -4241,6 +4499,15 @@ components:
       type: object
       title: DescribeOrganizationConfigurationRequest
       properties: {}
+    OrganizationDataSourceConfigurationsResult:
+      type: object
+      required:
+        - S3Logs
+      properties:
+        S3Logs:
+          $ref: '#/components/schemas/OrganizationS3LogsConfigurationResult'
+          description: Describes whether S3 data event logs are enabled as a data source.
+      description: An object that contains information on which data sources are automatically enabled for new members within the organization.
     DescribePublishingDestinationRequest:
       type: object
       title: DescribePublishingDestinationRequest
@@ -4563,6 +4830,21 @@ components:
           $ref: '#/components/schemas/String'
           description: The timestamp when the invitation was sent.
       description: Contains information about the master account and invitation.
+    GetMemberDetectorsRequest:
+      type: object
+      required:
+        - AccountIds
+      title: GetMemberDetectorsRequest
+      properties:
+        AccountIds:
+          $ref: '#/components/schemas/AccountIds'
+          description: The account ID of the member account.
+    MemberDataSourceConfigurations:
+      type: array
+      items:
+        $ref: '#/components/schemas/MemberDataSourceConfiguration'
+      minItems: 1
+      maxItems: 50
     GetMembersRequest:
       type: object
       required:
@@ -4727,7 +5009,7 @@ components:
       properties:
         FindingCriteria:
           $ref: '#/components/schemas/FindingCriteria'
-          description: '<p>Represents the criteria used for querying findings. Valid values include:</p> <ul> <li> <p>JSON field name</p> </li> <li> <p>accountId</p> </li> <li> <p>region</p> </li> <li> <p>confidence</p> </li> <li> <p>id</p> </li> <li> <p>resource.accessKeyDetails.accessKeyId</p> </li> <li> <p>resource.accessKeyDetails.principalId</p> </li> <li> <p>resource.accessKeyDetails.userName</p> </li> <li> <p>resource.accessKeyDetails.userType</p> </li> <li> <p>resource.instanceDetails.iamInstanceProfile.id</p> </li> <li> <p>resource.instanceDetails.imageId</p> </li> <li> <p>resource.instanceDetails.instanceId</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.ipv6Addresses</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.privateIpAddresses.privateIpAddress</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.publicDnsName</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.publicIp</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.securityGroups.groupId</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.securityGroups.groupName</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.subnetId</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.vpcId</p> </li> <li> <p>resource.instanceDetails.tags.key</p> </li> <li> <p>resource.instanceDetails.tags.value</p> </li> <li> <p>resource.resourceType</p> </li> <li> <p>service.action.actionType</p> </li> <li> <p>service.action.awsApiCallAction.api</p> </li> <li> <p>service.action.awsApiCallAction.callerType</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.city.cityName</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.country.countryName</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.ipAddressV4</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.organization.asn</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.organization.asnOrg</p> </li> <li> <p>service.action.awsApiCallAction.serviceName</p> </li> <li> <p>service.action.dnsRequestAction.domain</p> </li> <li> <p>service.action.networkConnectionAction.blocked</p> </li> <li> <p>service.action.networkConnectionAction.connectionDirection</p> </li> <li> <p>service.action.networkConnectionAction.localPortDetails.port</p> </li> <li> <p>service.action.networkConnectionAction.protocol</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.city.cityName</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.country.countryName</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.ipAddressV4</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.organization.asn</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.organization.asnOrg</p> </li> <li> <p>service.action.networkConnectionAction.remotePortDetails.port</p> </li> <li> <p>service.additionalInfo.threatListName</p> </li> <li> <p>service.archived</p> <p>When this attribute is set to ''true'', only archived findings are listed. When it''s set to ''false'', only unarchived findings are listed. When this attribute is not set, all existing findings are listed.</p> </li> <li> <p>service.resourceRole</p> </li> <li> <p>severity</p> </li> <li> <p>type</p> </li> <li> <p>updatedAt</p> <p>Type: Timestamp in Unix Epoch millisecond format: 1486685375000</p> </li> </ul>'
+          description: '<p>Represents the criteria used for querying findings. Valid values include:</p> <ul> <li> <p>JSON field name</p> </li> <li> <p>accountId</p> </li> <li> <p>region</p> </li> <li> <p>confidence</p> </li> <li> <p>id</p> </li> <li> <p>resource.accessKeyDetails.accessKeyId</p> </li> <li> <p>resource.accessKeyDetails.principalId</p> </li> <li> <p>resource.accessKeyDetails.userName</p> </li> <li> <p>resource.accessKeyDetails.userType</p> </li> <li> <p>resource.instanceDetails.iamInstanceProfile.id</p> </li> <li> <p>resource.instanceDetails.imageId</p> </li> <li> <p>resource.instanceDetails.instanceId</p> </li> <li> <p>resource.instanceDetails.outpostArn</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.ipv6Addresses</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.privateIpAddresses.privateIpAddress</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.publicDnsName</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.publicIp</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.securityGroups.groupId</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.securityGroups.groupName</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.subnetId</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.vpcId</p> </li> <li> <p>resource.instanceDetails.tags.key</p> </li> <li> <p>resource.instanceDetails.tags.value</p> </li> <li> <p>resource.resourceType</p> </li> <li> <p>service.action.actionType</p> </li> <li> <p>service.action.awsApiCallAction.api</p> </li> <li> <p>service.action.awsApiCallAction.callerType</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.city.cityName</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.country.countryName</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.ipAddressV4</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.organization.asn</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.organization.asnOrg</p> </li> <li> <p>service.action.awsApiCallAction.serviceName</p> </li> <li> <p>service.action.dnsRequestAction.domain</p> </li> <li> <p>service.action.networkConnectionAction.blocked</p> </li> <li> <p>service.action.networkConnectionAction.connectionDirection</p> </li> <li> <p>service.action.networkConnectionAction.localPortDetails.port</p> </li> <li> <p>service.action.networkConnectionAction.protocol</p> </li> <li> <p>service.action.networkConnectionAction.localIpDetails.ipAddressV4</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.city.cityName</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.country.countryName</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.ipAddressV4</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.organization.asn</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.organization.asnOrg</p> </li> <li> <p>service.action.networkConnectionAction.remotePortDetails.port</p> </li> <li> <p>service.additionalInfo.threatListName</p> </li> <li> <p>service.archived</p> <p>When this attribute is set to ''true'', only archived findings are listed. When it''s set to ''false'', only unarchived findings are listed. When this attribute is not set, all existing findings are listed.</p> </li> <li> <p>service.resourceRole</p> </li> <li> <p>severity</p> </li> <li> <p>type</p> </li> <li> <p>updatedAt</p> <p>Type: Timestamp in Unix Epoch millisecond format: 1486685375000</p> </li> </ul>'
         SortCriteria:
           $ref: '#/components/schemas/SortCriteria'
           description: Represents the criteria used for sorting findings.
@@ -4819,6 +5101,19 @@ components:
           $ref: '#/components/schemas/String'
           description: The last-updated timestamp of the member.
       description: 'Contains information about the member account. '
+    MemberDataSourceConfiguration:
+      type: object
+      required:
+        - AccountId
+        - DataSources
+      properties:
+        AccountId:
+          $ref: '#/components/schemas/AccountId'
+          description: The account ID for the member account.
+        DataSources:
+          $ref: '#/components/schemas/DataSourceConfigurationsResult'
+          description: Contains information on the status of data sources for the account.
+      description: Contains information on which data sources are enabled for a member account.
     RemotePortDetails:
       type: object
       properties:
@@ -4887,6 +5182,22 @@ components:
           $ref: '#/components/schemas/String'
           description: The name of the internet provider.
       description: Contains information about the ISP organization of the remote IP address.
+    OrganizationDataSourceConfigurations:
+      type: object
+      properties:
+        S3Logs:
+          $ref: '#/components/schemas/OrganizationS3LogsConfiguration'
+          description: Describes whether S3 data event logs are enabled for new members of the organization.
+      description: An object that contains information on which data sources will be configured to be automatically enabled for new members within the organization.
+    OrganizationS3LogsConfigurationResult:
+      type: object
+      required:
+        - AutoEnable
+      properties:
+        AutoEnable:
+          $ref: '#/components/schemas/Boolean'
+          description: A value that describes whether S3 data event logs are automatically enabled for new members of the organization.
+      description: The current configuration of S3 data event logs as a data source for the organization.
     Owner:
       type: object
       properties:
@@ -4953,7 +5264,6 @@ components:
       description: Describes the public access policies that apply to the S3 bucket.
     S3BucketDetails:
       type: array
-      description: Contains information on the S3 bucket.
       items:
         $ref: '#/components/schemas/S3BucketDetail'
     Timestamp:
@@ -4986,6 +5296,7 @@ components:
         PublicAccess:
           $ref: '#/components/schemas/PublicAccess'
           description: Describes the public access policies that apply to the S3 bucket.
+      description: Contains information on the S3 bucket.
     SecurityGroup:
       type: object
       properties:
@@ -5089,6 +5400,9 @@ components:
         FindingPublishingFrequency:
           $ref: '#/components/schemas/FindingPublishingFrequency'
           description: 'An enum value that specifies how frequently findings are exported, such as to CloudWatch Events.'
+        DataSources:
+          $ref: '#/components/schemas/DataSourceConfigurations'
+          description: An object that describes which data sources will be updated.
     UpdateFilterRequest:
       type: object
       title: UpdateFilterRequest
@@ -5130,10 +5444,22 @@ components:
           description: The unique ID that specifies the IPSet that you want to update.
         Location:
           $ref: '#/components/schemas/Location'
-          description: 'The updated URI of the file that contains the IPSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.'
+          description: The updated URI of the file that contains the IPSet.
         Activate:
           $ref: '#/components/schemas/Boolean'
           description: The updated Boolean value that specifies whether the IPSet is active or not.
+    UpdateMemberDetectorsRequest:
+      type: object
+      required:
+        - AccountIds
+      title: UpdateMemberDetectorsRequest
+      properties:
+        AccountIds:
+          $ref: '#/components/schemas/AccountIds'
+          description: A list of member account IDs to be updated.
+        DataSources:
+          $ref: '#/components/schemas/DataSourceConfigurations'
+          description: An object describes which data sources will be updated.
     UpdateOrganizationConfigurationRequest:
       type: object
       required:
@@ -5143,6 +5469,9 @@ components:
         AutoEnable:
           $ref: '#/components/schemas/Boolean'
           description: Indicates whether to automatically enable member accounts in the organization.
+        DataSources:
+          $ref: '#/components/schemas/OrganizationDataSourceConfigurations'
+          description: An object describes which data sources will be updated.
     UpdatePublishingDestinationRequest:
       type: object
       title: UpdatePublishingDestinationRequest
@@ -5159,7 +5488,7 @@ components:
           description: The unique ID that specifies the ThreatIntelSet that you want to update.
         Location:
           $ref: '#/components/schemas/Location'
-          description: 'The updated URI of the file that contains the ThreateIntelSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.'
+          description: The updated URI of the file that contains the ThreateIntelSet.
         Activate:
           $ref: '#/components/schemas/Boolean'
           description: The updated Boolean value that specifies whether the ThreateIntelSet is active or not.
