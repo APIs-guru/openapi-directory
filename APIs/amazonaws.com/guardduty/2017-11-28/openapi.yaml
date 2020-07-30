@@ -260,7 +260,7 @@ paths:
   /detector:
     post:
       operationId: CreateDetector
-      description: 'Creates a single Amazon GuardDuty detector. A detector is a resource that represents the GuardDuty service. To start using GuardDuty, you must create a detector in each Region where you enable the service. You can have only one detector per account per Region.'
+      description: 'Creates a single Amazon GuardDuty detector. A detector is a resource that represents the GuardDuty service. To start using GuardDuty, you must create a detector in each Region where you enable the service. You can have only one detector per account per Region. All data sources are enabled in a new detector by default.'
       responses:
         '200':
           description: Success
@@ -587,7 +587,7 @@ paths:
                   minLength: 1
                   maxLength: 300
                 location:
-                  description: The URI of the file that contains the IPSet.
+                  description: 'The URI of the file that contains the IPSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.'
                   type: string
                   minLength: 1
                   maxLength: 300
@@ -674,7 +674,7 @@ paths:
   '/detector/{detectorId}/member':
     post:
       operationId: CreateMembers
-      description: Creates member accounts of the current AWS account by specifying a list of AWS account IDs. The current AWS account can then invite these members to manage GuardDuty in their accounts.
+      description: '<p>Creates member accounts of the current AWS account by specifying a list of AWS account IDs. This step is a prerequisite for managing the associated member accounts either by invitation or through an organization.</p> <p>When using <code>Create Members</code> as an organizations delegated administrator this action will enable GuardDuty in the added member accounts, with the exception of the organization master account, which must enable GuardDuty prior to being added as a member.</p> <p>If you are adding accounts by invitation use this action after GuardDuty has been enabled in potential member accounts and before using <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_InviteMembers.html"> <code>Invite Members</code> </a>.</p>'
       responses:
         '200':
           description: Success
@@ -729,7 +729,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListMembers
-      description: Lists details about associated member accounts for the current GuardDuty master account.
+      description: Lists details about all member accounts for the current GuardDuty master account.
       responses:
         '200':
           description: Success
@@ -775,7 +775,7 @@ paths:
         - name: onlyAssociated
           in: query
           required: false
-          description: Specifies what member accounts the response includes based on their relationship status with the master account. The default value is "true". If set to "false" the response includes all existing member accounts (including members who haven't been invited yet or have been disassociated).
+          description: Specifies whether to only return associated members or to return all members (including members who haven't been invited yet or have been disassociated).
           schema:
             type: string
         - name: MaxResults
@@ -1035,7 +1035,7 @@ paths:
                   minLength: 1
                   maxLength: 300
                 location:
-                  description: The URI of the file that contains the ThreatIntelSet.
+                  description: 'The URI of the file that contains the ThreatIntelSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.'
                   type: string
                   minLength: 1
                   maxLength: 300
@@ -1578,7 +1578,7 @@ paths:
                   minLength: 1
                   maxLength: 300
                 location:
-                  description: The updated URI of the file that contains the IPSet.
+                  description: 'The updated URI of the file that contains the IPSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.'
                   type: string
                   minLength: 1
                   maxLength: 300
@@ -1959,7 +1959,7 @@ paths:
                   minLength: 1
                   maxLength: 300
                 location:
-                  description: The updated URI of the file that contains the ThreateIntelSet.
+                  description: 'The updated URI of the file that contains the ThreateIntelSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.'
                   type: string
                   minLength: 1
                   maxLength: 300
@@ -2513,6 +2513,100 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/detector/{detectorId}/usage/statistics':
+    post:
+      operationId: GetUsageStatistics
+      description: 'Lists Amazon GuardDuty usage statistics over the last 30 days for the specified detector ID. For newly enabled detectors or data sources the cost returned will include only the usage so far under 30 days, this may differ from the cost metrics in the console, which projects usage over 30 days to provide a monthly cost estimate. For more information see <a href="https://docs.aws.amazon.com/guardduty/latest/ug/monitoring_costs.html#usage-calculations">Understanding How Usage Costs are Calculated</a>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetUsageStatisticsResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+      parameters:
+        - name: detectorId
+          in: path
+          required: true
+          description: The ID of the detector that specifies the GuardDuty service whose usage statistics you want to retrieve.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 300
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - usageStatisticsType
+                - usageCriteria
+              properties:
+                usageStatisticsType:
+                  description: The type of usage statistics to retrieve.
+                  type: string
+                  enum:
+                    - SUM_BY_ACCOUNT
+                    - SUM_BY_DATA_SOURCE
+                    - SUM_BY_RESOURCE
+                    - TOP_RESOURCES
+                usageCriteria:
+                  description: Contains information about the criteria used to query usage statistics.
+                  type: object
+                  properties:
+                    AccountIds:
+                      $ref: '#/components/schemas/AccountIds'
+                      description: The account IDs to aggregate usage statistics from.
+                    DataSources:
+                      $ref: '#/components/schemas/DataSourceList'
+                      description: The data sources to aggregate usage statistics from.
+                    Resources:
+                      $ref: '#/components/schemas/ResourceList'
+                      description: The resources to aggregate usage statistics from. Only accepts exact resource names.
+                unit:
+                  description: The currency unit you would like to view your usage statistics in. Current valid values are USD.
+                  type: string
+                maxResults:
+                  description: The maximum number of results to return in the response.
+                  type: integer
+                  minimum: 1
+                  maximum: 50
+                nextToken:
+                  description: 'A token to use for paginating results that are returned in the response. Set the value of this parameter to null for the first request to a list action. For subsequent calls, use the NextToken value returned from the previous request to continue listing results after the first page.'
+                  type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/detector/{detectorId}/member/invite':
     post:
       operationId: InviteMembers
@@ -2562,10 +2656,10 @@ paths:
                   minItems: 1
                   maxItems: 50
                 disableEmailNotification:
-                  description: A Boolean value that specifies whether you want to disable email notification to the accounts that you’re inviting to GuardDuty as members.
+                  description: A Boolean value that specifies whether you want to disable email notification to the accounts that you are inviting to GuardDuty as members.
                   type: boolean
                 message:
-                  description: The invitation message that you want to send to the accounts that you’re inviting to GuardDuty as members.
+                  description: The invitation message that you want to send to the accounts that you're inviting to GuardDuty as members.
                   type: string
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -3546,7 +3640,7 @@ components:
           description: The format of the file that contains the IPSet.
         Location:
           $ref: '#/components/schemas/Location'
-          description: The URI of the file that contains the IPSet.
+          description: 'The URI of the file that contains the IPSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.'
         Status:
           $ref: '#/components/schemas/IpSetStatus'
           description: The status of IPSet file that was uploaded.
@@ -3607,13 +3701,36 @@ components:
           description: The format of the threatIntelSet.
         Location:
           $ref: '#/components/schemas/Location'
-          description: The URI of the file that contains the ThreatIntelSet.
+          description: 'The URI of the file that contains the ThreatIntelSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.'
         Status:
           $ref: '#/components/schemas/ThreatIntelSetStatus'
           description: The status of threatIntelSet file uploaded.
         Tags:
           $ref: '#/components/schemas/TagMap'
           description: The tags of the threat list resource.
+    GetUsageStatisticsResponse:
+      type: object
+      properties:
+        UsageStatistics:
+          $ref: '#/components/schemas/UsageStatistics'
+          description: 'The usage statistics object. If a UsageStatisticType was provided, the objects representing other types will be null.'
+        NextToken:
+          $ref: '#/components/schemas/String'
+          description: The pagination parameter to be used on the next list operation to retrieve more items.
+    AccountIds:
+      type: array
+      items:
+        $ref: '#/components/schemas/AccountId'
+      minItems: 1
+      maxItems: 50
+    DataSourceList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DataSource'
+    ResourceList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
     InviteMembersResponse:
       type: object
       required:
@@ -3847,12 +3964,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/AccountDetail'
-      minItems: 1
-      maxItems: 50
-    AccountIds:
-      type: array
-      items:
-        $ref: '#/components/schemas/AccountId'
       minItems: 1
       maxItems: 50
     BlockPublicAccess:
@@ -4282,7 +4393,7 @@ components:
           description: The format of the file that contains the IPSet.
         Location:
           $ref: '#/components/schemas/Location'
-          description: The URI of the file that contains the IPSet.
+          description: 'The URI of the file that contains the IPSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.'
         Activate:
           $ref: '#/components/schemas/Boolean'
           description: A Boolean value that indicates whether GuardDuty is to start using the uploaded IPSet.
@@ -4380,7 +4491,7 @@ components:
           description: The format of the file that contains the ThreatIntelSet.
         Location:
           $ref: '#/components/schemas/Location'
-          description: The URI of the file that contains the ThreatIntelSet.
+          description: 'The URI of the file that contains the ThreatIntelSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.'
         Activate:
           $ref: '#/components/schemas/Boolean'
           description: A Boolean value that indicates whether GuardDuty is to start using the uploaded ThreatIntelSet.
@@ -4399,6 +4510,13 @@ components:
           $ref: '#/components/schemas/DataSourceStatus'
           description: Denotes whether DNS logs is enabled as a data source.
       description: Contains information on the status of DNS logs as a data source.
+    DataSource:
+      type: string
+      enum:
+        - FLOW_LOGS
+        - CLOUD_TRAIL
+        - DNS_LOGS
+        - S3_LOGS
     FlowLogsConfigurationResult:
       type: object
       required:
@@ -4876,6 +4994,70 @@ components:
         - DELETED
       minLength: 1
       maxLength: 300
+    UsageStatisticType:
+      type: string
+      enum:
+        - SUM_BY_ACCOUNT
+        - SUM_BY_DATA_SOURCE
+        - SUM_BY_RESOURCE
+        - TOP_RESOURCES
+    UsageCriteria:
+      type: object
+      required:
+        - DataSources
+      properties:
+        AccountIds:
+          $ref: '#/components/schemas/AccountIds'
+          description: The account IDs to aggregate usage statistics from.
+        DataSources:
+          $ref: '#/components/schemas/DataSourceList'
+          description: The data sources to aggregate usage statistics from.
+        Resources:
+          $ref: '#/components/schemas/ResourceList'
+          description: The resources to aggregate usage statistics from. Only accepts exact resource names.
+      description: Contains information about the criteria used to query usage statistics.
+    MaxResults:
+      type: integer
+      minimum: 1
+      maximum: 50
+    GetUsageStatisticsRequest:
+      type: object
+      required:
+        - UsageStatisticType
+        - UsageCriteria
+      title: GetUsageStatisticsRequest
+      properties:
+        UsageStatisticType:
+          $ref: '#/components/schemas/UsageStatisticType'
+          description: The type of usage statistics to retrieve.
+        UsageCriteria:
+          $ref: '#/components/schemas/UsageCriteria'
+          description: Represents the criteria used for querying usage.
+        Unit:
+          $ref: '#/components/schemas/String'
+          description: The currency unit you would like to view your usage statistics in. Current valid values are USD.
+        MaxResults:
+          $ref: '#/components/schemas/MaxResults'
+          description: The maximum number of results to return in the response.
+        NextToken:
+          $ref: '#/components/schemas/String'
+          description: 'A token to use for paginating results that are returned in the response. Set the value of this parameter to null for the first request to a list action. For subsequent calls, use the NextToken value returned from the previous request to continue listing results after the first page.'
+    UsageStatistics:
+      type: object
+      properties:
+        SumByAccount:
+          $ref: '#/components/schemas/UsageAccountResultList'
+          description: The usage statistic sum organized by account ID.
+        SumByDataSource:
+          $ref: '#/components/schemas/UsageDataSourceResultList'
+          description: The usage statistic sum organized by on data source.
+        SumByResource:
+          $ref: '#/components/schemas/UsageResourceResultList'
+          description: The usage statistic sum organized by resource.
+        TopResources:
+          $ref: '#/components/schemas/UsageResourceResultList'
+          description: 'Lists the top 50 resources that have generated the most GuardDuty usage, in order from most to least expensive.'
+      description: 'Contains the result of GuardDuty usage. If a UsageStatisticType is provided the result for other types will be null. '
     GuardDutyArn:
       type: string
       pattern: '^arn:[A-Za-z_.-]{1,20}:guardduty:[A-Za-z0-9_/.-]{0,63}:\d+:detector/[A-Za-z0-9_/.-]{32,264}$'
@@ -4977,10 +5159,10 @@ components:
           description: A list of account IDs of the accounts that you want to invite to GuardDuty as members.
         DisableEmailNotification:
           $ref: '#/components/schemas/Boolean'
-          description: A Boolean value that specifies whether you want to disable email notification to the accounts that you’re inviting to GuardDuty as members.
+          description: A Boolean value that specifies whether you want to disable email notification to the accounts that you are inviting to GuardDuty as members.
         Message:
           $ref: '#/components/schemas/String'
-          description: The invitation message that you want to send to the accounts that you’re inviting to GuardDuty as members.
+          description: The invitation message that you want to send to the accounts that you're inviting to GuardDuty as members.
     IpSetIds:
       type: array
       items:
@@ -4991,10 +5173,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/String'
-    MaxResults:
-      type: integer
-      minimum: 1
-      maximum: 50
     ListDetectorsRequest:
       type: object
       title: ListDetectorsRequest
@@ -5009,7 +5187,7 @@ components:
       properties:
         FindingCriteria:
           $ref: '#/components/schemas/FindingCriteria'
-          description: '<p>Represents the criteria used for querying findings. Valid values include:</p> <ul> <li> <p>JSON field name</p> </li> <li> <p>accountId</p> </li> <li> <p>region</p> </li> <li> <p>confidence</p> </li> <li> <p>id</p> </li> <li> <p>resource.accessKeyDetails.accessKeyId</p> </li> <li> <p>resource.accessKeyDetails.principalId</p> </li> <li> <p>resource.accessKeyDetails.userName</p> </li> <li> <p>resource.accessKeyDetails.userType</p> </li> <li> <p>resource.instanceDetails.iamInstanceProfile.id</p> </li> <li> <p>resource.instanceDetails.imageId</p> </li> <li> <p>resource.instanceDetails.instanceId</p> </li> <li> <p>resource.instanceDetails.outpostArn</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.ipv6Addresses</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.privateIpAddresses.privateIpAddress</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.publicDnsName</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.publicIp</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.securityGroups.groupId</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.securityGroups.groupName</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.subnetId</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.vpcId</p> </li> <li> <p>resource.instanceDetails.tags.key</p> </li> <li> <p>resource.instanceDetails.tags.value</p> </li> <li> <p>resource.resourceType</p> </li> <li> <p>service.action.actionType</p> </li> <li> <p>service.action.awsApiCallAction.api</p> </li> <li> <p>service.action.awsApiCallAction.callerType</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.city.cityName</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.country.countryName</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.ipAddressV4</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.organization.asn</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.organization.asnOrg</p> </li> <li> <p>service.action.awsApiCallAction.serviceName</p> </li> <li> <p>service.action.dnsRequestAction.domain</p> </li> <li> <p>service.action.networkConnectionAction.blocked</p> </li> <li> <p>service.action.networkConnectionAction.connectionDirection</p> </li> <li> <p>service.action.networkConnectionAction.localPortDetails.port</p> </li> <li> <p>service.action.networkConnectionAction.protocol</p> </li> <li> <p>service.action.networkConnectionAction.localIpDetails.ipAddressV4</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.city.cityName</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.country.countryName</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.ipAddressV4</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.organization.asn</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.organization.asnOrg</p> </li> <li> <p>service.action.networkConnectionAction.remotePortDetails.port</p> </li> <li> <p>service.additionalInfo.threatListName</p> </li> <li> <p>service.archived</p> <p>When this attribute is set to ''true'', only archived findings are listed. When it''s set to ''false'', only unarchived findings are listed. When this attribute is not set, all existing findings are listed.</p> </li> <li> <p>service.resourceRole</p> </li> <li> <p>severity</p> </li> <li> <p>type</p> </li> <li> <p>updatedAt</p> <p>Type: Timestamp in Unix Epoch millisecond format: 1486685375000</p> </li> </ul>'
+          description: '<p>Represents the criteria used for querying findings. Valid values include:</p> <ul> <li> <p>JSON field name</p> </li> <li> <p>accountId</p> </li> <li> <p>region</p> </li> <li> <p>confidence</p> </li> <li> <p>id</p> </li> <li> <p>resource.accessKeyDetails.accessKeyId</p> </li> <li> <p>resource.accessKeyDetails.principalId</p> </li> <li> <p>resource.accessKeyDetails.userName</p> </li> <li> <p>resource.accessKeyDetails.userType</p> </li> <li> <p>resource.instanceDetails.iamInstanceProfile.id</p> </li> <li> <p>resource.instanceDetails.imageId</p> </li> <li> <p>resource.instanceDetails.instanceId</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.ipv6Addresses</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.privateIpAddresses.privateIpAddress</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.publicDnsName</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.publicIp</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.securityGroups.groupId</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.securityGroups.groupName</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.subnetId</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.vpcId</p> </li> <li> <p>resource.instanceDetails.tags.key</p> </li> <li> <p>resource.instanceDetails.tags.value</p> </li> <li> <p>resource.resourceType</p> </li> <li> <p>service.action.actionType</p> </li> <li> <p>service.action.awsApiCallAction.api</p> </li> <li> <p>service.action.awsApiCallAction.callerType</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.city.cityName</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.country.countryName</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.ipAddressV4</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.organization.asn</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.organization.asnOrg</p> </li> <li> <p>service.action.awsApiCallAction.serviceName</p> </li> <li> <p>service.action.dnsRequestAction.domain</p> </li> <li> <p>service.action.networkConnectionAction.blocked</p> </li> <li> <p>service.action.networkConnectionAction.connectionDirection</p> </li> <li> <p>service.action.networkConnectionAction.localPortDetails.port</p> </li> <li> <p>service.action.networkConnectionAction.protocol</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.city.cityName</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.country.countryName</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.ipAddressV4</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.organization.asn</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.organization.asnOrg</p> </li> <li> <p>service.action.networkConnectionAction.remotePortDetails.port</p> </li> <li> <p>service.additionalInfo.threatListName</p> </li> <li> <p>service.archived</p> <p>When this attribute is set to ''true'', only archived findings are listed. When it''s set to ''false'', only unarchived findings are listed. When this attribute is not set, all existing findings are listed.</p> </li> <li> <p>service.resourceRole</p> </li> <li> <p>severity</p> </li> <li> <p>type</p> </li> <li> <p>updatedAt</p> <p>Type: Timestamp in Unix Epoch millisecond format: 1486685375000</p> </li> </ul>'
         SortCriteria:
           $ref: '#/components/schemas/SortCriteria'
           description: Represents the criteria used for sorting findings.
@@ -5364,6 +5542,16 @@ components:
           $ref: '#/components/schemas/ThreatNames'
           description: A list of names of the threats in the threat intelligence list that triggered the finding.
       description: An instance of a threat intelligence detail that constitutes evidence for the finding.
+    Total:
+      type: object
+      properties:
+        Amount:
+          $ref: '#/components/schemas/String'
+          description: The total usage.
+        Unit:
+          $ref: '#/components/schemas/String'
+          description: The currency unit that the amount is given in.
+      description: Contains the total usage with the corresponding currency unit for that value.
     UnarchiveFindingsRequest:
       type: object
       required:
@@ -5444,7 +5632,7 @@ components:
           description: The unique ID that specifies the IPSet that you want to update.
         Location:
           $ref: '#/components/schemas/Location'
-          description: The updated URI of the file that contains the IPSet.
+          description: 'The updated URI of the file that contains the IPSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.'
         Activate:
           $ref: '#/components/schemas/Boolean'
           description: The updated Boolean value that specifies whether the IPSet is active or not.
@@ -5488,9 +5676,51 @@ components:
           description: The unique ID that specifies the ThreatIntelSet that you want to update.
         Location:
           $ref: '#/components/schemas/Location'
-          description: The updated URI of the file that contains the ThreateIntelSet.
+          description: 'The updated URI of the file that contains the ThreateIntelSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.'
         Activate:
           $ref: '#/components/schemas/Boolean'
           description: The updated Boolean value that specifies whether the ThreateIntelSet is active or not.
+    UsageAccountResult:
+      type: object
+      properties:
+        AccountId:
+          $ref: '#/components/schemas/AccountId'
+          description: The Account ID that generated usage.
+        Total:
+          $ref: '#/components/schemas/Total'
+          description: Represents the total of usage for the Account ID.
+      description: Contains information on the total of usage based on account IDs.
+    UsageAccountResultList:
+      type: array
+      items:
+        $ref: '#/components/schemas/UsageAccountResult'
+    UsageDataSourceResult:
+      type: object
+      properties:
+        DataSource:
+          $ref: '#/components/schemas/DataSource'
+          description: The data source type that generated usage.
+        Total:
+          $ref: '#/components/schemas/Total'
+          description: Represents the total of usage for the specified data source.
+      description: Contains information on the result of usage based on data source type.
+    UsageDataSourceResultList:
+      type: array
+      items:
+        $ref: '#/components/schemas/UsageDataSourceResult'
+    UsageResourceResult:
+      type: object
+      properties:
+        Resource:
+          $ref: '#/components/schemas/String'
+          description: The AWS resource that generated usage.
+        Total:
+          $ref: '#/components/schemas/Total'
+          description: Represents the sum total of usage for the specified resource type.
+      description: Contains information on the sum of usage based on an AWS resource.
+    UsageResourceResultList:
+      type: array
+      items:
+        $ref: '#/components/schemas/UsageResourceResult'
 security:
   - hmac: []

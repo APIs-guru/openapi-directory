@@ -153,6 +153,45 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=CodeBuild_20161006.BatchGetBuildBatches:
+    post:
+      operationId: BatchGetBuildBatches
+      description: Retrieves information about one or more batch builds.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchGetBuildBatchesOutput'
+        '480':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchGetBuildBatchesInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - CodeBuild_20161006.BatchGetBuildBatches
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=CodeBuild_20161006.BatchGetBuilds:
     post:
       operationId: BatchGetBuilds
@@ -468,6 +507,45 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=CodeBuild_20161006.DeleteBuildBatch:
+    post:
+      operationId: DeleteBuildBatch
+      description: Deletes a batch build.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteBuildBatchOutput'
+        '480':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteBuildBatchInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - CodeBuild_20161006.DeleteBuildBatch
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=CodeBuild_20161006.DeleteProject:
     post:
       operationId: DeleteProject
@@ -720,6 +798,57 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=CodeBuild_20161006.DescribeCodeCoverages:
+    post:
+      operationId: DescribeCodeCoverages
+      description: Retrieves one or more code coverage reports.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeCodeCoveragesOutput'
+        '480':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeCodeCoveragesInput'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - CodeBuild_20161006.DescribeCodeCoverages
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=CodeBuild_20161006.DescribeTestCases:
     post:
       operationId: DescribeTestCases
@@ -910,6 +1039,114 @@ paths:
             type: string
             enum:
               - CodeBuild_20161006.InvalidateProjectCache
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=CodeBuild_20161006.ListBuildBatches:
+    post:
+      operationId: ListBuildBatches
+      description: Retrieves the identifiers of your build batches in the current region.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListBuildBatchesOutput'
+        '480':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListBuildBatchesInput'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - CodeBuild_20161006.ListBuildBatches
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=CodeBuild_20161006.ListBuildBatchesForProject:
+    post:
+      operationId: ListBuildBatchesForProject
+      description: Retrieves the identifiers of the build batches for a specific project.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListBuildBatchesForProjectOutput'
+        '480':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListBuildBatchesForProjectInput'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - CodeBuild_20161006.ListBuildBatchesForProject
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1364,6 +1601,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ListSourceCredentialsOutput'
+        '480':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
       requestBody:
         required: true
         content:
@@ -1431,6 +1674,102 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=CodeBuild_20161006.RetryBuild:
+    post:
+      operationId: RetryBuild
+      description: Restarts a build.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RetryBuildOutput'
+        '480':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: AccountLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountLimitExceededException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RetryBuildInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - CodeBuild_20161006.RetryBuild
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=CodeBuild_20161006.RetryBuildBatch:
+    post:
+      operationId: RetryBuildBatch
+      description: Restarts a batch build.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RetryBuildBatchOutput'
+        '480':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RetryBuildBatchInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - CodeBuild_20161006.RetryBuildBatch
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=CodeBuild_20161006.StartBuild:
     post:
       operationId: StartBuild
@@ -1482,6 +1821,51 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=CodeBuild_20161006.StartBuildBatch:
+    post:
+      operationId: StartBuildBatch
+      description: Starts a batch build for a project.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartBuildBatchOutput'
+        '480':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StartBuildBatchInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - CodeBuild_20161006.StartBuildBatch
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=CodeBuild_20161006.StopBuild:
     post:
       operationId: StopBuild
@@ -1519,6 +1903,51 @@ paths:
             type: string
             enum:
               - CodeBuild_20161006.StopBuild
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=CodeBuild_20161006.StopBuildBatch:
+    post:
+      operationId: StopBuildBatch
+      description: Stops a running batch build.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StopBuildBatchOutput'
+        '480':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StopBuildBatchInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - CodeBuild_20161006.StopBuildBatch
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1739,6 +2168,24 @@ components:
           $ref: '#/components/schemas/BuildIds'
           description: The IDs of the builds to delete.
     InvalidInputException: {}
+    BatchGetBuildBatchesOutput:
+      type: object
+      properties:
+        buildBatches:
+          $ref: '#/components/schemas/BuildBatches'
+          description: An array of <code>BuildBatch</code> objects that represent the retrieved batch builds.
+        buildBatchesNotFound:
+          $ref: '#/components/schemas/BuildBatchIds'
+          description: An array that contains the identifiers of any batch builds that are not found.
+    BatchGetBuildBatchesInput:
+      type: object
+      required:
+        - ids
+      title: BatchGetBuildBatchesInput
+      properties:
+        ids:
+          $ref: '#/components/schemas/BuildBatchIds'
+          description: An array that contains the batch build identifiers to retrieve.
     BatchGetBuildsOutput:
       type: object
       example:
@@ -2003,19 +2450,19 @@ components:
           description: Information about the build input source code for the build project.
         secondarySources:
           $ref: '#/components/schemas/ProjectSources'
-          description: ' An array of <code>ProjectSource</code> objects. '
+          description: 'An array of <code>ProjectSource</code> objects. '
         sourceVersion:
           $ref: '#/components/schemas/String'
-          description: '<p> A version of the build input to be built for this project. If not specified, the latest version is used. If specified, it must be one of: </p> <ul> <li> <p>For AWS CodeCommit: the commit ID, branch, or Git tag to use.</p> </li> <li> <p>For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format <code>pr/pull-request-ID</code> (for example <code>pr/25</code>). If a branch name is specified, the branch''s HEAD commit ID is used. If not specified, the default branch''s HEAD commit ID is used.</p> </li> <li> <p>For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch''s HEAD commit ID is used. If not specified, the default branch''s HEAD commit ID is used.</p> </li> <li> <p>For Amazon Simple Storage Service (Amazon S3): the version ID of the object that represents the build input ZIP file to use.</p> </li> </ul> <p> If <code>sourceVersion</code> is specified at the build level, then that version takes precedence over this <code>sourceVersion</code> (at the project level). </p> <p> For more information, see <a href="https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html">Source Version Sample with CodeBuild</a> in the <i>AWS CodeBuild User Guide</i>. </p>'
+          description: '<p>A version of the build input to be built for this project. If not specified, the latest version is used. If specified, it must be one of: </p> <ul> <li> <p>For AWS CodeCommit: the commit ID, branch, or Git tag to use.</p> </li> <li> <p>For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format <code>pr/pull-request-ID</code> (for example <code>pr/25</code>). If a branch name is specified, the branch''s HEAD commit ID is used. If not specified, the default branch''s HEAD commit ID is used.</p> </li> <li> <p>For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch''s HEAD commit ID is used. If not specified, the default branch''s HEAD commit ID is used.</p> </li> <li> <p>For Amazon Simple Storage Service (Amazon S3): the version ID of the object that represents the build input ZIP file to use.</p> </li> </ul> <p>If <code>sourceVersion</code> is specified at the build level, then that version takes precedence over this <code>sourceVersion</code> (at the project level). </p> <p>For more information, see <a href="https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html">Source Version Sample with CodeBuild</a> in the <i>AWS CodeBuild User Guide</i>. </p>'
         secondarySourceVersions:
           $ref: '#/components/schemas/ProjectSecondarySourceVersions'
-          description: ' An array of <code>ProjectSourceVersion</code> objects. If <code>secondarySourceVersions</code> is specified at the build level, then they take precedence over these <code>secondarySourceVersions</code> (at the project level). '
+          description: 'An array of <code>ProjectSourceVersion</code> objects. If <code>secondarySourceVersions</code> is specified at the build level, then they take precedence over these <code>secondarySourceVersions</code> (at the project level). '
         artifacts:
           $ref: '#/components/schemas/ProjectArtifacts'
           description: Information about the build output artifacts for the build project.
         secondaryArtifacts:
           $ref: '#/components/schemas/ProjectArtifactsList'
-          description: ' An array of <code>ProjectArtifacts</code> objects. '
+          description: 'An array of <code>ProjectArtifacts</code> objects. '
         cache:
           $ref: '#/components/schemas/ProjectCache'
           description: Stores recently used information so that it can be quickly accessed at a later time.
@@ -2030,10 +2477,10 @@ components:
           description: 'How long, in minutes, from 5 to 480 (8 hours), for AWS CodeBuild to wait before it times out any build that has not been marked as completed. The default is 60 minutes.'
         queuedTimeoutInMinutes:
           $ref: '#/components/schemas/TimeOut'
-          description: ' The number of minutes a build is allowed to be queued before it times out. '
+          description: 'The number of minutes a build is allowed to be queued before it times out. '
         encryptionKey:
           $ref: '#/components/schemas/NonEmptyString'
-          description: '<p>The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output artifacts.</p> <note> <p> You can use a cross-account KMS key to encrypt the build output artifacts if your service role has permission to that key. </p> </note> <p>You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK''s alias (using the format <code>alias/<i>alias-name</i> </code>).</p>'
+          description: '<p>The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output artifacts.</p> <note> <p>You can use a cross-account KMS key to encrypt the build output artifacts if your service role has permission to that key. </p> </note> <p>You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK''s alias (using the format <code>alias/<i>alias-name</i> </code>).</p>'
         tags:
           $ref: '#/components/schemas/TagList'
           description: <p>A list of tag key and value pairs associated with this build project.</p> <p>These tags are available for use by AWS services that support AWS CodeBuild build project tags.</p>
@@ -2045,10 +2492,13 @@ components:
           description: Set this to true to generate a publicly accessible URL for your project's build badge.
         logsConfig:
           $ref: '#/components/schemas/LogsConfig'
-          description: ' Information about logs for the build project. These can be logs in Amazon CloudWatch Logs, logs uploaded to a specified S3 bucket, or both. '
+          description: 'Information about logs for the build project. These can be logs in Amazon CloudWatch Logs, logs uploaded to a specified S3 bucket, or both. '
         fileSystemLocations:
           $ref: '#/components/schemas/ProjectFileSystemLocations'
           description: ' An array of <code>ProjectFileSystemLocation</code> objects for a CodeBuild build project. A <code>ProjectFileSystemLocation</code> object specifies the <code>identifier</code>, <code>location</code>, <code>mountOptions</code>, <code>mountPoint</code>, and <code>type</code> of a file system created using Amazon Elastic File System. '
+        buildBatchConfig:
+          $ref: '#/components/schemas/ProjectBuildBatchConfig'
+          description: A <a>ProjectBuildBatchConfig</a> object that defines the batch build options for the project.
     ResourceAlreadyExistsException: {}
     AccountLimitExceededException: {}
     CreateReportGroupOutput:
@@ -2094,12 +2544,36 @@ components:
           description: The name of the AWS CodeBuild project.
         branchFilter:
           $ref: '#/components/schemas/String'
-          description: '<p>A regular expression used to determine which repository branches are built when a webhook is triggered. If the name of a branch matches the regular expression, then it is built. If <code>branchFilter</code> is empty, then all branches are built.</p> <note> <p> It is recommended that you use <code>filterGroups</code> instead of <code>branchFilter</code>. </p> </note>'
+          description: '<p>A regular expression used to determine which repository branches are built when a webhook is triggered. If the name of a branch matches the regular expression, then it is built. If <code>branchFilter</code> is empty, then all branches are built.</p> <note> <p>It is recommended that you use <code>filterGroups</code> instead of <code>branchFilter</code>. </p> </note>'
         filterGroups:
           $ref: '#/components/schemas/FilterGroups'
-          description: '<p> An array of arrays of <code>WebhookFilter</code> objects used to determine which webhooks are triggered. At least one <code>WebhookFilter</code> in the array must specify <code>EVENT</code> as its <code>type</code>. </p> <p> For a build to be triggered, at least one filter group in the <code>filterGroups</code> array must pass. For a filter group to pass, each of its filters must pass. </p>'
+          description: '<p>An array of arrays of <code>WebhookFilter</code> objects used to determine which webhooks are triggered. At least one <code>WebhookFilter</code> in the array must specify <code>EVENT</code> as its <code>type</code>. </p> <p>For a build to be triggered, at least one filter group in the <code>filterGroups</code> array must pass. For a filter group to pass, each of its filters must pass. </p>'
+        buildType:
+          $ref: '#/components/schemas/WebhookBuildType'
+          description: Specifies the type of build this webhook will trigger.
     OAuthProviderException: {}
     ResourceNotFoundException: {}
+    DeleteBuildBatchOutput:
+      type: object
+      properties:
+        statusCode:
+          $ref: '#/components/schemas/String'
+          description: The status code.
+        buildsDeleted:
+          $ref: '#/components/schemas/BuildIds'
+          description: An array of strings that contain the identifiers of the builds that were deleted.
+        buildsNotDeleted:
+          $ref: '#/components/schemas/BuildsNotDeleted'
+          description: An array of <code>BuildNotDeleted</code> objects that specify the builds that could not be deleted.
+    DeleteBuildBatchInput:
+      type: object
+      required:
+        - id
+      title: DeleteBuildBatchInput
+      properties:
+        id:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The identifier of the batch build to delete.
     DeleteProjectOutput:
       type: object
       properties: {}
@@ -2175,6 +2649,42 @@ components:
         projectName:
           $ref: '#/components/schemas/ProjectName'
           description: The name of the AWS CodeBuild project.
+    DescribeCodeCoveragesOutput:
+      type: object
+      properties:
+        nextToken:
+          $ref: '#/components/schemas/String'
+          description: 'If there are more items to return, this contains a token that is passed to a subsequent call to <code>DescribeCodeCoverages</code> to retrieve the next set of items.'
+        codeCoverages:
+          $ref: '#/components/schemas/CodeCoverages'
+          description: An array of <code>CodeCoverage</code> objects that contain the results.
+    DescribeCodeCoveragesInput:
+      type: object
+      required:
+        - reportArn
+      title: DescribeCodeCoveragesInput
+      properties:
+        reportArn:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: ' The ARN of the report for which test cases are returned. '
+        nextToken:
+          $ref: '#/components/schemas/String'
+          description: 'The <code>nextToken</code> value returned from a previous call to <code>DescribeCodeCoverages</code>. This specifies the next item to return. To return the beginning of the list, exclude this parameter.'
+        maxResults:
+          $ref: '#/components/schemas/PageSize'
+          description: The maximum number of results to return.
+        sortOrder:
+          $ref: '#/components/schemas/SortOrderType'
+          description: Specifies if the results are sorted in ascending or descending order.
+        sortBy:
+          $ref: '#/components/schemas/ReportCodeCoverageSortByType'
+          description: '<p>Specifies how the results are sorted. Possible values are:</p> <dl> <dt>FILE_PATH</dt> <dd> <p>The results are sorted by file path.</p> </dd> <dt>LINE_COVERAGE_PERCENTAGE</dt> <dd> <p>The results are sorted by the percentage of lines that are covered.</p> </dd> </dl>'
+        minLineCoveragePercentage:
+          $ref: '#/components/schemas/Percentage'
+          description: The minimum line coverage percentage to report.
+        maxLineCoveragePercentage:
+          $ref: '#/components/schemas/Percentage'
+          description: The maximum line coverage percentage to report.
     DescribeTestCasesOutput:
       type: object
       properties:
@@ -2258,6 +2768,59 @@ components:
         projectName:
           $ref: '#/components/schemas/NonEmptyString'
           description: The name of the AWS CodeBuild build project that the cache is reset for.
+    ListBuildBatchesOutput:
+      type: object
+      properties:
+        ids:
+          $ref: '#/components/schemas/BuildBatchIds'
+          description: An array of strings that contains the batch build identifiers.
+        nextToken:
+          $ref: '#/components/schemas/String'
+          description: 'If there are more items to return, this contains a token that is passed to a subsequent call to <code>ListBuildBatches</code> to retrieve the next set of items.'
+    ListBuildBatchesInput:
+      type: object
+      title: ListBuildBatchesInput
+      properties:
+        filter:
+          $ref: '#/components/schemas/BuildBatchFilter'
+          description: A <code>BuildBatchFilter</code> object that specifies the filters for the search.
+        maxResults:
+          $ref: '#/components/schemas/PageSize'
+          description: The maximum number of results to return.
+        sortOrder:
+          $ref: '#/components/schemas/SortOrderType'
+          description: '<p>Specifies the sort order of the returned items. Valid values include:</p> <ul> <li> <p> <code>ASCENDING</code>: List the batch build identifiers in ascending order by identifier.</p> </li> <li> <p> <code>DESCENDING</code>: List the batch build identifiers in descending order by identifier.</p> </li> </ul>'
+        nextToken:
+          $ref: '#/components/schemas/String'
+          description: 'The <code>nextToken</code> value returned from a previous call to <code>ListBuildBatches</code>. This specifies the next item to return. To return the beginning of the list, exclude this parameter.'
+    ListBuildBatchesForProjectOutput:
+      type: object
+      properties:
+        ids:
+          $ref: '#/components/schemas/BuildBatchIds'
+          description: An array of strings that contains the batch build identifiers.
+        nextToken:
+          $ref: '#/components/schemas/String'
+          description: 'If there are more items to return, this contains a token that is passed to a subsequent call to <code>ListBuildBatchesForProject</code> to retrieve the next set of items.'
+    ListBuildBatchesForProjectInput:
+      type: object
+      title: ListBuildBatchesForProjectInput
+      properties:
+        projectName:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The name of the project.
+        filter:
+          $ref: '#/components/schemas/BuildBatchFilter'
+          description: A <code>BuildBatchFilter</code> object that specifies the filters for the search.
+        maxResults:
+          $ref: '#/components/schemas/PageSize'
+          description: The maximum number of results to return.
+        sortOrder:
+          $ref: '#/components/schemas/SortOrderType'
+          description: '<p>Specifies the sort order of the returned items. Valid values include:</p> <ul> <li> <p> <code>ASCENDING</code>: List the batch build identifiers in ascending order by identifier.</p> </li> <li> <p> <code>DESCENDING</code>: List the batch build identifiers in descending order by identifier.</p> </li> </ul>'
+        nextToken:
+          $ref: '#/components/schemas/String'
+          description: 'The <code>nextToken</code> value returned from a previous call to <code>ListBuildBatchesForProject</code>. This specifies the next item to return. To return the beginning of the list, exclude this parameter.'
     ListBuildsOutput:
       type: object
       properties:
@@ -2492,6 +3055,33 @@ components:
         resourceArn:
           $ref: '#/components/schemas/NonEmptyString'
           description: ' The ARN of the <code>Project</code> or <code>ReportGroup</code> resource you want to associate with a resource policy. '
+    RetryBuildOutput:
+      type: object
+      properties:
+        build:
+          $ref: '#/components/schemas/Build'
+    RetryBuildInput:
+      type: object
+      title: RetryBuildInput
+      properties:
+        id:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: Specifies the identifier of the build to restart.
+    RetryBuildBatchOutput:
+      type: object
+      properties:
+        buildBatch:
+          $ref: '#/components/schemas/BuildBatch'
+    RetryBuildBatchInput:
+      type: object
+      title: RetryBuildBatchInput
+      properties:
+        id:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: Specifies the identifier of the batch build to restart.
+        retryType:
+          $ref: '#/components/schemas/RetryBuildBatchType'
+          description: Specifies the type of retry to perform.
     StartBuildOutput:
       type: object
       properties:
@@ -2515,7 +3105,7 @@ components:
           description: ' An array of <code>ProjectSourceVersion</code> objects that specify one or more versions of the project''s secondary sources to be used for this build only. '
         sourceVersion:
           $ref: '#/components/schemas/String'
-          description: '<p>A version of the build input to be built, for this build only. If not specified, the latest version is used. If specified, must be one of:</p> <ul> <li> <p>For AWS CodeCommit: the commit ID, branch, or Git tag to use.</p> </li> <li> <p>For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format <code>pr/pull-request-ID</code> (for example <code>pr/25</code>). If a branch name is specified, the branch''s HEAD commit ID is used. If not specified, the default branch''s HEAD commit ID is used.</p> </li> <li> <p>For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch''s HEAD commit ID is used. If not specified, the default branch''s HEAD commit ID is used.</p> </li> <li> <p>For Amazon Simple Storage Service (Amazon S3): the version ID of the object that represents the build input ZIP file to use.</p> </li> </ul> <p> If <code>sourceVersion</code> is specified at the project level, then this <code>sourceVersion</code> (at the build level) takes precedence. </p> <p> For more information, see <a href="https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html">Source Version Sample with CodeBuild</a> in the <i>AWS CodeBuild User Guide</i>. </p>'
+          description: '<p>The version of the build input to be built, for this build only. If not specified, the latest version is used. If specified, the contents depends on the source provider:</p> <dl> <dt>AWS CodeCommit</dt> <dd> <p>The commit ID, branch, or Git tag to use.</p> </dd> <dt>GitHub</dt> <dd> <p>The commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format <code>pr/pull-request-ID</code> (for example <code>pr/25</code>). If a branch name is specified, the branch''s HEAD commit ID is used. If not specified, the default branch''s HEAD commit ID is used.</p> </dd> <dt>Bitbucket</dt> <dd> <p>The commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch''s HEAD commit ID is used. If not specified, the default branch''s HEAD commit ID is used.</p> </dd> <dt>Amazon Simple Storage Service (Amazon S3)</dt> <dd> <p>The version ID of the object that represents the build input ZIP file to use.</p> </dd> </dl> <p>If <code>sourceVersion</code> is specified at the project level, then this <code>sourceVersion</code> (at the build level) takes precedence. </p> <p>For more information, see <a href="https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html">Source Version Sample with CodeBuild</a> in the <i>AWS CodeBuild User Guide</i>. </p>'
         artifactsOverride:
           $ref: '#/components/schemas/ProjectArtifacts'
           description: 'Build output artifact settings that override, for this build only, the latest ones already defined in the build project.'
@@ -2590,10 +3180,109 @@ components:
           description: ' The credentials for access to a private registry. '
         imagePullCredentialsTypeOverride:
           $ref: '#/components/schemas/ImagePullCredentialsType'
-          description: '<p> The type of credentials AWS CodeBuild uses to pull images in your build. There are two valid values: </p> <ul> <li> <p> <code>CODEBUILD</code> specifies that AWS CodeBuild uses its own credentials. This requires that you modify your ECR repository policy to trust AWS CodeBuild''s service principal.</p> </li> <li> <p> <code>SERVICE_ROLE</code> specifies that AWS CodeBuild uses your build project''s service role. </p> </li> </ul> <p> When using a cross-account or private registry image, you must use SERVICE_ROLE credentials. When using an AWS CodeBuild curated image, you must use CODEBUILD credentials. </p>'
+          description: '<p>The type of credentials AWS CodeBuild uses to pull images in your build. There are two valid values: </p> <dl> <dt>CODEBUILD</dt> <dd> <p>Specifies that AWS CodeBuild uses its own credentials. This requires that you modify your ECR repository policy to trust AWS CodeBuild''s service principal.</p> </dd> <dt>SERVICE_ROLE</dt> <dd> <p>Specifies that AWS CodeBuild uses your build project''s service role. </p> </dd> </dl> <p>When using a cross-account or private registry image, you must use <code>SERVICE_ROLE</code> credentials. When using an AWS CodeBuild curated image, you must use <code>CODEBUILD</code> credentials. </p>'
         debugSessionEnabled:
           $ref: '#/components/schemas/WrapperBoolean'
           description: 'Specifies if session debugging is enabled for this build. For more information, see <a href="https://docs.aws.amazon.com/codebuild/latest/userguide/session-manager.html">Viewing a running build in Session Manager</a>.'
+    StartBuildBatchOutput:
+      type: object
+      properties:
+        buildBatch:
+          $ref: '#/components/schemas/BuildBatch'
+          description: A <code>BuildBatch</code> object that contains information about the batch build.
+    StartBuildBatchInput:
+      type: object
+      required:
+        - projectName
+      title: StartBuildBatchInput
+      properties:
+        projectName:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The name of the project.
+        secondarySourcesOverride:
+          $ref: '#/components/schemas/ProjectSources'
+          description: An array of <code>ProjectSource</code> objects that override the secondary sources defined in the batch build project.
+        secondarySourcesVersionOverride:
+          $ref: '#/components/schemas/ProjectSecondarySourceVersions'
+          description: An array of <code>ProjectSourceVersion</code> objects that override the secondary source versions in the batch build project.
+        sourceVersion:
+          $ref: '#/components/schemas/String'
+          description: '<p>The version of the batch build input to be built, for this build only. If not specified, the latest version is used. If specified, the contents depends on the source provider:</p> <dl> <dt>AWS CodeCommit</dt> <dd> <p>The commit ID, branch, or Git tag to use.</p> </dd> <dt>GitHub</dt> <dd> <p>The commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format <code>pr/pull-request-ID</code> (for example <code>pr/25</code>). If a branch name is specified, the branch''s HEAD commit ID is used. If not specified, the default branch''s HEAD commit ID is used.</p> </dd> <dt>Bitbucket</dt> <dd> <p>The commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch''s HEAD commit ID is used. If not specified, the default branch''s HEAD commit ID is used.</p> </dd> <dt>Amazon Simple Storage Service (Amazon S3)</dt> <dd> <p>The version ID of the object that represents the build input ZIP file to use.</p> </dd> </dl> <p>If <code>sourceVersion</code> is specified at the project level, then this <code>sourceVersion</code> (at the build level) takes precedence. </p> <p>For more information, see <a href="https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html">Source Version Sample with CodeBuild</a> in the <i>AWS CodeBuild User Guide</i>. </p>'
+        artifactsOverride:
+          $ref: '#/components/schemas/ProjectArtifacts'
+          description: An array of <code>ProjectArtifacts</code> objects that contains information about the build output artifact overrides for the build project.
+        secondaryArtifactsOverride:
+          $ref: '#/components/schemas/ProjectArtifactsList'
+          description: An array of <code>ProjectArtifacts</code> objects that override the secondary artifacts defined in the batch build project.
+        environmentVariablesOverride:
+          $ref: '#/components/schemas/EnvironmentVariables'
+          description: 'An array of <code>EnvironmentVariable</code> objects that override, or add to, the environment variables defined in the batch build project.'
+        sourceTypeOverride:
+          $ref: '#/components/schemas/SourceType'
+          description: The source input type that overrides the source input defined in the batch build project.
+        sourceLocationOverride:
+          $ref: '#/components/schemas/String'
+          description: 'A location that overrides, for this batch build, the source location defined in the batch build project.'
+        sourceAuthOverride:
+          $ref: '#/components/schemas/SourceAuth'
+          description: A <code>SourceAuth</code> object that overrides the one defined in the batch build project. This override applies only if the build project's source is BitBucket or GitHub.
+        gitCloneDepthOverride:
+          $ref: '#/components/schemas/GitCloneDepth'
+          description: 'The user-defined depth of history, with a minimum value of 0, that overrides, for this batch build only, any previous depth of history defined in the batch build project.'
+        gitSubmodulesConfigOverride:
+          $ref: '#/components/schemas/GitSubmodulesConfig'
+          description: A <code>GitSubmodulesConfig</code> object that overrides the Git submodules configuration for this batch build.
+        buildspecOverride:
+          $ref: '#/components/schemas/String'
+          description: '<p>A buildspec file declaration that overrides, for this build only, the latest one already defined in the build project.</p> <p>If this value is set, it can be either an inline buildspec definition, the path to an alternate buildspec file relative to the value of the built-in <code>CODEBUILD_SRC_DIR</code> environment variable, or the path to an S3 bucket. The bucket must be in the same AWS Region as the build project. Specify the buildspec file using its ARN (for example, <code>arn:aws:s3:::my-codebuild-sample2/buildspec.yml</code>). If this value is not provided or is set to an empty string, the source code must contain a buildspec file in its root directory. For more information, see <a href="https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html#build-spec-ref-name-storage">Buildspec File Name and Storage Location</a>. </p>'
+        insecureSslOverride:
+          $ref: '#/components/schemas/WrapperBoolean'
+          description: Enable this flag to override the insecure SSL setting that is specified in the batch build project. The insecure SSL setting determines whether to ignore SSL warnings while connecting to the project source code. This override applies only if the build's source is GitHub Enterprise.
+        reportBuildBatchStatusOverride:
+          $ref: '#/components/schemas/WrapperBoolean'
+          description: '<p>Set to <code>true</code> to report to your source provider the status of a batch build''s start and completion. If you use this option with a source provider other than GitHub, GitHub Enterprise, or Bitbucket, an <code>invalidInputException</code> is thrown. </p> <note> <p>The status of a build triggered by a webhook is always reported to your source provider. </p> </note>'
+        environmentTypeOverride:
+          $ref: '#/components/schemas/EnvironmentType'
+          description: A container type for this batch build that overrides the one specified in the batch build project.
+        imageOverride:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The name of an image for this batch build that overrides the one specified in the batch build project.
+        computeTypeOverride:
+          $ref: '#/components/schemas/ComputeType'
+          description: The name of a compute type for this batch build that overrides the one specified in the batch build project.
+        certificateOverride:
+          $ref: '#/components/schemas/String'
+          description: The name of a certificate for this batch build that overrides the one specified in the batch build project.
+        cacheOverride:
+          $ref: '#/components/schemas/ProjectCache'
+          description: A <code>ProjectCache</code> object that specifies cache overrides.
+        serviceRoleOverride:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The name of a service role for this batch build that overrides the one specified in the batch build project.
+        privilegedModeOverride:
+          $ref: '#/components/schemas/WrapperBoolean'
+          description: Enable this flag to override privileged mode in the batch build project.
+        buildTimeoutInMinutesOverride:
+          $ref: '#/components/schemas/TimeOut'
+          description: Overrides the build timeout specified in the batch build project.
+        queuedTimeoutInMinutesOverride:
+          $ref: '#/components/schemas/TimeOut'
+          description: The number of minutes a batch build is allowed to be queued before it times out.
+        encryptionKeyOverride:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: '<p>The AWS Key Management Service (AWS KMS) customer master key (CMK) that overrides the one specified in the batch build project. The CMK key encrypts the build output artifacts.</p> <note> <p>You can use a cross-account KMS key to encrypt the build output artifacts if your service role has permission to that key. </p> </note> <p>You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK''s alias (using the format <code>alias/<i>alias-name</i> </code>).</p>'
+        logsConfigOverride:
+          $ref: '#/components/schemas/LogsConfig'
+          description: A <code>LogsConfig</code> object that override the log settings defined in the batch build project.
+        registryCredentialOverride:
+          $ref: '#/components/schemas/RegistryCredential'
+          description: A <code>RegistryCredential</code> object that overrides credentials for access to a private registry.
+        imagePullCredentialsTypeOverride:
+          $ref: '#/components/schemas/ImagePullCredentialsType'
+          description: '<p>The type of credentials AWS CodeBuild uses to pull images in your batch build. There are two valid values: </p> <dl> <dt>CODEBUILD</dt> <dd> <p>Specifies that AWS CodeBuild uses its own credentials. This requires that you modify your ECR repository policy to trust AWS CodeBuild''s service principal.</p> </dd> <dt>SERVICE_ROLE</dt> <dd> <p>Specifies that AWS CodeBuild uses your build project''s service role. </p> </dd> </dl> <p>When using a cross-account or private registry image, you must use <code>SERVICE_ROLE</code> credentials. When using an AWS CodeBuild curated image, you must use <code>CODEBUILD</code> credentials. </p>'
+        buildBatchConfigOverride:
+          $ref: '#/components/schemas/ProjectBuildBatchConfig'
+          description: A <code>BuildBatchConfigOverride</code> object that contains batch build configuration overrides.
     StopBuildOutput:
       type: object
       properties:
@@ -2609,6 +3298,20 @@ components:
         id:
           $ref: '#/components/schemas/NonEmptyString'
           description: The ID of the build.
+    StopBuildBatchOutput:
+      type: object
+      properties:
+        buildBatch:
+          $ref: '#/components/schemas/BuildBatch'
+    StopBuildBatchInput:
+      type: object
+      required:
+        - id
+      title: StopBuildBatchInput
+      properties:
+        id:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The identifier of the batch build to stop.
     UpdateProjectOutput:
       type: object
       properties:
@@ -2678,6 +3381,8 @@ components:
         fileSystemLocations:
           $ref: '#/components/schemas/ProjectFileSystemLocations'
           description: ' An array of <code>ProjectFileSystemLocation</code> objects for a CodeBuild build project. A <code>ProjectFileSystemLocation</code> object specifies the <code>identifier</code>, <code>location</code>, <code>mountOptions</code>, <code>mountPoint</code>, and <code>type</code> of a file system created using Amazon Elastic File System. '
+        buildBatchConfig:
+          $ref: '#/components/schemas/ProjectBuildBatchConfig'
     UpdateReportGroupOutput:
       type: object
       properties:
@@ -2723,6 +3428,9 @@ components:
         filterGroups:
           $ref: '#/components/schemas/FilterGroups'
           description: ' An array of arrays of <code>WebhookFilter</code> objects used to determine if a webhook event can trigger a build. A filter group must contain at least one <code>EVENT</code> <code>WebhookFilter</code>. '
+        buildType:
+          $ref: '#/components/schemas/WebhookBuildType'
+          description: Specifies the type of build this webhook will trigger.
     ArtifactNamespace:
       type: string
       enum:
@@ -2755,6 +3463,18 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/BuildNotDeleted'
+    BuildBatchIds:
+      type: array
+      items:
+        $ref: '#/components/schemas/NonEmptyString'
+      minItems: 0
+      maxItems: 100
+    BuildBatches:
+      type: array
+      items:
+        $ref: '#/components/schemas/BuildBatch'
+      minItems: 0
+      maxItems: 100
     Builds:
       type: array
       items:
@@ -2793,6 +3513,22 @@ components:
         $ref: '#/components/schemas/Report'
       minItems: 1
       maxItems: 100
+    WrapperInt:
+      type: integer
+    ComputeTypesAllowed:
+      type: array
+      items:
+        $ref: '#/components/schemas/NonEmptyString'
+    BatchRestrictions:
+      type: object
+      properties:
+        maximumBuildsAllowed:
+          $ref: '#/components/schemas/WrapperInt'
+          description: Specifies the maximum number of builds allowed.
+        computeTypesAllowed:
+          $ref: '#/components/schemas/ComputeTypesAllowed'
+          description: 'An array of strings that specify the compute types that are allowed for the batch build. See <a href="https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html">Build environment compute types</a> in the <i>AWS CodeBuild User Guide</i> for these values. '
+      description: Specifies restrictions for the batch build.
     Boolean:
       type: boolean
     NonEmptyString:
@@ -2969,8 +3705,6 @@ components:
           $ref: '#/components/schemas/S3LogsConfig'
           description: ' Information about S3 logs for a build project. '
       description: Information about build logs in Amazon CloudWatch Logs.
-    WrapperInt:
-      type: integer
     VpcConfig:
       type: object
       properties:
@@ -3112,9 +3846,220 @@ components:
         debugSession:
           $ref: '#/components/schemas/DebugSession'
           description: Contains information about the debug session for this build.
+        buildBatchArn:
+          $ref: '#/components/schemas/String'
+          description: 'The ARN of the batch build that this build is a member of, if applicable.'
       description: Information about a build.
     WrapperBoolean:
       type: boolean
+    BuildBatchPhases:
+      type: array
+      items:
+        $ref: '#/components/schemas/BuildBatchPhase'
+    LogsConfig:
+      type: object
+      properties:
+        cloudWatchLogs:
+          $ref: '#/components/schemas/CloudWatchLogsConfig'
+          description: ' Information about Amazon CloudWatch Logs for a build project. Amazon CloudWatch Logs are enabled by default. '
+        s3Logs:
+          $ref: '#/components/schemas/S3LogsConfig'
+          description: ' Information about logs built to an S3 bucket for a build project. S3 logs are not enabled by default. '
+      description: ' Information about logs for a build project. These can be logs in Amazon CloudWatch Logs, built in a specified S3 bucket, or both. '
+    ProjectBuildBatchConfig:
+      type: object
+      properties:
+        serviceRole:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: Specifies the service role ARN for the batch build project.
+        combineArtifacts:
+          $ref: '#/components/schemas/WrapperBoolean'
+          description: Specifies if the build artifacts for the batch build should be combined into a single artifact location.
+        restrictions:
+          $ref: '#/components/schemas/BatchRestrictions'
+          description: A <code>BatchRestrictions</code> object that specifies the restrictions for the batch build.
+        timeoutInMins:
+          $ref: '#/components/schemas/WrapperInt'
+          description: 'Specifies the maximum amount of time, in minutes, that the batch build must be completed in.'
+      description: Contains configuration information about a batch build project.
+    BuildGroups:
+      type: array
+      items:
+        $ref: '#/components/schemas/BuildGroup'
+    BuildBatch:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The identifier of the batch build.
+        arn:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The ARN of the batch build.
+        startTime:
+          $ref: '#/components/schemas/Timestamp'
+          description: The date and time that the batch build started.
+        endTime:
+          $ref: '#/components/schemas/Timestamp'
+          description: The date and time that the batch build ended.
+        currentPhase:
+          $ref: '#/components/schemas/String'
+          description: The current phase of the batch build.
+        buildBatchStatus:
+          $ref: '#/components/schemas/StatusType'
+          description: The status of the batch build.
+        sourceVersion:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The identifier of the version of the source code to be built.
+        resolvedSourceVersion:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: '<p>The identifier of the resolved version of this batch build''s source code.</p> <ul> <li> <p>For AWS CodeCommit, GitHub, GitHub Enterprise, and BitBucket, the commit ID.</p> </li> <li> <p>For AWS CodePipeline, the source revision provided by AWS CodePipeline.</p> </li> <li> <p>For Amazon Simple Storage Service (Amazon S3), this does not apply.</p> </li> </ul>'
+        projectName:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The name of the batch build project.
+        phases:
+          $ref: '#/components/schemas/BuildBatchPhases'
+          description: An array of <code>BuildBatchPhase</code> objects the specify the phases of the batch build.
+        source:
+          $ref: '#/components/schemas/ProjectSource'
+        secondarySources:
+          $ref: '#/components/schemas/ProjectSources'
+          description: An array of <code>ProjectSource</code> objects that define the sources for the batch build.
+        secondarySourceVersions:
+          $ref: '#/components/schemas/ProjectSecondarySourceVersions'
+          description: '<p>An array of <code>ProjectSourceVersion</code> objects. Each <code>ProjectSourceVersion</code> must be one of: </p> <ul> <li> <p>For AWS CodeCommit: the commit ID, branch, or Git tag to use.</p> </li> <li> <p>For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format <code>pr/pull-request-ID</code> (for example, <code>pr/25</code>). If a branch name is specified, the branch''s HEAD commit ID is used. If not specified, the default branch''s HEAD commit ID is used.</p> </li> <li> <p>For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch''s HEAD commit ID is used. If not specified, the default branch''s HEAD commit ID is used.</p> </li> <li> <p>For Amazon Simple Storage Service (Amazon S3): the version ID of the object that represents the build input ZIP file to use.</p> </li> </ul>'
+        artifacts:
+          $ref: '#/components/schemas/BuildArtifacts'
+          description: A <code>BuildArtifacts</code> object the defines the build artifacts for this batch build.
+        secondaryArtifacts:
+          $ref: '#/components/schemas/BuildArtifactsList'
+          description: An array of <code>BuildArtifacts</code> objects the define the build artifacts for this batch build.
+        cache:
+          $ref: '#/components/schemas/ProjectCache'
+        environment:
+          $ref: '#/components/schemas/ProjectEnvironment'
+        serviceRole:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The name of a service role used for builds in the batch.
+        logConfig:
+          $ref: '#/components/schemas/LogsConfig'
+        buildTimeoutInMinutes:
+          $ref: '#/components/schemas/WrapperInt'
+          description: 'Specifies the maximum amount of time, in minutes, that the build in a batch must be completed in.'
+        queuedTimeoutInMinutes:
+          $ref: '#/components/schemas/WrapperInt'
+          description: 'Specifies the amount of time, in minutes, that the batch build is allowed to be queued before it times out.'
+        complete:
+          $ref: '#/components/schemas/Boolean'
+          description: Indicates if the batch build is complete.
+        initiator:
+          $ref: '#/components/schemas/String'
+          description: '<p>The entity that started the batch build. Valid values include:</p> <ul> <li> <p>If AWS CodePipeline started the build, the pipeline''s name (for example, <code>codepipeline/my-demo-pipeline</code>).</p> </li> <li> <p>If an AWS Identity and Access Management (IAM) user started the build, the user''s name.</p> </li> <li> <p>If the Jenkins plugin for AWS CodeBuild started the build, the string <code>CodeBuild-Jenkins-Plugin</code>.</p> </li> </ul>'
+        vpcConfig:
+          $ref: '#/components/schemas/VpcConfig'
+        encryptionKey:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: '<p>The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the batch build output artifacts.</p> <note> <p>You can use a cross-account KMS key to encrypt the build output artifacts if your service role has permission to that key. </p> </note> <p>You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK''s alias (using the format <code>alias/<i>alias-name</i> </code>).</p>'
+        buildBatchNumber:
+          $ref: '#/components/schemas/WrapperLong'
+          description: 'The number of the batch build. For each project, the <code>buildBatchNumber</code> of its first batch build is <code>1</code>. The <code>buildBatchNumber</code> of each subsequent batch build is incremented by <code>1</code>. If a batch build is deleted, the <code>buildBatchNumber</code> of other batch builds does not change.'
+        fileSystemLocations:
+          $ref: '#/components/schemas/ProjectFileSystemLocations'
+          description: 'An array of <code>ProjectFileSystemLocation</code> objects for the batch build project. A <code>ProjectFileSystemLocation</code> object specifies the <code>identifier</code>, <code>location</code>, <code>mountOptions</code>, <code>mountPoint</code>, and <code>type</code> of a file system created using Amazon Elastic File System. '
+        buildBatchConfig:
+          $ref: '#/components/schemas/ProjectBuildBatchConfig'
+        buildGroups:
+          $ref: '#/components/schemas/BuildGroups'
+          description: An array of <code>BuildGroup</code> objects that define the build groups for the batch build.
+      description: Contains information about a batch build.
+    BuildBatchFilter:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/StatusType'
+          description: The status of the batch builds to retrieve. Only batch builds that have this status will be retrieved.
+      description: Specifies filters when retrieving batch builds.
+    BuildBatchPhaseType:
+      type: string
+      enum:
+        - SUBMITTED
+        - DOWNLOAD_BATCHSPEC
+        - IN_PROGRESS
+        - COMBINE_ARTIFACTS
+        - SUCCEEDED
+        - FAILED
+        - STOPPED
+    PhaseContexts:
+      type: array
+      items:
+        $ref: '#/components/schemas/PhaseContext'
+    BuildBatchPhase:
+      type: object
+      properties:
+        phaseType:
+          $ref: '#/components/schemas/BuildBatchPhaseType'
+          description: '<p>The name of the batch build phase. Valid values include:</p> <dl> <dt>COMBINE_ARTIFACTS</dt> <dd> <p>Build output artifacts are being combined and uploaded to the output location.</p> </dd> <dt>DOWNLOAD_BATCHSPEC</dt> <dd> <p>The batch build specification is being downloaded.</p> </dd> <dt>FAILED</dt> <dd> <p>One or more of the builds failed.</p> </dd> <dt>IN_PROGRESS</dt> <dd> <p>The batch build is in progress.</p> </dd> <dt>STOPPED</dt> <dd> <p>The batch build was stopped.</p> </dd> <dt>SUBMITTED</dt> <dd> <p>The btach build has been submitted.</p> </dd> <dt>SUCCEEDED</dt> <dd> <p>The batch build succeeded.</p> </dd> </dl>'
+        phaseStatus:
+          $ref: '#/components/schemas/StatusType'
+          description: '<p>The current status of the batch build phase. Valid values include:</p> <dl> <dt>FAILED</dt> <dd> <p>The build phase failed.</p> </dd> <dt>FAULT</dt> <dd> <p>The build phase faulted.</p> </dd> <dt>IN_PROGRESS</dt> <dd> <p>The build phase is still in progress.</p> </dd> <dt>QUEUED</dt> <dd> <p>The build has been submitted and is queued behind other submitted builds.</p> </dd> <dt>STOPPED</dt> <dd> <p>The build phase stopped.</p> </dd> <dt>SUCCEEDED</dt> <dd> <p>The build phase succeeded.</p> </dd> <dt>TIMED_OUT</dt> <dd> <p>The build phase timed out.</p> </dd> </dl>'
+        startTime:
+          $ref: '#/components/schemas/Timestamp'
+          description: 'When the batch build phase started, expressed in Unix time format.'
+        endTime:
+          $ref: '#/components/schemas/Timestamp'
+          description: 'When the batch build phase ended, expressed in Unix time format.'
+        durationInSeconds:
+          $ref: '#/components/schemas/WrapperLong'
+          description: 'How long, in seconds, between the starting and ending times of the batch build''s phase.'
+        contexts:
+          $ref: '#/components/schemas/PhaseContexts'
+          description: Additional information about the batch build phase. Especially to help troubleshoot a failed btach build.
+      description: Contains information about a stage for a batch build.
+    Identifiers:
+      type: array
+      items:
+        $ref: '#/components/schemas/NonEmptyString'
+    BuildSummary:
+      type: object
+      properties:
+        arn:
+          $ref: '#/components/schemas/String'
+          description: The batch build ARN.
+        requestedOn:
+          $ref: '#/components/schemas/Timestamp'
+          description: 'When the build was started, expressed in Unix time format.'
+        buildStatus:
+          $ref: '#/components/schemas/StatusType'
+          description: <p>The status of the build group.</p> <dl> <dt>FAILED</dt> <dd> <p>The build group failed.</p> </dd> <dt>FAULT</dt> <dd> <p>The build group faulted.</p> </dd> <dt>IN_PROGRESS</dt> <dd> <p>The build group is still in progress.</p> </dd> <dt>STOPPED</dt> <dd> <p>The build group stopped.</p> </dd> <dt>SUCCEEDED</dt> <dd> <p>The build group succeeded.</p> </dd> <dt>TIMED_OUT</dt> <dd> <p>The build group timed out.</p> </dd> </dl>
+        primaryArtifact:
+          $ref: '#/components/schemas/ResolvedArtifact'
+          description: A <code>ResolvedArtifact</code> object that represents the primary build artifacts for the build group.
+        secondaryArtifacts:
+          $ref: '#/components/schemas/ResolvedSecondaryArtifacts'
+          description: An array of <code>ResolvedArtifact</code> objects that represents the secondary build artifacts for the build group.
+      description: Contains summary information about a batch build group.
+    BuildSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/BuildSummary'
+    BuildGroup:
+      type: object
+      properties:
+        identifier:
+          $ref: '#/components/schemas/String'
+          description: Contains the identifier of the build group.
+        dependsOn:
+          $ref: '#/components/schemas/Identifiers'
+          description: An array of strings that contain the identifiers of the build groups that this build group depends on.
+        ignoreFailure:
+          $ref: '#/components/schemas/Boolean'
+          description: Specifies if failures in this build group can be ignored.
+        currentBuildSummary:
+          $ref: '#/components/schemas/BuildSummary'
+          description: A <code>BuildSummary</code> object that contains a summary of the current build group.
+        priorBuildSummaryList:
+          $ref: '#/components/schemas/BuildSummaries'
+          description: An array of <code>BuildSummary</code> objects that contain summaries of previous build groups.
+      description: 'Contains information about a batch build build group. Build groups are used to combine builds that can run in parallel, while still being able to set dependencies on other build groups.'
     BuildNotDeleted:
       type: object
       properties:
@@ -3139,10 +4084,6 @@ components:
         - UPLOAD_ARTIFACTS
         - FINALIZING
         - COMPLETED
-    PhaseContexts:
-      type: array
-      items:
-        $ref: '#/components/schemas/PhaseContext'
     BuildPhase:
       type: object
       properties:
@@ -3151,7 +4092,7 @@ components:
           description: '<p>The name of the build phase. Valid values include:</p> <ul> <li> <p> <code>BUILD</code>: Core build activities typically occur in this build phase.</p> </li> <li> <p> <code>COMPLETED</code>: The build has been completed.</p> </li> <li> <p> <code>DOWNLOAD_SOURCE</code>: Source code is being downloaded in this build phase.</p> </li> <li> <p> <code>FINALIZING</code>: The build process is completing in this build phase.</p> </li> <li> <p> <code>INSTALL</code>: Installation activities typically occur in this build phase.</p> </li> <li> <p> <code>POST_BUILD</code>: Post-build activities typically occur in this build phase.</p> </li> <li> <p> <code>PRE_BUILD</code>: Pre-build activities typically occur in this build phase.</p> </li> <li> <p> <code>PROVISIONING</code>: The build environment is being set up.</p> </li> <li> <p> <code>QUEUED</code>: The build has been submitted and is queued behind other submitted builds.</p> </li> <li> <p> <code>SUBMITTED</code>: The build has been submitted.</p> </li> <li> <p> <code>UPLOAD_ARTIFACTS</code>: Build output artifacts are being uploaded to the output location.</p> </li> </ul>'
         phaseStatus:
           $ref: '#/components/schemas/StatusType'
-          description: '<p>The current status of the build phase. Valid values include:</p> <ul> <li> <p> <code>FAILED</code>: The build phase failed.</p> </li> <li> <p> <code>FAULT</code>: The build phase faulted.</p> </li> <li> <p> <code>IN_PROGRESS</code>: The build phase is still in progress.</p> </li> <li> <p> <code>QUEUED</code>: The build has been submitted and is queued behind other submitted builds.</p> </li> <li> <p> <code>STOPPED</code>: The build phase stopped.</p> </li> <li> <p> <code>SUCCEEDED</code>: The build phase succeeded.</p> </li> <li> <p> <code>TIMED_OUT</code>: The build phase timed out.</p> </li> </ul>'
+          description: '<p>The current status of the build phase. Valid values include:</p> <dl> <dt>FAILED</dt> <dd> <p>The build phase failed.</p> </dd> <dt>FAULT</dt> <dd> <p>The build phase faulted.</p> </dd> <dt>IN_PROGRESS</dt> <dd> <p>The build phase is still in progress.</p> </dd> <dt>QUEUED</dt> <dd> <p>The build has been submitted and is queued behind other submitted builds.</p> </dd> <dt>STOPPED</dt> <dd> <p>The build phase stopped.</p> </dd> <dt>SUCCEEDED</dt> <dd> <p>The build phase succeeded.</p> </dd> <dt>TIMED_OUT</dt> <dd> <p>The build phase timed out.</p> </dd> </dl>'
         startTime:
           $ref: '#/components/schemas/Timestamp'
           description: 'When the build phase started, expressed in Unix time format.'
@@ -3175,6 +4116,23 @@ components:
           $ref: '#/components/schemas/String'
           description: '<p>Specifies the target url of the build status CodeBuild sends to the source provider. The usage of this parameter depends on the source provider.</p> <dl> <dt>Bitbucket</dt> <dd> <p>This parameter is used for the <code>url</code> parameter in the Bitbucket commit status. For more information, see <a href="https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Bworkspace%7D/%7Brepo_slug%7D/commit/%7Bnode%7D/statuses/build">build</a> in the Bitbucket API documentation.</p> </dd> <dt>GitHub/GitHub Enterprise Server</dt> <dd> <p>This parameter is used for the <code>target_url</code> parameter in the GitHub commit status. For more information, see <a href="https://developer.github.com/v3/repos/statuses/#create-a-commit-status">Create a commit status</a> in the GitHub developer guide.</p> </dd> </dl>'
       description: 'Contains information that defines how the AWS CodeBuild build project reports the build status to the source provider. '
+    ResolvedArtifact:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ArtifactsType'
+          description: Specifies the type of artifact.
+        location:
+          $ref: '#/components/schemas/String'
+          description: The location of the artifact.
+        identifier:
+          $ref: '#/components/schemas/String'
+          description: The identifier of the artifact.
+      description: 'Represents a resolved build artifact. A resolve artifact is an artifact that is built and deployed to the destination, such as Amazon Simple Storage Service (Amazon S3).'
+    ResolvedSecondaryArtifacts:
+      type: array
+      items:
+        $ref: '#/components/schemas/ResolvedArtifact'
     CacheMode:
       type: string
       enum:
@@ -3207,6 +4165,74 @@ components:
           $ref: '#/components/schemas/String'
           description: ' The prefix of the stream name of the Amazon CloudWatch Logs. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html">Working with Log Groups and Log Streams</a>. '
       description: ' Information about Amazon CloudWatch Logs for a build project. '
+    Percentage:
+      type: number
+      format: double
+      minimum: 0
+      maximum: 100
+    NonNegativeInt:
+      type: integer
+      minimum: 0
+    CodeCoverage:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The identifier of the code coverage report.
+        reportARN:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The ARN of the report.
+        filePath:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The path of the test report file.
+        lineCoveragePercentage:
+          $ref: '#/components/schemas/Percentage'
+          description: The percentage of lines that are covered by your tests.
+        linesCovered:
+          $ref: '#/components/schemas/NonNegativeInt'
+          description: The number of lines that are covered by your tests.
+        linesMissed:
+          $ref: '#/components/schemas/NonNegativeInt'
+          description: The number of lines that are not covered by your tests.
+        branchCoveragePercentage:
+          $ref: '#/components/schemas/Percentage'
+          description: The percentage of branches that are covered by your tests.
+        branchesCovered:
+          $ref: '#/components/schemas/NonNegativeInt'
+          description: The number of conditional branches that are covered by your tests.
+        branchesMissed:
+          $ref: '#/components/schemas/NonNegativeInt'
+          description: The number of conditional branches that are not covered by your tests.
+        expired:
+          $ref: '#/components/schemas/Timestamp'
+          description: The date and time that the tests were run.
+      description: '<p>Contains code coverage report information.</p> <p>Line coverage measures how many statements your tests cover. A statement is a single instruction, not including comments, conditionals, etc.</p> <p>Branch coverage determines if your tests cover every possible branch of a control structure, such as an <code>if</code> or <code>case</code> statement.</p>'
+    CodeCoverageReportSummary:
+      type: object
+      properties:
+        lineCoveragePercentage:
+          $ref: '#/components/schemas/Percentage'
+          description: The percentage of lines that are covered by your tests.
+        linesCovered:
+          $ref: '#/components/schemas/NonNegativeInt'
+          description: The number of lines that are covered by your tests.
+        linesMissed:
+          $ref: '#/components/schemas/NonNegativeInt'
+          description: The number of lines that are not covered by your tests.
+        branchCoveragePercentage:
+          $ref: '#/components/schemas/Percentage'
+          description: The percentage of branches that are covered by your tests.
+        branchesCovered:
+          $ref: '#/components/schemas/NonNegativeInt'
+          description: The number of conditional branches that are covered by your tests.
+        branchesMissed:
+          $ref: '#/components/schemas/NonNegativeInt'
+          description: The number of conditional branches that are not covered by your tests.
+      description: '<p>Contains a summary of a code coverage report.</p> <p>Line coverage measures how many statements your tests cover. A statement is a single instruction, not including comments, conditionals, etc.</p> <p>Branch coverage determines if your tests cover every possible branch of a control structure, such as an <code>if</code> or <code>case</code> statement.</p>'
+    CodeCoverages:
+      type: array
+      items:
+        $ref: '#/components/schemas/CodeCoverage'
     ComputeType:
       type: string
       enum:
@@ -3272,16 +4298,6 @@ components:
         $ref: '#/components/schemas/Tag'
       minItems: 0
       maxItems: 50
-    LogsConfig:
-      type: object
-      properties:
-        cloudWatchLogs:
-          $ref: '#/components/schemas/CloudWatchLogsConfig'
-          description: ' Information about Amazon CloudWatch Logs for a build project. Amazon CloudWatch Logs are enabled by default. '
-        s3Logs:
-          $ref: '#/components/schemas/S3LogsConfig'
-          description: ' Information about logs built to an S3 bucket for a build project. S3 logs are not enabled by default. '
-      description: ' Information about logs for a build project. These can be logs in Amazon CloudWatch Logs, built in a specified S3 bucket, or both. '
     Project:
       type: object
       properties:
@@ -3299,19 +4315,19 @@ components:
           description: Information about the build input source code for this build project.
         secondarySources:
           $ref: '#/components/schemas/ProjectSources'
-          description: ' An array of <code>ProjectSource</code> objects. '
+          description: 'An array of <code>ProjectSource</code> objects. '
         sourceVersion:
           $ref: '#/components/schemas/String'
-          description: '<p>A version of the build input to be built for this project. If not specified, the latest version is used. If specified, it must be one of:</p> <ul> <li> <p>For AWS CodeCommit: the commit ID, branch, or Git tag to use.</p> </li> <li> <p>For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format <code>pr/pull-request-ID</code> (for example <code>pr/25</code>). If a branch name is specified, the branch''s HEAD commit ID is used. If not specified, the default branch''s HEAD commit ID is used.</p> </li> <li> <p>For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch''s HEAD commit ID is used. If not specified, the default branch''s HEAD commit ID is used.</p> </li> <li> <p>For Amazon Simple Storage Service (Amazon S3): the version ID of the object that represents the build input ZIP file to use.</p> </li> </ul> <p> If <code>sourceVersion</code> is specified at the build level, then that version takes precedence over this <code>sourceVersion</code> (at the project level). </p> <p> For more information, see <a href="https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html">Source Version Sample with CodeBuild</a> in the <i>AWS CodeBuild User Guide</i>. </p>'
+          description: '<p>A version of the build input to be built for this project. If not specified, the latest version is used. If specified, it must be one of:</p> <ul> <li> <p>For AWS CodeCommit: the commit ID, branch, or Git tag to use.</p> </li> <li> <p>For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format <code>pr/pull-request-ID</code> (for example <code>pr/25</code>). If a branch name is specified, the branch''s HEAD commit ID is used. If not specified, the default branch''s HEAD commit ID is used.</p> </li> <li> <p>For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch''s HEAD commit ID is used. If not specified, the default branch''s HEAD commit ID is used.</p> </li> <li> <p>For Amazon Simple Storage Service (Amazon S3): the version ID of the object that represents the build input ZIP file to use.</p> </li> </ul> <p>If <code>sourceVersion</code> is specified at the build level, then that version takes precedence over this <code>sourceVersion</code> (at the project level). </p> <p>For more information, see <a href="https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html">Source Version Sample with CodeBuild</a> in the <i>AWS CodeBuild User Guide</i>. </p>'
         secondarySourceVersions:
           $ref: '#/components/schemas/ProjectSecondarySourceVersions'
-          description: ' An array of <code>ProjectSourceVersion</code> objects. If <code>secondarySourceVersions</code> is specified at the build level, then they take over these <code>secondarySourceVersions</code> (at the project level). '
+          description: 'An array of <code>ProjectSourceVersion</code> objects. If <code>secondarySourceVersions</code> is specified at the build level, then they take over these <code>secondarySourceVersions</code> (at the project level). '
         artifacts:
           $ref: '#/components/schemas/ProjectArtifacts'
           description: Information about the build output artifacts for the build project.
         secondaryArtifacts:
           $ref: '#/components/schemas/ProjectArtifactsList'
-          description: ' An array of <code>ProjectArtifacts</code> objects. '
+          description: 'An array of <code>ProjectArtifacts</code> objects. '
         cache:
           $ref: '#/components/schemas/ProjectCache'
           description: Information about the cache for the build project.
@@ -3326,10 +4342,10 @@ components:
           description: 'How long, in minutes, from 5 to 480 (8 hours), for AWS CodeBuild to wait before timing out any related build that did not get marked as completed. The default is 60 minutes.'
         queuedTimeoutInMinutes:
           $ref: '#/components/schemas/TimeOut'
-          description: ' The number of minutes a build is allowed to be queued before it times out. '
+          description: 'The number of minutes a build is allowed to be queued before it times out. '
         encryptionKey:
           $ref: '#/components/schemas/NonEmptyString'
-          description: '<p>The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output artifacts.</p> <note> <p> You can use a cross-account KMS key to encrypt the build output artifacts if your service role has permission to that key. </p> </note> <p>You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK''s alias (using the format <code>alias/<i>alias-name</i> </code>).</p>'
+          description: '<p>The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output artifacts.</p> <note> <p>You can use a cross-account KMS key to encrypt the build output artifacts if your service role has permission to that key. </p> </note> <p>You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK''s alias (using the format <code>alias/<i>alias-name</i> </code>).</p>'
         tags:
           $ref: '#/components/schemas/TagList'
           description: <p>A list of tag key and value pairs associated with this build project.</p> <p>These tags are available for use by AWS services that support AWS CodeBuild build project tags.</p>
@@ -3350,10 +4366,13 @@ components:
           description: Information about the build badge for the build project.
         logsConfig:
           $ref: '#/components/schemas/LogsConfig'
-          description: ' Information about logs for the build project. A project can create logs in Amazon CloudWatch Logs, an S3 bucket, or both. '
+          description: 'Information about logs for the build project. A project can create logs in Amazon CloudWatch Logs, an S3 bucket, or both. '
         fileSystemLocations:
           $ref: '#/components/schemas/ProjectFileSystemLocations'
           description: ' An array of <code>ProjectFileSystemLocation</code> objects for a CodeBuild build project. A <code>ProjectFileSystemLocation</code> object specifies the <code>identifier</code>, <code>location</code>, <code>mountOptions</code>, <code>mountPoint</code>, and <code>type</code> of a file system created using Amazon Elastic File System. '
+        buildBatchConfig:
+          $ref: '#/components/schemas/ProjectBuildBatchConfig'
+          description: A <a>ProjectBuildBatchConfig</a> object that defines the batch build options for the project.
       description: Information about a build project.
     ReportGroupName:
       type: string
@@ -3363,6 +4382,7 @@ components:
       type: string
       enum:
         - TEST
+        - CODE_COVERAGE
     ReportExportConfig:
       type: object
       properties:
@@ -3402,6 +4422,11 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/FilterGroup'
+    WebhookBuildType:
+      type: string
+      enum:
+        - BUILD
+        - BUILD_BATCH
     Webhook:
       type: object
       properties:
@@ -3410,19 +4435,22 @@ components:
           description: The URL to the webhook.
         payloadUrl:
           $ref: '#/components/schemas/NonEmptyString'
-          description: ' The AWS CodeBuild endpoint where webhook events are sent.'
+          description: The AWS CodeBuild endpoint where webhook events are sent.
         secret:
           $ref: '#/components/schemas/NonEmptyString'
-          description: <p> The secret token of the associated repository. </p> <note> <p> A Bitbucket webhook does not support <code>secret</code>. </p> </note>
+          description: <p>The secret token of the associated repository. </p> <note> <p>A Bitbucket webhook does not support <code>secret</code>. </p> </note>
         branchFilter:
           $ref: '#/components/schemas/String'
-          description: '<p>A regular expression used to determine which repository branches are built when a webhook is triggered. If the name of a branch matches the regular expression, then it is built. If <code>branchFilter</code> is empty, then all branches are built.</p> <note> <p> It is recommended that you use <code>filterGroups</code> instead of <code>branchFilter</code>. </p> </note>'
+          description: '<p>A regular expression used to determine which repository branches are built when a webhook is triggered. If the name of a branch matches the regular expression, then it is built. If <code>branchFilter</code> is empty, then all branches are built.</p> <note> <p>It is recommended that you use <code>filterGroups</code> instead of <code>branchFilter</code>. </p> </note>'
         filterGroups:
           $ref: '#/components/schemas/FilterGroups'
-          description: '<p> An array of arrays of <code>WebhookFilter</code> objects used to determine which webhooks are triggered. At least one <code>WebhookFilter</code> in the array must specify <code>EVENT</code> as its <code>type</code>. </p> <p> For a build to be triggered, at least one filter group in the <code>filterGroups</code> array must pass. For a filter group to pass, each of its filters must pass. </p>'
+          description: '<p>An array of arrays of <code>WebhookFilter</code> objects used to determine which webhooks are triggered. At least one <code>WebhookFilter</code> in the array must specify <code>EVENT</code> as its <code>type</code>. </p> <p>For a build to be triggered, at least one filter group in the <code>filterGroups</code> array must pass. For a filter group to pass, each of its filters must pass. </p>'
+        buildType:
+          $ref: '#/components/schemas/WebhookBuildType'
+          description: Specifies the type of build this webhook will trigger.
         lastModifiedSecret:
           $ref: '#/components/schemas/Timestamp'
-          description: ' A timestamp that indicates the last time a repository''s secret token was modified. '
+          description: 'A timestamp that indicates the last time a repository''s secret token was modified. '
       description: Information about a webhook that connects repository events to a build project in AWS CodeBuild.
     CredentialProviderType:
       type: string
@@ -3432,6 +4460,16 @@ components:
       type: integer
       minimum: 1
       maximum: 100
+    SortOrderType:
+      type: string
+      enum:
+        - ASCENDING
+        - DESCENDING
+    ReportCodeCoverageSortByType:
+      type: string
+      enum:
+        - LINE_COVERAGE_PERCENTAGE
+        - FILE_PATH
     TestCaseFilter:
       type: object
       properties:
@@ -3612,11 +4650,6 @@ components:
       pattern: '^([\p{L}\p{Z}\p{N}_.:/=@+\-]*)$'
       minLength: 1
       maxLength: 127
-    SortOrderType:
-      type: string
-      enum:
-        - ASCENDING
-        - DESCENDING
     ProjectSortByType:
       type: string
       enum:
@@ -3790,7 +4823,7 @@ components:
           description: ' The ARN of the report run. '
         type:
           $ref: '#/components/schemas/ReportType'
-          description: ' The type of the report that was run. '
+          description: <p>The type of the report that was run.</p> <dl> <dt>CODE_COVERAGE</dt> <dd> <p>A code coverage report.</p> </dd> <dt>TEST</dt> <dd> <p>A test report.</p> </dd> </dl>
         name:
           $ref: '#/components/schemas/String'
           description: ' The name of the report that was run. '
@@ -3818,7 +4851,10 @@ components:
         testSummary:
           $ref: '#/components/schemas/TestReportSummary'
           description: ' A <code>TestReportSummary</code> object that contains information about this test report. '
-      description: ' Information about the results from running a series of test cases during the run of a build project. The test cases are specified in the buildspec for the build project using one or more paths to the test case files. You can specify any type of tests you want, such as unit tests, integration tests, and functional tests. '
+        codeCoverageSummary:
+          $ref: '#/components/schemas/CodeCoverageReportSummary'
+          description: A <code>CodeCoverageReportSummary</code> object that contains a code coverage summary for this report.
+      description: 'Information about the results from running a series of test cases during the run of a build project. The test cases are specified in the buildspec for the build project using one or more paths to the test case files. You can specify any type of tests you want, such as unit tests, integration tests, and functional tests. '
     ReportExportConfigType:
       type: string
       enum:
@@ -3852,6 +4888,11 @@ components:
       type: object
       additionalProperties:
         $ref: '#/components/schemas/WrapperInt'
+    RetryBuildBatchType:
+      type: string
+      enum:
+        - RETRY_ALL_BUILDS
+        - RETRY_FAILED_BUILDS
     SecurityGroupIds:
       type: array
       items:

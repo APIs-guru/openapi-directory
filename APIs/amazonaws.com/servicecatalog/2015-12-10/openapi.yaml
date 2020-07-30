@@ -678,7 +678,7 @@ paths:
   /#X-Amz-Target=AWS242ServiceCatalogService.CreatePortfolioShare:
     post:
       operationId: CreatePortfolioShare
-      description: '<p>Shares the specified portfolio with the specified account or organization node. Shares to an organization node can only be created by the master account of an organization or by a delegated administrator. You can share portfolios to an organization, an organizational unit, or a specific account.</p> <p>Note that if a delegated admin is de-registered, they can no longer create portfolio shares.</p> <p> <code>AWSOrganizationsAccess</code> must be enabled in order to create a portfolio share to an organization node.</p>'
+      description: '<p>Shares the specified portfolio with the specified account or organization node. Shares to an organization node can only be created by the master account of an organization or by a delegated administrator. You can share portfolios to an organization, an organizational unit, or a specific account.</p> <p>Note that if a delegated admin is de-registered, they can no longer create portfolio shares.</p> <p> <code>AWSOrganizationsAccess</code> must be enabled in order to create a portfolio share to an organization node.</p> <p>You can''t share a shared resource. This includes portfolios that contain a shared product.</p>'
       responses:
         '200':
           description: Success
@@ -5175,11 +5175,11 @@ components:
         ProvisioningArtifactPreferences:
           $ref: '#/components/schemas/ProvisioningArtifactPreferences'
           description: 'An object that contains information about preferences, such as regions and accounts, for the provisioning artifact.'
+        ProvisioningArtifactOutputs:
+          $ref: '#/components/schemas/ProvisioningArtifactOutputs'
+          description: The output of the provisioning artifact.
     DescribeProvisioningParametersInput:
       type: object
-      required:
-        - ProductId
-        - ProvisioningArtifactId
       title: DescribeProvisioningParametersInput
       properties:
         AcceptLanguage:
@@ -5187,13 +5187,22 @@ components:
           description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
         ProductId:
           $ref: '#/components/schemas/Id'
-          description: The product identifier.
+          description: 'The product identifier. You must provide the product name or ID, but not both.'
+        ProductName:
+          $ref: '#/components/schemas/ProductViewName'
+          description: 'The name of the product. You must provide the name or ID, but not both.'
         ProvisioningArtifactId:
           $ref: '#/components/schemas/Id'
-          description: The identifier of the provisioning artifact.
+          description: 'The identifier of the provisioning artifact. You must provide the name or ID, but not both.'
+        ProvisioningArtifactName:
+          $ref: '#/components/schemas/ProvisioningArtifactName'
+          description: 'The name of the provisioning artifact. You must provide the name or ID, but not both.'
         PathId:
           $ref: '#/components/schemas/Id'
-          description: 'The path identifier of the product. This value is optional if the product has a default path, and required if the product has more than one path. To list the paths for a product, use <a>ListLaunchPaths</a>.'
+          description: 'The path identifier of the product. This value is optional if the product has a default path, and required if the product has more than one path. To list the paths for a product, use <a>ListLaunchPaths</a>. You must provide the name or ID, but not both.'
+        PathName:
+          $ref: '#/components/schemas/PortfolioDisplayName'
+          description: 'The name of the path. You must provide the name or ID, but not both.'
     DescribeRecordOutput:
       type: object
       properties:
@@ -5935,8 +5944,6 @@ components:
     ProvisionProductInput:
       type: object
       required:
-        - ProductId
-        - ProvisioningArtifactId
         - ProvisionedProductName
         - ProvisionToken
       title: ProvisionProductInput
@@ -5946,13 +5953,22 @@ components:
           description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
         ProductId:
           $ref: '#/components/schemas/Id'
-          description: The product identifier.
+          description: 'The product identifier. You must provide the name or ID, but not both.'
+        ProductName:
+          $ref: '#/components/schemas/ProductViewName'
+          description: 'The name of the product. You must provide the name or ID, but not both.'
         ProvisioningArtifactId:
           $ref: '#/components/schemas/Id'
-          description: The identifier of the provisioning artifact.
+          description: 'The identifier of the provisioning artifact. You must provide the name or ID, but not both.'
+        ProvisioningArtifactName:
+          $ref: '#/components/schemas/ProvisioningArtifactName'
+          description: 'The name of the provisioning artifact. You must provide the name or ID, but not both.'
         PathId:
           $ref: '#/components/schemas/Id'
-          description: 'The path identifier of the product. This value is optional if the product has a default path, and required if the product has more than one path. To list the paths for a product, use <a>ListLaunchPaths</a>.'
+          description: 'The path identifier of the product. This value is optional if the product has a default path, and required if the product has more than one path. To list the paths for a product, use <a>ListLaunchPaths</a>. You must provide the name or ID, but not both.'
+        PathName:
+          $ref: '#/components/schemas/PortfolioDisplayName'
+          description: 'The name of the path. You must provide the name or ID, but not both.'
         ProvisionedProductName:
           $ref: '#/components/schemas/ProvisionedProductName'
           description: A user-friendly name for the provisioned product. This value must be unique for the AWS account and cannot be updated after the product is provisioned.
@@ -6283,16 +6299,25 @@ components:
           description: The name of the provisioned product. You cannot specify both <code>ProvisionedProductName</code> and <code>ProvisionedProductId</code>.
         ProvisionedProductId:
           $ref: '#/components/schemas/Id'
-          description: The identifier of the provisioned product. You cannot specify both <code>ProvisionedProductName</code> and <code>ProvisionedProductId</code>.
+          description: 'The identifier of the provisioned product. You must provide the name or ID, but not both.'
         ProductId:
           $ref: '#/components/schemas/Id'
-          description: The identifier of the product.
+          description: 'The identifier of the product. You must provide the name or ID, but not both.'
+        ProductName:
+          $ref: '#/components/schemas/ProductViewName'
+          description: 'The name of the product. You must provide the name or ID, but not both.'
         ProvisioningArtifactId:
           $ref: '#/components/schemas/Id'
           description: The identifier of the provisioning artifact.
+        ProvisioningArtifactName:
+          $ref: '#/components/schemas/ProvisioningArtifactName'
+          description: 'The name of the provisioning artifact. You must provide the name or ID, but not both.'
         PathId:
           $ref: '#/components/schemas/Id'
-          description: 'The new path identifier. This value is optional if the product has a default path, and required if the product has more than one path.'
+          description: 'The path identifier. This value is optional if the product has a default path, and required if the product has more than one path. You must provide the name or ID, but not both.'
+        PathName:
+          $ref: '#/components/schemas/PortfolioDisplayName'
+          description: 'The name of the path. You must provide the name or ID, but not both.'
         ProvisioningParameters:
           $ref: '#/components/schemas/UpdateProvisioningParameters'
           description: The new parameters.
@@ -7070,6 +7095,11 @@ components:
           $ref: '#/components/schemas/StackSetRegions'
           description: <p>One or more AWS Regions where stack instances are deployed from the stack set. These regions can be scoped in <code>ProvisioningPreferences$StackSetRegions</code> and <code>UpdateProvisioningPreferences$StackSetRegions</code>.</p> <p>Applicable only to a <code>CFN_STACKSET</code> provisioned product type.</p>
       description: '<p>The user-defined preferences that will be applied during product provisioning, unless overridden by <code>ProvisioningPreferences</code> or <code>UpdateProvisioningPreferences</code>.</p> <p>For more information on maximum concurrent accounts and failure tolerance, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-ops-options">Stack set operation options</a> in the <i>AWS CloudFormation User Guide</i>.</p>'
+    ProvisioningArtifactOutputs:
+      type: array
+      items:
+        $ref: '#/components/schemas/ProvisioningArtifactOutput'
+      maxItems: 60
     RecordDetail:
       type: object
       properties:
@@ -7336,6 +7366,9 @@ components:
       pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
       minLength: 1
       maxLength: 1224
+    OutputDescription:
+      type: string
+      maxLength: 1024
     OutputKey:
       type: string
     OutputValue:
@@ -7652,6 +7685,21 @@ components:
       type: string
     ProvisioningArtifactInfoKey:
       type: string
+    ProvisioningArtifactOutputKey:
+      type: string
+      pattern: '[a-zA-Z0-9]*'
+      minLength: 1
+      maxLength: 255
+    ProvisioningArtifactOutput:
+      type: object
+      properties:
+        Key:
+          $ref: '#/components/schemas/ProvisioningArtifactOutputKey'
+          description: The provisioning artifact output key.
+        Description:
+          $ref: '#/components/schemas/OutputDescription'
+          description: Description of the provisioning artifact output key.
+      description: Provisioning artifact output.
     ProvisioningArtifactParameter:
       type: object
       properties:

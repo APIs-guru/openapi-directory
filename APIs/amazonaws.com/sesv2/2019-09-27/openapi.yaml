@@ -391,6 +391,124 @@ paths:
           schema:
             type: string
             description: '<p>The name of a configuration set.</p> <p> <i>Configuration sets</i> are groups of rules that you can apply to the emails you send. You apply a configuration set to an email by including a reference to the configuration set in the headers of the email. When you apply a configuration set to an email, all of the rules in that configuration set are applied to the email.</p>'
+  /v2/email/custom-verification-email-templates:
+    post:
+      operationId: CreateCustomVerificationEmailTemplate
+      description: '<p>Creates a new custom verification email template.</p> <p>For more information about custom verification email templates, see <a href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-verify-address-custom.html">Using Custom Verification Email Templates</a> in the <i>Amazon SES Developer Guide</i>.</p> <p>You can execute this operation no more than once per second.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateCustomVerificationEmailTemplateResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: AlreadyExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AlreadyExistsException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '484':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - TemplateName
+                - FromEmailAddress
+                - TemplateSubject
+                - TemplateContent
+                - SuccessRedirectionURL
+                - FailureRedirectionURL
+              properties:
+                TemplateName:
+                  description: The name of the template. You will refer to this name when you send email using the <code>SendTemplatedEmail</code> or <code>SendBulkTemplatedEmail</code> operations.
+                  type: string
+                  minLength: 1
+                FromEmailAddress:
+                  description: The email address that the custom verification email is sent from.
+                  type: string
+                TemplateSubject:
+                  description: The subject line of the email.
+                  type: string
+                TemplateContent:
+                  description: The content of the custom verification email template.
+                  type: string
+                SuccessRedirectionURL:
+                  description: The URL that the recipient of the verification email is sent to if his or her address is successfully verified.
+                  type: string
+                FailureRedirectionURL:
+                  description: The URL that the recipient of the verification email is sent to if his or her address is not successfully verified.
+                  type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListCustomVerificationEmailTemplates
+      description: '<p>Lists the existing custom verification email templates for your account in the current AWS Region.</p> <p>For more information about custom verification email templates, see <a href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-verify-address-custom.html">Using Custom Verification Email Templates</a> in the <i>Amazon SES Developer Guide</i>.</p> <p>You can execute this operation no more than once per second.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListCustomVerificationEmailTemplatesResponse'
+        '480':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '481':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+      parameters:
+        - name: NextToken
+          in: query
+          required: false
+          description: A token returned from a previous call to <code>ListCustomVerificationEmailTemplates</code> to indicate the position in the list of custom verification email templates.
+          schema:
+            type: string
+        - name: PageSize
+          in: query
+          required: false
+          description: '<p>The number of results to show in a single call to <code>ListCustomVerificationEmailTemplates</code>. If the number of results is larger than the number you specified in this parameter, then the response includes a <code>NextToken</code> element, which you can use to obtain additional results.</p> <p>The value you specify has to be at least 1, and can be no more than 50.</p>'
+          schema:
+            type: integer
   /v2/email/dedicated-ip-pools:
     post:
       operationId: CreateDedicatedIpPool
@@ -655,6 +773,7 @@ paths:
                 EmailIdentity:
                   description: The email address or domain that you want to verify.
                   type: string
+                  minLength: 1
                 Tags:
                   description: An array of objects that define the tags (keys and values) that you want to associate with the email identity.
                   type: array
@@ -711,6 +830,294 @@ paths:
           in: query
           required: false
           description: '<p>The number of results to show in a single call to <code>ListEmailIdentities</code>. If the number of results is larger than the number you specified in this parameter, then the response includes a <code>NextToken</code> element, which you can use to obtain additional results.</p> <p>The value you specify has to be at least 0, and can be no more than 1000.</p>'
+          schema:
+            type: integer
+  '/v2/email/identities/{EmailIdentity}/policies/{PolicyName}':
+    post:
+      operationId: CreateEmailIdentityPolicy
+      description: '<p>Creates the specified sending authorization policy for the given identity (an email address or a domain).</p> <note> <p>This API is for the identity owner only. If you have not verified the identity, this API will return an error.</p> </note> <p>Sending authorization is a feature that enables an identity owner to authorize other senders to use its identities. For information about using sending authorization, see the <a href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html">Amazon SES Developer Guide</a>.</p> <p>You can execute this operation no more than once per second.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateEmailIdentityPolicyResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: AlreadyExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AlreadyExistsException'
+        '482':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '483':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '484':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+      parameters:
+        - name: EmailIdentity
+          in: path
+          required: true
+          description: The email identity for which you want to create a policy.
+          schema:
+            type: string
+            minLength: 1
+        - name: PolicyName
+          in: path
+          required: true
+          description: '<p>The name of the policy.</p> <p>The policy name cannot exceed 64 characters and can only include alphanumeric characters, dashes, and underscores.</p>'
+          schema:
+            type: string
+            description: '<p>The name of the policy.</p> <p>The policy name cannot exceed 64 characters and can only include alphanumeric characters, dashes, and underscores.</p>'
+            minLength: 1
+            maxLength: 64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Policy
+              properties:
+                Policy:
+                  description: '<p>The text of the policy in JSON format. The policy cannot exceed 4 KB.</p> <p>For information about the syntax of sending authorization policies, see the <a href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html">Amazon SES Developer Guide</a>.</p>'
+                  type: string
+                  minLength: 1
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    delete:
+      operationId: DeleteEmailIdentityPolicy
+      description: '<p>Deletes the specified sending authorization policy for the given identity (an email address or a domain). This API returns successfully even if a policy with the specified name does not exist.</p> <note> <p>This API is for the identity owner only. If you have not verified the identity, this API will return an error.</p> </note> <p>Sending authorization is a feature that enables an identity owner to authorize other senders to use its identities. For information about using sending authorization, see the <a href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html">Amazon SES Developer Guide</a>.</p> <p>You can execute this operation no more than once per second.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteEmailIdentityPolicyResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '482':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+      parameters:
+        - name: EmailIdentity
+          in: path
+          required: true
+          description: The email identity for which you want to delete a policy.
+          schema:
+            type: string
+            minLength: 1
+        - name: PolicyName
+          in: path
+          required: true
+          description: '<p>The name of the policy.</p> <p>The policy name cannot exceed 64 characters and can only include alphanumeric characters, dashes, and underscores.</p>'
+          schema:
+            type: string
+            description: '<p>The name of the policy.</p> <p>The policy name cannot exceed 64 characters and can only include alphanumeric characters, dashes, and underscores.</p>'
+            minLength: 1
+            maxLength: 64
+    put:
+      operationId: UpdateEmailIdentityPolicy
+      description: '<p>Updates the specified sending authorization policy for the given identity (an email address or a domain). This API returns successfully even if a policy with the specified name does not exist.</p> <note> <p>This API is for the identity owner only. If you have not verified the identity, this API will return an error.</p> </note> <p>Sending authorization is a feature that enables an identity owner to authorize other senders to use its identities. For information about using sending authorization, see the <a href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html">Amazon SES Developer Guide</a>.</p> <p>You can execute this operation no more than once per second.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateEmailIdentityPolicyResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '482':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+      parameters:
+        - name: EmailIdentity
+          in: path
+          required: true
+          description: The email identity for which you want to update policy.
+          schema:
+            type: string
+            minLength: 1
+        - name: PolicyName
+          in: path
+          required: true
+          description: '<p>The name of the policy.</p> <p>The policy name cannot exceed 64 characters and can only include alphanumeric characters, dashes, and underscores.</p>'
+          schema:
+            type: string
+            description: '<p>The name of the policy.</p> <p>The policy name cannot exceed 64 characters and can only include alphanumeric characters, dashes, and underscores.</p>'
+            minLength: 1
+            maxLength: 64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Policy
+              properties:
+                Policy:
+                  description: '<p>The text of the policy in JSON format. The policy cannot exceed 4 KB.</p> <p>For information about the syntax of sending authorization policies, see the <a href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html">Amazon SES Developer Guide</a>.</p>'
+                  type: string
+                  minLength: 1
+  /v2/email/templates:
+    post:
+      operationId: CreateEmailTemplate
+      description: '<p>Creates an email template. Email templates enable you to send personalized email to one or more destinations in a single API operation. For more information, see the <a href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html">Amazon SES Developer Guide</a>.</p> <p>You can execute this operation no more than once per second.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateEmailTemplateResponse'
+        '480':
+          description: AlreadyExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AlreadyExistsException'
+        '481':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '482':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '483':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - TemplateName
+                - TemplateContent
+              properties:
+                TemplateName:
+                  description: The name of the template. You will refer to this name when you send email using the <code>SendTemplatedEmail</code> or <code>SendBulkTemplatedEmail</code> operations.
+                  type: string
+                  minLength: 1
+                TemplateContent:
+                  description: 'The content of the email, composed of a subject line, an HTML part, and a text-only part.'
+                  type: object
+                  properties:
+                    Subject:
+                      $ref: '#/components/schemas/EmailTemplateSubject'
+                      description: The subject line of the email.
+                    Text:
+                      $ref: '#/components/schemas/EmailTemplateText'
+                      description: The email body that will be visible to recipients whose email clients do not display HTML.
+                    Html:
+                      $ref: '#/components/schemas/EmailTemplateHtml'
+                      description: The HTML body of the email.
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListEmailTemplates
+      description: <p>Lists the email templates present in your Amazon SES account in the current AWS Region.</p> <p>You can execute this operation no more than once per second.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListEmailTemplatesResponse'
+        '480':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '481':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+      parameters:
+        - name: NextToken
+          in: query
+          required: false
+          description: A token returned from a previous call to <code>ListEmailTemplates</code> to indicate the position in the list of email templates.
+          schema:
+            type: string
+        - name: PageSize
+          in: query
+          required: false
+          description: '<p>The number of results to show in a single call to <code>ListEmailTemplates</code>. If the number of results is larger than the number you specified in this parameter, then the response includes a <code>NextToken</code> element, which you can use to obtain additional results.</p> <p>The value you specify has to be at least 1, and can be no more than 10.</p>'
           schema:
             type: integer
   '/v2/email/configuration-sets/{ConfigurationSetName}':
@@ -926,6 +1333,154 @@ paths:
                     PinpointDestination:
                       $ref: '#/components/schemas/PinpointDestination'
                       description: 'An object that defines an Amazon Pinpoint project destination for email events. You can send email event data to a Amazon Pinpoint project to view metrics using the Transactional Messaging dashboards that are built in to Amazon Pinpoint. For more information, see <a href="https://docs.aws.amazon.com/pinpoint/latest/userguide/analytics-transactional-messages.html">Transactional Messaging Charts</a> in the <i>Amazon Pinpoint User Guide</i>.'
+  '/v2/email/custom-verification-email-templates/{TemplateName}':
+    delete:
+      operationId: DeleteCustomVerificationEmailTemplate
+      description: '<p>Deletes an existing custom verification email template.</p> <p>For more information about custom verification email templates, see <a href="https://docs.aws.amazon.com/es/latest/DeveloperGuide/send-email-verify-address-custom.html">Using Custom Verification Email Templates</a> in the <i>Amazon SES Developer Guide</i>.</p> <p>You can execute this operation no more than once per second.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteCustomVerificationEmailTemplateResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '482':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+      parameters:
+        - name: TemplateName
+          in: path
+          required: true
+          description: The name of the custom verification email template that you want to delete.
+          schema:
+            type: string
+            description: The name of the template. You will refer to this name when you send email using the <code>SendTemplatedEmail</code> or <code>SendBulkTemplatedEmail</code> operations.
+            minLength: 1
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetCustomVerificationEmailTemplate
+      description: '<p>Returns the custom email verification template for the template name you specify.</p> <p>For more information about custom verification email templates, see <a href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-verify-address-custom.html">Using Custom Verification Email Templates</a> in the <i>Amazon SES Developer Guide</i>.</p> <p>You can execute this operation no more than once per second.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCustomVerificationEmailTemplateResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '482':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+      parameters:
+        - name: TemplateName
+          in: path
+          required: true
+          description: The name of the custom verification email template that you want to retrieve.
+          schema:
+            type: string
+            description: The name of the template. You will refer to this name when you send email using the <code>SendTemplatedEmail</code> or <code>SendBulkTemplatedEmail</code> operations.
+            minLength: 1
+    put:
+      operationId: UpdateCustomVerificationEmailTemplate
+      description: '<p>Updates an existing custom verification email template.</p> <p>For more information about custom verification email templates, see <a href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-verify-address-custom.html">Using Custom Verification Email Templates</a> in the <i>Amazon SES Developer Guide</i>.</p> <p>You can execute this operation no more than once per second.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateCustomVerificationEmailTemplateResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '482':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: TemplateName
+          in: path
+          required: true
+          description: The name of the custom verification email template that you want to update.
+          schema:
+            type: string
+            description: The name of the template. You will refer to this name when you send email using the <code>SendTemplatedEmail</code> or <code>SendBulkTemplatedEmail</code> operations.
+            minLength: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - FromEmailAddress
+                - TemplateSubject
+                - TemplateContent
+                - SuccessRedirectionURL
+                - FailureRedirectionURL
+              properties:
+                FromEmailAddress:
+                  description: The email address that the custom verification email is sent from.
+                  type: string
+                TemplateSubject:
+                  description: The subject line of the email.
+                  type: string
+                TemplateContent:
+                  description: The content of the custom verification email template.
+                  type: string
+                SuccessRedirectionURL:
+                  description: The URL that the recipient of the verification email is sent to if his or her address is successfully verified.
+                  type: string
+                FailureRedirectionURL:
+                  description: The URL that the recipient of the verification email is sent to if his or her address is not successfully verified.
+                  type: string
   '/v2/email/dedicated-ip-pools/{PoolName}':
     delete:
       operationId: DeleteDedicatedIpPool
@@ -1019,6 +1574,7 @@ paths:
           description: 'The identity (that is, the email address or domain) that you want to delete.'
           schema:
             type: string
+            minLength: 1
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1029,7 +1585,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: GetEmailIdentity
-      description: 'Provides information about a specific identity, including the identity''s verification status, its DKIM authentication status, and its custom Mail-From settings.'
+      description: 'Provides information about a specific identity, including the identity''s verification status, sending authorization policies, its DKIM authentication status, and its custom Mail-From settings.'
       responses:
         '200':
           description: Success
@@ -1062,6 +1618,149 @@ paths:
           description: The email identity that you want to retrieve details for.
           schema:
             type: string
+            minLength: 1
+  '/v2/email/templates/{TemplateName}':
+    delete:
+      operationId: DeleteEmailTemplate
+      description: <p>Deletes an email template.</p> <p>You can execute this operation no more than once per second.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteEmailTemplateResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '482':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+      parameters:
+        - name: TemplateName
+          in: path
+          required: true
+          description: The name of the template to be deleted.
+          schema:
+            type: string
+            description: The name of the template. You will refer to this name when you send email using the <code>SendTemplatedEmail</code> or <code>SendBulkTemplatedEmail</code> operations.
+            minLength: 1
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetEmailTemplate
+      description: '<p>Displays the template object (which includes the subject line, HTML part and text part) for the template you specify.</p> <p>You can execute this operation no more than once per second.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetEmailTemplateResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '482':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+      parameters:
+        - name: TemplateName
+          in: path
+          required: true
+          description: The name of the template you want to retrieve.
+          schema:
+            type: string
+            description: The name of the template. You will refer to this name when you send email using the <code>SendTemplatedEmail</code> or <code>SendBulkTemplatedEmail</code> operations.
+            minLength: 1
+    put:
+      operationId: UpdateEmailTemplate
+      description: '<p>Updates an email template. Email templates enable you to send personalized email to one or more destinations in a single API operation. For more information, see the <a href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html">Amazon SES Developer Guide</a>.</p> <p>You can execute this operation no more than once per second.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateEmailTemplateResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '482':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+      parameters:
+        - name: TemplateName
+          in: path
+          required: true
+          description: The name of the template you want to update.
+          schema:
+            type: string
+            description: The name of the template. You will refer to this name when you send email using the <code>SendTemplatedEmail</code> or <code>SendBulkTemplatedEmail</code> operations.
+            minLength: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - TemplateContent
+              properties:
+                TemplateContent:
+                  description: 'The content of the email, composed of a subject line, an HTML part, and a text-only part.'
+                  type: object
+                  properties:
+                    Subject:
+                      $ref: '#/components/schemas/EmailTemplateSubject'
+                      description: The subject line of the email.
+                    Text:
+                      $ref: '#/components/schemas/EmailTemplateText'
+                      description: The email body that will be visible to recipients whose email clients do not display HTML.
+                    Html:
+                      $ref: '#/components/schemas/EmailTemplateHtml'
+                      description: The HTML body of the email.
   '/v2/email/suppression/addresses/{EmailAddress}':
     delete:
       operationId: DeleteSuppressedDestination
@@ -1542,6 +2241,7 @@ paths:
           description: The domain that you want to obtain deliverability metrics for.
           schema:
             type: string
+            minLength: 1
         - name: StartDate
           in: query
           required: true
@@ -1556,6 +2256,51 @@ paths:
           schema:
             type: string
             format: date-time
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/v2/email/identities/{EmailIdentity}/policies':
+    get:
+      operationId: GetEmailIdentityPolicies
+      description: '<p>Returns the requested sending authorization policies for the given identity (an email address or a domain). The policies are returned as a map of policy names to policy contents. You can retrieve a maximum of 20 policies at a time.</p> <note> <p>This API is for the identity owner only. If you have not verified the identity, this API will return an error.</p> </note> <p>Sending authorization is a feature that enables an identity owner to authorize other senders to use its identities. For information about using sending authorization, see the <a href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html">Amazon SES Developer Guide</a>.</p> <p>You can execute this operation no more than once per second.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetEmailIdentityPoliciesResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '482':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+      parameters:
+        - name: EmailIdentity
+          in: path
+          required: true
+          description: The email identity that you want to retrieve policies for.
+          schema:
+            type: string
+            minLength: 1
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1875,6 +2620,90 @@ paths:
               properties:
                 AutoWarmupEnabled:
                   description: 'Enables or disables the automatic warm-up feature for dedicated IP addresses that are associated with your Amazon SES account in the current AWS Region. Set to <code>true</code> to enable the automatic warm-up feature, or set to <code>false</code> to disable it.'
+                  type: boolean
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /v2/email/account/details:
+    post:
+      operationId: PutAccountDetails
+      description: Update your Amazon SES account details.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutAccountDetailsResponse'
+        '480':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '481':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - MailType
+                - WebsiteURL
+                - UseCaseDescription
+              properties:
+                MailType:
+                  description: The type of email your account will send.
+                  type: string
+                  enum:
+                    - MARKETING
+                    - TRANSACTIONAL
+                WebsiteURL:
+                  description: The URL of your website. This information helps us better understand the type of content that you plan to send.
+                  type: string
+                  pattern: '^(([^:/?#]+):)?(//([^/?#]*))?([^?#]*)(\?([^#]*))?(#(.*))?'
+                  minLength: 1
+                  maxLength: 1000
+                  format: password
+                ContactLanguage:
+                  description: The language you would prefer to be contacted with.
+                  type: string
+                  enum:
+                    - EN
+                    - JA
+                UseCaseDescription:
+                  description: A description of the types of email that you plan to send.
+                  type: string
+                  minLength: 1
+                  maxLength: 5000
+                  format: password
+                AdditionalContactEmailAddresses:
+                  description: Additional email addresses that you would like to be notified regarding Amazon SES matters.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/AdditionalContactEmailAddress'
+                  minItems: 1
+                  maxItems: 4
+                ProductionAccessEnabled:
+                  description: '<p>Indicates whether or not your account should have production access in the current AWS Region.</p> <p>If the value is <code>false</code>, then your account is in the <i>sandbox</i>. When your account is in the sandbox, you can only send email to verified identities. Additionally, the maximum number of emails you can send in a 24-hour period (your sending quota) is 200, and the maximum number of emails you can send per second (your maximum sending rate) is 1.</p> <p>If the value is <code>true</code>, then your account has production access. When your account has production access, you can send email to any address. The sending quota and maximum sending rate for your account vary based on your specific use case.</p>'
                   type: boolean
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -2403,6 +3232,7 @@ paths:
           description: The email identity that you want to change the DKIM settings for.
           schema:
             type: string
+            minLength: 1
       requestBody:
         required: true
         content:
@@ -2457,6 +3287,7 @@ paths:
           description: The email identity that you want to configure DKIM for.
           schema:
             type: string
+            minLength: 1
       requestBody:
         required: true
         content:
@@ -2526,6 +3357,7 @@ paths:
           description: The email identity that you want to configure bounce and complaint feedback forwarding for.
           schema:
             type: string
+            minLength: 1
       requestBody:
         required: true
         content:
@@ -2580,6 +3412,7 @@ paths:
           description: The verified email identity that you want to set up the custom MAIL FROM domain for.
           schema:
             type: string
+            minLength: 1
       requestBody:
         required: true
         content:
@@ -2604,10 +3437,207 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /v2/email/outbound-bulk-emails:
+    post:
+      operationId: SendBulkEmail
+      description: Composes an email message to multiple destinations.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SendBulkEmailResponse'
+        '480':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '481':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '482':
+          description: AccountSuspendedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountSuspendedException'
+        '483':
+          description: SendingPausedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SendingPausedException'
+        '484':
+          description: MessageRejected
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageRejected'
+        '485':
+          description: MailFromDomainNotVerifiedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MailFromDomainNotVerifiedException'
+        '486':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '487':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - DefaultContent
+                - BulkEmailEntries
+              properties:
+                FromEmailAddress:
+                  description: The email address that you want to use as the "From" address for the email. The address that you specify has to be verified.
+                  type: string
+                FromEmailAddressIdentityArn:
+                  description: '<p>This parameter is used only for sending authorization. It is the ARN of the identity that is associated with the sending authorization policy that permits you to use the email address specified in the <code>FromEmailAddress</code> parameter.</p> <p>For example, if the owner of example.com (which has ARN arn:aws:ses:us-east-1:123456789012:identity/example.com) attaches a policy to it that authorizes you to use sender@example.com, then you would specify the <code>FromEmailAddressIdentityArn</code> to be arn:aws:ses:us-east-1:123456789012:identity/example.com, and the <code>FromEmailAddress</code> to be sender@example.com.</p> <p>For more information about sending authorization, see the <a href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html">Amazon SES Developer Guide</a>.</p>'
+                  type: string
+                ReplyToAddresses:
+                  description: 'The "Reply-to" email addresses for the message. When the recipient replies to the message, each Reply-to address receives the reply.'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/EmailAddress'
+                FeedbackForwardingEmailAddress:
+                  description: The address that you want bounce and complaint notifications to be sent to.
+                  type: string
+                FeedbackForwardingEmailAddressIdentityArn:
+                  description: '<p>This parameter is used only for sending authorization. It is the ARN of the identity that is associated with the sending authorization policy that permits you to use the email address specified in the <code>FeedbackForwardingEmailAddress</code> parameter.</p> <p>For example, if the owner of example.com (which has ARN arn:aws:ses:us-east-1:123456789012:identity/example.com) attaches a policy to it that authorizes you to use feedback@example.com, then you would specify the <code>FeedbackForwardingEmailAddressIdentityArn</code> to be arn:aws:ses:us-east-1:123456789012:identity/example.com, and the <code>FeedbackForwardingEmailAddress</code> to be feedback@example.com.</p> <p>For more information about sending authorization, see the <a href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html">Amazon SES Developer Guide</a>.</p>'
+                  type: string
+                DefaultEmailTags:
+                  description: A list of message tags.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/MessageTag'
+                DefaultContent:
+                  description: An object that contains the body of the message. You can specify a template message.
+                  type: object
+                  properties:
+                    Template:
+                      $ref: '#/components/schemas/Template'
+                      description: The template to use for the bulk email message.
+                BulkEmailEntries:
+                  description: A list of <code>BulkEmailEntry</code> objects.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/BulkEmailEntry'
+                ConfigurationSetName:
+                  description: '<p>The name of a configuration set.</p> <p> <i>Configuration sets</i> are groups of rules that you can apply to the emails you send. You apply a configuration set to an email by including a reference to the configuration set in the headers of the email. When you apply a configuration set to an email, all of the rules in that configuration set are applied to the email.</p>'
+                  type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /v2/email/outbound-custom-verification-emails:
+    post:
+      operationId: SendCustomVerificationEmail
+      description: '<p>Adds an email address to the list of identities for your Amazon SES account in the current AWS Region and attempts to verify it. As a result of executing this operation, a customized verification email is sent to the specified address.</p> <p>To use this operation, you must first create a custom verification email template. For more information about creating and using custom verification email templates, see <a href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-verify-address-custom.html">Using Custom Verification Email Templates</a> in the <i>Amazon SES Developer Guide</i>.</p> <p>You can execute this operation no more than once per second.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SendCustomVerificationEmailResponse'
+        '480':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '481':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '482':
+          description: MessageRejected
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageRejected'
+        '483':
+          description: SendingPausedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SendingPausedException'
+        '484':
+          description: MailFromDomainNotVerifiedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MailFromDomainNotVerifiedException'
+        '485':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '486':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - EmailAddress
+                - TemplateName
+              properties:
+                EmailAddress:
+                  description: The email address to verify.
+                  type: string
+                TemplateName:
+                  description: The name of the template. You will refer to this name when you send email using the <code>SendTemplatedEmail</code> or <code>SendBulkTemplatedEmail</code> operations.
+                  type: string
+                  minLength: 1
+                ConfigurationSetName:
+                  description: '<p>The name of a configuration set.</p> <p> <i>Configuration sets</i> are groups of rules that you can apply to the emails you send. You apply a configuration set to an email by including a reference to the configuration set in the headers of the email. When you apply a configuration set to an email, all of the rules in that configuration set are applied to the email.</p>'
+                  type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /v2/email/outbound-emails:
     post:
       operationId: SendEmail
-      description: '<p>Sends an email message. You can use the Amazon SES API v2 to send two types of messages:</p> <ul> <li> <p> <b>Simple</b> – A standard email message. When you create this type of message, you specify the sender, the recipient, and the message body, and Amazon SES assembles the message for you.</p> </li> <li> <p> <b>Raw</b> – A raw, MIME-formatted email message. When you send this type of email, you have to specify all of the message headers, as well as the message body. You can use this message type to send messages that contain attachments. The message that you specify has to be a valid MIME message.</p> </li> </ul>'
+      description: '<p>Sends an email message. You can use the Amazon SES API v2 to send two types of messages:</p> <ul> <li> <p> <b>Simple</b> – A standard email message. When you create this type of message, you specify the sender, the recipient, and the message body, and Amazon SES assembles the message for you.</p> </li> <li> <p> <b>Raw</b> – A raw, MIME-formatted email message. When you send this type of email, you have to specify all of the message headers, as well as the message body. You can use this message type to send messages that contain attachments. The message that you specify has to be a valid MIME message.</p> </li> <li> <p> <b>Templated</b> – A message that contains personalization tags. When you send this type of email, Amazon SES API v2 automatically replaces the tags with values that you specify.</p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -2671,11 +3701,13 @@ paths:
             schema:
               type: object
               required:
-                - Destination
                 - Content
               properties:
                 FromEmailAddress:
                   description: 'The email address that you want to use as the "From" address for the email. The address that you specify has to be verified. '
+                  type: string
+                FromEmailAddressIdentityArn:
+                  description: '<p>This parameter is used only for sending authorization. It is the ARN of the identity that is associated with the sending authorization policy that permits you to use the email address specified in the <code>FromEmailAddress</code> parameter.</p> <p>For example, if the owner of example.com (which has ARN arn:aws:ses:us-east-1:123456789012:identity/example.com) attaches a policy to it that authorizes you to use sender@example.com, then you would specify the <code>FromEmailAddressIdentityArn</code> to be arn:aws:ses:us-east-1:123456789012:identity/example.com, and the <code>FromEmailAddress</code> to be sender@example.com.</p> <p>For more information about sending authorization, see the <a href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html">Amazon SES Developer Guide</a>.</p> <p>For Raw emails, the <code>FromEmailAddressIdentityArn</code> value overrides the X-SES-SOURCE-ARN and X-SES-FROM-ARN headers specified in raw email message content.</p>'
                   type: string
                 Destination:
                   description: An object that describes the recipients for an email.
@@ -2697,6 +3729,9 @@ paths:
                     $ref: '#/components/schemas/EmailAddress'
                 FeedbackForwardingEmailAddress:
                   description: The address that you want bounce and complaint notifications to be sent to.
+                  type: string
+                FeedbackForwardingEmailAddressIdentityArn:
+                  description: '<p>This parameter is used only for sending authorization. It is the ARN of the identity that is associated with the sending authorization policy that permits you to use the email address specified in the <code>FeedbackForwardingEmailAddress</code> parameter.</p> <p>For example, if the owner of example.com (which has ARN arn:aws:ses:us-east-1:123456789012:identity/example.com) attaches a policy to it that authorizes you to use feedback@example.com, then you would specify the <code>FeedbackForwardingEmailAddressIdentityArn</code> to be arn:aws:ses:us-east-1:123456789012:identity/example.com, and the <code>FeedbackForwardingEmailAddress</code> to be feedback@example.com.</p> <p>For more information about sending authorization, see the <a href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html">Amazon SES Developer Guide</a>.</p>'
                   type: string
                 Content:
                   description: 'An object that defines the entire content of the email, including the message headers and the body content. You can create a simple email message, in which you specify the subject and the text and HTML versions of the message body. You can also create raw messages, in which you specify a complete MIME-formatted message. Raw messages can include attachments and custom headers.'
@@ -2781,6 +3816,65 @@ paths:
                   type: array
                   items:
                     $ref: '#/components/schemas/Tag'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/v2/email/templates/{TemplateName}/render':
+    post:
+      operationId: TestRenderEmailTemplate
+      description: <p>Creates a preview of the MIME content of an email when provided with a template and a set of replacement data.</p> <p>You can execute this operation no more than once per second.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TestRenderEmailTemplateResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '482':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+      parameters:
+        - name: TemplateName
+          in: path
+          required: true
+          description: The name of the template that you want to render.
+          schema:
+            type: string
+            description: The name of the template. You will refer to this name when you send email using the <code>SendTemplatedEmail</code> or <code>SendBulkTemplatedEmail</code> operations.
+            minLength: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - TemplateData
+              properties:
+                TemplateData:
+                  description: An object that defines the values to use for message variables in the template. This object is a set of key-value pairs. Each key defines a message variable in the template. The corresponding value defines the value to use for that variable.
+                  type: string
+                  maxLength: 262144
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2990,6 +4084,10 @@ components:
           $ref: '#/components/schemas/AmazonResourceName'
           description: The Amazon Resource Name (ARN) of the Amazon Pinpoint project that you want to send email events to.
       description: 'An object that defines an Amazon Pinpoint project destination for email events. You can send email event data to a Amazon Pinpoint project to view metrics using the Transactional Messaging dashboards that are built in to Amazon Pinpoint. For more information, see <a href="https://docs.aws.amazon.com/pinpoint/latest/userguide/analytics-transactional-messages.html">Transactional Messaging Charts</a> in the <i>Amazon Pinpoint User Guide</i>.'
+    CreateCustomVerificationEmailTemplateResponse:
+      type: object
+      properties: {}
+      description: 'If the action is successful, the service sends back an HTTP 200 response with an empty HTTP body.'
     CreateDedicatedIpPoolResponse:
       type: object
       properties: {}
@@ -3032,11 +4130,14 @@ components:
     Template:
       type: object
       properties:
+        TemplateName:
+          $ref: '#/components/schemas/EmailTemplateName'
+          description: 'The name of the template. You will refer to this name when you send email using the <code>SendTemplatedEmail</code> or <code>SendBulkTemplatedEmail</code> operations. '
         TemplateArn:
-          $ref: '#/components/schemas/TemplateArn'
+          $ref: '#/components/schemas/AmazonResourceName'
           description: The Amazon Resource Name (ARN) of the template.
         TemplateData:
-          $ref: '#/components/schemas/TemplateData'
+          $ref: '#/components/schemas/EmailTemplateData'
           description: An object that defines the values to use for message variables in the template. This object is a set of key-value pairs. Each key defines a message variable in the template. The corresponding value defines the value to use for that variable.
       description: 'An object that defines the email template to use for an email message, and the values to use for any message variables in that template. An <i>email template</i> is a type of message template that contains content that you want to define, save, and reuse in email messages that you send.'
     AccountSuspendedException: {}
@@ -3067,6 +4168,23 @@ components:
       minLength: 1
       maxLength: 20480
       format: password
+    CreateEmailIdentityPolicyResponse:
+      type: object
+      properties: {}
+      description: 'An HTTP 200 response if the request succeeds, or an error message if the request fails.'
+    CreateEmailTemplateResponse:
+      type: object
+      properties: {}
+      description: 'If the action is successful, the service sends back an HTTP 200 response with an empty HTTP body.'
+    EmailTemplateSubject:
+      type: string
+      description: The subject line of the email.
+    EmailTemplateText:
+      type: string
+      description: The email body that will be visible to recipients whose email clients do not display HTML.
+    EmailTemplateHtml:
+      type: string
+      description: The HTML body of the email.
     DeleteConfigurationSetResponse:
       type: object
       properties: {}
@@ -3075,6 +4193,10 @@ components:
       type: object
       properties: {}
       description: 'An HTTP 200 response if the request succeeds, or an error message if the request fails.'
+    DeleteCustomVerificationEmailTemplateResponse:
+      type: object
+      properties: {}
+      description: 'If the action is successful, the service sends back an HTTP 200 response with an empty HTTP body.'
     DeleteDedicatedIpPoolResponse:
       type: object
       properties: {}
@@ -3083,6 +4205,14 @@ components:
       type: object
       properties: {}
       description: 'An HTTP 200 response if the request succeeds, or an error message if the request fails.'
+    DeleteEmailIdentityPolicyResponse:
+      type: object
+      properties: {}
+      description: 'An HTTP 200 response if the request succeeds, or an error message if the request fails.'
+    DeleteEmailTemplateResponse:
+      type: object
+      properties: {}
+      description: 'If the action is successful, the service sends back an HTTP 200 response with an empty HTTP body.'
     DeleteSuppressedDestinationResponse:
       type: object
       properties: {}
@@ -3108,6 +4238,9 @@ components:
         SuppressionAttributes:
           $ref: '#/components/schemas/SuppressionAttributes'
           description: An object that contains information about the email address suppression preferences for your account in the current AWS Region.
+        Details:
+          $ref: '#/components/schemas/AccountDetails'
+          description: An object that defines your account details.
       description: A list of details about the email-sending capabilities of your Amazon SES account in the current AWS Region.
     GetBlacklistReportsResponse:
       type: object
@@ -3153,6 +4286,28 @@ components:
           $ref: '#/components/schemas/EventDestinations'
           description: An array that includes all of the events destinations that have been configured for the configuration set.
       description: Information about an event destination for a configuration set.
+    GetCustomVerificationEmailTemplateResponse:
+      type: object
+      properties:
+        TemplateName:
+          $ref: '#/components/schemas/EmailTemplateName'
+          description: The name of the custom verification email template.
+        FromEmailAddress:
+          $ref: '#/components/schemas/EmailAddress'
+          description: The email address that the custom verification email is sent from.
+        TemplateSubject:
+          $ref: '#/components/schemas/EmailTemplateSubject'
+          description: The subject line of the custom verification email.
+        TemplateContent:
+          $ref: '#/components/schemas/TemplateContent'
+          description: The content of the custom verification email.
+        SuccessRedirectionURL:
+          $ref: '#/components/schemas/SuccessRedirectionURL'
+          description: The URL that the recipient of the verification email is sent to if his or her address is successfully verified.
+        FailureRedirectionURL:
+          $ref: '#/components/schemas/FailureRedirectionURL'
+          description: The URL that the recipient of the verification email is sent to if his or her address is not successfully verified.
+      description: The following elements are returned by the service.
     GetDedicatedIpResponse:
       type: object
       properties:
@@ -3254,10 +4409,33 @@ components:
         MailFromAttributes:
           $ref: '#/components/schemas/MailFromAttributes'
           description: An object that contains information about the Mail-From attributes for the email identity.
+        Policies:
+          $ref: '#/components/schemas/PolicyMap'
+          description: A map of policy names to policies.
         Tags:
           $ref: '#/components/schemas/TagList'
           description: An array of objects that define the tags (keys and values) that are associated with the email identity.
       description: Details about an email identity.
+    GetEmailIdentityPoliciesResponse:
+      type: object
+      properties:
+        Policies:
+          $ref: '#/components/schemas/PolicyMap'
+          description: A map of policy names to policies.
+      description: Identity policies associated with email identity.
+    GetEmailTemplateResponse:
+      type: object
+      required:
+        - TemplateName
+        - TemplateContent
+      properties:
+        TemplateName:
+          $ref: '#/components/schemas/EmailTemplateName'
+          description: The name of the template you want to retrieve.
+        TemplateContent:
+          $ref: '#/components/schemas/EmailTemplateContent'
+          description: 'The content of the email template, composed of a subject line, an HTML part, and a text-only part.'
+      description: The following element is returned by the service.
     GetSuppressedDestinationResponse:
       type: object
       required:
@@ -3277,6 +4455,16 @@ components:
           $ref: '#/components/schemas/NextToken'
           description: 'A token that indicates that there are additional configuration sets to list. To view additional configuration sets, issue another request to <code>ListConfigurationSets</code>, and pass this token in the <code>NextToken</code> parameter.'
       description: A list of configuration sets in your Amazon SES account in the current AWS Region.
+    ListCustomVerificationEmailTemplatesResponse:
+      type: object
+      properties:
+        CustomVerificationEmailTemplates:
+          $ref: '#/components/schemas/CustomVerificationEmailTemplatesList'
+          description: A list of the custom verification email templates that exist in your account.
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+          description: A token indicating that there are additional custom verification email templates available to be listed. Pass this token to a subsequent call to <code>ListCustomVerificationEmailTemplates</code> to retrieve the next 50 custom verification email templates.
+      description: The following elements are returned by the service.
     ListDedicatedIpPoolsResponse:
       type: object
       properties:
@@ -3321,6 +4509,16 @@ components:
           $ref: '#/components/schemas/NextToken'
           description: 'A token that indicates that there are additional configuration sets to list. To view additional configuration sets, issue another request to <code>ListEmailIdentities</code>, and pass this token in the <code>NextToken</code> parameter.'
       description: 'A list of all of the identities that you''ve attempted to verify, regardless of whether or not those identities were successfully verified.'
+    ListEmailTemplatesResponse:
+      type: object
+      properties:
+        TemplatesMetadata:
+          $ref: '#/components/schemas/EmailTemplateMetadataList'
+          description: An array the contains the name and creation time stamp for each template in your Amazon SES account.
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+          description: A token indicating that there are additional email templates available to be listed. Pass this token to a subsequent <code>ListEmailTemplates</code> call to retrieve the next 10 email templates.
+      description: The following elements are returned by the service.
     ListSuppressedDestinationsResponse:
       type: object
       properties:
@@ -3350,6 +4548,17 @@ components:
       type: object
       properties: {}
       description: 'An HTTP 200 response if the request succeeds, or an error message if the request fails.'
+    PutAccountDetailsResponse:
+      type: object
+      properties: {}
+      description: 'An HTTP 200 response if the request succeeds, or an error message if the request fails.'
+    AdditionalContactEmailAddress:
+      type: string
+      pattern: ^(.+)@(.+)$
+      minLength: 6
+      maxLength: 254
+      format: password
+    ConflictException: {}
     PutAccountSendingAttributesResponse:
       type: object
       properties: {}
@@ -3429,17 +4638,14 @@ components:
       type: object
       properties: {}
       description: 'An HTTP 200 response if the request succeeds, or an error message if the request fails.'
-    SendEmailResponse:
+    SendBulkEmailResponse:
       type: object
+      required:
+        - BulkEmailEntryResults
       properties:
-        MessageId:
-          $ref: '#/components/schemas/OutboundMessageId'
-          description: '<p>A unique identifier for the message that is generated when the message is accepted.</p> <note> <p>It''s possible for Amazon SES to accept a message without sending it. This can happen when the message that you''re trying to send has an attachment contains a virus, or when you send a templated email that contains invalid personalization content, for example.</p> </note>'
-      description: A unique message ID that you receive when an email is accepted for sending.
-    EmailAddressList:
-      type: array
-      items:
-        $ref: '#/components/schemas/EmailAddress'
+        BulkEmailEntryResults:
+          $ref: '#/components/schemas/BulkEmailEntryResultList'
+      description: The following data is returned in JSON format by the service.
     EmailAddress:
       type: string
     MessageTag:
@@ -3455,9 +4661,50 @@ components:
           $ref: '#/components/schemas/MessageTagValue'
           description: '<p>The value of the message tag. The message tag value has to meet the following criteria:</p> <ul> <li> <p>It can only contain ASCII letters (a–z, A–Z), numbers (0–9), underscores (_), or dashes (-).</p> </li> <li> <p>It can contain no more than 256 characters.</p> </li> </ul>'
       description: 'Contains the name and value of a tag that you apply to an email. You can use message tags when you publish email sending events. '
+    BulkEmailEntry:
+      type: object
+      required:
+        - Destination
+      properties:
+        Destination:
+          $ref: '#/components/schemas/Destination'
+          description: '<p>Represents the destination of the message, consisting of To:, CC:, and BCC: fields.</p> <note> <p>Amazon SES does not support the SMTPUTF8 extension, as described in <a href="https://tools.ietf.org/html/rfc6531">RFC6531</a>. For this reason, the local part of a destination email address (the part of the email address that precedes the @ sign) may only contain <a href="https://en.wikipedia.org/wiki/Email_address#Local-part">7-bit ASCII characters</a>. If the domain part of an address (the part after the @ sign) contains non-ASCII characters, they must be encoded using Punycode, as described in <a href="https://tools.ietf.org/html/rfc3492.html">RFC3492</a>.</p> </note>'
+        ReplacementTags:
+          $ref: '#/components/schemas/MessageTagList'
+          description: 'A list of tags, in the form of name/value pairs, to apply to an email that you send using the <code>SendBulkTemplatedEmail</code> operation. Tags correspond to characteristics of the email that you define, so that you can publish email sending events.'
+        ReplacementEmailContent:
+          $ref: '#/components/schemas/ReplacementEmailContent'
+          description: The <code>ReplacementEmailContent</code> associated with a <code>BulkEmailEntry</code>.
+    SendCustomVerificationEmailResponse:
+      type: object
+      properties:
+        MessageId:
+          $ref: '#/components/schemas/OutboundMessageId'
+          description: The unique message identifier returned from the <code>SendCustomVerificationEmail</code> operation.
+      description: The following element is returned by the service.
+    SendEmailResponse:
+      type: object
+      properties:
+        MessageId:
+          $ref: '#/components/schemas/OutboundMessageId'
+          description: '<p>A unique identifier for the message that is generated when the message is accepted.</p> <note> <p>It''s possible for Amazon SES to accept a message without sending it. This can happen when the message that you''re trying to send has an attachment contains a virus, or when you send a templated email that contains invalid personalization content, for example.</p> </note>'
+      description: A unique message ID that you receive when an email is accepted for sending.
+    EmailAddressList:
+      type: array
+      items:
+        $ref: '#/components/schemas/EmailAddress'
     TagResourceResponse:
       type: object
       properties: {}
+    TestRenderEmailTemplateResponse:
+      type: object
+      required:
+        - RenderedTemplate
+      properties:
+        RenderedTemplate:
+          $ref: '#/components/schemas/RenderedEmailTemplate'
+          description: The complete MIME message rendered by applying the data in the <code>TemplateData</code> parameter to the template specified in the TemplateName parameter.
+      description: The following element is returned by the service.
     UntagResourceResponse:
       type: object
       properties: {}
@@ -3467,6 +4714,77 @@ components:
       type: object
       properties: {}
       description: 'An HTTP 200 response if the request succeeds, or an error message if the request fails.'
+    UpdateCustomVerificationEmailTemplateResponse:
+      type: object
+      properties: {}
+      description: 'If the action is successful, the service sends back an HTTP 200 response with an empty HTTP body.'
+    UpdateEmailIdentityPolicyResponse:
+      type: object
+      properties: {}
+      description: 'An HTTP 200 response if the request succeeds, or an error message if the request fails.'
+    UpdateEmailTemplateResponse:
+      type: object
+      properties: {}
+      description: 'If the action is successful, the service sends back an HTTP 200 response with an empty HTTP body.'
+    MailType:
+      type: string
+      enum:
+        - MARKETING
+        - TRANSACTIONAL
+    WebsiteURL:
+      type: string
+      pattern: '^(([^:/?#]+):)?(//([^/?#]*))?([^?#]*)(\?([^#]*))?(#(.*))?'
+      minLength: 1
+      maxLength: 1000
+      format: password
+    ContactLanguage:
+      type: string
+      enum:
+        - EN
+        - JA
+    UseCaseDescription:
+      type: string
+      minLength: 1
+      maxLength: 5000
+      format: password
+    AdditionalContactEmailAddresses:
+      type: array
+      items:
+        $ref: '#/components/schemas/AdditionalContactEmailAddress'
+      minItems: 1
+      maxItems: 4
+    ReviewDetails:
+      type: object
+      properties:
+        Status:
+          $ref: '#/components/schemas/ReviewStatus'
+          description: '<p>The status of the latest review of your account. The status can be one of the following:</p> <ul> <li> <p> <code>PENDING</code> – We have received your appeal and are in the process of reviewing it.</p> </li> <li> <p> <code>GRANTED</code> – Your appeal has been reviewed and your production access has been granted.</p> </li> <li> <p> <code>DENIED</code> – Your appeal has been reviewed and your production access has been denied.</p> </li> <li> <p> <code>FAILED</code> – An internal error occurred and we didn''t receive your appeal. You can submit your appeal again.</p> </li> </ul>'
+        CaseId:
+          $ref: '#/components/schemas/CaseId'
+          description: The associated support center case ID (if any).
+      description: An object that contains information about your account details review.
+    AccountDetails:
+      type: object
+      properties:
+        MailType:
+          $ref: '#/components/schemas/MailType'
+          description: '<p>The type of email your account is sending. The mail type can be one of the following:</p> <ul> <li> <p> <code>MARKETING</code> – Most of your sending traffic is to keep your customers informed of your latest offering.</p> </li> <li> <p> <code>TRANSACTIONAL</code> – Most of your sending traffic is to communicate during a transaction with a customer.</p> </li> </ul>'
+        WebsiteURL:
+          $ref: '#/components/schemas/WebsiteURL'
+          description: The URL of your website. This information helps us better understand the type of content that you plan to send.
+        ContactLanguage:
+          $ref: '#/components/schemas/ContactLanguage'
+          description: The language you would prefer for the case. The contact language can be one of <code>ENGLISH</code> or <code>JAPANESE</code>.
+        UseCaseDescription:
+          $ref: '#/components/schemas/UseCaseDescription'
+          description: A description of the types of email that you plan to send.
+        AdditionalContactEmailAddresses:
+          $ref: '#/components/schemas/AdditionalContactEmailAddresses'
+          description: Additional email addresses where updates are sent about your account review process.
+        ReviewDetails:
+          $ref: '#/components/schemas/ReviewDetails'
+          description: Information about the review of the latest details you submitted.
+      description: An object that contains information about your account details.
     AmazonResourceName:
       type: string
     BehaviorOnMxFailure:
@@ -3531,7 +4849,85 @@ components:
           $ref: '#/components/schemas/Content'
           description: 'An object that represents the version of the message that is displayed in email clients that support HTML. HTML messages can include formatted text, hyperlinks, images, and more. '
       description: Represents the body of the email message.
+    BulkEmailContent:
+      type: object
+      properties:
+        Template:
+          $ref: '#/components/schemas/Template'
+          description: The template to use for the bulk email message.
+      description: An object that contains the body of the message. You can specify a template message.
+    Destination:
+      type: object
+      properties:
+        ToAddresses:
+          $ref: '#/components/schemas/EmailAddressList'
+          description: An array that contains the email addresses of the "To" recipients for the email.
+        CcAddresses:
+          $ref: '#/components/schemas/EmailAddressList'
+          description: An array that contains the email addresses of the "CC" (carbon copy) recipients for the email.
+        BccAddresses:
+          $ref: '#/components/schemas/EmailAddressList'
+          description: An array that contains the email addresses of the "BCC" (blind carbon copy) recipients for the email.
+      description: An object that describes the recipients for an email.
+    MessageTagList:
+      type: array
+      description: A list of message tags.
+      items:
+        $ref: '#/components/schemas/MessageTag'
+    ReplacementEmailContent:
+      type: object
+      properties:
+        ReplacementTemplate:
+          $ref: '#/components/schemas/ReplacementTemplate'
+          description: The <code>ReplacementTemplate</code> associated with <code>ReplacementEmailContent</code>.
+      description: The <code>ReplaceEmailContent</code> object to be used for a specific <code>BulkEmailEntry</code>. The <code>ReplacementTemplate</code> can be specified within this object.
+    BulkEmailEntryList:
+      type: array
+      description: A list of <code>BulkEmailEntry</code> objects.
+      items:
+        $ref: '#/components/schemas/BulkEmailEntry'
+    BulkEmailStatus:
+      type: string
+      enum:
+        - SUCCESS
+        - MESSAGE_REJECTED
+        - MAIL_FROM_DOMAIN_NOT_VERIFIED
+        - CONFIGURATION_SET_NOT_FOUND
+        - TEMPLATE_NOT_FOUND
+        - ACCOUNT_SUSPENDED
+        - ACCOUNT_THROTTLED
+        - ACCOUNT_DAILY_QUOTA_EXCEEDED
+        - INVALID_SENDING_POOL_NAME
+        - ACCOUNT_SENDING_PAUSED
+        - CONFIGURATION_SET_SENDING_PAUSED
+        - INVALID_PARAMETER
+        - TRANSIENT_FAILURE
+        - FAILED
+    ErrorMessage:
+      type: string
+    OutboundMessageId:
+      type: string
+    BulkEmailEntryResult:
+      type: object
+      properties:
+        Status:
+          $ref: '#/components/schemas/BulkEmailStatus'
+          description: '<p>The status of a message sent using the <code>SendBulkTemplatedEmail</code> operation.</p> <p>Possible values for this parameter include:</p> <ul> <li> <p>SUCCESS: Amazon SES accepted the message, and will attempt to deliver it to the recipients.</p> </li> <li> <p>MESSAGE_REJECTED: The message was rejected because it contained a virus.</p> </li> <li> <p>MAIL_FROM_DOMAIN_NOT_VERIFIED: The sender''s email address or domain was not verified.</p> </li> <li> <p>CONFIGURATION_SET_DOES_NOT_EXIST: The configuration set you specified does not exist.</p> </li> <li> <p>TEMPLATE_DOES_NOT_EXIST: The template you specified does not exist.</p> </li> <li> <p>ACCOUNT_SUSPENDED: Your account has been shut down because of issues related to your email sending practices.</p> </li> <li> <p>ACCOUNT_THROTTLED: The number of emails you can send has been reduced because your account has exceeded its allocated sending limit.</p> </li> <li> <p>ACCOUNT_DAILY_QUOTA_EXCEEDED: You have reached or exceeded the maximum number of emails you can send from your account in a 24-hour period.</p> </li> <li> <p>INVALID_SENDING_POOL_NAME: The configuration set you specified refers to an IP pool that does not exist.</p> </li> <li> <p>ACCOUNT_SENDING_PAUSED: Email sending for the Amazon SES account was disabled using the <a href="https://docs.aws.amazon.com/ses/latest/APIReference/API_UpdateAccountSendingEnabled.html">UpdateAccountSendingEnabled</a> operation.</p> </li> <li> <p>CONFIGURATION_SET_SENDING_PAUSED: Email sending for this configuration set was disabled using the <a href="https://docs.aws.amazon.com/ses/latest/APIReference/API_UpdateConfigurationSetSendingEnabled.html">UpdateConfigurationSetSendingEnabled</a> operation.</p> </li> <li> <p>INVALID_PARAMETER_VALUE: One or more of the parameters you specified when calling this operation was invalid. See the error message for additional information.</p> </li> <li> <p>TRANSIENT_FAILURE: Amazon SES was unable to process your request because of a temporary issue.</p> </li> <li> <p>FAILED: Amazon SES was unable to process your request. See the error message for additional information.</p> </li> </ul>'
+        Error:
+          $ref: '#/components/schemas/ErrorMessage'
+          description: A description of an error that prevented a message being sent using the <code>SendBulkTemplatedEmail</code> operation.
+        MessageId:
+          $ref: '#/components/schemas/OutboundMessageId'
+          description: The unique message identifier returned from the <code>SendBulkTemplatedEmail</code> operation.
+      description: The result of the <code>SendBulkEmail</code> operation of each specified <code>BulkEmailEntry</code>.
+    BulkEmailEntryResultList:
+      type: array
+      description: A list of <code>BulkMailEntry</code> objects.
+      items:
+        $ref: '#/components/schemas/BulkEmailEntryResult'
     CampaignId:
+      type: string
+    CaseId:
       type: string
     Charset:
       type: string
@@ -3691,6 +5087,49 @@ components:
         SuppressionOptions:
           $ref: '#/components/schemas/SuppressionOptions'
       description: A request to create a configuration set.
+    EmailTemplateName:
+      type: string
+      description: The name of the template. You will refer to this name when you send email using the <code>SendTemplatedEmail</code> or <code>SendBulkTemplatedEmail</code> operations.
+      minLength: 1
+    TemplateContent:
+      type: string
+      description: The content of the custom verification email template.
+    SuccessRedirectionURL:
+      type: string
+      description: The URL that the recipient of the verification email is sent to if his or her address is successfully verified.
+    FailureRedirectionURL:
+      type: string
+      description: The URL that the recipient of the verification email is sent to if his or her address is not successfully verified.
+    CreateCustomVerificationEmailTemplateRequest:
+      type: object
+      required:
+        - TemplateName
+        - FromEmailAddress
+        - TemplateSubject
+        - TemplateContent
+        - SuccessRedirectionURL
+        - FailureRedirectionURL
+      title: CreateCustomVerificationEmailTemplateRequest
+      properties:
+        TemplateName:
+          $ref: '#/components/schemas/EmailTemplateName'
+          description: The name of the custom verification email template.
+        FromEmailAddress:
+          $ref: '#/components/schemas/EmailAddress'
+          description: The email address that the custom verification email is sent from.
+        TemplateSubject:
+          $ref: '#/components/schemas/EmailTemplateSubject'
+          description: The subject line of the custom verification email.
+        TemplateContent:
+          $ref: '#/components/schemas/TemplateContent'
+          description: 'The content of the custom verification email. The total size of the email must be less than 10 MB. The message body may contain HTML, with some limitations. For more information, see <a href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-verify-address-custom.html#custom-verification-emails-faq">Custom Verification Email Frequently Asked Questions</a> in the <i>Amazon SES Developer Guide</i>.'
+        SuccessRedirectionURL:
+          $ref: '#/components/schemas/SuccessRedirectionURL'
+          description: The URL that the recipient of the verification email is sent to if his or her address is successfully verified.
+        FailureRedirectionURL:
+          $ref: '#/components/schemas/FailureRedirectionURL'
+          description: The URL that the recipient of the verification email is sent to if his or her address is not successfully verified.
+      description: Represents a request to create a custom verification email template.
     CreateDedicatedIpPoolRequest:
       type: object
       required:
@@ -3751,6 +5190,26 @@ components:
       description: 'The status of a predictive inbox placement test. If the status is <code>IN_PROGRESS</code>, then the predictive inbox placement test is currently running. Predictive inbox placement tests are usually complete within 24 hours of creating the test. If the status is <code>COMPLETE</code>, then the test is finished, and you can use the <code>GetDeliverabilityTestReport</code> operation to view the results of the test.'
     Identity:
       type: string
+      minLength: 1
+    PolicyName:
+      type: string
+      description: '<p>The name of the policy.</p> <p>The policy name cannot exceed 64 characters and can only include alphanumeric characters, dashes, and underscores.</p>'
+      minLength: 1
+      maxLength: 64
+    Policy:
+      type: string
+      description: '<p>The text of the policy in JSON format. The policy cannot exceed 4 KB.</p> <p>For information about the syntax of sending authorization policies, see the <a href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html">Amazon SES Developer Guide</a>.</p>'
+      minLength: 1
+    CreateEmailIdentityPolicyRequest:
+      type: object
+      required:
+        - Policy
+      title: CreateEmailIdentityPolicyRequest
+      properties:
+        Policy:
+          $ref: '#/components/schemas/Policy'
+          description: '<p>The text of the policy in JSON format. The policy cannot exceed 4 KB.</p> <p>For information about the syntax of sending authorization policies, see the <a href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-policies.html">Amazon SES Developer Guide</a>.</p>'
+      description: 'Represents a request to create a sending authorization policy for an identity. Sending authorization is an Amazon SES feature that enables you to authorize other senders to use your identities. For information, see the <a href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-identity-owner-tasks-management.html">Amazon SES Developer Guide</a>.'
     DkimSigningAttributes:
       type: object
       required:
@@ -3803,6 +5262,57 @@ components:
           $ref: '#/components/schemas/DkimSigningAttributesOrigin'
           description: '<p>A string that indicates how DKIM was configured for the identity. There are two possible values:</p> <ul> <li> <p> <code>AWS_SES</code> – Indicates that DKIM was configured for the identity by using <a href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html">Easy DKIM</a>.</p> </li> <li> <p> <code>EXTERNAL</code> – Indicates that DKIM was configured for the identity by using Bring Your Own DKIM (BYODKIM).</p> </li> </ul>'
       description: '<p>An object that contains information about the DKIM authentication status for an email identity.</p> <p>Amazon SES determines the authentication status by searching for specific records in the DNS configuration for the domain. If you used <a href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html">Easy DKIM</a> to set up DKIM authentication, Amazon SES tries to find three unique CNAME records in the DNS configuration for your domain. If you provided a public key to perform DKIM authentication, Amazon SES tries to find a TXT record that uses the selector that you specified. The value of the TXT record must be a public key that''s paired with the private key that you specified in the process of creating the identity</p>'
+    EmailTemplateContent:
+      type: object
+      properties:
+        Subject:
+          $ref: '#/components/schemas/EmailTemplateSubject'
+          description: The subject line of the email.
+        Text:
+          $ref: '#/components/schemas/EmailTemplateText'
+          description: The email body that will be visible to recipients whose email clients do not display HTML.
+        Html:
+          $ref: '#/components/schemas/EmailTemplateHtml'
+          description: The HTML body of the email.
+      description: 'The content of the email, composed of a subject line, an HTML part, and a text-only part.'
+    CreateEmailTemplateRequest:
+      type: object
+      required:
+        - TemplateName
+        - TemplateContent
+      title: CreateEmailTemplateRequest
+      properties:
+        TemplateName:
+          $ref: '#/components/schemas/EmailTemplateName'
+          description: The name of the template you want to create.
+        TemplateContent:
+          $ref: '#/components/schemas/EmailTemplateContent'
+          description: 'The content of the email template, composed of a subject line, an HTML part, and a text-only part.'
+      description: 'Represents a request to create an email template. For more information, see the <a href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html">Amazon SES Developer Guide</a>.'
+    CustomVerificationEmailTemplateMetadata:
+      type: object
+      properties:
+        TemplateName:
+          $ref: '#/components/schemas/EmailTemplateName'
+          description: The name of the custom verification email template.
+        FromEmailAddress:
+          $ref: '#/components/schemas/EmailAddress'
+          description: The email address that the custom verification email is sent from.
+        TemplateSubject:
+          $ref: '#/components/schemas/EmailTemplateSubject'
+          description: The subject line of the custom verification email.
+        SuccessRedirectionURL:
+          $ref: '#/components/schemas/SuccessRedirectionURL'
+          description: The URL that the recipient of the verification email is sent to if his or her address is successfully verified.
+        FailureRedirectionURL:
+          $ref: '#/components/schemas/FailureRedirectionURL'
+          description: The URL that the recipient of the verification email is sent to if his or her address is not successfully verified.
+      description: Contains information about a custom verification email template.
+    CustomVerificationEmailTemplatesList:
+      type: array
+      description: A list of the custom verification email templates that exist in your account.
+      items:
+        $ref: '#/components/schemas/CustomVerificationEmailTemplateMetadata'
     VolumeStatistics:
       type: object
       properties:
@@ -3886,16 +5396,31 @@ components:
       title: DeleteConfigurationSetRequest
       properties: {}
       description: A request to delete a configuration set.
+    DeleteCustomVerificationEmailTemplateRequest:
+      type: object
+      title: DeleteCustomVerificationEmailTemplateRequest
+      properties: {}
+      description: Represents a request to delete an existing custom verification email template.
     DeleteDedicatedIpPoolRequest:
       type: object
       title: DeleteDedicatedIpPoolRequest
       properties: {}
       description: A request to delete a dedicated IP pool.
+    DeleteEmailIdentityPolicyRequest:
+      type: object
+      title: DeleteEmailIdentityPolicyRequest
+      properties: {}
+      description: 'Represents a request to delete a sending authorization policy for an identity. Sending authorization is an Amazon SES feature that enables you to authorize other senders to use your identities. For information, see the <a href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-identity-owner-tasks-management.html">Amazon SES Developer Guide</a>.'
     DeleteEmailIdentityRequest:
       type: object
       title: DeleteEmailIdentityRequest
       properties: {}
       description: 'A request to delete an existing email identity. When you delete an identity, you lose the ability to send email from that identity. You can restore your ability to send email by completing the verification process for the identity again.'
+    DeleteEmailTemplateRequest:
+      type: object
+      title: DeleteEmailTemplateRequest
+      properties: {}
+      description: 'Represents a request to delete an email template. For more information, see the <a href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html">Amazon SES Developer Guide</a>.'
     DeleteSuppressedDestinationRequest:
       type: object
       title: DeleteSuppressedDestinationRequest
@@ -3937,19 +5462,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/DeliverabilityTestReport'
-    Destination:
-      type: object
-      properties:
-        ToAddresses:
-          $ref: '#/components/schemas/EmailAddressList'
-          description: An array that contains the email addresses of the "To" recipients for the email.
-        CcAddresses:
-          $ref: '#/components/schemas/EmailAddressList'
-          description: An array that contains the email addresses of the "CC" (carbon copy) recipients for the email.
-        BccAddresses:
-          $ref: '#/components/schemas/EmailAddressList'
-          description: An array that contains the email addresses of the "BCC" (blind carbon copy) recipients for the email.
-      description: An object that describes the recipients for an email.
     DkimStatus:
       type: string
       enum:
@@ -4079,6 +5591,27 @@ components:
           $ref: '#/components/schemas/Percentage'
           description: The percentage of messages that were sent from the selected domain to the specified email provider that arrived in recipients' spam or junk mail folders.
       description: An object that contains inbox placement data for email sent from one of your email domains to a specific email provider.
+    EmailTemplateData:
+      type: string
+      description: An object that defines the values to use for message variables in the template. This object is a set of key-value pairs. Each key defines a message variable in the template. The corresponding value defines the value to use for that variable.
+      maxLength: 262144
+    EmailTemplateMetadata:
+      type: object
+      properties:
+        TemplateName:
+          $ref: '#/components/schemas/EmailTemplateName'
+          description: The name of the template.
+        CreatedTimestamp:
+          $ref: '#/components/schemas/Timestamp'
+          description: The time and date the template was created.
+      description: Contains information about an email template.
+    EmailTemplateMetadataList:
+      type: array
+      description: A list of the EmailTemplateMetadata object.
+      items:
+        $ref: '#/components/schemas/EmailTemplateMetadata'
+    EnabledWrapper:
+      type: boolean
     Esp:
       type: string
     EventDestination:
@@ -4170,6 +5703,11 @@ components:
       title: GetConfigurationSetRequest
       properties: {}
       description: A request to obtain information about a configuration set.
+    GetCustomVerificationEmailTemplateRequest:
+      type: object
+      title: GetCustomVerificationEmailTemplateRequest
+      properties: {}
+      description: Represents a request to retrieve an existing custom verification email template.
     GetDedicatedIpRequest:
       type: object
       title: GetDedicatedIpRequest
@@ -4243,6 +5781,16 @@ components:
           $ref: '#/components/schemas/DomainIspPlacements'
           description: An object that contains inbox and junk mail placement metrics for individual email providers.
       description: An object that contains information about email that was sent from the selected domain.
+    GetEmailIdentityPoliciesRequest:
+      type: object
+      title: GetEmailIdentityPoliciesRequest
+      properties: {}
+      description: A request to return the policies of an email identity.
+    PolicyMap:
+      type: object
+      description: An object that contains mapping between <code>PolicyName</code> and <code>Policy</code> text.
+      additionalProperties:
+        $ref: '#/components/schemas/Policy'
     GetEmailIdentityRequest:
       type: object
       title: GetEmailIdentityRequest
@@ -4265,6 +5813,11 @@ components:
           $ref: '#/components/schemas/BehaviorOnMxFailure'
           description: '<p>The action that you want to take if the required MX record can''t be found when you send an email. When you set this value to <code>UseDefaultValue</code>, the mail is sent using <i>amazonses.com</i> as the MAIL FROM domain. When you set this value to <code>RejectMessage</code>, the Amazon SES API v2 returns a <code>MailFromDomainNotVerified</code> error, and doesn''t attempt to deliver the email.</p> <p>These behaviors are taken when the custom MAIL FROM domain configuration is in the <code>Pending</code>, <code>Failed</code>, and <code>TemporaryFailure</code> states.</p>'
       description: A list of attributes that are associated with a MAIL FROM domain.
+    GetEmailTemplateRequest:
+      type: object
+      title: GetEmailTemplateRequest
+      properties: {}
+      description: 'Represents a request to display the template object (which includes the subject line, HTML part and text part) for the template you specify.'
     GetSuppressedDestinationRequest:
       type: object
       title: GetSuppressedDestinationRequest
@@ -4326,6 +5879,11 @@ components:
       title: ListConfigurationSetsRequest
       properties: {}
       description: A request to obtain a list of configuration sets for your Amazon SES account in the current AWS Region.
+    ListCustomVerificationEmailTemplatesRequest:
+      type: object
+      title: ListCustomVerificationEmailTemplatesRequest
+      properties: {}
+      description: Represents a request to list the existing custom verification email templates for your account.
     ListDedicatedIpPoolsRequest:
       type: object
       title: ListDedicatedIpPoolsRequest
@@ -4351,6 +5909,11 @@ components:
       title: ListEmailIdentitiesRequest
       properties: {}
       description: 'A request to list all of the email identities associated with your AWS account. This list includes identities that you''ve already verified, identities that are unverified, and identities that were verified in the past, but are no longer verified.'
+    ListEmailTemplatesRequest:
+      type: object
+      title: ListEmailTemplatesRequest
+      properties: {}
+      description: 'Represents a request to list the email templates present in your Amazon SES account in the current AWS Region. For more information, see the <a href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html">Amazon SES Developer Guide</a>.'
     ListSuppressedDestinationsRequest:
       type: object
       title: ListSuppressedDestinationsRequest
@@ -4387,13 +5950,6 @@ components:
     MessageTagValue:
       type: string
       description: '<p>The value of the message tag. The message tag value has to meet the following criteria:</p> <ul> <li> <p>It can only contain ASCII letters (a–z, A–Z), numbers (0–9), underscores (_), or dashes (-).</p> </li> <li> <p>It can contain no more than 256 characters.</p> </li> </ul>'
-    MessageTagList:
-      type: array
-      description: A list of message tags.
-      items:
-        $ref: '#/components/schemas/MessageTag'
-    OutboundMessageId:
-      type: string
     PutAccountDedicatedIpWarmupAttributesRequest:
       type: object
       title: PutAccountDedicatedIpWarmupAttributesRequest
@@ -4402,6 +5958,33 @@ components:
           $ref: '#/components/schemas/Enabled'
           description: 'Enables or disables the automatic warm-up feature for dedicated IP addresses that are associated with your Amazon SES account in the current AWS Region. Set to <code>true</code> to enable the automatic warm-up feature, or set to <code>false</code> to disable it.'
       description: A request to enable or disable the automatic IP address warm-up feature.
+    PutAccountDetailsRequest:
+      type: object
+      required:
+        - MailType
+        - WebsiteURL
+        - UseCaseDescription
+      title: PutAccountDetailsRequest
+      properties:
+        MailType:
+          $ref: '#/components/schemas/MailType'
+          description: The type of email your account will send.
+        WebsiteURL:
+          $ref: '#/components/schemas/WebsiteURL'
+          description: The URL of your website. This information helps us better understand the type of content that you plan to send.
+        ContactLanguage:
+          $ref: '#/components/schemas/ContactLanguage'
+          description: The language you would prefer to be contacted with.
+        UseCaseDescription:
+          $ref: '#/components/schemas/UseCaseDescription'
+          description: A description of the types of email that you plan to send.
+        AdditionalContactEmailAddresses:
+          $ref: '#/components/schemas/AdditionalContactEmailAddresses'
+          description: Additional email addresses that you would like to be notified regarding Amazon SES matters.
+        ProductionAccessEnabled:
+          $ref: '#/components/schemas/EnabledWrapper'
+          description: '<p>Indicates whether or not your account should have production access in the current AWS Region.</p> <p>If the value is <code>false</code>, then your account is in the <i>sandbox</i>. When your account is in the sandbox, you can only send email to verified identities. Additionally, the maximum number of emails you can send in a 24-hour period (your sending quota) is 200, and the maximum number of emails you can send per second (your maximum sending rate) is 1.</p> <p>If the value is <code>true</code>, then your account has production access. When your account has production access, you can send email to any address. The sending quota and maximum sending rate for your account vary based on your specific use case.</p>'
+      description: A request to submit new account details.
     PutAccountSendingAttributesRequest:
       type: object
       title: PutAccountSendingAttributesRequest
@@ -4554,16 +6137,87 @@ components:
     RawMessageData:
       type: string
       description: '<p>The raw email message. The message has to meet the following criteria:</p> <ul> <li> <p>The message has to contain a header and a body, separated by one blank line.</p> </li> <li> <p>All of the required header fields must be present in the message.</p> </li> <li> <p>Each part of a multipart MIME message must be formatted properly.</p> </li> <li> <p>Attachments must be in a file format that the Amazon SES API v2 supports. </p> </li> <li> <p>The entire message must be Base64 encoded.</p> </li> <li> <p>If any of the MIME parts in your message contain content that is outside of the 7-bit ASCII character range, you should encode that content to ensure that recipients'' email clients render the message properly.</p> </li> <li> <p>The length of any single line of text in the message can''t exceed 1,000 characters. This restriction is defined in <a href="https://tools.ietf.org/html/rfc5321">RFC 5321</a>.</p> </li> </ul>'
+    RenderedEmailTemplate:
+      type: string
+      description: The complete MIME message rendered by applying the data in the TemplateData parameter to the template specified in the TemplateName parameter.
+    ReplacementTemplate:
+      type: object
+      properties:
+        ReplacementTemplateData:
+          $ref: '#/components/schemas/EmailTemplateData'
+          description: 'A list of replacement values to apply to the template. This parameter is a JSON object, typically consisting of key-value pairs in which the keys correspond to replacement tags in the email template.'
+      description: An object which contains <code>ReplacementTemplateData</code> to be used for a specific <code>BulkEmailEntry</code>.
+    ReviewStatus:
+      type: string
+      enum:
+        - PENDING
+        - FAILED
+        - GRANTED
+        - DENIED
+    SendBulkEmailRequest:
+      type: object
+      required:
+        - DefaultContent
+        - BulkEmailEntries
+      title: SendBulkEmailRequest
+      properties:
+        FromEmailAddress:
+          $ref: '#/components/schemas/EmailAddress'
+          description: The email address that you want to use as the "From" address for the email. The address that you specify has to be verified.
+        FromEmailAddressIdentityArn:
+          $ref: '#/components/schemas/AmazonResourceName'
+          description: '<p>This parameter is used only for sending authorization. It is the ARN of the identity that is associated with the sending authorization policy that permits you to use the email address specified in the <code>FromEmailAddress</code> parameter.</p> <p>For example, if the owner of example.com (which has ARN arn:aws:ses:us-east-1:123456789012:identity/example.com) attaches a policy to it that authorizes you to use sender@example.com, then you would specify the <code>FromEmailAddressIdentityArn</code> to be arn:aws:ses:us-east-1:123456789012:identity/example.com, and the <code>FromEmailAddress</code> to be sender@example.com.</p> <p>For more information about sending authorization, see the <a href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html">Amazon SES Developer Guide</a>.</p>'
+        ReplyToAddresses:
+          $ref: '#/components/schemas/EmailAddressList'
+          description: 'The "Reply-to" email addresses for the message. When the recipient replies to the message, each Reply-to address receives the reply.'
+        FeedbackForwardingEmailAddress:
+          $ref: '#/components/schemas/EmailAddress'
+          description: The address that you want bounce and complaint notifications to be sent to.
+        FeedbackForwardingEmailAddressIdentityArn:
+          $ref: '#/components/schemas/AmazonResourceName'
+          description: '<p>This parameter is used only for sending authorization. It is the ARN of the identity that is associated with the sending authorization policy that permits you to use the email address specified in the <code>FeedbackForwardingEmailAddress</code> parameter.</p> <p>For example, if the owner of example.com (which has ARN arn:aws:ses:us-east-1:123456789012:identity/example.com) attaches a policy to it that authorizes you to use feedback@example.com, then you would specify the <code>FeedbackForwardingEmailAddressIdentityArn</code> to be arn:aws:ses:us-east-1:123456789012:identity/example.com, and the <code>FeedbackForwardingEmailAddress</code> to be feedback@example.com.</p> <p>For more information about sending authorization, see the <a href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html">Amazon SES Developer Guide</a>.</p>'
+        DefaultEmailTags:
+          $ref: '#/components/schemas/MessageTagList'
+          description: 'A list of tags, in the form of name/value pairs, to apply to an email that you send using the <code>SendEmail</code> operation. Tags correspond to characteristics of the email that you define, so that you can publish email sending events.'
+        DefaultContent:
+          $ref: '#/components/schemas/BulkEmailContent'
+          description: An object that contains the body of the message. You can specify a template message.
+        BulkEmailEntries:
+          $ref: '#/components/schemas/BulkEmailEntryList'
+          description: The list of bulk email entry objects.
+        ConfigurationSetName:
+          $ref: '#/components/schemas/ConfigurationSetName'
+          description: The name of the configuration set that you want to use when sending the email.
+      description: 'Represents a request to send email messages to multiple destinations using Amazon SES. For more information, see the <a href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html">Amazon SES Developer Guide</a>.'
+    SendCustomVerificationEmailRequest:
+      type: object
+      required:
+        - EmailAddress
+        - TemplateName
+      title: SendCustomVerificationEmailRequest
+      properties:
+        EmailAddress:
+          $ref: '#/components/schemas/EmailAddress'
+          description: The email address to verify.
+        TemplateName:
+          $ref: '#/components/schemas/EmailTemplateName'
+          description: The name of the custom verification email template to use when sending the verification email.
+        ConfigurationSetName:
+          $ref: '#/components/schemas/ConfigurationSetName'
+          description: Name of a configuration set to use when sending the verification email.
+      description: Represents a request to send a custom verification email to a specified recipient.
     SendEmailRequest:
       type: object
       required:
-        - Destination
         - Content
       title: SendEmailRequest
       properties:
         FromEmailAddress:
           $ref: '#/components/schemas/EmailAddress'
           description: 'The email address that you want to use as the "From" address for the email. The address that you specify has to be verified. '
+        FromEmailAddressIdentityArn:
+          $ref: '#/components/schemas/AmazonResourceName'
+          description: '<p>This parameter is used only for sending authorization. It is the ARN of the identity that is associated with the sending authorization policy that permits you to use the email address specified in the <code>FromEmailAddress</code> parameter.</p> <p>For example, if the owner of example.com (which has ARN arn:aws:ses:us-east-1:123456789012:identity/example.com) attaches a policy to it that authorizes you to use sender@example.com, then you would specify the <code>FromEmailAddressIdentityArn</code> to be arn:aws:ses:us-east-1:123456789012:identity/example.com, and the <code>FromEmailAddress</code> to be sender@example.com.</p> <p>For more information about sending authorization, see the <a href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html">Amazon SES Developer Guide</a>.</p> <p>For Raw emails, the <code>FromEmailAddressIdentityArn</code> value overrides the X-SES-SOURCE-ARN and X-SES-FROM-ARN headers specified in raw email message content.</p>'
         Destination:
           $ref: '#/components/schemas/Destination'
           description: An object that contains the recipients of the email message.
@@ -4573,16 +6227,19 @@ components:
         FeedbackForwardingEmailAddress:
           $ref: '#/components/schemas/EmailAddress'
           description: The address that you want bounce and complaint notifications to be sent to.
+        FeedbackForwardingEmailAddressIdentityArn:
+          $ref: '#/components/schemas/AmazonResourceName'
+          description: '<p>This parameter is used only for sending authorization. It is the ARN of the identity that is associated with the sending authorization policy that permits you to use the email address specified in the <code>FeedbackForwardingEmailAddress</code> parameter.</p> <p>For example, if the owner of example.com (which has ARN arn:aws:ses:us-east-1:123456789012:identity/example.com) attaches a policy to it that authorizes you to use feedback@example.com, then you would specify the <code>FeedbackForwardingEmailAddressIdentityArn</code> to be arn:aws:ses:us-east-1:123456789012:identity/example.com, and the <code>FeedbackForwardingEmailAddress</code> to be feedback@example.com.</p> <p>For more information about sending authorization, see the <a href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html">Amazon SES Developer Guide</a>.</p>'
         Content:
           $ref: '#/components/schemas/EmailContent'
-          description: An object that contains the body of the message. You can send either a Simple message or a Raw message.
+          description: An object that contains the body of the message. You can send either a Simple message Raw message or a template Message.
         EmailTags:
           $ref: '#/components/schemas/MessageTagList'
           description: 'A list of tags, in the form of name/value pairs, to apply to an email that you send using the <code>SendEmail</code> operation. Tags correspond to characteristics of the email that you define, so that you can publish email sending events. '
         ConfigurationSetName:
           $ref: '#/components/schemas/ConfigurationSetName'
           description: The name of the configuration set that you want to use when sending the email.
-      description: A request to send an email message.
+      description: 'Represents a request to send a single formatted email using Amazon SES. For more information, see the <a href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-formatted.html">Amazon SES Developer Guide</a>.'
     SentLast24Hours:
       type: number
       format: double
@@ -4632,11 +6289,16 @@ components:
         Tags:
           $ref: '#/components/schemas/TagList'
           description: A list of the tags that you want to add to the resource. A tag consists of a required tag key (<code>Key</code>) and an associated tag value (<code>Value</code>). The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256 characters.
-    TemplateArn:
-      type: string
-    TemplateData:
-      type: string
-      maxLength: 262144
+    TestRenderEmailTemplateRequest:
+      type: object
+      required:
+        - TemplateData
+      title: TestRenderEmailTemplateRequest
+      properties:
+        TemplateData:
+          $ref: '#/components/schemas/EmailTemplateData'
+          description: 'A list of replacement values to apply to the template. This parameter is a JSON object, typically consisting of key-value pairs in which the keys correspond to replacement tags in the email template.'
+      description: '&gt;Represents a request to create a preview of the MIME content of an email when provided with a template and a set of replacement data.'
     UntagResourceRequest:
       type: object
       title: UntagResourceRequest
@@ -4651,5 +6313,51 @@ components:
           $ref: '#/components/schemas/EventDestinationDefinition'
           description: An object that defines the event destination.
       description: A request to change the settings for an event destination for a configuration set.
+    UpdateCustomVerificationEmailTemplateRequest:
+      type: object
+      required:
+        - FromEmailAddress
+        - TemplateSubject
+        - TemplateContent
+        - SuccessRedirectionURL
+        - FailureRedirectionURL
+      title: UpdateCustomVerificationEmailTemplateRequest
+      properties:
+        FromEmailAddress:
+          $ref: '#/components/schemas/EmailAddress'
+          description: The email address that the custom verification email is sent from.
+        TemplateSubject:
+          $ref: '#/components/schemas/EmailTemplateSubject'
+          description: The subject line of the custom verification email.
+        TemplateContent:
+          $ref: '#/components/schemas/TemplateContent'
+          description: 'The content of the custom verification email. The total size of the email must be less than 10 MB. The message body may contain HTML, with some limitations. For more information, see <a href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-verify-address-custom.html#custom-verification-emails-faq">Custom Verification Email Frequently Asked Questions</a> in the <i>Amazon SES Developer Guide</i>.'
+        SuccessRedirectionURL:
+          $ref: '#/components/schemas/SuccessRedirectionURL'
+          description: The URL that the recipient of the verification email is sent to if his or her address is successfully verified.
+        FailureRedirectionURL:
+          $ref: '#/components/schemas/FailureRedirectionURL'
+          description: The URL that the recipient of the verification email is sent to if his or her address is not successfully verified.
+      description: Represents a request to update an existing custom verification email template.
+    UpdateEmailIdentityPolicyRequest:
+      type: object
+      required:
+        - Policy
+      title: UpdateEmailIdentityPolicyRequest
+      properties:
+        Policy:
+          $ref: '#/components/schemas/Policy'
+          description: '<p>The text of the policy in JSON format. The policy cannot exceed 4 KB.</p> <p> For information about the syntax of sending authorization policies, see the <a href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-policies.html">Amazon SES Developer Guide</a>.</p>'
+      description: 'Represents a request to update a sending authorization policy for an identity. Sending authorization is an Amazon SES feature that enables you to authorize other senders to use your identities. For information, see the <a href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-identity-owner-tasks-management.html">Amazon SES Developer Guide</a>.'
+    UpdateEmailTemplateRequest:
+      type: object
+      required:
+        - TemplateContent
+      title: UpdateEmailTemplateRequest
+      properties:
+        TemplateContent:
+          $ref: '#/components/schemas/EmailTemplateContent'
+          description: 'The content of the email template, composed of a subject line, an HTML part, and a text-only part.'
+      description: 'Represents a request to update an email template. For more information, see the <a href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html">Amazon SES Developer Guide</a>.'
 security:
   - hmac: []

@@ -1525,6 +1525,94 @@ paths:
                   type: object
                   additionalProperties:
                     $ref: '#/components/schemas/__string'
+  '/v1/clusters/{clusterArn}/reboot-broker':
+    put:
+      operationId: RebootBroker
+      description: Reboots brokers.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RebootBrokerResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '482':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '484':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: clusterArn
+          in: path
+          required: true
+          description: |2-
+
+                        <p>The Amazon Resource Name (ARN) of the cluster to be updated.</p>
+                     
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - brokerIds
+              properties:
+                brokerIds:
+                  description: |2-
+
+                                <p>The list of broker IDs to be rebooted.</p>
+                             
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/__string'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/v1/tags/{resourceArn}#tagKeys':
     delete:
       operationId: UntagResource
@@ -2545,6 +2633,21 @@ components:
           description: |2-
 
                         <p>The key-value pair for the resource tag.</p>
+                     
+    RebootBrokerResponse:
+      type: object
+      properties:
+        ClusterArn:
+          $ref: '#/components/schemas/__string'
+          description: |2-
+
+                        <p>The Amazon Resource Name (ARN) of the cluster.</p>
+                     
+        ClusterOperationArn:
+          $ref: '#/components/schemas/__string'
+          description: |2-
+
+                        <p>The Amazon Resource Name (ARN) of the cluster operation.</p>
                      
     UpdateBrokerCountResponse:
       type: object
@@ -3614,6 +3717,19 @@ components:
 
                     <p>Prometheus settings.</p>
                  
+    RebootBrokerRequest:
+      type: object
+      required:
+        - BrokerIds
+      title: RebootBrokerRequest
+      properties:
+        BrokerIds:
+          $ref: '#/components/schemas/__listOf__string'
+          description: |2-
+
+                        <p>The list of broker IDs to be rebooted.</p>
+                     
+      description: Reboots a node.
     NodeType:
       type: string
       enum:
