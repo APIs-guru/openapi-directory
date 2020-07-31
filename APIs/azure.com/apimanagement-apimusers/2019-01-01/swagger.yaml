@@ -14,7 +14,7 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/apimanagement/resource-manager/Microsoft.ApiManagement/stable/2019-01-01/apimusers.json'
       version: '2.0'
-  x-preferred: true
+  x-preferred: false
   x-providerName: azure.com
   x-serviceName: apimanagement-apimusers
   x-tags:
@@ -350,6 +350,24 @@ paths:
           name: subscriptionId
           required: true
           type: string
+        - default: portal
+          description: Determines the type of application which send the create user request. Default is legacy publisher portal.
+          enum:
+            - portal
+            - developerPortal
+          in: query
+          name: appType
+          required: false
+          type: string
+          x-ms-enum:
+            modelAsString: true
+            name: AppType
+            values:
+              - description: User create request was sent by legacy developer portal.
+                value: portal
+              - description: User create request was sent by new developer portal.
+                value: developerPortal
+          x-ms-parameter-location: method
       responses:
         '200':
           description: The user details were successfully deleted.
@@ -929,6 +947,20 @@ paths:
                               value: deleted
                 description: Parameters supplied to the Create User operation.
                 properties:
+                  appType:
+                    description: Determines the type of application which send the create user request. Default is legacy portal.
+                    enum:
+                      - portal
+                      - developerPortal
+                    type: string
+                    x-ms-enum:
+                      modelAsString: true
+                      name: AppType
+                      values:
+                        - description: User create request was sent by legacy developer portal.
+                          value: portal
+                        - description: User create request was sent by new developer portal.
+                          value: developerPortal
                   confirmation:
                     description: Determines the type of confirmation e-mail that will be sent to the newly created user.
                     enum:
@@ -965,6 +997,11 @@ paths:
                   - email
                   - firstName
                   - lastName
+        - description: Send an Email notification to the User.
+          in: query
+          name: notify
+          required: false
+          type: boolean
         - description: 'ETag of the Entity. Not required when creating an entity, but required when updating an entity.'
           in: header
           name: If-Match
@@ -1328,6 +1365,24 @@ paths:
           name: subscriptionId
           required: true
           type: string
+        - default: portal
+          description: Determines the type of application which send the create user request. Default is legacy publisher portal.
+          enum:
+            - portal
+            - developerPortal
+          in: query
+          name: appType
+          required: false
+          type: string
+          x-ms-enum:
+            modelAsString: true
+            name: AppType
+            values:
+              - description: User create request was sent by legacy developer portal.
+                value: portal
+              - description: User create request was sent by new developer portal.
+                value: developerPortal
+          x-ms-parameter-location: method
       responses:
         '204':
           description: Notification successfully sent

@@ -461,8 +461,7 @@ paths:
                     url: 'https://apimService1.azure-api.net/echo/resource'
                     userId: /users/1
       x-ms-odata: '#/definitions/RequestReportRecordContract'
-      x-ms-pageable:
-        nextLinkName: null
+      x-ms-pageable: {}
   /reports/bySubscription:
     get:
       description: Lists report records by subscription.

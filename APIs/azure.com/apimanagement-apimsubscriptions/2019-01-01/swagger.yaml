@@ -14,7 +14,7 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/apimanagement/resource-manager/Microsoft.ApiManagement/stable/2019-01-01/apimsubscriptions.json'
       version: '2.0'
-  x-preferred: true
+  x-preferred: false
   x-providerName: azure.com
   x-serviceName: apimanagement-apimsubscriptions
   x-tags:
@@ -749,6 +749,24 @@ paths:
           name: subscriptionId
           required: true
           type: string
+        - default: portal
+          description: Determines the type of application which send the create user request. Default is legacy publisher portal.
+          enum:
+            - portal
+            - developerPortal
+          in: query
+          name: appType
+          required: false
+          type: string
+          x-ms-enum:
+            modelAsString: true
+            name: AppType
+            values:
+              - description: User create request was sent by legacy developer portal.
+                value: portal
+              - description: User create request was sent by new developer portal.
+                value: developerPortal
+          x-ms-parameter-location: method
       responses:
         '204':
           description: The subscription details were successfully updated.
@@ -899,6 +917,24 @@ paths:
           name: subscriptionId
           required: true
           type: string
+        - default: portal
+          description: Determines the type of application which send the create user request. Default is legacy publisher portal.
+          enum:
+            - portal
+            - developerPortal
+          in: query
+          name: appType
+          required: false
+          type: string
+          x-ms-enum:
+            modelAsString: true
+            name: AppType
+            values:
+              - description: User create request was sent by legacy developer portal.
+                value: portal
+              - description: User create request was sent by new developer portal.
+                value: developerPortal
+          x-ms-parameter-location: method
       responses:
         '200':
           description: The user already subscribed to the product.

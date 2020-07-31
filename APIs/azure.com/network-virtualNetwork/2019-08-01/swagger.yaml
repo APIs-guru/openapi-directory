@@ -14,7 +14,7 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2019-08-01/virtualNetwork.json'
       version: '2.0'
-  x-preferred: false
+  x-preferred: true
   x-providerName: azure.com
   x-serviceName: network-virtualNetwork
   x-tags:
@@ -2641,7 +2641,6 @@ definitions:
         description: The AddressSpace that contains an array of IP address ranges that can be used by subnets.
       bgpCommunities:
         $ref: '#/definitions/VirtualNetworkBgpCommunities'
-        default: null
         description: Bgp Communities sent over ExpressRoute with each route corresponding to a prefix in this VNET.
       ddosProtectionPlan:
         description: Reference to another subresource.

@@ -14,7 +14,7 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/apimanagement/resource-manager/Microsoft.ApiManagement/stable/2019-01-01/apimdiagnostics.json'
       version: '2.0'
-  x-preferred: true
+  x-preferred: false
   x-providerName: azure.com
   x-serviceName: apimanagement-apimdiagnostics
   x-tags:
@@ -205,6 +205,23 @@ paths:
                                   items:
                                     type: string
                                   type: array
+                        httpCorrelationProtocol:
+                          description: Sets correlation protocol to use for Application Insights diagnostics.
+                          enum:
+                            - None
+                            - Legacy
+                            - W3C
+                          type: string
+                          x-ms-enum:
+                            modelAsString: true
+                            name: HttpCorrelationProtocol
+                            values:
+                              - description: Do not read and inject correlation headers.
+                                value: None
+                              - description: 'Inject Request-Id and Request-Context headers with request correlation data. See https://github.com/dotnet/corefx/blob/master/src/System.Diagnostics.DiagnosticSource/src/HttpCorrelationProtocol.md.'
+                                value: Legacy
+                              - description: 'Inject Trace Context headers. See https://w3c.github.io/trace-context.'
+                                value: W3C
                         loggerId:
                           description: Resource Id of a target logger.
                           type: string
@@ -228,6 +245,23 @@ paths:
                                 values:
                                   - description: Fixed-rate sampling.
                                     value: fixed
+                        verbosity:
+                          description: The verbosity level applied to traces emitted by trace policies.
+                          enum:
+                            - verbose
+                            - information
+                            - error
+                          type: string
+                          x-ms-enum:
+                            modelAsString: true
+                            name: Verbosity
+                            values:
+                              - description: All the traces emitted by trace policies will be sent to the logger attached to this diagnostic instance.
+                                value: verbose
+                              - description: Traces with 'severity' set to 'information' and 'error' will be sent to the logger attached to this diagnostic instance.
+                                value: information
+                              - description: Only traces with 'severity' set to 'error' will be sent to the logger attached to this diagnostic instance.
+                                value: error
                       required:
                         - loggerId
                 type: array
@@ -552,6 +586,23 @@ paths:
                             items:
                               type: string
                             type: array
+                  httpCorrelationProtocol:
+                    description: Sets correlation protocol to use for Application Insights diagnostics.
+                    enum:
+                      - None
+                      - Legacy
+                      - W3C
+                    type: string
+                    x-ms-enum:
+                      modelAsString: true
+                      name: HttpCorrelationProtocol
+                      values:
+                        - description: Do not read and inject correlation headers.
+                          value: None
+                        - description: 'Inject Request-Id and Request-Context headers with request correlation data. See https://github.com/dotnet/corefx/blob/master/src/System.Diagnostics.DiagnosticSource/src/HttpCorrelationProtocol.md.'
+                          value: Legacy
+                        - description: 'Inject Trace Context headers. See https://w3c.github.io/trace-context.'
+                          value: W3C
                   loggerId:
                     description: Resource Id of a target logger.
                     type: string
@@ -575,6 +626,23 @@ paths:
                           values:
                             - description: Fixed-rate sampling.
                               value: fixed
+                  verbosity:
+                    description: The verbosity level applied to traces emitted by trace policies.
+                    enum:
+                      - verbose
+                      - information
+                      - error
+                    type: string
+                    x-ms-enum:
+                      modelAsString: true
+                      name: Verbosity
+                      values:
+                        - description: All the traces emitted by trace policies will be sent to the logger attached to this diagnostic instance.
+                          value: verbose
+                        - description: Traces with 'severity' set to 'information' and 'error' will be sent to the logger attached to this diagnostic instance.
+                          value: information
+                        - description: Only traces with 'severity' set to 'error' will be sent to the logger attached to this diagnostic instance.
+                          value: error
                 required:
                   - loggerId
         default:
@@ -876,6 +944,23 @@ paths:
                             items:
                               type: string
                             type: array
+                  httpCorrelationProtocol:
+                    description: Sets correlation protocol to use for Application Insights diagnostics.
+                    enum:
+                      - None
+                      - Legacy
+                      - W3C
+                    type: string
+                    x-ms-enum:
+                      modelAsString: true
+                      name: HttpCorrelationProtocol
+                      values:
+                        - description: Do not read and inject correlation headers.
+                          value: None
+                        - description: 'Inject Request-Id and Request-Context headers with request correlation data. See https://github.com/dotnet/corefx/blob/master/src/System.Diagnostics.DiagnosticSource/src/HttpCorrelationProtocol.md.'
+                          value: Legacy
+                        - description: 'Inject Trace Context headers. See https://w3c.github.io/trace-context.'
+                          value: W3C
                   loggerId:
                     description: Resource Id of a target logger.
                     type: string
@@ -899,6 +984,23 @@ paths:
                           values:
                             - description: Fixed-rate sampling.
                               value: fixed
+                  verbosity:
+                    description: The verbosity level applied to traces emitted by trace policies.
+                    enum:
+                      - verbose
+                      - information
+                      - error
+                    type: string
+                    x-ms-enum:
+                      modelAsString: true
+                      name: Verbosity
+                      values:
+                        - description: All the traces emitted by trace policies will be sent to the logger attached to this diagnostic instance.
+                          value: verbose
+                        - description: Traces with 'severity' set to 'information' and 'error' will be sent to the logger attached to this diagnostic instance.
+                          value: information
+                        - description: Only traces with 'severity' set to 'error' will be sent to the logger attached to this diagnostic instance.
+                          value: error
                 required:
                   - loggerId
         - description: ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -1129,6 +1231,23 @@ paths:
                             items:
                               type: string
                             type: array
+                  httpCorrelationProtocol:
+                    description: Sets correlation protocol to use for Application Insights diagnostics.
+                    enum:
+                      - None
+                      - Legacy
+                      - W3C
+                    type: string
+                    x-ms-enum:
+                      modelAsString: true
+                      name: HttpCorrelationProtocol
+                      values:
+                        - description: Do not read and inject correlation headers.
+                          value: None
+                        - description: 'Inject Request-Id and Request-Context headers with request correlation data. See https://github.com/dotnet/corefx/blob/master/src/System.Diagnostics.DiagnosticSource/src/HttpCorrelationProtocol.md.'
+                          value: Legacy
+                        - description: 'Inject Trace Context headers. See https://w3c.github.io/trace-context.'
+                          value: W3C
                   loggerId:
                     description: Resource Id of a target logger.
                     type: string
@@ -1152,6 +1271,23 @@ paths:
                           values:
                             - description: Fixed-rate sampling.
                               value: fixed
+                  verbosity:
+                    description: The verbosity level applied to traces emitted by trace policies.
+                    enum:
+                      - verbose
+                      - information
+                      - error
+                    type: string
+                    x-ms-enum:
+                      modelAsString: true
+                      name: Verbosity
+                      values:
+                        - description: All the traces emitted by trace policies will be sent to the logger attached to this diagnostic instance.
+                          value: verbose
+                        - description: Traces with 'severity' set to 'information' and 'error' will be sent to the logger attached to this diagnostic instance.
+                          value: information
+                        - description: Only traces with 'severity' set to 'error' will be sent to the logger attached to this diagnostic instance.
+                          value: error
                 required:
                   - loggerId
         - description: 'ETag of the Entity. Not required when creating an entity, but required when updating an entity.'
@@ -1283,6 +1419,23 @@ paths:
                             items:
                               type: string
                             type: array
+                  httpCorrelationProtocol:
+                    description: Sets correlation protocol to use for Application Insights diagnostics.
+                    enum:
+                      - None
+                      - Legacy
+                      - W3C
+                    type: string
+                    x-ms-enum:
+                      modelAsString: true
+                      name: HttpCorrelationProtocol
+                      values:
+                        - description: Do not read and inject correlation headers.
+                          value: None
+                        - description: 'Inject Request-Id and Request-Context headers with request correlation data. See https://github.com/dotnet/corefx/blob/master/src/System.Diagnostics.DiagnosticSource/src/HttpCorrelationProtocol.md.'
+                          value: Legacy
+                        - description: 'Inject Trace Context headers. See https://w3c.github.io/trace-context.'
+                          value: W3C
                   loggerId:
                     description: Resource Id of a target logger.
                     type: string
@@ -1306,6 +1459,23 @@ paths:
                           values:
                             - description: Fixed-rate sampling.
                               value: fixed
+                  verbosity:
+                    description: The verbosity level applied to traces emitted by trace policies.
+                    enum:
+                      - verbose
+                      - information
+                      - error
+                    type: string
+                    x-ms-enum:
+                      modelAsString: true
+                      name: Verbosity
+                      values:
+                        - description: All the traces emitted by trace policies will be sent to the logger attached to this diagnostic instance.
+                          value: verbose
+                        - description: Traces with 'severity' set to 'information' and 'error' will be sent to the logger attached to this diagnostic instance.
+                          value: information
+                        - description: Only traces with 'severity' set to 'error' will be sent to the logger attached to this diagnostic instance.
+                          value: error
                 required:
                   - loggerId
         '201':
@@ -1420,6 +1590,23 @@ paths:
                             items:
                               type: string
                             type: array
+                  httpCorrelationProtocol:
+                    description: Sets correlation protocol to use for Application Insights diagnostics.
+                    enum:
+                      - None
+                      - Legacy
+                      - W3C
+                    type: string
+                    x-ms-enum:
+                      modelAsString: true
+                      name: HttpCorrelationProtocol
+                      values:
+                        - description: Do not read and inject correlation headers.
+                          value: None
+                        - description: 'Inject Request-Id and Request-Context headers with request correlation data. See https://github.com/dotnet/corefx/blob/master/src/System.Diagnostics.DiagnosticSource/src/HttpCorrelationProtocol.md.'
+                          value: Legacy
+                        - description: 'Inject Trace Context headers. See https://w3c.github.io/trace-context.'
+                          value: W3C
                   loggerId:
                     description: Resource Id of a target logger.
                     type: string
@@ -1443,6 +1630,23 @@ paths:
                           values:
                             - description: Fixed-rate sampling.
                               value: fixed
+                  verbosity:
+                    description: The verbosity level applied to traces emitted by trace policies.
+                    enum:
+                      - verbose
+                      - information
+                      - error
+                    type: string
+                    x-ms-enum:
+                      modelAsString: true
+                      name: Verbosity
+                      values:
+                        - description: All the traces emitted by trace policies will be sent to the logger attached to this diagnostic instance.
+                          value: verbose
+                        - description: Traces with 'severity' set to 'information' and 'error' will be sent to the logger attached to this diagnostic instance.
+                          value: information
+                        - description: Only traces with 'severity' set to 'error' will be sent to the logger attached to this diagnostic instance.
+                          value: error
                 required:
                   - loggerId
         default:

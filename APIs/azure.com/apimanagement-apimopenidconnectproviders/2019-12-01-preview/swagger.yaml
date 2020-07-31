@@ -14,7 +14,7 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/apimanagement/resource-manager/Microsoft.ApiManagement/preview/2019-12-01-preview/apimopenidconnectproviders.json'
       version: '2.0'
-  x-preferred: false
+  x-preferred: true
   x-providerName: azure.com
   x-serviceName: apimanagement-apimopenidconnectproviders
   x-tags:
@@ -127,6 +127,7 @@ paths:
                         clientSecret:
                           description: Client Secret of developer console which is the client application.
                           type: string
+                          x-ms-secret: true
                         description:
                           description: User-friendly description of OpenID Connect Provider.
                           type: string
@@ -360,6 +361,7 @@ paths:
                   clientSecret:
                     description: Client Secret of developer console which is the client application.
                     type: string
+                    x-ms-secret: true
                   description:
                     description: User-friendly description of OpenID Connect Provider.
                     type: string
@@ -554,6 +556,7 @@ paths:
                   clientSecret:
                     description: Client Secret of developer console which is the client application.
                     type: string
+                    x-ms-secret: true
                   description:
                     description: User-friendly description of OpenID Connect Provider.
                     type: string
@@ -687,6 +690,7 @@ paths:
                   clientSecret:
                     description: Client Secret of developer console which is the client application.
                     type: string
+                    x-ms-secret: true
                   description:
                     description: User-friendly description of OpenID Connect Provider.
                     type: string
@@ -752,6 +756,7 @@ paths:
                   clientSecret:
                     description: Client Secret of developer console which is the client application.
                     type: string
+                    x-ms-secret: true
                   description:
                     description: User-friendly description of OpenID Connect Provider.
                     type: string
@@ -800,6 +805,7 @@ paths:
                   clientSecret:
                     description: Client Secret of developer console which is the client application.
                     type: string
+                    x-ms-secret: true
                   description:
                     description: User-friendly description of OpenID Connect Provider.
                     type: string
@@ -853,6 +859,7 @@ paths:
             parameters:
               properties:
                 clientId: oidprovidertemplate3
+                clientSecret: x
                 displayName: templateoidprovider3
                 metadataEndpoint: 'https://oidprovider-template3.net'
             resourceGroupName: rg1

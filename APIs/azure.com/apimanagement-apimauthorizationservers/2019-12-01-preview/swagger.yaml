@@ -14,7 +14,7 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/apimanagement/resource-manager/Microsoft.ApiManagement/preview/2019-12-01-preview/apimauthorizationservers.json'
       version: '2.0'
-  x-preferred: false
+  x-preferred: true
   x-providerName: azure.com
   x-serviceName: apimanagement-apimauthorizationservers
   x-tags:
@@ -172,9 +172,6 @@ paths:
                                     - description: Body based Authentication method.
                                       value: Body
                               type: array
-                            clientSecret:
-                              description: Client or app secret registered with this authorization server. This property will not be filled on 'GET' operations! Use '/listSecrets' POST request to get the value.
-                              type: string
                             defaultScope:
                               description: Access token scope that is going to be requested by default. Can be overridden at the API level. Should be provided in the form of a string containing space-delimited values.
                               externalDocs:
@@ -225,6 +222,10 @@ paths:
                         clientRegistrationEndpoint:
                           description: Optional reference to a page where client or app registration for this authorization server is performed. Contains absolute URL to entity being referenced.
                           type: string
+                        clientSecret:
+                          description: Client or app secret registered with this authorization server. This property will not be filled on 'GET' operations! Use '/listSecrets' POST request to get the value.
+                          type: string
+                          x-ms-secret: true
                         displayName:
                           description: User-friendly authorization server name.
                           maxLength: 50
@@ -558,9 +559,6 @@ paths:
                               - description: Body based Authentication method.
                                 value: Body
                         type: array
-                      clientSecret:
-                        description: Client or app secret registered with this authorization server. This property will not be filled on 'GET' operations! Use '/listSecrets' POST request to get the value.
-                        type: string
                       defaultScope:
                         description: Access token scope that is going to be requested by default. Can be overridden at the API level. Should be provided in the form of a string containing space-delimited values.
                         externalDocs:
@@ -611,6 +609,10 @@ paths:
                   clientRegistrationEndpoint:
                     description: Optional reference to a page where client or app registration for this authorization server is performed. Contains absolute URL to entity being referenced.
                     type: string
+                  clientSecret:
+                    description: Client or app secret registered with this authorization server. This property will not be filled on 'GET' operations! Use '/listSecrets' POST request to get the value.
+                    type: string
+                    x-ms-secret: true
                   displayName:
                     description: User-friendly authorization server name.
                     maxLength: 50
@@ -900,9 +902,6 @@ paths:
                               - description: Body based Authentication method.
                                 value: Body
                         type: array
-                      clientSecret:
-                        description: Client or app secret registered with this authorization server. This property will not be filled on 'GET' operations! Use '/listSecrets' POST request to get the value.
-                        type: string
                       defaultScope:
                         description: Access token scope that is going to be requested by default. Can be overridden at the API level. Should be provided in the form of a string containing space-delimited values.
                         externalDocs:
@@ -953,6 +952,10 @@ paths:
                   clientRegistrationEndpoint:
                     description: Optional reference to a page where client or app registration for this authorization server is performed. Contains absolute URL to entity being referenced.
                     type: string
+                  clientSecret:
+                    description: Client or app secret registered with this authorization server. This property will not be filled on 'GET' operations! Use '/listSecrets' POST request to get the value.
+                    type: string
+                    x-ms-secret: true
                   displayName:
                     description: User-friendly authorization server name.
                     maxLength: 50
@@ -1148,9 +1151,6 @@ paths:
                               - description: Body based Authentication method.
                                 value: Body
                         type: array
-                      clientSecret:
-                        description: Client or app secret registered with this authorization server. This property will not be filled on 'GET' operations! Use '/listSecrets' POST request to get the value.
-                        type: string
                       defaultScope:
                         description: Access token scope that is going to be requested by default. Can be overridden at the API level. Should be provided in the form of a string containing space-delimited values.
                         externalDocs:
@@ -1201,6 +1201,10 @@ paths:
                   clientRegistrationEndpoint:
                     description: Optional reference to a page where client or app registration for this authorization server is performed. Contains absolute URL to entity being referenced.
                     type: string
+                  clientSecret:
+                    description: Client or app secret registered with this authorization server. This property will not be filled on 'GET' operations! Use '/listSecrets' POST request to get the value.
+                    type: string
+                    x-ms-secret: true
                   displayName:
                     description: User-friendly authorization server name.
                     maxLength: 50
@@ -1328,9 +1332,6 @@ paths:
                               - description: Body based Authentication method.
                                 value: Body
                         type: array
-                      clientSecret:
-                        description: Client or app secret registered with this authorization server. This property will not be filled on 'GET' operations! Use '/listSecrets' POST request to get the value.
-                        type: string
                       defaultScope:
                         description: Access token scope that is going to be requested by default. Can be overridden at the API level. Should be provided in the form of a string containing space-delimited values.
                         externalDocs:
@@ -1381,6 +1382,10 @@ paths:
                   clientRegistrationEndpoint:
                     description: Optional reference to a page where client or app registration for this authorization server is performed. Contains absolute URL to entity being referenced.
                     type: string
+                  clientSecret:
+                    description: Client or app secret registered with this authorization server. This property will not be filled on 'GET' operations! Use '/listSecrets' POST request to get the value.
+                    type: string
+                    x-ms-secret: true
                   displayName:
                     description: User-friendly authorization server name.
                     maxLength: 50
@@ -1491,9 +1496,6 @@ paths:
                               - description: Body based Authentication method.
                                 value: Body
                         type: array
-                      clientSecret:
-                        description: Client or app secret registered with this authorization server. This property will not be filled on 'GET' operations! Use '/listSecrets' POST request to get the value.
-                        type: string
                       defaultScope:
                         description: Access token scope that is going to be requested by default. Can be overridden at the API level. Should be provided in the form of a string containing space-delimited values.
                         externalDocs:
@@ -1544,6 +1546,10 @@ paths:
                   clientRegistrationEndpoint:
                     description: Optional reference to a page where client or app registration for this authorization server is performed. Contains absolute URL to entity being referenced.
                     type: string
+                  clientSecret:
+                    description: Client or app secret registered with this authorization server. This property will not be filled on 'GET' operations! Use '/listSecrets' POST request to get the value.
+                    type: string
+                    x-ms-secret: true
                   displayName:
                     description: User-friendly authorization server name.
                     maxLength: 50
@@ -1651,7 +1657,6 @@ paths:
                     - authorizationHeader
                   clientId: '1'
                   clientRegistrationEndpoint: 'https://www.contoso.com/apps'
-                  clientSecret: '2'
                   defaultScope: read write
                   description: test server
                   displayName: test2
@@ -1675,7 +1680,6 @@ paths:
                     - authorizationHeader
                   clientId: '1'
                   clientRegistrationEndpoint: 'https://www.contoso.com/apps'
-                  clientSecret: '2'
                   defaultScope: read write
                   description: test server
                   displayName: test2

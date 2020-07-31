@@ -14,7 +14,7 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/apimanagement/resource-manager/Microsoft.ApiManagement/preview/2019-12-01-preview/apimsubscriptions.json'
       version: '2.0'
-  x-preferred: false
+  x-preferred: true
   x-providerName: azure.com
   x-serviceName: apimanagement-apimsubscriptions
   x-tags:
@@ -159,6 +159,7 @@ paths:
                           maxLength: 256
                           minLength: 1
                           type: string
+                          x-ms-secret: true
                         scope:
                           description: 'Scope like /products/{productId} or /apis or /apis/{apiId}.'
                           type: string
@@ -167,6 +168,7 @@ paths:
                           maxLength: 256
                           minLength: 1
                           type: string
+                          x-ms-secret: true
                         startDate:
                           description: |
                             Subscription activation date. The setting is for audit purposes only and the subscription is not automatically activated. The subscription lifecycle can be managed by using the `state` property. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
@@ -463,6 +465,7 @@ paths:
                     maxLength: 256
                     minLength: 1
                     type: string
+                    x-ms-secret: true
                   scope:
                     description: 'Scope like /products/{productId} or /apis or /apis/{apiId}.'
                     type: string
@@ -471,6 +474,7 @@ paths:
                     maxLength: 256
                     minLength: 1
                     type: string
+                    x-ms-secret: true
                   startDate:
                     description: |
                       Subscription activation date. The setting is for audit purposes only and the subscription is not automatically activated. The subscription lifecycle can be managed by using the `state` property. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
@@ -954,6 +958,7 @@ paths:
                     maxLength: 256
                     minLength: 1
                     type: string
+                    x-ms-secret: true
                   scope:
                     description: 'Scope like /products/{productId} or /apis or /apis/{apiId}.'
                     type: string
@@ -962,6 +967,7 @@ paths:
                     maxLength: 256
                     minLength: 1
                     type: string
+                    x-ms-secret: true
                   startDate:
                     description: |
                       Subscription activation date. The setting is for audit purposes only and the subscription is not automatically activated. The subscription lifecycle can be managed by using the `state` property. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
@@ -1052,6 +1058,7 @@ paths:
                     maxLength: 256
                     minLength: 1
                     type: string
+                    x-ms-secret: true
                   scope:
                     description: 'Scope like /products/{productId} or /apis or /apis/{apiId}.'
                     type: string
@@ -1060,6 +1067,7 @@ paths:
                     maxLength: 256
                     minLength: 1
                     type: string
+                    x-ms-secret: true
                   startDate:
                     description: |
                       Subscription activation date. The setting is for audit purposes only and the subscription is not automatically activated. The subscription lifecycle can be managed by using the `state` property. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
@@ -1137,9 +1145,7 @@ paths:
                   createdDate: '2017-06-02T23:34:03.1055076Z'
                   displayName: testsub
                   ownerId: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/users/57127d485157a511ace86ae7
-                  primaryKey: 06c34e1a9d394412b292e0611e73d417
                   scope: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/products/5600b59475ff190048060002
-                  secondaryKey: 1e756a7705364c529e8d1760190f47b3
                   state: submitted
                 type: Microsoft.ApiManagement/service/subscriptions
             '201':
@@ -1150,9 +1156,7 @@ paths:
                   createdDate: '2017-06-02T23:34:03.1055076Z'
                   displayName: testsub
                   ownerId: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/users/57127d485157a511ace86ae7
-                  primaryKey: 06c34e1a9d394412b292e0611e73d417
                   scope: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/products/5600b59475ff190048060002
-                  secondaryKey: 1e756a7705364c529e8d1760190f47b3
                   state: submitted
                 type: Microsoft.ApiManagement/service/subscriptions
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/subscriptions/{sid}/listSecrets':

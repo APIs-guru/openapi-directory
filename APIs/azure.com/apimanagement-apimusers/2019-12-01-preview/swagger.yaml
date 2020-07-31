@@ -14,7 +14,7 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/apimanagement/resource-manager/Microsoft.ApiManagement/preview/2019-12-01-preview/apimusers.json'
       version: '2.0'
-  x-preferred: false
+  x-preferred: true
   x-providerName: azure.com
   x-serviceName: apimanagement-apimusers
   x-tags:
@@ -929,6 +929,17 @@ paths:
                               value: deleted
                 description: Parameters supplied to the Create User operation.
                 properties:
+                  appType:
+                    description: Determines the type of application which send the create user request. Default is old publisher portal.
+                    enum:
+                      - developerPortal
+                    type: string
+                    x-ms-enum:
+                      modelAsString: true
+                      name: AppType
+                      values:
+                        - description: User create request was sent by new developer portal.
+                          value: developerPortal
                   confirmation:
                     description: Determines the type of confirmation e-mail that will be sent to the newly created user.
                     enum:
@@ -1879,6 +1890,7 @@ paths:
                           maxLength: 256
                           minLength: 1
                           type: string
+                          x-ms-secret: true
                         scope:
                           description: 'Scope like /products/{productId} or /apis or /apis/{apiId}.'
                           type: string
@@ -1887,6 +1899,7 @@ paths:
                           maxLength: 256
                           minLength: 1
                           type: string
+                          x-ms-secret: true
                         startDate:
                           description: |
                             Subscription activation date. The setting is for audit purposes only and the subscription is not automatically activated. The subscription lifecycle can be managed by using the `state` property. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.

@@ -141,13 +141,12 @@ paths:
                           pattern: '^[A-Za-z0-9-._]+$'
                           type: string
                         value:
-                          description: Value of the NamedValue. Can contain policy expressions. It may not be empty or consist only of whitespace.
+                          description: Value of the NamedValue. Can contain policy expressions. It may not be empty or consist only of whitespace. This property will not be filled on 'GET' operations! Use '/listSecrets' POST request to get the value.
                           maxLength: 4096
                           minLength: 1
                           type: string
                       required:
                         - displayName
-                        - value
                 type: array
         default:
           description: Error response describing why the operation failed.
@@ -196,18 +195,17 @@ paths:
                     name: 592f1174cc83890dc4f32686
                     properties:
                       displayName: Logger-Credentials-592f1174cc83890dc4f32687
-                      secret: true
-                      value: 'Endpoint=sb://testtemplatetesteh.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=...'
+                      secret: false
+                      value: propValue
                     type: Microsoft.ApiManagement/service/namedValues
                   - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/namedValues/testarmTemplateproperties2
                     name: testarmTemplateproperties2
                     properties:
                       displayName: propName
-                      secret: false
+                      secret: true
                       tags:
                         - foo
                         - bar
-                      value: propValue
                     type: Microsoft.ApiManagement/service/namedValues
       x-ms-odata: './definitions.json#/definitions/NamedValueContract'
       x-ms-pageable:
@@ -389,13 +387,12 @@ paths:
                     pattern: '^[A-Za-z0-9-._]+$'
                     type: string
                   value:
-                    description: Value of the NamedValue. Can contain policy expressions. It may not be empty or consist only of whitespace.
+                    description: Value of the NamedValue. Can contain policy expressions. It may not be empty or consist only of whitespace. This property will not be filled on 'GET' operations! Use '/listSecrets' POST request to get the value.
                     maxLength: 4096
                     minLength: 1
                     type: string
                 required:
                   - displayName
-                  - value
         default:
           description: Error response describing why the operation failed.
           schema:
@@ -659,13 +656,12 @@ paths:
                     pattern: '^[A-Za-z0-9-._]+$'
                     type: string
                   value:
-                    description: Value of the NamedValue. Can contain policy expressions. It may not be empty or consist only of whitespace.
+                    description: Value of the NamedValue. Can contain policy expressions. It may not be empty or consist only of whitespace. This property will not be filled on 'GET' operations! Use '/listSecrets' POST request to get the value.
                     maxLength: 4096
                     minLength: 1
                     type: string
                 required:
                   - displayName
-                  - value
         '202':
           description: Request to update NamedValue was accepted. Location header contains the URL where the status of the long running operation can be checked.
         '204':
@@ -709,10 +705,12 @@ paths:
             namedValueId: testprop2
             parameters:
               properties:
-                secret: true
+                displayName: prop3name
+                secret: false
                 tags:
                   - foo
                   - bar2
+                value: propValue
             resourceGroupName: rg1
             serviceName: apimService1
             subscriptionId: subid
@@ -720,13 +718,12 @@ paths:
             '200':
               body:
                 id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/namedValues/testprop2
-                name: testprop2
                 properties:
                   displayName: prop3name
-                  secret: true
+                  secret: false
                   tags:
                     - foo
-                    - bar
+                    - bar2
                   value: propValue
                 type: Microsoft.ApiManagement/service/namedValues
             '202':
@@ -808,7 +805,7 @@ paths:
                     pattern: '^[A-Za-z0-9-._]+$'
                     type: string
                   value:
-                    description: Value of the NamedValue. Can contain policy expressions. It may not be empty or consist only of whitespace.
+                    description: Value of the NamedValue. Can contain policy expressions. It may not be empty or consist only of whitespace. This property will not be filled on 'GET' operations! Use '/listSecrets' POST request to get the value.
                     maxLength: 4096
                     minLength: 1
                     type: string
@@ -879,13 +876,12 @@ paths:
                     pattern: '^[A-Za-z0-9-._]+$'
                     type: string
                   value:
-                    description: Value of the NamedValue. Can contain policy expressions. It may not be empty or consist only of whitespace.
+                    description: Value of the NamedValue. Can contain policy expressions. It may not be empty or consist only of whitespace. This property will not be filled on 'GET' operations! Use '/listSecrets' POST request to get the value.
                     maxLength: 4096
                     minLength: 1
                     type: string
                 required:
                   - displayName
-                  - value
         '201':
           description: NamedValue was successfully created.
           headers:
@@ -933,13 +929,12 @@ paths:
                     pattern: '^[A-Za-z0-9-._]+$'
                     type: string
                   value:
-                    description: Value of the NamedValue. Can contain policy expressions. It may not be empty or consist only of whitespace.
+                    description: Value of the NamedValue. Can contain policy expressions. It may not be empty or consist only of whitespace. This property will not be filled on 'GET' operations! Use '/listSecrets' POST request to get the value.
                     maxLength: 4096
                     minLength: 1
                     type: string
                 required:
                   - displayName
-                  - value
         '202':
           description: Request to create or update NamedValue was accepted. Location header contains the URL where the status of the long running operation can be checked.
         default:
@@ -981,7 +976,7 @@ paths:
             parameters:
               properties:
                 displayName: prop3name
-                secret: true
+                secret: false
                 tags:
                   - foo
                   - bar
@@ -996,7 +991,7 @@ paths:
                 name: testprop2
                 properties:
                   displayName: prop3name
-                  secret: true
+                  secret: false
                   tags:
                     - foo
                     - bar
@@ -1008,7 +1003,7 @@ paths:
                 name: testprop2
                 properties:
                   displayName: prop3name
-                  secret: true
+                  secret: false
                   tags:
                     - foo
                     - bar
@@ -1020,4 +1015,94 @@ paths:
       x-ms-long-running-operation: true
       x-ms-long-running-operation-options:
         final-state-via: location
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/namedValues/{namedValueId}/listValue':
+    post:
+      description: Gets the secret value of the NamedValue.
+      operationId: NamedValue_ListValue
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: The name of the API Management service.
+          in: path
+          maxLength: 50
+          minLength: 1
+          name: serviceName
+          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: Identifier of the NamedValue.
+          in: path
+          maxLength: 256
+          name: namedValueId
+          pattern: '^[^*#&+:<>?]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: Version of the API to be used with the client request.
+          in: query
+          name: api-version
+          required: true
+          type: string
+        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The response body contains secret value.
+          schema:
+            description: 'Client or app secret used in IdentityProviders, Aad, OpenID or OAuth.'
+            properties:
+              value:
+                description: This is secret value of the NamedValue entity.
+                type: string
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            description: Error Response.
+            properties:
+              error:
+                description: Error Body contract.
+                properties:
+                  code:
+                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
+                    type: string
+                  details:
+                    description: 'The list of invalid fields send in request, in case of validation error.'
+                    items:
+                      description: Error Field contract.
+                      properties:
+                        code:
+                          description: Property level error code.
+                          type: string
+                        message:
+                          description: Human-readable representation of property-level error.
+                          type: string
+                        target:
+                          description: Property name.
+                          type: string
+                    type: array
+                  message:
+                    description: Human-readable representation of the error.
+                    type: string
+      tags:
+        - NamedValue
+      x-ms-examples:
+        ApiManagementListSecretsSubscription:
+          parameters:
+            api-version: 2019-12-01-preview
+            namedValueId: testarmTemplateproperties2
+            resourceGroupName: rg1
+            serviceName: apimService1
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                value: propValue
 definitions: {}
