@@ -2011,7 +2011,7 @@ paths:
                   items:
                     $ref: '#/components/schemas/CreateAttendeeRequestItem'
                   minItems: 1
-                  maxItems: 5
+                  maxItems: 10
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -11031,7 +11031,7 @@ components:
       items:
         $ref: '#/components/schemas/CreateAttendeeRequestItem'
       minItems: 1
-      maxItems: 5
+      maxItems: 10
     CreateMeetingWithAttendeesRequest:
       type: object
       required:
@@ -11581,6 +11581,7 @@ components:
         - AccessDenied
         - ServiceUnavailable
         - Throttled
+        - Throttling
         - Unauthorized
         - Unprocessable
         - VoiceConnectorGroupAssociationsExist

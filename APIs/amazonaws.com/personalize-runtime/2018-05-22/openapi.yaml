@@ -154,7 +154,7 @@ paths:
                   pattern: 'arn:([a-z\d-]+):personalize:.*:.*:.+'
                   maxLength: 256
                 inputList:
-                  description: 'A list of items (itemId''s) to rank. If an item was not included in the training dataset, the item is appended to the end of the reranked list. The maximum is 500.'
+                  description: 'A list of items (by <code>itemId</code>) to rank. If an item was not included in the training dataset, the item is appended to the end of the reranked list. The maximum is 500.'
                   type: array
                   items:
                     $ref: '#/components/schemas/ItemID'
@@ -168,6 +168,11 @@ paths:
                   maxProperties: 150
                   additionalProperties:
                     $ref: '#/components/schemas/AttributeValue'
+                filterArn:
+                  description: The Amazon Resource Name (ARN) of a filter you created to include or exclude items from recommendations for a given user.
+                  type: string
+                  pattern: 'arn:([a-z\d-]+):personalize:.*:.*:.+'
+                  maxLength: 256
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -233,7 +238,7 @@ paths:
                   additionalProperties:
                     $ref: '#/components/schemas/AttributeValue'
                 filterArn:
-                  description: 'The ARN of the filter to apply to the returned recommendations. For more information, see Using Filters with Amazon Personalize.'
+                  description: '<p>The ARN of the filter to apply to the returned recommendations. For more information, see <a href="https://docs.aws.amazon.com/personalize/latest/dg/filters.html">Using Filters with Amazon Personalize</a>.</p> <p>When using this parameter, be sure the filter resource is <code>ACTIVE</code>.</p>'
                   type: string
                   pattern: 'arn:([a-z\d-]+):personalize:.*:.*:.+'
                   maxLength: 256
@@ -351,13 +356,16 @@ components:
           description: The Amazon Resource Name (ARN) of the campaign to use for generating the personalized ranking.
         inputList:
           $ref: '#/components/schemas/InputList'
-          description: 'A list of items (itemId''s) to rank. If an item was not included in the training dataset, the item is appended to the end of the reranked list. The maximum is 500.'
+          description: 'A list of items (by <code>itemId</code>) to rank. If an item was not included in the training dataset, the item is appended to the end of the reranked list. The maximum is 500.'
         userId:
           $ref: '#/components/schemas/UserID'
           description: The user for which you want the campaign to provide a personalized ranking.
         context:
           $ref: '#/components/schemas/Context'
           description: 'The contextual metadata to use when getting recommendations. Contextual metadata includes any interaction information that might be relevant when getting a user''s recommendations, such as the user''s current location or device type.'
+        filterArn:
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of a filter you created to include or exclude items from recommendations for a given user.
     ItemList:
       type: array
       items:
@@ -388,7 +396,7 @@ components:
           description: 'The contextual metadata to use when getting recommendations. Contextual metadata includes any interaction information that might be relevant when getting a user''s recommendations, such as the user''s current location or device type.'
         filterArn:
           $ref: '#/components/schemas/Arn'
-          description: 'The ARN of the filter to apply to the returned recommendations. For more information, see Using Filters with Amazon Personalize.'
+          description: '<p>The ARN of the filter to apply to the returned recommendations. For more information, see <a href="https://docs.aws.amazon.com/personalize/latest/dg/filters.html">Using Filters with Amazon Personalize</a>.</p> <p>When using this parameter, be sure the filter resource is <code>ACTIVE</code>.</p>'
     PredictedItem:
       type: object
       properties:

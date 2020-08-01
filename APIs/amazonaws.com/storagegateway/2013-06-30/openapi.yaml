@@ -4798,6 +4798,12 @@ components:
         EndpointType:
           $ref: '#/components/schemas/EndpointType'
           description: '<p>The type of endpoint for your gateway.</p> <p>Valid Values: <code>STANDARD</code> | <code>FIPS</code> </p>'
+        SoftwareUpdatesEndDate:
+          $ref: '#/components/schemas/SoftwareUpdatesEndDate'
+          description: Date after which this gateway will not receive software updates for new features.
+        DeprecationDate:
+          $ref: '#/components/schemas/DeprecationDate'
+          description: Date after which this gateway will not receive software updates for new features and bug fixes.
       description: 'A JSON object containing the following fields:'
     DescribeGatewayInformationInput:
       type: object
@@ -6474,6 +6480,10 @@ components:
       type: integer
       minimum: 0
       maximum: 6
+    DeprecationDate:
+      type: string
+      minLength: 1
+      maxLength: 25
     Time:
       type: string
       format: date-time
@@ -6520,6 +6530,10 @@ components:
       type: string
       minLength: 4
       maxLength: 8
+    SoftwareUpdatesEndDate:
+      type: string
+      minLength: 1
+      maxLength: 25
     HourOfDay:
       type: integer
       minimum: 0
