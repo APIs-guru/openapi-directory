@@ -297,11 +297,17 @@ components:
       type: object
       properties:
         ConnectedAt:
+          xml:
+            name: connectedAt
           $ref: '#/components/schemas/__timestampIso8601'
           description: The time in ISO 8601 format for when the connection was established.
         Identity:
+          xml:
+            name: identity
           $ref: '#/components/schemas/Identity'
         LastActiveAt:
+          xml:
+            name: lastActiveAt
           $ref: '#/components/schemas/__timestampIso8601'
           description: The time in ISO 8601 format for when the connection was last active.
     PayloadTooLargeException: {}
@@ -329,9 +335,13 @@ components:
         - UserAgent
       properties:
         SourceIp:
+          xml:
+            name: sourceIp
           $ref: '#/components/schemas/__string'
           description: The source IP address of the TCP connection making the request to API Gateway.
         UserAgent:
+          xml:
+            name: userAgent
           $ref: '#/components/schemas/__string'
           description: The User Agent of the API caller.
     PostToConnectionRequest:

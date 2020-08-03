@@ -164,6 +164,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: Tag
               $ref: '#/components/schemas/Tag'
         - name: Action
           in: query
@@ -1021,6 +1023,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: PreferredAvailabilityZone
               $ref: '#/components/schemas/String'
         - name: NumCacheNodes
           in: query
@@ -1065,6 +1069,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: CacheSecurityGroupName
               $ref: '#/components/schemas/String'
         - name: SecurityGroupIds
           in: query
@@ -1073,6 +1079,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: SecurityGroupId
               $ref: '#/components/schemas/String'
         - name: Tags
           in: query
@@ -1081,6 +1089,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: Tag
               $ref: '#/components/schemas/Tag'
         - name: SnapshotArns
           in: query
@@ -1089,6 +1099,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: SnapshotArn
               $ref: '#/components/schemas/String'
         - name: SnapshotName
           in: query
@@ -1601,6 +1613,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: SubnetIdentifier
               $ref: '#/components/schemas/String'
         - name: Action
           in: query
@@ -1987,6 +2001,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: AvailabilityZone
               $ref: '#/components/schemas/String'
         - name: NumNodeGroups
           in: query
@@ -2007,6 +2023,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: NodeGroupConfiguration
               $ref: '#/components/schemas/NodeGroupConfiguration'
         - name: CacheNodeType
           in: query
@@ -2045,6 +2063,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: CacheSecurityGroupName
               $ref: '#/components/schemas/String'
         - name: SecurityGroupIds
           in: query
@@ -2053,6 +2073,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: SecurityGroupId
               $ref: '#/components/schemas/String'
         - name: Tags
           in: query
@@ -2061,6 +2083,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: Tag
               $ref: '#/components/schemas/Tag'
         - name: SnapshotArns
           in: query
@@ -2069,6 +2093,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: SnapshotArn
               $ref: '#/components/schemas/String'
         - name: SnapshotName
           in: query
@@ -2545,6 +2571,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: GlobalNodeGroupId
               $ref: '#/components/schemas/String'
         - name: GlobalNodeGroupsToRetain
           in: query
@@ -2553,6 +2581,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: GlobalNodeGroupId
               $ref: '#/components/schemas/String'
         - name: ApplyImmediately
           in: query
@@ -2741,6 +2771,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: ConfigureShard
               $ref: '#/components/schemas/ConfigureShard'
         - name: ReplicasToRemove
           in: query
@@ -6190,6 +6222,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: RegionalConfiguration
               $ref: '#/components/schemas/RegionalConfiguration'
         - name: ApplyImmediately
           in: query
@@ -6372,6 +6406,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: ConfigureShard
               $ref: '#/components/schemas/ConfigureShard'
         - name: ApplyImmediately
           in: query
@@ -6836,6 +6872,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: CacheNodeId
               $ref: '#/components/schemas/String'
         - name: AZMode
           in: query
@@ -6853,6 +6891,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: PreferredAvailabilityZone
               $ref: '#/components/schemas/String'
         - name: CacheSecurityGroupNames
           in: query
@@ -6861,6 +6901,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: CacheSecurityGroupName
               $ref: '#/components/schemas/String'
         - name: SecurityGroupIds
           in: query
@@ -6869,6 +6911,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: SecurityGroupId
               $ref: '#/components/schemas/String'
         - name: PreferredMaintenanceWindow
           in: query
@@ -7120,6 +7164,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: ParameterNameValue
               $ref: '#/components/schemas/ParameterNameValue'
         - name: Action
           in: query
@@ -7260,6 +7306,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: SubnetIdentifier
               $ref: '#/components/schemas/String'
         - name: Action
           in: query
@@ -7622,6 +7670,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: CacheSecurityGroupName
               $ref: '#/components/schemas/String'
         - name: SecurityGroupIds
           in: query
@@ -7630,6 +7680,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: SecurityGroupId
               $ref: '#/components/schemas/String'
         - name: PreferredMaintenanceWindow
           in: query
@@ -7941,6 +7993,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: ReshardingConfiguration
               $ref: '#/components/schemas/ReshardingConfiguration'
         - name: NodeGroupsToRemove
           in: query
@@ -7949,6 +8003,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: NodeGroupToRemove
               $ref: '#/components/schemas/AllowedNodeGroupId'
         - name: NodeGroupsToRetain
           in: query
@@ -7957,6 +8013,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: NodeGroupToRetain
               $ref: '#/components/schemas/AllowedNodeGroupId'
         - name: Action
           in: query
@@ -8367,6 +8425,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: CacheNodeId
               $ref: '#/components/schemas/String'
         - name: Action
           in: query
@@ -8623,6 +8683,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: ParameterNameValue
               $ref: '#/components/schemas/ParameterNameValue'
         - name: Action
           in: query
@@ -9736,6 +9798,8 @@ components:
     TagList:
       type: array
       items:
+        xml:
+          name: Tag
         $ref: '#/components/schemas/Tag'
     AddTagsToResourceMessage:
       type: object
@@ -9819,6 +9883,8 @@ components:
     AvailabilityZonesList:
       type: array
       items:
+        xml:
+          name: AvailabilityZone
         $ref: '#/components/schemas/String'
     ReplicationGroupIdList:
       type: array
@@ -9908,6 +9974,8 @@ components:
     CacheSecurityGroupMembershipList:
       type: array
       items:
+        xml:
+          name: CacheSecurityGroup
         $ref: '#/components/schemas/CacheSecurityGroupMembership'
     CacheParameterGroupStatus:
       type: object
@@ -9925,6 +9993,8 @@ components:
     CacheNodeList:
       type: array
       items:
+        xml:
+          name: CacheNode
         $ref: '#/components/schemas/CacheNode'
     SecurityGroupMembershipList:
       type: array
@@ -10017,6 +10087,8 @@ components:
     CacheClusterList:
       type: array
       items:
+        xml:
+          name: CacheCluster
         $ref: '#/components/schemas/CacheCluster'
     CacheEngineVersion:
       type: object
@@ -10040,6 +10112,8 @@ components:
     CacheEngineVersionList:
       type: array
       items:
+        xml:
+          name: CacheEngineVersion
         $ref: '#/components/schemas/CacheEngineVersion'
     CacheNode:
       type: object
@@ -10069,10 +10143,14 @@ components:
     CacheNodeIdsList:
       type: array
       items:
+        xml:
+          name: CacheNodeId
         $ref: '#/components/schemas/String'
     CacheNodeTypeSpecificValueList:
       type: array
       items:
+        xml:
+          name: CacheNodeTypeSpecificValue
         $ref: '#/components/schemas/CacheNodeTypeSpecificValue'
     ChangeType:
       type: string
@@ -10113,6 +10191,8 @@ components:
     CacheNodeTypeSpecificParametersList:
       type: array
       items:
+        xml:
+          name: CacheNodeTypeSpecificParameter
         $ref: '#/components/schemas/CacheNodeTypeSpecificParameter'
     CacheNodeTypeSpecificValue:
       type: object
@@ -10169,6 +10249,8 @@ components:
     CacheNodeUpdateStatusList:
       type: array
       items:
+        xml:
+          name: CacheNodeUpdateStatus
         $ref: '#/components/schemas/CacheNodeUpdateStatus'
     CacheParameterGroup:
       type: object
@@ -10192,14 +10274,20 @@ components:
     ParametersList:
       type: array
       items:
+        xml:
+          name: Parameter
         $ref: '#/components/schemas/Parameter'
     CacheParameterGroupList:
       type: array
       items:
+        xml:
+          name: CacheParameterGroup
         $ref: '#/components/schemas/CacheParameterGroup'
     EC2SecurityGroupList:
       type: array
       items:
+        xml:
+          name: EC2SecurityGroup
         $ref: '#/components/schemas/EC2SecurityGroup'
     CacheSecurityGroupMembership:
       type: object
@@ -10214,14 +10302,20 @@ components:
     CacheSecurityGroups:
       type: array
       items:
+        xml:
+          name: CacheSecurityGroup
         $ref: '#/components/schemas/CacheSecurityGroup'
     CacheSecurityGroupNameList:
       type: array
       items:
+        xml:
+          name: CacheSecurityGroupName
         $ref: '#/components/schemas/String'
     SubnetList:
       type: array
       items:
+        xml:
+          name: Subnet
         $ref: '#/components/schemas/Subnet'
     CacheSubnetGroup:
       type: object
@@ -10245,10 +10339,14 @@ components:
     CacheSubnetGroups:
       type: array
       items:
+        xml:
+          name: CacheSubnetGroup
         $ref: '#/components/schemas/CacheSubnetGroup'
     ClusterIdList:
       type: array
       items:
+        xml:
+          name: ClusterId
         $ref: '#/components/schemas/String'
     CompleteMigrationMessage:
       type: object
@@ -10334,6 +10432,8 @@ components:
     PreferredAvailabilityZoneList:
       type: array
       items:
+        xml:
+          name: PreferredAvailabilityZone
         $ref: '#/components/schemas/String'
     CopySnapshotMessage:
       type: object
@@ -10440,10 +10540,14 @@ components:
     SecurityGroupIdsList:
       type: array
       items:
+        xml:
+          name: SecurityGroupId
         $ref: '#/components/schemas/String'
     SnapshotArnsList:
       type: array
       items:
+        xml:
+          name: SnapshotArn
         $ref: '#/components/schemas/String'
     CreateCacheClusterMessage:
       type: object
@@ -10556,6 +10660,8 @@ components:
     SubnetIdentifierList:
       type: array
       items:
+        xml:
+          name: SubnetIdentifier
         $ref: '#/components/schemas/String'
     CreateCacheSubnetGroupMessage:
       type: object
@@ -10637,6 +10743,8 @@ components:
     NodeGroupConfigurationList:
       type: array
       items:
+        xml:
+          name: NodeGroupConfiguration
         $ref: '#/components/schemas/NodeGroupConfiguration'
     CreateReplicationGroupMessage:
       type: object
@@ -10765,6 +10873,8 @@ components:
     GlobalNodeGroupIdList:
       type: array
       items:
+        xml:
+          name: GlobalNodeGroupId
         $ref: '#/components/schemas/String'
     DecreaseNodeGroupsInGlobalReplicationGroupMessage:
       type: object
@@ -10792,6 +10902,8 @@ components:
     ReplicaConfigurationList:
       type: array
       items:
+        xml:
+          name: ConfigureShard
         $ref: '#/components/schemas/ConfigureShard'
     RemoveReplicasList:
       type: array
@@ -11090,6 +11202,8 @@ components:
     GlobalReplicationGroupList:
       type: array
       items:
+        xml:
+          name: GlobalReplicationGroup
         $ref: '#/components/schemas/GlobalReplicationGroup'
     DescribeReplicationGroupsMessage:
       type: object
@@ -11184,6 +11298,8 @@ components:
     SnapshotList:
       type: array
       items:
+        xml:
+          name: Snapshot
         $ref: '#/components/schemas/Snapshot'
     DescribeSnapshotsMessage:
       type: object
@@ -11312,6 +11428,8 @@ components:
     EventList:
       type: array
       items:
+        xml:
+          name: Event
         $ref: '#/components/schemas/Event'
     FailoverGlobalReplicationGroupMessage:
       type: object
@@ -11343,10 +11461,14 @@ components:
     GlobalNodeGroupList:
       type: array
       items:
+        xml:
+          name: GlobalNodeGroup
         $ref: '#/components/schemas/GlobalNodeGroup'
     GlobalReplicationGroupMemberList:
       type: array
       items:
+        xml:
+          name: GlobalReplicationGroupMember
         $ref: '#/components/schemas/GlobalReplicationGroupMember'
     GlobalReplicationGroupInfo:
       type: object
@@ -11380,6 +11502,8 @@ components:
     RegionalConfigurationList:
       type: array
       items:
+        xml:
+          name: RegionalConfiguration
         $ref: '#/components/schemas/RegionalConfiguration'
     IncreaseNodeGroupsInGlobalReplicationGroupMessage:
       type: object
@@ -11512,6 +11636,8 @@ components:
     ParameterNameValueList:
       type: array
       items:
+        xml:
+          name: ParameterNameValue
         $ref: '#/components/schemas/ParameterNameValue'
     ModifyCacheParameterGroupMessage:
       type: object
@@ -11642,14 +11768,20 @@ components:
     ReshardingConfigurationList:
       type: array
       items:
+        xml:
+          name: ReshardingConfiguration
         $ref: '#/components/schemas/ReshardingConfiguration'
     NodeGroupsToRemoveList:
       type: array
       items:
+        xml:
+          name: NodeGroupToRemove
         $ref: '#/components/schemas/AllowedNodeGroupId'
     NodeGroupsToRetainList:
       type: array
       items:
+        xml:
+          name: NodeGroupToRetain
         $ref: '#/components/schemas/AllowedNodeGroupId'
     ModifyReplicationGroupShardConfigurationMessage:
       type: object
@@ -11686,6 +11818,8 @@ components:
     NodeGroupMemberList:
       type: array
       items:
+        xml:
+          name: NodeGroupMember
         $ref: '#/components/schemas/NodeGroupMember'
     NodeGroup:
       type: object
@@ -11712,6 +11846,8 @@ components:
     NodeGroupList:
       type: array
       items:
+        xml:
+          name: NodeGroup
         $ref: '#/components/schemas/NodeGroup'
     NodeGroupMember:
       type: object
@@ -11766,6 +11902,8 @@ components:
     NodeGroupMemberUpdateStatusList:
       type: array
       items:
+        xml:
+          name: NodeGroupMemberUpdateStatus
         $ref: '#/components/schemas/NodeGroupMemberUpdateStatus'
     NodeGroupUpdateStatus:
       type: object
@@ -11780,6 +11918,8 @@ components:
     NodeGroupUpdateStatusList:
       type: array
       items:
+        xml:
+          name: NodeGroupUpdateStatus
         $ref: '#/components/schemas/NodeGroupUpdateStatus'
     NodeSnapshot:
       type: object
@@ -11809,6 +11949,8 @@ components:
     NodeSnapshotList:
       type: array
       items:
+        xml:
+          name: NodeSnapshot
         $ref: '#/components/schemas/NodeSnapshot'
     Parameter:
       type: object
@@ -11865,6 +12007,8 @@ components:
     ProcessedUpdateActionList:
       type: array
       items:
+        xml:
+          name: ProcessedUpdateAction
         $ref: '#/components/schemas/ProcessedUpdateAction'
     PurchaseReservedCacheNodesOfferingMessage:
       type: object
@@ -11965,6 +12109,8 @@ components:
     RecurringChargeList:
       type: array
       items:
+        xml:
+          name: RecurringCharge
         $ref: '#/components/schemas/RecurringCharge'
     RemoveTagsFromResourceMessage:
       type: object
@@ -11999,6 +12145,8 @@ components:
     ReplicationGroupList:
       type: array
       items:
+        xml:
+          name: ReplicationGroup
         $ref: '#/components/schemas/ReplicationGroup'
     ReshardingStatus:
       type: object
@@ -12010,6 +12158,8 @@ components:
     ReservedCacheNodeList:
       type: array
       items:
+        xml:
+          name: ReservedCacheNode
         $ref: '#/components/schemas/ReservedCacheNode'
     ReservedCacheNodesOffering:
       type: object
@@ -12042,6 +12192,8 @@ components:
     ReservedCacheNodesOfferingList:
       type: array
       items:
+        xml:
+          name: ReservedCacheNodesOffering
         $ref: '#/components/schemas/ReservedCacheNodesOffering'
     ResetCacheParameterGroupMessage:
       type: object
@@ -12148,6 +12300,8 @@ components:
     ServiceUpdateList:
       type: array
       items:
+        xml:
+          name: ServiceUpdate
         $ref: '#/components/schemas/ServiceUpdate'
     SlaMet:
       type: string
@@ -12213,6 +12367,8 @@ components:
     UnprocessedUpdateActionList:
       type: array
       items:
+        xml:
+          name: UnprocessedUpdateAction
         $ref: '#/components/schemas/UnprocessedUpdateAction'
     UpdateAction:
       type: object
@@ -12272,6 +12428,8 @@ components:
     UpdateActionList:
       type: array
       items:
+        xml:
+          name: UpdateAction
         $ref: '#/components/schemas/UpdateAction'
 security:
   - hmac: []

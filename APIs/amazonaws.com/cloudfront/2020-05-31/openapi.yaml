@@ -5403,10 +5403,14 @@ components:
     TagList:
       type: array
       items:
+        xml:
+          name: Tag
         $ref: '#/components/schemas/Tag'
     TagKeyList:
       type: array
       items:
+        xml:
+          name: Key
         $ref: '#/components/schemas/TagKey'
     UpdateCachePolicyResult:
       type: object
@@ -5466,6 +5470,8 @@ components:
     SignerList:
       type: array
       items:
+        xml:
+          name: Signer
         $ref: '#/components/schemas/Signer'
     ActiveTrustedSigners:
       type: object
@@ -5502,14 +5508,20 @@ components:
     AliasICPRecordals:
       type: array
       items:
+        xml:
+          name: AliasICPRecordal
         $ref: '#/components/schemas/AliasICPRecordal'
     AliasList:
       type: array
       items:
+        xml:
+          name: CNAME
         $ref: '#/components/schemas/string'
     MethodsList:
       type: array
       items:
+        xml:
+          name: Method
         $ref: '#/components/schemas/Method'
     CachedMethods:
       type: object
@@ -5542,6 +5554,8 @@ components:
     AwsAccountNumberList:
       type: array
       items:
+        xml:
+          name: AwsAccountNumber
         $ref: '#/components/schemas/string'
     ViewerProtocolPolicy:
       type: string
@@ -5640,6 +5654,8 @@ components:
     CacheBehaviorList:
       type: array
       items:
+        xml:
+          name: CacheBehavior
         $ref: '#/components/schemas/CacheBehavior'
     timestamp:
       type: string
@@ -5747,6 +5763,8 @@ components:
     CachePolicySummaryList:
       type: array
       items:
+        xml:
+          name: CachePolicySummary
         $ref: '#/components/schemas/CachePolicySummary'
     CachePolicyList:
       type: object
@@ -5854,6 +5872,8 @@ components:
     CloudFrontOriginAccessIdentitySummaryList:
       type: array
       items:
+        xml:
+          name: CloudFrontOriginAccessIdentitySummary
         $ref: '#/components/schemas/CloudFrontOriginAccessIdentitySummary'
     CloudFrontOriginAccessIdentityList:
       type: object
@@ -5934,10 +5954,14 @@ components:
     ContentTypeProfileList:
       type: array
       items:
+        xml:
+          name: ContentTypeProfile
         $ref: '#/components/schemas/ContentTypeProfile'
     CookieNameList:
       type: array
       items:
+        xml:
+          name: Name
         $ref: '#/components/schemas/string'
     ItemSelection:
       type: string
@@ -6387,10 +6411,14 @@ components:
     CustomErrorResponseList:
       type: array
       items:
+        xml:
+          name: CustomErrorResponse
         $ref: '#/components/schemas/CustomErrorResponse'
     OriginCustomHeadersList:
       type: array
       items:
+        xml:
+          name: OriginCustomHeader
         $ref: '#/components/schemas/OriginCustomHeader'
     CustomHeaders:
       type: object
@@ -6487,6 +6515,8 @@ components:
     DistributionIdListSummary:
       type: array
       items:
+        xml:
+          name: DistributionId
         $ref: '#/components/schemas/string'
     DistributionIdList:
       type: object
@@ -6518,6 +6548,8 @@ components:
     DistributionSummaryList:
       type: array
       items:
+        xml:
+          name: DistributionSummary
         $ref: '#/components/schemas/DistributionSummary'
     DistributionList:
       type: object
@@ -6632,6 +6664,8 @@ components:
     EncryptionEntityList:
       type: array
       items:
+        xml:
+          name: EncryptionEntity
         $ref: '#/components/schemas/EncryptionEntity'
     FieldPatterns:
       type: object
@@ -6672,6 +6706,8 @@ components:
     FieldLevelEncryptionSummaryList:
       type: array
       items:
+        xml:
+          name: FieldLevelEncryptionSummary
         $ref: '#/components/schemas/FieldLevelEncryptionSummary'
     FieldLevelEncryptionList:
       type: object
@@ -6695,6 +6731,8 @@ components:
     FieldLevelEncryptionProfileSummaryList:
       type: array
       items:
+        xml:
+          name: FieldLevelEncryptionProfileSummary
         $ref: '#/components/schemas/FieldLevelEncryptionProfileSummary'
     FieldLevelEncryptionProfileList:
       type: object
@@ -6764,6 +6802,8 @@ components:
     FieldPatternList:
       type: array
       items:
+        xml:
+          name: FieldPattern
         $ref: '#/components/schemas/string'
     QueryStringCacheKeys:
       type: object
@@ -6786,6 +6826,8 @@ components:
     LocationList:
       type: array
       items:
+        xml:
+          name: Location
         $ref: '#/components/schemas/string'
     GeoRestriction:
       type: object
@@ -6881,10 +6923,14 @@ components:
     HeaderList:
       type: array
       items:
+        xml:
+          name: Name
         $ref: '#/components/schemas/string'
     InvalidationSummaryList:
       type: array
       items:
+        xml:
+          name: InvalidationSummary
         $ref: '#/components/schemas/InvalidationSummary'
     InvalidationList:
       type: object
@@ -6933,6 +6979,8 @@ components:
     KeyPairIdList:
       type: array
       items:
+        xml:
+          name: KeyPairId
         $ref: '#/components/schemas/string'
     KeyPairIds:
       type: object
@@ -6967,6 +7015,8 @@ components:
     LambdaFunctionAssociationList:
       type: array
       items:
+        xml:
+          name: LambdaFunctionAssociation
         $ref: '#/components/schemas/LambdaFunctionAssociation'
     ListCachePoliciesRequest:
       type: object
@@ -7227,6 +7277,8 @@ components:
       type: array
       description: List of origin groups for a distribution.
       items:
+        xml:
+          name: OriginGroup
         $ref: '#/components/schemas/OriginGroup'
     OriginGroupMember:
       type: object
@@ -7241,12 +7293,16 @@ components:
       type: array
       description: List of origins in an origin group.
       items:
+        xml:
+          name: OriginGroupMember
         $ref: '#/components/schemas/OriginGroupMember'
       minItems: 2
       maxItems: 2
     OriginList:
       type: array
       items:
+        xml:
+          name: Origin
         $ref: '#/components/schemas/Origin'
       minItems: 1
     OriginRequestPolicyCookieBehavior:
@@ -7265,6 +7321,8 @@ components:
     OriginRequestPolicySummaryList:
       type: array
       items:
+        xml:
+          name: OriginRequestPolicySummary
         $ref: '#/components/schemas/OriginRequestPolicySummary'
     OriginRequestPolicyQueryStringBehavior:
       type: string
@@ -7288,14 +7346,20 @@ components:
     SslProtocolsList:
       type: array
       items:
+        xml:
+          name: SslProtocol
         $ref: '#/components/schemas/SslProtocol'
     PathList:
       type: array
       items:
+        xml:
+          name: Path
         $ref: '#/components/schemas/string'
     PublicKeySummaryList:
       type: array
       items:
+        xml:
+          name: PublicKeySummary
         $ref: '#/components/schemas/PublicKeySummary'
     PublicKeySummary:
       type: object
@@ -7349,14 +7413,20 @@ components:
     QueryArgProfileList:
       type: array
       items:
+        xml:
+          name: QueryArgProfile
         $ref: '#/components/schemas/QueryArgProfile'
     QueryStringCacheKeysList:
       type: array
       items:
+        xml:
+          name: Name
         $ref: '#/components/schemas/string'
     QueryStringNamesList:
       type: array
       items:
+        xml:
+          name: Name
         $ref: '#/components/schemas/string'
     SSLSupportMethod:
       type: string
@@ -7384,11 +7454,15 @@ components:
       type: array
       description: List of status codes for origin failover.
       items:
+        xml:
+          name: StatusCode
         $ref: '#/components/schemas/integer'
       minItems: 1
     StreamingDistributionSummaryList:
       type: array
       items:
+        xml:
+          name: StreamingDistributionSummary
         $ref: '#/components/schemas/StreamingDistributionSummary'
     StreamingDistributionSummary:
       type: object

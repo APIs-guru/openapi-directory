@@ -310,6 +310,8 @@ paths:
                   type: object
                   properties:
                     S3Logs:
+                      xml:
+                        name: s3Logs
                       $ref: '#/components/schemas/S3LogsConfiguration'
                       description: Describes whether S3 data event logs are enabled as a data source.
                 tags:
@@ -446,6 +448,8 @@ paths:
                   type: object
                   properties:
                     Criterion:
+                      xml:
+                        name: criterion
                       $ref: '#/components/schemas/Criterion'
                       description: Represents a map of finding properties that match specified conditions and values when querying findings.
                 clientToken:
@@ -844,9 +848,13 @@ paths:
                   type: object
                   properties:
                     DestinationArn:
+                      xml:
+                        name: destinationArn
                       $ref: '#/components/schemas/String'
                       description: The ARN of the resource to publish to.
                     KmsKeyArn:
+                      xml:
+                        name: kmsKeyArn
                       $ref: '#/components/schemas/String'
                       description: The ARN of the KMS key to use for encryption.
                 clientToken:
@@ -1291,6 +1299,8 @@ paths:
                   type: object
                   properties:
                     S3Logs:
+                      xml:
+                        name: s3Logs
                       $ref: '#/components/schemas/S3LogsConfiguration'
                       description: Describes whether S3 data event logs are enabled as a data source.
   '/detector/{detectorId}/filter/{filterName}':
@@ -1443,6 +1453,8 @@ paths:
                   type: object
                   properties:
                     Criterion:
+                      xml:
+                        name: criterion
                       $ref: '#/components/schemas/Criterion'
                       description: Represents a map of finding properties that match specified conditions and values when querying findings.
   '/detector/{detectorId}/ipset/{ipSetId}':
@@ -1821,9 +1833,13 @@ paths:
                   type: object
                   properties:
                     DestinationArn:
+                      xml:
+                        name: destinationArn
                       $ref: '#/components/schemas/String'
                       description: The ARN of the resource to publish to.
                     KmsKeyArn:
+                      xml:
+                        name: kmsKeyArn
                       $ref: '#/components/schemas/String'
                       description: The ARN of the KMS key to use for encryption.
   '/detector/{detectorId}/threatintelset/{threatIntelSetId}':
@@ -2054,6 +2070,8 @@ paths:
                   type: object
                   properties:
                     S3Logs:
+                      xml:
+                        name: s3Logs
                       $ref: '#/components/schemas/OrganizationS3LogsConfiguration'
                       description: Describes whether S3 data event logs are enabled for new members of the organization.
   /admin/disable:
@@ -2293,9 +2311,13 @@ paths:
                   type: object
                   properties:
                     AttributeName:
+                      xml:
+                        name: attributeName
                       $ref: '#/components/schemas/String'
                       description: 'Represents the finding attribute (for example, accountId) to sort findings by.'
                     OrderBy:
+                      xml:
+                        name: orderBy
                       $ref: '#/components/schemas/OrderBy'
                       description: The order by which the sorted findings are to be displayed.
     parameters:
@@ -2359,6 +2381,8 @@ paths:
                   type: object
                   properties:
                     Criterion:
+                      xml:
+                        name: criterion
                       $ref: '#/components/schemas/Criterion'
                       description: Represents a map of finding properties that match specified conditions and values when querying findings.
     parameters:
@@ -2580,12 +2604,18 @@ paths:
                   type: object
                   properties:
                     AccountIds:
+                      xml:
+                        name: accountIds
                       $ref: '#/components/schemas/AccountIds'
                       description: The account IDs to aggregate usage statistics from.
                     DataSources:
+                      xml:
+                        name: dataSources
                       $ref: '#/components/schemas/DataSourceList'
                       description: The data sources to aggregate usage statistics from.
                     Resources:
+                      xml:
+                        name: resources
                       $ref: '#/components/schemas/ResourceList'
                       description: The resources to aggregate usage statistics from. Only accepts exact resource names.
                 unit:
@@ -2725,6 +2755,8 @@ paths:
                   type: object
                   properties:
                     Criterion:
+                      xml:
+                        name: criterion
                       $ref: '#/components/schemas/Criterion'
                       description: Represents a map of finding properties that match specified conditions and values when querying findings.
                 sortCriteria:
@@ -2732,9 +2764,13 @@ paths:
                   type: object
                   properties:
                     AttributeName:
+                      xml:
+                        name: attributeName
                       $ref: '#/components/schemas/String'
                       description: 'Represents the finding attribute (for example, accountId) to sort findings by.'
                     OrderBy:
+                      xml:
+                        name: orderBy
                       $ref: '#/components/schemas/OrderBy'
                       description: The order by which the sorted findings are to be displayed.
                 maxResults:
@@ -3290,6 +3326,8 @@ paths:
                   type: object
                   properties:
                     S3Logs:
+                      xml:
+                        name: s3Logs
                       $ref: '#/components/schemas/S3LogsConfiguration'
                       description: Describes whether S3 data event logs are enabled as a data source.
     parameters:
@@ -3368,6 +3406,8 @@ components:
       type: object
       properties:
         DetectorId:
+          xml:
+            name: detectorId
           $ref: '#/components/schemas/DetectorId'
           description: The unique ID of the created detector.
     S3LogsConfiguration:
@@ -3376,6 +3416,8 @@ components:
         - Enable
       properties:
         Enable:
+          xml:
+            name: enable
           $ref: '#/components/schemas/Boolean'
           description: ' The status of S3 data event logs as a data source.'
       description: Describes whether S3 data event logs will be enabled as a data source.
@@ -3388,6 +3430,8 @@ components:
         - Name
       properties:
         Name:
+          xml:
+            name: name
           $ref: '#/components/schemas/FilterName'
           description: The name of the successfully created filter.
     Criterion:
@@ -3400,6 +3444,8 @@ components:
         - IpSetId
       properties:
         IpSetId:
+          xml:
+            name: ipSetId
           $ref: '#/components/schemas/String'
           description: The ID of the IPSet resource.
     CreateMembersResponse:
@@ -3408,6 +3454,8 @@ components:
         - UnprocessedAccounts
       properties:
         UnprocessedAccounts:
+          xml:
+            name: unprocessedAccounts
           $ref: '#/components/schemas/UnprocessedAccounts'
           description: A list of objects that include the <code>accountIds</code> of the unprocessed accounts and a result string that explains why each was unprocessed.
     AccountDetail:
@@ -3417,9 +3465,13 @@ components:
         - Email
       properties:
         AccountId:
+          xml:
+            name: accountId
           $ref: '#/components/schemas/AccountId'
           description: The member account ID.
         Email:
+          xml:
+            name: email
           $ref: '#/components/schemas/Email'
           description: The email address of the member account.
       description: Contains information about the account.
@@ -3429,6 +3481,8 @@ components:
         - DestinationId
       properties:
         DestinationId:
+          xml:
+            name: destinationId
           $ref: '#/components/schemas/String'
           description: The ID of the publishing destination that is created.
     String:
@@ -3446,6 +3500,8 @@ components:
         - ThreatIntelSetId
       properties:
         ThreatIntelSetId:
+          xml:
+            name: threatIntelSetId
           $ref: '#/components/schemas/String'
           description: The ID of the ThreatIntelSet resource.
     DeclineInvitationsResponse:
@@ -3454,6 +3510,8 @@ components:
         - UnprocessedAccounts
       properties:
         UnprocessedAccounts:
+          xml:
+            name: unprocessedAccounts
           $ref: '#/components/schemas/UnprocessedAccounts'
           description: A list of objects that contain the unprocessed account and a result string that explains why it was unprocessed.
     AccountId:
@@ -3475,6 +3533,8 @@ components:
         - UnprocessedAccounts
       properties:
         UnprocessedAccounts:
+          xml:
+            name: unprocessedAccounts
           $ref: '#/components/schemas/UnprocessedAccounts'
           description: A list of objects that contain the unprocessed account and a result string that explains why it was unprocessed.
     DeleteMembersResponse:
@@ -3483,6 +3543,8 @@ components:
         - UnprocessedAccounts
       properties:
         UnprocessedAccounts:
+          xml:
+            name: unprocessedAccounts
           $ref: '#/components/schemas/UnprocessedAccounts'
           description: The accounts that could not be processed.
     DeletePublishingDestinationResponse:
@@ -3498,12 +3560,18 @@ components:
         - MemberAccountLimitReached
       properties:
         AutoEnable:
+          xml:
+            name: autoEnable
           $ref: '#/components/schemas/Boolean'
           description: Indicates whether GuardDuty is automatically enabled for accounts added to the organization.
         MemberAccountLimitReached:
+          xml:
+            name: memberAccountLimitReached
           $ref: '#/components/schemas/Boolean'
           description: Indicates whether the maximum number of allowed member accounts are already associated with the delegated administrator master account.
         DataSources:
+          xml:
+            name: dataSources
           $ref: '#/components/schemas/OrganizationDataSourceConfigurationsResult'
           description: An object that describes which data sources are enabled automatically for member accounts.
     DescribePublishingDestinationResponse:
@@ -3516,18 +3584,28 @@ components:
         - DestinationProperties
       properties:
         DestinationId:
+          xml:
+            name: destinationId
           $ref: '#/components/schemas/String'
           description: The ID of the publishing destination.
         DestinationType:
+          xml:
+            name: destinationType
           $ref: '#/components/schemas/DestinationType'
           description: 'The type of publishing destination. Currently, only Amazon S3 buckets are supported.'
         Status:
+          xml:
+            name: status
           $ref: '#/components/schemas/PublishingStatus'
           description: The status of the publishing destination.
         PublishingFailureStartTimestamp:
+          xml:
+            name: publishingFailureStartTimestamp
           $ref: '#/components/schemas/Long'
           description: 'The time, in epoch millisecond format, at which GuardDuty was first unable to publish findings to the destination.'
         DestinationProperties:
+          xml:
+            name: destinationProperties
           $ref: '#/components/schemas/DestinationProperties'
           description: A <code>DestinationProperties</code> object that includes the <code>DestinationArn</code> and <code>KmsKeyArn</code> of the publishing destination.
     DisableOrganizationAdminAccountResponse:
@@ -3542,6 +3620,8 @@ components:
         - UnprocessedAccounts
       properties:
         UnprocessedAccounts:
+          xml:
+            name: unprocessedAccounts
           $ref: '#/components/schemas/UnprocessedAccounts'
           description: A list of objects that contain the unprocessed account and a result string that explains why it was unprocessed.
     EnableOrganizationAdminAccountResponse:
@@ -3554,24 +3634,38 @@ components:
         - Status
       properties:
         CreatedAt:
+          xml:
+            name: createdAt
           $ref: '#/components/schemas/String'
           description: The timestamp of when the detector was created.
         FindingPublishingFrequency:
+          xml:
+            name: findingPublishingFrequency
           $ref: '#/components/schemas/FindingPublishingFrequency'
           description: The publishing frequency of the finding.
         ServiceRole:
+          xml:
+            name: serviceRole
           $ref: '#/components/schemas/String'
           description: The GuardDuty service role.
         Status:
+          xml:
+            name: status
           $ref: '#/components/schemas/DetectorStatus'
           description: The detector status.
         UpdatedAt:
+          xml:
+            name: updatedAt
           $ref: '#/components/schemas/String'
           description: The last-updated timestamp for the detector.
         DataSources:
+          xml:
+            name: dataSources
           $ref: '#/components/schemas/DataSourceConfigurationsResult'
           description: An object that describes which data sources are enabled for the detector.
         Tags:
+          xml:
+            name: tags
           $ref: '#/components/schemas/TagMap'
           description: The tags of the detector resource.
     GetFilterResponse:
@@ -3582,21 +3676,33 @@ components:
         - FindingCriteria
       properties:
         Name:
+          xml:
+            name: name
           $ref: '#/components/schemas/FilterName'
           description: The name of the filter.
         Description:
+          xml:
+            name: description
           $ref: '#/components/schemas/FilterDescription'
           description: The description of the filter.
         Action:
+          xml:
+            name: action
           $ref: '#/components/schemas/FilterAction'
           description: Specifies the action that is to be applied to the findings that match the filter.
         Rank:
+          xml:
+            name: rank
           $ref: '#/components/schemas/FilterRank'
           description: Specifies the position of the filter in the list of current filters. Also specifies the order in which this filter is applied to the findings.
         FindingCriteria:
+          xml:
+            name: findingCriteria
           $ref: '#/components/schemas/FindingCriteria'
           description: Represents the criteria to be used in the filter for querying findings.
         Tags:
+          xml:
+            name: tags
           $ref: '#/components/schemas/TagMap'
           description: The tags of the filter resource.
     GetFindingsResponse:
@@ -3605,6 +3711,8 @@ components:
         - Findings
       properties:
         Findings:
+          xml:
+            name: findings
           $ref: '#/components/schemas/Findings'
           description: A list of findings.
     OrderBy:
@@ -3618,6 +3726,8 @@ components:
         - FindingStatistics
       properties:
         FindingStatistics:
+          xml:
+            name: findingStatistics
           $ref: '#/components/schemas/FindingStatistics'
           description: The finding statistics object.
     FindingStatisticType:
@@ -3633,24 +3743,36 @@ components:
         - Status
       properties:
         Name:
+          xml:
+            name: name
           $ref: '#/components/schemas/Name'
           description: The user-friendly name for the IPSet.
         Format:
+          xml:
+            name: format
           $ref: '#/components/schemas/IpSetFormat'
           description: The format of the file that contains the IPSet.
         Location:
+          xml:
+            name: location
           $ref: '#/components/schemas/Location'
           description: 'The URI of the file that contains the IPSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.'
         Status:
+          xml:
+            name: status
           $ref: '#/components/schemas/IpSetStatus'
           description: The status of IPSet file that was uploaded.
         Tags:
+          xml:
+            name: tags
           $ref: '#/components/schemas/TagMap'
           description: The tags of the IPSet resource.
     GetInvitationsCountResponse:
       type: object
       properties:
         InvitationsCount:
+          xml:
+            name: invitationsCount
           $ref: '#/components/schemas/Integer'
           description: The number of received invitations.
     GetMasterAccountResponse:
@@ -3659,6 +3781,8 @@ components:
         - Master
       properties:
         Master:
+          xml:
+            name: master
           $ref: '#/components/schemas/Master'
           description: The master account details.
     GetMemberDetectorsResponse:
@@ -3668,9 +3792,13 @@ components:
         - UnprocessedAccounts
       properties:
         MemberDataSourceConfigurations:
+          xml:
+            name: members
           $ref: '#/components/schemas/MemberDataSourceConfigurations'
           description: An object that describes which data sources are enabled for a member account.
         UnprocessedAccounts:
+          xml:
+            name: unprocessedAccounts
           $ref: '#/components/schemas/UnprocessedAccounts'
           description: A list of member account IDs that were unable to be processed along with an explanation for why they were not processed.
     GetMembersResponse:
@@ -3680,9 +3808,13 @@ components:
         - UnprocessedAccounts
       properties:
         Members:
+          xml:
+            name: members
           $ref: '#/components/schemas/Members'
           description: A list of members.
         UnprocessedAccounts:
+          xml:
+            name: unprocessedAccounts
           $ref: '#/components/schemas/UnprocessedAccounts'
           description: A list of objects that contain the unprocessed account and a result string that explains why it was unprocessed.
     GetThreatIntelSetResponse:
@@ -3694,27 +3826,41 @@ components:
         - Status
       properties:
         Name:
+          xml:
+            name: name
           $ref: '#/components/schemas/Name'
           description: A user-friendly ThreatIntelSet name displayed in all findings that are generated by activity that involves IP addresses included in this ThreatIntelSet.
         Format:
+          xml:
+            name: format
           $ref: '#/components/schemas/ThreatIntelSetFormat'
           description: The format of the threatIntelSet.
         Location:
+          xml:
+            name: location
           $ref: '#/components/schemas/Location'
           description: 'The URI of the file that contains the ThreatIntelSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.'
         Status:
+          xml:
+            name: status
           $ref: '#/components/schemas/ThreatIntelSetStatus'
           description: The status of threatIntelSet file uploaded.
         Tags:
+          xml:
+            name: tags
           $ref: '#/components/schemas/TagMap'
           description: The tags of the threat list resource.
     GetUsageStatisticsResponse:
       type: object
       properties:
         UsageStatistics:
+          xml:
+            name: usageStatistics
           $ref: '#/components/schemas/UsageStatistics'
           description: 'The usage statistics object. If a UsageStatisticType was provided, the objects representing other types will be null.'
         NextToken:
+          xml:
+            name: nextToken
           $ref: '#/components/schemas/String'
           description: The pagination parameter to be used on the next list operation to retrieve more items.
     AccountIds:
@@ -3737,6 +3883,8 @@ components:
         - UnprocessedAccounts
       properties:
         UnprocessedAccounts:
+          xml:
+            name: unprocessedAccounts
           $ref: '#/components/schemas/UnprocessedAccounts'
           description: A list of objects that contain the unprocessed account and a result string that explains why it was unprocessed.
     ListDetectorsResponse:
@@ -3745,9 +3893,13 @@ components:
         - DetectorIds
       properties:
         DetectorIds:
+          xml:
+            name: detectorIds
           $ref: '#/components/schemas/DetectorIds'
           description: A list of detector IDs.
         NextToken:
+          xml:
+            name: nextToken
           $ref: '#/components/schemas/String'
           description: The pagination parameter to be used on the next list operation to retrieve more items.
     ListFiltersResponse:
@@ -3756,9 +3908,13 @@ components:
         - FilterNames
       properties:
         FilterNames:
+          xml:
+            name: filterNames
           $ref: '#/components/schemas/FilterNames'
           description: A list of filter names.
         NextToken:
+          xml:
+            name: nextToken
           $ref: '#/components/schemas/String'
           description: The pagination parameter to be used on the next list operation to retrieve more items.
     ListFindingsResponse:
@@ -3767,9 +3923,13 @@ components:
         - FindingIds
       properties:
         FindingIds:
+          xml:
+            name: findingIds
           $ref: '#/components/schemas/FindingIds'
           description: The IDs of the findings that you're listing.
         NextToken:
+          xml:
+            name: nextToken
           $ref: '#/components/schemas/String'
           description: The pagination parameter to be used on the next list operation to retrieve more items.
     ListIPSetsResponse:
@@ -3778,36 +3938,52 @@ components:
         - IpSetIds
       properties:
         IpSetIds:
+          xml:
+            name: ipSetIds
           $ref: '#/components/schemas/IpSetIds'
           description: The IDs of the IPSet resources.
         NextToken:
+          xml:
+            name: nextToken
           $ref: '#/components/schemas/String'
           description: The pagination parameter to be used on the next list operation to retrieve more items.
     ListInvitationsResponse:
       type: object
       properties:
         Invitations:
+          xml:
+            name: invitations
           $ref: '#/components/schemas/Invitations'
           description: A list of invitation descriptions.
         NextToken:
+          xml:
+            name: nextToken
           $ref: '#/components/schemas/String'
           description: The pagination parameter to be used on the next list operation to retrieve more items.
     ListMembersResponse:
       type: object
       properties:
         Members:
+          xml:
+            name: members
           $ref: '#/components/schemas/Members'
           description: A list of members.
         NextToken:
+          xml:
+            name: nextToken
           $ref: '#/components/schemas/String'
           description: The pagination parameter to be used on the next list operation to retrieve more items.
     ListOrganizationAdminAccountsResponse:
       type: object
       properties:
         AdminAccounts:
+          xml:
+            name: adminAccounts
           $ref: '#/components/schemas/AdminAccounts'
           description: An AdminAccounts object that includes a list of accounts configured as GuardDuty delegated administrators.
         NextToken:
+          xml:
+            name: nextToken
           $ref: '#/components/schemas/String'
           description: The pagination parameter to be used on the next list operation to retrieve more items.
     ListPublishingDestinationsResponse:
@@ -3816,15 +3992,21 @@ components:
         - Destinations
       properties:
         Destinations:
+          xml:
+            name: destinations
           $ref: '#/components/schemas/Destinations'
           description: A <code>Destinations</code> object that includes information about each publishing destination returned.
         NextToken:
+          xml:
+            name: nextToken
           $ref: '#/components/schemas/String'
           description: 'A token to use for paginating results that are returned in the response. Set the value of this parameter to null for the first request to a list action. For subsequent calls, use the <code>NextToken</code> value returned from the previous request to continue listing results after the first page.'
     ListTagsForResourceResponse:
       type: object
       properties:
         Tags:
+          xml:
+            name: tags
           $ref: '#/components/schemas/TagMap'
           description: The tags associated with the resource.
     ListThreatIntelSetsResponse:
@@ -3833,9 +4015,13 @@ components:
         - ThreatIntelSetIds
       properties:
         ThreatIntelSetIds:
+          xml:
+            name: threatIntelSetIds
           $ref: '#/components/schemas/ThreatIntelSetIds'
           description: The IDs of the ThreatIntelSet resources.
         NextToken:
+          xml:
+            name: nextToken
           $ref: '#/components/schemas/String'
           description: The pagination parameter to be used on the next list operation to retrieve more items.
     StartMonitoringMembersResponse:
@@ -3844,6 +4030,8 @@ components:
         - UnprocessedAccounts
       properties:
         UnprocessedAccounts:
+          xml:
+            name: unprocessedAccounts
           $ref: '#/components/schemas/UnprocessedAccounts'
           description: A list of objects that contain the unprocessed account and a result string that explains why it was unprocessed.
     StopMonitoringMembersResponse:
@@ -3852,6 +4040,8 @@ components:
         - UnprocessedAccounts
       properties:
         UnprocessedAccounts:
+          xml:
+            name: unprocessedAccounts
           $ref: '#/components/schemas/UnprocessedAccounts'
           description: 'A list of objects that contain an accountId for each account that could not be processed, and a result string that indicates why the account was not processed. '
     TagResourceResponse:
@@ -3877,6 +4067,8 @@ components:
         - Name
       properties:
         Name:
+          xml:
+            name: name
           $ref: '#/components/schemas/FilterName'
           description: The name of the filter.
     UpdateFindingsFeedbackResponse:
@@ -3891,6 +4083,8 @@ components:
         - UnprocessedAccounts
       properties:
         UnprocessedAccounts:
+          xml:
+            name: unprocessedAccounts
           $ref: '#/components/schemas/UnprocessedAccounts'
           description: A list of member account IDs that were unable to be processed along with an explanation for why they were not processed.
     UpdateOrganizationConfigurationResponse:
@@ -3902,6 +4096,8 @@ components:
         - AutoEnable
       properties:
         AutoEnable:
+          xml:
+            name: autoEnable
           $ref: '#/components/schemas/Boolean'
           description: A value that contains information on whether S3 data event logs will be enabled automatically as a data source for the organization.
       description: Describes whether S3 data event logs will be automatically enabled for new members of the organization.
@@ -3923,9 +4119,13 @@ components:
       title: AcceptInvitationRequest
       properties:
         MasterId:
+          xml:
+            name: masterId
           $ref: '#/components/schemas/String'
           description: The account ID of the master GuardDuty account whose invitation you're accepting.
         InvitationId:
+          xml:
+            name: invitationId
           $ref: '#/components/schemas/String'
           description: The value that is used to validate the master account to the member account.
     Boolean:
@@ -3934,9 +4134,13 @@ components:
       type: object
       properties:
         AllowsPublicReadAccess:
+          xml:
+            name: allowsPublicReadAccess
           $ref: '#/components/schemas/Boolean'
           description: A value that indicates whether public read access for the bucket is enabled through an Access Control List (ACL).
         AllowsPublicWriteAccess:
+          xml:
+            name: allowsPublicWriteAccess
           $ref: '#/components/schemas/Boolean'
           description: A value that indicates whether public write access for the bucket is enabled through an Access Control List (ACL).
       description: Contains information on the current access control policies for the bucket.
@@ -3944,15 +4148,23 @@ components:
       type: object
       properties:
         AccessKeyId:
+          xml:
+            name: accessKeyId
           $ref: '#/components/schemas/String'
           description: The access key ID of the user.
         PrincipalId:
+          xml:
+            name: principalId
           $ref: '#/components/schemas/String'
           description: The principal ID of the user.
         UserName:
+          xml:
+            name: userName
           $ref: '#/components/schemas/String'
           description: The name of the user.
         UserType:
+          xml:
+            name: userType
           $ref: '#/components/schemas/String'
           description: The type of the user.
       description: Contains information about the access keys.
@@ -3970,15 +4182,23 @@ components:
       type: object
       properties:
         IgnorePublicAcls:
+          xml:
+            name: ignorePublicAcls
           $ref: '#/components/schemas/Boolean'
           description: Indicates if S3 Block Public Access is set to <code>IgnorePublicAcls</code>.
         RestrictPublicBuckets:
+          xml:
+            name: restrictPublicBuckets
           $ref: '#/components/schemas/Boolean'
           description: Indicates if S3 Block Public Access is set to <code>RestrictPublicBuckets</code>.
         BlockPublicAcls:
+          xml:
+            name: blockPublicAcls
           $ref: '#/components/schemas/Boolean'
           description: Indicates if S3 Block Public Access is set to <code>BlockPublicAcls</code>.
         BlockPublicPolicy:
+          xml:
+            name: blockPublicPolicy
           $ref: '#/components/schemas/Boolean'
           description: Indicates if S3 Block Public Access is set to <code>BlockPublicPolicy</code>.
       description: 'Contains information on how the bucker owner''s S3 Block Public Access settings are being applied to the S3 bucket. See <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html">S3 Block Public Access</a> for more information. '
@@ -3986,6 +4206,8 @@ components:
       type: object
       properties:
         BlockPublicAccess:
+          xml:
+            name: blockPublicAccess
           $ref: '#/components/schemas/BlockPublicAccess'
           description: Describes the S3 Block Public Access settings of the bucket's parent account.
       description: Contains information about the account level permissions on the S3 bucket.
@@ -3993,18 +4215,28 @@ components:
       type: object
       properties:
         Api:
+          xml:
+            name: api
           $ref: '#/components/schemas/String'
           description: The AWS API name.
         CallerType:
+          xml:
+            name: callerType
           $ref: '#/components/schemas/String'
           description: The AWS API caller type.
         DomainDetails:
+          xml:
+            name: domainDetails
           $ref: '#/components/schemas/DomainDetails'
           description: The domain information for the AWS API call.
         RemoteIpDetails:
+          xml:
+            name: remoteIpDetails
           $ref: '#/components/schemas/RemoteIpDetails'
           description: The remote IP information of the connection.
         ServiceName:
+          xml:
+            name: serviceName
           $ref: '#/components/schemas/String'
           description: The AWS service name whose API was invoked.
       description: Contains information about the API operation.
@@ -4012,6 +4244,8 @@ components:
       type: object
       properties:
         Domain:
+          xml:
+            name: domain
           $ref: '#/components/schemas/String'
           description: The domain information for the API request.
       description: Contains information about the DNS_REQUEST action described in this finding.
@@ -4019,24 +4253,38 @@ components:
       type: object
       properties:
         Blocked:
+          xml:
+            name: blocked
           $ref: '#/components/schemas/Boolean'
           description: Indicates whether EC2 blocked the network connection to your instance.
         ConnectionDirection:
+          xml:
+            name: connectionDirection
           $ref: '#/components/schemas/String'
           description: The network connection direction.
         LocalPortDetails:
+          xml:
+            name: localPortDetails
           $ref: '#/components/schemas/LocalPortDetails'
           description: The local port information of the connection.
         Protocol:
+          xml:
+            name: protocol
           $ref: '#/components/schemas/String'
           description: The network connection protocol.
         LocalIpDetails:
+          xml:
+            name: localIpDetails
           $ref: '#/components/schemas/LocalIpDetails'
           description: The local IP information of the connection.
         RemoteIpDetails:
+          xml:
+            name: remoteIpDetails
           $ref: '#/components/schemas/RemoteIpDetails'
           description: The remote IP information of the connection.
         RemotePortDetails:
+          xml:
+            name: remotePortDetails
           $ref: '#/components/schemas/RemotePortDetails'
           description: The remote port information of the connection.
       description: Contains information about the NETWORK_CONNECTION action described in the finding.
@@ -4044,9 +4292,13 @@ components:
       type: object
       properties:
         Blocked:
+          xml:
+            name: blocked
           $ref: '#/components/schemas/Boolean'
           description: 'Indicates whether EC2 blocked the port probe to the instance, such as with an ACL.'
         PortProbeDetails:
+          xml:
+            name: portProbeDetails
           $ref: '#/components/schemas/PortProbeDetails'
           description: A list of objects related to port probe details.
       description: Contains information about the PORT_PROBE action described in the finding.
@@ -4054,18 +4306,28 @@ components:
       type: object
       properties:
         ActionType:
+          xml:
+            name: actionType
           $ref: '#/components/schemas/String'
           description: The GuardDuty finding activity type.
         AwsApiCallAction:
+          xml:
+            name: awsApiCallAction
           $ref: '#/components/schemas/AwsApiCallAction'
           description: Information about the AWS_API_CALL action described in this finding.
         DnsRequestAction:
+          xml:
+            name: dnsRequestAction
           $ref: '#/components/schemas/DnsRequestAction'
           description: Information about the DNS_REQUEST action described in this finding.
         NetworkConnectionAction:
+          xml:
+            name: networkConnectionAction
           $ref: '#/components/schemas/NetworkConnectionAction'
           description: Information about the NETWORK_CONNECTION action described in this finding.
         PortProbeAction:
+          xml:
+            name: portProbeAction
           $ref: '#/components/schemas/PortProbeAction'
           description: Information about the PORT_PROBE action described in this finding.
       description: Contains information about actions.
@@ -4080,9 +4342,13 @@ components:
       type: object
       properties:
         AdminAccountId:
+          xml:
+            name: adminAccountId
           $ref: '#/components/schemas/String'
           description: The AWS account ID for the account.
         AdminStatus:
+          xml:
+            name: adminStatus
           $ref: '#/components/schemas/AdminStatus'
           description: Indicates whether the account is enabled as the delegated administrator.
       description: The account within the organization specified as the GuardDuty delegated administrator.
@@ -4105,12 +4371,16 @@ components:
       title: ArchiveFindingsRequest
       properties:
         FindingIds:
+          xml:
+            name: findingIds
           $ref: '#/components/schemas/FindingIds'
           description: The IDs of the findings that you want to archive.
     DomainDetails:
       type: object
       properties:
         Domain:
+          xml:
+            name: domain
           $ref: '#/components/schemas/String'
           description: The domain information for the AWS API call.
       description: Contains information about the domain.
@@ -4118,18 +4388,28 @@ components:
       type: object
       properties:
         City:
+          xml:
+            name: city
           $ref: '#/components/schemas/City'
           description: The city information of the remote IP address.
         Country:
+          xml:
+            name: country
           $ref: '#/components/schemas/Country'
           description: The country code of the remote IP address.
         GeoLocation:
+          xml:
+            name: geoLocation
           $ref: '#/components/schemas/GeoLocation'
           description: The location information of the remote IP address.
         IpAddressV4:
+          xml:
+            name: ipAddressV4
           $ref: '#/components/schemas/String'
           description: The IPv4 remote address of the connection.
         Organization:
+          xml:
+            name: organization
           $ref: '#/components/schemas/Organization'
           description: The ISP organization information of the remote IP address.
       description: Contains information about the remote IP address of the connection.
@@ -4137,9 +4417,13 @@ components:
       type: object
       properties:
         AllowsPublicReadAccess:
+          xml:
+            name: allowsPublicReadAccess
           $ref: '#/components/schemas/Boolean'
           description: A value that indicates whether public read access for the bucket is enabled through a bucket policy.
         AllowsPublicWriteAccess:
+          xml:
+            name: allowsPublicWriteAccess
           $ref: '#/components/schemas/Boolean'
           description: A value that indicates whether public write access for the bucket is enabled through a bucket policy.
       description: Contains information on the current bucket policies for the S3 bucket.
@@ -4147,12 +4431,18 @@ components:
       type: object
       properties:
         AccessControlList:
+          xml:
+            name: accessControlList
           $ref: '#/components/schemas/AccessControlList'
           description: Contains information on how Access Control Policies are applied to the bucket.
         BucketPolicy:
+          xml:
+            name: bucketPolicy
           $ref: '#/components/schemas/BucketPolicy'
           description: Contains information on the bucket policies for the S3 bucket.
         BlockPublicAccess:
+          xml:
+            name: blockPublicAccess
           $ref: '#/components/schemas/BlockPublicAccess'
           description: Contains information on which account level S3 Block Public Access settings are applied to the S3 bucket.
       description: Contains information about the bucket level permissions for the S3 bucket.
@@ -4160,6 +4450,8 @@ components:
       type: object
       properties:
         CityName:
+          xml:
+            name: cityName
           $ref: '#/components/schemas/String'
           description: The city name of the remote IP address.
       description: Contains information about the city associated with the IP address.
@@ -4180,6 +4472,8 @@ components:
         - Status
       properties:
         Status:
+          xml:
+            name: status
           $ref: '#/components/schemas/DataSourceStatus'
           description: Describes whether CloudTrail is enabled as a data source for the detector.
       description: Contains information on the status of CloudTrail as a data source for the detector.
@@ -4208,44 +4502,68 @@ components:
       properties:
         Eq:
           deprecated: true
+          xml:
+            name: eq
           $ref: '#/components/schemas/Eq'
           description: Represents the <i>equal</i> condition to be applied to a single field when querying for findings.
         Neq:
           deprecated: true
+          xml:
+            name: neq
           $ref: '#/components/schemas/Neq'
           description: Represents the <i>not equal</i> condition to be applied to a single field when querying for findings.
         Gt:
           deprecated: true
+          xml:
+            name: gt
           $ref: '#/components/schemas/Integer'
           description: Represents a <i>greater than</i> condition to be applied to a single field when querying for findings.
         Gte:
           deprecated: true
+          xml:
+            name: gte
           $ref: '#/components/schemas/Integer'
           description: Represents a <i>greater than or equal</i> condition to be applied to a single field when querying for findings.
         Lt:
           deprecated: true
+          xml:
+            name: lt
           $ref: '#/components/schemas/Integer'
           description: Represents a <i>less than</i> condition to be applied to a single field when querying for findings.
         Lte:
           deprecated: true
+          xml:
+            name: lte
           $ref: '#/components/schemas/Integer'
           description: Represents a <i>less than or equal</i> condition to be applied to a single field when querying for findings.
         Equals:
+          xml:
+            name: equals
           $ref: '#/components/schemas/Equals'
           description: Represents an <i>equal</i> <b/> condition to be applied to a single field when querying for findings.
         NotEquals:
+          xml:
+            name: notEquals
           $ref: '#/components/schemas/NotEquals'
           description: Represents a <i>not equal</i> <b/> condition to be applied to a single field when querying for findings.
         GreaterThan:
+          xml:
+            name: greaterThan
           $ref: '#/components/schemas/Long'
           description: Represents a <i>greater than</i> condition to be applied to a single field when querying for findings.
         GreaterThanOrEqual:
+          xml:
+            name: greaterThanOrEqual
           $ref: '#/components/schemas/Long'
           description: Represents a <i>greater than or equal</i> condition to be applied to a single field when querying for findings.
         LessThan:
+          xml:
+            name: lessThan
           $ref: '#/components/schemas/Long'
           description: Represents a <i>less than</i> condition to be applied to a single field when querying for findings.
         LessThanOrEqual:
+          xml:
+            name: lessThanOrEqual
           $ref: '#/components/schemas/Long'
           description: Represents a <i>less than or equal</i> condition to be applied to a single field when querying for findings.
       description: Contains information about the condition.
@@ -4257,9 +4575,13 @@ components:
       type: object
       properties:
         CountryCode:
+          xml:
+            name: countryCode
           $ref: '#/components/schemas/String'
           description: The country code of the remote IP address.
         CountryName:
+          xml:
+            name: countryName
           $ref: '#/components/schemas/String'
           description: The country name of the remote IP address.
       description: Contains information about the country where the remote IP address is located.
@@ -4273,6 +4595,8 @@ components:
       type: object
       properties:
         S3Logs:
+          xml:
+            name: s3Logs
           $ref: '#/components/schemas/S3LogsConfiguration'
           description: Describes whether S3 data event logs are enabled as a data source.
       description: Contains information about which data sources are enabled.
@@ -4289,18 +4613,28 @@ components:
       title: CreateDetectorRequest
       properties:
         Enable:
+          xml:
+            name: enable
           $ref: '#/components/schemas/Boolean'
           description: A Boolean value that specifies whether the detector is to be enabled.
         ClientToken:
+          xml:
+            name: clientToken
           $ref: '#/components/schemas/ClientToken'
           description: The idempotency token for the create request.
         FindingPublishingFrequency:
+          xml:
+            name: findingPublishingFrequency
           $ref: '#/components/schemas/FindingPublishingFrequency'
           description: An enum value that specifies how frequently updated findings are exported.
         DataSources:
+          xml:
+            name: dataSources
           $ref: '#/components/schemas/DataSourceConfigurations'
           description: An object that describes which data sources will be enabled for the detector.
         Tags:
+          xml:
+            name: tags
           $ref: '#/components/schemas/TagMap'
           description: The tags to be added to a new detector resource.
     FilterName:
@@ -4326,6 +4660,8 @@ components:
       type: object
       properties:
         Criterion:
+          xml:
+            name: criterion
           $ref: '#/components/schemas/Criterion'
           description: Represents a map of finding properties that match specified conditions and values when querying findings.
       description: Contains information about the criteria used for querying findings.
@@ -4337,24 +4673,38 @@ components:
       title: CreateFilterRequest
       properties:
         Name:
+          xml:
+            name: name
           $ref: '#/components/schemas/FilterName'
           description: The name of the filter.
         Description:
+          xml:
+            name: description
           $ref: '#/components/schemas/FilterDescription'
           description: The description of the filter.
         Action:
+          xml:
+            name: action
           $ref: '#/components/schemas/FilterAction'
           description: Specifies the action that is to be applied to the findings that match the filter.
         Rank:
+          xml:
+            name: rank
           $ref: '#/components/schemas/FilterRank'
           description: Specifies the position of the filter in the list of current filters. Also specifies the order in which this filter is applied to the findings.
         FindingCriteria:
+          xml:
+            name: findingCriteria
           $ref: '#/components/schemas/FindingCriteria'
           description: '<p>Represents the criteria to be used in the filter for querying findings.</p> <p>You can only use the following attributes to query findings:</p> <ul> <li> <p>accountId</p> </li> <li> <p>region</p> </li> <li> <p>confidence</p> </li> <li> <p>id</p> </li> <li> <p>resource.accessKeyDetails.accessKeyId</p> </li> <li> <p>resource.accessKeyDetails.principalId</p> </li> <li> <p>resource.accessKeyDetails.userName</p> </li> <li> <p>resource.accessKeyDetails.userType</p> </li> <li> <p>resource.instanceDetails.iamInstanceProfile.id</p> </li> <li> <p>resource.instanceDetails.imageId</p> </li> <li> <p>resource.instanceDetails.instanceId</p> </li> <li> <p>resource.instanceDetails.outpostArn</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.ipv6Addresses</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.privateIpAddresses.privateIpAddress</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.publicDnsName</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.publicIp</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.securityGroups.groupId</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.securityGroups.groupName</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.subnetId</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.vpcId</p> </li> <li> <p>resource.instanceDetails.tags.key</p> </li> <li> <p>resource.instanceDetails.tags.value</p> </li> <li> <p>resource.resourceType</p> </li> <li> <p>service.action.actionType</p> </li> <li> <p>service.action.awsApiCallAction.api</p> </li> <li> <p>service.action.awsApiCallAction.callerType</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.city.cityName</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.country.countryName</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.ipAddressV4</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.organization.asn</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.organization.asnOrg</p> </li> <li> <p>service.action.awsApiCallAction.serviceName</p> </li> <li> <p>service.action.dnsRequestAction.domain</p> </li> <li> <p>service.action.networkConnectionAction.blocked</p> </li> <li> <p>service.action.networkConnectionAction.connectionDirection</p> </li> <li> <p>service.action.networkConnectionAction.localPortDetails.port</p> </li> <li> <p>service.action.networkConnectionAction.protocol</p> </li> <li> <p>service.action.networkConnectionAction.localIpDetails.ipAddressV4</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.city.cityName</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.country.countryName</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.ipAddressV4</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.organization.asn</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.organization.asnOrg</p> </li> <li> <p>service.action.networkConnectionAction.remotePortDetails.port</p> </li> <li> <p>service.additionalInfo.threatListName</p> </li> <li> <p>service.archived</p> <p>When this attribute is set to TRUE, only archived findings are listed. When it''s set to FALSE, only unarchived findings are listed. When this attribute is not set, all existing findings are listed.</p> </li> <li> <p>service.resourceRole</p> </li> <li> <p>severity</p> </li> <li> <p>type</p> </li> <li> <p>updatedAt</p> <p>Type: ISO 8601 string format: YYYY-MM-DDTHH:MM:SS.SSSZ or YYYY-MM-DDTHH:MM:SSZ depending on whether the value contains milliseconds.</p> </li> </ul>'
         ClientToken:
+          xml:
+            name: clientToken
           $ref: '#/components/schemas/ClientToken'
           description: The idempotency token for the create request.
         Tags:
+          xml:
+            name: tags
           $ref: '#/components/schemas/TagMap'
           description: The tags to be added to a new filter resource.
     Name:
@@ -4386,21 +4736,33 @@ components:
       title: CreateIPSetRequest
       properties:
         Name:
+          xml:
+            name: name
           $ref: '#/components/schemas/Name'
           description: '<p>The user-friendly name to identify the IPSet.</p> <p> Allowed characters are alphanumerics, spaces, hyphens (-), and underscores (_).</p>'
         Format:
+          xml:
+            name: format
           $ref: '#/components/schemas/IpSetFormat'
           description: The format of the file that contains the IPSet.
         Location:
+          xml:
+            name: location
           $ref: '#/components/schemas/Location'
           description: 'The URI of the file that contains the IPSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.'
         Activate:
+          xml:
+            name: activate
           $ref: '#/components/schemas/Boolean'
           description: A Boolean value that indicates whether GuardDuty is to start using the uploaded IPSet.
         ClientToken:
+          xml:
+            name: clientToken
           $ref: '#/components/schemas/ClientToken'
           description: The idempotency token for the create request.
         Tags:
+          xml:
+            name: tags
           $ref: '#/components/schemas/TagMap'
           description: The tags to be added to a new IP set resource.
     CreateMembersRequest:
@@ -4410,6 +4772,8 @@ components:
       title: CreateMembersRequest
       properties:
         AccountDetails:
+          xml:
+            name: accountDetails
           $ref: '#/components/schemas/AccountDetails'
           description: A list of account ID and email address pairs of the accounts that you want to associate with the master GuardDuty account.
     UnprocessedAccounts:
@@ -4428,9 +4792,13 @@ components:
       type: object
       properties:
         DestinationArn:
+          xml:
+            name: destinationArn
           $ref: '#/components/schemas/String'
           description: The ARN of the resource to publish to.
         KmsKeyArn:
+          xml:
+            name: kmsKeyArn
           $ref: '#/components/schemas/String'
           description: The ARN of the KMS key to use for encryption.
       description: 'Contains the Amazon Resource Name (ARN) of the resource to publish to, such as an S3 bucket, and the ARN of the KMS key to use to encrypt published findings.'
@@ -4442,12 +4810,18 @@ components:
       title: CreatePublishingDestinationRequest
       properties:
         DestinationType:
+          xml:
+            name: destinationType
           $ref: '#/components/schemas/DestinationType'
           description: The type of resource for the publishing destination. Currently only Amazon S3 buckets are supported.
         DestinationProperties:
+          xml:
+            name: destinationProperties
           $ref: '#/components/schemas/DestinationProperties'
           description: 'The properties of the publishing destination, including the ARNs for the destination and the KMS key used for encryption.'
         ClientToken:
+          xml:
+            name: clientToken
           $ref: '#/components/schemas/ClientToken'
           description: The idempotency token for the request.
     FindingTypes:
@@ -4461,6 +4835,8 @@ components:
       title: CreateSampleFindingsRequest
       properties:
         FindingTypes:
+          xml:
+            name: findingTypes
           $ref: '#/components/schemas/FindingTypes'
           description: The types of sample findings to generate.
     ThreatIntelSetFormat:
@@ -4484,21 +4860,33 @@ components:
       title: CreateThreatIntelSetRequest
       properties:
         Name:
+          xml:
+            name: name
           $ref: '#/components/schemas/Name'
           description: A user-friendly ThreatIntelSet name displayed in all findings that are generated by activity that involves IP addresses included in this ThreatIntelSet.
         Format:
+          xml:
+            name: format
           $ref: '#/components/schemas/ThreatIntelSetFormat'
           description: The format of the file that contains the ThreatIntelSet.
         Location:
+          xml:
+            name: location
           $ref: '#/components/schemas/Location'
           description: 'The URI of the file that contains the ThreatIntelSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.'
         Activate:
+          xml:
+            name: activate
           $ref: '#/components/schemas/Boolean'
           description: A Boolean value that indicates whether GuardDuty is to start using the uploaded ThreatIntelSet.
         ClientToken:
+          xml:
+            name: clientToken
           $ref: '#/components/schemas/ClientToken'
           description: The idempotency token for the create request.
         Tags:
+          xml:
+            name: tags
           $ref: '#/components/schemas/TagMap'
           description: The tags to be added to a new threat list resource.
     DNSLogsConfigurationResult:
@@ -4507,6 +4895,8 @@ components:
         - Status
       properties:
         Status:
+          xml:
+            name: status
           $ref: '#/components/schemas/DataSourceStatus'
           description: Denotes whether DNS logs is enabled as a data source.
       description: Contains information on the status of DNS logs as a data source.
@@ -4523,6 +4913,8 @@ components:
         - Status
       properties:
         Status:
+          xml:
+            name: status
           $ref: '#/components/schemas/DataSourceStatus'
           description: Denotes whether VPC flow logs is enabled as a data source.
       description: Contains information on the status of VPC flow logs as a data source.
@@ -4532,6 +4924,8 @@ components:
         - Status
       properties:
         Status:
+          xml:
+            name: status
           $ref: '#/components/schemas/DataSourceStatus'
           description: A value that describes whether S3 data event logs are automatically enabled for new members of the organization.
       description: Describes whether S3 data event logs will be enabled as a data source.
@@ -4544,15 +4938,23 @@ components:
         - S3Logs
       properties:
         CloudTrail:
+          xml:
+            name: cloudTrail
           $ref: '#/components/schemas/CloudTrailConfigurationResult'
           description: An object that contains information on the status of CloudTrail as a data source.
         DNSLogs:
+          xml:
+            name: dnsLogs
           $ref: '#/components/schemas/DNSLogsConfigurationResult'
           description: An object that contains information on the status of DNS logs as a data source.
         FlowLogs:
+          xml:
+            name: flowLogs
           $ref: '#/components/schemas/FlowLogsConfigurationResult'
           description: An object that contains information on the status of VPC flow logs as a data source.
         S3Logs:
+          xml:
+            name: s3Logs
           $ref: '#/components/schemas/S3LogsConfigurationResult'
           description: An object that contains information on the status of S3 Data event logs as a data source.
       description: Contains information on the status of data sources for the detector.
@@ -4563,15 +4965,21 @@ components:
       title: DeclineInvitationsRequest
       properties:
         AccountIds:
+          xml:
+            name: accountIds
           $ref: '#/components/schemas/AccountIds'
           description: A list of account IDs of the AWS accounts that sent invitations to the current member account that you want to decline invitations from.
     DefaultServerSideEncryption:
       type: object
       properties:
         EncryptionType:
+          xml:
+            name: encryptionType
           $ref: '#/components/schemas/String'
           description: The type of encryption used for objects within the S3 bucket.
         KmsMasterKeyArn:
+          xml:
+            name: kmsMasterKeyArn
           $ref: '#/components/schemas/String'
           description: 'The Amazon Resource Name (ARN) of the KMS encryption key. Only available if the bucket <code>EncryptionType</code> is <code>aws:kms</code>.'
       description: 'Contains information on the server side encryption method used in the S3 bucket. See <a href="https://docs.aws.amazon.com/AmazonS3/atest/dev/serv-side-encryption.html">S3 Server-Side Encryption</a> for more information.'
@@ -4594,6 +5002,8 @@ components:
       title: DeleteInvitationsRequest
       properties:
         AccountIds:
+          xml:
+            name: accountIds
           $ref: '#/components/schemas/AccountIds'
           description: A list of account IDs of the AWS accounts that sent invitations to the current member account that you want to delete invitations from.
     DeleteMembersRequest:
@@ -4603,6 +5013,8 @@ components:
       title: DeleteMembersRequest
       properties:
         AccountIds:
+          xml:
+            name: accountIds
           $ref: '#/components/schemas/AccountIds'
           description: A list of account IDs of the GuardDuty member accounts that you want to delete.
     DeletePublishingDestinationRequest:
@@ -4623,6 +5035,8 @@ components:
         - S3Logs
       properties:
         S3Logs:
+          xml:
+            name: s3Logs
           $ref: '#/components/schemas/OrganizationS3LogsConfigurationResult'
           description: Describes whether S3 data event logs are enabled as a data source.
       description: An object that contains information on which data sources are automatically enabled for new members within the organization.
@@ -4647,12 +5061,18 @@ components:
         - Status
       properties:
         DestinationId:
+          xml:
+            name: destinationId
           $ref: '#/components/schemas/String'
           description: The unique ID of the publishing destination.
         DestinationType:
+          xml:
+            name: destinationType
           $ref: '#/components/schemas/DestinationType'
           description: 'The type of resource used for the publishing destination. Currently, only Amazon S3 buckets are supported.'
         Status:
+          xml:
+            name: status
           $ref: '#/components/schemas/PublishingStatus'
           description: The status of the publishing destination.
       description: 'Contains information about the publishing destination, including the ID, type, and status.'
@@ -4680,6 +5100,8 @@ components:
       title: DisableOrganizationAdminAccountRequest
       properties:
         AdminAccountId:
+          xml:
+            name: adminAccountId
           $ref: '#/components/schemas/String'
           description: The AWS Account ID for the organizations account to be disabled as a GuardDuty delegated administrator.
     DisassociateFromMasterAccountRequest:
@@ -4693,6 +5115,8 @@ components:
       title: DisassociateMembersRequest
       properties:
         AccountIds:
+          xml:
+            name: accountIds
           $ref: '#/components/schemas/AccountIds'
           description: A list of account IDs of the GuardDuty member accounts that you want to disassociate from the master account.
     Double:
@@ -4705,6 +5129,8 @@ components:
       title: EnableOrganizationAdminAccountRequest
       properties:
         AdminAccountId:
+          xml:
+            name: adminAccountId
           $ref: '#/components/schemas/String'
           description: The AWS Account ID for the organization account to be enabled as a GuardDuty delegated administrator.
     ThreatIntelligenceDetails:
@@ -4715,6 +5141,8 @@ components:
       type: object
       properties:
         ThreatIntelligenceDetails:
+          xml:
+            name: threatIntelligenceDetails
           $ref: '#/components/schemas/ThreatIntelligenceDetails'
           description: A list of threat intelligence details related to the evidence.
       description: Contains information about the reason that the finding was generated.
@@ -4733,15 +5161,23 @@ components:
       type: object
       properties:
         AccessKeyDetails:
+          xml:
+            name: accessKeyDetails
           $ref: '#/components/schemas/AccessKeyDetails'
           description: The IAM access key details (IAM user information) of a user that engaged in the activity that prompted GuardDuty to generate a finding.
         S3BucketDetails:
+          xml:
+            name: s3BucketDetails
           $ref: '#/components/schemas/S3BucketDetails'
           description: Contains information on the S3 bucket.
         InstanceDetails:
+          xml:
+            name: instanceDetails
           $ref: '#/components/schemas/InstanceDetails'
           description: The information about the EC2 instance associated with the activity that prompted GuardDuty to generate a finding.
         ResourceType:
+          xml:
+            name: resourceType
           $ref: '#/components/schemas/String'
           description: The type of AWS resource.
       description: Contains information about the AWS resource associated with the activity that prompted GuardDuty to generate a finding.
@@ -4749,33 +5185,53 @@ components:
       type: object
       properties:
         Action:
+          xml:
+            name: action
           $ref: '#/components/schemas/Action'
           description: Information about the activity that is described in a finding.
         Evidence:
+          xml:
+            name: evidence
           $ref: '#/components/schemas/Evidence'
           description: An evidence object associated with the service.
         Archived:
+          xml:
+            name: archived
           $ref: '#/components/schemas/Boolean'
           description: Indicates whether this finding is archived.
         Count:
+          xml:
+            name: count
           $ref: '#/components/schemas/Integer'
           description: The total count of the occurrences of this finding type.
         DetectorId:
+          xml:
+            name: detectorId
           $ref: '#/components/schemas/DetectorId'
           description: The detector ID for the GuardDuty service.
         EventFirstSeen:
+          xml:
+            name: eventFirstSeen
           $ref: '#/components/schemas/String'
           description: The first-seen timestamp of the activity that prompted GuardDuty to generate this finding.
         EventLastSeen:
+          xml:
+            name: eventLastSeen
           $ref: '#/components/schemas/String'
           description: The last-seen timestamp of the activity that prompted GuardDuty to generate this finding.
         ResourceRole:
+          xml:
+            name: resourceRole
           $ref: '#/components/schemas/String'
           description: The resource role information for this finding.
         ServiceName:
+          xml:
+            name: serviceName
           $ref: '#/components/schemas/String'
           description: The name of the AWS service (GuardDuty) that generated a finding.
         UserFeedback:
+          xml:
+            name: userFeedback
           $ref: '#/components/schemas/String'
           description: Feedback that was submitted about the finding.
       description: Contains additional information about the generated finding.
@@ -4794,46 +5250,76 @@ components:
         - UpdatedAt
       properties:
         AccountId:
+          xml:
+            name: accountId
           $ref: '#/components/schemas/String'
           description: The ID of the account in which the finding was generated.
         Arn:
+          xml:
+            name: arn
           $ref: '#/components/schemas/String'
           description: The ARN of the finding.
         Confidence:
+          xml:
+            name: confidence
           $ref: '#/components/schemas/Double'
           description: The confidence score for the finding.
         CreatedAt:
+          xml:
+            name: createdAt
           $ref: '#/components/schemas/String'
           description: The time and date when the finding was created.
         Description:
+          xml:
+            name: description
           $ref: '#/components/schemas/String'
           description: The description of the finding.
         Id:
+          xml:
+            name: id
           $ref: '#/components/schemas/String'
           description: The ID of the finding.
         Partition:
+          xml:
+            name: partition
           $ref: '#/components/schemas/String'
           description: The partition associated with the finding.
         Region:
+          xml:
+            name: region
           $ref: '#/components/schemas/String'
           description: The Region where the finding was generated.
         Resource:
+          xml:
+            name: resource
           $ref: '#/components/schemas/Resource'
         SchemaVersion:
+          xml:
+            name: schemaVersion
           $ref: '#/components/schemas/String'
           description: The version of the schema used for the finding.
         Service:
+          xml:
+            name: service
           $ref: '#/components/schemas/Service'
         Severity:
+          xml:
+            name: severity
           $ref: '#/components/schemas/Double'
           description: The severity of the finding.
         Title:
+          xml:
+            name: title
           $ref: '#/components/schemas/String'
           description: The title of the finding.
         Type:
+          xml:
+            name: type
           $ref: '#/components/schemas/FindingType'
           description: The type of finding.
         UpdatedAt:
+          xml:
+            name: updatedAt
           $ref: '#/components/schemas/String'
           description: The time and date when the finding was last updated.
       description: 'Contains information about the finding, which is generated when abnormal or suspicious activity is detected.'
@@ -4847,6 +5333,8 @@ components:
       type: object
       properties:
         CountBySeverity:
+          xml:
+            name: countBySeverity
           $ref: '#/components/schemas/CountBySeverity'
           description: Represents a map of severity to count statistics for a set of findings.
       description: Contains information about finding statistics.
@@ -4860,9 +5348,13 @@ components:
       type: object
       properties:
         Lat:
+          xml:
+            name: lat
           $ref: '#/components/schemas/Double'
           description: The latitude information of the remote IP address.
         Lon:
+          xml:
+            name: lon
           $ref: '#/components/schemas/Double'
           description: The longitude information of the remote IP address.
       description: Contains information about the location of the remote IP address.
@@ -4878,9 +5370,13 @@ components:
       type: object
       properties:
         AttributeName:
+          xml:
+            name: attributeName
           $ref: '#/components/schemas/String'
           description: 'Represents the finding attribute (for example, accountId) to sort findings by.'
         OrderBy:
+          xml:
+            name: orderBy
           $ref: '#/components/schemas/OrderBy'
           description: The order by which the sorted findings are to be displayed.
       description: Contains information about the criteria used for sorting findings.
@@ -4891,9 +5387,13 @@ components:
       title: GetFindingsRequest
       properties:
         FindingIds:
+          xml:
+            name: findingIds
           $ref: '#/components/schemas/FindingIds'
           description: The IDs of the findings that you want to retrieve.
         SortCriteria:
+          xml:
+            name: sortCriteria
           $ref: '#/components/schemas/SortCriteria'
           description: Represents the criteria used for sorting findings.
     GetFindingsStatisticsRequest:
@@ -4903,9 +5403,13 @@ components:
       title: GetFindingsStatisticsRequest
       properties:
         FindingStatisticTypes:
+          xml:
+            name: findingStatisticTypes
           $ref: '#/components/schemas/FindingStatisticTypes'
           description: The types of finding statistics to retrieve.
         FindingCriteria:
+          xml:
+            name: findingCriteria
           $ref: '#/components/schemas/FindingCriteria'
           description: Represents the criteria that is used for querying findings.
     GetIPSetRequest:
@@ -4936,15 +5440,23 @@ components:
       type: object
       properties:
         AccountId:
+          xml:
+            name: accountId
           $ref: '#/components/schemas/AccountId'
           description: The ID of the account used as the master account.
         InvitationId:
+          xml:
+            name: invitationId
           $ref: '#/components/schemas/String'
           description: The value used to validate the master account to the member account.
         RelationshipStatus:
+          xml:
+            name: relationshipStatus
           $ref: '#/components/schemas/String'
           description: The status of the relationship between the master and member accounts.
         InvitedAt:
+          xml:
+            name: invitedAt
           $ref: '#/components/schemas/String'
           description: The timestamp when the invitation was sent.
       description: Contains information about the master account and invitation.
@@ -4955,6 +5467,8 @@ components:
       title: GetMemberDetectorsRequest
       properties:
         AccountIds:
+          xml:
+            name: accountIds
           $ref: '#/components/schemas/AccountIds'
           description: The account ID of the member account.
     MemberDataSourceConfigurations:
@@ -4970,6 +5484,8 @@ components:
       title: GetMembersRequest
       properties:
         AccountIds:
+          xml:
+            name: accountIds
           $ref: '#/components/schemas/AccountIds'
           description: A list of account IDs of the GuardDuty member accounts that you want to describe.
     Members:
@@ -5007,12 +5523,18 @@ components:
         - DataSources
       properties:
         AccountIds:
+          xml:
+            name: accountIds
           $ref: '#/components/schemas/AccountIds'
           description: The account IDs to aggregate usage statistics from.
         DataSources:
+          xml:
+            name: dataSources
           $ref: '#/components/schemas/DataSourceList'
           description: The data sources to aggregate usage statistics from.
         Resources:
+          xml:
+            name: resources
           $ref: '#/components/schemas/ResourceList'
           description: The resources to aggregate usage statistics from. Only accepts exact resource names.
       description: Contains information about the criteria used to query usage statistics.
@@ -5028,33 +5550,51 @@ components:
       title: GetUsageStatisticsRequest
       properties:
         UsageStatisticType:
+          xml:
+            name: usageStatisticsType
           $ref: '#/components/schemas/UsageStatisticType'
           description: The type of usage statistics to retrieve.
         UsageCriteria:
+          xml:
+            name: usageCriteria
           $ref: '#/components/schemas/UsageCriteria'
           description: Represents the criteria used for querying usage.
         Unit:
+          xml:
+            name: unit
           $ref: '#/components/schemas/String'
           description: The currency unit you would like to view your usage statistics in. Current valid values are USD.
         MaxResults:
+          xml:
+            name: maxResults
           $ref: '#/components/schemas/MaxResults'
           description: The maximum number of results to return in the response.
         NextToken:
+          xml:
+            name: nextToken
           $ref: '#/components/schemas/String'
           description: 'A token to use for paginating results that are returned in the response. Set the value of this parameter to null for the first request to a list action. For subsequent calls, use the NextToken value returned from the previous request to continue listing results after the first page.'
     UsageStatistics:
       type: object
       properties:
         SumByAccount:
+          xml:
+            name: sumByAccount
           $ref: '#/components/schemas/UsageAccountResultList'
           description: The usage statistic sum organized by account ID.
         SumByDataSource:
+          xml:
+            name: sumByDataSource
           $ref: '#/components/schemas/UsageDataSourceResultList'
           description: The usage statistic sum organized by on data source.
         SumByResource:
+          xml:
+            name: sumByResource
           $ref: '#/components/schemas/UsageResourceResultList'
           description: The usage statistic sum organized by resource.
         TopResources:
+          xml:
+            name: topResources
           $ref: '#/components/schemas/UsageResourceResultList'
           description: 'Lists the top 50 resources that have generated the most GuardDuty usage, in order from most to least expensive.'
       description: 'Contains the result of GuardDuty usage. If a UsageStatisticType is provided the result for other types will be null. '
@@ -5065,9 +5605,13 @@ components:
       type: object
       properties:
         Arn:
+          xml:
+            name: arn
           $ref: '#/components/schemas/String'
           description: The profile ARN of the EC2 instance.
         Id:
+          xml:
+            name: id
           $ref: '#/components/schemas/String'
           description: The profile ID of the EC2 instance.
       description: Contains information about the EC2 instance profile.
@@ -5087,42 +5631,68 @@ components:
       type: object
       properties:
         AvailabilityZone:
+          xml:
+            name: availabilityZone
           $ref: '#/components/schemas/String'
           description: The Availability Zone of the EC2 instance.
         IamInstanceProfile:
+          xml:
+            name: iamInstanceProfile
           $ref: '#/components/schemas/IamInstanceProfile'
           description: The profile information of the EC2 instance.
         ImageDescription:
+          xml:
+            name: imageDescription
           $ref: '#/components/schemas/String'
           description: The image description of the EC2 instance.
         ImageId:
+          xml:
+            name: imageId
           $ref: '#/components/schemas/String'
           description: The image ID of the EC2 instance.
         InstanceId:
+          xml:
+            name: instanceId
           $ref: '#/components/schemas/String'
           description: The ID of the EC2 instance.
         InstanceState:
+          xml:
+            name: instanceState
           $ref: '#/components/schemas/String'
           description: The state of the EC2 instance.
         InstanceType:
+          xml:
+            name: instanceType
           $ref: '#/components/schemas/String'
           description: The type of the EC2 instance.
         OutpostArn:
+          xml:
+            name: outpostArn
           $ref: '#/components/schemas/String'
           description: The Amazon Resource Name (ARN) of the AWS Outpost. Only applicable to AWS Outposts instances.
         LaunchTime:
+          xml:
+            name: launchTime
           $ref: '#/components/schemas/String'
           description: The launch time of the EC2 instance.
         NetworkInterfaces:
+          xml:
+            name: networkInterfaces
           $ref: '#/components/schemas/NetworkInterfaces'
           description: The elastic network interface information of the EC2 instance.
         Platform:
+          xml:
+            name: platform
           $ref: '#/components/schemas/String'
           description: The platform of the EC2 instance.
         ProductCodes:
+          xml:
+            name: productCodes
           $ref: '#/components/schemas/ProductCodes'
           description: The product code of the EC2 instance.
         Tags:
+          xml:
+            name: tags
           $ref: '#/components/schemas/Tags'
           description: The tags of the EC2 instance.
       description: Contains information about the details of an instance.
@@ -5130,15 +5700,23 @@ components:
       type: object
       properties:
         AccountId:
+          xml:
+            name: accountId
           $ref: '#/components/schemas/AccountId'
           description: The ID of the account that the invitation was sent from.
         InvitationId:
+          xml:
+            name: invitationId
           $ref: '#/components/schemas/String'
           description: The ID of the invitation. This value is used to validate the inviter account to the member account.
         RelationshipStatus:
+          xml:
+            name: relationshipStatus
           $ref: '#/components/schemas/String'
           description: The status of the relationship between the inviter and invitee accounts.
         InvitedAt:
+          xml:
+            name: invitedAt
           $ref: '#/components/schemas/String'
           description: The timestamp when the invitation was sent.
       description: Contains information about the invitation to become a member account.
@@ -5155,12 +5733,18 @@ components:
       title: InviteMembersRequest
       properties:
         AccountIds:
+          xml:
+            name: accountIds
           $ref: '#/components/schemas/AccountIds'
           description: A list of account IDs of the accounts that you want to invite to GuardDuty as members.
         DisableEmailNotification:
+          xml:
+            name: disableEmailNotification
           $ref: '#/components/schemas/Boolean'
           description: A Boolean value that specifies whether you want to disable email notification to the accounts that you are inviting to GuardDuty as members.
         Message:
+          xml:
+            name: message
           $ref: '#/components/schemas/String'
           description: The invitation message that you want to send to the accounts that you're inviting to GuardDuty as members.
     IpSetIds:
@@ -5186,15 +5770,23 @@ components:
       title: ListFindingsRequest
       properties:
         FindingCriteria:
+          xml:
+            name: findingCriteria
           $ref: '#/components/schemas/FindingCriteria'
           description: '<p>Represents the criteria used for querying findings. Valid values include:</p> <ul> <li> <p>JSON field name</p> </li> <li> <p>accountId</p> </li> <li> <p>region</p> </li> <li> <p>confidence</p> </li> <li> <p>id</p> </li> <li> <p>resource.accessKeyDetails.accessKeyId</p> </li> <li> <p>resource.accessKeyDetails.principalId</p> </li> <li> <p>resource.accessKeyDetails.userName</p> </li> <li> <p>resource.accessKeyDetails.userType</p> </li> <li> <p>resource.instanceDetails.iamInstanceProfile.id</p> </li> <li> <p>resource.instanceDetails.imageId</p> </li> <li> <p>resource.instanceDetails.instanceId</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.ipv6Addresses</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.privateIpAddresses.privateIpAddress</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.publicDnsName</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.publicIp</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.securityGroups.groupId</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.securityGroups.groupName</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.subnetId</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.vpcId</p> </li> <li> <p>resource.instanceDetails.tags.key</p> </li> <li> <p>resource.instanceDetails.tags.value</p> </li> <li> <p>resource.resourceType</p> </li> <li> <p>service.action.actionType</p> </li> <li> <p>service.action.awsApiCallAction.api</p> </li> <li> <p>service.action.awsApiCallAction.callerType</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.city.cityName</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.country.countryName</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.ipAddressV4</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.organization.asn</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.organization.asnOrg</p> </li> <li> <p>service.action.awsApiCallAction.serviceName</p> </li> <li> <p>service.action.dnsRequestAction.domain</p> </li> <li> <p>service.action.networkConnectionAction.blocked</p> </li> <li> <p>service.action.networkConnectionAction.connectionDirection</p> </li> <li> <p>service.action.networkConnectionAction.localPortDetails.port</p> </li> <li> <p>service.action.networkConnectionAction.protocol</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.city.cityName</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.country.countryName</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.ipAddressV4</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.organization.asn</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.organization.asnOrg</p> </li> <li> <p>service.action.networkConnectionAction.remotePortDetails.port</p> </li> <li> <p>service.additionalInfo.threatListName</p> </li> <li> <p>service.archived</p> <p>When this attribute is set to ''true'', only archived findings are listed. When it''s set to ''false'', only unarchived findings are listed. When this attribute is not set, all existing findings are listed.</p> </li> <li> <p>service.resourceRole</p> </li> <li> <p>severity</p> </li> <li> <p>type</p> </li> <li> <p>updatedAt</p> <p>Type: Timestamp in Unix Epoch millisecond format: 1486685375000</p> </li> </ul>'
         SortCriteria:
+          xml:
+            name: sortCriteria
           $ref: '#/components/schemas/SortCriteria'
           description: Represents the criteria used for sorting findings.
         MaxResults:
+          xml:
+            name: maxResults
           $ref: '#/components/schemas/MaxResults'
           description: You can use this parameter to indicate the maximum number of items you want in the response. The default value is 50. The maximum value is 50.
         NextToken:
+          xml:
+            name: nextToken
           $ref: '#/components/schemas/String'
           description: 'You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the list action. For subsequent calls to the action, fill nextToken in the request with the value of NextToken from the previous response to continue listing data.'
     ListIPSetsRequest:
@@ -5235,6 +5827,8 @@ components:
       type: object
       properties:
         IpAddressV4:
+          xml:
+            name: ipAddressV4
           $ref: '#/components/schemas/String'
           description: The IPv4 local address of the connection.
       description: Contains information about the local IP address of the connection.
@@ -5242,9 +5836,13 @@ components:
       type: object
       properties:
         Port:
+          xml:
+            name: port
           $ref: '#/components/schemas/Integer'
           description: The port number of the local connection.
         PortName:
+          xml:
+            name: portName
           $ref: '#/components/schemas/String'
           description: The port name of the local connection.
       description: Contains information about the port for the local connection.
@@ -5258,24 +5856,38 @@ components:
         - UpdatedAt
       properties:
         AccountId:
+          xml:
+            name: accountId
           $ref: '#/components/schemas/AccountId'
           description: The ID of the member account.
         DetectorId:
+          xml:
+            name: detectorId
           $ref: '#/components/schemas/DetectorId'
           description: The detector ID of the member account.
         MasterId:
+          xml:
+            name: masterId
           $ref: '#/components/schemas/String'
           description: The master account ID.
         Email:
+          xml:
+            name: email
           $ref: '#/components/schemas/Email'
           description: The email address of the member account.
         RelationshipStatus:
+          xml:
+            name: relationshipStatus
           $ref: '#/components/schemas/String'
           description: The status of the relationship between the member and the master.
         InvitedAt:
+          xml:
+            name: invitedAt
           $ref: '#/components/schemas/String'
           description: The timestamp when the invitation was sent.
         UpdatedAt:
+          xml:
+            name: updatedAt
           $ref: '#/components/schemas/String'
           description: The last-updated timestamp of the member.
       description: 'Contains information about the member account. '
@@ -5286,9 +5898,13 @@ components:
         - DataSources
       properties:
         AccountId:
+          xml:
+            name: accountId
           $ref: '#/components/schemas/AccountId'
           description: The account ID for the member account.
         DataSources:
+          xml:
+            name: dataSources
           $ref: '#/components/schemas/DataSourceConfigurationsResult'
           description: Contains information on the status of data sources for the account.
       description: Contains information on which data sources are enabled for a member account.
@@ -5296,9 +5912,13 @@ components:
       type: object
       properties:
         Port:
+          xml:
+            name: port
           $ref: '#/components/schemas/Integer'
           description: The port number of the remote connection.
         PortName:
+          xml:
+            name: portName
           $ref: '#/components/schemas/String'
           description: The port name of the remote connection.
       description: Contains information about the remote port.
@@ -5314,33 +5934,53 @@ components:
       type: object
       properties:
         Ipv6Addresses:
+          xml:
+            name: ipv6Addresses
           $ref: '#/components/schemas/Ipv6Addresses'
           description: A list of IPv6 addresses for the EC2 instance.
         NetworkInterfaceId:
+          xml:
+            name: networkInterfaceId
           $ref: '#/components/schemas/String'
           description: The ID of the network interface.
         PrivateDnsName:
+          xml:
+            name: privateDnsName
           $ref: '#/components/schemas/String'
           description: The private DNS name of the EC2 instance.
         PrivateIpAddress:
+          xml:
+            name: privateIpAddress
           $ref: '#/components/schemas/String'
           description: The private IP address of the EC2 instance.
         PrivateIpAddresses:
+          xml:
+            name: privateIpAddresses
           $ref: '#/components/schemas/PrivateIpAddresses'
           description: Other private IP address information of the EC2 instance.
         PublicDnsName:
+          xml:
+            name: publicDnsName
           $ref: '#/components/schemas/String'
           description: The public DNS name of the EC2 instance.
         PublicIp:
+          xml:
+            name: publicIp
           $ref: '#/components/schemas/String'
           description: The public IP address of the EC2 instance.
         SecurityGroups:
+          xml:
+            name: securityGroups
           $ref: '#/components/schemas/SecurityGroups'
           description: The security groups associated with the EC2 instance.
         SubnetId:
+          xml:
+            name: subnetId
           $ref: '#/components/schemas/String'
           description: The subnet ID of the EC2 instance.
         VpcId:
+          xml:
+            name: vpcId
           $ref: '#/components/schemas/String'
           description: The VPC ID of the EC2 instance.
       description: Contains information about the elastic network interface of the EC2 instance.
@@ -5348,15 +5988,23 @@ components:
       type: object
       properties:
         Asn:
+          xml:
+            name: asn
           $ref: '#/components/schemas/String'
           description: The Autonomous System Number (ASN) of the internet provider of the remote IP address.
         AsnOrg:
+          xml:
+            name: asnOrg
           $ref: '#/components/schemas/String'
           description: The organization that registered this ASN.
         Isp:
+          xml:
+            name: isp
           $ref: '#/components/schemas/String'
           description: The ISP information for the internet provider.
         Org:
+          xml:
+            name: org
           $ref: '#/components/schemas/String'
           description: The name of the internet provider.
       description: Contains information about the ISP organization of the remote IP address.
@@ -5364,6 +6012,8 @@ components:
       type: object
       properties:
         S3Logs:
+          xml:
+            name: s3Logs
           $ref: '#/components/schemas/OrganizationS3LogsConfiguration'
           description: Describes whether S3 data event logs are enabled for new members of the organization.
       description: An object that contains information on which data sources will be configured to be automatically enabled for new members within the organization.
@@ -5373,6 +6023,8 @@ components:
         - AutoEnable
       properties:
         AutoEnable:
+          xml:
+            name: autoEnable
           $ref: '#/components/schemas/Boolean'
           description: A value that describes whether S3 data event logs are automatically enabled for new members of the organization.
       description: The current configuration of S3 data event logs as a data source for the organization.
@@ -5380,6 +6032,8 @@ components:
       type: object
       properties:
         Id:
+          xml:
+            name: id
           $ref: '#/components/schemas/String'
           description: 'The canonical user ID of the bucket owner. For information about locating your canonical user ID see <a href="https://docs.aws.amazon.com/general/latest/gr/acct-identifiers.html#FindingCanonicalId">Finding Your Account Canonical User ID.</a> '
       description: Contains information on the owner of the bucket.
@@ -5387,9 +6041,13 @@ components:
       type: object
       properties:
         BucketLevelPermissions:
+          xml:
+            name: bucketLevelPermissions
           $ref: '#/components/schemas/BucketLevelPermissions'
           description: Contains information about the bucket level permissions for the S3 bucket.
         AccountLevelPermissions:
+          xml:
+            name: accountLevelPermissions
           $ref: '#/components/schemas/AccountLevelPermissions'
           description: Contains information about the account level permissions on the S3 bucket.
       description: Contains information about how permissions are configured for the S3 bucket.
@@ -5401,12 +6059,18 @@ components:
       type: object
       properties:
         LocalPortDetails:
+          xml:
+            name: localPortDetails
           $ref: '#/components/schemas/LocalPortDetails'
           description: The local port information of the connection.
         LocalIpDetails:
+          xml:
+            name: localIpDetails
           $ref: '#/components/schemas/LocalIpDetails'
           description: The local IP information of the connection.
         RemoteIpDetails:
+          xml:
+            name: remoteIpDetails
           $ref: '#/components/schemas/RemoteIpDetails'
           description: The remote IP information of the connection.
       description: Contains information about the port probe details.
@@ -5414,9 +6078,13 @@ components:
       type: object
       properties:
         PrivateDnsName:
+          xml:
+            name: privateDnsName
           $ref: '#/components/schemas/String'
           description: The private DNS name of the EC2 instance.
         PrivateIpAddress:
+          xml:
+            name: privateIpAddress
           $ref: '#/components/schemas/String'
           description: The private IP address of the EC2 instance.
       description: Contains other private IP address information of the EC2 instance.
@@ -5424,9 +6092,13 @@ components:
       type: object
       properties:
         Code:
+          xml:
+            name: code
           $ref: '#/components/schemas/String'
           description: The product code information.
         ProductType:
+          xml:
+            name: productType
           $ref: '#/components/schemas/String'
           description: The product code type.
       description: Contains information about the product code for the EC2 instance.
@@ -5434,9 +6106,13 @@ components:
       type: object
       properties:
         PermissionConfiguration:
+          xml:
+            name: permissionConfiguration
           $ref: '#/components/schemas/PermissionConfiguration'
           description: Contains information about how permissions are configured for the S3 bucket.
         EffectivePermission:
+          xml:
+            name: effectivePermission
           $ref: '#/components/schemas/String'
           description: Describes the effective permission on this bucket after factoring all attached policies.
       description: Describes the public access policies that apply to the S3 bucket.
@@ -5451,27 +6127,43 @@ components:
       type: object
       properties:
         Arn:
+          xml:
+            name: arn
           $ref: '#/components/schemas/String'
           description: The Amazon Resource Name (ARN) of the S3 bucket.
         Name:
+          xml:
+            name: name
           $ref: '#/components/schemas/String'
           description: The name of the S3 bucket.
         Type:
+          xml:
+            name: type
           $ref: '#/components/schemas/String'
           description: Describes whether the bucket is a source or destination bucket.
         CreatedAt:
+          xml:
+            name: createdAt
           $ref: '#/components/schemas/Timestamp'
           description: The date and time the bucket was created at.
         Owner:
+          xml:
+            name: owner
           $ref: '#/components/schemas/Owner'
           description: The owner of the S3 bucket.
         Tags:
+          xml:
+            name: tags
           $ref: '#/components/schemas/Tags'
           description: All tags attached to the S3 bucket
         DefaultServerSideEncryption:
+          xml:
+            name: defaultServerSideEncryption
           $ref: '#/components/schemas/DefaultServerSideEncryption'
           description: Describes the server side encryption method used in the S3 bucket.
         PublicAccess:
+          xml:
+            name: publicAccess
           $ref: '#/components/schemas/PublicAccess'
           description: Describes the public access policies that apply to the S3 bucket.
       description: Contains information on the S3 bucket.
@@ -5479,9 +6171,13 @@ components:
       type: object
       properties:
         GroupId:
+          xml:
+            name: groupId
           $ref: '#/components/schemas/String'
           description: The security group ID of the EC2 instance.
         GroupName:
+          xml:
+            name: groupName
           $ref: '#/components/schemas/String'
           description: The security group name of the EC2 instance.
       description: Contains information about the security groups associated with the EC2 instance.
@@ -5492,6 +6188,8 @@ components:
       title: StartMonitoringMembersRequest
       properties:
         AccountIds:
+          xml:
+            name: accountIds
           $ref: '#/components/schemas/AccountIds'
           description: A list of account IDs of the GuardDuty member accounts to start monitoring.
     StopMonitoringMembersRequest:
@@ -5501,15 +6199,21 @@ components:
       title: StopMonitoringMembersRequest
       properties:
         AccountIds:
+          xml:
+            name: accountIds
           $ref: '#/components/schemas/AccountIds'
           description: A list of account IDs for the member accounts to stop monitoring.
     Tag:
       type: object
       properties:
         Key:
+          xml:
+            name: key
           $ref: '#/components/schemas/String'
           description: The EC2 instance tag key.
         Value:
+          xml:
+            name: value
           $ref: '#/components/schemas/String'
           description: The EC2 instance tag value.
       description: Contains information about a tag associated with the EC2 instance.
@@ -5526,6 +6230,8 @@ components:
       title: TagResourceRequest
       properties:
         Tags:
+          xml:
+            name: tags
           $ref: '#/components/schemas/TagMap'
           description: The tags to be added to a resource.
     ThreatNames:
@@ -5536,9 +6242,13 @@ components:
       type: object
       properties:
         ThreatListName:
+          xml:
+            name: threatListName
           $ref: '#/components/schemas/String'
           description: The name of the threat intelligence list that triggered the finding.
         ThreatNames:
+          xml:
+            name: threatNames
           $ref: '#/components/schemas/ThreatNames'
           description: A list of names of the threats in the threat intelligence list that triggered the finding.
       description: An instance of a threat intelligence detail that constitutes evidence for the finding.
@@ -5546,9 +6256,13 @@ components:
       type: object
       properties:
         Amount:
+          xml:
+            name: amount
           $ref: '#/components/schemas/String'
           description: The total usage.
         Unit:
+          xml:
+            name: unit
           $ref: '#/components/schemas/String'
           description: The currency unit that the amount is given in.
       description: Contains the total usage with the corresponding currency unit for that value.
@@ -5559,6 +6273,8 @@ components:
       title: UnarchiveFindingsRequest
       properties:
         FindingIds:
+          xml:
+            name: findingIds
           $ref: '#/components/schemas/FindingIds'
           description: The IDs of the findings to unarchive.
     UnprocessedAccount:
@@ -5568,9 +6284,13 @@ components:
         - Result
       properties:
         AccountId:
+          xml:
+            name: accountId
           $ref: '#/components/schemas/AccountId'
           description: The AWS account ID.
         Result:
+          xml:
+            name: result
           $ref: '#/components/schemas/String'
           description: A reason why the account hasn't been processed.
       description: Contains information about the accounts that weren't processed.
@@ -5583,12 +6303,18 @@ components:
       title: UpdateDetectorRequest
       properties:
         Enable:
+          xml:
+            name: enable
           $ref: '#/components/schemas/Boolean'
           description: Specifies whether the detector is enabled or not enabled.
         FindingPublishingFrequency:
+          xml:
+            name: findingPublishingFrequency
           $ref: '#/components/schemas/FindingPublishingFrequency'
           description: 'An enum value that specifies how frequently findings are exported, such as to CloudWatch Events.'
         DataSources:
+          xml:
+            name: dataSources
           $ref: '#/components/schemas/DataSourceConfigurations'
           description: An object that describes which data sources will be updated.
     UpdateFilterRequest:
@@ -5596,15 +6322,23 @@ components:
       title: UpdateFilterRequest
       properties:
         Description:
+          xml:
+            name: description
           $ref: '#/components/schemas/FilterDescription'
           description: The description of the filter.
         Action:
+          xml:
+            name: action
           $ref: '#/components/schemas/FilterAction'
           description: Specifies the action that is to be applied to the findings that match the filter.
         Rank:
+          xml:
+            name: rank
           $ref: '#/components/schemas/FilterRank'
           description: Specifies the position of the filter in the list of current filters. Also specifies the order in which this filter is applied to the findings.
         FindingCriteria:
+          xml:
+            name: findingCriteria
           $ref: '#/components/schemas/FindingCriteria'
           description: Represents the criteria to be used in the filter for querying findings.
     UpdateFindingsFeedbackRequest:
@@ -5615,12 +6349,18 @@ components:
       title: UpdateFindingsFeedbackRequest
       properties:
         FindingIds:
+          xml:
+            name: findingIds
           $ref: '#/components/schemas/FindingIds'
           description: The IDs of the findings that you want to mark as useful or not useful.
         Feedback:
+          xml:
+            name: feedback
           $ref: '#/components/schemas/Feedback'
           description: The feedback for the finding.
         Comments:
+          xml:
+            name: comments
           $ref: '#/components/schemas/String'
           description: Additional feedback about the GuardDuty findings.
     UpdateIPSetRequest:
@@ -5628,12 +6368,18 @@ components:
       title: UpdateIPSetRequest
       properties:
         Name:
+          xml:
+            name: name
           $ref: '#/components/schemas/Name'
           description: The unique ID that specifies the IPSet that you want to update.
         Location:
+          xml:
+            name: location
           $ref: '#/components/schemas/Location'
           description: 'The updated URI of the file that contains the IPSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.'
         Activate:
+          xml:
+            name: activate
           $ref: '#/components/schemas/Boolean'
           description: The updated Boolean value that specifies whether the IPSet is active or not.
     UpdateMemberDetectorsRequest:
@@ -5643,9 +6389,13 @@ components:
       title: UpdateMemberDetectorsRequest
       properties:
         AccountIds:
+          xml:
+            name: accountIds
           $ref: '#/components/schemas/AccountIds'
           description: A list of member account IDs to be updated.
         DataSources:
+          xml:
+            name: dataSources
           $ref: '#/components/schemas/DataSourceConfigurations'
           description: An object describes which data sources will be updated.
     UpdateOrganizationConfigurationRequest:
@@ -5655,9 +6405,13 @@ components:
       title: UpdateOrganizationConfigurationRequest
       properties:
         AutoEnable:
+          xml:
+            name: autoEnable
           $ref: '#/components/schemas/Boolean'
           description: Indicates whether to automatically enable member accounts in the organization.
         DataSources:
+          xml:
+            name: dataSources
           $ref: '#/components/schemas/OrganizationDataSourceConfigurations'
           description: An object describes which data sources will be updated.
     UpdatePublishingDestinationRequest:
@@ -5665,6 +6419,8 @@ components:
       title: UpdatePublishingDestinationRequest
       properties:
         DestinationProperties:
+          xml:
+            name: destinationProperties
           $ref: '#/components/schemas/DestinationProperties'
           description: A <code>DestinationProperties</code> object that includes the <code>DestinationArn</code> and <code>KmsKeyArn</code> of the publishing destination.
     UpdateThreatIntelSetRequest:
@@ -5672,21 +6428,31 @@ components:
       title: UpdateThreatIntelSetRequest
       properties:
         Name:
+          xml:
+            name: name
           $ref: '#/components/schemas/Name'
           description: The unique ID that specifies the ThreatIntelSet that you want to update.
         Location:
+          xml:
+            name: location
           $ref: '#/components/schemas/Location'
           description: 'The updated URI of the file that contains the ThreateIntelSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.'
         Activate:
+          xml:
+            name: activate
           $ref: '#/components/schemas/Boolean'
           description: The updated Boolean value that specifies whether the ThreateIntelSet is active or not.
     UsageAccountResult:
       type: object
       properties:
         AccountId:
+          xml:
+            name: accountId
           $ref: '#/components/schemas/AccountId'
           description: The Account ID that generated usage.
         Total:
+          xml:
+            name: total
           $ref: '#/components/schemas/Total'
           description: Represents the total of usage for the Account ID.
       description: Contains information on the total of usage based on account IDs.
@@ -5698,9 +6464,13 @@ components:
       type: object
       properties:
         DataSource:
+          xml:
+            name: dataSource
           $ref: '#/components/schemas/DataSource'
           description: The data source type that generated usage.
         Total:
+          xml:
+            name: total
           $ref: '#/components/schemas/Total'
           description: Represents the total of usage for the specified data source.
       description: Contains information on the result of usage based on data source type.
@@ -5712,9 +6482,13 @@ components:
       type: object
       properties:
         Resource:
+          xml:
+            name: resource
           $ref: '#/components/schemas/String'
           description: The AWS resource that generated usage.
         Total:
+          xml:
+            name: total
           $ref: '#/components/schemas/Total'
           description: Represents the sum total of usage for the specified resource type.
       description: Contains information on the sum of usage based on an AWS resource.

@@ -4169,6 +4169,8 @@ components:
           $ref: '#/components/schemas/__listOfConnectivityInfo'
           description: Connectivity info list.
         Message:
+          xml:
+            name: message
           $ref: '#/components/schemas/__string'
           description: A message about the connectivity info request.
     GetConnectorDefinitionResponse:
@@ -4804,6 +4806,8 @@ components:
       type: object
       properties:
         Message:
+          xml:
+            name: message
           $ref: '#/components/schemas/__string'
           description: A message about the connectivity info update request.
         Version:
@@ -5345,6 +5349,8 @@ components:
           $ref: '#/components/schemas/__string'
           description: The name of the definition.
         Tags:
+          xml:
+            name: tags
           $ref: '#/components/schemas/Tags'
           description: Tag(s) attached to the resource arn.
       description: Information about a definition.

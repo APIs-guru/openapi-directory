@@ -4212,10 +4212,14 @@ components:
     TagList:
       type: array
       items:
+        xml:
+          name: Tag
         $ref: '#/components/schemas/Tag'
     TagKeyList:
       type: array
       items:
+        xml:
+          name: Key
         $ref: '#/components/schemas/TagKey'
     UpdateCloudFrontOriginAccessIdentityResult:
       type: object
@@ -4263,6 +4267,8 @@ components:
     SignerList:
       type: array
       items:
+        xml:
+          name: Signer
         $ref: '#/components/schemas/Signer'
     ActiveTrustedSigners:
       type: object
@@ -4283,10 +4289,14 @@ components:
     AliasList:
       type: array
       items:
+        xml:
+          name: CNAME
         $ref: '#/components/schemas/string'
     MethodsList:
       type: array
       items:
+        xml:
+          name: Method
         $ref: '#/components/schemas/Method'
     CachedMethods:
       type: object
@@ -4319,6 +4329,8 @@ components:
     AwsAccountNumberList:
       type: array
       items:
+        xml:
+          name: AwsAccountNumber
         $ref: '#/components/schemas/string'
     ForwardedValues:
       type: object
@@ -4411,6 +4423,8 @@ components:
     CacheBehaviorList:
       type: array
       items:
+        xml:
+          name: CacheBehavior
         $ref: '#/components/schemas/CacheBehavior'
     CertificateSource:
       type: string
@@ -4450,6 +4464,8 @@ components:
     CloudFrontOriginAccessIdentitySummaryList:
       type: array
       items:
+        xml:
+          name: CloudFrontOriginAccessIdentitySummary
         $ref: '#/components/schemas/CloudFrontOriginAccessIdentitySummary'
     CloudFrontOriginAccessIdentityList:
       type: object
@@ -4530,10 +4546,14 @@ components:
     ContentTypeProfileList:
       type: array
       items:
+        xml:
+          name: ContentTypeProfile
         $ref: '#/components/schemas/ContentTypeProfile'
     CookieNameList:
       type: array
       items:
+        xml:
+          name: Name
         $ref: '#/components/schemas/string'
     CookieNames:
       type: object
@@ -4928,10 +4948,14 @@ components:
     CustomErrorResponseList:
       type: array
       items:
+        xml:
+          name: CustomErrorResponse
         $ref: '#/components/schemas/CustomErrorResponse'
     OriginCustomHeadersList:
       type: array
       items:
+        xml:
+          name: OriginCustomHeader
         $ref: '#/components/schemas/OriginCustomHeader'
     CustomHeaders:
       type: object
@@ -5023,6 +5047,8 @@ components:
     DistributionSummaryList:
       type: array
       items:
+        xml:
+          name: DistributionSummary
         $ref: '#/components/schemas/DistributionSummary'
     DistributionList:
       type: object
@@ -5128,6 +5154,8 @@ components:
     EncryptionEntityList:
       type: array
       items:
+        xml:
+          name: EncryptionEntity
         $ref: '#/components/schemas/EncryptionEntity'
     FieldPatterns:
       type: object
@@ -5168,6 +5196,8 @@ components:
     FieldLevelEncryptionSummaryList:
       type: array
       items:
+        xml:
+          name: FieldLevelEncryptionSummary
         $ref: '#/components/schemas/FieldLevelEncryptionSummary'
     FieldLevelEncryptionList:
       type: object
@@ -5191,6 +5221,8 @@ components:
     FieldLevelEncryptionProfileSummaryList:
       type: array
       items:
+        xml:
+          name: FieldLevelEncryptionProfileSummary
         $ref: '#/components/schemas/FieldLevelEncryptionProfileSummary'
     FieldLevelEncryptionProfileList:
       type: object
@@ -5260,6 +5292,8 @@ components:
     FieldPatternList:
       type: array
       items:
+        xml:
+          name: FieldPattern
         $ref: '#/components/schemas/string'
     Headers:
       type: object
@@ -5293,6 +5327,8 @@ components:
     LocationList:
       type: array
       items:
+        xml:
+          name: Location
         $ref: '#/components/schemas/string'
     GeoRestriction:
       type: object
@@ -5372,10 +5408,14 @@ components:
     HeaderList:
       type: array
       items:
+        xml:
+          name: Name
         $ref: '#/components/schemas/string'
     InvalidationSummaryList:
       type: array
       items:
+        xml:
+          name: InvalidationSummary
         $ref: '#/components/schemas/InvalidationSummary'
     InvalidationList:
       type: object
@@ -5423,6 +5463,8 @@ components:
     KeyPairIdList:
       type: array
       items:
+        xml:
+          name: KeyPairId
         $ref: '#/components/schemas/string'
     KeyPairIds:
       type: object
@@ -5457,6 +5499,8 @@ components:
     LambdaFunctionAssociationList:
       type: array
       items:
+        xml:
+          name: LambdaFunctionAssociation
         $ref: '#/components/schemas/LambdaFunctionAssociation'
     ListCloudFrontOriginAccessIdentitiesRequest:
       type: object
@@ -5617,19 +5661,27 @@ components:
     OriginList:
       type: array
       items:
+        xml:
+          name: Origin
         $ref: '#/components/schemas/Origin'
       minItems: 1
     SslProtocolsList:
       type: array
       items:
+        xml:
+          name: SslProtocol
         $ref: '#/components/schemas/SslProtocol'
     PathList:
       type: array
       items:
+        xml:
+          name: Path
         $ref: '#/components/schemas/string'
     PublicKeySummaryList:
       type: array
       items:
+        xml:
+          name: PublicKeySummary
         $ref: '#/components/schemas/PublicKeySummary'
     PublicKeySummary:
       type: object
@@ -5683,10 +5735,14 @@ components:
     QueryArgProfileList:
       type: array
       items:
+        xml:
+          name: QueryArgProfile
         $ref: '#/components/schemas/QueryArgProfile'
     QueryStringCacheKeysList:
       type: array
       items:
+        xml:
+          name: Name
         $ref: '#/components/schemas/string'
     SSLSupportMethod:
       type: string
@@ -5713,6 +5769,8 @@ components:
     StreamingDistributionSummaryList:
       type: array
       items:
+        xml:
+          name: StreamingDistributionSummary
         $ref: '#/components/schemas/StreamingDistributionSummary'
     StreamingDistributionSummary:
       type: object

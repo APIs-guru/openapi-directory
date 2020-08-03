@@ -194,6 +194,8 @@ paths:
                   type: object
                   properties:
                     BrokerAZDistribution:
+                      xml:
+                        name: brokerAZDistribution
                       $ref: '#/components/schemas/BrokerAZDistribution'
                       description: |2-
 
@@ -201,12 +203,16 @@ paths:
                                  <p>Amazon MSK distributes the broker nodes evenly across the Availability Zones that correspond to the subnets you provide when you create the cluster.</p>
                                  
                     ClientSubnets:
+                      xml:
+                        name: clientSubnets
                       $ref: '#/components/schemas/__listOf__string'
                       description: |2-
 
                                     <p>The list of subnets to connect to in the client virtual private cloud (VPC). AWS creates elastic network interfaces inside these subnets. Client applications use elastic network interfaces to produce and consume data. Client subnets can't be in Availability Zone us-east-1e.</p>
                                  
                     InstanceType:
+                      xml:
+                        name: instanceType
                       $ref: '#/components/schemas/__stringMin5Max32'
                       description: |2-
 
@@ -214,12 +220,16 @@ paths:
                         kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.</p>
                                  
                     SecurityGroups:
+                      xml:
+                        name: securityGroups
                       $ref: '#/components/schemas/__listOf__string'
                       description: |2-
 
                                     <p>The AWS security groups to associate with the elastic network interfaces in order to specify who can connect to and communicate with the Amazon MSK cluster. If you don't specify a security group, Amazon MSK uses the default security group associated with the VPC.</p>
                                  
                     StorageInfo:
+                      xml:
+                        name: storageInfo
                       $ref: '#/components/schemas/StorageInfo'
                       description: |2-
 
@@ -233,6 +243,8 @@ paths:
                   type: object
                   properties:
                     Tls:
+                      xml:
+                        name: tls
                       $ref: '#/components/schemas/Tls'
                       description: |2-
 
@@ -254,12 +266,16 @@ paths:
                   type: object
                   properties:
                     Arn:
+                      xml:
+                        name: arn
                       $ref: '#/components/schemas/__string'
                       description: |2-
 
                                     <p>ARN of the configuration to use.</p>
                                  
                     Revision:
+                      xml:
+                        name: revision
                       $ref: '#/components/schemas/__long'
                       description: |2-
 
@@ -273,12 +289,16 @@ paths:
                   type: object
                   properties:
                     EncryptionAtRest:
+                      xml:
+                        name: encryptionAtRest
                       $ref: '#/components/schemas/EncryptionAtRest'
                       description: |2-
 
                                     <p>The data-volume encryption details.</p>
                                  
                     EncryptionInTransit:
+                      xml:
+                        name: encryptionInTransit
                       $ref: '#/components/schemas/EncryptionInTransit'
                       description: |2-
 
@@ -302,6 +322,8 @@ paths:
                   type: object
                   properties:
                     Prometheus:
+                      xml:
+                        name: prometheus
                       $ref: '#/components/schemas/PrometheusInfo'
                       description: |2-
 
@@ -320,6 +342,8 @@ paths:
                   type: object
                   properties:
                     BrokerLogs:
+                      xml:
+                        name: brokerLogs
                       $ref: '#/components/schemas/BrokerLogs'
                 numberOfBrokerNodes:
                   description: |2-
@@ -1939,12 +1963,16 @@ paths:
                   type: object
                   properties:
                     Arn:
+                      xml:
+                        name: arn
                       $ref: '#/components/schemas/__string'
                       description: |2-
 
                                     <p>ARN of the configuration to use.</p>
                                  
                     Revision:
+                      xml:
+                        name: revision
                       $ref: '#/components/schemas/__long'
                       description: |2-
 
@@ -2048,12 +2076,16 @@ paths:
                   type: object
                   properties:
                     Arn:
+                      xml:
+                        name: arn
                       $ref: '#/components/schemas/__string'
                       description: |2-
 
                                     <p>ARN of the configuration to use.</p>
                                  
                     Revision:
+                      xml:
+                        name: revision
                       $ref: '#/components/schemas/__long'
                       description: |2-
 
@@ -2166,6 +2198,8 @@ paths:
                   type: object
                   properties:
                     Prometheus:
+                      xml:
+                        name: prometheus
                       $ref: '#/components/schemas/PrometheusInfo'
                       description: |2-
 
@@ -2176,6 +2210,8 @@ paths:
                   type: object
                   properties:
                     BrokerLogs:
+                      xml:
+                        name: brokerLogs
                       $ref: '#/components/schemas/BrokerLogs'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -2241,18 +2277,24 @@ components:
       type: object
       properties:
         ClusterArn:
+          xml:
+            name: clusterArn
           $ref: '#/components/schemas/__string'
           description: |2-
 
                         <p>The Amazon Resource Name (ARN) of the cluster.</p>
                      
         ClusterName:
+          xml:
+            name: clusterName
           $ref: '#/components/schemas/__string'
           description: |2-
 
                         <p>The name of the MSK cluster.</p>
                      
         State:
+          xml:
+            name: state
           $ref: '#/components/schemas/ClusterState'
           description: |2-
 
@@ -2279,6 +2321,8 @@ components:
       type: object
       properties:
         EbsStorageInfo:
+          xml:
+            name: ebsStorageInfo
           $ref: '#/components/schemas/EBSStorageInfo'
           description: |2-
 
@@ -2292,6 +2336,8 @@ components:
       type: object
       properties:
         CertificateAuthorityArnList:
+          xml:
+            name: certificateAuthorityArnList
           $ref: '#/components/schemas/__listOf__string'
           description: |2-
 
@@ -2311,6 +2357,8 @@ components:
         - DataVolumeKMSKeyId
       properties:
         DataVolumeKMSKeyId:
+          xml:
+            name: dataVolumeKMSKeyId
           $ref: '#/components/schemas/__string'
           description: |2-
 
@@ -2324,6 +2372,8 @@ components:
       type: object
       properties:
         ClientBroker:
+          xml:
+            name: clientBroker
           $ref: '#/components/schemas/ClientBroker'
           description: |2-
 
@@ -2337,6 +2387,8 @@ components:
                         <p>The default value is TLS_PLAINTEXT.</p>
                      
         InCluster:
+          xml:
+            name: inCluster
           $ref: '#/components/schemas/__boolean'
           description: |2-
 
@@ -2351,12 +2403,16 @@ components:
       type: object
       properties:
         JmxExporter:
+          xml:
+            name: jmxExporter
           $ref: '#/components/schemas/JmxExporterInfo'
           description: |2-
 
                         <p>Indicates whether you want to enable or disable the JMX Exporter.</p>
                      
         NodeExporter:
+          xml:
+            name: nodeExporter
           $ref: '#/components/schemas/NodeExporterInfo'
           description: |2-
 
@@ -2370,10 +2426,16 @@ components:
       type: object
       properties:
         CloudWatchLogs:
+          xml:
+            name: cloudWatchLogs
           $ref: '#/components/schemas/CloudWatchLogs'
         Firehose:
+          xml:
+            name: firehose
           $ref: '#/components/schemas/Firehose'
         S3:
+          xml:
+            name: s3
           $ref: '#/components/schemas/S3'
     BadRequestException: {}
     InternalServerErrorException: {}
@@ -2386,24 +2448,32 @@ components:
       type: object
       properties:
         Arn:
+          xml:
+            name: arn
           $ref: '#/components/schemas/__string'
           description: |2-
 
                         <p>The Amazon Resource Name (ARN) of the configuration.</p>
                      
         CreationTime:
+          xml:
+            name: creationTime
           $ref: '#/components/schemas/__timestampIso8601'
           description: |2-
 
                         <p>The time when the configuration was created.</p>
                      
         LatestRevision:
+          xml:
+            name: latestRevision
           $ref: '#/components/schemas/ConfigurationRevision'
           description: |2-
 
                         <p>Latest revision of the configuration.</p>
                      
         Name:
+          xml:
+            name: name
           $ref: '#/components/schemas/__string'
           description: |2-
 
@@ -2413,12 +2483,16 @@ components:
       type: object
       properties:
         ClusterArn:
+          xml:
+            name: clusterArn
           $ref: '#/components/schemas/__string'
           description: |2-
 
                         <p>The Amazon Resource Name (ARN) of the cluster.</p>
                      
         State:
+          xml:
+            name: state
           $ref: '#/components/schemas/ClusterState'
           description: |2-
 
@@ -2429,6 +2503,8 @@ components:
       type: object
       properties:
         ClusterInfo:
+          xml:
+            name: clusterInfo
           $ref: '#/components/schemas/ClusterInfo'
           description: |2-
 
@@ -2438,6 +2514,8 @@ components:
       type: object
       properties:
         ClusterOperationInfo:
+          xml:
+            name: clusterOperationInfo
           $ref: '#/components/schemas/ClusterOperationInfo'
           description: |2-
 
@@ -2447,36 +2525,48 @@ components:
       type: object
       properties:
         Arn:
+          xml:
+            name: arn
           $ref: '#/components/schemas/__string'
           description: |2-
 
                         <p>The Amazon Resource Name (ARN) of the configuration.</p>
                      
         CreationTime:
+          xml:
+            name: creationTime
           $ref: '#/components/schemas/__timestampIso8601'
           description: |2-
 
                         <p>The time when the configuration was created.</p>
                      
         Description:
+          xml:
+            name: description
           $ref: '#/components/schemas/__string'
           description: |2-
 
                         <p>The description of the configuration.</p>
                      
         KafkaVersions:
+          xml:
+            name: kafkaVersions
           $ref: '#/components/schemas/__listOf__string'
           description: |2-
 
                         <p>The versions of Apache Kafka with which you can use this MSK configuration.</p>
                      
         LatestRevision:
+          xml:
+            name: latestRevision
           $ref: '#/components/schemas/ConfigurationRevision'
           description: |2-
 
                         <p>Latest revision of the configuration.</p>
                      
         Name:
+          xml:
+            name: name
           $ref: '#/components/schemas/__string'
           description: |2-
 
@@ -2486,30 +2576,40 @@ components:
       type: object
       properties:
         Arn:
+          xml:
+            name: arn
           $ref: '#/components/schemas/__string'
           description: |2-
 
                         <p>The Amazon Resource Name (ARN) of the configuration.</p>
                      
         CreationTime:
+          xml:
+            name: creationTime
           $ref: '#/components/schemas/__timestampIso8601'
           description: |2-
 
                         <p>The time when the configuration was created.</p>
                      
         Description:
+          xml:
+            name: description
           $ref: '#/components/schemas/__string'
           description: |2-
 
                         <p>The description of the configuration.</p>
                      
         Revision:
+          xml:
+            name: revision
           $ref: '#/components/schemas/__long'
           description: |2-
 
                         <p>The revision number.</p>
                      
         ServerProperties:
+          xml:
+            name: serverProperties
           $ref: '#/components/schemas/__blob'
           description: |2-
 
@@ -2520,12 +2620,16 @@ components:
       type: object
       properties:
         BootstrapBrokerString:
+          xml:
+            name: bootstrapBrokerString
           $ref: '#/components/schemas/__string'
           description: |2-
 
                         <p>A string containing one or more hostname:port pairs.</p>
                      
         BootstrapBrokerStringTls:
+          xml:
+            name: bootstrapBrokerStringTls
           $ref: '#/components/schemas/__string'
           description: |2-
 
@@ -2535,6 +2639,8 @@ components:
       type: object
       properties:
         CompatibleKafkaVersions:
+          xml:
+            name: compatibleKafkaVersions
           $ref: '#/components/schemas/__listOfCompatibleKafkaVersion'
           description: |2-
 
@@ -2544,12 +2650,16 @@ components:
       type: object
       properties:
         ClusterOperationInfoList:
+          xml:
+            name: clusterOperationInfoList
           $ref: '#/components/schemas/__listOfClusterOperationInfo'
           description: |2-
 
                         <p>An array of cluster operation information objects.</p>
                      
         NextToken:
+          xml:
+            name: nextToken
           $ref: '#/components/schemas/__string'
           description: |2-
 
@@ -2559,12 +2669,16 @@ components:
       type: object
       properties:
         ClusterInfoList:
+          xml:
+            name: clusterInfoList
           $ref: '#/components/schemas/__listOfClusterInfo'
           description: |2-
 
                         <p>Information on each of the MSK clusters in the response.</p>
                      
         NextToken:
+          xml:
+            name: nextToken
           $ref: '#/components/schemas/__string'
           description: |2-
 
@@ -2575,12 +2689,16 @@ components:
       type: object
       properties:
         NextToken:
+          xml:
+            name: nextToken
           $ref: '#/components/schemas/__string'
           description: |2-
 
                         <p>Paginated results marker.</p>
                      
         Revisions:
+          xml:
+            name: revisions
           $ref: '#/components/schemas/__listOfConfigurationRevision'
           description: |2-
 
@@ -2590,12 +2708,16 @@ components:
       type: object
       properties:
         Configurations:
+          xml:
+            name: configurations
           $ref: '#/components/schemas/__listOfConfiguration'
           description: |2-
 
                         <p>An array of MSK configurations.</p>
                      
         NextToken:
+          xml:
+            name: nextToken
           $ref: '#/components/schemas/__string'
           description: |2-
 
@@ -2606,13 +2728,19 @@ components:
       type: object
       properties:
         KafkaVersions:
+          xml:
+            name: kafkaVersions
           $ref: '#/components/schemas/__listOfKafkaVersion'
         NextToken:
+          xml:
+            name: nextToken
           $ref: '#/components/schemas/__string'
     ListNodesResponse:
       type: object
       properties:
         NextToken:
+          xml:
+            name: nextToken
           $ref: '#/components/schemas/__string'
           description: |2-
 
@@ -2620,6 +2748,8 @@ components:
                            To get another batch of nodes, provide this token in your next request.</p>
                      
         NodeInfoList:
+          xml:
+            name: nodeInfoList
           $ref: '#/components/schemas/__listOfNodeInfo'
           description: |2-
 
@@ -2629,6 +2759,8 @@ components:
       type: object
       properties:
         Tags:
+          xml:
+            name: tags
           $ref: '#/components/schemas/__mapOf__string'
           description: |2-
 
@@ -2638,12 +2770,16 @@ components:
       type: object
       properties:
         ClusterArn:
+          xml:
+            name: clusterArn
           $ref: '#/components/schemas/__string'
           description: |2-
 
                         <p>The Amazon Resource Name (ARN) of the cluster.</p>
                      
         ClusterOperationArn:
+          xml:
+            name: clusterOperationArn
           $ref: '#/components/schemas/__string'
           description: |2-
 
@@ -2653,12 +2789,16 @@ components:
       type: object
       properties:
         ClusterArn:
+          xml:
+            name: clusterArn
           $ref: '#/components/schemas/__string'
           description: |2-
 
                         <p>The Amazon Resource Name (ARN) of the cluster.</p>
                      
         ClusterOperationArn:
+          xml:
+            name: clusterOperationArn
           $ref: '#/components/schemas/__string'
           description: |2-
 
@@ -2668,12 +2808,16 @@ components:
       type: object
       properties:
         ClusterArn:
+          xml:
+            name: clusterArn
           $ref: '#/components/schemas/__string'
           description: |2-
 
                         <p>The Amazon Resource Name (ARN) of the cluster.</p>
                      
         ClusterOperationArn:
+          xml:
+            name: clusterOperationArn
           $ref: '#/components/schemas/__string'
           description: |2-
 
@@ -2686,12 +2830,16 @@ components:
         - KafkaBrokerNodeId
       properties:
         KafkaBrokerNodeId:
+          xml:
+            name: kafkaBrokerNodeId
           $ref: '#/components/schemas/__string'
           description: |2-
 
                         <p>The ID of the broker to update.</p>
                      
         VolumeSizeGB:
+          xml:
+            name: volumeSizeGB
           $ref: '#/components/schemas/__integer'
           description: |2-
 
@@ -2705,12 +2853,16 @@ components:
       type: object
       properties:
         ClusterArn:
+          xml:
+            name: clusterArn
           $ref: '#/components/schemas/__string'
           description: |2-
 
                         <p>The Amazon Resource Name (ARN) of the cluster.</p>
                      
         ClusterOperationArn:
+          xml:
+            name: clusterOperationArn
           $ref: '#/components/schemas/__string'
           description: |2-
 
@@ -2720,12 +2872,16 @@ components:
       type: object
       properties:
         ClusterArn:
+          xml:
+            name: clusterArn
           $ref: '#/components/schemas/__string'
           description: |2-
 
                         <p>The Amazon Resource Name (ARN) of the cluster.</p>
                         
         ClusterOperationArn:
+          xml:
+            name: clusterOperationArn
           $ref: '#/components/schemas/__string'
           description: |2-
 
@@ -2735,12 +2891,16 @@ components:
       type: object
       properties:
         ClusterArn:
+          xml:
+            name: clusterArn
           $ref: '#/components/schemas/__string'
           description: |2-
 
                         <p>The Amazon Resource Name (ARN) of the cluster.</p>
                      
         ClusterOperationArn:
+          xml:
+            name: clusterOperationArn
           $ref: '#/components/schemas/__string'
           description: |2-
 
@@ -2754,8 +2914,12 @@ components:
         - Enabled
       properties:
         Enabled:
+          xml:
+            name: enabled
           $ref: '#/components/schemas/__boolean'
         LogGroup:
+          xml:
+            name: logGroup
           $ref: '#/components/schemas/__string'
     Firehose:
       type: object
@@ -2763,8 +2927,12 @@ components:
         - Enabled
       properties:
         DeliveryStream:
+          xml:
+            name: deliveryStream
           $ref: '#/components/schemas/__string'
         Enabled:
+          xml:
+            name: enabled
           $ref: '#/components/schemas/__boolean'
     S3:
       type: object
@@ -2772,10 +2940,16 @@ components:
         - Enabled
       properties:
         Bucket:
+          xml:
+            name: bucket
           $ref: '#/components/schemas/__string'
         Enabled:
+          xml:
+            name: enabled
           $ref: '#/components/schemas/__boolean'
         Prefix:
+          xml:
+            name: prefix
           $ref: '#/components/schemas/__string'
     BrokerNodeGroupInfo:
       type: object
@@ -2784,6 +2958,8 @@ components:
         - InstanceType
       properties:
         BrokerAZDistribution:
+          xml:
+            name: brokerAZDistribution
           $ref: '#/components/schemas/BrokerAZDistribution'
           description: |2-
 
@@ -2791,12 +2967,16 @@ components:
                      <p>Amazon MSK distributes the broker nodes evenly across the Availability Zones that correspond to the subnets you provide when you create the cluster.</p>
                      
         ClientSubnets:
+          xml:
+            name: clientSubnets
           $ref: '#/components/schemas/__listOf__string'
           description: |2-
 
                         <p>The list of subnets to connect to in the client virtual private cloud (VPC). AWS creates elastic network interfaces inside these subnets. Client applications use elastic network interfaces to produce and consume data. Client subnets can't be in Availability Zone us-east-1e.</p>
                      
         InstanceType:
+          xml:
+            name: instanceType
           $ref: '#/components/schemas/__stringMin5Max32'
           description: |2-
 
@@ -2804,12 +2984,16 @@ components:
             kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.</p>
                      
         SecurityGroups:
+          xml:
+            name: securityGroups
           $ref: '#/components/schemas/__listOf__string'
           description: |2-
 
                         <p>The AWS security groups to associate with the elastic network interfaces in order to specify who can connect to and communicate with the Amazon MSK cluster. If you don't specify a security group, Amazon MSK uses the default security group associated with the VPC.</p>
                      
         StorageInfo:
+          xml:
+            name: storageInfo
           $ref: '#/components/schemas/StorageInfo'
           description: |2-
 
@@ -2826,18 +3010,24 @@ components:
       type: object
       properties:
         ConfigurationArn:
+          xml:
+            name: configurationArn
           $ref: '#/components/schemas/__string'
           description: |2-
 
                         <p>The Amazon Resource Name (ARN) of the configuration used for the cluster. This field isn't visible in this preview release.</p>
                      
         ConfigurationRevision:
+          xml:
+            name: configurationRevision
           $ref: '#/components/schemas/__long'
           description: |2-
 
                         <p>The revision of the configuration to use. This field isn't visible in this preview release.</p>
                      
         KafkaVersion:
+          xml:
+            name: kafkaVersion
           $ref: '#/components/schemas/__string'
           description: |2-
 
@@ -2851,36 +3041,48 @@ components:
       type: object
       properties:
         AttachedENIId:
+          xml:
+            name: attachedENIId
           $ref: '#/components/schemas/__string'
           description: |2-
 
                         <p>The attached elastic network interface of the broker.</p>
                      
         BrokerId:
+          xml:
+            name: brokerId
           $ref: '#/components/schemas/__double'
           description: |2-
 
                         <p>The ID of the broker.</p>
                      
         ClientSubnet:
+          xml:
+            name: clientSubnet
           $ref: '#/components/schemas/__string'
           description: |2-
 
                         <p>The client subnet to which this broker node belongs.</p>
                      
         ClientVpcIpAddress:
+          xml:
+            name: clientVpcIpAddress
           $ref: '#/components/schemas/__string'
           description: |2-
 
                         <p>The virtual private cloud (VPC) of the client.</p>
                      
         CurrentBrokerSoftwareInfo:
+          xml:
+            name: currentBrokerSoftwareInfo
           $ref: '#/components/schemas/BrokerSoftwareInfo'
           description: |2-
 
                         <p>Information about the version of software currently deployed on the Kafka brokers in the cluster.</p>
                      
         Endpoints:
+          xml:
+            name: endpoints
           $ref: '#/components/schemas/__listOf__string'
           description: |2-
 
@@ -2894,6 +3096,8 @@ components:
       type: object
       properties:
         Tls:
+          xml:
+            name: tls
           $ref: '#/components/schemas/Tls'
           description: |2-
 
@@ -2922,12 +3126,16 @@ components:
       type: object
       properties:
         EncryptionAtRest:
+          xml:
+            name: encryptionAtRest
           $ref: '#/components/schemas/EncryptionAtRest'
           description: |2-
 
                         <p>The data-volume encryption details.</p>
                      
         EncryptionInTransit:
+          xml:
+            name: encryptionInTransit
           $ref: '#/components/schemas/EncryptionInTransit'
           description: |2-
 
@@ -2953,6 +3161,8 @@ components:
         - Prometheus
       properties:
         Prometheus:
+          xml:
+            name: prometheus
           $ref: '#/components/schemas/Prometheus'
           description: |2-
 
@@ -2968,6 +3178,8 @@ components:
         - BrokerLogs
       properties:
         BrokerLogs:
+          xml:
+            name: brokerLogs
           $ref: '#/components/schemas/BrokerLogs'
     ClusterState:
       type: string
@@ -2985,8 +3197,12 @@ components:
       type: object
       properties:
         Code:
+          xml:
+            name: code
           $ref: '#/components/schemas/__string'
         Message:
+          xml:
+            name: message
           $ref: '#/components/schemas/__string'
     __mapOf__string:
       type: object
@@ -2996,94 +3212,128 @@ components:
       type: object
       properties:
         ActiveOperationArn:
+          xml:
+            name: activeOperationArn
           $ref: '#/components/schemas/__string'
           description: |2-
 
                         <p>Arn of active cluster operation.</p>
                      
         BrokerNodeGroupInfo:
+          xml:
+            name: brokerNodeGroupInfo
           $ref: '#/components/schemas/BrokerNodeGroupInfo'
           description: |2-
 
                         <p>Information about the broker nodes.</p>
                      
         ClientAuthentication:
+          xml:
+            name: clientAuthentication
           $ref: '#/components/schemas/ClientAuthentication'
           description: |2-
 
                         <p>Includes all client authentication information.</p>
                      
         ClusterArn:
+          xml:
+            name: clusterArn
           $ref: '#/components/schemas/__string'
           description: |2-
 
                         <p>The Amazon Resource Name (ARN) that uniquely identifies the cluster.</p>
                      
         ClusterName:
+          xml:
+            name: clusterName
           $ref: '#/components/schemas/__string'
           description: |2-
 
                         <p>The name of the cluster.</p>
                      
         CreationTime:
+          xml:
+            name: creationTime
           $ref: '#/components/schemas/__timestampIso8601'
           description: |2-
 
                         <p>The time when the cluster was created.</p>
                      
         CurrentBrokerSoftwareInfo:
+          xml:
+            name: currentBrokerSoftwareInfo
           $ref: '#/components/schemas/BrokerSoftwareInfo'
           description: |2-
 
                         <p>Information about the version of software currently deployed on the Kafka brokers in the cluster.</p>
                      
         CurrentVersion:
+          xml:
+            name: currentVersion
           $ref: '#/components/schemas/__string'
           description: |2-
 
                         <p>The current version of the MSK cluster.</p>
                      
         EncryptionInfo:
+          xml:
+            name: encryptionInfo
           $ref: '#/components/schemas/EncryptionInfo'
           description: |2-
 
                         <p>Includes all encryption-related information.</p>
                      
         EnhancedMonitoring:
+          xml:
+            name: enhancedMonitoring
           $ref: '#/components/schemas/EnhancedMonitoring'
           description: |2-
 
                         <p>Specifies which metrics are gathered for the MSK cluster. This property has three possible values: DEFAULT, PER_BROKER, and PER_TOPIC_PER_BROKER. For a list of the metrics associated with each of these three levels of monitoring, see <a href="https://docs.aws.amazon.com/msk/latest/developerguide/monitoring.html">Monitoring</a>.</p>
                      
         OpenMonitoring:
+          xml:
+            name: openMonitoring
           $ref: '#/components/schemas/OpenMonitoring'
           description: |2-
 
                         <p>Settings for open monitoring using Prometheus.</p>
                      
         LoggingInfo:
+          xml:
+            name: loggingInfo
           $ref: '#/components/schemas/LoggingInfo'
         NumberOfBrokerNodes:
+          xml:
+            name: numberOfBrokerNodes
           $ref: '#/components/schemas/__integer'
           description: |2-
 
                         <p>The number of broker nodes in the cluster.</p>
                      
         State:
+          xml:
+            name: state
           $ref: '#/components/schemas/ClusterState'
           description: |2-
 
                         <p>The state of the cluster. The possible states are CREATING, ACTIVE, and FAILED.</p>
                      
         StateInfo:
+          xml:
+            name: stateInfo
           $ref: '#/components/schemas/StateInfo'
         Tags:
+          xml:
+            name: tags
           $ref: '#/components/schemas/__mapOf__string'
           description: |2-
 
                         <p>Tags attached to the cluster.</p>
                      
         ZookeeperConnectString:
+          xml:
+            name: zookeeperConnectString
           $ref: '#/components/schemas/__string'
           description: |2-
 
@@ -3097,12 +3347,16 @@ components:
       type: object
       properties:
         ErrorCode:
+          xml:
+            name: errorCode
           $ref: '#/components/schemas/__string'
           description: |2-
 
                         <p>A number describing the error programmatically.</p>
                      
         ErrorString:
+          xml:
+            name: errorString
           $ref: '#/components/schemas/__string'
           description: |2-
 
@@ -3120,42 +3374,56 @@ components:
       type: object
       properties:
         BrokerEBSVolumeInfo:
+          xml:
+            name: brokerEBSVolumeInfo
           $ref: '#/components/schemas/__listOfBrokerEBSVolumeInfo'
           description: |2-
 
                         <p>Specifies the size of the EBS volume and the ID of the associated broker.</p>
                      
         ConfigurationInfo:
+          xml:
+            name: configurationInfo
           $ref: '#/components/schemas/ConfigurationInfo'
           description: |2-
 
                         <p>Information about the changes in the configuration of the brokers.</p>
                      
         NumberOfBrokerNodes:
+          xml:
+            name: numberOfBrokerNodes
           $ref: '#/components/schemas/__integer'
           description: |2-
 
                         <p>The number of broker nodes in the cluster.</p>
                      
         EnhancedMonitoring:
+          xml:
+            name: enhancedMonitoring
           $ref: '#/components/schemas/EnhancedMonitoring'
           description: |2-
 
                         <p>Specifies which Apache Kafka metrics Amazon MSK gathers and sends to Amazon CloudWatch for this cluster.</p>
                      
         OpenMonitoring:
+          xml:
+            name: openMonitoring
           $ref: '#/components/schemas/OpenMonitoring'
           description: |2-
 
                         <p>The settings for open monitoring.</p>
                      
         KafkaVersion:
+          xml:
+            name: kafkaVersion
           $ref: '#/components/schemas/__string'
           description: |2-
 
                         <p>The Kafka version.</p>
                         
         LoggingInfo:
+          xml:
+            name: loggingInfo
           $ref: '#/components/schemas/LoggingInfo'
       description: |2-
 
@@ -3165,66 +3433,88 @@ components:
       type: object
       properties:
         ClientRequestId:
+          xml:
+            name: clientRequestId
           $ref: '#/components/schemas/__string'
           description: |2-
 
                         <p>The ID of the API request that triggered this operation.</p>
                      
         ClusterArn:
+          xml:
+            name: clusterArn
           $ref: '#/components/schemas/__string'
           description: |2-
 
                         <p>ARN of the cluster.</p>
                      
         CreationTime:
+          xml:
+            name: creationTime
           $ref: '#/components/schemas/__timestampIso8601'
           description: |2-
 
                         <p>The time that the operation was created.</p>
                      
         EndTime:
+          xml:
+            name: endTime
           $ref: '#/components/schemas/__timestampIso8601'
           description: |2-
 
                         <p>The time at which the operation finished.</p>
                      
         ErrorInfo:
+          xml:
+            name: errorInfo
           $ref: '#/components/schemas/ErrorInfo'
           description: |2-
 
                         <p>Describes the error if the operation fails.</p>
                      
         OperationArn:
+          xml:
+            name: operationArn
           $ref: '#/components/schemas/__string'
           description: |2-
 
                         <p>ARN of the cluster operation.</p>
                      
         OperationState:
+          xml:
+            name: operationState
           $ref: '#/components/schemas/__string'
           description: |2-
 
                         <p>State of the cluster operation.</p>
                      
         OperationSteps:
+          xml:
+            name: operationSteps
           $ref: '#/components/schemas/__listOfClusterOperationStep'
           description: |2-
 
                         <p>Steps completed during the operation.</p>
                      
         OperationType:
+          xml:
+            name: operationType
           $ref: '#/components/schemas/__string'
           description: |2-
 
                         <p>Type of the cluster operation.</p>
                      
         SourceClusterInfo:
+          xml:
+            name: sourceClusterInfo
           $ref: '#/components/schemas/MutableClusterInfo'
           description: |2-
 
                         <p>Information about cluster attributes before a cluster is updated.</p>
                      
         TargetClusterInfo:
+          xml:
+            name: targetClusterInfo
           $ref: '#/components/schemas/MutableClusterInfo'
           description: |2-
 
@@ -3238,6 +3528,8 @@ components:
       type: object
       properties:
         StepStatus:
+          xml:
+            name: stepStatus
           $ref: '#/components/schemas/__string'
           description: |2-
 
@@ -3251,12 +3543,16 @@ components:
       type: object
       properties:
         StepInfo:
+          xml:
+            name: stepInfo
           $ref: '#/components/schemas/ClusterOperationStepInfo'
           description: |2-
 
                         <p>Information about the step and its status.</p>
                      
         StepName:
+          xml:
+            name: stepName
           $ref: '#/components/schemas/__string'
           description: |2-
 
@@ -3270,12 +3566,16 @@ components:
       type: object
       properties:
         SourceVersion:
+          xml:
+            name: sourceVersion
           $ref: '#/components/schemas/__string'
           description: |2-
 
                         <p>A Kafka version.</p>
                         
         TargetVersions:
+          xml:
+            name: targetVersions
           $ref: '#/components/schemas/__listOf__string'
           description: |2-
 
@@ -3292,18 +3592,24 @@ components:
         - CreationTime
       properties:
         CreationTime:
+          xml:
+            name: creationTime
           $ref: '#/components/schemas/__timestampIso8601'
           description: |2-
 
                         <p>The time when the configuration revision was created.</p>
                      
         Description:
+          xml:
+            name: description
           $ref: '#/components/schemas/__string'
           description: |2-
 
                         <p>The description of the configuration revision.</p>
                      
         Revision:
+          xml:
+            name: revision
           $ref: '#/components/schemas/__long'
           description: |2-
 
@@ -3324,36 +3630,48 @@ components:
         - Name
       properties:
         Arn:
+          xml:
+            name: arn
           $ref: '#/components/schemas/__string'
           description: |2-
 
                         <p>The Amazon Resource Name (ARN) of the configuration.</p>
                      
         CreationTime:
+          xml:
+            name: creationTime
           $ref: '#/components/schemas/__timestampIso8601'
           description: |2-
 
                         <p>The time when the configuration was created.</p>
                      
         Description:
+          xml:
+            name: description
           $ref: '#/components/schemas/__string'
           description: |2-
 
                         <p>The description of the configuration.</p>
                      
         KafkaVersions:
+          xml:
+            name: kafkaVersions
           $ref: '#/components/schemas/__listOf__string'
           description: |2-
 
                         <p>An array of the versions of Apache Kafka with which you can use this MSK configuration. You can use this configuration for an MSK cluster only if the Apache Kafka version specified for the cluster appears in this array.</p>
                      
         LatestRevision:
+          xml:
+            name: latestRevision
           $ref: '#/components/schemas/ConfigurationRevision'
           description: |2-
 
                         <p>Latest revision of the configuration.</p>
                      
         Name:
+          xml:
+            name: name
           $ref: '#/components/schemas/__string'
           description: |2-
 
@@ -3370,12 +3688,16 @@ components:
         - Arn
       properties:
         Arn:
+          xml:
+            name: arn
           $ref: '#/components/schemas/__string'
           description: |2-
 
                         <p>ARN of the configuration to use.</p>
                      
         Revision:
+          xml:
+            name: revision
           $ref: '#/components/schemas/__long'
           description: |2-
 
@@ -3395,6 +3717,8 @@ components:
         - Prometheus
       properties:
         Prometheus:
+          xml:
+            name: prometheus
           $ref: '#/components/schemas/PrometheusInfo'
           description: |2-
 
@@ -3422,62 +3746,84 @@ components:
       title: CreateClusterRequest
       properties:
         BrokerNodeGroupInfo:
+          xml:
+            name: brokerNodeGroupInfo
           $ref: '#/components/schemas/BrokerNodeGroupInfo'
           description: |2-
 
                         <p>Information about the broker nodes in the cluster.</p>
                      
         ClientAuthentication:
+          xml:
+            name: clientAuthentication
           $ref: '#/components/schemas/ClientAuthentication'
           description: |2-
 
                         <p>Includes all client authentication related information.</p>
                      
         ClusterName:
+          xml:
+            name: clusterName
           $ref: '#/components/schemas/__stringMin1Max64'
           description: |2-
 
                         <p>The name of the cluster.</p>
                      
         ConfigurationInfo:
+          xml:
+            name: configurationInfo
           $ref: '#/components/schemas/ConfigurationInfo'
           description: |2-
 
                         <p>Represents the configuration that you want MSK to use for the brokers in a cluster.</p>
                      
         EncryptionInfo:
+          xml:
+            name: encryptionInfo
           $ref: '#/components/schemas/EncryptionInfo'
           description: |2-
 
                         <p>Includes all encryption-related information.</p>
                      
         EnhancedMonitoring:
+          xml:
+            name: enhancedMonitoring
           $ref: '#/components/schemas/EnhancedMonitoring'
           description: |2-
 
                         <p>Specifies the level of monitoring for the MSK cluster. The possible values are DEFAULT, PER_BROKER, and PER_TOPIC_PER_BROKER.</p>
                      
         OpenMonitoring:
+          xml:
+            name: openMonitoring
           $ref: '#/components/schemas/OpenMonitoringInfo'
           description: |2-
 
                         <p>The settings for open monitoring.</p>
                      
         KafkaVersion:
+          xml:
+            name: kafkaVersion
           $ref: '#/components/schemas/__stringMin1Max128'
           description: |2-
 
                         <p>The version of Apache Kafka.</p>
                      
         LoggingInfo:
+          xml:
+            name: loggingInfo
           $ref: '#/components/schemas/LoggingInfo'
         NumberOfBrokerNodes:
+          xml:
+            name: numberOfBrokerNodes
           $ref: '#/components/schemas/__integerMin1Max15'
           description: |2-
 
                         <p>The number of broker nodes in the cluster.</p>
                      
         Tags:
+          xml:
+            name: tags
           $ref: '#/components/schemas/__mapOf__string'
           description: |2-
 
@@ -3493,24 +3839,32 @@ components:
       title: CreateConfigurationRequest
       properties:
         Description:
+          xml:
+            name: description
           $ref: '#/components/schemas/__string'
           description: |2-
 
                         <p>The description of the configuration.</p>
                      
         KafkaVersions:
+          xml:
+            name: kafkaVersions
           $ref: '#/components/schemas/__listOf__string'
           description: |2-
 
                         <p>The versions of Apache Kafka with which you can use this MSK configuration.</p>
                      
         Name:
+          xml:
+            name: name
           $ref: '#/components/schemas/__string'
           description: |2-
 
                         <p>The name of the configuration.</p>
                      
         ServerProperties:
+          xml:
+            name: serverProperties
           $ref: '#/components/schemas/__blob'
           description: |2-
 
@@ -3545,6 +3899,8 @@ components:
       type: object
       properties:
         VolumeSize:
+          xml:
+            name: volumeSize
           $ref: '#/components/schemas/__integerMin1Max16384'
           description: |2-
 
@@ -3575,8 +3931,12 @@ components:
       type: object
       properties:
         Version:
+          xml:
+            name: version
           $ref: '#/components/schemas/__string'
         Status:
+          xml:
+            name: status
           $ref: '#/components/schemas/KafkaVersionStatus'
     MaxResults:
       type: integer
@@ -3644,6 +4004,8 @@ components:
         - EnabledInBroker
       properties:
         EnabledInBroker:
+          xml:
+            name: enabledInBroker
           $ref: '#/components/schemas/__boolean'
           description: |2-
 
@@ -3659,6 +4021,8 @@ components:
         - EnabledInBroker
       properties:
         EnabledInBroker:
+          xml:
+            name: enabledInBroker
           $ref: '#/components/schemas/__boolean'
           description: |2-
 
@@ -3674,6 +4038,8 @@ components:
         - EnabledInBroker
       properties:
         EnabledInBroker:
+          xml:
+            name: enabledInBroker
           $ref: '#/components/schemas/__boolean'
           description: |2-
 
@@ -3689,6 +4055,8 @@ components:
         - EnabledInBroker
       properties:
         EnabledInBroker:
+          xml:
+            name: enabledInBroker
           $ref: '#/components/schemas/__boolean'
           description: |2-
 
@@ -3702,12 +4070,16 @@ components:
       type: object
       properties:
         JmxExporter:
+          xml:
+            name: jmxExporter
           $ref: '#/components/schemas/JmxExporter'
           description: |2-
 
                         <p>Indicates whether you want to enable or disable the JMX Exporter.</p>
                      
         NodeExporter:
+          xml:
+            name: nodeExporter
           $ref: '#/components/schemas/NodeExporter'
           description: |2-
 
@@ -3724,6 +4096,8 @@ components:
       title: RebootBrokerRequest
       properties:
         BrokerIds:
+          xml:
+            name: brokerIds
           $ref: '#/components/schemas/__listOf__string'
           description: |2-
 
@@ -3742,30 +4116,40 @@ components:
       type: object
       properties:
         AttachedENIId:
+          xml:
+            name: attachedENIId
           $ref: '#/components/schemas/__string'
           description: |2-
 
                         <p>The attached elastic network interface of the broker.</p>
                      
         ClientVpcIpAddress:
+          xml:
+            name: clientVpcIpAddress
           $ref: '#/components/schemas/__string'
           description: |2-
 
                         <p>The virtual private cloud (VPC) IP address of the client.</p>
                      
         Endpoints:
+          xml:
+            name: endpoints
           $ref: '#/components/schemas/__listOf__string'
           description: |2-
 
                         <p>Endpoints for accessing the ZooKeeper.</p>
                      
         ZookeeperId:
+          xml:
+            name: zookeeperId
           $ref: '#/components/schemas/__double'
           description: |2-
 
                         <p>The role-specific ID for Zookeeper.</p>
                      
         ZookeeperVersion:
+          xml:
+            name: zookeeperVersion
           $ref: '#/components/schemas/__string'
           description: |2-
 
@@ -3779,36 +4163,48 @@ components:
       type: object
       properties:
         AddedToClusterTime:
+          xml:
+            name: addedToClusterTime
           $ref: '#/components/schemas/__string'
           description: |2-
 
                         <p>The start time.</p>
                      
         BrokerNodeInfo:
+          xml:
+            name: brokerNodeInfo
           $ref: '#/components/schemas/BrokerNodeInfo'
           description: |2-
 
                         <p>The broker node info.</p>
                      
         InstanceType:
+          xml:
+            name: instanceType
           $ref: '#/components/schemas/__string'
           description: |2-
 
                         <p>The instance type.</p>
                      
         NodeARN:
+          xml:
+            name: nodeARN
           $ref: '#/components/schemas/__string'
           description: |2-
 
                         <p>The Amazon Resource Name (ARN) of the node.</p>
                      
         NodeType:
+          xml:
+            name: nodeType
           $ref: '#/components/schemas/NodeType'
           description: |2-
 
                         <p>The node type.</p>
                      
         ZookeeperNodeInfo:
+          xml:
+            name: zookeeperNodeInfo
           $ref: '#/components/schemas/ZookeeperNodeInfo'
           description: |2-
 
@@ -3825,6 +4221,8 @@ components:
       title: TagResourceRequest
       properties:
         Tags:
+          xml:
+            name: tags
           $ref: '#/components/schemas/__mapOf__string'
           description: |2-
 
@@ -3842,12 +4240,16 @@ components:
       title: UpdateBrokerCountRequest
       properties:
         CurrentVersion:
+          xml:
+            name: currentVersion
           $ref: '#/components/schemas/__string'
           description: |2-
 
                         <p>The version of cluster to update from. A successful operation will then generate a new version.</p>
                      
         TargetNumberOfBrokerNodes:
+          xml:
+            name: targetNumberOfBrokerNodes
           $ref: '#/components/schemas/__integerMin1Max15'
           description: |2-
 
@@ -3861,12 +4263,16 @@ components:
       title: UpdateBrokerStorageRequest
       properties:
         CurrentVersion:
+          xml:
+            name: currentVersion
           $ref: '#/components/schemas/__string'
           description: |2-
 
                         <p>The version of cluster to update from. A successful operation will then generate a new version.</p>
                      
         TargetBrokerEBSVolumeInfo:
+          xml:
+            name: targetBrokerEBSVolumeInfo
           $ref: '#/components/schemas/__listOfBrokerEBSVolumeInfo'
           description: |2-
 
@@ -3880,12 +4286,16 @@ components:
       title: UpdateClusterConfigurationRequest
       properties:
         ConfigurationInfo:
+          xml:
+            name: configurationInfo
           $ref: '#/components/schemas/ConfigurationInfo'
           description: |2-
 
                         <p>Represents the configuration that you want MSK to use for the brokers in a cluster.</p>
                      
         CurrentVersion:
+          xml:
+            name: currentVersion
           $ref: '#/components/schemas/__string'
           description: |2-
 
@@ -3899,18 +4309,24 @@ components:
       title: UpdateClusterKafkaVersionRequest
       properties:
         ConfigurationInfo:
+          xml:
+            name: configurationInfo
           $ref: '#/components/schemas/ConfigurationInfo'
           description: |2-
 
                         <p>The custom configuration that should be applied on the new version of cluster.</p>
                         
         CurrentVersion:
+          xml:
+            name: currentVersion
           $ref: '#/components/schemas/__string'
           description: |2-
 
                         <p>Current cluster version.</p>
                         
         TargetKafkaVersion:
+          xml:
+            name: targetKafkaVersion
           $ref: '#/components/schemas/__string'
           description: |2-
 
@@ -3923,24 +4339,32 @@ components:
       title: UpdateMonitoringRequest
       properties:
         CurrentVersion:
+          xml:
+            name: currentVersion
           $ref: '#/components/schemas/__string'
           description: |2-
 
                         <p>The version of the MSK cluster to update. Cluster versions aren't simple numbers. You can describe an MSK cluster to find its version. When this update operation is successful, it generates a new cluster version.</p>
                      
         EnhancedMonitoring:
+          xml:
+            name: enhancedMonitoring
           $ref: '#/components/schemas/EnhancedMonitoring'
           description: |2-
 
                         <p>Specifies which Apache Kafka metrics Amazon MSK gathers and sends to Amazon CloudWatch for this cluster.</p>
                      
         OpenMonitoring:
+          xml:
+            name: openMonitoring
           $ref: '#/components/schemas/OpenMonitoringInfo'
           description: |2-
 
                         <p>The settings for open monitoring.</p>
                      
         LoggingInfo:
+          xml:
+            name: loggingInfo
           $ref: '#/components/schemas/LoggingInfo'
       description: Request body for UpdateMonitoring.
 security:

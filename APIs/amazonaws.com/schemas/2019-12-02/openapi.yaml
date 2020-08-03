@@ -2243,6 +2243,8 @@ components:
           $ref: '#/components/schemas/DiscovererState'
           description: The state of the discoverer.
         Tags:
+          xml:
+            name: tags
           $ref: '#/components/schemas/Tags'
           description: Tags associated with the resource.
     __string:
@@ -2266,6 +2268,8 @@ components:
           $ref: '#/components/schemas/__string'
           description: The name of the registry.
         Tags:
+          xml:
+            name: tags
           $ref: '#/components/schemas/Tags'
           description: Tags associated with the registry.
     CreateSchemaResponse:
@@ -2287,6 +2291,8 @@ components:
           $ref: '#/components/schemas/__string'
           description: The version number of the schema
         Tags:
+          xml:
+            name: tags
           $ref: '#/components/schemas/Tags'
         Type:
           $ref: '#/components/schemas/__string'
@@ -2330,6 +2336,8 @@ components:
           $ref: '#/components/schemas/DiscovererState'
           description: The state of the discoverer.
         Tags:
+          xml:
+            name: tags
           $ref: '#/components/schemas/Tags'
           description: Tags associated with the resource.
     DescribeRegistryResponse:
@@ -2345,6 +2353,8 @@ components:
           $ref: '#/components/schemas/__string'
           description: The name of the registry.
         Tags:
+          xml:
+            name: tags
           $ref: '#/components/schemas/Tags'
           description: Tags associated with the registry.
     DescribeSchemaResponse:
@@ -2369,6 +2379,8 @@ components:
           $ref: '#/components/schemas/__string'
           description: The version number of the schema
         Tags:
+          xml:
+            name: tags
           $ref: '#/components/schemas/Tags'
           description: Tags associated with the resource.
         Type:
@@ -2441,6 +2453,8 @@ components:
       type: object
       properties:
         Tags:
+          xml:
+            name: tags
           $ref: '#/components/schemas/Tags'
     PutCodeBindingResponse:
       type: object
@@ -2514,6 +2528,8 @@ components:
           $ref: '#/components/schemas/DiscovererState'
           description: The state of the discoverer.
         Tags:
+          xml:
+            name: tags
           $ref: '#/components/schemas/Tags'
           description: Tags associated with the resource.
     UpdateRegistryResponse:
@@ -2529,6 +2545,8 @@ components:
           $ref: '#/components/schemas/__string'
           description: The name of the registry.
         Tags:
+          xml:
+            name: tags
           $ref: '#/components/schemas/Tags'
           description: Tags associated with the registry.
     UpdateSchemaResponse:
@@ -2550,6 +2568,8 @@ components:
           $ref: '#/components/schemas/__string'
           description: The version number of the schema
         Tags:
+          xml:
+            name: tags
           $ref: '#/components/schemas/Tags'
         Type:
           $ref: '#/components/schemas/__string'
@@ -2589,6 +2609,8 @@ components:
           $ref: '#/components/schemas/__stringMin20Max1600'
           description: The ARN of the event bus.
         Tags:
+          xml:
+            name: tags
           $ref: '#/components/schemas/Tags'
           description: Tags associated with the resource.
       description: ''
@@ -2605,6 +2627,8 @@ components:
           $ref: '#/components/schemas/__stringMin0Max256'
           description: A description of the registry to be created.
         Tags:
+          xml:
+            name: tags
           $ref: '#/components/schemas/Tags'
           description: Tags to associate with the registry.
     __stringMin1Max100000:
@@ -2629,6 +2653,8 @@ components:
           $ref: '#/components/schemas/__stringMin0Max256'
           description: A description of the schema.
         Tags:
+          xml:
+            name: tags
           $ref: '#/components/schemas/Tags'
           description: Tags associated with the schema.
         Type:
@@ -2689,6 +2715,8 @@ components:
           $ref: '#/components/schemas/DiscovererState'
           description: The state of the discoverer.
         Tags:
+          xml:
+            name: tags
           $ref: '#/components/schemas/Tags'
           description: Tags associated with the resource.
     GetCodeBindingSourceRequest:
@@ -2785,6 +2813,8 @@ components:
           $ref: '#/components/schemas/__string'
           description: The name of the registry.
         Tags:
+          xml:
+            name: tags
           $ref: '#/components/schemas/Tags'
           description: Tags associated with the registry.
     __long:
@@ -2802,6 +2832,8 @@ components:
           $ref: '#/components/schemas/__string'
           description: The name of the schema.
         Tags:
+          xml:
+            name: tags
           $ref: '#/components/schemas/Tags'
           description: Tags associated with the schema.
         VersionCount:
@@ -2871,6 +2903,8 @@ components:
       title: TagResourceRequest
       properties:
         Tags:
+          xml:
+            name: tags
           $ref: '#/components/schemas/Tags'
           description: Tags associated with the resource.
       description: ''

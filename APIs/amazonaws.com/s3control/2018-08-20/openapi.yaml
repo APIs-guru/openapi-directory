@@ -1515,6 +1515,8 @@ components:
     AccessPointList:
       type: array
       items:
+        xml:
+          name: AccessPoint
         $ref: '#/components/schemas/AccessPoint'
     AccountId:
       type: string

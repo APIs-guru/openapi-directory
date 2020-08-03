@@ -4703,6 +4703,8 @@ components:
         $ref: '#/components/schemas/VirtualInterfaceTestHistory'
     LoaContent:
       type: string
+    LocationName:
+      type: string
     ProviderList:
       type: array
       items:
@@ -4713,6 +4715,9 @@ components:
         locationCode:
           $ref: '#/components/schemas/LocationCode'
           description: The code for the location.
+        locationName:
+          $ref: '#/components/schemas/LocationName'
+          description: The name of the location. This includes the name of the colocation partner and the physical site of the building.
         region:
           $ref: '#/components/schemas/Region'
           description: The AWS Region for the location.
@@ -4727,8 +4732,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Location'
-    LocationName:
-      type: string
     MTU:
       type: integer
     VirtualInterfaceName:

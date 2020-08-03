@@ -596,6 +596,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: DeleteClusterSnapshotMessage
               $ref: '#/components/schemas/DeleteClusterSnapshotMessage'
         - name: Action
           in: query
@@ -688,6 +690,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: String
               $ref: '#/components/schemas/String'
         - name: ManualSnapshotRetentionPeriod
           in: query
@@ -1224,6 +1228,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: ClusterSecurityGroupName
               $ref: '#/components/schemas/String'
         - name: VpcSecurityGroupIds
           in: query
@@ -1232,6 +1238,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: VpcSecurityGroupId
               $ref: '#/components/schemas/String'
         - name: ClusterSubnetGroupName
           in: query
@@ -1330,6 +1338,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: Tag
               $ref: '#/components/schemas/Tag'
         - name: KmsKeyId
           in: query
@@ -1356,6 +1366,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: IamRoleArn
               $ref: '#/components/schemas/String'
         - name: MaintenanceTrackName
           in: query
@@ -1616,6 +1628,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: Tag
               $ref: '#/components/schemas/Tag'
         - name: Action
           in: query
@@ -1750,6 +1764,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: Tag
               $ref: '#/components/schemas/Tag'
         - name: Action
           in: query
@@ -1908,6 +1924,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: Tag
               $ref: '#/components/schemas/Tag'
         - name: Action
           in: query
@@ -2084,6 +2102,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: SubnetIdentifier
               $ref: '#/components/schemas/String'
         - name: Tags
           in: query
@@ -2092,6 +2112,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: Tag
               $ref: '#/components/schemas/Tag'
         - name: Action
           in: query
@@ -2298,6 +2320,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: SourceId
               $ref: '#/components/schemas/String'
         - name: EventCategories
           in: query
@@ -2306,6 +2330,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: EventCategory
               $ref: '#/components/schemas/String'
         - name: Severity
           in: query
@@ -2326,6 +2352,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: Tag
               $ref: '#/components/schemas/Tag'
         - name: Action
           in: query
@@ -2496,6 +2524,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: Tag
               $ref: '#/components/schemas/Tag'
         - name: Action
           in: query
@@ -2654,6 +2684,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: Tag
               $ref: '#/components/schemas/Tag'
         - name: Action
           in: query
@@ -2999,6 +3031,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: Tag
               $ref: '#/components/schemas/Tag'
         - name: Action
           in: query
@@ -3139,6 +3173,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: ScheduleDefinition
               $ref: '#/components/schemas/String'
         - name: ScheduleIdentifier
           in: query
@@ -3159,6 +3195,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: Tag
               $ref: '#/components/schemas/Tag'
         - name: DryRun
           in: query
@@ -3295,6 +3333,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: Tag
               $ref: '#/components/schemas/Tag'
         - name: Action
           in: query
@@ -3475,6 +3515,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: Tag
               $ref: '#/components/schemas/Tag'
         - name: Action
           in: query
@@ -4661,6 +4703,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: TagKey
               $ref: '#/components/schemas/String'
         - name: Action
           in: query
@@ -4831,6 +4875,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: AttributeName
               $ref: '#/components/schemas/String'
         - name: Action
           in: query
@@ -5043,6 +5089,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: TagKey
               $ref: '#/components/schemas/String'
         - name: TagValues
           in: query
@@ -5051,6 +5099,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: TagValue
               $ref: '#/components/schemas/String'
         - name: Action
           in: query
@@ -5293,6 +5343,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: TagKey
               $ref: '#/components/schemas/String'
         - name: TagValues
           in: query
@@ -5301,6 +5353,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: TagValue
               $ref: '#/components/schemas/String'
         - name: Action
           in: query
@@ -5467,6 +5521,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: TagKey
               $ref: '#/components/schemas/String'
         - name: TagValues
           in: query
@@ -5475,6 +5531,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: TagValue
               $ref: '#/components/schemas/String'
         - name: ClusterExists
           in: query
@@ -5489,6 +5547,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: SnapshotSortingEntity
               $ref: '#/components/schemas/SnapshotSortingEntity'
         - name: Action
           in: query
@@ -5623,6 +5683,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: TagKey
               $ref: '#/components/schemas/String'
         - name: TagValues
           in: query
@@ -5631,6 +5693,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: TagValue
               $ref: '#/components/schemas/String'
         - name: Action
           in: query
@@ -5969,6 +6033,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: TagKey
               $ref: '#/components/schemas/String'
         - name: TagValues
           in: query
@@ -5977,6 +6043,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: TagValue
               $ref: '#/components/schemas/String'
         - name: Action
           in: query
@@ -6273,6 +6341,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: TagKey
               $ref: '#/components/schemas/String'
         - name: TagValues
           in: query
@@ -6281,6 +6351,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: TagValue
               $ref: '#/components/schemas/String'
         - name: Action
           in: query
@@ -6537,6 +6609,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: TagKey
               $ref: '#/components/schemas/String'
         - name: TagValues
           in: query
@@ -6545,6 +6619,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: TagValue
               $ref: '#/components/schemas/String'
         - name: Action
           in: query
@@ -6673,6 +6749,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: TagKey
               $ref: '#/components/schemas/String'
         - name: TagValues
           in: query
@@ -6681,6 +6759,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: TagValue
               $ref: '#/components/schemas/String'
         - name: Action
           in: query
@@ -6915,6 +6995,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: NodeConfigurationOptionsFilter
               $ref: '#/components/schemas/NodeConfigurationOptionsFilter'
         - name: Marker
           in: query
@@ -7535,6 +7617,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: ScheduledActionFilter
               $ref: '#/components/schemas/ScheduledActionFilter'
         - name: Marker
           in: query
@@ -7675,6 +7759,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: TagKey
               $ref: '#/components/schemas/String'
         - name: TagValues
           in: query
@@ -7683,6 +7769,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: TagValue
               $ref: '#/components/schemas/String'
         - name: Action
           in: query
@@ -7781,6 +7869,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: TagKey
               $ref: '#/components/schemas/String'
         - name: TagValues
           in: query
@@ -7789,6 +7879,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: TagValue
               $ref: '#/components/schemas/String'
         - name: Marker
           in: query
@@ -8086,6 +8178,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: TagKey
               $ref: '#/components/schemas/String'
         - name: TagValues
           in: query
@@ -8094,6 +8188,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: TagValue
               $ref: '#/components/schemas/String'
         - name: Action
           in: query
@@ -8225,6 +8321,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: TagKey
               $ref: '#/components/schemas/String'
         - name: TagValues
           in: query
@@ -8233,6 +8331,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: TagValue
               $ref: '#/components/schemas/String'
         - name: Action
           in: query
@@ -8961,6 +9061,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: DbGroup
               $ref: '#/components/schemas/String'
         - name: Action
           in: query
@@ -9341,6 +9443,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: ClusterSecurityGroupName
               $ref: '#/components/schemas/String'
         - name: VpcSecurityGroupIds
           in: query
@@ -9349,6 +9453,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: VpcSecurityGroupId
               $ref: '#/components/schemas/String'
         - name: MasterUserPassword
           in: query
@@ -9765,6 +9871,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: IamRoleArn
               $ref: '#/components/schemas/String'
         - name: RemoveIamRoles
           in: query
@@ -9773,6 +9881,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: IamRoleArn
               $ref: '#/components/schemas/String'
         - name: Action
           in: query
@@ -10005,6 +10115,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: Parameter
               $ref: '#/components/schemas/Parameter'
         - name: Action
           in: query
@@ -10371,6 +10483,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: SubnetIdentifier
               $ref: '#/components/schemas/String'
         - name: Action
           in: query
@@ -10553,6 +10667,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: SourceId
               $ref: '#/components/schemas/String'
         - name: EventCategories
           in: query
@@ -10561,6 +10677,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: EventCategory
               $ref: '#/components/schemas/String'
         - name: Severity
           in: query
@@ -11056,6 +11174,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: ScheduleDefinition
               $ref: '#/components/schemas/String'
         - name: Action
           in: query
@@ -11614,6 +11734,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: Parameter
               $ref: '#/components/schemas/Parameter'
         - name: Action
           in: query
@@ -12132,6 +12254,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: ClusterSecurityGroupName
               $ref: '#/components/schemas/String'
         - name: VpcSecurityGroupIds
           in: query
@@ -12140,6 +12264,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: VpcSecurityGroupId
               $ref: '#/components/schemas/String'
         - name: PreferredMaintenanceWindow
           in: query
@@ -12190,6 +12316,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: IamRoleArn
               $ref: '#/components/schemas/String'
         - name: MaintenanceTrackName
           in: query
@@ -13690,6 +13818,8 @@ components:
           $ref: '#/components/schemas/OperatorType'
           description: 'The filter operator. If filter Name is NodeType only the ''in'' operator is supported. Provide one value to evaluate for ''eq'', ''lt'', ''le'', ''gt'', and ''ge''. Provide two values to evaluate for ''between''. Provide a list of values for ''in''.'
         Values:
+          xml:
+            name: Value
           $ref: '#/components/schemas/ValueStringList'
           description: 'List of values. Compare Name using Operator to Values. If filter Name is NumberOfNodes, then values can range from 0 to 200. If filter Name is EstimatedDiskUtilizationPercent, then values can range from 0 to 100. For example, filter NumberOfNodes (name) GT (operator) 3 (values).'
       description: A set of elements to filter the returned node configurations.
@@ -14046,6 +14176,8 @@ components:
     AttributeValueList:
       type: array
       items:
+        xml:
+          name: AttributeValueTarget
         $ref: '#/components/schemas/AttributeValueTarget'
     AccountAttribute:
       type: object
@@ -14060,6 +14192,8 @@ components:
     AttributeList:
       type: array
       items:
+        xml:
+          name: AccountAttribute
         $ref: '#/components/schemas/AccountAttribute'
     AccountWithRestoreAccess:
       type: object
@@ -14074,6 +14208,8 @@ components:
     AccountsWithRestoreAccessList:
       type: array
       items:
+        xml:
+          name: AccountWithRestoreAccess
         $ref: '#/components/schemas/AccountWithRestoreAccess'
     ActionType:
       type: string
@@ -14094,10 +14230,14 @@ components:
     AssociatedClusterList:
       type: array
       items:
+        xml:
+          name: ClusterAssociatedToSchedule
         $ref: '#/components/schemas/ClusterAssociatedToSchedule'
     AttributeNameList:
       type: array
       items:
+        xml:
+          name: AttributeName
         $ref: '#/components/schemas/String'
     AttributeValueTarget:
       type: object
@@ -14267,6 +14407,8 @@ components:
     SupportedPlatformsList:
       type: array
       items:
+        xml:
+          name: SupportedPlatform
         $ref: '#/components/schemas/SupportedPlatform'
     AvailabilityZone:
       type: object
@@ -14281,10 +14423,14 @@ components:
     AvailabilityZoneList:
       type: array
       items:
+        xml:
+          name: AvailabilityZone
         $ref: '#/components/schemas/AvailabilityZone'
     DeleteClusterSnapshotMessageList:
       type: array
       items:
+        xml:
+          name: DeleteClusterSnapshotMessage
         $ref: '#/components/schemas/DeleteClusterSnapshotMessage'
     BatchDeleteClusterSnapshotsRequest:
       type: object
@@ -14298,10 +14444,14 @@ components:
     SnapshotIdentifierList:
       type: array
       items:
+        xml:
+          name: String
         $ref: '#/components/schemas/String'
     BatchSnapshotOperationErrorList:
       type: array
       items:
+        xml:
+          name: SnapshotErrorMessage
         $ref: '#/components/schemas/SnapshotErrorMessage'
     IntegerOptional:
       type: integer
@@ -14325,6 +14475,8 @@ components:
     BatchSnapshotOperationErrors:
       type: array
       items:
+        xml:
+          name: SnapshotErrorMessage
         $ref: '#/components/schemas/SnapshotErrorMessage'
     SnapshotErrorMessage:
       type: object
@@ -14371,14 +14523,20 @@ components:
     ClusterSecurityGroupMembershipList:
       type: array
       items:
+        xml:
+          name: ClusterSecurityGroup
         $ref: '#/components/schemas/ClusterSecurityGroupMembership'
     VpcSecurityGroupMembershipList:
       type: array
       items:
+        xml:
+          name: VpcSecurityGroup
         $ref: '#/components/schemas/VpcSecurityGroupMembership'
     ClusterParameterGroupStatusList:
       type: array
       items:
+        xml:
+          name: ClusterParameterGroup
         $ref: '#/components/schemas/ClusterParameterGroupStatus'
     PendingModifiedValues:
       type: object
@@ -14507,10 +14665,14 @@ components:
     TagList:
       type: array
       items:
+        xml:
+          name: Tag
         $ref: '#/components/schemas/Tag'
     ClusterIamRoleList:
       type: array
       items:
+        xml:
+          name: ClusterIamRole
         $ref: '#/components/schemas/ClusterIamRole'
     PendingActionsList:
       type: array
@@ -14519,6 +14681,8 @@ components:
     DeferredMaintenanceWindowsList:
       type: array
       items:
+        xml:
+          name: DeferredMaintenanceWindow
         $ref: '#/components/schemas/DeferredMaintenanceWindow'
     ScheduleState:
       type: string
@@ -14684,6 +14848,8 @@ components:
     RevisionTargetsList:
       type: array
       items:
+        xml:
+          name: RevisionTarget
         $ref: '#/components/schemas/RevisionTarget'
     ClusterDbRevision:
       type: object
@@ -14704,6 +14870,8 @@ components:
     ClusterDbRevisionsList:
       type: array
       items:
+        xml:
+          name: ClusterDbRevision
         $ref: '#/components/schemas/ClusterDbRevision'
     ClusterIamRole:
       type: object
@@ -14718,6 +14886,8 @@ components:
     ClusterList:
       type: array
       items:
+        xml:
+          name: Cluster
         $ref: '#/components/schemas/Cluster'
     ClusterNode:
       type: object
@@ -14751,6 +14921,8 @@ components:
     ParametersList:
       type: array
       items:
+        xml:
+          name: Parameter
         $ref: '#/components/schemas/Parameter'
     ClusterParameterStatusList:
       type: array
@@ -14772,6 +14944,8 @@ components:
     ParameterGroupList:
       type: array
       items:
+        xml:
+          name: ClusterParameterGroup
         $ref: '#/components/schemas/ClusterParameterGroup'
     ClusterParameterStatus:
       type: object
@@ -14789,10 +14963,14 @@ components:
     EC2SecurityGroupList:
       type: array
       items:
+        xml:
+          name: EC2SecurityGroup
         $ref: '#/components/schemas/EC2SecurityGroup'
     IPRangeList:
       type: array
       items:
+        xml:
+          name: IPRange
         $ref: '#/components/schemas/IPRange'
     ClusterSecurityGroupMembership:
       type: object
@@ -14807,16 +14985,22 @@ components:
     ClusterSecurityGroups:
       type: array
       items:
+        xml:
+          name: ClusterSecurityGroup
         $ref: '#/components/schemas/ClusterSecurityGroup'
     ClusterSecurityGroupNameList:
       type: array
       items:
+        xml:
+          name: ClusterSecurityGroupName
         $ref: '#/components/schemas/String'
     Long:
       type: integer
     SubnetList:
       type: array
       items:
+        xml:
+          name: Subnet
         $ref: '#/components/schemas/Subnet'
     ClusterSubnetGroup:
       type: object
@@ -14843,6 +15027,8 @@ components:
     ClusterSubnetGroups:
       type: array
       items:
+        xml:
+          name: ClusterSubnetGroup
         $ref: '#/components/schemas/ClusterSubnetGroup'
     ClusterVersion:
       type: object
@@ -14860,6 +15046,8 @@ components:
     ClusterVersionList:
       type: array
       items:
+        xml:
+          name: ClusterVersion
         $ref: '#/components/schemas/ClusterVersion'
     CopyClusterSnapshotMessage:
       type: object
@@ -14884,10 +15072,14 @@ components:
     VpcSecurityGroupIdList:
       type: array
       items:
+        xml:
+          name: VpcSecurityGroupId
         $ref: '#/components/schemas/String'
     IamRoleArnList:
       type: array
       items:
+        xml:
+          name: IamRoleArn
         $ref: '#/components/schemas/String'
     CreateClusterMessage:
       type: object
@@ -15050,6 +15242,8 @@ components:
     SubnetIdentifierList:
       type: array
       items:
+        xml:
+          name: SubnetIdentifier
         $ref: '#/components/schemas/String'
     CreateClusterSubnetGroupMessage:
       type: object
@@ -15075,10 +15269,14 @@ components:
     SourceIdsList:
       type: array
       items:
+        xml:
+          name: SourceId
         $ref: '#/components/schemas/String'
     EventCategoriesList:
       type: array
       items:
+        xml:
+          name: EventCategory
         $ref: '#/components/schemas/String'
     CreateEventSubscriptionMessage:
       type: object
@@ -15305,6 +15503,8 @@ components:
     ScheduleDefinitionList:
       type: array
       items:
+        xml:
+          name: ScheduleDefinition
         $ref: '#/components/schemas/String'
     CreateSnapshotScheduleMessage:
       type: object
@@ -15405,6 +15605,8 @@ components:
     DbGroupList:
       type: array
       items:
+        xml:
+          name: DbGroup
         $ref: '#/components/schemas/String'
     DefaultClusterParameters:
       type: object
@@ -15542,6 +15744,8 @@ components:
     TagKeyList:
       type: array
       items:
+        xml:
+          name: TagKey
         $ref: '#/components/schemas/String'
     DeleteTagsMessage:
       type: object
@@ -15589,6 +15793,8 @@ components:
     TagValueList:
       type: array
       items:
+        xml:
+          name: TagValue
         $ref: '#/components/schemas/String'
     DescribeClusterParameterGroupsMessage:
       type: object
@@ -15652,6 +15858,8 @@ components:
     SnapshotSortingEntityList:
       type: array
       items:
+        xml:
+          name: SnapshotSortingEntity
         $ref: '#/components/schemas/SnapshotSortingEntity'
     DescribeClusterSnapshotsMessage:
       type: object
@@ -15895,6 +16103,8 @@ components:
     NodeConfigurationOptionsFilterList:
       type: array
       items:
+        xml:
+          name: NodeConfigurationOptionsFilter
         $ref: '#/components/schemas/NodeConfigurationOptionsFilter'
     DescribeNodeConfigurationOptionsMessage:
       type: object
@@ -15915,6 +16125,8 @@ components:
           $ref: '#/components/schemas/String'
           description: 'The AWS customer account used to create or copy the snapshot. Required if you are restoring a snapshot you do not own, optional if you own the snapshot.'
         Filters:
+          xml:
+            name: Filter
           $ref: '#/components/schemas/NodeConfigurationOptionsFilterList'
           description: 'A set of name, operator, and value items to filter the results.'
         Marker:
@@ -15987,6 +16199,8 @@ components:
     ScheduledActionFilterList:
       type: array
       items:
+        xml:
+          name: ScheduledActionFilter
         $ref: '#/components/schemas/ScheduledActionFilter'
     DescribeScheduledActionsMessage:
       type: object
@@ -16061,6 +16275,8 @@ components:
     SnapshotScheduleList:
       type: array
       items:
+        xml:
+          name: SnapshotSchedule
         $ref: '#/components/schemas/SnapshotSchedule'
     DescribeTableRestoreStatusMessage:
       type: object
@@ -16179,6 +16395,8 @@ components:
     EligibleTracksToUpdateList:
       type: array
       items:
+        xml:
+          name: UpdateTarget
         $ref: '#/components/schemas/UpdateTarget'
     EnableLoggingMessage:
       type: object
@@ -16248,6 +16466,8 @@ components:
     EventInfoMapList:
       type: array
       items:
+        xml:
+          name: EventInfoMap
         $ref: '#/components/schemas/EventInfoMap'
     EventCategoriesMap:
       type: object
@@ -16262,6 +16482,8 @@ components:
     EventCategoriesMapList:
       type: array
       items:
+        xml:
+          name: EventCategoriesMap
         $ref: '#/components/schemas/EventCategoriesMap'
     EventInfoMap:
       type: object
@@ -16282,10 +16504,14 @@ components:
     EventList:
       type: array
       items:
+        xml:
+          name: Event
         $ref: '#/components/schemas/Event'
     EventSubscriptionsList:
       type: array
       items:
+        xml:
+          name: EventSubscription
         $ref: '#/components/schemas/EventSubscription'
     GetClusterCredentialsMessage:
       type: object
@@ -16332,14 +16558,20 @@ components:
     ReservedNodeOfferingList:
       type: array
       items:
+        xml:
+          name: ReservedNodeOffering
         $ref: '#/components/schemas/ReservedNodeOffering'
     HsmClientCertificateList:
       type: array
       items:
+        xml:
+          name: HsmClientCertificate
         $ref: '#/components/schemas/HsmClientCertificate'
     HsmConfigurationList:
       type: array
       items:
+        xml:
+          name: HsmConfiguration
         $ref: '#/components/schemas/HsmConfiguration'
     IPRange:
       type: object
@@ -16693,6 +16925,8 @@ components:
     NodeConfigurationOptionList:
       type: array
       items:
+        xml:
+          name: NodeConfigurationOption
         $ref: '#/components/schemas/NodeConfigurationOption'
     NodeConfigurationOptionsFilterName:
       type: string
@@ -16714,6 +16948,8 @@ components:
     ValueStringList:
       type: array
       items:
+        xml:
+          name: item
         $ref: '#/components/schemas/String'
     OrderableClusterOption:
       type: object
@@ -16734,6 +16970,8 @@ components:
     OrderableClusterOptionsList:
       type: array
       items:
+        xml:
+          name: OrderableClusterOption
         $ref: '#/components/schemas/OrderableClusterOption'
     ParameterApplyType:
       type: string
@@ -16776,6 +17014,8 @@ components:
     RecurringChargeList:
       type: array
       items:
+        xml:
+          name: RecurringCharge
         $ref: '#/components/schemas/RecurringCharge'
     ReservedNodeOfferingType:
       type: string
@@ -16785,6 +17025,8 @@ components:
     ReservedNodeList:
       type: array
       items:
+        xml:
+          name: ReservedNode
         $ref: '#/components/schemas/ReservedNode'
     ReservedNodeOffering:
       type: object
@@ -16836,6 +17078,8 @@ components:
     RestorableNodeTypeList:
       type: array
       items:
+        xml:
+          name: NodeType
         $ref: '#/components/schemas/String'
     RestoreFromClusterSnapshotMessage:
       type: object
@@ -17071,6 +17315,8 @@ components:
     ScheduledActionTimeList:
       type: array
       items:
+        xml:
+          name: ScheduledActionTime
         $ref: '#/components/schemas/TStamp'
     ScheduledActionFilterName:
       type: string
@@ -17080,10 +17326,14 @@ components:
     ScheduledActionList:
       type: array
       items:
+        xml:
+          name: ScheduledAction
         $ref: '#/components/schemas/ScheduledAction'
     ScheduledSnapshotTimeList:
       type: array
       items:
+        xml:
+          name: SnapshotTime
         $ref: '#/components/schemas/TStamp'
     SnapshotAttributeToSortBy:
       type: string
@@ -17094,10 +17344,14 @@ components:
     SnapshotCopyGrantList:
       type: array
       items:
+        xml:
+          name: SnapshotCopyGrant
         $ref: '#/components/schemas/SnapshotCopyGrant'
     SnapshotList:
       type: array
       items:
+        xml:
+          name: Snapshot
         $ref: '#/components/schemas/Snapshot'
     SortByOrder:
       type: string
@@ -17127,6 +17381,8 @@ components:
     SupportedOperationList:
       type: array
       items:
+        xml:
+          name: SupportedOperation
         $ref: '#/components/schemas/SupportedOperation'
     SupportedPlatform:
       type: object
@@ -17146,6 +17402,8 @@ components:
     TableRestoreStatusList:
       type: array
       items:
+        xml:
+          name: TableRestoreStatus
         $ref: '#/components/schemas/TableRestoreStatus'
     TaggedResource:
       type: object
@@ -17163,10 +17421,14 @@ components:
     TaggedResourceList:
       type: array
       items:
+        xml:
+          name: TaggedResource
         $ref: '#/components/schemas/TaggedResource'
     TrackList:
       type: array
       items:
+        xml:
+          name: MaintenanceTrack
         $ref: '#/components/schemas/MaintenanceTrack'
     UsageLimits:
       type: array

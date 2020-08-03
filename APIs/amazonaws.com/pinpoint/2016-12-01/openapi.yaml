@@ -13795,6 +13795,8 @@ components:
           $ref: '#/components/schemas/SegmentCondition'
           description: The segment that's associated with the activity.
         SegmentDimensions:
+          xml:
+            name: segmentDimensions
           $ref: '#/components/schemas/SegmentDimensions'
           description: The dimension settings for the segment that's associated with the activity.
       description: Specifies a condition to evaluate for an activity in a journey.

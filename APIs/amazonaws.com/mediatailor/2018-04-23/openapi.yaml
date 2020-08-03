@@ -497,6 +497,8 @@ components:
           description: 'The URL for a high-quality video asset to transcode and use to fill in time that''s not used by ads. AWS Elemental MediaTailor shows the slate to fill in gaps in media content. Configuring the slate is optional for non-VPAID playback configurations. For VPAID, the slate is required because MediaTailor provides it in the slots designated for dynamic ad content. The slate must be a high-quality asset that contains both audio and video. '
           $ref: '#/components/schemas/__string'
         Tags:
+          xml:
+            name: tags
           description: 'The tags assigned to the playback configuration. '
           $ref: '#/components/schemas/__mapOf__string'
         TranscodeProfileName:
@@ -518,6 +520,8 @@ components:
       type: object
       properties:
         Tags:
+          xml:
+            name: tags
           description: |-
             A comma-separated list of tag key:value pairs. For example: 
              {
@@ -570,6 +574,8 @@ components:
           description: 'The URL for a high-quality video asset to transcode and use to fill in time that''s not used by ads. AWS Elemental MediaTailor shows the slate to fill in gaps in media content. Configuring the slate is optional for non-VPAID playback configurations. For VPAID, the slate is required because MediaTailor provides it in the slots designated for dynamic ad content. The slate must be a high-quality asset that contains both audio and video. '
           $ref: '#/components/schemas/__string'
         Tags:
+          xml:
+            name: tags
           description: 'The tags assigned to the playback configuration. '
           $ref: '#/components/schemas/__mapOf__string'
         TranscodeProfileName:
@@ -730,6 +736,8 @@ components:
           description: 'The URL for a high-quality video asset to transcode and use to fill in time that''s not used by ads. AWS Elemental MediaTailor shows the slate to fill in gaps in media content. Configuring the slate is optional for non-VPAID playback configurations. For VPAID, the slate is required because MediaTailor provides it in the slots designated for dynamic ad content. The slate must be a high-quality asset that contains both audio and video. '
           $ref: '#/components/schemas/__string'
         Tags:
+          xml:
+            name: tags
           description: 'The tags assigned to the playback configuration. '
           $ref: '#/components/schemas/__mapOf__string'
         TranscodeProfileName:
@@ -774,6 +782,8 @@ components:
           description: 'The URL for a high-quality video asset to transcode and use to fill in time that''s not used by ads. AWS Elemental MediaTailor shows the slate to fill in gaps in media content. Configuring the slate is optional for non-VPAID configurations. For VPAID, the slate is required because MediaTailor provides it in the slots that are designated for dynamic ad content. The slate must be a high-quality asset that contains both audio and video. '
           $ref: '#/components/schemas/__string'
         Tags:
+          xml:
+            name: tags
           description: 'The tags to assign to the playback configuration. '
           $ref: '#/components/schemas/__mapOf__string'
         TranscodeProfileName:
@@ -789,6 +799,8 @@ components:
       title: TagResourceRequest
       properties:
         Tags:
+          xml:
+            name: tags
           description: |-
             A comma-separated list of tag key:value pairs. For example: 
              {

@@ -140,6 +140,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: Item
               $ref: '#/components/schemas/DeletableItem'
             xml:
               wrapped: false
@@ -228,6 +230,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: Item
               $ref: '#/components/schemas/ReplaceableItem'
             xml:
               wrapped: false
@@ -428,6 +432,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: Attribute
               $ref: '#/components/schemas/DeletableAttribute'
             xml:
               wrapped: false
@@ -714,6 +720,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: AttributeName
               $ref: '#/components/schemas/String'
             xml:
               wrapped: false
@@ -936,6 +944,8 @@ paths:
           schema:
             type: array
             items:
+              xml:
+                name: Attribute
               $ref: '#/components/schemas/ReplaceableAttribute'
             xml:
               wrapped: false
@@ -1202,6 +1212,8 @@ components:
         - Name
       properties:
         Name:
+          xml:
+            name: ItemName
           $ref: '#/components/schemas/String'
         Attributes:
           $ref: '#/components/schemas/DeletableAttributeList'
@@ -1212,6 +1224,8 @@ components:
         - Attributes
       properties:
         Name:
+          xml:
+            name: ItemName
           $ref: '#/components/schemas/String'
           description: The name of the replaceable item.
         Attributes:
@@ -1425,18 +1439,24 @@ components:
     AttributeList:
       type: array
       items:
+        xml:
+          name: Attribute
         $ref: '#/components/schemas/Attribute'
       xml:
         wrapped: false
     AttributeNameList:
       type: array
       items:
+        xml:
+          name: AttributeName
         $ref: '#/components/schemas/String'
       xml:
         wrapped: false
     DeletableItemList:
       type: array
       items:
+        xml:
+          name: Item
         $ref: '#/components/schemas/DeletableItem'
       xml:
         wrapped: false
@@ -1456,6 +1476,8 @@ components:
     ReplaceableItemList:
       type: array
       items:
+        xml:
+          name: Item
         $ref: '#/components/schemas/ReplaceableItem'
       xml:
         wrapped: false
@@ -1484,6 +1506,8 @@ components:
     DeletableAttributeList:
       type: array
       items:
+        xml:
+          name: Attribute
         $ref: '#/components/schemas/DeletableAttribute'
       xml:
         wrapped: false
@@ -1544,6 +1568,8 @@ components:
     DomainNameList:
       type: array
       items:
+        xml:
+          name: DomainName
         $ref: '#/components/schemas/String'
       xml:
         wrapped: false
@@ -1585,6 +1611,8 @@ components:
     ItemList:
       type: array
       items:
+        xml:
+          name: Item
         $ref: '#/components/schemas/Item'
       xml:
         wrapped: false
@@ -1601,6 +1629,8 @@ components:
     ReplaceableAttributeList:
       type: array
       items:
+        xml:
+          name: Attribute
         $ref: '#/components/schemas/ReplaceableAttribute'
       xml:
         wrapped: false

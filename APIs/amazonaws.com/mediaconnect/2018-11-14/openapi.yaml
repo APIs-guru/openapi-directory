@@ -426,36 +426,58 @@ paths:
                   type: object
                   properties:
                     Decryption:
+                      xml:
+                        name: decryption
                       $ref: '#/components/schemas/Encryption'
                       description: The type of encryption that is used on the content ingested from this source.
                     Description:
+                      xml:
+                        name: description
                       $ref: '#/components/schemas/__string'
                       description: A description for the source. This value is not used or seen outside of the current AWS Elemental MediaConnect account.
                     EntitlementArn:
+                      xml:
+                        name: entitlementArn
                       $ref: '#/components/schemas/__string'
                       description: 'The ARN of the entitlement that allows you to subscribe to this flow. The entitlement is set by the flow originator, and the ARN is generated as part of the originator''s flow.'
                     IngestPort:
+                      xml:
+                        name: ingestPort
                       $ref: '#/components/schemas/__integer'
                       description: The port that the flow will be listening on for incoming content.
                     MaxBitrate:
+                      xml:
+                        name: maxBitrate
                       $ref: '#/components/schemas/__integer'
                       description: 'The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.'
                     MaxLatency:
+                      xml:
+                        name: maxLatency
                       $ref: '#/components/schemas/__integer'
                       description: The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.
                     Name:
+                      xml:
+                        name: name
                       $ref: '#/components/schemas/__string'
                       description: The name of the source.
                     Protocol:
+                      xml:
+                        name: protocol
                       $ref: '#/components/schemas/Protocol'
                       description: The protocol that is used by the source.
                     StreamId:
+                      xml:
+                        name: streamId
                       $ref: '#/components/schemas/__string'
                       description: The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
                     VpcInterfaceName:
+                      xml:
+                        name: vpcInterfaceName
                       $ref: '#/components/schemas/__string'
                       description: The name of the VPC interface to use for this source.
                     WhitelistCidr:
+                      xml:
+                        name: whitelistCidr
                       $ref: '#/components/schemas/__string'
                       description: 'The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.'
                 sourceFailoverConfig:
@@ -463,9 +485,13 @@ paths:
                   type: object
                   properties:
                     RecoveryWindow:
+                      xml:
+                        name: recoveryWindow
                       $ref: '#/components/schemas/__integer'
                       description: Search window time to look for dash-7 packets
                     State:
+                      xml:
+                        name: state
                       $ref: '#/components/schemas/State'
                 sources:
                   description: ''
@@ -726,9 +752,13 @@ paths:
                   type: object
                   properties:
                     RecoveryWindow:
+                      xml:
+                        name: recoveryWindow
                       $ref: '#/components/schemas/__integer'
                       description: Recovery window time to look for dash-7 packets
                     State:
+                      xml:
+                        name: state
                       $ref: '#/components/schemas/State'
   '/v1/flows/{flowArn}/entitlements':
     post:
@@ -1121,30 +1151,48 @@ paths:
                   type: object
                   properties:
                     Algorithm:
+                      xml:
+                        name: algorithm
                       $ref: '#/components/schemas/Algorithm'
                       description: 'The type of algorithm that is used for the encryption (such as aes128, aes192, or aes256).'
                     ConstantInitializationVector:
+                      xml:
+                        name: constantInitializationVector
                       $ref: '#/components/schemas/__string'
                       description: 'A 128-bit, 16-byte hex value represented by a 32-character string, to be used with the key for encrypting content. This parameter is not valid for static key encryption.'
                     DeviceId:
+                      xml:
+                        name: deviceId
                       $ref: '#/components/schemas/__string'
                       description: The value of one of the devices that you configured with your digital rights management (DRM) platform key provider. This parameter is required for SPEKE encryption and is not valid for static key encryption.
                     KeyType:
+                      xml:
+                        name: keyType
                       $ref: '#/components/schemas/KeyType'
                       description: 'The type of key that is used for the encryption. If no keyType is provided, the service will use the default setting (static-key).'
                     Region:
+                      xml:
+                        name: region
                       $ref: '#/components/schemas/__string'
                       description: The AWS Region that the API Gateway proxy endpoint was created in. This parameter is required for SPEKE encryption and is not valid for static key encryption.
                     ResourceId:
+                      xml:
+                        name: resourceId
                       $ref: '#/components/schemas/__string'
                       description: An identifier for the content. The service sends this value to the key server to identify the current endpoint. The resource ID is also known as the content ID. This parameter is required for SPEKE encryption and is not valid for static key encryption.
                     RoleArn:
+                      xml:
+                        name: roleArn
                       $ref: '#/components/schemas/__string'
                       description: The ARN of the role that you created during setup (when you set up AWS Elemental MediaConnect as a trusted entity).
                     SecretArn:
+                      xml:
+                        name: secretArn
                       $ref: '#/components/schemas/__string'
                       description: The ARN of the secret that you created in AWS Secrets Manager to store the encryption key. This parameter is required for static key encryption and is not valid for SPEKE encryption.
                     Url:
+                      xml:
+                        name: url
                       $ref: '#/components/schemas/__string'
                       description: The URL from the API Gateway proxy that you set up to talk to your key server. This parameter is required for SPEKE encryption and is not valid for static key encryption.
                 maxLatency:
@@ -1176,6 +1224,8 @@ paths:
                   type: object
                   properties:
                     VpcInterfaceName:
+                      xml:
+                        name: vpcInterfaceName
                       $ref: '#/components/schemas/__string'
                       description: The name of the VPC interface to use for this output.
   '/v1/flows/{flowArn}/source/{sourceArn}':
@@ -1317,30 +1367,48 @@ paths:
                   type: object
                   properties:
                     Algorithm:
+                      xml:
+                        name: algorithm
                       $ref: '#/components/schemas/Algorithm'
                       description: 'The type of algorithm that is used for the encryption (such as aes128, aes192, or aes256).'
                     ConstantInitializationVector:
+                      xml:
+                        name: constantInitializationVector
                       $ref: '#/components/schemas/__string'
                       description: 'A 128-bit, 16-byte hex value represented by a 32-character string, to be used with the key for encrypting content. This parameter is not valid for static key encryption.'
                     DeviceId:
+                      xml:
+                        name: deviceId
                       $ref: '#/components/schemas/__string'
                       description: The value of one of the devices that you configured with your digital rights management (DRM) platform key provider. This parameter is required for SPEKE encryption and is not valid for static key encryption.
                     KeyType:
+                      xml:
+                        name: keyType
                       $ref: '#/components/schemas/KeyType'
                       description: 'The type of key that is used for the encryption. If no keyType is provided, the service will use the default setting (static-key).'
                     Region:
+                      xml:
+                        name: region
                       $ref: '#/components/schemas/__string'
                       description: The AWS Region that the API Gateway proxy endpoint was created in. This parameter is required for SPEKE encryption and is not valid for static key encryption.
                     ResourceId:
+                      xml:
+                        name: resourceId
                       $ref: '#/components/schemas/__string'
                       description: An identifier for the content. The service sends this value to the key server to identify the current endpoint. The resource ID is also known as the content ID. This parameter is required for SPEKE encryption and is not valid for static key encryption.
                     RoleArn:
+                      xml:
+                        name: roleArn
                       $ref: '#/components/schemas/__string'
                       description: The ARN of the role that you created during setup (when you set up AWS Elemental MediaConnect as a trusted entity).
                     SecretArn:
+                      xml:
+                        name: secretArn
                       $ref: '#/components/schemas/__string'
                       description: The ARN of the secret that you created in AWS Secrets Manager to store the encryption key. This parameter is required for static key encryption and is not valid for SPEKE encryption.
                     Url:
+                      xml:
+                        name: url
                       $ref: '#/components/schemas/__string'
                       description: The URL from the API Gateway proxy that you set up to talk to your key server. This parameter is required for SPEKE encryption and is not valid for static key encryption.
                 description:
@@ -1586,30 +1654,48 @@ paths:
                   type: object
                   properties:
                     Algorithm:
+                      xml:
+                        name: algorithm
                       $ref: '#/components/schemas/Algorithm'
                       description: 'The type of algorithm that is used for the encryption (such as aes128, aes192, or aes256).'
                     ConstantInitializationVector:
+                      xml:
+                        name: constantInitializationVector
                       $ref: '#/components/schemas/__string'
                       description: 'A 128-bit, 16-byte hex value represented by a 32-character string, to be used with the key for encrypting content. This parameter is not valid for static key encryption.'
                     DeviceId:
+                      xml:
+                        name: deviceId
                       $ref: '#/components/schemas/__string'
                       description: The value of one of the devices that you configured with your digital rights management (DRM) platform key provider. This parameter is required for SPEKE encryption and is not valid for static key encryption.
                     KeyType:
+                      xml:
+                        name: keyType
                       $ref: '#/components/schemas/KeyType'
                       description: 'The type of key that is used for the encryption. If no keyType is provided, the service will use the default setting (static-key).'
                     Region:
+                      xml:
+                        name: region
                       $ref: '#/components/schemas/__string'
                       description: The AWS Region that the API Gateway proxy endpoint was created in. This parameter is required for SPEKE encryption and is not valid for static key encryption.
                     ResourceId:
+                      xml:
+                        name: resourceId
                       $ref: '#/components/schemas/__string'
                       description: An identifier for the content. The service sends this value to the key server to identify the current endpoint. The resource ID is also known as the content ID. This parameter is required for SPEKE encryption and is not valid for static key encryption.
                     RoleArn:
+                      xml:
+                        name: roleArn
                       $ref: '#/components/schemas/__string'
                       description: The ARN of the role that you created during setup (when you set up AWS Elemental MediaConnect as a trusted entity).
                     SecretArn:
+                      xml:
+                        name: secretArn
                       $ref: '#/components/schemas/__string'
                       description: The ARN of the secret that you created in AWS Secrets Manager to store the encryption key. This parameter is required for static key encryption and is not valid for SPEKE encryption.
                     Url:
+                      xml:
+                        name: url
                       $ref: '#/components/schemas/__string'
                       description: The URL from the API Gateway proxy that you set up to talk to your key server. This parameter is required for SPEKE encryption and is not valid for static key encryption.
                 entitlementStatus:
@@ -1851,9 +1937,13 @@ components:
       type: object
       properties:
         FlowArn:
+          xml:
+            name: flowArn
           $ref: '#/components/schemas/__string'
           description: The ARN of the flow that these outputs were added to.
         Outputs:
+          xml:
+            name: outputs
           $ref: '#/components/schemas/__listOfOutput'
           description: The details of the newly added outputs.
     AddOutputRequest:
@@ -1862,39 +1952,63 @@ components:
         - Protocol
       properties:
         CidrAllowList:
+          xml:
+            name: cidrAllowList
           $ref: '#/components/schemas/__listOf__string'
           description: 'The range of IP addresses that should be allowed to initiate output requests to this flow. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.'
         Description:
+          xml:
+            name: description
           $ref: '#/components/schemas/__string'
           description: A description of the output. This description appears only on the AWS Elemental MediaConnect console and will not be seen by the end user.
         Destination:
+          xml:
+            name: destination
           $ref: '#/components/schemas/__string'
           description: The IP address from which video will be sent to output destinations.
         Encryption:
+          xml:
+            name: encryption
           $ref: '#/components/schemas/Encryption'
           description: 'The type of key used for the encryption. If no keyType is provided, the service will use the default setting (static-key).'
         MaxLatency:
+          xml:
+            name: maxLatency
           $ref: '#/components/schemas/__integer'
           description: The maximum latency in milliseconds for Zixi-based streams.
         Name:
+          xml:
+            name: name
           $ref: '#/components/schemas/__string'
           description: The name of the output. This value must be unique within the current flow.
         Port:
+          xml:
+            name: port
           $ref: '#/components/schemas/__integer'
           description: The port to use when content is distributed to this output.
         Protocol:
+          xml:
+            name: protocol
           $ref: '#/components/schemas/Protocol'
           description: The protocol to use for the output.
         RemoteId:
+          xml:
+            name: remoteId
           $ref: '#/components/schemas/__string'
           description: The remote ID for the Zixi-pull output stream.
         SmoothingLatency:
+          xml:
+            name: smoothingLatency
           $ref: '#/components/schemas/__integer'
           description: 'The smoothing latency in milliseconds for RIST, RTP, and RTP-FEC streams.'
         StreamId:
+          xml:
+            name: streamId
           $ref: '#/components/schemas/__string'
           description: The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
         VpcInterfaceAttachment:
+          xml:
+            name: vpcInterfaceAttachment
           $ref: '#/components/schemas/VpcInterfaceAttachment'
           description: The name of the VPC interface attachment to use for this output.
       description: The output that you want to add to this flow.
@@ -1909,45 +2023,71 @@ components:
       type: object
       properties:
         FlowArn:
+          xml:
+            name: flowArn
           $ref: '#/components/schemas/__string'
           description: The ARN of the flow that these sources were added to.
         Sources:
+          xml:
+            name: sources
           $ref: '#/components/schemas/__listOfSource'
           description: The details of the newly added sources.
     SetSourceRequest:
       type: object
       properties:
         Decryption:
+          xml:
+            name: decryption
           $ref: '#/components/schemas/Encryption'
           description: The type of encryption that is used on the content ingested from this source.
         Description:
+          xml:
+            name: description
           $ref: '#/components/schemas/__string'
           description: A description for the source. This value is not used or seen outside of the current AWS Elemental MediaConnect account.
         EntitlementArn:
+          xml:
+            name: entitlementArn
           $ref: '#/components/schemas/__string'
           description: 'The ARN of the entitlement that allows you to subscribe to this flow. The entitlement is set by the flow originator, and the ARN is generated as part of the originator''s flow.'
         IngestPort:
+          xml:
+            name: ingestPort
           $ref: '#/components/schemas/__integer'
           description: The port that the flow will be listening on for incoming content.
         MaxBitrate:
+          xml:
+            name: maxBitrate
           $ref: '#/components/schemas/__integer'
           description: 'The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.'
         MaxLatency:
+          xml:
+            name: maxLatency
           $ref: '#/components/schemas/__integer'
           description: The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.
         Name:
+          xml:
+            name: name
           $ref: '#/components/schemas/__string'
           description: The name of the source.
         Protocol:
+          xml:
+            name: protocol
           $ref: '#/components/schemas/Protocol'
           description: The protocol that is used by the source.
         StreamId:
+          xml:
+            name: streamId
           $ref: '#/components/schemas/__string'
           description: The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
         VpcInterfaceName:
+          xml:
+            name: vpcInterfaceName
           $ref: '#/components/schemas/__string'
           description: The name of the VPC interface to use for this source.
         WhitelistCidr:
+          xml:
+            name: whitelistCidr
           $ref: '#/components/schemas/__string'
           description: 'The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.'
       description: The settings for the source of the flow.
@@ -1955,9 +2095,13 @@ components:
       type: object
       properties:
         FlowArn:
+          xml:
+            name: flowArn
           $ref: '#/components/schemas/__string'
           description: The ARN of the flow that these VPC interfaces were added to.
         VpcInterfaces:
+          xml:
+            name: vpcInterfaces
           $ref: '#/components/schemas/__listOfVpcInterface'
           description: The details of the newly added VPC interfaces.
     VpcInterfaceRequest:
@@ -1969,15 +2113,23 @@ components:
         - Name
       properties:
         Name:
+          xml:
+            name: name
           $ref: '#/components/schemas/__string'
           description: The name of the VPC Interface. This value must be unique within the current flow.
         RoleArn:
+          xml:
+            name: roleArn
           $ref: '#/components/schemas/__string'
           description: Role Arn MediaConnect can assumes to create ENIs in customer's account
         SecurityGroupIds:
+          xml:
+            name: securityGroupIds
           $ref: '#/components/schemas/__listOf__string'
           description: Security Group IDs to be used on ENI.
         SubnetId:
+          xml:
+            name: subnetId
           $ref: '#/components/schemas/__string'
           description: Subnet must be in the AZ of the Flow
       description: Desired VPC Interface for a Flow
@@ -1985,6 +2137,8 @@ components:
       type: object
       properties:
         Flow:
+          xml:
+            name: flow
           $ref: '#/components/schemas/Flow'
     GrantEntitlementRequest:
       type: object
@@ -1992,21 +2146,33 @@ components:
         - Subscribers
       properties:
         DataTransferSubscriberFeePercent:
+          xml:
+            name: dataTransferSubscriberFeePercent
           $ref: '#/components/schemas/__integer'
           description: Percentage from 0-100 of the data transfer cost to be billed to the subscriber.
         Description:
+          xml:
+            name: description
           $ref: '#/components/schemas/__string'
           description: A description of the entitlement. This description appears only on the AWS Elemental MediaConnect console and will not be seen by the subscriber or end user.
         Encryption:
+          xml:
+            name: encryption
           $ref: '#/components/schemas/Encryption'
           description: The type of encryption that will be used on the output that is associated with this entitlement.
         EntitlementStatus:
+          xml:
+            name: entitlementStatus
           $ref: '#/components/schemas/EntitlementStatus'
           description: 'An indication of whether the new entitlement should be enabled or disabled as soon as it is created. If you don’t specify the entitlementStatus field in your request, MediaConnect sets it to ENABLED.'
         Name:
+          xml:
+            name: name
           $ref: '#/components/schemas/__string'
           description: The name of the entitlement. This value must be unique within the current flow.
         Subscribers:
+          xml:
+            name: subscribers
           $ref: '#/components/schemas/__listOf__string'
           description: The AWS account IDs that you want to share your content with. The receiving accounts (subscribers) will be allowed to create their own flows using your content as the source.
       description: The entitlements that you want to grant on a flow.
@@ -2017,30 +2183,48 @@ components:
         - RoleArn
       properties:
         Algorithm:
+          xml:
+            name: algorithm
           $ref: '#/components/schemas/Algorithm'
           description: 'The type of algorithm that is used for the encryption (such as aes128, aes192, or aes256).'
         ConstantInitializationVector:
+          xml:
+            name: constantInitializationVector
           $ref: '#/components/schemas/__string'
           description: 'A 128-bit, 16-byte hex value represented by a 32-character string, to be used with the key for encrypting content. This parameter is not valid for static key encryption.'
         DeviceId:
+          xml:
+            name: deviceId
           $ref: '#/components/schemas/__string'
           description: The value of one of the devices that you configured with your digital rights management (DRM) platform key provider. This parameter is required for SPEKE encryption and is not valid for static key encryption.
         KeyType:
+          xml:
+            name: keyType
           $ref: '#/components/schemas/KeyType'
           description: 'The type of key that is used for the encryption. If no keyType is provided, the service will use the default setting (static-key).'
         Region:
+          xml:
+            name: region
           $ref: '#/components/schemas/__string'
           description: The AWS Region that the API Gateway proxy endpoint was created in. This parameter is required for SPEKE encryption and is not valid for static key encryption.
         ResourceId:
+          xml:
+            name: resourceId
           $ref: '#/components/schemas/__string'
           description: An identifier for the content. The service sends this value to the key server to identify the current endpoint. The resource ID is also known as the content ID. This parameter is required for SPEKE encryption and is not valid for static key encryption.
         RoleArn:
+          xml:
+            name: roleArn
           $ref: '#/components/schemas/__string'
           description: The ARN of the role that you created during setup (when you set up AWS Elemental MediaConnect as a trusted entity).
         SecretArn:
+          xml:
+            name: secretArn
           $ref: '#/components/schemas/__string'
           description: The ARN of the secret that you created in AWS Secrets Manager to store the encryption key. This parameter is required for static key encryption and is not valid for SPEKE encryption.
         Url:
+          xml:
+            name: url
           $ref: '#/components/schemas/__string'
           description: The URL from the API Gateway proxy that you set up to talk to your key server. This parameter is required for SPEKE encryption and is not valid for static key encryption.
       description: Information about the encryption of the flow.
@@ -2066,25 +2250,37 @@ components:
       type: object
       properties:
         FlowArn:
+          xml:
+            name: flowArn
           $ref: '#/components/schemas/__string'
           description: The ARN of the flow that was deleted.
         Status:
+          xml:
+            name: status
           $ref: '#/components/schemas/Status'
           description: The status of the flow when the DeleteFlow process begins.
     DescribeFlowResponse:
       type: object
       properties:
         Flow:
+          xml:
+            name: flow
           $ref: '#/components/schemas/Flow'
         Messages:
+          xml:
+            name: messages
           $ref: '#/components/schemas/Messages'
     GrantFlowEntitlementsResponse:
       type: object
       properties:
         Entitlements:
+          xml:
+            name: entitlements
           $ref: '#/components/schemas/__listOfEntitlement'
           description: The entitlements that were just granted.
         FlowArn:
+          xml:
+            name: flowArn
           $ref: '#/components/schemas/__string'
           description: The ARN of the flow that these entitlements were granted to.
     GrantFlowEntitlements420Exception: {}
@@ -2092,94 +2288,136 @@ components:
       type: object
       properties:
         Entitlements:
+          xml:
+            name: entitlements
           $ref: '#/components/schemas/__listOfListedEntitlement'
           description: A list of entitlements that have been granted to you from other AWS accounts.
         NextToken:
+          xml:
+            name: nextToken
           $ref: '#/components/schemas/__string'
           description: 'The token that identifies which batch of results that you want to see. For example, you submit a ListEntitlements request with MaxResults set at 5. The service returns the first batch of results (up to 5) and a NextToken value. To see the next batch of results, you can submit the ListEntitlements request a second time and specify the NextToken value.'
     ListFlowsResponse:
       type: object
       properties:
         Flows:
+          xml:
+            name: flows
           $ref: '#/components/schemas/__listOfListedFlow'
           description: A list of flow summaries.
         NextToken:
+          xml:
+            name: nextToken
           $ref: '#/components/schemas/__string'
           description: 'The token that identifies which batch of results that you want to see. For example, you submit a ListFlows request with MaxResults set at 5. The service returns the first batch of results (up to 5) and a NextToken value. To see the next batch of results, you can submit the ListFlows request a second time and specify the NextToken value.'
     ListTagsForResourceResponse:
       type: object
       properties:
         Tags:
+          xml:
+            name: tags
           $ref: '#/components/schemas/__mapOf__string'
           description: 'A map from tag keys to values. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.'
     RemoveFlowOutputResponse:
       type: object
       properties:
         FlowArn:
+          xml:
+            name: flowArn
           $ref: '#/components/schemas/__string'
           description: The ARN of the flow that is associated with the output you removed.
         OutputArn:
+          xml:
+            name: outputArn
           $ref: '#/components/schemas/__string'
           description: The ARN of the output that was removed.
     RemoveFlowSourceResponse:
       type: object
       properties:
         FlowArn:
+          xml:
+            name: flowArn
           $ref: '#/components/schemas/__string'
           description: The ARN of the flow that is associated with the source you removed.
         SourceArn:
+          xml:
+            name: sourceArn
           $ref: '#/components/schemas/__string'
           description: The ARN of the source that was removed.
     RemoveFlowVpcInterfaceResponse:
       type: object
       properties:
         FlowArn:
+          xml:
+            name: flowArn
           $ref: '#/components/schemas/__string'
           description: The ARN of the flow that is associated with the VPC interface you removed.
         NonDeletedNetworkInterfaceIds:
+          xml:
+            name: nonDeletedNetworkInterfaceIds
           $ref: '#/components/schemas/__listOf__string'
           description: IDs of network interfaces associated with the removed VPC interface that Media Connect was unable to remove.
         VpcInterfaceName:
+          xml:
+            name: vpcInterfaceName
           $ref: '#/components/schemas/__string'
           description: The name of the VPC interface that was removed.
     RevokeFlowEntitlementResponse:
       type: object
       properties:
         EntitlementArn:
+          xml:
+            name: entitlementArn
           $ref: '#/components/schemas/__string'
           description: The ARN of the entitlement that was revoked.
         FlowArn:
+          xml:
+            name: flowArn
           $ref: '#/components/schemas/__string'
           description: The ARN of the flow that the entitlement was revoked from.
     StartFlowResponse:
       type: object
       properties:
         FlowArn:
+          xml:
+            name: flowArn
           $ref: '#/components/schemas/__string'
           description: The ARN of the flow that you started.
         Status:
+          xml:
+            name: status
           $ref: '#/components/schemas/Status'
           description: The status of the flow when the StartFlow process begins.
     StopFlowResponse:
       type: object
       properties:
         FlowArn:
+          xml:
+            name: flowArn
           $ref: '#/components/schemas/__string'
           description: The ARN of the flow that you stopped.
         Status:
+          xml:
+            name: status
           $ref: '#/components/schemas/Status'
           description: The status of the flow when the StopFlow process begins.
     UpdateFlowResponse:
       type: object
       properties:
         Flow:
+          xml:
+            name: flow
           $ref: '#/components/schemas/Flow'
     UpdateFlowEntitlementResponse:
       type: object
       properties:
         Entitlement:
+          xml:
+            name: entitlement
           $ref: '#/components/schemas/Entitlement'
         FlowArn:
+          xml:
+            name: flowArn
           $ref: '#/components/schemas/__string'
           description: The ARN of the flow that this entitlement was granted on.
     Algorithm:
@@ -2197,17 +2435,25 @@ components:
       type: object
       properties:
         FlowArn:
+          xml:
+            name: flowArn
           $ref: '#/components/schemas/__string'
           description: The ARN of the flow that is associated with the updated output.
         Output:
+          xml:
+            name: output
           $ref: '#/components/schemas/Output'
     UpdateFlowSourceResponse:
       type: object
       properties:
         FlowArn:
+          xml:
+            name: flowArn
           $ref: '#/components/schemas/__string'
           description: The ARN of the flow that you want to update.
         Source:
+          xml:
+            name: source
           $ref: '#/components/schemas/Source'
           description: The settings for the source of the flow.
     __listOfAddOutputRequest:
@@ -2221,6 +2467,8 @@ components:
       title: AddFlowOutputsRequest
       properties:
         Outputs:
+          xml:
+            name: outputs
           $ref: '#/components/schemas/__listOfAddOutputRequest'
           description: A list of outputs that you want to add.
       description: A request to add outputs to the specified flow.
@@ -2239,6 +2487,8 @@ components:
       title: AddFlowSourcesRequest
       properties:
         Sources:
+          xml:
+            name: sources
           $ref: '#/components/schemas/__listOfSetSourceRequest'
           description: A list of sources that you want to add.
       description: A request to add sources to the flow.
@@ -2257,6 +2507,8 @@ components:
       title: AddFlowVpcInterfacesRequest
       properties:
         VpcInterfaces:
+          xml:
+            name: vpcInterfaces
           $ref: '#/components/schemas/__listOfVpcInterfaceRequest'
           description: A list of VPC interfaces that you want to add.
       description: A request to add VPC interfaces to the flow.
@@ -2272,6 +2524,8 @@ components:
       type: object
       properties:
         VpcInterfaceName:
+          xml:
+            name: vpcInterfaceName
           $ref: '#/components/schemas/__string'
           description: The name of the VPC interface to use for this output.
       description: The settings for attaching a VPC interface to an output.
@@ -2283,9 +2537,13 @@ components:
       type: object
       properties:
         RecoveryWindow:
+          xml:
+            name: recoveryWindow
           $ref: '#/components/schemas/__integer'
           description: Search window time to look for dash-7 packets
         State:
+          xml:
+            name: state
           $ref: '#/components/schemas/State'
       description: The settings for source failover
     CreateFlowRequest:
@@ -2295,24 +2553,40 @@ components:
       title: CreateFlowRequest
       properties:
         AvailabilityZone:
+          xml:
+            name: availabilityZone
           $ref: '#/components/schemas/__string'
           description: The Availability Zone that you want to create the flow in. These options are limited to the Availability Zones within the current AWS Region.
         Entitlements:
+          xml:
+            name: entitlements
           $ref: '#/components/schemas/__listOfGrantEntitlementRequest'
           description: The entitlements that you want to grant on a flow.
         Name:
+          xml:
+            name: name
           $ref: '#/components/schemas/__string'
           description: The name of the flow.
         Outputs:
+          xml:
+            name: outputs
           $ref: '#/components/schemas/__listOfAddOutputRequest'
           description: The outputs that you want to add to this flow.
         Source:
+          xml:
+            name: source
           $ref: '#/components/schemas/SetSourceRequest'
         SourceFailoverConfig:
+          xml:
+            name: sourceFailoverConfig
           $ref: '#/components/schemas/FailoverConfig'
         Sources:
+          xml:
+            name: sources
           $ref: '#/components/schemas/__listOfSetSourceRequest'
         VpcInterfaces:
+          xml:
+            name: vpcInterfaces
           $ref: '#/components/schemas/__listOfVpcInterfaceRequest'
           description: The VPC interfaces you want on the flow.
       description: Creates a new flow. The request must include one source. The request optionally can include outputs (up to 50) and entitlements (up to 50).
@@ -2328,36 +2602,60 @@ components:
         - Name
       properties:
         AvailabilityZone:
+          xml:
+            name: availabilityZone
           $ref: '#/components/schemas/__string'
           description: The Availability Zone that you want to create the flow in. These options are limited to the Availability Zones within the current AWS.
         Description:
+          xml:
+            name: description
           $ref: '#/components/schemas/__string'
           description: A description of the flow. This value is not used or seen outside of the current AWS Elemental MediaConnect account.
         EgressIp:
+          xml:
+            name: egressIp
           $ref: '#/components/schemas/__string'
           description: The IP address from which video will be sent to output destinations.
         Entitlements:
+          xml:
+            name: entitlements
           $ref: '#/components/schemas/__listOfEntitlement'
           description: The entitlements in this flow.
         FlowArn:
+          xml:
+            name: flowArn
           $ref: '#/components/schemas/__string'
           description: 'The Amazon Resource Name (ARN), a unique identifier for any AWS resource, of the flow.'
         Name:
+          xml:
+            name: name
           $ref: '#/components/schemas/__string'
           description: The name of the flow.
         Outputs:
+          xml:
+            name: outputs
           $ref: '#/components/schemas/__listOfOutput'
           description: The outputs in this flow.
         Source:
+          xml:
+            name: source
           $ref: '#/components/schemas/Source'
         SourceFailoverConfig:
+          xml:
+            name: sourceFailoverConfig
           $ref: '#/components/schemas/FailoverConfig'
         Sources:
+          xml:
+            name: sources
           $ref: '#/components/schemas/__listOfSource'
         Status:
+          xml:
+            name: status
           $ref: '#/components/schemas/Status'
           description: The current status of the flow.
         VpcInterfaces:
+          xml:
+            name: vpcInterfaces
           $ref: '#/components/schemas/__listOfVpcInterface'
           description: The VPC Interfaces for this flow.
       description: 'The settings for a flow, including its source, outputs, and entitlements.'
@@ -2385,6 +2683,8 @@ components:
         - Errors
       properties:
         Errors:
+          xml:
+            name: errors
           $ref: '#/components/schemas/__listOf__string'
           description: A list of errors that might have been generated from processes on this flow.
       description: Messages that provide the state of the flow.
@@ -2401,24 +2701,38 @@ components:
         - Name
       properties:
         DataTransferSubscriberFeePercent:
+          xml:
+            name: dataTransferSubscriberFeePercent
           $ref: '#/components/schemas/__integer'
           description: Percentage from 0-100 of the data transfer cost to be billed to the subscriber.
         Description:
+          xml:
+            name: description
           $ref: '#/components/schemas/__string'
           description: A description of the entitlement.
         Encryption:
+          xml:
+            name: encryption
           $ref: '#/components/schemas/Encryption'
           description: The type of encryption that will be used on the output that is associated with this entitlement.
         EntitlementArn:
+          xml:
+            name: entitlementArn
           $ref: '#/components/schemas/__string'
           description: The ARN of the entitlement.
         EntitlementStatus:
+          xml:
+            name: entitlementStatus
           $ref: '#/components/schemas/EntitlementStatus'
           description: An indication of whether the entitlement is enabled.
         Name:
+          xml:
+            name: name
           $ref: '#/components/schemas/__string'
           description: The name of the entitlement.
         Subscribers:
+          xml:
+            name: subscribers
           $ref: '#/components/schemas/__listOf__string'
           description: The AWS account IDs that you want to share your content with. The receiving accounts (subscribers) will be allowed to create their own flow using your content as the source.
       description: The settings for a flow entitlement.
@@ -2433,36 +2747,58 @@ components:
         - Name
       properties:
         DataTransferSubscriberFeePercent:
+          xml:
+            name: dataTransferSubscriberFeePercent
           $ref: '#/components/schemas/__integer'
           description: Percentage from 0-100 of the data transfer cost to be billed to the subscriber.
         Decryption:
+          xml:
+            name: decryption
           $ref: '#/components/schemas/Encryption'
           description: The type of encryption that is used on the content ingested from this source.
         Description:
+          xml:
+            name: description
           $ref: '#/components/schemas/__string'
           description: A description for the source. This value is not used or seen outside of the current AWS Elemental MediaConnect account.
         EntitlementArn:
+          xml:
+            name: entitlementArn
           $ref: '#/components/schemas/__string'
           description: The ARN of the entitlement that allows you to subscribe to content that comes from another AWS account. The entitlement is set by the content originator and the ARN is generated as part of the originator's flow.
         IngestIp:
+          xml:
+            name: ingestIp
           $ref: '#/components/schemas/__string'
           description: The IP address that the flow will be listening on for incoming content.
         IngestPort:
+          xml:
+            name: ingestPort
           $ref: '#/components/schemas/__integer'
           description: The port that the flow will be listening on for incoming content.
         Name:
+          xml:
+            name: name
           $ref: '#/components/schemas/__string'
           description: The name of the source.
         SourceArn:
+          xml:
+            name: sourceArn
           $ref: '#/components/schemas/__string'
           description: The ARN of the source.
         Transport:
+          xml:
+            name: transport
           $ref: '#/components/schemas/Transport'
           description: Attributes related to the transport stream that are used in the source.
         VpcInterfaceName:
+          xml:
+            name: vpcInterfaceName
           $ref: '#/components/schemas/__string'
           description: The name of the VPC Interface this Source is configured with.
         WhitelistCidr:
+          xml:
+            name: whitelistCidr
           $ref: '#/components/schemas/__string'
           description: 'The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.'
       description: The settings for the source of the flow.
@@ -2473,6 +2809,8 @@ components:
       title: GrantFlowEntitlementsRequest
       properties:
         Entitlements:
+          xml:
+            name: entitlements
           $ref: '#/components/schemas/__listOfGrantEntitlementRequest'
           description: The list of entitlements that you want to grant.
       description: A request to grant entitlements on a flow.
@@ -2511,12 +2849,18 @@ components:
         - EntitlementName
       properties:
         DataTransferSubscriberFeePercent:
+          xml:
+            name: dataTransferSubscriberFeePercent
           $ref: '#/components/schemas/__integer'
           description: Percentage from 0-100 of the data transfer cost to be billed to the subscriber.
         EntitlementArn:
+          xml:
+            name: entitlementArn
           $ref: '#/components/schemas/__string'
           description: The ARN of the entitlement.
         EntitlementName:
+          xml:
+            name: entitlementName
           $ref: '#/components/schemas/__string'
           description: The name of the entitlement.
       description: An entitlement that has been granted to you from other AWS accounts.
@@ -2536,21 +2880,33 @@ components:
         - Name
       properties:
         AvailabilityZone:
+          xml:
+            name: availabilityZone
           $ref: '#/components/schemas/__string'
           description: The Availability Zone that the flow was created in.
         Description:
+          xml:
+            name: description
           $ref: '#/components/schemas/__string'
           description: A description of the flow.
         FlowArn:
+          xml:
+            name: flowArn
           $ref: '#/components/schemas/__string'
           description: The ARN of the flow.
         Name:
+          xml:
+            name: name
           $ref: '#/components/schemas/__string'
           description: The name of the flow.
         SourceType:
+          xml:
+            name: sourceType
           $ref: '#/components/schemas/SourceType'
           description: The type of source. This value is either owned (originated somewhere other than an AWS Elemental MediaConnect flow owned by another AWS account) or entitled (originated at an AWS Elemental MediaConnect flow owned by another AWS account).
         Status:
+          xml:
+            name: status
           $ref: '#/components/schemas/Status'
           description: The current status of the flow.
       description: 'Provides a summary of a flow, including its ARN, Availability Zone, and source type.'
@@ -2560,24 +2916,38 @@ components:
         - Protocol
       properties:
         CidrAllowList:
+          xml:
+            name: cidrAllowList
           $ref: '#/components/schemas/__listOf__string'
           description: 'The range of IP addresses that should be allowed to initiate output requests to this flow. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.'
         MaxBitrate:
+          xml:
+            name: maxBitrate
           $ref: '#/components/schemas/__integer'
           description: 'The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.'
         MaxLatency:
+          xml:
+            name: maxLatency
           $ref: '#/components/schemas/__integer'
           description: The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.
         Protocol:
+          xml:
+            name: protocol
           $ref: '#/components/schemas/Protocol'
           description: The protocol that is used by the source or output.
         RemoteId:
+          xml:
+            name: remoteId
           $ref: '#/components/schemas/__string'
           description: The remote ID for the Zixi-pull stream.
         SmoothingLatency:
+          xml:
+            name: smoothingLatency
           $ref: '#/components/schemas/__integer'
           description: 'The smoothing latency in milliseconds for RIST, RTP, and RTP-FEC streams.'
         StreamId:
+          xml:
+            name: streamId
           $ref: '#/components/schemas/__string'
           description: The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
       description: Attributes related to the transport stream that are used in a source or output.
@@ -2588,36 +2958,58 @@ components:
         - Name
       properties:
         DataTransferSubscriberFeePercent:
+          xml:
+            name: dataTransferSubscriberFeePercent
           $ref: '#/components/schemas/__integer'
           description: Percentage from 0-100 of the data transfer cost to be billed to the subscriber.
         Description:
+          xml:
+            name: description
           $ref: '#/components/schemas/__string'
           description: A description of the output.
         Destination:
+          xml:
+            name: destination
           $ref: '#/components/schemas/__string'
           description: The address where you want to send the output.
         Encryption:
+          xml:
+            name: encryption
           $ref: '#/components/schemas/Encryption'
           description: 'The type of key used for the encryption. If no keyType is provided, the service will use the default setting (static-key).'
         EntitlementArn:
+          xml:
+            name: entitlementArn
           $ref: '#/components/schemas/__string'
           description: The ARN of the entitlement on the originator''s flow. This value is relevant only on entitled flows.
         MediaLiveInputArn:
+          xml:
+            name: mediaLiveInputArn
           $ref: '#/components/schemas/__string'
           description: The input ARN of the AWS Elemental MediaLive channel. This parameter is relevant only for outputs that were added by creating a MediaLive input.
         Name:
+          xml:
+            name: name
           $ref: '#/components/schemas/__string'
           description: The name of the output. This value must be unique within the current flow.
         OutputArn:
+          xml:
+            name: outputArn
           $ref: '#/components/schemas/__string'
           description: The ARN of the output.
         Port:
+          xml:
+            name: port
           $ref: '#/components/schemas/__integer'
           description: The port to use when content is distributed to this output.
         Transport:
+          xml:
+            name: transport
           $ref: '#/components/schemas/Transport'
           description: Attributes related to the transport stream that are used in the output.
         VpcInterfaceAttachment:
+          xml:
+            name: vpcInterfaceAttachment
           $ref: '#/components/schemas/VpcInterfaceAttachment'
           description: The name of the VPC interface attachment to use for this output.
       description: The settings for an output.
@@ -2652,6 +3044,8 @@ components:
       title: TagResourceRequest
       properties:
         Tags:
+          xml:
+            name: tags
           $ref: '#/components/schemas/__mapOf__string'
           description: 'A map from tag keys to values. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.'
       description: 'The tags to add to the resource. A tag is an array of key-value pairs. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.'
@@ -2663,30 +3057,48 @@ components:
       type: object
       properties:
         Algorithm:
+          xml:
+            name: algorithm
           $ref: '#/components/schemas/Algorithm'
           description: 'The type of algorithm that is used for the encryption (such as aes128, aes192, or aes256).'
         ConstantInitializationVector:
+          xml:
+            name: constantInitializationVector
           $ref: '#/components/schemas/__string'
           description: 'A 128-bit, 16-byte hex value represented by a 32-character string, to be used with the key for encrypting content. This parameter is not valid for static key encryption.'
         DeviceId:
+          xml:
+            name: deviceId
           $ref: '#/components/schemas/__string'
           description: The value of one of the devices that you configured with your digital rights management (DRM) platform key provider. This parameter is required for SPEKE encryption and is not valid for static key encryption.
         KeyType:
+          xml:
+            name: keyType
           $ref: '#/components/schemas/KeyType'
           description: 'The type of key that is used for the encryption. If no keyType is provided, the service will use the default setting (static-key).'
         Region:
+          xml:
+            name: region
           $ref: '#/components/schemas/__string'
           description: The AWS Region that the API Gateway proxy endpoint was created in. This parameter is required for SPEKE encryption and is not valid for static key encryption.
         ResourceId:
+          xml:
+            name: resourceId
           $ref: '#/components/schemas/__string'
           description: An identifier for the content. The service sends this value to the key server to identify the current endpoint. The resource ID is also known as the content ID. This parameter is required for SPEKE encryption and is not valid for static key encryption.
         RoleArn:
+          xml:
+            name: roleArn
           $ref: '#/components/schemas/__string'
           description: The ARN of the role that you created during setup (when you set up AWS Elemental MediaConnect as a trusted entity).
         SecretArn:
+          xml:
+            name: secretArn
           $ref: '#/components/schemas/__string'
           description: The ARN of the secret that you created in AWS Secrets Manager to store the encryption key. This parameter is required for static key encryption and is not valid for SPEKE encryption.
         Url:
+          xml:
+            name: url
           $ref: '#/components/schemas/__string'
           description: The URL from the API Gateway proxy that you set up to talk to your key server. This parameter is required for SPEKE encryption and is not valid for static key encryption.
       description: Information about the encryption of the flow.
@@ -2694,9 +3106,13 @@ components:
       type: object
       properties:
         RecoveryWindow:
+          xml:
+            name: recoveryWindow
           $ref: '#/components/schemas/__integer'
           description: Recovery window time to look for dash-7 packets
         State:
+          xml:
+            name: state
           $ref: '#/components/schemas/State'
       description: The settings for source failover
     UpdateFlowEntitlementRequest:
@@ -2704,15 +3120,23 @@ components:
       title: UpdateFlowEntitlementRequest
       properties:
         Description:
+          xml:
+            name: description
           $ref: '#/components/schemas/__string'
           description: A description of the entitlement. This description appears only on the AWS Elemental MediaConnect console and will not be seen by the subscriber or end user.
         Encryption:
+          xml:
+            name: encryption
           $ref: '#/components/schemas/UpdateEncryption'
           description: The type of encryption that will be used on the output associated with this entitlement.
         EntitlementStatus:
+          xml:
+            name: entitlementStatus
           $ref: '#/components/schemas/EntitlementStatus'
           description: 'An indication of whether you want to enable the entitlement to allow access, or disable it to stop streaming content to the subscriber’s flow temporarily. If you don’t specify the entitlementStatus field in your request, MediaConnect leaves the value unchanged.'
         Subscribers:
+          xml:
+            name: subscribers
           $ref: '#/components/schemas/__listOf__string'
           description: The AWS account IDs that you want to share your content with. The receiving accounts (subscribers) will be allowed to create their own flow using your content as the source.
       description: The entitlement fields that you want to update.
@@ -2721,36 +3145,58 @@ components:
       title: UpdateFlowOutputRequest
       properties:
         CidrAllowList:
+          xml:
+            name: cidrAllowList
           $ref: '#/components/schemas/__listOf__string'
           description: 'The range of IP addresses that should be allowed to initiate output requests to this flow. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.'
         Description:
+          xml:
+            name: description
           $ref: '#/components/schemas/__string'
           description: A description of the output. This description appears only on the AWS Elemental MediaConnect console and will not be seen by the end user.
         Destination:
+          xml:
+            name: destination
           $ref: '#/components/schemas/__string'
           description: The IP address where you want to send the output.
         Encryption:
+          xml:
+            name: encryption
           $ref: '#/components/schemas/UpdateEncryption'
           description: 'The type of key used for the encryption. If no keyType is provided, the service will use the default setting (static-key).'
         MaxLatency:
+          xml:
+            name: maxLatency
           $ref: '#/components/schemas/__integer'
           description: The maximum latency in milliseconds for Zixi-based streams.
         Port:
+          xml:
+            name: port
           $ref: '#/components/schemas/__integer'
           description: The port to use when content is distributed to this output.
         Protocol:
+          xml:
+            name: protocol
           $ref: '#/components/schemas/Protocol'
           description: The protocol to use for the output.
         RemoteId:
+          xml:
+            name: remoteId
           $ref: '#/components/schemas/__string'
           description: The remote ID for the Zixi-pull stream.
         SmoothingLatency:
+          xml:
+            name: smoothingLatency
           $ref: '#/components/schemas/__integer'
           description: 'The smoothing latency in milliseconds for RIST, RTP, and RTP-FEC streams.'
         StreamId:
+          xml:
+            name: streamId
           $ref: '#/components/schemas/__string'
           description: The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
         VpcInterfaceAttachment:
+          xml:
+            name: vpcInterfaceAttachment
           $ref: '#/components/schemas/VpcInterfaceAttachment'
           description: The name of the VPC interface attachment to use for this output.
       description: The fields that you want to update in the output.
@@ -2759,6 +3205,8 @@ components:
       title: UpdateFlowRequest
       properties:
         SourceFailoverConfig:
+          xml:
+            name: sourceFailoverConfig
           $ref: '#/components/schemas/UpdateFailoverConfig'
       description: A request to update flow.
     UpdateFlowSourceRequest:
@@ -2766,33 +3214,53 @@ components:
       title: UpdateFlowSourceRequest
       properties:
         Decryption:
+          xml:
+            name: decryption
           $ref: '#/components/schemas/UpdateEncryption'
           description: The type of encryption used on the content ingested from this source.
         Description:
+          xml:
+            name: description
           $ref: '#/components/schemas/__string'
           description: A description for the source. This value is not used or seen outside of the current AWS Elemental MediaConnect account.
         EntitlementArn:
+          xml:
+            name: entitlementArn
           $ref: '#/components/schemas/__string'
           description: 'The ARN of the entitlement that allows you to subscribe to this flow. The entitlement is set by the flow originator, and the ARN is generated as part of the originator''s flow.'
         IngestPort:
+          xml:
+            name: ingestPort
           $ref: '#/components/schemas/__integer'
           description: The port that the flow will be listening on for incoming content.
         MaxBitrate:
+          xml:
+            name: maxBitrate
           $ref: '#/components/schemas/__integer'
           description: 'The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.'
         MaxLatency:
+          xml:
+            name: maxLatency
           $ref: '#/components/schemas/__integer'
           description: The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.
         Protocol:
+          xml:
+            name: protocol
           $ref: '#/components/schemas/Protocol'
           description: The protocol that is used by the source.
         StreamId:
+          xml:
+            name: streamId
           $ref: '#/components/schemas/__string'
           description: The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
         VpcInterfaceName:
+          xml:
+            name: vpcInterfaceName
           $ref: '#/components/schemas/__string'
           description: The name of the VPC Interface to configure this Source with.
         WhitelistCidr:
+          xml:
+            name: whitelistCidr
           $ref: '#/components/schemas/__string'
           description: 'The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.'
       description: A request to update the source of a flow.
@@ -2806,18 +3274,28 @@ components:
         - Name
       properties:
         Name:
+          xml:
+            name: name
           $ref: '#/components/schemas/__string'
           description: Immutable and has to be a unique against other VpcInterfaces in this Flow
         NetworkInterfaceIds:
+          xml:
+            name: networkInterfaceIds
           $ref: '#/components/schemas/__listOf__string'
           description: IDs of the network interfaces created in customer's account by MediaConnect.
         RoleArn:
+          xml:
+            name: roleArn
           $ref: '#/components/schemas/__string'
           description: Role Arn MediaConnect can assumes to create ENIs in customer's account
         SecurityGroupIds:
+          xml:
+            name: securityGroupIds
           $ref: '#/components/schemas/__listOf__string'
           description: Security Group IDs to be used on ENI.
         SubnetId:
+          xml:
+            name: subnetId
           $ref: '#/components/schemas/__string'
           description: Subnet must be in the AZ of the Flow
       description: The settings for a VPC Source.

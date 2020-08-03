@@ -398,9 +398,13 @@ paths:
                   type: object
                   properties:
                     DeviceType:
+                      xml:
+                        name: deviceType
                       $ref: '#/components/schemas/__string'
                       description: 'The type of the device, such as "button".'
                     MethodName:
+                      xml:
+                        name: methodName
                       $ref: '#/components/schemas/__string'
                       description: The name of the method applicable to the deviceType.
                 deviceMethodParameters:
@@ -907,9 +911,13 @@ components:
       type: object
       properties:
         ClaimCode:
+          xml:
+            name: claimCode
           $ref: '#/components/schemas/__stringMin12Max40'
           description: The claim code provided by the device manufacturer.
         Total:
+          xml:
+            name: total
           $ref: '#/components/schemas/__integer'
           description: |-
             The total number of devices associated with the claim code that has been processed in
@@ -921,6 +929,8 @@ components:
       type: object
       properties:
         DeviceDescription:
+          xml:
+            name: deviceDescription
           $ref: '#/components/schemas/DeviceDescription'
           description: Device details.
     ResourceNotFoundException: {}
@@ -928,6 +938,8 @@ components:
       type: object
       properties:
         State:
+          xml:
+            name: state
           $ref: '#/components/schemas/__string'
           description: The device's final claim state.
     __string:
@@ -938,18 +950,24 @@ components:
       type: object
       properties:
         DeviceMethods:
+          xml:
+            name: deviceMethods
           $ref: '#/components/schemas/__listOfDeviceMethod'
           description: List of available device APIs.
     InitiateDeviceClaimResponse:
       type: object
       properties:
         State:
+          xml:
+            name: state
           $ref: '#/components/schemas/__string'
           description: The device's final claim state.
     InvokeDeviceMethodResponse:
       type: object
       properties:
         DeviceMethodResponse:
+          xml:
+            name: deviceMethodResponse
           $ref: '#/components/schemas/__string'
           description: A JSON encoded string containing the device method response.
     RangeNotSatisfiableException: {}
@@ -957,26 +975,36 @@ components:
       type: object
       properties:
         Events:
+          xml:
+            name: events
           $ref: '#/components/schemas/__listOfDeviceEvent'
           description: |-
             An array of zero or more elements describing the event(s) associated with the
              device.
         NextToken:
+          xml:
+            name: nextToken
           $ref: '#/components/schemas/__string'
           description: The token to retrieve the next set of results.
     ListDevicesResponse:
       type: object
       properties:
         Devices:
+          xml:
+            name: devices
           $ref: '#/components/schemas/__listOfDeviceDescription'
           description: A list of devices.
         NextToken:
+          xml:
+            name: nextToken
           $ref: '#/components/schemas/__string'
           description: The token to retrieve the next set of results.
     ListTagsForResourceResponse:
       type: object
       properties:
         Tags:
+          xml:
+            name: tags
           $ref: '#/components/schemas/__mapOf__string'
           description: |-
             <p>A collection of key/value pairs defining the resource tags. For example, {
@@ -988,6 +1016,8 @@ components:
       type: object
       properties:
         State:
+          xml:
+            name: state
           $ref: '#/components/schemas/__string'
           description: The device's final claim state.
     UpdateDeviceStateResponse:
@@ -1014,40 +1044,60 @@ components:
       type: object
       properties:
         Arn:
+          xml:
+            name: arn
           $ref: '#/components/schemas/__string'
           description: The ARN of the device.
         Attributes:
+          xml:
+            name: attributes
           $ref: '#/components/schemas/DeviceAttributes'
           description: |-
             An array of zero or more elements of DeviceAttribute objects providing
              user specified device attributes.
         DeviceId:
+          xml:
+            name: deviceId
           $ref: '#/components/schemas/__string'
           description: The unique identifier of the device.
         Enabled:
+          xml:
+            name: enabled
           $ref: '#/components/schemas/__boolean'
           description: A Boolean value indicating whether or not the device is enabled.
         RemainingLife:
+          xml:
+            name: remainingLife
           $ref: '#/components/schemas/__doubleMin0Max100'
           description: |-
             A value between 0 and 1 inclusive, representing the fraction of life remaining for the
              device.
         Type:
+          xml:
+            name: type
           $ref: '#/components/schemas/__string'
           description: 'The type of the device, such as "button".'
         Tags:
+          xml:
+            name: tags
           $ref: '#/components/schemas/__mapOf__string'
           description: The tags currently associated with the AWS IoT 1-Click device.
     Device:
       type: object
       properties:
         Attributes:
+          xml:
+            name: attributes
           $ref: '#/components/schemas/Attributes'
           description: The user specified attributes associated with the device for an event.
         DeviceId:
+          xml:
+            name: deviceId
           $ref: '#/components/schemas/__string'
           description: The unique identifier of the device.
         Type:
+          xml:
+            name: type
           $ref: '#/components/schemas/__string'
           description: 'The device type, such as "button".'
     DeviceAttributes:
@@ -1070,18 +1120,26 @@ components:
       type: object
       properties:
         Device:
+          xml:
+            name: device
           $ref: '#/components/schemas/Device'
           description: An object representing the device associated with the event.
         StdEvent:
+          xml:
+            name: stdEvent
           $ref: '#/components/schemas/__string'
           description: A serialized JSON object representing the device-type specific event.
     DeviceMethod:
       type: object
       properties:
         DeviceType:
+          xml:
+            name: deviceType
           $ref: '#/components/schemas/__string'
           description: 'The type of the device, such as "button".'
         MethodName:
+          xml:
+            name: methodName
           $ref: '#/components/schemas/__string'
           description: The name of the method applicable to the deviceType.
     FinalizeDeviceClaimRequest:
@@ -1089,6 +1147,8 @@ components:
       title: FinalizeDeviceClaimRequest
       properties:
         Tags:
+          xml:
+            name: tags
           $ref: '#/components/schemas/__mapOf__string'
           description: |-
             <p>A collection of key/value pairs defining the resource tags. For example, {
@@ -1113,9 +1173,13 @@ components:
       title: InvokeDeviceMethodRequest
       properties:
         DeviceMethod:
+          xml:
+            name: deviceMethod
           $ref: '#/components/schemas/DeviceMethod'
           description: The device method to invoke.
         DeviceMethodParameters:
+          xml:
+            name: deviceMethodParameters
           $ref: '#/components/schemas/__string'
           description: A JSON encoded string containing the device method request parameters.
     __timestampIso8601:
@@ -1152,6 +1216,8 @@ components:
       title: TagResourceRequest
       properties:
         Tags:
+          xml:
+            name: tags
           $ref: '#/components/schemas/__mapOf__string'
           description: |-
             <p>A collection of key/value pairs defining the resource tags. For example, {
@@ -1176,6 +1242,8 @@ components:
       title: UpdateDeviceStateRequest
       properties:
         Enabled:
+          xml:
+            name: enabled
           $ref: '#/components/schemas/__boolean'
           description: |-
             If true, the device is enabled. If false, the device is

@@ -1805,6 +1805,8 @@ components:
       type: object
       properties:
         Tags:
+          xml:
+            name: tags
           $ref: '#/components/schemas/MapOf__string'
           description: A label that consists of a customer-defined key and an optional value.
     StartJobResponse:
@@ -2522,6 +2524,8 @@ components:
       title: TagResourceRequest
       properties:
         Tags:
+          xml:
+            name: tags
           $ref: '#/components/schemas/MapOf__string'
           description: A label that consists of a customer-defined key and an optional value.
       description: The request body for TagResource.

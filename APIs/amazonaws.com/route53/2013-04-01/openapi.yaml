@@ -291,6 +291,8 @@ paths:
                   description: <p>A complex type that contains a list of the tags that you want to add to the specified health check or hosted zone and/or the tags that you want to edit <code>Value</code> for.</p> <p>You can add a maximum of 10 tags to a health check or a hosted zone.</p>
                   type: array
                   items:
+                    xml:
+                      name: Tag
                     $ref: '#/components/schemas/Tag'
                   minItems: 1
                   maxItems: 10
@@ -298,6 +300,8 @@ paths:
                   description: A complex type that contains a list of the tags that you want to delete from the specified health check or hosted zone. You can specify up to 10 keys.
                   type: array
                   items:
+                    xml:
+                      name: Key
                     $ref: '#/components/schemas/TagKey'
                   minItems: 1
                   maxItems: 10
@@ -1464,6 +1468,8 @@ paths:
                   description: A complex type that contains one <code>ChildHealthCheck</code> element for each health check that you want to associate with a <code>CALCULATED</code> health check.
                   type: array
                   items:
+                    xml:
+                      name: ChildHealthCheck
                     $ref: '#/components/schemas/HealthCheckId'
                   maxItems: 256
                 EnableSNI:
@@ -1473,6 +1479,8 @@ paths:
                   description: A complex type that contains one <code>Region</code> element for each region that you want Amazon Route 53 health checkers to check the specified endpoint from.
                   type: array
                   items:
+                    xml:
+                      name: Region
                     $ref: '#/components/schemas/HealthCheckRegion'
                   minItems: 3
                   maxItems: 64
@@ -1497,6 +1505,8 @@ paths:
                   description: '<p>A complex type that contains one <code>ResettableElementName</code> element for each element that you want to reset to the default value. Valid values for <code>ResettableElementName</code> include the following:</p> <ul> <li> <p> <code>ChildHealthChecks</code>: Amazon Route 53 resets <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_HealthCheckConfig.html#Route53-Type-HealthCheckConfig-ChildHealthChecks">ChildHealthChecks</a> to null.</p> </li> <li> <p> <code>FullyQualifiedDomainName</code>: Route 53 resets <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_UpdateHealthCheck.html#Route53-UpdateHealthCheck-request-FullyQualifiedDomainName">FullyQualifiedDomainName</a>. to null.</p> </li> <li> <p> <code>Regions</code>: Route 53 resets the <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_HealthCheckConfig.html#Route53-Type-HealthCheckConfig-Regions">Regions</a> list to the default set of regions. </p> </li> <li> <p> <code>ResourcePath</code>: Route 53 resets <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_HealthCheckConfig.html#Route53-Type-HealthCheckConfig-ResourcePath">ResourcePath</a> to null.</p> </li> </ul>'
                   type: array
                   items:
+                    xml:
+                      name: ResettableElementName
                     $ref: '#/components/schemas/ResettableElementName'
                   maxItems: 64
   '/2013-04-01/hostedzone/{Id}':
@@ -3014,6 +3024,8 @@ paths:
                   description: A complex type that contains the ResourceId element for each resource for which you want to get a list of tags.
                   type: array
                   items:
+                    xml:
+                      name: ResourceId
                     $ref: '#/components/schemas/TagResourceId'
                   minItems: 1
                   maxItems: 10
@@ -3579,6 +3591,8 @@ components:
     Changes:
       type: array
       items:
+        xml:
+          name: Change
         $ref: '#/components/schemas/Change'
       minItems: 1
     NoSuchHealthCheck: {}
@@ -3659,6 +3673,8 @@ components:
     ChildHealthCheckList:
       type: array
       items:
+        xml:
+          name: ChildHealthCheck
         $ref: '#/components/schemas/HealthCheckId'
       maxItems: 256
     EnableSNI:
@@ -3666,6 +3682,8 @@ components:
     HealthCheckRegionList:
       type: array
       items:
+        xml:
+          name: Region
         $ref: '#/components/schemas/HealthCheckRegion'
       minItems: 3
       maxItems: 64
@@ -4687,12 +4705,16 @@ components:
     TagList:
       type: array
       items:
+        xml:
+          name: Tag
         $ref: '#/components/schemas/Tag'
       minItems: 1
       maxItems: 10
     TagKeyList:
       type: array
       items:
+        xml:
+          name: Key
         $ref: '#/components/schemas/TagKey'
       minItems: 1
       maxItems: 10
@@ -4748,6 +4770,8 @@ components:
     DimensionList:
       type: array
       items:
+        xml:
+          name: Dimension
         $ref: '#/components/schemas/Dimension'
       maxItems: 10
     CloudWatchAlarmConfiguration:
@@ -5174,11 +5198,15 @@ components:
     DelegationSetNameServers:
       type: array
       items:
+        xml:
+          name: NameServer
         $ref: '#/components/schemas/DNSName'
       minItems: 1
     DelegationSets:
       type: array
       items:
+        xml:
+          name: DelegationSet
         $ref: '#/components/schemas/DelegationSet'
     DeleteHealthCheckRequest:
       type: object
@@ -5321,6 +5349,8 @@ components:
     GeoLocationDetailsList:
       type: array
       items:
+        xml:
+          name: GeoLocationDetails
         $ref: '#/components/schemas/GeoLocationDetails'
     GetAccountLimitRequest:
       type: object
@@ -5360,6 +5390,8 @@ components:
     HealthCheckObservations:
       type: array
       items:
+        xml:
+          name: HealthCheckObservation
         $ref: '#/components/schemas/HealthCheckObservation'
     GetHealthCheckRequest:
       type: object
@@ -5410,6 +5442,8 @@ components:
       type: array
       description: (Private hosted zones only) A list of <code>VPC</code> elements.
       items:
+        xml:
+          name: VPC
         $ref: '#/components/schemas/VPC'
       minItems: 1
     GetQueryLoggingConfigRequest:
@@ -5499,6 +5533,8 @@ components:
     HealthChecks:
       type: array
       items:
+        xml:
+          name: HealthCheck
         $ref: '#/components/schemas/HealthCheck'
     HostedZoneRRSetCount:
       type: integer
@@ -5535,10 +5571,14 @@ components:
     HostedZoneSummaries:
       type: array
       items:
+        xml:
+          name: HostedZoneSummary
         $ref: '#/components/schemas/HostedZoneSummary'
     HostedZones:
       type: array
       items:
+        xml:
+          name: HostedZone
         $ref: '#/components/schemas/HostedZone'
     ServicePrincipal:
       type: string
@@ -5587,6 +5627,8 @@ components:
     QueryLoggingConfigs:
       type: array
       items:
+        xml:
+          name: QueryLoggingConfig
         $ref: '#/components/schemas/QueryLoggingConfig'
     RRType:
       type: string
@@ -5615,6 +5657,8 @@ components:
     ResourceRecordSets:
       type: array
       items:
+        xml:
+          name: ResourceRecordSet
         $ref: '#/components/schemas/ResourceRecordSet'
     ListReusableDelegationSetsRequest:
       type: object
@@ -5642,6 +5686,8 @@ components:
     TagResourceIdList:
       type: array
       items:
+        xml:
+          name: ResourceId
         $ref: '#/components/schemas/TagResourceId'
       minItems: 1
       maxItems: 10
@@ -5658,6 +5704,8 @@ components:
     ResourceTagSetList:
       type: array
       items:
+        xml:
+          name: ResourceTagSet
         $ref: '#/components/schemas/ResourceTagSet'
     ListTrafficPoliciesRequest:
       type: object
@@ -5667,6 +5715,8 @@ components:
     TrafficPolicySummaries:
       type: array
       items:
+        xml:
+          name: TrafficPolicySummary
         $ref: '#/components/schemas/TrafficPolicySummary'
     ListTrafficPolicyInstancesByHostedZoneRequest:
       type: object
@@ -5676,6 +5726,8 @@ components:
     TrafficPolicyInstances:
       type: array
       items:
+        xml:
+          name: TrafficPolicyInstance
         $ref: '#/components/schemas/TrafficPolicyInstance'
     ListTrafficPolicyInstancesByPolicyRequest:
       type: object
@@ -5698,6 +5750,8 @@ components:
     TrafficPolicies:
       type: array
       items:
+        xml:
+          name: TrafficPolicy
         $ref: '#/components/schemas/TrafficPolicy'
     ListVPCAssociationAuthorizationsRequest:
       type: object
@@ -5722,10 +5776,14 @@ components:
     RecordData:
       type: array
       items:
+        xml:
+          name: RecordDataEntry
         $ref: '#/components/schemas/RecordDataEntry'
     ResettableElementNameList:
       type: array
       items:
+        xml:
+          name: ResettableElementName
         $ref: '#/components/schemas/ResettableElementName'
       maxItems: 64
     ResourceRecord:
@@ -5779,6 +5837,8 @@ components:
     ResourceRecords:
       type: array
       items:
+        xml:
+          name: ResourceRecord
         $ref: '#/components/schemas/ResourceRecord'
       minItems: 1
     Status:
