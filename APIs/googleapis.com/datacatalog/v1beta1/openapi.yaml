@@ -7,8 +7,7 @@ info:
     url: https://google.com
     x-twitter: youtube
   description: >
-    A fully managed and highly scalable data discovery and metadata management
-    service.
+    A fully managed and highly scalable data discovery and metadata management service.
   license:
     name: Creative Commons Attribution 3.0
     url: http://creativecommons.org/licenses/by/3.0/
@@ -35,23 +34,23 @@ info:
 externalDocs:
   url: https://cloud.google.com/data-catalog/docs/
 tags:
-  - name: catalog
   - name: projects
   - name: entries
+  - name: catalog
 paths:
   /v1beta1/catalog:search:
     parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
     post:
       description: >-
         Searches Data Catalog for multiple resources like entries, tags that
@@ -164,38 +163,33 @@ paths:
       tags:
         - entries
     parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
   "/v1beta1/{name}":
     delete:
-      description: Deletes a policy tag. Also deletes all of its descendant policy tags.
-      operationId: datacatalog.projects.locations.taxonomies.policyTags.delete
+      description: Deletes a tag.
+      operationId: datacatalog.projects.locations.entryGroups.tags.delete
       parameters:
         - description: >-
-            Required. Resource name of the policy tag to be deleted. All of its
-            descendant
+            Required. The name of the tag to delete. Example:
 
-            policy tags will also be deleted.
+
+            * projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}/entries/{entry_id}/tags/{tag_id}
           in: path
           name: name
           required: true
           schema:
             type: string
-        - description: >-
-            Required. Currently, this field must always be set to `true`.
-
-            This confirms the deletion of this field from any tags using this field.
-
-            `force = false` will be supported in the future.
+        - description: Optional. If true, deletes all entries in the entry group.
           in: query
           name: force
           schema:
@@ -215,10 +209,14 @@ paths:
       tags:
         - projects
     get:
-      description: Gets a policy tag.
-      operationId: datacatalog.projects.locations.taxonomies.policyTags.get
+      description: Gets an entry.
+      operationId: datacatalog.projects.locations.entryGroups.entries.get
       parameters:
-        - description: Required. Resource name of the requested policy tag.
+        - description: >-
+            Required. The name of the entry. Example:
+
+
+            * projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}/entries/{entry_id}
           in: path
           name: name
           required: true
@@ -234,7 +232,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GoogleCloudDatacatalogV1beta1PolicyTag"
+                $ref: "#/components/schemas/GoogleCloudDatacatalogV1beta1Entry"
           description: Successful response
       security:
         - Oauth2:
@@ -244,45 +242,40 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
     patch:
-      description: Updates a policy tag.
-      operationId: datacatalog.projects.locations.taxonomies.policyTags.patch
+      description: Updates an existing tag.
+      operationId: datacatalog.projects.locations.entryGroups.tags.patch
       parameters:
         - description: >-
-            Output only. Resource name of this policy tag, whose format is:
+            The resource name of the tag in URL format. Example:
 
-            "projects/{project_number}/locations/{location_id}/taxonomies/{taxonomy_id}/policyTags/{id}".
+
+            * projects/{project_id}/locations/{location}/entrygroups/{entry_group_id}/entries/{entry_id}/tags/{tag_id}
+
+
+            where `tag_id` is a system-generated identifier.
+
+            Note that this Tag may not actually be stored in the location in this name.
           in: path
           name: name
           required: true
           schema:
             type: string
         - description: >-
-            The update mask applies to the resource. Only display_name,
-            description and
+            The fields to update on the Tag. If absent or empty, all modifiable fields
 
-            parent_policy_tag can be updated and thus can be listed in the mask. If
-
-            update_mask is not provided, all allowed fields (i.e. display_name,
-
-            description and parent) will be updated. For more information including the
-
-            `FieldMask` definition, see
-
-            https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
-
-            If not set, defaults to all of the fields that are allowed to update.
+            are updated. Currently the only modifiable field is the field `fields`.
           in: query
           name: updateMask
           schema:
@@ -291,13 +284,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/GoogleCloudDatacatalogV1beta1PolicyTag"
+              $ref: "#/components/schemas/GoogleCloudDatacatalogV1beta1Tag"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GoogleCloudDatacatalogV1beta1PolicyTag"
+                $ref: "#/components/schemas/GoogleCloudDatacatalogV1beta1Tag"
           description: Successful response
       security:
         - Oauth2:
@@ -308,21 +301,20 @@ paths:
         - projects
   "/v1beta1/{name}:rename":
     parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
     post:
       description: >-
-        Renames an enum value in a tag template. The enum values have to be
-        unique
+        Renames an enum value in a tag template. The enum values have to be unique
 
         within one enum field. Thus, an enum value cannot be renamed with a name
 
@@ -343,8 +335,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/GoogleCloudDatacatalogV1beta1RenameTagTemplateField\
-                EnumValueRequest"
+              $ref: "#/components/schemas/GoogleCloudDatacatalogV1beta1RenameTagTemplateFieldEnumValueRequest"
       responses:
         "200":
           content:
@@ -365,8 +356,7 @@ paths:
       operationId: datacatalog.projects.locations.entryGroups.entries.list
       parameters:
         - description: >-
-            Required. The name of the entry group that contains the entries,
-            which can
+            Required. The name of the entry group that contains the entries, which can
 
             be provided in URL format. Example:
 
@@ -378,8 +368,7 @@ paths:
           schema:
             type: string
         - description: >-
-            The maximum number of items to return. Default is 10. Max limit is
-            1000.
+            The maximum number of items to return. Default is 10. Max limit is 1000.
 
             Throws an invalid argument for `page_size > 1000`.
           in: query
@@ -387,8 +376,7 @@ paths:
           schema:
             type: integer
         - description: >-
-            Token that specifies which page is requested. If empty, the first
-            page is
+            Token that specifies which page is requested. If empty, the first page is
 
             returned.
           in: query
@@ -422,21 +410,20 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
     post:
       description: >-
-        Creates an entry. Only entries of 'FILESET' type or user-specified type
-        can
+        Creates an entry. Only entries of 'FILESET' type or user-specified type can
 
         be created.
 
@@ -498,8 +485,7 @@ paths:
       operationId: datacatalog.projects.locations.entryGroups.list
       parameters:
         - description: >-
-            Required. The name of the location that contains the entry groups,
-            which can be
+            Required. The name of the location that contains the entry groups, which can be
 
             provided in URL format. Example:
 
@@ -511,8 +497,7 @@ paths:
           schema:
             type: string
         - description: >-
-            Optional. The maximum number of items to return. Default is 10. Max
-            limit is 1000.
+            Optional. The maximum number of items to return. Default is 10. Max limit is 1000.
 
             Throws an invalid argument for `page_size > 1000`.
           in: query
@@ -520,8 +505,7 @@ paths:
           schema:
             type: integer
         - description: >-
-            Optional. Token that specifies which page is requested. If empty,
-            the first page is
+            Optional. Token that specifies which page is requested. If empty, the first page is
 
             returned.
           in: query
@@ -533,8 +517,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GoogleCloudDatacatalogV1beta1ListEntryGroupsRespons\
-                  e"
+                $ref: "#/components/schemas/GoogleCloudDatacatalogV1beta1ListEntryGroupsResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -544,21 +527,20 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
     post:
       description: >-
-        A maximum of 10,000 entry groups may be created per organization across
-        all
+        A maximum of 10,000 entry groups may be created per organization across all
 
         locations.
 
@@ -587,9 +569,11 @@ paths:
           required: true
           schema:
             type: string
-        - description: |-
+        - description: >-
             Required. The id of the entry group to create.
+
             The id must begin with a letter or underscore, contain only English
+
             letters, numbers and underscores, and be at most 64 characters.
           in: query
           name: entryGroupId
@@ -616,21 +600,20 @@ paths:
         - projects
   "/v1beta1/{parent}/fields":
     parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
     post:
       description: >-
-        Creates a field in a tag template. The user should enable the Data
-        Catalog
+        Creates a field in a tag template. The user should enable the Data Catalog
 
         API in the project identified by the `parent` parameter (see
 
@@ -701,8 +684,7 @@ paths:
           schema:
             type: string
         - description: >-
-            The maximum number of items to return. Must be a value between 1 and
-            1000.
+            The maximum number of items to return. Must be a value between 1 and 1000.
 
             If not set, defaults to 50.
           in: query
@@ -710,8 +692,7 @@ paths:
           schema:
             type: integer
         - description: >-
-            The next_page_token value returned from a previous List request, if
-            any. If
+            The next_page_token value returned from a previous List request, if any. If
 
             not set, defaults to an empty string.
           in: query
@@ -733,23 +714,22 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
     post:
       description: Creates a policy tag in the specified taxonomy.
       operationId: datacatalog.projects.locations.taxonomies.policyTags.create
       parameters:
-        - description: Required. Resource name of the taxonomy that the policy tag will
-            belong to.
+        - description: Required. Resource name of the taxonomy that the policy tag will belong to.
           in: path
           name: parent
           required: true
@@ -776,17 +756,17 @@ paths:
         - projects
   "/v1beta1/{parent}/tagTemplates":
     parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
     post:
       description: >-
         Creates a tag template. The user should enable the Data Catalog API in
@@ -845,8 +825,7 @@ paths:
       operationId: datacatalog.projects.locations.entryGroups.tags.list
       parameters:
         - description: >-
-            Required. The name of the Data Catalog resource to list the tags of.
-            The resource
+            Required. The name of the Data Catalog resource to list the tags of. The resource
 
             could be an Entry or an
 
@@ -864,15 +843,13 @@ paths:
           required: true
           schema:
             type: string
-        - description: The maximum number of tags to return. Default is 10. Max limit is
-            1000.
+        - description: The maximum number of tags to return. Default is 10. Max limit is 1000.
           in: query
           name: pageSize
           schema:
             type: integer
         - description: >-
-            Token that specifies which page is requested. If empty, the first
-            page is
+            Token that specifies which page is requested. If empty, the first page is
 
             returned.
           in: query
@@ -894,17 +871,17 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
     post:
       description: >-
         Creates a tag on an Entry.
@@ -923,8 +900,7 @@ paths:
       operationId: datacatalog.projects.locations.entryGroups.tags.create
       parameters:
         - description: >-
-            Required. The name of the resource to attach this tag to. Tags can
-            be attached to
+            Required. The name of the resource to attach this tag to. Tags can be attached to
 
             Entries. Example:
 
@@ -962,8 +938,7 @@ paths:
   "/v1beta1/{parent}/taxonomies":
     get:
       description: >-
-        Lists all taxonomies in a project in a particular location that the
-        caller
+        Lists all taxonomies in a project in a particular location that the caller
 
         has permission to view.
       operationId: datacatalog.projects.locations.taxonomies.list
@@ -975,8 +950,7 @@ paths:
           schema:
             type: string
         - description: >-
-            The maximum number of items to return. Must be a value between 1 and
-            1000.
+            The maximum number of items to return. Must be a value between 1 and 1000.
 
             If not set, defaults to 50.
           in: query
@@ -984,8 +958,7 @@ paths:
           schema:
             type: integer
         - description: >-
-            The next_page_token value returned from a previous list request, if
-            any. If
+            The next_page_token value returned from a previous list request, if any. If
 
             not set, defaults to an empty string.
           in: query
@@ -1007,23 +980,22 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
     post:
       description: Creates a taxonomy in the specified project.
       operationId: datacatalog.projects.locations.taxonomies.create
       parameters:
-        - description: Required. Resource name of the project that the taxonomy will
-            belong to.
+        - description: Required. Resource name of the project that the taxonomy will belong to.
           in: path
           name: parent
           required: true
@@ -1050,16 +1022,17 @@ paths:
         - projects
   "/v1beta1/{parent}/taxonomies:export":
     get:
-      description: |-
+      description: >-
         Exports all taxonomies and their policy tags in a project.
 
+
         This method generates SerializedTaxonomy protos with nested policy tags
+
         that can be used as an input for future ImportTaxonomies calls.
       operationId: datacatalog.projects.locations.taxonomies.export
       parameters:
         - description: >-
-            Required. Resource name of the project that taxonomies to be
-            exported
+            Required. Resource name of the project that taxonomies to be exported
 
             will share.
           in: path
@@ -1086,8 +1059,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GoogleCloudDatacatalogV1beta1ExportTaxonomiesRespon\
-                  se"
+                $ref: "#/components/schemas/GoogleCloudDatacatalogV1beta1ExportTaxonomiesResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -1097,41 +1069,43 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
   "/v1beta1/{parent}/taxonomies:import":
     parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
     post:
-      description: |-
+      description: >-
         Imports all taxonomies and their policy tags to a project as new
+
         taxonomies.
 
+
         This method provides a bulk taxonomy / policy tag creation using nested
+
         proto structure.
       operationId: datacatalog.projects.locations.taxonomies.import
       parameters:
-        - description: Required. Resource name of project that the imported taxonomies
-            will belong to.
+        - description: Required. Resource name of project that the imported taxonomies will belong to.
           in: path
           name: parent
           required: true
@@ -1141,15 +1115,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/GoogleCloudDatacatalogV1beta1ImportTaxonomiesReques\
-                t"
+              $ref: "#/components/schemas/GoogleCloudDatacatalogV1beta1ImportTaxonomiesRequest"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GoogleCloudDatacatalogV1beta1ImportTaxonomiesRespon\
-                  se"
+                $ref: "#/components/schemas/GoogleCloudDatacatalogV1beta1ImportTaxonomiesResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -1160,20 +1132,41 @@ paths:
         - projects
   "/v1beta1/{resource}:getIamPolicy":
     parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
     post:
-      description: Gets the IAM policy for a taxonomy or a policy tag.
-      operationId: datacatalog.projects.locations.taxonomies.policyTags.getIamPolicy
+      description: >-
+        Gets the access control policy for a resource. A `NOT_FOUND` error
+
+        is returned if the resource does not exist. An empty policy is returned
+
+        if the resource exists but does not have a policy set on it.
+
+
+        Supported resources are:
+          - Tag templates.
+          - Entries.
+          - Entry groups.
+        Note, this method cannot be used to manage policies for BigQuery, Pub/Sub
+
+        and any external Google Cloud Platform resources synced to Data Catalog.
+
+
+        Callers must have following Google IAM permission
+          - `datacatalog.tagTemplates.getIamPolicy` to get policies on tag
+            templates.
+          - `datacatalog.entries.getIamPolicy` to get policies on entries.
+          - `datacatalog.entryGroups.getIamPolicy` to get policies on entry groups.
+      operationId: datacatalog.projects.locations.entryGroups.entries.getIamPolicy
       parameters:
         - description: >-
             REQUIRED: The resource for which the policy is being requested.
@@ -1205,20 +1198,38 @@ paths:
         - projects
   "/v1beta1/{resource}:setIamPolicy":
     parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
     post:
-      description: Sets the IAM policy for a taxonomy or a policy tag.
-      operationId: datacatalog.projects.locations.taxonomies.policyTags.setIamPolicy
+      description: >-
+        Sets the access control policy for a resource. Replaces any existing
+
+        policy.
+
+        Supported resources are:
+          - Tag templates.
+          - Entries.
+          - Entry groups.
+        Note, this method cannot be used to manage policies for BigQuery, Pub/Sub
+
+        and any external Google Cloud Platform resources synced to Data Catalog.
+
+
+        Callers must have following Google IAM permission
+          - `datacatalog.tagTemplates.setIamPolicy` to set policies on tag
+            templates.
+          - `datacatalog.entries.setIamPolicy` to set policies on entries.
+          - `datacatalog.entryGroups.setIamPolicy` to set policies on entry groups.
+      operationId: datacatalog.projects.locations.entryGroups.setIamPolicy
       parameters:
         - description: >-
             REQUIRED: The resource for which the policy is being specified.
@@ -1250,26 +1261,42 @@ paths:
         - projects
   "/v1beta1/{resource}:testIamPermissions":
     parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
     post:
-      description: |-
-        Returns the permissions that a caller has on the specified taxonomy or
-        policy tag.
-      operationId: datacatalog.projects.locations.taxonomies.policyTags.testIamPermissions
+      description: >-
+        Returns the caller's permissions on a resource.
+
+        If the resource does not exist, an empty set of permissions is returned
+
+        (We don't return a `NOT_FOUND` error).
+
+
+        Supported resources are:
+          - Tag templates.
+          - Entries.
+          - Entry groups.
+        Note, this method cannot be used to manage policies for BigQuery, Pub/Sub
+
+        and any external Google Cloud Platform resources synced to Data Catalog.
+
+
+        A caller is not required to have Google IAM permission to make this
+
+        request.
+      operationId: datacatalog.projects.locations.entryGroups.entries.testIamPermissions
       parameters:
         - description: >-
-            REQUIRED: The resource for which the policy detail is being
-            requested.
+            REQUIRED: The resource for which the policy detail is being requested.
 
             See the operation documentation for the appropriate value for this field.
           in: path
@@ -1336,9 +1363,7 @@ components:
       schema:
         type: string
     key:
-      description: API key. Your API key identifies your project and provides you with
-        API access, quota, and reports. Required unless you provide an OAuth 2.0
-        token.
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -1356,9 +1381,7 @@ components:
       schema:
         type: boolean
     quotaUser:
-      description: Available to use for quota purposes for server-side applications.
-        Can be any arbitrary string assigned to a user, but should not exceed 40
-        characters.
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
       in: query
       name: quotaUser
       schema:
@@ -1404,8 +1427,7 @@ components:
             documentation](https://cloud.google.com/iam/help/conditions/resource-policies).
         members:
           description: >+
-            Specifies the identities requesting access for a Cloud Platform
-            resource.
+            Specifies the identities requesting access for a Cloud Platform resource.
 
             `members` can have the following values:
 
@@ -1454,8 +1476,9 @@ components:
             type: string
           type: array
         role:
-          description: |-
+          description: >-
             Role that is assigned to `members`.
+
             For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
           type: string
       type: object
@@ -1514,26 +1537,29 @@ components:
         documentation for additional information.
       properties:
         description:
-          description: |-
+          description: >-
             Optional. Description of the expression. This is a longer text which
+
             describes the expression, e.g. when hovered over it in a UI.
           type: string
         expression:
           description: >-
-            Textual representation of an expression in Common Expression
-            Language
+            Textual representation of an expression in Common Expression Language
 
             syntax.
           type: string
         location:
-          description: |-
+          description: >-
             Optional. String indicating the location of the expression for error
+
             reporting, e.g. a file name and a position in the file.
           type: string
         title:
-          description: |-
+          description: >-
             Optional. Title for the expression, i.e. a short string describing
+
             its purpose. This can be used e.g. in UIs which allow to enter the
+
             expression.
           type: string
       type: object
@@ -1542,8 +1568,9 @@ components:
       properties:
         options:
           $ref: "#/components/schemas/GetPolicyOptions"
-          description: |-
+          description: >-
             OPTIONAL: A `GetPolicyOptions` object for specifying options to
+
             `GetIamPolicy`.
       type: object
     GetPolicyOptions:
@@ -1576,8 +1603,7 @@ components:
       type: object
     GoogleCloudDatacatalogV1beta1BigQueryDateShardedSpec:
       description: >-
-        Spec for a group of BigQuery tables with name pattern
-        `[prefix]YYYYMMDD`.
+        Spec for a group of BigQuery tables with name pattern `[prefix]YYYYMMDD`.
 
         Context:
 
@@ -1585,8 +1611,7 @@ components:
       properties:
         dataset:
           description: >-
-            Output only. The Data Catalog resource name of the dataset entry the
-            current table
+            Output only. The Data Catalog resource name of the dataset entry the current table
 
             belongs to, for example,
 
@@ -1598,8 +1623,7 @@ components:
           type: string
         tablePrefix:
           description: >-
-            Output only. The table name prefix of the shards. The name of any
-            given shard is
+            Output only. The table name prefix of the shards. The name of any given shard is
 
             `[table_prefix]YYYYMMDD`, for example, for shard `MyTable20180101`, the
 
@@ -1619,19 +1643,20 @@ components:
           type: string
         tableSpec:
           $ref: "#/components/schemas/GoogleCloudDatacatalogV1beta1TableSpec"
-          description: |-
+          description: >-
             Spec of a BigQuery table. This field should only be populated if
+
             `table_source_type` is `BIGQUERY_TABLE`.
         viewSpec:
           $ref: "#/components/schemas/GoogleCloudDatacatalogV1beta1ViewSpec"
-          description: |-
+          description: >-
             Table view specification. This field should only be populated if
+
             `table_source_type` is `BIGQUERY_VIEW`.
       type: object
     GoogleCloudDatacatalogV1beta1ColumnSchema:
       description: >-
-        Representation of a column within a schema. Columns could be nested
-        inside
+        Representation of a column within a schema. Columns could be nested inside
 
         other columns.
       properties:
@@ -1639,21 +1664,18 @@ components:
           description: Required. Name of the column.
           type: string
         description:
-          description: Optional. Description of the column. Default value is an empty
-            string.
+          description: Optional. Description of the column. Default value is an empty string.
           type: string
         mode:
           description: >-
-            Optional. A column's mode indicates whether the values in this
-            column are required,
+            Optional. A column's mode indicates whether the values in this column are required,
 
             nullable, etc. Only `NULLABLE`, `REQUIRED` and `REPEATED` are supported.
 
             Default mode is `NULLABLE`.
           type: string
         subcolumns:
-          description: Optional. Schema of sub-columns. A column can have zero or more
-            sub-columns.
+          description: Optional. Schema of sub-columns. A column can have zero or more sub-columns.
           items:
             $ref: "#/components/schemas/GoogleCloudDatacatalogV1beta1ColumnSchema"
           type: array
@@ -1683,8 +1705,7 @@ components:
         Tag.
       properties:
         bigqueryDateShardedSpec:
-          $ref: "#/components/schemas/GoogleCloudDatacatalogV1beta1BigQueryDateShardedSpe\
-            c"
+          $ref: "#/components/schemas/GoogleCloudDatacatalogV1beta1BigQueryDateShardedSpec"
           description: >-
             Specification for a group of BigQuery tables with name pattern
 
@@ -1694,21 +1715,18 @@ components:
         bigqueryTableSpec:
           $ref: "#/components/schemas/GoogleCloudDatacatalogV1beta1BigQueryTableSpec"
           description: >-
-            Specification that applies to a BigQuery table. This is only valid
-            on
+            Specification that applies to a BigQuery table. This is only valid on
 
             entries of type `TABLE`.
         description:
           description: >-
-            Entry description, which can consist of several sentences or
-            paragraphs
+            Entry description, which can consist of several sentences or paragraphs
 
             that describe entry contents. Default value is an empty string.
           type: string
         displayName:
           description: >-
-            Display information such as title and description. A short name to
-            identify
+            Display information such as title and description. A short name to identify
 
             the entry, for example, "Analytics Data - Jan 2011". Default value is an
 
@@ -1717,14 +1735,12 @@ components:
         gcsFilesetSpec:
           $ref: "#/components/schemas/GoogleCloudDatacatalogV1beta1GcsFilesetSpec"
           description: >-
-            Specification that applies to a Cloud Storage fileset. This is only
-            valid
+            Specification that applies to a Cloud Storage fileset. This is only valid
 
             on entries of type FILESET.
         integratedSystem:
           description: >-
-            Output only. This field indicates the entry's source system that
-            Data Catalog
+            Output only. This field indicates the entry's source system that Data Catalog
 
             integrates with, such as BigQuery or Pub/Sub.
           enum:
@@ -1769,13 +1785,11 @@ components:
           type: string
         schema:
           $ref: "#/components/schemas/GoogleCloudDatacatalogV1beta1Schema"
-          description: Schema of the entry. An entry might not have any schema attached to
-            it.
+          description: Schema of the entry. An entry might not have any schema attached to it.
         sourceSystemTimestamps:
           $ref: "#/components/schemas/GoogleCloudDatacatalogV1beta1SystemTimestamps"
           description: >-
-            Output only. Timestamps about the underlying resource, not about
-            this Data Catalog
+            Output only. Timestamps about the underlying resource, not about this Data Catalog
 
             entry. Output only when Entry is of type in the EntryType enum. For entries
 
@@ -1783,8 +1797,9 @@ components:
 
             timestamp.
         type:
-          description: |-
+          description: >-
             The type of the entry.
+
             Only used for Entries with types in the EntryType enum.
           enum:
             - ENTRY_TYPE_UNSPECIFIED
@@ -1795,8 +1810,7 @@ components:
           type: string
         userSpecifiedSystem:
           description: >-
-            This field indicates the entry's source system that Data Catalog
-            does not
+            This field indicates the entry's source system that Data Catalog does not
 
             integrate with. `user_specified_system` strings must begin with a letter
 
@@ -1808,8 +1822,7 @@ components:
           type: string
         userSpecifiedType:
           description: >-
-            Entry type if it does not fit any of the input-allowed values listed
-            in
+            Entry type if it does not fit any of the input-allowed values listed in
 
             `EntryType` enum above. When creating an entry, users should check the
 
@@ -1830,15 +1843,16 @@ components:
           type: string
       type: object
     GoogleCloudDatacatalogV1beta1EntryGroup:
-      description: |-
+      description: >-
         EntryGroup Metadata. 
+
         An EntryGroup resource represents a logical grouping of zero or more
+
         Data Catalog Entry resources.
       properties:
         dataCatalogTimestamps:
           $ref: "#/components/schemas/GoogleCloudDatacatalogV1beta1SystemTimestamps"
-          description: Output only. Timestamps about this EntryGroup. Default value is
-            empty timestamps.
+          description: Output only. Timestamps about this EntryGroup. Default value is empty timestamps.
         description:
           description: >-
             Entry group description, which can consist of several sentences or
@@ -1848,8 +1862,9 @@ components:
             string.
           type: string
         displayName:
-          description: |-
+          description: >-
             A short name to identify the entry group, for example,
+
             "analytics data - jan 2011". Default value is an empty string.
           type: string
         name:
@@ -1866,8 +1881,9 @@ components:
           type: string
       type: object
     GoogleCloudDatacatalogV1beta1ExportTaxonomiesResponse:
-      description: |-
+      description: >-
         Response message for
+
         ExportTaxonomies.
       properties:
         taxonomies:
@@ -1895,8 +1911,7 @@ components:
       properties:
         allowedValues:
           description: >-
-            The set of allowed values for this enum. This set must not be empty,
-            the
+            The set of allowed values for this enum. This set must not be empty, the
 
             display names of the values in this set must not be empty and the display
 
@@ -1904,21 +1919,25 @@ components:
 
             The order of items in this list is preserved. This field can be used to
 
-            create, remove and reorder enum values. To rename enum values, use the
+            Required on create; optional on update. The set of allowed values for
 
-            RenameTagTemplateFieldEnumValue method. This list can include up to 500
+            this enum. This set must not be empty, the display names of the values in
 
-            allowed values.
+            this set must not be empty and the display names of the values must be
+
+            case-insensitively unique within this set. Currently, enum values can
+
+            only be added to the list of allowed values. Deletion and renaming of
+
+            enum values are not supported. Can have up to 500 allowed values.
           items:
-            $ref: "#/components/schemas/GoogleCloudDatacatalogV1beta1FieldTypeEnumTypeEnumV\
-              alue"
+            $ref: "#/components/schemas/GoogleCloudDatacatalogV1beta1FieldTypeEnumTypeEnumValue"
           type: array
       type: object
     GoogleCloudDatacatalogV1beta1FieldTypeEnumTypeEnumValue:
       properties:
         displayName:
-          description: Required. The display name of the enum value. Must not be an empty
-            string.
+          description: Required. The display name of the enum value. Must not be an empty string.
           type: string
       type: object
     GoogleCloudDatacatalogV1beta1GcsFileSpec:
@@ -1940,8 +1959,7 @@ components:
       properties:
         filePatterns:
           description: >-
-            Required. Patterns to identify a set of files in Google Cloud
-            Storage.
+            Required. Patterns to identify a set of files in Google Cloud Storage.
 
             See [Cloud Storage
 
@@ -1979,8 +1997,7 @@ components:
           type: array
         sampleGcsFileSpecs:
           description: >-
-            Output only. Sample files contained in this fileset, not all files
-            contained in this
+            Output only. Sample files contained in this fileset, not all files contained in this
 
             fileset are represented here.
           items:
@@ -1988,8 +2005,9 @@ components:
           type: array
       type: object
     GoogleCloudDatacatalogV1beta1ImportTaxonomiesRequest:
-      description: |-
+      description: >-
         Request message for
+
         ImportTaxonomies.
       properties:
         inlineSource:
@@ -1997,8 +2015,9 @@ components:
           description: Inline source used for taxonomies to be imported.
       type: object
     GoogleCloudDatacatalogV1beta1ImportTaxonomiesResponse:
-      description: |-
+      description: >-
         Response message for
+
         ImportTaxonomies.
       properties:
         taxonomies:
@@ -2017,8 +2036,9 @@ components:
           type: array
       type: object
     GoogleCloudDatacatalogV1beta1ListEntriesResponse:
-      description: |-
+      description: >-
         Response message for
+
         ListEntries.
       properties:
         entries:
@@ -2028,15 +2048,15 @@ components:
           type: array
         nextPageToken:
           description: >-
-            Token to retrieve the next page of results. It is set to empty if no
-            items
+            Token to retrieve the next page of results. It is set to empty if no items
 
             remain in results.
           type: string
       type: object
     GoogleCloudDatacatalogV1beta1ListEntryGroupsResponse:
-      description: |-
+      description: >-
         Response message for
+
         ListEntryGroups.
       properties:
         entryGroups:
@@ -2046,21 +2066,20 @@ components:
           type: array
         nextPageToken:
           description: >-
-            Token to retrieve the next page of results. It is set to empty if no
-            items
+            Token to retrieve the next page of results. It is set to empty if no items
 
             remain in results.
           type: string
       type: object
     GoogleCloudDatacatalogV1beta1ListPolicyTagsResponse:
-      description: |-
+      description: >-
         Response message for
+
         ListPolicyTags.
       properties:
         nextPageToken:
           description: >-
-            Token used to retrieve the next page of results, or empty if there
-            are no
+            Token used to retrieve the next page of results, or empty if there are no
 
             more results in the list.
           type: string
@@ -2071,14 +2090,14 @@ components:
           type: array
       type: object
     GoogleCloudDatacatalogV1beta1ListTagsResponse:
-      description: |-
+      description: >-
         Response message for
+
         ListTags.
       properties:
         nextPageToken:
           description: >-
-            Token to retrieve the next page of results. It is set to empty if no
-            items
+            Token to retrieve the next page of results. It is set to empty if no items
 
             remain in results.
           type: string
@@ -2089,14 +2108,14 @@ components:
           type: array
       type: object
     GoogleCloudDatacatalogV1beta1ListTaxonomiesResponse:
-      description: |-
+      description: >-
         Response message for
+
         ListTaxonomies.
       properties:
         nextPageToken:
           description: >-
-            Token used to retrieve the next page of results, or empty if there
-            are no
+            Token used to retrieve the next page of results, or empty if there are no
 
             more results in the list.
           type: string
@@ -2108,8 +2127,7 @@ components:
       type: object
     GoogleCloudDatacatalogV1beta1PolicyTag:
       description: >-
-        Denotes one policy tag in a taxonomy (e.g. ssn). Policy Tags can be
-        defined
+        Denotes one policy tag in a taxonomy (e.g. ssn). Policy Tags can be defined
 
         in a hierarchy. For example, consider the following hierarchy:
 
@@ -2124,8 +2142,7 @@ components:
           type: array
         description:
           description: >-
-            Description of this policy tag. It must: contain only unicode
-            characters,
+            Description of this policy tag. It must: contain only unicode characters,
 
             tabs, newlines, carriage returns and page breaks; and be at most 2000 bytes
 
@@ -2135,8 +2152,7 @@ components:
           type: string
         displayName:
           description: >-
-            Required. User defined name of this policy tag. It must: be unique
-            within the parent
+            Required. User defined name of this policy tag. It must: be unique within the parent
 
             taxonomy; contain only unicode letters, numbers, underscores, dashes and
 
@@ -2166,23 +2182,23 @@ components:
           type: string
       type: object
     GoogleCloudDatacatalogV1beta1RenameTagTemplateFieldEnumValueRequest:
-      description: |-
+      description: >-
         Request message for
+
         RenameTagTemplateFieldEnumValue.
       properties:
         newEnumValueDisplayName:
-          description: Required. The new display name of the enum value. For example,
-            `my_new_enum_value`.
+          description: Required. The new display name of the enum value. For example, `my_new_enum_value`.
           type: string
       type: object
     GoogleCloudDatacatalogV1beta1RenameTagTemplateFieldRequest:
-      description: |-
+      description: >-
         Request message for
+
         RenameTagTemplateField.
       properties:
         newTagTemplateFieldId:
-          description: Required. The new ID of this tag template field. For example,
-            `my_new_field`.
+          description: Required. The new ID of this tag template field. For example, `my_new_field`.
           type: string
       type: object
     GoogleCloudDatacatalogV1beta1Schema:
@@ -2190,8 +2206,7 @@ components:
       properties:
         columns:
           description: >-
-            Required. Schema of columns. A maximum of 10,000 columns and
-            sub-columns can be
+            Required. Schema of columns. A maximum of 10,000 columns and sub-columns can be
 
             specified.
           items:
@@ -2199,14 +2214,14 @@ components:
           type: array
       type: object
     GoogleCloudDatacatalogV1beta1SearchCatalogRequest:
-      description: |-
+      description: >-
         Request message for
+
         SearchCatalog.
       properties:
         orderBy:
           description: >-
-            Specifies the ordering of results, currently supported
-            case-sensitive
+            Specifies the ordering of results, currently supported case-sensitive
 
             choices are:
 
@@ -2218,8 +2233,7 @@ components:
           type: string
         pageSize:
           description: >-
-            Number of results in the search page. If <=0 then defaults to 10.
-            Max limit
+            Number of results in the search page. If <=0 then defaults to 10. Max limit
 
             for page_size is 1000. Throws an invalid argument for page_size > 1000.
           format: int32
@@ -2240,8 +2254,7 @@ components:
           type: string
         query:
           description: >-
-            Required. The query string in search query syntax. The query must be
-            non-empty.
+            Required. The query string in search query syntax. The query must be non-empty.
 
 
             Query strings can be simple as "x" or more qualified as:
@@ -2263,8 +2276,7 @@ components:
             for more information.
           type: string
         scope:
-          $ref: "#/components/schemas/GoogleCloudDatacatalogV1beta1SearchCatalogRequestSc\
-            ope"
+          $ref: "#/components/schemas/GoogleCloudDatacatalogV1beta1SearchCatalogRequestScope"
           description: >-
             Required. The scope of this search request. A `scope` that has empty
 
@@ -2279,8 +2291,7 @@ components:
       properties:
         includeGcpPublicDatasets:
           description: >-
-            If `true`, include Google Cloud Platform (GCP) public datasets in
-            the
+            If `true`, include Google Cloud Platform (GCP) public datasets in the
 
             search results. Info on GCP public datasets is available at
 
@@ -2290,8 +2301,7 @@ components:
           type: boolean
         includeOrgIds:
           description: >-
-            The list of organization IDs to search within. To find your
-            organization
+            The list of organization IDs to search within. To find your organization
 
             ID, follow instructions in
 
@@ -2300,9 +2310,11 @@ components:
             type: string
           type: array
         includeProjectIds:
-          description: |-
+          description: >-
             The list of project IDs to search within. To learn more about the
+
             distinction between project names/IDs/numbers, go to
+
             https://cloud.google.com/docs/overview/#projects.
           items:
             type: string
@@ -2358,8 +2370,9 @@ components:
           type: array
       type: object
     GoogleCloudDatacatalogV1beta1SearchCatalogResponse:
-      description: |-
+      description: >-
         Response message for
+
         SearchCatalog.
       properties:
         nextPageToken:
@@ -2372,8 +2385,7 @@ components:
           type: array
         unreachable:
           description: >-
-            Unreachable locations. Search result does not include data from
-            those
+            Unreachable locations. Search result does not include data from those
 
             locations. Users can get additional information on the error by repeating
 
@@ -2385,8 +2397,9 @@ components:
           type: array
       type: object
     GoogleCloudDatacatalogV1beta1SearchCatalogResult:
-      description: |-
+      description: >-
         A result that appears in the response of a search request. Each result
+
         captures details of one entry that matches the search.
       properties:
         linkedResource:
@@ -2410,8 +2423,7 @@ components:
           type: string
         searchResultSubtype:
           description: >-
-            Sub-type of the search result. This is a dot-delimited description
-            of the
+            Sub-type of the search result. This is a dot-delimited description of the
 
             resource's full type, and is the same as the value callers would provide in
 
@@ -2421,8 +2433,7 @@ components:
           type: string
         searchResultType:
           description: >-
-            Type of the search result. This field can be used to determine which
-            Get
+            Type of the search result. This field can be used to determine which Get
 
             method to call to fetch the full resource.
           enum:
@@ -2449,20 +2460,19 @@ components:
             defaults to an empty description.
           type: string
         displayName:
-          description: Required. Display name of the policy tag. Max 200 bytes when
-            encoded in UTF-8.
+          description: Required. Display name of the policy tag. Max 200 bytes when encoded in UTF-8.
           type: string
         policyTag:
-          description: |-
+          description: >-
             Resource name of the policy tag.
+
 
             This field will be ignored when calling ImportTaxonomies.
           type: string
       type: object
     GoogleCloudDatacatalogV1beta1SerializedTaxonomy:
       description: >-
-        Message capturing a taxonomy and its policy tag hierarchy as a nested
-        proto.
+        Message capturing a taxonomy and its policy tag hierarchy as a nested proto.
 
         Used for taxonomy import/export and mutation.
       properties:
@@ -2475,8 +2485,7 @@ components:
             defaults to an empty description.
           type: string
         displayName:
-          description: Required. Display name of the taxonomy. Max 200 bytes when encoded
-            in UTF-8.
+          description: Required. Display name of the taxonomy. Max 200 bytes when encoded in UTF-8.
           type: string
         policyTags:
           description: Top level policy tags associated with the taxonomy if any.
@@ -2493,8 +2502,7 @@ components:
           type: string
         expireTime:
           description: >-
-            Output only. The expiration time of the resource within the given
-            system.
+            Output only. The expiration time of the resource within the given system.
 
             Currently only apllicable to BigQuery resources.
           format: google-datetime
@@ -2509,8 +2517,7 @@ components:
       properties:
         groupedEntry:
           description: >-
-            Output only. If the table is a dated shard, i.e., with name pattern
-            `[prefix]YYYYMMDD`,
+            Output only. If the table is a dated shard, i.e., with name pattern `[prefix]YYYYMMDD`,
 
             `grouped_entry` is the Data Catalog resource name of the date sharded
 
@@ -2536,8 +2543,7 @@ components:
       properties:
         column:
           description: >-
-            Resources like Entry can have schemas associated with them. This
-            scope
+            Resources like Entry can have schemas associated with them. This scope
 
             allows users to attach tags to an individual column based on that schema.
 
@@ -2553,8 +2559,7 @@ components:
           additionalProperties:
             $ref: "#/components/schemas/GoogleCloudDatacatalogV1beta1TagField"
           description: >-
-            Required. This maps the ID of a tag field to the value of and
-            additional information
+            Required. This maps the ID of a tag field to the value of and additional information
 
             about that field. Valid field IDs are defined by the tag's template. A tag
 
@@ -2574,8 +2579,7 @@ components:
           type: string
         template:
           description: >-
-            Required. The resource name of the tag template that this tag uses.
-            Example:
+            Required. The resource name of the tag template that this tag uses. Example:
 
 
             * projects/{project_id}/locations/{location}/tagTemplates/{tag_template_id}
@@ -2588,8 +2592,9 @@ components:
           type: string
       type: object
     GoogleCloudDatacatalogV1beta1TagField:
-      description: |-
+      description: >-
         Contains the value and supporting information for a field within
+
         a Tag.
       properties:
         boolValue:
@@ -2604,13 +2609,13 @@ components:
           type: number
         enumValue:
           $ref: "#/components/schemas/GoogleCloudDatacatalogV1beta1TagFieldEnumValue"
-          description: |-
+          description: >-
             Holds the value for a tag field with enum type. This value must be
+
             one of the allowed values in the definition of this enum.
         order:
           description: >-
-            Output only. The order of this field with respect to other fields in
-            this tag. It can be
+            Output only. The order of this field with respect to other fields in this tag. It can be
 
             set in Tag. For
 
@@ -2661,8 +2666,7 @@ components:
           additionalProperties:
             $ref: "#/components/schemas/GoogleCloudDatacatalogV1beta1TagTemplateField"
           description: >-
-            Required. Map of tag template field IDs to the settings for the
-            field.
+            Required. Map of tag template field IDs to the settings for the field.
 
             This map is an exhaustive list of the allowed fields. This map must contain
 
@@ -2701,8 +2705,7 @@ components:
           type: boolean
         name:
           description: >-
-            Output only. The resource name of the tag template field in URL
-            format. Example:
+            Output only. The resource name of the tag template field in URL format. Example:
 
 
             * projects/{project_id}/locations/{location}/tagTemplates/{tag_template}/fields/{field}
@@ -2729,8 +2732,7 @@ components:
       type: object
     GoogleCloudDatacatalogV1beta1Taxonomy:
       description: >-
-        A taxonomy is a collection of policy tags that classify data along a
-        common
+        A taxonomy is a collection of policy tags that classify data along a common
 
         axis. For instance a data *sensitivity* taxonomy could contain policy tags
 
@@ -2742,8 +2744,7 @@ components:
       properties:
         activatedPolicyTypes:
           description: >-
-            Optional. A list of policy types that are activated for this
-            taxonomy. If not set,
+            Optional. A list of policy types that are activated for this taxonomy. If not set,
 
             defaults to an empty list.
           items:
@@ -2754,8 +2755,7 @@ components:
           type: array
         description:
           description: >-
-            Optional. Description of this taxonomy. It must: contain only
-            unicode characters,
+            Optional. Description of this taxonomy. It must: contain only unicode characters,
 
             tabs, newlines, carriage returns and page breaks; and be at most 2000 bytes
 
@@ -2763,16 +2763,16 @@ components:
           type: string
         displayName:
           description: >-
-            Required. User defined name of this taxonomy. It must: contain only
-            unicode letters,
+            Required. User defined name of this taxonomy. It must: contain only unicode letters,
 
             numbers, underscores, dashes and spaces; not start or end with spaces; and
 
             be at most 200 bytes long when encoded in UTF-8.
           type: string
         name:
-          description: |-
+          description: >-
             Output only. Resource name of this taxonomy, whose format is:
+
             "projects/{project_number}/locations/{location_id}/taxonomies/{id}".
           type: string
       type: object
@@ -2869,8 +2869,7 @@ components:
       properties:
         bindings:
           description: >-
-            Associates a list of `members` to a `role`. Optionally, may specify
-            a
+            Associates a list of `members` to a `role`. Optionally, may specify a
 
             `condition` that determines how and when the `bindings` are applied. Each
 
@@ -2954,8 +2953,7 @@ components:
         policy:
           $ref: "#/components/schemas/Policy"
           description: >-
-            REQUIRED: The complete policy to be applied to the `resource`. The
-            size of
+            REQUIRED: The complete policy to be applied to the `resource`. The size of
 
             the policy is limited to a few 10s of KB. An empty policy is a
 
@@ -2983,8 +2981,9 @@ components:
       description: Response message for `TestIamPermissions` method.
       properties:
         permissions:
-          description: |-
+          description: >-
             A subset of `TestPermissionsRequest.permissions` that the caller is
+
             allowed.
           items:
             type: string

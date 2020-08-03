@@ -1,6 +1,6 @@
 openapi: 3.0.0
 servers:
-  - url: https://www.googleapis.com/
+  - url: https://gamesmanagement.googleapis.com/
 info:
   contact:
     name: Google
@@ -35,24 +35,24 @@ info:
 externalDocs:
   url: https://developers.google.com/games/
 tags:
-  - name: achievements
+  - name: events
   - name: applications
   - name: players
   - name: scores
-  - name: events
+  - name: achievements
 paths:
   /games/v1management/achievements/reset:
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/key"
     post:
       description: >-
@@ -78,16 +78,16 @@ paths:
         - achievements
   /games/v1management/achievements/resetAllForAllPlayers:
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/key"
     post:
       description: >-
@@ -107,16 +107,16 @@ paths:
         - achievements
   /games/v1management/achievements/resetMultipleForAllPlayers:
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/key"
     post:
       description: >-
@@ -143,16 +143,16 @@ paths:
         - achievements
   "/games/v1management/achievements/{achievementId}/reset":
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/key"
     post:
       description: >-
@@ -185,16 +185,16 @@ paths:
         - achievements
   "/games/v1management/achievements/{achievementId}/resetForAllPlayers":
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/key"
     post:
       description: >-
@@ -265,16 +265,16 @@ paths:
       tags:
         - applications
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/key"
   "/games/v1management/applications/{applicationId}/players/hidden/{playerId}":
     delete:
@@ -310,16 +310,16 @@ paths:
       tags:
         - players
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/key"
     post:
       description: >-
@@ -355,16 +355,16 @@ paths:
         - players
   /games/v1management/events/reset:
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/key"
     post:
       description: >-
@@ -386,16 +386,16 @@ paths:
         - events
   /games/v1management/events/resetAllForAllPlayers:
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/key"
     post:
       description: >-
@@ -415,16 +415,16 @@ paths:
         - events
   /games/v1management/events/resetMultipleForAllPlayers:
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/key"
     post:
       description: >-
@@ -451,16 +451,16 @@ paths:
         - events
   "/games/v1management/events/{eventId}/reset":
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/key"
     post:
       description: >-
@@ -489,16 +489,16 @@ paths:
         - events
   "/games/v1management/events/{eventId}/resetForAllPlayers":
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/key"
     post:
       description: >-
@@ -527,16 +527,16 @@ paths:
         - events
   "/games/v1management/leaderboards/{leaderboardId}/scores/reset":
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/key"
     post:
       description: >-
@@ -569,16 +569,16 @@ paths:
         - scores
   "/games/v1management/leaderboards/{leaderboardId}/scores/resetForAllPlayers":
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/key"
     post:
       description: >-
@@ -607,16 +607,16 @@ paths:
         - scores
   /games/v1management/scores/reset:
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/key"
     post:
       description: >-
@@ -642,16 +642,16 @@ paths:
         - scores
   /games/v1management/scores/resetAllForAllPlayers:
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/key"
     post:
       description: >-
@@ -671,16 +671,16 @@ paths:
         - scores
   /games/v1management/scores/resetMultipleForAllPlayers:
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/key"
     post:
       description: >-

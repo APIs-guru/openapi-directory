@@ -93,25 +93,26 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
     patch:
-      description: Updates a model. The longrunning operation will eventually return a
-        Model.
+      description: Updates a model. The longrunning operation will eventually return a Model.
       operationId: firebaseml.projects.models.patch
       parameters:
-        - description: |-
+        - description: >-
             The resource name of the Model.
+
             Model names have the form `projects/{project_id}/models/{model_id}`
+
             The name is ignored when creating a model.
           in: path
           name: name
@@ -147,16 +148,18 @@ paths:
       description: Lists the models
       operationId: firebaseml.projects.models.list
       parameters:
-        - description: |-
+        - description: >-
             Required. The name of the parent to list models for.
+
             The parent must have the form `projects/{project_id}'
           in: path
           name: parent
           required: true
           schema:
             type: string
-        - description: |-
+        - description: >-
             A filter for the list
+
             e.g. 'tags: abc' to list models which are tagged with "abc"
           in: query
           name: filter
@@ -167,8 +170,7 @@ paths:
           name: pageSize
           schema:
             type: integer
-        - description: The next_page_token value returned from a previous List request, if
-            any.
+        - description: The next_page_token value returned from a previous List request, if any.
           in: query
           name: pageToken
           schema:
@@ -188,26 +190,26 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
     post:
-      description: |-
+      description: >-
         Creates a model in Firebase ML.
+
         The longrunning operation will eventually return a Model
       operationId: firebaseml.projects.models.create
       parameters:
         - description: >-
-            Required. The parent project resource where the model is to be
-            created.
+            Required. The parent project resource where the model is to be created.
 
             The parent must have the form `projects/{project_id}`
           in: path
@@ -274,9 +276,7 @@ components:
       schema:
         type: string
     key:
-      description: API key. Your API key identifies your project and provides you with
-        API access, quota, and reports. Required unless you provide an OAuth 2.0
-        token.
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -294,9 +294,7 @@ components:
       schema:
         type: boolean
     quotaUser:
-      description: Available to use for quota purposes for server-side applications.
-        Can be any arbitrary string assigned to a user, but should not exceed 40
-        characters.
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
       in: query
       name: quotaUser
       schema:
@@ -338,8 +336,9 @@ components:
             $ref: "#/components/schemas/Model"
           type: array
         nextPageToken:
-          description: |-
+          description: >-
             Token to retrieve the next page of results, or empty if there are no
+
             more results in the list.
           type: string
       type: object
@@ -347,8 +346,7 @@ components:
       description: An ML model hosted in Firebase ML
       properties:
         activeOperations:
-          description: Output only. Lists operation ids associated with this model whose
-            status is NOT done.
+          description: Output only. Lists operation ids associated with this model whose status is NOT done.
           items:
             $ref: "#/components/schemas/Operation"
           type: array
@@ -358,36 +356,37 @@ components:
           type: string
         displayName:
           description: >-
-            Required. The name of the model to create. The name can be up to 32
-            characters long
+            Required. The name of the model to create. The name can be up to 32 characters long
 
             and can consist only of ASCII Latin letters A-Z and a-z, underscores(_)
 
             and ASCII digits 0-9. It must start with a letter.
           type: string
         etag:
-          description: |-
+          description: >-
             Output only. See RFC7232
+
             https://tools.ietf.org/html/rfc7232#section-2.3
           type: string
         modelHash:
-          description: Output only. The model_hash will change if a new file is available
-            for download.
+          description: Output only. The model_hash will change if a new file is available for download.
           type: string
         name:
-          description: |-
+          description: >-
             The resource name of the Model.
+
             Model names have the form `projects/{project_id}/models/{model_id}`
+
             The name is ignored when creating a model.
           type: string
         state:
           $ref: "#/components/schemas/ModelState"
-          description: |-
+          description: >-
             State common to all model types.
+
             Includes publishing and validation information.
         tags:
-          description: User defined tags which can be used to group/filter models during
-            listing
+          description: User defined tags which can be used to group/filter models during listing
           items:
             type: string
           type: array
@@ -400,8 +399,9 @@ components:
           type: string
       type: object
     ModelOperationMetadata:
-      description: |-
+      description: >-
         This is returned in the longrunning operations
+
         for create/update.
       properties:
         basicOperationStatus:
@@ -418,8 +418,9 @@ components:
           type: string
       type: object
     ModelState:
-      description: |-
+      description: >-
         State common to all model types.
+
         Includes publishing and validation information.
       properties:
         published:
@@ -428,8 +429,7 @@ components:
         validationError:
           $ref: "#/components/schemas/Status"
           description: >-
-            Output only. Indicates the latest validation error on the model if
-            any.
+            Output only. Indicates the latest validation error on the model if any.
 
             A model may have validation errors if there were problems during
 
@@ -443,15 +443,13 @@ components:
       type: object
     Operation:
       description: >-
-        This resource represents a long-running operation that is the result of
-        a
+        This resource represents a long-running operation that is the result of a
 
         network API call.
       properties:
         done:
           description: >-
-            If the value is `false`, it means the operation is still in
-            progress.
+            If the value is `false`, it means the operation is still in progress.
 
             If `true`, the operation is completed, and either `error` or `response` is
 
@@ -464,8 +462,7 @@ components:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
           description: >-
-            Service-specific metadata associated with the operation.  It
-            typically
+            Service-specific metadata associated with the operation.  It typically
 
             contains progress information and common metadata such as create time.
 
@@ -475,8 +472,7 @@ components:
           type: object
         name:
           description: >-
-            The server-assigned name, which is only unique within the same
-            service that
+            The server-assigned name, which is only unique within the same service that
 
             originally returns it. If you use the default HTTP mapping, the
 
@@ -486,8 +482,7 @@ components:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
           description: >-
-            The normal response of the operation in case of success.  If the
-            original
+            The normal response of the operation in case of success.  If the original
 
             method returns no data on success, such as `Delete`, the response is
 
@@ -525,8 +520,7 @@ components:
           type: integer
         details:
           description: >-
-            A list of messages that carry the error details.  There is a common
-            set of
+            A list of messages that carry the error details.  There is a common set of
 
             message types for APIs to use.
           items:
@@ -535,9 +529,11 @@ components:
             type: object
           type: array
         message:
-          description: |-
+          description: >-
             A developer-facing error message, which should be in English. Any
+
             user-facing error message should be localized and sent in the
+
             google.rpc.Status.details field, or localized by the client.
           type: string
       type: object
@@ -556,6 +552,12 @@ components:
 
             updated file.
           type: string
+        managedUpload:
+          description: >-
+            Output only. A boolean indicating that this model was uploaded from the console.
+
+            Read only
+          type: boolean
         sizeBytes:
           description: Output only. The size of the TFLite model
           type: string

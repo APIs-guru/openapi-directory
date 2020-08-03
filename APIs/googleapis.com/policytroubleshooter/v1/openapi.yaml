@@ -37,17 +37,17 @@ tags:
 paths:
   /v1/iam:troubleshoot:
     parameters:
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
     post:
       description: >-
         Checks whether a member has a specific permission for a specific resource,
@@ -660,7 +660,8 @@ components:
                recovered group retains the role in the binding.
 
 
-            * `domain:{domain}`: The G Suite domain (primary) that represents all the    users of that domain. For example, `google.com` or `example.com`.
+            * `domain:{domain}`: The G Suite domain (primary) that represents all the
+               users of that domain. For example, `google.com` or `example.com`.
 
           items:
             type: string

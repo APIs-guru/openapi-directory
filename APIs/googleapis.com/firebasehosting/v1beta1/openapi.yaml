@@ -33,13 +33,13 @@ info:
 externalDocs:
   url: https://firebase.google.com/docs/hosting/
 tags:
-  - name: sites
   - name: projects
+  - name: sites
 paths:
   "/v1beta1/{name}":
     delete:
       description: Deletes the existing domain mapping on the specified site.
-      operationId: firebasehosting.projects.sites.domains.delete
+      operationId: firebasehosting.sites.domains.delete
       parameters:
         - description: Required. The name of the domain association to delete.
           in: path
@@ -64,10 +64,10 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/firebase
       tags:
-        - projects
+        - sites
     get:
       description: Gets a domain mapping on the specified site.
-      operationId: firebasehosting.projects.sites.domains.get
+      operationId: firebasehosting.sites.domains.get
       parameters:
         - description: Required. The name of the domain configuration to get.
           in: path
@@ -100,18 +100,18 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/firebase.readonly
       tags:
-        - projects
+        - sites
     parameters:
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
     patch:
       description: >-
@@ -126,7 +126,7 @@ paths:
         Use [`DeleteVersion`](../sites.versions/delete) to set the status of a
 
         version to `DELETED`.
-      operationId: firebasehosting.projects.sites.versions.patch
+      operationId: firebasehosting.sites.versions.patch
       parameters:
         - description: >-
             The unique identifier for a version, in the format:
@@ -177,13 +177,13 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/firebase
       tags:
-        - projects
+        - sites
     put:
       description: >-
         Updates the specified domain mapping, creating the mapping as if it does
 
         not exist.
-      operationId: firebasehosting.projects.sites.domains.update
+      operationId: firebasehosting.sites.domains.update
       parameters:
         - description: >-
             Required. The name of the domain association to update or create, if an
@@ -216,11 +216,11 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/firebase
       tags:
-        - projects
+        - sites
   "/v1beta1/{parent}/domains":
     get:
       description: Lists the domains for the specified site.
-      operationId: firebasehosting.projects.sites.domains.list
+      operationId: firebasehosting.sites.domains.list
       parameters:
         - description: >-
             Required. The parent for which to list domains, in the format:
@@ -266,22 +266,22 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/firebase.readonly
       tags:
-        - projects
+        - sites
     parameters:
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
     post:
       description: Creates a domain mapping on the specified site.
-      operationId: firebasehosting.projects.sites.domains.create
+      operationId: firebasehosting.sites.domains.create
       parameters:
         - description: >-
             Required. The parent to create the domain association for, in the format:
@@ -314,11 +314,11 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/firebase
       tags:
-        - projects
+        - sites
   "/v1beta1/{parent}/files":
     get:
       description: Lists the remaining files to be uploaded for the specified version.
-      operationId: firebasehosting.projects.sites.versions.files.list
+      operationId: firebasehosting.sites.versions.files.list
       parameters:
         - description: >-
             Required. The parent to list files for, in the format:
@@ -376,23 +376,23 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/firebase.readonly
       tags:
-        - projects
+        - sites
     parameters:
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
   "/v1beta1/{parent}/releases":
     get:
       description: Lists the releases that have been created on the specified site.
-      operationId: firebasehosting.projects.sites.releases.list
+      operationId: firebasehosting.sites.releases.list
       parameters:
         - description: >-
             Required. The parent for which to list files, in the format:
@@ -438,25 +438,25 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/firebase.readonly
       tags:
-        - projects
+        - sites
     parameters:
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
     post:
       description: >-
         Creates a new release which makes the content of the specified version
 
         actively display on the appropriate URL(s).
-      operationId: firebasehosting.projects.sites.releases.create
+      operationId: firebasehosting.sites.releases.create
       parameters:
         - description: >-
             Required. The site that the release belongs to, in the format:
@@ -507,14 +507,14 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/firebase
       tags:
-        - projects
+        - sites
   "/v1beta1/{parent}/versions":
     get:
       description: >-
         Lists the versions that have been created on the specified site.
 
         Will include filtering in the future.
-      operationId: firebasehosting.projects.sites.versions.list
+      operationId: firebasehosting.sites.versions.list
       parameters:
         - description: >-
             Required. The parent for which to list files, in the format:
@@ -579,22 +579,22 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/firebase.readonly
       tags:
-        - projects
+        - sites
     parameters:
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
     post:
       description: Creates a new version for a site.
-      operationId: firebasehosting.projects.sites.versions.create
+      operationId: firebasehosting.sites.versions.create
       parameters:
         - description: >-
             Required. The parent to create the version for, in the format:
@@ -643,26 +643,26 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/firebase
       tags:
-        - projects
+        - sites
   "/v1beta1/{parent}:populateFiles":
     parameters:
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
     post:
       description: >-
         Adds content files to a version.
 
         Each file must be under 2 GB.
-      operationId: firebasehosting.projects.sites.versions.populateFiles
+      operationId: firebasehosting.sites.versions.populateFiles
       parameters:
         - description: >-
             Required. The version to add files to, in the format:
@@ -695,7 +695,7 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/firebase
       tags:
-        - projects
+        - sites
 components:
   parameters:
     _.xgafv:

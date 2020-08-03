@@ -95,17 +95,17 @@ paths:
       tags:
         - users
     parameters:
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
     patch:
       description: Updates an existing environment.
       operationId: cloudshell.users.environments.patch
@@ -147,17 +147,17 @@ paths:
         - users
   "/v1alpha1/{name}:authorize":
     parameters:
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: >-
         Sends OAuth credentials to a running environment on behalf of a user. When
@@ -201,17 +201,17 @@ paths:
         - users
   "/v1alpha1/{name}:start":
     parameters:
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: >-
         Starts an existing environment, allowing clients to connect to it. The
@@ -259,17 +259,17 @@ paths:
         - users
   "/v1alpha1/{parent}/publicKeys":
     parameters:
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: >-
         Adds a public SSH key to an environment, allowing clients with the
@@ -383,7 +383,10 @@ components:
         type: string
   schemas:
     AuthorizeEnvironmentRequest:
-      description: Request message for AuthorizeEnvironment.
+      description: >-
+        Request message for
+
+        AuthorizeEnvironment.
       properties:
         accessToken:
           description: The OAuth access token that should be sent to the environment.
@@ -400,7 +403,10 @@ components:
           type: string
       type: object
     CreatePublicKeyRequest:
-      description: Request message for CreatePublicKey.
+      description: >-
+        Request message for
+
+        CreatePublicKey.
       properties:
         key:
           $ref: "#/components/schemas/PublicKey"
@@ -640,7 +646,10 @@ components:
           type: string
       type: object
     StartEnvironmentRequest:
-      description: Request message for StartEnvironment.
+      description: >-
+        Request message for
+
+        StartEnvironment.
       properties:
         accessToken:
           description: >-
@@ -662,9 +671,9 @@ components:
       description: >-
         Message included in the response field of operations returned from
 
-        StartEnvironment once the
+        StartEnvironment
 
-        operation is complete.
+        once the operation is complete.
       properties:
         environment:
           $ref: "#/components/schemas/Environment"

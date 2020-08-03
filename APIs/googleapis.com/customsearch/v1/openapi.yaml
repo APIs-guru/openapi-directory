@@ -38,9 +38,9 @@ paths:
   /customsearch/v1:
     get:
       description: >-
-        Returns metadata about the search performed, metadata about the custom
+        Returns metadata about the search performed, metadata about the
 
-        search engine used for the search, and the search results.
+        engine used for the search, and the search results.
       operationId: search.cse.list
       parameters:
         - description: >-
@@ -90,7 +90,7 @@ paths:
           name: cr
           schema:
             type: string
-        - description: The custom search engine ID to use for this request.
+        - description: The Programmable Search Engine ID to use for this request.
           in: query
           name: cx
           schema:
@@ -679,23 +679,23 @@ paths:
       tags:
         - cse
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
   /customsearch/v1/siterestrict:
     get:
       description: >-
-        Returns metadata about the search performed, metadata about the custom
+        Returns metadata about the search performed, metadata about the
 
-        search engine used for the search, and the search results. Uses a small set
+        engine used for the search, and the search results. Uses a small set
 
         of url patterns.
       operationId: search.cse.siterestrict.list
@@ -747,7 +747,7 @@ paths:
           name: cr
           schema:
             type: string
-        - description: The custom search engine ID to use for this request.
+        - description: The Programmable Search Engine ID to use for this request.
           in: query
           name: cx
           schema:
@@ -1336,17 +1336,17 @@ paths:
       tags:
         - cse
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
 components:
   parameters:
     _.xgafv:
@@ -1677,11 +1677,13 @@ components:
                     type: string
                   cx:
                     description: >-
-                      The identifier of a custom search engine created using the Custom Search
+                      The identifier of an engine created using the Programmable Search Engine
 
-                      [Control Panel](https://cse.google.com/). This is a custom property not
+                      [Control Panel](https://programmablesearchengine.google.com/). This is a
 
-                      defined in the OpenSearch spec. This parameter is **required**.
+                      custom property not defined in the OpenSearch spec. This parameter is
+
+                      **required**.
                     type: string
                   dateRestrict:
                     description: >-
@@ -2123,11 +2125,13 @@ components:
                     type: string
                   cx:
                     description: >-
-                      The identifier of a custom search engine created using the Custom Search
+                      The identifier of an engine created using the Programmable Search Engine
 
-                      [Control Panel](https://cse.google.com/). This is a custom property not
+                      [Control Panel](https://programmablesearchengine.google.com/). This is a
 
-                      defined in the OpenSearch spec. This parameter is **required**.
+                      custom property not defined in the OpenSearch spec. This parameter is
+
+                      **required**.
                     type: string
                   dateRestrict:
                     description: >-
@@ -2569,11 +2573,13 @@ components:
                     type: string
                   cx:
                     description: >-
-                      The identifier of a custom search engine created using the Custom Search
+                      The identifier of an engine created using the Programmable Search Engine
 
-                      [Control Panel](https://cse.google.com/). This is a custom property not
+                      [Control Panel](https://programmablesearchengine.google.com/). This is a
 
-                      defined in the OpenSearch spec. This parameter is **required**.
+                      custom property not defined in the OpenSearch spec. This parameter is
+
+                      **required**.
                     type: string
                   dateRestrict:
                     description: >-
@@ -3019,7 +3025,10 @@ components:
                 for this API.
               type: string
             type:
-              description: The MIME type of the OpenSearch URL template for the Custom Search API.
+              description: >-
+                The MIME type of the OpenSearch URL template for the Custom Search JSON
+
+                API.
               type: string
           type: object
       type: object

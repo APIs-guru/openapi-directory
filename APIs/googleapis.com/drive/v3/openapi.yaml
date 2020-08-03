@@ -2846,7 +2846,7 @@ components:
       description: A restriction for accessing the content of the file.
       properties:
         readOnly:
-          description: Whether the content of the file is read-only.
+          description: Whether the content of the file is read-only. If a file is read-only, a new revision of the file may not be added, comments may not be added or modified, and the title of the file may not be modified.
           type: boolean
         reason:
           description: Reason for why the content of the file is restricted. This is only mutable on requests that also set readOnly=true.
@@ -3733,6 +3733,9 @@ components:
         published:
           description: Whether this revision is published. This is only applicable to Google Docs.
           type: boolean
+        publishedLink:
+          description: A link to the published revision.
+          type: string
         publishedOutsideDomain:
           description: Whether this revision is published outside the domain. This is only applicable to Google Docs.
           type: boolean

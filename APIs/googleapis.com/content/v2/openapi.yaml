@@ -4273,6 +4273,12 @@ components:
         force:
           description: Whether the account should be deleted if the account has offers. Only applicable if the method is `delete`.
           type: boolean
+        labelIds:
+          description: Label IDs for the 'updatelabels' request.
+          items:
+            format: uint64
+            type: string
+          type: array
         linkRequest:
           $ref: "#/components/schemas/AccountsCustomBatchRequestEntryLinkRequest"
           description: Details about the `link` request.
@@ -7072,7 +7078,25 @@ components:
 
             - "`eub`" (ePacket) 
 
-            - "`chukou1`" (Chukou1 Logistics)  
+            - "`chukou1`" (Chukou1 Logistics) 
+
+            - "`bestex`" (Best Express) 
+
+            - "`canada post`" (Canada Post) 
+
+            - "`purolator`" (Purolator) 
+
+            - "`canpar`" (Canpar) 
+
+            - "`india post`" (India Post) 
+
+            - "`blue dart`" (Blue Dart) 
+
+            - "`delhivery`" (Delhivery) 
+
+            - "`dtdc`" (DTDC) 
+
+            - "`tpc india`" (TPC India)  
 
             Supported carriers for FR are:  
 

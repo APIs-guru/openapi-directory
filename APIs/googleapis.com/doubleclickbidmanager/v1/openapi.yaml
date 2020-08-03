@@ -48,7 +48,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
     post:
-      description: Retrieves line items in CSV format. TrueView line items are not supported.
+      description: Retrieves line items in CSV format. YouTube & partners line items are not supported.
       operationId: doubleclickbidmanager.lineitems.downloadlineitems
       requestBody:
         content:
@@ -79,7 +79,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
     post:
-      description: Uploads line items in CSV format. TrueView line items are not supported.
+      description: Uploads line items in CSV format. YouTube & partners line items are not supported.
       operationId: doubleclickbidmanager.lineitems.uploadlineitems
       requestBody:
         content:
@@ -381,7 +381,7 @@ components:
           type: string
       type: object
     DownloadRequest:
-      description: Request to fetch stored inventory sources, campaigns, insertion orders, line items, TrueView ad groups and ads.
+      description: Request to fetch stored inventory sources, campaigns, insertion orders, line items, YouTube ad groups and ads.
       properties:
         fileTypes:
           description: >-

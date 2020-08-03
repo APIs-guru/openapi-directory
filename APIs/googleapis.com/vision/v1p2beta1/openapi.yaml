@@ -33,23 +33,23 @@ info:
 externalDocs:
   url: https://cloud.google.com/vision/
 tags:
-  - name: projects
   - name: files
+  - name: projects
   - name: images
 paths:
   /v1p2beta1/files:annotate:
     parameters:
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: >-
         Service that performs image detection and annotation for a batch of files.
@@ -91,16 +91,16 @@ paths:
   /v1p2beta1/files:asyncBatchAnnotate:
     parameters:
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: >-
         Run asynchronous image detection and annotation for a list of generic
@@ -141,16 +141,16 @@ paths:
   /v1p2beta1/images:annotate:
     parameters:
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Run image detection and annotation for a batch of images.
       operationId: vision.images.annotate
@@ -180,16 +180,16 @@ paths:
   /v1p2beta1/images:asyncBatchAnnotate:
     parameters:
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: >-
         Run asynchronous image detection and annotation for a list of images.
@@ -234,16 +234,16 @@ paths:
   "/v1p2beta1/{parent}/files:annotate":
     parameters:
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: >-
         Service that performs image detection and annotation for a batch of files.
@@ -258,7 +258,7 @@ paths:
         file provided and perform detection and annotation for each image
 
         extracted.
-      operationId: vision.projects.locations.files.annotate
+      operationId: vision.projects.files.annotate
       parameters:
         - description: >-
             Optional. Target project and location to make a call.
@@ -307,16 +307,16 @@ paths:
   "/v1p2beta1/{parent}/files:asyncBatchAnnotate":
     parameters:
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: >-
         Run asynchronous image detection and annotation for a list of generic
@@ -330,7 +330,7 @@ paths:
         `Operation.metadata` contains `OperationMetadata` (metadata).
 
         `Operation.response` contains `AsyncBatchAnnotateFilesResponse` (results).
-      operationId: vision.projects.locations.files.asyncBatchAnnotate
+      operationId: vision.projects.files.asyncBatchAnnotate
       parameters:
         - description: >-
             Optional. Target project and location to make a call.
@@ -379,16 +379,16 @@ paths:
   "/v1p2beta1/{parent}/images:annotate":
     parameters:
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Run image detection and annotation for a batch of images.
       operationId: vision.projects.images.annotate
@@ -440,16 +440,16 @@ paths:
   "/v1p2beta1/{parent}/images:asyncBatchAnnotate":
     parameters:
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: >-
         Run asynchronous image detection and annotation for a list of images.
@@ -3602,6 +3602,11 @@ components:
             Note: As with all `bytes` fields, protobuffers use a pure binary
 
             representation, whereas JSON representations use base64.
+
+
+            Currently, this field only works for BatchAnnotateImages requests. It does
+
+            not work for AsyncBatchAnnotateImages requests.
           format: byte
           type: string
         source:

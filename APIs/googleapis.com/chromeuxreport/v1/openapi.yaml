@@ -7,8 +7,7 @@ info:
     url: https://google.com
     x-twitter: youtube
   description: >
-    The Chrome UX Report API lets you view real user experience data for
-    millions of websites.
+    The Chrome UX Report API lets you view real user experience data for millions of websites.
   license:
     name: Creative Commons Attribution 3.0
     url: http://creativecommons.org/licenses/by/3.0/
@@ -39,21 +38,20 @@ tags:
 paths:
   /v1/records:queryRecord:
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
     post:
       description: >-
-        Queries the Chrome User Experience for a single `record` for a given
-        site.
+        Queries the Chrome User Experience for a single `record` for a given site.
 
 
         Returns a `record` that contains one or more `metrics` corresponding to
@@ -114,9 +112,7 @@ components:
       schema:
         type: string
     key:
-      description: API key. Your API key identifies your project and provides you with
-        API access, quota, and reports. Required unless you provide an OAuth 2.0
-        token.
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -134,9 +130,7 @@ components:
       schema:
         type: boolean
     quotaUser:
-      description: Available to use for quota purposes for server-side applications.
-        Can be any arbitrary string assigned to a user, but should not exceed 40
-        characters.
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
       in: query
       name: quotaUser
       schema:
@@ -175,16 +169,14 @@ components:
       properties:
         density:
           description: >-
-            The proportion of users that experienced this bin's value for the
-            given
+            The proportion of users that experienced this bin's value for the given
 
             metric.
           format: double
           type: number
         end:
           description: >-
-            End is the end of the data bin. If end is not populated, then the
-            bin has
+            End is the end of the data bin. If end is not populated, then the bin has
 
             no end and is valid from start to +inf.
         start:
@@ -195,8 +187,7 @@ components:
       properties:
         effectiveConnectionType:
           description: >-
-            The effective connection type is the general connection class that
-            all
+            The effective connection type is the general connection class that all
 
             users experienced for this record. This field uses the values ["offline",
 
@@ -211,8 +202,7 @@ components:
           type: string
         formFactor:
           description: >-
-            The form factor is the device class that all users used to access
-            the
+            The form factor is the device class that all users used to access the
 
             site for this record.
 
@@ -255,8 +245,7 @@ components:
       properties:
         histogram:
           description: >-
-            The histogram of user experiences for a metric. The histogram will
-            have at
+            The histogram of user experiences for a metric. The histogram will have at
 
             least one bin and the densities of all bins will add up to ~1.
           items:
@@ -283,16 +272,17 @@ components:
           description: 75% of users experienced the given metric at or below this value.
       type: object
     QueryRequest:
-      description: |-
+      description: >-
         Request payload sent by a physical web client.
 
+
         This request includes all necessary context to load a particular
+
         user experience record.
       properties:
         effectiveConnectionType:
           description: >-
-            The effective connection type is a query dimension that specifies
-            the
+            The effective connection type is a query dimension that specifies the
 
             effective network class that the record's data should belong to. This field
 
@@ -307,8 +297,7 @@ components:
           type: string
         formFactor:
           description: >-
-            The form factor is a query dimension that specifies the device class
-            that
+            The form factor is a query dimension that specifies the device class that
 
             the record's data should belong to.
 
@@ -323,20 +312,23 @@ components:
             - TABLET
           type: string
         metrics:
-          description: |-
+          description: >-
             The metrics that should be included in the response.
+
             If none are specified then any metrics found will be returned.
 
+
             Allowed values: ["first_contentful_paint",
+
             "first_input_delay", "largest_contentful_paint",
+
             "cumulative_layout_shift"]
           items:
             type: string
           type: array
         origin:
           description: >-
-            The url pattern "origin" refers to a url pattern that is the origin
-            of
+            The url pattern "origin" refers to a url pattern that is the origin of
 
             a website.
 
@@ -345,8 +337,7 @@ components:
           type: string
         url:
           description: >-
-            The url pattern "url" refers to a url pattern that is any arbitrary
-            url.
+            The url pattern "url" refers to a url pattern that is any arbitrary url.
 
 
             Examples: "https://example.com/",
@@ -372,31 +363,27 @@ components:
         urlNormalizationDetails:
           $ref: "#/components/schemas/UrlNormalization"
           description: >-
-            These are details about automated normalization actions that were
-            taken in
+            These are details about automated normalization actions that were taken in
 
             order to make the requested `url_pattern` valid.
       type: object
     Record:
       description: >-
-        Record is a single Chrome UX report data record. It contains use
-        experience
+        Record is a single Chrome UX report data record. It contains use experience
 
         statistics for a single url pattern and set of dimensions.
       properties:
         key:
           $ref: "#/components/schemas/Key"
           description: >-
-            Key defines all of the unique querying parameters needed to look up
-            a user
+            Key defines all of the unique querying parameters needed to look up a user
 
             experience record.
         metrics:
           additionalProperties:
             $ref: "#/components/schemas/Metric"
           description: >-
-            Metrics is the map of user experience data available for the record
-            defined
+            Metrics is the map of user experience data available for the record defined
 
             in the key field. Metrics are keyed on the metric name.
 
@@ -410,8 +397,7 @@ components:
       type: object
     UrlNormalization:
       description: >-
-        Object representing the normalization actions taken to normalize a url
-        to
+        Object representing the normalization actions taken to normalize a url to
 
         achieve a higher chance of successful lookup. These are simple automated
 
@@ -421,8 +407,7 @@ components:
       properties:
         normalizedUrl:
           description: >-
-            The URL after any normalization actions. This is a valid user
-            experience
+            The URL after any normalization actions. This is a valid user experience
 
             URL that could reasonably be looked up.
           type: string

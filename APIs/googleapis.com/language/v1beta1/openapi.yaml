@@ -38,16 +38,16 @@ paths:
   /v1beta1/documents:analyzeEntities:
     parameters:
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
       description: >-
         Finds named entities (currently proper names and common nouns) in the text
@@ -82,16 +82,16 @@ paths:
   /v1beta1/documents:analyzeSentiment:
     parameters:
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
       description: Analyzes the sentiment of the provided text.
       operationId: language.documents.analyzeSentiment
@@ -121,16 +121,16 @@ paths:
   /v1beta1/documents:analyzeSyntax:
     parameters:
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
       description: >-
         Analyzes the syntax of the text and provides sentence boundaries and
@@ -165,16 +165,16 @@ paths:
   /v1beta1/documents:annotateText:
     parameters:
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
       description: >-
         A convenience method that provides all the features that analyzeSentiment,

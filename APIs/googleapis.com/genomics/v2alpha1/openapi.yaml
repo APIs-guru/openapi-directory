@@ -39,17 +39,17 @@ tags:
 paths:
   /v2alpha1/pipelines:run:
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
     post:
       description: >-
         Runs a pipeline.  The returned Operation's metadata field will contain a
@@ -110,17 +110,17 @@ paths:
         - pipelines
   "/v2alpha1/workers/{id}:checkIn":
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
     post:
       description: >-
         The worker uses this method to retrieve the assigned operation and
@@ -160,68 +160,19 @@ paths:
             - https://www.googleapis.com/auth/genomics
       tags:
         - workers
-  "/v2alpha1/workers/{id}:uploadSosReport":
-    parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
-    post:
-      description: The worker uses this method to upload SOS reports for unexpected errors.
-      operationId: genomics.workers.projects.workers.uploadSosReport
-      parameters:
-        - description: >-
-            The VM identity token for authenticating the VM instance.
-
-            https://cloud.google.com/compute/docs/instances/verifying-instance-identity
-          in: path
-          name: id
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/HttpBody"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/UploadSOSReportResponse"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/genomics
-          Oauth2c:
-            - https://www.googleapis.com/auth/genomics
-      tags:
-        - workers
   "/v2alpha1/{id}:checkIn":
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
     post:
       description: >-
         The worker uses this method to retrieve the assigned operation and
@@ -264,22 +215,73 @@ paths:
   "/v2alpha1/{name}":
     get:
       description: >-
-        Gets the latest state of a long-running operation.
-
-        Clients can use this method to poll the operation result at intervals as
-
-        recommended by the API service.
+        Lists operations that match the specified filter in the request.
 
         Authorization requires the following [Google IAM](https://cloud.google.com/iam) permission&#58;
 
 
-        * `genomics.operations.get`
-      operationId: genomics.projects.operations.get
+        * `genomics.operations.list`
+      operationId: genomics.projects.operations.list
       parameters:
-        - description: The name of the operation resource.
+        - description: The name of the operation's parent resource.
           in: path
           name: name
           required: true
+          schema:
+            type: string
+        - description: >-
+            A string for filtering Operations.
+
+            In v2alpha1, the following filter fields are supported&#58;
+
+
+            * createTime&#58; The time this job was created
+
+            * events&#58; The set of event (names) that have occurred while running
+              the pipeline.  The &#58; operator can be used to determine if a
+              particular event has occurred.
+            * error&#58; If the pipeline is running, this value is NULL.  Once the
+              pipeline finishes, the value is the standard Google error code.
+            * labels.key or labels."key with space" where key is a label key.
+
+            * done&#58; If the pipeline is running, this value is false. Once the
+              pipeline finishes, the value is true.
+
+            In v1 and v1alpha2, the following filter fields are supported&#58;
+
+
+            * projectId&#58; Required. Corresponds to
+              OperationMetadata.projectId.
+            * createTime&#58; The time this job was created, in seconds from the
+              [epoch](http://en.wikipedia.org/wiki/Unix_time). Can use `>=` and/or `<=`
+              operators.
+            * status&#58; Can be `RUNNING`, `SUCCESS`, `FAILURE`, or `CANCELED`. Only
+              one status may be specified.
+            * labels.key where key is a label key.
+
+
+            Examples&#58;
+
+
+            * `projectId = my-project AND createTime >= 1432140000`
+
+            * `projectId = my-project AND createTime >= 1432140000 AND createTime <= 1432150000 AND status = RUNNING`
+
+            * `projectId = my-project AND labels.color = *`
+
+            * `projectId = my-project AND labels.color = red`
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: The maximum number of results to return. The maximum value is 256.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: The standard list page token.
+          in: query
+          name: pageToken
           schema:
             type: string
       responses:
@@ -287,7 +289,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Operation"
+                $ref: "#/components/schemas/ListOperationsResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -301,30 +303,30 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
   "/v2alpha1/{name}:cancel":
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
     post:
       description: >-
         Starts asynchronous cancellation on a long-running operation.
@@ -950,75 +952,6 @@ components:
             - DATA_LOSS
           type: string
       type: object
-    HttpBody:
-      description: >-
-        Message that represents an arbitrary HTTP body. It should only be used for
-
-        payload formats that can't be represented as JSON, such as raw binary or
-
-        an HTML page.
-
-
-
-        This message can be used both in streaming and non-streaming API methods in
-
-        the request as well as the response.
-
-
-        It can be used as a top-level request field, which is convenient if one
-
-        wants to extract parameters from either the URL or HTTP template into the
-
-        request fields and also want access to the raw HTTP body.
-
-
-        Example:
-
-            message GetResourceRequest {
-              // A unique request id.
-              string request_id = 1;
-
-              // The raw HTTP body is bound to this field.
-              google.api.HttpBody http_body = 2;
-            }
-
-            service ResourceService {
-              rpc GetResource(GetResourceRequest) returns (google.api.HttpBody);
-              rpc UpdateResource(google.api.HttpBody) returns
-              (google.protobuf.Empty);
-            }
-
-        Example with streaming methods:
-
-            service CaldavService {
-              rpc GetCalendar(stream google.api.HttpBody)
-                returns (stream google.api.HttpBody);
-              rpc UpdateCalendar(stream google.api.HttpBody)
-                returns (stream google.api.HttpBody);
-            }
-
-        Use of this type only changes how the request and response bodies are
-
-        handled, all other features will continue to work unchanged.
-      properties:
-        contentType:
-          description: The HTTP Content-Type header value specifying the content type of the body.
-          type: string
-        data:
-          description: The HTTP request/response body as raw binary.
-          format: byte
-          type: string
-        extensions:
-          description: >-
-            Application specific response metadata. Must be set in the first response
-
-            for streaming APIs.
-          items:
-            additionalProperties:
-              description: Properties of the object. Contains field @type with type URL.
-            type: object
-          type: array
-      type: object
     ListOperationsResponse:
       description: The response message for Operations.ListOperations.
       properties:
@@ -1470,10 +1403,6 @@ components:
           format: int32
           type: integer
       type: object
-    UploadSOSReportResponse:
-      description: The response to the UploadSOSReport method.
-      properties: {}
-      type: object
     VirtualMachine:
       description: Carries information about a Compute Engine VM resource.
       properties:
@@ -1549,7 +1478,11 @@ components:
 
             match those of the tags used or the latest version will still be pulled.
 
-            Only a single image is supported.
+            The root directory of the ext4 image must contain `image` and `overlay2`
+
+            directories copied from the Docker directory of a VM where the desired
+
+            Docker images have already been pulled. Only a single image is supported.
           items:
             type: string
           type: array

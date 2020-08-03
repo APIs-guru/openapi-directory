@@ -33,8 +33,8 @@ info:
 externalDocs:
   url: https://cloud.google.com/asset-inventory/docs/quickstart
 tags:
-  - name: organizations
   - name: projects
+  - name: organizations
   - name: folders
 paths:
   "/v1beta1/{name}":
@@ -68,17 +68,17 @@ paths:
       tags:
         - folders
     parameters:
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
   "/v1beta1/{parent}:batchGetAssetsHistory":
     get:
       description: >-
@@ -95,7 +95,7 @@ paths:
         If a specified asset does not exist, this API returns an INVALID_ARGUMENT
 
         error.
-      operationId: cloudasset.projects.batchGetAssetsHistory
+      operationId: cloudasset.organizations.batchGetAssetsHistory
       parameters:
         - description: >-
             Required. The relative name of the root asset. It can only be an
@@ -166,32 +166,32 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
-        - projects
+        - organizations
     parameters:
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
   "/v1beta1/{parent}:exportAssets":
     parameters:
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
     post:
       description: >-
         Exports assets with time and resource types to a given Cloud Storage
@@ -613,7 +613,8 @@ components:
                recovered group retains the role in the binding.
 
 
-            * `domain:{domain}`: The G Suite domain (primary) that represents all the    users of that domain. For example, `google.com` or `example.com`.
+            * `domain:{domain}`: The G Suite domain (primary) that represents all the
+               users of that domain. For example, `google.com` or `example.com`.
 
           items:
             type: string

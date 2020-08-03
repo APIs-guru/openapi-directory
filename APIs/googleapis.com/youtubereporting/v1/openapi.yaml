@@ -33,9 +33,9 @@ info:
 externalDocs:
   url: https://developers.google.com/youtube/reporting/v1/reports/
 tags:
+  - name: jobs
   - name: media
   - name: reportTypes
-  - name: jobs
 paths:
   /v1/jobs:
     get:
@@ -99,15 +99,15 @@ paths:
       tags:
         - jobs
     parameters:
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/key"
     post:
@@ -219,15 +219,15 @@ paths:
       tags:
         - jobs
     parameters:
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/key"
   "/v1/jobs/{jobId}/reports":
@@ -312,15 +312,15 @@ paths:
       tags:
         - jobs
     parameters:
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/key"
   "/v1/jobs/{jobId}/reports/{reportId}":
@@ -367,15 +367,15 @@ paths:
       tags:
         - jobs
     parameters:
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/key"
   "/v1/media/{resourceName}":
@@ -411,15 +411,15 @@ paths:
       tags:
         - media
     parameters:
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/key"
   /v1/reportTypes:
@@ -484,15 +484,15 @@ paths:
       tags:
         - reportTypes
     parameters:
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/key"
 components:

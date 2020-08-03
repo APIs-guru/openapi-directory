@@ -108,17 +108,17 @@ paths:
       tags:
         - users
     parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: Creates a new draft with the `DRAFT` label.
       operationId: gmail.users.drafts.create
@@ -134,7 +134,64 @@ paths:
             type: string
       requestBody:
         content:
-          "message/cpim,message/delivery-status,message/disposition-notification,message/external-body,message/feedback-report,message/global,message/global-delivery-status,message/global-disposition-notification,message/global-headers,message/http,message/imdn+xml,message/news,message/partial,message/rfc822,message/s-http,message/sip,message/sipfrag,message/tracking-status,message/vnd.si.simp,message/vnd.wfa.wsc":
+          message/cpim:
+            schema:
+              $ref: "#/components/schemas/Draft"
+          message/delivery-status:
+            schema:
+              $ref: "#/components/schemas/Draft"
+          message/disposition-notification:
+            schema:
+              $ref: "#/components/schemas/Draft"
+          message/external-body:
+            schema:
+              $ref: "#/components/schemas/Draft"
+          message/feedback-report:
+            schema:
+              $ref: "#/components/schemas/Draft"
+          message/global:
+            schema:
+              $ref: "#/components/schemas/Draft"
+          message/global-delivery-status:
+            schema:
+              $ref: "#/components/schemas/Draft"
+          message/global-disposition-notification:
+            schema:
+              $ref: "#/components/schemas/Draft"
+          message/global-headers:
+            schema:
+              $ref: "#/components/schemas/Draft"
+          message/http:
+            schema:
+              $ref: "#/components/schemas/Draft"
+          message/imdn+xml:
+            schema:
+              $ref: "#/components/schemas/Draft"
+          message/news:
+            schema:
+              $ref: "#/components/schemas/Draft"
+          message/partial:
+            schema:
+              $ref: "#/components/schemas/Draft"
+          message/rfc822:
+            schema:
+              $ref: "#/components/schemas/Draft"
+          message/s-http:
+            schema:
+              $ref: "#/components/schemas/Draft"
+          message/sip:
+            schema:
+              $ref: "#/components/schemas/Draft"
+          message/sipfrag:
+            schema:
+              $ref: "#/components/schemas/Draft"
+          message/tracking-status:
+            schema:
+              $ref: "#/components/schemas/Draft"
+          message/vnd.si.simp:
+            schema:
+              $ref: "#/components/schemas/Draft"
+          message/vnd.wfa.wsc:
             schema:
               $ref: "#/components/schemas/Draft"
       responses:
@@ -165,17 +222,17 @@ paths:
         - users
   "/gmail/v1/users/{userId}/drafts/send":
     parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: >-
         Sends the specified, existing draft to the recipients in the
@@ -194,7 +251,64 @@ paths:
             type: string
       requestBody:
         content:
-          "message/cpim,message/delivery-status,message/disposition-notification,message/external-body,message/feedback-report,message/global,message/global-delivery-status,message/global-disposition-notification,message/global-headers,message/http,message/imdn+xml,message/news,message/partial,message/rfc822,message/s-http,message/sip,message/sipfrag,message/tracking-status,message/vnd.si.simp,message/vnd.wfa.wsc":
+          message/cpim:
+            schema:
+              $ref: "#/components/schemas/Draft"
+          message/delivery-status:
+            schema:
+              $ref: "#/components/schemas/Draft"
+          message/disposition-notification:
+            schema:
+              $ref: "#/components/schemas/Draft"
+          message/external-body:
+            schema:
+              $ref: "#/components/schemas/Draft"
+          message/feedback-report:
+            schema:
+              $ref: "#/components/schemas/Draft"
+          message/global:
+            schema:
+              $ref: "#/components/schemas/Draft"
+          message/global-delivery-status:
+            schema:
+              $ref: "#/components/schemas/Draft"
+          message/global-disposition-notification:
+            schema:
+              $ref: "#/components/schemas/Draft"
+          message/global-headers:
+            schema:
+              $ref: "#/components/schemas/Draft"
+          message/http:
+            schema:
+              $ref: "#/components/schemas/Draft"
+          message/imdn+xml:
+            schema:
+              $ref: "#/components/schemas/Draft"
+          message/news:
+            schema:
+              $ref: "#/components/schemas/Draft"
+          message/partial:
+            schema:
+              $ref: "#/components/schemas/Draft"
+          message/rfc822:
+            schema:
+              $ref: "#/components/schemas/Draft"
+          message/s-http:
+            schema:
+              $ref: "#/components/schemas/Draft"
+          message/sip:
+            schema:
+              $ref: "#/components/schemas/Draft"
+          message/sipfrag:
+            schema:
+              $ref: "#/components/schemas/Draft"
+          message/tracking-status:
+            schema:
+              $ref: "#/components/schemas/Draft"
+          message/vnd.si.simp:
+            schema:
+              $ref: "#/components/schemas/Draft"
+          message/vnd.wfa.wsc:
             schema:
               $ref: "#/components/schemas/Draft"
       responses:
@@ -324,17 +438,17 @@ paths:
       tags:
         - users
     parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
     put:
       description: Replaces a draft's content.
       operationId: gmail.users.drafts.update
@@ -356,7 +470,64 @@ paths:
             type: string
       requestBody:
         content:
-          "message/cpim,message/delivery-status,message/disposition-notification,message/external-body,message/feedback-report,message/global,message/global-delivery-status,message/global-disposition-notification,message/global-headers,message/http,message/imdn+xml,message/news,message/partial,message/rfc822,message/s-http,message/sip,message/sipfrag,message/tracking-status,message/vnd.si.simp,message/vnd.wfa.wsc":
+          message/cpim:
+            schema:
+              $ref: "#/components/schemas/Draft"
+          message/delivery-status:
+            schema:
+              $ref: "#/components/schemas/Draft"
+          message/disposition-notification:
+            schema:
+              $ref: "#/components/schemas/Draft"
+          message/external-body:
+            schema:
+              $ref: "#/components/schemas/Draft"
+          message/feedback-report:
+            schema:
+              $ref: "#/components/schemas/Draft"
+          message/global:
+            schema:
+              $ref: "#/components/schemas/Draft"
+          message/global-delivery-status:
+            schema:
+              $ref: "#/components/schemas/Draft"
+          message/global-disposition-notification:
+            schema:
+              $ref: "#/components/schemas/Draft"
+          message/global-headers:
+            schema:
+              $ref: "#/components/schemas/Draft"
+          message/http:
+            schema:
+              $ref: "#/components/schemas/Draft"
+          message/imdn+xml:
+            schema:
+              $ref: "#/components/schemas/Draft"
+          message/news:
+            schema:
+              $ref: "#/components/schemas/Draft"
+          message/partial:
+            schema:
+              $ref: "#/components/schemas/Draft"
+          message/rfc822:
+            schema:
+              $ref: "#/components/schemas/Draft"
+          message/s-http:
+            schema:
+              $ref: "#/components/schemas/Draft"
+          message/sip:
+            schema:
+              $ref: "#/components/schemas/Draft"
+          message/sipfrag:
+            schema:
+              $ref: "#/components/schemas/Draft"
+          message/tracking-status:
+            schema:
+              $ref: "#/components/schemas/Draft"
+          message/vnd.si.simp:
+            schema:
+              $ref: "#/components/schemas/Draft"
+          message/vnd.wfa.wsc:
             schema:
               $ref: "#/components/schemas/Draft"
       responses:
@@ -488,17 +659,17 @@ paths:
       tags:
         - users
     parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
   "/gmail/v1/users/{userId}/labels":
     get:
       description: Lists all labels in the user's mailbox.
@@ -544,17 +715,17 @@ paths:
       tags:
         - users
     parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: Creates a new label.
       operationId: gmail.users.labels.create
@@ -686,17 +857,17 @@ paths:
       tags:
         - users
     parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
     patch:
       description: Patch the specified label.
       operationId: gmail.users.labels.patch
@@ -871,17 +1042,17 @@ paths:
       tags:
         - users
     parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: >-
         Directly inserts a message into only this user's mailbox similar to
@@ -922,7 +1093,64 @@ paths:
             type: string
       requestBody:
         content:
-          "message/cpim,message/delivery-status,message/disposition-notification,message/external-body,message/feedback-report,message/global,message/global-delivery-status,message/global-disposition-notification,message/global-headers,message/http,message/imdn+xml,message/news,message/partial,message/rfc822,message/s-http,message/sip,message/sipfrag,message/tracking-status,message/vnd.si.simp,message/vnd.wfa.wsc":
+          message/cpim:
+            schema:
+              $ref: "#/components/schemas/Message"
+          message/delivery-status:
+            schema:
+              $ref: "#/components/schemas/Message"
+          message/disposition-notification:
+            schema:
+              $ref: "#/components/schemas/Message"
+          message/external-body:
+            schema:
+              $ref: "#/components/schemas/Message"
+          message/feedback-report:
+            schema:
+              $ref: "#/components/schemas/Message"
+          message/global:
+            schema:
+              $ref: "#/components/schemas/Message"
+          message/global-delivery-status:
+            schema:
+              $ref: "#/components/schemas/Message"
+          message/global-disposition-notification:
+            schema:
+              $ref: "#/components/schemas/Message"
+          message/global-headers:
+            schema:
+              $ref: "#/components/schemas/Message"
+          message/http:
+            schema:
+              $ref: "#/components/schemas/Message"
+          message/imdn+xml:
+            schema:
+              $ref: "#/components/schemas/Message"
+          message/news:
+            schema:
+              $ref: "#/components/schemas/Message"
+          message/partial:
+            schema:
+              $ref: "#/components/schemas/Message"
+          message/rfc822:
+            schema:
+              $ref: "#/components/schemas/Message"
+          message/s-http:
+            schema:
+              $ref: "#/components/schemas/Message"
+          message/sip:
+            schema:
+              $ref: "#/components/schemas/Message"
+          message/sipfrag:
+            schema:
+              $ref: "#/components/schemas/Message"
+          message/tracking-status:
+            schema:
+              $ref: "#/components/schemas/Message"
+          message/vnd.si.simp:
+            schema:
+              $ref: "#/components/schemas/Message"
+          message/vnd.wfa.wsc:
             schema:
               $ref: "#/components/schemas/Message"
       responses:
@@ -949,17 +1177,17 @@ paths:
         - users
   "/gmail/v1/users/{userId}/messages/batchDelete":
     parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: >-
         Deletes many messages by message ID.  Provides no guarantees that messages
@@ -993,17 +1221,17 @@ paths:
         - users
   "/gmail/v1/users/{userId}/messages/batchModify":
     parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: Modifies the labels on the specified messages.
       operationId: gmail.users.messages.batchModify
@@ -1038,17 +1266,17 @@ paths:
         - users
   "/gmail/v1/users/{userId}/messages/import":
     parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: >-
         Imports a message into only this user's mailbox, with standard
@@ -1105,7 +1333,64 @@ paths:
             type: boolean
       requestBody:
         content:
-          "message/cpim,message/delivery-status,message/disposition-notification,message/external-body,message/feedback-report,message/global,message/global-delivery-status,message/global-disposition-notification,message/global-headers,message/http,message/imdn+xml,message/news,message/partial,message/rfc822,message/s-http,message/sip,message/sipfrag,message/tracking-status,message/vnd.si.simp,message/vnd.wfa.wsc":
+          message/cpim:
+            schema:
+              $ref: "#/components/schemas/Message"
+          message/delivery-status:
+            schema:
+              $ref: "#/components/schemas/Message"
+          message/disposition-notification:
+            schema:
+              $ref: "#/components/schemas/Message"
+          message/external-body:
+            schema:
+              $ref: "#/components/schemas/Message"
+          message/feedback-report:
+            schema:
+              $ref: "#/components/schemas/Message"
+          message/global:
+            schema:
+              $ref: "#/components/schemas/Message"
+          message/global-delivery-status:
+            schema:
+              $ref: "#/components/schemas/Message"
+          message/global-disposition-notification:
+            schema:
+              $ref: "#/components/schemas/Message"
+          message/global-headers:
+            schema:
+              $ref: "#/components/schemas/Message"
+          message/http:
+            schema:
+              $ref: "#/components/schemas/Message"
+          message/imdn+xml:
+            schema:
+              $ref: "#/components/schemas/Message"
+          message/news:
+            schema:
+              $ref: "#/components/schemas/Message"
+          message/partial:
+            schema:
+              $ref: "#/components/schemas/Message"
+          message/rfc822:
+            schema:
+              $ref: "#/components/schemas/Message"
+          message/s-http:
+            schema:
+              $ref: "#/components/schemas/Message"
+          message/sip:
+            schema:
+              $ref: "#/components/schemas/Message"
+          message/sipfrag:
+            schema:
+              $ref: "#/components/schemas/Message"
+          message/tracking-status:
+            schema:
+              $ref: "#/components/schemas/Message"
+          message/vnd.si.simp:
+            schema:
+              $ref: "#/components/schemas/Message"
+          message/vnd.wfa.wsc:
             schema:
               $ref: "#/components/schemas/Message"
       responses:
@@ -1132,17 +1417,17 @@ paths:
         - users
   "/gmail/v1/users/{userId}/messages/send":
     parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: >-
         Sends the specified message to the recipients in the
@@ -1161,7 +1446,64 @@ paths:
             type: string
       requestBody:
         content:
-          "message/cpim,message/delivery-status,message/disposition-notification,message/external-body,message/feedback-report,message/global,message/global-delivery-status,message/global-disposition-notification,message/global-headers,message/http,message/imdn+xml,message/news,message/partial,message/rfc822,message/s-http,message/sip,message/sipfrag,message/tracking-status,message/vnd.si.simp,message/vnd.wfa.wsc":
+          message/cpim:
+            schema:
+              $ref: "#/components/schemas/Message"
+          message/delivery-status:
+            schema:
+              $ref: "#/components/schemas/Message"
+          message/disposition-notification:
+            schema:
+              $ref: "#/components/schemas/Message"
+          message/external-body:
+            schema:
+              $ref: "#/components/schemas/Message"
+          message/feedback-report:
+            schema:
+              $ref: "#/components/schemas/Message"
+          message/global:
+            schema:
+              $ref: "#/components/schemas/Message"
+          message/global-delivery-status:
+            schema:
+              $ref: "#/components/schemas/Message"
+          message/global-disposition-notification:
+            schema:
+              $ref: "#/components/schemas/Message"
+          message/global-headers:
+            schema:
+              $ref: "#/components/schemas/Message"
+          message/http:
+            schema:
+              $ref: "#/components/schemas/Message"
+          message/imdn+xml:
+            schema:
+              $ref: "#/components/schemas/Message"
+          message/news:
+            schema:
+              $ref: "#/components/schemas/Message"
+          message/partial:
+            schema:
+              $ref: "#/components/schemas/Message"
+          message/rfc822:
+            schema:
+              $ref: "#/components/schemas/Message"
+          message/s-http:
+            schema:
+              $ref: "#/components/schemas/Message"
+          message/sip:
+            schema:
+              $ref: "#/components/schemas/Message"
+          message/sipfrag:
+            schema:
+              $ref: "#/components/schemas/Message"
+          message/tracking-status:
+            schema:
+              $ref: "#/components/schemas/Message"
+          message/vnd.si.simp:
+            schema:
+              $ref: "#/components/schemas/Message"
+          message/vnd.wfa.wsc:
             schema:
               $ref: "#/components/schemas/Message"
       responses:
@@ -1256,7 +1598,10 @@ paths:
               - raw
               - metadata
             type: string
-        - description: When given and format is METADATA, only include headers specified.
+        - description: >-
+            When given and format is `METADATA`, only include headers
+
+            specified.
           explode: true
           in: query
           name: metadataHeaders
@@ -1304,30 +1649,30 @@ paths:
       tags:
         - users
     parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
   "/gmail/v1/users/{userId}/messages/{id}/modify":
     parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: Modifies the labels on the specified message.
       operationId: gmail.users.messages.modify
@@ -1372,17 +1717,17 @@ paths:
         - users
   "/gmail/v1/users/{userId}/messages/{id}/trash":
     parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: Moves the specified message to the trash.
       operationId: gmail.users.messages.trash
@@ -1422,17 +1767,17 @@ paths:
         - users
   "/gmail/v1/users/{userId}/messages/{id}/untrash":
     parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: Removes the specified message from the trash.
       operationId: gmail.users.messages.untrash
@@ -1527,17 +1872,17 @@ paths:
       tags:
         - users
     parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
   "/gmail/v1/users/{userId}/profile":
     get:
       description: Gets the current user's Gmail profile.
@@ -1583,17 +1928,17 @@ paths:
       tags:
         - users
     parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
   "/gmail/v1/users/{userId}/settings/autoForwarding":
     get:
       description: Gets the auto-forwarding setting for the specified account.
@@ -1635,17 +1980,17 @@ paths:
       tags:
         - users
     parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
     put:
       description: >-
         Updates the auto-forwarding setting for the specified account.  A verified
@@ -1733,17 +2078,17 @@ paths:
       tags:
         - users
     parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: >-
         Adds a delegate with its verification status set directly to
@@ -1910,17 +2255,17 @@ paths:
       tags:
         - users
     parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
   "/gmail/v1/users/{userId}/settings/filters":
     get:
       description: Lists the message filters of a Gmail user.
@@ -1962,17 +2307,17 @@ paths:
       tags:
         - users
     parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: Creates a filter.
       operationId: gmail.users.settings.filters.create
@@ -2081,17 +2426,17 @@ paths:
       tags:
         - users
     parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
   "/gmail/v1/users/{userId}/settings/forwardingAddresses":
     get:
       description: Lists the forwarding addresses for the specified account.
@@ -2133,17 +2478,17 @@ paths:
       tags:
         - users
     parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: >-
         Creates a forwarding address.  If ownership verification is required, a
@@ -2272,17 +2617,17 @@ paths:
       tags:
         - users
     parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
   "/gmail/v1/users/{userId}/settings/imap":
     get:
       description: Gets IMAP settings.
@@ -2324,17 +2669,17 @@ paths:
       tags:
         - users
     parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
     put:
       description: Updates IMAP settings.
       operationId: gmail.users.settings.updateImap
@@ -2408,17 +2753,17 @@ paths:
       tags:
         - users
     parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
     put:
       description: >-
         Updates language settings.
@@ -2504,17 +2849,17 @@ paths:
       tags:
         - users
     parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
     put:
       description: Updates POP settings.
       operationId: gmail.users.settings.updatePop
@@ -2593,17 +2938,17 @@ paths:
       tags:
         - users
     parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: >-
         Creates a custom "from" send-as alias.  If an SMTP MSA is specified, Gmail
@@ -2743,17 +3088,17 @@ paths:
       tags:
         - users
     parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
     patch:
       description: Patch the specified send-as alias.
       operationId: gmail.users.settings.sendAs.patch
@@ -2902,17 +3247,17 @@ paths:
       tags:
         - users
     parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: >-
         Insert (upload) the given S/MIME config for the specified send-as alias.
@@ -3063,30 +3408,30 @@ paths:
       tags:
         - users
     parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
   "/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}/smimeInfo/{id}/setDefault":
     parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: Sets the default S/MIME config for the specified send-as alias.
       operationId: gmail.users.settings.sendAs.smimeInfo.setDefault
@@ -3131,17 +3476,17 @@ paths:
         - users
   "/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}/verify":
     parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: >-
         Sends a verification email to the specified send-as alias address.
@@ -3220,17 +3565,17 @@ paths:
       tags:
         - users
     parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
     put:
       description: Updates vacation responder settings.
       operationId: gmail.users.settings.updateVacation
@@ -3265,17 +3610,17 @@ paths:
         - users
   "/gmail/v1/users/{userId}/stop":
     parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: Stop receiving push notifications for the given user mailbox.
       operationId: gmail.users.stop
@@ -3393,17 +3738,17 @@ paths:
       tags:
         - users
     parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
   "/gmail/v1/users/{userId}/threads/{id}":
     delete:
       description: >-
@@ -3513,30 +3858,30 @@ paths:
       tags:
         - users
     parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
   "/gmail/v1/users/{userId}/threads/{id}/modify":
     parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: >-
         Modifies the labels applied to the thread. This applies to all messages
@@ -3584,17 +3929,17 @@ paths:
         - users
   "/gmail/v1/users/{userId}/threads/{id}/trash":
     parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: Moves the specified thread to the trash.
       operationId: gmail.users.threads.trash
@@ -3634,17 +3979,17 @@ paths:
         - users
   "/gmail/v1/users/{userId}/threads/{id}/untrash":
     parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: Removes the specified thread from the trash.
       operationId: gmail.users.threads.untrash
@@ -3684,17 +4029,17 @@ paths:
         - users
   "/gmail/v1/users/{userId}/watch":
     parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: Set up or update a push notification watch on the given user mailbox.
       operationId: gmail.users.watch
@@ -4152,9 +4497,9 @@ components:
           type: string
         messageListVisibility:
           description: >-
-            The visibility of the label in the message list in the
+            The visibility of messages with this label in the message list
 
-            Gmail web interface.
+            in the Gmail web interface.
 
             @mutable gmail.users.labels.create gmail.users.labels.update
           enum:

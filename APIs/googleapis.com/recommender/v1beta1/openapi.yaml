@@ -38,12 +38,12 @@ paths:
   "/v1beta1/{name}":
     get:
       description: >-
-        Gets the requested recommendation. Requires the recommender.*.get
+        Gets the requested insight. Requires the recommender.*.get IAM permission
 
-        IAM permission for the specified recommender.
-      operationId: recommender.projects.locations.recommenders.recommendations.get
+        for the specified insight type.
+      operationId: recommender.projects.locations.insightTypes.insights.get
       parameters:
-        - description: Required. Name of the recommendation.
+        - description: Required. Name of the insight.
           in: path
           name: name
           required: true
@@ -54,7 +54,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GoogleCloudRecommenderV1beta1Recommendation"
+                $ref: "#/components/schemas/GoogleCloudRecommenderV1beta1Insight"
           description: Successful response
       security:
         - Oauth2:
@@ -64,30 +64,30 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
   "/v1beta1/{name}:markAccepted":
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
     post:
       description: >-
         Marks the Insight State as Accepted. Users can use this method to
@@ -129,17 +129,17 @@ paths:
         - projects
   "/v1beta1/{name}:markClaimed":
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
     post:
       description: >-
         Marks the Recommendation State as Claimed. Users can use this method to
@@ -188,17 +188,17 @@ paths:
         - projects
   "/v1beta1/{name}:markFailed":
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
     post:
       description: >-
         Marks the Recommendation State as Failed. Users can use this method to
@@ -249,17 +249,17 @@ paths:
         - projects
   "/v1beta1/{name}:markSucceeded":
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
     post:
       description: >-
         Marks the Recommendation State as Succeeded. Users can use this method to
@@ -382,17 +382,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
   "/v1beta1/{parent}/recommendations":
     get:
       description: >-
@@ -467,17 +467,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
 components:
   parameters:
     _.xgafv:

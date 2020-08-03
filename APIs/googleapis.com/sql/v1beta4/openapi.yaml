@@ -1,6 +1,6 @@
 openapi: 3.0.0
 servers:
-  - url: https://sqladmin.googleapis.com/
+  - url: https://www.googleapis.com/
 info:
   contact:
     name: Google
@@ -33,15 +33,15 @@ info:
 externalDocs:
   url: https://developers.google.com/cloud-sql/
 tags:
-  - name: tiers
-  - name: users
-  - name: flags
-  - name: operations
-  - name: instances
-  - name: projects
-  - name: databases
   - name: sslCerts
+  - name: projects
+  - name: operations
+  - name: databases
+  - name: users
   - name: backupRuns
+  - name: flags
+  - name: tiers
+  - name: instances
 paths:
   /sql/v1beta4/flags:
     get:
@@ -49,8 +49,7 @@ paths:
       operationId: sql.flags.list
       parameters:
         - description: >-
-            Database type and version you want to retrieve flags for. By
-            default, this
+            Database type and version you want to retrieve flags for. By default, this
 
             method returns flags for all database types and versions.
           in: query
@@ -76,17 +75,17 @@ paths:
       tags:
         - flags
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
   "/sql/v1beta4/projects/{project}/instances":
     get:
       description: Lists instances under a given project.
@@ -125,8 +124,7 @@ paths:
           schema:
             type: integer
         - description: >-
-            A previously-returned page token representing part of the larger set
-            of
+            A previously-returned page token representing part of the larger set of
 
             results to view.
           in: query
@@ -152,24 +150,23 @@ paths:
       tags:
         - instances
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: Creates a new Cloud SQL instance.
       operationId: sql.instances.insert
       parameters:
         - description: >-
-            Project ID of the project to which the newly created Cloud SQL
-            instances
+            Project ID of the project to which the newly created Cloud SQL instances
 
             should belong.
           in: path
@@ -270,20 +267,21 @@ paths:
       tags:
         - instances
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
     patch:
-      description: |-
+      description: >-
         Updates settings of a Cloud SQL instance.
+
         This method supports patch semantics.
       operationId: sql.instances.patch
       parameters:
@@ -324,8 +322,7 @@ paths:
         - instances
     put:
       description: >-
-        Updates settings of a Cloud SQL instance. Using this operation might
-        cause
+        Updates settings of a Cloud SQL instance. Using this operation might cause
 
         your instance to restart.
       operationId: sql.instances.update
@@ -367,17 +364,17 @@ paths:
         - instances
   "/sql/v1beta4/projects/{project}/instances/{instance}/addServerCa":
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: >-
         Add a new trusted Certificate Authority (CA) version for the specified
@@ -424,8 +421,7 @@ paths:
   "/sql/v1beta4/projects/{project}/instances/{instance}/backupRuns":
     get:
       description: >-
-        Lists all backup runs associated with a given instance and configuration
-        in
+        Lists all backup runs associated with a given instance and configuration in
 
         the reverse chronological order of the backup initiation time.
       operationId: sql.backupRuns.list
@@ -448,8 +444,7 @@ paths:
           schema:
             type: integer
         - description: >-
-            A previously-returned page token representing part of the larger set
-            of
+            A previously-returned page token representing part of the larger set of
 
             results to view.
           in: query
@@ -475,20 +470,21 @@ paths:
       tags:
         - backupRuns
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
     post:
-      description: |-
+      description: >-
         Creates a new backup run on demand. This method is applicable only to
+
         Second Generation instances.
       operationId: sql.backupRuns.insert
       parameters:
@@ -545,8 +541,7 @@ paths:
           schema:
             type: string
         - description: >-
-            The ID of the Backup Run to delete. To find a Backup Run ID, use the
-            <a
+            The ID of the Backup Run to delete. To find a Backup Run ID, use the <a
 
             href="/sql/docs/db_path/admin-api/rest/v1beta4/backupRuns/list">list</a>
 
@@ -615,34 +610,33 @@ paths:
       tags:
         - backupRuns
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
   "/sql/v1beta4/projects/{project}/instances/{instance}/clone":
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: >-
-        Creates a Cloud SQL instance as a clone of the source instance. Using
-        this
+        Creates a Cloud SQL instance as a clone of the source instance. Using this
 
         operation might cause your instance to restart.
       operationId: sql.instances.clone
@@ -654,8 +648,7 @@ paths:
           schema:
             type: string
         - description: >-
-            The ID of the Cloud SQL instance to be cloned (source). This does
-            not
+            The ID of the Cloud SQL instance to be cloned (source). This does not
 
             include the project ID.
           in: path
@@ -688,21 +681,20 @@ paths:
         - instances
   "/sql/v1beta4/projects/{project}/instances/{instance}/createEphemeral":
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: >-
-        Generates a short-lived X509 certificate containing the provided public
-        key
+        Generates a short-lived X509 certificate containing the provided public key
 
         and signed by a private key specific to the target instance. Users may use
 
@@ -782,21 +774,20 @@ paths:
       tags:
         - databases
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: >-
-        Inserts a resource containing information about a database inside a
-        Cloud
+        Inserts a resource containing information about a database inside a Cloud
 
         SQL instance.
       operationId: sql.databases.insert
@@ -879,8 +870,7 @@ paths:
         - databases
     get:
       description: >-
-        Retrieves a resource containing information about a database inside a
-        Cloud
+        Retrieves a resource containing information about a database inside a Cloud
 
         SQL instance.
       operationId: sql.databases.get
@@ -922,21 +912,20 @@ paths:
       tags:
         - databases
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
     patch:
       description: >-
-        Partially updates a resource containing information about a database
-        inside
+        Partially updates a resource containing information about a database inside
 
         a Cloud SQL instance. This method supports patch semantics.
       operationId: sql.databases.patch
@@ -984,8 +973,7 @@ paths:
         - databases
     put:
       description: >-
-        Updates a resource containing information about a database inside a
-        Cloud
+        Updates a resource containing information about a database inside a Cloud
 
         SQL instance.
       operationId: sql.databases.update
@@ -1033,20 +1021,21 @@ paths:
         - databases
   "/sql/v1beta4/projects/{project}/instances/{instance}/demoteMaster":
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
     post:
-      description: |-
+      description: >-
         Demotes the stand-alone instance to be a Cloud SQL read replica for an
+
         external database server.
       operationId: sql.instances.demoteMaster
       parameters:
@@ -1087,21 +1076,20 @@ paths:
         - instances
   "/sql/v1beta4/projects/{project}/instances/{instance}/export":
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: >-
-        Exports data from a Cloud SQL instance to a Cloud Storage bucket as a
-        SQL
+        Exports data from a Cloud SQL instance to a Cloud Storage bucket as a SQL
 
         dump or CSV file.
       operationId: sql.instances.export
@@ -1139,20 +1127,21 @@ paths:
         - instances
   "/sql/v1beta4/projects/{project}/instances/{instance}/failover":
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
     post:
-      description: |-
+      description: >-
         Failover the instance to its failover replica instance. Using this
+
         operation might cause your instance to restart.
       operationId: sql.instances.failover
       parameters:
@@ -1193,20 +1182,21 @@ paths:
         - instances
   "/sql/v1beta4/projects/{project}/instances/{instance}/import":
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
     post:
-      description: |-
+      description: >-
         Imports data into a Cloud SQL instance from a SQL dump  or CSV file in
+
         Cloud Storage.
       operationId: sql.instances.import
       parameters:
@@ -1286,34 +1276,33 @@ paths:
       tags:
         - instances
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
   "/sql/v1beta4/projects/{project}/instances/{instance}/promoteReplica":
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: >-
-        Promotes the read replica instance to be a stand-alone Cloud SQL
-        instance.
+        Promotes the read replica instance to be a stand-alone Cloud SQL instance.
 
         Using this operation might cause your instance to restart.
       operationId: sql.instances.promoteReplica
@@ -1350,17 +1339,17 @@ paths:
         - instances
   "/sql/v1beta4/projects/{project}/instances/{instance}/rescheduleMaintenance":
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: Reschedules the maintenance on the given instance.
       operationId: sql.projects.instances.rescheduleMaintenance
@@ -1402,21 +1391,20 @@ paths:
         - projects
   "/sql/v1beta4/projects/{project}/instances/{instance}/resetSslConfig":
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: >-
-        Deletes all client certificates and generates a new server SSL
-        certificate
+        Deletes all client certificates and generates a new server SSL certificate
 
         for the instance.
       operationId: sql.instances.resetSslConfig
@@ -1453,17 +1441,17 @@ paths:
         - instances
   "/sql/v1beta4/projects/{project}/instances/{instance}/restart":
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: Restarts a Cloud SQL instance.
       operationId: sql.instances.restart
@@ -1500,21 +1488,20 @@ paths:
         - instances
   "/sql/v1beta4/projects/{project}/instances/{instance}/restoreBackup":
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: >-
-        Restores a backup of a Cloud SQL instance. Using this operation might
-        cause
+        Restores a backup of a Cloud SQL instance. Using this operation might cause
 
         your instance to restart.
       operationId: sql.instances.restoreBackup
@@ -1556,21 +1543,20 @@ paths:
         - instances
   "/sql/v1beta4/projects/{project}/instances/{instance}/rotateServerCa":
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: >-
-        Rotates the server certificate to one signed by the Certificate
-        Authority
+        Rotates the server certificate to one signed by the Certificate Authority
 
         (CA) version previously added with the addServerCA method.
       operationId: sql.instances.rotateServerCa
@@ -1646,17 +1632,17 @@ paths:
       tags:
         - sslCerts
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: >-
         Creates an SSL certificate and returns it along with the private key and
@@ -1703,8 +1689,9 @@ paths:
         - sslCerts
   "/sql/v1beta4/projects/{project}/instances/{instance}/sslCerts/{sha1Fingerprint}":
     delete:
-      description: |-
+      description: >-
         Deletes the SSL certificate. For First Generation instances, the
+
         certificate remains valid until the instance is restarted.
       operationId: sql.sslCerts.delete
       parameters:
@@ -1746,8 +1733,7 @@ paths:
         - sslCerts
     get:
       description: >-
-        Retrieves a particular SSL certificate.  Does not include the private
-        key
+        Retrieves a particular SSL certificate.  Does not include the private key
 
         (required for usage).  The private key must be saved from the response to
 
@@ -1791,30 +1777,30 @@ paths:
       tags:
         - sslCerts
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
   "/sql/v1beta4/projects/{project}/instances/{instance}/startExternalSync":
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: Start External master migration.
       operationId: sql.projects.instances.startExternalSync
@@ -1860,17 +1846,17 @@ paths:
         - projects
   "/sql/v1beta4/projects/{project}/instances/{instance}/startReplica":
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: Starts the replication in the read replica instance.
       operationId: sql.instances.startReplica
@@ -1907,17 +1893,17 @@ paths:
         - instances
   "/sql/v1beta4/projects/{project}/instances/{instance}/stopReplica":
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: Stops the replication in the read replica instance.
       operationId: sql.instances.stopReplica
@@ -1954,17 +1940,17 @@ paths:
         - instances
   "/sql/v1beta4/projects/{project}/instances/{instance}/truncateLog":
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: Truncate MySQL general and slow query log tables
       operationId: sql.instances.truncateLog
@@ -2084,17 +2070,17 @@ paths:
       tags:
         - users
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: Creates a new user in a Cloud SQL instance.
       operationId: sql.users.insert
@@ -2185,17 +2171,17 @@ paths:
         - users
   "/sql/v1beta4/projects/{project}/instances/{instance}/verifyExternalSyncSettings":
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: Verify External master external sync settings.
       operationId: sql.projects.instances.verifyExternalSyncSettings
@@ -2247,8 +2233,7 @@ paths:
   "/sql/v1beta4/projects/{project}/operations":
     get:
       description: >-
-        Lists all instance operations that have been performed on the given
-        Cloud
+        Lists all instance operations that have been performed on the given Cloud
 
         SQL instance in the reverse chronological order of the start time.
       operationId: sql.operations.list
@@ -2270,8 +2255,7 @@ paths:
           schema:
             type: integer
         - description: >-
-            A previously-returned page token representing part of the larger set
-            of
+            A previously-returned page token representing part of the larger set of
 
             results to view.
           in: query
@@ -2297,17 +2281,17 @@ paths:
       tags:
         - operations
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
   "/sql/v1beta4/projects/{project}/operations/{operation}":
     get:
       description: Retrieves an instance operation that has been performed on an instance.
@@ -2344,22 +2328,24 @@ paths:
       tags:
         - operations
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
   "/sql/v1beta4/projects/{project}/tiers":
     get:
-      description: |-
+      description: >-
         Lists all available machine types (tiers) for Cloud SQL, for example,
+
         db-n1-standard-1. For related information, see <a
+
         href="/sql/pricing">Pricing</a>.
       operationId: sql.tiers.list
       parameters:
@@ -2388,17 +2374,17 @@ paths:
       tags:
         - tiers
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
 components:
   parameters:
     _.xgafv:
@@ -2439,9 +2425,7 @@ components:
       schema:
         type: string
     key:
-      description: API key. Your API key identifies your project and provides you with
-        API access, quota, and reports. Required unless you provide an OAuth 2.0
-        token.
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -2459,9 +2443,7 @@ components:
       schema:
         type: boolean
     quotaUser:
-      description: Available to use for quota purposes for server-side applications.
-        Can be any arbitrary string assigned to a user, but should not exceed 40
-        characters.
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
       in: query
       name: quotaUser
       schema:
@@ -2488,11 +2470,11 @@ components:
 
             href="https://tools.ietf.org/html/rfc3339">RFC 3339</a> format, for example
 
-            <code>2012-11-15T16:19:00.094Z</code>.
+            <b>2012-11-15T16:19:00.094Z</b>.
           format: google-datetime
           type: string
         kind:
-          description: This is always <code>sql#aclEntry</code>.
+          description: This is always <b>sql#aclEntry</b>.
           type: string
         name:
           description: Optional. A label to identify this entry.
@@ -2519,8 +2501,7 @@ components:
       properties:
         binaryLogEnabled:
           description: >-
-            (MySQL only) Whether binary log is enabled. If backup configuration
-            is
+            (MySQL only) Whether binary log is enabled. If backup configuration is
 
             disabled, binarylog must be disabled as well.
           type: boolean
@@ -2528,7 +2509,7 @@ components:
           description: Whether this configuration is enabled.
           type: boolean
         kind:
-          description: This is always <code>sql#backupConfiguration</code>.
+          description: This is always <b>sql#backupConfiguration</b>.
           type: string
         location:
           description: Location of the backup
@@ -2541,27 +2522,35 @@ components:
           type: boolean
         startTime:
           description: >-
-            Start time for the daily backup configuration in UTC timezone in the
-            24
+            Start time for the daily backup configuration in UTC timezone in the 24
 
-            hour format - <code>HH:MM</code>.
+            hour format - <b>HH:MM</b>.
           type: string
       type: object
     BackupRun:
       description: A BackupRun resource.
       properties:
+        backupKind:
+          description: Specifies the kind of backup, PHYSICAL or DEFAULT_SNAPSHOT.
+          enum:
+            - SQL_BACKUP_KIND_UNSPECIFIED
+            - SNAPSHOT
+            - PHYSICAL
+          type: string
         description:
           description: The description of this run, only applicable to on-demand backups.
           type: string
         diskEncryptionConfiguration:
           $ref: "#/components/schemas/DiskEncryptionConfiguration"
-          description: |-
+          description: >-
             Encryption configuration specific to a backup.
+
             Applies only to Second Generation instances.
         diskEncryptionStatus:
           $ref: "#/components/schemas/DiskEncryptionStatus"
-          description: |-
+          description: >-
             Encryption status specific to a backup.
+
             Applies only to Second Generation instances.
         endTime:
           description: >-
@@ -2569,7 +2558,7 @@ components:
 
             href="https://tools.ietf.org/html/rfc3339">RFC 3339</a> format, for example
 
-            <code>2012-11-15T16:19:00.094Z</code>.
+            <b>2012-11-15T16:19:00.094Z</b>.
           format: google-datetime
           type: string
         enqueuedTime:
@@ -2578,20 +2567,18 @@ components:
 
             href="https://tools.ietf.org/html/rfc3339">RFC 3339</a> format, for example
 
-            <code>2012-11-15T16:19:00.094Z</code>.
+            <b>2012-11-15T16:19:00.094Z</b>.
           format: google-datetime
           type: string
         error:
           $ref: "#/components/schemas/OperationError"
           description: >-
-            Information about why the backup operation failed. This is only
-            present if
+            Information about why the backup operation failed. This is only present if
 
             the run has the FAILED status.
         id:
           description: >-
-            The identifier for this backup run. Unique only for a specific Cloud
-            SQL
+            The identifier for this backup run. Unique only for a specific Cloud SQL
 
             instance.
           format: int64
@@ -2600,7 +2587,7 @@ components:
           description: Name of the database instance.
           type: string
         kind:
-          description: This is always <code>sql#backupRun</code>.
+          description: This is always <b>sql#backupRun</b>.
           type: string
         location:
           description: Location of the backups.
@@ -2614,7 +2601,7 @@ components:
 
             href="https://tools.ietf.org/html/rfc3339">RFC 3339</a> format, for example
 
-            <code>2012-11-15T16:19:00.094Z</code>.
+            <b>2012-11-15T16:19:00.094Z</b>.
           format: google-datetime
           type: string
         status:
@@ -2644,7 +2631,7 @@ components:
 
             attempted in <a href="https://tools.ietf.org/html/rfc3339">RFC 3339</a>
 
-            format, for example <code>2012-11-15T16:19:00.094Z</code>.
+            format, for example <b>2012-11-15T16:19:00.094Z</b>.
           format: google-datetime
           type: string
       type: object
@@ -2652,18 +2639,16 @@ components:
       description: Backup run list results.
       properties:
         items:
-          description: A list of backup runs in reverse chronological order of the
-            enqueued time.
+          description: A list of backup runs in reverse chronological order of the enqueued time.
           items:
             $ref: "#/components/schemas/BackupRun"
           type: array
         kind:
-          description: This is always <code>sql#backupRunsList</code>.
+          description: This is always <b>sql#backupRunsList</b>.
           type: string
         nextPageToken:
           description: >-
-            The continuation token, used to page through large result sets.
-            Provide
+            The continuation token, used to page through large result sets. Provide
 
             this value in a subsequent request to return the next page of results.
           type: string
@@ -2679,7 +2664,7 @@ components:
           format: int64
           type: string
         kind:
-          description: This is always <code>sql#binLogCoordinates</code>.
+          description: This is always <b>sql#binLogCoordinates</b>.
           type: string
       type: object
     CloneContext:
@@ -2688,8 +2673,7 @@ components:
         binLogCoordinates:
           $ref: "#/components/schemas/BinLogCoordinates"
           description: >-
-            Binary log coordinates, if specified, identify the position up to
-            which the
+            Binary log coordinates, if specified, identify the position up to which the
 
             source instance should be cloned. If not specified, the source instance is
 
@@ -2698,7 +2682,7 @@ components:
           description: Name of the Cloud SQL instance to be created as a clone.
           type: string
         kind:
-          description: This is always <code>sql#cloneContext</code>.
+          description: This is always <b>sql#cloneContext</b>.
           type: string
         pitrTimestampMs:
           description: Reserved for future use.
@@ -2713,36 +2697,32 @@ components:
       description: Represents a SQL database on the Cloud SQL instance.
       properties:
         charset:
-          description: The MySQL charset value.
+          description: The Cloud SQL charset value.
           type: string
         collation:
-          description: The MySQL collation value.
+          description: The Cloud SQL collation value.
           type: string
         etag:
           description: >-
-            This field is deprecated and will be removed from a future version
-            of the
+            This field is deprecated and will be removed from a future version of the
 
             API.
           type: string
         instance:
-          description: The name of the Cloud SQL instance. This does not include the
-            project ID.
+          description: The name of the Cloud SQL instance. This does not include the project ID.
           type: string
         kind:
-          description: This is always <code>sql#database</code>.
+          description: This is always <b>sql#database</b>.
           type: string
         name:
           description: >-
-            The name of the database in the Cloud SQL instance. This does not
-            include
+            The name of the database in the Cloud SQL instance. This does not include
 
             the project ID or instance name.
           type: string
         project:
           description: >-
-            The project ID of the project containing the Cloud SQL database. The
-            Google
+            The project ID of the project containing the Cloud SQL database. The Google
 
             apps domain is prefixed if applicable.
           type: string
@@ -2769,30 +2749,30 @@ components:
           type: string
         value:
           description: >-
-            The value of the flag. Booleans should be set to <code>on</code> for
-            true
+            The value of the flag. Booleans should be set to <b>on</b> for true
 
-            and <code>off</code> for false. This field must be omitted if the flag
+            and <b>off</b> for false. This field must be omitted if the flag
 
             doesn't take a value.
           type: string
       type: object
     DatabaseInstance:
-      description: A Cloud SQL instance resource.
+      description: >-
+        A Cloud SQL instance resource.
+
+        Next field: 34
       properties:
         backendType:
           description: >-
-            <code>FIRST_GEN</code>: First Generation instance. MySQL only. <br
+            <br><b>SECOND_GEN</b>: Cloud SQL database instance.
 
-            /><code>SECOND_GEN</code>: Second Generation instance or PostgreSQL
-
-            instance. <br /><code>EXTERNAL</code>: A database server that is not
+            <br><b>EXTERNAL</b>: A database server that is not
 
             managed by Google. <br>This property is read-only; use the
 
-            <code>tier</code> property in the <code>settings</code> object to determine
+            <b>tier</b> property in the <b>settings</b> object to determine
 
-            the database type and Second or First Generation.
+            the database type.
           enum:
             - SQL_BACKEND_TYPE_UNSPECIFIED
             - FIRST_GEN
@@ -2804,8 +2784,7 @@ components:
           type: string
         currentDiskSize:
           description: >-
-            The current disk usage of the instance in bytes. This property has
-            been
+            The current disk usage of the instance in bytes. This property has been
 
             deprecated. Users should use the
 
@@ -2820,18 +2799,21 @@ components:
           type: string
         databaseVersion:
           description: >-
-            The database engine type and version. The
-            <code>databaseVersion</code>
+            The database engine type and version. The <b>databaseVersion</b>
 
-            field can not be changed after instance creation.  MySQL Second Generation
+            field cannot be changed after instance creation.
 
-            instances: <code>MYSQL_5_7</code> (default) or <code>MYSQL_5_6</code>.
+            <br>MySQL instances: <b>MYSQL_5_7</b> (default), or <b>MYSQL_5_6</b>.
 
-            PostgreSQL instances: <code>POSTGRES_9_6</code> (default) or
+            <br>PostgreSQL instances: <b>POSTGRES_9_6</b> (default), or
 
-            <code>POSTGRES_11 Beta</code> MySQL First Generation
+            <b>POSTGRES_10</b>, or <b>POSTGRES_11 Beta</b>, or <b>POSTGRES_12</b>.
 
-            instances: <code>MYSQL_5_6</code> (default) or <code>MYSQL_5_5</code>
+            <br>SQL Server instances: <b>SQLSERVER_2017_STANDARD</b> (default),
+
+            <b>SQLSERVER_2017_ENTERPRISE</b>, <b>SQLSERVER_2017_EXPRESS</b>, or
+
+            <b>SQLSERVER_2017_WEB</b>.
           enum:
             - SQL_DATABASE_VERSION_UNSPECIFIED
             - MYSQL_5_1
@@ -2850,32 +2832,31 @@ components:
           type: string
         diskEncryptionConfiguration:
           $ref: "#/components/schemas/DiskEncryptionConfiguration"
-          description: |-
+          description: >-
             Disk encryption configuration specific to an instance.
+
             Applies only to Second Generation instances.
         diskEncryptionStatus:
           $ref: "#/components/schemas/DiskEncryptionStatus"
-          description: |-
+          description: >-
             Disk encryption status specific to an instance.
+
             Applies only to Second Generation instances.
         etag:
           description: >-
-            This field is deprecated and will be removed from a future version
-            of the
+            This field is deprecated and will be removed from a future version of the
 
-            API. Use the <code>settings.settingsVersion</code> field instead.
+            API. Use the <b>settings.settingsVersion</b> field instead.
           type: string
         failoverReplica:
           description: >-
-            The name and status of the failover replica. This property is
-            applicable
+            The name and status of the failover replica. This property is applicable
 
             only to Second Generation instances.
           properties:
             available:
               description: >-
-                The availability status of the failover replica. A false status
-                indicates
+                The availability status of the failover replica. A false status indicates
 
                 that the failover replica is out of sync. The master can only failover to
 
@@ -2883,8 +2864,7 @@ components:
               type: boolean
             name:
               description: >-
-                The name of the failover replica. If specified at instance
-                creation, a
+                The name of the failover replica. If specified at instance creation, a
 
                 failover replica is created for the instance. The name
 
@@ -2895,8 +2875,7 @@ components:
           type: object
         gceZone:
           description: >-
-            The Compute Engine zone that the instance is currently serving from.
-            This
+            The Compute Engine zone that the instance is currently serving from. This
 
             value could be different from the zone that was specified when the instance
 
@@ -2906,15 +2885,13 @@ components:
           description: >-
             The instance type. This can be one of the following.
 
-            <br><code>CLOUD_SQL_INSTANCE</code>: A Cloud SQL instance that is not
+            <br><b>CLOUD_SQL_INSTANCE</b>: A Cloud SQL instance that is not replicating
 
-            replicating from a master. <br><code>ON_PREMISES_INSTANCE</code>: An
+            from a master. <br><b>ON_PREMISES_INSTANCE</b>: An instance running on the
 
-            instance running on the
+            customer's premises. <br><b>READ_REPLICA_INSTANCE</b>: A Cloud SQL instance
 
-            customer's premises. <br><code>READ_REPLICA_INSTANCE</code>: A Cloud SQL
-
-            instance configured as a read-replica.
+            configured as a read-replica.
           enum:
             - SQL_INSTANCE_TYPE_UNSPECIFIED
             - CLOUD_SQL_INSTANCE
@@ -2928,17 +2905,17 @@ components:
           type: array
         ipv6Address:
           description: >-
-            The IPv6 address assigned to the instance. This property is
-            applicable only
+            The IPv6 address assigned to the instance.
+
+            (Deprecated) This property was applicable only
 
             to First Generation instances.
           type: string
         kind:
-          description: This is always <code>sql#instance</code>.
+          description: This is always <b>sql#instance</b>.
           type: string
         masterInstanceName:
-          description: The name of the instance which will act as master in the
-            replication setup.
+          description: The name of the instance which will act as master in the replication setup.
           type: string
         maxDiskSize:
           description: The maximum disk size of the instance in bytes.
@@ -2952,26 +2929,25 @@ components:
           description: Configuration specific to on-premises instances.
         project:
           description: >-
-            The project ID of the project containing the Cloud SQL instance. The
-            Google
+            The project ID of the project containing the Cloud SQL instance. The Google
 
             apps domain is prefixed if applicable.
           type: string
         region:
           description: >-
-            The geographical region. Can be <code>us-central</code>
+            The geographical region. Can be
 
-            (<code>FIRST_GEN</code> instances only), <code>us-central1</code>
+            <br><b>us-central</b> (<b>FIRST_GEN</b> instances only)
 
-            (<code>SECOND_GEN</code> instances only), <code>asia-east1</code> or
+            <br><b>us-central1</b> (<b>SECOND_GEN</b> instances only)
 
-            <code>europe-west1</code>. Defaults to <code>us-central</code> or
+            <br><b>asia-east1</b> or <b>europe-west1</b>.
 
-            <code>us-central1</code> depending on the instance type (First Generation
+            <br>Defaults to <b>us-central</b> or
 
-            or Second Generation). The region can not be changed after instance
+            <b>us-central1</b> depending on the instance type.
 
-            creation.
+            The region cannot be changed after instance creation.
           type: string
         replicaConfiguration:
           $ref: "#/components/schemas/ReplicaConfiguration"
@@ -2986,8 +2962,7 @@ components:
           type: string
         scheduledMaintenance:
           $ref: "#/components/schemas/SqlScheduledMaintenance"
-          description: The start time of any upcoming scheduled maintenance for this
-            instance.
+          description: The start time of any upcoming scheduled maintenance for this instance.
         selfLink:
           description: The URI of this resource.
           type: string
@@ -2996,8 +2971,7 @@ components:
           description: SSL configuration.
         serviceAccountEmailAddress:
           description: >-
-            The service account email address assigned to the instance. This
-            property
+            The service account email address assigned to the instance. This property
 
             is applicable only to Second Generation instances.
           type: string
@@ -3006,22 +2980,21 @@ components:
           description: The user settings.
         state:
           description: >-
-            The current serving state of the Cloud SQL instance. This can be one
-            of the
+            The current serving state of the Cloud SQL instance. This can be one of the
 
-            following. <br><code>RUNNABLE</code>: The instance is running, or is ready
+            following. <br><b>RUNNABLE</b>: The instance is running, or is ready
 
-            to run when accessed. <br><code>SUSPENDED</code>: The instance is not
+            to run when accessed. <br><b>SUSPENDED</b>: The instance is not
 
             available, for example due to problems with billing.
 
-            <br><code>PENDING_CREATE</code>: The instance is being created.
+            <br><b>PENDING_CREATE</b>: The instance is being created.
 
-            <br><code>MAINTENANCE</code>: The instance is down for maintenance.
+            <br><b>MAINTENANCE</b>: The instance is down for maintenance.
 
-            <br><code>FAILED</code>: The instance creation failed.
+            <br><b>FAILED</b>: The instance creation failed.
 
-            <br><code>UNKNOWN_STATE</code>: The state of the instance is unknown.
+            <br><b>UNKNOWN_STATE</b>: The state of the instance is unknown.
           enum:
             - SQL_INSTANCE_STATE_UNSPECIFIED
             - RUNNABLE
@@ -3052,20 +3025,19 @@ components:
             $ref: "#/components/schemas/Database"
           type: array
         kind:
-          description: This is always <code>sql#databasesList</code>.
+          description: This is always <b>sql#databasesList</b>.
           type: string
       type: object
     DemoteMasterConfiguration:
       description: Read-replica configuration for connecting to the on-premises master.
       properties:
         kind:
-          description: This is always <code>sql#demoteMasterConfiguration</code>.
+          description: This is always <b>sql#demoteMasterConfiguration</b>.
           type: string
         mysqlReplicaConfiguration:
           $ref: "#/components/schemas/DemoteMasterMySqlReplicaConfiguration"
           description: >-
-            MySQL specific configuration when replicating from a MySQL
-            on-premises
+            MySQL specific configuration when replicating from a MySQL on-premises
 
             master. Replication configuration information such as the username,
 
@@ -3073,7 +3045,7 @@ components:
 
             The configuration information is used only to set up the replication
 
-            connection and is stored by MySQL in a file named <code>master.info</code>
+            connection and is stored by MySQL in a file named <b>master.info</b>
 
             in the data directory.
       type: object
@@ -3081,25 +3053,25 @@ components:
       description: Database instance demote master context.
       properties:
         kind:
-          description: This is always <code>sql#demoteMasterContext</code>.
+          description: This is always <b>sql#demoteMasterContext</b>.
           type: string
         masterInstanceName:
-          description: |-
+          description: >-
             The name of the instance which will act as on-premises master in the
+
             replication setup.
           type: string
         replicaConfiguration:
           $ref: "#/components/schemas/DemoteMasterConfiguration"
           description: >-
-            Configuration specific to read-replicas replicating from the
-            on-premises
+            Configuration specific to read-replicas replicating from the on-premises
 
             master.
         verifyGtidConsistency:
           description: >-
             Verify GTID consistency for demote operation. Default value:
 
-            <code>True</code>. Second Generation instances only.  Setting this flag to
+            <b>True</b>. Second Generation instances only.  Setting this flag to
 
             false enables you to bypass GTID consistency check between on-premises
 
@@ -3123,16 +3095,14 @@ components:
           type: string
         clientKey:
           description: >-
-            PEM representation of the slave's private key. The corresponsing
-            public key
+            PEM representation of the slave's private key. The corresponsing public key
 
             is encoded in the client's certificate. The format of the slave's private
 
             key can be either PKCS #1 or PKCS #8.
           type: string
         kind:
-          description: This is always
-            <code>sql#demoteMasterMysqlReplicaConfiguration</code>.
+          description: This is always <b>sql#demoteMasterMysqlReplicaConfiguration</b>.
           type: string
         password:
           description: The password for the replication connection.
@@ -3145,7 +3115,7 @@ components:
       description: Disk encryption configuration for an instance.
       properties:
         kind:
-          description: This is always <code>sql#diskEncryptionConfiguration</code>.
+          description: This is always <b>sql#diskEncryptionConfiguration</b>.
           type: string
         kmsKeyName:
           description: Resource name of KMS key for disk encryption
@@ -3155,7 +3125,7 @@ components:
       description: Disk encryption status for an instance.
       properties:
         kind:
-          description: This is always <code>sql#diskEncryptionStatus</code>.
+          description: This is always <b>sql#diskEncryptionStatus</b>.
           type: string
         kmsKeyVersionName:
           description: KMS key version used to encrypt the Cloud SQL instance resource
@@ -3175,31 +3145,31 @@ components:
           description: >-
             Databases to be exported. <br /> <b>MySQL instances:</b> If
 
-            <code>fileType</code> is <code>SQL</code> and no database is specified, all
+            <b>fileType</b> is <b>SQL</b> and no database is specified, all
 
-            databases are exported, except for the <code>mysql</code> system database.
+            databases are exported, except for the <b>mysql</b> system database.
 
-            If <code>fileType</code> is <code>CSV</code>, you can specify one database,
+            If <b>fileType</b> is <b>CSV</b>, you can specify one database,
 
             either by using this property or by using the
 
-            <code>csvExportOptions.selectQuery</code> property, which takes precedence
+            <b>csvExportOptions.selectQuery</b> property, which takes precedence
 
             over this property. <br /> <b>PostgreSQL instances:</b> You must specify
 
-            one database to be exported. If <code>fileType</code> is <code>CSV</code>,
+            one database to be exported. If <b>fileType</b> is <b>CSV</b>,
 
             this database must match the one specified in the
 
-            <code>csvExportOptions.selectQuery</code> property.
+            <b>csvExportOptions.selectQuery</b> property.
           items:
             type: string
           type: array
         fileType:
           description: >-
-            The file type for the specified uri. <br><code>SQL</code>: The file
+            The file type for the specified uri. <br><b>SQL</b>: The file
 
-            contains SQL statements. <br><code>CSV</code>: The file contains CSV data.
+            contains SQL statements. <br><b>CSV</b>: The file contains CSV data.
           enum:
             - SQL_FILE_TYPE_UNSPECIFIED
             - SQL
@@ -3207,11 +3177,8 @@ components:
             - BAK
           type: string
         kind:
-          description: This is always <code>sql#exportContext</code>.
+          description: This is always <b>sql#exportContext</b>.
           type: string
-        offload:
-          description: Option for export offload.
-          type: boolean
         sqlExportOptions:
           description: Options for exporting data as SQL statements.
           properties:
@@ -3220,12 +3187,11 @@ components:
               properties:
                 masterData:
                   description: >-
-                    Option to include SQL statement required to set up
-                    replication.
+                    Option to include SQL statement required to set up replication.
 
-                    If set to <code>1</code>, the dump file includes
+                    <br>If set to <b>1</b>, the dump file includes
                      a CHANGE MASTER TO statement with the binary log coordinates.
-                    If set to <code>2</code>, the CHANGE MASTER TO statement is written as
+                    <br>If set to <b>2</b>, the CHANGE MASTER TO statement is written as
                      a SQL comment, and has no effect.
                     All other values are ignored.
                   format: int32
@@ -3236,8 +3202,7 @@ components:
               type: boolean
             tables:
               description: >-
-                Tables to export, or that were exported, from the specified
-                database. If
+                Tables to export, or that were exported, from the specified database. If
 
                 you specify tables, specify one and only one database. For PostgreSQL
 
@@ -3248,16 +3213,15 @@ components:
           type: object
         uri:
           description: >-
-            The path to the file in Google Cloud Storage where the export will
-            be
+            The path to the file in Google Cloud Storage where the export will be
 
-            stored. The URI is in the form <code>gs:
+            stored. The URI is in the form <b>gs:
 
-            //bucketName/fileName</code>. If the file already exists, the requests
+            //bucketName/fileName</b>. If the file already exists, the requests
 
-            // succeeds, but the operation fails. If <code>fileType</code> is
+            // succeeds, but the operation fails. If <b>fileType</b> is
 
-            // <code>SQL</code> and the filename ends with .gz, the contents are
+            // <b>SQL</b> and the filename ends with .gz, the contents are
 
             // compressed.
           type: string
@@ -3266,12 +3230,11 @@ components:
       description: Database instance failover context.
       properties:
         kind:
-          description: This is always <code>sql#failoverContext</code>.
+          description: This is always <b>sql#failoverContext</b>.
           type: string
         settingsVersion:
           description: >-
-            The current settings version of this instance. Request will be
-            rejected if
+            The current settings version of this instance. Request will be rejected if
 
             this version doesn't match the current settings version.
           format: int64
@@ -3282,8 +3245,7 @@ components:
       properties:
         allowedIntValues:
           description: >-
-            Use this field if only certain integers are accepted. Can be
-            combined
+            Use this field if only certain integers are accepted. Can be combined
 
             with min_value and max_value to add additional values.
           items:
@@ -3292,8 +3254,7 @@ components:
           type: array
         allowedStringValues:
           description: >-
-            For <code>STRING</code> flags, a list of strings that the value can
-            be set
+            For <b>STRING</b> flags, a list of strings that the value can be set
 
             to.
           items:
@@ -3301,10 +3262,9 @@ components:
           type: array
         appliesTo:
           description: >-
-            The database version this flag applies to. Can be
-            <code>MYSQL_5_5</code>,
+            The database version this flag applies to. Can be <b>MYSQL_5_5</b>,
 
-            <code>MYSQL_5_6</code>, or <code>MYSQL_5_7</code>. <code>MYSQL_5_7</code>
+            <b>MYSQL_5_6</b>, or <b>MYSQL_5_7</b>. <b>MYSQL_5_7</b>
 
             is applicable only to Second Generation instances.
           items:
@@ -3329,37 +3289,37 @@ components:
           description: Whether or not the flag is considered in beta.
           type: boolean
         kind:
-          description: This is always <code>sql#flag</code>.
+          description: This is always <b>sql#flag</b>.
           type: string
         maxValue:
-          description: For <code>INTEGER</code> flags, the maximum allowed value.
+          description: For <b>INTEGER</b> flags, the maximum allowed value.
           format: int64
           type: string
         minValue:
-          description: For <code>INTEGER</code> flags, the minimum allowed value.
+          description: For <b>INTEGER</b> flags, the minimum allowed value.
           format: int64
           type: string
         name:
-          description: |-
+          description: >-
             This is the name of the flag. Flag names always use underscores, not
-            hyphens, e.g. <code>max_allowed_packet</code>
+
+            hyphens, e.g. <b>max_allowed_packet</b>
           type: string
         requiresRestart:
           description: >-
-            Indicates whether changing this flag will trigger a database
-            restart. Only
+            Indicates whether changing this flag will trigger a database restart. Only
 
             applicable to Second Generation instances.
           type: boolean
         type:
           description: >-
-            The type of the flag. Flags are typed to being <code>BOOLEAN</code>,
+            The type of the flag. Flags are typed to being <b>BOOLEAN</b>,
 
-            <code>STRING</code>, <code>INTEGER</code> or <code>NONE</code>.
+            <b>STRING</b>, <b>INTEGER</b> or <b>NONE</b>.
 
-            <code>NONE</code> is used for flags which do not take a value, such as
+            <b>NONE</b> is used for flags which do not take a value, such as
 
-            <code>skip_grant_tables</code>.
+            <b>skip_grant_tables</b>.
           enum:
             - SQL_FLAG_TYPE_UNSPECIFIED
             - BOOLEAN
@@ -3380,7 +3340,7 @@ components:
             $ref: "#/components/schemas/Flag"
           type: array
         kind:
-          description: This is always <code>sql#flagsList</code>.
+          description: This is always <b>sql#flagsList</b>.
           type: string
       type: object
     ImportContext:
@@ -3395,7 +3355,7 @@ components:
                   description: >-
                     Path to the Certificate (.cer) in Cloud Storage, in the form
 
-                    <code>gs://bucketName/fileName</code>. The instance must have
+                    <b>gs://bucketName/fileName</b>. The instance must have
 
                     write permissions to the bucket and read access to the file.
                   type: string
@@ -3404,10 +3364,9 @@ components:
                   type: string
                 pvkPath:
                   description: >-
-                    Path to the Certificate Private Key (.pvk)  in Cloud
-                    Storage, in the
+                    Path to the Certificate Private Key (.pvk)  in Cloud Storage, in the
 
-                    form <code>gs://bucketName/fileName</code>. The instance must have
+                    form <b>gs://bucketName/fileName</b>. The instance must have
 
                     write permissions to the bucket and read access to the file.
                   type: string
@@ -3418,8 +3377,7 @@ components:
           properties:
             columns:
               description: >-
-                The columns to which CSV data is imported. If not specified, all
-                columns
+                The columns to which CSV data is imported. If not specified, all columns
 
                 of the database table are loaded with CSV data.
               items:
@@ -3431,21 +3389,21 @@ components:
           type: object
         database:
           description: >-
-            The target database for the import. If <code>fileType</code> is
+            The target database for the import. If <b>fileType</b> is
 
-            <code>SQL</code>, this field is required only if the import file does not
+            <b>SQL</b>, this field is required only if the import file does not
 
             specify a database, and is overridden by any database specification in the
 
-            import file. If <code>fileType</code> is <code>CSV</code>, one database
+            import file. If <b>fileType</b> is <b>CSV</b>, one database
 
             must be specified.
           type: string
         fileType:
           description: >-
-            The file type for the specified uri. <br><code>SQL</code>: The file
+            The file type for the specified uri. <br><b>SQL</b>: The file
 
-            contains SQL statements. <br><code>CSV</code>: The file contains CSV data.
+            contains SQL statements. <br><b>CSV</b>: The file contains CSV data.
           enum:
             - SQL_FILE_TYPE_UNSPECIFIED
             - SQL
@@ -3453,21 +3411,20 @@ components:
             - BAK
           type: string
         importUser:
-          description: The PostgreSQL user for this import operation. PostgreSQL instances
-            only.
+          description: The PostgreSQL user for this import operation. PostgreSQL instances only.
           type: string
         kind:
-          description: This is always <code>sql#importContext</code>.
+          description: This is always <b>sql#importContext</b>.
           type: string
         uri:
           description: >-
             Path to the import file in Cloud Storage, in the form
 
-            <code>gs:
+            <b>gs:
 
-            //bucketName/fileName</code>. Compressed gzip files (.gz) are supported
+            //bucketName/fileName</b>. Compressed gzip files (.gz) are supported
 
-            // when <code>fileType</code> is <code>SQL</code>. The instance must have
+            // when <b>fileType</b> is <b>SQL</b>. The instance must have
 
             // write permissions to the bucket and read access to the file.
           type: string
@@ -3516,12 +3473,11 @@ components:
             $ref: "#/components/schemas/DatabaseInstance"
           type: array
         kind:
-          description: This is always <code>sql#instancesList</code>.
+          description: This is always <b>sql#instancesList</b>.
           type: string
         nextPageToken:
           description: >-
-            The continuation token, used to page through large result sets.
-            Provide
+            The continuation token, used to page through large result sets. Provide
 
             this value in a subsequent request to return the next page of results.
           type: string
@@ -3542,7 +3498,7 @@ components:
             $ref: "#/components/schemas/SslCert"
           type: array
         kind:
-          description: This is always <code>sql#instancesListServerCas</code>.
+          description: This is always <b>sql#instancesListServerCas</b>.
           type: string
       type: object
     InstancesRestoreBackupRequest:
@@ -3571,16 +3527,11 @@ components:
       properties:
         authorizedNetworks:
           description: >-
-            The list of external networks that are allowed to connect to the
-            instance
+            The list of external networks that are allowed to connect to the instance
 
-            using the IP. In <a
+            using the IP. In 'CIDR' notation, also known as 'slash' notation (e.g.
 
-            href="http://en.wikipedia.org/wiki/CIDR_notation#CIDR_notation">CIDR
-
-            notation</a>, also known as 'slash' notation (e.g.
-
-            <code>192.168.100.0/24</code>).
+            <b>192.168.100.0/24</b>).
           items:
             $ref: "#/components/schemas/AclEntry"
           type: array
@@ -3589,12 +3540,11 @@ components:
           type: boolean
         privateNetwork:
           description: >-
-            The resource link for the VPC network from which the Cloud SQL
-            instance is
+            The resource link for the VPC network from which the Cloud SQL instance is
 
             accessible for private IP. For example,
 
-            <code>/projects/myProject/global/networks/default</code>. This setting can
+            <b>/projects/myProject/global/networks/default</b>. This setting can
 
             be updated, but it cannot be removed after it is set.
           type: string
@@ -3614,21 +3564,20 @@ components:
 
             href="https://tools.ietf.org/html/rfc3339">RFC 3339</a> format, for example
 
-            <code>2012-11-15T16:19:00.094Z</code>. This field is only available when
+            <b>2012-11-15T16:19:00.094Z</b>. This field is only available when
 
             the IP is scheduled to be retired.
           format: google-datetime
           type: string
         type:
           description: >-
-            The type of this IP address. A <code>PRIMARY</code> address is a
-            public
+            The type of this IP address. A <b>PRIMARY</b> address is a public
 
-            address that can accept incoming connections. A <code>PRIVATE</code>
+            address that can accept incoming connections. A <b>PRIVATE</b>
 
             address is a private address that can accept incoming connections. An
 
-            <code>OUTGOING</code> address is the source address of connections
+            <b>OUTGOING</b> address is the source address of connections
 
             originating from the instance, if supported.
           enum:
@@ -3653,25 +3602,24 @@ components:
       properties:
         followGaeApplication:
           description: >-
-            The AppEngine application to follow, it must be in the same region
-            as the
+            The App Engine application to follow, it must be in the same region as the
 
             Cloud SQL instance.
           type: string
         kind:
-          description: This is always <code>sql#locationPreference</code>.
+          description: This is always <b>sql#locationPreference</b>.
           type: string
         zone:
           description: >-
-            The preferred Compute Engine zone (e.g. us-central1-a,
-            us-central1-b,
+            The preferred Compute Engine zone (e.g. us-central1-a, us-central1-b,
 
             etc.).
           type: string
       type: object
     MaintenanceWindow:
-      description: |-
+      description: >-
         Maintenance window. This specifies when a v2 Cloud SQL instance should
+
         preferably be restarted for system maintenance purposes.
       properties:
         day:
@@ -3683,13 +3631,13 @@ components:
           format: int32
           type: integer
         kind:
-          description: This is always <code>sql#maintenanceWindow</code>.
+          description: This is always <b>sql#maintenanceWindow</b>.
           type: string
         updateTrack:
           description: >-
-            Maintenance timing setting: <code>canary</code> (Earlier) or
+            Maintenance timing setting: <b>canary</b> (Earlier) or
 
-            <code>stable</code> (Later). <br /><a
+            <b>stable</b> (Later). <br /><a
 
             href="/sql/docs/db_path/instance-settings#maintenance-timing-2ndgen">
 
@@ -3711,32 +3659,30 @@ components:
           type: string
         clientKey:
           description: >-
-            PEM representation of the slave's private key. The corresponsing
-            public key
+            PEM representation of the slave's private key. The corresponsing public key
 
             is encoded in the client's certificate.
           type: string
         connectRetryInterval:
-          description: Seconds to wait between connect retries. MySQL's default is 60
-            seconds.
+          description: Seconds to wait between connect retries. MySQL's default is 60 seconds.
           format: int32
           type: integer
         dumpFilePath:
           description: >-
             Path to a SQL dump file in Google Cloud Storage from which the slave
 
-            instance is to be created. The URI is in the form gs:
+            instance is to be created. The URI is in the form gs://bucketName/fileName.
 
-            //bucketName/fileName. Compressed gzip files (.gz) are also supported.
+            Compressed gzip files (.gz) are also supported.
 
-            // Dumps should have the binlog co-ordinates from which replication should
+            Dumps should have the binlog co-ordinates from which replication should
 
-            // begin. This can be accomplished by setting --master-data to 1 when using
+            begin. This can be accomplished by setting --master-data to 1 when using
 
-            // mysqldump.
+            mysqldump.
           type: string
         kind:
-          description: This is always <code>sql#mysqlReplicaConfiguration</code>.
+          description: This is always <b>sql#mysqlReplicaConfiguration</b>.
           type: string
         masterHeartbeatPeriod:
           description: Interval in milliseconds between replication heartbeats.
@@ -3753,8 +3699,7 @@ components:
           type: string
         verifyServerCertificate:
           description: >-
-            Whether or not to check the master's Common Name value in the
-            certificate
+            Whether or not to check the master's Common Name value in the certificate
 
             that it sends during the SSL handshake.
           type: boolean
@@ -3770,8 +3715,7 @@ components:
           type: string
         clientKey:
           description: >-
-            PEM representation of the slave's private key. The corresponsing
-            public key
+            PEM representation of the slave's private key. The corresponsing public key
 
             is encoded in the client's certificate.
           type: string
@@ -3782,7 +3726,7 @@ components:
           description: The host and port of the on-premises instance in host:port format
           type: string
         kind:
-          description: This is always <code>sql#onPremisesConfiguration</code>.
+          description: This is always <b>sql#onPremisesConfiguration</b>.
           type: string
         password:
           description: The password for connecting to on-premises instance.
@@ -3805,14 +3749,13 @@ components:
 
             href="https://tools.ietf.org/html/rfc3339">RFC 3339</a> format, for example
 
-            <code>2012-11-15T16:19:00.094Z</code>.
+            <b>2012-11-15T16:19:00.094Z</b>.
           format: google-datetime
           type: string
         error:
           $ref: "#/components/schemas/OperationErrors"
           description: >-
-            If errors occurred during processing of this operation, this field
-            will be
+            If errors occurred during processing of this operation, this field will be
 
             populated.
         exportContext:
@@ -3827,16 +3770,15 @@ components:
 
             href="https://tools.ietf.org/html/rfc3339">RFC 3339</a> format, for example
 
-            <code>2012-11-15T16:19:00.094Z</code>.
+            <b>2012-11-15T16:19:00.094Z</b>.
           format: google-datetime
           type: string
         kind:
-          description: This is always <code>sql#operation</code>.
+          description: This is always <b>sql#operation</b>.
           type: string
         name:
           description: >-
-            An identifier that uniquely identifies the operation. You can use
-            this
+            An identifier that uniquely identifies the operation. You can use this
 
             identifier to retrieve the Operations resource that has information about
 
@@ -3844,17 +3786,31 @@ components:
           type: string
         operationType:
           description: >-
-            The type of the operation. Valid values are <code>CREATE</code>,
+            The type of the operation. Valid values are:
 
-            <code>DELETE</code>, <code>UPDATE</code>, <code>RESTART</code>,
+            <br><b>CREATE</b>
 
-            <code>IMPORT</code>, <code>EXPORT</code>, <code>BACKUP_VOLUME</code>,
+            <br><b>DELETE</b>
 
-            <code>RESTORE_VOLUME</code>, <code>CREATE_USER</code>,
+            <br><b>UPDATE</b>
 
-            <code>DELETE_USER</code>, <code>CREATE_DATABASE</code>,
+            <br><b>RESTART</b>
 
-            <code>DELETE_DATABASE</code> .
+            <br><b>IMPORT</b>
+
+            <br><b>EXPORT</b>
+
+            <br><b>BACKUP_VOLUME</b>
+
+            <br><b>RESTORE_VOLUME</b>
+
+            <br><b>CREATE_USER</b>
+
+            <br><b>DELETE_USER</b>
+
+            <br><b>CREATE_DATABASE</b>
+
+            <br><b>DELETE_DATABASE</b>
           enum:
             - SQL_OPERATION_TYPE_UNSPECIFIED
             - IMPORT
@@ -3901,14 +3857,20 @@ components:
 
             href="https://tools.ietf.org/html/rfc3339">RFC 3339</a> format, for example
 
-            <code>2012-11-15T16:19:00.094Z</code>.
+            <b>2012-11-15T16:19:00.094Z</b>.
           format: google-datetime
           type: string
         status:
-          description: |-
-            The status of an operation. Valid values are <code>PENDING</code>,
-            <code>RUNNING</code>, <code>DONE</code>,
-            <code>SQL_OPERATION_STATUS_UNSPECIFIED</code>.
+          description: >-
+            The status of an operation. Valid values are:
+
+            <br><b>PENDING</b>
+
+            <br><b>RUNNING</b>
+
+            <br><b>DONE</b>
+
+            <br><b>SQL_OPERATION_STATUS_UNSPECIFIED</b>
           enum:
             - SQL_OPERATION_STATUS_UNSPECIFIED
             - PENDING
@@ -3934,7 +3896,7 @@ components:
           description: Identifies the specific error that occurred.
           type: string
         kind:
-          description: This is always <code>sql#operationError</code>.
+          description: This is always <b>sql#operationError</b>.
           type: string
         message:
           description: Additional information about the error encountered.
@@ -3949,7 +3911,7 @@ components:
             $ref: "#/components/schemas/OperationError"
           type: array
         kind:
-          description: This is always <code>sql#operationErrors</code>.
+          description: This is always <b>sql#operationErrors</b>.
           type: string
       type: object
     OperationsListResponse:
@@ -3961,12 +3923,11 @@ components:
             $ref: "#/components/schemas/Operation"
           type: array
         kind:
-          description: This is always <code>sql#operationsList</code>.
+          description: This is always <b>sql#operationsList</b>.
           type: string
         nextPageToken:
           description: >-
-            The continuation token, used to page through large result sets.
-            Provide
+            The continuation token, used to page through large result sets. Provide
 
             this value in a subsequent request to return the next page of results.
           type: string
@@ -3976,10 +3937,9 @@ components:
       properties:
         failoverTarget:
           description: >-
-            Specifies if the replica is the failover target. If the field is set
-            to
+            Specifies if the replica is the failover target. If the field is set to
 
-            <code>true</code> the replica will be designated as a failover replica. In
+            <b>true</b> the replica will be designated as a failover replica. In
 
             case the master instance fails, the replica instance will be promoted as
 
@@ -3990,13 +3950,12 @@ components:
             instance.
           type: boolean
         kind:
-          description: This is always <code>sql#replicaConfiguration</code>.
+          description: This is always <b>sql#replicaConfiguration</b>.
           type: string
         mysqlReplicaConfiguration:
           $ref: "#/components/schemas/MySqlReplicaConfiguration"
           description: >-
-            MySQL specific configuration when replicating from a MySQL
-            on-premises
+            MySQL specific configuration when replicating from a MySQL on-premises
 
             master. Replication configuration information such as the username,
 
@@ -4004,7 +3963,7 @@ components:
 
             The configuration information is used only to set up the replication
 
-            connection and is stored by MySQL in a file named <code>master.info</code>
+            connection and is stored by MySQL in a file named <b>master.info</b>
 
             in the data directory.
       type: object
@@ -4019,17 +3978,21 @@ components:
             - SPECIFIC_TIME
           type: string
         scheduleTime:
-          description: |-
+          description: >-
             Optional. Timestamp when the maintenance shall be rescheduled to if
+
             reschedule_type=SPECIFIC_TIME, in <a
+
             href="https://tools.ietf.org/html/rfc3339">RFC 3339</a> format, for
-            example <code>2012-11-15T16:19:00.094Z</code>.
+
+            example <b>2012-11-15T16:19:00.094Z</b>.
           format: google-datetime
           type: string
       type: object
     RestoreBackupContext:
-      description: |-
+      description: >-
         Database instance restore from backup context.
+
         Backup context contains source instance id and project id.
       properties:
         backupRunId:
@@ -4040,7 +4003,7 @@ components:
           description: The ID of the instance that the backup was taken from.
           type: string
         kind:
-          description: This is always <code>sql#restoreBackupContext</code>.
+          description: This is always <b>sql#restoreBackupContext</b>.
           type: string
         project:
           description: The full project ID of the source instance.
@@ -4050,12 +4013,11 @@ components:
       description: Instance rotate server CA context.
       properties:
         kind:
-          description: This is always <code>sql#rotateServerCaContext</code>.
+          description: This is always <b>sql#rotateServerCaContext</b>.
           type: string
         nextVersion:
           description: >-
-            The fingerprint of the next version to be rotated to. If left
-            unspecified,
+            The fingerprint of the next version to be rotated to. If left unspecified,
 
             will be rotated to the most recently added server CA version.
           type: string
@@ -4065,26 +4027,13 @@ components:
       properties:
         activationPolicy:
           description: >-
-            The activation policy specifies when the instance is activated; it
-            is
+            The activation policy specifies when the instance is activated; it is
 
-            applicable only when the instance state is <code>RUNNABLE</code>. Valid
-
-            values: <br><code>ALWAYS</code>: The instance is on, and remains so even in
-
-            the absence of connection requests. <br><code>NEVER</code>: The instance is
-
-            off; it is not activated, even if a connection request arrives.
-
-            <br><code>ON_DEMAND</code>: First Generation instances only. The instance
-
-            responds to incoming requests, and turns itself off when not in use.
-
-            Instances with <code>PER_USE</code> pricing turn off after 15 minutes of
-
-            inactivity. Instances with <code>PER_PACKAGE</code> pricing turn off after
-
-            12 hours of inactivity.
+            applicable only when the instance state is RUNNABLE. Valid values:
+              <br><b>ALWAYS</b>: The instance is on, and remains so even in
+            the absence of connection requests.
+              <br><b>NEVER</b>: The instance is off; it is not activated, even if a
+              connection request arrives.
           enum:
             - SQL_ACTIVATION_POLICY_UNSPECIFIED
             - ALWAYS
@@ -4093,29 +4042,24 @@ components:
           type: string
         authorizedGaeApplications:
           description: >-
-            The App Engine app IDs that can access this instance. First
-            Generation
+            The App Engine app IDs that can access this instance.
 
-            instances only.
+            (Deprecated) Applied to First Generation instances only.
           items:
             type: string
           type: array
         availabilityType:
           description: >-
-            Availability type (PostgreSQL and MySQL instances only). Potential
-            values:
+            Availability type. Potential values:
+              <br><b>ZONAL</b>: The instance serves data from only one zone.
+            Outages in that zone affect data accessibility.
+              <br><b>REGIONAL</b>: The instance can serve data from more than one zone
+              in a region
+            (it is highly available). <br>For more information, see
 
-            <br><code>ZONAL</code>: The instance serves data from only one zone.
+            <a href="/sql/docs/postgres/high-availability">
 
-            Outages in that zone affect data accessibility. <br><code>REGIONAL</code>:
-
-            The instance can serve data from more than one zone in a region (it is
-
-            highly available). <br>For more information, see <a
-
-            href="https://cloud.google.com/sql/docs/postgres/high-availability">Overview
-
-            of the High Availability Configuration</a>.
+            Overview of the High Availability Configuration</a>.
           enum:
             - SQL_AVAILABILITY_TYPE_UNSPECIFIED
             - ZONAL
@@ -4124,26 +4068,26 @@ components:
         backupConfiguration:
           $ref: "#/components/schemas/BackupConfiguration"
           description: The daily backup configuration for the instance.
+        collation:
+          description: The name of server Instance collation.
+          type: string
         crashSafeReplicationEnabled:
           description: >-
             Configuration specific to read replica instances. Indicates whether
 
-            database flags for crash-safe replication are enabled. This property is
+            database flags for crash-safe replication are enabled. This property was
 
             only applicable to First Generation instances.
           type: boolean
         dataDiskSizeGb:
-          description: >-
-            The size of data disk, in GB. The data disk size minimum is 10GB.
-            Not used
-
-            for First Generation instances.
+          description: The size of data disk, in GB. The data disk size minimum is 10GB.
           format: int64
           type: string
         dataDiskType:
-          description: |-
-            The type of data disk: <code>PD_SSD</code> (default) or
-            <code>PD_HDD</code>. Not used for First Generation instances.
+          description: >-
+            The type of data disk: PD_SSD (default) or
+
+            PD_HDD. Not used for First Generation instances.
           enum:
             - SQL_DATA_DISK_TYPE_UNSPECIFIED
             - PD_SSD
@@ -4156,8 +4100,9 @@ components:
             $ref: "#/components/schemas/DatabaseFlags"
           type: array
         databaseReplicationEnabled:
-          description: |-
+          description: >-
             Configuration specific to read replica instances. Indicates whether
+
             replication is enabled or not.
           type: boolean
         ipConfiguration:
@@ -4169,34 +4114,29 @@ components:
 
             The IPv4 address cannot be disabled for Second Generation instances.
         kind:
-          description: This is always <code>sql#settings</code>.
+          description: This is always <b>sql#settings</b>.
           type: string
         locationPreference:
           $ref: "#/components/schemas/LocationPreference"
           description: >-
-            The location preference settings. This allows the instance to be
-            located as
+            The location preference settings. This allows the instance to be located as
 
             near as possible to either an App Engine app or Compute Engine zone for
 
-            better performance. App Engine co-location is only applicable to First
+            better performance. App Engine co-location was only applicable to First
 
             Generation instances.
         maintenanceWindow:
           $ref: "#/components/schemas/MaintenanceWindow"
           description: >-
-            The maintenance window for this instance. This specifies when the
-            instance
+            The maintenance window for this instance. This specifies when the instance
 
-            can be restarted for maintenance purposes. Not used for First Generation
-
-            instances.
+            can be restarted for maintenance purposes.
         pricingPlan:
           description: >-
-            The pricing plan for this instance. This can be either
-            <code>PER_USE</code>
+            The pricing plan for this instance. This can be either <b>PER_USE</b>
 
-            or <code>PACKAGE</code>. Only <code>PER_USE</code> is supported for Second
+            or <b>PACKAGE</b>. Only <b>PER_USE</b> is supported for Second
 
             Generation instances.
           enum:
@@ -4208,9 +4148,11 @@ components:
           description: >-
             The type of replication this instance uses. This can be either
 
-            <code>ASYNCHRONOUS</code> or <code>SYNCHRONOUS</code>. This property is
+            <b>ASYNCHRONOUS</b> or <b>SYNCHRONOUS</b>.
 
-            only applicable to First Generation instances.
+            (Deprecated_ This property was only applicable to
+
+            First Generation instances.
           enum:
             - SQL_REPLICATION_TYPE_UNSPECIFIED
             - SYNCHRONOUS
@@ -4218,8 +4160,7 @@ components:
           type: string
         settingsVersion:
           description: >-
-            The version of instance settings. This is a required field for
-            update
+            The version of instance settings. This is a required field for update
 
             method to make sure concurrent updates are handled properly. During update,
 
@@ -4230,41 +4171,30 @@ components:
           type: string
         storageAutoResize:
           description: >-
-            Configuration to increase storage size automatically. The default
-            value is
+            Configuration to increase storage size automatically. The default value is
 
-            true. Not used for First Generation instances.
+            true.
           type: boolean
         storageAutoResizeLimit:
           description: >-
-            The maximum size to which storage capacity can be automatically
-            increased.
+            The maximum size to which storage capacity can be automatically increased.
 
-            The default value is 0, which specifies that there is no limit. Not used
-
-            for First Generation instances.
+            The default value is 0, which specifies that there is no limit.
           format: int64
           type: string
         tier:
           description: >-
             The tier (or machine type) for this instance, for example
 
-            <code>db-n1-standard-1</code> (MySQL instances) or
+            <b>db-n1-standard-1</b> (MySQL instances) or
 
-            <code>db-custom-1-3840</code> (PostgreSQL instances). For MySQL instances,
-
-            this property determines whether the instance is First or Second
-
-            Generation. For more information, see <a
-
-            href="/sql/docs/db_path/instance-settings">Instance Settings</a>.
+            <b>db-custom-1-3840</b> (PostgreSQL instances).
           type: string
         userLabels:
           additionalProperties:
             type: string
           description: >-
-            User-provided labels, represented as a dictionary where each label
-            is a
+            User-provided labels, represented as a dictionary where each label is a
 
             single key value pair.
           type: object
@@ -4276,7 +4206,7 @@ components:
           description: Additional information about the error encountered.
           type: string
         kind:
-          description: This is always <code>sql#migrationSettingError</code>.
+          description: This is always <b>sql#migrationSettingError</b>.
           type: string
         type:
           description: Identifies the specific error that occurred.
@@ -4290,6 +4220,13 @@ components:
             - UNSUPPORTED_MIGRATION_TYPE
             - NO_PGLOGICAL_INSTALLED
             - PGLOGICAL_NODE_ALREADY_EXISTS
+            - INVALID_WAL_LEVEL
+            - INVALID_SHARED_PRELOAD_LIBRARY
+            - INSUFFICIENT_MAX_REPLICATION_SLOTS
+            - INSUFFICIENT_MAX_WAL_SENDERS
+            - INSUFFICIENT_MAX_WORKER_PROCESSES
+            - UNSUPPORTED_EXTENSIONS
+            - INVALID_RDS_LOGICAL_REPLICATION
           type: string
       type: object
     SqlInstancesRescheduleMaintenanceRequestBody:
@@ -4308,7 +4245,7 @@ components:
             $ref: "#/components/schemas/SqlExternalSyncSettingError"
           type: array
         kind:
-          description: This is always <code>sql#migrationSettingErrorList</code>.
+          description: This is always <b>sql#migrationSettingErrorList</b>.
           type: string
       type: object
     SqlScheduledMaintenance:
@@ -4320,8 +4257,7 @@ components:
           description: If the scheduled maintenance can be rescheduled.
           type: boolean
         startTime:
-          description: The start time of any upcoming scheduled maintenance for this
-            instance.
+          description: The start time of any upcoming scheduled maintenance for this instance.
           format: google-datetime
           type: string
       type: object
@@ -4329,8 +4265,7 @@ components:
       description: Represents a Sql Server database on the Cloud SQL instance.
       properties:
         compatibilityLevel:
-          description: The version of SQL Server with which the database is to be made
-            compatible
+          description: The version of SQL Server with which the database is to be made compatible
           format: int32
           type: integer
         recoveryModel:
@@ -4367,7 +4302,7 @@ components:
 
             href="https://tools.ietf.org/html/rfc3339">RFC 3339</a> format, for example
 
-            <code>2012-11-15T16:19:00.094Z</code>
+            <b>2012-11-15T16:19:00.094Z</b>
           format: google-datetime
           type: string
         expirationTime:
@@ -4376,14 +4311,14 @@ components:
 
             href="https://tools.ietf.org/html/rfc3339">RFC 3339</a> format, for example
 
-            <code>2012-11-15T16:19:00.094Z</code>.
+            <b>2012-11-15T16:19:00.094Z</b>.
           format: google-datetime
           type: string
         instance:
           description: Name of the database instance.
           type: string
         kind:
-          description: This is always <code>sql#sslCert</code>.
+          description: This is always <b>sql#sslCert</b>.
           type: string
         selfLink:
           description: The URI of this resource.
@@ -4400,8 +4335,7 @@ components:
           description: The public information about the cert.
         certPrivateKey:
           description: >-
-            The private key for the client cert, in pem format.  Keep private in
-            order
+            The private key for the client cert, in pem format.  Keep private in order
 
             to protect your security.
           type: string
@@ -4418,8 +4352,7 @@ components:
       properties:
         commonName:
           description: >-
-            User supplied name.  Must be a distinct name from the other
-            certificates
+            User supplied name.  Must be a distinct name from the other certificates
 
             for this instance.
           type: string
@@ -4429,14 +4362,9 @@ components:
       properties:
         clientCert:
           $ref: "#/components/schemas/SslCertDetail"
-          description: >-
-            The new client certificate and private key.  For First Generation
-
-            instances, the new certificate does not take effect until the instance is
-
-            restarted.
+          description: The new client certificate and private key.
         kind:
-          description: This is always <code>sql#sslCertsInsert</code>.
+          description: This is always <b>sql#sslCertsInsert</b>.
           type: string
         operation:
           $ref: "#/components/schemas/Operation"
@@ -4444,8 +4372,7 @@ components:
         serverCaCert:
           $ref: "#/components/schemas/SslCert"
           description: >-
-            The server Certificate Authority's certificate.  If this is missing
-            you can
+            The server Certificate Authority's certificate.  If this is missing you can
 
             force a new one to be generated by calling resetSslConfig method on
 
@@ -4460,7 +4387,7 @@ components:
             $ref: "#/components/schemas/SslCert"
           type: array
         kind:
-          description: This is always <code>sql#sslCertsList</code>.
+          description: This is always <b>sql#sslCertsList</b>.
           type: string
       type: object
     Tier:
@@ -4475,7 +4402,7 @@ components:
           format: int64
           type: string
         kind:
-          description: This is always <code>sql#tier</code>.
+          description: This is always <b>sql#tier</b>.
           type: string
         region:
           description: The applicable regions for this tier.
@@ -4484,8 +4411,7 @@ components:
           type: array
         tier:
           description: >-
-            An identifier for the machine type, for example, db-n1-standard-1.
-            For
+            An identifier for the machine type, for example, db-n1-standard-1. For
 
             related information, see <a href="/sql/pricing">Pricing</a>.
           type: string
@@ -4499,19 +4425,20 @@ components:
             $ref: "#/components/schemas/Tier"
           type: array
         kind:
-          description: This is always <code>sql#tiersList</code>.
+          description: This is always <b>sql#tiersList</b>.
           type: string
       type: object
     TruncateLogContext:
       description: Database Instance truncate log context.
       properties:
         kind:
-          description: This is always <code>sql#truncateLogContext</code>.
+          description: This is always <b>sql#truncateLogContext</b>.
           type: string
         logType:
-          description: |-
+          description: >-
             The type of log to truncate. Valid values are
-            <code>MYSQL_GENERAL_TABLE</code> and <code>MYSQL_SLOW_TABLE</code>.
+
+            <b>MYSQL_GENERAL_TABLE</b> and <b>MYSQL_SLOW_TABLE</b>.
           type: string
       type: object
     User:
@@ -4519,17 +4446,15 @@ components:
       properties:
         etag:
           description: >-
-            This field is deprecated and will be removed from a future version
-            of the
+            This field is deprecated and will be removed from a future version of the
 
             API.
           type: string
         host:
           description: >-
-            The host name from which the user can connect. For
-            <code>insert</code>
+            The host name from which the user can connect. For <b>insert</b>
 
-            operations, host defaults to an empty string. For <code>update</code>
+            operations, host defaults to an empty string. For <b>update</b>
 
             operations, host is specified as part of the request URL. The host name
 
@@ -4537,32 +4462,31 @@ components:
           type: string
         instance:
           description: >-
-            The name of the Cloud SQL instance. This does not include the
-            project ID.
+            The name of the Cloud SQL instance. This does not include the project ID.
 
-            Can be omitted for <code>update</code> since it is already specified on the
+            Can be omitted for <b>update</b> since it is already specified on the
 
             URL.
           type: string
         kind:
-          description: This is always <code>sql#user</code>.
+          description: This is always <b>sql#user</b>.
           type: string
         name:
-          description: |-
+          description: >-
             The name of the user in the Cloud SQL instance. Can be omitted for
-            <code>update</code> since it is already specified in the URL.
+
+            <b>update</b> since it is already specified in the URL.
           type: string
         password:
           description: The password for the user.
           type: string
         project:
           description: >-
-            The project ID of the project containing the Cloud SQL database. The
-            Google
+            The project ID of the project containing the Cloud SQL database. The Google
 
             apps domain is prefixed if applicable. Can be omitted for
 
-            <code>update</code> since it is already specified on the URL.
+            <b>update</b> since it is already specified on the URL.
           type: string
         sqlserverUserDetails:
           $ref: "#/components/schemas/SqlServerUserDetails"
@@ -4576,12 +4500,11 @@ components:
             $ref: "#/components/schemas/User"
           type: array
         kind:
-          description: This is always <code>sql#usersList</code>.
+          description: This is always <b>sql#usersList</b>.
           type: string
         nextPageToken:
           description: >-
-            An identifier that uniquely identifies the operation. You can use
-            this
+            An identifier that uniquely identifies the operation. You can use this
 
             identifier to retrieve the Operations resource that has information about
 

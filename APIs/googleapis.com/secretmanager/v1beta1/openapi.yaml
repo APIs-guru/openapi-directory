@@ -7,8 +7,7 @@ info:
     url: https://google.com
     x-twitter: youtube
   description: >
-    Stores sensitive data such as API keys, passwords, and certificates.
-    Provides convenience while improving security.
+    Stores sensitive data such as API keys, passwords, and certificates. Provides convenience while improving security.
   license:
     name: Creative Commons Attribution 3.0
     url: http://creativecommons.org/licenses/by/3.0/
@@ -42,8 +41,9 @@ paths:
       description: Deletes a Secret.
       operationId: secretmanager.projects.secrets.delete
       parameters:
-        - description: |-
+        - description: >-
             Required. The resource name of the Secret to delete in the format
+
             `projects/*/secrets/*`.
           in: path
           name: name
@@ -65,10 +65,23 @@ paths:
       tags:
         - projects
     get:
-      description: Gets information about a location.
-      operationId: secretmanager.projects.locations.get
+      description: >-
+        Gets metadata for a SecretVersion.
+
+
+        `projects/*/secrets/*/versions/latest` is an alias to the `latest`
+
+        SecretVersion.
+      operationId: secretmanager.projects.secrets.versions.get
       parameters:
-        - description: Resource name for the location.
+        - description: >-
+            Required. The resource name of the SecretVersion in the format
+
+            `projects/*/secrets/*/versions/*`.
+
+            `projects/*/secrets/*/versions/latest` is an alias to the `latest`
+
+            SecretVersion.
           in: path
           name: name
           required: true
@@ -79,7 +92,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Location"
+                $ref: "#/components/schemas/SecretVersion"
           description: Successful response
       security:
         - Oauth2:
@@ -89,23 +102,22 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
     patch:
       description: Updates metadata of an existing Secret.
       operationId: secretmanager.projects.secrets.patch
       parameters:
-        - description: Output only. The resource name of the Secret in the format
-            `projects/*/secrets/*`.
+        - description: Output only. The resource name of the Secret in the format `projects/*/secrets/*`.
           in: path
           name: name
           required: true
@@ -176,28 +188,31 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
   "/v1beta1/{name}:access":
     get:
-      description: |-
+      description: >-
         Accesses a SecretVersion. This call returns the secret data.
 
+
         `projects/*/secrets/*/versions/latest` is an alias to the `latest`
+
         SecretVersion.
       operationId: secretmanager.projects.secrets.versions.access
       parameters:
-        - description: |-
+        - description: >-
             Required. The resource name of the SecretVersion in the format
+
             `projects/*/secrets/*/versions/*`.
           in: path
           name: name
@@ -219,42 +234,44 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
   "/v1beta1/{name}:destroy":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
     post:
-      description: |-
+      description: >-
         Destroys a SecretVersion.
 
+
         Sets the state of the SecretVersion to
+
         DESTROYED and irrevocably destroys the
+
         secret data.
       operationId: secretmanager.projects.secrets.versions.destroy
       parameters:
         - description: >-
-            Required. The resource name of the SecretVersion to destroy in the
-            format
+            Required. The resource name of the SecretVersion to destroy in the format
 
             `projects/*/secrets/*/versions/*`.
           in: path
@@ -283,28 +300,29 @@ paths:
         - projects
   "/v1beta1/{name}:disable":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
     post:
-      description: |-
+      description: >-
         Disables a SecretVersion.
 
+
         Sets the state of the SecretVersion to
+
         DISABLED.
       operationId: secretmanager.projects.secrets.versions.disable
       parameters:
         - description: >-
-            Required. The resource name of the SecretVersion to disable in the
-            format
+            Required. The resource name of the SecretVersion to disable in the format
 
             `projects/*/secrets/*/versions/*`.
           in: path
@@ -333,28 +351,29 @@ paths:
         - projects
   "/v1beta1/{name}:enable":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
     post:
-      description: |-
+      description: >-
         Enables a SecretVersion.
 
+
         Sets the state of the SecretVersion to
+
         ENABLED.
       operationId: secretmanager.projects.secrets.versions.enable
       parameters:
         - description: >-
-            Required. The resource name of the SecretVersion to enable in the
-            format
+            Required. The resource name of the SecretVersion to enable in the format
 
             `projects/*/secrets/*/versions/*`.
           in: path
@@ -386,8 +405,9 @@ paths:
       description: Lists Secrets.
       operationId: secretmanager.projects.secrets.list
       parameters:
-        - description: |-
+        - description: >-
             Required. The resource name of the project associated with the
+
             Secrets, in the format `projects/*`.
           in: path
           name: parent
@@ -395,8 +415,7 @@ paths:
           schema:
             type: string
         - description: >-
-            Optional. The maximum number of results to be returned in a single
-            page. If
+            Optional. The maximum number of results to be returned in a single page. If
 
             set to 0, the server decides the number of results to return. If the
 
@@ -405,8 +424,9 @@ paths:
           name: pageSize
           schema:
             type: integer
-        - description: |-
+        - description: >-
             Optional. Pagination token, returned earlier via
+
             ListSecretsResponse.next_page_token.
           in: query
           name: pageToken
@@ -427,23 +447,24 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
     post:
       description: Creates a new Secret containing no SecretVersions.
       operationId: secretmanager.projects.secrets.create
       parameters:
-        - description: |-
+        - description: >-
             Required. The resource name of the project to associate with the
+
             Secret, in the format `projects/*`.
           in: path
           name: parent
@@ -484,14 +505,17 @@ paths:
         - projects
   "/v1beta1/{parent}/versions":
     get:
-      description: |-
+      description: >-
         Lists SecretVersions. This call does not return secret
+
         data.
       operationId: secretmanager.projects.secrets.versions.list
       parameters:
-        - description: |-
+        - description: >-
             Required. The resource name of the Secret associated with the
+
             SecretVersions to list, in the format
+
             `projects/*/secrets/*`.
           in: path
           name: parent
@@ -499,8 +523,7 @@ paths:
           schema:
             type: string
         - description: >-
-            Optional. The maximum number of results to be returned in a single
-            page. If
+            Optional. The maximum number of results to be returned in a single page. If
 
             set to 0, the server decides the number of results to return. If the
 
@@ -509,8 +532,9 @@ paths:
           name: pageSize
           schema:
             type: integer
-        - description: |-
+        - description: >-
             Optional. Pagination token, returned earlier via
+
             ListSecretVersionsResponse.next_page_token][].
           in: query
           name: pageToken
@@ -531,38 +555,40 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
   "/v1beta1/{parent}:addVersion":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
     post:
-      description: |-
+      description: >-
         Creates a new SecretVersion containing secret data and attaches
+
         it to an existing Secret.
       operationId: secretmanager.projects.secrets.addVersion
       parameters:
-        - description: |-
+        - description: >-
             Required. The resource name of the Secret to associate with the
+
             SecretVersion in the format `projects/*/secrets/*`.
           in: path
           name: parent
@@ -645,36 +671,39 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
   "/v1beta1/{resource}:setIamPolicy":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
     post:
-      description: |-
+      description: >-
         Sets the access control policy on the specified secret. Replaces any
+
         existing policy.
 
+
         Permissions on SecretVersions are enforced according
+
         to the policy set on the associated Secret.
       operationId: secretmanager.projects.secrets.setIamPolicy
       parameters:
@@ -708,15 +737,15 @@ paths:
         - projects
   "/v1beta1/{resource}:testIamPermissions":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
     post:
@@ -736,8 +765,7 @@ paths:
       operationId: secretmanager.projects.secrets.testIamPermissions
       parameters:
         - description: >-
-            REQUIRED: The resource for which the policy detail is being
-            requested.
+            REQUIRED: The resource for which the policy detail is being requested.
 
             See the operation documentation for the appropriate value for this field.
           in: path
@@ -804,9 +832,7 @@ components:
       schema:
         type: string
     key:
-      description: API key. Your API key identifies your project and provides you with
-        API access, quota, and reports. Required unless you provide an OAuth 2.0
-        token.
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -824,9 +850,7 @@ components:
       schema:
         type: boolean
     quotaUser:
-      description: Available to use for quota purposes for server-side applications.
-        Can be any arbitrary string assigned to a user, but should not exceed 40
-        characters.
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
       in: query
       name: quotaUser
       schema:
@@ -848,8 +872,9 @@ components:
       description: Response message for SecretManagerService.AccessSecretVersion.
       properties:
         name:
-          description: |-
+          description: >-
             The resource name of the SecretVersion in the format
+
             `projects/*/secrets/*/versions/*`.
           type: string
         payload:
@@ -933,15 +958,18 @@ components:
             $ref: "#/components/schemas/AuditLogConfig"
           type: array
         service:
-          description: |-
+          description: >-
             Specifies a service that will be enabled for audit logging.
+
             For example, `storage.googleapis.com`, `cloudsql.googleapis.com`.
+
             `allServices` is a special value that covers all services.
           type: string
       type: object
     AuditLogConfig:
-      description: |-
+      description: >-
         Provides the configuration for logging a type of permissions.
+
         Example:
 
             {
@@ -959,12 +987,15 @@ components:
             }
 
         This enables 'DATA_READ' and 'DATA_WRITE' logging, while exempting
+
         jose@example.com from DATA_READ logging.
       properties:
         exemptedMembers:
-          description: |-
+          description: >-
             Specifies the identities that do not cause logging for this type of
+
             permission.
+
             Follows the same format of Binding.members.
           items:
             type: string
@@ -979,8 +1010,9 @@ components:
           type: string
       type: object
     Automatic:
-      description: |-
+      description: >-
         A replication policy that replicates the Secret payload without any
+
         restrictions.
       properties: {}
       type: object
@@ -1012,8 +1044,7 @@ components:
             documentation](https://cloud.google.com/iam/help/conditions/resource-policies).
         members:
           description: >+
-            Specifies the identities requesting access for a Cloud Platform
-            resource.
+            Specifies the identities requesting access for a Cloud Platform resource.
 
             `members` can have the following values:
 
@@ -1062,8 +1093,9 @@ components:
             type: string
           type: array
         role:
-          description: |-
+          description: >-
             Role that is assigned to `members`.
+
             For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
           type: string
       type: object
@@ -1134,26 +1166,29 @@ components:
         documentation for additional information.
       properties:
         description:
-          description: |-
+          description: >-
             Optional. Description of the expression. This is a longer text which
+
             describes the expression, e.g. when hovered over it in a UI.
           type: string
         expression:
           description: >-
-            Textual representation of an expression in Common Expression
-            Language
+            Textual representation of an expression in Common Expression Language
 
             syntax.
           type: string
         location:
-          description: |-
+          description: >-
             Optional. String indicating the location of the expression for error
+
             reporting, e.g. a file name and a position in the file.
           type: string
         title:
-          description: |-
+          description: >-
             Optional. Title for the expression, i.e. a short string describing
+
             its purpose. This can be used e.g. in UIs which allow to enter the
+
             expression.
           type: string
       type: object
@@ -1173,8 +1208,9 @@ components:
       description: Response message for SecretManagerService.ListSecretVersions.
       properties:
         nextPageToken:
-          description: |-
+          description: >-
             A token to retrieve the next page of results. Pass this value in
+
             ListSecretVersionsRequest.page_token to retrieve the next page.
           type: string
         totalSize:
@@ -1182,8 +1218,9 @@ components:
           format: int32
           type: integer
         versions:
-          description: |-
+          description: >-
             The list of SecretVersions sorted in reverse by
+
             create_time (newest first).
           items:
             $ref: "#/components/schemas/SecretVersion"
@@ -1193,13 +1230,15 @@ components:
       description: Response message for SecretManagerService.ListSecrets.
       properties:
         nextPageToken:
-          description: |-
+          description: >-
             A token to retrieve the next page of results. Pass this value in
+
             ListSecretsRequest.page_token to retrieve the next page.
           type: string
         secrets:
-          description: |-
+          description: >-
             The list of Secrets sorted in reverse by create_time (newest
+
             first).
           items:
             $ref: "#/components/schemas/Secret"
@@ -1213,14 +1252,15 @@ components:
       description: A resource that represents Google Cloud Platform location.
       properties:
         displayName:
-          description: |-
+          description: >-
             The friendly name for this location, typically a nearby city name.
+
             For example, "Tokyo".
           type: string
         labels:
           additionalProperties:
             type: string
-          description: |-
+          description: >-
             Cross-service attributes for the location. For example
 
                 {"cloud.googleapis.com/region": "us-east1"}
@@ -1232,15 +1272,13 @@ components:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
           description: >-
-            Service-specific metadata. For example the available capacity at the
-            given
+            Service-specific metadata. For example the available capacity at the given
 
             location.
           type: object
         name:
           description: >-
-            Resource name for the location, which may vary between
-            implementations.
+            Resource name for the location, which may vary between implementations.
 
             For example: `"projects/example-project/locations/us-east1"`
           type: string
@@ -1336,8 +1374,7 @@ components:
           type: array
         bindings:
           description: >-
-            Associates a list of `members` to a `role`. Optionally, may specify
-            a
+            Associates a list of `members` to a `role`. Optionally, may specify a
 
             `condition` that determines how and when the `bindings` are applied. Each
 
@@ -1419,8 +1456,9 @@ components:
       description: Represents a Replica for this Secret.
       properties:
         location:
-          description: |-
+          description: >-
             The canonical IDs of the location to replicate data.
+
             For example: `"us-east1"`.
           type: string
       type: object
@@ -1435,11 +1473,14 @@ components:
           description: The Secret will only be replicated into the locations specified.
       type: object
     Secret:
-      description: |-
+      description: >-
         A Secret is a logical secret whose value and versions can
+
         be accessed.
 
+
         A Secret is made up of zero or more SecretVersions that
+
         represent the secret data.
       properties:
         createTime:
@@ -1470,21 +1511,20 @@ components:
             No more than 64 labels can be assigned to a given resource.
           type: object
         name:
-          description: Output only. The resource name of the Secret in the format
-            `projects/*/secrets/*`.
+          description: Output only. The resource name of the Secret in the format `projects/*/secrets/*`.
           type: string
         replication:
           $ref: "#/components/schemas/Replication"
           description: >-
-            Required. Immutable. The replication policy of the secret data
-            attached to the Secret.
+            Required. Immutable. The replication policy of the secret data attached to the Secret.
 
 
             The replication policy cannot be changed after the Secret has been created.
       type: object
     SecretPayload:
-      description: |-
+      description: >-
         A secret payload resource in the Secret Manager API. This contains the
+
         sensitive secret data that is associated with a SecretVersion.
       properties:
         data:
@@ -1500,18 +1540,23 @@ components:
           format: google-datetime
           type: string
         destroyTime:
-          description: |-
+          description: >-
             Output only. The time this SecretVersion was destroyed.
+
             Only present if state is
+
             DESTROYED.
           format: google-datetime
           type: string
         name:
-          description: |-
+          description: >-
             Output only. The resource name of the SecretVersion in the
+
             format `projects/*/secrets/*/versions/*`.
 
+
             SecretVersion IDs in a Secret start at 1 and
+
             are incremented for each subsequent version of the secret.
           type: string
         state:
@@ -1529,8 +1574,7 @@ components:
         policy:
           $ref: "#/components/schemas/Policy"
           description: >-
-            REQUIRED: The complete policy to be applied to the `resource`. The
-            size of
+            REQUIRED: The complete policy to be applied to the `resource`. The size of
 
             the policy is limited to a few 10s of KB. An empty policy is a
 
@@ -1539,8 +1583,7 @@ components:
             might reject them.
         updateMask:
           description: >-
-            OPTIONAL: A FieldMask specifying which fields of the policy to
-            modify. Only
+            OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
 
             the fields in the mask will be modified. If no mask is provided, the
 
@@ -1571,21 +1614,24 @@ components:
       description: Response message for `TestIamPermissions` method.
       properties:
         permissions:
-          description: |-
+          description: >-
             A subset of `TestPermissionsRequest.permissions` that the caller is
+
             allowed.
           items:
             type: string
           type: array
       type: object
     UserManaged:
-      description: |-
+      description: >-
         A replication policy that replicates the Secret payload into the
+
         locations specified in Secret.replication.user_managed.replicas
       properties:
         replicas:
-          description: |-
+          description: >-
             Required. The list of Replicas for this Secret.
+
 
             Cannot be empty.
           items:

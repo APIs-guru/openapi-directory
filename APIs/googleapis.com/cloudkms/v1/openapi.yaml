@@ -38,10 +38,10 @@ tags:
 paths:
   "/v1/{name}":
     get:
-      description: Returns metadata for a given ImportJob.
-      operationId: cloudkms.projects.locations.keyRings.importJobs.get
+      description: Returns metadata for a given CryptoKeyVersion.
+      operationId: cloudkms.projects.locations.keyRings.cryptoKeys.cryptoKeyVersions.get
       parameters:
-        - description: Required. The name of the ImportJob to get.
+        - description: Required. The name of the CryptoKeyVersion to get.
           in: path
           name: name
           required: true
@@ -52,7 +52,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ImportJob"
+                $ref: "#/components/schemas/CryptoKeyVersion"
           description: Successful response
       security:
         - Oauth2:
@@ -66,17 +66,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
     patch:
       description: >-
         Update a CryptoKeyVersion's metadata.
@@ -175,17 +175,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
   "/v1/{name}/publicKey":
     get:
       description: >-
@@ -226,30 +226,30 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
   "/v1/{name}:asymmetricDecrypt":
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
     post:
       description: >-
         Decrypts data that was encrypted with a public key retrieved from
@@ -293,17 +293,17 @@ paths:
         - projects
   "/v1/{name}:asymmetricSign":
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
     post:
       description: >-
         Signs data using a CryptoKeyVersion with CryptoKey.purpose
@@ -344,17 +344,17 @@ paths:
         - projects
   "/v1/{name}:decrypt":
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
     post:
       description: >-
         Decrypts data that was protected by Encrypt. The CryptoKey.purpose
@@ -396,17 +396,17 @@ paths:
         - projects
   "/v1/{name}:destroy":
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
     post:
       description: >-
         Schedule a CryptoKeyVersion for destruction.
@@ -463,17 +463,17 @@ paths:
         - projects
   "/v1/{name}:encrypt":
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
     post:
       description: >-
         Encrypts data, so that it can only be recovered by a call to Decrypt.
@@ -522,17 +522,17 @@ paths:
         - projects
   "/v1/{name}:restore":
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
     post:
       description: >-
         Restore a CryptoKeyVersion in the
@@ -580,17 +580,17 @@ paths:
         - projects
   "/v1/{name}:updatePrimaryVersion":
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
     post:
       description: >-
         Update the version of a CryptoKey that will be used in Encrypt.
@@ -715,17 +715,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
     post:
       description: >-
         Create a new CryptoKeyVersion in a CryptoKey.
@@ -772,17 +772,17 @@ paths:
         - projects
   "/v1/{parent}/cryptoKeyVersions:import":
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
     post:
       description: >-
         Imports a new CryptoKeyVersion into an existing CryptoKey using the
@@ -912,17 +912,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
     post:
       description: >-
         Create a new CryptoKey within a KeyRing.
@@ -1066,17 +1066,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
     post:
       description: >-
         Create a new ImportJob within a KeyRing.
@@ -1202,17 +1202,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
     post:
       description: Create a new KeyRing in a given Project and Location.
       operationId: cloudkms.projects.locations.keyRings.create
@@ -1265,7 +1265,7 @@ paths:
         Returns an empty policy if the resource exists and does not have a policy
 
         set.
-      operationId: cloudkms.projects.locations.keyRings.importJobs.getIamPolicy
+      operationId: cloudkms.projects.locations.keyRings.cryptoKeys.getIamPolicy
       parameters:
         - description: >-
             REQUIRED: The resource for which the policy is being requested.
@@ -1320,30 +1320,30 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
   "/v1/{resource}:setIamPolicy":
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
     post:
       description: >-
         Sets the access control policy on the specified resource. Replaces any
@@ -1352,7 +1352,7 @@ paths:
 
 
         Can return `NOT_FOUND`, `INVALID_ARGUMENT`, and `PERMISSION_DENIED` errors.
-      operationId: cloudkms.projects.locations.keyRings.importJobs.setIamPolicy
+      operationId: cloudkms.projects.locations.keyRings.cryptoKeys.setIamPolicy
       parameters:
         - description: >-
             REQUIRED: The resource for which the policy is being specified.
@@ -1388,17 +1388,17 @@ paths:
         - projects
   "/v1/{resource}:testIamPermissions":
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
     post:
       description: >-
         Returns permissions that a caller has on the specified resource.
@@ -1413,7 +1413,7 @@ paths:
         UIs and command-line tools, not for authorization checking. This operation
 
         may "fail open" without warning.
-      operationId: cloudkms.projects.locations.keyRings.importJobs.testIamPermissions
+      operationId: cloudkms.projects.locations.keyRings.cryptoKeys.testIamPermissions
       parameters:
         - description: >-
             REQUIRED: The resource for which the policy detail is being requested.
@@ -1924,7 +1924,8 @@ components:
                recovered group retains the role in the binding.
 
 
-            * `domain:{domain}`: The G Suite domain (primary) that represents all the    users of that domain. For example, `google.com` or `example.com`.
+            * `domain:{domain}`: The G Suite domain (primary) that represents all the
+               users of that domain. For example, `google.com` or `example.com`.
 
           items:
             type: string

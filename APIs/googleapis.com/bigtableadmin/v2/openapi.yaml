@@ -33,22 +33,20 @@ info:
 externalDocs:
   url: https://cloud.google.com/bigtable/
 tags:
-  - name: projects
   - name: operations
+  - name: projects
 paths:
   "/v2/{name}":
     delete:
-      description: >-
-        Deletes a long-running operation. This method indicates that the client is
-
-        no longer interested in the operation result. It does not cancel the
-
-        operation. If the server doesn't support this method, it returns
-
-        `google.rpc.Code.UNIMPLEMENTED`.
-      operationId: bigtableadmin.operations.delete
+      description: Permanently deletes a specified table and all of its data.
+      operationId: bigtableadmin.projects.instances.tables.delete
       parameters:
-        - description: The name of the operation resource to be deleted.
+        - description: >-
+            Required. The unique name of the table to be deleted.
+
+            Values are of the form
+
+            `projects/{project}/instances/{instance}/tables/{table}`.
           in: path
           name: name
           required: true
@@ -72,37 +70,32 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/bigtable.admin
         - Oauth2:
-            - https://www.googleapis.com/auth/bigtable.admin.cluster
+            - https://www.googleapis.com/auth/bigtable.admin.table
           Oauth2c:
-            - https://www.googleapis.com/auth/bigtable.admin.cluster
-        - Oauth2:
-            - https://www.googleapis.com/auth/bigtable.admin.instance
-          Oauth2c:
-            - https://www.googleapis.com/auth/bigtable.admin.instance
+            - https://www.googleapis.com/auth/bigtable.admin.table
         - Oauth2:
             - https://www.googleapis.com/auth/cloud-bigtable.admin
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-bigtable.admin
         - Oauth2:
-            - https://www.googleapis.com/auth/cloud-bigtable.admin.cluster
+            - https://www.googleapis.com/auth/cloud-bigtable.admin.table
           Oauth2c:
-            - https://www.googleapis.com/auth/cloud-bigtable.admin.cluster
+            - https://www.googleapis.com/auth/cloud-bigtable.admin.table
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
             - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
-        - operations
+        - projects
     get:
-      description: >-
-        Gets the latest state of a long-running operation.  Clients can use this
-
-        method to poll the operation result at intervals as recommended by the API
-
-        service.
-      operationId: bigtableadmin.operations.get
+      description: Gets information about a location.
+      operationId: bigtableadmin.projects.locations.get
       parameters:
-        - description: The name of the operation resource.
+        - description: Resource name for the location.
           in: path
           name: name
           required: true
@@ -127,7 +120,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Operation"
+                $ref: "#/components/schemas/Location"
           description: Successful response
       security:
         - Oauth2:
@@ -159,41 +152,55 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform.read-only
       tags:
-        - operations
+        - projects
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
     patch:
-      description: Updates an app profile within an instance.
-      operationId: bigtableadmin.projects.instances.appProfiles.patch
+      description: Updates a pending or completed Cloud Bigtable Backup.
+      operationId: bigtableadmin.projects.instances.clusters.backups.patch
       parameters:
         - description: >-
-            The unique name of the app profile. Values are of the form
+            A globally unique identifier for the backup which cannot be
 
-            `projects/{project}/instances/{instance}/appProfiles/_a-zA-Z0-9*`.
+            changed. Values are of the form
+
+            `projects/{project}/instances/{instance}/clusters/{cluster}/
+               backups/_a-zA-Z0-9*`
+            The final segment of the name must be between 1 and 50 characters
+
+            in length.
+
+
+            The backup is stored in the cluster identified by the prefix of the backup
+
+            name of the form
+
+            `projects/{project}/instances/{instance}/clusters/{cluster}`.
           in: path
           name: name
           required: true
           schema:
             type: string
-        - description: If true, ignore safety checks when updating the app profile.
-          in: query
-          name: ignoreWarnings
-          schema:
-            type: boolean
         - description: >-
-            Required. The subset of app profile fields which should be replaced.
+            Required. A mask specifying which fields (e.g. `expire_time`) in the
 
-            If unset, all fields will be replaced.
+            Backup resource should be updated. This mask is relative to the Backup
+
+            resource, not to the request message. The field mask must always be
+
+            specified; this prevents any future fields from being erased accidentally
+
+            by clients that do not know about them.
           in: query
           name: updateMask
           schema:
@@ -202,13 +209,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/AppProfile"
+              $ref: "#/components/schemas/Backup"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Operation"
+                $ref: "#/components/schemas/Backup"
           description: Successful response
       security:
         - Oauth2:
@@ -216,21 +223,21 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/bigtable.admin
         - Oauth2:
-            - https://www.googleapis.com/auth/bigtable.admin.cluster
+            - https://www.googleapis.com/auth/bigtable.admin.table
           Oauth2c:
-            - https://www.googleapis.com/auth/bigtable.admin.cluster
-        - Oauth2:
-            - https://www.googleapis.com/auth/bigtable.admin.instance
-          Oauth2c:
-            - https://www.googleapis.com/auth/bigtable.admin.instance
+            - https://www.googleapis.com/auth/bigtable.admin.table
         - Oauth2:
             - https://www.googleapis.com/auth/cloud-bigtable.admin
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-bigtable.admin
         - Oauth2:
-            - https://www.googleapis.com/auth/cloud-bigtable.admin.cluster
+            - https://www.googleapis.com/auth/cloud-bigtable.admin.table
           Oauth2c:
-            - https://www.googleapis.com/auth/cloud-bigtable.admin.cluster
+            - https://www.googleapis.com/auth/cloud-bigtable.admin.table
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
             - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
@@ -354,17 +361,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
   "/v2/{name}/operations":
     get:
       description: >-
@@ -448,30 +455,30 @@ paths:
       tags:
         - operations
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
   "/v2/{name}:cancel":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
     post:
       description: >-
         Starts asynchronous cancellation on a long-running operation.  The server
@@ -537,17 +544,17 @@ paths:
         - operations
   "/v2/{name}:checkConsistency":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
     post:
       description: >-
         Checks replication consistency based on a consistency token, that is, if
@@ -605,17 +612,17 @@ paths:
         - projects
   "/v2/{name}:dropRowRange":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
     post:
       description: >-
         Permanently drop/delete a row range from a specified table. The request can
@@ -673,17 +680,17 @@ paths:
         - projects
   "/v2/{name}:generateConsistencyToken":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
     post:
       description: >-
         Generates a consistency token for a Table, which can be used in
@@ -743,17 +750,17 @@ paths:
         - projects
   "/v2/{name}:modifyColumnFamilies":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
     post:
       description: >-
         Performs a series of column family modifications on the specified table.
@@ -891,17 +898,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
     post:
       description: Creates an app profile within an instance.
       operationId: bigtableadmin.projects.instances.appProfiles.create
@@ -1001,7 +1008,7 @@ paths:
 
             string, a number, or a boolean. The comparison operator must be
 
-            <, >, <=, >=, !=, =, or :. Colon ‘:’ represents a HAS operator which is
+            <, >, <=, >=, !=, =, or :. Colon ':' represents a HAS operator which is
 
             roughly synonymous with equality. Filter rules are case insensitive.
 
@@ -1122,17 +1129,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
     post:
       description: >-
         Starts creating a new Cloud Bigtable Backup.  The returned backup
@@ -1276,17 +1283,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
     post:
       description: Creates a cluster within an instance.
       operationId: bigtableadmin.projects.instances.clusters.create
@@ -1409,17 +1416,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
     post:
       description: Create an instance within a project.
       operationId: bigtableadmin.projects.instances.create
@@ -1560,17 +1567,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
     post:
       description: >-
         Creates a new table in the specified instance.
@@ -1626,17 +1633,17 @@ paths:
         - projects
   "/v2/{parent}/tables:restore":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
     post:
       description: >-
         Create a new table by restoring from a completed backup. The new table
@@ -1704,17 +1711,17 @@ paths:
         - projects
   "/v2/{resource}:getIamPolicy":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
     post:
       description: >-
         Gets the access control policy for a Table resource.
@@ -1774,17 +1781,17 @@ paths:
         - projects
   "/v2/{resource}:setIamPolicy":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
     post:
       description: >-
         Sets the access control policy on a Table resource.
@@ -1842,17 +1849,17 @@ paths:
         - projects
   "/v2/{resource}:testIamPermissions":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
     post:
       description: Returns permissions that the caller has on the specified table resource.
       operationId: bigtableadmin.projects.instances.tables.testIamPermissions
@@ -2309,7 +2316,8 @@ components:
                recovered group retains the role in the binding.
 
 
-            * `domain:{domain}`: The G Suite domain (primary) that represents all the    users of that domain. For example, `google.com` or `example.com`.
+            * `domain:{domain}`: The G Suite domain (primary) that represents all the
+               users of that domain. For example, `google.com` or `example.com`.
 
           items:
             type: string

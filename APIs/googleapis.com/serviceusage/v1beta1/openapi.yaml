@@ -98,21 +98,21 @@ paths:
       tags:
         - operations
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
   "/v1beta1/{name}":
     delete:
-      description: Deletes a consumer override.
-      operationId: serviceusage.services.consumerQuotaMetrics.limits.consumerOverrides.delete
+      description: Deletes an admin override.
+      operationId: serviceusage.services.consumerQuotaMetrics.limits.adminOverrides.delete
       parameters:
         - description: >-
             The resource name of the override to delete.
@@ -120,7 +120,7 @@ paths:
 
             An example name would be:
 
-            `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion/consumerOverrides/4a3f2c1d`
+            `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion/adminOverrides/4a3f2c1d`
           in: path
           name: name
           required: true
@@ -202,20 +202,20 @@ paths:
       tags:
         - services
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
     patch:
-      description: Updates a consumer override.
-      operationId: serviceusage.services.consumerQuotaMetrics.limits.consumerOverrides.patch
+      description: Updates an admin override.
+      operationId: serviceusage.services.consumerQuotaMetrics.limits.adminOverrides.patch
       parameters:
         - description: >-
             The resource name of the override to update.
@@ -223,7 +223,7 @@ paths:
 
             An example name would be:
 
-            `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion/consumerOverrides/4a3f2c1d`
+            `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion/adminOverrides/4a3f2c1d`
           in: path
           name: name
           required: true
@@ -276,17 +276,17 @@ paths:
         - services
   "/v1beta1/{name}:disable":
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
     post:
       description: >-
         Disable a service so that it can no longer be used with a project.
@@ -348,17 +348,17 @@ paths:
         - services
   "/v1beta1/{name}:enable":
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
     post:
       description: >-
         Enable a service so that it can be used with a project.
@@ -465,17 +465,17 @@ paths:
       tags:
         - services
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
     post:
       description: >-
         Creates an admin override.
@@ -593,17 +593,17 @@ paths:
       tags:
         - services
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
     post:
       description: >-
         Creates a consumer override.
@@ -739,30 +739,30 @@ paths:
       tags:
         - services
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
   "/v1beta1/{parent}/consumerQuotaMetrics:importConsumerOverrides":
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
     post:
       description: >-
         Create or update multiple consumer overrides atomically, all on the
@@ -883,30 +883,30 @@ paths:
       tags:
         - services
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
   "/v1beta1/{parent}/services:batchEnable":
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
     post:
       description: >-
         Enable multiple services on a project. The operation is atomic: if enabling
@@ -959,17 +959,17 @@ paths:
         - services
   "/v1beta1/{parent}:generateServiceIdentity":
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
     post:
       description: Generate service identity for service.
       operationId: serviceusage.services.generateServiceIdentity
@@ -3664,7 +3664,7 @@ components:
         descriptors:
 
 
-        * `type`, `metric_kind`, `value_type`, `description`, and `display_name`
+        * `type`, `metric_kind`, `value_type` and `description`
           fields are all required. The `unit` field must be specified
           if the `value_type` is any of DOUBLE, INT64, DISTRIBUTION.
         * Maximum of default 500 metric descriptors per service is allowed.

@@ -80,15 +80,15 @@ paths:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
   "/v1/{name}":
     get:
       description: Gets a book. Returns NOT_FOUND if the book does not exist.
@@ -117,28 +117,28 @@ paths:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
   "/v1/{name}:borrow":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: >-
         Borrow a book from the library. Returns the book if it is borrowed
@@ -174,15 +174,15 @@ paths:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: >-
         Return a book to the library. Returns the book if it is returned to the
@@ -267,15 +267,15 @@ paths:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
 components:
   parameters:
     _.xgafv:

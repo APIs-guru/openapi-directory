@@ -33,24 +33,24 @@ info:
 externalDocs:
   url: https://developers.google.com/google-apps/calendar/firstapp
 tags:
-  - name: colors
-  - name: channels
-  - name: freebusy
-  - name: calendars
   - name: calendarList
-  - name: acl
   - name: settings
+  - name: colors
+  - name: calendars
   - name: events
+  - name: channels
+  - name: acl
+  - name: freebusy
 paths:
   /calendars:
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: Creates a secondary calendar.
       operationId: calendar.calendars.insert
@@ -123,13 +123,13 @@ paths:
       tags:
         - calendars
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/quotaUser"
     patch:
       description: Updates metadata for a calendar. This method supports patch semantics.
       operationId: calendar.calendars.patch
@@ -242,13 +242,13 @@ paths:
       tags:
         - acl
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: Creates an access control rule.
       operationId: calendar.acl.insert
@@ -285,13 +285,13 @@ paths:
         - acl
   "/calendars/{calendarId}/acl/watch":
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: Watch for changes to ACL resources.
       operationId: calendar.acl.watch
@@ -411,13 +411,13 @@ paths:
       tags:
         - acl
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/quotaUser"
     patch:
       description: Updates an access control rule. This method supports patch semantics.
       operationId: calendar.acl.patch
@@ -500,13 +500,13 @@ paths:
         - acl
   "/calendars/{calendarId}/clear":
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: Clears a primary calendar. This operation deletes all events associated with the primary calendar of an account.
       operationId: calendar.calendars.clear
@@ -689,13 +689,13 @@ paths:
       tags:
         - events
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: Creates an event.
       operationId: calendar.events.insert
@@ -767,13 +767,13 @@ paths:
         - events
   "/calendars/{calendarId}/events/import":
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: Imports an event. This operation is used to add a private copy of an existing event to a calendar.
       operationId: calendar.events.import
@@ -821,13 +821,13 @@ paths:
         - events
   "/calendars/{calendarId}/events/quickAdd":
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: Creates an event based on a simple text string.
       operationId: calendar.events.quickAdd
@@ -882,13 +882,13 @@ paths:
         - events
   "/calendars/{calendarId}/events/watch":
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: Watch for changes to Events resources.
       operationId: calendar.events.watch
@@ -1162,13 +1162,13 @@ paths:
       tags:
         - events
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/quotaUser"
     patch:
       description: Updates an event. This method supports patch semantics.
       operationId: calendar.events.patch
@@ -1420,22 +1420,22 @@ paths:
       tags:
         - events
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/quotaUser"
   "/calendars/{calendarId}/events/{eventId}/move":
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: Moves an event to another calendar, i.e. changes an event's organizer.
       operationId: calendar.events.move
@@ -1496,13 +1496,13 @@ paths:
         - events
   /channels/stop:
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: Stop watching resources through this channel
       operationId: calendar.channels.stop
@@ -1560,22 +1560,22 @@ paths:
       tags:
         - colors
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/quotaUser"
   /freeBusy:
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: Returns free/busy information for a set of calendars.
       operationId: calendar.freebusy.query
@@ -1671,13 +1671,13 @@ paths:
       tags:
         - calendarList
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: Inserts an existing calendar into the user's calendar list.
       operationId: calendar.calendarList.insert
@@ -1708,13 +1708,13 @@ paths:
         - calendarList
   /users/me/calendarList/watch:
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: Watch for changes to CalendarList resources.
       operationId: calendar.calendarList.watch
@@ -1837,13 +1837,13 @@ paths:
       tags:
         - calendarList
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/quotaUser"
     patch:
       description: Updates an existing calendar on the user's calendar list. This method supports patch semantics.
       operationId: calendar.calendarList.patch
@@ -1963,22 +1963,22 @@ paths:
       tags:
         - settings
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/quotaUser"
   /users/me/settings/watch:
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: Watch for changes to Settings resources.
       operationId: calendar.settings.watch
@@ -2067,13 +2067,13 @@ paths:
       tags:
         - settings
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/quotaUser"
 components:
   parameters:
     alt:

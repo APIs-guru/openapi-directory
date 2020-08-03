@@ -33,9 +33,9 @@ info:
 externalDocs:
   url: https://cloud.google.com/remote-build-execution/docs/
 tags:
-  - name: media
-  - name: projects
   - name: operations
+  - name: projects
+  - name: media
 paths:
   "/v1/media/{resourceName}":
     get:
@@ -69,17 +69,17 @@ paths:
       tags:
         - media
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
     post:
       description: >-
         Uploads media. Upload is supported on
@@ -149,27 +149,14 @@ paths:
         - operations
     get:
       description: >-
-        Lists operations that match the specified filter in the request. If the
+        Gets the latest state of a long-running operation.  Clients can use this
 
-        server doesn't support this method, it returns `UNIMPLEMENTED`.
+        method to poll the operation result at intervals as recommended by the API
 
-
-        NOTE: the `name` binding allows API services to override the binding
-
-        to use different resource name schemes, such as `users/*/operations`. To
-
-        override the binding, API services can add a binding such as
-
-        `"/v1/{name=users/*}/operations"` to their service configuration.
-
-        For backwards compatibility, the default name includes the operations
-
-        collection id, however overriding users must ensure the name binding
-
-        is the parent resource, without the operations collection id.
-      operationId: remotebuildexecution.operations.list
+        service.
+      operationId: remotebuildexecution.projects.operations.get
       parameters:
-        - description: The name of the operation's parent resource.
+        - description: The name of the operation resource.
           in: path
           name: name
           required: true
@@ -195,7 +182,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GoogleLongrunningListOperationsResponse"
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
           description: Successful response
       security:
         - Oauth2:
@@ -203,32 +190,32 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
-        - operations
+        - projects
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
   "/v1/{name}:cancel":
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
     post:
       description: >-
         Starts asynchronous cancellation on a long-running operation.  The server
@@ -1824,6 +1811,7 @@ components:
             - DOCKER_CREATE_RUNTIME_FILE_NOT_FOUND
             - DOCKER_CREATE_RUNTIME_PERMISSION_DENIED
             - DOCKER_CREATE_PROCESS_FILE_NOT_FOUND
+            - DOCKER_CREATE_COMPUTE_SYSTEM_INCORRECT_PARAMETER_ERROR
           type: string
         message:
           description: The error message.

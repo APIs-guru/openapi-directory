@@ -33,8 +33,8 @@ info:
 externalDocs:
   url: https://developers.google.com/fact-check/tools/api/
 tags:
-  - name: claims
   - name: pages
+  - name: claims
 paths:
   /v1alpha1/claims:search:
     get:
@@ -112,17 +112,17 @@ paths:
       tags:
         - claims
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
   /v1alpha1/pages:
     get:
       description: >-
@@ -198,17 +198,17 @@ paths:
       tags:
         - pages
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
     post:
       description: Create `ClaimReview` markup on a page.
       operationId: factchecktools.pages.create
@@ -281,17 +281,17 @@ paths:
       tags:
         - pages
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
     put:
       description: >-
         Update for all `ClaimReview` markup on a page

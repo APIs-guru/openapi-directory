@@ -33,13 +33,13 @@ info:
 externalDocs:
   url: https://cloud.google.com/bigquery/
 tags:
-  - name: routines
+  - name: tabledata
+  - name: tables
   - name: datasets
+  - name: routines
   - name: models
   - name: jobs
   - name: projects
-  - name: tabledata
-  - name: tables
 paths:
   /projects:
     get:
@@ -83,13 +83,13 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
   "/projects/{projectId}/datasets":
     get:
       description: Lists all datasets in the specified project to which you have been granted the READER dataset role.
@@ -148,13 +148,13 @@ paths:
       tags:
         - datasets
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: Creates a new empty dataset.
       operationId: bigquery.datasets.insert
@@ -267,13 +267,13 @@ paths:
       tags:
         - datasets
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
     patch:
       description: Updates information in an existing dataset. The update method replaces the entire dataset resource, whereas the patch method only replaces fields that are provided in the submitted dataset resource. This method supports patch semantics.
       operationId: bigquery.datasets.patch
@@ -415,13 +415,13 @@ paths:
       tags:
         - models
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
   "/projects/{projectId}/datasets/{datasetId}/models/{modelId}":
     delete:
       description: Deletes the model specified by modelId from the dataset.
@@ -508,13 +508,13 @@ paths:
       tags:
         - models
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
     patch:
       description: Patch specific fields in the specified model.
       operationId: bigquery.models.patch
@@ -649,13 +649,13 @@ paths:
       tags:
         - routines
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: Creates a new routine in the dataset.
       operationId: bigquery.routines.insert
@@ -789,13 +789,13 @@ paths:
       tags:
         - routines
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
     put:
       description: >-
         Updates information in an existing routine. The update method replaces the
@@ -898,13 +898,13 @@ paths:
       tags:
         - tables
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: Creates a new, empty table in the dataset.
       operationId: bigquery.tables.insert
@@ -1035,13 +1035,13 @@ paths:
       tags:
         - tables
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
     patch:
       description: Updates information in an existing table. The update method replaces the entire table resource, whereas the patch method only replaces fields that are provided in the submitted table resource. This method supports patch semantics.
       operationId: bigquery.tables.patch
@@ -1202,22 +1202,22 @@ paths:
       tags:
         - tabledata
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
   "/projects/{projectId}/datasets/{datasetId}/tables/{tableId}/insertAll":
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: Streams data into BigQuery one record at a time without needing to run a load job. Requires the WRITER dataset role.
       operationId: bigquery.tabledata.insertAll
@@ -1356,13 +1356,13 @@ paths:
       tags:
         - jobs
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: Starts a new asynchronous job. Requires the Can View project role.
       operationId: bigquery.jobs.insert
@@ -1457,22 +1457,22 @@ paths:
       tags:
         - jobs
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
   "/projects/{projectId}/jobs/{jobId}/cancel":
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: Requests that a job be cancelled. This call will return immediately, and the client will need to poll for the job status to see if the cancel completed successfully. Cancelled jobs may still incur costs.
       operationId: bigquery.jobs.cancel
@@ -1514,13 +1514,13 @@ paths:
         - jobs
   "/projects/{projectId}/queries":
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: Runs a BigQuery SQL query synchronously and returns query results if the query completes within a specified timeout.
       operationId: bigquery.jobs.query
@@ -1631,13 +1631,13 @@ paths:
       tags:
         - jobs
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
   "/projects/{projectId}/serviceAccount":
     get:
       description: Returns the email address of the service account for your project used for interactions with Google Cloud KMS.
@@ -1676,22 +1676,22 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
   "/{resource}:getIamPolicy":
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: >-
         Gets the access control policy for a resource.
@@ -1743,13 +1743,13 @@ paths:
         - tables
   "/{resource}:setIamPolicy":
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: >-
         Sets the access control policy on the specified resource. Replaces any
@@ -1794,13 +1794,13 @@ paths:
         - tables
   "/{resource}:testIamPermissions":
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: >-
         Returns permissions that a caller has on the specified resource.
@@ -2035,6 +2035,57 @@ components:
           format: double
           type: number
       type: object
+    ArimaForecastingMetrics:
+      description: Model evaluation metrics for ARIMA forecasting models.
+      properties:
+        arimaFittingMetrics:
+          description: Arima model fitting metrics.
+          items:
+            $ref: "#/components/schemas/ArimaFittingMetrics"
+          type: array
+        arimaSingleModelForecastingMetrics:
+          description: >-
+            Repeated as there can be many metric sets (one for each model) in
+
+            auto-arima and the large-scale case.
+          items:
+            $ref: "#/components/schemas/ArimaSingleModelForecastingMetrics"
+          type: array
+        hasDrift:
+          description: >-
+            Whether Arima model fitted with drift or not. It is always false when d
+
+            is not 1.
+          items:
+            type: boolean
+          type: array
+        nonSeasonalOrder:
+          description: Non-seasonal order.
+          items:
+            $ref: "#/components/schemas/ArimaOrder"
+          type: array
+        seasonalPeriods:
+          description: >-
+            Seasonal periods. Repeated because multiple periods are supported for one
+
+            time series.
+          items:
+            enum:
+              - SEASONAL_PERIOD_TYPE_UNSPECIFIED
+              - NO_SEASONALITY
+              - DAILY
+              - WEEKLY
+              - MONTHLY
+              - QUARTERLY
+              - YEARLY
+            type: string
+          type: array
+        timeSeriesId:
+          description: Id to differentiate different time series for the large-scale case.
+          items:
+            type: string
+          type: array
+      type: object
     ArimaModelInfo:
       description: Arima model information.
       properties:
@@ -2119,6 +2170,41 @@ components:
               - YEARLY
             type: string
           type: array
+      type: object
+    ArimaSingleModelForecastingMetrics:
+      description: Model evaluation metrics for a single ARIMA forecasting model.
+      properties:
+        arimaFittingMetrics:
+          $ref: "#/components/schemas/ArimaFittingMetrics"
+          description: Arima fitting metrics.
+        hasDrift:
+          description: >-
+            Is arima model fitted with drift or not. It is always false when d
+
+            is not 1.
+          type: boolean
+        nonSeasonalOrder:
+          $ref: "#/components/schemas/ArimaOrder"
+          description: Non-seasonal order.
+        seasonalPeriods:
+          description: >-
+            Seasonal periods. Repeated because multiple periods are supported
+
+            for one time series.
+          items:
+            enum:
+              - SEASONAL_PERIOD_TYPE_UNSPECIFIED
+              - NO_SEASONALITY
+              - DAILY
+              - WEEKLY
+              - MONTHLY
+              - QUARTERLY
+              - YEARLY
+            type: string
+          type: array
+        timeSeriesId:
+          description: The id to indicate different time series.
+          type: string
       type: object
     AuditConfig:
       description: >-
@@ -2441,7 +2527,8 @@ components:
                recovered group retains the role in the binding.
 
 
-            * `domain:{domain}`: The G Suite domain (primary) that represents all the    users of that domain. For example, `google.com` or `example.com`.
+            * `domain:{domain}`: The G Suite domain (primary) that represents all the
+               users of that domain. For example, `google.com` or `example.com`.
 
           items:
             type: string
@@ -2858,6 +2945,9 @@ components:
 
         training. These are not present for imported models.
       properties:
+        arimaForecastingMetrics:
+          $ref: "#/components/schemas/ArimaForecastingMetrics"
+          description: Populated for ARIMA models.
         binaryClassificationMetrics:
           $ref: "#/components/schemas/BinaryClassificationMetrics"
           description: Populated for binary classification/classifier models.
@@ -2869,10 +2959,7 @@ components:
           description: Populated for multi-class classification/classifier models.
         rankingMetrics:
           $ref: "#/components/schemas/RankingMetrics"
-          description: >-
-            [Alpha] Populated for implicit feedback type matrix factorization
-
-            models.
+          description: Populated for implicit feedback type matrix factorization models.
         regressionMetrics:
           $ref: "#/components/schemas/RegressionMetrics"
           description: >-
@@ -4052,6 +4139,7 @@ components:
             - DNN_REGRESSOR
             - BOOSTED_TREE_REGRESSOR
             - BOOSTED_TREE_CLASSIFIER
+            - ARIMA
             - AUTOML_REGRESSOR
             - AUTOML_CLASSIFIER
           type: string
@@ -4835,6 +4923,16 @@ components:
           format: google-fieldmask
           type: string
       type: object
+    SnapshotDefinition:
+      properties:
+        baseTableReference:
+          $ref: "#/components/schemas/TableReference"
+          description: "[Required] Reference describing the ID of the table that is snapshotted."
+        snapshotTime:
+          description: "[Required] The time at which the base table was snapshot."
+          format: date-time
+          type: string
+      type: object
     StandardSqlDataType:
       description: >-
         The type of a variable, e.g., a function argument.
@@ -5000,6 +5098,9 @@ components:
         selfLink:
           description: "[Output-only] A URL that can be used to access this resource again."
           type: string
+        snapshotDefinition:
+          $ref: "#/components/schemas/SnapshotDefinition"
+          description: "[Output-only] Snapshot definition."
         streamingBuffer:
           $ref: "#/components/schemas/Streamingbuffer"
           description: "[Output-only] Contains information regarding this table's streaming buffer, if one is present. This field will be absent if the table is not being streamed to or if there is no data in the streaming buffer."
@@ -5010,7 +5111,7 @@ components:
           $ref: "#/components/schemas/TimePartitioning"
           description: Time-based partitioning specification for this table. Only one of timePartitioning and rangePartitioning should be specified.
         type:
-          description: "[Output-only] Describes the table type. The following values are supported: TABLE: A normal BigQuery table. VIEW: A virtual table defined by a SQL query. [TrustedTester] MATERIALIZED_VIEW: SQL query whose result is persisted. EXTERNAL: A table that references data stored in an external storage system, such as Google Cloud Storage. The default value is TABLE."
+          description: "[Output-only] Describes the table type. The following values are supported: TABLE: A normal BigQuery table. VIEW: A virtual table defined by a SQL query. [TrustedTester] SNAPSHOT: An immutable, read-only table that is a copy of another table. [TrustedTester] MATERIALIZED_VIEW: SQL query whose result is persisted. EXTERNAL: A table that references data stored in an external storage system, such as Google Cloud Storage. The default value is TABLE."
           type: string
         view:
           $ref: "#/components/schemas/ViewDefinition"
@@ -5270,9 +5371,24 @@ components:
       type: object
     TrainingOptions:
       properties:
+        autoArima:
+          description: Whether to enable auto ARIMA or not.
+          type: boolean
         batchSize:
           description: Batch size for dnn models.
           format: int64
+          type: string
+        dataFrequency:
+          description: The data frequency of a time series.
+          enum:
+            - DATA_FREQUENCY_UNSPECIFIED
+            - AUTO_FREQUENCY
+            - YEARLY
+            - QUARTERLY
+            - MONTHLY
+            - WEEKLY
+            - DAILY
+            - HOURLY
           type: string
         dataSplitColumn:
           description: >-
@@ -5352,6 +5468,91 @@ components:
             format: int64
             type: string
           type: array
+        holidayRegion:
+          description: >-
+            The geographical region based on which the holidays are considered in
+
+            time series modeling. If a valid value is specified, then holiday
+
+            effects modeling is enabled.
+          enum:
+            - HOLIDAY_REGION_UNSPECIFIED
+            - GLOBAL
+            - NA
+            - JAPAC
+            - EMEA
+            - LAC
+            - AE
+            - AR
+            - AT
+            - AU
+            - BE
+            - BR
+            - CA
+            - CH
+            - CL
+            - CN
+            - CO
+            - CS
+            - CZ
+            - DE
+            - DK
+            - DZ
+            - EC
+            - EE
+            - EG
+            - ES
+            - FI
+            - FR
+            - GB
+            - GR
+            - HK
+            - HU
+            - ID
+            - IE
+            - IL
+            - IN
+            - IR
+            - IT
+            - JP
+            - KR
+            - LV
+            - MA
+            - MX
+            - MY
+            - NG
+            - NL
+            - NO
+            - NZ
+            - PE
+            - PH
+            - PK
+            - PL
+            - PT
+            - RO
+            - RS
+            - RU
+            - SA
+            - SE
+            - SG
+            - SI
+            - SK
+            - TH
+            - TR
+            - TW
+            - UA
+            - US
+            - VE
+            - VN
+            - ZA
+          type: string
+        horizon:
+          description: The number of periods ahead that need to be forecasted.
+          format: int64
+          type: string
+        includeDrift:
+          description: Include drift when fitting an ARIMA model.
+          type: boolean
         initialLearnRate:
           description: >-
             Specifies the initial learning rate for the line search learn rate
@@ -5446,6 +5647,14 @@ components:
 
             applicable for imported models.
           type: string
+        nonSeasonalOrder:
+          $ref: "#/components/schemas/ArimaOrder"
+          description: >-
+            A specification of the non-seasonal part of the ARIMA model: the three
+
+            components (p, d, q) are the AR order, the degree of differencing, and
+
+            the MA order.
         numClusters:
           description: Number of clusters for clustering models.
           format: int64
@@ -5478,6 +5687,18 @@ components:
             overfitting for boosted tree models.
           format: double
           type: number
+        timeSeriesDataColumn:
+          description: Column to be designated as time series data for ARIMA model.
+          type: string
+        timeSeriesIdColumn:
+          description: >-
+            The id column that will be used to indicate different time series to
+
+            forecast in parallel.
+          type: string
+        timeSeriesTimestampColumn:
+          description: Column to be designated as time series timestamp for ARIMA model.
+          type: string
         userColumn:
           description: User column specified for matrix factorization models.
           type: string

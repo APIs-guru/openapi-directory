@@ -33,8 +33,8 @@ info:
 externalDocs:
   url: https://cloud.google.com/service-infrastructure/docs/service-networking/getting-started
 tags:
-  - name: services
   - name: operations
+  - name: services
 paths:
   "/v1/{name}":
     delete:
@@ -106,17 +106,17 @@ paths:
       tags:
         - operations
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
     patch:
       description: Updates the allocated ranges that are assigned to a connection.
       operationId: servicenetworking.services.connections.patch
@@ -179,17 +179,17 @@ paths:
         - services
   "/v1/{name}:cancel":
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
       description: >-
         Starts asynchronous cancellation on a long-running operation.  The server
@@ -302,17 +302,17 @@ paths:
       tags:
         - services
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
       description: >-
         Creates a private connection that establishes a VPC Network Peering
@@ -366,17 +366,17 @@ paths:
         - services
   "/v1/{parent}/dnsRecordSets:add":
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
       description: >-
         Service producers can use this method to add DNS record sets to private DNS
@@ -420,17 +420,17 @@ paths:
         - services
   "/v1/{parent}/dnsRecordSets:remove":
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
       description: >-
         Service producers can use this method to remove DNS record sets from
@@ -474,17 +474,17 @@ paths:
         - services
   "/v1/{parent}/dnsRecordSets:update":
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
       description: >-
         Service producers can use this method to update DNS record sets from
@@ -528,17 +528,17 @@ paths:
         - services
   "/v1/{parent}/dnsZones:add":
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
       description: >-
         Service producers can use this method to add private DNS zones in the
@@ -584,17 +584,17 @@ paths:
         - services
   "/v1/{parent}/dnsZones:remove":
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
       description: >-
         Service producers can use this method to remove private DNS zones in the
@@ -640,17 +640,17 @@ paths:
         - services
   "/v1/{parent}/roles:add":
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
       description: >-
         Service producers can use this method to add roles in the shared VPC host
@@ -698,17 +698,17 @@ paths:
         - services
   "/v1/{parent}:addSubnetwork":
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
       description: >-
         For service producers, provisions a new subnet in a peered service's shared
@@ -774,17 +774,17 @@ paths:
         - services
   "/v1/{parent}:disableVpcServiceControls":
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
     patch:
       description: Disables VPC service controls for a connection.
       operationId: servicenetworking.services.disableVpcServiceControls
@@ -825,17 +825,17 @@ paths:
         - services
   "/v1/{parent}:enableVpcServiceControls":
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
     patch:
       description: Enables VPC service controls for a connection.
       operationId: servicenetworking.services.enableVpcServiceControls
@@ -876,17 +876,17 @@ paths:
         - services
   "/v1/{parent}:searchRange":
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
       description: >-
         Service producers can use this method to find a currently unused range
@@ -936,17 +936,17 @@ paths:
         - services
   "/v1/{parent}:validate":
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
       description: >-
         Service producers use this method to validate if the consumer provided
@@ -3250,7 +3250,7 @@ components:
         descriptors:
 
 
-        * `type`, `metric_kind`, `value_type`, `description`, and `display_name`
+        * `type`, `metric_kind`, `value_type` and `description`
           fields are all required. The `unit` field must be specified
           if the `value_type` is any of DOUBLE, INT64, DISTRIBUTION.
         * Maximum of default 500 metric descriptors per service is allowed.

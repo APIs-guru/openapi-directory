@@ -33,25 +33,25 @@ info:
 externalDocs:
   url: https://cloud.google.com/iam/
 tags:
+  - name: organizations
+  - name: projects
   - name: roles
   - name: iamPolicies
-  - name: organizations
   - name: permissions
-  - name: projects
 paths:
   /v1/iamPolicies:lintPolicy:
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: >-
         Lints, or validates, an IAM policy. Currently checks the
@@ -86,17 +86,17 @@ paths:
         - iamPolicies
   /v1/iamPolicies:queryAuditableServices:
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: >-
         Returns a list of services that allow you to opt into audit logs that are
@@ -129,17 +129,17 @@ paths:
         - iamPolicies
   /v1/permissions:queryTestablePermissions:
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: >-
         Lists every permission that you can test on a resource. A permission is
@@ -263,30 +263,30 @@ paths:
       tags:
         - roles
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
   /v1/roles:queryGrantableRoles:
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: >-
         Lists roles that can be granted on a Google Cloud resource. A role is
@@ -316,65 +316,19 @@ paths:
         - roles
   "/v1/{name}":
     delete:
-      description: >-
-        Deletes a custom Role.
-
-
-        When you delete a custom role, the following changes occur immediately:
-
-
-        * You cannot bind a member to the custom role in an IAM
-
-        Policy.
-
-        * Existing bindings to the custom role are not changed, but they have no
-
-        effect.
-
-        * By default, the response from ListRoles does not include the custom
-
-        role.
-
-
-        You have 7 days to undelete the custom role. After 7 days, the following
-
-        changes occur:
-
-
-        * The custom role is permanently deleted and cannot be recovered.
-
-        * If an IAM policy contains a binding to the custom role, the binding is
-
-        permanently removed.
-      operationId: iam.projects.roles.delete
+      description: Deletes a ServiceAccountKey.
+      operationId: iam.projects.serviceAccounts.keys.delete
       parameters:
         - description: >-
-            The `name` parameter's value depends on the target resource for the
+            Required. The resource name of the service account key in the following format:
 
-            request, namely
+            `projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT}/keys/{key}`.
 
-            [`projects`](/iam/reference/rest/v1/projects.roles) or
+            Using `-` as a wildcard for the `PROJECT_ID` will infer the project from
 
-            [`organizations`](/iam/reference/rest/v1/organizations.roles). Each
+            the account. The `ACCOUNT` value can be the `email` address or the
 
-            resource type's `name` value format is described below:
-
-
-            * [`projects.roles.delete()`](/iam/reference/rest/v1/projects.roles/delete):
-              `projects/{PROJECT_ID}/roles/{CUSTOM_ROLE_ID}`. This method deletes only
-              [custom roles](/iam/docs/understanding-custom-roles) that have been
-              created at the project level. Example request URL:
-              `https://iam.googleapis.com/v1/projects/{PROJECT_ID}/roles/{CUSTOM_ROLE_ID}`
-
-            * [`organizations.roles.delete()`](/iam/reference/rest/v1/organizations.roles/delete):
-              `organizations/{ORGANIZATION_ID}/roles/{CUSTOM_ROLE_ID}`. This method
-              deletes only [custom roles](/iam/docs/understanding-custom-roles) that
-              have been created at the organization level. Example request URL:
-              `https://iam.googleapis.com/v1/organizations/{ORGANIZATION_ID}/roles/{CUSTOM_ROLE_ID}`
-
-            Note: Wildcard (*) values are invalid; you must specify a complete project
-
-            ID or organization ID.
+            `unique_id` of the service account.
           in: path
           name: name
           required: true
@@ -390,7 +344,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Role"
+                $ref: "#/components/schemas/Empty"
           description: Successful response
       security:
         - Oauth2:
@@ -401,7 +355,7 @@ paths:
         - projects
     get:
       description: Gets the definition of a Role.
-      operationId: iam.projects.roles.get
+      operationId: iam.roles.get
       parameters:
         - description: >-
             The `name` parameter's value depends on the target resource for the
@@ -468,50 +422,56 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
-        - projects
+        - roles
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
     patch:
-      description: Updates the definition of a custom Role.
-      operationId: iam.projects.roles.patch
+      description: Patches a ServiceAccount.
+      operationId: iam.projects.serviceAccounts.patch
       parameters:
         - description: >-
-            The `name` parameter's value depends on the target resource for the
-
-            request, namely
-
-            [`projects`](/iam/reference/rest/v1/projects.roles) or
-
-            [`organizations`](/iam/reference/rest/v1/organizations.roles). Each
-
-            resource type's `name` value format is described below:
+            The resource name of the service account.
 
 
-            * [`projects.roles.patch()`](/iam/reference/rest/v1/projects.roles/patch):
-              `projects/{PROJECT_ID}/roles/{CUSTOM_ROLE_ID}`. This method updates only
-              [custom roles](/iam/docs/understanding-custom-roles) that have been
-              created at the project level. Example request URL:
-              `https://iam.googleapis.com/v1/projects/{PROJECT_ID}/roles/{CUSTOM_ROLE_ID}`
+            Use one of the following formats:
 
-            * [`organizations.roles.patch()`](/iam/reference/rest/v1/organizations.roles/patch):
-              `organizations/{ORGANIZATION_ID}/roles/{CUSTOM_ROLE_ID}`. This method
-              updates only [custom roles](/iam/docs/understanding-custom-roles) that
-              have been created at the organization level. Example request URL:
-              `https://iam.googleapis.com/v1/organizations/{ORGANIZATION_ID}/roles/{CUSTOM_ROLE_ID}`
 
-            Note: Wildcard (*) values are invalid; you must specify a complete project
+            * `projects/{PROJECT_ID}/serviceAccounts/{EMAIL_ADDRESS}`
 
-            ID or organization ID.
+            * `projects/{PROJECT_ID}/serviceAccounts/{UNIQUE_ID}`
+
+
+            As an alternative, you can use the `-` wildcard character instead of the
+
+            project ID:
+
+
+            * `projects/-/serviceAccounts/{EMAIL_ADDRESS}`
+
+            * `projects/-/serviceAccounts/{UNIQUE_ID}`
+
+
+            When possible, avoid using the `-` wildcard character, because it can cause
+
+            response messages to contain misleading error codes. For example, if you
+
+            try to get the service account
+
+            `projects/-/serviceAccounts/fake@example.com`, which does not exist, the
+
+            response contains an HTTP `403 Forbidden` error instead of a `404 Not
+
+            Found` error.
           in: path
           name: name
           required: true
@@ -526,13 +486,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Role"
+              $ref: "#/components/schemas/PatchServiceAccountRequest"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Role"
+                $ref: "#/components/schemas/ServiceAccount"
           description: Successful response
       security:
         - Oauth2:
@@ -665,17 +625,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: Creates a ServiceAccountKey.
       operationId: iam.projects.serviceAccounts.keys.create
@@ -716,17 +676,17 @@ paths:
         - projects
   "/v1/{name}/keys:upload":
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: Creates a ServiceAccountKey, using a public key that you provide.
       operationId: iam.projects.serviceAccounts.keys.upload
@@ -817,17 +777,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: Creates a ServiceAccount.
       operationId: iam.projects.serviceAccounts.create
@@ -862,17 +822,17 @@ paths:
         - projects
   "/v1/{name}:disable":
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: >-
         Disables a ServiceAccount immediately.
@@ -941,17 +901,17 @@ paths:
         - projects
   "/v1/{name}:enable":
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: >-
         Enables a ServiceAccount that was disabled by
@@ -1005,17 +965,17 @@ paths:
         - projects
   "/v1/{name}:signBlob":
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: >-
         **Note:** This method is deprecated and will stop working on July 1, 2021.
@@ -1077,17 +1037,17 @@ paths:
         - projects
   "/v1/{name}:signJwt":
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: >-
         **Note:** This method is deprecated and will stop working on July 1, 2021.
@@ -1151,48 +1111,42 @@ paths:
         - projects
   "/v1/{name}:undelete":
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
     post:
-      description: Undeletes a custom Role.
-      operationId: iam.projects.roles.undelete
+      description: >-
+        Restores a deleted ServiceAccount.
+
+
+        **Important:** It is not always possible to restore a deleted service
+
+        account. Use this method only as a last resort.
+
+
+        After you delete a service account, IAM permanently removes the service
+
+        account 30 days later. There is no way to restore a deleted service account
+
+        that has been permanently removed.
+      operationId: iam.projects.serviceAccounts.undelete
       parameters:
         - description: >-
-            The `name` parameter's value depends on the target resource for the
+            The resource name of the service account in the following format:
 
-            request, namely
+            `projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT_UNIQUE_ID}`.
 
-            [`projects`](/iam/reference/rest/v1/projects.roles) or
+            Using `-` as a wildcard for the `PROJECT_ID` will infer the project from
 
-            [`organizations`](/iam/reference/rest/v1/organizations.roles). Each
-
-            resource type's `name` value format is described below:
-
-
-            * [`projects.roles.undelete()`](/iam/reference/rest/v1/projects.roles/undelete):
-              `projects/{PROJECT_ID}/roles/{CUSTOM_ROLE_ID}`. This method undeletes
-              only [custom roles](/iam/docs/understanding-custom-roles) that have been
-              created at the project level. Example request URL:
-              `https://iam.googleapis.com/v1/projects/{PROJECT_ID}/roles/{CUSTOM_ROLE_ID}`
-
-            * [`organizations.roles.undelete()`](/iam/reference/rest/v1/organizations.roles/undelete):
-              `organizations/{ORGANIZATION_ID}/roles/{CUSTOM_ROLE_ID}`. This method
-              undeletes only [custom roles](/iam/docs/understanding-custom-roles) that
-              have been created at the organization level. Example request URL:
-              `https://iam.googleapis.com/v1/organizations/{ORGANIZATION_ID}/roles/{CUSTOM_ROLE_ID}`
-
-            Note: Wildcard (*) values are invalid; you must specify a complete project
-
-            ID or organization ID.
+            the account.
           in: path
           name: name
           required: true
@@ -1202,13 +1156,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/UndeleteRoleRequest"
+              $ref: "#/components/schemas/UndeleteServiceAccountRequest"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Role"
+                $ref: "#/components/schemas/UndeleteServiceAccountResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -1314,17 +1268,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: Creates a new custom Role.
       operationId: iam.projects.roles.create
@@ -1382,17 +1336,17 @@ paths:
         - projects
   "/v1/{resource}:getIamPolicy":
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: >-
         Gets the IAM policy that is attached to a ServiceAccount. This IAM
@@ -1465,17 +1419,17 @@ paths:
         - projects
   "/v1/{resource}:setIamPolicy":
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: >-
         Sets the IAM policy that is attached to a ServiceAccount.
@@ -1539,17 +1493,17 @@ paths:
         - projects
   "/v1/{resource}:testIamPermissions":
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: >-
         Tests whether the caller has the specified permissions on a
@@ -1886,7 +1840,8 @@ components:
                recovered group retains the role in the binding.
 
 
-            * `domain:{domain}`: The G Suite domain (primary) that represents all the    users of that domain. For example, `google.com` or `example.com`.
+            * `domain:{domain}`: The G Suite domain (primary) that represents all the
+               users of that domain. For example, `google.com` or `example.com`.
 
           items:
             type: string

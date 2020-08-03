@@ -6,8 +6,7 @@ info:
     name: Google
     url: https://google.com
     x-twitter: youtube
-  description: Cloud Life Sciences is a suite of services and tools for managing,
-    processing, and transforming life sciences data.
+  description: Cloud Life Sciences is a suite of services and tools for managing, processing, and transforming life sciences data.
   license:
     name: Creative Commons Attribution 3.0
     url: http://creativecommons.org/licenses/by/3.0/
@@ -73,16 +72,16 @@ paths:
         - projects
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
   "/v2beta/{name}/locations":
     get:
       description: Lists information about the supported locations for this service.
@@ -125,16 +124,16 @@ paths:
         - projects
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
   "/v2beta/{name}/operations":
     get:
       description: >-
@@ -199,29 +198,29 @@ paths:
         - projects
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
   "/v2beta/{name}:cancel":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
     post:
       description: >-
         Starts asynchronous cancellation on a long-running operation.
@@ -270,16 +269,16 @@ paths:
   "/v2beta/{parent}/pipelines:run":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
     post:
       description: >-
         Runs a pipeline.  The returned Operation's metadata field will contain a
@@ -313,8 +312,7 @@ paths:
         * `lifesciences.workflows.run`
       operationId: lifesciences.projects.locations.pipelines.run
       parameters:
-        - description: The project and location that this request should be executed
-            against.
+        - description: The project and location that this request should be executed against.
           in: path
           name: parent
           required: true
@@ -379,9 +377,7 @@ components:
       schema:
         type: string
     key:
-      description: API key. Your API key identifies your project and provides you with
-        API access, quota, and reports. Required unless you provide an OAuth 2.0
-        token.
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -399,9 +395,7 @@ components:
       schema:
         type: boolean
     quotaUser:
-      description: Available to use for quota purposes for server-side applications.
-        Can be any arbitrary string assigned to a user, but should not exceed 40
-        characters.
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
       in: query
       name: quotaUser
       schema:
@@ -449,8 +443,7 @@ components:
       properties:
         alwaysRun:
           description: >-
-            By default, after an action fails, no further actions are run. This
-            flag
+            By default, after an action fails, no further actions are run. This flag
 
             indicates that this action must be run even if the pipeline has already
 
@@ -474,8 +467,7 @@ components:
           type: array
         containerName:
           description: >-
-            An optional name for the container. The container hostname will be
-            set to
+            An optional name for the container. The container hostname will be set to
 
             this name, making it useful for inter-container communication. The name
 
@@ -486,8 +478,7 @@ components:
         credentials:
           $ref: "#/components/schemas/Secret"
           description: >-
-            If the specified image is hosted on a private registry other than
-            Google
+            If the specified image is hosted on a private registry other than Google
 
             Container Registry, the credentials required to pull the image must be
 
@@ -512,8 +503,7 @@ components:
           type: boolean
         disableStandardErrorCapture:
           description: >-
-            A small portion of the container's standard error stream is
-            typically
+            A small portion of the container's standard error stream is typically
 
             captured and returned inside the `ContainerStoppedEvent`. Setting this
 
@@ -521,8 +511,7 @@ components:
           type: boolean
         enableFuse:
           description: >-
-            Enable access to the FUSE device for this action. Filesystems can
-            then
+            Enable access to the FUSE device for this action. Filesystems can then
 
             be mounted into disks shared with other actions. The other actions do
 
@@ -542,8 +531,7 @@ components:
           additionalProperties:
             type: string
           description: >-
-            The environment to pass into the container. This environment is
-            merged
+            The environment to pass into the container. This environment is merged
 
             with values specified in the google.cloud.lifesciences.v2beta.Pipeline
 
@@ -574,15 +562,13 @@ components:
           type: object
         ignoreExitStatus:
           description: >-
-            Normally, a non-zero exit status causes the pipeline to fail. This
-            flag
+            Normally, a non-zero exit status causes the pipeline to fail. This flag
 
             allows execution of other actions to continue instead.
           type: boolean
         imageUri:
           description: >-
-            Required. The URI to pull the container image from. Note that all
-            images referenced
+            Required. The URI to pull the container image from. Note that all images referenced
 
             by actions in the pipeline are pulled before the first action runs. If
 
@@ -612,8 +598,7 @@ components:
           additionalProperties:
             type: string
           description: >-
-            Labels to associate with the action. This field is provided to
-            assist
+            Labels to associate with the action. This field is provided to assist
 
             workflow engine authors in identifying actions (for example, to indicate
 
@@ -675,8 +660,7 @@ components:
           type: object
         publishExposedPorts:
           description: >-
-            Exposes all ports specified by `EXPOSE` statements in the container.
-            To
+            Exposes all ports specified by `EXPOSE` statements in the container. To
 
             discover the host side port numbers, consult the `ACTION_STARTED` event
 
@@ -684,8 +668,7 @@ components:
           type: boolean
         runInBackground:
           description: >-
-            This flag allows an action to continue running in the background
-            while
+            This flag allows an action to continue running in the background while
 
             executing subsequent actions. This is useful to provide services to
 
@@ -693,8 +676,7 @@ components:
           type: boolean
         timeout:
           description: >-
-            The maximum amount of time to give the action to complete. If the
-            action
+            The maximum amount of time to give the action to complete. If the action
 
             fails to complete before the timeout, it will be terminated and the exit
 
@@ -709,9 +691,11 @@ components:
       properties: {}
       type: object
     ContainerKilledEvent:
-      description: |-
+      description: >-
         An event generated when a container is forcibly terminated by the
+
         worker. Currently, this only occurs when the container outlives the
+
         timeout specified by the user.
       properties:
         actionId:
@@ -728,8 +712,7 @@ components:
           type: integer
         ipAddress:
           description: >-
-            The public IP address that can be used to connect to the container.
-            This
+            The public IP address that can be used to connect to the container. This
 
             field is only populated when at least one port mapping is present. If the
 
@@ -742,8 +725,7 @@ components:
             format: int32
             type: integer
           description: >-
-            The container-to-host port mappings installed for this container.
-            This
+            The container-to-host port mappings installed for this container. This
 
             set will contain any ports exposed using the `PUBLISH_EXPOSED_PORTS` flag
 
@@ -763,8 +745,7 @@ components:
           type: integer
         stderr:
           description: >-
-            The tail end of any content written to standard error by the
-            container.
+            The tail end of any content written to standard error by the container.
 
             If the content emits large amounts of debugging noise or contains
 
@@ -781,14 +762,14 @@ components:
           type: string
       type: object
     DelayedEvent:
-      description: |-
+      description: >-
         An event generated whenever a resource limitation or transient error
+
         delays execution of a pipeline that was otherwise ready to run.
       properties:
         cause:
           description: >-
-            A textual description of the cause of the delay. The string can
-            change
+            A textual description of the cause of the delay. The string can change
 
             without notice because it is often generated by another service (such as
 
@@ -808,16 +789,20 @@ components:
           type: array
       type: object
     Disk:
-      description: |-
+      description: >-
         Carries information about a disk that can be attached to a VM.
 
+
         See https://cloud.google.com/compute/docs/disks/performance for more
+
         information about disk type, size, and performance considerations.
       properties:
         name:
-          description: |-
+          description: >-
             A user-supplied name for the disk. Used when mounting the disk into
+
             actions. The name must contain only upper and lowercase alphanumeric
+
             characters and hyphens and cannot start with a hyphen.
           type: string
         sizeGb:
@@ -875,8 +860,7 @@ components:
           description: See google.cloud.lifesciences.v2beta.DelayedEvent.
         description:
           description: >-
-            A human-readable description of the event. Note that these strings
-            can
+            A human-readable description of the event. Note that these strings can
 
             change at any time without notice. Any application logic must use the
 
@@ -906,8 +890,9 @@ components:
           description: See google.cloud.lifesciences.v2beta.WorkerReleasedEvent.
       type: object
     FailedEvent:
-      description: |-
+      description: >-
         An event generated when the execution of a pipeline has failed. Note
+
         that other events can continue to occur after this event.
       properties:
         cause:
@@ -954,8 +939,7 @@ components:
           description: The standard List next-page token.
           type: string
         operations:
-          description: A list of operations that matches the specified filter in the
-            request.
+          description: A list of operations that matches the specified filter in the request.
           items:
             $ref: "#/components/schemas/Operation"
           type: array
@@ -964,14 +948,15 @@ components:
       description: A resource that represents Google Cloud Platform location.
       properties:
         displayName:
-          description: |-
+          description: >-
             The friendly name for this location, typically a nearby city name.
+
             For example, "Tokyo".
           type: string
         labels:
           additionalProperties:
             type: string
-          description: |-
+          description: >-
             Cross-service attributes for the location. For example
 
                 {"cloud.googleapis.com/region": "us-east1"}
@@ -983,22 +968,21 @@ components:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
           description: >-
-            Service-specific metadata. For example the available capacity at the
-            given
+            Service-specific metadata. For example the available capacity at the given
 
             location.
           type: object
         name:
           description: >-
-            Resource name for the location, which may vary between
-            implementations.
+            Resource name for the location, which may vary between implementations.
 
             For example: `"projects/example-project/locations/us-east1"`
           type: string
       type: object
     Metadata:
-      description: |-
+      description: >-
         Carries information about the pipeline execution that is returned
+
         in the long running operation's metadata field.
       properties:
         createTime:
@@ -1006,14 +990,12 @@ components:
           format: google-datetime
           type: string
         endTime:
-          description: The time at which execution was completed and resources were
-            cleaned up.
+          description: The time at which execution was completed and resources were cleaned up.
           format: google-datetime
           type: string
         events:
           description: >-
-            The list of events that have happened so far during the execution of
-            this
+            The list of events that have happened so far during the execution of this
 
             operation.
           items:
@@ -1028,8 +1010,7 @@ components:
           $ref: "#/components/schemas/Pipeline"
           description: The pipeline this operation represents.
         startTime:
-          description: The first time at which resources were allocated to execute the
-            pipeline.
+          description: The first time at which resources were allocated to execute the pipeline.
           format: google-datetime
           type: string
       type: object
@@ -1051,8 +1032,7 @@ components:
       properties:
         network:
           description: >-
-            The network name to attach the VM's network interface to. The value
-            will
+            The network name to attach the VM's network interface to. The value will
 
             be prefixed with `global/networks/` unless it contains a `/`, in which
 
@@ -1063,8 +1043,7 @@ components:
           type: string
         subnetwork:
           description: >-
-            If the specified network is configured for custom subnet creation,
-            the
+            If the specified network is configured for custom subnet creation, the
 
             name of the subnetwork to attach the instance to must be specified here.
 
@@ -1082,8 +1061,7 @@ components:
           type: string
         usePrivateAddress:
           description: >-
-            If set to true, do not attach a public IP address to the VM. Note
-            that
+            If set to true, do not attach a public IP address to the VM. Note that
 
             without a public IP address, additional configuration is required to
 
@@ -1097,15 +1075,13 @@ components:
       type: object
     Operation:
       description: >-
-        This resource represents a long-running operation that is the result of
-        a
+        This resource represents a long-running operation that is the result of a
 
         network API call.
       properties:
         done:
           description: >-
-            If the value is `false`, it means the operation is still in
-            progress.
+            If the value is `false`, it means the operation is still in progress.
 
             If `true`, the operation is completed, and either `error` or `response` is
 
@@ -1120,9 +1096,7 @@ components:
           description: An Metadata object. This will always be returned with the Operation.
           type: object
         name:
-          description: The server-assigned name for the operation.  This may be passed to
-            the other operation methods to retrieve information about the
-            operation's status.
+          description: The server-assigned name for the operation.  This may be passed to the other operation methods to retrieve information about the operation's status.
           type: string
         response:
           additionalProperties:
@@ -1142,8 +1116,7 @@ components:
           additionalProperties:
             type: string
           description: >-
-            The environment to pass into every action. Each action can also
-            specify
+            The environment to pass into every action. Each action can also specify
 
             additional environment variables but cannot delete an entry from this map
 
@@ -1154,8 +1127,7 @@ components:
           description: The resources required for execution.
         timeout:
           description: >-
-            The maximum amount of time to give the pipeline to complete.  This
-            includes
+            The maximum amount of time to give the pipeline to complete.  This includes
 
             the time spent waiting for a worker to be allocated.  If the pipeline fails
 
@@ -1191,8 +1163,7 @@ components:
       properties:
         regions:
           description: >-
-            The list of regions allowed for VM allocation. If set, the `zones`
-            field
+            The list of regions allowed for VM allocation. If set, the `zones` field
 
             must not be set.
           items:
@@ -1203,8 +1174,7 @@ components:
           description: The virtual machine specification.
         zones:
           description: >-
-            The list of zones allowed for VM allocation. If set, the `regions`
-            field
+            The list of zones allowed for VM allocation. If set, the `regions` field
 
             must not be set.
           items:
@@ -1212,9 +1182,11 @@ components:
           type: array
       type: object
     RunPipelineRequest:
-      description: |-
+      description: >-
         The arguments to the `RunPipeline` method. The requesting user must have
+
         the `iam.serviceAccounts.actAs` permission for the Cloud Life Sciences
+
         service account or the request will fail.
       properties:
         labels:
@@ -1238,28 +1210,26 @@ components:
       type: object
     RunPipelineResponse:
       description: >-
-        The response to the RunPipeline method, returned in the operation's
-        result
+        The response to the RunPipeline method, returned in the operation's result
 
         field on success.
       properties: {}
       type: object
     Secret:
-      description: |-
+      description: >-
         Holds encrypted information that is only decrypted and stored in RAM
+
         by the worker VM when running the pipeline.
       properties:
         cipherText:
           description: >-
-            The value of the cipherText response from the `encrypt` method. This
-            field
+            The value of the cipherText response from the `encrypt` method. This field
 
             is intentionally unaudited.
           type: string
         keyName:
           description: >-
-            The name of the Cloud KMS key that will be used to decrypt the
-            secret
+            The name of the Cloud KMS key that will be used to decrypt the secret
 
             value. The VM service account must have the required permissions and
 
@@ -1270,8 +1240,9 @@ components:
       description: Carries information about a Google Cloud service account.
       properties:
         email:
-          description: |-
+          description: >-
             Email address of the service account. If not specified, the default
+
             Compute Engine service account for the project will be used.
           type: string
         scopes:
@@ -1304,8 +1275,7 @@ components:
           type: integer
         details:
           description: >-
-            A list of messages that carry the error details.  There is a common
-            set of
+            A list of messages that carry the error details.  There is a common set of
 
             message types for APIs to use.
           items:
@@ -1314,17 +1284,22 @@ components:
             type: object
           type: array
         message:
-          description: |-
+          description: >-
             A developer-facing error message, which should be in English. Any
+
             user-facing error message should be localized and sent in the
+
             google.rpc.Status.details field, or localized by the client.
           type: string
       type: object
     UnexpectedExitStatusEvent:
-      description: |-
+      description: >-
         An event generated when the execution of a container results in a
+
         non-zero exit status that was not otherwise ignored. Execution will
+
         continue, but only actions that are flagged as `ALWAYS_RUN` will be
+
         executed. Other actions will be skipped.
       properties:
         actionId:
@@ -1381,8 +1356,7 @@ components:
           type: string
         cpuPlatform:
           description: >-
-            The CPU platform to request. An instance based on a newer platform
-            can be
+            The CPU platform to request. An instance based on a newer platform can be
 
             allocated, but never one with fewer capabilities. The value of this
 
@@ -1404,8 +1378,7 @@ components:
           type: array
         dockerCacheImages:
           description: >-
-            The Compute Engine Disk Images to use as a Docker cache. The disks
-            will be
+            The Compute Engine Disk Images to use as a Docker cache. The disks will be
 
             mounted into the Docker folder in a way that the images present in the
 
@@ -1424,8 +1397,7 @@ components:
           additionalProperties:
             type: string
           description: >-
-            Optional set of labels to apply to the VM and any attached disk
-            resources.
+            Optional set of labels to apply to the VM and any attached disk resources.
 
             These labels must adhere to the [name and value
 
@@ -1443,8 +1415,7 @@ components:
           type: object
         machineType:
           description: >-
-            Required. The machine type of the virtual machine to create. Must be
-            the short name
+            Required. The machine type of the virtual machine to create. Must be the short name
 
             of a standard machine type (such as "n1-standard-1") or a custom machine
 
@@ -1463,8 +1434,7 @@ components:
           description: The VM network configuration.
         nvidiaDriverVersion:
           description: >-
-            The NVIDIA driver version to use when attaching an NVIDIA GPU
-            accelerator.
+            The NVIDIA driver version to use when attaching an NVIDIA GPU accelerator.
 
             The version specified here must be compatible with the GPU libraries
 
@@ -1477,13 +1447,15 @@ components:
           type: boolean
         serviceAccount:
           $ref: "#/components/schemas/ServiceAccount"
-          description: |-
+          description: >-
             The service account to install on the VM. This account does not need
+
             any permissions other than those required by the pipeline.
       type: object
     WorkerAssignedEvent:
-      description: |-
+      description: >-
         An event generated after a worker VM has been assigned to run the
+
         pipeline.
       properties:
         instance:
@@ -1497,8 +1469,9 @@ components:
           type: string
       type: object
     WorkerReleasedEvent:
-      description: |-
+      description: >-
         An event generated when the worker VM that was assigned to the pipeline
+
         has been released (deleted).
       properties:
         instance:

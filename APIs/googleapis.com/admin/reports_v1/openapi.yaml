@@ -33,11 +33,11 @@ info:
 externalDocs:
   url: /admin-sdk/reports/
 tags:
-  - name: activities
-  - name: channels
   - name: customerUsageReports
-  - name: entityUsageReports
+  - name: channels
   - name: userUsageReport
+  - name: entityUsageReports
+  - name: activities
 paths:
   "/activity/users/{userKey}/applications/{applicationName}":
     get:
@@ -176,22 +176,22 @@ paths:
       tags:
         - activities
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/alt"
   "/activity/users/{userKey}/applications/{applicationName}/watch":
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/alt"
     post:
       description: Start receiving notifications for account activities. For more information, see Receiving Push Notifications.
       operationId: reports.activities.watch
@@ -334,13 +334,13 @@ paths:
         - activities
   /admin/reports_v1/channels/stop:
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/alt"
     post:
       description: Stop watching resources through this channel
       operationId: admin.channels.stop
@@ -410,13 +410,13 @@ paths:
       tags:
         - customerUsageReports
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/alt"
   "/usage/users/{userKey}/dates/{date}":
     get:
       description: Retrieves a report which is a collection of properties and statistics for a set of users with the account. For more information, see the User Usage Report guide. For more information about the user report's parameters, see the Users Usage parameters reference guides.
@@ -518,13 +518,13 @@ paths:
       tags:
         - userUsageReport
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/alt"
   "/usage/{entityType}/{entityKey}/dates/{date}":
     get:
       description: Retrieves a report which is a collection of properties and statistics for entities used by users within the account. For more information, see the Entities Usage Report guide. For more information about the entities report's parameters, see the Entities Usage parameters reference guides.
@@ -629,13 +629,13 @@ paths:
       tags:
         - entityUsageReports
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/alt"
 components:
   parameters:
     alt:

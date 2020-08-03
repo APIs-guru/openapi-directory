@@ -33,22 +33,22 @@ info:
 externalDocs:
   url: https://cloud.google.com/text-to-speech/
 tags:
-  - name: text
   - name: voices
+  - name: text
 paths:
   /v1beta1/text:synthesize:
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
     post:
       description: >-
         Synthesizes speech synchronously: receive results after all text input
@@ -114,17 +114,17 @@ paths:
       tags:
         - voices
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
 components:
   parameters:
     _.xgafv:

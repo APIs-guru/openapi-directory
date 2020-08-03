@@ -33,13 +33,13 @@ info:
 externalDocs:
   url: https://developers.google.com/safe-browsing/
 tags:
-  - name: encodedUpdates
-  - name: threatMatches
-  - name: encodedFullHashes
-  - name: threatListUpdates
-  - name: threatLists
   - name: threatHits
+  - name: encodedFullHashes
+  - name: encodedUpdates
+  - name: threatLists
+  - name: threatMatches
   - name: fullHashes
+  - name: threatListUpdates
 paths:
   "/v4/encodedFullHashes/{encodedRequest}":
     get:
@@ -75,17 +75,17 @@ paths:
       tags:
         - encodedFullHashes
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
   "/v4/encodedUpdates/{encodedRequest}":
     get:
       description: ""
@@ -120,30 +120,30 @@ paths:
       tags:
         - encodedUpdates
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
   /v4/fullHashes:find:
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
     post:
       description: Finds the full hashes that match the requested hash prefixes.
       operationId: safebrowsing.fullHashes.find
@@ -163,17 +163,17 @@ paths:
         - fullHashes
   /v4/threatHits:
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
     post:
       description: >-
         Reports a Safe Browsing threat list hit to Google. Only projects with
@@ -196,17 +196,17 @@ paths:
         - threatHits
   /v4/threatListUpdates:fetch:
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
     post:
       description: >-
         Fetches the most recent threat list updates. A client can request updates
@@ -241,30 +241,30 @@ paths:
       tags:
         - threatLists
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
   /v4/threatMatches:find:
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
     post:
       description: Finds the threat entries that match the Safe Browsing lists.
       operationId: safebrowsing.threatMatches.find

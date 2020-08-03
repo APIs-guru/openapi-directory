@@ -33,10 +33,10 @@ info:
 externalDocs:
   url: https://cloud.google.com/dlp/docs/
 tags:
+  - name: organizations
+  - name: projects
   - name: locations
   - name: infoTypes
-  - name: projects
-  - name: organizations
 paths:
   /v2/infoTypes:
     get:
@@ -94,31 +94,33 @@ paths:
       tags:
         - infoTypes
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
   "/v2/{name}":
     delete:
       description: >-
-        Deletes an InspectTemplate.
+        Deletes a DeidentifyTemplate.
 
-        See https://cloud.google.com/dlp/docs/creating-templates to learn more.
-      operationId: dlp.organizations.locations.inspectTemplates.delete
+        See https://cloud.google.com/dlp/docs/creating-templates-deid to learn
+
+        more.
+      operationId: dlp.projects.deidentifyTemplates.delete
       parameters:
         - description: >-
-            Required. Resource name of the organization and inspectTemplate to be deleted, for
+            Required. Resource name of the organization and deidentify template to be deleted,
 
-            example `organizations/433245324/inspectTemplates/432452342` or
+            for example `organizations/433245324/deidentifyTemplates/432452342` or
 
-            projects/project-id/inspectTemplates/432452342.
+            projects/project-id/deidentifyTemplates/432452342.
           in: path
           name: name
           required: true
@@ -137,20 +139,22 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
-        - organizations
+        - projects
     get:
       description: >-
-        Gets an InspectTemplate.
+        Gets a DeidentifyTemplate.
 
-        See https://cloud.google.com/dlp/docs/creating-templates to learn more.
-      operationId: dlp.organizations.locations.inspectTemplates.get
+        See https://cloud.google.com/dlp/docs/creating-templates-deid to learn
+
+        more.
+      operationId: dlp.projects.deidentifyTemplates.get
       parameters:
         - description: >-
-            Required. Resource name of the organization and inspectTemplate to be read, for
+            Required. Resource name of the organization and deidentify template to be read, for
 
-            example `organizations/433245324/inspectTemplates/432452342` or
+            example `organizations/433245324/deidentifyTemplates/432452342` or
 
-            projects/project-id/inspectTemplates/432452342.
+            projects/project-id/deidentifyTemplates/432452342.
           in: path
           name: name
           required: true
@@ -161,7 +165,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GooglePrivacyDlpV2InspectTemplate"
+                $ref: "#/components/schemas/GooglePrivacyDlpV2DeidentifyTemplate"
           description: Successful response
       security:
         - Oauth2:
@@ -169,32 +173,34 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
-        - organizations
+        - projects
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
     patch:
       description: >-
-        Updates the InspectTemplate.
+        Updates the DeidentifyTemplate.
 
-        See https://cloud.google.com/dlp/docs/creating-templates to learn more.
-      operationId: dlp.organizations.locations.inspectTemplates.patch
+        See https://cloud.google.com/dlp/docs/creating-templates-deid to learn
+
+        more.
+      operationId: dlp.projects.deidentifyTemplates.patch
       parameters:
         - description: >-
-            Required. Resource name of organization and inspectTemplate to be updated, for
+            Required. Resource name of organization and deidentify template to be updated, for
 
-            example `organizations/433245324/inspectTemplates/432452342` or
+            example `organizations/433245324/deidentifyTemplates/432452342` or
 
-            projects/project-id/inspectTemplates/432452342.
+            projects/project-id/deidentifyTemplates/432452342.
           in: path
           name: name
           required: true
@@ -204,13 +210,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/GooglePrivacyDlpV2UpdateInspectTemplateRequest"
+              $ref: "#/components/schemas/GooglePrivacyDlpV2UpdateDeidentifyTemplateRequest"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GooglePrivacyDlpV2InspectTemplate"
+                $ref: "#/components/schemas/GooglePrivacyDlpV2DeidentifyTemplate"
           description: Successful response
       security:
         - Oauth2:
@@ -218,20 +224,20 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
-        - organizations
+        - projects
   "/v2/{name}:activate":
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: >-
         Activate a job trigger. Causes the immediate execute of a trigger
@@ -269,17 +275,17 @@ paths:
         - projects
   "/v2/{name}:cancel":
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: >-
         Starts asynchronous cancellation on a long-running DlpJob. The server
@@ -320,17 +326,17 @@ paths:
         - projects
   "/v2/{name}:finish":
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: >-
         Finish a running hybrid DlpJob. Triggers the finalization steps and running
@@ -371,36 +377,36 @@ paths:
         - projects
   "/v2/{name}:hybridInspect":
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: >-
-        Inspect hybrid content and store findings to a trigger. The inspection
+        Inspect hybrid content and store findings to a job.
 
-        will be processed asynchronously. To review the findings monitor the
+        To review the findings inspect the job. Inspection will occur
 
-        jobs within the trigger.
+        asynchronously.
 
         Early access feature is in a pre-release state and might change or have
 
         limited support. For more information, see
 
         https://cloud.google.com/products#product-launch-stages.
-      operationId: dlp.projects.locations.jobTriggers.hybridInspect
+      operationId: dlp.projects.locations.dlpJobs.hybridInspect
       parameters:
         - description: >-
-            Required. Resource name of the trigger to execute a hybrid inspect on, for example
+            Required. Resource name of the job to execute a hybrid inspect on, for example
 
-            `projects/dlp-test-project/jobTriggers/53234423`.
+            `projects/dlp-test-project/dlpJob/53234423`.
           in: path
           name: name
           required: true
@@ -410,7 +416,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/GooglePrivacyDlpV2HybridInspectJobTriggerRequest"
+              $ref: "#/components/schemas/GooglePrivacyDlpV2HybridInspectDlpJobRequest"
       responses:
         "200":
           content:
@@ -427,17 +433,17 @@ paths:
         - projects
   "/v2/{parent}/content:deidentify":
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: >-
         De-identifies potentially sensitive info from a ContentItem.
@@ -488,17 +494,17 @@ paths:
         - projects
   "/v2/{parent}/content:inspect":
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: >-
         Finds potentially sensitive info in content.
@@ -550,17 +556,17 @@ paths:
         - projects
   "/v2/{parent}/content:reidentify":
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: >-
         Re-identifies content that has been de-identified.
@@ -610,7 +616,7 @@ paths:
         See https://cloud.google.com/dlp/docs/creating-templates-deid to learn
 
         more.
-      operationId: dlp.organizations.locations.deidentifyTemplates.list
+      operationId: dlp.projects.deidentifyTemplates.list
       parameters:
         - description: >-
             Required. Parent resource name.
@@ -688,19 +694,19 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
-        - organizations
+        - projects
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: >-
         Creates a DeidentifyTemplate for re-using frequently used configuration
@@ -710,7 +716,7 @@ paths:
         See https://cloud.google.com/dlp/docs/creating-templates-deid to learn
 
         more.
-      operationId: dlp.organizations.locations.deidentifyTemplates.create
+      operationId: dlp.projects.deidentifyTemplates.create
       parameters:
         - description: >-
             Required. Parent resource name.
@@ -745,7 +751,7 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
-        - organizations
+        - projects
   "/v2/{parent}/dlpJobs":
     get:
       description: >-
@@ -878,17 +884,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: >-
         Creates a new job to inspect storage or calculate risk metrics.
@@ -937,17 +943,17 @@ paths:
         - projects
   "/v2/{parent}/image:redact":
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: >-
         Redacts potentially sensitive info from an image.
@@ -1053,24 +1059,24 @@ paths:
       tags:
         - locations
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
   "/v2/{parent}/inspectTemplates":
     get:
       description: >-
         Lists InspectTemplates.
 
         See https://cloud.google.com/dlp/docs/creating-templates to learn more.
-      operationId: dlp.organizations.locations.inspectTemplates.list
+      operationId: dlp.projects.locations.inspectTemplates.list
       parameters:
         - description: >-
             Required. Parent resource name.
@@ -1148,19 +1154,19 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
-        - organizations
+        - projects
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: >-
         Creates an InspectTemplate for re-using frequently used configuration
@@ -1168,7 +1174,7 @@ paths:
         for inspecting content, images, and storage.
 
         See https://cloud.google.com/dlp/docs/creating-templates to learn more.
-      operationId: dlp.organizations.locations.inspectTemplates.create
+      operationId: dlp.projects.locations.inspectTemplates.create
       parameters:
         - description: >-
             Required. Parent resource name.
@@ -1203,7 +1209,7 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
-        - organizations
+        - projects
   "/v2/{parent}/jobTriggers":
     get:
       description: >-
@@ -1330,17 +1336,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: >-
         Creates a job trigger to run DLP actions such as scanning storage for
@@ -1388,7 +1394,7 @@ paths:
         See https://cloud.google.com/dlp/docs/creating-stored-infotypes to
 
         learn more.
-      operationId: dlp.organizations.locations.storedInfoTypes.list
+      operationId: dlp.projects.storedInfoTypes.list
       parameters:
         - description: >-
             Required. Parent resource name.
@@ -1468,19 +1474,19 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
-        - organizations
+        - projects
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: >-
         Creates a pre-built stored infoType to be used for inspection.
@@ -1488,7 +1494,7 @@ paths:
         See https://cloud.google.com/dlp/docs/creating-stored-infotypes to
 
         learn more.
-      operationId: dlp.organizations.locations.storedInfoTypes.create
+      operationId: dlp.projects.storedInfoTypes.create
       parameters:
         - description: >-
             Required. Parent resource name.
@@ -1523,7 +1529,7 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
-        - organizations
+        - projects
 components:
   parameters:
     _.xgafv:

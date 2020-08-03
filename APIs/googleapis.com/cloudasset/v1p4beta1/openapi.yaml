@@ -281,29 +281,29 @@ paths:
         - v1p4beta1
     parameters:
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
   "/v1p4beta1/{parent}:exportIamPolicyAnalysis":
     parameters:
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
     post:
       description: >-
         Exports the answers of which identities have what accesses on which
@@ -563,7 +563,8 @@ components:
                recovered group retains the role in the binding.
 
 
-            * `domain:{domain}`: The G Suite domain (primary) that represents all the    users of that domain. For example, `google.com` or `example.com`.
+            * `domain:{domain}`: The G Suite domain (primary) that represents all the
+               users of that domain. For example, `google.com` or `example.com`.
 
           items:
             type: string
@@ -912,10 +913,7 @@ components:
           description: Optional. Specifies roles or permissions for analysis. This is optional.
         identitySelector:
           $ref: "#/components/schemas/IdentitySelector"
-          description: >-
-            Optional. Specifies an identity for analysis. Either ResourceSelector or
-
-            IdentitySelector must be specified.
+          description: Optional. Specifies an identity for analysis.
         parent:
           description: >-
             Required. The relative name of the root asset. Only resources and IAM policies within
@@ -936,10 +934,7 @@ components:
           type: string
         resourceSelector:
           $ref: "#/components/schemas/ResourceSelector"
-          description: >-
-            Optional. Specifies a resource for analysis. Either ResourceSelector or
-
-            IdentitySelector must be specified.
+          description: Optional. Specifies a resource for analysis.
       type: object
     IamPolicyAnalysisResult:
       description: >-

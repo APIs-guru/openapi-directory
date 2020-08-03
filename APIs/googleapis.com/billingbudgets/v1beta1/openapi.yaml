@@ -6,9 +6,7 @@ info:
     name: Google
     url: https://google.com
     x-twitter: youtube
-  description: The Cloud Billing Budget API stores Cloud Billing budgets, which
-    define a budget plan and the rules to execute as spend is tracked against
-    that plan.
+  description: The Cloud Billing Budget API stores Cloud Billing budgets, which define a budget plan and the rules to execute as spend is tracked against that plan.
   license:
     name: Creative Commons Attribution 3.0
     url: http://creativecommons.org/licenses/by/3.0/
@@ -42,8 +40,9 @@ paths:
       description: Deletes a budget. Returns successfully if already deleted.
       operationId: billingbudgets.billingAccounts.budgets.delete
       parameters:
-        - description: |-
+        - description: >-
             Required. Name of the budget to delete. Values are of the form
+
             `billingAccounts/{billingAccountId}/budgets/{budgetId}`.
           in: path
           name: name
@@ -65,17 +64,22 @@ paths:
       tags:
         - billingAccounts
     get:
-      description: |-
+      description: >-
         Returns a budget.
 
+
         WARNING: There are some fields exposed on the Google Cloud Console that
+
         aren't available on this API. When reading from the API, you will not
+
         see these fields in the return value, though they may have been set
+
         in the Cloud Console.
       operationId: billingbudgets.billingAccounts.budgets.get
       parameters:
-        - description: |-
+        - description: >-
             Required. Name of budget to get. Values are of the form
+
             `billingAccounts/{billingAccountId}/budgets/{budgetId}`.
           in: path
           name: name
@@ -97,23 +101,26 @@ paths:
       tags:
         - billingAccounts
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
     patch:
-      description: |-
+      description: >-
         Updates a budget and returns the updated budget.
 
+
         WARNING: There are some fields exposed on the Google Cloud Console that
+
         aren't available on this API. Budget fields that are not exposed in
+
         this API will not be changed by this method.
       operationId: billingbudgets.billingAccounts.budgets.patch
       parameters:
@@ -149,33 +156,41 @@ paths:
         - billingAccounts
   "/v1beta1/{parent}/budgets":
     get:
-      description: |-
+      description: >-
         Returns a list of budgets for a billing account.
 
+
         WARNING: There are some fields exposed on the Google Cloud Console that
+
         aren't available on this API. When reading from the API, you will not
+
         see these fields in the return value, though they may have been set
+
         in the Cloud Console.
       operationId: billingbudgets.billingAccounts.budgets.list
       parameters:
-        - description: |-
+        - description: >-
             Required. Name of billing account to list budgets under. Values
+
             are of the form `billingAccounts/{billingAccountId}`.
           in: path
           name: parent
           required: true
           schema:
             type: string
-        - description: |-
+        - description: >-
             Optional. The maximum number of budgets to return per page.
+
             The default and maximum value are 100.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: |-
+        - description: >-
             Optional. The value returned by the last `ListBudgetsResponse` which
+
             indicates that this is a continuation of a prior `ListBudgets` call,
+
             and that the system should return the next page of data.
           in: query
           name: pageToken
@@ -196,17 +211,17 @@ paths:
       tags:
         - billingAccounts
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
       description: >-
         Creates a new budget. See
@@ -217,8 +232,7 @@ paths:
       operationId: billingbudgets.billingAccounts.budgets.create
       parameters:
         - description: >-
-            Required. The name of the billing account to create the budget in.
-            Values
+            Required. The name of the billing account to create the budget in. Values
 
             are of the form `billingAccounts/{billingAccountId}`.
           in: path
@@ -285,9 +299,7 @@ components:
       schema:
         type: string
     key:
-      description: API key. Your API key identifies your project and provides you with
-        API access, quota, and reports. Required unless you provide an OAuth 2.0
-        token.
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -305,9 +317,7 @@ components:
       schema:
         type: boolean
     quotaUser:
-      description: Available to use for quota purposes for server-side applications.
-        Can be any arbitrary string assigned to a user, but should not exceed 40
-        characters.
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
       in: query
       name: quotaUser
       schema:
@@ -326,14 +336,14 @@ components:
         type: string
   schemas:
     GoogleCloudBillingBudgetsV1beta1AllUpdatesRule:
-      description: |-
+      description: >-
         AllUpdatesRule defines notifications that are sent based on budget spend
+
         and thresholds.
       properties:
         monitoringNotificationChannels:
           description: >-
-            Optional. Targets to send notifications to when a threshold is
-            exceeded. This is in
+            Optional. Targets to send notifications to when a threshold is exceeded. This is in
 
             addition to default recipients who have billing account roles.
 
@@ -353,8 +363,7 @@ components:
           type: array
         pubsubTopic:
           description: >-
-            Required. The name of the Cloud Pub/Sub topic where budget related
-            messages will be
+            Required. The name of the Cloud Pub/Sub topic where budget related messages will be
 
             published, in the form `projects/{project_id}/topics/{topic_id}`. Updates
 
@@ -378,8 +387,7 @@ components:
           type: string
         schemaVersion:
           description: >-
-            Required. The schema version of the notification sent to
-            `pubsub_topic`.
+            Required. The schema version of the notification sent to `pubsub_topic`.
 
             Only "1.0" is accepted. It represents the JSON schema as defined in
 
@@ -400,25 +408,28 @@ components:
       properties:
         allUpdatesRule:
           $ref: "#/components/schemas/GoogleCloudBillingBudgetsV1beta1AllUpdatesRule"
-          description: Optional. Rules to apply to notifications sent based on budget
-            spend and thresholds.
+          description: Optional. Rules to apply to notifications sent based on budget spend and thresholds.
         amount:
           $ref: "#/components/schemas/GoogleCloudBillingBudgetsV1beta1BudgetAmount"
           description: Required. Budgeted amount.
         budgetFilter:
           $ref: "#/components/schemas/GoogleCloudBillingBudgetsV1beta1Filter"
-          description: |-
+          description: >-
             Optional. Filters that define which resources are used to compute
+
             the actual spend against the budget.
         displayName:
-          description: |-
+          description: >-
             User data for display name in UI.
+
             Validation: <= 60 chars.
           type: string
         etag:
-          description: |-
+          description: >-
             Optional. Etag to validate that the object is unchanged for a
+
             read-modify-write operation.
+
             An empty etag will cause an update to overwrite other changes.
           type: string
         name:
@@ -443,14 +454,16 @@ components:
       properties:
         lastPeriodAmount:
           $ref: "#/components/schemas/GoogleCloudBillingBudgetsV1beta1LastPeriodAmount"
-          description: Use the last period's actual spend as the budget for the present
-            period.
+          description: Use the last period's actual spend as the budget for the present period.
         specifiedAmount:
           $ref: "#/components/schemas/GoogleTypeMoney"
-          description: |-
+          description: >-
             A specified amount to use as the budget.
+
             `currency_code` is optional. If specified, it must match the
+
             currency of the billing account. The `currency_code` is provided on
+
             output.
       type: object
     GoogleCloudBillingBudgetsV1beta1CreateBudgetRequest:
@@ -475,8 +488,7 @@ components:
             items: {}
             type: array
           description: >-
-            Optional. A single label and value pair specifying that usage from
-            only this set of
+            Optional. A single label and value pair specifying that usage from only this set of
 
             labeled resources should be included in the budget. Currently, multiple
 
@@ -516,8 +528,7 @@ components:
           type: array
         subaccounts:
           description: >-
-            Optional. A set of subaccounts of the form
-            `billingAccounts/{account_id}`, specifying
+            Optional. A set of subaccounts of the form `billingAccounts/{account_id}`, specifying
 
             that usage from only this set of subaccounts should be included in the
 
@@ -533,11 +544,15 @@ components:
           type: array
       type: object
     GoogleCloudBillingBudgetsV1beta1LastPeriodAmount:
-      description: |-
+      description: >-
         Describes a budget amount targeted to last period's spend.
+
         At this time, the amount is automatically 100% of last period's spend;
+
         that is, there are no other options yet.
+
         Future configuration will be described here (for example, configuring a
+
         percentage of last period's spend).
       properties: {}
       type: object
@@ -551,26 +566,30 @@ components:
           type: array
         nextPageToken:
           description: >-
-            If not empty, indicates that there may be more budgets that match
-            the
+            If not empty, indicates that there may be more budgets that match the
 
             request; this value should be passed in a new `ListBudgetsRequest`.
           type: string
       type: object
     GoogleCloudBillingBudgetsV1beta1ThresholdRule:
-      description: |-
+      description: >-
         ThresholdRule contains a definition of a threshold which triggers
+
         an alert (a notification of a threshold being crossed) to be sent when
+
         spend goes above the specified amount.
+
         Alerts are automatically e-mailed to users with the Billing Account
+
         Administrator role or the Billing Account User role.
+
         The thresholds here have no effect on notifications sent to anything
+
         configured under `Budget.all_updates_rule`.
       properties:
         spendBasis:
           description: >-
-            Optional. The type of basis used to determine if spend has passed
-            the
+            Optional. The type of basis used to determine if spend has passed the
 
             threshold. Behavior defaults to CURRENT_SPEND if not set.
           enum:
@@ -579,9 +598,11 @@ components:
             - FORECASTED_SPEND
           type: string
         thresholdPercent:
-          description: |-
+          description: >-
             Required. Send an alert when this threshold is exceeded.
+
             This is a 1.0-based percentage, so 0.5 = 50%.
+
             Validation: non-negative number.
           format: double
           type: number
@@ -591,8 +612,9 @@ components:
       properties:
         budget:
           $ref: "#/components/schemas/GoogleCloudBillingBudgetsV1beta1Budget"
-          description: |-
+          description: >-
             Required. The updated budget object.
+
             The budget to update is specified by the budget name in the budget.
         updateMask:
           description: >-

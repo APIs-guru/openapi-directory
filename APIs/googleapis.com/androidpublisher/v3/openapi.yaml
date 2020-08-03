@@ -33,27 +33,27 @@ info:
 externalDocs:
   url: https://developers.google.com/android-publisher
 tags:
-  - name: purchases
+  - name: orders
   - name: internalappsharingartifacts
   - name: reviews
   - name: edits
+  - name: purchases
   - name: systemapks
   - name: inappproducts
-  - name: orders
 paths:
   "/androidpublisher/v3/applications/internalappsharing/{packageName}/artifacts/apk":
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
       description: >-
         Uploads an APK to internal app sharing.
@@ -94,17 +94,17 @@ paths:
         - internalappsharingartifacts
   "/androidpublisher/v3/applications/internalappsharing/{packageName}/artifacts/bundle":
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
       description: >-
         Uploads an app bundle to internal app sharing.
@@ -145,17 +145,17 @@ paths:
         - internalappsharingartifacts
   "/androidpublisher/v3/applications/{packageName}/edits":
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
       description: Creates a new edit for an app.
       operationId: androidpublisher.edits.insert
@@ -243,17 +243,17 @@ paths:
       tags:
         - edits
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
   "/androidpublisher/v3/applications/{packageName}/edits/{editId}/apks":
     get:
       description: Lists all current APKs of the app and edit.
@@ -286,17 +286,17 @@ paths:
       tags:
         - edits
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
       description: Uploads an APK and adds to the current edit.
       operationId: androidpublisher.edits.apks.upload
@@ -329,17 +329,17 @@ paths:
         - edits
   "/androidpublisher/v3/applications/{packageName}/edits/{editId}/apks/externallyHosted":
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
       description: >-
         Creates a new APK without uploading the APK itself to Google Play, instead
@@ -384,17 +384,17 @@ paths:
         - edits
   "/androidpublisher/v3/applications/{packageName}/edits/{editId}/apks/{apkVersionCode}/deobfuscationFiles/{deobfuscationFileType}":
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
       description: Uploads a new deobfuscation file and attaches to the specified APK.
       operationId: androidpublisher.edits.deobfuscationfiles.upload
@@ -495,17 +495,17 @@ paths:
       tags:
         - edits
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
     patch:
       description: >-
         Patches the APK's expansion file configuration to reference another APK's
@@ -705,17 +705,17 @@ paths:
       tags:
         - edits
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
       description: >-
         Uploads a new Android App Bundle to this edit.
@@ -801,17 +801,17 @@ paths:
       tags:
         - edits
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
     patch:
       description: Patches details of an app.
       operationId: androidpublisher.edits.details.patch
@@ -940,17 +940,17 @@ paths:
       tags:
         - edits
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
   "/androidpublisher/v3/applications/{packageName}/edits/{editId}/listings/{language}":
     delete:
       description: Deletes a localized store listing.
@@ -1027,17 +1027,17 @@ paths:
       tags:
         - edits
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
     patch:
       description: Patches a localized store listing.
       operationId: androidpublisher.edits.listings.patch
@@ -1253,17 +1253,17 @@ paths:
       tags:
         - edits
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
       description: >-
         Uploads an image of the specified language and image type, and adds to the
@@ -1385,17 +1385,17 @@ paths:
       tags:
         - edits
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
   "/androidpublisher/v3/applications/{packageName}/edits/{editId}/testers/{track}":
     get:
       description: Gets testers.
@@ -1434,17 +1434,17 @@ paths:
       tags:
         - edits
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
     patch:
       description: Patches testers.
       operationId: androidpublisher.edits.testers.patch
@@ -1559,17 +1559,17 @@ paths:
       tags:
         - edits
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
   "/androidpublisher/v3/applications/{packageName}/edits/{editId}/tracks/{track}":
     get:
       description: Gets a track.
@@ -1608,17 +1608,17 @@ paths:
       tags:
         - edits
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
     patch:
       description: Patches a track.
       operationId: androidpublisher.edits.tracks.patch
@@ -1703,17 +1703,17 @@ paths:
         - edits
   "/androidpublisher/v3/applications/{packageName}/edits/{editId}:commit":
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
       description: Commits an app edit.
       operationId: androidpublisher.edits.commit
@@ -1746,17 +1746,17 @@ paths:
         - edits
   "/androidpublisher/v3/applications/{packageName}/edits/{editId}:validate":
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
       description: Validates an app edit.
       operationId: androidpublisher.edits.validate
@@ -1828,17 +1828,17 @@ paths:
       tags:
         - inappproducts
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
       description: Creates an in-app product (i.e. a managed product or a subscriptions).
       operationId: androidpublisher.inappproducts.insert
@@ -1936,17 +1936,17 @@ paths:
       tags:
         - inappproducts
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
     patch:
       description: Patches an in-app product (i.e. a managed product or a subscriptions).
       operationId: androidpublisher.inappproducts.patch
@@ -2039,17 +2039,17 @@ paths:
         - inappproducts
   "/androidpublisher/v3/applications/{packageName}/orders/{orderId}:refund":
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
       description: Refund a user's subscription or in-app purchase order.
       operationId: androidpublisher.orders.refund
@@ -2138,30 +2138,30 @@ paths:
       tags:
         - purchases
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
   "/androidpublisher/v3/applications/{packageName}/purchases/products/{productId}/tokens/{token}:acknowledge":
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
       description: Acknowledges a purchase of an inapp item.
       operationId: androidpublisher.purchases.products.acknowledge
@@ -2252,30 +2252,30 @@ paths:
       tags:
         - purchases
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
   "/androidpublisher/v3/applications/{packageName}/purchases/subscriptions/{subscriptionId}/tokens/{token}:acknowledge":
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
       description: Acknowledges a subscription purchase.
       operationId: androidpublisher.purchases.subscriptions.acknowledge
@@ -2321,17 +2321,17 @@ paths:
         - purchases
   "/androidpublisher/v3/applications/{packageName}/purchases/subscriptions/{subscriptionId}/tokens/{token}:cancel":
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
       description: >-
         Cancels a user's subscription purchase. The subscription remains valid
@@ -2375,17 +2375,17 @@ paths:
         - purchases
   "/androidpublisher/v3/applications/{packageName}/purchases/subscriptions/{subscriptionId}/tokens/{token}:defer":
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
       description: >-
         Defers a user's subscription purchase until a specified future expiration
@@ -2438,17 +2438,17 @@ paths:
         - purchases
   "/androidpublisher/v3/applications/{packageName}/purchases/subscriptions/{subscriptionId}/tokens/{token}:refund":
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
       description: >-
         Refunds a user's subscription purchase, but the subscription remains valid
@@ -2492,17 +2492,17 @@ paths:
         - purchases
   "/androidpublisher/v3/applications/{packageName}/purchases/subscriptions/{subscriptionId}/tokens/{token}:revoke":
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
       description: >-
         Refunds and immediately revokes a user's subscription purchase. Access to
@@ -2658,17 +2658,17 @@ paths:
       tags:
         - purchases
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
   "/androidpublisher/v3/applications/{packageName}/reviews":
     get:
       description: Lists all reviews.
@@ -2715,17 +2715,17 @@ paths:
       tags:
         - reviews
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
   "/androidpublisher/v3/applications/{packageName}/reviews/{reviewId}":
     get:
       description: Gets a single review.
@@ -2763,30 +2763,30 @@ paths:
       tags:
         - reviews
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
   "/androidpublisher/v3/applications/{packageName}/reviews/{reviewId}:reply":
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
       description: Replies to a single review, or updates an existing reply.
       operationId: androidpublisher.reviews.reply
@@ -2854,17 +2854,17 @@ paths:
       tags:
         - systemapks
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
       description: >-
         Creates an APK which is suitable for inclusion in a system image from an
@@ -2941,17 +2941,17 @@ paths:
       tags:
         - systemapks
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
   "/androidpublisher/v3/applications/{packageName}/systemApks/{versionCode}/variants/{variantId}:download":
     get:
       description: >-
@@ -2989,17 +2989,17 @@ paths:
       tags:
         - systemapks
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
 components:
   parameters:
     _.xgafv:

@@ -37,20 +37,39 @@ tags:
 paths:
   "/v1/{name}":
     delete:
-      description: |-
-        Deletes a model version.
-
-        Each model can have multiple versions deployed and in use at any given
-        time. Use this method to remove a single version.
-
-        Note: You cannot delete the version that is set as the default version
-        of the model unless it is the only remaining version.
-      operationId: ml.projects.models.versions.delete
+      description: Deletes a trial.
+      operationId: ml.projects.locations.studies.trials.delete
       parameters:
-        - description: |-
-            Required. The name of the version. You can get the names of all the
-            versions of a model by calling
-            projects.models.versions.list.
+        - description: Required. The trial name.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleProtobuf__Empty"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    get:
+      description: >-
+        Gets the latest state of a long-running operation.  Clients can use this
+
+        method to poll the operation result at intervals as recommended by the API
+
+        service.
+      operationId: ml.projects.operations.get
+      parameters:
+        - description: The name of the operation resource.
           in: path
           name: name
           required: true
@@ -62,36 +81,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GoogleLongrunning__Operation"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - projects
-    get:
-      description: |-
-        Gets information about a model version.
-
-        Models can have multiple versions. You can call
-        projects.models.versions.list
-        to get the same information that this method returns for all of the
-        versions of a model.
-      operationId: ml.projects.models.versions.get
-      parameters:
-        - description: Required. The name of the version.
-          in: path
-          name: name
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GoogleCloudMlV1__Version"
           description: Successful response
       security:
         - Oauth2:
@@ -105,64 +94,59 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
     patch:
       description: >-
-        Updates the specified Version resource.
+        Updates a specific job resource.
 
 
-        Currently the only update-able fields are `description`,
-
-        `requestLoggingConfig`, `autoScaling.minNodes`, and `manualScaling.nodes`.
-      operationId: ml.projects.models.versions.patch
+        Currently the only supported fields to update are `labels`.
+      operationId: ml.projects.jobs.patch
       parameters:
-        - description: Required. The name of the model.
+        - description: Required. The job name.
           in: path
           name: name
           required: true
           schema:
             type: string
         - description: >-
-            Required. Specifies the path, relative to `Version`, of the field to
+            Required. Specifies the path, relative to `Job`, of the field to update.
 
-            update. Must be present and non-empty.
+            To adopt etag mechanism, include `etag` field in the mask, and include the
+
+            `etag` value in your job resource.
 
 
-            For example, to change the description of a version to "foo", the
+            For example, to change the labels of a job, the `update_mask` parameter
 
-            `update_mask` parameter would be specified as `description`, and the
+            would be specified as `labels`, `etag`, and the
 
             `PATCH` request body would specify the new value, as follows:
+                {
+                  "labels": {
+                     "owner": "Google",
+                     "color": "Blue"
+                  }
+                  "etag": "33a64df551425fcc55e4d42a148795d9f25f89d4"
+                }
+            If `etag` matches the one on the server, the labels of the job will be
+
+            replaced with the given ones, and the server end `etag` will be
+
+            recalculated.
 
 
-            ```
-
-            {
-              "description": "foo"
-            }
-
-            ```
-
-
-            Currently the only supported update mask fields are `description`,
-
-            `requestLoggingConfig`, `autoScaling.minNodes`, and `manualScaling.nodes`.
-
-            However, you can only update `manualScaling.nodes` if the version uses a
-
-            [Compute Engine (N1)
-
-            machine type](/ml-engine/docs/machine-types-online-prediction).
+            Currently the only supported update masks are `labels` and `etag`.
           in: query
           name: updateMask
           schema:
@@ -171,13 +155,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/GoogleCloudMlV1__Version"
+              $ref: "#/components/schemas/GoogleCloudMlV1__Job"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GoogleLongrunning__Operation"
+                $ref: "#/components/schemas/GoogleCloudMlV1__Job"
           description: Successful response
       security:
         - Oauth2:
@@ -188,16 +172,24 @@ paths:
         - projects
   "/v1/{name}/operations":
     get:
-      description: |-
+      description: >-
         Lists operations that match the specified filter in the request. If the
+
         server doesn't support this method, it returns `UNIMPLEMENTED`.
 
+
         NOTE: the `name` binding allows API services to override the binding
+
         to use different resource name schemes, such as `users/*/operations`. To
+
         override the binding, API services can add a binding such as
+
         `"/v1/{name=users/*}/operations"` to their service configuration.
+
         For backwards compatibility, the default name includes the operations
+
         collection id, however overriding users must ensure the name binding
+
         is the parent resource, without the operations collection id.
       operationId: ml.projects.operations.list
       parameters:
@@ -237,33 +229,34 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
   "/v1/{name}:addMeasurement":
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
-      description: |-
+      description: >-
         Adds a measurement of the objective metrics to a trial. This measurement
+
         is assumed to have been taken before the trial is complete.
       operationId: ml.projects.locations.studies.trials.addMeasurement
       parameters:
@@ -294,21 +287,20 @@ paths:
         - projects
   "/v1/{name}:cancel":
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: >-
-        Starts asynchronous cancellation on a long-running operation.  The
-        server
+        Starts asynchronous cancellation on a long-running operation.  The server
 
         makes a best effort to cancel the operation, but success is not
 
@@ -356,22 +348,25 @@ paths:
         - projects
   "/v1/{name}:checkEarlyStoppingState":
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
-      description: |-
+      description: >-
         Checks  whether a trial should stop or not. Returns a
+
         long-running operation. When the operation is successful,
+
         it will contain a
+
         CheckTrialEarlyStoppingStateResponse.
       operationId: ml.projects.locations.studies.trials.checkEarlyStoppingState
       parameters:
@@ -385,8 +380,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/GoogleCloudMlV1__CheckTrialEarlyStoppingStateReques\
-                t"
+              $ref: "#/components/schemas/GoogleCloudMlV1__CheckTrialEarlyStoppingStateRequest"
       responses:
         "200":
           content:
@@ -403,17 +397,17 @@ paths:
         - projects
   "/v1/{name}:complete":
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: Marks a trial as complete.
       operationId: ml.projects.locations.studies.trials.complete
@@ -445,17 +439,17 @@ paths:
         - projects
   "/v1/{name}:explain":
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: >-
         Performs explanation on the data in the request.
@@ -496,8 +490,7 @@ paths:
   "/v1/{name}:getConfig":
     get:
       description: >-
-        Get the service account information associated with your project. You
-        need
+        Get the service account information associated with your project. You need
 
         this information in order to grant the service account permissions for
 
@@ -527,30 +520,30 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
   "/v1/{name}:predict":
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: >-
         Performs online prediction on the data in the request.
@@ -590,17 +583,17 @@ paths:
         - projects
   "/v1/{name}:setDefault":
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: >-
         Designates a version to be the default for the model.
@@ -619,8 +612,7 @@ paths:
       operationId: ml.projects.models.versions.setDefault
       parameters:
         - description: >-
-            Required. The name of the version to make the default for the model.
-            You
+            Required. The name of the version to make the default for the model. You
 
             can get the names of all the versions of a model by calling
 
@@ -651,17 +643,17 @@ paths:
         - projects
   "/v1/{name}:stop":
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: Stops a trial.
       operationId: ml.projects.locations.studies.trials.stop
@@ -693,10 +685,12 @@ paths:
         - projects
   "/v1/{parent}/jobs":
     get:
-      description: |-
+      description: >-
         Lists the jobs in the project.
 
+
         If there are no jobs that match the request parameters, the list
+
         request returns an empty response body: {}.
       operationId: ml.projects.jobs.list
       parameters:
@@ -729,8 +723,7 @@ paths:
           schema:
             type: string
         - description: >-
-            Optional. The number of jobs to retrieve per "page" of results. If
-            there
+            Optional. The number of jobs to retrieve per "page" of results. If there
 
             are more remaining results than this number, the response message will
 
@@ -772,17 +765,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: Creates a training or a batch prediction job.
       operationId: ml.projects.jobs.create
@@ -818,8 +811,7 @@ paths:
       operationId: ml.projects.locations.list
       parameters:
         - description: >-
-            Required. The name of the project for which available locations are
-            to be
+            Required. The name of the project for which available locations are to be
 
             listed (since some locations might be whitelisted for specific projects).
           in: path
@@ -828,8 +820,7 @@ paths:
           schema:
             type: string
         - description: >-
-            Optional. The number of locations to retrieve per "page" of results.
-            If
+            Optional. The number of locations to retrieve per "page" of results. If
 
             there are more remaining results than this number, the response message
 
@@ -871,17 +862,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
   "/v1/{parent}/models":
     get:
       description: >-
@@ -910,8 +901,7 @@ paths:
           schema:
             type: string
         - description: >-
-            Optional. The number of models to retrieve per "page" of results. If
-            there
+            Optional. The number of models to retrieve per "page" of results. If there
 
             are more remaining results than this number, the response message will
 
@@ -953,17 +943,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: >-
         Creates a model which will later contain one or more versions.
@@ -1006,8 +996,9 @@ paths:
       description: Lists all the studies in a region for an associated project.
       operationId: ml.projects.locations.studies.list
       parameters:
-        - description: |-
+        - description: >-
             Required. The project and location that the study belongs to.
+
             Format: projects/{project}/locations/{location}
           in: path
           name: parent
@@ -1029,23 +1020,24 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: Creates a study.
       operationId: ml.projects.locations.studies.create
       parameters:
-        - description: |-
+        - description: >-
             Required. The project and location that the study belongs to.
+
             Format: projects/{project}/locations/{location}
           in: path
           name: parent
@@ -1053,8 +1045,7 @@ paths:
           schema:
             type: string
         - description: >-
-            Required. The ID to use for the study, which will become the final
-            component of
+            Required. The ID to use for the study, which will become the final component of
 
             the study's resource name.
           in: query
@@ -1106,17 +1097,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: Adds a user provided trial to a study.
       operationId: ml.projects.locations.studies.trials.create
@@ -1148,23 +1139,27 @@ paths:
         - projects
   "/v1/{parent}/trials:suggest":
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
-      description: |-
+      description: >-
         Adds one or more trials to a study, with parameter values
+
         suggested by AI Platform Optimizer. Returns a long-running
+
         operation associated with the generation of trial suggestions.
+
         When this long-running operation succeeds, it will contain
+
         a SuggestTrialsResponse.
       operationId: ml.projects.locations.studies.trials.suggest
       parameters:
@@ -1223,8 +1218,7 @@ paths:
           schema:
             type: string
         - description: >-
-            Optional. The number of versions to retrieve per "page" of results.
-            If
+            Optional. The number of versions to retrieve per "page" of results. If
 
             there are more remaining results than this number, the response message
 
@@ -1266,17 +1260,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: >-
         Creates a new version of a model from a trained TensorFlow model.
@@ -1328,7 +1322,7 @@ paths:
         Returns an empty policy if the resource exists and does not have a policy
 
         set.
-      operationId: ml.projects.models.getIamPolicy
+      operationId: ml.projects.jobs.getIamPolicy
       parameters:
         - description: >-
             REQUIRED: The resource for which the policy is being requested.
@@ -1379,30 +1373,30 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
   "/v1/{resource}:setIamPolicy":
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: >-
         Sets the access control policy on the specified resource. Replaces any
@@ -1411,7 +1405,7 @@ paths:
 
 
         Can return `NOT_FOUND`, `INVALID_ARGUMENT`, and `PERMISSION_DENIED` errors.
-      operationId: ml.projects.models.setIamPolicy
+      operationId: ml.projects.jobs.setIamPolicy
       parameters:
         - description: >-
             REQUIRED: The resource for which the policy is being specified.
@@ -1443,17 +1437,17 @@ paths:
         - projects
   "/v1/{resource}:testIamPermissions":
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: >-
         Returns permissions that a caller has on the specified resource.
@@ -1468,11 +1462,10 @@ paths:
         UIs and command-line tools, not for authorization checking. This operation
 
         may "fail open" without warning.
-      operationId: ml.projects.models.testIamPermissions
+      operationId: ml.projects.jobs.testIamPermissions
       parameters:
         - description: >-
-            REQUIRED: The resource for which the policy detail is being
-            requested.
+            REQUIRED: The resource for which the policy detail is being requested.
 
             See the operation documentation for the appropriate value for this field.
           in: path
@@ -1539,9 +1532,7 @@ components:
       schema:
         type: string
     key:
-      description: API key. Your API key identifies your project and provides you with
-        API access, quota, and reports. Required unless you provide an OAuth 2.0
-        token.
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -1559,9 +1550,7 @@ components:
       schema:
         type: boolean
     quotaUser:
-      description: Available to use for quota purposes for server-side applications.
-        Can be any arbitrary string assigned to a user, but should not exceed 40
-        characters.
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
       in: query
       name: quotaUser
       schema:
@@ -1581,8 +1570,7 @@ components:
   schemas:
     GoogleApi__HttpBody:
       description: >-
-        Message that represents an arbitrary HTTP body. It should only be used
-        for
+        Message that represents an arbitrary HTTP body. It should only be used for
 
         payload formats that can't be represented as JSON, such as raw binary or
 
@@ -1632,8 +1620,7 @@ components:
         handled, all other features will continue to work unchanged.
       properties:
         contentType:
-          description: The HTTP Content-Type header value specifying the content type of
-            the body.
+          description: The HTTP Content-Type header value specifying the content type of the body.
           type: string
         data:
           description: The HTTP request/response body as raw binary.
@@ -1641,8 +1628,7 @@ components:
           type: string
         extensions:
           description: >-
-            Application specific response metadata. Must be set in the first
-            response
+            Application specific response metadata. Must be set in the first response
 
             for streaming APIs.
           items:
@@ -1654,26 +1640,36 @@ components:
     GoogleCloudMlV1_AutomatedStoppingConfig_DecayCurveAutomatedStoppingConfig:
       properties:
         useElapsedTime:
-          description: |-
+          description: >-
             If true, measurement.elapsed_time is used as the x-axis of each
+
             Trials Decay Curve. Otherwise, Measurement.steps will be used as the
+
             x-axis.
           type: boolean
       type: object
     GoogleCloudMlV1_AutomatedStoppingConfig_MedianAutomatedStoppingConfig:
-      description: |-
+      description: >-
         The median automated stopping rule stops a pending trial if the trial's
+
         best objective_value is strictly below the median 'performance' of all
+
         completed trials reported up to the trial's last measurement.
+
         Currently, 'performance' refers to the running average of the objective
+
         values reported by the trial in each measurement.
       properties:
         useElapsedTime:
-          description: |-
+          description: >-
             If true, the median automated stopping rule applies to
+
             measurement.use_elapsed_time, which means the elapsed_time field of
+
             the current trial's
+
             latest measurement is used to compute the median objective
+
             value for each completed trial.
           type: boolean
       type: object
@@ -1703,8 +1699,9 @@ components:
     GoogleCloudMlV1_StudyConfigParameterSpec_CategoricalValueSpec:
       properties:
         values:
-          description: |-
+          description: >-
             Must be specified if type is `CATEGORICAL`.
+
             The list of possible categories.
           items:
             type: string
@@ -1731,26 +1728,22 @@ components:
     GoogleCloudMlV1_StudyConfigParameterSpec_DoubleValueSpec:
       properties:
         maxValue:
-          description: Must be specified if type is `DOUBLE`. Maximum value of the
-            parameter.
+          description: Must be specified if type is `DOUBLE`. Maximum value of the parameter.
           format: double
           type: number
         minValue:
-          description: Must be specified if type is `DOUBLE`. Minimum value of the
-            parameter.
+          description: Must be specified if type is `DOUBLE`. Minimum value of the parameter.
           format: double
           type: number
       type: object
     GoogleCloudMlV1_StudyConfigParameterSpec_IntegerValueSpec:
       properties:
         maxValue:
-          description: Must be specified if type is `INTEGER`. Maximum value of the
-            parameter.
+          description: Must be specified if type is `INTEGER`. Maximum value of the parameter.
           format: int64
           type: string
         minValue:
-          description: Must be specified if type is `INTEGER`. Minimum value of the
-            parameter.
+          description: Must be specified if type is `INTEGER`. Minimum value of the parameter.
           format: int64
           type: string
       type: object
@@ -1770,8 +1763,9 @@ components:
       description: Represents the spec to match discrete values from parent parameter.
       properties:
         values:
-          description: |-
+          description: >-
             Matches values of the parent parameter with type 'DISCRETE'.
+
             All values must exist in `discrete_value_spec` of parent parameter.
           items:
             format: double
@@ -1782,8 +1776,9 @@ components:
       description: Represents the spec to match integer values from parent parameter.
       properties:
         values:
-          description: |-
+          description: >-
             Matches values of the parent parameter with type 'INTEGER'.
+
             All values must lie in `integer_value_spec` of parent parameter.
           items:
             format: int64
@@ -1808,13 +1803,11 @@ components:
       description: Represents a single parameter to optimize.
       properties:
         categoricalValueSpec:
-          $ref: "#/components/schemas/GoogleCloudMlV1_StudyConfigParameterSpec_Categorica\
-            lValueSpec"
+          $ref: "#/components/schemas/GoogleCloudMlV1_StudyConfigParameterSpec_CategoricalValueSpec"
           description: The value spec for a 'CATEGORICAL' parameter.
         childParameterSpecs:
           description: >-
-            A child node is active if the parameter's value matches the child
-            node's
+            A child node is active if the parameter's value matches the child node's
 
             matching_parent_values.
 
@@ -1826,33 +1819,27 @@ components:
             $ref: "#/components/schemas/GoogleCloudMlV1_StudyConfig_ParameterSpec"
           type: array
         discreteValueSpec:
-          $ref: "#/components/schemas/GoogleCloudMlV1_StudyConfigParameterSpec_DiscreteVa\
-            lueSpec"
+          $ref: "#/components/schemas/GoogleCloudMlV1_StudyConfigParameterSpec_DiscreteValueSpec"
           description: The value spec for a 'DISCRETE' parameter.
         doubleValueSpec:
-          $ref: "#/components/schemas/GoogleCloudMlV1_StudyConfigParameterSpec_DoubleValu\
-            eSpec"
+          $ref: "#/components/schemas/GoogleCloudMlV1_StudyConfigParameterSpec_DoubleValueSpec"
           description: The value spec for a 'DOUBLE' parameter.
         integerValueSpec:
-          $ref: "#/components/schemas/GoogleCloudMlV1_StudyConfigParameterSpec_IntegerVal\
-            ueSpec"
+          $ref: "#/components/schemas/GoogleCloudMlV1_StudyConfigParameterSpec_IntegerValueSpec"
           description: The value spec for an 'INTEGER' parameter.
         parameter:
-          description: Required. The parameter name must be unique amongst all
-            ParameterSpecs.
+          description: Required. The parameter name must be unique amongst all ParameterSpecs.
           type: string
         parentCategoricalValues:
-          $ref: "#/components/schemas/GoogleCloudMlV1_StudyConfigParameterSpec_MatchingPa\
-            rentCategoricalValueSpec"
+          $ref: "#/components/schemas/GoogleCloudMlV1_StudyConfigParameterSpec_MatchingParentCategoricalValueSpec"
         parentDiscreteValues:
-          $ref: "#/components/schemas/GoogleCloudMlV1_StudyConfigParameterSpec_MatchingPa\
-            rentDiscreteValueSpec"
+          $ref: "#/components/schemas/GoogleCloudMlV1_StudyConfigParameterSpec_MatchingParentDiscreteValueSpec"
         parentIntValues:
-          $ref: "#/components/schemas/GoogleCloudMlV1_StudyConfigParameterSpec_MatchingPa\
-            rentIntValueSpec"
+          $ref: "#/components/schemas/GoogleCloudMlV1_StudyConfigParameterSpec_MatchingParentIntValueSpec"
         scaleType:
-          description: |-
+          description: >-
             How the parameter should be scaled.
+
             Leave unset for categorical parameters.
           enum:
             - SCALE_TYPE_UNSPECIFIED
@@ -1871,8 +1858,9 @@ components:
           type: string
       type: object
     GoogleCloudMlV1_Trial_Parameter:
-      description: |-
+      description: >-
         A message representing a parameter to be tuned. Contains the name of
+
         the parameter and the suggested value to use for this trial.
       properties:
         floatValue:
@@ -1931,8 +1919,7 @@ components:
       properties:
         minNodes:
           description: >-
-            Optional. The minimum number of nodes to allocate for this model.
-            These
+            Optional. The minimum number of nodes to allocate for this model. These
 
             nodes are always up, starting from the time the model is deployed.
 
@@ -2018,16 +2005,15 @@ components:
           type: integer
       type: object
     GoogleCloudMlV1__AutomatedStoppingConfig:
-      description: |-
+      description: >-
         Configuration for Automated Early Stopping of Trials. If no
+
         implementation_config is set, automated early stopping will not be run.
       properties:
         decayCurveStoppingConfig:
-          $ref: "#/components/schemas/GoogleCloudMlV1_AutomatedStoppingConfig_DecayCurveA\
-            utomatedStoppingConfig"
+          $ref: "#/components/schemas/GoogleCloudMlV1_AutomatedStoppingConfig_DecayCurveAutomatedStoppingConfig"
         medianAutomatedStoppingConfig:
-          $ref: "#/components/schemas/GoogleCloudMlV1_AutomatedStoppingConfig_MedianAutom\
-            atedStoppingConfig"
+          $ref: "#/components/schemas/GoogleCloudMlV1_AutomatedStoppingConfig_MedianAutomatedStoppingConfig"
       type: object
     GoogleCloudMlV1__BuiltInAlgorithmOutput:
       description: Represents output related to a built-in algorithm Job.
@@ -2037,8 +2023,7 @@ components:
           type: string
         modelPath:
           description: >-
-            The Cloud Storage path to the `model/` directory where the training
-            job
+            The Cloud Storage path to the `model/` directory where the training job
 
             saves the trained model. Only set for successful jobs that don't use
 
@@ -2048,8 +2033,9 @@ components:
           description: Python version on which the built-in algorithm was trained.
           type: string
         runtimeVersion:
-          description: |-
+          description: >-
             AI Platform runtime version on which the built-in algorithm was
+
             trained.
           type: string
       type: object
@@ -2129,21 +2115,21 @@ components:
       properties:
         finalMeasurement:
           $ref: "#/components/schemas/GoogleCloudMlV1__Measurement"
-          description: |-
+          description: >-
             Optional. If provided, it will be used as the completed trial's
+
             final_measurement; Otherwise, the service will auto-select a
+
             previously reported measurement as the final-measurement
         infeasibleReason:
           description: >-
-            Optional. A human readable reason why the trial was infeasible. This
-            should
+            Optional. A human readable reason why the trial was infeasible. This should
 
             only be provided if `trial_infeasible` is true.
           type: string
         trialInfeasible:
           description: >-
-            Optional. True if the trial cannot be run with the given Parameter,
-            and
+            Optional. True if the trial cannot be run with the given Parameter, and
 
             final_measurement will be ignored.
           type: boolean
@@ -2155,14 +2141,14 @@ components:
           type: string
       type: object
     GoogleCloudMlV1__EncryptionConfig:
-      description: |-
+      description: >-
         Represents a custom encryption key configuration that can be applied to
+
         a resource.
       properties:
         kmsKeyName:
           description: >-
-            The Cloud KMS resource identifier of the customer-managed encryption
-            key
+            The Cloud KMS resource identifier of the customer-managed encryption key
 
             used to protect a resource, such as a training job. It has the following
 
@@ -2176,8 +2162,9 @@ components:
       properties:
         httpBody:
           $ref: "#/components/schemas/GoogleApi__HttpBody"
-          description: |-
+          description: >-
             Required.
+
             The explanation request body.
       type: object
     GoogleCloudMlV1__ExplanationConfig:
@@ -2195,8 +2182,7 @@ components:
         integratedGradientsAttribution:
           $ref: "#/components/schemas/GoogleCloudMlV1__IntegratedGradientsAttribution"
           description: >-
-            Attributes credit by computing the Aumann-Shapley value taking
-            advantage
+            Attributes credit by computing the Aumann-Shapley value taking advantage
 
             of the model's fully differentiable structure. Refer to this paper for
 
@@ -2204,8 +2190,7 @@ components:
         sampledShapleyAttribution:
           $ref: "#/components/schemas/GoogleCloudMlV1__SampledShapleyAttribution"
           description: >-
-            An attribution method that approximates Shapley values for features
-            that
+            An attribution method that approximates Shapley values for features that
 
             contribute to the label being predicted. A sampling strategy is used to
 
@@ -2235,34 +2220,35 @@ components:
           type: string
       type: object
     GoogleCloudMlV1__HyperparameterOutput:
-      description: |-
+      description: >-
         Represents the result of a single hyperparameter tuning trial from a
+
         training job. The TrainingOutput object that is returned on successful
+
         completion of a training job with hyperparameter tuning includes a list
+
         of HyperparameterOutput objects, one for each successful trial.
       properties:
         allMetrics:
           description: >-
-            All recorded object metrics for this trial. This field is not
-            currently
+            All recorded object metrics for this trial. This field is not currently
 
             populated.
           items:
-            $ref: "#/components/schemas/GoogleCloudMlV1_HyperparameterOutput_Hyperparameter\
-              Metric"
+            $ref: "#/components/schemas/GoogleCloudMlV1_HyperparameterOutput_HyperparameterMetric"
           type: array
         builtInAlgorithmOutput:
           $ref: "#/components/schemas/GoogleCloudMlV1__BuiltInAlgorithmOutput"
-          description: |-
+          description: >-
             Details related to built-in algorithms jobs.
+
             Only set for trials of built-in algorithms jobs that have succeeded.
         endTime:
           description: Output only. End time for the trial.
           format: google-datetime
           type: string
         finalMetric:
-          $ref: "#/components/schemas/GoogleCloudMlV1_HyperparameterOutput_Hyperparameter\
-            Metric"
+          $ref: "#/components/schemas/GoogleCloudMlV1_HyperparameterOutput_HyperparameterMetric"
           description: The final objective metric seen for this trial.
         hyperparameters:
           additionalProperties:
@@ -2296,10 +2282,13 @@ components:
       description: Represents a set of hyperparameters to optimize.
       properties:
         algorithm:
-          description: |-
+          description: >-
             Optional. The search algorithm specified for the hyperparameter
+
             tuning job.
+
             Uses the default AI Platform hyperparameter tuning
+
             algorithm if unspecified.
           enum:
             - ALGORITHM_UNSPECIFIED
@@ -2308,15 +2297,16 @@ components:
           type: string
         enableTrialEarlyStopping:
           description: >-
-            Optional. Indicates if the hyperparameter tuning job enables auto
-            trial
+            Optional. Indicates if the hyperparameter tuning job enables auto trial
 
             early stopping.
           type: boolean
         goal:
-          description: |-
+          description: >-
             Required. The type of goal to use for tuning. Available types are
+
             `MAXIMIZE` and `MINIMIZE`.
+
 
             Defaults to `MAXIMIZE`.
           enum:
@@ -2326,8 +2316,7 @@ components:
           type: string
         hyperparameterMetricTag:
           description: >-
-            Optional. The TensorFlow summary tag name to use for optimizing
-            trials. For
+            Optional. The TensorFlow summary tag name to use for optimizing trials. For
 
             current versions of TensorFlow, this tag name should exactly match what is
 
@@ -2339,8 +2328,7 @@ components:
           type: string
         maxFailedTrials:
           description: >-
-            Optional. The number of failed trials that need to be seen before
-            failing
+            Optional. The number of failed trials that need to be seen before failing
 
             the hyperparameter tuning job. You can specify this field to override the
 
@@ -2374,9 +2362,11 @@ components:
           format: int32
           type: integer
         maxTrials:
-          description: |-
+          description: >-
             Optional. How many training trials should be attempted to optimize
+
             the specified hyperparameters.
+
 
             Defaults to one.
           format: int32
@@ -2396,15 +2386,19 @@ components:
           type: string
       type: object
     GoogleCloudMlV1__IntegratedGradientsAttribution:
-      description: |-
+      description: >-
         Attributes credit by computing the Aumann-Shapley value taking advantage
+
         of the model's fully differentiable structure. Refer to this paper for
+
         more details: https://arxiv.org/abs/1703.01365
       properties:
         numIntegralSteps:
-          description: |-
+          description: >-
             Number of steps for approximating the path integral.
+
             A good value to start is 50 and gradually increase until the
+
             sum to diff property is met within the desired error range.
           format: int32
           type: integer
@@ -2447,8 +2441,7 @@ components:
           additionalProperties:
             type: string
           description: >-
-            Optional. One or more labels that you can add, to organize your
-            jobs.
+            Optional. One or more labels that you can add, to organize your jobs.
 
             Each label is a key-value pair, where both the key and the value are
 
@@ -2497,8 +2490,7 @@ components:
           type: array
         nextPageToken:
           description: >-
-            Optional. Pass this token as the `page_token` field of the request
-            for a
+            Optional. Pass this token as the `page_token` field of the request for a
 
             subsequent call.
           type: string
@@ -2512,8 +2504,7 @@ components:
           type: array
         nextPageToken:
           description: >-
-            Optional. Pass this token as the `page_token` field of the request
-            for a
+            Optional. Pass this token as the `page_token` field of the request for a
 
             subsequent call.
           type: string
@@ -2528,8 +2519,7 @@ components:
           type: array
         nextPageToken:
           description: >-
-            Optional. Pass this token as the `page_token` field of the request
-            for a
+            Optional. Pass this token as the `page_token` field of the request for a
 
             subsequent call.
           type: string
@@ -2556,8 +2546,7 @@ components:
       properties:
         nextPageToken:
           description: >-
-            Optional. Pass this token as the `page_token` field of the request
-            for a
+            Optional. Pass this token as the `page_token` field of the request for a
 
             subsequent call.
           type: string
@@ -2582,8 +2571,7 @@ components:
       properties:
         nodes:
           description: >-
-            The number of nodes to allocate for this model. These nodes are
-            always up,
+            The number of nodes to allocate for this model. These nodes are always up,
 
             starting from the time the model is deployed, so the cost of operating
 
@@ -2597,38 +2585,43 @@ components:
       description: A message representing a measurement.
       properties:
         elapsedTime:
-          description: |-
+          description: >-
             Output only. Time that the trial has been running at the point of
+
             this measurement.
           format: google-duration
           type: string
         metrics:
-          description: |-
+          description: >-
             Provides a list of metrics that act as inputs into the objective
+
             function.
           items:
             $ref: "#/components/schemas/GoogleCloudMlV1_Measurement_Metric"
           type: array
         stepCount:
-          description: |-
+          description: >-
             The number of steps a machine learning model has been trained for.
+
             Must be non-negative.
           format: int64
           type: string
       type: object
     GoogleCloudMlV1__Model:
-      description: |-
+      description: >-
         Represents a machine learning solution.
 
+
         A model can have multiple versions, each of which is a deployed, trained
+
         model ready to receive prediction requests. The model itself is just a
+
         container.
       properties:
         defaultVersion:
           $ref: "#/components/schemas/GoogleCloudMlV1__Version"
           description: >-
-            Output only. The default version of the model. This version will be
-            used to
+            Output only. The default version of the model. This version will be used to
 
             handle prediction requests that do not specify a version.
 
@@ -2637,8 +2630,7 @@ components:
 
             projects.models.versions.setDefault.
         description:
-          description: Optional. The description specified for the model when it was
-            created.
+          description: Optional. The description specified for the model when it was created.
           type: string
         etag:
           description: >-
@@ -2661,8 +2653,7 @@ components:
           additionalProperties:
             type: string
           description: >-
-            Optional. One or more labels that you can add, to organize your
-            models.
+            Optional. One or more labels that you can add, to organize your models.
 
             Each label is a key-value pair, where both the key and the value are
 
@@ -2673,15 +2664,15 @@ components:
             <a href="/ml-engine/docs/tensorflow/resource-labels">using labels</a>.
           type: object
         name:
-          description: |-
+          description: >-
             Required. The name specified for the model when it was created.
+
 
             The model name must be unique within the project it is created in.
           type: string
         onlinePredictionConsoleLogging:
           description: >-
-            Optional. If true, online prediction nodes send `stderr` and
-            `stdout`
+            Optional. If true, online prediction nodes send `stderr` and `stdout`
 
             streams to Stackdriver Logging. These can be more verbose than the standard
 
@@ -2700,8 +2691,7 @@ components:
           type: boolean
         onlinePredictionLogging:
           description: >-
-            Optional. If true, online prediction access logs are sent to
-            StackDriver
+            Optional. If true, online prediction access logs are sent to StackDriver
 
             Logging. These logs are like standard server access logs, containing
 
@@ -2718,8 +2708,7 @@ components:
           type: boolean
         regions:
           description: >-
-            Optional. The list of regions where the model is going to be
-            deployed.
+            Optional. The list of regions where the model is going to be deployed.
 
             Only one region per model is supported.
 
@@ -2757,8 +2746,9 @@ components:
         labels:
           additionalProperties:
             type: string
-          description: |-
+          description: >-
             The user labels, inherited from the model or the model version being
+
             operated on.
           type: object
         modelName:
@@ -2830,16 +2820,18 @@ components:
           type: number
         parameterName:
           description: >-
-            Required. The parameter name must be unique amongst all
-            ParameterConfigs in
+            Required. The parameter name must be unique amongst all ParameterConfigs in
 
             a HyperparameterSpec message. E.g., "learning_rate".
           type: string
         scaleType:
-          description: |-
+          description: >-
             Optional. How the parameter should be scaled to the hypercube.
+
             Leave unset for categorical parameters.
+
             Some kind of scaling is strongly recommended for real or integral
+
             parameters (e.g., `UNIT_LINEAR_SCALE`).
           enum:
             - NONE
@@ -2896,8 +2888,7 @@ components:
           type: string
         inputPaths:
           description: >-
-            Required. The Cloud Storage location of the input data files. May
-            contain
+            Required. The Cloud Storage location of the input data files. May contain
 
             <a href="/storage/docs/gsutil/addlhelp/WildcardNames">wildcards</a>.
           items:
@@ -2905,16 +2896,14 @@ components:
           type: array
         maxWorkerCount:
           description: >-
-            Optional. The maximum number of workers to be used for parallel
-            processing.
+            Optional. The maximum number of workers to be used for parallel processing.
 
             Defaults to 10 if not specified.
           format: int64
           type: string
         modelName:
           description: >-
-            Use this field if you want to use the default version for the
-            specified
+            Use this field if you want to use the default version for the specified
 
             model. The string must use the following format:
 
@@ -2936,8 +2925,7 @@ components:
           type: string
         region:
           description: >-
-            Required. The Google Compute Engine region to run the prediction job
-            in.
+            Required. The Google Compute Engine region to run the prediction job in.
 
             See the <a href="/ml-engine/docs/tensorflow/regions">available regions</a>
 
@@ -2957,8 +2945,7 @@ components:
           type: string
         signatureName:
           description: >-
-            Optional. The name of the signature defined in the SavedModel to use
-            for
+            Optional. The name of the signature defined in the SavedModel to use for
 
             this job. Please refer to
 
@@ -2975,15 +2962,13 @@ components:
           type: string
         uri:
           description: >-
-            Use this field if you want to specify a Google Cloud Storage path
-            for
+            Use this field if you want to specify a Google Cloud Storage path for
 
             the model to use.
           type: string
         versionName:
           description: >-
-            Use this field if you want to specify a version of the model to use.
-            The
+            Use this field if you want to specify a version of the model to use. The
 
             string is formatted the same way as `model_version`, with the addition
 
@@ -3005,8 +2990,7 @@ components:
           format: double
           type: number
         outputPath:
-          description: The output Google Cloud Storage location provided at the job
-            creation time.
+          description: The output Google Cloud Storage location provided at the job creation time.
           type: string
         predictionCount:
           description: The number of generated predictions.
@@ -3071,8 +3055,7 @@ components:
           type: array
         imageUri:
           description: >-
-            The Docker image to run on the replica. This image must be in
-            Container
+            The Docker image to run on the replica. This image must be in Container
 
             Registry. Learn more about [configuring custom
 
@@ -3080,8 +3063,7 @@ components:
           type: string
         tpuTfVersion:
           description: >-
-            The AI Platform runtime version that includes a TensorFlow version
-            matching
+            The AI Platform runtime version that includes a TensorFlow version matching
 
             the one used in the custom container. This field is required if the replica
 
@@ -3136,8 +3118,7 @@ components:
       properties:
         bigqueryTableName:
           description: >-
-            Required. Fully qualified BigQuery table name in the following
-            format:
+            Required. Fully qualified BigQuery table name in the following format:
 
             "<var>project_id</var>.<var>dataset_name</var>.<var>table_name</var>"
 
@@ -3162,8 +3143,7 @@ components:
           type: string
         samplingPercentage:
           description: >-
-            Percentage of requests to be logged, expressed as a fraction from 0
-            to 1.
+            Percentage of requests to be logged, expressed as a fraction from 0 to 1.
 
             For example, if you want to log 10% of requests, enter `0.1`. The sampling
 
@@ -3172,15 +3152,16 @@ components:
           type: number
       type: object
     GoogleCloudMlV1__SampledShapleyAttribution:
-      description: |-
+      description: >-
         An attribution method that approximates Shapley values for features that
+
         contribute to the label being predicted. A sampling strategy is used to
+
         approximate the value rather than considering all subsets of features.
       properties:
         numPaths:
           description: >-
-            The number of feature permutations to consider when approximating
-            the
+            The number of feature permutations to consider when approximating the
 
             Shapley values.
           format: int32
@@ -3191,8 +3172,7 @@ components:
       properties:
         maxRunningTime:
           description: >-
-            Optional. The maximum job running time, expressed in seconds. The
-            field can
+            Optional. The maximum job running time, expressed in seconds. The field can
 
             contain up to nine fractional digits, terminated by `s`. If not specified,
 
@@ -3249,8 +3229,9 @@ components:
           format: google-datetime
           type: string
         inactiveReason:
-          description: |-
+          description: >-
             Output only. A human readable reason why the Study is inactive.
+
             This should be empty if a study is ACTIVE or COMPLETED.
           type: string
         name:
@@ -3294,8 +3275,9 @@ components:
           type: array
       type: object
     GoogleCloudMlV1__SuggestTrialsMetadata:
-      description: |-
+      description: >-
         Metadata field of a google.longrunning.Operation associated
+
         with a SuggestTrialsRequest.
       properties:
         clientId:
@@ -3318,8 +3300,7 @@ components:
       properties:
         clientId:
           description: >-
-            Required. The identifier of the client that is requesting the
-            suggestion.
+            Required. The identifier of the client that is requesting the suggestion.
 
 
             If multiple SuggestTrialsRequests have the same `client_id`,
@@ -3334,8 +3315,9 @@ components:
           type: integer
       type: object
     GoogleCloudMlV1__SuggestTrialsResponse:
-      description: |-
+      description: >-
         This message will be placed in the response field of a completed
+
         google.longrunning.Operation associated with a SuggestTrials request.
       properties:
         endTime:
@@ -3362,8 +3344,7 @@ components:
       type: object
     GoogleCloudMlV1__TrainingInput:
       description: >-
-        Represents input parameters for a training job. When using the gcloud
-        command
+        Represents input parameters for a training job. When using the gcloud command
 
         to submit your training job, you can specify the input parameters as
 
@@ -3375,8 +3356,7 @@ components:
       properties:
         args:
           description: >-
-            Optional. Command-line arguments passed to the training application
-            when it
+            Optional. Command-line arguments passed to the training application when it
 
             starts. If your job uses a custom container, then the arguments are passed
 
@@ -3391,8 +3371,7 @@ components:
         encryptionConfig:
           $ref: "#/components/schemas/GoogleCloudMlV1__EncryptionConfig"
           description: >-
-            Optional. Options for using customer-managed encryption keys (CMEK)
-            to
+            Optional. Options for using customer-managed encryption keys (CMEK) to
 
             protect resources created by a training job, instead of using Google's
 
@@ -3430,8 +3409,7 @@ components:
             containers](/ai-platform/training/docs/distributed-training-containers).
         evaluatorCount:
           description: >-
-            Optional. The number of evaluator replicas to use for the training
-            job.
+            Optional. The number of evaluator replicas to use for the training job.
 
             Each replica in the cluster will be of the type specified in
 
@@ -3448,8 +3426,7 @@ components:
           type: string
         evaluatorType:
           description: >-
-            Optional. Specifies the type of virtual machine to use for your
-            training
+            Optional. Specifies the type of virtual machine to use for your training
 
             job's evaluator nodes.
 
@@ -3475,8 +3452,7 @@ components:
           description: Optional. The set of Hyperparameters to tune.
         jobDir:
           description: >-
-            Optional. A Google Cloud Storage path in which to store training
-            outputs
+            Optional. A Google Cloud Storage path in which to store training outputs
 
             and other data needed for training. This path is passed to your TensorFlow
 
@@ -3508,8 +3484,7 @@ components:
             containers](/ai-platform/training/docs/distributed-training-containers).
         masterType:
           description: >-
-            Optional. Specifies the type of virtual machine to use for your
-            training
+            Optional. Specifies the type of virtual machine to use for your training
 
             job's master worker. You must specify this field when `scaleTier` is set to
 
@@ -3628,9 +3603,11 @@ components:
             IP.
           type: string
         packageUris:
-          description: |-
+          description: >-
             Required. The Google Cloud Storage location of the packages with
+
             the training program and any additional dependencies.
+
             The maximum number of package URIs is 100.
           items:
             type: string
@@ -3659,8 +3636,7 @@ components:
             containers](/ai-platform/training/docs/distributed-training-containers).
         parameterServerCount:
           description: >-
-            Optional. The number of parameter server replicas to use for the
-            training
+            Optional. The number of parameter server replicas to use for the training
 
             job. Each replica in the cluster will be of the type specified in
 
@@ -3677,8 +3653,7 @@ components:
           type: string
         parameterServerType:
           description: >-
-            Optional. Specifies the type of virtual machine to use for your
-            training
+            Optional. Specifies the type of virtual machine to use for your training
 
             job's parameter server.
 
@@ -3700,13 +3675,11 @@ components:
             `parameter_server_count` is greater than zero.
           type: string
         pythonModule:
-          description: Required. The Python module name to run after installing the
-            packages.
+          description: Required. The Python module name to run after installing the packages.
           type: string
         pythonVersion:
           description: >-
-            Optional. The version of Python used in training. You must either
-            specify
+            Optional. The version of Python used in training. You must either specify
 
             this field or specify `masterConfig.imageUri`.
 
@@ -3733,8 +3706,7 @@ components:
           type: string
         runtimeVersion:
           description: >-
-            Optional. The AI Platform runtime version to use for training. You
-            must
+            Optional. The AI Platform runtime version to use for training. You must
 
             either specify this field or specify `masterConfig.imageUri`.
 
@@ -3747,8 +3719,7 @@ components:
           type: string
         scaleTier:
           description: >-
-            Required. Specifies the machine types, the number of replicas for
-            workers
+            Required. Specifies the machine types, the number of replicas for workers
 
             and parameter servers.
           enum:
@@ -3772,8 +3743,7 @@ components:
           type: string
         useChiefInTfConfig:
           description: >-
-            Optional. Use `chief` instead of `master` in the `TF_CONFIG`
-            environment
+            Optional. Use `chief` instead of `master` in the `TF_CONFIG` environment
 
             variable when training with a custom container. Defaults to `false`. [Learn
 
@@ -3810,8 +3780,7 @@ components:
             containers](/ai-platform/training/docs/distributed-training-containers).
         workerCount:
           description: >-
-            Optional. The number of worker replicas to use for the training job.
-            Each
+            Optional. The number of worker replicas to use for the training job. Each
 
             replica in the cluster will be of the type specified in `worker_type`.
 
@@ -3826,8 +3795,7 @@ components:
           type: string
         workerType:
           description: >-
-            Optional. Specifies the type of virtual machine to use for your
-            training
+            Optional. Specifies the type of virtual machine to use for your training
 
             job's worker nodes.
 
@@ -3861,13 +3829,13 @@ components:
       properties:
         builtInAlgorithmOutput:
           $ref: "#/components/schemas/GoogleCloudMlV1__BuiltInAlgorithmOutput"
-          description: |-
+          description: >-
             Details related to built-in algorithms jobs.
+
             Only set for built-in algorithms jobs.
         completedTrialCount:
           description: >-
-            The number of hyperparameter tuning trials that completed
-            successfully.
+            The number of hyperparameter tuning trials that completed successfully.
 
             Only set for hyperparameter tuning jobs.
           format: int64
@@ -3878,8 +3846,7 @@ components:
           type: number
         hyperparameterMetricTag:
           description: >-
-            The TensorFlow summary tag name used for optimizing hyperparameter
-            tuning
+            The TensorFlow summary tag name used for optimizing hyperparameter tuning
 
             trials. See
 
@@ -3894,8 +3861,9 @@ components:
           description: Whether this job is a hyperparameter tuning job.
           type: boolean
         trials:
-          description: |-
+          description: >-
             Results for individual Hyperparameter trials.
+
             Only set for hyperparameter tuning jobs.
           items:
             $ref: "#/components/schemas/GoogleCloudMlV1__HyperparameterOutput"
@@ -3905,8 +3873,7 @@ components:
       description: A message representing a trial.
       properties:
         clientId:
-          description: Output only. The identifier of the client that originally requested
-            this trial.
+          description: Output only. The identifier of the client that originally requested this trial.
           type: string
         endTime:
           description: Output only. Time at which the trial's status changed to COMPLETED.
@@ -3916,14 +3883,17 @@ components:
           $ref: "#/components/schemas/GoogleCloudMlV1__Measurement"
           description: The final measurement containing the objective value.
         infeasibleReason:
-          description: |-
+          description: >-
             Output only. A human readable string describing why the trial is
+
             infeasible. This should only be set if trial_infeasible is true.
           type: string
         measurements:
-          description: |-
+          description: >-
             A list of measurements that are strictly lexicographically
+
             ordered by their induced tuples (steps, elapsed_time).
+
             These are used for early stopping computations.
           items:
             $ref: "#/components/schemas/GoogleCloudMlV1__Measurement"
@@ -3950,24 +3920,26 @@ components:
             - STOPPING
           type: string
         trialInfeasible:
-          description: Output only. If true, the parameters in this trial are not
-            attempted again.
+          description: Output only. If true, the parameters in this trial are not attempted again.
           type: boolean
       type: object
     GoogleCloudMlV1__Version:
-      description: |-
+      description: >-
         Represents a version of the model.
 
+
         Each version is a trained model deployed in the cloud, ready to handle
+
         prediction requests. A model can have multiple versions. You can get
+
         information about all of the versions of a given model by calling
+
         projects.models.versions.list.
       properties:
         acceleratorConfig:
           $ref: "#/components/schemas/GoogleCloudMlV1__AcceleratorConfig"
           description: >-
-            Optional. Accelerator config for using GPUs for online prediction
-            (beta).
+            Optional. Accelerator config for using GPUs for online prediction (beta).
 
             Only specify this field if you have specified a Compute Engine (N1) machine
 
@@ -4021,8 +3993,7 @@ components:
             The total number of model files can't exceed 1000.
           type: string
         description:
-          description: Optional. The description specified for the version when it was
-            created.
+          description: Optional. The description specified for the version when it was created.
           type: string
         errorMessage:
           description: Output only. The details of a failure or a cancellation.
@@ -4046,9 +4017,11 @@ components:
           type: string
         explanationConfig:
           $ref: "#/components/schemas/GoogleCloudMlV1__ExplanationConfig"
-          description: |-
+          description: >-
             Optional. Configures explainability features on the model's version.
+
             Some explanation features require additional metadata to be loaded
+
             as part of the model payload.
         framework:
           description: >-
@@ -4084,19 +4057,21 @@ components:
             - XGBOOST
           type: string
         isDefault:
-          description: |-
+          description: >-
             Output only. If true, this version will be used to handle prediction
+
             requests that do not specify a version.
 
+
             You can change the default version by calling
+
             projects.methods.versions.setDefault.
           type: boolean
         labels:
           additionalProperties:
             type: string
           description: >-
-            Optional. One or more labels that you can add, to organize your
-            model
+            Optional. One or more labels that you can add, to organize your model
 
             versions. Each label is a key-value pair, where both the key and the value
 
@@ -4112,8 +4087,7 @@ components:
           type: string
         machineType:
           description: >-
-            Optional. The type of machine on which to serve the model. Currently
-            only
+            Optional. The type of machine on which to serve the model. Currently only
 
             applies to online prediction service. If this field is not specified, it
 
@@ -4179,8 +4153,9 @@ components:
 
             on the selected number of nodes.
         name:
-          description: |-
+          description: >-
             Required. The name specified for the version when it was created.
+
 
             The version name must be unique within the model it is created in.
           type: string
@@ -4328,8 +4303,7 @@ components:
             Version.
         runtimeVersion:
           description: >-
-            Required. The AI Platform runtime version to use for this
-            deployment.
+            Required. The AI Platform runtime version to use for this deployment.
 
 
             For more information, see the
@@ -4353,16 +4327,21 @@ components:
           type: string
       type: object
     GoogleCloudMlV1__XraiAttribution:
-      description: |-
+      description: >-
         Attributes credit by computing the XRAI taking advantage
+
         of the model's fully differentiable structure. Refer to this paper for
+
         more details: https://arxiv.org/abs/1906.02825
+
         Currently only implemented for models with natural image inputs.
       properties:
         numIntegralSteps:
-          description: |-
+          description: >-
             Number of steps for approximating the path integral.
+
             A good value to start is 50 and gradually increase until the
+
             sum to diff property is met within the desired error range.
           format: int32
           type: integer
@@ -4437,15 +4416,18 @@ components:
             $ref: "#/components/schemas/GoogleIamV1__AuditLogConfig"
           type: array
         service:
-          description: |-
+          description: >-
             Specifies a service that will be enabled for audit logging.
+
             For example, `storage.googleapis.com`, `cloudsql.googleapis.com`.
+
             `allServices` is a special value that covers all services.
           type: string
       type: object
     GoogleIamV1__AuditLogConfig:
-      description: |-
+      description: >-
         Provides the configuration for logging a type of permissions.
+
         Example:
 
             {
@@ -4463,12 +4445,15 @@ components:
             }
 
         This enables 'DATA_READ' and 'DATA_WRITE' logging, while exempting
+
         jose@example.com from DATA_READ logging.
       properties:
         exemptedMembers:
-          description: |-
+          description: >-
             Specifies the identities that do not cause logging for this type of
+
             permission.
+
             Follows the same format of Binding.members.
           items:
             type: string
@@ -4510,8 +4495,7 @@ components:
             documentation](https://cloud.google.com/iam/help/conditions/resource-policies).
         members:
           description: >+
-            Specifies the identities requesting access for a Cloud Platform
-            resource.
+            Specifies the identities requesting access for a Cloud Platform resource.
 
             `members` can have the following values:
 
@@ -4560,8 +4544,9 @@ components:
             type: string
           type: array
         role:
-          description: |-
+          description: >-
             Role that is assigned to `members`.
+
             For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
           type: string
       type: object
@@ -4656,8 +4641,7 @@ components:
           type: array
         bindings:
           description: >-
-            Associates a list of `members` to a `role`. Optionally, may specify
-            a
+            Associates a list of `members` to a `role`. Optionally, may specify a
 
             `condition` that determines how and when the `bindings` are applied. Each
 
@@ -4741,8 +4725,7 @@ components:
         policy:
           $ref: "#/components/schemas/GoogleIamV1__Policy"
           description: >-
-            REQUIRED: The complete policy to be applied to the `resource`. The
-            size of
+            REQUIRED: The complete policy to be applied to the `resource`. The size of
 
             the policy is limited to a few 10s of KB. An empty policy is a
 
@@ -4751,8 +4734,7 @@ components:
             might reject them.
         updateMask:
           description: >-
-            OPTIONAL: A FieldMask specifying which fields of the policy to
-            modify. Only
+            OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
 
             the fields in the mask will be modified. If no mask is provided, the
 
@@ -4783,8 +4765,9 @@ components:
       description: Response message for `TestIamPermissions` method.
       properties:
         permissions:
-          description: |-
+          description: >-
             A subset of `TestPermissionsRequest.permissions` that the caller is
+
             allowed.
           items:
             type: string
@@ -4797,23 +4780,20 @@ components:
           description: The standard List next-page token.
           type: string
         operations:
-          description: A list of operations that matches the specified filter in the
-            request.
+          description: A list of operations that matches the specified filter in the request.
           items:
             $ref: "#/components/schemas/GoogleLongrunning__Operation"
           type: array
       type: object
     GoogleLongrunning__Operation:
       description: >-
-        This resource represents a long-running operation that is the result of
-        a
+        This resource represents a long-running operation that is the result of a
 
         network API call.
       properties:
         done:
           description: >-
-            If the value is `false`, it means the operation is still in
-            progress.
+            If the value is `false`, it means the operation is still in progress.
 
             If `true`, the operation is completed, and either `error` or `response` is
 
@@ -4826,8 +4806,7 @@ components:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
           description: >-
-            Service-specific metadata associated with the operation.  It
-            typically
+            Service-specific metadata associated with the operation.  It typically
 
             contains progress information and common metadata such as create time.
 
@@ -4837,8 +4816,7 @@ components:
           type: object
         name:
           description: >-
-            The server-assigned name, which is only unique within the same
-            service that
+            The server-assigned name, which is only unique within the same service that
 
             originally returns it. If you use the default HTTP mapping, the
 
@@ -4848,8 +4826,7 @@ components:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
           description: >-
-            The normal response of the operation in case of success.  If the
-            original
+            The normal response of the operation in case of success.  If the original
 
             method returns no data on success, such as `Delete`, the response is
 
@@ -4902,8 +4879,7 @@ components:
           type: integer
         details:
           description: >-
-            A list of messages that carry the error details.  There is a common
-            set of
+            A list of messages that carry the error details.  There is a common set of
 
             message types for APIs to use.
           items:
@@ -4912,9 +4888,11 @@ components:
             type: object
           type: array
         message:
-          description: |-
+          description: >-
             A developer-facing error message, which should be in English. Any
+
             user-facing error message should be localized and sent in the
+
             google.rpc.Status.details field, or localized by the client.
           type: string
       type: object
@@ -4958,26 +4936,29 @@ components:
         documentation for additional information.
       properties:
         description:
-          description: |-
+          description: >-
             Optional. Description of the expression. This is a longer text which
+
             describes the expression, e.g. when hovered over it in a UI.
           type: string
         expression:
           description: >-
-            Textual representation of an expression in Common Expression
-            Language
+            Textual representation of an expression in Common Expression Language
 
             syntax.
           type: string
         location:
-          description: |-
+          description: >-
             Optional. String indicating the location of the expression for error
+
             reporting, e.g. a file name and a position in the file.
           type: string
         title:
-          description: |-
+          description: >-
             Optional. Title for the expression, i.e. a short string describing
+
             its purpose. This can be used e.g. in UIs which allow to enter the
+
             expression.
           type: string
       type: object

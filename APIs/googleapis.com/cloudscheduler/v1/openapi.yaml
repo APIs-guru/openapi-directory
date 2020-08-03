@@ -91,17 +91,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
     patch:
       description: >-
         Updates a job.
@@ -213,30 +213,30 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
   "/v1/{name}:pause":
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: >-
         Pauses a job.
@@ -283,17 +283,17 @@ paths:
         - projects
   "/v1/{name}:resume":
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: >-
         Resume a job.
@@ -338,17 +338,17 @@ paths:
         - projects
   "/v1/{name}:run":
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: >-
         Forces a job to run now.
@@ -449,17 +449,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Creates a job.
       operationId: cloudscheduler.projects.locations.jobs.create
@@ -1300,6 +1300,20 @@ components:
             subscriber that receives a `PubsubMessage` via a `Pull` call or a push
 
             delivery. It must not be populated by the publisher in a `Publish` call.
+          type: string
+        orderingKey:
+          description: >-
+            If non-empty, identifies related messages for which publish order should be
+
+            respected. If a `Subscription` has `enable_message_ordering` set to `true`,
+
+            messages published with the same non-empty `ordering_key` value will be
+
+            delivered to subscribers in the order in which they are received by the
+
+            Pub/Sub system. All `PubsubMessage`s published in a given `PublishRequest`
+
+            must specify the same `ordering_key` value.
           type: string
         publishTime:
           description: >-

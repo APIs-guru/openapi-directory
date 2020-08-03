@@ -1,6 +1,6 @@
 openapi: 3.0.0
 servers:
-  - url: https://www.googleapis.com/
+  - url: https://toolresults.googleapis.com/
 info:
   contact:
     name: Google
@@ -115,17 +115,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
     post:
       description: >-
         Creates a History.
@@ -235,17 +235,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
   "/toolresults/v1beta3/projects/{projectId}/histories/{historyId}/executions":
     get:
       description: >-
@@ -327,17 +327,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
     post:
       description: >-
         Creates an Execution.
@@ -467,17 +467,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
     patch:
       description: >-
         Updates an existing Execution with the supplied partial entity.
@@ -612,17 +612,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
   "/toolresults/v1beta3/projects/{projectId}/histories/{historyId}/executions/{executionId}/clusters/{clusterId}":
     get:
       description: Retrieves a single screenshot cluster by its ID
@@ -683,17 +683,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
   "/toolresults/v1beta3/projects/{projectId}/histories/{historyId}/executions/{executionId}/environments":
     get:
       description: >-
@@ -762,17 +762,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
   "/toolresults/v1beta3/projects/{projectId}/histories/{historyId}/executions/{executionId}/environments/{environmentId}":
     get:
       description: >-
@@ -828,17 +828,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
   "/toolresults/v1beta3/projects/{projectId}/histories/{historyId}/executions/{executionId}/steps":
     get:
       description: >-
@@ -933,17 +933,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
     post:
       description: >-
         Creates a Step.
@@ -1083,17 +1083,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
     patch:
       description: >-
         Updates an existing Step with the supplied partial entity.
@@ -1232,17 +1232,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
     post:
       description: >-
         Creates a PerfMetricsSummary resource. Returns the existing one if it has
@@ -1347,11 +1347,11 @@ paths:
           schema:
             items:
               enum:
-                - PERF_METRIC_TYPE_UNSPECIFIED
-                - MEMORY
-                - CPU
-                - NETWORK
-                - GRAPHICS
+                - perfMetricTypeUnspecified
+                - memory
+                - cpu
+                - network
+                - graphics
               type: string
             type: array
           style: form
@@ -1370,17 +1370,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
     post:
       description: >-
         Creates a PerfSampleSeries.
@@ -1492,17 +1492,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
   "/toolresults/v1beta3/projects/{projectId}/histories/{historyId}/executions/{executionId}/steps/{stepId}/perfSampleSeries/{sampleSeriesId}/samples":
     get:
       description: >-
@@ -1586,30 +1586,30 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
   "/toolresults/v1beta3/projects/{projectId}/histories/{historyId}/executions/{executionId}/steps/{stepId}/perfSampleSeries/{sampleSeriesId}/samples:batchCreate":
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
     post:
       description: >-
         Creates a batch of PerfSamples
@@ -1779,17 +1779,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
   "/toolresults/v1beta3/projects/{projectId}/histories/{historyId}/executions/{executionId}/steps/{stepId}/testCases/{testCaseId}":
     get:
       description: >-
@@ -1875,17 +1875,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
   "/toolresults/v1beta3/projects/{projectId}/histories/{historyId}/executions/{executionId}/steps/{stepId}/thumbnails":
     get:
       description: >-
@@ -1980,30 +1980,30 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
   "/toolresults/v1beta3/projects/{projectId}/histories/{historyId}/executions/{executionId}/steps/{stepId}:publishXunitXmlFiles":
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
     post:
       description: >-
         Publish xml files to an existing Step.
@@ -2121,30 +2121,30 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
   "/toolresults/v1beta3/projects/{projectId}:initializeSettings":
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
     post:
       description: >-
         Creates resources for settings which have not yet been set.
@@ -2285,17 +2285,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
 components:
   parameters:
     _.xgafv:
@@ -2701,36 +2701,36 @@ components:
       properties:
         perfMetricType:
           enum:
-            - PERF_METRIC_TYPE_UNSPECIFIED
-            - MEMORY
-            - CPU
-            - NETWORK
-            - GRAPHICS
+            - perfMetricTypeUnspecified
+            - memory
+            - cpu
+            - network
+            - graphics
           type: string
         perfUnit:
           enum:
-            - PERF_UNIT_UNSPECIFIED
-            - KIBIBYTE
-            - PERCENT
-            - BYTES_PER_SECOND
-            - FRAMES_PER_SECOND
-            - BYTE
+            - perfUnitUnspecified
+            - kibibyte
+            - percent
+            - bytesPerSecond
+            - framesPerSecond
+            - byte
           type: string
         sampleSeriesLabel:
           enum:
-            - SAMPLE_SERIES_TYPE_UNSPECIFIED
-            - MEMORY_RSS_PRIVATE
-            - MEMORY_RSS_SHARED
-            - MEMORY_RSS_TOTAL
-            - MEMORY_TOTAL
-            - CPU_USER
-            - CPU_KERNEL
-            - CPU_TOTAL
-            - NT_BYTES_TRANSFERRED
-            - NT_BYTES_RECEIVED
-            - NETWORK_SENT
-            - NETWORK_RECEIVED
-            - GRAPHICS_FRAME_RATE
+            - sampleSeriesTypeUnspecified
+            - memoryRssPrivate
+            - memoryRssShared
+            - memoryRssTotal
+            - memoryTotal
+            - cpuUser
+            - cpuKernel
+            - cpuTotal
+            - ntBytesTransferred
+            - ntBytesReceived
+            - networkSent
+            - networkReceived
+            - graphicsFrameRate
           type: string
       type: object
     BatchCreatePerfSamplesRequest:
@@ -3066,10 +3066,10 @@ components:
 
             - In create/update request: optional
           enum:
-            - UNKNOWN_STATE
-            - PENDING
-            - IN_PROGRESS
-            - COMPLETE
+            - unknownState
+            - pending
+            - inProgress
+            - complete
           type: string
         testExecutionMatrixId:
           description: >-
@@ -3092,6 +3092,14 @@ components:
       properties:
         crashed:
           description: If the failure was severe because the system (app) under test crashed.
+          type: boolean
+        failedRoboscript:
+          description: >-
+            If the Roboscript failed to complete successfully, e.g., because a
+
+            Roboscript action or assertion failed or a Roboscript action could not be
+
+            matched during the entire crawl.
           type: boolean
         notInstalled:
           description: >-
@@ -3283,9 +3291,9 @@ components:
 
             unknown.
           enum:
-            - UNKNOWN_PLATFORM
-            - ANDROID
-            - IOS
+            - unknownPlatform
+            - android
+            - ios
           type: string
       type: object
     Image:
@@ -3378,12 +3386,12 @@ components:
           type: integer
         outcomeSummary:
           enum:
-            - UNSET
-            - SUCCESS
-            - FAILURE
-            - INCONCLUSIVE
-            - SKIPPED
-            - FLAKY
+            - unset
+            - success
+            - failure
+            - inconclusive
+            - skipped
+            - flaky
           type: string
         runDuration:
           $ref: "#/components/schemas/Duration"
@@ -3708,10 +3716,10 @@ components:
         state:
           description: State of the resource
           enum:
-            - UNKNOWN_STATE
-            - PENDING
-            - IN_PROGRESS
-            - COMPLETE
+            - unknownState
+            - pending
+            - inProgress
+            - complete
           type: string
         testSuiteOverviews:
           description: >-
@@ -3920,12 +3928,12 @@ components:
 
             Required
           enum:
-            - UNSET
-            - SUCCESS
-            - FAILURE
-            - INCONCLUSIVE
-            - SKIPPED
-            - FLAKY
+            - unset
+            - success
+            - failure
+            - inconclusive
+            - skipped
+            - flaky
           type: string
       type: object
     OverlappingUIElements:
@@ -3993,11 +4001,11 @@ components:
           description: Set of resource collected
           items:
             enum:
-              - PERF_METRIC_TYPE_UNSPECIFIED
-              - MEMORY
-              - CPU
-              - NETWORK
-              - GRAPHICS
+              - perfMetricTypeUnspecified
+              - memory
+              - cpu
+              - network
+              - graphics
             type: string
           type: array
         projectId:
@@ -4090,12 +4098,12 @@ components:
 
             configuration as a group.
           enum:
-            - UNSET
-            - SUCCESS
-            - FAILURE
-            - INCONCLUSIVE
-            - SKIPPED
-            - FLAKY
+            - unset
+            - success
+            - failure
+            - inconclusive
+            - skipped
+            - flaky
           type: string
       type: object
     ProjectSettings:
@@ -4674,10 +4682,10 @@ components:
 
             - In create/update request: optional
           enum:
-            - UNKNOWN_STATE
-            - PENDING
-            - IN_PROGRESS
-            - COMPLETE
+            - unknownState
+            - pending
+            - inProgress
+            - complete
           type: string
         stepId:
           description: >-
@@ -4743,11 +4751,11 @@ components:
 
             Always set.
           enum:
-            - UNKNOWN_CATEGORY
-            - CONTENT_LABELING
-            - TOUCH_TARGET_SIZE
-            - LOW_CONTRAST
-            - IMPLEMENTATION
+            - unknownCategory
+            - contentLabeling
+            - touchTargetSize
+            - lowContrast
+            - implementation
           type: string
         suggestions:
           description: >-
@@ -4782,10 +4790,10 @@ components:
 
             Always set.
           enum:
-            - UNKNOWN_PRIORITY
-            - ERROR
-            - WARNING
-            - INFO
+            - unknownPriority
+            - error
+            - warning
+            - info
           type: string
         pseudoResourceId:
           description: >-
@@ -4890,11 +4898,11 @@ components:
 
             Required.
           enum:
-            - PASSED
-            - FAILED
-            - ERROR
-            - SKIPPED
-            - FLAKY
+            - passed
+            - failed
+            - error
+            - skipped
+            - flaky
           type: string
         testCaseId:
           description: A unique identifier within a Step for this Test Case.
@@ -5028,9 +5036,9 @@ components:
 
             Required.
           enum:
-            - UNSPECIFIED_CATEGORY
-            - COMMON
-            - ROBO
+            - unspecifiedCategory
+            - common
+            - robo
           type: string
         errorMessage:
           description: >-
@@ -5044,11 +5052,11 @@ components:
 
             Required.
           enum:
-            - UNSPECIFIED_SEVERITY
-            - INFO
-            - SUGGESTION
-            - WARNING
-            - SEVERE
+            - unspecifiedSeverity
+            - info
+            - suggestion
+            - warning
+            - severe
           type: string
         stackTrace:
           $ref: "#/components/schemas/StackTrace"
@@ -5059,35 +5067,35 @@ components:
 
             Required.
           enum:
-            - UNSPECIFIED_TYPE
-            - FATAL_EXCEPTION
-            - NATIVE_CRASH
-            - ANR
-            - UNUSED_ROBO_DIRECTIVE
-            - COMPATIBLE_WITH_ORCHESTRATOR
-            - LAUNCHER_ACTIVITY_NOT_FOUND
-            - START_ACTIVITY_NOT_FOUND
-            - INCOMPLETE_ROBO_SCRIPT_EXECUTION
-            - COMPLETE_ROBO_SCRIPT_EXECUTION
-            - FAILED_TO_INSTALL
-            - AVAILABLE_DEEP_LINKS
-            - NON_SDK_API_USAGE_VIOLATION
-            - NON_SDK_API_USAGE_REPORT
-            - ENCOUNTERED_NON_ANDROID_UI_WIDGET_SCREEN
-            - ENCOUNTERED_LOGIN_SCREEN
-            - PERFORMED_GOOGLE_LOGIN
-            - IOS_EXCEPTION
-            - IOS_CRASH
-            - PERFORMED_MONKEY_ACTIONS
-            - USED_ROBO_DIRECTIVE
-            - USED_ROBO_IGNORE_DIRECTIVE
-            - INSUFFICIENT_COVERAGE
-            - IN_APP_PURCHASES
-            - CRASH_DIALOG_ERROR
-            - UI_ELEMENTS_TOO_DEEP
-            - BLANK_SCREEN
-            - OVERLAPPING_UI_ELEMENTS
-            - UNITY_EXCEPTION
+            - unspecifiedType
+            - fatalException
+            - nativeCrash
+            - anr
+            - unusedRoboDirective
+            - compatibleWithOrchestrator
+            - launcherActivityNotFound
+            - startActivityNotFound
+            - incompleteRoboScriptExecution
+            - completeRoboScriptExecution
+            - failedToInstall
+            - availableDeepLinks
+            - nonSdkApiUsageViolation
+            - nonSdkApiUsageReport
+            - encounteredNonAndroidUiWidgetScreen
+            - encounteredLoginScreen
+            - performedGoogleLogin
+            - iosException
+            - iosCrash
+            - performedMonkeyActions
+            - usedRoboDirective
+            - usedRoboIgnoreDirective
+            - insufficientCoverage
+            - inAppPurchases
+            - crashDialogError
+            - uiElementsTooDeep
+            - blankScreen
+            - overlappingUiElements
+            - unityException
           type: string
         warning:
           $ref: "#/components/schemas/Any"

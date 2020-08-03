@@ -37,46 +37,13 @@ tags:
 paths:
   "/v1beta1/{name}":
     delete:
-      description: >-
-        Deletes a long-running operation. This method indicates that the client is
-
-        no longer interested in the operation result. It does not cancel the
-
-        operation. If the server doesn't support this method, it returns
-
-        `google.rpc.Code.UNIMPLEMENTED`.
-      operationId: file.projects.locations.operations.delete
+      description: Deletes an instance.
+      operationId: file.projects.locations.instances.delete
       parameters:
-        - description: The name of the operation resource to be deleted.
-          in: path
-          name: name
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Empty"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - projects
-    get:
-      description: >-
-        Gets the latest state of a long-running operation.  Clients can use this
+        - description: >-
+            Required. The instance resource name, in the format
 
-        method to poll the operation result at intervals as recommended by the API
-
-        service.
-      operationId: file.projects.locations.operations.get
-      parameters:
-        - description: The name of the operation resource.
+            projects/{project_id}/locations/{location}/instances/{instance_id}
           in: path
           name: name
           required: true
@@ -96,18 +63,45 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+    get:
+      description: Gets the details of a specific instance.
+      operationId: file.projects.locations.instances.get
+      parameters:
+        - description: >-
+            Required. The instance resource name, in the format
+
+            projects/{project_id}/locations/{location}/instances/{instance_id}.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Instance"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
     patch:
       description: Updates the settings of a specific instance.
       operationId: file.projects.locations.instances.patch
@@ -206,17 +200,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
   "/v1beta1/{name}/operations":
     get:
       description: >-
@@ -276,30 +270,30 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
   "/v1beta1/{name}:cancel":
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
     post:
       description: >-
         Starts asynchronous cancellation on a long-running operation.  The server
@@ -409,17 +403,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
     post:
       description: Creates an instance.
       operationId: file.projects.locations.instances.create

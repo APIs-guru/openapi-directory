@@ -6,9 +6,7 @@ info:
     name: Google
     url: https://google.com
     x-twitter: youtube
-  description: >-
-    The Blogger API provides access to posts, comments and pages of a
-        Blogger blog.
+  description: The Blogger API provides access to posts, comments and pages of a Blogger blog.
   license:
     name: Creative Commons Attribution 3.0
     url: http://creativecommons.org/licenses/by/3.0/
@@ -35,11 +33,11 @@ info:
 externalDocs:
   url: https://developers.google.com/blogger/docs/3.0/getting_started
 tags:
-  - name: blogs
-  - name: comments
-  - name: pages
   - name: posts
+  - name: comments
   - name: users
+  - name: pages
+  - name: blogs
 paths:
   "/v2/blogs/{blogId}":
     get:
@@ -66,17 +64,17 @@ paths:
       tags:
         - blogs
     parameters:
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
   "/v2/blogs/{blogId}/pages":
     get:
       description: Lists pages.
@@ -106,17 +104,17 @@ paths:
       tags:
         - pages
     parameters:
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
   "/v2/blogs/{blogId}/pages/{pageId}":
     get:
       description: Gets a page by blog id and page id.
@@ -147,17 +145,17 @@ paths:
       tags:
         - pages
     parameters:
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
   "/v2/blogs/{blogId}/posts":
     get:
       description: Lists posts.
@@ -199,17 +197,17 @@ paths:
       tags:
         - posts
     parameters:
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
   "/v2/blogs/{blogId}/posts/{postId}":
     get:
       description: Gets a post by blog id and post id
@@ -240,17 +238,17 @@ paths:
       tags:
         - posts
     parameters:
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
   "/v2/blogs/{blogId}/posts/{postId}/comments":
     get:
       description: Lists comments.
@@ -297,17 +295,17 @@ paths:
       tags:
         - comments
     parameters:
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
   "/v2/blogs/{blogId}/posts/{postId}/comments/{commentId}":
     get:
       description: Gets a comment by blog id, post id and comment id.
@@ -343,17 +341,17 @@ paths:
       tags:
         - comments
     parameters:
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
   "/v2/users/{userId}":
     get:
       description: Gets a user by user id.
@@ -379,17 +377,17 @@ paths:
       tags:
         - users
     parameters:
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
   "/v2/users/{userId}/blogs":
     get:
       description: Lists blogs by user id, possibly filtered.
@@ -415,17 +413,17 @@ paths:
       tags:
         - blogs
     parameters:
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
 components:
   parameters:
     _.xgafv:
@@ -609,10 +607,7 @@ components:
           description: The Photo Album Key for the user when adding photos to the blog.
           type: string
         role:
-          description: >-
-            Access permissions that the user has for the blog (ADMIN, AUTHOR, or
-
-            READER).
+          description: Access permissions that the user has for the blog (ADMIN, AUTHOR, or READER).
           enum:
             - VIEW_TYPE_UNSPECIFIED
             - READER
@@ -779,10 +774,7 @@ components:
             - DRAFT
           type: string
         title:
-          description: >-
-            The title of this entity. This is the name displayed in the Admin user
-
-            interface.
+          description: The title of this entity. This is the name displayed in the Admin user interface.
           type: string
         updated:
           description: RFC 3339 date-time when this Page was last updated.

@@ -33,27 +33,26 @@ info:
 externalDocs:
   url: https://developers.google.com/spectrum-access-system/
 tags:
-  - name: installer
-  - name: deployments
   - name: nodes
-  - name: policies
+  - name: installer
   - name: customers
+  - name: policies
 paths:
   /v1alpha1/customers:
     get:
       description: Returns a list of requested customers.
       operationId: sasportal.customers.list
       parameters:
-        - description: |-
+        - description: >-
             The maximum number of customers
+
             to return in the response.
           in: query
           name: pageSize
           schema:
             type: integer
         - description: >-
-            A pagination token returned from a previous call to ListCustomers
-            method that indicates where
+            A pagination token returned from a previous call to ListCustomers method that indicates where
 
             this listing should continue from.
           in: query
@@ -75,30 +74,30 @@ paths:
       tags:
         - customers
     parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
   /v1alpha1/installer:generateSecret:
     parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
     post:
       description: Generates a secret to be used with the ValidateInstaller method
       operationId: sasportal.installer.generateSecret
@@ -123,17 +122,17 @@ paths:
         - installer
   /v1alpha1/installer:validate:
     parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
     post:
       description: Validates the identity of a Certified Professional Installer (CPI).
       operationId: sasportal.installer.validate
@@ -158,17 +157,17 @@ paths:
         - installer
   /v1alpha1/policies:get:
     parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
     post:
       description: >-
         Gets the access control policy for a resource.
@@ -198,20 +197,21 @@ paths:
         - policies
   /v1alpha1/policies:set:
     parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
     post:
-      description: |-
+      description: >-
         Sets the access control policy on the specified resource. Replaces any
+
         existing policy.
       operationId: sasportal.policies.set
       requestBody:
@@ -235,17 +235,17 @@ paths:
         - policies
   /v1alpha1/policies:test:
     parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
     post:
       description: Returns permissions that a caller has on the specified resource.
       operationId: sasportal.policies.test
@@ -270,10 +270,10 @@ paths:
         - policies
   "/v1alpha1/{name}":
     delete:
-      description: Deletes a node.
-      operationId: sasportal.customers.nodes.delete
+      description: Deletes a device.
+      operationId: sasportal.customers.devices.delete
       parameters:
-        - description: Required. The name of the node.
+        - description: Required. The name of the device.
           in: path
           name: name
           required: true
@@ -294,10 +294,10 @@ paths:
       tags:
         - customers
     get:
-      description: Returns a requested node.
-      operationId: sasportal.customers.nodes.get
+      description: Gets details about a device.
+      operationId: sasportal.customers.devices.get
       parameters:
-        - description: Required. The name of the node.
+        - description: Required. The name of the device.
           in: path
           name: name
           required: true
@@ -308,7 +308,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/SasPortalNode"
+                $ref: "#/components/schemas/SasPortalDevice"
           description: Successful response
       security:
         - Oauth2:
@@ -318,22 +318,22 @@ paths:
       tags:
         - customers
     parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
     patch:
-      description: Updates an existing node.
-      operationId: sasportal.customers.nodes.patch
+      description: Updates a device.
+      operationId: sasportal.customers.devices.patch
       parameters:
-        - description: Output only. Resource name.
+        - description: Output only. The resource path name.
           in: path
           name: name
           required: true
@@ -348,13 +348,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/SasPortalNode"
+              $ref: "#/components/schemas/SasPortalDevice"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/SasPortalNode"
+                $ref: "#/components/schemas/SasPortalDevice"
           description: Successful response
       security:
         - Oauth2:
@@ -365,24 +365,22 @@ paths:
         - customers
   "/v1alpha1/{name}:move":
     parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
     post:
-      description: Moves a node under another node or customer.
-      operationId: sasportal.customers.nodes.move
+      description: Moves a device under another node or customer.
+      operationId: sasportal.customers.devices.move
       parameters:
-        - description: |-
-            Required. The name of the node to
-            move.
+        - description: Required. The name of the device to move.
           in: path
           name: name
           required: true
@@ -392,7 +390,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/SasPortalMoveNodeRequest"
+              $ref: "#/components/schemas/SasPortalMoveDeviceRequest"
       responses:
         "200":
           content:
@@ -409,17 +407,17 @@ paths:
         - customers
   "/v1alpha1/{name}:signDevice":
     parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
     post:
       description: Signs a device.
       operationId: sasportal.customers.devices.signDevice
@@ -451,17 +449,17 @@ paths:
         - customers
   "/v1alpha1/{name}:updateSigned":
     parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
     patch:
       description: Updates a signed device.
       operationId: sasportal.customers.devices.updateSigned
@@ -491,88 +489,6 @@ paths:
             - https://www.googleapis.com/auth/userinfo.email
       tags:
         - customers
-  "/v1alpha1/{parent}/deployments":
-    get:
-      description: Lists deployments.
-      operationId: sasportal.customers.nodes.deployments.list
-      parameters:
-        - description: |-
-            Required. The parent resource name, for example, "nodes/1",
-            customer/1/nodes/2.
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-        - description: The maximum number of deployments to return in the response.
-          in: query
-          name: pageSize
-          schema:
-            type: integer
-        - description: |-
-            A pagination token returned from a previous call to ListDeployments
-            method that
-            indicates where this listing should continue from.
-          in: query
-          name: pageToken
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/SasPortalListDeploymentsResponse"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/userinfo.email
-          Oauth2c:
-            - https://www.googleapis.com/auth/userinfo.email
-      tags:
-        - customers
-    parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-    post:
-      description: Creates a new deployment.
-      operationId: sasportal.customers.nodes.deployments.create
-      parameters:
-        - description: Required. The parent resource name where the deployment is to be
-            created.
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/SasPortalDeployment"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/SasPortalDeployment"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/userinfo.email
-          Oauth2c:
-            - https://www.googleapis.com/auth/userinfo.email
-      tags:
-        - customers
   "/v1alpha1/{parent}/devices":
     get:
       description: Lists devices under a node or customer.
@@ -594,16 +510,19 @@ paths:
           name: filter
           schema:
             type: string
-        - description: |-
+        - description: >-
             The maximum number of devices to return in the response.
+
             If empty or zero, all devices will be listed.
+
             Must be in the range [0, 1000].
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: |-
+        - description: >-
             A pagination token returned from a previous call to ListDevices
+
             that indicates where this listing should continue from.
           in: query
           name: pageToken
@@ -624,17 +543,17 @@ paths:
       tags:
         - customers
     parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
     post:
       description: Creates a device under a node or customer.
       operationId: sasportal.customers.devices.create
@@ -666,20 +585,19 @@ paths:
         - customers
   "/v1alpha1/{parent}/devices:bulk":
     parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
     post:
-      description: Creates a device under a node or customer. Returned devices are
-        unordered.
+      description: Creates a device under a node or customer. Returned devices are unordered.
       operationId: sasportal.customers.devices.bulk
       parameters:
         - description: Required. The name of the parent resource.
@@ -709,20 +627,21 @@ paths:
         - customers
   "/v1alpha1/{parent}/devices:createSigned":
     parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
     post:
-      description: |-
+      description: >-
         Creates a signed device under a
+
         node or customer.
       operationId: sasportal.customers.devices.createSigned
       parameters:
@@ -767,8 +686,9 @@ paths:
           name: pageSize
           schema:
             type: integer
-        - description: |-
+        - description: >-
             A pagination token returned from a previous call to ListNodes method
+
             that indicates where this listing should continue from.
           in: query
           name: pageToken
@@ -789,17 +709,17 @@ paths:
       tags:
         - customers
     parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
     post:
       description: Creates a new node.
       operationId: sasportal.customers.nodes.nodes.create
@@ -869,9 +789,7 @@ components:
       schema:
         type: string
     key:
-      description: API key. Your API key identifies your project and provides you with
-        API access, quota, and reports. Required unless you provide an OAuth 2.0
-        token.
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -889,9 +807,7 @@ components:
       schema:
         type: boolean
     quotaUser:
-      description: Available to use for quota purposes for server-side applications.
-        Can be any arbitrary string assigned to a user, but should not exceed 40
-        characters.
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
       in: query
       name: quotaUser
       schema:
@@ -913,9 +829,11 @@ components:
       description: Associates `members` with a `role`.
       properties:
         members:
-          description: |-
+          description: >-
             The identities the role is assigned to. It can have the following
+
             values:
+
 
             * `{user_email}`: An email address that represents a specific
                Google account. For example: `alice@gmail.com`.
@@ -960,8 +878,7 @@ components:
           type: string
         installerId:
           description: >-
-            Required. Unique installer id (cpiId) from the Certified
-            Professional
+            Required. Unique installer id (cpiId) from the Certified Professional
 
             Installers database.
           type: string
@@ -970,8 +887,7 @@ components:
       description: Entity representing a SAS customer.
       properties:
         displayName:
-          description: Required. Name of the organization that the customer entity
-            represents.
+          description: Required. Name of the organization that the customer entity represents.
           type: string
         name:
           description: Output only. Resource name of the customer.
@@ -982,51 +898,16 @@ components:
             type: string
           type: array
       type: object
-    SasPortalDeployment:
-      description: The Deployment.
-      properties:
-        allowedBillingModes:
-          description: The allowed billing modes under this deployment.
-          items:
-            enum:
-              - BILLING_MODE_UNSPECIFIED
-              - MOBILE
-              - FIXED_WIRELESS
-            type: string
-          type: array
-        defaultBillingMode:
-          description: Default billing mode for the deployment and devices under it.
-          enum:
-            - BILLING_MODE_UNSPECIFIED
-            - MOBILE
-            - FIXED_WIRELESS
-          type: string
-        displayName:
-          description: The deployment's display name.
-          type: string
-        name:
-          description: Output only. Resource name.
-          type: string
-        sasUserIds:
-          description: >-
-            User id used by the devices belonging to this deployment. Each
-            deployment
-
-            should be associated with one unique user_id.
-          items:
-            type: string
-          type: array
-      type: object
     SasPortalDevice:
       properties:
         activeConfig:
           $ref: "#/components/schemas/SasPortalDeviceConfig"
-          description: Output only. Current configuration of the device as registered to
-            the SAS.
+          description: Output only. Current configuration of the device as registered to the SAS.
         deviceMetadata:
           $ref: "#/components/schemas/SasPortalDeviceMetadata"
-          description: |-
+          description: >-
             Device parameters that can be overridden by both SAS Portal and SAS
+
             registration requests.
         displayName:
           description: Device display name.
@@ -1046,8 +927,9 @@ components:
           $ref: "#/components/schemas/SasPortalDeviceConfig"
           description: Configuration of the device, as specified via SAS Portal API.
         serialNumber:
-          description: |-
+          description: >-
             A serial number assigned to the device by the device
+
             manufacturer.
           type: string
         state:
@@ -1064,8 +946,7 @@ components:
       properties:
         radioTechnology:
           description: >-
-            This field specifies the radio access technology that is used for
-            the CBSD.
+            This field specifies the radio access technology that is used for the CBSD.
 
 
             Conditional
@@ -1082,8 +963,7 @@ components:
           type: string
         supportedSpec:
           description: >-
-            This field is related to the radioTechnology field and provides the
-            air
+            This field is related to the radioTechnology field and provides the air
 
             interface specification that the CBSD is compliant with at the time of
 
@@ -1143,9 +1023,11 @@ components:
           type: string
       type: object
     SasPortalDeviceGrant:
-      description: |-
+      description: >-
         Device grant. It is an authorization provided by the Spectrum
+
         Access System to a device to transmit using specified operating
+
         parameters after a successful heartbeat by the device.
       properties:
         channelType:
@@ -1163,10 +1045,13 @@ components:
           $ref: "#/components/schemas/SasPortalFrequencyRange"
           description: The transmission frequency range.
         maxEirp:
-          description: |-
+          description: >-
             Maximum Equivalent Isotropically Radiated Power (EIRP) permitted
+
             by the grant. The maximum EIRP is in units of dBm/MHz. The
+
             value of maxEirp represents the average (RMS) EIRP that would be
+
             measured by the procedure defined in FCC part 96.41(e)(3).
           format: double
           type: number
@@ -1252,8 +1137,9 @@ components:
           type: number
       type: object
     SasPortalGenerateSecretRequest:
-      description: |-
+      description: >-
         Request for GenerateSecret method]
+
         [spectrum.sas.portal.v1alpha1.DeviceManager.GenerateSecret].
       properties: {}
       type: object
@@ -1261,8 +1147,9 @@ components:
       description: Response for GenerateSecret method.
       properties:
         secret:
-          description: |-
+          description: >-
             The secret generated by the string and used by
+
             [ValidateInstaller] method.
           type: string
       type: object
@@ -1277,60 +1164,79 @@ components:
       description: Information about the device installation parameters.
       properties:
         antennaAzimuth:
-          description: |-
+          description: >-
             Boresight direction of the horizontal plane of the antenna in
+
             degrees with respect to true north. The value of this parameter
+
             is an integer with a value between 0 and 359 inclusive. A value
+
             of 0 degrees means true north; a value of 90 degrees means
+
             east. This parameter is optional for Category A devices and
+
             conditional for Category B devices.
           format: int32
           type: integer
         antennaBeamwidth:
-          description: |-
+          description: >-
             3-dB antenna beamwidth of the antenna in the horizontal-plane in
+
             degrees.  This parameter is an unsigned integer having a value
+
             between 0 and 360 (degrees) inclusive; it is optional for
+
             Category A devices and conditional for Category B devices.
           format: int32
           type: integer
         antennaDowntilt:
-          description: |-
+          description: >-
             Antenna downtilt in degrees and is an integer with a value
+
             between -90 and +90 inclusive; a negative value means the antenna
+
             is tilted up (above horizontal). This parameter is optional for
+
             Category A devices and conditional for Category B devices.
           format: int32
           type: integer
         antennaGain:
-          description: |-
+          description: >-
             Peak antenna gain in dBi. This parameter is an integer with a
+
             value between -127 and +128 (dBi) inclusive.
           format: int32
           type: integer
         antennaModel:
-          description: |-
+          description: >-
             If an external antenna is used, the antenna model is optionally
+
             provided in this field. The string has a maximum length of 128
+
             octets.
           type: string
         cpeCbsdIndication:
-          description: If present, this parameter specifies whether the CBSD is a CPE-CBSD
-            or not.
+          description: If present, this parameter specifies whether the CBSD is a CPE-CBSD or not.
           type: boolean
         eirpCapability:
-          description: |-
+          description: >-
             This parameter is the maximum device EIRP in units of dBm/10MHz
+
             and is an integer with a value between -127 and +47 (dBm/10 MHz)
+
             inclusive. If not included, SAS interprets it as maximum
+
             allowable EIRP in units of dBm/10MHz for device category.
           format: int32
           type: integer
         height:
-          description: |-
+          description: >-
             Device antenna height in meters. When the heightType parameter
+
             value is "AGL", the antenna height should be given relative to
+
             ground level. When the heightType parameter value is "AMSL", it
+
             is given with respect to WGS84 datum.
           format: double
           type: number
@@ -1342,40 +1248,54 @@ components:
             - HEIGHT_TYPE_AMSL
           type: string
         horizontalAccuracy:
-          description: |-
+          description: >-
             A positive number in meters to indicate accuracy of the device
+
             antenna horizontal location. This optional parameter should only
+
             be present if its value is less than the FCC requirement of 50
+
             meters.
           format: double
           type: number
         indoorDeployment:
-          description: |-
+          description: >-
             Whether the device antenna is indoor or not. True: indoor. False:
+
             outdoor.
           type: boolean
         latitude:
-          description: |-
+          description: >-
             Latitude of the device antenna location in degrees relative to
+
             the WGS 84 datum. The allowed range is from -90.000000 to
+
             +90.000000. Positive values represent latitudes north of the
+
             equator; negative values south of the equator.
           format: double
           type: number
         longitude:
-          description: |-
+          description: >-
             Longitude of the device antenna location. in degrees relative to
+
             the WGS 84 datum. The allowed range is from -180.000000 to
+
             +180.000000. Positive values represent longitudes east of the
+
             prime meridian; negative values west of the prime
+
             meridian.
           format: double
           type: number
         verticalAccuracy:
-          description: |-
+          description: >-
             A positive number in meters to indicate accuracy of the device
+
             antenna vertical location. This optional parameter should only be
+
             present if its value is less than the FCC requirement of 3
+
             meters.
           format: double
           type: number
@@ -1384,41 +1304,20 @@ components:
       description: Response for `ListCustomers`.
       properties:
         customers:
-          description: |-
+          description: >-
             The list of customers that
+
             match the request.
           items:
             $ref: "#/components/schemas/SasPortalCustomer"
           type: array
         nextPageToken:
           description: >-
-            A pagination token returned from a previous call to ListCustomers
-            method that indicates from
+            A pagination token returned from a previous call to ListCustomers method that indicates from
 
             where listing should continue. If the field is missing or empty, it means
 
             there are no more customers.
-          type: string
-      type: object
-    SasPortalListDeploymentsResponse:
-      description: Response for ListDeployments method.
-      properties:
-        deployments:
-          description: |-
-            The deployments that match the
-            request.
-          items:
-            $ref: "#/components/schemas/SasPortalDeployment"
-          type: array
-        nextPageToken:
-          description: >-
-            A pagination token returned from a previous call to
-
-            ListDeployments method that indicates
-
-            from where listing should continue. If the field is missing or empty, it
-
-            means there is no more deployments.
           type: string
       type: object
     SasPortalListDevicesResponse:
@@ -1431,8 +1330,7 @@ components:
           type: array
         nextPageToken:
           description: >-
-            A pagination token returned from a previous call to ListDevices
-            method
+            A pagination token returned from a previous call to ListDevices method
 
             that indicates from where listing should continue. If the field
 
@@ -1462,8 +1360,9 @@ components:
       description: Request for MoveDevice method.
       properties:
         destination:
-          description: |-
+          description: >-
             Required. The name of the new parent resource (Node or Customer) to
+
             reparent the device under.
           type: string
       type: object
@@ -1471,8 +1370,7 @@ components:
       description: Request for MoveNode method.
       properties:
         destination:
-          description: Required. The name of the new parent resource node or Customer) to
-            reparent the node under.
+          description: Required. The name of the new parent resource node or Customer) to reparent the node under.
           type: string
       type: object
     SasPortalNode:
@@ -1492,15 +1390,13 @@ components:
       type: object
     SasPortalOperation:
       description: >-
-        This resource represents a long-running operation that is the result of
-        a
+        This resource represents a long-running operation that is the result of a
 
         network API call.
       properties:
         done:
           description: >-
-            If the value is `false`, it means the operation is still in
-            progress.
+            If the value is `false`, it means the operation is still in progress.
 
             If `true`, the operation is completed, and either `error` or `response` is
 
@@ -1513,8 +1409,7 @@ components:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
           description: >-
-            Service-specific metadata associated with the operation.  It
-            typically
+            Service-specific metadata associated with the operation.  It typically
 
             contains progress information and common metadata such as create time.
 
@@ -1524,8 +1419,7 @@ components:
           type: object
         name:
           description: >-
-            The server-assigned name, which is only unique within the same
-            service that
+            The server-assigned name, which is only unique within the same service that
 
             originally returns it. If you use the default HTTP mapping, the
 
@@ -1535,8 +1429,7 @@ components:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
           description: >-
-            The normal response of the operation in case of success.  If the
-            original
+            The normal response of the operation in case of success.  If the original
 
             method returns no data on success, such as `Delete`, the response is
 
@@ -1561,17 +1454,26 @@ components:
             $ref: "#/components/schemas/SasPortalAssignment"
           type: array
         etag:
-          description: |-
+          description: >-
             The [etag] is used for optimistic concurrency control as a way to
+
             help prevent simultaneous updates of a policy from overwriting
+
             each other.  It is strongly suggested that systems make use of
+
             the [etag] in the read-modify-write cycle to perform policy
+
             updates in order to avoid race conditions: An [etag] is returned
+
             in the response to [GetPolicy], and systems are expected to put
+
             that etag in the request to [SetPolicy] to ensure that their
+
             change will be applied to the same version of the policy.
 
+
             If no [etag] is provided in the call to [SetPolicy], then the
+
             existing policy is overwritten blindly.
           format: byte
           type: string
@@ -1584,8 +1486,7 @@ components:
           description: Required. The policy to be applied to the `resource`.
         resource:
           description: >-
-            Required. The resource for which the policy is being specified. This
-            policy
+            Required. The resource for which the policy is being specified. This policy
 
             replaces any existing policy.
           type: string
@@ -1595,9 +1496,11 @@ components:
       properties:
         device:
           $ref: "#/components/schemas/SasPortalDevice"
-          description: |-
+          description: >-
             Required. The device to sign.
+
             The device fields name, fcc_id and serial_number must be set.
+
             The user_id field must be set.
       type: object
     SasPortalStatus:
@@ -1621,8 +1524,7 @@ components:
           type: integer
         details:
           description: >-
-            A list of messages that carry the error details.  There is a common
-            set of
+            A list of messages that carry the error details.  There is a common set of
 
             message types for APIs to use.
           items:
@@ -1631,9 +1533,11 @@ components:
             type: object
           type: array
         message:
-          description: |-
+          description: >-
             A developer-facing error message, which should be in English. Any
+
             user-facing error message should be localized and sent in the
+
             google.rpc.Status.details field, or localized by the client.
           type: string
       type: object
@@ -1662,16 +1566,17 @@ components:
       description: Request for UpdateSignedDevice method.
       properties:
         encodedDevice:
-          description: |-
+          description: >-
             Required. The JSON Web Token signed using a CPI private key. Payload
+
             must be the JSON encoding
+
             of the device. The user_id field must be set.
           format: byte
           type: string
         installerId:
           description: >-
-            Required. Unique installer ID (CPI ID) from the Certified
-            Professional
+            Required. Unique installer ID (CPI ID) from the Certified Professional
 
             Installers database.
           type: string
@@ -1680,13 +1585,15 @@ components:
       description: Request for ValidateInstaller method.
       properties:
         encodedSecret:
-          description: |-
+          description: >-
             Required. JSON Web Token signed using a CPI private key. Payload
+
             must include a "secret" claim whose value is the secret.
           type: string
         installerId:
-          description: |-
+          description: >-
             Required. Unique installer id (cpiId) from the Certified
+
             Professional Installers database.
           type: string
         secret:
@@ -1694,8 +1601,9 @@ components:
           type: string
       type: object
     SasPortalValidateInstallerResponse:
-      description: |-
+      description: >-
         Response for ValidateInstaller method]
+
         [spectrum.sas.portal.v1alpha1.DeviceManager.ValidateInstaller].
       properties: {}
       type: object

@@ -33,22 +33,22 @@ info:
 externalDocs:
   url: https://developers.google.com/android/work/play/emm-api
 tags:
-  - name: permissions
-  - name: managedconfigurationsfordevice
-  - name: entitlements
-  - name: managedconfigurationssettings
-  - name: users
-  - name: managedconfigurationsforuser
-  - name: devices
   - name: grouplicenses
-  - name: enterprises
+  - name: managedconfigurationsforuser
   - name: webapps
+  - name: installs
+  - name: storelayoutpages
+  - name: managedconfigurationsfordevice
+  - name: permissions
+  - name: managedconfigurationssettings
   - name: storelayoutclusters
+  - name: enterprises
+  - name: grouplicenseusers
   - name: products
   - name: serviceaccountkeys
-  - name: grouplicenseusers
-  - name: storelayoutpages
-  - name: installs
+  - name: users
+  - name: devices
+  - name: entitlements
 paths:
   /androidenterprise/v1/enterprises:
     get:
@@ -85,29 +85,29 @@ paths:
       tags:
         - enterprises
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
   /androidenterprise/v1/enterprises/acknowledgeNotificationSet:
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
     post:
       description: >-
@@ -138,16 +138,16 @@ paths:
         - enterprises
   /androidenterprise/v1/enterprises/completeSignup:
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
     post:
       description: >-
@@ -186,16 +186,16 @@ paths:
         - enterprises
   /androidenterprise/v1/enterprises/enroll:
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
     post:
       description: Enrolls an enterprise with the calling EMM.
@@ -228,16 +228,16 @@ paths:
         - enterprises
   /androidenterprise/v1/enterprises/pullNotificationSet:
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
     post:
       description: >-
@@ -327,16 +327,16 @@ paths:
         - enterprises
   /androidenterprise/v1/enterprises/signupUrl:
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
     post:
       description: Generates a sign-up URL.
@@ -402,29 +402,29 @@ paths:
       tags:
         - enterprises
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
   "/androidenterprise/v1/enterprises/{enterpriseId}/account":
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
     put:
       description: >-
@@ -460,16 +460,16 @@ paths:
         - enterprises
   "/androidenterprise/v1/enterprises/{enterpriseId}/createWebToken":
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
     post:
       description: >-
@@ -533,16 +533,16 @@ paths:
       tags:
         - grouplicenses
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
   "/androidenterprise/v1/enterprises/{enterpriseId}/groupLicenses/{groupLicenseId}":
     get:
@@ -579,16 +579,16 @@ paths:
       tags:
         - grouplicenses
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
   "/androidenterprise/v1/enterprises/{enterpriseId}/groupLicenses/{groupLicenseId}/users":
     get:
@@ -628,16 +628,16 @@ paths:
       tags:
         - grouplicenseusers
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
   "/androidenterprise/v1/enterprises/{enterpriseId}/products":
     get:
@@ -718,16 +718,16 @@ paths:
       tags:
         - products
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
   "/androidenterprise/v1/enterprises/{enterpriseId}/products/{productId}":
     get:
@@ -766,16 +766,16 @@ paths:
       tags:
         - products
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
   "/androidenterprise/v1/enterprises/{enterpriseId}/products/{productId}/appRestrictionsSchema":
     get:
@@ -829,29 +829,29 @@ paths:
       tags:
         - products
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
   "/androidenterprise/v1/enterprises/{enterpriseId}/products/{productId}/approve":
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
     post:
       description: >-
@@ -899,16 +899,16 @@ paths:
         - products
   "/androidenterprise/v1/enterprises/{enterpriseId}/products/{productId}/generateApprovalUrl":
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
     post:
       description: >-
@@ -1002,16 +1002,16 @@ paths:
       tags:
         - managedconfigurationssettings
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
   "/androidenterprise/v1/enterprises/{enterpriseId}/products/{productId}/permissions":
     get:
@@ -1045,29 +1045,29 @@ paths:
       tags:
         - products
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
   "/androidenterprise/v1/enterprises/{enterpriseId}/products/{productId}/unapprove":
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
     post:
       description: Unapproves the specified product (and the relevant app permissions, if any)
@@ -1097,16 +1097,16 @@ paths:
         - products
   "/androidenterprise/v1/enterprises/{enterpriseId}/sendTestPushNotification":
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
     post:
       description: >-
@@ -1198,16 +1198,16 @@ paths:
       tags:
         - enterprises
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
   "/androidenterprise/v1/enterprises/{enterpriseId}/serviceAccountKeys":
     get:
@@ -1244,16 +1244,16 @@ paths:
       tags:
         - serviceaccountkeys
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
     post:
       description: >-
@@ -1330,16 +1330,16 @@ paths:
       tags:
         - serviceaccountkeys
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
   "/androidenterprise/v1/enterprises/{enterpriseId}/storeLayout":
     get:
@@ -1372,16 +1372,16 @@ paths:
       tags:
         - enterprises
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
     put:
       description: >-
@@ -1455,16 +1455,16 @@ paths:
       tags:
         - storelayoutpages
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
     post:
       description: Inserts a new store page.
@@ -1553,16 +1553,16 @@ paths:
       tags:
         - storelayoutpages
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
     put:
       description: Updates the content of a store page.
@@ -1631,16 +1631,16 @@ paths:
       tags:
         - storelayoutclusters
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
     post:
       description: Inserts a new cluster in a page.
@@ -1747,16 +1747,16 @@ paths:
       tags:
         - storelayoutclusters
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
     put:
       description: Updates a cluster.
@@ -1801,16 +1801,16 @@ paths:
         - storelayoutclusters
   "/androidenterprise/v1/enterprises/{enterpriseId}/unenroll":
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
     post:
       description: Unenrolls an enterprise from the calling EMM.
@@ -1871,16 +1871,16 @@ paths:
       tags:
         - users
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
     post:
       description: >-
@@ -1983,16 +1983,16 @@ paths:
       tags:
         - users
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
     put:
       description: >-
@@ -2045,16 +2045,16 @@ paths:
         - users
   "/androidenterprise/v1/enterprises/{enterpriseId}/users/{userId}/authenticationToken":
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
     post:
       description: >-
@@ -2129,16 +2129,16 @@ paths:
       tags:
         - users
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
     put:
       description: >-
@@ -2220,16 +2220,16 @@ paths:
       tags:
         - users
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
   "/androidenterprise/v1/enterprises/{enterpriseId}/users/{userId}/devices":
     get:
@@ -2263,16 +2263,16 @@ paths:
       tags:
         - devices
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
   "/androidenterprise/v1/enterprises/{enterpriseId}/users/{userId}/devices/{deviceId}":
     get:
@@ -2312,16 +2312,16 @@ paths:
       tags:
         - devices
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
     put:
       description: Updates the device policy
@@ -2379,16 +2379,16 @@ paths:
         - devices
   "/androidenterprise/v1/enterprises/{enterpriseId}/users/{userId}/devices/{deviceId}/forceReportUpload":
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
     post:
       description: >-
@@ -2469,16 +2469,16 @@ paths:
       tags:
         - installs
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
   "/androidenterprise/v1/enterprises/{enterpriseId}/users/{userId}/devices/{deviceId}/installs/{installId}":
     delete:
@@ -2573,16 +2573,16 @@ paths:
       tags:
         - installs
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
     put:
       description: >-
@@ -2680,16 +2680,16 @@ paths:
       tags:
         - managedconfigurationsfordevice
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
   "/androidenterprise/v1/enterprises/{enterpriseId}/users/{userId}/devices/{deviceId}/managedConfigurationsForDevice/{managedConfigurationForDeviceId}":
     delete:
@@ -2782,16 +2782,16 @@ paths:
       tags:
         - managedconfigurationsfordevice
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
     put:
       description: >-
@@ -2897,16 +2897,16 @@ paths:
       tags:
         - devices
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
     put:
       description: >-
@@ -2992,16 +2992,16 @@ paths:
       tags:
         - entitlements
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
   "/androidenterprise/v1/enterprises/{enterpriseId}/users/{userId}/entitlements/{entitlementId}":
     delete:
@@ -3073,16 +3073,16 @@ paths:
       tags:
         - entitlements
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
     put:
       description: Adds or updates an entitlement to an app for a user.
@@ -3172,16 +3172,16 @@ paths:
       tags:
         - managedconfigurationsforuser
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
   "/androidenterprise/v1/enterprises/{enterpriseId}/users/{userId}/managedConfigurationsForUser/{managedConfigurationForUserId}":
     delete:
@@ -3262,16 +3262,16 @@ paths:
       tags:
         - managedconfigurationsforuser
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
     put:
       description: >-
@@ -3364,16 +3364,16 @@ paths:
       tags:
         - webapps
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
     post:
       description: Creates a new web app for the enterprise.
@@ -3462,16 +3462,16 @@ paths:
       tags:
         - webapps
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
     put:
       description: Updates an existing web app.
@@ -3542,16 +3542,16 @@ paths:
       tags:
         - permissions
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
 components:
   parameters:

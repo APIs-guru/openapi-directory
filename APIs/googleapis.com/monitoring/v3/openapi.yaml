@@ -75,26 +75,26 @@ paths:
       tags:
         - uptimeCheckIps
     parameters:
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
   "/v3/{name}":
     delete:
-      description: Deletes an existing group.
-      operationId: monitoring.projects.groups.delete
+      description: Deletes an Uptime check configuration. Note that this method will fail if the Uptime check configuration is referenced by an alert policy or other dependent configs that would be rendered invalid by the deletion.
+      operationId: monitoring.projects.uptimeCheckConfigs.delete
       parameters:
         - description: >
-            Required. The group to delete. The format is:
+            Required. The Uptime check configuration to delete. The format is:
 
-            projects/[PROJECT_ID_OR_NUMBER]/groups/[GROUP_ID]
+            projects/[PROJECT_ID_OR_NUMBER]/uptimeCheckConfigs/[UPTIME_CHECK_ID]
           in: path
           name: name
           required: true
@@ -124,13 +124,13 @@ paths:
       tags:
         - projects
     get:
-      description: Gets a single group.
-      operationId: monitoring.projects.groups.get
+      description: Gets a single Uptime check configuration.
+      operationId: monitoring.projects.uptimeCheckConfigs.get
       parameters:
         - description: >
-            Required. The group to retrieve. The format is:
+            Required. The Uptime check configuration to retrieve. The format is:
 
-            projects/[PROJECT_ID_OR_NUMBER]/groups/[GROUP_ID]
+            projects/[PROJECT_ID_OR_NUMBER]/uptimeCheckConfigs/[UPTIME_CHECK_ID]
           in: path
           name: name
           required: true
@@ -150,7 +150,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Group"
+                $ref: "#/components/schemas/UptimeCheckConfig"
           description: Successful response
       security:
         - Oauth2:
@@ -172,33 +172,31 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
     patch:
-      description: Updates a notification channel. Fields not specified in the field mask remain unchanged.
-      operationId: monitoring.projects.notificationChannels.patch
+      description: Updates an Uptime check configuration. You can either replace the entire configuration with a new one or replace only certain fields in the current configuration by specifying the fields to be updated via updateMask. Returns the updated configuration.
+      operationId: monitoring.projects.uptimeCheckConfigs.patch
       parameters:
         - description: >-
-            The full REST resource name for this channel. The format is:
-
-            projects/[PROJECT_ID_OR_NUMBER]/notificationChannels/[CHANNEL_ID]
-
-            The [CHANNEL_ID] is automatically assigned by the server on creation.
+            A unique resource name for this Uptime check configuration. The format is:
+             projects/[PROJECT_ID_OR_NUMBER]/uptimeCheckConfigs/[UPTIME_CHECK_ID]
+            This field should be omitted when creating the Uptime check configuration; on create, the resource name is assigned by the server and included in the response.
           in: path
           name: name
           required: true
           schema:
             type: string
-        - description: The fields to update.
+        - description: Optional. If present, only the listed fields in the current Uptime check configuration are updated with values from the new configuration. If this field is empty, then the current configuration is completely replaced with the new configuration.
           in: query
           name: updateMask
           schema:
@@ -207,13 +205,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/NotificationChannel"
+              $ref: "#/components/schemas/UptimeCheckConfig"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/NotificationChannel"
+                $ref: "#/components/schemas/UptimeCheckConfig"
           description: Successful response
       security:
         - Oauth2:
@@ -328,17 +326,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
     post:
       description: Creates a new alerting policy.
       operationId: monitoring.projects.alertPolicies.create
@@ -379,17 +377,17 @@ paths:
         - projects
   "/v3/{name}/collectdTimeSeries":
     parameters:
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
     post:
       description: 'Stackdriver Monitoring Agent only: Creates a new time series.<aside class="caution">This method is only for use by the Stackdriver Monitoring Agent. Use projects.timeSeries.create instead.</aside>'
       operationId: monitoring.projects.collectdTimeSeries.create
@@ -507,17 +505,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
     post:
       description: Creates a new group.
       operationId: monitoring.projects.groups.create
@@ -624,17 +622,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
   "/v3/{name}/metricDescriptors":
     get:
       description: Lists metric descriptors that match a filter. This method does not require a Workspace.
@@ -694,17 +692,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
     post:
       description: Creates a new metric descriptor. User-created metric descriptors define custom metrics (https://cloud.google.com/monitoring/custom-metrics).
       operationId: monitoring.projects.metricDescriptors.create
@@ -804,17 +802,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
   "/v3/{name}/notificationChannelDescriptors":
     get:
       description: Lists the descriptors for supported channel types. The use of descriptors makes it possible for new channel types to be dynamically added.
@@ -864,17 +862,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
   "/v3/{name}/notificationChannels":
     get:
       description: Lists the notification channels that have been created for the project.
@@ -934,17 +932,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
     post:
       description: Creates a new notification channel, representing a single notification endpoint such as an email address, SMS number, or PagerDuty service.
       operationId: monitoring.projects.notificationChannels.create
@@ -997,7 +995,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: The alignment_period specifies a time interval, in seconds, that is used to divide the data in all the time series into consistent blocks of time. This will be done before the per-series aligner can be applied to the data.The value must be at least 60 seconds. If a per-series aligner other than ALIGN_NONE is specified, this field is required or an error is returned. If no per-series aligner is specified, or the aligner ALIGN_NONE is specified, then this field is ignored.
+        - description: The alignment_period specifies a time interval, in seconds, that is used to divide the data in all the time series into consistent blocks of time. This will be done before the per-series aligner can be applied to the data.The value must be at least 60 seconds, at most 104 weeks. If a per-series aligner other than ALIGN_NONE is specified, this field is required or an error is returned. If no per-series aligner is specified, or the aligner ALIGN_NONE is specified, then this field is ignored.The maximum value of the alignment_period is 2 years, or 104 weeks.
           in: query
           name: aggregation.alignmentPeriod
           schema:
@@ -1121,17 +1119,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
     post:
       description: Creates or adds data to one or more time series. The response is empty if all time series in the request were written. If any time series could not be written, a corresponding failure message is included in the error response.
       operationId: monitoring.projects.timeSeries.create
@@ -1174,17 +1172,17 @@ paths:
         - projects
   "/v3/{name}/timeSeries:query":
     parameters:
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
     post:
       description: Queries time series using Monitoring Query Language. This method does not require a Workspace.
       operationId: monitoring.projects.timeSeries.query
@@ -1227,17 +1225,17 @@ paths:
         - projects
   "/v3/{name}:getVerificationCode":
     parameters:
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
     post:
       description: Requests a verification code for an already verified channel that can then be used in a call to VerifyNotificationChannel() on a different channel with an equivalent identity in the same or in a different project. This makes it possible to copy a channel between projects without requiring manual reverification of the channel. If the channel is not in the verified state, this method will fail (in other words, this may only be used if the SendNotificationChannelVerificationCode and VerifyNotificationChannel paths have already been used to put the given channel into the verified state).There is no guarantee that the verification codes returned by this method will be of a similar structure or form as the ones that are delivered to the channel via SendNotificationChannelVerificationCode; while VerifyNotificationChannel() will recognize both the codes delivered via SendNotificationChannelVerificationCode() and returned from GetNotificationChannelVerificationCode(), it is typically the case that the verification codes delivered via SendNotificationChannelVerificationCode() will be shorter and also have a shorter expiration (e.g. codes such as "G-123456") whereas GetVerificationCode() will typically return a much longer, websafe base 64 encoded string that has a longer expiration time.
       operationId: monitoring.projects.notificationChannels.getVerificationCode
@@ -1273,17 +1271,17 @@ paths:
         - projects
   "/v3/{name}:sendVerificationCode":
     parameters:
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
     post:
       description: Causes a verification code to be delivered to the channel. The code can then be supplied in VerifyNotificationChannel to verify the channel.
       operationId: monitoring.projects.notificationChannels.sendVerificationCode
@@ -1319,17 +1317,17 @@ paths:
         - projects
   "/v3/{name}:verify":
     parameters:
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
     post:
       description: Verifies a NotificationChannel by proving receipt of the code delivered to the channel as a result of calling SendNotificationChannelVerificationCode.
       operationId: monitoring.projects.notificationChannels.verify
@@ -1426,17 +1424,17 @@ paths:
       tags:
         - services
     parameters:
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
     post:
       description: Create a ServiceLevelObjective for the given Service.
       operationId: monitoring.services.serviceLevelObjectives.create
@@ -1555,17 +1553,17 @@ paths:
       tags:
         - services
     parameters:
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
     post:
       description: Create a Service.
       operationId: monitoring.services.create
@@ -1654,17 +1652,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
     post:
       description: Creates a new Uptime check configuration.
       operationId: monitoring.projects.uptimeCheckConfigs.create
@@ -1781,7 +1779,7 @@ components:
       description: Describes how to combine multiple time series to provide a different view of the data. Aggregation of time series is done in two steps. First, each time series in the set is aligned to the same time interval boundaries, then the set of time series is optionally reduced in number.Alignment consists of applying the per_series_aligner operation to each time series after its data has been divided into regular alignment_period time intervals. This process takes all of the data points in an alignment period, applies a mathematical transformation such as averaging, minimum, maximum, delta, etc., and converts them into a single data point per period.Reduction is when the aligned and transformed time series can optionally be combined, reducing the number of time series through similar mathematical transformations. Reduction involves applying a cross_series_reducer to all the time series, optionally sorting the time series into subsets with group_by_fields, and applying the reducer to each subset.The raw time series data can contain a huge amount of information from multiple sources. Alignment and reduction transforms this mass of data into a more manageable and representative collection of data, for example "the 95% latency across the average of all tasks in a cluster". This representative data can be more easily graphed and comprehended, and the individual time series data is still available for later drilldown. For more details, see Filtering and aggregation (https://cloud.google.com/monitoring/api/v3/aggregation).
       properties:
         alignmentPeriod:
-          description: The alignment_period specifies a time interval, in seconds, that is used to divide the data in all the time series into consistent blocks of time. This will be done before the per-series aligner can be applied to the data.The value must be at least 60 seconds. If a per-series aligner other than ALIGN_NONE is specified, this field is required or an error is returned. If no per-series aligner is specified, or the aligner ALIGN_NONE is specified, then this field is ignored.
+          description: The alignment_period specifies a time interval, in seconds, that is used to divide the data in all the time series into consistent blocks of time. This will be done before the per-series aligner can be applied to the data.The value must be at least 60 seconds, at most 104 weeks. If a per-series aligner other than ALIGN_NONE is specified, this field is required or an error is returned. If no per-series aligner is specified, or the aligner ALIGN_NONE is specified, then this field is ignored.The maximum value of the alignment_period is 2 years, or 104 weeks.
           format: google-duration
           type: string
         crossSeriesReducer:
@@ -2208,7 +2206,7 @@ components:
           type: string
       type: object
     DroppedLabels:
-      description: A set of (label, value) pairs which were dropped during aggregation, attached to google.api.Distribution.Exemplars in google.api.Distribution values during aggregation.These values are used in combination with the label values that remain on the aggregated Distribution timeseries to construct the full label set for the exemplar values. The resulting full label set may be used to identify the specific task/job/instance (for example) which may be contributing to a long-tail, while allowing the storage savings of only storing aggregated distribution values for a large group.Note that there are no guarantees on ordering of the labels from exemplar-to-exemplar and from distribution-to-distribution in the same stream, and there may be duplicates. It is up to clients to resolve any ambiguities.
+      description: A set of (label, value) pairs that were removed from a Distribution time series during aggregation and then added as an attachment to a Distribution.Exemplar.The full label set for the exemplars is constructed by using the dropped pairs in combination with the label values that remain on the aggregated Distribution time series. The constructed full label set can be used to identify the specific entity, such as the instance or job, which might be contributing to a long-tail. However, with dropped labels, the storage requirements are reduced because only the aggregated distribution values for a large group of time series are stored.Note that there are no guarantees on ordering of the labels from exemplar-to-exemplar and from distribution-to-distribution in the same stream, and there may be duplicates. It is up to clients to resolve any ambiguities.
       properties:
         label:
           additionalProperties:
@@ -2762,7 +2760,7 @@ components:
       description: >-
         Defines a metric type and its schema. Once a metric descriptor is created, deleting or altering it stops data collection and makes the metric type's existing data unusable.The following are specific rules for service defined Monitoring metric descriptors:
 
-        type, metric_kind, value_type, description, and display_name  fields are all required. The unit field must be specified  if the value_type is any of DOUBLE, INT64, DISTRIBUTION.
+        type, metric_kind, value_type and description  fields are all required. The unit field must be specified  if the value_type is any of DOUBLE, INT64, DISTRIBUTION.
 
         Maximum of default 500 metric descriptors per service is allowed.
 
@@ -3495,6 +3493,9 @@ components:
         resource:
           $ref: "#/components/schemas/MonitoredResource"
           description: The associated monitored resource. Custom metrics can use only certain monitored resource types in their time series data.
+        unit:
+          description: The units in which the metric value is reported. It is only applicable if the value_type is INT64, DOUBLE, or DISTRIBUTION. The unit defines the representation of the stored metric values.
+          type: string
         valueType:
           description: The value type of the time series. When listing time series, this value type might be different from the value type of the associated metric if this time series is an alignment or reduction of other time series.When creating a time series, this field is optional. If present, it must be the same as the type of the data in the points field.
           enum:
@@ -3712,6 +3713,9 @@ components:
             - GAUGE
             - DELTA
             - CUMULATIVE
+          type: string
+        unit:
+          description: The unit in which time_series point values are reported. unit follows the UCUM format for units as seen in https://unitsofmeasure.org/ucum.html. unit is only valid if value_type is INTEGER, DOUBLE, DISTRIBUTION.
           type: string
         valueType:
           description: The value type.

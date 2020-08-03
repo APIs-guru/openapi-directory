@@ -38,16 +38,16 @@ tags:
 paths:
   "/v1beta1/projects/{projectId}:export":
     parameters:
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
     post:
       description: >-
@@ -99,16 +99,16 @@ paths:
         - projects
   "/v1beta1/projects/{projectId}:import":
     parameters:
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
     post:
       description: >-

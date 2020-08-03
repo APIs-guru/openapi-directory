@@ -7,8 +7,7 @@ info:
     url: https://google.com
     x-twitter: youtube
   description: >
-    Service Directory is a platform for discovering, publishing, and connecting
-    services.
+    Service Directory is a platform for discovering, publishing, and connecting services.
   license:
     name: Creative Commons Attribution 3.0
     url: http://creativecommons.org/licenses/by/3.0/
@@ -87,23 +86,24 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
     patch:
       description: Updates a endpoint.
       operationId: servicedirectory.projects.locations.namespaces.services.endpoints.patch
       parameters:
-        - description: |-
+        - description: >-
             Immutable. The resource name for the endpoint in the format
+
             'projects/*/locations/*/namespaces/*/services/*/endpoints/*'.
           in: path
           name: name
@@ -175,34 +175,36 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
   "/v1beta1/{name}:resolve":
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
     post:
-      description: |-
+      description: >-
         Returns a service and its
+
         associated endpoints.
+
         Resolving a service is not considered an active developer method.
       operationId: servicedirectory.projects.locations.namespaces.services.resolve
       parameters:
@@ -237,8 +239,7 @@ paths:
       operationId: servicedirectory.projects.locations.namespaces.services.endpoints.list
       parameters:
         - description: >-
-            Required. The resource name of the service whose endpoints we'd like
-            to
+            Required. The resource name of the service whose endpoints we'd like to
 
             list.
           in: path
@@ -298,8 +299,7 @@ paths:
           schema:
             type: integer
         - description: >-
-            Optional. The next_page_token value returned from a previous List
-            request,
+            Optional. The next_page_token value returned from a previous List request,
 
             if any.
           in: query
@@ -321,31 +321,29 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: Creates a endpoint, and returns the new Endpoint.
       operationId: servicedirectory.projects.locations.namespaces.services.endpoints.create
       parameters:
-        - description: Required. The resource name of the service that this endpoint
-            provides.
+        - description: Required. The resource name of the service that this endpoint provides.
           in: path
           name: parent
           required: true
           schema:
             type: string
         - description: >-
-            Required. The Resource ID must be 1-63 characters long, and comply
-            with
+            Required. The Resource ID must be 1-63 characters long, and comply with
 
             <a href="https://www.ietf.org/rfc/rfc1035.txt" target="_blank">RFC1035</a>.
 
@@ -387,8 +385,7 @@ paths:
       operationId: servicedirectory.projects.locations.namespaces.list
       parameters:
         - description: >-
-            Required. The resource name of the project and location whose
-            namespaces we'd like to
+            Required. The resource name of the project and location whose namespaces we'd like to
 
             list.
           in: path
@@ -459,8 +456,7 @@ paths:
           name: pageSize
           schema:
             type: integer
-        - description: Optional. The next_page_token value returned from a previous List
-            request, if any.
+        - description: Optional. The next_page_token value returned from a previous List request, if any.
           in: query
           name: pageToken
           schema:
@@ -480,24 +476,23 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: Creates a namespace, and returns the new Namespace.
       operationId: servicedirectory.projects.locations.namespaces.create
       parameters:
         - description: >-
-            Required. The resource name of the project and location the
-            namespace
+            Required. The resource name of the project and location the namespace
 
             will be created in.
           in: path
@@ -506,8 +501,7 @@ paths:
           schema:
             type: string
         - description: >-
-            Required. The Resource ID must be 1-63 characters long, and comply
-            with
+            Required. The Resource ID must be 1-63 characters long, and comply with
 
             <a href="https://www.ietf.org/rfc/rfc1035.txt" target="_blank">RFC1035</a>.
 
@@ -548,8 +542,9 @@ paths:
       description: Lists all services belonging to a namespace.
       operationId: servicedirectory.projects.locations.namespaces.services.list
       parameters:
-        - description: |-
+        - description: >-
             Required. The resource name of the namespace whose services we'd
+
             like to list.
           in: path
           name: parent
@@ -604,8 +599,7 @@ paths:
           schema:
             type: integer
         - description: >-
-            Optional. The next_page_token value returned from a previous List
-            request,
+            Optional. The next_page_token value returned from a previous List request,
 
             if any.
           in: query
@@ -627,31 +621,29 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: Creates a service, and returns the new Service.
       operationId: servicedirectory.projects.locations.namespaces.services.create
       parameters:
-        - description: Required. The resource name of the namespace this service will
-            belong to.
+        - description: Required. The resource name of the namespace this service will belong to.
           in: path
           name: parent
           required: true
           schema:
             type: string
         - description: >-
-            Required. The Resource ID must be 1-63 characters long, and comply
-            with
+            Required. The Resource ID must be 1-63 characters long, and comply with
 
             <a href="https://www.ietf.org/rfc/rfc1035.txt" target="_blank">RFC1035</a>.
 
@@ -689,17 +681,17 @@ paths:
         - projects
   "/v1beta1/{resource}:getIamPolicy":
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: Gets the IAM Policy for a resource (namespace or service only).
       operationId: servicedirectory.projects.locations.namespaces.services.getIamPolicy
@@ -734,17 +726,17 @@ paths:
         - projects
   "/v1beta1/{resource}:setIamPolicy":
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: Sets the IAM Policy for a resource (namespace or service only).
       operationId: servicedirectory.projects.locations.namespaces.services.setIamPolicy
@@ -779,24 +771,23 @@ paths:
         - projects
   "/v1beta1/{resource}:testIamPermissions":
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: Tests IAM permissions for a resource (namespace or service only).
       operationId: servicedirectory.projects.locations.namespaces.services.testIamPermissions
       parameters:
         - description: >-
-            REQUIRED: The resource for which the policy detail is being
-            requested.
+            REQUIRED: The resource for which the policy detail is being requested.
 
             See the operation documentation for the appropriate value for this field.
           in: path
@@ -863,9 +854,7 @@ components:
       schema:
         type: string
     key:
-      description: API key. Your API key identifies your project and provides you with
-        API access, quota, and reports. Required unless you provide an OAuth 2.0
-        token.
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -883,9 +872,7 @@ components:
       schema:
         type: boolean
     quotaUser:
-      description: Available to use for quota purposes for server-side applications.
-        Can be any arbitrary string assigned to a user, but should not exceed 40
-        characters.
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
       in: query
       name: quotaUser
       schema:
@@ -931,8 +918,7 @@ components:
             documentation](https://cloud.google.com/iam/help/conditions/resource-policies).
         members:
           description: >+
-            Specifies the identities requesting access for a Cloud Platform
-            resource.
+            Specifies the identities requesting access for a Cloud Platform resource.
 
             `members` can have the following values:
 
@@ -981,8 +967,9 @@ components:
             type: string
           type: array
         role:
-          description: |-
+          description: >-
             Role that is assigned to `members`.
+
             For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
           type: string
       type: object
@@ -1002,14 +989,17 @@ components:
       properties: {}
       type: object
     Endpoint:
-      description: |-
+      description: >-
         An individual endpoint that provides a
+
         service. The service must
+
         already exist to create an endpoint.
       properties:
         address:
-          description: |-
+          description: >-
             Optional. An IPv4 or IPv6 address. Service Directory will reject bad
+
             addresses like:
               "8.8.8"
               "8.8.8.8:53"
@@ -1022,8 +1012,7 @@ components:
           additionalProperties:
             type: string
           description: >-
-            Optional. Metadata for the endpoint. This data can be consumed by
-            service
+            Optional. Metadata for the endpoint. This data can be consumed by service
 
             clients.  The entire metadata dictionary may contain up to 512 characters,
 
@@ -1032,8 +1021,9 @@ components:
             limits will be rejected.
           type: object
         name:
-          description: |-
+          description: >-
             Immutable. The resource name for the endpoint in the format
+
             'projects/*/locations/*/namespaces/*/services/*/endpoints/*'.
           type: string
         port:
@@ -1081,26 +1071,29 @@ components:
         documentation for additional information.
       properties:
         description:
-          description: |-
+          description: >-
             Optional. Description of the expression. This is a longer text which
+
             describes the expression, e.g. when hovered over it in a UI.
           type: string
         expression:
           description: >-
-            Textual representation of an expression in Common Expression
-            Language
+            Textual representation of an expression in Common Expression Language
 
             syntax.
           type: string
         location:
-          description: |-
+          description: >-
             Optional. String indicating the location of the expression for error
+
             reporting, e.g. a file name and a position in the file.
           type: string
         title:
-          description: |-
+          description: >-
             Optional. Title for the expression, i.e. a short string describing
+
             its purpose. This can be used e.g. in UIs which allow to enter the
+
             expression.
           type: string
       type: object
@@ -1109,8 +1102,9 @@ components:
       properties:
         options:
           $ref: "#/components/schemas/GetPolicyOptions"
-          description: |-
+          description: >-
             OPTIONAL: A `GetPolicyOptions` object for specifying options to
+
             `GetIamPolicy`.
       type: object
     GetPolicyOptions:
@@ -1150,8 +1144,9 @@ components:
             $ref: "#/components/schemas/Endpoint"
           type: array
         nextPageToken:
-          description: |-
+          description: >-
             Token to retrieve the next page of results, or empty if there are no
+
             more results in the list.
           type: string
       type: object
@@ -1176,8 +1171,9 @@ components:
             $ref: "#/components/schemas/Namespace"
           type: array
         nextPageToken:
-          description: |-
+          description: >-
             Token to retrieve the next page of results, or empty if there are no
+
             more results in the list.
           type: string
       type: object
@@ -1185,8 +1181,9 @@ components:
       description: The response message for RegistrationService.ListServices.
       properties:
         nextPageToken:
-          description: |-
+          description: >-
             Token to retrieve the next page of results, or empty if there are no
+
             more results in the list.
           type: string
         services:
@@ -1199,14 +1196,15 @@ components:
       description: A resource that represents Google Cloud Platform location.
       properties:
         displayName:
-          description: |-
+          description: >-
             The friendly name for this location, typically a nearby city name.
+
             For example, "Tokyo".
           type: string
         labels:
           additionalProperties:
             type: string
-          description: |-
+          description: >-
             Cross-service attributes for the location. For example
 
                 {"cloud.googleapis.com/region": "us-east1"}
@@ -1218,23 +1216,23 @@ components:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
           description: >-
-            Service-specific metadata. For example the available capacity at the
-            given
+            Service-specific metadata. For example the available capacity at the given
 
             location.
           type: object
         name:
           description: >-
-            Resource name for the location, which may vary between
-            implementations.
+            Resource name for the location, which may vary between implementations.
 
             For example: `"projects/example-project/locations/us-east1"`
           type: string
       type: object
     Namespace:
-      description: |-
+      description: >-
         A container for services.
+
         Namespaces allow administrators to group services together and define
+
         permissions for a collection of services.
       properties:
         labels:
@@ -1248,8 +1246,9 @@ components:
             keys and values can be no longer than 63 characters.
           type: object
         name:
-          description: |-
+          description: >-
             Immutable. The resource name for the namespace in the format
+
             'projects/*/locations/*/namespaces/*'.
           type: string
       type: object
@@ -1339,8 +1338,7 @@ components:
       properties:
         bindings:
           description: >-
-            Associates a list of `members` to a `role`. Optionally, may specify
-            a
+            Associates a list of `members` to a `role`. Optionally, may specify a
 
             `condition` that determines how and when the `bindings` are applied. Each
 
@@ -1419,14 +1417,14 @@ components:
           type: integer
       type: object
     ResolveServiceRequest:
-      description: |-
+      description: >-
         The request message for LookupService.ResolveService.
+
         Looks up a service by its name, returns the service and its endpoints.
       properties:
         endpointFilter:
           description: >-
-            Optional. The filter applied to the endpoints of the resolved
-            service.
+            Optional. The filter applied to the endpoints of the resolved service.
 
 
             General filter string syntax:
@@ -1456,8 +1454,7 @@ components:
           type: string
         maxEndpoints:
           description: >-
-            Optional. The maximum number of endpoints to return. Defaults to 25.
-            Maximum is 100.
+            Optional. The maximum number of endpoints to return. Defaults to 25. Maximum is 100.
 
             If a value less than one is specified, the Default is used.
 
@@ -1472,16 +1469,18 @@ components:
           $ref: "#/components/schemas/Service"
       type: object
     Service:
-      description: |-
+      description: >-
         An individual service. A service contains a name and optional metadata.
+
         A service must exist before
+
         endpoints can be
+
         added to it.
       properties:
         endpoints:
           description: >-
-            Output only. Endpoints associated with this service. Returned on
-            LookupService.Resolve.
+            Output only. Endpoints associated with this service. Returned on LookupService.Resolve.
 
             Control plane clients should use RegistrationService.ListEndpoints.
           items:
@@ -1491,8 +1490,7 @@ components:
           additionalProperties:
             type: string
           description: >-
-            Optional. Metadata for the service. This data can be consumed by
-            service
+            Optional. Metadata for the service. This data can be consumed by service
 
             clients.  The entire metadata dictionary may contain up to 2000 characters,
 
@@ -1501,8 +1499,9 @@ components:
             limits will be rejected.
           type: object
         name:
-          description: |-
+          description: >-
             Immutable. The resource name for the service in the format
+
             'projects/*/locations/*/namespaces/*/services/*'.
           type: string
       type: object
@@ -1512,8 +1511,7 @@ components:
         policy:
           $ref: "#/components/schemas/Policy"
           description: >-
-            REQUIRED: The complete policy to be applied to the `resource`. The
-            size of
+            REQUIRED: The complete policy to be applied to the `resource`. The size of
 
             the policy is limited to a few 10s of KB. An empty policy is a
 
@@ -1541,8 +1539,9 @@ components:
       description: Response message for `TestIamPermissions` method.
       properties:
         permissions:
-          description: |-
+          description: >-
             A subset of `TestPermissionsRequest.permissions` that the caller is
+
             allowed.
           items:
             type: string

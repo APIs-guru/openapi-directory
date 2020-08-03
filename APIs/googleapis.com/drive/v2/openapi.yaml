@@ -4895,7 +4895,7 @@ components:
       description: A restriction for accessing the content of the file.
       properties:
         readOnly:
-          description: Whether the content of the file is read-only.
+          description: Whether the content of the file is read-only. If a file is read-only, a new revision of the file may not be added, comments may not be added or modified, and the title of the file may not be modified.
           type: boolean
         reason:
           description: Reason for why the content of the file is restricted. This is only mutable on requests that also set readOnly=true.

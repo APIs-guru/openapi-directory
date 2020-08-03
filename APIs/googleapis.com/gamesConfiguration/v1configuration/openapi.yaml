@@ -1,6 +1,6 @@
 openapi: 3.0.0
 servers:
-  - url: https://www.googleapis.com/
+  - url: https://gamesconfiguration.googleapis.com/
 info:
   contact:
     name: Google
@@ -33,9 +33,9 @@ info:
 externalDocs:
   url: https://developers.google.com/games/
 tags:
-  - name: achievementConfigurations
   - name: imageConfigurations
   - name: leaderboardConfigurations
+  - name: achievementConfigurations
 paths:
   "/games/v1configuration/achievements/{achievementId}":
     delete:
@@ -83,17 +83,17 @@ paths:
       tags:
         - achievementConfigurations
     parameters:
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
     put:
       description: Update the metadata of the achievement configuration with the given ID.
       operationId: gamesConfiguration.achievementConfigurations.update
@@ -164,17 +164,17 @@ paths:
       tags:
         - achievementConfigurations
     parameters:
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
     post:
       description: Insert a new achievement configuration in this application.
       operationId: gamesConfiguration.achievementConfigurations.insert
@@ -245,17 +245,17 @@ paths:
       tags:
         - leaderboardConfigurations
     parameters:
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
     post:
       description: Insert a new leaderboard configuration in this application.
       operationId: gamesConfiguration.leaderboardConfigurations.insert
@@ -287,17 +287,17 @@ paths:
         - leaderboardConfigurations
   "/games/v1configuration/images/{resourceId}/imageType/{imageType}":
     parameters:
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
     post:
       description: Uploads an image for a resource with the given ID and image type.
       operationId: gamesConfiguration.imageConfigurations.upload
@@ -378,17 +378,17 @@ paths:
       tags:
         - leaderboardConfigurations
     parameters:
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
     put:
       description: Update the metadata of the leaderboard configuration with the given ID.
       operationId: gamesConfiguration.leaderboardConfigurations.update

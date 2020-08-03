@@ -10848,6 +10848,41 @@ components:
           description: Pagination token to be used for the next list operation.
           type: string
       type: object
+    ChannelGrouping:
+      description: Represents a DfaReporting channel grouping.
+      properties:
+        fallbackName:
+          description: ChannelGrouping fallback name.
+          type: string
+        kind:
+          default: dfareporting#channelGrouping
+          description: The kind of resource this is, in this case dfareporting#channelGrouping.
+          type: string
+        name:
+          description: ChannelGrouping name.
+          type: string
+        rules:
+          description: The rules contained within this channel grouping.
+          items:
+            $ref: "#/components/schemas/ChannelGroupingRule"
+          type: array
+      type: object
+    ChannelGroupingRule:
+      description: Represents a DfaReporting channel grouping rule.
+      properties:
+        disjunctiveMatchStatements:
+          description: The disjunctive match statements contained within this rule.
+          items:
+            $ref: "#/components/schemas/DisjunctiveMatchStatement"
+          type: array
+        kind:
+          default: dfareporting#channelGroupingRule
+          description: The kind of resource this is, in this case dfareporting#channelGroupingRule.
+          type: string
+        name:
+          description: Rule name.
+          type: string
+      type: object
     CitiesListResponse:
       description: City List Response
       properties:
@@ -10987,6 +11022,12 @@ components:
           default: dfareporting#compatibleFields
           description: The kind of resource this is, in this case dfareporting#compatibleFields.
           type: string
+        pathAttributionReportCompatibleFields:
+          $ref: "#/components/schemas/PathReportCompatibleFields"
+          description: Contains items that are compatible to be selected for a report of type "PATH_ATTRIBUTION".
+        pathReportCompatibleFields:
+          $ref: "#/components/schemas/PathReportCompatibleFields"
+          description: Contains items that are compatible to be selected for a report of type "PATH".
         pathToConversionReportCompatibleFields:
           $ref: "#/components/schemas/PathToConversionReportCompatibleFields"
           description: Contains items that are compatible to be selected for a report of type "PATH_TO_CONVERSION".
@@ -13293,6 +13334,19 @@ components:
           description: Pagination token to be used for the next list operation.
           type: string
       type: object
+    DisjunctiveMatchStatement:
+      description: Represents a Disjunctive Match Statement resource, which is a conjunction (and) of disjunctive (or) boolean statements.
+      properties:
+        eventFilters:
+          description: The event filters contained within this disjunctive match statement.
+          items:
+            $ref: "#/components/schemas/EventFilter"
+          type: array
+        kind:
+          default: dfareporting#disjunctiveMatchStatement
+          description: The kind of resource this is, in this case dfareporting#disjunctiveMatchStatement.
+          type: string
+      type: object
     DynamicTargetingKey:
       description: Contains properties of a dynamic targeting key. Dynamic targeting keys are unique, user-friendly labels, created at the advertiser level in DCM, that can be assigned to ads, creatives, and placements and used for targeting with Studio dynamic creatives. Use these labels instead of numeric Campaign Manager IDs (such as placement IDs) to save time and avoid errors in your dynamic feeds.
       properties:
@@ -13357,6 +13411,17 @@ components:
         kind:
           default: dfareporting#encryptionInfo
           description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#encryptionInfo".'
+          type: string
+      type: object
+    EventFilter:
+      description: Represents a DfaReporting event filter.
+      properties:
+        dimensionFilter:
+          $ref: "#/components/schemas/PathReportDimensionValue"
+          description: The dimension filter contained within this EventFilter.
+        kind:
+          default: dfareporting#eventFilter
+          description: The kind of resource this is, in this case dfareporting#eventFilter.
           type: string
       type: object
     EventTag:
@@ -13597,6 +13662,9 @@ components:
         advertiserIdDimensionValue:
           $ref: "#/components/schemas/DimensionValue"
           description: Dimension value for the ID of the advertiser. This is a read-only, auto-generated field.
+        attributionEnabled:
+          description: Whether the activity is enabled for attribution.
+          type: boolean
         cacheBustingType:
           description: Code type used for cache busting in the generated tag. Applicable only when floodlightActivityGroupType is COUNTER and countingMethod is STANDARD_COUNTING or UNIQUE_COUNTING.
           enum:
@@ -14862,6 +14930,84 @@ components:
             $ref: "#/components/schemas/Order"
           type: array
       type: object
+    PathFilter:
+      description: Represents a DfaReporting path filter.
+      properties:
+        eventFilters:
+          description: Event filters in path report.
+          items:
+            $ref: "#/components/schemas/EventFilter"
+          type: array
+        kind:
+          default: dfaReporting#pathFilter
+          description: The kind of resource this is, in this case dfareporting#pathFilter.
+          type: string
+        pathMatchPosition:
+          description: Determines how the 'value' field is matched when filtering. If not specified, defaults to EXACT. If set to WILDCARD_EXPRESSION, '*' is allowed as a placeholder for variable length character sequences, and it can be escaped with a backslash. Note, only paid search dimensions ('dfa:paidSearch*') allow a matchType other than EXACT.
+          enum:
+            - ANY
+            - FIRST
+            - LAST
+            - PATH_MATCH_POSITION_UNSPECIFIED
+          type: string
+      type: object
+    PathReportCompatibleFields:
+      description: Represents fields that are compatible to be selected for a report of type "PATH".
+      properties:
+        channelGroupings:
+          description: Dimensions which are compatible to be selected in the "channelGroupings" section of the report.
+          items:
+            $ref: "#/components/schemas/Dimension"
+          type: array
+        dimensions:
+          description: Dimensions which are compatible to be selected in the "dimensions" section of the report.
+          items:
+            $ref: "#/components/schemas/Dimension"
+          type: array
+        kind:
+          default: dfareporting#pathReportCompatibleFields
+          description: The kind of resource this is, in this case dfareporting#pathReportCompatibleFields.
+          type: string
+        metrics:
+          description: Metrics which are compatible to be selected in the "metricNames" section of the report.
+          items:
+            $ref: "#/components/schemas/Metric"
+          type: array
+        pathFilters:
+          description: Dimensions which are compatible to be selected in the "pathFilters" section of the report.
+          items:
+            $ref: "#/components/schemas/Dimension"
+          type: array
+      type: object
+    PathReportDimensionValue:
+      description: Represents a PathReportDimensionValue resource.
+      properties:
+        dimensionName:
+          description: The name of the dimension.
+          type: string
+        ids:
+          description: The possible ID's associated with the value if available.
+          items:
+            type: string
+          type: array
+        kind:
+          default: dfareporting#pathReportDimensionValue
+          description: The kind of resource this is, in this case dfareporting#pathReportDimensionValue.
+          type: string
+        matchType:
+          description: Determines how the 'value' field is matched when filtering. If not specified, defaults to EXACT. If set to WILDCARD_EXPRESSION, '*' is allowed as a placeholder for variable length character sequences, and it can be escaped with a backslash. Note, only paid search dimensions ('dfa:paidSearch*') allow a matchType other than EXACT.
+          enum:
+            - BEGINS_WITH
+            - CONTAINS
+            - EXACT
+            - WILDCARD_EXPRESSION
+          type: string
+        values:
+          description: The possible values of the dimension.
+          items:
+            type: string
+          type: array
+      type: object
     PathToConversionReportCompatibleFields:
       description: Represents fields that are compatible to be selected for a report of type "PATH_TO_CONVERSION".
       properties:
@@ -16002,6 +16148,72 @@ components:
           description: The user profile id of the owner of this report.
           format: int64
           type: string
+        pathAttributionCriteria:
+          description: The report criteria for a report of type "PATH_ATTRIBUTION".
+          properties:
+            activityFilters:
+              description: The list of 'dfa:activity' values to filter on.
+              items:
+                $ref: "#/components/schemas/DimensionValue"
+              type: array
+            customChannelGrouping:
+              $ref: "#/components/schemas/ChannelGrouping"
+              description: Channel Grouping.
+            dateRange:
+              $ref: "#/components/schemas/DateRange"
+              description: The date range this report should be run for.
+            dimensions:
+              description: The list of dimensions the report should include.
+              items:
+                $ref: "#/components/schemas/SortedDimension"
+              type: array
+            floodlightConfigId:
+              $ref: "#/components/schemas/DimensionValue"
+              description: The floodlight ID for which to show data in this report. All advertisers associated with that ID will automatically be added. The dimension of the value needs to be 'dfa:floodlightConfigId'.
+            metricNames:
+              description: The list of names of metrics the report should include.
+              items:
+                type: string
+              type: array
+            pathFilters:
+              description: Path Filters.
+              items:
+                $ref: "#/components/schemas/PathFilter"
+              type: array
+          type: object
+        pathCriteria:
+          description: The report criteria for a report of type "PATH".
+          properties:
+            activityFilters:
+              description: The list of 'dfa:activity' values to filter on.
+              items:
+                $ref: "#/components/schemas/DimensionValue"
+              type: array
+            customChannelGrouping:
+              $ref: "#/components/schemas/ChannelGrouping"
+              description: Channel Grouping.
+            dateRange:
+              $ref: "#/components/schemas/DateRange"
+              description: The date range this report should be run for.
+            dimensions:
+              description: The list of dimensions the report should include.
+              items:
+                $ref: "#/components/schemas/SortedDimension"
+              type: array
+            floodlightConfigId:
+              $ref: "#/components/schemas/DimensionValue"
+              description: The floodlight ID for which to show data in this report. All advertisers associated with that ID will automatically be added. The dimension of the value needs to be 'dfa:floodlightConfigId'.
+            metricNames:
+              description: The list of names of metrics the report should include.
+              items:
+                type: string
+              type: array
+            pathFilters:
+              description: Path Filters.
+              items:
+                $ref: "#/components/schemas/PathFilter"
+              type: array
+          type: object
         pathToConversionCriteria:
           description: The report criteria for a report of type "PATH_TO_CONVERSION".
           properties:
@@ -16177,6 +16389,8 @@ components:
           enum:
             - CROSS_DIMENSION_REACH
             - FLOODLIGHT
+            - PATH
+            - PATH_ATTRIBUTION
             - PATH_TO_CONVERSION
             - REACH
             - STANDARD
@@ -16513,6 +16727,12 @@ components:
           default: dfareporting#siteVideoSettings
           description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#siteVideoSettings".'
           type: string
+        obaEnabled:
+          description: Whether OBA icons are enabled for this placement.
+          type: boolean
+        obaSettings:
+          $ref: "#/components/schemas/ObaIcon"
+          description: Settings for the OBA icon of video creatives served to this site. This will act as default for new placements created under this site.
         orientation:
           description: Orientation of a site template used for video. This will act as default for new placements created under this site.
           enum:
@@ -17329,6 +17549,12 @@ components:
           default: dfareporting#videoSettings
           description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#videoSettings".'
           type: string
+        obaEnabled:
+          description: Whether OBA icons are enabled for this placement.
+          type: boolean
+        obaSettings:
+          $ref: "#/components/schemas/ObaIcon"
+          description: Settings for the OBA icon of video creatives served to this placement. If this object is provided, the creative-level OBA settings will be overridden.
         orientation:
           description: Orientation of a video placement. If this value is set, placement will return assets matching the specified orientation.
           enum:

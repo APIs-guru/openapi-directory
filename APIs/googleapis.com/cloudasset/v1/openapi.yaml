@@ -34,8 +34,8 @@ externalDocs:
   url: https://cloud.google.com/asset-inventory/docs/quickstart
 tags:
   - name: v1
-  - name: feeds
   - name: operations
+  - name: feeds
 paths:
   "/v1/{name}":
     delete:
@@ -70,15 +70,17 @@ paths:
       tags:
         - feeds
     get:
-      description: >-
-        Gets the latest state of a long-running operation.  Clients can use this
-
-        method to poll the operation result at intervals as recommended by the API
-
-        service.
-      operationId: cloudasset.operations.get
+      description: Gets details about an asset feed.
+      operationId: cloudasset.feeds.get
       parameters:
-        - description: The name of the operation resource.
+        - description: >-
+            Required. The name of the Feed and it must be in the format of:
+
+            projects/project_number/feeds/feed_id
+
+            folders/folder_number/feeds/feed_id
+
+            organizations/organization_number/feeds/feed_id
           in: path
           name: name
           required: true
@@ -89,7 +91,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Operation"
+                $ref: "#/components/schemas/Feed"
           description: Successful response
       security:
         - Oauth2:
@@ -97,19 +99,19 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
-        - operations
+        - feeds
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
     patch:
       description: Updates an asset feed configuration.
       operationId: cloudasset.feeds.patch
@@ -182,17 +184,17 @@ paths:
       tags:
         - feeds
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
     post:
       description: >-
         Creates a feed in a parent project/folder/organization to listen to its
@@ -324,30 +326,30 @@ paths:
       tags:
         - v1
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
   "/v1/{parent}:exportAssets":
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
     post:
       description: >-
         Exports assets with time and resource types to a given Cloud Storage
@@ -406,31 +408,37 @@ paths:
   "/v1/{scope}:searchAllIamPolicies":
     get:
       description: >-
-        Searches all the IAM policies within the given accessible scope (e.g., a
+        Searches all IAM policies within the specified scope, such as a project,
 
-        project, a folder or an organization). Callers should have
+        folder, or organization. The caller must be granted the
 
-        `cloud.assets.SearchAllIamPolicies` permission upon the requested scope,
+        `cloudasset.assets.searchAllIamPolicies` permission on the desired scope,
 
         otherwise the request will be rejected.
       operationId: cloudasset.searchAllIamPolicies
       parameters:
         - description: >-
-            Required. A scope can be a project, a folder or an organization. The search is
+            Required. A scope can be a project, a folder, or an organization. The search is
 
-            limited to the IAM policies within the `scope`.
+            limited to the IAM policies within the `scope`. The caller must be granted
+
+            the
+
+            [`cloudasset.assets.searchAllIamPolicies`](http://cloud.google.com/asset-inventory/docs/access-control#required_permissions)
+
+            permission on the desired scope.
 
 
             The allowed values are:
 
 
-            * projects/{PROJECT_ID}
+            * projects/{PROJECT_ID} (e.g., "projects/foo-bar")
 
-            * projects/{PROJECT_NUMBER}
+            * projects/{PROJECT_NUMBER} (e.g., "projects/12345678")
 
-            * folders/{FOLDER_NUMBER}
+            * folders/{FOLDER_NUMBER} (e.g., "folders/1234567")
 
-            * organizations/{ORGANIZATION_NUMBER}
+            * organizations/{ORGANIZATION_NUMBER} (e.g., "organizations/123456")
           in: path
           name: scope
           required: true
@@ -461,32 +469,37 @@ paths:
           schema:
             type: string
         - description: >-
-            Optional. The query statement. An empty query can be specified to search all the IAM
+            Optional. The query statement. See [how to construct a
 
-            policies within the given `scope`.
+            query](https://cloud.google.com/asset-inventory/docs/searching-iam-policies#how_to_construct_a_query)
+
+            for more information. If not specified or empty, it will search all the
+
+            IAM policies within the specified `scope`.
 
 
             Examples:
 
 
-            * `policy : "amy@gmail.com"` to find Cloud IAM policy bindings that
-              specify user "amy@gmail.com".
-            * `policy : "roles/compute.admin"` to find Cloud IAM policy bindings that
-              specify the Compute Admin role.
-            * `policy.role.permissions : "storage.buckets.update"` to find Cloud IAM
-              policy bindings that specify a role containing "storage.buckets.update"
-              permission.
-            * `resource : "organizations/123"` to find Cloud IAM policy bindings that
-              are set on "organizations/123".
-            * `(resource : ("organizations/123" OR "folders/1234") AND policy : "amy")`
-              to find Cloud IAM policy bindings that are set on "organizations/123" or
-              "folders/1234", and also specify user "amy".
-
-            See [how to construct a
-
-            query](https://cloud.google.com/asset-inventory/docs/searching-iam-policies#how_to_construct_a_query)
-
-            for more details.
+            * `policy : "amy@gmail.com"` to find IAM policy bindings that specify user
+              "amy@gmail.com".
+            * `policy : "roles/compute.admin"` to find IAM policy bindings that specify
+              the Compute Admin role.
+            * `policy.role.permissions : "storage.buckets.update"` to find IAM policy
+              bindings that specify a role containing "storage.buckets.update"
+              permission. Note that if callers don't have `iam.roles.get` access to a
+              role's included permissions, policy bindings that specify this role will
+              be dropped from the search results.
+            * `resource : "organizations/123456"` to find IAM policy bindings
+              that are set on "organizations/123456".
+            * `"Important"` to find IAM policy bindings that contain "Important" as a
+              word in any of the searchable fields (except for the included
+              permissions).
+            * `"*por*"` to find IAM policy bindings which contain "por" as a substring
+              in any of the searchable fields (except for the included permissions).
+            * `(resource : ("instance1" OR "instance2") AND policy : "amy")` to find
+              IAM policy bindings that are set on resources "instance1" or
+              "instance2" and also specify user "amy".
           in: query
           name: query
           schema:
@@ -506,45 +519,49 @@ paths:
       tags:
         - v1
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
   "/v1/{scope}:searchAllResources":
     get:
       description: >-
-        Searches all the resources within the given accessible scope (e.g., a
+        Searches all Cloud resources within the specified scope, such as a project,
 
-        project, a folder or an organization). Callers should have
+        folder, or organization. The caller must be granted the
 
-        `cloud.assets.SearchAllResources` permission upon the requested scope,
+        `cloudasset.assets.searchAllResources` permission on the desired scope,
 
         otherwise the request will be rejected.
       operationId: cloudasset.searchAllResources
       parameters:
         - description: >-
-            Required. A scope can be a project, a folder or an organization. The search is
+            Required. A scope can be a project, a folder, or an organization. The search is
 
-            limited to the resources within the `scope`.
+            limited to the resources within the `scope`. The caller must be granted the
+
+            [`cloudasset.assets.searchAllResources`](http://cloud.google.com/asset-inventory/docs/access-control#required_permissions)
+
+            permission on the desired scope.
 
 
             The allowed values are:
 
 
-            * projects/{PROJECT_ID}
+            * projects/{PROJECT_ID} (e.g., "projects/foo-bar")
 
-            * projects/{PROJECT_NUMBER}
+            * projects/{PROJECT_NUMBER} (e.g., "projects/12345678")
 
-            * folders/{FOLDER_NUMBER}
+            * folders/{FOLDER_NUMBER} (e.g., "folders/1234567")
 
-            * organizations/{ORGANIZATION_NUMBER}
+            * organizations/{ORGANIZATION_NUMBER} (e.g., "organizations/123456")
           in: path
           name: scope
           required: true
@@ -609,9 +626,23 @@ paths:
           schema:
             type: string
         - description: >-
-            Optional. The query statement. An empty query can be specified to search all the
+            Optional. The query statement. See [how to construct a
 
-            resources of certain `asset_types` within the given `scope`.
+            query](http://cloud.google.com/asset-inventory/docs/searching-resources#how_to_construct_a_query)
+
+            for more information. If not specified or empty, it will search all the
+
+            resources within the specified `scope`. Note that the query string is
+
+            compared against each Cloud IAM policy binding, including its members,
+
+            roles, and Cloud IAM conditions. The returned Cloud IAM policies will only
+
+            contain the bindings that match your query. To learn more about the IAM
+
+            policy structure, see [IAM policy
+
+            doc](https://cloud.google.com/iam/docs/policies#structure).
 
 
             Examples:
@@ -620,7 +651,7 @@ paths:
             * `name : "Important"` to find Cloud resources whose name contains
               "Important" as a word.
             * `displayName : "Impor*"` to find Cloud resources whose display name
-              contains "Impor" as a word prefix.
+              contains "Impor" as a prefix.
             * `description : "*por*"` to find Cloud resources whose description
               contains "por" as a substring.
             * `location : "us-west*"` to find Cloud resources whose location is
@@ -633,7 +664,7 @@ paths:
 
             * `"Important"` to find Cloud resources which contain "Important" as a word
               in any of the searchable fields.
-            * `"Impor*"` to find Cloud resources which contain "Impor" as a word prefix
+            * `"Impor*"` to find Cloud resources which contain "Impor" as a prefix
               in any of the searchable fields.
             * `"*por*"` to find Cloud resources which contain "por" as a substring in
               any of the searchable fields.
@@ -641,12 +672,6 @@ paths:
               resources which contain "Important" as a word in any of the searchable
               fields and are also located in the "us-west1" region or the "global"
               location.
-
-            See [how to construct a
-
-            query](https://cloud.google.com/asset-inventory/docs/searching-resources#how_to_construct_a_query)
-
-            for more details.
           in: query
           name: query
           schema:
@@ -666,17 +691,17 @@ paths:
       tags:
         - v1
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
 components:
   parameters:
     _.xgafv:
@@ -1107,7 +1132,8 @@ components:
                recovered group retains the role in the binding.
 
 
-            * `domain:{domain}`: The G Suite domain (primary) that represents all the    users of that domain. For example, `google.com` or `example.com`.
+            * `domain:{domain}`: The G Suite domain (primary) that represents all the
+               users of that domain. For example, `google.com` or `example.com`.
 
           items:
             type: string
@@ -2715,31 +2741,36 @@ components:
           type: string
       type: object
     ResourceSearchResult:
-      description: A result of Resource Search, containing information of a cloud resoure.
+      description: A result of Resource Search, containing information of a cloud resource.
       properties:
         additionalAttributes:
           additionalProperties:
             description: Properties of the object.
           description: >-
-            The additional attributes of this resource. The attributes may vary from
+            The additional searchable attributes of this resource. The attributes may
 
-            one resource type to another. Examples: `projectId` for Project,
+            vary from one resource type to another. Examples: `projectId` for Project,
 
             `dnsName` for DNS ManagedZone. This field contains a subset of the resource
 
             metadata fields that are returned by the List or Get APIs provided by the
 
-            corresponding GCP service (e.g., Compute Engine). see [API
+            corresponding GCP service (e.g., Compute Engine). see [API references and
 
-            references](https://cloud.google.com/asset-inventory/docs/supported-asset-types#supported_resource_types)
+            supported searchable
 
-            of CAIS supported resource types. You can search values of these fields
+            attributes](https://cloud.google.com/asset-inventory/docs/supported-asset-types#searchable_asset_types)
 
-            through free text search. However, you should not consume the field
+            for more information.
 
-            programically as the field names and values may change as the GCP service
 
-            (e.g., Compute Engine) updates to a new incompatible API version.
+            You can search values of these fields through free text search. However,
+
+            you should not consume the field programically as the field names and
+
+            values may change as the GCP service updates to a new incompatible API
+
+            version.
 
 
             To search against the `additional_attributes`:

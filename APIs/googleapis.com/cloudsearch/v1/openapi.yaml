@@ -33,27 +33,27 @@ info:
 externalDocs:
   url: https://developers.google.com/cloud-search/docs/guides/
 tags:
-  - name: operations
-  - name: settings
   - name: media
-  - name: indexing
   - name: debug
-  - name: stats
   - name: query
+  - name: settings
+  - name: operations
+  - name: indexing
+  - name: stats
 paths:
   "/v1/debug/{name}/items:searchByViewUrl":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
       description: >-
         Fetches the item whose viewUrl exactly matches that of the URL provided
@@ -98,17 +98,17 @@ paths:
         - debug
   "/v1/debug/{name}:checkAccess":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
       description: >-
         Checks whether an item is accessible by specified principal.
@@ -223,30 +223,30 @@ paths:
       tags:
         - debug
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
   "/v1/debug/{parent}/unmappedids":
     get:
       description: >-
-        List all unmapped identities for a specific item.
+        Lists unmapped user identities for an identity source.
 
 
         **Note:** This API requires an admin account to execute.
-      operationId: cloudsearch.debug.datasources.items.unmappedids.list
+      operationId: cloudsearch.debug.identitysources.unmappedids.list
       parameters:
         - description: >-
-            The name of the item, in the following format:
+            The name of the identity source, in the following format:
 
-            datasources/{source_id}/items/{ID}
+            identitysources/{source_id}
           in: path
           name: parent
           required: true
@@ -304,17 +304,17 @@ paths:
       tags:
         - debug
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
   "/v1/indexing/{name}":
     delete:
       description: >-
@@ -455,17 +455,17 @@ paths:
       tags:
         - indexing
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
   "/v1/indexing/{name}/items":
     get:
       description: >-
@@ -580,30 +580,30 @@ paths:
       tags:
         - indexing
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
   "/v1/indexing/{name}/items:deleteQueueItems":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
       description: >-
         Deletes all items in a queue. This method is useful for deleting stale
@@ -650,17 +650,17 @@ paths:
         - indexing
   "/v1/indexing/{name}/items:poll":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
       description: >-
         Polls for unreserved items from the indexing queue and marks a
@@ -751,17 +751,17 @@ paths:
         - indexing
   "/v1/indexing/{name}/items:unreserve":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
       description: >-
         Unreserves all items from a queue, making them all eligible to be
@@ -904,17 +904,17 @@ paths:
       tags:
         - indexing
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
     put:
       description: >-
         Updates the schema of a data source. This method does not perform
@@ -965,17 +965,17 @@ paths:
         - indexing
   "/v1/indexing/{name}:index":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
       description: >-
         Updates Item ACL, metadata, and
@@ -1032,17 +1032,17 @@ paths:
         - indexing
   "/v1/indexing/{name}:push":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
       description: >-
         Pushes an item onto a queue for later polling and updating.
@@ -1093,17 +1093,17 @@ paths:
         - indexing
   "/v1/indexing/{name}:upload":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
       description: >-
         Creates an upload session for uploading item content. For items smaller
@@ -1156,17 +1156,17 @@ paths:
         - indexing
   "/v1/media/{resourceName}":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
       description: >-
         Uploads media for indexing.
@@ -1234,17 +1234,17 @@ paths:
         - media
   /v1/query/search:
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
       description: >-
         The Cloud Search Query API provides the search method, which returns
@@ -1393,30 +1393,30 @@ paths:
       tags:
         - query
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
   /v1/query/suggest:
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
       description: >-
         Provides suggestions for autocompleting the query.
@@ -1510,17 +1510,17 @@ paths:
       tags:
         - settings
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
       description: >-
         Creates a datasource.
@@ -1608,17 +1608,17 @@ paths:
       tags:
         - settings
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
       description: >-
         Creates a search application.
@@ -1656,16 +1656,16 @@ paths:
   "/v1/settings/{name}":
     delete:
       description: >-
-        Deletes a search application.
+        Deletes a datasource.
 
 
         **Note:** This API requires an admin account to execute.
-      operationId: cloudsearch.settings.searchapplications.delete
+      operationId: cloudsearch.settings.datasources.delete
       parameters:
         - description: >-
-            The name of the search application to be deleted.
+            Name of the datasource.
 
-            <br />Format: applications/{application_id}.
+            Format: datasources/{source_id}.
           in: path
           name: name
           required: true
@@ -1696,23 +1696,23 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/cloud_search.settings
         - Oauth2:
-            - https://www.googleapis.com/auth/cloud_search.settings.query
+            - https://www.googleapis.com/auth/cloud_search.settings.indexing
           Oauth2c:
-            - https://www.googleapis.com/auth/cloud_search.settings.query
+            - https://www.googleapis.com/auth/cloud_search.settings.indexing
       tags:
         - settings
     get:
       description: >-
-        Gets the specified search application.
+        Gets a datasource.
 
 
         **Note:** This API requires an admin account to execute.
-      operationId: cloudsearch.settings.searchapplications.get
+      operationId: cloudsearch.settings.datasources.get
       parameters:
         - description: >-
-            Name of the search application.
+            Name of the datasource resource.
 
-            <br />Format: searchapplications/{application_id}.
+            Format: datasources/{source_id}.
           in: path
           name: name
           required: true
@@ -1731,7 +1731,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/SearchApplication"
+                $ref: "#/components/schemas/DataSource"
           description: Successful response
       security:
         - Oauth2:
@@ -1743,35 +1743,37 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/cloud_search.settings
         - Oauth2:
-            - https://www.googleapis.com/auth/cloud_search.settings.query
+            - https://www.googleapis.com/auth/cloud_search.settings.indexing
           Oauth2c:
-            - https://www.googleapis.com/auth/cloud_search.settings.query
+            - https://www.googleapis.com/auth/cloud_search.settings.indexing
       tags:
         - settings
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
     put:
       description: >-
-        Updates a search application.
+        Updates a datasource.
 
 
         **Note:** This API requires an admin account to execute.
-      operationId: cloudsearch.settings.searchapplications.update
+      operationId: cloudsearch.settings.datasources.update
       parameters:
         - description: >-
-            Name of the Search Application.
+            Name of the datasource resource.
 
-            <br />Format: searchapplications/{application_id}.
+            Format: datasources/{source_id}.
+
+            <br />The name is ignored when creating a datasource.
           in: path
           name: name
           required: true
@@ -1781,7 +1783,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/SearchApplication"
+              $ref: "#/components/schemas/UpdateDataSourceRequest"
       responses:
         "200":
           content:
@@ -1799,24 +1801,24 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/cloud_search.settings
         - Oauth2:
-            - https://www.googleapis.com/auth/cloud_search.settings.query
+            - https://www.googleapis.com/auth/cloud_search.settings.indexing
           Oauth2c:
-            - https://www.googleapis.com/auth/cloud_search.settings.query
+            - https://www.googleapis.com/auth/cloud_search.settings.indexing
       tags:
         - settings
   "/v1/settings/{name}:reset":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
       description: >-
         Resets a search application to default settings. This will return an empty
@@ -1929,17 +1931,17 @@ paths:
       tags:
         - stats
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
   "/v1/stats/index/{name}":
     get:
       description: >-
@@ -2011,17 +2013,17 @@ paths:
       tags:
         - stats
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
   /v1/stats/query:
     get:
       description: >-
@@ -2084,17 +2086,17 @@ paths:
       tags:
         - stats
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
   "/v1/stats/query/{name}":
     get:
       description: >-
@@ -2166,17 +2168,17 @@ paths:
       tags:
         - stats
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
   /v1/stats/session:
     get:
       description: >-
@@ -2241,17 +2243,17 @@ paths:
       tags:
         - stats
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
   "/v1/stats/session/{name}":
     get:
       description: >-
@@ -2325,17 +2327,17 @@ paths:
       tags:
         - stats
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
   /v1/stats/user:
     get:
       description: >-
@@ -2398,17 +2400,17 @@ paths:
       tags:
         - stats
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
   "/v1/stats/user/{name}":
     get:
       description: >-
@@ -2480,17 +2482,17 @@ paths:
       tags:
         - stats
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
   "/v1/{name}":
     get:
       description: >-
@@ -2542,17 +2544,17 @@ paths:
       tags:
         - operations
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
 components:
   parameters:
     _.xgafv:
@@ -5494,7 +5496,7 @@ components:
 
             Cheat
 
-            Sheet](https://gsuite.google.com/learning-center/products/cloudsearch/cheat-sheet/)
+            Sheet](https://support.google.com/a/users/answer/9299929)
           type: string
         queryInterpretationOptions:
           $ref: "#/components/schemas/QueryInterpretationOptions"
