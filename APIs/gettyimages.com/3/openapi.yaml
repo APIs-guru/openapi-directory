@@ -27,17 +27,12 @@ paths:
         - in: query
           name: phrase
           schema:
-            default: ""
+            nullable: true
             type: string
         - in: query
           name: style
           schema:
-            default: ""
-            enum:
-              - photography
-              - vector
-            nullable: true
-            type: string
+            $ref: "#/components/schemas/AffiliateSearchStyle"
       responses:
         "200":
           content:
@@ -58,7 +53,7 @@ paths:
         - in: query
           name: phrase
           schema:
-            default: ""
+            nullable: true
             type: string
       responses:
         "200":
@@ -81,49 +76,18 @@ paths:
           in: query
           name: artist_name
           schema:
-            default: ""
+            description: Name of artist for desired images
+            nullable: true
             type: string
         - description: Comma separated list of fields. Allows restricting which fields are returned. If no fields are selected, the summary_set of fields are returned.
           explode: false
           in: query
           name: fields
           schema:
+            description: Comma separated list of fields. Allows restricting which fields are returned. If no fields are selected, the summary_set of fields are returned.
             items:
-              enum:
-                - id
-                - allowed_use
-                - alternative_ids
-                - artist
-                - asset_family
-                - asset_type
-                - call_for_image
-                - caption
-                - collection_id
-                - collection_code
-                - collection_name
-                - comp
-                - copyright
-                - date_created
-                - date_submitted
-                - detail_set
-                - display_set
-                - editorial_segments
-                - event_ids
-                - graphical_style
-                - high_res_comp
-                - keywords
-                - license_model
-                - max_dimensions
-                - mid_res_comp
-                - orientation
-                - preview
-                - product_types
-                - quality_rank
-                - referral_destinations
-                - summary_set
-                - thumb
-                - title
-              type: string
+              $ref: "#/components/schemas/ArtistsImageSearchFieldValues"
+            nullable: true
             type: array
           style: form
         - description: Identifies page to return. Default page is 1.
@@ -131,6 +95,7 @@ paths:
           name: page
           schema:
             default: 1
+            description: Identifies page to return. Default page is 1.
             format: int32
             type: integer
         - description: Specifies page size. Default page_size is 10, maximum page_size is 100.
@@ -138,6 +103,7 @@ paths:
           name: page_size
           schema:
             default: 10
+            description: Specifies page size. Default page_size is 10, maximum page_size is 100.
             format: int32
             type: integer
       responses:
@@ -162,50 +128,18 @@ paths:
           in: query
           name: artist_name
           schema:
-            default: ""
+            description: Name of artist for desired images
+            nullable: true
             type: string
         - description: Comma separated list of fields. Allows restricting which fields are returned. If no fields are selected, the summary_set of fields are returned.
           explode: false
           in: query
           name: fields
           schema:
+            description: Comma separated list of fields. Allows restricting which fields are returned. If no fields are selected, the summary_set of fields are returned.
             items:
-              enum:
-                - id
-                - allowed_use
-                - alternative_ids
-                - artist
-                - asset_family
-                - asset_type
-                - call_for_image
-                - caption
-                - clip_length
-                - collection_id
-                - collection_code
-                - collection_name
-                - comp
-                - copyright
-                - date_created
-                - date_submitted
-                - detail_set
-                - display_set
-                - editorial_segments
-                - event_ids
-                - graphical_style
-                - high_res_comp
-                - keywords
-                - license_model
-                - max_dimensions
-                - mid_res_comp
-                - orientation
-                - preview
-                - product_types
-                - quality_rank
-                - referral_destinations
-                - summary_set
-                - thumb
-                - title
-              type: string
+              $ref: "#/components/schemas/ArtistsVideoSearchFieldValues"
+            nullable: true
             type: array
           style: form
         - description: Identifies page to return. Default page is 1.
@@ -213,6 +147,7 @@ paths:
           name: page
           schema:
             default: 1
+            description: Identifies page to return. Default page is 1.
             format: int32
             type: integer
         - description: Specifies page size. Default page_size is 10, maximum page_size is 100.
@@ -220,6 +155,7 @@ paths:
           name: page_size
           schema:
             default: 10
+            description: Specifies page size. Default page_size is 10, maximum page_size is 100.
             format: int32
             type: integer
       responses:
@@ -363,13 +299,26 @@ paths:
           name: assetId
           required: true
           schema:
-            default: ""
+            description: Getty Images assetId - examples 520621493, 112301284
+            nullable: true
             type: string
       requestBody:
         content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/AcquireAssetLicensesRequest"
           application/json:
             schema:
               $ref: "#/components/schemas/AcquireAssetLicensesRequest"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/AcquireAssetLicensesRequest"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/AcquireAssetLicensesRequest"
+        description: "Structure that specifies an array of LicenseTypes (Multiseat, Unlimited, Resale, Indemnification) to acquire,\r
+
+          \            and whether or not to use Team Credits. Authenticated User must have access to Team Credits if UseTeamCredits is set to \"true\"."
       responses:
         "200":
           content:
@@ -865,6 +814,11 @@ paths:
           in: query
           name: date_from
           schema:
+            description: "If specified, selects assets downloaded on or after this date. Dates should be submitted in ISO 8601 format (i.e., YYYY-MM-DD). \r
+
+              Any hour, minute, second values in the request are not used, unless useTimePart parameter is included.\r
+
+              Date/times in the response are UTC. Default is 30 days prior to date_to"
             format: date-time
             nullable: true
             type: string
@@ -876,6 +830,11 @@ paths:
           in: query
           name: date_to
           schema:
+            description: "If specified, selects assets downloaded on or before this date. Dates should be submitted in ISO 8601 format (i.e., YYYY-MM-DD)\r
+
+              Any hour, minute, second values in the request are not used, unless useTimePart parameter is included.\r
+
+              Date/times in the response are UTC. Default is current date or 30 days after specified start date, whichever one is earlier."
             format: date-time
             nullable: true
             type: string
@@ -888,12 +847,18 @@ paths:
           name: use_time
           schema:
             default: false
+            description: "If specified, time values provided with date_to or date_from will be used. Time values should be appended to the date value in ISO 8601 format\r
+
+              i.e.: 2019-09-19T19:30:37 or 2019-09-19 19:30:37.  Time zone can be specified as optional.\r
+
+              Default value is false"
             type: boolean
         - description: Identifies page to return. Default is 1.
           in: query
           name: page
           schema:
             default: 1
+            description: Identifies page to return. Default is 1.
             format: int32
             type: integer
         - description: Specifies page size. Default is 30, maximum page_size is 100.
@@ -901,25 +866,20 @@ paths:
           name: page_size
           schema:
             default: 30
+            description: Specifies page size. Default is 30, maximum page_size is 100.
             format: int32
             type: integer
         - description: Specifies product type to be included in the previous download results. To get previous iStockPhoto credit downloads, credit_pack must be selected.
           in: query
           name: product_type
           schema:
-            enum:
-              - easyaccess
-              - editorialsubscription
-              - imagepack
-              - premiumaccess
-              - royaltyfreesubscription
-            nullable: true
-            type: string
+            $ref: "#/components/schemas/ProductTypeRequest"
         - description: If specified, returns the list of previously downloaded images for all users in your company. Your account must be enabled for this functionality. Contact your Getty Images account rep for more information. Default is false.
           in: query
           name: company_downloads
           schema:
             default: false
+            description: If specified, returns the list of previously downloaded images for all users in your company. Your account must be enabled for this functionality. Contact your Getty Images account rep for more information. Default is false.
             type: boolean
       responses:
         "200":
@@ -1022,7 +982,12 @@ paths:
           name: id
           required: true
           schema:
-            default: ""
+            description: "<remarks>\r
+
+              \                    Id of image to download.\r
+
+              \                </remarks>"
+            nullable: true
             type: string
         - description: "<remarks>\r
 
@@ -1037,6 +1002,15 @@ paths:
           name: auto_download
           schema:
             default: true
+            description: "<remarks>\r
+
+              \                    Specifies whether to auto-download the image. If true is specified, a 303 SeeOther status is returned with a\r
+
+              \                    Location header set to the location of the image.\r
+
+              \                    If false is specified, the download URI will be returned in the response message.\r
+
+              \                </remarks>"
             type: boolean
         - description: "<remarks>\r
 
@@ -1046,11 +1020,7 @@ paths:
           in: query
           name: file_type
           schema:
-            enum:
-              - eps
-              - jpg
-            nullable: true
-            type: string
+            $ref: "#/components/schemas/DownloadFileType"
         - description: "<remarks>\r
 
             \                    Specifies the pixel height of the particular image to download.\r
@@ -1063,6 +1033,16 @@ paths:
           in: query
           name: height
           schema:
+            description: "<remarks>\r
+
+              \                    Specifies the pixel height of the particular image to download.\r
+
+              \                    Available heights can be found in the images/{ids} response for the specific image.\r
+
+              \                    If left blank, it will return the largest available size.\r
+
+              \                </remarks>"
+            nullable: true
             type: string
         - description: "<remarks>\r
 
@@ -1072,6 +1052,11 @@ paths:
           in: query
           name: product_id
           schema:
+            description: "<remarks>\r
+
+              \                    Identifier of the instance for the selected product offering type.\r
+
+              \                </remarks>"
             format: int32
             nullable: true
             type: integer
@@ -1083,26 +1068,36 @@ paths:
           in: query
           name: product_type
           schema:
-            enum:
-              - easyaccess
-              - editorialsubscription
-              - imagepack
-              - premiumaccess
-              - royaltyfreesubscription
-            nullable: true
-            type: string
+            $ref: "#/components/schemas/ProductTypeRequest"
         - description: Specifies whether to download the image with iStock Team Credits. Only applicable to iStock API keys authenticated with a user that has Team Credits. Blank is the same as False.
           in: query
           name: use_team_credits
           schema:
             default: false
+            description: Specifies whether to download the image with iStock Team Credits. Only applicable to iStock API keys authenticated with a user that has Team Credits. Blank is the same as False.
             nullable: true
             type: boolean
       requestBody:
         content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/PremiumAccessDownloadData"
           application/json:
             schema:
               $ref: "#/components/schemas/PremiumAccessDownloadData"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/PremiumAccessDownloadData"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/PremiumAccessDownloadData"
+        description: "<remarks>\r
+
+          \                    Additional information required from specific customers when downloading. \r
+
+          \                    Only users who have been set up with a project code by Getty Images Sales need to use this field.\r
+
+          \                </remarks>"
       responses:
         "200":
           description: OK
@@ -1202,7 +1197,12 @@ paths:
           name: id
           required: true
           schema:
-            default: ""
+            description: "<remarks>\r
+
+              \                    Id of video to download.\r
+
+              \                </remarks>"
+            nullable: true
             type: string
         - description: "<remarks>\r
 
@@ -1217,11 +1217,22 @@ paths:
           name: auto_download
           schema:
             default: false
+            description: "<remarks>\r
+
+              \                    Specifies whether to auto-download the video. If true is specified, a 303 SeeOther status is returned with a\r
+
+              \                    Location header set to the location of the video.\r
+
+              \                    If false is specified, the download URI will be returned in the response message.\r
+
+              \                </remarks>"
             type: boolean
         - description: Specifies the size to be downloaded.
           in: query
           name: size
           schema:
+            description: Specifies the size to be downloaded.
+            nullable: true
             type: string
         - description: "<remarks>\r
 
@@ -1231,6 +1242,11 @@ paths:
           in: query
           name: product_id
           schema:
+            description: "<remarks>\r
+
+              \                    Identifier of the instance for the selected product offering type.\r
+
+              \                </remarks>"
             format: int32
             nullable: true
             type: integer
@@ -1238,13 +1254,30 @@ paths:
           in: query
           name: use_team_credits
           schema:
+            description: Specifies whether to download the image with iStock Team Credits. Only applicable to iStock API keys authenticated with a user that has Team Credits. Blank is the same as False.
             nullable: true
             type: boolean
       requestBody:
         content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/PremiumAccessDownloadData"
           application/json:
             schema:
               $ref: "#/components/schemas/PremiumAccessDownloadData"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/PremiumAccessDownloadData"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/PremiumAccessDownloadData"
+        description: "<remarks>\r
+
+          \                    Additional information required from specific customers when downloading. \r
+
+          \                    Only users who have been set up with a project code by Getty Images Sales need to use this field.\r
+
+          \                </remarks>"
       responses:
         "200":
           description: OK
@@ -1287,9 +1320,11 @@ paths:
           in: query
           name: ids
           schema:
+            description: A comma separated list of event ids.
             items:
               format: int32
               type: integer
+            nullable: true
             type: array
           style: form
         - description: A comma separated list of fields to return in the response.
@@ -1297,18 +1332,10 @@ paths:
           in: query
           name: fields
           schema:
+            description: A comma separated list of fields to return in the response.
             items:
-              enum:
-                - id
-                - child_event_count
-                - editorial_segments
-                - hero_image
-                - image_count
-                - location
-                - name
-                - start_date
-                - type
-              type: string
+              $ref: "#/components/schemas/EventDetailFieldValues"
+            nullable: true
             type: array
           style: form
       responses:
@@ -1353,6 +1380,7 @@ paths:
           name: id
           required: true
           schema:
+            description: An event id.
             format: int32
             type: integer
         - description: A comma separated list of fields to return in the response.
@@ -1360,18 +1388,10 @@ paths:
           in: query
           name: fields
           schema:
+            description: A comma separated list of fields to return in the response.
             items:
-              enum:
-                - id
-                - child_event_count
-                - editorial_segments
-                - hero_image
-                - image_count
-                - location
-                - name
-                - start_date
-                - type
-              type: string
+              $ref: "#/components/schemas/EventDetailFieldValues"
+            nullable: true
             type: array
           style: form
       responses:
@@ -1524,8 +1544,10 @@ paths:
           in: query
           name: ids
           schema:
+            description: Specifies one or more image ids to return. Use comma delimiter when requesting multiple ids.
             items:
               type: string
+            nullable: true
             type: array
           style: form
         - description: "Specifies fields to return. Defaults to 'summary_set'. NOTE: Bytes returned by 'download_sizes' field are estimates."
@@ -1533,58 +1555,10 @@ paths:
           in: query
           name: fields
           schema:
+            description: "Specifies fields to return. Defaults to 'summary_set'. NOTE: Bytes returned by 'download_sizes' field are estimates."
             items:
-              enum:
-                - allowed_use
-                - alternative_ids
-                - artist
-                - artist_title
-                - asset_family
-                - call_for_image
-                - caption
-                - city
-                - collection_code
-                - collection_id
-                - collection_name
-                - color_type
-                - comp
-                - copyright
-                - country
-                - credit_line
-                - date_camera_shot
-                - date_created
-                - date_submitted
-                - detail_set
-                - display_set
-                - download_sizes
-                - download_product
-                - downloads
-                - editorial_segments
-                - editorial_source
-                - entity_details
-                - event_ids
-                - graphical_style
-                - id
-                - istock_collection
-                - istock_licenses
-                - keywords
-                - largest_downloads
-                - license_model
-                - links
-                - max_dimensions
-                - object_name
-                - orientation
-                - people
-                - preview
-                - product_types
-                - quality_rank
-                - referral_destinations
-                - state_province
-                - summary_set
-                - thumb
-                - title
-                - uri_oembed
-              type: string
+              $ref: "#/components/schemas/ImageDetailFieldValues"
+            nullable: true
             type: array
           style: form
       responses:
@@ -1748,65 +1722,18 @@ paths:
           name: id
           required: true
           schema:
-            default: ""
+            description: An image id. For more than one image please use the /v3/images endpoint.
+            nullable: true
             type: string
         - description: "Specifies fields to return. Defaults to 'summary_set'. NOTE: Bytes returned by 'download_sizes' field are estimates."
           explode: false
           in: query
           name: fields
           schema:
+            description: "Specifies fields to return. Defaults to 'summary_set'. NOTE: Bytes returned by 'download_sizes' field are estimates."
             items:
-              enum:
-                - allowed_use
-                - alternative_ids
-                - artist
-                - artist_title
-                - asset_family
-                - call_for_image
-                - caption
-                - city
-                - collection_code
-                - collection_id
-                - collection_name
-                - color_type
-                - comp
-                - copyright
-                - country
-                - credit_line
-                - date_camera_shot
-                - date_created
-                - date_submitted
-                - detail_set
-                - display_set
-                - download_sizes
-                - download_product
-                - downloads
-                - editorial_segments
-                - editorial_source
-                - entity_details
-                - event_ids
-                - graphical_style
-                - id
-                - istock_collection
-                - istock_licenses
-                - keywords
-                - largest_downloads
-                - license_model
-                - links
-                - max_dimensions
-                - object_name
-                - orientation
-                - people
-                - preview
-                - product_types
-                - quality_rank
-                - referral_destinations
-                - state_province
-                - summary_set
-                - thumb
-                - title
-                - uri_oembed
-              type: string
+              $ref: "#/components/schemas/ImageDetailFieldValues"
+            nullable: true
             type: array
           style: form
       responses:
@@ -1843,7 +1770,8 @@ paths:
           name: id
           required: true
           schema:
-            default: ""
+            description: An image id.
+            nullable: true
             type: string
         - description: "If specified, returns the list of previously downloaded images for all users in your company.\r
 
@@ -1851,6 +1779,9 @@ paths:
           in: query
           name: company_downloads
           schema:
+            description: "If specified, returns the list of previously downloaded images for all users in your company.\r
+
+              \            Your account must be enabled for this functionality. Contact your Getty Images account rep for more information. Default is false."
             type: boolean
       responses:
         "200":
@@ -2013,57 +1944,18 @@ paths:
           name: id
           required: true
           schema:
-            default: ""
+            description: Identifies an existing image
+            nullable: true
             type: string
         - description: Specifies fields to return. Defaults to 'summary_set'.
           explode: false
           in: query
           name: fields
           schema:
+            description: Specifies fields to return. Defaults to 'summary_set'.
             items:
-              enum:
-                - accessrestriction
-                - allowed_use
-                - alternative_ids
-                - artist
-                - asset_family
-                - call_for_image
-                - caption
-                - collection_code
-                - collection_id
-                - collection_name
-                - color_type
-                - comp
-                - copyright
-                - date_camera_shot
-                - date_created
-                - date_submitted
-                - detail_set
-                - display_set
-                - download_product
-                - download_sizes
-                - editorial_segments
-                - editorial_source
-                - entity_details
-                - event_ids
-                - graphical_style
-                - id
-                - istock_collection
-                - keywords
-                - largest_downloads
-                - license_model
-                - max_dimensions
-                - orientation
-                - people
-                - preview
-                - product_types
-                - quality_rank
-                - referral_destinations
-                - summary_set
-                - thumb
-                - title
-                - uri_oembed
-              type: string
+              $ref: "#/components/schemas/ImagesFieldValues"
+            nullable: true
             type: array
           style: form
         - description: Identifies page to return. Default is 1.
@@ -2071,6 +1963,7 @@ paths:
           name: page
           schema:
             default: 1
+            description: Identifies page to return. Default is 1.
             format: int32
             type: integer
         - description: Specifies page size. Default is 30, maximum page_size is 100.
@@ -2078,6 +1971,7 @@ paths:
           name: page_size
           schema:
             default: 30
+            description: Specifies page size. Default is 30, maximum page_size is 100.
             format: int32
             type: integer
       responses:
@@ -2241,57 +2135,18 @@ paths:
           name: id
           required: true
           schema:
-            default: ""
+            description: Identifies an existing image
+            nullable: true
             type: string
         - description: Specifies fields to return. Defaults to 'summary_set'.
           explode: false
           in: query
           name: fields
           schema:
+            description: Specifies fields to return. Defaults to 'summary_set'.
             items:
-              enum:
-                - accessrestriction
-                - allowed_use
-                - alternative_ids
-                - artist
-                - asset_family
-                - call_for_image
-                - caption
-                - collection_code
-                - collection_id
-                - collection_name
-                - color_type
-                - comp
-                - copyright
-                - date_camera_shot
-                - date_created
-                - date_submitted
-                - detail_set
-                - display_set
-                - download_product
-                - download_sizes
-                - editorial_segments
-                - editorial_source
-                - entity_details
-                - event_ids
-                - graphical_style
-                - id
-                - istock_collection
-                - keywords
-                - largest_downloads
-                - license_model
-                - max_dimensions
-                - orientation
-                - people
-                - preview
-                - product_types
-                - quality_rank
-                - referral_destinations
-                - summary_set
-                - thumb
-                - title
-                - uri_oembed
-              type: string
+              $ref: "#/components/schemas/ImagesFieldValues"
+            nullable: true
             type: array
           style: form
         - description: Identifies page to return. Default is 1.
@@ -2299,6 +2154,7 @@ paths:
           name: page
           schema:
             default: 1
+            description: Identifies page to return. Default is 1.
             format: int32
             type: integer
         - description: Specifies page size. Default is 30, maximum page_size is 100.
@@ -2306,6 +2162,7 @@ paths:
           name: page_size
           schema:
             default: 30
+            description: Specifies page size. Default is 30, maximum page_size is 100.
             format: int32
             type: integer
       responses:
@@ -2348,6 +2205,7 @@ paths:
           name: id
           required: true
           schema:
+            description: An order id.
             format: int32
             type: integer
       responses:
@@ -2386,10 +2244,10 @@ paths:
           in: query
           name: fields
           schema:
+            description: Comma separated list of fields. Allows product download requirements to be returned.
             items:
-              enum:
-                - download_requirements
-              type: string
+              $ref: "#/components/schemas/ProductFieldValues"
+            nullable: true
             type: array
           style: form
       responses:
@@ -2429,6 +2287,7 @@ paths:
           in: query
           name: date_to
           schema:
+            description: If specified, retrieves previous purchases on or before this date. Dates should be submitted in ISO 8601 format (i.e., YYYY-MM-DD).
             format: date-time
             nullable: true
             type: string
@@ -2437,6 +2296,7 @@ paths:
           name: page
           schema:
             default: 1
+            description: Identifies page to return. Default is 1.
             format: int32
             type: integer
         - description: Specifies page size. Default is 75, maximum page_size is 100.
@@ -2444,12 +2304,14 @@ paths:
           name: page_size
           schema:
             default: 75
+            description: Specifies page size. Default is 75, maximum page_size is 100.
             format: int32
             type: integer
         - description: If specified, retrieves previous purchases on or after this date. Dates should be submitted in ISO 8601 format (i.e., YYYY-MM-DD).
           in: query
           name: date_from
           schema:
+            description: If specified, retrieves previous purchases on or after this date. Dates should be submitted in ISO 8601 format (i.e., YYYY-MM-DD).
             format: date-time
             nullable: true
             type: string
@@ -2490,19 +2352,12 @@ paths:
           in: query
           name: editorial_segment
           schema:
-            enum:
-              - archival
-              - entertainment
-              - news
-              - publicity
-              - royalty
-              - sport
-            nullable: true
-            type: string
+            $ref: "#/components/schemas/EditorialSegmentContract"
         - description: Filters to events that start on or after this date. Use ISO 8601 format (e.g., 1999-12-31).
           in: query
           name: date_from
           schema:
+            description: Filters to events that start on or after this date. Use ISO 8601 format (e.g., 1999-12-31).
             format: date-time
             nullable: true
             type: string
@@ -2510,6 +2365,7 @@ paths:
           in: query
           name: date_to
           schema:
+            description: Filters to events that start on or before this date. Use ISO 8601 format (e.g., 1999-12-31).
             format: date-time
             nullable: true
             type: string
@@ -2518,19 +2374,10 @@ paths:
           in: query
           name: fields
           schema:
+            description: Specifies fields to return. Default set is 'id','name','start_date'.
             items:
-              enum:
-                - id
-                - child_event_count
-                - editorial_segments
-                - hero_image
-                - image_count
-                - keywords
-                - location
-                - name
-                - start_date
-                - type
-              type: string
+              $ref: "#/components/schemas/EventFieldValues"
+            nullable: true
             type: array
           style: form
         - description: Request results starting at a page number (default is 1, maximum is 50).
@@ -2538,6 +2385,7 @@ paths:
           name: page
           schema:
             default: 1
+            description: Request results starting at a page number (default is 1, maximum is 50).
             format: int32
             type: integer
         - description: Request number of images to return in each page.
@@ -2545,6 +2393,7 @@ paths:
           name: page_size
           schema:
             default: 30
+            description: Request number of images to return in each page.
             format: int32
             type: integer
         - description: Filters to events related to this phrase
@@ -2552,6 +2401,8 @@ paths:
           name: phrase
           schema:
             default: ""
+            description: Filters to events related to this phrase
+            nullable: true
             type: string
       responses:
         "200":
@@ -2722,103 +2573,51 @@ paths:
           in: query
           name: age_of_people
           schema:
+            description: Filter based on the age of individuals in an image.
             items:
-              enum:
-                - newborn
-                - baby
-                - child
-                - teenager
-                - young_adult
-                - adult
-                - adults_only
-                - mature_adult
-                - senior_adult
-                - 0-1_months
-                - 2-5_months
-                - 6-11_months
-                - 12-17_months
-                - 18-23_months
-                - 2-3_years
-                - 4-5_years
-                - 6-7_years
-                - 8-9_years
-                - 10-11_years
-                - 12-13_years
-                - 14-15_years
-                - 16-17_years
-                - 18-19_years
-                - 20-24_years
-                - 20-29_years
-                - 25-29_years
-                - 30-34_years
-                - 30-39_years
-                - 35-39_years
-                - 40-44_years
-                - 40-49_years
-                - 45-49_years
-                - 50-54_years
-                - 50-59_years
-                - 55-59_years
-                - 60-64_years
-                - 60-69_years
-                - 65-69_years
-                - 70-79_years
-                - 80-89_years
-                - 90_plus_years
-                - 100_over
-              type: string
+              $ref: "#/components/schemas/AgeOfPeopleFilterType"
+            nullable: true
             type: array
           style: form
         - description: Search for images by specific artists (free-text, comma-separated list of artists).
           in: query
           name: artists
           schema:
+            description: Search for images by specific artists (free-text, comma-separated list of artists).
+            nullable: true
             type: string
         - description: Filter by collection codes (comma-separated list). Include or exclude based on collections_filter_type.
           explode: false
           in: query
           name: collection_codes
           schema:
+            description: Filter by collection codes (comma-separated list). Include or exclude based on collections_filter_type.
             items:
               type: string
+            nullable: true
             type: array
           style: form
-        - description: Provides searching based on specified collection(s). The default is Include
+        - description: "*Default value*: "
           in: query
           name: collections_filter_type
           schema:
-            enum:
-              - include
-              - exclude
-            type: string
+            $ref: "#/components/schemas/CollectionsFilterType"
         - description: "Filter based on predominant color in an image. Use 6 character hexidecimal format (e.g., #002244). Note: when specified, results will not contain editorial images."
           in: query
           name: color
           schema:
+            description: "Filter based on predominant color in an image. Use 6 character hexidecimal format (e.g., #002244). Note: when specified, results will not contain editorial images."
+            nullable: true
             type: string
         - description: Filter based on image composition.
           explode: false
           in: query
           name: compositions
           schema:
+            description: Filter based on image composition.
             items:
-              enum:
-                - abstract
-                - candid
-                - close_up
-                - copy_space
-                - cut_out
-                - full_frame
-                - full_length
-                - headshot
-                - looking_at_camera
-                - macro
-                - portrait
-                - sparse
-                - still_life
-                - three_quarter_length
-                - waist_up
-              type: string
+              $ref: "#/components/schemas/CompositionsFilterType"
+            nullable: true
             type: array
           style: form
         - description: "Filters based on which product the asset will download against.\r
@@ -2833,20 +2632,33 @@ paths:
           in: query
           name: download_product
           schema:
+            description: "Filters based on which product the asset will download against.\r
+
+              \                    Allowed values are easyaccess, editorialsubscription, imagepack, premiumaccess and royaltyfreesubscription.\r
+
+              \                    If you have more than one instance of a product, you may also include the ID of the product instance you wish to filter on. \r
+
+              \                    For example, some users may have more than one premiumaccess product, so the download_product value would be premiumaccess:1234. \r
+
+              \                    Product ID can be obtained from the GET /products response."
+            nullable: true
             type: string
-        - description: Restrict search results to embeddable images. The default is false.
+        - description: "*Default value*: Microsoft.OpenApi.Any.OpenApiBoolean"
           in: query
           name: embed_content_only
           schema:
+            description: Restrict search results to embeddable images. The default is false.
             type: boolean
         - description: Filter based on specific events
           explode: false
           in: query
           name: event_ids
           schema:
+            description: Filter based on specific events
             items:
               format: int32
               type: integer
+            nullable: true
             type: array
           style: form
         - description: Filter search results based on the ethnicity of individuals in an image.
@@ -2854,77 +2666,27 @@ paths:
           in: query
           name: ethnicity
           schema:
+            description: Filter search results based on the ethnicity of individuals in an image.
             items:
-              enum:
-                - black
-                - caucasian
-                - east_asian
-                - hispanic_latino
-                - japanese
-                - middle_eastern
-                - mixed_race_person
-                - multiethnic_group
-                - native_american_first_nations
-                - pacific_islander
-                - south_asian
-                - southeast_asian
-              type: string
+              $ref: "#/components/schemas/EthnicityFilterType"
+            nullable: true
             type: array
           style: form
-        - description: Excludes images containing nudity. The default is false.
+        - description: "*Default value*: Microsoft.OpenApi.Any.OpenApiBoolean"
           in: query
           name: exclude_nudity
           schema:
+            description: Excludes images containing nudity. The default is false.
             type: boolean
         - description: Specifies fields to return. Defaults to 'summary_set'.
           explode: false
           in: query
           name: fields
           schema:
+            description: Specifies fields to return. Defaults to 'summary_set'.
             items:
-              enum:
-                - accessrestriction
-                - allowed_use
-                - alternative_ids
-                - artist
-                - asset_family
-                - call_for_image
-                - caption
-                - collection_code
-                - collection_id
-                - collection_name
-                - color_type
-                - comp
-                - copyright
-                - date_camera_shot
-                - date_created
-                - date_submitted
-                - detail_set
-                - display_set
-                - download_product
-                - download_sizes
-                - editorial_segments
-                - editorial_source
-                - entity_details
-                - event_ids
-                - graphical_style
-                - id
-                - istock_collection
-                - keywords
-                - largest_downloads
-                - license_model
-                - max_dimensions
-                - orientation
-                - people
-                - preview
-                - product_types
-                - quality_rank
-                - referral_destinations
-                - summary_set
-                - thumb
-                - title
-                - uri_oembed
-              type: string
+              $ref: "#/components/schemas/ImagesFieldValues"
+            nullable: true
             type: array
           style: form
         - description: Return only images having a specific file type.
@@ -2932,11 +2694,10 @@ paths:
           in: query
           name: file_types
           schema:
+            description: Return only images having a specific file type.
             items:
-              enum:
-                - eps
-                - jpg
-              type: string
+              $ref: "#/components/schemas/SearchFileType"
+            nullable: true
             type: array
           style: form
         - description: Filter based on graphical style of the image.
@@ -2944,58 +2705,43 @@ paths:
           in: query
           name: graphical_styles
           schema:
+            description: Filter based on graphical style of the image.
             items:
-              enum:
-                - fine_art
-                - illustration
-                - photography
-                - vector
-              type: string
+              $ref: "#/components/schemas/GraphicalStyle"
+            nullable: true
             type: array
           style: form
-        - description: Provides searching based on specified graphical style(s). The default is Include
+        - description: "*Default value*: "
           in: query
           name: graphical_styles_filter_type
           schema:
-            enum:
-              - include
-              - exclude
-            type: string
+            $ref: "#/components/schemas/GraphicalStylesFilterType"
         - description: Return only images tagged with specific keyword(s). Specify using a comma-separated list of keyword Ids. If keyword Ids and phrase are both specified, only those images matching the query phrase which also contain the requested keyword(s) are returned.
           explode: false
           in: query
           name: keyword_ids
           schema:
+            description: Return only images tagged with specific keyword(s). Specify using a comma-separated list of keyword Ids. If keyword Ids and phrase are both specified, only those images matching the query phrase which also contain the requested keyword(s) are returned.
             items:
               format: int32
               type: integer
+            nullable: true
             type: array
           style: form
-        - description: Filter based on minimum size requested. The default is x-small
+        - description: "*Default value*: "
           in: query
           name: minimum_size
           schema:
-            enum:
-              - x_small
-              - small
-              - medium
-              - large
-              - x_large
-              - xx_large
-              - vector
-            type: string
+            $ref: "#/components/schemas/TeeShirtSize"
         - description: Filter based on the number of people in the image.
           explode: false
           in: query
           name: number_of_people
           schema:
+            description: Filter based on the number of people in the image.
             items:
-              enum:
-                - none
-                - one
-                - two
-                - group
-              type: string
+              $ref: "#/components/schemas/NumberOfPeopleFilterType"
+            nullable: true
             type: array
           style: form
         - description: Return only images with selected aspect ratios.
@@ -3003,14 +2749,10 @@ paths:
           in: query
           name: orientations
           schema:
+            description: Return only images with selected aspect ratios.
             items:
-              enum:
-                - horizontal
-                - vertical
-                - square
-                - panoramic_horizontal
-                - panoramic_vertical
-              type: string
+              $ref: "#/components/schemas/OrientationRequest"
+            nullable: true
             type: array
           style: form
         - description: Request results starting at a page number (default is 1).
@@ -3018,6 +2760,7 @@ paths:
           name: page
           schema:
             default: 1
+            description: Request results starting at a page number (default is 1).
             format: int32
             type: integer
         - description: Request number of images to return in each page.
@@ -3025,30 +2768,30 @@ paths:
           name: page_size
           schema:
             default: 30
+            description: Request number of images to return in each page.
             format: int32
             type: integer
         - description: Search images using a search phrase.
           in: query
           name: phrase
           schema:
+            description: Search images using a search phrase.
+            nullable: true
             type: string
-        - description: Select sort order of results.  The default is best_match
+        - description: "*Default value*: "
           in: query
           name: sort_order
           schema:
-            enum:
-              - best_match
-              - most_popular
-              - newest
-              - random
-            type: string
+            $ref: "#/components/schemas/BlendedImageSortOrder"
         - description: Return only images associated with specific people (using a comma-delimited list).
           explode: false
           in: query
           name: specific_people
           schema:
+            description: Return only images associated with specific people (using a comma-delimited list).
             items:
               type: string
+            nullable: true
             type: array
           style: form
       responses:
@@ -3212,103 +2955,51 @@ paths:
           in: query
           name: age_of_people
           schema:
+            description: Filter based on the age of individuals in an image.
             items:
-              enum:
-                - newborn
-                - baby
-                - child
-                - teenager
-                - young_adult
-                - adult
-                - adults_only
-                - mature_adult
-                - senior_adult
-                - 0-1_months
-                - 2-5_months
-                - 6-11_months
-                - 12-17_months
-                - 18-23_months
-                - 2-3_years
-                - 4-5_years
-                - 6-7_years
-                - 8-9_years
-                - 10-11_years
-                - 12-13_years
-                - 14-15_years
-                - 16-17_years
-                - 18-19_years
-                - 20-24_years
-                - 20-29_years
-                - 25-29_years
-                - 30-34_years
-                - 30-39_years
-                - 35-39_years
-                - 40-44_years
-                - 40-49_years
-                - 45-49_years
-                - 50-54_years
-                - 50-59_years
-                - 55-59_years
-                - 60-64_years
-                - 60-69_years
-                - 65-69_years
-                - 70-79_years
-                - 80-89_years
-                - 90_plus_years
-                - 100_over
-              type: string
+              $ref: "#/components/schemas/AgeOfPeopleFilterType"
+            nullable: true
             type: array
           style: form
         - description: Search for images by specific artists (free-text, comma-separated list of artists).
           in: query
           name: artists
           schema:
+            description: Search for images by specific artists (free-text, comma-separated list of artists).
+            nullable: true
             type: string
         - description: Filter by collection codes (comma-separated list). Include or exclude based on collections_filter_type.
           explode: false
           in: query
           name: collection_codes
           schema:
+            description: Filter by collection codes (comma-separated list). Include or exclude based on collections_filter_type.
             items:
               type: string
+            nullable: true
             type: array
           style: form
-        - description: Use to include or exclude collections from search. The default is include
+        - description: "*Default value*: "
           in: query
           name: collections_filter_type
           schema:
-            enum:
-              - include
-              - exclude
-            type: string
+            $ref: "#/components/schemas/CollectionsFilterType"
         - description: "Filter based on predominant color in an image. Use 6 character hexidecimal format (e.g., #002244)."
           in: query
           name: color
           schema:
+            description: "Filter based on predominant color in an image. Use 6 character hexidecimal format (e.g., #002244)."
+            nullable: true
             type: string
         - description: Filter based on image composition.
           explode: false
           in: query
           name: compositions
           schema:
+            description: Filter based on image composition.
             items:
-              enum:
-                - abstract
-                - candid
-                - close_up
-                - copy_space
-                - cut_out
-                - full_frame
-                - full_length
-                - headshot
-                - looking_at_camera
-                - macro
-                - portrait
-                - sparse
-                - still_life
-                - three_quarter_length
-                - waist_up
-              type: string
+              $ref: "#/components/schemas/CompositionsFilterType"
+            nullable: true
             type: array
           style: form
         - description: "Filters based on which product the asset will download against.\r
@@ -3323,43 +3014,45 @@ paths:
           in: query
           name: download_product
           schema:
+            description: "Filters based on which product the asset will download against.\r
+
+              \                    Allowed values are easyaccess, editorialsubscription, imagepack, premiumaccess and royaltyfreesubscription.\r
+
+              \                    If you have more than one instance of a product, you may also include the ID of the product instance you wish to filter on. \r
+
+              \                    For example, some users may have more than one premiumaccess product, so the download_product value would be premiumaccess:1234. \r
+
+              \                    Product ID can be obtained from the GET /products response."
+            nullable: true
             type: string
-        - description: Restrict search results to embeddable images. The default is false.
+        - description: "*Default value*: Microsoft.OpenApi.Any.OpenApiBoolean"
           in: query
           name: embed_content_only
           schema:
+            description: Restrict search results to embeddable images. The default is false.
             type: boolean
         - description: Filter search results based on the ethnicity of individuals in an image.
           explode: false
           in: query
           name: ethnicity
           schema:
+            description: Filter search results based on the ethnicity of individuals in an image.
             items:
-              enum:
-                - black
-                - caucasian
-                - east_asian
-                - hispanic_latino
-                - japanese
-                - middle_eastern
-                - mixed_race_person
-                - multiethnic_group
-                - native_american_first_nations
-                - pacific_islander
-                - south_asian
-                - southeast_asian
-              type: string
+              $ref: "#/components/schemas/EthnicityFilterType"
+            nullable: true
             type: array
           style: form
-        - description: Excludes images containing nudity. The default is false.
+        - description: "*Default value*: Microsoft.OpenApi.Any.OpenApiBoolean"
           in: query
           name: exclude_nudity
           schema:
+            description: Excludes images containing nudity. The default is false.
             type: boolean
         - description: Exclude images that are only available for editorial (non-commercial) use. Default value is false.
           in: query
           name: exclude_editorial_use_only
           schema:
+            description: Exclude images that are only available for editorial (non-commercial) use. Default value is false.
             nullable: true
             type: boolean
         - description: Specifies fields to return. Defaults to 'summary_set'.
@@ -3367,44 +3060,10 @@ paths:
           in: query
           name: fields
           schema:
+            description: Specifies fields to return. Defaults to 'summary_set'.
             items:
-              enum:
-                - allowed_use
-                - alternative_ids
-                - artist
-                - asset_family
-                - call_for_image
-                - caption
-                - collection_code
-                - collection_id
-                - collection_name
-                - color_type
-                - comp
-                - copyright
-                - date_camera_shot
-                - date_created
-                - date_submitted
-                - detail_set
-                - display_set
-                - download_product
-                - download_sizes
-                - graphical_style
-                - id
-                - istock_collection
-                - keywords
-                - largest_downloads
-                - license_model
-                - max_dimensions
-                - orientation
-                - preview
-                - product_types
-                - quality_rank
-                - referral_destinations
-                - summary_set
-                - thumb
-                - title
-                - uri_oembed
-              type: string
+              $ref: "#/components/schemas/CreativeImagesFieldValues"
+            nullable: true
             type: array
           style: form
         - description: Return only images having a specific file type.
@@ -3412,11 +3071,10 @@ paths:
           in: query
           name: file_types
           schema:
+            description: Return only images having a specific file type.
             items:
-              enum:
-                - eps
-                - jpg
-              type: string
+              $ref: "#/components/schemas/SearchFileType"
+            nullable: true
             type: array
           style: form
         - description: Filter based on graphical style of the image.
@@ -3424,58 +3082,43 @@ paths:
           in: query
           name: graphical_styles
           schema:
+            description: Filter based on graphical style of the image.
             items:
-              enum:
-                - fine_art
-                - illustration
-                - photography
-                - vector
-              type: string
+              $ref: "#/components/schemas/GraphicalStyle"
+            nullable: true
             type: array
           style: form
-        - description: Provides searching based on specified graphical style(s). The default is include.
+        - description: "*Default value*: "
           in: query
           name: graphical_styles_filter_type
           schema:
-            enum:
-              - include
-              - exclude
-            type: string
+            $ref: "#/components/schemas/GraphicalStylesFilterType"
         - description: Return only images tagged with specific keyword(s). Specify using a comma-separated list of keyword Ids. If keyword Ids and phrase are both specified, only those images matching the query phrase which also contain the requested keyword(s) are returned.
           explode: false
           in: query
           name: keyword_ids
           schema:
+            description: Return only images tagged with specific keyword(s). Specify using a comma-separated list of keyword Ids. If keyword Ids and phrase are both specified, only those images matching the query phrase which also contain the requested keyword(s) are returned.
             items:
               format: int32
               type: integer
+            nullable: true
             type: array
           style: form
-        - description: Filter based on minimum size requested. The default is x-small.
+        - description: "*Default value*: "
           in: query
           name: minimum_size
           schema:
-            enum:
-              - x_small
-              - small
-              - medium
-              - large
-              - x_large
-              - xx_large
-              - vector
-            type: string
+            $ref: "#/components/schemas/TeeShirtSize"
         - description: Filter based on the number of people in the image.
           explode: false
           in: query
           name: number_of_people
           schema:
+            description: Filter based on the number of people in the image.
             items:
-              enum:
-                - none
-                - one
-                - two
-                - group
-              type: string
+              $ref: "#/components/schemas/NumberOfPeopleFilterType"
+            nullable: true
             type: array
           style: form
         - description: Return only images with selected aspect ratios.
@@ -3483,14 +3126,10 @@ paths:
           in: query
           name: orientations
           schema:
+            description: Return only images with selected aspect ratios.
             items:
-              enum:
-                - horizontal
-                - vertical
-                - square
-                - panoramic_horizontal
-                - panoramic_vertical
-              type: string
+              $ref: "#/components/schemas/OrientationRequest"
+            nullable: true
             type: array
           style: form
         - description: Request results starting at a page number (default is 1).
@@ -3498,6 +3137,7 @@ paths:
           name: page
           schema:
             default: 1
+            description: Request results starting at a page number (default is 1).
             format: int32
             type: integer
         - description: Request number of images to return in each page.
@@ -3505,6 +3145,7 @@ paths:
           name: page_size
           schema:
             default: 30
+            description: Request number of images to return in each page.
             format: int32
             type: integer
         - description: Search images using a search phrase.
@@ -3512,17 +3153,14 @@ paths:
           name: phrase
           schema:
             default: ""
+            description: Search images using a search phrase.
+            nullable: true
             type: string
-        - description: Select sort order of results.  The default is best_match
+        - description: "*Default value*: "
           in: query
           name: sort_order
           schema:
-            enum:
-              - best_match
-              - most_popular
-              - newest
-              - random
-            type: string
+            $ref: "#/components/schemas/CreativeImageSortOrder"
         - description: "Specifies the facets to return in the response. Facets provide additional search parameters to refine your results.\r
 
             \                   The include_facets parameter must be set to \"true\" for facets to be returned."
@@ -3530,23 +3168,26 @@ paths:
           in: query
           name: facet_fields
           schema:
+            description: "Specifies the facets to return in the response. Facets provide additional search parameters to refine your results.\r
+
+              \                   The include_facets parameter must be set to \"true\" for facets to be returned."
             items:
-              enum:
-                - artists
-                - locations
-              type: string
+              $ref: "#/components/schemas/CreateImageSearchFacetsFields"
+            nullable: true
             type: array
           style: form
         - description: Specifies whether or not to include facets in the result set. Default is "false".
           in: query
           name: include_facets
           schema:
+            description: Specifies whether or not to include facets in the result set. Default is "false".
             nullable: true
             type: boolean
-        - description: Specifies the maximum number of facets to return per type. Default is 300.
+        - description: "*Default value*: Microsoft.OpenApi.Any.OpenApiInteger"
           in: query
           name: facet_max_count
           schema:
+            description: Specifies the maximum number of facets to return per type. Default is 300.
             format: int32
             type: integer
       responses:
@@ -3605,55 +3246,25 @@ paths:
           in: query
           name: image_url
           schema:
+            description: Specifies the location of the image to use in the search.
+            nullable: true
             type: string
         - description: CURRENTLY HAS NO EFFECT
           in: query
           name: image_fingerprint
           schema:
+            description: CURRENTLY HAS NO EFFECT
+            nullable: true
             type: string
         - description: Specifies fields to return. Defaults to 'summary_set'.
           explode: false
           in: query
           name: fields
           schema:
+            description: Specifies fields to return. Defaults to 'summary_set'.
             items:
-              enum:
-                - allowed_use
-                - alternative_ids
-                - artist
-                - asset_family
-                - call_for_image
-                - caption
-                - collection_code
-                - collection_id
-                - collection_name
-                - color_type
-                - comp
-                - copyright
-                - date_camera_shot
-                - date_created
-                - date_submitted
-                - detail_set
-                - display_set
-                - download_product
-                - download_sizes
-                - graphical_style
-                - id
-                - istock_collection
-                - keywords
-                - largest_downloads
-                - license_model
-                - max_dimensions
-                - orientation
-                - preview
-                - product_types
-                - quality_rank
-                - referral_destinations
-                - summary_set
-                - thumb
-                - title
-                - uri_oembed
-              type: string
+              $ref: "#/components/schemas/CreativeImagesFieldValues"
+            nullable: true
             type: array
           style: form
         - description: "Filter images to those from one of your product types. \r
@@ -3669,8 +3280,18 @@ paths:
           in: query
           name: product_types
           schema:
+            description: "Filter images to those from one of your product types. \r
+
+              \                    Allowed values are easyaccess, imagepack, premiumaccess and royaltyfreesubscription. \r
+
+              \                    If you have more than one instance of a product, you may also include the ID of the product instance you wish to filter on. \r
+
+              \                    For example, some users may have more than one premiumaccess product, so the product_types value would be premiumaccess:1234. \r
+
+              \                    Product ID can be obtained from the GET /products response."
             items:
               type: string
+            nullable: true
             type: array
           style: form
         - description: Request results starting at a page number (default is 1).
@@ -3678,6 +3299,7 @@ paths:
           name: page
           schema:
             default: 1
+            description: Request results starting at a page number (default is 1).
             format: int32
             type: integer
         - description: Request number of images to return in each page.
@@ -3685,6 +3307,7 @@ paths:
           name: page_size
           schema:
             default: 30
+            description: Request number of images to return in each page.
             format: int32
             type: integer
         - description: "Specifies the facets to return in the response. Facets provide additional search parameters to refine your results.\r
@@ -3694,23 +3317,26 @@ paths:
           in: query
           name: facet_fields
           schema:
+            description: "Specifies the facets to return in the response. Facets provide additional search parameters to refine your results.\r
+
+              \                    The include_facets parameter must be set to \"true\" for facets to be returned."
             items:
-              enum:
-                - artists
-                - locations
-              type: string
+              $ref: "#/components/schemas/CreateImageSearchFacetsFields"
+            nullable: true
             type: array
           style: form
-        - description: Specifies the maximum number of facets to return per type. Default is 300.
+        - description: "*Default value*: Microsoft.OpenApi.Any.OpenApiInteger"
           in: query
           name: facet_max_count
           schema:
+            description: Specifies the maximum number of facets to return per type. Default is 300.
             format: int32
             type: integer
         - description: Specifies whether or not to include facets in the result set. Default is "false".
           in: query
           name: include_facets
           schema:
+            description: Specifies whether or not to include facets in the result set. Default is "false".
             nullable: true
             type: boolean
       responses:
@@ -3878,98 +3504,44 @@ paths:
           in: query
           name: age_of_people
           schema:
+            description: Filter based on the age of individuals in an image.
             items:
-              enum:
-                - newborn
-                - baby
-                - child
-                - teenager
-                - young_adult
-                - adult
-                - adults_only
-                - mature_adult
-                - senior_adult
-                - 0-1_months
-                - 2-5_months
-                - 6-11_months
-                - 12-17_months
-                - 18-23_months
-                - 2-3_years
-                - 4-5_years
-                - 6-7_years
-                - 8-9_years
-                - 10-11_years
-                - 12-13_years
-                - 14-15_years
-                - 16-17_years
-                - 18-19_years
-                - 20-24_years
-                - 20-29_years
-                - 25-29_years
-                - 30-34_years
-                - 30-39_years
-                - 35-39_years
-                - 40-44_years
-                - 40-49_years
-                - 45-49_years
-                - 50-54_years
-                - 50-59_years
-                - 55-59_years
-                - 60-64_years
-                - 60-69_years
-                - 65-69_years
-                - 70-79_years
-                - 80-89_years
-                - 90_plus_years
-                - 100_over
-              type: string
+              $ref: "#/components/schemas/AgeOfPeopleFilterType"
+            nullable: true
             type: array
           style: form
         - description: Search for images by specific artists (free-text, comma-separated list of artists).
           in: query
           name: artists
           schema:
+            description: Search for images by specific artists (free-text, comma-separated list of artists).
+            nullable: true
             type: string
         - description: Filter by collections (comma-separated list of collection codes). Include or exclude based on collections_filter_type.
           explode: false
           in: query
           name: collection_codes
           schema:
+            description: Filter by collections (comma-separated list of collection codes). Include or exclude based on collections_filter_type.
             items:
               type: string
+            nullable: true
             type: array
           style: form
-        - description: Use to include or exclude collections from search. The default is include
+        - description: "*Default value*: "
           in: query
           name: collections_filter_type
           schema:
-            enum:
-              - include
-              - exclude
-            type: string
+            $ref: "#/components/schemas/CollectionsFilterType"
         - description: Filter based on image composition.
           explode: false
           in: query
           name: compositions
           schema:
+            description: Filter based on image composition.
             items:
-              enum:
-                - abstract
-                - candid
-                - close_up
-                - copy_space
-                - cut_out
-                - full_frame
-                - full_length
-                - headshot
-                - looking_at_camera
-                - macro
-                - portrait
-                - sparse
-                - still_life
-                - three_quarter_length
-                - waist_up
-              type: string
+              $ref: "#/components/schemas/CompositionsFilterType"
+            nullable: true
             type: array
           style: form
         - description: "Filters based on which product the asset will download against.\r
@@ -3984,21 +3556,26 @@ paths:
           in: query
           name: download_product
           schema:
+            description: "Filters based on which product the asset will download against.\r
+
+              \                    Allowed values are easyaccess, editorialsubscription, imagepack, premiumaccess and royaltyfreesubscription.\r
+
+              \                    If you have more than one instance of a product, you may also include the ID of the product instance you wish to filter on. \r
+
+              \                    For example, some users may have more than one premiumaccess product, so the download_product value would be premiumaccess:1234. \r
+
+              \                    Product ID can be obtained from the GET /products response."
+            nullable: true
             type: string
         - description: Return only events with a matching editorial segment.
           explode: false
           in: query
           name: editorial_segments
           schema:
+            description: Return only events with a matching editorial segment.
             items:
-              enum:
-                - archival
-                - entertainment
-                - news
-                - publicity
-                - royalty
-                - sport
-              type: string
+              $ref: "#/components/schemas/EditorialSegmentContract"
+            nullable: true
             type: array
           style: form
         - description: specify linked data entity uri.
@@ -4006,19 +3583,23 @@ paths:
           in: query
           name: entity_uris
           schema:
+            description: specify linked data entity uri.
             items:
               type: string
+            nullable: true
             type: array
           style: form
-        - description: Restrict search results to embeddable images. The default is false.
+        - description: "*Default value*: Microsoft.OpenApi.Any.OpenApiBoolean"
           in: query
           name: embed_content_only
           schema:
+            description: Restrict search results to embeddable images. The default is false.
             type: boolean
         - description: Return only images that are created on or after this date. Use ISO 8601 format (e.g., 1999-12-31).
           in: query
           name: date_from
           schema:
+            description: Return only images that are created on or after this date. Use ISO 8601 format (e.g., 1999-12-31).
             format: date-time
             nullable: true
             type: string
@@ -4026,6 +3607,7 @@ paths:
           in: query
           name: date_to
           schema:
+            description: Return only images that are created on or before this date. Use ISO 8601 format (e.g., 1999-12-31).
             format: date-time
             nullable: true
             type: string
@@ -4034,9 +3616,11 @@ paths:
           in: query
           name: event_ids
           schema:
+            description: Filter based on specific events
             items:
               format: int32
               type: integer
+            nullable: true
             type: array
           style: form
         - description: Filter search results based on the ethnicity of individuals in an image.
@@ -4044,21 +3628,10 @@ paths:
           in: query
           name: ethnicity
           schema:
+            description: Filter search results based on the ethnicity of individuals in an image.
             items:
-              enum:
-                - black
-                - caucasian
-                - east_asian
-                - hispanic_latino
-                - japanese
-                - middle_eastern
-                - mixed_race_person
-                - multiethnic_group
-                - native_american_first_nations
-                - pacific_islander
-                - south_asian
-                - southeast_asian
-              type: string
+              $ref: "#/components/schemas/EthnicityFilterType"
+            nullable: true
             type: array
           style: form
         - description: Specifies fields to return. Defaults to 'summary_set'.
@@ -4066,48 +3639,10 @@ paths:
           in: query
           name: fields
           schema:
+            description: Specifies fields to return. Defaults to 'summary_set'.
             items:
-              enum:
-                - allowed_use
-                - alternative_ids
-                - artist
-                - asset_family
-                - call_for_image
-                - caption
-                - collection_code
-                - collection_id
-                - collection_name
-                - color_type
-                - comp
-                - copyright
-                - date_camera_shot
-                - date_created
-                - date_submitted
-                - detail_set
-                - display_set
-                - download_product
-                - download_sizes
-                - editorial_segments
-                - editorial_source
-                - entity_details
-                - event_ids
-                - graphical_style
-                - id
-                - keywords
-                - largest_downloads
-                - license_model
-                - max_dimensions
-                - orientation
-                - people
-                - preview
-                - product_types
-                - quality_rank
-                - referral_destinations
-                - summary_set
-                - thumb
-                - title
-                - uri_oembed
-              type: string
+              $ref: "#/components/schemas/EditorialImagesFieldValues"
+            nullable: true
             type: array
           style: form
         - description: Return only images having a specific file type.
@@ -4115,11 +3650,10 @@ paths:
           in: query
           name: file_types
           schema:
+            description: Return only images having a specific file type.
             items:
-              enum:
-                - eps
-                - jpg
-              type: string
+              $ref: "#/components/schemas/SearchFileType"
+            nullable: true
             type: array
           style: form
         - description: Filter based on graphical style of the image.
@@ -4127,57 +3661,43 @@ paths:
           in: query
           name: graphical_styles
           schema:
+            description: Filter based on graphical style of the image.
             items:
-              enum:
-                - photography
-                - illustration
-                - vector
-              type: string
+              $ref: "#/components/schemas/EditorialGraphicalStyle"
+            nullable: true
             type: array
           style: form
-        - description: Provides searching based on specified graphical style(s). The default is include.
+        - description: "*Default value*: "
           in: query
           name: graphical_styles_filter_type
           schema:
-            enum:
-              - include
-              - exclude
-            type: string
+            $ref: "#/components/schemas/GraphicalStylesFilterType"
         - description: Return only images tagged with specific keyword(s). Specify using a comma-separated list of keyword Ids. If keyword Ids and phrase are both specified, only those images matching the query phrase which also contain the requested keyword(s) are returned.
           explode: false
           in: query
           name: keyword_ids
           schema:
+            description: Return only images tagged with specific keyword(s). Specify using a comma-separated list of keyword Ids. If keyword Ids and phrase are both specified, only those images matching the query phrase which also contain the requested keyword(s) are returned.
             items:
               format: int32
               type: integer
+            nullable: true
             type: array
           style: form
-        - description: Filter based on minimum size requested. The default is x-small.
+        - description: "*Default value*: "
           in: query
           name: minimum_size
           schema:
-            enum:
-              - x_small
-              - small
-              - medium
-              - large
-              - x_large
-              - xx_large
-              - vector
-            type: string
+            $ref: "#/components/schemas/TeeShirtSize"
         - description: Filter based on the number of people in the image.
           explode: false
           in: query
           name: number_of_people
           schema:
+            description: Filter based on the number of people in the image.
             items:
-              enum:
-                - none
-                - one
-                - two
-                - group
-              type: string
+              $ref: "#/components/schemas/NumberOfPeopleFilterType"
+            nullable: true
             type: array
           style: form
         - description: Return only images with selected aspect ratios.
@@ -4185,14 +3705,10 @@ paths:
           in: query
           name: orientations
           schema:
+            description: Return only images with selected aspect ratios.
             items:
-              enum:
-                - horizontal
-                - vertical
-                - square
-                - panoramic_horizontal
-                - panoramic_vertical
-              type: string
+              $ref: "#/components/schemas/OrientationRequest"
+            nullable: true
             type: array
           style: form
         - description: Request results starting at a page number (default is 1).
@@ -4200,6 +3716,7 @@ paths:
           name: page
           schema:
             default: 1
+            description: Request results starting at a page number (default is 1).
             format: int32
             type: integer
         - description: Request number of images to return in each page.
@@ -4207,37 +3724,37 @@ paths:
           name: page_size
           schema:
             default: 30
+            description: Request number of images to return in each page.
             format: int32
             type: integer
         - description: Search images using a search phrase.
           in: query
           name: phrase
           schema:
+            description: Search images using a search phrase.
+            nullable: true
             type: string
-        - description: Select sort order of results.  The default is best_match
+        - description: "*Default value*: "
           in: query
           name: sort_order
           schema:
-            enum:
-              - best_match
-              - most_popular
-              - newest
-              - oldest
-              - random
-            type: string
+            $ref: "#/components/schemas/SortOrder"
         - description: Return only images associated with specific people (using a comma-delimited list).
           explode: false
           in: query
           name: specific_people
           schema:
+            description: Return only images associated with specific people (using a comma-delimited list).
             items:
               type: string
+            nullable: true
             type: array
           style: form
         - description: Filter search results based on minimum quality ranking. Possible values 1, 2, 3 with 1 being best.
           in: query
           name: minimum_quality_rank
           schema:
+            description: Filter search results based on minimum quality ranking. Possible values 1, 2, 3 with 1 being best.
             format: int32
             nullable: true
             type: integer
@@ -4248,25 +3765,26 @@ paths:
           in: query
           name: facet_fields
           schema:
+            description: "Specifies the facets to return in the response. Facets provide additional search parameters to refine your results.\r
+
+              \                   The include_facets parameter must be set to \"true\" for facets to be returned."
             items:
-              enum:
-                - artists
-                - events
-                - locations
-                - specific_people
-              type: string
+              $ref: "#/components/schemas/EditorialImageSearchFacetsFields"
+            nullable: true
             type: array
           style: form
         - description: Specifies whether or not to include facets in the result set. Default is "false".
           in: query
           name: include_facets
           schema:
+            description: Specifies whether or not to include facets in the result set. Default is "false".
             nullable: true
             type: boolean
-        - description: Specifies the maximum number of facets to return per type. Default is 300.
+        - description: "*Default value*: Microsoft.OpenApi.Any.OpenApiInteger"
           in: query
           name: facet_max_count
           schema:
+            description: Specifies the maximum number of facets to return per type. Default is 300.
             format: int32
             type: integer
       responses:
@@ -4441,75 +3959,35 @@ paths:
           in: query
           name: age_of_people
           schema:
+            description: Provides filtering according to the age of individuals in a video.
             items:
-              enum:
-                - newborn
-                - baby
-                - child
-                - teenager
-                - young_adult
-                - adult
-                - adults_only
-                - mature_adult
-                - senior_adult
-                - 0-1_months
-                - 2-5_months
-                - 6-11_months
-                - 12-17_months
-                - 18-23_months
-                - 2-3_years
-                - 4-5_years
-                - 6-7_years
-                - 8-9_years
-                - 10-11_years
-                - 12-13_years
-                - 14-15_years
-                - 16-17_years
-                - 18-19_years
-                - 20-24_years
-                - 20-29_years
-                - 25-29_years
-                - 30-34_years
-                - 30-39_years
-                - 35-39_years
-                - 40-44_years
-                - 40-49_years
-                - 45-49_years
-                - 50-54_years
-                - 50-59_years
-                - 55-59_years
-                - 60-64_years
-                - 60-69_years
-                - 65-69_years
-                - 70-79_years
-                - 80-89_years
-                - 90_plus_years
-                - 100_over
-              type: string
+              $ref: "#/components/schemas/AgeOfPeopleFilterType"
+            nullable: true
             type: array
           style: form
         - description: Search for images by specific artists (free-text, comma-separated list of artists).
           in: query
           name: artists
           schema:
+            description: Search for images by specific artists (free-text, comma-separated list of artists).
+            nullable: true
             type: string
         - description: Provides filtering by collection code.
           explode: false
           in: query
           name: collection_codes
           schema:
+            description: Provides filtering by collection code.
             items:
               type: string
+            nullable: true
             type: array
           style: form
-        - description: Use to include or exclude collections from search. The default is include
+        - description: "*Default value*: "
           in: query
           name: collections_filter_type
           schema:
-            enum:
-              - include
-              - exclude
-            type: string
+            $ref: "#/components/schemas/CollectionsFilterType"
         - description: "Filters based on which product the asset will download against.\r
 
             \                    Allowed values are easyaccess, editorialsubscription, imagepack, premiumaccess and royaltyfreesubscription.\r
@@ -4522,34 +4000,31 @@ paths:
           in: query
           name: download_product
           schema:
+            description: "Filters based on which product the asset will download against.\r
+
+              \                    Allowed values are easyaccess, editorialsubscription, imagepack, premiumaccess and royaltyfreesubscription.\r
+
+              \                    If you have more than one instance of a product, you may also include the ID of the product instance you wish to filter on. \r
+
+              \                    For example, some users may have more than one premiumaccess product, so the download_product value would be premiumaccess:1234. \r
+
+              \                    Product ID can be obtained from the GET /products response."
+            nullable: true
             type: string
         - description: Filters according to the digital video format available on a film asset.
           in: query
           name: format_available
           schema:
-            enum:
-              - sd
-              - hd
-              - 4k
-              - hd_web
-            nullable: true
-            type: string
+            $ref: "#/components/schemas/VideoFormatsRequest"
         - description: Provides filtering by video frame rate (frames/second).
           explode: false
           in: query
           name: frame_rates
           schema:
+            description: Provides filtering by video frame rate (frames/second).
             items:
-              enum:
-                - "23.98"
-                - "24"
-                - "25"
-                - "29.97"
-                - "30"
-                - "50"
-                - "59.94"
-                - "60"
-              type: string
+              $ref: "#/components/schemas/VideoFrameRates"
+            nullable: true
             type: array
           style: form
         - description: Specifies fields to return. Defaults to 'summary_set'.
@@ -4557,44 +4032,10 @@ paths:
           in: query
           name: fields
           schema:
+            description: Specifies fields to return. Defaults to 'summary_set'.
             items:
-              enum:
-                - allowed_use
-                - artist
-                - asset_family
-                - call_for_image
-                - caption
-                - clip_length
-                - collection_code
-                - collection_id
-                - collection_name
-                - color_type
-                - comp
-                - copyright
-                - date_created
-                - date_submitted
-                - detail_set
-                - display_set
-                - download_product
-                - download_sizes
-                - era
-                - id
-                - istock_collection
-                - keywords
-                - largest_downloads
-                - license_model
-                - mastered_to
-                - originally_shot_on
-                - object_name
-                - preview
-                - product_types
-                - referral_destinations
-                - shot_speed
-                - source
-                - summary_set
-                - thumb
-                - title
-              type: string
+              $ref: "#/components/schemas/CreativeVideosFieldValues"
+            nullable: true
             type: array
           style: form
         - description: Return only images tagged with specific keyword(s). Specify using a comma-separated list of keyword Ids. If keyword Ids and phrase are both specified, only those images matching the query phrase which also contain the requested keyword(s) are returned.
@@ -4602,9 +4043,11 @@ paths:
           in: query
           name: keyword_ids
           schema:
+            description: Return only images tagged with specific keyword(s). Specify using a comma-separated list of keyword Ids. If keyword Ids and phrase are both specified, only those images matching the query phrase which also contain the requested keyword(s) are returned.
             items:
               format: int32
               type: integer
+            nullable: true
             type: array
           style: form
         - description: Specifies the video licensing model(s).
@@ -4612,11 +4055,10 @@ paths:
           in: query
           name: license_models
           schema:
+            description: Specifies the video licensing model(s).
             items:
-              enum:
-                - rightsready
-                - royaltyfree
-              type: string
+              $ref: "#/components/schemas/LicenseModelVideoRequest"
+            nullable: true
             type: array
           style: form
         - description: Provides filtering by minimum length of video clip, in seconds
@@ -4624,6 +4066,7 @@ paths:
           name: min_clip_length
           schema:
             default: 0
+            description: Provides filtering by minimum length of video clip, in seconds
             format: int32
             type: integer
         - description: Provides filtering by maximum length of video, in seconds
@@ -4631,6 +4074,7 @@ paths:
           name: max_clip_length
           schema:
             default: 0
+            description: Provides filtering by maximum length of video, in seconds
             format: int32
             type: integer
         - description: Identifies page to return. Default is 1.
@@ -4638,6 +4082,7 @@ paths:
           name: page
           schema:
             default: 1
+            description: Identifies page to return. Default is 1.
             format: int32
             type: integer
         - description: Specifies page size. Default is 30, maximum page_size is 100.
@@ -4645,6 +4090,7 @@ paths:
           name: page_size
           schema:
             default: 30
+            description: Specifies page size. Default is 30, maximum page_size is 100.
             format: int32
             type: integer
         - description: Free-text search query.
@@ -4652,26 +4098,19 @@ paths:
           name: phrase
           schema:
             default: ""
+            description: Free-text search query.
+            nullable: true
             type: string
-        - description: Select sort order of results.  The default is best_match
+        - description: "*Default value*: "
           in: query
           name: sort_order
           schema:
-            enum:
-              - best_match
-              - most_popular
-              - newest
-              - random
-            type: string
+            $ref: "#/components/schemas/CreativeVideoSortOrder"
         - description: Allows filtering by type of model release.
           in: query
           name: release_status
           schema:
-            enum:
-              - release_not_important
-              - fully_released
-            nullable: true
-            type: string
+            $ref: "#/components/schemas/ReleaseStatus"
         - description: "Specifies the facets to return in the response. Facets provide additional search parameters to refine your results.\r
 
             \                   The include_facets parameter must be set to \"true\" for facets to be returned."
@@ -4679,23 +4118,26 @@ paths:
           in: query
           name: facet_fields
           schema:
+            description: "Specifies the facets to return in the response. Facets provide additional search parameters to refine your results.\r
+
+              \                   The include_facets parameter must be set to \"true\" for facets to be returned."
             items:
-              enum:
-                - artists
-                - locations
-              type: string
+              $ref: "#/components/schemas/CreateVideoSearchFacetsFields"
+            nullable: true
             type: array
           style: form
-        - description: Specifies the maximum number of facets to return per type. Default is 300.
+        - description: "*Default value*: Microsoft.OpenApi.Any.OpenApiInteger"
           in: query
           name: facet_max_count
           schema:
+            description: Specifies the maximum number of facets to return per type. Default is 300.
             format: int32
             type: integer
         - description: Specifies whether or not to include facets in the result set. Default is "false".
           in: query
           name: include_facets
           schema:
+            description: Specifies whether or not to include facets in the result set. Default is "false".
             nullable: true
             type: boolean
       responses:
@@ -4864,75 +4306,35 @@ paths:
           in: query
           name: age_of_people
           schema:
+            description: Provides filtering according to the age of individuals in a video.
             items:
-              enum:
-                - newborn
-                - baby
-                - child
-                - teenager
-                - young_adult
-                - adult
-                - adults_only
-                - mature_adult
-                - senior_adult
-                - 0-1_months
-                - 2-5_months
-                - 6-11_months
-                - 12-17_months
-                - 18-23_months
-                - 2-3_years
-                - 4-5_years
-                - 6-7_years
-                - 8-9_years
-                - 10-11_years
-                - 12-13_years
-                - 14-15_years
-                - 16-17_years
-                - 18-19_years
-                - 20-24_years
-                - 20-29_years
-                - 25-29_years
-                - 30-34_years
-                - 30-39_years
-                - 35-39_years
-                - 40-44_years
-                - 40-49_years
-                - 45-49_years
-                - 50-54_years
-                - 50-59_years
-                - 55-59_years
-                - 60-64_years
-                - 60-69_years
-                - 65-69_years
-                - 70-79_years
-                - 80-89_years
-                - 90_plus_years
-                - 100_over
-              type: string
+              $ref: "#/components/schemas/AgeOfPeopleFilterType"
+            nullable: true
             type: array
           style: form
         - description: Search for images by specific artists (free-text, comma-separated list of artists).
           in: query
           name: artists
           schema:
+            description: Search for images by specific artists (free-text, comma-separated list of artists).
+            nullable: true
             type: string
         - description: Provides filtering by collection code.
           explode: false
           in: query
           name: collection_codes
           schema:
+            description: Provides filtering by collection code.
             items:
               type: string
+            nullable: true
             type: array
           style: form
-        - description: Use to include or exclude collections from search. The default is include
+        - description: "*Default value*: "
           in: query
           name: collections_filter_type
           schema:
-            enum:
-              - include
-              - exclude
-            type: string
+            $ref: "#/components/schemas/CollectionsFilterType"
         - description: "Filters based on which product the asset will download against.\r
 
             \                    Allowed values are easyaccess, editorialsubscription, imagepack, premiumaccess and royaltyfreesubscription.\r
@@ -4945,17 +4347,26 @@ paths:
           in: query
           name: download_product
           schema:
+            description: "Filters based on which product the asset will download against.\r
+
+              \                    Allowed values are easyaccess, editorialsubscription, imagepack, premiumaccess and royaltyfreesubscription.\r
+
+              \                    If you have more than one instance of a product, you may also include the ID of the product instance you wish to filter on. \r
+
+              \                    For example, some users may have more than one premiumaccess product, so the download_product value would be premiumaccess:1234. \r
+
+              \                    Product ID can be obtained from the GET /products response."
+            nullable: true
             type: string
         - description: Allows filtering by types of video.
           explode: false
           in: query
           name: editorial_video_types
           schema:
+            description: Allows filtering by types of video.
             items:
-              enum:
-                - raw
-                - produced
-              type: string
+              $ref: "#/components/schemas/EditorialVideoType"
+            nullable: true
             type: array
           style: form
         - description: specify link data entity uri.
@@ -4963,8 +4374,10 @@ paths:
           in: query
           name: entity_uris
           schema:
+            description: specify link data entity uri.
             items:
               type: string
+            nullable: true
             type: array
           style: form
         - description: Allows filtering by specific peoples' names.
@@ -4972,37 +4385,26 @@ paths:
           in: query
           name: specific_people
           schema:
+            description: Allows filtering by specific peoples' names.
             items:
               type: string
+            nullable: true
             type: array
           style: form
         - description: Filters according to the digital video format available on a film asset.
           in: query
           name: format_available
           schema:
-            enum:
-              - sd
-              - hd
-              - 4k
-              - hd_web
-            nullable: true
-            type: string
+            $ref: "#/components/schemas/VideoFormatsRequest"
         - description: Provides filtering by video frame rate (frames/second).
           explode: false
           in: query
           name: frame_rates
           schema:
+            description: Provides filtering by video frame rate (frames/second).
             items:
-              enum:
-                - "23.98"
-                - "24"
-                - "25"
-                - "29.97"
-                - "30"
-                - "50"
-                - "59.94"
-                - "60"
-              type: string
+              $ref: "#/components/schemas/VideoFrameRates"
+            nullable: true
             type: array
           style: form
         - description: Specifies fields to return. Defaults to 'summary_set'.
@@ -5010,47 +4412,10 @@ paths:
           in: query
           name: fields
           schema:
+            description: Specifies fields to return. Defaults to 'summary_set'.
             items:
-              enum:
-                - allowed_use
-                - artist
-                - asset_family
-                - call_for_image
-                - caption
-                - clip_length
-                - collection_code
-                - collection_id
-                - collection_name
-                - color_type
-                - comp
-                - copyright
-                - date_created
-                - date_submitted
-                - detail_set
-                - display_set
-                - download_product
-                - download_sizes
-                - editorial_segments
-                - entity_details
-                - era
-                - id
-                - istock_collection
-                - keywords
-                - largest_downloads
-                - license_model
-                - mastered_to
-                - originally_shot_on
-                - object_name
-                - preview
-                - product_types
-                - referral_destinations
-                - shot_speed
-                - source
-                - summary_set
-                - thumb
-                - title
-                - istock_licenses
-              type: string
+              $ref: "#/components/schemas/VideosFieldValues"
+            nullable: true
             type: array
           style: form
         - description: Return only images tagged with specific keyword(s). Specify using a comma-separated list of keyword Ids. If keyword Ids and phrase are both specified, only those images matching the query phrase which also contain the requested keyword(s) are returned.
@@ -5058,9 +4423,11 @@ paths:
           in: query
           name: keyword_ids
           schema:
+            description: Return only images tagged with specific keyword(s). Specify using a comma-separated list of keyword Ids. If keyword Ids and phrase are both specified, only those images matching the query phrase which also contain the requested keyword(s) are returned.
             items:
               format: int32
               type: integer
+            nullable: true
             type: array
           style: form
         - description: Provides filtering by minimum length of video clip, in seconds
@@ -5068,6 +4435,7 @@ paths:
           name: min_clip_length
           schema:
             default: 0
+            description: Provides filtering by minimum length of video clip, in seconds
             format: int32
             type: integer
         - description: Provides filtering by maximum length of video clip, in seconds
@@ -5075,6 +4443,7 @@ paths:
           name: max_clip_length
           schema:
             default: 0
+            description: Provides filtering by maximum length of video clip, in seconds
             format: int32
             type: integer
         - description: Identifies page to return. Default is 1.
@@ -5082,6 +4451,7 @@ paths:
           name: page
           schema:
             default: 1
+            description: Identifies page to return. Default is 1.
             format: int32
             type: integer
         - description: Specifies page size. Default is 30, maximum page_size is 100.
@@ -5089,6 +4459,7 @@ paths:
           name: page_size
           schema:
             default: 30
+            description: Specifies page size. Default is 30, maximum page_size is 100.
             format: int32
             type: integer
         - description: Free-text search query.
@@ -5096,27 +4467,19 @@ paths:
           name: phrase
           schema:
             default: ""
+            description: Free-text search query.
+            nullable: true
             type: string
-        - description: Select sort order of results.  The default is best_match
+        - description: "*Default value*: "
           in: query
           name: sort_order
           schema:
-            enum:
-              - best_match
-              - most_popular
-              - newest
-              - oldest
-              - random
-            type: string
+            $ref: "#/components/schemas/SortOrder"
         - description: Allows filtering by type of model release.
           in: query
           name: release_status
           schema:
-            enum:
-              - release_not_important
-              - fully_released
-            nullable: true
-            type: string
+            $ref: "#/components/schemas/ReleaseStatus"
         - description: "Specifies the facets to return in the response. Facets provide additional search parameters to refine your results.\r
 
             \                   The include_facets parameter must be set to \"true\" for facets to be returned."
@@ -5124,25 +4487,26 @@ paths:
           in: query
           name: facet_fields
           schema:
+            description: "Specifies the facets to return in the response. Facets provide additional search parameters to refine your results.\r
+
+              \                   The include_facets parameter must be set to \"true\" for facets to be returned."
             items:
-              enum:
-                - artists
-                - events
-                - locations
-                - specific_people
-              type: string
+              $ref: "#/components/schemas/EditorialVideoSearchFacetsFields"
+            nullable: true
             type: array
           style: form
         - description: Specifies whether or not to include facets in the result set. Default is "false".
           in: query
           name: include_facets
           schema:
+            description: Specifies whether or not to include facets in the result set. Default is "false".
             nullable: true
             type: boolean
-        - description: Specifies the maximum number of facets to return per type. Default is 300.
+        - description: "*Default value*: Microsoft.OpenApi.Any.OpenApiInteger"
           in: query
           name: facet_max_count
           schema:
+            description: Specifies the maximum number of facets to return per type. Default is 300.
             format: int32
             type: integer
       responses:
@@ -5359,8 +4723,10 @@ paths:
           in: query
           name: ids
           schema:
+            description: Specifies one or more video ids to return. Use comma delimiter when requesting multiple ids.
             items:
               type: string
+            nullable: true
             type: array
           style: form
         - description: Specifies fields to return. Defaults to 'summary_set'.
@@ -5368,47 +4734,10 @@ paths:
           in: query
           name: fields
           schema:
+            description: Specifies fields to return. Defaults to 'summary_set'.
             items:
-              enum:
-                - id
-                - allowed_use
-                - artist
-                - asset_family
-                - call_for_image
-                - caption
-                - clip_length
-                - collection_code
-                - collection_id
-                - collection_name
-                - color_type
-                - copyright
-                - comp
-                - date_created
-                - date_submitted
-                - detail_set
-                - display_set
-                - download_sizes
-                - download_product
-                - downloads
-                - era
-                - editorial_segments
-                - entity_details
-                - keywords
-                - license_model
-                - mastered_to
-                - originally_shot_on
-                - object_name
-                - preview
-                - product_types
-                - referral_destinations
-                - shot_speed
-                - source
-                - summary_set
-                - video_thumb
-                - thumb
-                - istock_licenses
-                - istock_collection
-              type: string
+              $ref: "#/components/schemas/VideoDetailFieldValues"
+            nullable: true
             type: array
           style: form
       responses:
@@ -5576,54 +4905,18 @@ paths:
           name: id
           required: true
           schema:
-            default: ""
+            description: A video id. For more than one video please use the /v3/video endpoint.
+            nullable: true
             type: string
         - description: comma delimited list of fields to retrive for the video
           explode: false
           in: query
           name: fields
           schema:
+            description: comma delimited list of fields to retrive for the video
             items:
-              enum:
-                - id
-                - allowed_use
-                - artist
-                - asset_family
-                - call_for_image
-                - caption
-                - clip_length
-                - collection_code
-                - collection_id
-                - collection_name
-                - color_type
-                - copyright
-                - comp
-                - date_created
-                - date_submitted
-                - detail_set
-                - display_set
-                - download_sizes
-                - download_product
-                - downloads
-                - era
-                - editorial_segments
-                - entity_details
-                - keywords
-                - license_model
-                - mastered_to
-                - originally_shot_on
-                - object_name
-                - preview
-                - product_types
-                - referral_destinations
-                - shot_speed
-                - source
-                - summary_set
-                - video_thumb
-                - thumb
-                - istock_licenses
-                - istock_collection
-              type: string
+              $ref: "#/components/schemas/VideoDetailFieldValues"
+            nullable: true
             type: array
           style: form
       responses:
@@ -5656,7 +4949,8 @@ paths:
           name: id
           required: true
           schema:
-            default: ""
+            description: An image id.
+            nullable: true
             type: string
         - description: "If specified, returns the list of previously downloaded images for all users in your company.\r
 
@@ -5664,6 +4958,9 @@ paths:
           in: query
           name: company_downloads
           schema:
+            description: "If specified, returns the list of previously downloaded images for all users in your company.\r
+
+              \            Your account must be enabled for this functionality. Contact your Getty Images account rep for more information. Default is false."
             type: boolean
       responses:
         "200":
@@ -5823,54 +5120,18 @@ paths:
           name: id
           required: true
           schema:
-            default: ""
+            description: Identifies an existing video
+            nullable: true
             type: string
         - description: Specifies fields to return. Defaults to 'summary_set'.
           explode: false
           in: query
           name: fields
           schema:
+            description: Specifies fields to return. Defaults to 'summary_set'.
             items:
-              enum:
-                - allowed_use
-                - artist
-                - asset_family
-                - call_for_image
-                - caption
-                - clip_length
-                - collection_code
-                - collection_id
-                - collection_name
-                - color_type
-                - comp
-                - copyright
-                - date_created
-                - date_submitted
-                - detail_set
-                - display_set
-                - download_product
-                - download_sizes
-                - editorial_segments
-                - entity_details
-                - era
-                - id
-                - istock_collection
-                - keywords
-                - largest_downloads
-                - license_model
-                - mastered_to
-                - originally_shot_on
-                - object_name
-                - preview
-                - product_types
-                - referral_destinations
-                - shot_speed
-                - source
-                - summary_set
-                - thumb
-                - title
-                - istock_licenses
-              type: string
+              $ref: "#/components/schemas/VideosFieldValues"
+            nullable: true
             type: array
           style: form
         - description: Identifies page to return. Default is 1.
@@ -5878,6 +5139,7 @@ paths:
           name: page
           schema:
             default: 1
+            description: Identifies page to return. Default is 1.
             format: int32
             type: integer
         - description: Specifies page size. Default is 30, maximum page_size is 100.
@@ -5885,6 +5147,7 @@ paths:
           name: page_size
           schema:
             default: 30
+            description: Specifies page size. Default is 30, maximum page_size is 100.
             format: int32
             type: integer
       responses:
@@ -6041,54 +5304,18 @@ paths:
           name: id
           required: true
           schema:
-            default: ""
+            description: A video id.
+            nullable: true
             type: string
         - description: comma delimited list of fields to retrive for the videos
           explode: false
           in: query
           name: fields
           schema:
+            description: comma delimited list of fields to retrive for the videos
             items:
-              enum:
-                - allowed_use
-                - artist
-                - asset_family
-                - call_for_image
-                - caption
-                - clip_length
-                - collection_code
-                - collection_id
-                - collection_name
-                - color_type
-                - comp
-                - copyright
-                - date_created
-                - date_submitted
-                - detail_set
-                - display_set
-                - download_product
-                - download_sizes
-                - editorial_segments
-                - entity_details
-                - era
-                - id
-                - istock_collection
-                - keywords
-                - largest_downloads
-                - license_model
-                - mastered_to
-                - originally_shot_on
-                - object_name
-                - preview
-                - product_types
-                - referral_destinations
-                - shot_speed
-                - source
-                - summary_set
-                - thumb
-                - title
-                - istock_licenses
-              type: string
+              $ref: "#/components/schemas/VideosFieldValues"
+            nullable: true
             type: array
           style: form
         - description: Identifies page to return. Default is 1.
@@ -6096,6 +5323,7 @@ paths:
           name: page
           schema:
             default: 1
+            description: Identifies page to return. Default is 1.
             format: int32
             type: integer
         - description: Specifies page size. Default is 30, maximum page_size is 100.
@@ -6103,6 +5331,7 @@ paths:
           name: page_size
           schema:
             default: 30
+            description: Specifies page size. Default is 30, maximum page_size is 100.
             format: int32
             type: integer
       responses:
@@ -6128,12 +5357,7 @@ components:
       properties:
         LicenseTypes:
           items:
-            enum:
-              - Multiseat
-              - Unlimited
-              - Resale
-              - Indemnification
-            type: string
+            $ref: "#/components/schemas/ExtendedLicenses"
           type: array
         UseTeamCredits:
           description: Defaults to false.
@@ -6157,14 +5381,18 @@ components:
       additionalProperties: false
       properties:
         caption:
+          nullable: true
           type: string
         destination_url:
+          nullable: true
           type: string
         id:
+          nullable: true
           type: string
         preview_urls:
           $ref: "#/components/schemas/AffiliateImageUrls"
         title:
+          nullable: true
           type: string
       type: object
     AffiliateImageSearchResponse:
@@ -6173,12 +5401,14 @@ components:
         images:
           items:
             $ref: "#/components/schemas/AffiliateImage"
+          nullable: true
           type: array
       type: object
     AffiliateImageUrls:
       additionalProperties: false
       properties:
         large:
+          nullable: true
           type: string
         large_height:
           format: int32
@@ -6187,6 +5417,7 @@ components:
           format: int32
           type: integer
         medium:
+          nullable: true
           type: string
         medium_height:
           format: int32
@@ -6195,6 +5426,7 @@ components:
           format: int32
           type: integer
         small:
+          nullable: true
           type: string
         small_height:
           format: int32
@@ -6203,20 +5435,30 @@ components:
           format: int32
           type: integer
       type: object
+    AffiliateSearchStyle:
+      enum:
+        - photography
+        - vector
+      type: string
     AffiliateVideo:
       additionalProperties: false
       properties:
         caption:
+          nullable: true
           type: string
         clip_length:
+          nullable: true
           type: string
         destination_url:
+          nullable: true
           type: string
         id:
+          nullable: true
           type: string
         preview_urls:
           $ref: "#/components/schemas/AffiliateVideoUrls"
         title:
+          nullable: true
           type: string
       type: object
     AffiliateVideoSearchResponse:
@@ -6225,43 +5467,171 @@ components:
         videos:
           items:
             $ref: "#/components/schemas/AffiliateVideo"
+          nullable: true
           type: array
       type: object
     AffiliateVideoUrls:
       additionalProperties: false
       properties:
         large_motion:
+          nullable: true
           type: string
         large_still:
+          nullable: true
           type: string
         medium_still:
+          nullable: true
           type: string
         small_motion:
+          nullable: true
           type: string
         small_still:
+          nullable: true
           type: string
       type: object
+    AgeOfPeopleFilterType:
+      enum:
+        - newborn
+        - baby
+        - child
+        - teenager
+        - young_adult
+        - adult
+        - adults_only
+        - mature_adult
+        - senior_adult
+        - 0-1_months
+        - 2-5_months
+        - 6-11_months
+        - 12-17_months
+        - 18-23_months
+        - 2-3_years
+        - 4-5_years
+        - 6-7_years
+        - 8-9_years
+        - 10-11_years
+        - 12-13_years
+        - 14-15_years
+        - 16-17_years
+        - 18-19_years
+        - 20-24_years
+        - 20-29_years
+        - 25-29_years
+        - 30-34_years
+        - 30-39_years
+        - 35-39_years
+        - 40-44_years
+        - 40-49_years
+        - 45-49_years
+        - 50-54_years
+        - 50-59_years
+        - 55-59_years
+        - 60-64_years
+        - 60-69_years
+        - 65-69_years
+        - 70-79_years
+        - 80-89_years
+        - 90_plus_years
+        - 100_over
+      type: string
     AllowedUse:
       additionalProperties: false
       properties:
         how_can_i_use_it:
           description: Indicates how the asset can be used
+          nullable: true
           type: string
         release_info:
           description: Indicates release status
+          nullable: true
           type: string
         usage_restrictions:
           description: Indicates asset usage restriction, if any
           items:
             type: string
+          nullable: true
           type: array
       type: object
     Artist:
       additionalProperties: false
       properties:
         name:
+          nullable: true
           type: string
       type: object
+    ArtistsImageSearchFieldValues:
+      enum:
+        - id
+        - allowed_use
+        - alternative_ids
+        - artist
+        - asset_family
+        - asset_type
+        - call_for_image
+        - caption
+        - collection_id
+        - collection_code
+        - collection_name
+        - comp
+        - copyright
+        - date_created
+        - date_submitted
+        - detail_set
+        - display_set
+        - editorial_segments
+        - event_ids
+        - graphical_style
+        - high_res_comp
+        - keywords
+        - license_model
+        - max_dimensions
+        - mid_res_comp
+        - orientation
+        - preview
+        - product_types
+        - quality_rank
+        - referral_destinations
+        - summary_set
+        - thumb
+        - title
+      type: string
+    ArtistsVideoSearchFieldValues:
+      enum:
+        - id
+        - allowed_use
+        - alternative_ids
+        - artist
+        - asset_family
+        - asset_type
+        - call_for_image
+        - caption
+        - clip_length
+        - collection_id
+        - collection_code
+        - collection_name
+        - comp
+        - copyright
+        - date_created
+        - date_submitted
+        - detail_set
+        - display_set
+        - editorial_segments
+        - event_ids
+        - graphical_style
+        - high_res_comp
+        - keywords
+        - license_model
+        - max_dimensions
+        - mid_res_comp
+        - orientation
+        - preview
+        - product_types
+        - quality_rank
+        - referral_destinations
+        - summary_set
+        - thumb
+        - title
+      type: string
     Asset:
       additionalProperties: false
       properties:
@@ -6293,33 +5663,47 @@ components:
       additionalProperties: false
       properties:
         downloads:
+          additionalProperties: false
+          nullable: true
           type: object
         id:
+          nullable: true
           type: string
       type: object
     AssetIdFromOrder:
       additionalProperties: false
       properties:
         id:
+          nullable: true
           type: string
       type: object
+    AssetLicenseName:
+      enum:
+        - Standard
+        - Multiseat
+        - Unlimited
+        - Resale
+        - Indemnification
+      type: string
     AssetLicensingResponse:
       additionalProperties: false
       properties:
         AcquiredLicenses:
           items:
-            enum:
-              - Standard
-              - Multiseat
-              - Unlimited
-              - Resale
-              - Indemnification
-            type: string
+            $ref: "#/components/schemas/AssetLicenseName"
+          nullable: true
           type: array
         CreditsUsed:
           format: int32
           type: integer
       type: object
+    BlendedImageSortOrder:
+      enum:
+        - best_match
+        - most_popular
+        - newest
+        - random
+      type: string
     BoardAsset:
       additionalProperties: false
       properties:
@@ -6496,27 +5880,38 @@ components:
       additionalProperties: false
       properties:
         asset_family:
+          nullable: true
           type: string
         code:
+          nullable: true
           type: string
         id:
           format: int32
           type: integer
         license_model:
+          nullable: true
           type: string
         name:
+          nullable: true
           type: string
         product_types:
           items:
             type: string
+          nullable: true
           type: array
       type: object
+    CollectionsFilterType:
+      enum:
+        - include
+        - exclude
+      type: string
     CollectionsList:
       additionalProperties: false
       properties:
         collections:
           items:
             $ref: "#/components/schemas/Collection"
+          nullable: true
           type: array
       type: object
     Comment:
@@ -6562,35 +5957,113 @@ components:
         permissions:
           $ref: "#/components/schemas/BoardCommentPermissions"
       type: object
+    CompositionsFilterType:
+      enum:
+        - abstract
+        - candid
+        - close_up
+        - copy_space
+        - cut_out
+        - full_frame
+        - full_length
+        - headshot
+        - looking_at_camera
+        - macro
+        - portrait
+        - sparse
+        - still_life
+        - three_quarter_length
+        - waist_up
+      type: string
     CountriesList:
       additionalProperties: false
       properties:
         countries:
           items:
             $ref: "#/components/schemas/Country"
+          nullable: true
           type: array
       type: object
     Country:
       additionalProperties: false
       properties:
         iso_alpha_2:
+          nullable: true
           type: string
         iso_alpha_3:
+          nullable: true
           type: string
         name:
+          nullable: true
           type: string
       type: object
+    CreateImageSearchFacetsFields:
+      enum:
+        - artists
+        - locations
+      type: string
+    CreateVideoSearchFacetsFields:
+      enum:
+        - artists
+        - locations
+      type: string
     CreativeImageSearchResults:
       additionalProperties: false
       properties:
         images:
           items:
             $ref: "#/components/schemas/ImageSearchItemCreative"
+          nullable: true
           type: array
         result_count:
           format: int32
           type: integer
       type: object
+    CreativeImageSortOrder:
+      enum:
+        - best_match
+        - most_popular
+        - newest
+        - random
+      type: string
+    CreativeImagesFieldValues:
+      enum:
+        - allowed_use
+        - alternative_ids
+        - artist
+        - asset_family
+        - call_for_image
+        - caption
+        - collection_code
+        - collection_id
+        - collection_name
+        - color_type
+        - comp
+        - copyright
+        - date_camera_shot
+        - date_created
+        - date_submitted
+        - detail_set
+        - display_set
+        - download_product
+        - download_sizes
+        - graphical_style
+        - id
+        - istock_collection
+        - keywords
+        - largest_downloads
+        - license_model
+        - max_dimensions
+        - orientation
+        - preview
+        - product_types
+        - quality_rank
+        - referral_destinations
+        - summary_set
+        - thumb
+        - title
+        - uri_oembed
+      type: string
     CreativeVideoSearchResults:
       additionalProperties: false
       properties:
@@ -6602,14 +6075,61 @@ components:
         videos:
           items:
             $ref: "#/components/schemas/VideoSearchItem"
+          nullable: true
           type: array
       type: object
+    CreativeVideoSortOrder:
+      enum:
+        - best_match
+        - most_popular
+        - newest
+        - random
+      type: string
+    CreativeVideosFieldValues:
+      enum:
+        - allowed_use
+        - artist
+        - asset_family
+        - call_for_image
+        - caption
+        - clip_length
+        - collection_code
+        - collection_id
+        - collection_name
+        - color_type
+        - comp
+        - copyright
+        - date_created
+        - date_submitted
+        - detail_set
+        - display_set
+        - download_product
+        - download_sizes
+        - era
+        - id
+        - istock_collection
+        - keywords
+        - largest_downloads
+        - license_model
+        - mastered_to
+        - originally_shot_on
+        - object_name
+        - preview
+        - product_types
+        - referral_destinations
+        - shot_speed
+        - source
+        - summary_set
+        - thumb
+        - title
+      type: string
     CuratedSet:
       additionalProperties: false
       properties:
         assets:
           items:
             type: string
+          nullable: true
           type: array
         date_created:
           format: date-time
@@ -6620,26 +6140,34 @@ components:
           nullable: true
           type: string
         description:
+          nullable: true
           type: string
         hero_image_uri:
+          nullable: true
           type: string
         keywords:
           items:
             type: string
+          nullable: true
           type: array
         set_id:
+          nullable: true
           type: string
         title:
+          nullable: true
           type: string
       type: object
     CustomerInfoResponse:
       additionalProperties: false
       properties:
         first_name:
+          nullable: true
           type: string
         last_name:
+          nullable: true
           type: string
         middle_name:
+          nullable: true
           type: string
       type: object
     Dimensions:
@@ -6670,22 +6198,33 @@ components:
       additionalProperties: false
       properties:
         agreement_name:
+          nullable: true
           type: string
         product_id:
+          nullable: true
           type: string
         product_type:
+          nullable: true
           type: string
         uri:
+          nullable: true
           type: string
       type: object
     DownloadDetails:
       additionalProperties: false
       properties:
         download_notes:
+          nullable: true
           type: string
         project_code:
+          nullable: true
           type: string
       type: object
+    DownloadFileType:
+      enum:
+        - eps
+        - jpg
+      type: string
     DownloadRequirements:
       additionalProperties: false
       properties:
@@ -6696,19 +6235,85 @@ components:
         project_codes:
           items:
             type: string
+          nullable: true
           type: array
       type: object
+    EditorialGraphicalStyle:
+      enum:
+        - photography
+        - illustration
+        - vector
+      type: string
+    EditorialImageSearchFacetsFields:
+      enum:
+        - artists
+        - events
+        - locations
+        - specific_people
+      type: string
     EditorialImageSearchResults:
       additionalProperties: false
       properties:
         images:
           items:
             $ref: "#/components/schemas/ImageSearchItemEditorial"
+          nullable: true
           type: array
         result_count:
           format: int32
           type: integer
       type: object
+    EditorialImagesFieldValues:
+      enum:
+        - allowed_use
+        - alternative_ids
+        - artist
+        - asset_family
+        - call_for_image
+        - caption
+        - collection_code
+        - collection_id
+        - collection_name
+        - color_type
+        - comp
+        - copyright
+        - date_camera_shot
+        - date_created
+        - date_submitted
+        - detail_set
+        - display_set
+        - download_product
+        - download_sizes
+        - editorial_segments
+        - editorial_source
+        - entity_details
+        - event_ids
+        - graphical_style
+        - id
+        - keywords
+        - largest_downloads
+        - license_model
+        - max_dimensions
+        - orientation
+        - people
+        - preview
+        - product_types
+        - quality_rank
+        - referral_destinations
+        - summary_set
+        - thumb
+        - title
+        - uri_oembed
+      type: string
+    EditorialSegmentContract:
+      enum:
+        - archival
+        - entertainment
+        - news
+        - publicity
+        - royalty
+        - sport
+      type: string
     EditorialSource:
       additionalProperties: false
       properties:
@@ -6716,6 +6321,13 @@ components:
           format: int32
           type: integer
       type: object
+    EditorialVideoSearchFacetsFields:
+      enum:
+        - artists
+        - events
+        - locations
+        - specific_people
+      type: string
     EditorialVideoSearchResults:
       additionalProperties: false
       properties:
@@ -6727,8 +6339,14 @@ components:
         videos:
           items:
             $ref: "#/components/schemas/VideoSearchItem"
+          nullable: true
           type: array
       type: object
+    EditorialVideoType:
+      enum:
+        - raw
+        - produced
+      type: string
     Entertainment:
       additionalProperties: false
       properties:
@@ -6736,8 +6354,24 @@ components:
           format: int32
           type: integer
         name:
+          nullable: true
           type: string
       type: object
+    EthnicityFilterType:
+      enum:
+        - black
+        - caucasian
+        - east_asian
+        - hispanic_latino
+        - japanese
+        - middle_eastern
+        - mixed_race_person
+        - multiethnic_group
+        - native_american_first_nations
+        - pacific_islander
+        - south_asian
+        - southeast_asian
+      type: string
     Event:
       additionalProperties: false
       properties:
@@ -6747,6 +6381,7 @@ components:
         editorial_segments:
           items:
             type: string
+          nullable: true
           type: array
         hero_image:
           $ref: "#/components/schemas/HeroImage"
@@ -6759,23 +6394,57 @@ components:
         location:
           $ref: "#/components/schemas/LocationEvent"
         name:
+          nullable: true
           type: string
         start_date:
           format: date-time
           nullable: true
           type: string
       type: object
+    EventDetailFieldValues:
+      enum:
+        - id
+        - child_event_count
+        - editorial_segments
+        - hero_image
+        - image_count
+        - location
+        - name
+        - start_date
+        - type
+      type: string
+    EventFieldValues:
+      enum:
+        - id
+        - child_event_count
+        - editorial_segments
+        - hero_image
+        - image_count
+        - keywords
+        - location
+        - name
+        - start_date
+        - type
+      type: string
     EventsSearchResult:
       additionalProperties: false
       properties:
         events:
           items:
             $ref: "#/components/schemas/Event"
+          nullable: true
           type: array
         result_count:
           format: int32
           type: integer
       type: object
+    ExtendedLicenses:
+      enum:
+        - Multiseat
+        - Unlimited
+        - Resale
+        - Indemnification
+      type: string
     FacetEvent:
       additionalProperties: false
       properties:
@@ -6786,6 +6455,7 @@ components:
           format: int32
           type: integer
         name:
+          nullable: true
           type: string
       type: object
     GetDownloadsResponse:
@@ -6794,19 +6464,34 @@ components:
         downloads:
           items:
             $ref: "#/components/schemas/HistoricalDownload"
+          nullable: true
           type: array
         result_count:
           format: int32
           type: integer
       type: object
+    GraphicalStyle:
+      enum:
+        - fine_art
+        - illustration
+        - photography
+        - vector
+      type: string
+    GraphicalStylesFilterType:
+      enum:
+        - include
+        - exclude
+      type: string
     HeroImage:
       additionalProperties: false
       properties:
         display_sizes:
           items:
             $ref: "#/components/schemas/HeroImageDisplaySize"
+          nullable: true
           type: array
         id:
+          nullable: true
           type: string
       type: object
     HeroImageDisplaySize:
@@ -6815,16 +6500,20 @@ components:
         is_watermarked:
           type: boolean
         name:
+          nullable: true
           type: string
         uri:
+          nullable: true
           type: string
       type: object
     HistoricalDownload:
       additionalProperties: false
       properties:
         agreement_name:
+          nullable: true
           type: string
         asset_type:
+          nullable: true
           type: string
         date_downloaded:
           format: date-time
@@ -6834,17 +6523,22 @@ components:
         download_details:
           $ref: "#/components/schemas/DownloadDetails"
         download_source:
+          nullable: true
           type: string
         id:
+          nullable: true
           type: string
         product_id:
           format: int32
           type: integer
         product_type:
+          nullable: true
           type: string
         size_name:
+          nullable: true
           type: string
         thumb_uri:
+          nullable: true
           type: string
         user:
           $ref: "#/components/schemas/User"
@@ -6856,14 +6550,60 @@ components:
           format: int32
           type: integer
         license_type:
-          enum:
-            - Standard
-            - Multiseat
-            - Unlimited
-            - Resale
-            - Indemnification
-          type: string
+          $ref: "#/components/schemas/AssetLicenseName"
       type: object
+    ImageDetailFieldValues:
+      enum:
+        - allowed_use
+        - alternative_ids
+        - artist
+        - artist_title
+        - asset_family
+        - call_for_image
+        - caption
+        - city
+        - collection_code
+        - collection_id
+        - collection_name
+        - color_type
+        - comp
+        - copyright
+        - country
+        - credit_line
+        - date_camera_shot
+        - date_created
+        - date_submitted
+        - detail_set
+        - display_set
+        - download_sizes
+        - download_product
+        - downloads
+        - editorial_segments
+        - editorial_source
+        - entity_details
+        - event_ids
+        - graphical_style
+        - id
+        - istock_collection
+        - istock_licenses
+        - keywords
+        - largest_downloads
+        - license_model
+        - links
+        - max_dimensions
+        - object_name
+        - orientation
+        - people
+        - preview
+        - product_types
+        - quality_rank
+        - referral_destinations
+        - state_province
+        - summary_set
+        - thumb
+        - title
+        - uri_oembed
+      type: string
     ImageSearchItem:
       additionalProperties: false
       properties:
@@ -6872,26 +6612,34 @@ components:
         alternative_ids:
           additionalProperties:
             type: string
+          nullable: true
           type: object
         artist:
+          nullable: true
           type: string
         asset_family:
+          nullable: true
           type: string
         call_for_image:
           type: boolean
         caption:
+          nullable: true
           type: string
         collection_code:
+          nullable: true
           type: string
         collection_id:
           format: int32
           nullable: true
           type: integer
         collection_name:
+          nullable: true
           type: string
         color_type:
+          nullable: true
           type: string
         copyright:
+          nullable: true
           type: string
         date_camera_shot:
           format: date-time
@@ -6904,47 +6652,60 @@ components:
         display_sizes:
           items:
             $ref: "#/components/schemas/ImageSearchItemDisplaySize"
+          nullable: true
           type: array
         download_product:
+          nullable: true
           type: string
         editorial_segments:
           items:
             type: string
+          nullable: true
           type: array
         event_ids:
           items:
             format: int32
             type: integer
+          nullable: true
           type: array
         graphical_style:
+          nullable: true
           type: string
         id:
+          nullable: true
           type: string
         istock_licenses:
           items:
             $ref: "#/components/schemas/IStockLicense"
+          nullable: true
           type: array
         keywords:
           items:
             $ref: "#/components/schemas/Keyword"
+          nullable: true
           type: array
         largest_downloads:
           items:
             $ref: "#/components/schemas/Download"
+          nullable: true
           type: array
         license_model:
+          nullable: true
           type: string
         max_dimensions:
           $ref: "#/components/schemas/MaxDimensions"
         orientation:
+          nullable: true
           type: string
         people:
           items:
             type: string
+          nullable: true
           type: array
         product_types:
           items:
             type: string
+          nullable: true
           type: array
         quality_rank:
           format: int32
@@ -6952,10 +6713,13 @@ components:
         referral_destinations:
           items:
             $ref: "#/components/schemas/ReferralDestination"
+          nullable: true
           type: array
         title:
+          nullable: true
           type: string
         uri_oembed:
+          nullable: true
           type: string
       type: object
     ImageSearchItemCreative:
@@ -6966,26 +6730,34 @@ components:
         alternative_ids:
           additionalProperties:
             type: string
+          nullable: true
           type: object
         artist:
+          nullable: true
           type: string
         asset_family:
+          nullable: true
           type: string
         call_for_image:
           type: boolean
         caption:
+          nullable: true
           type: string
         collection_code:
+          nullable: true
           type: string
         collection_id:
           format: int32
           nullable: true
           type: integer
         collection_name:
+          nullable: true
           type: string
         color_type:
+          nullable: true
           type: string
         copyright:
+          nullable: true
           type: string
         date_camera_shot:
           format: date-time
@@ -6998,26 +6770,34 @@ components:
         display_sizes:
           items:
             $ref: "#/components/schemas/ImageSearchItemDisplaySize"
+          nullable: true
           type: array
         download_product:
+          nullable: true
           type: string
         graphical_style:
+          nullable: true
           type: string
         id:
+          nullable: true
           type: string
         keywords:
           items:
             $ref: "#/components/schemas/Keyword"
+          nullable: true
           type: array
         largest_downloads:
           items:
             $ref: "#/components/schemas/Download"
+          nullable: true
           type: array
         license_model:
+          nullable: true
           type: string
         max_dimensions:
           $ref: "#/components/schemas/MaxDimensions"
         orientation:
+          nullable: true
           type: string
         quality_rank:
           format: int32
@@ -7025,10 +6805,13 @@ components:
         referral_destinations:
           items:
             $ref: "#/components/schemas/ReferralDestination"
+          nullable: true
           type: array
         title:
+          nullable: true
           type: string
         uri_oembed:
+          nullable: true
           type: string
       type: object
     ImageSearchItemDisplaySize:
@@ -7037,8 +6820,10 @@ components:
         is_watermarked:
           type: boolean
         name:
+          nullable: true
           type: string
         uri:
+          nullable: true
           type: string
       type: object
     ImageSearchItemEditorial:
@@ -7049,26 +6834,34 @@ components:
         alternative_ids:
           additionalProperties:
             type: string
+          nullable: true
           type: object
         artist:
+          nullable: true
           type: string
         asset_family:
+          nullable: true
           type: string
         call_for_image:
           type: boolean
         caption:
+          nullable: true
           type: string
         collection_code:
+          nullable: true
           type: string
         collection_id:
           format: int32
           nullable: true
           type: integer
         collection_name:
+          nullable: true
           type: string
         color_type:
+          nullable: true
           type: string
         copyright:
+          nullable: true
           type: string
         date_camera_shot:
           format: date-time
@@ -7081,12 +6874,15 @@ components:
         display_sizes:
           items:
             $ref: "#/components/schemas/ImageSearchItemDisplaySize"
+          nullable: true
           type: array
         download_product:
+          nullable: true
           type: string
         editorial_segments:
           items:
             type: string
+          nullable: true
           type: array
         editorial_source:
           $ref: "#/components/schemas/EditorialSource"
@@ -7094,32 +6890,41 @@ components:
           items:
             format: int32
             type: integer
+          nullable: true
           type: array
         graphical_style:
+          nullable: true
           type: string
         id:
+          nullable: true
           type: string
         keywords:
           items:
             $ref: "#/components/schemas/Keyword"
+          nullable: true
           type: array
         largest_downloads:
           items:
             $ref: "#/components/schemas/Download"
+          nullable: true
           type: array
         license_model:
+          nullable: true
           type: string
         max_dimensions:
           $ref: "#/components/schemas/MaxDimensions"
         orientation:
+          nullable: true
           type: string
         people:
           items:
             type: string
+          nullable: true
           type: array
         product_types:
           items:
             type: string
+          nullable: true
           type: array
         quality_rank:
           format: int32
@@ -7127,10 +6932,13 @@ components:
         referral_destinations:
           items:
             $ref: "#/components/schemas/ReferralDestination"
+          nullable: true
           type: array
         title:
+          nullable: true
           type: string
         uri_oembed:
+          nullable: true
           type: string
       type: object
     ImageSearchItemSearchResults:
@@ -7139,6 +6947,7 @@ components:
         images:
           items:
             $ref: "#/components/schemas/ImageSearchItem"
+          nullable: true
           type: array
         result_count:
           format: int32
@@ -7148,34 +6957,96 @@ components:
       additionalProperties: false
       properties:
         images:
+          additionalProperties: false
+          nullable: true
           type: object
         images_not_found:
           items:
             type: string
+          nullable: true
           type: array
       type: object
+    ImagesFieldValues:
+      enum:
+        - accessrestriction
+        - allowed_use
+        - alternative_ids
+        - artist
+        - asset_family
+        - call_for_image
+        - caption
+        - collection_code
+        - collection_id
+        - collection_name
+        - color_type
+        - comp
+        - copyright
+        - date_camera_shot
+        - date_created
+        - date_submitted
+        - detail_set
+        - display_set
+        - download_product
+        - download_sizes
+        - editorial_segments
+        - editorial_source
+        - entity_details
+        - event_ids
+        - graphical_style
+        - id
+        - istock_collection
+        - keywords
+        - largest_downloads
+        - license_model
+        - max_dimensions
+        - orientation
+        - people
+        - preview
+        - product_types
+        - quality_rank
+        - referral_destinations
+        - summary_set
+        - thumb
+        - title
+        - uri_oembed
+      type: string
     Keyword:
       additionalProperties: false
       properties:
         entity_types:
           items:
             type: string
+          nullable: true
           type: array
         entity_uris:
           items:
             type: string
+          nullable: true
           type: array
         keyword_id:
+          nullable: true
           type: string
         relevance:
           format: int32
           nullable: true
           type: integer
         text:
+          nullable: true
           type: string
         type:
+          nullable: true
           type: string
       type: object
+    LicenseModelImageRequest:
+      enum:
+        - rightsmanaged
+        - royaltyfree
+      type: string
+    LicenseModelVideoRequest:
+      enum:
+        - rightsready
+        - royaltyfree
+      type: string
     Links:
       additionalProperties: false
       properties:
@@ -7191,20 +7062,35 @@ components:
           format: int32
           type: integer
         name:
+          nullable: true
           type: string
       type: object
     LocationEvent:
       additionalProperties: false
       properties:
         city:
+          nullable: true
           type: string
         country:
+          nullable: true
           type: string
         state_province:
+          nullable: true
           type: string
         venue:
+          nullable: true
           type: string
       type: object
+    LogLevel:
+      enum:
+        - Trace
+        - Debug
+        - Information
+        - Warning
+        - Error
+        - Critical
+        - None
+      type: string
     MaxDimensions:
       additionalProperties: false
       properties:
@@ -7219,33 +7105,37 @@ components:
       additionalProperties: false
       properties:
         ExceptionMessage:
+          nullable: true
           type: string
         LogLevel:
-          enum:
-            - Trace
-            - Debug
-            - Information
-            - Warning
-            - Error
-            - Critical
-            - None
-          type: string
+          $ref: "#/components/schemas/LogLevel"
         Message:
+          nullable: true
           type: string
         Time:
           format: date-time
           type: string
       type: object
+    NumberOfPeopleFilterType:
+      enum:
+        - none
+        - one
+        - two
+        - group
+      type: string
     OrderDetail:
       additionalProperties: false
       properties:
         assets:
           items:
             $ref: "#/components/schemas/AssetIdFromOrder"
+          nullable: true
           type: array
         end_client:
+          nullable: true
           type: string
         id:
+          nullable: true
           type: string
         notes:
           $ref: "#/components/schemas/OrderNotes"
@@ -7257,14 +7147,26 @@ components:
       additionalProperties: false
       properties:
         licensee_name:
+          nullable: true
           type: string
         ordered_by:
+          nullable: true
           type: string
         project_title:
+          nullable: true
           type: string
         purchase_order_number:
+          nullable: true
           type: string
       type: object
+    OrientationRequest:
+      enum:
+        - horizontal
+        - vertical
+        - square
+        - panoramic_horizontal
+        - panoramic_vertical
+      type: string
     OverageDetails:
       additionalProperties: false
       properties:
@@ -7288,31 +7190,41 @@ components:
       additionalProperties: false
       properties:
         download_notes:
+          nullable: true
           type: string
         project_code:
+          nullable: true
           type: string
       type: object
     PreviousAssetPurchase:
       additionalProperties: false
       properties:
         asset_id:
+          nullable: true
           type: string
         asset_type:
+          nullable: true
           type: string
         date_purchased:
           format: date-time
           type: string
         download_uri:
+          nullable: true
           type: string
         file_size_in_bytes:
+          nullable: true
           type: string
         license_model:
+          nullable: true
           type: string
         order_id:
+          nullable: true
           type: string
         size_name:
+          nullable: true
           type: string
         thumb_uri:
+          nullable: true
           type: string
       type: object
     PreviousAssetPurchases:
@@ -7321,6 +7233,7 @@ components:
         previous_purchases:
           items:
             $ref: "#/components/schemas/PreviousAssetPurchase"
+          nullable: true
           type: array
         result_count:
           format: int32
@@ -7333,12 +7246,16 @@ components:
           format: date-time
           type: string
         image_id:
+          nullable: true
           type: string
         license_model:
+          nullable: true
           type: string
         order_id:
+          nullable: true
           type: string
         thumb_uri:
+          nullable: true
           type: string
       type: object
     PreviousPurchases:
@@ -7347,6 +7264,7 @@ components:
         previous_purchases:
           items:
             $ref: "#/components/schemas/PreviousPurchase"
+          nullable: true
           type: array
         result_count:
           format: int32
@@ -7356,8 +7274,10 @@ components:
       additionalProperties: false
       properties:
         agreement_name:
+          nullable: true
           type: string
         application_website:
+          nullable: true
           type: string
         credits_remaining:
           format: int32
@@ -7368,6 +7288,7 @@ components:
           nullable: true
           type: integer
         download_limit_duration:
+          nullable: true
           type: string
         download_limit_reset_utc_date:
           format: date-time
@@ -7387,54 +7308,89 @@ components:
           format: int32
           type: integer
         imagepack_resolution:
+          nullable: true
           type: string
         name:
+          nullable: true
           type: string
         overage:
           $ref: "#/components/schemas/OverageDetails"
         status:
-          enum:
-            - active
-            - inactive
-          type: string
+          $ref: "#/components/schemas/ProductStatus"
         team_credits:
           format: int32
           nullable: true
           type: integer
         type:
-          enum:
-            - easyaccess
-            - editorialsubscription
-            - imagepack
-            - premiumaccess
-            - royaltyfreesubscription
-            - creditpack
-          type: string
+          $ref: "#/components/schemas/ProductTypeResponse"
       type: object
+    ProductFieldValues:
+      enum:
+        - download_requirements
+      type: string
+    ProductStatus:
+      enum:
+        - active
+        - inactive
+      type: string
+    ProductStatusRequest:
+      enum:
+        - all
+        - active
+        - inactive
+      type: string
+    ProductTypeRequest:
+      enum:
+        - easyaccess
+        - editorialsubscription
+        - imagepack
+        - premiumaccess
+        - royaltyfreesubscription
+      type: string
+    ProductTypeResponse:
+      enum:
+        - easyaccess
+        - editorialsubscription
+        - imagepack
+        - premiumaccess
+        - royaltyfreesubscription
+        - creditpack
+      type: string
     ProductsResult:
       additionalProperties: false
       properties:
         products:
           items:
             $ref: "#/components/schemas/Product"
+          nullable: true
           type: array
       type: object
     ReferralDestination:
       additionalProperties: false
       properties:
         site_name:
+          nullable: true
           type: string
         uri:
+          nullable: true
           type: string
       type: object
+    ReleaseStatus:
+      enum:
+        - release_not_important
+        - fully_released
+      type: string
     SearchByImageResourceResults:
       additionalProperties: false
       properties:
         facets:
           $ref: "#/components/schemas/SearchFacetsResponse"
         image_fingerprint:
+          nullable: true
           type: string
         images:
+          additionalProperties: false
+          nullable: true
           type: object
         result_count:
           format: int32
@@ -7446,24 +7402,34 @@ components:
         artists:
           items:
             $ref: "#/components/schemas/Artist"
+          nullable: true
           type: array
         entertainment:
           items:
             $ref: "#/components/schemas/Entertainment"
+          nullable: true
           type: array
         events:
           items:
             $ref: "#/components/schemas/FacetEvent"
+          nullable: true
           type: array
         locations:
           items:
             $ref: "#/components/schemas/Location"
+          nullable: true
           type: array
         specific_people:
           items:
             $ref: "#/components/schemas/SpecificPeople"
+          nullable: true
           type: array
       type: object
+    SearchFileType:
+      enum:
+        - eps
+        - jpg
+      type: string
     SelfResult:
       additionalProperties: false
       properties:
@@ -7474,6 +7440,14 @@ components:
         name:
           type: string
       type: object
+    SortOrder:
+      enum:
+        - best_match
+        - most_popular
+        - newest
+        - oldest
+        - random
+      type: string
     SpecificPeople:
       additionalProperties: false
       properties:
@@ -7481,54 +7455,139 @@ components:
           format: int32
           type: integer
         name:
+          nullable: true
           type: string
       type: object
+    TeeShirtSize:
+      enum:
+        - x_small
+        - small
+        - medium
+        - large
+        - x_large
+        - xx_large
+        - vector
+      type: string
     TerritoryRestriction:
       additionalProperties: false
       properties:
         country_code:
+          nullable: true
           type: string
         description:
+          nullable: true
           type: string
         type:
+          nullable: true
           type: string
       type: object
     User:
       additionalProperties: false
       properties:
         first_name:
+          nullable: true
           type: string
         last_name:
+          nullable: true
           type: string
         middle_name:
+          nullable: true
           type: string
         username:
+          nullable: true
           type: string
       type: object
+    VideoDetailFieldValues:
+      enum:
+        - id
+        - allowed_use
+        - artist
+        - asset_family
+        - call_for_image
+        - caption
+        - clip_length
+        - collection_code
+        - collection_id
+        - collection_name
+        - color_type
+        - copyright
+        - comp
+        - date_created
+        - date_submitted
+        - detail_set
+        - display_set
+        - download_sizes
+        - download_product
+        - downloads
+        - era
+        - editorial_segments
+        - entity_details
+        - keywords
+        - license_model
+        - mastered_to
+        - originally_shot_on
+        - object_name
+        - preview
+        - product_types
+        - referral_destinations
+        - shot_speed
+        - source
+        - summary_set
+        - thumb
+        - title
+        - istock_licenses
+        - istock_collection
+      type: string
+    VideoFormatsRequest:
+      enum:
+        - sd
+        - hd
+        - 4k
+        - hd_web
+      type: string
+    VideoFrameRates:
+      enum:
+        - "23.98"
+        - "24"
+        - "25"
+        - "29.97"
+        - "30"
+        - "50"
+        - "59.94"
+        - "60"
+      type: string
     VideoSearchItem:
       additionalProperties: false
       properties:
         allowed_use:
           $ref: "#/components/schemas/AllowedUse"
         artist:
+          nullable: true
           type: string
         asset_family:
+          nullable: true
           type: string
         caption:
+          nullable: true
           type: string
         clip_length:
+          nullable: true
           type: string
         collection_code:
+          nullable: true
           type: string
         collection_id:
           format: int32
           nullable: true
           type: integer
         collection_name:
+          nullable: true
           type: string
         color_type:
+          nullable: true
           type: string
         copyright:
+          nullable: true
           type: string
         date_created:
           format: date-time
@@ -7537,56 +7596,74 @@ components:
         display_sizes:
           items:
             $ref: "#/components/schemas/VideoSearchItemDisplaySize"
+          nullable: true
           type: array
         download_product:
+          nullable: true
           type: string
         era:
+          nullable: true
           type: string
         id:
+          nullable: true
           type: string
         istock_licenses:
           items:
             $ref: "#/components/schemas/IStockLicense"
+          nullable: true
           type: array
         keywords:
           items:
             $ref: "#/components/schemas/Keyword"
+          nullable: true
           type: array
         largest_downloads:
           items:
             $ref: "#/components/schemas/Download"
+          nullable: true
           type: array
         license_model:
+          nullable: true
           type: string
         mastered_to:
+          nullable: true
           type: string
         originally_shot_on:
+          nullable: true
           type: string
         product_types:
           items:
             type: string
+          nullable: true
           type: array
         referral_destinations:
           items:
             $ref: "#/components/schemas/ReferralDestination"
+          nullable: true
           type: array
         shot_speed:
+          nullable: true
           type: string
         source:
+          nullable: true
           type: string
         title:
+          nullable: true
           type: string
       type: object
     VideoSearchItemDisplaySize:
       additionalProperties: false
       properties:
         aspect_ratio:
+          nullable: true
           type: string
         is_watermarked:
           type: boolean
         name:
+          nullable: true
           type: string
         uri:
+          nullable: true
           type: string
       type: object
     VideoSearchItemVideoSearchResults:
@@ -7600,8 +7677,50 @@ components:
         videos:
           items:
             $ref: "#/components/schemas/VideoSearchItem"
+          nullable: true
           type: array
       type: object
+    VideosFieldValues:
+      enum:
+        - allowed_use
+        - artist
+        - asset_family
+        - call_for_image
+        - caption
+        - clip_length
+        - collection_code
+        - collection_id
+        - collection_name
+        - color_type
+        - comp
+        - copyright
+        - date_created
+        - date_submitted
+        - detail_set
+        - display_set
+        - download_product
+        - download_sizes
+        - editorial_segments
+        - entity_details
+        - era
+        - id
+        - istock_collection
+        - keywords
+        - largest_downloads
+        - license_model
+        - mastered_to
+        - originally_shot_on
+        - object_name
+        - preview
+        - product_types
+        - referral_destinations
+        - shot_speed
+        - source
+        - summary_set
+        - thumb
+        - title
+        - istock_licenses
+      type: string
     asset_usage:
       additionalProperties: false
       description: Specifies the id, usage Quantity, and date of when an asset was used.
