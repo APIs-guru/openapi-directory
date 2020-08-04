@@ -37,28 +37,15 @@ tags:
 paths:
   /v1/shelves:
     get:
-      description: >-
-        Lists shelves. The order is unspecified but deterministic. Newly created
-
-        shelves will not necessarily be added to the end of this list.
+      description: Lists shelves. The order is unspecified but deterministic. Newly created shelves will not necessarily be added to the end of this list.
       operationId: libraryagent.shelves.list
       parameters:
-        - description: >-
-            Requested page size. Server may return fewer shelves than requested.
-
-            If unspecified, server will pick an appropriate default.
+        - description: Requested page size. Server may return fewer shelves than requested. If unspecified, server will pick an appropriate default.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: >-
-            A token identifying a page of results the server should return.
-
-            Typically, this is the value of
-
-            ListShelvesResponse.next_page_token
-
-            returned from the previous call to `ListShelves` method.
+        - description: A token identifying a page of results the server should return. Typically, this is the value of ListShelvesResponse.next_page_token returned from the previous call to `ListShelves` method.
           in: query
           name: pageToken
           schema:
@@ -78,17 +65,17 @@ paths:
       tags:
         - shelves
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
   "/v1/{name}":
     get:
       description: Gets a book. Returns NOT_FOUND if the book does not exist.
@@ -115,39 +102,32 @@ paths:
       tags:
         - shelves
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
   "/v1/{name}:borrow":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
     post:
-      description: >-
-        Borrow a book from the library. Returns the book if it is borrowed
-
-        successfully. Returns NOT_FOUND if the book does not exist in the library.
-
-        Returns quota exceeded error if the amount of books borrowed exceeds
-
-        allocation quota in any dimensions.
+      description: Borrow a book from the library. Returns the book if it is borrowed successfully. Returns NOT_FOUND if the book does not exist in the library. Returns quota exceeded error if the amount of books borrowed exceeds allocation quota in any dimensions.
       operationId: libraryagent.shelves.books.borrow
       parameters:
         - description: Required. The name of the book to borrow.
@@ -172,26 +152,19 @@ paths:
         - shelves
   "/v1/{name}:return":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
     post:
-      description: >-
-        Return a book to the library. Returns the book if it is returned to the
-
-        library successfully.
-
-        Returns error if the book does not belong to the library
-
-        or the users didn't borrow before.
+      description: Return a book to the library. Returns the book if it is returned to the library successfully. Returns error if the book does not belong to the library or the users didn't borrow before.
       operationId: libraryagent.shelves.books.return
       parameters:
         - description: Required. The name of the book to return.
@@ -216,12 +189,7 @@ paths:
         - shelves
   "/v1/{parent}/books":
     get:
-      description: >-
-        Lists books in a shelf. The order is unspecified but deterministic. Newly
-
-        created books will not necessarily be added to the end of this list.
-
-        Returns NOT_FOUND if the shelf does not exist.
+      description: Lists books in a shelf. The order is unspecified but deterministic. Newly created books will not necessarily be added to the end of this list. Returns NOT_FOUND if the shelf does not exist.
       operationId: libraryagent.shelves.books.list
       parameters:
         - description: Required. The name of the shelf whose books we'd like to list.
@@ -230,22 +198,12 @@ paths:
           required: true
           schema:
             type: string
-        - description: >-
-            Requested page size. Server may return fewer books than requested.
-
-            If unspecified, server will pick an appropriate default.
+        - description: Requested page size. Server may return fewer books than requested. If unspecified, server will pick an appropriate default.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: >-
-            A token identifying a page of results the server should return.
-
-            Typically, this is the value of
-
-            ListBooksResponse.next_page_token.
-
-            returned from the previous call to `ListBooks` method.
+        - description: A token identifying a page of results the server should return. Typically, this is the value of ListBooksResponse.next_page_token. returned from the previous call to `ListBooks` method.
           in: query
           name: pageToken
           schema:
@@ -265,17 +223,17 @@ paths:
       tags:
         - shelves
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
 components:
   parameters:
     _.xgafv:
@@ -359,12 +317,7 @@ components:
           description: The name of the book author.
           type: string
         name:
-          description: >-
-            The resource name of the book.
-
-            Book names have the form `shelves/{shelf_id}/books/{book_id}`.
-
-            The name is ignored when creating a book.
+          description: The resource name of the book. Book names have the form `shelves/{shelf_id}/books/{book_id}`. The name is ignored when creating a book.
           type: string
         read:
           description: Value indicating whether the book has been read.
@@ -382,32 +335,14 @@ components:
             $ref: "#/components/schemas/GoogleExampleLibraryagentV1Book"
           type: array
         nextPageToken:
-          description: >-
-            A token to retrieve next page of results.
-
-            Pass this value in the
-
-            ListBooksRequest.page_token
-
-            field in the subsequent call to `ListBooks` method to retrieve the next
-
-            page of results.
+          description: A token to retrieve next page of results. Pass this value in the ListBooksRequest.page_token field in the subsequent call to `ListBooks` method to retrieve the next page of results.
           type: string
       type: object
     GoogleExampleLibraryagentV1ListShelvesResponse:
       description: Response message for LibraryAgent.ListShelves.
       properties:
         nextPageToken:
-          description: >-
-            A token to retrieve next page of results.
-
-            Pass this value in the
-
-            ListShelvesRequest.page_token
-
-            field in the subsequent call to `ListShelves` method to retrieve the next
-
-            page of results.
+          description: A token to retrieve next page of results. Pass this value in the ListShelvesRequest.page_token field in the subsequent call to `ListShelves` method to retrieve the next page of results.
           type: string
         shelves:
           description: The list of shelves.
@@ -419,12 +354,7 @@ components:
       description: A Shelf contains a collection of books with a theme.
       properties:
         name:
-          description: >-
-            Output only. The resource name of the shelf.
-
-            Shelf names have the form `shelves/{shelf_id}`.
-
-            The name is ignored when creating a shelf.
+          description: Output only. The resource name of the shelf. Shelf names have the form `shelves/{shelf_id}`. The name is ignored when creating a shelf.
           type: string
         theme:
           description: The theme of the shelf

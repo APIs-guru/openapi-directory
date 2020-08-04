@@ -36,17 +36,17 @@ tags:
 paths:
   "/tasks/v1/lists/{tasklist}/clear":
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: >-
         Clears all completed tasks from the specified task list. The affected tasks
@@ -181,17 +181,17 @@ paths:
       tags:
         - tasks
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: Creates a new task on the specified task list.
       operationId: tasks.tasks.insert
@@ -299,17 +299,17 @@ paths:
       tags:
         - tasks
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
     patch:
       description: Updates the specified task. This method supports patch semantics.
       operationId: tasks.tasks.patch
@@ -382,17 +382,17 @@ paths:
         - tasks
   "/tasks/v1/lists/{tasklist}/tasks/{task}/move":
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: >-
         Moves the specified task to another position in the task list. This can
@@ -481,17 +481,17 @@ paths:
       tags:
         - tasklists
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: Creates a new task list and adds it to the authenticated user's task lists.
       operationId: tasks.tasklists.insert
@@ -564,17 +564,17 @@ paths:
       tags:
         - tasklists
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
     patch:
       description: >-
         Updates the authenticated user's specified task list. This method supports

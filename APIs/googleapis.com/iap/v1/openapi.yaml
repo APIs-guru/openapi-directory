@@ -33,8 +33,8 @@ info:
 externalDocs:
   url: https://cloud.google.com/iap
 tags:
-  - name: projects
   - name: v1
+  - name: projects
 paths:
   "/v1/{name}":
     delete:
@@ -104,17 +104,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
   "/v1/{name}:iapSettings":
     get:
       description: Gets the IAP settings on a particular IAP protected resource.
@@ -146,17 +146,17 @@ paths:
       tags:
         - v1
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
     patch:
       description: >-
         Updates the IAP settings on a particular IAP protected resource. It
@@ -201,17 +201,17 @@ paths:
         - v1
   "/v1/{name}:resetSecret":
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
     post:
       description: >-
         Resets an Identity Aware Proxy (IAP) OAuth client secret. Useful if the
@@ -278,17 +278,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
     post:
       description: >-
         Constructs a new OAuth brand for the project if one does not exist.
@@ -390,17 +390,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
     post:
       description: >-
         Creates an Identity Aware Proxy (IAP) OAuth client. The client is owned
@@ -444,17 +444,17 @@ paths:
         - projects
   "/v1/{resource}:getIamPolicy":
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
     post:
       description: >-
         Gets the access control policy for an Identity-Aware Proxy protected
@@ -496,17 +496,17 @@ paths:
         - v1
   "/v1/{resource}:setIamPolicy":
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
     post:
       description: >-
         Sets the access control policy for an Identity-Aware Proxy protected
@@ -548,17 +548,17 @@ paths:
         - v1
   "/v1/{resource}:testIamPermissions":
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
     post:
       description: >-
         Returns permissions that a caller has on the Identity-Aware Proxy protected

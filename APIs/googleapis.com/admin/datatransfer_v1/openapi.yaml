@@ -33,8 +33,8 @@ info:
 externalDocs:
   url: https://developers.google.com/admin-sdk/data-transfer/
 tags:
-  - name: transfers
   - name: applications
+  - name: transfers
 paths:
   /applications:
     get:
@@ -77,12 +77,12 @@ paths:
       tags:
         - applications
     parameters:
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/quotaUser"
   "/applications/{applicationId}":
     get:
@@ -114,12 +114,12 @@ paths:
       tags:
         - applications
     parameters:
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/quotaUser"
   /transfers:
     get:
@@ -177,12 +177,12 @@ paths:
       tags:
         - transfers
     parameters:
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/quotaUser"
     post:
       description: Inserts a data transfer request.
@@ -236,12 +236,12 @@ paths:
       tags:
         - transfers
     parameters:
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/quotaUser"
 components:
   parameters:

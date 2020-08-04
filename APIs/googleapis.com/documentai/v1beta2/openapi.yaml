@@ -1,0 +1,2231 @@
+openapi: 3.0.0
+servers:
+  - url: https://documentai.googleapis.com/
+info:
+  contact:
+    name: Google
+    url: https://google.com
+  description: Service to parse structured information from unstructured or semi-structured documents using state-of-the-art Google AI such as natural language, computer vision, translation, and AutoML.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: http://creativecommons.org/licenses/by/3.0/
+  termsOfService: https://developers.google.com/terms/
+  title: Cloud Document AI API
+  version: v1beta2
+  x-origin:
+    - format: google
+      url: https://documentai.googleapis.com/$discovery/rest?version=v1beta2
+      version: v1
+  x-providerName: googleapis.com
+  x-serviceName: documentai
+externalDocs:
+  url: https://cloud.google.com/document-ai/docs/
+tags:
+  - name: projects
+paths:
+  "/v1beta2/{name}":
+    get:
+      description: >-
+        Gets the latest state of a long-running operation.  Clients can use this
+
+        method to poll the operation result at intervals as recommended by the API
+
+        service.
+      operationId: documentai.projects.locations.operations.get
+      parameters:
+        - description: The name of the operation resource.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+  "/v1beta2/{parent}/documents:batchProcess":
+    parameters:
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: >-
+        LRO endpoint to batch process many documents. The output is written
+
+        to Cloud Storage as JSON in the [Document] format.
+      operationId: documentai.projects.locations.documents.batchProcess
+      parameters:
+        - description: >-
+            Target project and location to make a call.
+
+
+            Format: `projects/{project-id}/locations/{location-id}`.
+
+
+            If no location is specified, a region will be chosen automatically.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2BatchProcessDocumentsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1beta2/{parent}/documents:process":
+    parameters:
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Processes a single document.
+      operationId: documentai.projects.locations.documents.process
+      parameters:
+        - description: >-
+            Target project and location to make a call.
+
+
+            Format: `projects/{project-id}/locations/{location-id}`.
+
+
+            If no location is specified, a region will be chosen automatically.
+
+            This field is only populated when used in ProcessDocument method.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2ProcessDocumentRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2Document"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+components:
+  parameters:
+    _.xgafv:
+      description: V1 error format.
+      in: query
+      name: $.xgafv
+      schema:
+        enum:
+          - "1"
+          - "2"
+        type: string
+    access_token:
+      description: OAuth access token.
+      in: query
+      name: access_token
+      schema:
+        type: string
+    alt:
+      description: Data format for response.
+      in: query
+      name: alt
+      schema:
+        enum:
+          - json
+          - media
+          - proto
+        type: string
+    callback:
+      description: JSONP
+      in: query
+      name: callback
+      schema:
+        type: string
+    fields:
+      description: Selector specifying which fields to include in a partial response.
+      in: query
+      name: fields
+      schema:
+        type: string
+    key:
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+      in: query
+      name: key
+      schema:
+        type: string
+    oauth_token:
+      description: OAuth 2.0 token for the current user.
+      in: query
+      name: oauth_token
+      schema:
+        type: string
+    prettyPrint:
+      description: Returns response with indentations and line breaks.
+      in: query
+      name: prettyPrint
+      schema:
+        type: boolean
+    quotaUser:
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
+      in: query
+      name: quotaUser
+      schema:
+        type: string
+    uploadType:
+      description: Legacy upload protocol for media (e.g. "media", "multipart").
+      in: query
+      name: uploadType
+      schema:
+        type: string
+    upload_protocol:
+      description: Upload protocol for media (e.g. "raw", "multipart").
+      in: query
+      name: upload_protocol
+      schema:
+        type: string
+  schemas:
+    GoogleCloudDocumentaiV1beta1BatchProcessDocumentsResponse:
+      description: >-
+        Response to an batch document processing request. This is returned in
+
+        the LRO Operation after the operation is complete.
+      properties:
+        responses:
+          description: Responses for each individual document.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1ProcessDocumentResponse"
+          type: array
+      type: object
+    GoogleCloudDocumentaiV1beta1BoundingPoly:
+      description: A bounding polygon for the detected image annotation.
+      properties:
+        normalizedVertices:
+          description: The bounding polygon normalized vertices.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1NormalizedVertex"
+          type: array
+        vertices:
+          description: The bounding polygon vertices.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1Vertex"
+          type: array
+      type: object
+    GoogleCloudDocumentaiV1beta1Document:
+      description: >-
+        Document represents the canonical document resource in Document Understanding
+
+        AI.
+
+        It is an interchange format that provides insights into documents and allows
+
+        for collaboration between users and Document Understanding AI to iterate and
+
+        optimize for quality.
+      properties:
+        content:
+          description: >-
+            Inline document content, represented as a stream of bytes.
+
+            Note: As with all `bytes` fields, protobuffers use a pure binary
+
+            representation, whereas JSON representations use base64.
+          format: byte
+          type: string
+        entities:
+          description: >-
+            A list of entities detected on Document.text. For document shards,
+
+            entities in this list may cross shard boundaries.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentEntity"
+          type: array
+        entityRelations:
+          description: Relationship among Document.entities.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentEntityRelation"
+          type: array
+        error:
+          $ref: "#/components/schemas/GoogleRpcStatus"
+          description: Any error that occurred while processing this document.
+        mimeType:
+          description: >-
+            An IANA published MIME type (also referred to as media type). For more
+
+            information, see
+
+            https://www.iana.org/assignments/media-types/media-types.xhtml.
+          type: string
+        pages:
+          description: Visual page layout for the Document.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentPage"
+          type: array
+        shardInfo:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentShardInfo"
+          description: >-
+            Information about the sharding if this document is sharded part of a larger
+
+            document. If the document is not sharded, this message is not specified.
+        text:
+          description: UTF-8 encoded text in reading order from the document.
+          type: string
+        textStyles:
+          description: Styles for the Document.text.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentStyle"
+          type: array
+        translations:
+          description: >-
+            A list of translations on Document.text. For document shards,
+
+            translations in this list may cross shard boundaries.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentTranslation"
+          type: array
+        uri:
+          description: >-
+            Currently supports Google Cloud Storage URI of the form
+               `gs://bucket_name/object_name`. Object versioning is not supported.
+               See [Google Cloud Storage Request
+               URIs](https://cloud.google.com/storage/docs/reference-uris) for more
+               info.
+          type: string
+      type: object
+    GoogleCloudDocumentaiV1beta1DocumentEntity:
+      description: >-
+        A phrase in the text that is a known entity type, such as a person, an
+
+        organization, or location.
+      properties:
+        confidence:
+          description: Optional. Confidence of detected Schema entity. Range [0, 1].
+          format: float
+          type: number
+        mentionId:
+          description: Deprecated.  Use `id` field instead.
+          type: string
+        mentionText:
+          description: Text value in the document e.g. `1600 Amphitheatre Pkwy`.
+          type: string
+        textAnchor:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentTextAnchor"
+          description: >-
+            Provenance of the entity.
+
+            Text anchor indexing into the Document.text.
+        type:
+          description: Entity type from a schema e.g. `Address`.
+          type: string
+      type: object
+    GoogleCloudDocumentaiV1beta1DocumentEntityRelation:
+      description: Relationship between Entities.
+      properties:
+        objectId:
+          description: Object entity id.
+          type: string
+        relation:
+          description: Relationship description.
+          type: string
+        subjectId:
+          description: Subject entity id.
+          type: string
+      type: object
+    GoogleCloudDocumentaiV1beta1DocumentPage:
+      description: A page in a Document.
+      properties:
+        blocks:
+          description: >-
+            A list of visually detected text blocks on the page.
+
+            A block has a set of lines (collected into paragraphs) that have a common
+
+            line-spacing and orientation.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentPageBlock"
+          type: array
+        detectedLanguages:
+          description: A list of detected languages together with confidence.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentPageDetectedLanguage"
+          type: array
+        dimension:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentPageDimension"
+          description: Physical dimension of the page.
+        formFields:
+          description: A list of visually detected form fields on the page.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentPageFormField"
+          type: array
+        layout:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentPageLayout"
+          description: Layout for the page.
+        lines:
+          description: >-
+            A list of visually detected text lines on the page.
+
+            A collection of tokens that a human would perceive as a line.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentPageLine"
+          type: array
+        pageNumber:
+          description: >-
+            1-based index for current Page in a parent Document.
+
+            Useful when a page is taken out of a Document for individual
+
+            processing.
+          format: int32
+          type: integer
+        paragraphs:
+          description: >-
+            A list of visually detected text paragraphs on the page.
+
+            A collection of lines that a human would perceive as a paragraph.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentPageParagraph"
+          type: array
+        tables:
+          description: A list of visually detected tables on the page.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentPageTable"
+          type: array
+        tokens:
+          description: A list of visually detected tokens on the page.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentPageToken"
+          type: array
+        visualElements:
+          description: >-
+            A list of detected non-text visual elements e.g. checkbox,
+
+            signature etc. on the page.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentPageVisualElement"
+          type: array
+      type: object
+    GoogleCloudDocumentaiV1beta1DocumentPageBlock:
+      description: >-
+        A block has a set of lines (collected into paragraphs) that have a
+
+        common line-spacing and orientation.
+      properties:
+        detectedLanguages:
+          description: A list of detected languages together with confidence.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentPageDetectedLanguage"
+          type: array
+        layout:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentPageLayout"
+          description: Layout for Block.
+      type: object
+    GoogleCloudDocumentaiV1beta1DocumentPageDetectedLanguage:
+      description: Detected language for a structural component.
+      properties:
+        confidence:
+          description: Confidence of detected language. Range [0, 1].
+          format: float
+          type: number
+        languageCode:
+          description: >-
+            The BCP-47 language code, such as "en-US" or "sr-Latn". For more
+
+            information, see
+
+            http://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
+          type: string
+      type: object
+    GoogleCloudDocumentaiV1beta1DocumentPageDimension:
+      description: Dimension for the page.
+      properties:
+        height:
+          description: Page height.
+          format: float
+          type: number
+        unit:
+          description: Dimension unit.
+          type: string
+        width:
+          description: Page width.
+          format: float
+          type: number
+      type: object
+    GoogleCloudDocumentaiV1beta1DocumentPageFormField:
+      description: A form field detected on the page.
+      properties:
+        fieldName:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentPageLayout"
+          description: >-
+            Layout for the FormField name. e.g. `Address`, `Email`,
+
+            `Grand total`, `Phone number`, etc.
+        fieldValue:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentPageLayout"
+          description: Layout for the FormField value.
+        nameDetectedLanguages:
+          description: A list of detected languages for name together with confidence.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentPageDetectedLanguage"
+          type: array
+        valueDetectedLanguages:
+          description: A list of detected languages for value together with confidence.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentPageDetectedLanguage"
+          type: array
+      type: object
+    GoogleCloudDocumentaiV1beta1DocumentPageLayout:
+      description: Visual element describing a layout unit on a page.
+      properties:
+        boundingPoly:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1BoundingPoly"
+          description: The bounding polygon for the Layout.
+        confidence:
+          description: >-
+            Confidence of the current Layout within context of the object this
+
+            layout is for. e.g. confidence can be for a single token, a table,
+
+            a visual element, etc. depending on context. Range [0, 1].
+          format: float
+          type: number
+        orientation:
+          description: Detected orientation for the Layout.
+          enum:
+            - ORIENTATION_UNSPECIFIED
+            - PAGE_UP
+            - PAGE_RIGHT
+            - PAGE_DOWN
+            - PAGE_LEFT
+          type: string
+        textAnchor:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentTextAnchor"
+          description: Text anchor indexing into the Document.text.
+      type: object
+    GoogleCloudDocumentaiV1beta1DocumentPageLine:
+      description: >-
+        A collection of tokens that a human would perceive as a line.
+
+        Does not cross column boundaries, can be horizontal, vertical, etc.
+      properties:
+        detectedLanguages:
+          description: A list of detected languages together with confidence.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentPageDetectedLanguage"
+          type: array
+        layout:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentPageLayout"
+          description: Layout for Line.
+      type: object
+    GoogleCloudDocumentaiV1beta1DocumentPageParagraph:
+      description: A collection of lines that a human would perceive as a paragraph.
+      properties:
+        detectedLanguages:
+          description: A list of detected languages together with confidence.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentPageDetectedLanguage"
+          type: array
+        layout:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentPageLayout"
+          description: Layout for Paragraph.
+      type: object
+    GoogleCloudDocumentaiV1beta1DocumentPageTable:
+      description: A table representation similar to HTML table structure.
+      properties:
+        bodyRows:
+          description: Body rows of the table.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentPageTableTableRow"
+          type: array
+        detectedLanguages:
+          description: A list of detected languages together with confidence.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentPageDetectedLanguage"
+          type: array
+        headerRows:
+          description: Header rows of the table.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentPageTableTableRow"
+          type: array
+        layout:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentPageLayout"
+          description: Layout for Table.
+      type: object
+    GoogleCloudDocumentaiV1beta1DocumentPageTableTableCell:
+      description: A cell representation inside the table.
+      properties:
+        colSpan:
+          description: How many columns this cell spans.
+          format: int32
+          type: integer
+        detectedLanguages:
+          description: A list of detected languages together with confidence.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentPageDetectedLanguage"
+          type: array
+        layout:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentPageLayout"
+          description: Layout for TableCell.
+        rowSpan:
+          description: How many rows this cell spans.
+          format: int32
+          type: integer
+      type: object
+    GoogleCloudDocumentaiV1beta1DocumentPageTableTableRow:
+      description: A row of table cells.
+      properties:
+        cells:
+          description: Cells that make up this row.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentPageTableTableCell"
+          type: array
+      type: object
+    GoogleCloudDocumentaiV1beta1DocumentPageToken:
+      description: A detected token.
+      properties:
+        detectedBreak:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentPageTokenDetectedBreak"
+          description: Detected break at the end of a Token.
+        detectedLanguages:
+          description: A list of detected languages together with confidence.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentPageDetectedLanguage"
+          type: array
+        layout:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentPageLayout"
+          description: Layout for Token.
+      type: object
+    GoogleCloudDocumentaiV1beta1DocumentPageTokenDetectedBreak:
+      description: Detected break at the end of a Token.
+      properties:
+        type:
+          description: Detected break type.
+          enum:
+            - TYPE_UNSPECIFIED
+            - SPACE
+            - WIDE_SPACE
+            - HYPHEN
+          type: string
+      type: object
+    GoogleCloudDocumentaiV1beta1DocumentPageVisualElement:
+      description: >-
+        Detected non-text visual elements e.g. checkbox, signature etc. on the
+
+        page.
+      properties:
+        detectedLanguages:
+          description: A list of detected languages together with confidence.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentPageDetectedLanguage"
+          type: array
+        layout:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentPageLayout"
+          description: Layout for VisualElement.
+        type:
+          description: Type of the VisualElement.
+          type: string
+      type: object
+    GoogleCloudDocumentaiV1beta1DocumentShardInfo:
+      description: >-
+        For a large document, sharding may be performed to produce several
+
+        document shards. Each document shard contains this field to detail which
+
+        shard it is.
+      properties:
+        shardCount:
+          description: Total number of shards.
+          format: int64
+          type: string
+        shardIndex:
+          description: The 0-based index of this shard.
+          format: int64
+          type: string
+        textOffset:
+          description: >-
+            The index of the first character in Document.text in the overall
+
+            document global text.
+          format: int64
+          type: string
+      type: object
+    GoogleCloudDocumentaiV1beta1DocumentStyle:
+      description: >-
+        Annotation for common text style attributes. This adheres to CSS
+
+        conventions as much as possible.
+      properties:
+        backgroundColor:
+          $ref: "#/components/schemas/GoogleTypeColor"
+          description: Text background color.
+        color:
+          $ref: "#/components/schemas/GoogleTypeColor"
+          description: Text color.
+        fontSize:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentStyleFontSize"
+          description: Font size.
+        fontWeight:
+          description: >-
+            Font weight. Possible values are normal, bold, bolder, and lighter.
+
+            https://www.w3schools.com/cssref/pr_font_weight.asp
+          type: string
+        textAnchor:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentTextAnchor"
+          description: Text anchor indexing into the Document.text.
+        textDecoration:
+          description: >-
+            Text decoration. Follows CSS standard.
+
+            <text-decoration-line> <text-decoration-color> <text-decoration-style>
+
+            https://www.w3schools.com/cssref/pr_text_text-decoration.asp
+          type: string
+        textStyle:
+          description: >-
+            Text style. Possible values are normal, italic, and oblique.
+
+            https://www.w3schools.com/cssref/pr_font_font-style.asp
+          type: string
+      type: object
+    GoogleCloudDocumentaiV1beta1DocumentStyleFontSize:
+      description: Font size with unit.
+      properties:
+        size:
+          description: Font size for the text.
+          format: float
+          type: number
+        unit:
+          description: Unit for the font size. Follows CSS naming (in, px, pt, etc.).
+          type: string
+      type: object
+    GoogleCloudDocumentaiV1beta1DocumentTextAnchor:
+      description: Text reference indexing into the Document.text.
+      properties:
+        textSegments:
+          description: The text segments from the Document.text.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentTextAnchorTextSegment"
+          type: array
+      type: object
+    GoogleCloudDocumentaiV1beta1DocumentTextAnchorTextSegment:
+      description: >-
+        A text segment in the Document.text. The indices may be out of bounds
+
+        which indicate that the text extends into another document shard for
+
+        large sharded documents. See ShardInfo.text_offset
+      properties:
+        endIndex:
+          description: >-
+            TextSegment half open end UTF-8 char index in the
+
+            Document.text.
+          format: int64
+          type: string
+        startIndex:
+          description: TextSegment start UTF-8 char index in the Document.text.
+          format: int64
+          type: string
+      type: object
+    GoogleCloudDocumentaiV1beta1DocumentTranslation:
+      description: A translation of the text segment.
+      properties:
+        languageCode:
+          description: >-
+            The BCP-47 language code, such as "en-US" or "sr-Latn". For more
+
+            information, see
+
+            http://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
+          type: string
+        textAnchor:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentTextAnchor"
+          description: >-
+            Provenance of the translation.
+
+            Text anchor indexing into the Document.text.
+        translatedText:
+          description: Text translated into the target language.
+          type: string
+      type: object
+    GoogleCloudDocumentaiV1beta1GcsDestination:
+      description: The Google Cloud Storage location where the output file will be written to.
+      properties:
+        uri:
+          type: string
+      type: object
+    GoogleCloudDocumentaiV1beta1GcsSource:
+      description: The Google Cloud Storage location where the input file will be read from.
+      properties:
+        uri:
+          type: string
+      type: object
+    GoogleCloudDocumentaiV1beta1InputConfig:
+      description: The desired input location and metadata.
+      properties:
+        gcsSource:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1GcsSource"
+          description: >-
+            The Google Cloud Storage location to read the input from. This must be a
+
+            single file.
+        mimeType:
+          description: >-
+            Required. Mimetype of the input. Current supported mimetypes are application/pdf,
+
+            image/tiff, and image/gif.
+
+            In addition, application/json type is supported for requests with
+
+            ProcessDocumentRequest.automl_params field set. The JSON file needs to
+
+            be in Document format.
+          type: string
+      type: object
+    GoogleCloudDocumentaiV1beta1NormalizedVertex:
+      description: >-
+        A vertex represents a 2D point in the image.
+
+        NOTE: the normalized vertex coordinates are relative to the original image
+
+        and range from 0 to 1.
+      properties:
+        x:
+          description: X coordinate.
+          format: float
+          type: number
+        y:
+          description: Y coordinate.
+          format: float
+          type: number
+      type: object
+    GoogleCloudDocumentaiV1beta1OperationMetadata:
+      description: Contains metadata for the BatchProcessDocuments operation.
+      properties:
+        createTime:
+          description: The creation time of the operation.
+          format: google-datetime
+          type: string
+        state:
+          description: The state of the current batch processing.
+          enum:
+            - STATE_UNSPECIFIED
+            - ACCEPTED
+            - WAITING
+            - RUNNING
+            - SUCCEEDED
+            - CANCELLED
+            - FAILED
+          type: string
+        stateMessage:
+          description: A message providing more details about the current state of processing.
+          type: string
+        updateTime:
+          description: The last update time of the operation.
+          format: google-datetime
+          type: string
+      type: object
+    GoogleCloudDocumentaiV1beta1OutputConfig:
+      description: The desired output location and metadata.
+      properties:
+        gcsDestination:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1GcsDestination"
+          description: The Google Cloud Storage location to write the output to.
+        pagesPerShard:
+          description: >-
+            The max number of pages to include into each output Document shard JSON on
+
+            Google Cloud Storage.
+
+
+            The valid range is [1, 100]. If not specified, the default value is 20.
+
+
+            For example, for one pdf file with 100 pages, 100 parsed pages will be
+
+            produced. If `pages_per_shard` = 20, then 5 Document shard JSON files each
+
+            containing 20 parsed pages will be written under the prefix
+
+            OutputConfig.gcs_destination.uri and suffix pages-x-to-y.json where
+
+            x and y are 1-indexed page numbers.
+
+
+            Example GCS outputs with 157 pages and pages_per_shard = 50:
+
+
+            <prefix>pages-001-to-050.json
+
+            <prefix>pages-051-to-100.json
+
+            <prefix>pages-101-to-150.json
+
+            <prefix>pages-151-to-157.json
+          format: int32
+          type: integer
+      type: object
+    GoogleCloudDocumentaiV1beta1ProcessDocumentResponse:
+      description: Response to a single document processing request.
+      properties:
+        inputConfig:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1InputConfig"
+          description: >-
+            Information about the input file. This is the same as the corresponding
+
+            input config in the request.
+        outputConfig:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1OutputConfig"
+          description: >-
+            The output location of the parsed responses. The responses are written to
+
+            this location as JSON-serialized `Document` objects.
+      type: object
+    GoogleCloudDocumentaiV1beta1Vertex:
+      description: >-
+        A vertex represents a 2D point in the image.
+
+        NOTE: the vertex coordinates are in the same scale as the original image.
+      properties:
+        x:
+          description: X coordinate.
+          format: int32
+          type: integer
+        y:
+          description: Y coordinate.
+          format: int32
+          type: integer
+      type: object
+    GoogleCloudDocumentaiV1beta2AutoMlParams:
+      description: Parameters to control AutoML model prediction behavior.
+      properties:
+        model:
+          description: >-
+            Resource name of the AutoML model.
+
+
+            Format: `projects/{project-id}/locations/{location-id}/models/{model-id}`.
+          type: string
+      type: object
+    GoogleCloudDocumentaiV1beta2BatchProcessDocumentsRequest:
+      description: >-
+        Request to batch process documents as an asynchronous operation. The output
+
+        is written to Cloud Storage as JSON in the [Document] format.
+      properties:
+        requests:
+          description: Required. Individual requests for each document.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2ProcessDocumentRequest"
+          type: array
+      type: object
+    GoogleCloudDocumentaiV1beta2BatchProcessDocumentsResponse:
+      description: >-
+        Response to an batch document processing request. This is returned in
+
+        the LRO Operation after the operation is complete.
+      properties:
+        responses:
+          description: Responses for each individual document.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2ProcessDocumentResponse"
+          type: array
+      type: object
+    GoogleCloudDocumentaiV1beta2BoundingPoly:
+      description: A bounding polygon for the detected image annotation.
+      properties:
+        normalizedVertices:
+          description: The bounding polygon normalized vertices.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2NormalizedVertex"
+          type: array
+        vertices:
+          description: The bounding polygon vertices.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2Vertex"
+          type: array
+      type: object
+    GoogleCloudDocumentaiV1beta2Document:
+      description: >-
+        Document represents the canonical document resource in Document Understanding
+
+        AI.
+
+        It is an interchange format that provides insights into documents and allows
+
+        for collaboration between users and Document Understanding AI to iterate and
+
+        optimize for quality.
+      properties:
+        content:
+          description: >-
+            Inline document content, represented as a stream of bytes.
+
+            Note: As with all `bytes` fields, protobuffers use a pure binary
+
+            representation, whereas JSON representations use base64.
+          format: byte
+          type: string
+        entities:
+          description: >-
+            A list of entities detected on Document.text. For document shards,
+
+            entities in this list may cross shard boundaries.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentEntity"
+          type: array
+        entityRelations:
+          description: Relationship among Document.entities.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentEntityRelation"
+          type: array
+        error:
+          $ref: "#/components/schemas/GoogleRpcStatus"
+          description: Any error that occurred while processing this document.
+        labels:
+          description: Labels for this document.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentLabel"
+          type: array
+        mimeType:
+          description: >-
+            An IANA published MIME type (also referred to as media type). For more
+
+            information, see
+
+            https://www.iana.org/assignments/media-types/media-types.xhtml.
+          type: string
+        pages:
+          description: Visual page layout for the Document.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentPage"
+          type: array
+        shardInfo:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentShardInfo"
+          description: >-
+            Information about the sharding if this document is sharded part of a larger
+
+            document. If the document is not sharded, this message is not specified.
+        text:
+          description: UTF-8 encoded text in reading order from the document.
+          type: string
+        textStyles:
+          description: Styles for the Document.text.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentStyle"
+          type: array
+        translations:
+          description: >-
+            A list of translations on Document.text. For document shards,
+
+            translations in this list may cross shard boundaries.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentTranslation"
+          type: array
+        uri:
+          description: >-
+            Currently supports Google Cloud Storage URI of the form
+               `gs://bucket_name/object_name`. Object versioning is not supported.
+               See [Google Cloud Storage Request
+               URIs](https://cloud.google.com/storage/docs/reference-uris) for more
+               info.
+          type: string
+      type: object
+    GoogleCloudDocumentaiV1beta2DocumentEntity:
+      description: >-
+        A phrase in the text that is a known entity type, such as a person, an
+
+        organization, or location.
+      properties:
+        confidence:
+          description: Optional. Confidence of detected Schema entity. Range [0, 1].
+          format: float
+          type: number
+        mentionId:
+          description: Deprecated.  Use `id` field instead.
+          type: string
+        mentionText:
+          description: Text value in the document e.g. `1600 Amphitheatre Pkwy`.
+          type: string
+        textAnchor:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentTextAnchor"
+          description: >-
+            Provenance of the entity.
+
+            Text anchor indexing into the Document.text.
+        type:
+          description: Entity type from a schema e.g. `Address`.
+          type: string
+      type: object
+    GoogleCloudDocumentaiV1beta2DocumentEntityRelation:
+      description: Relationship between Entities.
+      properties:
+        objectId:
+          description: Object entity id.
+          type: string
+        relation:
+          description: Relationship description.
+          type: string
+        subjectId:
+          description: Subject entity id.
+          type: string
+      type: object
+    GoogleCloudDocumentaiV1beta2DocumentLabel:
+      description: >-
+        Label attaches schema information and/or other metadata to segments within
+
+        a Document. Multiple Labels on a single field can denote either
+
+        different labels, different instances of the same label created at
+
+        different times, or some combination of both.
+      properties:
+        automlModel:
+          description: >-
+            Label is generated AutoML model. This field stores the full resource
+
+            name of the AutoML model.
+
+
+            Format:
+
+            `projects/{project-id}/locations/{location-id}/models/{model-id}`
+          type: string
+        confidence:
+          description: Confidence score between 0 and 1 for label assignment.
+          format: float
+          type: number
+        name:
+          description: >-
+            Name of the label.
+
+
+            When the label is generated from AutoML Text Classification model, this
+
+            field represents the name of the category.
+          type: string
+      type: object
+    GoogleCloudDocumentaiV1beta2DocumentPage:
+      description: A page in a Document.
+      properties:
+        blocks:
+          description: >-
+            A list of visually detected text blocks on the page.
+
+            A block has a set of lines (collected into paragraphs) that have a common
+
+            line-spacing and orientation.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentPageBlock"
+          type: array
+        detectedLanguages:
+          description: A list of detected languages together with confidence.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentPageDetectedLanguage"
+          type: array
+        dimension:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentPageDimension"
+          description: Physical dimension of the page.
+        formFields:
+          description: A list of visually detected form fields on the page.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentPageFormField"
+          type: array
+        layout:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentPageLayout"
+          description: Layout for the page.
+        lines:
+          description: >-
+            A list of visually detected text lines on the page.
+
+            A collection of tokens that a human would perceive as a line.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentPageLine"
+          type: array
+        pageNumber:
+          description: >-
+            1-based index for current Page in a parent Document.
+
+            Useful when a page is taken out of a Document for individual
+
+            processing.
+          format: int32
+          type: integer
+        paragraphs:
+          description: >-
+            A list of visually detected text paragraphs on the page.
+
+            A collection of lines that a human would perceive as a paragraph.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentPageParagraph"
+          type: array
+        tables:
+          description: A list of visually detected tables on the page.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentPageTable"
+          type: array
+        tokens:
+          description: A list of visually detected tokens on the page.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentPageToken"
+          type: array
+        visualElements:
+          description: >-
+            A list of detected non-text visual elements e.g. checkbox,
+
+            signature etc. on the page.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentPageVisualElement"
+          type: array
+      type: object
+    GoogleCloudDocumentaiV1beta2DocumentPageBlock:
+      description: >-
+        A block has a set of lines (collected into paragraphs) that have a
+
+        common line-spacing and orientation.
+      properties:
+        detectedLanguages:
+          description: A list of detected languages together with confidence.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentPageDetectedLanguage"
+          type: array
+        layout:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentPageLayout"
+          description: Layout for Block.
+      type: object
+    GoogleCloudDocumentaiV1beta2DocumentPageDetectedLanguage:
+      description: Detected language for a structural component.
+      properties:
+        confidence:
+          description: Confidence of detected language. Range [0, 1].
+          format: float
+          type: number
+        languageCode:
+          description: >-
+            The BCP-47 language code, such as "en-US" or "sr-Latn". For more
+
+            information, see
+
+            http://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
+          type: string
+      type: object
+    GoogleCloudDocumentaiV1beta2DocumentPageDimension:
+      description: Dimension for the page.
+      properties:
+        height:
+          description: Page height.
+          format: float
+          type: number
+        unit:
+          description: Dimension unit.
+          type: string
+        width:
+          description: Page width.
+          format: float
+          type: number
+      type: object
+    GoogleCloudDocumentaiV1beta2DocumentPageFormField:
+      description: A form field detected on the page.
+      properties:
+        fieldName:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentPageLayout"
+          description: >-
+            Layout for the FormField name. e.g. `Address`, `Email`,
+
+            `Grand total`, `Phone number`, etc.
+        fieldValue:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentPageLayout"
+          description: Layout for the FormField value.
+        nameDetectedLanguages:
+          description: A list of detected languages for name together with confidence.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentPageDetectedLanguage"
+          type: array
+        valueDetectedLanguages:
+          description: A list of detected languages for value together with confidence.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentPageDetectedLanguage"
+          type: array
+        valueType:
+          description: >-
+            If the value is non-textual, this field represents the type. Current
+
+            valid values are:
+
+            - blank (this indicates the field_value is normal text)
+
+            - "unfilled_checkbox"
+
+            - "filled_checkbox"
+          type: string
+      type: object
+    GoogleCloudDocumentaiV1beta2DocumentPageLayout:
+      description: Visual element describing a layout unit on a page.
+      properties:
+        boundingPoly:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2BoundingPoly"
+          description: The bounding polygon for the Layout.
+        confidence:
+          description: >-
+            Confidence of the current Layout within context of the object this
+
+            layout is for. e.g. confidence can be for a single token, a table,
+
+            a visual element, etc. depending on context. Range [0, 1].
+          format: float
+          type: number
+        orientation:
+          description: Detected orientation for the Layout.
+          enum:
+            - ORIENTATION_UNSPECIFIED
+            - PAGE_UP
+            - PAGE_RIGHT
+            - PAGE_DOWN
+            - PAGE_LEFT
+          type: string
+        textAnchor:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentTextAnchor"
+          description: Text anchor indexing into the Document.text.
+      type: object
+    GoogleCloudDocumentaiV1beta2DocumentPageLine:
+      description: >-
+        A collection of tokens that a human would perceive as a line.
+
+        Does not cross column boundaries, can be horizontal, vertical, etc.
+      properties:
+        detectedLanguages:
+          description: A list of detected languages together with confidence.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentPageDetectedLanguage"
+          type: array
+        layout:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentPageLayout"
+          description: Layout for Line.
+      type: object
+    GoogleCloudDocumentaiV1beta2DocumentPageParagraph:
+      description: A collection of lines that a human would perceive as a paragraph.
+      properties:
+        detectedLanguages:
+          description: A list of detected languages together with confidence.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentPageDetectedLanguage"
+          type: array
+        layout:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentPageLayout"
+          description: Layout for Paragraph.
+      type: object
+    GoogleCloudDocumentaiV1beta2DocumentPageTable:
+      description: A table representation similar to HTML table structure.
+      properties:
+        bodyRows:
+          description: Body rows of the table.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentPageTableTableRow"
+          type: array
+        detectedLanguages:
+          description: A list of detected languages together with confidence.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentPageDetectedLanguage"
+          type: array
+        headerRows:
+          description: Header rows of the table.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentPageTableTableRow"
+          type: array
+        layout:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentPageLayout"
+          description: Layout for Table.
+      type: object
+    GoogleCloudDocumentaiV1beta2DocumentPageTableTableCell:
+      description: A cell representation inside the table.
+      properties:
+        colSpan:
+          description: How many columns this cell spans.
+          format: int32
+          type: integer
+        detectedLanguages:
+          description: A list of detected languages together with confidence.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentPageDetectedLanguage"
+          type: array
+        layout:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentPageLayout"
+          description: Layout for TableCell.
+        rowSpan:
+          description: How many rows this cell spans.
+          format: int32
+          type: integer
+      type: object
+    GoogleCloudDocumentaiV1beta2DocumentPageTableTableRow:
+      description: A row of table cells.
+      properties:
+        cells:
+          description: Cells that make up this row.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentPageTableTableCell"
+          type: array
+      type: object
+    GoogleCloudDocumentaiV1beta2DocumentPageToken:
+      description: A detected token.
+      properties:
+        detectedBreak:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentPageTokenDetectedBreak"
+          description: Detected break at the end of a Token.
+        detectedLanguages:
+          description: A list of detected languages together with confidence.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentPageDetectedLanguage"
+          type: array
+        layout:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentPageLayout"
+          description: Layout for Token.
+      type: object
+    GoogleCloudDocumentaiV1beta2DocumentPageTokenDetectedBreak:
+      description: Detected break at the end of a Token.
+      properties:
+        type:
+          description: Detected break type.
+          enum:
+            - TYPE_UNSPECIFIED
+            - SPACE
+            - WIDE_SPACE
+            - HYPHEN
+          type: string
+      type: object
+    GoogleCloudDocumentaiV1beta2DocumentPageVisualElement:
+      description: >-
+        Detected non-text visual elements e.g. checkbox, signature etc. on the
+
+        page.
+      properties:
+        detectedLanguages:
+          description: A list of detected languages together with confidence.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentPageDetectedLanguage"
+          type: array
+        layout:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentPageLayout"
+          description: Layout for VisualElement.
+        type:
+          description: Type of the VisualElement.
+          type: string
+      type: object
+    GoogleCloudDocumentaiV1beta2DocumentShardInfo:
+      description: >-
+        For a large document, sharding may be performed to produce several
+
+        document shards. Each document shard contains this field to detail which
+
+        shard it is.
+      properties:
+        shardCount:
+          description: Total number of shards.
+          format: int64
+          type: string
+        shardIndex:
+          description: The 0-based index of this shard.
+          format: int64
+          type: string
+        textOffset:
+          description: >-
+            The index of the first character in Document.text in the overall
+
+            document global text.
+          format: int64
+          type: string
+      type: object
+    GoogleCloudDocumentaiV1beta2DocumentStyle:
+      description: >-
+        Annotation for common text style attributes. This adheres to CSS
+
+        conventions as much as possible.
+      properties:
+        backgroundColor:
+          $ref: "#/components/schemas/GoogleTypeColor"
+          description: Text background color.
+        color:
+          $ref: "#/components/schemas/GoogleTypeColor"
+          description: Text color.
+        fontSize:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentStyleFontSize"
+          description: Font size.
+        fontWeight:
+          description: >-
+            Font weight. Possible values are normal, bold, bolder, and lighter.
+
+            https://www.w3schools.com/cssref/pr_font_weight.asp
+          type: string
+        textAnchor:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentTextAnchor"
+          description: Text anchor indexing into the Document.text.
+        textDecoration:
+          description: >-
+            Text decoration. Follows CSS standard.
+
+            <text-decoration-line> <text-decoration-color> <text-decoration-style>
+
+            https://www.w3schools.com/cssref/pr_text_text-decoration.asp
+          type: string
+        textStyle:
+          description: >-
+            Text style. Possible values are normal, italic, and oblique.
+
+            https://www.w3schools.com/cssref/pr_font_font-style.asp
+          type: string
+      type: object
+    GoogleCloudDocumentaiV1beta2DocumentStyleFontSize:
+      description: Font size with unit.
+      properties:
+        size:
+          description: Font size for the text.
+          format: float
+          type: number
+        unit:
+          description: Unit for the font size. Follows CSS naming (in, px, pt, etc.).
+          type: string
+      type: object
+    GoogleCloudDocumentaiV1beta2DocumentTextAnchor:
+      description: Text reference indexing into the Document.text.
+      properties:
+        textSegments:
+          description: The text segments from the Document.text.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentTextAnchorTextSegment"
+          type: array
+      type: object
+    GoogleCloudDocumentaiV1beta2DocumentTextAnchorTextSegment:
+      description: >-
+        A text segment in the Document.text. The indices may be out of bounds
+
+        which indicate that the text extends into another document shard for
+
+        large sharded documents. See ShardInfo.text_offset
+      properties:
+        endIndex:
+          description: >-
+            TextSegment half open end UTF-8 char index in the
+
+            Document.text.
+          format: int64
+          type: string
+        startIndex:
+          description: TextSegment start UTF-8 char index in the Document.text.
+          format: int64
+          type: string
+      type: object
+    GoogleCloudDocumentaiV1beta2DocumentTranslation:
+      description: A translation of the text segment.
+      properties:
+        languageCode:
+          description: >-
+            The BCP-47 language code, such as "en-US" or "sr-Latn". For more
+
+            information, see
+
+            http://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
+          type: string
+        textAnchor:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentTextAnchor"
+          description: >-
+            Provenance of the translation.
+
+            Text anchor indexing into the Document.text.
+        translatedText:
+          description: Text translated into the target language.
+          type: string
+      type: object
+    GoogleCloudDocumentaiV1beta2EntityExtractionParams:
+      description: Parameters to control entity extraction behavior.
+      properties:
+        enabled:
+          description: Whether to enable entity extraction.
+          type: boolean
+        modelVersion:
+          description: >-
+            Model version of the entity extraction. Default is
+
+            "builtin/stable". Specify "builtin/latest" for the latest model.
+          type: string
+      type: object
+    GoogleCloudDocumentaiV1beta2FormExtractionParams:
+      description: Parameters to control form extraction behavior.
+      properties:
+        enabled:
+          description: Whether to enable form extraction.
+          type: boolean
+        keyValuePairHints:
+          description: Reserved for future use.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2KeyValuePairHint"
+          type: array
+        modelVersion:
+          description: >-
+            Model version of the form extraction system. Default is
+
+            "builtin/stable". Specify "builtin/latest" for the latest model.
+
+            For custom form models, specify: “custom/{model_name}". Model name
+
+            format is "bucket_name/path/to/modeldir" corresponding to
+
+            "gs://bucket_name/path/to/modeldir" where annotated examples are stored.
+          type: string
+      type: object
+    GoogleCloudDocumentaiV1beta2GcsDestination:
+      description: The Google Cloud Storage location where the output file will be written to.
+      properties:
+        uri:
+          type: string
+      type: object
+    GoogleCloudDocumentaiV1beta2GcsSource:
+      description: The Google Cloud Storage location where the input file will be read from.
+      properties:
+        uri:
+          type: string
+      type: object
+    GoogleCloudDocumentaiV1beta2InputConfig:
+      description: The desired input location and metadata.
+      properties:
+        contents:
+          description: >-
+            Content in bytes, represented as a stream of bytes.
+
+            Note: As with all `bytes` fields, proto buffer messages use a pure binary
+
+            representation, whereas JSON representations use base64.
+
+
+            This field only works for synchronous ProcessDocument method.
+          format: byte
+          type: string
+        gcsSource:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2GcsSource"
+          description: >-
+            The Google Cloud Storage location to read the input from. This must be a
+
+            single file.
+        mimeType:
+          description: >-
+            Required. Mimetype of the input. Current supported mimetypes are application/pdf,
+
+            image/tiff, and image/gif.
+
+            In addition, application/json type is supported for requests with
+
+            ProcessDocumentRequest.automl_params field set. The JSON file needs to
+
+            be in Document format.
+          type: string
+      type: object
+    GoogleCloudDocumentaiV1beta2KeyValuePairHint:
+      description: Reserved for future use.
+      properties:
+        key:
+          description: The key text for the hint.
+          type: string
+        valueTypes:
+          description: >-
+            Type of the value. This is case-insensitive, and could be one of:
+
+            ADDRESS, LOCATION, ORGANIZATION, PERSON, PHONE_NUMBER,
+
+            ID, NUMBER, EMAIL, PRICE, TERMS, DATE, NAME. Types not in this list will
+
+            be ignored.
+          items:
+            type: string
+          type: array
+      type: object
+    GoogleCloudDocumentaiV1beta2NormalizedVertex:
+      description: >-
+        A vertex represents a 2D point in the image.
+
+        NOTE: the normalized vertex coordinates are relative to the original image
+
+        and range from 0 to 1.
+      properties:
+        x:
+          description: X coordinate.
+          format: float
+          type: number
+        y:
+          description: Y coordinate.
+          format: float
+          type: number
+      type: object
+    GoogleCloudDocumentaiV1beta2OcrParams:
+      description: Parameters to control Optical Character Recognition (OCR) behavior.
+      properties:
+        languageHints:
+          description: >-
+            List of languages to use for OCR. In most cases, an empty value
+
+            yields the best results since it enables automatic language detection. For
+
+            languages based on the Latin alphabet, setting `language_hints` is not
+
+            needed. In rare cases, when the language of the text in the image is known,
+
+            setting a hint will help get better results (although it will be a
+
+            significant hindrance if the hint is wrong). Document processing returns an
+
+            error if one or more of the specified languages is not one of the
+
+            supported languages.
+          items:
+            type: string
+          type: array
+      type: object
+    GoogleCloudDocumentaiV1beta2OperationMetadata:
+      description: Contains metadata for the BatchProcessDocuments operation.
+      properties:
+        createTime:
+          description: The creation time of the operation.
+          format: google-datetime
+          type: string
+        state:
+          description: The state of the current batch processing.
+          enum:
+            - STATE_UNSPECIFIED
+            - ACCEPTED
+            - WAITING
+            - RUNNING
+            - SUCCEEDED
+            - CANCELLED
+            - FAILED
+          type: string
+        stateMessage:
+          description: A message providing more details about the current state of processing.
+          type: string
+        updateTime:
+          description: The last update time of the operation.
+          format: google-datetime
+          type: string
+      type: object
+    GoogleCloudDocumentaiV1beta2OutputConfig:
+      description: The desired output location and metadata.
+      properties:
+        gcsDestination:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2GcsDestination"
+          description: The Google Cloud Storage location to write the output to.
+        pagesPerShard:
+          description: >-
+            The max number of pages to include into each output Document shard JSON on
+
+            Google Cloud Storage.
+
+
+            The valid range is [1, 100]. If not specified, the default value is 20.
+
+
+            For example, for one pdf file with 100 pages, 100 parsed pages will be
+
+            produced. If `pages_per_shard` = 20, then 5 Document shard JSON files each
+
+            containing 20 parsed pages will be written under the prefix
+
+            OutputConfig.gcs_destination.uri and suffix pages-x-to-y.json where
+
+            x and y are 1-indexed page numbers.
+
+
+            Example GCS outputs with 157 pages and pages_per_shard = 50:
+
+
+            <prefix>pages-001-to-050.json
+
+            <prefix>pages-051-to-100.json
+
+            <prefix>pages-101-to-150.json
+
+            <prefix>pages-151-to-157.json
+          format: int32
+          type: integer
+      type: object
+    GoogleCloudDocumentaiV1beta2ProcessDocumentRequest:
+      description: Request to process one document.
+      properties:
+        automlParams:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2AutoMlParams"
+          description: >-
+            Controls AutoML model prediction behavior. AutoMlParams cannot be used
+
+            together with other Params.
+        documentType:
+          description: >-
+            Specifies a known document type for deeper structure detection. Valid
+
+            values are currently "general" and "invoice". If not provided, "general"\
+
+            is used as default. If any other value is given, the request is rejected.
+          type: string
+        entityExtractionParams:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2EntityExtractionParams"
+          description: >-
+            Controls entity extraction behavior. If not specified, the system will
+
+            decide reasonable defaults.
+        formExtractionParams:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2FormExtractionParams"
+          description: >-
+            Controls form extraction behavior. If not specified, the system will
+
+            decide reasonable defaults.
+        inputConfig:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2InputConfig"
+          description: Required. Information about the input file.
+        ocrParams:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2OcrParams"
+          description: >-
+            Controls OCR behavior. If not specified, the system will decide reasonable
+
+            defaults.
+        outputConfig:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2OutputConfig"
+          description: >-
+            The desired output location. This field is only needed in
+
+            BatchProcessDocumentsRequest.
+        parent:
+          description: >-
+            Target project and location to make a call.
+
+
+            Format: `projects/{project-id}/locations/{location-id}`.
+
+
+            If no location is specified, a region will be chosen automatically.
+
+            This field is only populated when used in ProcessDocument method.
+          type: string
+        tableExtractionParams:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2TableExtractionParams"
+          description: >-
+            Controls table extraction behavior. If not specified, the system will
+
+            decide reasonable defaults.
+      type: object
+    GoogleCloudDocumentaiV1beta2ProcessDocumentResponse:
+      description: Response to a single document processing request.
+      properties:
+        inputConfig:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2InputConfig"
+          description: >-
+            Information about the input file. This is the same as the corresponding
+
+            input config in the request.
+        outputConfig:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2OutputConfig"
+          description: >-
+            The output location of the parsed responses. The responses are written to
+
+            this location as JSON-serialized `Document` objects.
+      type: object
+    GoogleCloudDocumentaiV1beta2TableBoundHint:
+      description: A hint for a table bounding box on the page for table parsing.
+      properties:
+        boundingBox:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2BoundingPoly"
+          description: >-
+            Bounding box hint for a table on this page. The coordinates must be
+
+            normalized to [0,1] and the bounding box must be an axis-aligned rectangle.
+        pageNumber:
+          description: >-
+            Optional. Page number for multi-paged inputs this hint applies to. If not
+
+            provided, this hint will apply to all pages by default. This value is
+
+            1-based.
+          format: int32
+          type: integer
+      type: object
+    GoogleCloudDocumentaiV1beta2TableExtractionParams:
+      description: Parameters to control table extraction behavior.
+      properties:
+        enabled:
+          description: Whether to enable table extraction.
+          type: boolean
+        headerHints:
+          description: Optional. Reserved for future use.
+          items:
+            type: string
+          type: array
+        modelVersion:
+          description: >-
+            Model version of the table extraction system. Default is "builtin/stable".
+
+            Specify "builtin/latest" for the latest model.
+          type: string
+        tableBoundHints:
+          description: >-
+            Optional. Table bounding box hints that can be provided to complex cases
+
+            which our algorithm cannot locate the table(s) in.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2TableBoundHint"
+          type: array
+      type: object
+    GoogleCloudDocumentaiV1beta2Vertex:
+      description: >-
+        A vertex represents a 2D point in the image.
+
+        NOTE: the vertex coordinates are in the same scale as the original image.
+      properties:
+        x:
+          description: X coordinate.
+          format: int32
+          type: integer
+        y:
+          description: Y coordinate.
+          format: int32
+          type: integer
+      type: object
+    GoogleLongrunningOperation:
+      description: >-
+        This resource represents a long-running operation that is the result of a
+
+        network API call.
+      properties:
+        done:
+          description: >-
+            If the value is `false`, it means the operation is still in progress.
+
+            If `true`, the operation is completed, and either `error` or `response` is
+
+            available.
+          type: boolean
+        error:
+          $ref: "#/components/schemas/GoogleRpcStatus"
+          description: The error result of the operation in case of failure or cancellation.
+        metadata:
+          additionalProperties:
+            description: Properties of the object. Contains field @type with type URL.
+          description: >-
+            Service-specific metadata associated with the operation.  It typically
+
+            contains progress information and common metadata such as create time.
+
+            Some services might not provide such metadata.  Any method that returns a
+
+            long-running operation should document the metadata type, if any.
+          type: object
+        name:
+          description: >-
+            The server-assigned name, which is only unique within the same service that
+
+            originally returns it. If you use the default HTTP mapping, the
+
+            `name` should be a resource name ending with `operations/{unique_id}`.
+          type: string
+        response:
+          additionalProperties:
+            description: Properties of the object. Contains field @type with type URL.
+          description: >-
+            The normal response of the operation in case of success.  If the original
+
+            method returns no data on success, such as `Delete`, the response is
+
+            `google.protobuf.Empty`.  If the original method is standard
+
+            `Get`/`Create`/`Update`, the response should be the resource.  For other
+
+            methods, the response should have the type `XxxResponse`, where `Xxx`
+
+            is the original method name.  For example, if the original method name
+
+            is `TakeSnapshot()`, the inferred response type is
+
+            `TakeSnapshotResponse`.
+          type: object
+      type: object
+    GoogleRpcStatus:
+      description: >-
+        The `Status` type defines a logical error model that is suitable for
+
+        different programming environments, including REST APIs and RPC APIs. It is
+
+        used by [gRPC](https://github.com/grpc). Each `Status` message contains
+
+        three pieces of data: error code, error message, and error details.
+
+
+        You can find out more about this error model and how to work with it in the
+
+        [API Design Guide](https://cloud.google.com/apis/design/errors).
+      properties:
+        code:
+          description: The status code, which should be an enum value of google.rpc.Code.
+          format: int32
+          type: integer
+        details:
+          description: >-
+            A list of messages that carry the error details.  There is a common set of
+
+            message types for APIs to use.
+          items:
+            additionalProperties:
+              description: Properties of the object. Contains field @type with type URL.
+            type: object
+          type: array
+        message:
+          description: >-
+            A developer-facing error message, which should be in English. Any
+
+            user-facing error message should be localized and sent in the
+
+            google.rpc.Status.details field, or localized by the client.
+          type: string
+      type: object
+    GoogleTypeColor:
+      description: >-
+        Represents a color in the RGBA color space. This representation is designed
+
+        for simplicity of conversion to/from color representations in various
+
+        languages over compactness; for example, the fields of this representation
+
+        can be trivially provided to the constructor of "java.awt.Color" in Java; it
+
+        can also be trivially provided to UIColor's "+colorWithRed:green:blue:alpha"
+
+        method in iOS; and, with just a little work, it can be easily formatted into
+
+        a CSS "rgba()" string in JavaScript, as well.
+
+
+        Note: this proto does not carry information about the absolute color space
+
+        that should be used to interpret the RGB value (e.g. sRGB, Adobe RGB,
+
+        DCI-P3, BT.2020, etc.). By default, applications SHOULD assume the sRGB color
+
+        space.
+
+
+        Note: when color equality needs to be decided, implementations, unless
+
+        documented otherwise, will treat two colors to be equal if all their red,
+
+        green, blue and alpha values each differ by at most 1e-5.
+
+
+        Example (Java):
+
+             import com.google.type.Color;
+
+             // ...
+             public static java.awt.Color fromProto(Color protocolor) {
+               float alpha = protocolor.hasAlpha()
+                   ? protocolor.getAlpha().getValue()
+                   : 1.0;
+
+               return new java.awt.Color(
+                   protocolor.getRed(),
+                   protocolor.getGreen(),
+                   protocolor.getBlue(),
+                   alpha);
+             }
+
+             public static Color toProto(java.awt.Color color) {
+               float red = (float) color.getRed();
+               float green = (float) color.getGreen();
+               float blue = (float) color.getBlue();
+               float denominator = 255.0;
+               Color.Builder resultBuilder =
+                   Color
+                       .newBuilder()
+                       .setRed(red / denominator)
+                       .setGreen(green / denominator)
+                       .setBlue(blue / denominator);
+               int alpha = color.getAlpha();
+               if (alpha != 255) {
+                 result.setAlpha(
+                     FloatValue
+                         .newBuilder()
+                         .setValue(((float) alpha) / denominator)
+                         .build());
+               }
+               return resultBuilder.build();
+             }
+             // ...
+
+        Example (iOS / Obj-C):
+
+             // ...
+             static UIColor* fromProto(Color* protocolor) {
+                float red = [protocolor red];
+                float green = [protocolor green];
+                float blue = [protocolor blue];
+                FloatValue* alpha_wrapper = [protocolor alpha];
+                float alpha = 1.0;
+                if (alpha_wrapper != nil) {
+                  alpha = [alpha_wrapper value];
+                }
+                return [UIColor colorWithRed:red green:green blue:blue alpha:alpha];
+             }
+
+             static Color* toProto(UIColor* color) {
+                 CGFloat red, green, blue, alpha;
+                 if (![color getRed:&red green:&green blue:&blue alpha:&alpha]) {
+                   return nil;
+                 }
+                 Color* result = [[Color alloc] init];
+                 [result setRed:red];
+                 [result setGreen:green];
+                 [result setBlue:blue];
+                 if (alpha <= 0.9999) {
+                   [result setAlpha:floatWrapperWithValue(alpha)];
+                 }
+                 [result autorelease];
+                 return result;
+            }
+            // ...
+
+         Example (JavaScript):
+
+            // ...
+
+            var protoToCssColor = function(rgb_color) {
+               var redFrac = rgb_color.red || 0.0;
+               var greenFrac = rgb_color.green || 0.0;
+               var blueFrac = rgb_color.blue || 0.0;
+               var red = Math.floor(redFrac * 255);
+               var green = Math.floor(greenFrac * 255);
+               var blue = Math.floor(blueFrac * 255);
+
+               if (!('alpha' in rgb_color)) {
+                  return rgbToCssColor_(red, green, blue);
+               }
+
+               var alphaFrac = rgb_color.alpha.value || 0.0;
+               var rgbParams = [red, green, blue].join(',');
+               return ['rgba(', rgbParams, ',', alphaFrac, ')'].join('');
+            };
+
+            var rgbToCssColor_ = function(red, green, blue) {
+              var rgbNumber = new Number((red << 16) | (green << 8) | blue);
+              var hexString = rgbNumber.toString(16);
+              var missingZeros = 6 - hexString.length;
+              var resultBuilder = ['#'];
+              for (var i = 0; i < missingZeros; i++) {
+                 resultBuilder.push('0');
+              }
+              resultBuilder.push(hexString);
+              return resultBuilder.join('');
+            };
+
+            // ...
+      properties:
+        alpha:
+          description: >-
+            The fraction of this color that should be applied to the pixel. That is,
+
+            the final pixel color is defined by the equation:
+
+              pixel color = alpha * (this color) + (1.0 - alpha) * (background color)
+
+            This means that a value of 1.0 corresponds to a solid color, whereas
+
+            a value of 0.0 corresponds to a completely transparent color. This
+
+            uses a wrapper message rather than a simple float scalar so that it is
+
+            possible to distinguish between a default value and the value being unset.
+
+            If omitted, this color object is to be rendered as a solid color
+
+            (as if the alpha value had been explicitly given with a value of 1.0).
+          format: float
+          type: number
+        blue:
+          description: The amount of blue in the color as a value in the interval [0, 1].
+          format: float
+          type: number
+        green:
+          description: The amount of green in the color as a value in the interval [0, 1].
+          format: float
+          type: number
+        red:
+          description: The amount of red in the color as a value in the interval [0, 1].
+          format: float
+          type: number
+      type: object
+  securitySchemes:
+    Oauth2:
+      description: Oauth 2.0 implicit authentication
+      flows:
+        implicit:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          scopes:
+            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+      type: oauth2
+    Oauth2c:
+      description: Oauth 2.0 authorizationCode authentication
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          scopes:
+            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+          tokenUrl: https://accounts.google.com/o/oauth2/token
+      type: oauth2

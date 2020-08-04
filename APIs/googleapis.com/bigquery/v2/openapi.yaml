@@ -33,13 +33,13 @@ info:
 externalDocs:
   url: https://cloud.google.com/bigquery/
 tags:
-  - name: tabledata
-  - name: tables
   - name: datasets
   - name: routines
   - name: models
   - name: jobs
   - name: projects
+  - name: tabledata
+  - name: tables
 paths:
   /projects:
     get:
@@ -83,13 +83,13 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/fields"
   "/projects/{projectId}/datasets":
     get:
       description: Lists all datasets in the specified project to which you have been granted the READER dataset role.
@@ -148,13 +148,13 @@ paths:
       tags:
         - datasets
     parameters:
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/fields"
     post:
       description: Creates a new empty dataset.
       operationId: bigquery.datasets.insert
@@ -267,13 +267,13 @@ paths:
       tags:
         - datasets
     parameters:
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/fields"
     patch:
       description: Updates information in an existing dataset. The update method replaces the entire dataset resource, whereas the patch method only replaces fields that are provided in the submitted dataset resource. This method supports patch semantics.
       operationId: bigquery.datasets.patch
@@ -415,13 +415,13 @@ paths:
       tags:
         - models
     parameters:
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/fields"
   "/projects/{projectId}/datasets/{datasetId}/models/{modelId}":
     delete:
       description: Deletes the model specified by modelId from the dataset.
@@ -508,13 +508,13 @@ paths:
       tags:
         - models
     parameters:
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/fields"
     patch:
       description: Patch specific fields in the specified model.
       operationId: bigquery.models.patch
@@ -649,13 +649,13 @@ paths:
       tags:
         - routines
     parameters:
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/fields"
     post:
       description: Creates a new routine in the dataset.
       operationId: bigquery.routines.insert
@@ -789,13 +789,13 @@ paths:
       tags:
         - routines
     parameters:
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/fields"
     put:
       description: >-
         Updates information in an existing routine. The update method replaces the
@@ -898,13 +898,13 @@ paths:
       tags:
         - tables
     parameters:
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/fields"
     post:
       description: Creates a new, empty table in the dataset.
       operationId: bigquery.tables.insert
@@ -1035,13 +1035,13 @@ paths:
       tags:
         - tables
     parameters:
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/fields"
     patch:
       description: Updates information in an existing table. The update method replaces the entire table resource, whereas the patch method only replaces fields that are provided in the submitted table resource. This method supports patch semantics.
       operationId: bigquery.tables.patch
@@ -1202,22 +1202,22 @@ paths:
       tags:
         - tabledata
     parameters:
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/fields"
   "/projects/{projectId}/datasets/{datasetId}/tables/{tableId}/insertAll":
     parameters:
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/fields"
     post:
       description: Streams data into BigQuery one record at a time without needing to run a load job. Requires the WRITER dataset role.
       operationId: bigquery.tabledata.insertAll
@@ -1356,13 +1356,13 @@ paths:
       tags:
         - jobs
     parameters:
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/fields"
     post:
       description: Starts a new asynchronous job. Requires the Can View project role.
       operationId: bigquery.jobs.insert
@@ -1457,22 +1457,22 @@ paths:
       tags:
         - jobs
     parameters:
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/fields"
   "/projects/{projectId}/jobs/{jobId}/cancel":
     parameters:
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/fields"
     post:
       description: Requests that a job be cancelled. This call will return immediately, and the client will need to poll for the job status to see if the cancel completed successfully. Cancelled jobs may still incur costs.
       operationId: bigquery.jobs.cancel
@@ -1514,13 +1514,13 @@ paths:
         - jobs
   "/projects/{projectId}/queries":
     parameters:
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/fields"
     post:
       description: Runs a BigQuery SQL query synchronously and returns query results if the query completes within a specified timeout.
       operationId: bigquery.jobs.query
@@ -1631,13 +1631,13 @@ paths:
       tags:
         - jobs
     parameters:
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/fields"
   "/projects/{projectId}/serviceAccount":
     get:
       description: Returns the email address of the service account for your project used for interactions with Google Cloud KMS.
@@ -1676,22 +1676,22 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/fields"
   "/{resource}:getIamPolicy":
     parameters:
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/fields"
     post:
       description: >-
         Gets the access control policy for a resource.
@@ -1743,13 +1743,13 @@ paths:
         - tables
   "/{resource}:setIamPolicy":
     parameters:
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/fields"
     post:
       description: >-
         Sets the access control policy on the specified resource. Replaces any
@@ -1794,13 +1794,13 @@ paths:
         - tables
   "/{resource}:testIamPermissions":
     parameters:
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/fields"
     post:
       description: >-
         Returns permissions that a caller has on the specified resource.

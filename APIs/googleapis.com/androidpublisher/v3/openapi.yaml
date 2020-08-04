@@ -33,43 +33,29 @@ info:
 externalDocs:
   url: https://developers.google.com/android-publisher
 tags:
-  - name: orders
-  - name: internalappsharingartifacts
-  - name: reviews
-  - name: edits
-  - name: purchases
-  - name: systemapks
   - name: inappproducts
+  - name: internalappsharingartifacts
+  - name: purchases
+  - name: edits
+  - name: reviews
+  - name: orders
+  - name: systemapks
 paths:
   "/androidpublisher/v3/applications/internalappsharing/{packageName}/artifacts/apk":
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
-      description: >-
-        Uploads an APK to internal app sharing.
-
-        If you are using the Google API client libraries, please increase the
-
-        timeout of the http request before calling this endpoint
-
-        (a timeout of 2 minutes is recommended).
-
-
-        See [Timeouts and
-
-        Errors](https://developers.google.com/api-client-library/java/google-api-java-client/errors)
-
-        for an example in java.
+      description: Uploads an APK to internal app sharing. If you are using the Google API client libraries, please increase the timeout of the http request before calling this endpoint (a timeout of 2 minutes is recommended). See [Timeouts and Errors](https://developers.google.com/api-client-library/java/google-api-java-client/errors) for an example in java.
       operationId: androidpublisher.internalappsharingartifacts.uploadapk
       parameters:
         - description: Package name of the app.
@@ -94,33 +80,19 @@ paths:
         - internalappsharingartifacts
   "/androidpublisher/v3/applications/internalappsharing/{packageName}/artifacts/bundle":
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
-      description: >-
-        Uploads an app bundle to internal app sharing.
-
-        If you are using the Google API client libraries, please increase the
-
-        timeout of the http request before calling this endpoint
-
-        (a timeout of 2 minutes is recommended).
-
-
-        See [Timeouts and
-
-        Errors](https://developers.google.com/api-client-library/java/google-api-java-client/errors)
-
-        for an example in java.
+      description: Uploads an app bundle to internal app sharing. If you are using the Google API client libraries, please increase the timeout of the http request before calling this endpoint (a timeout of 2 minutes is recommended). See [Timeouts and Errors](https://developers.google.com/api-client-library/java/google-api-java-client/errors) for an example in java.
       operationId: androidpublisher.internalappsharingartifacts.uploadbundle
       parameters:
         - description: Package name of the app.
@@ -145,17 +117,17 @@ paths:
         - internalappsharingartifacts
   "/androidpublisher/v3/applications/{packageName}/edits":
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: Creates a new edit for an app.
       operationId: androidpublisher.edits.insert
@@ -243,17 +215,17 @@ paths:
       tags:
         - edits
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
   "/androidpublisher/v3/applications/{packageName}/edits/{editId}/apks":
     get:
       description: Lists all current APKs of the app and edit.
@@ -286,17 +258,17 @@ paths:
       tags:
         - edits
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: Uploads an APK and adds to the current edit.
       operationId: androidpublisher.edits.apks.upload
@@ -329,26 +301,19 @@ paths:
         - edits
   "/androidpublisher/v3/applications/{packageName}/edits/{editId}/apks/externallyHosted":
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
-      description: >-
-        Creates a new APK without uploading the APK itself to Google Play, instead
-
-        hosting the APK at a specified URL. This function is only available to
-
-        organizations using Managed Play whose application is configured to
-
-        restrict distribution to the organizations.
+      description: Creates a new APK without uploading the APK itself to Google Play, instead hosting the APK at a specified URL. This function is only available to organizations using Managed Play whose application is configured to restrict distribution to the organizations.
       operationId: androidpublisher.edits.apks.addexternallyhosted
       parameters:
         - description: Package name of the app.
@@ -384,17 +349,17 @@ paths:
         - edits
   "/androidpublisher/v3/applications/{packageName}/edits/{editId}/apks/{apkVersionCode}/deobfuscationFiles/{deobfuscationFileType}":
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: Uploads a new deobfuscation file and attaches to the specified APK.
       operationId: androidpublisher.edits.deobfuscationfiles.upload
@@ -411,10 +376,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: >-
-            The version code of the APK whose Deobfuscation File is being
-
-            uploaded.
+        - description: The version code of the APK whose Deobfuscation File is being uploaded.
           in: path
           name: apkVersionCode
           required: true
@@ -461,10 +423,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: >-
-            The version code of the APK whose expansion file configuration is being
-
-            read or modified.
+        - description: The version code of the APK whose expansion file configuration is being read or modified.
           in: path
           name: apkVersionCode
           required: true
@@ -495,24 +454,19 @@ paths:
       tags:
         - edits
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
     patch:
-      description: >-
-        Patches the APK's expansion file configuration to reference another APK's
-
-        expansion file.
-
-        To add a new expansion file use the Upload method.
+      description: Patches the APK's expansion file configuration to reference another APK's expansion file. To add a new expansion file use the Upload method.
       operationId: androidpublisher.edits.expansionfiles.patch
       parameters:
         - description: Package name of the app.
@@ -527,10 +481,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: >-
-            The version code of the APK whose expansion file configuration is being
-
-            read or modified.
+        - description: The version code of the APK whose expansion file configuration is being read or modified.
           in: path
           name: apkVersionCode
           required: true
@@ -581,10 +532,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: >-
-            The version code of the APK whose expansion file configuration is being
-
-            read or modified.
+        - description: The version code of the APK whose expansion file configuration is being read or modified.
           in: path
           name: apkVersionCode
           required: true
@@ -615,12 +563,7 @@ paths:
       tags:
         - edits
     put:
-      description: >-
-        Updates the APK's expansion file configuration to reference another APK's
-
-        expansion file.
-
-        To add a new expansion file use the Upload method.
+      description: Updates the APK's expansion file configuration to reference another APK's expansion file. To add a new expansion file use the Upload method.
       operationId: androidpublisher.edits.expansionfiles.update
       parameters:
         - description: Package name of the app.
@@ -635,10 +578,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: >-
-            The version code of the APK whose expansion file configuration is being
-
-            read or modified.
+        - description: The version code of the APK whose expansion file configuration is being read or modified.
           in: path
           name: apkVersionCode
           required: true
@@ -705,32 +645,19 @@ paths:
       tags:
         - edits
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
-      description: >-
-        Uploads a new Android App Bundle to this edit.
-
-        If you are using the Google API client libraries, please increase the
-
-        timeout of the http request before calling this endpoint
-
-        (a timeout of 2 minutes is recommended).
-
-        See [Timeouts and
-
-        Errors](https://developers.google.com/api-client-library/java/google-api-java-client/errors)
-
-        for an example in java.
+      description: Uploads a new Android App Bundle to this edit. If you are using the Google API client libraries, please increase the timeout of the http request before calling this endpoint (a timeout of 2 minutes is recommended). See [Timeouts and Errors](https://developers.google.com/api-client-library/java/google-api-java-client/errors) for an example in java.
       operationId: androidpublisher.edits.bundles.upload
       parameters:
         - description: Package name of the app.
@@ -745,12 +672,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: >-
-            Must be set to true if the bundle installation may trigger a warning on
-
-            user devices (for example, if installation size may be over a threshold,
-
-            typically 100 MB).
+        - description: Must be set to true if the bundle installation may trigger a warning on user devices (for example, if installation size may be over a threshold, typically 100 MB).
           in: query
           name: ackBundleInstallationWarning
           schema:
@@ -801,17 +723,17 @@ paths:
       tags:
         - edits
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
     patch:
       description: Patches details of an app.
       operationId: androidpublisher.edits.details.patch
@@ -940,17 +862,17 @@ paths:
       tags:
         - edits
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
   "/androidpublisher/v3/applications/{packageName}/edits/{editId}/listings/{language}":
     delete:
       description: Deletes a localized store listing.
@@ -968,10 +890,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: >-
-            Language localization code (a BCP-47 language tag; for example, "de-AT"
-
-            for Austrian German).
+        - description: Language localization code (a BCP-47 language tag; for example, "de-AT" for Austrian German).
           in: path
           name: language
           required: true
@@ -1003,10 +922,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: >-
-            Language localization code (a BCP-47 language tag; for example, "de-AT"
-
-            for Austrian German).
+        - description: Language localization code (a BCP-47 language tag; for example, "de-AT" for Austrian German).
           in: path
           name: language
           required: true
@@ -1027,17 +943,17 @@ paths:
       tags:
         - edits
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
     patch:
       description: Patches a localized store listing.
       operationId: androidpublisher.edits.listings.patch
@@ -1054,10 +970,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: >-
-            Language localization code (a BCP-47 language tag; for example, "de-AT"
-
-            for Austrian German).
+        - description: Language localization code (a BCP-47 language tag; for example, "de-AT" for Austrian German).
           in: path
           name: language
           required: true
@@ -1098,10 +1011,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: >-
-            Language localization code (a BCP-47 language tag; for example, "de-AT"
-
-            for Austrian German).
+        - description: Language localization code (a BCP-47 language tag; for example, "de-AT" for Austrian German).
           in: path
           name: language
           required: true
@@ -1128,10 +1038,7 @@ paths:
         - edits
   "/androidpublisher/v3/applications/{packageName}/edits/{editId}/listings/{language}/{imageType}":
     delete:
-      description: >-
-        Deletes all images for the specified language and image type.
-
-        Returns an empty response if no images are found.
+      description: Deletes all images for the specified language and image type. Returns an empty response if no images are found.
       operationId: androidpublisher.edits.images.deleteall
       parameters:
         - description: Package name of the app.
@@ -1146,21 +1053,13 @@ paths:
           required: true
           schema:
             type: string
-        - description: >-
-            Language localization code (a BCP-47 language tag; for example, "de-AT"
-
-            for Austrian German).
-
-            Providing a language that is not supported by the App is a no-op.
+        - description: Language localization code (a BCP-47 language tag; for example, "de-AT" for Austrian German). Providing a language that is not supported by the App is a no-op.
           in: path
           name: language
           required: true
           schema:
             type: string
-        - description: >-
-            Type of the Image.
-
-            Providing an image type that refers to no images is a no-op.
+        - description: Type of the Image. Providing an image type that refers to no images is a no-op.
           in: path
           name: imageType
           required: true
@@ -1207,21 +1106,13 @@ paths:
           required: true
           schema:
             type: string
-        - description: >-
-            Language localization code (a BCP-47 language tag; for example, "de-AT"
-
-            for Austrian German).
-
-            There must be a store listing for the specified language.
+        - description: Language localization code (a BCP-47 language tag; for example, "de-AT" for Austrian German). There must be a store listing for the specified language.
           in: path
           name: language
           required: true
           schema:
             type: string
-        - description: >-
-            Type of the Image. Providing an image type that refers to no images will
-
-            return an empty response.
+        - description: Type of the Image. Providing an image type that refers to no images will return an empty response.
           in: path
           name: imageType
           required: true
@@ -1253,22 +1144,19 @@ paths:
       tags:
         - edits
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
-      description: >-
-        Uploads an image of the specified language and image type, and adds to the
-
-        edit.
+      description: Uploads an image of the specified language and image type, and adds to the edit.
       operationId: androidpublisher.edits.images.upload
       parameters:
         - description: Package name of the app.
@@ -1283,12 +1171,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: >-
-            Language localization code (a BCP-47 language tag; for example, "de-AT"
-
-            for Austrian German).
-
-            Providing a language that is not supported by the App is a no-op.
+        - description: Language localization code (a BCP-47 language tag; for example, "de-AT" for Austrian German). Providing a language that is not supported by the App is a no-op.
           in: path
           name: language
           required: true
@@ -1342,10 +1225,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: >-
-            Language localization code (a BCP-47 language tag; for example, "de-AT"
-
-            for Austrian German).
+        - description: Language localization code (a BCP-47 language tag; for example, "de-AT" for Austrian German).
           in: path
           name: language
           required: true
@@ -1385,17 +1265,17 @@ paths:
       tags:
         - edits
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
   "/androidpublisher/v3/applications/{packageName}/edits/{editId}/testers/{track}":
     get:
       description: Gets testers.
@@ -1434,17 +1314,17 @@ paths:
       tags:
         - edits
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
     patch:
       description: Patches testers.
       operationId: androidpublisher.edits.testers.patch
@@ -1559,17 +1439,17 @@ paths:
       tags:
         - edits
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
   "/androidpublisher/v3/applications/{packageName}/edits/{editId}/tracks/{track}":
     get:
       description: Gets a track.
@@ -1608,17 +1488,17 @@ paths:
       tags:
         - edits
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
     patch:
       description: Patches a track.
       operationId: androidpublisher.edits.tracks.patch
@@ -1703,17 +1583,17 @@ paths:
         - edits
   "/androidpublisher/v3/applications/{packageName}/edits/{editId}:commit":
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: Commits an app edit.
       operationId: androidpublisher.edits.commit
@@ -1746,17 +1626,17 @@ paths:
         - edits
   "/androidpublisher/v3/applications/{packageName}/edits/{editId}:validate":
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: Validates an app edit.
       operationId: androidpublisher.edits.validate
@@ -1828,17 +1708,17 @@ paths:
       tags:
         - inappproducts
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: Creates an in-app product (i.e. a managed product or a subscriptions).
       operationId: androidpublisher.inappproducts.insert
@@ -1849,12 +1729,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: >-
-            If true the prices for all regions targeted by the parent app that don't
-
-            have a price specified for this in-app product will be auto converted to
-
-            the target currency based on the default price. Defaults to false.
+        - description: If true the prices for all regions targeted by the parent app that don't have a price specified for this in-app product will be auto converted to the target currency based on the default price. Defaults to false.
           in: query
           name: autoConvertMissingPrices
           schema:
@@ -1936,17 +1811,17 @@ paths:
       tags:
         - inappproducts
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
     patch:
       description: Patches an in-app product (i.e. a managed product or a subscriptions).
       operationId: androidpublisher.inappproducts.patch
@@ -1963,12 +1838,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: >-
-            If true the prices for all regions targeted by the parent app that don't
-
-            have a price specified for this in-app product will be auto converted to
-
-            the target currency based on the default price. Defaults to false.
+        - description: If true the prices for all regions targeted by the parent app that don't have a price specified for this in-app product will be auto converted to the target currency based on the default price. Defaults to false.
           in: query
           name: autoConvertMissingPrices
           schema:
@@ -2008,12 +1878,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: >-
-            If true the prices for all regions targeted by the parent app that don't
-
-            have a price specified for this in-app product will be auto converted to
-
-            the target currency based on the default price. Defaults to false.
+        - description: If true the prices for all regions targeted by the parent app that don't have a price specified for this in-app product will be auto converted to the target currency based on the default price. Defaults to false.
           in: query
           name: autoConvertMissingPrices
           schema:
@@ -2039,47 +1904,34 @@ paths:
         - inappproducts
   "/androidpublisher/v3/applications/{packageName}/orders/{orderId}:refund":
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: Refund a user's subscription or in-app purchase order.
       operationId: androidpublisher.orders.refund
       parameters:
-        - description: >-
-            The package name of the application for which this subscription or in-app
-
-            item was purchased (for example, 'com.some.thing').
+        - description: The package name of the application for which this subscription or in-app item was purchased (for example, 'com.some.thing').
           in: path
           name: packageName
           required: true
           schema:
             type: string
-        - description: >-
-            The order ID provided to the user when the subscription or in-app order was
-
-            purchased.
+        - description: The order ID provided to the user when the subscription or in-app order was purchased.
           in: path
           name: orderId
           required: true
           schema:
             type: string
-        - description: >-
-            Whether to revoke the purchased item. If set to true, access to the
-
-            subscription or in-app item will be terminated immediately. If the item is
-
-            a recurring subscription, all future payments will also be terminated.
-
-            Consumed in-app items need to be handled by developer's app. (optional).
+        - description: Whether to revoke the purchased item. If set to true, access to the subscription or in-app item will be terminated immediately. If the item is a recurring subscription, all future payments will also be terminated. Consumed in-app items need to be handled by developer's app. (optional).
           in: query
           name: revoke
           schema:
@@ -2099,10 +1951,7 @@ paths:
       description: Checks the purchase and consumption status of an inapp item.
       operationId: androidpublisher.purchases.products.get
       parameters:
-        - description: >-
-            The package name of the application the inapp product was sold in (for
-
-            example, 'com.some.thing').
+        - description: The package name of the application the inapp product was sold in (for example, 'com.some.thing').
           in: path
           name: packageName
           required: true
@@ -2114,10 +1963,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: >-
-            The token provided to the user's device when the inapp product was
-
-            purchased.
+        - description: The token provided to the user's device when the inapp product was purchased.
           in: path
           name: token
           required: true
@@ -2138,38 +1984,35 @@ paths:
       tags:
         - purchases
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
   "/androidpublisher/v3/applications/{packageName}/purchases/products/{productId}/tokens/{token}:acknowledge":
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: Acknowledges a purchase of an inapp item.
       operationId: androidpublisher.purchases.products.acknowledge
       parameters:
-        - description: >-
-            The package name of the application the inapp product was sold in (for
-
-            example, 'com.some.thing').
+        - description: The package name of the application the inapp product was sold in (for example, 'com.some.thing').
           in: path
           name: packageName
           required: true
@@ -2181,10 +2024,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: >-
-            The token provided to the user's device when the inapp product was
-
-            purchased.
+        - description: The token provided to the user's device when the inapp product was purchased.
           in: path
           name: token
           required: true
@@ -2207,16 +2047,10 @@ paths:
         - purchases
   "/androidpublisher/v3/applications/{packageName}/purchases/subscriptions/{subscriptionId}/tokens/{token}":
     get:
-      description: >-
-        Checks whether a user's subscription purchase is valid and returns its
-
-        expiry time.
+      description: Checks whether a user's subscription purchase is valid and returns its expiry time.
       operationId: androidpublisher.purchases.subscriptions.get
       parameters:
-        - description: >-
-            The package name of the application for which this subscription was
-
-            purchased (for example, 'com.some.thing').
+        - description: The package name of the application for which this subscription was purchased (for example, 'com.some.thing').
           in: path
           name: packageName
           required: true
@@ -2228,10 +2062,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: >-
-            The token provided to the user's device when the subscription was
-
-            purchased.
+        - description: The token provided to the user's device when the subscription was purchased.
           in: path
           name: token
           required: true
@@ -2252,38 +2083,35 @@ paths:
       tags:
         - purchases
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
   "/androidpublisher/v3/applications/{packageName}/purchases/subscriptions/{subscriptionId}/tokens/{token}:acknowledge":
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: Acknowledges a subscription purchase.
       operationId: androidpublisher.purchases.subscriptions.acknowledge
       parameters:
-        - description: >-
-            The package name of the application for which this subscription was
-
-            purchased (for example, 'com.some.thing').
+        - description: The package name of the application for which this subscription was purchased (for example, 'com.some.thing').
           in: path
           name: packageName
           required: true
@@ -2295,10 +2123,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: >-
-            The token provided to the user's device when the subscription was
-
-            purchased.
+        - description: The token provided to the user's device when the subscription was purchased.
           in: path
           name: token
           required: true
@@ -2321,28 +2146,22 @@ paths:
         - purchases
   "/androidpublisher/v3/applications/{packageName}/purchases/subscriptions/{subscriptionId}/tokens/{token}:cancel":
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
-      description: >-
-        Cancels a user's subscription purchase. The subscription remains valid
-
-        until its expiration time.
+      description: Cancels a user's subscription purchase. The subscription remains valid until its expiration time.
       operationId: androidpublisher.purchases.subscriptions.cancel
       parameters:
-        - description: >-
-            The package name of the application for which this subscription was
-
-            purchased (for example, 'com.some.thing').
+        - description: The package name of the application for which this subscription was purchased (for example, 'com.some.thing').
           in: path
           name: packageName
           required: true
@@ -2354,10 +2173,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: >-
-            The token provided to the user's device when the subscription was
-
-            purchased.
+        - description: The token provided to the user's device when the subscription was purchased.
           in: path
           name: token
           required: true
@@ -2375,28 +2191,22 @@ paths:
         - purchases
   "/androidpublisher/v3/applications/{packageName}/purchases/subscriptions/{subscriptionId}/tokens/{token}:defer":
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
-      description: >-
-        Defers a user's subscription purchase until a specified future expiration
-
-        time.
+      description: Defers a user's subscription purchase until a specified future expiration time.
       operationId: androidpublisher.purchases.subscriptions.defer
       parameters:
-        - description: >-
-            The package name of the application for which this subscription was
-
-            purchased (for example, 'com.some.thing').
+        - description: The package name of the application for which this subscription was purchased (for example, 'com.some.thing').
           in: path
           name: packageName
           required: true
@@ -2408,10 +2218,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: >-
-            The token provided to the user's device when the subscription was
-
-            purchased.
+        - description: The token provided to the user's device when the subscription was purchased.
           in: path
           name: token
           required: true
@@ -2438,28 +2245,22 @@ paths:
         - purchases
   "/androidpublisher/v3/applications/{packageName}/purchases/subscriptions/{subscriptionId}/tokens/{token}:refund":
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
-      description: >-
-        Refunds a user's subscription purchase, but the subscription remains valid
-
-        until its expiration time and it will continue to recur.
+      description: Refunds a user's subscription purchase, but the subscription remains valid until its expiration time and it will continue to recur.
       operationId: androidpublisher.purchases.subscriptions.refund
       parameters:
-        - description: >-
-            The package name of the application for which this subscription was
-
-            purchased (for example, 'com.some.thing').
+        - description: The package name of the application for which this subscription was purchased (for example, 'com.some.thing').
           in: path
           name: packageName
           required: true
@@ -2471,10 +2272,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: >-
-            The token provided to the user's device when the subscription was
-
-            purchased.
+        - description: The token provided to the user's device when the subscription was purchased.
           in: path
           name: token
           required: true
@@ -2492,28 +2290,22 @@ paths:
         - purchases
   "/androidpublisher/v3/applications/{packageName}/purchases/subscriptions/{subscriptionId}/tokens/{token}:revoke":
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
-      description: >-
-        Refunds and immediately revokes a user's subscription purchase. Access to
-
-        the subscription will be terminated immediately and it will stop recurring.
+      description: Refunds and immediately revokes a user's subscription purchase. Access to the subscription will be terminated immediately and it will stop recurring.
       operationId: androidpublisher.purchases.subscriptions.revoke
       parameters:
-        - description: >-
-            The package name of the application for which this subscription was
-
-            purchased (for example, 'com.some.thing').
+        - description: The package name of the application for which this subscription was purchased (for example, 'com.some.thing').
           in: path
           name: packageName
           required: true
@@ -2525,10 +2317,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: >-
-            The token provided to the user's device when the subscription was
-
-            purchased.
+        - description: The token provided to the user's device when the subscription was purchased.
           in: path
           name: token
           required: true
@@ -2549,96 +2338,38 @@ paths:
       description: Lists the purchases that were canceled, refunded or charged-back.
       operationId: androidpublisher.purchases.voidedpurchases.list
       parameters:
-        - description: >-
-            The package name of the application for which voided purchases need to be
-
-            returned (for example, 'com.some.thing').
+        - description: The package name of the application for which voided purchases need to be returned (for example, 'com.some.thing').
           in: path
           name: packageName
           required: true
           schema:
             type: string
-        - description: >-
-            The time, in milliseconds since the Epoch, of the newest voided purchase
-
-            that you want to see in the response. The value of this parameter cannot
-
-            be greater than the current time and is ignored if a pagination token is
-
-            set. Default value is current time.
-
-            Note: This filter is applied on the time at which the record is seen as
-
-            voided by our systems and not the actual voided time returned in the
-
-            response.
+        - description: "The time, in milliseconds since the Epoch, of the newest voided purchase that you want to see in the response. The value of this parameter cannot be greater than the current time and is ignored if a pagination token is set. Default value is current time. Note: This filter is applied on the time at which the record is seen as voided by our systems and not the actual voided time returned in the response."
           in: query
           name: endTime
           schema:
             type: string
-        - description: >-
-            Defines how many results the list operation should return.
-
-            The default number depends on the resource collection.
+        - description: Defines how many results the list operation should return. The default number depends on the resource collection.
           in: query
           name: maxResults
           schema:
             type: integer
-        - description: >-
-            Defines the index of the first element to return.
-
-            This can only be used if indexed paging is enabled.
+        - description: Defines the index of the first element to return. This can only be used if indexed paging is enabled.
           in: query
           name: startIndex
           schema:
             type: integer
-        - description: >-
-            The time, in milliseconds since the Epoch, of the oldest voided purchase
-
-            that you want to see in the response. The value of this parameter cannot
-
-            be older than 30 days and is ignored if a pagination token is set.
-
-            Default value is current time minus 30 days.
-
-            Note: This filter is applied on the time at which the record is seen as
-
-            voided by our systems and not the actual voided time returned in the
-
-            response.
+        - description: "The time, in milliseconds since the Epoch, of the oldest voided purchase that you want to see in the response. The value of this parameter cannot be older than 30 days and is ignored if a pagination token is set. Default value is current time minus 30 days. Note: This filter is applied on the time at which the record is seen as voided by our systems and not the actual voided time returned in the response."
           in: query
           name: startTime
           schema:
             type: string
-        - description: >-
-            Defines the token of the page to return, usually taken from
-
-            TokenPagination.
-
-            This can only be used if token paging is enabled.
+        - description: Defines the token of the page to return, usually taken from TokenPagination. This can only be used if token paging is enabled.
           in: query
           name: token
           schema:
             type: string
-        - description: >-
-            The type of voided purchases that you want to see in the response.
-
-            Possible values are:
-
-            0. Only voided in-app product purchases will be returned in the
-               response. This is the default value.
-            1. Both voided in-app purchases and voided subscription purchases
-               will be returned in the response.
-
-            Note: Before requesting to receive voided subscription purchases, you
-
-            must switch to use orderId in the response which uniquely identifies
-
-            one-time purchases and subscriptions. Otherwise, you will receive multiple
-
-            subscription orders with the same PurchaseToken, because subscription
-
-            renewal orders share the same PurchaseToken.
+        - description: "The type of voided purchases that you want to see in the response. Possible values are: 0. Only voided in-app product purchases will be returned in the response. This is the default value. 1. Both voided in-app purchases and voided subscription purchases will be returned in the response. Note: Before requesting to receive voided subscription purchases, you must switch to use orderId in the response which uniquely identifies one-time purchases and subscriptions. Otherwise, you will receive multiple subscription orders with the same PurchaseToken, because subscription renewal orders share the same PurchaseToken."
           in: query
           name: type
           schema:
@@ -2658,17 +2389,17 @@ paths:
       tags:
         - purchases
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
   "/androidpublisher/v3/applications/{packageName}/reviews":
     get:
       description: Lists all reviews.
@@ -2715,17 +2446,17 @@ paths:
       tags:
         - reviews
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
   "/androidpublisher/v3/applications/{packageName}/reviews/{reviewId}":
     get:
       description: Gets a single review.
@@ -2763,30 +2494,30 @@ paths:
       tags:
         - reviews
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
   "/androidpublisher/v3/applications/{packageName}/reviews/{reviewId}:reply":
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: Replies to a single review, or updates an existing reply.
       operationId: androidpublisher.reviews.reply
@@ -2854,22 +2585,19 @@ paths:
       tags:
         - systemapks
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
-      description: >-
-        Creates an APK which is suitable for inclusion in a system image from an
-
-        already uploaded Android App Bundle.
+      description: Creates an APK which is suitable for inclusion in a system image from an already uploaded Android App Bundle.
       operationId: androidpublisher.systemapks.variants.create
       parameters:
         - description: Unique identifier of the Android app.
@@ -2941,23 +2669,20 @@ paths:
       tags:
         - systemapks
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
   "/androidpublisher/v3/applications/{packageName}/systemApks/{versionCode}/variants/{variantId}:download":
     get:
-      description: >-
-        Downloads a previously created system APK which is suitable for inclusion
-
-        in a system image.
+      description: Downloads a previously created system APK which is suitable for inclusion in a system image.
       operationId: androidpublisher.systemapks.variants.download
       parameters:
         - description: Unique identifier of the Android app.
@@ -2989,17 +2714,17 @@ paths:
       tags:
         - systemapks
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
 components:
   parameters:
     _.xgafv:
@@ -3091,16 +2816,10 @@ components:
       description: Represents the binary payload of an APK.
       properties:
         sha1:
-          description: >-
-            A sha1 hash of the APK payload, encoded as a hex string and matching the
-
-            output of the sha1sum command.
+          description: A sha1 hash of the APK payload, encoded as a hex string and matching the output of the sha1sum command.
           type: string
         sha256:
-          description: >-
-            A sha256 hash of the APK payload, encoded as a hex string and matching
-
-            the output of the sha256sum command.
+          description: A sha256 hash of the APK payload, encoded as a hex string and matching the output of the sha256sum command.
           type: string
       type: object
     ApksAddExternallyHostedRequest:
@@ -3149,35 +2868,25 @@ components:
       description: An app edit. The resource for EditsService.
       properties:
         expiryTimeSeconds:
-          description: >-
-            Output only. The time (as seconds since Epoch) at which the edit will expire and
-
-            will be no longer valid for use.
+          description: Output only. The time (as seconds since Epoch) at which the edit will expire and will be no longer valid for use.
+          readOnly: true
           type: string
         id:
           description: Output only. Identifier of the edit. Can be used in subsequent API calls.
+          readOnly: true
           type: string
       type: object
     Bundle:
       description: Information about a bundle. The resource for BundlesService.
       properties:
         sha1:
-          description: >-
-            A sha1 hash of the upload payload, encoded as a hex string and matching
-
-            the output of the sha1sum command.
+          description: A sha1 hash of the upload payload, encoded as a hex string and matching the output of the sha1sum command.
           type: string
         sha256:
-          description: >-
-            A sha256 hash of the upload payload, encoded as a hex string and matching
-
-            the output of the sha256sum command.
+          description: A sha256 hash of the upload payload, encoded as a hex string and matching the output of the sha256sum command.
           type: string
         versionCode:
-          description: >-
-            The version code of the Android App Bundle, as specified in the Android App
-
-            Bundle's base module APK manifest file.
+          description: The version code of the Android App Bundle, as specified in the Android App Bundle's base module APK manifest file.
           format: int32
           type: integer
       type: object
@@ -3207,10 +2916,7 @@ components:
       description: Country targeting specification.
       properties:
         countries:
-          description: >-
-            Countries to target, specified as two letter [CLDR
-
-            codes](https://unicode.org/cldr/charts/latest/supplemental/territory_containment_un_m_49.html).
+          description: Countries to target, specified as two letter [CLDR codes](https://unicode.org/cldr/charts/latest/supplemental/territory_containment_un_m_49.html).
           items:
             type: string
           type: array
@@ -3296,12 +3002,7 @@ components:
           format: uint32
           type: integer
         supportedAbis:
-          description: >-
-            Supported ABI architectures in the order of preference.
-
-            The values should be the string as reported by the platform, e.g.
-
-            "armeabi-v7a", "x86_64".
+          description: Supported ABI architectures in the order of preference. The values should be the string as reported by the platform, e.g. "armeabi-v7a", "x86_64".
           items:
             type: string
           type: array
@@ -3315,19 +3016,11 @@ components:
       description: An expansion file. The resource for ExpansionFilesService.
       properties:
         fileSize:
-          description: >-
-            If set, this field indicates that this APK has an expansion file uploaded
-
-            to it: this APK does not reference another APK's expansion file.
-
-            The field's value is the size of the uploaded expansion file in bytes.
+          description: "If set, this field indicates that this APK has an expansion file uploaded to it: this APK does not reference another APK's expansion file. The field's value is the size of the uploaded expansion file in bytes."
           format: int64
           type: string
         referencesVersion:
-          description: >-
-            If set, this APK's expansion file references another APK's expansion file.
-
-            The file_size field will not be set.
+          description: If set, this APK's expansion file references another APK's expansion file. The file_size field will not be set.
           format: int32
           type: integer
       type: object
@@ -3339,23 +3032,13 @@ components:
           description: The uploaded expansion file configuration.
       type: object
     ExternallyHostedApk:
-      description: >-
-        Defines an APK available for this application that is hosted externally
-
-        and not uploaded to Google Play.
-
-        This function is only available to organizations using Managed Play whose
-
-        application is configured to restrict distribution to the organizations.
+      description: Defines an APK available for this application that is hosted externally and not uploaded to Google Play. This function is only available to organizations using Managed Play whose application is configured to restrict distribution to the organizations.
       properties:
         applicationLabel:
           description: The application label.
           type: string
         certificateBase64s:
-          description: >-
-            A certificate (or array of certificates if a certificate-chain is used)
-
-            used to sign this APK, represented as a base64 encoded byte array.
+          description: A certificate (or array of certificates if a certificate-chain is used) used to sign this APK, represented as a base64 encoded byte array.
           items:
             type: string
           type: array
@@ -3363,16 +3046,10 @@ components:
           description: The URL at which the APK is hosted. This must be an https URL.
           type: string
         fileSha1Base64:
-          description: >-
-            The sha1 checksum of this APK, represented as a base64 encoded byte
-
-            array.
+          description: The sha1 checksum of this APK, represented as a base64 encoded byte array.
           type: string
         fileSha256Base64:
-          description: >-
-            The sha256 checksum of this APK, represented as a base64 encoded byte
-
-            array.
+          description: The sha256 checksum of this APK, represented as a base64 encoded byte array.
           type: string
         fileSize:
           description: The file size in bytes of this APK.
@@ -3464,29 +3141,14 @@ components:
           type: string
         defaultPrice:
           $ref: "#/components/schemas/Price"
-          description: >-
-            Default price. Cannot be zero, as in-app products are never free.
-
-            Always in the developer's Checkout merchant currency.
+          description: Default price. Cannot be zero, as in-app products are never free. Always in the developer's Checkout merchant currency.
         gracePeriod:
-          description: >-
-            Grace period of the subscription, specified in ISO 8601 format. Allows
-
-            developers to give their subscribers a grace period when the payment
-
-            for the new recurrence period is declined.
-
-            Acceptable values are P0D (zero days), P3D (three days), P7D (seven days),
-
-            P14D (14 days), and P30D (30 days).
+          description: Grace period of the subscription, specified in ISO 8601 format. Allows developers to give their subscribers a grace period when the payment for the new recurrence period is declined. Acceptable values are P0D (zero days), P3D (three days), P7D (seven days), P14D (14 days), and P30D (30 days).
           type: string
         listings:
           additionalProperties:
             $ref: "#/components/schemas/InAppProductListing"
-          description: >-
-            List of localized title and description data. Map key is the language of
-
-            the localized data, as defined by BCP-47, e.g. "en-US".
+          description: List of localized title and description data. Map key is the language of the localized data, as defined by BCP-47, e.g. "en-US".
           type: object
         packageName:
           description: Package name of the parent app.
@@ -3494,10 +3156,7 @@ components:
         prices:
           additionalProperties:
             $ref: "#/components/schemas/Price"
-          description: >-
-            Prices per buyer region. None of these can be zero, as in-app products are
-
-            never free. Map key is region code, as defined by ISO 3166-2.
+          description: Prices per buyer region. None of these can be zero, as in-app products are never free. Map key is region code, as defined by ISO 3166-2.
           type: object
         purchaseType:
           description: The type of the product, e.g. a recurring subscription.
@@ -3517,18 +3176,10 @@ components:
             - inactive
           type: string
         subscriptionPeriod:
-          description: >-
-            Subscription period, specified in ISO 8601 format. Acceptable values are
-
-            P1W (one week), P1M (one month), P3M (three months), P6M (six months),
-
-            and P1Y (one year).
+          description: Subscription period, specified in ISO 8601 format. Acceptable values are P1W (one week), P1M (one month), P3M (three months), P6M (six months), and P1Y (one year).
           type: string
         trialPeriod:
-          description: >-
-            Trial period, specified in ISO 8601 format. Acceptable values are anything
-
-            between P7D (seven days) and P999D (999 days).
+          description: Trial period, specified in ISO 8601 format. Acceptable values are anything between P7D (seven days) and P999D (999 days).
           type: string
       type: object
     InAppProductListing:
@@ -3565,69 +3216,34 @@ components:
           description: Pagination token, to handle a number of products that is over one page.
       type: object
     InternalAppSharingArtifact:
-      description: >-
-        An artifact resource which gets created when uploading an APK or Android
-
-        App Bundle through internal app sharing.
+      description: An artifact resource which gets created when uploading an APK or Android App Bundle through internal app sharing.
       properties:
         certificateFingerprint:
-          description: >-
-            The sha256 fingerprint of the certificate used to sign the generated
-
-            artifact.
+          description: The sha256 fingerprint of the certificate used to sign the generated artifact.
           type: string
         downloadUrl:
-          description: >-
-            The download URL generated for the uploaded artifact.
-
-            Users that are authorized to download can follow the link to the Play
-
-            Store app to install it.
+          description: The download URL generated for the uploaded artifact. Users that are authorized to download can follow the link to the Play Store app to install it.
           type: string
         sha256:
-          description: >-
-            The sha256 hash of the artifact represented as a lowercase hexadecimal
-
-            number, matching the output of the sha256sum command.
+          description: The sha256 hash of the artifact represented as a lowercase hexadecimal number, matching the output of the sha256sum command.
           type: string
       type: object
     IntroductoryPriceInfo:
       description: Contains the introductory price information for a subscription.
       properties:
         introductoryPriceAmountMicros:
-          description: >-
-            Introductory price of the subscription, not including tax.
-
-            The currency is the same as price_currency_code. Price is
-
-            expressed in micro-units, where 1,000,000 micro-units represents one unit
-
-            of the currency. For example, if the subscription price is €1.99,
-
-            price_amount_micros is 1990000.
+          description: Introductory price of the subscription, not including tax. The currency is the same as price_currency_code. Price is expressed in micro-units, where 1,000,000 micro-units represents one unit of the currency. For example, if the subscription price is €1.99, price_amount_micros is 1990000.
           format: int64
           type: string
         introductoryPriceCurrencyCode:
-          description: >-
-            ISO 4217 currency code for the introductory subscription price.
-
-            For example, if the price is specified in British pounds sterling,
-
-            price_currency_code is "GBP".
+          description: ISO 4217 currency code for the introductory subscription price. For example, if the price is specified in British pounds sterling, price_currency_code is "GBP".
           type: string
         introductoryPriceCycles:
           description: The number of billing period to offer introductory pricing.
           format: int32
           type: integer
         introductoryPricePeriod:
-          description: >-
-            Introductory price period, specified in ISO 8601 format.
-
-            Common values are (but not limited to) "P1W" (one
-
-            week), "P1M" (one month), "P3M" (three months), "P6M" (six months),
-
-            and "P1Y" (one year).
+          description: Introductory price period, specified in ISO 8601 format. Common values are (but not limited to) "P1W" (one week), "P1M" (one month), "P3M" (three months), "P6M" (six months), and "P1Y" (one year).
           type: string
       type: object
     Listing:
@@ -3637,10 +3253,7 @@ components:
           description: Full description of the app.
           type: string
         language:
-          description: >-
-            Language localization code (a BCP-47 language tag; for example, "de-AT"
-
-            for Austrian German).
+          description: Language localization code (a BCP-47 language tag; for example, "de-AT" for Austrian German).
           type: string
         shortDescription:
           description: Short description of the app.
@@ -3668,29 +3281,17 @@ components:
       description: Release notes specification, i.e. language and text.
       properties:
         language:
-          description: >-
-            Language localization code (a BCP-47 language tag; for example, "de-AT"
-
-            for Austrian German).
+          description: Language localization code (a BCP-47 language tag; for example, "de-AT" for Austrian German).
           type: string
         text:
           description: The text in the given language.
           type: string
       type: object
     PageInfo:
-      description: >-
-        Information about the current page.
-
-
-        List operations that supports paging return only one "page" of results. This
-
-        protocol buffer message describes the page that has been returned.
+      description: Information about the current page. List operations that supports paging return only one "page" of results. This protocol buffer message describes the page that has been returned.
       properties:
         resultPerPage:
-          description: >-
-            Maximum number of results returned in one page.
-
-            ! The number of results included in the API response.
+          description: Maximum number of results returned in one page. ! The number of results included in the API response.
           format: int32
           type: integer
         startIndex:
@@ -3698,10 +3299,7 @@ components:
           format: int32
           type: integer
         totalResults:
-          description: >-
-            Total number of results available on the backend
-
-            ! The total number of results in the result set.
+          description: Total number of results available on the backend ! The total number of results in the result set.
           format: int32
           type: integer
       type: object
@@ -3709,70 +3307,34 @@ components:
       description: Definition of a price, i.e. currency and units.
       properties:
         currency:
-          description: >-
-            3 letter Currency code, as defined by ISO 4217.
-
-            See java/com/google/common/money/CurrencyCode.java
+          description: 3 letter Currency code, as defined by ISO 4217. See java/com/google/common/money/CurrencyCode.java
           type: string
         priceMicros:
           description: Price in 1/million of the currency base unit, represented as a string.
           type: string
       type: object
     ProductPurchase:
-      description: >-
-        A ProductPurchase resource indicates the status of a user's inapp
-
-        product purchase.
+      description: A ProductPurchase resource indicates the status of a user's inapp product purchase.
       properties:
         acknowledgementState:
-          description: >-
-            The acknowledgement state of the inapp product. Possible values are:
-
-            0. Yet to be acknowledged
-
-            1. Acknowledged
+          description: "The acknowledgement state of the inapp product. Possible values are: 0. Yet to be acknowledged 1. Acknowledged"
           format: int32
           type: integer
         consumptionState:
-          description: >-
-            The consumption state of the inapp product. Possible values are:
-
-            0. Yet to be consumed
-
-            1. Consumed
+          description: "The consumption state of the inapp product. Possible values are: 0. Yet to be consumed 1. Consumed"
           format: int32
           type: integer
         developerPayload:
-          description: >-
-            A developer-specified string that contains supplemental
-
-            information about an order.
+          description: A developer-specified string that contains supplemental information about an order.
           type: string
         kind:
-          description: >-
-            This kind represents an inappPurchase object in the androidpublisher
-
-            service.
+          description: This kind represents an inappPurchase object in the androidpublisher service.
           type: string
         obfuscatedExternalAccountId:
-          description: >-
-            An obfuscated version of the id that is uniquely associated with the
-
-            user's account in your app. Only present if specified using
-
-            https://developer.android.com/reference/com/android/billingclient/api/BillingFlowParams.Builder#setobfuscatedaccountid
-
-            when the purchase was made.
+          description: An obfuscated version of the id that is uniquely associated with the user's account in your app. Only present if specified using https://developer.android.com/reference/com/android/billingclient/api/BillingFlowParams.Builder#setobfuscatedaccountid when the purchase was made.
           type: string
         obfuscatedExternalProfileId:
-          description: >-
-            An obfuscated version of the id that is uniquely associated with the
-
-            user's profile in your app. Only present if specified using
-
-            https://developer.android.com/reference/com/android/billingclient/api/BillingFlowParams.Builder#setobfuscatedprofileid
-
-            when the purchase was made.
+          description: An obfuscated version of the id that is uniquely associated with the user's profile in your app. Only present if specified using https://developer.android.com/reference/com/android/billingclient/api/BillingFlowParams.Builder#setobfuscatedprofileid when the purchase was made.
           type: string
         orderId:
           description: The order id associated with the purchase of the inapp product.
@@ -3781,39 +3343,18 @@ components:
           description: The inapp product SKU.
           type: string
         purchaseState:
-          description: >-
-            The purchase state of the order. Possible values are:
-
-            0. Purchased
-
-            1. Canceled
-
-            2. Pending
+          description: "The purchase state of the order. Possible values are: 0. Purchased 1. Canceled 2. Pending"
           format: int32
           type: integer
         purchaseTimeMillis:
-          description: >-
-            The time the product was purchased, in milliseconds since the
-
-            epoch (Jan 1, 1970).
+          description: The time the product was purchased, in milliseconds since the epoch (Jan 1, 1970).
           format: int64
           type: string
         purchaseToken:
           description: The purchase token generated to identify this purchase.
           type: string
         purchaseType:
-          description: >-
-            The type of purchase of the inapp product. This field is only set if
-
-            this purchase was not made using the standard in-app billing flow.
-
-            Possible values are:
-
-            0. Test (i.e. purchased from a license testing account)
-
-            1. Promo (i.e. purchased using a promo code)
-
-            2. Rewarded (i.e. from watching a video ad instead of paying)
+          description: "The type of purchase of the inapp product. This field is only set if this purchase was not made using the standard in-app billing flow. Possible values are: 0. Test (i.e. purchased from a license testing account) 1. Promo (i.e. purchased using a promo code) 2. Rewarded (i.e. from watching a video ad instead of paying)"
           format: int32
           type: integer
         quantity:
@@ -3872,10 +3413,7 @@ components:
       description: Request to reply to review or update existing reply.
       properties:
         replyText:
-          description: >-
-            The text to set as the reply. Replies of more than approximately 350
-
-            characters will be rejected. HTML tags will be stripped.
+          description: The text to set as the reply. Replies of more than approximately 350 characters will be rejected. HTML tags will be stripped.
           type: string
       type: object
     ReviewsReplyResponse:
@@ -3886,357 +3424,137 @@ components:
           description: The result of replying/updating a reply to review.
       type: object
     SubscriptionCancelSurveyResult:
-      description: >-
-        Information provided by the user when they complete the subscription
-
-        cancellation flow (cancellation reason survey).
+      description: Information provided by the user when they complete the subscription cancellation flow (cancellation reason survey).
       properties:
         cancelSurveyReason:
-          description: >-
-            The cancellation reason the user chose in the survey.
-
-            Possible values are:
-
-            0. Other
-
-            1. I don't use this service enough
-
-            2. Technical issues
-
-            3. Cost-related reasons
-
-            4. I found a better app
+          description: "The cancellation reason the user chose in the survey. Possible values are: 0. Other 1. I don't use this service enough 2. Technical issues 3. Cost-related reasons 4. I found a better app"
           format: int32
           type: integer
         userInputCancelReason:
-          description: >-
-            The customized input cancel reason from the user. Only present when
-
-            cancelReason is 0.
+          description: The customized input cancel reason from the user. Only present when cancelReason is 0.
           type: string
       type: object
     SubscriptionDeferralInfo:
-      description: >-
-        A SubscriptionDeferralInfo contains the data needed to defer a
-
-        subscription purchase to a future expiry time.
+      description: A SubscriptionDeferralInfo contains the data needed to defer a subscription purchase to a future expiry time.
       properties:
         desiredExpiryTimeMillis:
-          description: >-
-            The desired next expiry time to assign to the subscription, in
-
-            milliseconds since the Epoch. The given time must be later/greater
-
-            than the current expiry time for the subscription.
+          description: The desired next expiry time to assign to the subscription, in milliseconds since the Epoch. The given time must be later/greater than the current expiry time for the subscription.
           format: int64
           type: string
         expectedExpiryTimeMillis:
-          description: >-
-            The expected expiry time for the subscription.  If the current
-
-            expiry time for the subscription is not the value specified
-
-            here, the deferral will not occur.
+          description: The expected expiry time for the subscription. If the current expiry time for the subscription is not the value specified here, the deferral will not occur.
           format: int64
           type: string
       type: object
     SubscriptionPriceChange:
-      description: >-
-        Contains the price change information for a subscription that can be used to
-
-        control the user journey for the price change in the app. This can be in the
-
-        form of seeking confirmation from the user or tailoring the experience for a
-
-        successful conversion.
+      description: Contains the price change information for a subscription that can be used to control the user journey for the price change in the app. This can be in the form of seeking confirmation from the user or tailoring the experience for a successful conversion.
       properties:
         newPrice:
           $ref: "#/components/schemas/Price"
-          description: >-
-            The new price the subscription will renew with if the price change is
-
-            accepted by the user.
+          description: The new price the subscription will renew with if the price change is accepted by the user.
         state:
-          description: >-
-            The current state of the price change. Possible values are:
-
-            0. Outstanding: State for a pending price change waiting for the user to
-                agree. In this state, you can optionally seek confirmation from the
-                user using the In-App API.
-            1. Accepted: State for an accepted price change that the subscription
-                will renew with unless it's canceled. The price change takes effect on
-                a future date when the subscription renews. Note that the change might
-                not occur when the subscription is renewed next.
+          description: "The current state of the price change. Possible values are: 0. Outstanding: State for a pending price change waiting for the user to agree. In this state, you can optionally seek confirmation from the user using the In-App API. 1. Accepted: State for an accepted price change that the subscription will renew with unless it's canceled. The price change takes effect on a future date when the subscription renews. Note that the change might not occur when the subscription is renewed next."
           format: int32
           type: integer
       type: object
     SubscriptionPurchase:
-      description: >-
-        A SubscriptionPurchase resource indicates the status of a user's
-
-        subscription purchase.
+      description: A SubscriptionPurchase resource indicates the status of a user's subscription purchase.
       properties:
         acknowledgementState:
-          description: >-
-            The acknowledgement state of the subscription product. Possible values
-
-            are:
-
-            0. Yet to be acknowledged
-
-            1. Acknowledged
+          description: "The acknowledgement state of the subscription product. Possible values are: 0. Yet to be acknowledged 1. Acknowledged"
           format: int32
           type: integer
         autoRenewing:
-          description: >-
-            Whether the subscription will automatically be renewed when it
-
-            reaches its current expiry time.
+          description: Whether the subscription will automatically be renewed when it reaches its current expiry time.
           type: boolean
         autoResumeTimeMillis:
-          description: >-
-            Time at which the subscription will be automatically resumed, in
-
-            milliseconds since the Epoch. Only present if the user has requested to
-
-            pause the subscription.
+          description: Time at which the subscription will be automatically resumed, in milliseconds since the Epoch. Only present if the user has requested to pause the subscription.
           format: int64
           type: string
         cancelReason:
-          description: >-
-            The reason why a subscription was canceled or is not auto-renewing.
-
-            Possible values are:
-
-            0. User canceled the subscription
-
-            1. Subscription was canceled by the system,
-                  for example because of a billing problem
-            2. Subscription was replaced with a new subscription
-
-            3. Subscription was canceled by the developer
+          description: "The reason why a subscription was canceled or is not auto-renewing. Possible values are: 0. User canceled the subscription 1. Subscription was canceled by the system, for example because of a billing problem 2. Subscription was replaced with a new subscription 3. Subscription was canceled by the developer"
           format: int32
           type: integer
         cancelSurveyResult:
           $ref: "#/components/schemas/SubscriptionCancelSurveyResult"
-          description: >-
-            Information provided by the user when they complete the subscription
-
-            cancellation flow (cancellation reason survey).
+          description: Information provided by the user when they complete the subscription cancellation flow (cancellation reason survey).
         countryCode:
-          description: >-
-            ISO 3166-1 alpha-2 billing country/region code of the user at the time
-
-            the subscription was granted.
+          description: ISO 3166-1 alpha-2 billing country/region code of the user at the time the subscription was granted.
           type: string
         developerPayload:
-          description: >-
-            A developer-specified string that contains supplemental
-
-            information about an order.
+          description: A developer-specified string that contains supplemental information about an order.
           type: string
         emailAddress:
-          description: >-
-            The email address of the user when the subscription was purchased.
-
-            Only present for purchases made with 'Subscribe with Google'.
+          description: The email address of the user when the subscription was purchased. Only present for purchases made with 'Subscribe with Google'.
           type: string
         expiryTimeMillis:
-          description: >-
-            Time at which the subscription will expire, in milliseconds
-
-            since the Epoch.
+          description: Time at which the subscription will expire, in milliseconds since the Epoch.
           format: int64
           type: string
         externalAccountId:
-          description: >-
-            User account identifier in the third-party service.
-
-            Only present if account linking happened as part of the subscription
-
-            purchase flow.
+          description: User account identifier in the third-party service. Only present if account linking happened as part of the subscription purchase flow.
           type: string
         familyName:
-          description: >-
-            The family name of the user when the subscription was purchased.
-
-            Only present for purchases made with 'Subscribe with Google'.
+          description: The family name of the user when the subscription was purchased. Only present for purchases made with 'Subscribe with Google'.
           type: string
         givenName:
-          description: >-
-            The given name of the user when the subscription was purchased.
-
-            Only present for purchases made with 'Subscribe with Google'.
+          description: The given name of the user when the subscription was purchased. Only present for purchases made with 'Subscribe with Google'.
           type: string
         introductoryPriceInfo:
           $ref: "#/components/schemas/IntroductoryPriceInfo"
-          description: >-
-            Introductory price information of the subscription. This is only present
-
-            when the subscription was purchased with an introductory price.
-
-
-            This field does not indicate the subscription is currently in introductory
-
-            price period.
+          description: Introductory price information of the subscription. This is only present when the subscription was purchased with an introductory price. This field does not indicate the subscription is currently in introductory price period.
         kind:
-          description: >-
-            This kind represents a subscriptionPurchase object in the androidpublisher
-
-            service.
+          description: This kind represents a subscriptionPurchase object in the androidpublisher service.
           type: string
         linkedPurchaseToken:
-          description: >-
-            The purchase token of the originating purchase if this subscription
-
-            is one of the following:
-
-            0. Re-signup of a canceled but non-lapsed subscription
-
-            1. Upgrade/downgrade from a previous subscription
-
-
-            For example, suppose a user originally signs up and you receive
-
-            purchase token X, then the user cancels and goes through the
-
-            resignup flow (before their subscription lapses) and you receive
-
-            purchase token Y, and finally the user upgrades their subscription
-
-            and you receive purchase token Z. If you call this API with purchase
-
-            token Z, this field will be set to Y. If you call this API with
-
-            purchase token Y, this field will be set to X. If you call this API
-
-            with purchase token X, this field will not be set.
+          description: "The purchase token of the originating purchase if this subscription is one of the following: 0. Re-signup of a canceled but non-lapsed subscription 1. Upgrade/downgrade from a previous subscription For example, suppose a user originally signs up and you receive purchase token X, then the user cancels and goes through the resignup flow (before their subscription lapses) and you receive purchase token Y, and finally the user upgrades their subscription and you receive purchase token Z. If you call this API with purchase token Z, this field will be set to Y. If you call this API with purchase token Y, this field will be set to X. If you call this API with purchase token X, this field will not be set."
           type: string
         obfuscatedExternalAccountId:
-          description: >-
-            An obfuscated version of the id that is uniquely associated with the
-
-            user's account in your app. Present for the following purchases:
-              * If account linking happened as part of the subscription purchase flow.
-              * It was specified using
-                https://developer.android.com/reference/com/android/billingclient/api/BillingFlowParams.Builder#setobfuscatedaccountid
-                when the purchase was made.
+          description: "An obfuscated version of the id that is uniquely associated with the user's account in your app. Present for the following purchases: * If account linking happened as part of the subscription purchase flow. * It was specified using https://developer.android.com/reference/com/android/billingclient/api/BillingFlowParams.Builder#setobfuscatedaccountid when the purchase was made."
           type: string
         obfuscatedExternalProfileId:
-          description: >-
-            An obfuscated version of the id that is uniquely associated with the
-
-            user's profile in your app. Only present if specified using
-
-            https://developer.android.com/reference/com/android/billingclient/api/BillingFlowParams.Builder#setobfuscatedprofileid
-
-            when the purchase was made.
+          description: An obfuscated version of the id that is uniquely associated with the user's profile in your app. Only present if specified using https://developer.android.com/reference/com/android/billingclient/api/BillingFlowParams.Builder#setobfuscatedprofileid when the purchase was made.
           type: string
         orderId:
-          description: >-
-            The order id of the latest recurring order associated with
-
-            the purchase of the subscription.
+          description: The order id of the latest recurring order associated with the purchase of the subscription.
           type: string
         paymentState:
-          description: >-
-            The payment state of the subscription. Possible values are:
-
-            0. Payment pending
-
-            1. Payment received
-
-            2. Free trial
-
-            3. Pending deferred upgrade/downgrade
+          description: "The payment state of the subscription. Possible values are: 0. Payment pending 1. Payment received 2. Free trial 3. Pending deferred upgrade/downgrade"
           format: int32
           type: integer
         priceAmountMicros:
-          description: >-
-            Price of the subscription, not including tax. Price is expressed
-
-            in micro-units, where 1,000,000 micro-units represents one unit of
-
-            the currency. For example, if the subscription price is &euro;1.99,
-
-            price_amount_micros is 1990000.
+          description: Price of the subscription, not including tax. Price is expressed in micro-units, where 1,000,000 micro-units represents one unit of the currency. For example, if the subscription price is €1.99, price_amount_micros is 1990000.
           format: int64
           type: string
         priceChange:
           $ref: "#/components/schemas/SubscriptionPriceChange"
-          description: >-
-            The latest price change information available. This is present only when
-
-            there is an upcoming price change for the subscription yet to be applied.
-
-
-            Once the subscription renews with the new price or the subscription is
-
-            canceled, no price change information will be returned.
+          description: The latest price change information available. This is present only when there is an upcoming price change for the subscription yet to be applied. Once the subscription renews with the new price or the subscription is canceled, no price change information will be returned.
         priceCurrencyCode:
-          description: >-
-            ISO 4217 currency code for the subscription price. For example,
-
-            if the price is specified in British pounds sterling,
-
-            price_currency_code is "GBP".
+          description: ISO 4217 currency code for the subscription price. For example, if the price is specified in British pounds sterling, price_currency_code is "GBP".
           type: string
         profileId:
-          description: >-
-            The Google profile id of the user when the subscription was purchased.
-
-            Only present for purchases made with 'Subscribe with Google'.
+          description: The Google profile id of the user when the subscription was purchased. Only present for purchases made with 'Subscribe with Google'.
           type: string
         profileName:
-          description: >-
-            The profile name of the user when the subscription was purchased.
-
-            Only present for purchases made with 'Subscribe with Google'.
+          description: The profile name of the user when the subscription was purchased. Only present for purchases made with 'Subscribe with Google'.
           type: string
         promotionCode:
-          description: >-
-            The promotion code applied on this purchase. This field is only set if
-
-            a vanity code promotion is applied when the subscription was purchased.
+          description: The promotion code applied on this purchase. This field is only set if a vanity code promotion is applied when the subscription was purchased.
           type: string
         promotionType:
-          description: >-
-            The type of promotion applied on this purchase. This field is only set if
-
-            a promotion is applied when the subscription was purchased. Possible
-
-            values are:
-
-            0. One time code
-
-            1. Vanity code
+          description: "The type of promotion applied on this purchase. This field is only set if a promotion is applied when the subscription was purchased. Possible values are: 0. One time code 1. Vanity code"
           format: int32
           type: integer
         purchaseType:
-          description: >-
-            The type of purchase of the subscription. This field is only set if
-
-            this purchase was not made using the standard in-app billing flow.
-
-            Possible values are:
-
-            0. Test (i.e. purchased from a license testing account)
-
-            1. Promo (i.e. purchased using a promo code)
+          description: "The type of purchase of the subscription. This field is only set if this purchase was not made using the standard in-app billing flow. Possible values are: 0. Test (i.e. purchased from a license testing account) 1. Promo (i.e. purchased using a promo code)"
           format: int32
           type: integer
         startTimeMillis:
-          description: >-
-            Time at which the subscription was granted, in milliseconds
-
-            since the Epoch.
+          description: Time at which the subscription was granted, in milliseconds since the Epoch.
           format: int64
           type: string
         userCancellationTimeMillis:
-          description: >-
-            The time at which the subscription was canceled by the user, in
-
-            milliseconds since the epoch. Only present if cancelReason is 0.
+          description: The time at which the subscription was canceled by the user, in milliseconds since the epoch. Only present if cancelReason is 0.
           format: int64
           type: string
       type: object
@@ -4281,20 +3599,10 @@ components:
           type: array
       type: object
     Timestamp:
-      description: >-
-        A Timestamp represents a point in time independent of any time zone or local
-
-        calendar, encoded as a count of seconds and fractions of seconds at
-
-        nanosecond resolution. The count is relative to an epoch at UTC midnight on
-
-        January 1, 1970.
+      description: A Timestamp represents a point in time independent of any time zone or local calendar, encoded as a count of seconds and fractions of seconds at nanosecond resolution. The count is relative to an epoch at UTC midnight on January 1, 1970.
       properties:
         nanos:
-          description: >-
-            Non-negative fractions of a second at nanosecond resolution.
-
-            Must be from 0 to 999,999,999 inclusive.
+          description: Non-negative fractions of a second at nanosecond resolution. Must be from 0 to 999,999,999 inclusive.
           format: int32
           type: integer
         seconds:
@@ -4303,32 +3611,10 @@ components:
           type: string
       type: object
     TokenPagination:
-      description: >-
-        Pagination information returned by a List operation when token pagination
-
-        is enabled.
-
-
-        List operations that supports paging return only one "page" of results. This
-
-        protocol buffer message describes the page that has been returned.
-
-
-        When using token pagination, clients should use the next/previous token
-
-        to get another page of the result. The presence or absence of next/previous
-
-        token indicates whether a next/previous page is available and provides a
-
-        mean of accessing this page. ListRequest.page_token should be set to either
-
-        next_page_token or previous_page_token to access another page.
+      description: Pagination information returned by a List operation when token pagination is enabled. List operations that supports paging return only one "page" of results. This protocol buffer message describes the page that has been returned. When using token pagination, clients should use the next/previous token to get another page of the result. The presence or absence of next/previous token indicates whether a next/previous page is available and provides a mean of accessing this page. ListRequest.page_token should be set to either next_page_token or previous_page_token to access another page.
       properties:
         nextPageToken:
-          description: >-
-            Tokens to pass to the standard list field 'page_token'. Whenever available,
-
-            tokens are preferred over manipulating start_index.
+          description: Tokens to pass to the standard list field 'page_token'. Whenever available, tokens are preferred over manipulating start_index.
           type: string
         previousPageToken:
           type: string
@@ -4337,10 +3623,7 @@ components:
       description: A track configuration. The resource for TracksService.
       properties:
         releases:
-          description: >-
-            In a read request, represents all active releases in the track.
-
-            In an update request, represents desired changes.
+          description: In a read request, represents all active releases in the track. In an update request, represents desired changes.
           items:
             $ref: "#/components/schemas/TrackRelease"
           type: array
@@ -4355,25 +3638,11 @@ components:
           $ref: "#/components/schemas/CountryTargeting"
           description: Restricts a release to a specific set of countries.
         inAppUpdatePriority:
-          description: >-
-            In-app update priority of the release. All newly added APKs in the
-
-            release will be considered at this priority. Can take values in the range
-
-            [0, 5], with 5 the highest priority. Defaults to 0.
-
-            in_app_update_priority can not be updated once the release is rolled out.
-
-            See https://developer.android.com/guide/playcore/in-app-updates.
+          description: In-app update priority of the release. All newly added APKs in the release will be considered at this priority. Can take values in the range [0, 5], with 5 the highest priority. Defaults to 0. in_app_update_priority can not be updated once the release is rolled out. See https://developer.android.com/guide/playcore/in-app-updates.
           format: int32
           type: integer
         name:
-          description: >-
-            The release name. Not required to be unique. If not set, the name is
-
-            generated from the APK's version_name. If the release contains multiple
-
-            APKs, the name is generated from the date.
+          description: The release name. Not required to be unique. If not set, the name is generated from the APK's version_name. If the release contains multiple APKs, the name is generated from the date.
           type: string
         releaseNotes:
           description: A description of what is new in this release.
@@ -4390,17 +3659,11 @@ components:
             - completed
           type: string
         userFraction:
-          description: >-
-            Fraction of users who are eligible for a staged release. 0 < fraction < 1.
-
-            Can only be set when status is "inProgress" or "halted".
+          description: Fraction of users who are eligible for a staged release. 0 < fraction < 1. Can only be set when status is "inProgress" or "halted".
           format: double
           type: number
         versionCodes:
-          description: >-
-            Version codes of all APKs in the release. Must include version codes to
-
-            retain from previous releases.
+          description: Version codes of all APKs in the release. Must include version codes to retain from previous releases.
           items:
             format: int64
             type: string
@@ -4422,24 +3685,15 @@ components:
       description: User entry from conversation between user and developer.
       properties:
         androidOsVersion:
-          description: >-
-            Integer Android SDK version of the user's device at the time the
-
-            review was written, e.g. 23 is Marshmallow. May be absent.
+          description: Integer Android SDK version of the user's device at the time the review was written, e.g. 23 is Marshmallow. May be absent.
           format: int32
           type: integer
         appVersionCode:
-          description: >-
-            Integer version code of the app as installed at the time the
-
-            review was written. May be absent.
+          description: Integer version code of the app as installed at the time the review was written. May be absent.
           format: int32
           type: integer
         appVersionName:
-          description: >-
-            String version name of the app as installed at the time the
-
-            review was written. May be absent.
+          description: String version name of the app as installed at the time the review was written. May be absent.
           type: string
         device:
           description: Codename for the reviewer's device, e.g. klte, flounder. May be absent.
@@ -4451,32 +3705,17 @@ components:
           $ref: "#/components/schemas/Timestamp"
           description: The last time at which this comment was updated.
         originalText:
-          description: >-
-            Untranslated text of the review, where the review was translated.
-
-            If the review was not translated this is left blank.
+          description: Untranslated text of the review, where the review was translated. If the review was not translated this is left blank.
           type: string
         reviewerLanguage:
-          description: >-
-            Language code for the reviewer. This is taken from the device
-
-            settings so is not guaranteed to match the language the review
-
-            is written in. May be absent.
+          description: Language code for the reviewer. This is taken from the device settings so is not guaranteed to match the language the review is written in. May be absent.
           type: string
         starRating:
           description: The star rating associated with the review, from 1 to 5.
           format: int32
           type: integer
         text:
-          description: >-
-            The content of the comment, i.e. review body. In some cases
-
-            users have been able to write a review with separate title and
-
-            body; in those cases the title and body are concatenated and
-
-            separated by a tab character.
+          description: The content of the comment, i.e. review body. In some cases users have been able to write a review with separate title and body; in those cases the title and body are concatenated and separated by a tab character.
           type: string
         thumbsDownCount:
           description: Number of users who have given this review a thumbs down.
@@ -4491,10 +3730,7 @@ components:
       description: A permission used by this APK.
       properties:
         maxSdkVersion:
-          description: >-
-            Optionally, the maximum SDK version for which the permission is
-
-            required.
+          description: Optionally, the maximum SDK version for which the permission is required.
           format: int32
           type: integer
         name:
@@ -4502,10 +3738,7 @@ components:
           type: string
       type: object
     Variant:
-      description: >-
-        APK that is suitable for inclusion in a system image. The resource of
-
-        SystemApksService.
+      description: APK that is suitable for inclusion in a system image. The resource of SystemApksService.
       properties:
         deviceSpec:
           $ref: "#/components/schemas/DeviceSpec"
@@ -4513,78 +3746,35 @@ components:
         variantId:
           description: Output only. The ID of a previously created system APK variant.
           format: uint32
+          readOnly: true
           type: integer
       type: object
     VoidedPurchase:
-      description: >-
-        A VoidedPurchase resource indicates a purchase that was either
-
-        canceled/refunded/charged-back.
+      description: A VoidedPurchase resource indicates a purchase that was either canceled/refunded/charged-back.
       properties:
         kind:
-          description: >-
-            This kind represents a voided purchase object in the androidpublisher
-
-            service.
+          description: This kind represents a voided purchase object in the androidpublisher service.
           type: string
         orderId:
-          description: >-
-            The order id which uniquely identifies a one-time purchase, subscription
-
-            purchase, or subscription renewal.
+          description: The order id which uniquely identifies a one-time purchase, subscription purchase, or subscription renewal.
           type: string
         purchaseTimeMillis:
-          description: >-
-            The time at which the purchase was made, in milliseconds since the
-
-            epoch (Jan 1, 1970).
+          description: The time at which the purchase was made, in milliseconds since the epoch (Jan 1, 1970).
           format: int64
           type: string
         purchaseToken:
-          description: >-
-            The token which uniquely identifies a one-time purchase or subscription.
-
-            To uniquely identify subscription renewals use order_id (available
-
-            starting from version 3 of the API).
+          description: The token which uniquely identifies a one-time purchase or subscription. To uniquely identify subscription renewals use order_id (available starting from version 3 of the API).
           type: string
         voidedReason:
-          description: >-
-            The reason why the purchase was voided, possible values are:
-
-            0. Other
-
-            1. Remorse
-
-            2. Not_received
-
-            3. Defective
-
-            4. Accidental_purchase
-
-            5. Fraud
-
-            6. Friendly_fraud
-
-            7. Chargeback
+          description: "The reason why the purchase was voided, possible values are: 0. Other 1. Remorse 2. Not_received 3. Defective 4. Accidental_purchase 5. Fraud 6. Friendly_fraud 7. Chargeback"
           format: int32
           type: integer
         voidedSource:
-          description: >-
-            The initiator of voided purchase, possible values are:
-
-            0. User
-
-            1. Developer
-
-            2. Google
+          description: "The initiator of voided purchase, possible values are: 0. User 1. Developer 2. Google"
           format: int32
           type: integer
         voidedTimeMillis:
-          description: >-
-            The time at which the purchase was canceled/refunded/charged-back,
-
-            in milliseconds since the epoch (Jan 1, 1970).
+          description: The time at which the purchase was canceled/refunded/charged-back, in milliseconds since the epoch (Jan 1, 1970).
           format: int64
           type: string
       type: object

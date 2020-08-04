@@ -63,17 +63,17 @@ paths:
       tags:
         - media
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
   /v1/spaces:
     get:
       description: Lists spaces the caller is a member of.
@@ -104,17 +104,17 @@ paths:
       tags:
         - spaces
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
   "/v1/{name}":
     delete:
       description: Deletes a message.
@@ -142,16 +142,16 @@ paths:
       tags:
         - spaces
     get:
-      description: Returns a membership.
-      operationId: chat.spaces.members.get
+      description: >-
+        Gets the metadata of a message attachment. The attachment data is fetched
+
+        using the media API.
+      operationId: chat.spaces.messages.attachments.get
       parameters:
         - description: >-
-            Required. Resource name of the membership to be retrieved, in the form
+            Resource name of the attachment, in the form
 
-            "spaces/*/members/*".
-
-
-            Example: spaces/AAAAMpdlehY/members/105115627578887013105
+            "spaces/*/messages/*/attachments/*".
           in: path
           name: name
           required: true
@@ -162,22 +162,22 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Membership"
+                $ref: "#/components/schemas/Attachment"
           description: Successful response
       tags:
         - spaces
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
     put:
       description: Updates a message.
       operationId: chat.spaces.messages.update
@@ -263,30 +263,30 @@ paths:
       tags:
         - spaces
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
   "/v1/{parent}/messages":
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: Creates a message.
       operationId: chat.spaces.messages.create

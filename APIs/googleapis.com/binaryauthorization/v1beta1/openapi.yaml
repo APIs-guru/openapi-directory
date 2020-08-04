@@ -98,17 +98,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
     put:
       description: >-
         Updates an attestor.
@@ -194,17 +194,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
     post:
       description: >-
         Creates an attestor, and returns a copy of the new
@@ -305,30 +305,30 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
   "/v1beta1/{resource}:setIamPolicy":
     parameters:
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
     post:
       description: >-
         Sets the access control policy on the specified resource. Replaces any
@@ -369,17 +369,17 @@ paths:
         - projects
   "/v1beta1/{resource}:testIamPermissions":
     parameters:
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
     post:
       description: >-
         Returns permissions that a caller has on the specified resource.
@@ -1033,8 +1033,11 @@ components:
             - RSA_SIGN_PKCS1_4096_SHA256
             - RSA_SIGN_PKCS1_4096_SHA512
             - ECDSA_P256_SHA256
+            - EC_SIGN_P256_SHA256
             - ECDSA_P384_SHA384
+            - EC_SIGN_P384_SHA384
             - ECDSA_P521_SHA512
+            - EC_SIGN_P521_SHA512
           type: string
       type: object
     Policy:

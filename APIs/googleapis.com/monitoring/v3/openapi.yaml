@@ -33,8 +33,8 @@ info:
 externalDocs:
   url: https://cloud.google.com/monitoring/api/
 tags:
-  - name: services
   - name: uptimeCheckIps
+  - name: services
   - name: projects
 paths:
   /v3/uptimeCheckIps:
@@ -75,17 +75,17 @@ paths:
       tags:
         - uptimeCheckIps
     parameters:
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/quotaUser"
   "/v3/{name}":
     delete:
       description: Deletes an Uptime check configuration. Note that this method will fail if the Uptime check configuration is referenced by an alert policy or other dependent configs that would be rendered invalid by the deletion.
@@ -172,17 +172,17 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/quotaUser"
     patch:
       description: Updates an Uptime check configuration. You can either replace the entire configuration with a new one or replace only certain fields in the current configuration by specifying the fields to be updated via updateMask. Returns the updated configuration.
       operationId: monitoring.projects.uptimeCheckConfigs.patch
@@ -326,17 +326,17 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: Creates a new alerting policy.
       operationId: monitoring.projects.alertPolicies.create
@@ -377,17 +377,17 @@ paths:
         - projects
   "/v3/{name}/collectdTimeSeries":
     parameters:
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: 'Stackdriver Monitoring Agent only: Creates a new time series.<aside class="caution">This method is only for use by the Stackdriver Monitoring Agent. Use projects.timeSeries.create instead.</aside>'
       operationId: monitoring.projects.collectdTimeSeries.create
@@ -505,17 +505,17 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: Creates a new group.
       operationId: monitoring.projects.groups.create
@@ -622,17 +622,17 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/quotaUser"
   "/v3/{name}/metricDescriptors":
     get:
       description: Lists metric descriptors that match a filter. This method does not require a Workspace.
@@ -692,17 +692,17 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: Creates a new metric descriptor. User-created metric descriptors define custom metrics (https://cloud.google.com/monitoring/custom-metrics).
       operationId: monitoring.projects.metricDescriptors.create
@@ -802,17 +802,17 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/quotaUser"
   "/v3/{name}/notificationChannelDescriptors":
     get:
       description: Lists the descriptors for supported channel types. The use of descriptors makes it possible for new channel types to be dynamically added.
@@ -862,17 +862,17 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/quotaUser"
   "/v3/{name}/notificationChannels":
     get:
       description: Lists the notification channels that have been created for the project.
@@ -932,17 +932,17 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: Creates a new notification channel, representing a single notification endpoint such as an email address, SMS number, or PagerDuty service.
       operationId: monitoring.projects.notificationChannels.create
@@ -1119,17 +1119,17 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: Creates or adds data to one or more time series. The response is empty if all time series in the request were written. If any time series could not be written, a corresponding failure message is included in the error response.
       operationId: monitoring.projects.timeSeries.create
@@ -1172,17 +1172,17 @@ paths:
         - projects
   "/v3/{name}/timeSeries:query":
     parameters:
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: Queries time series using Monitoring Query Language. This method does not require a Workspace.
       operationId: monitoring.projects.timeSeries.query
@@ -1225,17 +1225,17 @@ paths:
         - projects
   "/v3/{name}:getVerificationCode":
     parameters:
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: Requests a verification code for an already verified channel that can then be used in a call to VerifyNotificationChannel() on a different channel with an equivalent identity in the same or in a different project. This makes it possible to copy a channel between projects without requiring manual reverification of the channel. If the channel is not in the verified state, this method will fail (in other words, this may only be used if the SendNotificationChannelVerificationCode and VerifyNotificationChannel paths have already been used to put the given channel into the verified state).There is no guarantee that the verification codes returned by this method will be of a similar structure or form as the ones that are delivered to the channel via SendNotificationChannelVerificationCode; while VerifyNotificationChannel() will recognize both the codes delivered via SendNotificationChannelVerificationCode() and returned from GetNotificationChannelVerificationCode(), it is typically the case that the verification codes delivered via SendNotificationChannelVerificationCode() will be shorter and also have a shorter expiration (e.g. codes such as "G-123456") whereas GetVerificationCode() will typically return a much longer, websafe base 64 encoded string that has a longer expiration time.
       operationId: monitoring.projects.notificationChannels.getVerificationCode
@@ -1271,17 +1271,17 @@ paths:
         - projects
   "/v3/{name}:sendVerificationCode":
     parameters:
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: Causes a verification code to be delivered to the channel. The code can then be supplied in VerifyNotificationChannel to verify the channel.
       operationId: monitoring.projects.notificationChannels.sendVerificationCode
@@ -1317,17 +1317,17 @@ paths:
         - projects
   "/v3/{name}:verify":
     parameters:
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: Verifies a NotificationChannel by proving receipt of the code delivered to the channel as a result of calling SendNotificationChannelVerificationCode.
       operationId: monitoring.projects.notificationChannels.verify
@@ -1424,17 +1424,17 @@ paths:
       tags:
         - services
     parameters:
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: Create a ServiceLevelObjective for the given Service.
       operationId: monitoring.services.serviceLevelObjectives.create
@@ -1553,17 +1553,17 @@ paths:
       tags:
         - services
     parameters:
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: Create a Service.
       operationId: monitoring.services.create
@@ -1652,17 +1652,17 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: Creates a new Uptime check configuration.
       operationId: monitoring.projects.uptimeCheckConfigs.create

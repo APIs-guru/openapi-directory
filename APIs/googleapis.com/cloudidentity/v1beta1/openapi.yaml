@@ -113,16 +113,16 @@ paths:
       tags:
         - groups
     parameters:
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/alt"
     post:
       description: Creates a `Group`.
@@ -230,16 +230,16 @@ paths:
       tags:
         - groups
     parameters:
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/alt"
   /v1beta1/groups:search:
     get:
@@ -331,16 +331,16 @@ paths:
       tags:
         - groups
     parameters:
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/alt"
   "/v1beta1/{name}":
     delete:
@@ -416,16 +416,16 @@ paths:
       tags:
         - groups
     parameters:
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/alt"
     patch:
       description: Updates a `Group`.
@@ -477,16 +477,16 @@ paths:
         - groups
   "/v1beta1/{name}:modifyMembershipRoles":
     parameters:
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/alt"
     post:
       description: Modifies the `MembershipRole`s of a `Membership`.
@@ -610,16 +610,16 @@ paths:
       tags:
         - groups
     parameters:
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/alt"
     post:
       description: Creates a `Membership`.
@@ -738,16 +738,16 @@ paths:
       tags:
         - groups
     parameters:
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/alt"
 components:
   parameters:

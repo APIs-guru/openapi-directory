@@ -33,13 +33,13 @@ info:
 externalDocs:
   url: http://developers.google.com/cloud-dns
 tags:
-  - name: projects
-  - name: policies
-  - name: managedZones
   - name: managedZoneOperations
-  - name: resourceRecordSets
+  - name: projects
   - name: dnsKeys
   - name: changes
+  - name: resourceRecordSets
+  - name: policies
+  - name: managedZones
 paths:
   "/dns/v1/projects/{project}":
     get:
@@ -90,16 +90,16 @@ paths:
         - projects
     parameters:
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
   "/dns/v1/projects/{project}/managedZones":
     get:
       description: Enumerate ManagedZones that have been created but not yet deleted.
@@ -160,16 +160,16 @@ paths:
         - managedZones
     parameters:
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Create a new ManagedZone.
       operationId: dns.managedZones.create
@@ -314,16 +314,16 @@ paths:
         - managedZones
     parameters:
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
     patch:
       description: Apply a partial update to an existing ManagedZone.
       operationId: dns.managedZones.patch
@@ -504,16 +504,16 @@ paths:
         - changes
     parameters:
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Atomically update the ResourceRecordSet collection.
       operationId: dns.changes.create
@@ -633,16 +633,16 @@ paths:
         - changes
     parameters:
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
   "/dns/v1/projects/{project}/managedZones/{managedZone}/dnsKeys":
     get:
       description: Enumerate DnsKeys to a ResourceRecordSet collection.
@@ -717,16 +717,16 @@ paths:
         - dnsKeys
     parameters:
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
   "/dns/v1/projects/{project}/managedZones/{managedZone}/dnsKeys/{dnsKeyId}":
     get:
       description: Fetch the representation of an existing DnsKey.
@@ -801,16 +801,16 @@ paths:
         - dnsKeys
     parameters:
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
   "/dns/v1/projects/{project}/managedZones/{managedZone}/operations":
     get:
       description: Enumerate Operations for the given ManagedZone.
@@ -880,16 +880,16 @@ paths:
         - managedZoneOperations
     parameters:
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
   "/dns/v1/projects/{project}/managedZones/{managedZone}/operations/{operation}":
     get:
       description: Fetch the representation of an existing Operation.
@@ -951,16 +951,16 @@ paths:
         - managedZoneOperations
     parameters:
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
   "/dns/v1/projects/{project}/managedZones/{managedZone}/rrsets":
     get:
       description: Enumerate ResourceRecordSets that have been created but not yet deleted.
@@ -1041,16 +1041,16 @@ paths:
         - resourceRecordSets
     parameters:
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
   "/dns/v1/projects/{project}/policies":
     get:
       description: Enumerate all Policies associated with a project.
@@ -1106,16 +1106,16 @@ paths:
         - policies
     parameters:
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Create a new Policy
       operationId: dns.policies.create
@@ -1257,16 +1257,16 @@ paths:
         - policies
     parameters:
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
     patch:
       description: Apply a partial update to an existing Policy.
       operationId: dns.policies.patch

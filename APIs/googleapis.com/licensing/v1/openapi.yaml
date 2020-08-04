@@ -37,13 +37,13 @@ tags:
 paths:
   "/{productId}/sku/{skuId}/user":
     parameters:
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/oauth_token"
     post:
       description: Assign a license.
       operationId: licensing.licenseAssignments.insert
@@ -159,13 +159,13 @@ paths:
       tags:
         - licenseAssignments
     parameters:
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/oauth_token"
     patch:
       description: Reassign a user's product SKU with a different SKU in the same product. This method supports patch semantics.
       operationId: licensing.licenseAssignments.patch
@@ -311,13 +311,13 @@ paths:
       tags:
         - licenseAssignments
     parameters:
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/oauth_token"
   "/{productId}/users":
     get:
       description: List all users assigned licenses for a specific product SKU.
@@ -365,13 +365,13 @@ paths:
       tags:
         - licenseAssignments
     parameters:
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/oauth_token"
 components:
   parameters:
     alt:

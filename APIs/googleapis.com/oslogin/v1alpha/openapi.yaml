@@ -37,15 +37,15 @@ tags:
 paths:
   "/v1alpha/{name}":
     delete:
-      description: Deletes a POSIX account.
-      operationId: oslogin.users.projects.delete
+      description: Deletes an SSH public key.
+      operationId: oslogin.users.sshPublicKeys.delete
       parameters:
         - description: >-
-            A reference to the POSIX account to update. POSIX accounts are identified
+            The fingerprint of the public key to update. Public keys are identified by
 
-            by the project ID they are associated with. A reference to the POSIX
+            their SHA-256 fingerprint. The fingerprint of the public key is in format
 
-            account is in format `users/{user}/projects/{project}`.
+            `users/{user}/sshPublicKeys/{fingerprint}`.
           in: path
           name: name
           required: true
@@ -112,17 +112,17 @@ paths:
       tags:
         - users
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
     patch:
       description: >-
         Updates an SSH public key and returns the profile information. This method
@@ -229,30 +229,30 @@ paths:
       tags:
         - users
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
   "/v1alpha/{parent}:importSshPublicKey":
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: >-
         Adds an SSH public key and returns the profile information. Default POSIX

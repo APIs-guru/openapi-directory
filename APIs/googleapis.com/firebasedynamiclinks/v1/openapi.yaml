@@ -33,23 +33,23 @@ info:
 externalDocs:
   url: https://firebase.google.com/docs/dynamic-links/
 tags:
-  - name: managedShortLinks
-  - name: shortLinks
   - name: v1
+  - name: shortLinks
+  - name: managedShortLinks
 paths:
   /v1/installAttribution:
     parameters:
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
     post:
       description: Get iOS strong/weak-match info for post-install attribution.
       operationId: firebasedynamiclinks.installAttribution
@@ -74,17 +74,17 @@ paths:
         - v1
   /v1/managedShortLinks:create:
     parameters:
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
     post:
       description: >-
         Creates a managed short Dynamic Link given either a valid long Dynamic Link
@@ -126,17 +126,17 @@ paths:
         - managedShortLinks
   /v1/reopenAttribution:
     parameters:
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
     post:
       description: Get iOS reopen attribution for app universal link open deeplinking.
       operationId: firebasedynamiclinks.reopenAttribution
@@ -161,17 +161,17 @@ paths:
         - v1
   /v1/shortLinks:
     parameters:
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
     post:
       description: >-
         Creates a short Dynamic Link given either a valid long Dynamic Link or
@@ -250,17 +250,17 @@ paths:
       tags:
         - v1
     parameters:
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
 components:
   parameters:
     _.xgafv:

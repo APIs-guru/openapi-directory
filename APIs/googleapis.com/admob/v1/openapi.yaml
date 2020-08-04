@@ -6,8 +6,7 @@ info:
     name: Google
     url: https://google.com
     x-twitter: youtube
-  description: >
-    The Google AdMob API lets you programmatically get reports on earnings.
+  description: "The Google AdMob API lets you programmatically get reports on earnings. "
   license:
     name: Creative Commons Attribution 3.0
     url: http://creativecommons.org/licenses/by/3.0/
@@ -38,10 +37,7 @@ tags:
 paths:
   /v1/accounts:
     get:
-      description: >-
-        Lists the AdMob publisher account accessible with the client credential.
-
-        Currently, all credentials have access to at most one AdMob account.
+      description: Lists the AdMob publisher account accessible with the client credential. Currently, all credentials have access to at most one AdMob account.
       operationId: admob.accounts.list
       parameters:
         - description: Maximum number of accounts to return.
@@ -49,12 +45,7 @@ paths:
           name: pageSize
           schema:
             type: integer
-        - description: >-
-            The value returned by the last `ListPublisherAccountsResponse`; indicates
-
-            that this is a continuation of a prior `ListPublisherAccounts` call, and
-
-            that the system should return the next page of data.
+        - description: The value returned by the last `ListPublisherAccountsResponse`; indicates that this is a continuation of a prior `ListPublisherAccounts` call, and that the system should return the next page of data.
           in: query
           name: pageToken
           schema:
@@ -70,25 +61,22 @@ paths:
         - accounts
     parameters:
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
   "/v1/{name}":
     get:
       description: Gets information about the specified AdMob publisher account.
       operationId: admob.accounts.get
       parameters:
-        - description: >-
-            Resource name of the publisher account to retrieve.
-
-            Example: accounts/pub-9876543210987654
+        - description: "Resource name of the publisher account to retrieve. Example: accounts/pub-9876543210987654"
           in: path
           name: name
           required: true
@@ -105,40 +93,34 @@ paths:
         - accounts
     parameters:
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
   "/v1/{parent}/mediationReport:generate":
     parameters:
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
     post:
-      description: >-
-        Generates an AdMob Mediation report based on the provided report
-
-        specification.
+      description: Generates an AdMob Mediation report based on the provided report specification.
       operationId: admob.accounts.mediationReport.generate
       parameters:
-        - description: >-
-            Resource name of the account to generate the report for.
-
-            Example: accounts/pub-9876543210987654
+        - description: "Resource name of the account to generate the report for. Example: accounts/pub-9876543210987654"
           in: path
           name: parent
           required: true
@@ -161,27 +143,21 @@ paths:
   "/v1/{parent}/networkReport:generate":
     parameters:
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
     post:
-      description: >-
-        Generates an AdMob Network report based on the provided report
-
-        specification.
+      description: Generates an AdMob Network report based on the provided report specification.
       operationId: admob.accounts.networkReport.generate
       parameters:
-        - description: >-
-            Resource name of the account to generate the report for.
-
-            Example: accounts/pub-9876543210987654
+        - description: "Resource name of the account to generate the report for. Example: accounts/pub-9876543210987654"
           in: path
           name: parent
           required: true
@@ -278,46 +254,18 @@ components:
         type: string
   schemas:
     Date:
-      description: >-
-        Represents a whole or partial calendar date, e.g. a birthday. The time of day
-
-        and time zone are either specified elsewhere or are not significant. The date
-
-        is relative to the Proleptic Gregorian Calendar. This can represent:
-
-
-        * A full date, with non-zero year, month and day values
-
-        * A month and day value, with a zero year, e.g. an anniversary
-
-        * A year on its own, with zero month and day values
-
-        * A year and month value, with a zero day, e.g. a credit card expiration date
-
-
-        Related types are google.type.TimeOfDay and `google.protobuf.Timestamp`.
+      description: "Represents a whole or partial calendar date, e.g. a birthday. The time of day and time zone are either specified elsewhere or are not significant. The date is relative to the Proleptic Gregorian Calendar. This can represent: * A full date, with non-zero year, month and day values * A month and day value, with a zero year, e.g. an anniversary * A year on its own, with zero month and day values * A year and month value, with a zero day, e.g. a credit card expiration date Related types are google.type.TimeOfDay and `google.protobuf.Timestamp`."
       properties:
         day:
-          description: >-
-            Day of month. Must be from 1 to 31 and valid for the year and month, or 0
-
-            if specifying a year by itself or a year and month where the day is not
-
-            significant.
+          description: Day of month. Must be from 1 to 31 and valid for the year and month, or 0 if specifying a year by itself or a year and month where the day is not significant.
           format: int32
           type: integer
         month:
-          description: >-
-            Month of year. Must be from 1 to 12, or 0 if specifying a year without a
-
-            month and day.
+          description: Month of year. Must be from 1 to 12, or 0 if specifying a year without a month and day.
           format: int32
           type: integer
         year:
-          description: >-
-            Year of date. Must be from 1 to 9999, or 0 if specifying a date without
-
-            a year.
+          description: Year of date. Must be from 1 to 9999, or 0 if specifying a date without a year.
           format: int32
           type: integer
       type: object
@@ -326,16 +274,10 @@ components:
       properties:
         endDate:
           $ref: "#/components/schemas/Date"
-          description: >-
-            End date of the date range, inclusive. Must be greater than or equal to the
-
-            start date.
+          description: End date of the date range, inclusive. Must be greater than or equal to the start date.
         startDate:
           $ref: "#/components/schemas/Date"
-          description: >-
-            Start date of the date range, inclusive. Must be less than or equal to the
-
-            end date.
+          description: Start date of the date range, inclusive. Must be less than or equal to the end date.
       type: object
     GenerateMediationReportRequest:
       description: Request to generate an AdMob Mediation report.
@@ -345,58 +287,14 @@ components:
           description: Network report specification.
       type: object
     GenerateMediationReportResponse:
-      description: >-
-        The streaming response for the AdMob Mediation report where the first
-
-        response contains the report header, then a stream of row responses, and
-
-        finally a footer as the last response message.
-
-
-        For example:
-
-            [{
-              "header": {
-                "date_range": {
-                  "start_date": {"year": 2018, "month": 9, "day": 1},
-                  "end_date": {"year": 2018, "month": 9, "day": 1}
-                },
-                "localization_settings": {
-                  "currency_code": "USD",
-                  "language_code": "en-US"
-                }
-              }
-            },
-            {
-              "row": {
-                "dimension_values": {
-                  "DATE": {"value": "20180918"},
-                  "APP": {
-                    "value": "ca-app-pub-8123415297019784~1001342552",
-                     "display_label": "My app name!"
-                  }
-                },
-                "metric_values": {
-                  "ESTIMATED_EARNINGS": {"decimal_value": "1324746"}
-                }
-              }
-            },
-            {
-              "footer": {"matching_row_count": 1}
-            }]
+      description: 'The streaming response for the AdMob Mediation report where the first response contains the report header, then a stream of row responses, and finally a footer as the last response message. For example: [{ "header": { "date_range": { "start_date": {"year": 2018, "month": 9, "day": 1}, "end_date": {"year": 2018, "month": 9, "day": 1} }, "localization_settings": { "currency_code": "USD", "language_code": "en-US" } } }, { "row": { "dimension_values": { "DATE": {"value": "20180918"}, "APP": { "value": "ca-app-pub-8123415297019784~1001342552", "display_label": "My app name!" } }, "metric_values": { "ESTIMATED_EARNINGS": {"decimal_value": "1324746"} } } }, { "footer": {"matching_row_count": 1} }]'
       properties:
         footer:
           $ref: "#/components/schemas/ReportFooter"
-          description: >-
-            Additional information about the generated report, such as warnings about
-
-            the data.
+          description: Additional information about the generated report, such as warnings about the data.
         header:
           $ref: "#/components/schemas/ReportHeader"
-          description: >-
-            Report generation settings that describes the report contents, such as
-
-            the report date range and localization settings.
+          description: Report generation settings that describes the report contents, such as the report date range and localization settings.
         row:
           $ref: "#/components/schemas/ReportRow"
           description: Actual report data.
@@ -409,58 +307,14 @@ components:
           description: Network report specification.
       type: object
     GenerateNetworkReportResponse:
-      description: >-
-        The streaming response for the AdMob Network report where the first response
-
-        contains the report header, then a stream of row responses, and finally a
-
-        footer as the last response message.
-
-
-        For example:
-
-            [{
-              "header": {
-                "dateRange": {
-                  "startDate": {"year": 2018, "month": 9, "day": 1},
-                  "endDate": {"year": 2018, "month": 9, "day": 1}
-                },
-                "localizationSettings": {
-                  "currencyCode": "USD",
-                  "languageCode": "en-US"
-                }
-              }
-            },
-            {
-              "row": {
-                "dimensionValues": {
-                  "DATE": {"value": "20180918"},
-                  "APP": {
-                    "value": "ca-app-pub-8123415297019784~1001342552",
-                     displayLabel: "My app name!"
-                  }
-                },
-                "metricValues": {
-                  "ESTIMATED_EARNINGS": {"microsValue": 6500000}
-                }
-              }
-            },
-            {
-              "footer": {"matchingRowCount": 1}
-            }]
+      description: 'The streaming response for the AdMob Network report where the first response contains the report header, then a stream of row responses, and finally a footer as the last response message. For example: [{ "header": { "dateRange": { "startDate": {"year": 2018, "month": 9, "day": 1}, "endDate": {"year": 2018, "month": 9, "day": 1} }, "localizationSettings": { "currencyCode": "USD", "languageCode": "en-US" } } }, { "row": { "dimensionValues": { "DATE": {"value": "20180918"}, "APP": { "value": "ca-app-pub-8123415297019784~1001342552", displayLabel: "My app name!" } }, "metricValues": { "ESTIMATED_EARNINGS": {"microsValue": 6500000} } } }, { "footer": {"matchingRowCount": 1} }]'
       properties:
         footer:
           $ref: "#/components/schemas/ReportFooter"
-          description: >-
-            Additional information about the generated report, such as warnings about
-
-            the data.
+          description: Additional information about the generated report, such as warnings about the data.
         header:
           $ref: "#/components/schemas/ReportHeader"
-          description: >-
-            Report generation settings that describes the report contents, such as
-
-            the report date range and localization settings.
+          description: Report generation settings that describes the report contents, such as the report date range and localization settings.
         row:
           $ref: "#/components/schemas/ReportRow"
           description: Actual report data.
@@ -474,75 +328,21 @@ components:
             $ref: "#/components/schemas/PublisherAccount"
           type: array
         nextPageToken:
-          description: >-
-            If not empty, indicates that there might be more accounts for the request;
-
-            you must pass this value in a new `ListPublisherAccountsRequest`.
+          description: If not empty, indicates that there might be more accounts for the request; you must pass this value in a new `ListPublisherAccountsRequest`.
           type: string
       type: object
     LocalizationSettings:
-      description: >-
-        Localization settings for reports, such as currency and language. It affects
-
-        how metrics are calculated.
+      description: Localization settings for reports, such as currency and language. It affects how metrics are calculated.
       properties:
         currencyCode:
-          description: >-
-            Currency code of the earning related metrics, which is the 3-letter code
-
-            defined in ISO 4217. The daily average rate is used for the currency
-
-            conversion. Defaults to the account currency code if unspecified.
+          description: Currency code of the earning related metrics, which is the 3-letter code defined in ISO 4217. The daily average rate is used for the currency conversion. Defaults to the account currency code if unspecified.
           type: string
         languageCode:
-          description: >-
-            Language used for any localized text, such as some dimension value display
-
-            labels. The language tag defined in the IETF BCP47. Defaults to 'en-US' if
-
-            unspecified.
+          description: Language used for any localized text, such as some dimension value display labels. The language tag defined in the IETF BCP47. Defaults to 'en-US' if unspecified.
           type: string
       type: object
     MediationReportSpec:
-      description: >-
-        The specification for generating an AdMob Mediation report.
-
-        For example, the specification to get observed ECPM sliced by ad source and
-
-        app for the 'US' and 'CN' countries can look like the following example:
-
-            {
-              "date_range": {
-                "start_date": {"year": 2018, "month": 9, "day": 1},
-                "end_date": {"year": 2018, "month": 9, "day": 30}
-              },
-              "dimensions": ["AD_SOURCE", "APP", "COUNTRY"],
-              "metrics": ["OBSERVED_ECPM"],
-              "dimension_filters": [
-                {
-                  "dimension": "COUNTRY",
-                  "matches_any": {"values": [{"value": "US", "value": "CN"}]}
-                }
-              ],
-              "sort_conditions": [
-                {"dimension":"APP", order: "ASCENDING"}
-              ],
-              "localization_settings": {
-                "currency_code": "USD",
-                "language_code": "en-US"
-              }
-            }
-
-        For a better understanding, you can treat the preceding specification like
-
-        the following pseudo SQL:
-
-            SELECT AD_SOURCE, APP, COUNTRY, OBSERVED_ECPM
-            FROM MEDIATION_REPORT
-            WHERE DATE >= '2018-09-01' AND DATE <= '2018-09-30'
-                AND COUNTRY IN ('US', 'CN')
-            GROUP BY AD_SOURCE, APP, COUNTRY
-            ORDER BY APP ASC;
+      description: "The specification for generating an AdMob Mediation report. For example, the specification to get observed ECPM sliced by ad source and app for the 'US' and 'CN' countries can look like the following example: { \"date_range\": { \"start_date\": {\"year\": 2018, \"month\": 9, \"day\": 1}, \"end_date\": {\"year\": 2018, \"month\": 9, \"day\": 30} }, \"dimensions\": [\"AD_SOURCE\", \"APP\", \"COUNTRY\"], \"metrics\": [\"OBSERVED_ECPM\"], \"dimension_filters\": [ { \"dimension\": \"COUNTRY\", \"matches_any\": {\"values\": [{\"value\": \"US\", \"value\": \"CN\"}]} } ], \"sort_conditions\": [ {\"dimension\":\"APP\", order: \"ASCENDING\"} ], \"localization_settings\": { \"currency_code\": \"USD\", \"language_code\": \"en-US\" } } For a better understanding, you can treat the preceding specification like the following pseudo SQL: SELECT AD_SOURCE, APP, COUNTRY, OBSERVED_ECPM FROM MEDIATION_REPORT WHERE DATE >= '2018-09-01' AND DATE <= '2018-09-30' AND COUNTRY IN ('US', 'CN') GROUP BY AD_SOURCE, APP, COUNTRY ORDER BY APP ASC;"
       properties:
         dateRange:
           $ref: "#/components/schemas/DateRange"
@@ -553,12 +353,7 @@ components:
             $ref: "#/components/schemas/MediationReportSpecDimensionFilter"
           type: array
         dimensions:
-          description: >-
-            List of dimensions of the report. The value combination of these dimensions
-
-            determines the row of the report. If no dimensions are specified, the
-
-            report returns a single row of requested metrics for the entire account.
+          description: List of dimensions of the report. The value combination of these dimensions determines the row of the report. If no dimensions are specified, the report returns a single row of requested metrics for the entire account.
           items:
             enum:
               - DIMENSION_UNSPECIFIED
@@ -579,12 +374,7 @@ components:
           $ref: "#/components/schemas/LocalizationSettings"
           description: Localization settings of the report.
         maxReportRows:
-          description: >-
-            Maximum number of report data rows to return. If the value is not set, the
-
-            API returns as many rows as possible, up to 100000. Acceptable values are
-
-            1-100000, inclusive. Any other values are treated as 100000.
+          description: Maximum number of report data rows to return. If the value is not set, the API returns as many rows as possible, up to 100000. Acceptable values are 1-100000, inclusive. Any other values are treated as 100000.
           format: int32
           type: integer
         metrics:
@@ -603,29 +393,12 @@ components:
             type: string
           type: array
         sortConditions:
-          description: >-
-            Describes the sorting of report rows. The order of the condition in the
-
-            list defines its precedence; the earlier the condition, the higher its
-
-            precedence. If no sort conditions are specified, the row ordering is
-
-            undefined.
+          description: Describes the sorting of report rows. The order of the condition in the list defines its precedence; the earlier the condition, the higher its precedence. If no sort conditions are specified, the row ordering is undefined.
           items:
             $ref: "#/components/schemas/MediationReportSpecSortCondition"
           type: array
         timeZone:
-          description: >-
-            A report time zone. Accepts an IANA TZ name values, such as
-
-            "America/Los_Angeles."  If no time zone is defined, the account default
-
-            takes effect. Check default value by the get account action.
-
-
-            **Warning:** The "America/Los_Angeles" is the only supported value at
-
-            the moment.
+          description: A report time zone. Accepts an IANA TZ name values, such as "America/Los_Angeles." If no time zone is defined, the account default takes effect. Check default value by the get account action. **Warning:** The "America/Los_Angeles" is the only supported value at the moment.
           type: string
       type: object
     MediationReportSpecDimensionFilter:
@@ -649,10 +422,7 @@ components:
           type: string
         matchesAny:
           $ref: "#/components/schemas/StringList"
-          description: >-
-            Matches a row if its value for the specified dimension is in one of the
-
-            values specified in this condition.
+          description: Matches a row if its value for the specified dimension is in one of the values specified in this condition.
       type: object
     MediationReportSpecSortCondition:
       description: Sorting direction to be applied on a dimension or a metric.
@@ -695,46 +465,7 @@ components:
           type: string
       type: object
     NetworkReportSpec:
-      description: >-
-        The specification for generating an AdMob Network report.
-
-        For example, the specification to get clicks and estimated earnings for only
-
-        the 'US' and 'CN' countries can look like the following example:
-
-            {
-              'date_range': {
-                'start_date': {'year': 2018, 'month': 9, 'day': 1},
-                'end_date': {'year': 2018, 'month': 9, 'day': 30}
-              },
-              'dimensions': ['DATE', 'APP', 'COUNTRY'],
-              'metrics': ['CLICKS', 'ESTIMATED_EARNINGS'],
-              'dimension_filters': [
-                {
-                  'dimension': 'COUNTRY',
-                  'matches_any': {'values': [{'value': 'US', 'value': 'CN'}]}
-                }
-              ],
-              'sort_conditions': [
-                {'dimension':'APP', order: 'ASCENDING'},
-                {'metric':'CLICKS', order: 'DESCENDING'}
-              ],
-              'localization_settings': {
-                'currency_code': 'USD',
-                'language_code': 'en-US'
-              }
-            }
-
-        For a better understanding, you can treat the preceding specification like
-
-        the following pseudo SQL:
-
-            SELECT DATE, APP, COUNTRY, CLICKS, ESTIMATED_EARNINGS
-            FROM NETWORK_REPORT
-            WHERE DATE >= '2018-09-01' AND DATE <= '2018-09-30'
-                AND COUNTRY IN ('US', 'CN')
-            GROUP BY DATE, APP, COUNTRY
-            ORDER BY APP ASC, CLICKS DESC;
+      description: "The specification for generating an AdMob Network report. For example, the specification to get clicks and estimated earnings for only the 'US' and 'CN' countries can look like the following example: { 'date_range': { 'start_date': {'year': 2018, 'month': 9, 'day': 1}, 'end_date': {'year': 2018, 'month': 9, 'day': 30} }, 'dimensions': ['DATE', 'APP', 'COUNTRY'], 'metrics': ['CLICKS', 'ESTIMATED_EARNINGS'], 'dimension_filters': [ { 'dimension': 'COUNTRY', 'matches_any': {'values': [{'value': 'US', 'value': 'CN'}]} } ], 'sort_conditions': [ {'dimension':'APP', order: 'ASCENDING'}, {'metric':'CLICKS', order: 'DESCENDING'} ], 'localization_settings': { 'currency_code': 'USD', 'language_code': 'en-US' } } For a better understanding, you can treat the preceding specification like the following pseudo SQL: SELECT DATE, APP, COUNTRY, CLICKS, ESTIMATED_EARNINGS FROM NETWORK_REPORT WHERE DATE >= '2018-09-01' AND DATE <= '2018-09-30' AND COUNTRY IN ('US', 'CN') GROUP BY DATE, APP, COUNTRY ORDER BY APP ASC, CLICKS DESC;"
       properties:
         dateRange:
           $ref: "#/components/schemas/DateRange"
@@ -745,12 +476,7 @@ components:
             $ref: "#/components/schemas/NetworkReportSpecDimensionFilter"
           type: array
         dimensions:
-          description: >-
-            List of dimensions of the report. The value combination of these dimensions
-
-            determines the row of the report. If no dimensions are specified, the
-
-            report returns a single row of requested metrics for the entire account.
+          description: List of dimensions of the report. The value combination of these dimensions determines the row of the report. If no dimensions are specified, the report returns a single row of requested metrics for the entire account.
           items:
             enum:
               - DIMENSION_UNSPECIFIED
@@ -769,12 +495,7 @@ components:
           $ref: "#/components/schemas/LocalizationSettings"
           description: Localization settings of the report.
         maxReportRows:
-          description: >-
-            Maximum number of report data rows to return. If the value is not set, the
-
-            API returns as many rows as possible, up to 100000. Acceptable values are
-
-            1-100000, inclusive. Any other values are treated as 100000.
+          description: Maximum number of report data rows to return. If the value is not set, the API returns as many rows as possible, up to 100000. Acceptable values are 1-100000, inclusive. Any other values are treated as 100000.
           format: int32
           type: integer
         metrics:
@@ -794,29 +515,12 @@ components:
             type: string
           type: array
         sortConditions:
-          description: >-
-            Describes the sorting of report rows. The order of the condition in the
-
-            list defines its precedence; the earlier the condition, the higher its
-
-            precedence. If no sort conditions are specified, the row ordering is
-
-            undefined.
+          description: Describes the sorting of report rows. The order of the condition in the list defines its precedence; the earlier the condition, the higher its precedence. If no sort conditions are specified, the row ordering is undefined.
           items:
             $ref: "#/components/schemas/NetworkReportSpecSortCondition"
           type: array
         timeZone:
-          description: >-
-            A report time zone. Accepts an IANA TZ name values, such as
-
-            "America/Los_Angeles."  If no time zone is defined, the account default
-
-            takes effect. Check default value by the get account action.
-
-
-            **Warning:** The "America/Los_Angeles" is the only supported value at
-
-            the moment.
+          description: A report time zone. Accepts an IANA TZ name values, such as "America/Los_Angeles." If no time zone is defined, the account default takes effect. Check default value by the get account action. **Warning:** The "America/Los_Angeles" is the only supported value at the moment.
           type: string
       type: object
     NetworkReportSpecDimensionFilter:
@@ -838,10 +542,7 @@ components:
           type: string
         matchesAny:
           $ref: "#/components/schemas/StringList"
-          description: >-
-            Matches a row if its value for the specified dimension is in one of the
-
-            values specified in this condition.
+          description: Matches a row if its value for the specified dimension is in one of the values specified in this condition.
       type: object
     NetworkReportSpecSortCondition:
       description: Sorting direction to be applied on a dimension or a metric.
@@ -883,54 +584,26 @@ components:
           type: string
       type: object
     PublisherAccount:
-      description: >-
-        A publisher account contains information relevant to the use of this API,
-
-        such as the time zone used for the reports.
+      description: A publisher account contains information relevant to the use of this API, such as the time zone used for the reports.
       properties:
         currencyCode:
-          description: >-
-            Currency code of the earning-related metrics, which is the 3-letter code
-
-            defined in ISO 4217. The daily average rate is used for the currency
-
-            conversion.
+          description: Currency code of the earning-related metrics, which is the 3-letter code defined in ISO 4217. The daily average rate is used for the currency conversion.
           type: string
         name:
-          description: >-
-            Resource name of this account.
-
-            Format is accounts/{publisher_id}.
+          description: Resource name of this account. Format is accounts/{publisher_id}.
           type: string
         publisherId:
-          description: >-
-            The unique ID by which this publisher account can be identified
-
-            in the API requests (for example, pub-1234567890).
+          description: The unique ID by which this publisher account can be identified in the API requests (for example, pub-1234567890).
           type: string
         reportingTimeZone:
-          description: >-
-            The time zone that is used in reports that are generated for this account.
-
-            The value is a time-zone ID as specified by the CLDR project,
-
-            for example, "America/Los_Angeles".
+          description: The time zone that is used in reports that are generated for this account. The value is a time-zone ID as specified by the CLDR project, for example, "America/Los_Angeles".
           type: string
       type: object
     ReportFooter:
-      description: >-
-        Groups data available after report generation, for example, warnings and row
-
-        counts. Always sent as the last message in the stream response.
+      description: Groups data available after report generation, for example, warnings and row counts. Always sent as the last message in the stream response.
       properties:
         matchingRowCount:
-          description: >-
-            Total number of rows that matched the request.
-
-
-            Warning: This count does NOT always match the number of rows in the
-
-            response. Do not make that assumption when processing the response.
+          description: "Total number of rows that matched the request. Warning: This count does NOT always match the number of rows in the response. Do not make that assumption when processing the response."
           format: int64
           type: string
         warnings:
@@ -940,28 +613,16 @@ components:
           type: array
       type: object
     ReportHeader:
-      description: >-
-        Groups data helps to treat the generated report. Always sent as a first
-
-        message in the stream response.
+      description: Groups data helps to treat the generated report. Always sent as a first message in the stream response.
       properties:
         dateRange:
           $ref: "#/components/schemas/DateRange"
-          description: >-
-            The date range for which the report is generated. This is identical to the
-
-            range specified in the report request.
+          description: The date range for which the report is generated. This is identical to the range specified in the report request.
         localizationSettings:
           $ref: "#/components/schemas/LocalizationSettings"
-          description: >-
-            Localization settings of the report. This is identical to the settings
-
-            in the report request.
+          description: Localization settings of the report. This is identical to the settings in the report request.
         reportingTimeZone:
-          description: >-
-            The report time zone. The value is a time-zone ID as specified by the CLDR
-
-            project, for example, "America/Los_Angeles".
+          description: The report time zone. The value is a time-zone ID as specified by the CLDR project, for example, "America/Los_Angeles".
           type: string
       type: object
     ReportRow:
@@ -975,28 +636,17 @@ components:
         metricValues:
           additionalProperties:
             $ref: "#/components/schemas/ReportRowMetricValue"
-          description: >-
-            Map of metric values in a row, with keys as enum name of the metrics. If
-
-            a metric being requested has no value returned, the map will not include
-
-            it.
+          description: Map of metric values in a row, with keys as enum name of the metrics. If a metric being requested has no value returned, the map will not include it.
           type: object
       type: object
     ReportRowDimensionValue:
       description: Representation of a dimension value.
       properties:
         displayLabel:
-          description: >-
-            The localized string representation of the value. If unspecified, the
-
-            display label should be derived from the value.
+          description: The localized string representation of the value. If unspecified, the display label should be derived from the value.
           type: string
         value:
-          description: >-
-            Dimension value in the format specified in the report's spec Dimension
-
-            enum.
+          description: Dimension value in the format specified in the report's spec Dimension enum.
           type: string
       type: object
     ReportRowMetricValue:
@@ -1011,12 +661,7 @@ components:
           format: int64
           type: string
         microsValue:
-          description: >-
-            Amount in micros. One million is equivalent to one unit. Currency value
-
-            is in the unit (USD, EUR or other) specified by the request.
-
-            For example, $6.50 whould be represented as 6500000 micros.
+          description: Amount in micros. One million is equivalent to one unit. Currency value is in the unit (USD, EUR or other) specified by the request. For example, $6.50 whould be represented as 6500000 micros.
           format: int64
           type: string
       type: object

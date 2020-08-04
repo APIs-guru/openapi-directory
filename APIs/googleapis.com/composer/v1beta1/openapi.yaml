@@ -37,46 +37,13 @@ tags:
 paths:
   "/v1beta1/{name}":
     delete:
-      description: >-
-        Deletes a long-running operation. This method indicates that the client is
-
-        no longer interested in the operation result. It does not cancel the
-
-        operation. If the server doesn't support this method, it returns
-
-        `google.rpc.Code.UNIMPLEMENTED`.
-      operationId: composer.projects.locations.operations.delete
+      description: Delete an environment.
+      operationId: composer.projects.locations.environments.delete
       parameters:
-        - description: The name of the operation resource to be deleted.
-          in: path
-          name: name
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Empty"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - projects
-    get:
-      description: >-
-        Gets the latest state of a long-running operation.  Clients can use this
+        - description: >-
+            The environment to delete, in the form:
 
-        method to poll the operation result at intervals as recommended by the API
-
-        service.
-      operationId: composer.projects.locations.operations.get
-      parameters:
-        - description: The name of the operation resource.
+            "projects/{projectId}/locations/{locationId}/environments/{environmentId}"
           in: path
           name: name
           required: true
@@ -96,18 +63,45 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+    get:
+      description: Get an existing environment.
+      operationId: composer.projects.locations.environments.get
+      parameters:
+        - description: >-
+            The resource name of the environment to get, in the form:
+
+            "projects/{projectId}/locations/{locationId}/environments/{environmentId}"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Environment"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
     patch:
       description: Update an environment.
       operationId: composer.projects.locations.environments.patch
@@ -389,17 +383,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
   "/v1beta1/{parent}/environments":
     get:
       description: List environments.
@@ -439,17 +433,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
     post:
       description: Create a new environment.
       operationId: composer.projects.locations.environments.create
@@ -521,17 +515,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
 components:
   parameters:
     _.xgafv:

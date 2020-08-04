@@ -38,16 +38,16 @@ tags:
 paths:
   "/v1beta1/{database}/documents:batchGet":
     parameters:
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
     post:
       description: >-
@@ -93,16 +93,16 @@ paths:
         - projects
   "/v1beta1/{database}/documents:batchWrite":
     parameters:
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
     post:
       description: >-
@@ -157,16 +157,16 @@ paths:
         - projects
   "/v1beta1/{database}/documents:beginTransaction":
     parameters:
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
     post:
       description: Starts a new transaction.
@@ -206,16 +206,16 @@ paths:
         - projects
   "/v1beta1/{database}/documents:commit":
     parameters:
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
     post:
       description: Commits a transaction, while optionally updating documents.
@@ -255,16 +255,16 @@ paths:
         - projects
   "/v1beta1/{database}/documents:listen":
     parameters:
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
     post:
       description: Listens to changes.
@@ -304,16 +304,16 @@ paths:
         - projects
   "/v1beta1/{database}/documents:rollback":
     parameters:
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
     post:
       description: Rolls back a transaction.
@@ -353,16 +353,16 @@ paths:
         - projects
   "/v1beta1/{database}/documents:write":
     parameters:
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
     post:
       description: Streams batches of document updates and deletes, in order.
@@ -404,13 +404,13 @@ paths:
         - projects
   "/v1beta1/{name}":
     delete:
-      description: Deletes an index.
-      operationId: firestore.projects.databases.indexes.delete
+      description: Deletes a document.
+      operationId: firestore.projects.databases.documents.delete
       parameters:
         - description: >-
-            The index name. For example:
+            Required. The resource name of the Document to delete. In the format:
 
-            `projects/{project_id}/databases/{database_id}/indexes/{index_id}`
+            `projects/{project_id}/databases/{database_id}/documents/{document_path}`.
           in: path
           name: name
           required: true
@@ -451,13 +451,13 @@ paths:
       tags:
         - projects
     get:
-      description: Gets an index.
-      operationId: firestore.projects.databases.indexes.get
+      description: Gets a single document.
+      operationId: firestore.projects.databases.documents.get
       parameters:
         - description: >-
-            The name of the index. For example:
+            Required. The resource name of the Document to get. In the format:
 
-            `projects/{project_id}/databases/{database_id}/indexes/{index_id}`
+            `projects/{project_id}/databases/{database_id}/documents/{document_path}`.
           in: path
           name: name
           required: true
@@ -493,7 +493,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GoogleFirestoreAdminV1beta1Index"
+                $ref: "#/components/schemas/Document"
           description: Successful response
       security:
         - Oauth2:
@@ -507,16 +507,16 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
     patch:
       description: Updates or inserts a document.
@@ -596,16 +596,16 @@ paths:
         - projects
   "/v1beta1/{name}:exportDocuments":
     parameters:
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
     post:
       description: >-
@@ -660,16 +660,16 @@ paths:
         - projects
   "/v1beta1/{name}:importDocuments":
     parameters:
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
     post:
       description: >-
@@ -763,16 +763,16 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
     post:
       description: >-
@@ -940,16 +940,16 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
     post:
       description: Creates a new document.
@@ -1018,16 +1018,16 @@ paths:
         - projects
   "/v1beta1/{parent}:listCollectionIds":
     parameters:
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
     post:
       description: Lists all the collection IDs underneath a document.
@@ -1071,16 +1071,16 @@ paths:
         - projects
   "/v1beta1/{parent}:partitionQuery":
     parameters:
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
     post:
       description: >-
@@ -1129,16 +1129,16 @@ paths:
         - projects
   "/v1beta1/{parent}:runQuery":
     parameters:
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
     post:
       description: Runs a query.

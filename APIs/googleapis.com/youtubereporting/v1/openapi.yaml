@@ -33,49 +33,31 @@ info:
 externalDocs:
   url: https://developers.google.com/youtube/reporting/v1/reports/
 tags:
+  - name: reportTypes
   - name: jobs
   - name: media
-  - name: reportTypes
 paths:
   /v1/jobs:
     get:
       description: Lists jobs.
       operationId: youtubereporting.jobs.list
       parameters:
-        - description: >-
-            If set to true, also system-managed jobs will be returned; otherwise only
-
-            user-created jobs will be returned. System-managed jobs can neither be
-
-            modified nor deleted.
+        - description: If set to true, also system-managed jobs will be returned; otherwise only user-created jobs will be returned. System-managed jobs can neither be modified nor deleted.
           in: query
           name: includeSystemManaged
           schema:
             type: boolean
-        - description: >-
-            The content owner's external ID on which behalf the user is acting on. If
-
-            not set, the user is acting for himself (his own channel).
+        - description: The content owner's external ID on which behalf the user is acting on. If not set, the user is acting for himself (his own channel).
           in: query
           name: onBehalfOfContentOwner
           schema:
             type: string
-        - description: >-
-            Requested page size. Server may return fewer jobs than requested.
-
-            If unspecified, server will pick an appropriate default.
+        - description: Requested page size. Server may return fewer jobs than requested. If unspecified, server will pick an appropriate default.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: >-
-            A token identifying a page of results the server should return. Typically,
-
-            this is the value of
-
-            ListReportTypesResponse.next_page_token
-
-            returned in response to the previous call to the `ListJobs` method.
+        - description: A token identifying a page of results the server should return. Typically, this is the value of ListReportTypesResponse.next_page_token returned in response to the previous call to the `ListJobs` method.
           in: query
           name: pageToken
           schema:
@@ -99,25 +81,22 @@ paths:
       tags:
         - jobs
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: Creates a job and returns it.
       operationId: youtubereporting.jobs.create
       parameters:
-        - description: >-
-            The content owner's external ID on which behalf the user is acting on. If
-
-            not set, the user is acting for himself (his own channel).
+        - description: The content owner's external ID on which behalf the user is acting on. If not set, the user is acting for himself (his own channel).
           in: query
           name: onBehalfOfContentOwner
           schema:
@@ -156,10 +135,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: >-
-            The content owner's external ID on which behalf the user is acting on. If
-
-            not set, the user is acting for himself (his own channel).
+        - description: The content owner's external ID on which behalf the user is acting on. If not set, the user is acting for himself (his own channel).
           in: query
           name: onBehalfOfContentOwner
           schema:
@@ -192,10 +168,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: >-
-            The content owner's external ID on which behalf the user is acting on. If
-
-            not set, the user is acting for himself (his own channel).
+        - description: The content owner's external ID on which behalf the user is acting on. If not set, the user is acting for himself (his own channel).
           in: query
           name: onBehalfOfContentOwner
           schema:
@@ -219,23 +192,20 @@ paths:
       tags:
         - jobs
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
   "/v1/jobs/{jobId}/reports":
     get:
-      description: >-
-        Lists reports created by a specific job.
-
-        Returns NOT_FOUND if the job does not exist.
+      description: Lists reports created by a specific job. Returns NOT_FOUND if the job does not exist.
       operationId: youtubereporting.jobs.reports.list
       parameters:
         - description: The ID of the job.
@@ -249,46 +219,27 @@ paths:
           name: createdAfter
           schema:
             type: string
-        - description: >-
-            The content owner's external ID on which behalf the user is acting on. If
-
-            not set, the user is acting for himself (his own channel).
+        - description: The content owner's external ID on which behalf the user is acting on. If not set, the user is acting for himself (his own channel).
           in: query
           name: onBehalfOfContentOwner
           schema:
             type: string
-        - description: >-
-            Requested page size. Server may return fewer report types than requested.
-
-            If unspecified, server will pick an appropriate default.
+        - description: Requested page size. Server may return fewer report types than requested. If unspecified, server will pick an appropriate default.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: >-
-            A token identifying a page of results the server should return. Typically,
-
-            this is the value of
-
-            ListReportsResponse.next_page_token
-
-            returned in response to the previous call to the `ListReports` method.
+        - description: A token identifying a page of results the server should return. Typically, this is the value of ListReportsResponse.next_page_token returned in response to the previous call to the `ListReports` method.
           in: query
           name: pageToken
           schema:
             type: string
-        - description: >-
-            If set, only reports whose start time is greater than or equal the
-
-            specified date/time are returned.
+        - description: If set, only reports whose start time is greater than or equal the specified date/time are returned.
           in: query
           name: startTimeAtOrAfter
           schema:
             type: string
-        - description: >-
-            If set, only reports whose start time is smaller than the specified
-
-            date/time are returned.
+        - description: If set, only reports whose start time is smaller than the specified date/time are returned.
           in: query
           name: startTimeBefore
           schema:
@@ -312,17 +263,17 @@ paths:
       tags:
         - jobs
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
   "/v1/jobs/{jobId}/reports/{reportId}":
     get:
       description: Gets the metadata of a specific report.
@@ -340,10 +291,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: >-
-            The content owner's external ID on which behalf the user is acting on. If
-
-            not set, the user is acting for himself (his own channel).
+        - description: The content owner's external ID on which behalf the user is acting on. If not set, the user is acting for himself (his own channel).
           in: query
           name: onBehalfOfContentOwner
           schema:
@@ -367,23 +315,20 @@ paths:
       tags:
         - jobs
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
   "/v1/media/{resourceName}":
     get:
-      description: >-
-        Method for media download. Download is supported
-
-        on the URI `/v1/media/{+name}?alt=media`.
+      description: Method for media download. Download is supported on the URI `/v1/media/{+name}?alt=media`.
       operationId: youtubereporting.media.download
       parameters:
         - description: Name of the media that is being downloaded.
@@ -411,56 +356,38 @@ paths:
       tags:
         - media
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
   /v1/reportTypes:
     get:
       description: Lists report types.
       operationId: youtubereporting.reportTypes.list
       parameters:
-        - description: >-
-            If set to true, also system-managed report types will be returned;
-
-            otherwise only the report types that can be used to create new reporting
-
-            jobs will be returned.
+        - description: If set to true, also system-managed report types will be returned; otherwise only the report types that can be used to create new reporting jobs will be returned.
           in: query
           name: includeSystemManaged
           schema:
             type: boolean
-        - description: >-
-            The content owner's external ID on which behalf the user is acting on. If
-
-            not set, the user is acting for himself (his own channel).
+        - description: The content owner's external ID on which behalf the user is acting on. If not set, the user is acting for himself (his own channel).
           in: query
           name: onBehalfOfContentOwner
           schema:
             type: string
-        - description: >-
-            Requested page size. Server may return fewer report types than requested.
-
-            If unspecified, server will pick an appropriate default.
+        - description: Requested page size. Server may return fewer report types than requested. If unspecified, server will pick an appropriate default.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: >-
-            A token identifying a page of results the server should return. Typically,
-
-            this is the value of
-
-            ListReportTypesResponse.next_page_token
-
-            returned in response to the previous call to the `ListReportTypes` method.
+        - description: A token identifying a page of results the server should return. Typically, this is the value of ListReportTypesResponse.next_page_token returned in response to the previous call to the `ListReportTypes` method.
           in: query
           name: pageToken
           schema:
@@ -484,17 +411,17 @@ paths:
       tags:
         - reportTypes
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
 components:
   parameters:
     _.xgafv:
@@ -572,18 +499,7 @@ components:
         type: string
   schemas:
     Empty:
-      description: >-
-        A generic empty message that you can re-use to avoid defining duplicated
-
-        empty messages in your APIs. A typical example is to use it as the request
-
-        or the response type of an API method. For instance:
-
-            service Foo {
-              rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);
-            }
-
-        The JSON representation for `Empty` is empty JSON object `{}`.
+      description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`."
       properties: {}
       type: object
     GdataBlobstore2Info:
@@ -892,10 +808,7 @@ components:
           format: google-datetime
           type: string
         expireTime:
-          description: >-
-            The date/time when this job will expire/expired. After a job expired, no
-
-            new reports are generated.
+          description: The date/time when this job will expire/expired. After a job expired, no new reports are generated.
           format: google-datetime
           type: string
         id:
@@ -905,16 +818,10 @@ components:
           description: The name of the job (max. 100 characters).
           type: string
         reportTypeId:
-          description: >-
-            The type of reports this job creates. Corresponds to the ID of a
-
-            ReportType.
+          description: The type of reports this job creates. Corresponds to the ID of a ReportType.
           type: string
         systemManaged:
-          description: >-
-            True if this a system-managed job that cannot be modified by the user;
-
-            otherwise false.
+          description: True if this a system-managed job that cannot be modified by the user; otherwise false.
           type: boolean
       type: object
     ListJobsResponse:
@@ -926,32 +833,14 @@ components:
             $ref: "#/components/schemas/Job"
           type: array
         nextPageToken:
-          description: >-
-            A token to retrieve next page of results.
-
-            Pass this value in the
-
-            ListJobsRequest.page_token
-
-            field in the subsequent call to `ListJobs` method to retrieve the next
-
-            page of results.
+          description: A token to retrieve next page of results. Pass this value in the ListJobsRequest.page_token field in the subsequent call to `ListJobs` method to retrieve the next page of results.
           type: string
       type: object
     ListReportTypesResponse:
       description: Response message for ReportingService.ListReportTypes.
       properties:
         nextPageToken:
-          description: >-
-            A token to retrieve next page of results.
-
-            Pass this value in the
-
-            ListReportTypesRequest.page_token
-
-            field in the subsequent call to `ListReportTypes` method to retrieve the
-
-            next page of results.
+          description: A token to retrieve next page of results. Pass this value in the ListReportTypesRequest.page_token field in the subsequent call to `ListReportTypes` method to retrieve the next page of results.
           type: string
         reportTypes:
           description: The list of report types.
@@ -963,16 +852,7 @@ components:
       description: Response message for ReportingService.ListReports.
       properties:
         nextPageToken:
-          description: >-
-            A token to retrieve next page of results.
-
-            Pass this value in the
-
-            ListReportsRequest.page_token
-
-            field in the subsequent call to `ListReports` method to retrieve the next
-
-            page of results.
+          description: A token to retrieve next page of results. Pass this value in the ListReportsRequest.page_token field in the subsequent call to `ListReports` method to retrieve the next page of results.
           type: string
         reports:
           description: The list of report types.
@@ -981,10 +861,7 @@ components:
           type: array
       type: object
     Report:
-      description: >-
-        A report's metadata including the URL from which the report itself can be
-
-        downloaded.
+      description: A report's metadata including the URL from which the report itself can be downloaded.
       properties:
         createTime:
           description: The date/time when this report was created.
@@ -994,10 +871,7 @@ components:
           description: The URL from which the report can be downloaded (max. 1000 characters).
           type: string
         endTime:
-          description: >-
-            The end of the time period that the report instance covers. The value is
-
-            exclusive.
+          description: The end of the time period that the report instance covers. The value is exclusive.
           format: google-datetime
           type: string
         id:
@@ -1011,10 +885,7 @@ components:
           description: The ID of the job that created this report.
           type: string
         startTime:
-          description: >-
-            The start of the time period that the report instance covers. The value is
-
-            inclusive.
+          description: The start of the time period that the report instance covers. The value is inclusive.
           format: google-datetime
           type: string
       type: object
@@ -1032,12 +903,7 @@ components:
           description: The name of the report type (max. 100 characters).
           type: string
         systemManaged:
-          description: >-
-            True if this a system-managed report type; otherwise false. Reporting jobs
-
-            for system-managed report types are created automatically and can thus not
-
-            be used in the `CreateJob` method.
+          description: True if this a system-managed report type; otherwise false. Reporting jobs for system-managed report types are created automatically and can thus not be used in the `CreateJob` method.
           type: boolean
       type: object
   securitySchemes:

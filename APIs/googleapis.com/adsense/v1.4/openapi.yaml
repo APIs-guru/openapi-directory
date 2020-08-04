@@ -33,16 +33,16 @@ info:
 externalDocs:
   url: https://developers.google.com/adsense/management/
 tags:
-  - name: adclients
+  - name: urlchannels
   - name: alerts
+  - name: adunits
+  - name: savedadstyles
   - name: reports
+  - name: metadata
+  - name: customchannels
+  - name: adclients
   - name: payments
   - name: accounts
-  - name: adunits
-  - name: urlchannels
-  - name: metadata
-  - name: savedadstyles
-  - name: customchannels
 paths:
   /accounts:
     get:
@@ -80,12 +80,12 @@ paths:
       tags:
         - accounts
     parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
   "/accounts/{accountId}":
     get:
@@ -122,12 +122,12 @@ paths:
       tags:
         - accounts
     parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
   "/accounts/{accountId}/adclients":
     get:
@@ -171,12 +171,12 @@ paths:
       tags:
         - accounts
     parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
   "/accounts/{accountId}/adclients/{adClientId}/adcode":
     get:
@@ -214,12 +214,12 @@ paths:
       tags:
         - accounts
     parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
   "/accounts/{accountId}/adclients/{adClientId}/adunits":
     get:
@@ -274,12 +274,12 @@ paths:
       tags:
         - accounts
     parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
   "/accounts/{accountId}/adclients/{adClientId}/adunits/{adUnitId}":
     get:
@@ -323,12 +323,12 @@ paths:
       tags:
         - accounts
     parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
   "/accounts/{accountId}/adclients/{adClientId}/adunits/{adUnitId}/adcode":
     get:
@@ -372,12 +372,12 @@ paths:
       tags:
         - accounts
     parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
   "/accounts/{accountId}/adclients/{adClientId}/adunits/{adUnitId}/customchannels":
     get:
@@ -433,12 +433,12 @@ paths:
       tags:
         - accounts
     parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
   "/accounts/{accountId}/adclients/{adClientId}/customchannels":
     get:
@@ -488,12 +488,12 @@ paths:
       tags:
         - accounts
     parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
   "/accounts/{accountId}/adclients/{adClientId}/customchannels/{customChannelId}":
     get:
@@ -537,12 +537,12 @@ paths:
       tags:
         - accounts
     parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
   "/accounts/{accountId}/adclients/{adClientId}/customchannels/{customChannelId}/adunits":
     get:
@@ -603,12 +603,12 @@ paths:
       tags:
         - accounts
     parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
   "/accounts/{accountId}/adclients/{adClientId}/urlchannels":
     get:
@@ -658,12 +658,12 @@ paths:
       tags:
         - accounts
     parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
   "/accounts/{accountId}/alerts":
     get:
@@ -700,12 +700,12 @@ paths:
       tags:
         - accounts
     parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
   "/accounts/{accountId}/alerts/{alertId}":
     delete:
@@ -735,12 +735,12 @@ paths:
       tags:
         - accounts
     parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
   "/accounts/{accountId}/payments":
     get:
@@ -772,12 +772,12 @@ paths:
       tags:
         - accounts
     parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
   "/accounts/{accountId}/reports":
     get:
@@ -886,12 +886,12 @@ paths:
       tags:
         - accounts
     parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
   "/accounts/{accountId}/reports/saved":
     get:
@@ -935,12 +935,12 @@ paths:
       tags:
         - accounts
     parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
   "/accounts/{accountId}/reports/{savedReportId}":
     get:
@@ -997,12 +997,12 @@ paths:
       tags:
         - accounts
     parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
   "/accounts/{accountId}/savedadstyles":
     get:
@@ -1046,12 +1046,12 @@ paths:
       tags:
         - accounts
     parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
   "/accounts/{accountId}/savedadstyles/{savedAdStyleId}":
     get:
@@ -1089,12 +1089,12 @@ paths:
       tags:
         - accounts
     parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
   /adclients:
     get:
@@ -1132,12 +1132,12 @@ paths:
       tags:
         - adclients
     parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
   "/adclients/{adClientId}/adunits":
     get:
@@ -1186,12 +1186,12 @@ paths:
       tags:
         - adunits
     parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
   "/adclients/{adClientId}/adunits/{adUnitId}":
     get:
@@ -1229,12 +1229,12 @@ paths:
       tags:
         - adunits
     parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
   "/adclients/{adClientId}/adunits/{adUnitId}/adcode":
     get:
@@ -1272,12 +1272,12 @@ paths:
       tags:
         - adunits
     parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
   "/adclients/{adClientId}/adunits/{adUnitId}/customchannels":
     get:
@@ -1327,12 +1327,12 @@ paths:
       tags:
         - adunits
     parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
   "/adclients/{adClientId}/customchannels":
     get:
@@ -1376,12 +1376,12 @@ paths:
       tags:
         - customchannels
     parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
   "/adclients/{adClientId}/customchannels/{customChannelId}":
     get:
@@ -1419,12 +1419,12 @@ paths:
       tags:
         - customchannels
     parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
   "/adclients/{adClientId}/customchannels/{customChannelId}/adunits":
     get:
@@ -1479,12 +1479,12 @@ paths:
       tags:
         - customchannels
     parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
   "/adclients/{adClientId}/urlchannels":
     get:
@@ -1528,12 +1528,12 @@ paths:
       tags:
         - urlchannels
     parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
   /alerts:
     get:
@@ -1564,12 +1564,12 @@ paths:
       tags:
         - alerts
     parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
   "/alerts/{alertId}":
     delete:
@@ -1593,12 +1593,12 @@ paths:
       tags:
         - alerts
     parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
   /metadata/dimensions:
     get:
@@ -1623,12 +1623,12 @@ paths:
       tags:
         - metadata
     parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
   /metadata/metrics:
     get:
@@ -1653,12 +1653,12 @@ paths:
       tags:
         - metadata
     parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
   /payments:
     get:
@@ -1683,12 +1683,12 @@ paths:
       tags:
         - payments
     parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
   /reports:
     get:
@@ -1800,12 +1800,12 @@ paths:
       tags:
         - reports
     parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
   /reports/saved:
     get:
@@ -1843,12 +1843,12 @@ paths:
       tags:
         - reports
     parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
   "/reports/{savedReportId}":
     get:
@@ -1899,12 +1899,12 @@ paths:
       tags:
         - reports
     parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
   /savedadstyles:
     get:
@@ -1942,12 +1942,12 @@ paths:
       tags:
         - savedadstyles
     parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
   "/savedadstyles/{savedAdStyleId}":
     get:
@@ -1979,12 +1979,12 @@ paths:
       tags:
         - savedadstyles
     parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
 components:
   parameters:

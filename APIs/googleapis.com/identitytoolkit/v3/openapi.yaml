@@ -37,13 +37,13 @@ tags:
 paths:
   /createAuthUri:
     parameters:
-      - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: Creates the URI used by the IdP to authenticate the user.
       operationId: identitytoolkit.relyingparty.createAuthUri
@@ -68,13 +68,13 @@ paths:
         - relyingparty
   /deleteAccount:
     parameters:
-      - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: Delete user account.
       operationId: identitytoolkit.relyingparty.deleteAccount
@@ -99,13 +99,13 @@ paths:
         - relyingparty
   /downloadAccount:
     parameters:
-      - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: Batch download user accounts.
       operationId: identitytoolkit.relyingparty.downloadAccount
@@ -134,13 +134,13 @@ paths:
         - relyingparty
   /emailLinkSignin:
     parameters:
-      - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: Reset password for a user.
       operationId: identitytoolkit.relyingparty.emailLinkSignin
@@ -165,13 +165,13 @@ paths:
         - relyingparty
   /getAccountInfo:
     parameters:
-      - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: Returns the account info.
       operationId: identitytoolkit.relyingparty.getAccountInfo
@@ -196,13 +196,13 @@ paths:
         - relyingparty
   /getOobConfirmationCode:
     parameters:
-      - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: Get a code for user action confirmation.
       operationId: identitytoolkit.relyingparty.getOobConfirmationCode
@@ -255,13 +255,13 @@ paths:
       tags:
         - relyingparty
     parameters:
-      - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
   /getRecaptchaParam:
     get:
       description: Get recaptcha secure param.
@@ -281,13 +281,13 @@ paths:
       tags:
         - relyingparty
     parameters:
-      - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
   /publicKeys:
     get:
       description: Get token signing public key.
@@ -307,22 +307,22 @@ paths:
       tags:
         - relyingparty
     parameters:
-      - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
   /resetPassword:
     parameters:
-      - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: Reset password for a user.
       operationId: identitytoolkit.relyingparty.resetPassword
@@ -347,13 +347,13 @@ paths:
         - relyingparty
   /sendVerificationCode:
     parameters:
-      - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: Send SMS verification code.
       operationId: identitytoolkit.relyingparty.sendVerificationCode
@@ -378,13 +378,13 @@ paths:
         - relyingparty
   /setAccountInfo:
     parameters:
-      - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: Set account info for a user.
       operationId: identitytoolkit.relyingparty.setAccountInfo
@@ -409,13 +409,13 @@ paths:
         - relyingparty
   /setProjectConfig:
     parameters:
-      - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: Set project configuration.
       operationId: identitytoolkit.relyingparty.setProjectConfig
@@ -440,13 +440,13 @@ paths:
         - relyingparty
   /signOutUser:
     parameters:
-      - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: Sign out user.
       operationId: identitytoolkit.relyingparty.signOutUser
@@ -471,13 +471,13 @@ paths:
         - relyingparty
   /signupNewUser:
     parameters:
-      - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: Signup new user.
       operationId: identitytoolkit.relyingparty.signupNewUser
@@ -502,13 +502,13 @@ paths:
         - relyingparty
   /uploadAccount:
     parameters:
-      - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: Batch upload existing user accounts.
       operationId: identitytoolkit.relyingparty.uploadAccount
@@ -537,13 +537,13 @@ paths:
         - relyingparty
   /verifyAssertion:
     parameters:
-      - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: Verifies the assertion returned by the IdP.
       operationId: identitytoolkit.relyingparty.verifyAssertion
@@ -568,13 +568,13 @@ paths:
         - relyingparty
   /verifyCustomToken:
     parameters:
-      - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: Verifies the developer asserted ID token.
       operationId: identitytoolkit.relyingparty.verifyCustomToken
@@ -599,13 +599,13 @@ paths:
         - relyingparty
   /verifyPassword:
     parameters:
-      - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: Verifies the user entered password.
       operationId: identitytoolkit.relyingparty.verifyPassword
@@ -630,13 +630,13 @@ paths:
         - relyingparty
   /verifyPhoneNumber:
     parameters:
-      - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: Verifies ownership of a phone number and creates/updates the user account accordingly.
       operationId: identitytoolkit.relyingparty.verifyPhoneNumber

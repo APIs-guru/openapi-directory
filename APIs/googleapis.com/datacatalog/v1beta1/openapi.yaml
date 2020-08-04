@@ -34,23 +34,23 @@ info:
 externalDocs:
   url: https://cloud.google.com/data-catalog/docs/
 tags:
+  - name: catalog
   - name: projects
   - name: entries
-  - name: catalog
 paths:
   /v1beta1/catalog:search:
     parameters:
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
     post:
       description: >-
         Searches Data Catalog for multiple resources like entries, tags that
@@ -163,27 +163,26 @@ paths:
       tags:
         - entries
     parameters:
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
   "/v1beta1/{name}":
     delete:
-      description: Deletes a tag.
-      operationId: datacatalog.projects.locations.entryGroups.tags.delete
+      description: Deletes a policy tag. Also deletes all of its descendant policy tags.
+      operationId: datacatalog.projects.locations.taxonomies.policyTags.delete
       parameters:
         - description: >-
-            Required. The name of the tag to delete. Example:
+            Required. Resource name of the policy tag to be deleted. All of its descendant
 
-
-            * projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}/entries/{entry_id}/tags/{tag_id}
+            policy tags will also be deleted.
           in: path
           name: name
           required: true
@@ -209,14 +208,10 @@ paths:
       tags:
         - projects
     get:
-      description: Gets an entry.
-      operationId: datacatalog.projects.locations.entryGroups.entries.get
+      description: Gets a policy tag.
+      operationId: datacatalog.projects.locations.taxonomies.policyTags.get
       parameters:
-        - description: >-
-            Required. The name of the entry. Example:
-
-
-            * projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}/entries/{entry_id}
+        - description: Required. Resource name of the requested policy tag.
           in: path
           name: name
           required: true
@@ -232,7 +227,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GoogleCloudDatacatalogV1beta1Entry"
+                $ref: "#/components/schemas/GoogleCloudDatacatalogV1beta1PolicyTag"
           description: Successful response
       security:
         - Oauth2:
@@ -242,40 +237,44 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
     patch:
-      description: Updates an existing tag.
-      operationId: datacatalog.projects.locations.entryGroups.tags.patch
+      description: Updates a policy tag.
+      operationId: datacatalog.projects.locations.taxonomies.policyTags.patch
       parameters:
         - description: >-
-            The resource name of the tag in URL format. Example:
+            Output only. Resource name of this policy tag, whose format is:
 
-
-            * projects/{project_id}/locations/{location}/entrygroups/{entry_group_id}/entries/{entry_id}/tags/{tag_id}
-
-
-            where `tag_id` is a system-generated identifier.
-
-            Note that this Tag may not actually be stored in the location in this name.
+            "projects/{project_number}/locations/{location_id}/taxonomies/{taxonomy_id}/policyTags/{id}".
           in: path
           name: name
           required: true
           schema:
             type: string
         - description: >-
-            The fields to update on the Tag. If absent or empty, all modifiable fields
+            The update mask applies to the resource. Only display_name, description and
 
-            are updated. Currently the only modifiable field is the field `fields`.
+            parent_policy_tag can be updated and thus can be listed in the mask. If
+
+            update_mask is not provided, all allowed fields (i.e. display_name,
+
+            description and parent) will be updated. For more information including the
+
+            `FieldMask` definition, see
+
+            https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
+
+            If not set, defaults to all of the fields that are allowed to update.
           in: query
           name: updateMask
           schema:
@@ -284,13 +283,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/GoogleCloudDatacatalogV1beta1Tag"
+              $ref: "#/components/schemas/GoogleCloudDatacatalogV1beta1PolicyTag"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GoogleCloudDatacatalogV1beta1Tag"
+                $ref: "#/components/schemas/GoogleCloudDatacatalogV1beta1PolicyTag"
           description: Successful response
       security:
         - Oauth2:
@@ -301,17 +300,17 @@ paths:
         - projects
   "/v1beta1/{name}:rename":
     parameters:
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
     post:
       description: >-
         Renames an enum value in a tag template. The enum values have to be unique
@@ -410,17 +409,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
     post:
       description: >-
         Creates an entry. Only entries of 'FILESET' type or user-specified type can
@@ -527,17 +526,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
     post:
       description: >-
         A maximum of 10,000 entry groups may be created per organization across all
@@ -600,17 +599,17 @@ paths:
         - projects
   "/v1beta1/{parent}/fields":
     parameters:
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
     post:
       description: >-
         Creates a field in a tag template. The user should enable the Data Catalog
@@ -714,17 +713,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
     post:
       description: Creates a policy tag in the specified taxonomy.
       operationId: datacatalog.projects.locations.taxonomies.policyTags.create
@@ -756,17 +755,17 @@ paths:
         - projects
   "/v1beta1/{parent}/tagTemplates":
     parameters:
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
     post:
       description: >-
         Creates a tag template. The user should enable the Data Catalog API in
@@ -871,17 +870,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
     post:
       description: >-
         Creates a tag on an Entry.
@@ -980,17 +979,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
     post:
       description: Creates a taxonomy in the specified project.
       operationId: datacatalog.projects.locations.taxonomies.create
@@ -1069,30 +1068,30 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
   "/v1beta1/{parent}/taxonomies:import":
     parameters:
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
     post:
       description: >-
         Imports all taxonomies and their policy tags to a project as new
@@ -1132,41 +1131,20 @@ paths:
         - projects
   "/v1beta1/{resource}:getIamPolicy":
     parameters:
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
     post:
-      description: >-
-        Gets the access control policy for a resource. A `NOT_FOUND` error
-
-        is returned if the resource does not exist. An empty policy is returned
-
-        if the resource exists but does not have a policy set on it.
-
-
-        Supported resources are:
-          - Tag templates.
-          - Entries.
-          - Entry groups.
-        Note, this method cannot be used to manage policies for BigQuery, Pub/Sub
-
-        and any external Google Cloud Platform resources synced to Data Catalog.
-
-
-        Callers must have following Google IAM permission
-          - `datacatalog.tagTemplates.getIamPolicy` to get policies on tag
-            templates.
-          - `datacatalog.entries.getIamPolicy` to get policies on entries.
-          - `datacatalog.entryGroups.getIamPolicy` to get policies on entry groups.
-      operationId: datacatalog.projects.locations.entryGroups.entries.getIamPolicy
+      description: Gets the IAM policy for a taxonomy or a policy tag.
+      operationId: datacatalog.projects.locations.taxonomies.policyTags.getIamPolicy
       parameters:
         - description: >-
             REQUIRED: The resource for which the policy is being requested.
@@ -1198,38 +1176,20 @@ paths:
         - projects
   "/v1beta1/{resource}:setIamPolicy":
     parameters:
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
     post:
-      description: >-
-        Sets the access control policy for a resource. Replaces any existing
-
-        policy.
-
-        Supported resources are:
-          - Tag templates.
-          - Entries.
-          - Entry groups.
-        Note, this method cannot be used to manage policies for BigQuery, Pub/Sub
-
-        and any external Google Cloud Platform resources synced to Data Catalog.
-
-
-        Callers must have following Google IAM permission
-          - `datacatalog.tagTemplates.setIamPolicy` to set policies on tag
-            templates.
-          - `datacatalog.entries.setIamPolicy` to set policies on entries.
-          - `datacatalog.entryGroups.setIamPolicy` to set policies on entry groups.
-      operationId: datacatalog.projects.locations.entryGroups.setIamPolicy
+      description: Sets the IAM policy for a taxonomy or a policy tag.
+      operationId: datacatalog.projects.locations.taxonomies.policyTags.setIamPolicy
       parameters:
         - description: >-
             REQUIRED: The resource for which the policy is being specified.
@@ -1261,39 +1221,23 @@ paths:
         - projects
   "/v1beta1/{resource}:testIamPermissions":
     parameters:
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
     post:
       description: >-
-        Returns the caller's permissions on a resource.
+        Returns the permissions that a caller has on the specified taxonomy or
 
-        If the resource does not exist, an empty set of permissions is returned
-
-        (We don't return a `NOT_FOUND` error).
-
-
-        Supported resources are:
-          - Tag templates.
-          - Entries.
-          - Entry groups.
-        Note, this method cannot be used to manage policies for BigQuery, Pub/Sub
-
-        and any external Google Cloud Platform resources synced to Data Catalog.
-
-
-        A caller is not required to have Google IAM permission to make this
-
-        request.
-      operationId: datacatalog.projects.locations.entryGroups.entries.testIamPermissions
+        policy tag.
+      operationId: datacatalog.projects.locations.taxonomies.policyTags.testIamPermissions
       parameters:
         - description: >-
             REQUIRED: The resource for which the policy detail is being requested.

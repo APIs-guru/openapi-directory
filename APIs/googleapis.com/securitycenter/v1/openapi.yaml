@@ -37,17 +37,13 @@ tags:
 paths:
   "/v1/{name}":
     delete:
-      description: >-
-        Deletes a long-running operation. This method indicates that the client is
-
-        no longer interested in the operation result. It does not cancel the
-
-        operation. If the server doesn't support this method, it returns
-
-        `google.rpc.Code.UNIMPLEMENTED`.
-      operationId: securitycenter.organizations.operations.delete
+      description: Deletes a notification config.
+      operationId: securitycenter.organizations.notificationConfigs.delete
       parameters:
-        - description: The name of the operation resource to be deleted.
+        - description: >-
+            Required. Name of the notification config to delete. Its format is
+
+            "organizations/[organization_id]/notificationConfigs/[config_id]".
           in: path
           name: name
           required: true
@@ -68,28 +64,13 @@ paths:
       tags:
         - organizations
     get:
-      description: >-
-        Lists operations that match the specified filter in the request. If the
-
-        server doesn't support this method, it returns `UNIMPLEMENTED`.
-
-
-        NOTE: the `name` binding allows API services to override the binding
-
-        to use different resource name schemes, such as `users/*/operations`. To
-
-        override the binding, API services can add a binding such as
-
-        `"/v1/{name=users/*}/operations"` to their service configuration.
-
-        For backwards compatibility, the default name includes the operations
-
-        collection id, however overriding users must ensure the name binding
-
-        is the parent resource, without the operations collection id.
-      operationId: securitycenter.organizations.operations.list
+      description: Gets a notification config.
+      operationId: securitycenter.organizations.notificationConfigs.get
       parameters:
-        - description: The name of the operation's parent resource.
+        - description: >-
+            Required. Name of the notification config to get. Its format is
+
+            "organizations/[organization_id]/notificationConfigs/[config_id]".
           in: path
           name: name
           required: true
@@ -115,7 +96,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ListOperationsResponse"
+                $ref: "#/components/schemas/NotificationConfig"
           description: Successful response
       security:
         - Oauth2:
@@ -125,50 +106,43 @@ paths:
       tags:
         - organizations
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
     patch:
       description: >-
-        Creates or updates a finding. The corresponding source must exist for a
+        
+        Updates a notification config. The following update
 
-        finding creation to succeed.
-      operationId: securitycenter.organizations.sources.findings.patch
+        fields are allowed: description, pubsub_topic, streaming_config.filter
+      operationId: securitycenter.organizations.notificationConfigs.patch
       parameters:
         - description: >-
-            The relative resource name of this finding. See:
+            The relative resource name of this notification config. See:
 
             https://cloud.google.com/apis/design/resource_names#relative_resource_name
 
             Example:
 
-            "organizations/{organization_id}/sources/{source_id}/findings/{finding_id}"
+            "organizations/{organization_id}/notificationConfigs/notify_public_bucket".
           in: path
           name: name
           required: true
           schema:
             type: string
         - description: >-
-            The FieldMask to use when updating the finding resource. This field should
-
-            not be specified when creating a finding.
+            The FieldMask to use when updating the notification config.
 
 
-            When updating a finding, an empty mask is treated as updating all mutable
-
-            fields and replacing source_properties.  Individual source_properties can
-
-            be added/updated by using "source_properties.<property key>" in the field
-
-            mask.
+            If empty all mutable fields will be updated.
           in: query
           name: updateMask
           schema:
@@ -177,13 +151,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Finding"
+              $ref: "#/components/schemas/NotificationConfig"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Finding"
+                $ref: "#/components/schemas/NotificationConfig"
           description: Successful response
       security:
         - Oauth2:
@@ -194,17 +168,17 @@ paths:
         - organizations
   "/v1/{name}:cancel":
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: >-
         Starts asynchronous cancellation on a long-running operation.  The server
@@ -250,17 +224,17 @@ paths:
         - organizations
   "/v1/{name}:setState":
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: Updates the state of a finding.
       operationId: securitycenter.organizations.sources.findings.setState
@@ -555,30 +529,30 @@ paths:
       tags:
         - organizations
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
   "/v1/{parent}/assets:group":
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: >-
         Filters an organization's assets and  groups them by their specified
@@ -616,17 +590,17 @@ paths:
         - organizations
   "/v1/{parent}/assets:runDiscovery":
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: >-
         Runs asset discovery. The discovery is tracked with a long-running
@@ -913,17 +887,17 @@ paths:
       tags:
         - organizations
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: >-
         Creates a finding. The corresponding source must exist for finding creation
@@ -971,17 +945,17 @@ paths:
         - organizations
   "/v1/{parent}/findings:group":
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: >-
         Filters an organization or source's findings and  groups them by their
@@ -1073,17 +1047,17 @@ paths:
       tags:
         - organizations
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: Creates a notification config.
       operationId: securitycenter.organizations.notificationConfigs.create
@@ -1175,17 +1149,17 @@ paths:
       tags:
         - organizations
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: Creates a source.
       operationId: securitycenter.organizations.sources.create
@@ -1220,17 +1194,17 @@ paths:
         - organizations
   "/v1/{resource}:getIamPolicy":
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: Gets the access control policy on the specified Source.
       operationId: securitycenter.organizations.sources.getIamPolicy
@@ -1265,17 +1239,17 @@ paths:
         - organizations
   "/v1/{resource}:setIamPolicy":
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: Sets the access control policy on the specified Source.
       operationId: securitycenter.organizations.sources.setIamPolicy
@@ -1310,17 +1284,17 @@ paths:
         - organizations
   "/v1/{resource}:testIamPermissions":
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: Returns the permissions that a caller has on the specified source.
       operationId: securitycenter.organizations.sources.testIamPermissions

@@ -72,15 +72,10 @@ paths:
       tags:
         - projects
     get:
-      description: >-
-        Gets the latest state of a long-running operation.  Clients can use this
-
-        method to poll the operation result at intervals as recommended by the API
-
-        service.
-      operationId: artifactregistry.projects.locations.operations.get
+      description: Gets a version
+      operationId: artifactregistry.projects.locations.repositories.packages.versions.get
       parameters:
-        - description: The name of the operation resource.
+        - description: The name of the version to retrieve.
           in: path
           name: name
           required: true
@@ -100,7 +95,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Operation"
+                $ref: "#/components/schemas/Version"
           description: Successful response
       security:
         - Oauth2:
@@ -114,16 +109,16 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
     patch:
       description: Updates a tag.
@@ -212,16 +207,16 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
   "/v1beta1/{name}/operations":
     get:
@@ -286,16 +281,16 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
   "/v1beta1/{parent}/files":
     get:
@@ -355,16 +350,16 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
   "/v1beta1/{parent}/packages":
     get:
@@ -406,16 +401,16 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
   "/v1beta1/{parent}/repositories":
     get:
@@ -457,16 +452,16 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
     post:
       description: >-
@@ -560,16 +555,16 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
     post:
       description: Creates a tag.
@@ -654,16 +649,16 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
   "/v1beta1/{resource}:getIamPolicy":
     get:
@@ -723,29 +718,29 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
   "/v1beta1/{resource}:setIamPolicy":
     parameters:
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
     post:
       description: Updates the IAM policy for a given resource.
@@ -781,16 +776,16 @@ paths:
         - projects
   "/v1beta1/{resource}:testIamPermissions":
     parameters:
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
     post:
       description: Tests if the caller has a list of permissions on a resource.

@@ -99,10 +99,6 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/_.xgafv"
@@ -110,30 +106,42 @@ paths:
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
     patch:
-      description: Sets the credential for the specified connection.
-      operationId: bigqueryconnection.projects.locations.connections.updateCredential
+      description: >-
+        Updates the specified connection. For security reasons, also resets
+
+        credential if connection properties are in the update field mask.
+      operationId: bigqueryconnection.projects.locations.connections.patch
       parameters:
         - description: >-
-            Required. Name of the connection, for example:
+            Required. Name of the connection to update, for example:
 
-            `projects/{project_id}/locations/{location_id}/connections/{connection_id}/credential`
+            `projects/{project_id}/locations/{location_id}/connections/{connection_id}`
           in: path
           name: name
           required: true
+          schema:
+            type: string
+        - description: Required. Update mask for the connection fields to be updated.
+          in: query
+          name: updateMask
           schema:
             type: string
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ConnectionCredential"
+              $ref: "#/components/schemas/Connection"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Empty"
+                $ref: "#/components/schemas/Connection"
           description: Successful response
       security:
         - Oauth2:
@@ -189,10 +197,6 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/_.xgafv"
@@ -200,6 +204,10 @@ paths:
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Creates a new connection.
       operationId: bigqueryconnection.projects.locations.connections.create
@@ -243,10 +251,6 @@ paths:
         - projects
   "/v1beta1/{resource}:getIamPolicy":
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/_.xgafv"
@@ -254,6 +258,10 @@ paths:
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: >-
         Gets the access control policy for a resource.
@@ -297,10 +305,6 @@ paths:
         - projects
   "/v1beta1/{resource}:setIamPolicy":
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/_.xgafv"
@@ -308,6 +312,10 @@ paths:
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: >-
         Sets the access control policy on the specified resource. Replaces any
@@ -352,10 +360,6 @@ paths:
         - projects
   "/v1beta1/{resource}:testIamPermissions":
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/_.xgafv"
@@ -363,6 +367,10 @@ paths:
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: >-
         Returns permissions that a caller has on the specified resource.

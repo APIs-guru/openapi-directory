@@ -33,15 +33,12 @@ info:
 externalDocs:
   url: https://developers.google.com/ad-experience-report/
 tags:
-  - name: violatingSites
   - name: sites
+  - name: violatingSites
 paths:
   /v1/violatingSites:
     get:
-      description: >-
-        Lists sites that are failing in the Ad Experience Report on at least one
-
-        platform.
+      description: Lists sites that are failing in the Ad Experience Report on at least one platform.
       operationId: adexperiencereport.violatingSites.list
       responses:
         "200":
@@ -53,29 +50,23 @@ paths:
       tags:
         - violatingSites
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
   "/v1/{name}":
     get:
       description: Gets a site's Ad Experience Report summary.
       operationId: adexperiencereport.sites.get
       parameters:
-        - description: >-
-            Required. The name of the site whose summary to get, e.g.
-
-            `sites/http%3A%2F%2Fwww.google.com%2F`.
-
-
-            Format: `sites/{site}`
+        - description: "Required. The name of the site whose summary to get, e.g. `sites/http%3A%2F%2Fwww.google.com%2F`. Format: `sites/{site}`"
           in: path
           name: name
           required: true
@@ -91,17 +82,17 @@ paths:
       tags:
         - sites
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
 components:
   parameters:
     _.xgafv:
@@ -190,28 +181,11 @@ components:
             - FAILING
           type: string
         enforcementTime:
-          description: >-
-            The time at which
-
-            [enforcement](https://support.google.com/webtools/answer/7308033) against
-
-            the site began or will begin on this platform.
-
-
-            Not set when the
-
-            filter_status
-
-            is OFF.
+          description: The time at which [enforcement](https://support.google.com/webtools/answer/7308033) against the site began or will begin on this platform. Not set when the filter_status is OFF.
           format: google-datetime
           type: string
         filterStatus:
-          description: >-
-            The site's [enforcement
-
-            status](https://support.google.com/webtools/answer/7308033) on this
-
-            platform.
+          description: The site's [enforcement status](https://support.google.com/webtools/answer/7308033) on this platform.
           enum:
             - UNKNOWN
             - ON
@@ -224,13 +198,7 @@ components:
           format: google-datetime
           type: string
         region:
-          description: >-
-            The site's regions on this platform.
-
-
-            No longer populated, because there is no longer any semantic difference
-
-            between sites in different regions.
+          description: The site's regions on this platform. No longer populated, because there is no longer any semantic difference between sites in different regions.
           items:
             enum:
               - REGION_UNKNOWN
@@ -240,20 +208,7 @@ components:
             type: string
           type: array
         reportUrl:
-          description: >-
-            A link to the full Ad Experience Report for the site on this platform..
-
-
-            Not set in
-
-            ViolatingSitesResponse.
-
-
-            Note that you must complete the [Search Console verification
-
-            process](https://support.google.com/webmasters/answer/9008080) for the site
-
-            before you can access the full report.
+          description: A link to the full Ad Experience Report for the site on this platform.. Not set in ViolatingSitesResponse. Note that you must complete the [Search Console verification process](https://support.google.com/webmasters/answer/9008080) for the site before you can access the full report.
           type: string
         underReview:
           description: Whether the site is currently under review on this platform.

@@ -37,24 +37,19 @@ tags:
 paths:
   /v1beta1/documents:analyzeEntities:
     parameters:
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
     post:
-      description: >-
-        Finds named entities (currently proper names and common nouns) in the text
-
-        along with entity types, salience, mentions for each entity, and
-
-        other properties.
+      description: Finds named entities (currently proper names and common nouns) in the text along with entity types, salience, mentions for each entity, and other properties.
       operationId: language.documents.analyzeEntities
       requestBody:
         content:
@@ -81,17 +76,17 @@ paths:
         - documents
   /v1beta1/documents:analyzeSentiment:
     parameters:
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
     post:
       description: Analyzes the sentiment of the provided text.
       operationId: language.documents.analyzeSentiment
@@ -120,24 +115,19 @@ paths:
         - documents
   /v1beta1/documents:analyzeSyntax:
     parameters:
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
     post:
-      description: >-
-        Analyzes the syntax of the text and provides sentence boundaries and
-
-        tokenization along with part of speech tags, dependency trees, and other
-
-        properties.
+      description: Analyzes the syntax of the text and provides sentence boundaries and tokenization along with part of speech tags, dependency trees, and other properties.
       operationId: language.documents.analyzeSyntax
       requestBody:
         content:
@@ -164,22 +154,19 @@ paths:
         - documents
   /v1beta1/documents:annotateText:
     parameters:
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
     post:
-      description: >-
-        A convenience method that provides all the features that analyzeSentiment,
-
-        analyzeEntities, and analyzeSyntax provide in one call.
+      description: A convenience method that provides all the features that analyzeSentiment, analyzeEntities, and analyzeSyntax provide in one call.
       operationId: language.documents.annotateText
       requestBody:
         content:
@@ -304,12 +291,7 @@ components:
             $ref: "#/components/schemas/Entity"
           type: array
         language:
-          description: >-
-            The language of the text, which will be the same as the language specified
-
-            in the request or, if not specified, the automatically-detected language.
-
-            See Document.language field for more details.
+          description: The language of the text, which will be the same as the language specified in the request or, if not specified, the automatically-detected language. See Document.language field for more details.
           type: string
       type: object
     AnalyzeSentimentRequest:
@@ -319,10 +301,7 @@ components:
           $ref: "#/components/schemas/Document"
           description: Input document.
         encodingType:
-          description: >-
-            The encoding type used by the API to calculate sentence offsets for the
-
-            sentence sentiment.
+          description: The encoding type used by the API to calculate sentence offsets for the sentence sentiment.
           enum:
             - NONE
             - UTF8
@@ -337,12 +316,7 @@ components:
           $ref: "#/components/schemas/Sentiment"
           description: The overall sentiment of the input document.
         language:
-          description: >-
-            The language of the text, which will be the same as the language specified
-
-            in the request or, if not specified, the automatically-detected language.
-
-            See Document.language field for more details.
+          description: The language of the text, which will be the same as the language specified in the request or, if not specified, the automatically-detected language. See Document.language field for more details.
           type: string
         sentences:
           description: The sentiment for all the sentences in the document.
@@ -369,12 +343,7 @@ components:
       description: The syntax analysis response message.
       properties:
         language:
-          description: >-
-            The language of the text, which will be the same as the language specified
-
-            in the request or, if not specified, the automatically-detected language.
-
-            See Document.language field for more details.
+          description: The language of the text, which will be the same as the language specified in the request or, if not specified, the automatically-detected language. See Document.language field for more details.
           type: string
         sentences:
           description: Sentences in the input document.
@@ -388,10 +357,7 @@ components:
           type: array
       type: object
     AnnotateTextRequest:
-      description: >-
-        The request message for the text annotation API, which can perform multiple
-
-        analysis types (sentiment, entities, and syntax) in one call.
+      description: The request message for the text annotation API, which can perform multiple analysis types (sentiment, entities, and syntax) in one call.
       properties:
         document:
           $ref: "#/components/schemas/Document"
@@ -413,43 +379,22 @@ components:
       properties:
         documentSentiment:
           $ref: "#/components/schemas/Sentiment"
-          description: >-
-            The overall sentiment for the document. Populated if the user enables
-
-            AnnotateTextRequest.Features.extract_document_sentiment.
+          description: The overall sentiment for the document. Populated if the user enables AnnotateTextRequest.Features.extract_document_sentiment.
         entities:
-          description: >-
-            Entities, along with their semantic information, in the input document.
-
-            Populated if the user enables
-
-            AnnotateTextRequest.Features.extract_entities.
+          description: Entities, along with their semantic information, in the input document. Populated if the user enables AnnotateTextRequest.Features.extract_entities.
           items:
             $ref: "#/components/schemas/Entity"
           type: array
         language:
-          description: >-
-            The language of the text, which will be the same as the language specified
-
-            in the request or, if not specified, the automatically-detected language.
-
-            See Document.language field for more details.
+          description: The language of the text, which will be the same as the language specified in the request or, if not specified, the automatically-detected language. See Document.language field for more details.
           type: string
         sentences:
-          description: >-
-            Sentences in the input document. Populated if the user enables
-
-            AnnotateTextRequest.Features.extract_syntax.
+          description: Sentences in the input document. Populated if the user enables AnnotateTextRequest.Features.extract_syntax.
           items:
             $ref: "#/components/schemas/Sentence"
           type: array
         tokens:
-          description: >-
-            Tokens, along with their syntactic information, in the input document.
-
-            Populated if the user enables
-
-            AnnotateTextRequest.Features.extract_syntax.
+          description: Tokens, along with their syntactic information, in the input document. Populated if the user enables AnnotateTextRequest.Features.extract_syntax.
           items:
             $ref: "#/components/schemas/Token"
           type: array
@@ -458,16 +403,7 @@ components:
       description: Represents dependency parse tree information for a token.
       properties:
         headTokenIndex:
-          description: >-
-            Represents the head of this token in the dependency tree.
-
-            This is the index of the token which has an arc going to this token.
-
-            The index is the position of the token in the array of tokens returned
-
-            by the API method. If this token is a root token, then the
-
-            `head_token_index` is its own index.
+          description: Represents the head of this token in the dependency tree. This is the index of the token which has an arc going to this token. The index is the position of the token in the array of tokens returned by the API method. If this token is a root token, then the `head_token_index` is its own index.
           format: int32
           type: integer
         label:
@@ -559,51 +495,19 @@ components:
           type: string
       type: object
     Document:
-      description: >-
-        ################################################################ #
-
-
-        Represents the input to API methods.
+      description: "################################################################ # Represents the input to API methods."
       properties:
         content:
-          description: >-
-            The content of the input in string format.
-
-            Cloud audit logging exempt since it is based on user data.
+          description: The content of the input in string format. Cloud audit logging exempt since it is based on user data.
           type: string
         gcsContentUri:
-          description: >-
-            The Google Cloud Storage URI where the file content is located.
-
-            This URI must be of the form: gs://bucket_name/object_name. For more
-
-            details, see https://cloud.google.com/storage/docs/reference-uris.
-
-            NOTE: Cloud Storage object versioning is not supported.
+          description: "The Google Cloud Storage URI where the file content is located. This URI must be of the form: gs://bucket_name/object_name. For more details, see https://cloud.google.com/storage/docs/reference-uris. NOTE: Cloud Storage object versioning is not supported."
           type: string
         language:
-          description: >-
-            The language of the document (if not specified, the language is
-
-            automatically detected). Both ISO and BCP-47 language codes are
-
-            accepted.<br>
-
-            [Language
-
-            Support](https://cloud.google.com/natural-language/docs/languages) lists
-
-            currently supported languages for each API method. If the language (either
-
-            specified by the caller or automatically detected) is not supported by the
-
-            called API method, an `INVALID_ARGUMENT` error is returned.
+          description: The language of the document (if not specified, the language is automatically detected). Both ISO and BCP-47 language codes are accepted. [Language Support](https://cloud.google.com/natural-language/docs/languages) lists currently supported languages for each API method. If the language (either specified by the caller or automatically detected) is not supported by the called API method, an `INVALID_ARGUMENT` error is returned.
           type: string
         type:
-          description: >-
-            Required. If the type is not set or is `TYPE_UNSPECIFIED`,
-
-            returns an `INVALID_ARGUMENT` error.
+          description: Required. If the type is not set or is `TYPE_UNSPECIFIED`, returns an `INVALID_ARGUMENT` error.
           enum:
             - TYPE_UNSPECIFIED
             - PLAIN_TEXT
@@ -611,47 +515,23 @@ components:
           type: string
       type: object
     Entity:
-      description: >-
-        Represents a phrase in the text that is a known entity, such as
-
-        a person, an organization, or location. The API associates information, such
-
-        as salience and mentions, with entities.
+      description: Represents a phrase in the text that is a known entity, such as a person, an organization, or location. The API associates information, such as salience and mentions, with entities.
       properties:
         mentions:
-          description: >-
-            The mentions of this entity in the input document. The API currently
-
-            supports proper noun mentions.
+          description: The mentions of this entity in the input document. The API currently supports proper noun mentions.
           items:
             $ref: "#/components/schemas/EntityMention"
           type: array
         metadata:
           additionalProperties:
             type: string
-          description: >-
-            Metadata associated with the entity.
-
-
-            Currently, Wikipedia URLs and Knowledge Graph MIDs are provided, if
-
-            available. The associated keys are "wikipedia_url" and "mid", respectively.
+          description: Metadata associated with the entity. Currently, Wikipedia URLs and Knowledge Graph MIDs are provided, if available. The associated keys are "wikipedia_url" and "mid", respectively.
           type: object
         name:
           description: The representative name for the entity.
           type: string
         salience:
-          description: >-
-            The salience score associated with the entity in the [0, 1.0] range.
-
-
-            The salience score for an entity provides information about the
-
-            importance or centrality of that entity to the entire document text.
-
-            Scores closer to 0 are less salient, while scores closer to 1.0 are highly
-
-            salient.
+          description: The salience score associated with the entity in the [0, 1.0] range. The salience score for an entity provides information about the importance or centrality of that entity to the entire document text. Scores closer to 0 are less salient, while scores closer to 1.0 are highly salient.
           format: float
           type: number
         type:
@@ -668,10 +548,7 @@ components:
           type: string
       type: object
     EntityMention:
-      description: >-
-        Represents a mention for an entity in the text. Currently, proper noun
-
-        mentions are supported.
+      description: Represents a mention for an entity in the text. Currently, proper noun mentions are supported.
       properties:
         text:
           $ref: "#/components/schemas/TextSpan"
@@ -685,10 +562,7 @@ components:
           type: string
       type: object
     Features:
-      description: >-
-        All available features for sentiment, syntax, and semantic analysis.
-
-        Setting each one to true will enable that specific analysis for the input.
+      description: All available features for sentiment, syntax, and semantic analysis. Setting each one to true will enable that specific analysis for the input.
       properties:
         extractDocumentSentiment:
           description: Extract document-level sentiment.
@@ -839,94 +713,50 @@ components:
       properties:
         sentiment:
           $ref: "#/components/schemas/Sentiment"
-          description: >-
-            For calls to AnalyzeSentiment or if
-
-            AnnotateTextRequest.Features.extract_document_sentiment is set to
-
-            true, this field will contain the sentiment for the sentence.
+          description: For calls to AnalyzeSentiment or if AnnotateTextRequest.Features.extract_document_sentiment is set to true, this field will contain the sentiment for the sentence.
         text:
           $ref: "#/components/schemas/TextSpan"
           description: The sentence text.
       type: object
     Sentiment:
-      description: >-
-        Represents the feeling associated with the entire text or entities in
-
-        the text.
+      description: Represents the feeling associated with the entire text or entities in the text.
       properties:
         magnitude:
-          description: >-
-            A non-negative number in the [0, +inf) range, which represents
-
-            the absolute magnitude of sentiment regardless of score (positive or
-
-            negative).
+          description: A non-negative number in the [0, +inf) range, which represents the absolute magnitude of sentiment regardless of score (positive or negative).
           format: float
           type: number
         polarity:
-          description: >-
-            DEPRECATED FIELD - This field is being deprecated in
-
-            favor of score. Please refer to our documentation at
-
-            https://cloud.google.com/natural-language/docs for more information.
+          description: DEPRECATED FIELD - This field is being deprecated in favor of score. Please refer to our documentation at https://cloud.google.com/natural-language/docs for more information.
           format: float
           type: number
         score:
-          description: >-
-            Sentiment score between -1.0 (negative sentiment) and 1.0
-
-            (positive sentiment).
+          description: Sentiment score between -1.0 (negative sentiment) and 1.0 (positive sentiment).
           format: float
           type: number
       type: object
     Status:
-      description: >-
-        The `Status` type defines a logical error model that is suitable for
-
-        different programming environments, including REST APIs and RPC APIs. It is
-
-        used by [gRPC](https://github.com/grpc). Each `Status` message contains
-
-        three pieces of data: error code, error message, and error details.
-
-
-        You can find out more about this error model and how to work with it in the
-
-        [API Design Guide](https://cloud.google.com/apis/design/errors).
+      description: "The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors)."
       properties:
         code:
           description: The status code, which should be an enum value of google.rpc.Code.
           format: int32
           type: integer
         details:
-          description: >-
-            A list of messages that carry the error details.  There is a common set of
-
-            message types for APIs to use.
+          description: A list of messages that carry the error details. There is a common set of message types for APIs to use.
           items:
             additionalProperties:
               description: Properties of the object. Contains field @type with type URL.
             type: object
           type: array
         message:
-          description: >-
-            A developer-facing error message, which should be in English. Any
-
-            user-facing error message should be localized and sent in the
-
-            google.rpc.Status.details field, or localized by the client.
+          description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.
           type: string
       type: object
     TextSpan:
       description: Represents an output piece of text.
       properties:
         beginOffset:
-          description: >-
-            The API calculates the beginning offset of the content in the original
-
-            document according to the EncodingType specified in the API request.
+          description: The API calculates the beginning offset of the content in the original document according to the EncodingType specified in the API request.
           format: int32
           type: integer
         content:

@@ -102,17 +102,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
     patch:
       description: >-
         Updates an existing capacity commitment.
@@ -167,17 +167,17 @@ paths:
         - projects
   "/v1beta1/{name}:move":
     parameters:
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
     post:
       description: >-
         Moves an assignment under a new reservation.
@@ -226,17 +226,17 @@ paths:
         - projects
   "/v1beta1/{name}:split":
     parameters:
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
     post:
       description: >-
         Splits capacity commitment to two commitments of the same plan and
@@ -365,17 +365,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
     post:
       description: >-
         Creates an assignment object which allows the given project to submit jobs
@@ -501,17 +501,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
     post:
       description: Creates a new capacity commitment resource.
       operationId: bigqueryreservation.projects.locations.capacityCommitments.create
@@ -557,17 +557,17 @@ paths:
         - projects
   "/v1beta1/{parent}/capacityCommitments:merge":
     parameters:
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
     post:
       description: >-
         Merges capacity commitments of the same plan into a single commitment.
@@ -670,17 +670,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
     post:
       description: Creates a new reservation resource.
       operationId: bigqueryreservation.projects.locations.reservations.create
@@ -820,17 +820,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
 components:
   parameters:
     _.xgafv:

@@ -103,17 +103,17 @@ paths:
       tags:
         - operations
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
   /v1/services:
     get:
       description: >-
@@ -195,17 +195,17 @@ paths:
       tags:
         - services
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: >-
         Creates a new managed service.
@@ -335,17 +335,17 @@ paths:
       tags:
         - services
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
   "/v1/services/{serviceName}/config":
     get:
       description: Gets a service configuration (version) for a managed service.
@@ -409,17 +409,17 @@ paths:
       tags:
         - services
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
   "/v1/services/{serviceName}/configs":
     get:
       description: >-
@@ -477,17 +477,17 @@ paths:
       tags:
         - services
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: >-
         Creates a new service configuration (version) for a managed service.
@@ -602,30 +602,30 @@ paths:
       tags:
         - services
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
   "/v1/services/{serviceName}/configs:submit":
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: >-
         Creates a new service configuration (version) for a managed service based
@@ -756,17 +756,17 @@ paths:
       tags:
         - services
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: >-
         Creates a new service configuration rollout. Based on rollout, the
@@ -874,30 +874,30 @@ paths:
       tags:
         - services
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
   "/v1/services/{serviceName}:disable":
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: >-
         Disables a service for a project, so it can no longer be
@@ -944,17 +944,17 @@ paths:
         - services
   "/v1/services/{serviceName}:enable":
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: >-
         Enables a service for a project, so it can be used
@@ -1003,17 +1003,17 @@ paths:
         - services
   "/v1/services/{serviceName}:undelete":
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: >-
         Revives a previously deleted managed service. The method restores the
@@ -1057,17 +1057,17 @@ paths:
         - services
   /v1/services:generateConfigReport:
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: >-
         Generates and returns a report (errors, warnings and changes from
@@ -1149,30 +1149,30 @@ paths:
       tags:
         - operations
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
   "/v1/{resource}:getIamPolicy":
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: >-
         Gets the access control policy for a resource.
@@ -1224,17 +1224,17 @@ paths:
         - services
   "/v1/{resource}:setIamPolicy":
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: >-
         Sets the access control policy on the specified resource. Replaces any
@@ -1279,17 +1279,17 @@ paths:
         - services
   "/v1/{resource}:testIamPermissions":
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: >-
         Returns permissions that a caller has on the specified resource.

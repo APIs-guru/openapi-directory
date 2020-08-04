@@ -33,13 +33,13 @@ info:
 externalDocs:
   url: https://cloud.google.com/deployment-manager/
 tags:
-  - name: compositeTypes
-  - name: operations
   - name: resources
-  - name: typeProviders
+  - name: operations
   - name: types
-  - name: deployments
   - name: manifests
+  - name: compositeTypes
+  - name: deployments
+  - name: typeProviders
 paths:
   "/{project}/global/compositeTypes":
     get:
@@ -122,12 +122,12 @@ paths:
       tags:
         - compositeTypes
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
     post:
       description: Creates a composite type.
@@ -240,12 +240,12 @@ paths:
       tags:
         - compositeTypes
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
     patch:
       description: Patches a composite type.
@@ -406,12 +406,12 @@ paths:
       tags:
         - deployments
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
     post:
       description: Creates a deployment and all of the resources described by the deployment manifest.
@@ -546,12 +546,12 @@ paths:
       tags:
         - deployments
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
     patch:
       description: Patches a deployment and all of the resources described by the deployment manifest.
@@ -677,12 +677,12 @@ paths:
         - deployments
   "/{project}/global/deployments/{deployment}/cancelPreview":
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
     post:
       description: Cancels and removes the preview currently associated with the deployment.
@@ -810,12 +810,12 @@ paths:
       tags:
         - manifests
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
   "/{project}/global/deployments/{deployment}/manifests/{manifest}":
     get:
@@ -867,12 +867,12 @@ paths:
       tags:
         - manifests
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
   "/{project}/global/deployments/{deployment}/resources":
     get:
@@ -961,12 +961,12 @@ paths:
       tags:
         - resources
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
   "/{project}/global/deployments/{deployment}/resources/{resource}":
     get:
@@ -1018,21 +1018,21 @@ paths:
       tags:
         - resources
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
   "/{project}/global/deployments/{deployment}/stop":
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
     post:
       description: Stops an ongoing operation. This does not roll back any work that has already been completed, but prevents any new work from being started.
@@ -1114,21 +1114,21 @@ paths:
       tags:
         - deployments
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
   "/{project}/global/deployments/{resource}/setIamPolicy":
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
     post:
       description: Sets the access control policy on the specified resource. Replaces any existing policy.
@@ -1171,12 +1171,12 @@ paths:
         - deployments
   "/{project}/global/deployments/{resource}/testIamPermissions":
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
     post:
       description: Returns permissions that a caller has on the specified resource.
@@ -1298,12 +1298,12 @@ paths:
       tags:
         - operations
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
   "/{project}/global/operations/{operation}":
     get:
@@ -1349,12 +1349,12 @@ paths:
       tags:
         - operations
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
   "/{project}/global/typeProviders":
     get:
@@ -1437,12 +1437,12 @@ paths:
       tags:
         - typeProviders
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
     post:
       description: Creates a type provider.
@@ -1555,12 +1555,12 @@ paths:
       tags:
         - typeProviders
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
     patch:
       description: Patches a type provider.
@@ -1727,12 +1727,12 @@ paths:
       tags:
         - typeProviders
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
   "/{project}/global/typeProviders/{typeProvider}/types/{type}":
     get:
@@ -1784,12 +1784,12 @@ paths:
       tags:
         - typeProviders
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
   "/{project}/global/types":
     get:
@@ -1872,12 +1872,12 @@ paths:
       tags:
         - types
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
   "/{project}/global/types/{type}":
     get:
@@ -1923,12 +1923,12 @@ paths:
       tags:
         - types
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
 components:
   parameters:

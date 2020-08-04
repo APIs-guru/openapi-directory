@@ -33,22 +33,22 @@ info:
 externalDocs:
   url: https://cloud.google.com/bigquery/
 tags:
-  - name: operations
   - name: projects
+  - name: operations
 paths:
   "/v1/{name}":
     delete:
       description: >-
-        Deletes a capacity commitment. Attempting to delete capacity commitment
+        Deletes a long-running operation. This method indicates that the client is
 
-        before its commitment_end_time will fail with the error code
+        no longer interested in the operation result. It does not cancel the
 
-        `google.rpc.Code.FAILED_PRECONDITION`.
-      operationId: bigqueryreservation.projects.locations.capacityCommitments.delete
+        operation. If the server doesn't support this method, it returns
+
+        `google.rpc.Code.UNIMPLEMENTED`.
+      operationId: bigqueryreservation.operations.delete
       parameters:
-        - description: >-
-            Required. Resource name of the capacity commitment to delete. E.g.,
-               `projects/myproject/locations/US/capacityCommitments/123`
+        - description: The name of the operation resource to be deleted.
           in: path
           name: name
           required: true
@@ -71,14 +71,30 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
-        - projects
+        - operations
     get:
-      description: Returns information about the capacity commitment.
-      operationId: bigqueryreservation.projects.locations.capacityCommitments.get
+      description: >-
+        Lists operations that match the specified filter in the request. If the
+
+        server doesn't support this method, it returns `UNIMPLEMENTED`.
+
+
+        NOTE: the `name` binding allows API services to override the binding
+
+        to use different resource name schemes, such as `users/*/operations`. To
+
+        override the binding, API services can add a binding such as
+
+        `"/v1/{name=users/*}/operations"` to their service configuration.
+
+        For backwards compatibility, the default name includes the operations
+
+        collection id, however overriding users must ensure the name binding
+
+        is the parent resource, without the operations collection id.
+      operationId: bigqueryreservation.operations.list
       parameters:
-        - description: >-
-            Required. Resource name of the capacity commitment to retrieve. E.g.,
-               `projects/myproject/locations/US/capacityCommitments/123`
+        - description: The name of the operation's parent resource.
           in: path
           name: name
           required: true
@@ -104,7 +120,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/CapacityCommitment"
+                $ref: "#/components/schemas/ListOperationsResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -116,19 +132,19 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
-        - projects
+        - operations
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
     patch:
       description: >-
         Updates an existing capacity commitment.
@@ -183,17 +199,17 @@ paths:
         - projects
   "/v1/{name}:move":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
     post:
       description: >-
         Moves an assignment under a new reservation.
@@ -242,17 +258,17 @@ paths:
         - projects
   "/v1/{name}:split":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
     post:
       description: >-
         Splits capacity commitment to two commitments of the same plan and
@@ -381,17 +397,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
     post:
       description: >-
         Creates an assignment object which allows the given project to submit jobs
@@ -517,17 +533,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
     post:
       description: Creates a new capacity commitment resource.
       operationId: bigqueryreservation.projects.locations.capacityCommitments.create
@@ -573,17 +589,17 @@ paths:
         - projects
   "/v1/{parent}/capacityCommitments:merge":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
     post:
       description: >-
         Merges capacity commitments of the same plan into a single commitment.
@@ -672,17 +688,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
     post:
       description: Creates a new reservation resource.
       operationId: bigqueryreservation.projects.locations.reservations.create
@@ -818,17 +834,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
   "/v1/{parent}:searchAssignments":
     get:
       description: >-
@@ -924,17 +940,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
 components:
   parameters:
     _.xgafv:
