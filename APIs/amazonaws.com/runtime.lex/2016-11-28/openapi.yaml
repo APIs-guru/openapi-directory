@@ -752,6 +752,12 @@ components:
         intentName:
           $ref: '#/components/schemas/IntentName'
           description: The current user intent that Amazon Lex is aware of.
+        nluIntentConfidence:
+          $ref: '#/components/schemas/IntentConfidence'
+          description: '<p>Provides a score that indicates how confident Amazon Lex is that the returned intent is the one that matches the user''s intent. The score is between 0.0 and 1.0. For more information, see <a href="https://docs.aws.amazon.com/lex/latest/dg/confidence-scores.html">Confidence Scores</a>.</p> <p>The score is a relative score, not an absolute score. The score may change based on improvements to the Amazon Lex natural language understanding (NLU) model.</p>'
+        alternativeIntents:
+          $ref: '#/components/schemas/IntentList'
+          description: <p>One to four alternative intents that may be applicable to the user's intent.</p> <p>Each alternative includes a score that indicates how confident Amazon Lex is that the intent matches the user's intent. The intents are sorted by the confidence score.</p>
         slots:
           $ref: '#/components/schemas/StringMap'
           description: '<p> The intent slots that Amazon Lex detected from the user input in the conversation. </p> <p>Amazon Lex creates a resolution list containing likely values for a slot. The value that it returns is determined by the <code>valueSelectionStrategy</code> selected when the slot type was created or updated. If <code>valueSelectionStrategy</code> is set to <code>ORIGINAL_VALUE</code>, the value provided by the user is returned, if the user value is similar to the slot values. If <code>valueSelectionStrategy</code> is set to <code>TOP_RESOLUTION</code> Amazon Lex returns the first value in the resolution list or, if there is no resolution list, null. If you don''t specify a <code>valueSelectionStrategy</code>, the default is <code>ORIGINAL_VALUE</code>.</p>'
@@ -779,6 +785,9 @@ components:
         sessionId:
           $ref: '#/components/schemas/String'
           description: A unique identifier for the session.
+        botVersion:
+          $ref: '#/components/schemas/BotVersion'
+          description: '<p>The version of the bot that responded to the conversation. You can use this information to help determine if one version of a bot is performing better than another version.</p> <p>If you have enabled the new natural language understanding (NLU) model, you can use this to determine if the improvement is due to changes to the bot or changes to the NLU.</p> <p>For more information about enabling the new NLU, see the <a href="https://docs.aws.amazon.com/lex/latest/dg/API_PutBot.html#lex-PutBot-request-enableModelImprovements">enableModelImprovements</a> parameter of the <code>PutBot</code> operation.</p>'
     String:
       type: string
     PutSessionResponse:
@@ -857,6 +866,11 @@ components:
       type: string
     BotName:
       type: string
+    BotVersion:
+      type: string
+      pattern: '[0-9]+|\$LATEST'
+      minLength: 1
+      maxLength: 64
     ButtonTextStringWithLength:
       type: string
       minLength: 1
@@ -933,6 +947,9 @@ components:
         - Fulfilled
         - ReadyForFulfillment
         - Failed
+    Double:
+      type: number
+      format: double
     StringWithLength:
       type: string
       minLength: 1
@@ -983,6 +1000,31 @@ components:
       maxItems: 3
     HttpContentType:
       type: string
+    IntentConfidence:
+      type: object
+      properties:
+        score:
+          $ref: '#/components/schemas/Double'
+          description: A score that indicates how confident Amazon Lex is that an intent satisfies the user's intent. Ranges between 0.00 and 1.00. Higher scores indicate higher confidence.
+      description: Provides a score that indicates the confidence that Amazon Lex has that an intent is the one that satisfies the user's intent.
+    PredictedIntent:
+      type: object
+      properties:
+        intentName:
+          $ref: '#/components/schemas/IntentName'
+          description: The name of the intent that Amazon Lex suggests satisfies the user's intent.
+        nluIntentConfidence:
+          $ref: '#/components/schemas/IntentConfidence'
+          description: Indicates how confident Amazon Lex is that an intent satisfies the user's intent.
+        slots:
+          $ref: '#/components/schemas/StringMap'
+          description: The slot and slot values associated with the predicted intent.
+      description: 'An intent that Amazon Lex suggests satisfies the user''s intent. Includes the name of the intent, the confidence that Amazon Lex has that the user''s intent is satisfied, and the slots defined for the intent.'
+    IntentList:
+      type: array
+      items:
+        $ref: '#/components/schemas/PredictedIntent'
+      maxItems: 4
     PostContentRequest:
       type: object
       required:

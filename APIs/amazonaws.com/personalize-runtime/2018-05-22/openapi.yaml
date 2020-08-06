@@ -308,6 +308,9 @@ components:
         personalizedRanking:
           $ref: '#/components/schemas/ItemList'
           description: A list of items in order of most likely interest to the user. The maximum is 500.
+        recommendationId:
+          $ref: '#/components/schemas/RecommendationID'
+          description: The ID of the recommendation.
     ItemID:
       type: string
       maxLength: 256
@@ -323,6 +326,9 @@ components:
         itemList:
           $ref: '#/components/schemas/ItemList'
           description: A list of recommendations sorted in ascending order by prediction score. There can be a maximum of 500 items in the list.
+        recommendationId:
+          $ref: '#/components/schemas/RecommendationID'
+          description: The ID of the recommendation.
     Arn:
       type: string
       pattern: 'arn:([a-z\d-]+):personalize:.*:.*:.+'
@@ -370,6 +376,8 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/PredictedItem'
+    RecommendationID:
+      type: string
     NumResults:
       type: integer
       minimum: 0

@@ -357,7 +357,7 @@ paths:
   /#X-Amz-Target=AmazonPersonalize.CreateDatasetImportJob:
     post:
       operationId: CreateDatasetImportJob
-      description: '<p>Creates a job that imports training data from your data source (an Amazon S3 bucket) to an Amazon Personalize dataset. To allow Amazon Personalize to import the training data, you must specify an AWS Identity and Access Management (IAM) role that has permission to read from the data source.</p> <important> <p>The dataset import job replaces any previous data in the dataset.</p> </important> <p> <b>Status</b> </p> <p>A dataset import job can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED</p> </li> </ul> <p>To get the status of the import job, call <a>DescribeDatasetImportJob</a>, providing the Amazon Resource Name (ARN) of the dataset import job. The dataset import is complete when the status shows as ACTIVE. If the status shows as CREATE FAILED, the response includes a <code>failureReason</code> key, which describes why the job failed.</p> <note> <p>Importing takes time. You must wait until the status shows as ACTIVE before training a model using the dataset.</p> </note> <p class="title"> <b>Related APIs</b> </p> <ul> <li> <p> <a>ListDatasetImportJobs</a> </p> </li> <li> <p> <a>DescribeDatasetImportJob</a> </p> </li> </ul>'
+      description: '<p>Creates a job that imports training data from your data source (an Amazon S3 bucket) to an Amazon Personalize dataset. To allow Amazon Personalize to import the training data, you must specify an AWS Identity and Access Management (IAM) role that has permission to read from the data source, as Amazon Personalize makes a copy of your data and processes it in an internal AWS system.</p> <important> <p>The dataset import job replaces any previous data in the dataset.</p> </important> <p> <b>Status</b> </p> <p>A dataset import job can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED</p> </li> </ul> <p>To get the status of the import job, call <a>DescribeDatasetImportJob</a>, providing the Amazon Resource Name (ARN) of the dataset import job. The dataset import is complete when the status shows as ACTIVE. If the status shows as CREATE FAILED, the response includes a <code>failureReason</code> key, which describes why the job failed.</p> <note> <p>Importing takes time. You must wait until the status shows as ACTIVE before training a model using the dataset.</p> </note> <p class="title"> <b>Related APIs</b> </p> <ul> <li> <p> <a>ListDatasetImportJobs</a> </p> </li> <li> <p> <a>DescribeDatasetImportJob</a> </p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -483,7 +483,7 @@ paths:
   /#X-Amz-Target=AmazonPersonalize.CreateFilter:
     post:
       operationId: CreateFilter
-      description: 'Creates a recommendation filter. For more information, see Using Filters with Amazon Personalize.'
+      description: 'Creates a recommendation filter. For more information, see <a href="https://docs.aws.amazon.com/personalize/latest/dg/filters.html">Using Filters with Amazon Personalize</a>.'
       responses:
         '200':
           description: Success
@@ -675,6 +675,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/ResourceNotFoundException'
         '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
           description: ResourceInUseException
           content:
             application/json:
@@ -909,6 +915,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
       requestBody:
         required: true
         content:
@@ -2404,6 +2416,9 @@ components:
         roleArn:
           $ref: '#/components/schemas/RoleArn'
           description: The ARN of the Amazon Identity and Access Management role that has permissions to read and write to your input and out Amazon S3 buckets respectively.
+        batchInferenceJobConfig:
+          $ref: '#/components/schemas/BatchInferenceJobConfig'
+          description: The configuration details of a batch inference job.
     InvalidInputException: {}
     ResourceAlreadyExistsException: {}
     LimitExceededException: {}
@@ -2432,6 +2447,9 @@ components:
         minProvisionedTPS:
           $ref: '#/components/schemas/TransactionsPerSecond'
           description: Specifies the requested minimum provisioned transactions (recommendations) per second that Amazon Personalize will support.
+        campaignConfig:
+          $ref: '#/components/schemas/CampaignConfig'
+          description: The configuration details of a campaign.
     CreateDatasetResponse:
       type: object
       properties:
@@ -2551,7 +2569,7 @@ components:
           description: The ARN of the dataset group that the filter will belong to.
         filterExpression:
           $ref: '#/components/schemas/FilterExpression'
-          description: '<p>The filter expression that designates the interaction types that the filter will filter out. A filter expression must follow the following format:</p> <p> <code>EXCLUDE itemId WHERE INTERACTIONS.event_type in ("EVENT_TYPE")</code> </p> <p>Where "EVENT_TYPE" is the type of event to filter out. To filter out all items with any interactions history, set <code>"*"</code> as the EVENT_TYPE. For more information, see Using Filters with Amazon Personalize.</p>'
+          description: '<p>The filter expression that designates the interaction types that the filter will filter out. A filter expression must follow the following format:</p> <p> <code>EXCLUDE itemId WHERE INTERACTIONS.event_type in ("EVENT_TYPE")</code> </p> <p>Where "EVENT_TYPE" is the type of event to filter out. To filter out all items with any interactions history, set <code>"*"</code> as the EVENT_TYPE. For more information, see <a href="https://docs.aws.amazon.com/personalize/latest/dg/filters.html">Using Filters with Amazon Personalize</a>.</p>'
     CreateSchemaResponse:
       type: object
       properties:
@@ -3157,6 +3175,9 @@ components:
         minProvisionedTPS:
           $ref: '#/components/schemas/TransactionsPerSecond'
           description: Specifies the requested minimum provisioned transactions (recommendations) per second that Amazon Personalize will support.
+        campaignConfig:
+          $ref: '#/components/schemas/CampaignConfig'
+          description: The configuration details of a campaign.
     AccountId:
       type: string
       maxLength: 256
@@ -3297,6 +3318,13 @@ components:
           $ref: '#/components/schemas/S3DataConfig'
           description: Information on the Amazon S3 bucket in which the batch inference job's output is stored.
       description: The output configuration parameters of a batch inference job.
+    BatchInferenceJobConfig:
+      type: object
+      properties:
+        itemExplorationConfig:
+          $ref: '#/components/schemas/HyperParameters'
+          description: A string to string map specifying the inference hyperparameters you wish to use for hyperparameter optimization. See <a>customizing-solution-config-hpo</a>.
+      description: The configuration details of a batch inference job.
     RoleArn:
       type: string
       pattern: 'arn:([a-z\d-]+):iam::\d{12}:role/?[a-zA-Z_0-9+=,.@\-_/]+'
@@ -3331,6 +3359,9 @@ components:
         jobOutput:
           $ref: '#/components/schemas/BatchInferenceJobOutput'
           description: The Amazon S3 bucket that contains the output data generated by the batch inference job.
+        batchInferenceJobConfig:
+          $ref: '#/components/schemas/BatchInferenceJobConfig'
+          description: A string to string map of the configuration details of a batch inference job.
         roleArn:
           $ref: '#/components/schemas/RoleArn'
           description: The ARN of the Amazon Identity and Access Management (IAM) role that requested the batch inference job.
@@ -3391,6 +3422,13 @@ components:
     TransactionsPerSecond:
       type: integer
       minimum: 1
+    CampaignConfig:
+      type: object
+      properties:
+        itemExplorationConfig:
+          $ref: '#/components/schemas/HyperParameters'
+          description: A string to string map specifying the inference hyperparameters you wish to use for hyperparameter optimization. See <a>customizing-solution-config-hpo</a>.
+      description: The configuration details of a campaign.
     CampaignUpdateSummary:
       type: object
       properties:
@@ -3400,6 +3438,8 @@ components:
         minProvisionedTPS:
           $ref: '#/components/schemas/TransactionsPerSecond'
           description: Specifies the requested minimum provisioned transactions (recommendations) per second that Amazon Personalize will support.
+        campaignConfig:
+          $ref: '#/components/schemas/CampaignConfig'
         status:
           $ref: '#/components/schemas/Status'
           description: '<p>The status of the campaign update.</p> <p>A campaign update can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED</p> </li> <li> <p>DELETE PENDING &gt; DELETE IN_PROGRESS</p> </li> </ul>'
@@ -3428,6 +3468,9 @@ components:
         minProvisionedTPS:
           $ref: '#/components/schemas/TransactionsPerSecond'
           description: Specifies the requested minimum provisioned transactions (recommendations) per second.
+        campaignConfig:
+          $ref: '#/components/schemas/CampaignConfig'
+          description: The configuration details of a campaign.
         status:
           $ref: '#/components/schemas/Status'
           description: '<p>The status of the campaign.</p> <p>A campaign can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED</p> </li> <li> <p>DELETE PENDING &gt; DELETE IN_PROGRESS</p> </li> </ul>'
@@ -3918,7 +3961,7 @@ components:
           description: 'If the filter failed, the reason for its failure.'
         filterExpression:
           $ref: '#/components/schemas/FilterExpression'
-          description: '<p>Specifies the type of item interactions to filter out of recommendation results. The filter expression must follow the following format:</p> <p> <code>EXCLUDE itemId WHERE INTERACTIONS.event_type in ("EVENT_TYPE")</code> </p> <p>Where "EVENT_TYPE" is the type of event to filter out. For more information, see Using Filters with Amazon Personalize.</p>'
+          description: '<p>Specifies the type of item interactions to filter out of recommendation results. The filter expression must follow the following format:</p> <p> <code>EXCLUDE itemId WHERE INTERACTIONS.event_type in ("EVENT_TYPE")</code> </p> <p>Where "EVENT_TYPE" is the type of event to filter out. For more information, see <a href="https://docs.aws.amazon.com/personalize/latest/dg/filters.html">Using Filters with Amazon Personalize</a>.</p>'
         status:
           $ref: '#/components/schemas/Status'
           description: The status of the filter.
