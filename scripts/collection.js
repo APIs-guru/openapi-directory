@@ -1002,6 +1002,11 @@ function fixSpec(swagger, errors) {
           }
           catch (e) {}
         }
+        if (path[path.length-1] === 'default') {
+          delete parentValue.default;
+          fixed = true;
+          break;
+        }
       case 'ENUM_MISMATCH':
       case 'INVALID_FORMAT':
         if (_.last(error.path) === 'default') {
