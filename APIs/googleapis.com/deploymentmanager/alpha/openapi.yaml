@@ -33,13 +33,13 @@ info:
 externalDocs:
   url: https://cloud.google.com/deployment-manager/
 tags:
-  - name: resources
   - name: operations
+  - name: resources
+  - name: compositeTypes
+  - name: typeProviders
+  - name: deployments
   - name: types
   - name: manifests
-  - name: compositeTypes
-  - name: deployments
-  - name: typeProviders
 paths:
   "/{project}/global/compositeTypes":
     get:
@@ -123,12 +123,12 @@ paths:
         - compositeTypes
     parameters:
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: Creates a composite type.
       operationId: deploymentmanager.compositeTypes.insert
@@ -241,12 +241,12 @@ paths:
         - compositeTypes
     parameters:
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
     patch:
       description: Patches a composite type.
       operationId: deploymentmanager.compositeTypes.patch
@@ -407,12 +407,12 @@ paths:
         - deployments
     parameters:
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: Creates a deployment and all of the resources described by the deployment manifest.
       operationId: deploymentmanager.deployments.insert
@@ -547,12 +547,12 @@ paths:
         - deployments
     parameters:
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
     patch:
       description: Patches a deployment and all of the resources described by the deployment manifest.
       operationId: deploymentmanager.deployments.patch
@@ -678,12 +678,12 @@ paths:
   "/{project}/global/deployments/{deployment}/cancelPreview":
     parameters:
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: Cancels and removes the preview currently associated with the deployment.
       operationId: deploymentmanager.deployments.cancelPreview
@@ -811,12 +811,12 @@ paths:
         - manifests
     parameters:
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
   "/{project}/global/deployments/{deployment}/manifests/{manifest}":
     get:
       description: Gets information about a specific manifest.
@@ -868,12 +868,12 @@ paths:
         - manifests
     parameters:
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
   "/{project}/global/deployments/{deployment}/resources":
     get:
       description: Lists all resources in a given deployment.
@@ -962,12 +962,12 @@ paths:
         - resources
     parameters:
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
   "/{project}/global/deployments/{deployment}/resources/{resource}":
     get:
       description: Gets information about a single resource.
@@ -1019,21 +1019,21 @@ paths:
         - resources
     parameters:
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
   "/{project}/global/deployments/{deployment}/stop":
     parameters:
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: Stops an ongoing operation. This does not roll back any work that has already been completed, but prevents any new work from being started.
       operationId: deploymentmanager.deployments.stop
@@ -1115,21 +1115,21 @@ paths:
         - deployments
     parameters:
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
   "/{project}/global/deployments/{resource}/setIamPolicy":
     parameters:
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: Sets the access control policy on the specified resource. Replaces any existing policy.
       operationId: deploymentmanager.deployments.setIamPolicy
@@ -1172,12 +1172,12 @@ paths:
   "/{project}/global/deployments/{resource}/testIamPermissions":
     parameters:
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: Returns permissions that a caller has on the specified resource.
       operationId: deploymentmanager.deployments.testIamPermissions
@@ -1299,12 +1299,12 @@ paths:
         - operations
     parameters:
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
   "/{project}/global/operations/{operation}":
     get:
       description: Gets information about a specific operation.
@@ -1350,12 +1350,12 @@ paths:
         - operations
     parameters:
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
   "/{project}/global/typeProviders":
     get:
       description: Lists all resource type providers for Deployment Manager.
@@ -1438,12 +1438,12 @@ paths:
         - typeProviders
     parameters:
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: Creates a type provider.
       operationId: deploymentmanager.typeProviders.insert
@@ -1556,12 +1556,12 @@ paths:
         - typeProviders
     parameters:
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
     patch:
       description: Patches a type provider.
       operationId: deploymentmanager.typeProviders.patch
@@ -1728,12 +1728,12 @@ paths:
         - typeProviders
     parameters:
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
   "/{project}/global/typeProviders/{typeProvider}/types/{type}":
     get:
       description: Gets a type info for a type provided by a TypeProvider.
@@ -1785,12 +1785,12 @@ paths:
         - typeProviders
     parameters:
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
   "/{project}/global/types":
     get:
       description: Lists all resource types for Deployment Manager.
@@ -1873,12 +1873,12 @@ paths:
         - types
     parameters:
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
   "/{project}/global/types/{type}":
     get:
       description: Gets information about a specific type.
@@ -1924,12 +1924,12 @@ paths:
         - types
     parameters:
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
 components:
   parameters:
     alt:

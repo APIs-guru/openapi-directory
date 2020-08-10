@@ -33,22 +33,22 @@ info:
 externalDocs:
   url: https://cloud.google.com/text-to-speech/
 tags:
-  - name: text
   - name: voices
+  - name: text
 paths:
   /v1beta1/text:synthesize:
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: >-
         Synthesizes speech synchronously: receive results after all text input
@@ -114,17 +114,17 @@ paths:
       tags:
         - voices
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
 components:
   parameters:
     _.xgafv:
@@ -211,6 +211,7 @@ components:
             - LINEAR16
             - MP3
             - OGG_OPUS
+            - MULAW
           type: string
         effectsProfileId:
           description: >-
@@ -324,6 +325,14 @@ components:
         audioConfig:
           $ref: "#/components/schemas/AudioConfig"
           description: Required. The configuration of the synthesized audio.
+        enableTimePointing:
+          description: Whether and what timepoints are returned in the response.
+          items:
+            enum:
+              - TIMEPOINT_TYPE_UNSPECIFIED
+              - SSML_MARK
+            type: string
+          type: array
         input:
           $ref: "#/components/schemas/SynthesisInput"
           description: Required. The Synthesizer requires either plain text or SSML as input.
@@ -334,6 +343,9 @@ components:
     SynthesizeSpeechResponse:
       description: The message returned to the client by the `SynthesizeSpeech` method.
       properties:
+        audioConfig:
+          $ref: "#/components/schemas/AudioConfig"
+          description: The audio metadata of `audio_content`.
         audioContent:
           description: >-
             The audio data bytes encoded as specified in the request, including the
@@ -347,6 +359,28 @@ components:
             whereas JSON representations use base64.
           format: byte
           type: string
+        timepoints:
+          description: >-
+            A link between a position in the original request input and a corresponding
+
+            time in the output audio. It's only supported via <mark> of SSML input.
+          items:
+            $ref: "#/components/schemas/Timepoint"
+          type: array
+      type: object
+    Timepoint:
+      description: >-
+        This contains a mapping between a certain point in the input text and a
+
+        corresponding time in the output audio.
+      properties:
+        markName:
+          description: Timepoint name as received from the client within <mark> tag.
+          type: string
+        timeSeconds:
+          description: Time offset in seconds from the start of the synthesized audio.
+          format: double
+          type: number
       type: object
     Voice:
       description: Description of a voice supported by the TTS service.

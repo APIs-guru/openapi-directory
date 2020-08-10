@@ -39,16 +39,16 @@ paths:
   "/v1/{database}/documents:batchGet":
     parameters:
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: >-
         Gets multiple documents.
@@ -94,16 +94,16 @@ paths:
   "/v1/{database}/documents:batchWrite":
     parameters:
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: >-
         Applies a batch of write operations.
@@ -158,16 +158,16 @@ paths:
   "/v1/{database}/documents:beginTransaction":
     parameters:
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: Starts a new transaction.
       operationId: firestore.projects.databases.documents.beginTransaction
@@ -207,16 +207,16 @@ paths:
   "/v1/{database}/documents:commit":
     parameters:
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: Commits a transaction, while optionally updating documents.
       operationId: firestore.projects.databases.documents.commit
@@ -256,16 +256,16 @@ paths:
   "/v1/{database}/documents:listen":
     parameters:
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: Listens to changes.
       operationId: firestore.projects.databases.documents.listen
@@ -305,16 +305,16 @@ paths:
   "/v1/{database}/documents:rollback":
     parameters:
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: Rolls back a transaction.
       operationId: firestore.projects.databases.documents.rollback
@@ -354,16 +354,16 @@ paths:
   "/v1/{database}/documents:write":
     parameters:
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: Streams batches of document updates and deletes, in order.
       operationId: firestore.projects.databases.documents.write
@@ -404,13 +404,17 @@ paths:
         - projects
   "/v1/{name}":
     delete:
-      description: Deletes a document.
-      operationId: firestore.projects.databases.documents.delete
-      parameters:
-        - description: >-
-            Required. The resource name of the Document to delete. In the format:
+      description: >-
+        Deletes a long-running operation. This method indicates that the client is
 
-            `projects/{project_id}/databases/{database_id}/documents/{document_path}`.
+        no longer interested in the operation result. It does not cancel the
+
+        operation. If the server doesn't support this method, it returns
+
+        `google.rpc.Code.UNIMPLEMENTED`.
+      operationId: firestore.projects.databases.operations.delete
+      parameters:
+        - description: The name of the operation resource to be deleted.
           in: path
           name: name
           required: true
@@ -451,13 +455,10 @@ paths:
       tags:
         - projects
     get:
-      description: Gets a single document.
-      operationId: firestore.projects.databases.documents.get
+      description: Gets information about a location.
+      operationId: firestore.projects.locations.get
       parameters:
-        - description: >-
-            Required. The resource name of the Document to get. In the format:
-
-            `projects/{project_id}/databases/{database_id}/documents/{document_path}`.
+        - description: Resource name for the location.
           in: path
           name: name
           required: true
@@ -493,7 +494,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Document"
+                $ref: "#/components/schemas/Location"
           description: Successful response
       security:
         - Oauth2:
@@ -508,37 +509,102 @@ paths:
         - projects
     parameters:
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
     patch:
-      description: Updates or inserts a document.
-      operationId: firestore.projects.databases.documents.patch
+      description: >-
+        Updates a field configuration. Currently, field updates apply only to
+
+        single field index configuration. However, calls to
+
+        FirestoreAdmin.UpdateField should provide a field mask to avoid
+
+        changing any configuration that the caller isn't aware of. The field mask
+
+        should be specified as: `{ paths: "index_config" }`.
+
+
+        This call returns a google.longrunning.Operation which may be used to
+
+        track the status of the field update. The metadata for
+
+        the operation will be the type FieldOperationMetadata.
+
+
+        To configure the default field settings for the database, use
+
+        the special `Field` with resource name:
+
+        `projects/{project_id}/databases/{database_id}/collectionGroups/__default__/fields/*`.
+      operationId: firestore.projects.databases.collectionGroups.fields.patch
       parameters:
         - description: >-
-            The resource name of the document, for example
+            A field name of the form
 
-            `projects/{project_id}/databases/{database_id}/documents/{document_path}`.
+            `projects/{project_id}/databases/{database_id}/collectionGroups/{collection_id}/fields/{field_path}`
+
+
+            A field path may be a simple field name, e.g. `address` or a path to fields
+
+            within map_value , e.g. `address.city`,
+
+            or a special field path. The only valid special field is `*`, which
+
+            represents any field.
+
+
+            Field paths may be quoted using ` (backtick). The only character that needs
+
+            to be escaped within a quoted field path is the backtick character itself,
+
+            escaped using a backslash. Special characters in field paths that
+
+            must be quoted include: `*`, `.`,
+
+            ``` (backtick), `[`, `]`, as well as any ascii symbolic characters.
+
+
+            Examples:
+
+            (Note: Comments here are written in markdown syntax, so there is an
+             additional layer of backticks to represent a code block)
+            `\`address.city\`` represents a field named `address.city`, not the map key
+
+            `city` in the field `address`.
+
+            `\`*\`` represents a field named `*`, not any field.
+
+
+            A special `Field` contains the default indexing settings for all fields.
+
+            This field's resource name is:
+
+            `projects/{project_id}/databases/{database_id}/collectionGroups/__default__/fields/*`
+
+            Indexes defined on this `Field` will be applied to all fields which do not
+
+            have their own `Field` index configuration.
           in: path
           name: name
           required: true
           schema:
             type: string
         - description: >-
-            When set to `true`, the target document must exist.
+            A mask, relative to the field. If specified, only configuration specified
 
-            When set to `false`, the target document must not exist.
+            by this field_mask will be updated in the field.
           in: query
-          name: currentDocument.exists
+          name: updateMask
           schema:
-            type: boolean
+            type: string
         - description: >-
             When set, the target document must exist and have been last updated at
 
@@ -575,13 +641,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Document"
+              $ref: "#/components/schemas/GoogleFirestoreAdminV1Field"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Document"
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
           description: Successful response
       security:
         - Oauth2:
@@ -640,16 +706,16 @@ paths:
         - projects
     parameters:
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
   "/v1/{name}/operations":
     get:
       description: >-
@@ -714,29 +780,29 @@ paths:
         - projects
     parameters:
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
   "/v1/{name}:cancel":
     parameters:
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: >-
         Starts asynchronous cancellation on a long-running operation.  The server
@@ -792,16 +858,16 @@ paths:
   "/v1/{name}:exportDocuments":
     parameters:
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: >-
         Exports a copy of all or a subset of documents from Google Cloud Firestore
@@ -856,16 +922,16 @@ paths:
   "/v1/{name}:importDocuments":
     parameters:
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: >-
         Imports documents into Google Cloud Firestore. Existing documents with the
@@ -984,16 +1050,16 @@ paths:
         - projects
     parameters:
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
   "/v1/{parent}/indexes":
     get:
       description: Lists composite indexes.
@@ -1048,16 +1114,16 @@ paths:
         - projects
     parameters:
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: >-
         Creates a composite index. This returns a google.longrunning.Operation
@@ -1207,16 +1273,16 @@ paths:
         - projects
     parameters:
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: Creates a new document.
       operationId: firestore.projects.databases.documents.createDocument
@@ -1285,16 +1351,16 @@ paths:
   "/v1/{parent}:listCollectionIds":
     parameters:
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: Lists all the collection IDs underneath a document.
       operationId: firestore.projects.databases.documents.listCollectionIds
@@ -1338,16 +1404,16 @@ paths:
   "/v1/{parent}:partitionQuery":
     parameters:
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: >-
         Partitions a query by returning partition cursors that can be used to run
@@ -1396,16 +1462,16 @@ paths:
   "/v1/{parent}:runQuery":
     parameters:
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: Runs a query.
       operationId: firestore.projects.databases.documents.runQuery

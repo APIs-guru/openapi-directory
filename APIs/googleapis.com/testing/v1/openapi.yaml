@@ -33,23 +33,23 @@ info:
 externalDocs:
   url: https://developers.google.com/cloud-test-lab/
 tags:
-  - name: projects
   - name: testEnvironmentCatalog
   - name: applicationDetailService
+  - name: projects
 paths:
   /v1/applicationDetailService/getApkDetails:
     parameters:
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
     post:
       description: Gets the details of an Android application APK.
       operationId: testing.applicationDetailService.getApkDetails
@@ -74,33 +74,19 @@ paths:
         - applicationDetailService
   "/v1/projects/{projectId}/testMatrices":
     parameters:
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
     post:
-      description: >-
-        Creates and runs a matrix of tests according to the given specifications.
-
-        Unsupported environments will be returned in the state UNSUPPORTED.
-
-        Matrices are limited to at most 200 supported executions.
-
-
-        May return any of the following canonical error codes:
-
-
-        - PERMISSION_DENIED - if the user is not authorized to write to project
-
-        - INVALID_ARGUMENT - if the request is malformed or if the matrix expands
-                             to more than 200 supported executions
+      description: "Creates and runs a matrix of tests according to the given specifications. Unsupported environments will be returned in the state UNSUPPORTED. Matrices are limited to at most 200 supported executions. May return any of the following canonical error codes: - PERMISSION_DENIED - if the user is not authorized to write to project - INVALID_ARGUMENT - if the request is malformed or if the matrix expands to more than 200 supported executions"
       operationId: testing.projects.testMatrices.create
       parameters:
         - description: The GCE project under which this job will run.
@@ -109,17 +95,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: >-
-            A string id used to detect duplicated requests.
-
-            Ids are automatically scoped to a project, so
-
-            users should ensure the ID is unique per-project.
-
-            A UUID is recommended.
-
-
-            Optional, but strongly recommended.
+        - description: A string id used to detect duplicated requests. Ids are automatically scoped to a project, so users should ensure the ID is unique per-project. A UUID is recommended. Optional, but strongly recommended.
           in: query
           name: requestId
           schema:
@@ -145,18 +121,7 @@ paths:
         - projects
   "/v1/projects/{projectId}/testMatrices/{testMatrixId}":
     get:
-      description: >-
-        Checks the status of a test matrix.
-
-
-        May return any of the following canonical error codes:
-
-
-        - PERMISSION_DENIED - if the user is not authorized to read project
-
-        - INVALID_ARGUMENT - if the request is malformed
-
-        - NOT_FOUND - if the Test Matrix does not exist
+      description: "Checks the status of a test matrix. May return any of the following canonical error codes: - PERMISSION_DENIED - if the user is not authorized to read project - INVALID_ARGUMENT - if the request is malformed - NOT_FOUND - if the Test Matrix does not exist"
       operationId: testing.projects.testMatrices.get
       parameters:
         - description: Cloud project that owns the test matrix.
@@ -190,47 +155,32 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
   "/v1/projects/{projectId}/testMatrices/{testMatrixId}:cancel":
     parameters:
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
     post:
-      description: >-
-        Cancels unfinished test executions in a test matrix.
-
-        This call returns immediately and cancellation proceeds asychronously.
-
-        If the matrix is already final, this operation will have no effect.
-
-
-        May return any of the following canonical error codes:
-
-
-        - PERMISSION_DENIED - if the user is not authorized to read project
-
-        - INVALID_ARGUMENT - if the request is malformed
-
-        - NOT_FOUND - if the Test Matrix does not exist
+      description: "Cancels unfinished test executions in a test matrix. This call returns immediately and cancellation proceeds asynchronously. If the matrix is already final, this operation will have no effect. May return any of the following canonical error codes: - PERMISSION_DENIED - if the user is not authorized to read project - INVALID_ARGUMENT - if the request is malformed - NOT_FOUND - if the Test Matrix does not exist"
       operationId: testing.projects.testMatrices.cancel
       parameters:
         - description: Cloud project that owns the test.
@@ -261,18 +211,7 @@ paths:
         - projects
   "/v1/testEnvironmentCatalog/{environmentType}":
     get:
-      description: >-
-        Gets the catalog of supported test environments.
-
-
-        May return any of the following canonical error codes:
-
-
-        - INVALID_ARGUMENT - if the request is malformed
-
-        - NOT_FOUND - if the environment type does not exist
-
-        - INTERNAL - if an internal error occurred
+      description: "Gets the catalog of supported test environments. May return any of the following canonical error codes: - INVALID_ARGUMENT - if the request is malformed - NOT_FOUND - if the environment type does not exist - INTERNAL - if an internal error occurred"
       operationId: testing.testEnvironmentCatalog.get
       parameters:
         - description: Required. The type of environment that should be listed.
@@ -312,17 +251,17 @@ paths:
       tags:
         - testEnvironmentCatalog
     parameters:
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
 components:
   parameters:
     _.xgafv:
@@ -410,28 +349,16 @@ components:
       description: A single Android device.
       properties:
         androidModelId:
-          description: >-
-            Required. The id of the Android device to be used.
-
-            Use the TestEnvironmentDiscoveryService to get supported options.
+          description: Required. The id of the Android device to be used. Use the TestEnvironmentDiscoveryService to get supported options.
           type: string
         androidVersionId:
-          description: >-
-            Required. The id of the Android OS version to be used.
-
-            Use the TestEnvironmentDiscoveryService to get supported options.
+          description: Required. The id of the Android OS version to be used. Use the TestEnvironmentDiscoveryService to get supported options.
           type: string
         locale:
-          description: >-
-            Required. The locale the test device used for testing.
-
-            Use the TestEnvironmentDiscoveryService to get supported options.
+          description: Required. The locale the test device used for testing. Use the TestEnvironmentDiscoveryService to get supported options.
           type: string
         orientation:
-          description: >-
-            Required. How the device is oriented during the test.
-
-            Use the TestEnvironmentDiscoveryService to get supported options.
+          description: Required. How the device is oriented during the test. Use the TestEnvironmentDiscoveryService to get supported options.
           type: string
       type: object
     AndroidDeviceCatalog:
@@ -461,23 +388,7 @@ components:
           type: array
       type: object
     AndroidInstrumentationTest:
-      description: >-
-        A test of an Android application that can control an Android component
-
-        independently of its normal lifecycle.
-
-        Android instrumentation tests run an application APK and test APK inside the
-
-        same process on a virtual or physical AndroidDevice.  They also specify
-
-        a test runner class, such as com.google.GoogleTestRunner, which can vary
-
-        on the specific instrumentation framework chosen.
-
-
-        See <http://developer.android.com/tools/testing/testing_android.html> for
-
-        more information on types of Android tests.
+      description: A test of an Android application that can control an Android component independently of its normal lifecycle. Android instrumentation tests run an application APK and test APK inside the same process on a virtual or physical AndroidDevice. They also specify a test runner class, such as com.google.GoogleTestRunner, which can vary on the specific instrumentation framework chosen. See for more information on types of Android tests.
       properties:
         appApk:
           $ref: "#/components/schemas/FileReference"
@@ -486,34 +397,10 @@ components:
           $ref: "#/components/schemas/AppBundle"
           description: A multi-apk app bundle for the application under test.
         appPackageId:
-          description: >-
-            The java package for the application under test.
-
-            The default value is determined by examining the application's manifest.
+          description: The java package for the application under test. The default value is determined by examining the application's manifest.
           type: string
         orchestratorOption:
-          description: >-
-            The option of whether running each test within its own invocation of
-
-            instrumentation with Android Test Orchestrator or not.
-
-            ** Orchestrator is only compatible with AndroidJUnitRunner version 1.0 or
-
-            higher! **
-
-            Orchestrator offers the following benefits:
-             - No shared state
-             - Crashes are isolated
-             - Logs are scoped per test
-
-            See
-
-            <https://developer.android.com/training/testing/junit-runner.html#using-android-test-orchestrator>
-
-            for more information about Android Test Orchestrator.
-
-
-            If not set, the test will be run without the orchestrator.
+          description: "The option of whether running each test within its own invocation of instrumentation with Android Test Orchestrator or not. ** Orchestrator is only compatible with AndroidJUnitRunner version 1.0 or higher! ** Orchestrator offers the following benefits: - No shared state - Crashes are isolated - Logs are scoped per test See for more information about Android Test Orchestrator. If not set, the test will be run without the orchestrator."
           enum:
             - ORCHESTRATOR_OPTION_UNSPECIFIED
             - USE_ORCHESTRATOR
@@ -526,73 +413,37 @@ components:
           $ref: "#/components/schemas/FileReference"
           description: Required. The APK containing the test code to be executed.
         testPackageId:
-          description: >-
-            The java package for the test to be executed.
-
-            The default value is determined by examining the application's manifest.
+          description: The java package for the test to be executed. The default value is determined by examining the application's manifest.
           type: string
         testRunnerClass:
-          description: >-
-            The InstrumentationTestRunner class.
-
-            The default value is determined by examining the application's manifest.
+          description: The InstrumentationTestRunner class. The default value is determined by examining the application's manifest.
           type: string
         testTargets:
-          description: >-
-            Each target must be fully qualified with the package name or class name,
-
-            in one of these formats:
-             - "package package_name"
-             - "class package_name.class_name"
-             - "class package_name.class_name#method_name"
-
-            If empty, all targets in the module will be run.
+          description: 'Each target must be fully qualified with the package name or class name, in one of these formats: - "package package_name" - "class package_name.class_name" - "class package_name.class_name#method_name" If empty, all targets in the module will be run.'
           items:
             type: string
           type: array
       type: object
     AndroidMatrix:
-      description: >-
-        A set of Android device configuration permutations is defined by the
-
-        the cross-product of the given axes. Internally, the given AndroidMatrix
-
-        will be expanded into a set of AndroidDevices.
-
-
-        Only supported permutations will be instantiated.  Invalid permutations
-
-        (e.g., incompatible models/versions) are ignored.
+      description: A set of Android device configuration permutations is defined by the the cross-product of the given axes. Internally, the given AndroidMatrix will be expanded into a set of AndroidDevices. Only supported permutations will be instantiated. Invalid permutations (e.g., incompatible models/versions) are ignored.
       properties:
         androidModelIds:
-          description: >-
-            Required. The ids of the set of Android device to be used.
-
-            Use the TestEnvironmentDiscoveryService to get supported options.
+          description: Required. The ids of the set of Android device to be used. Use the TestEnvironmentDiscoveryService to get supported options.
           items:
             type: string
           type: array
         androidVersionIds:
-          description: >-
-            Required. The ids of the set of Android OS version to be used.
-
-            Use the TestEnvironmentDiscoveryService to get supported options.
+          description: Required. The ids of the set of Android OS version to be used. Use the TestEnvironmentDiscoveryService to get supported options.
           items:
             type: string
           type: array
         locales:
-          description: >-
-            Required. The set of locales the test device will enable for testing.
-
-            Use the TestEnvironmentDiscoveryService to get supported options.
+          description: Required. The set of locales the test device will enable for testing. Use the TestEnvironmentDiscoveryService to get supported options.
           items:
             type: string
           type: array
         orientations:
-          description: >-
-            Required. The set of orientations to test with.
-
-            Use the TestEnvironmentDiscoveryService to get supported options.
+          description: Required. The set of orientations to test with. Use the TestEnvironmentDiscoveryService to get supported options.
           items:
             type: string
           type: array
@@ -601,16 +452,10 @@ components:
       description: A description of an Android device tests may be run on.
       properties:
         brand:
-          description: >-
-            The company that this device is branded with.
-
-            Example: "Google", "Samsung".
+          description: 'The company that this device is branded with. Example: "Google", "Samsung".'
           type: string
         codename:
-          description: >-
-            The name of the industrial design.
-
-            This corresponds to android.os.Build.DEVICE.
+          description: The name of the industrial design. This corresponds to android.os.Build.DEVICE.
           type: string
         form:
           description: Whether this device is virtual or physical.
@@ -629,31 +474,19 @@ components:
             - WEARABLE
           type: string
         id:
-          description: >-
-            The unique opaque id for this model.
-
-            Use this for invoking the TestExecutionService.
+          description: The unique opaque id for this model. Use this for invoking the TestExecutionService.
           type: string
         lowFpsVideoRecording:
-          description: >-
-            True if and only if tests with this model are recorded by stitching
-
-            together screenshots. See use_low_spec_video_recording in device config.
+          description: True if and only if tests with this model are recorded by stitching together screenshots. See use_low_spec_video_recording in device config.
           type: boolean
         manufacturer:
           description: The manufacturer of this device.
           type: string
         name:
-          description: >-
-            The human-readable marketing name for this device model.
-
-            Examples: "Nexus 5", "Galaxy S5".
+          description: 'The human-readable marketing name for this device model. Examples: "Nexus 5", "Galaxy S5".'
           type: string
         screenDensity:
-          description: >-
-            Screen density in DPI.
-
-            This corresponds to ro.sf.lcd_density
+          description: Screen density in DPI. This corresponds to ro.sf.lcd_density
           format: int32
           type: integer
         screenX:
@@ -665,21 +498,7 @@ components:
           format: int32
           type: integer
         supportedAbis:
-          description: >-
-            The list of supported ABIs for this device.
-
-            This corresponds to either android.os.Build.SUPPORTED_ABIS (for API level
-
-            21 and above) or android.os.Build.CPU_ABI/CPU_ABI2.
-
-            The most preferred ABI is the first element in the list.
-
-
-            Elements are optionally prefixed by "version_id:" (where version_id is
-
-            the id of an AndroidVersion), denoting an ABI that is supported only on
-
-            a particular version.
+          description: The list of supported ABIs for this device. This corresponds to either android.os.Build.SUPPORTED_ABIS (for API level 21 and above) or android.os.Build.CPU_ABI/CPU_ABI2. The most preferred ABI is the first element in the list. Elements are optionally prefixed by "version_id:" (where version_id is the id of an AndroidVersion), denoting an ABI that is supported only on a particular version.
           items:
             type: string
           type: array
@@ -689,25 +508,16 @@ components:
             type: string
           type: array
         tags:
-          description: >-
-            Tags for this dimension.
-
-            Examples: "default", "preview", "deprecated".
+          description: 'Tags for this dimension. Examples: "default", "preview", "deprecated".'
           items:
             type: string
           type: array
         thumbnailUrl:
-          description: >-
-            URL of a thumbnail image (photo) of the device.
-
-            e.g. https://lh3.googleusercontent.com/90WcauuJiCYABEl8U0lcZeuS5STUbf2yW...
+          description: URL of a thumbnail image (photo) of the device. e.g. https://lh3.googleusercontent.com/90WcauuJiCYABEl8U0lcZeuS5STUbf2yW...
           type: string
       type: object
     AndroidRoboTest:
-      description: >-
-        A test of an android application that explores the application on a virtual
-
-        or physical Android Device, finding culprits and crashes as it goes.
+      description: A test of an android application that explores the application on a virtual or physical Android Device, finding culprits and crashes as it goes.
       properties:
         appApk:
           $ref: "#/components/schemas/FileReference"
@@ -719,52 +529,26 @@ components:
           description: The initial activity that should be used to start the app.
           type: string
         appPackageId:
-          description: >-
-            The java package for the application under test.
-
-            The default value is determined by examining the application's manifest.
+          description: The java package for the application under test. The default value is determined by examining the application's manifest.
           type: string
         maxDepth:
-          description: >-
-            The max depth of the traversal stack Robo can explore. Needs to be at least
-
-            2 to make Robo explore the app beyond the first activity.
-
-            Default is 50.
+          description: The max depth of the traversal stack Robo can explore. Needs to be at least 2 to make Robo explore the app beyond the first activity. Default is 50.
           format: int32
           type: integer
         maxSteps:
-          description: >-
-            The max number of steps Robo can execute.
-
-            Default is no limit.
+          description: The max number of steps Robo can execute. Default is no limit.
           format: int32
           type: integer
         roboDirectives:
-          description: >-
-            A set of directives Robo should apply during the crawl.
-
-            This allows users to customize the crawl. For example, the username and
-
-            password for a test account can be provided.
+          description: A set of directives Robo should apply during the crawl. This allows users to customize the crawl. For example, the username and password for a test account can be provided.
           items:
             $ref: "#/components/schemas/RoboDirective"
           type: array
         roboScript:
           $ref: "#/components/schemas/FileReference"
-          description: >-
-            A JSON file with a sequence of actions Robo should perform as a prologue
-
-            for the crawl.
+          description: A JSON file with a sequence of actions Robo should perform as a prologue for the crawl.
         startingIntents:
-          description: >-
-            The intents used to launch the app for the crawl.
-
-            If none are provided, then the main launcher activity is launched.
-
-            If some are provided, then only those provided are launched (the main
-
-            launcher activity must be provided explicitly).
+          description: The intents used to launch the app for the crawl. If none are provided, then the main launcher activity is launched. If some are provided, then only those provided are launched (the main launcher activity must be provided explicitly).
           items:
             $ref: "#/components/schemas/RoboStartingIntent"
           type: array
@@ -784,12 +568,7 @@ components:
           type: array
       type: object
     AndroidTestLoop:
-      description: >-
-        A test of an Android Application with a Test Loop.
-
-        The intent \<intent-name\> will be implicitly added, since Games is the only
-
-        user of this api, for the time being.
+      description: A test of an Android Application with a Test Loop. The intent \ will be implicitly added, since Games is the only user of this api, for the time being.
       properties:
         appApk:
           $ref: "#/components/schemas/FileReference"
@@ -798,36 +577,15 @@ components:
           $ref: "#/components/schemas/AppBundle"
           description: A multi-apk app bundle for the application under test.
         appPackageId:
-          description: >-
-            The java package for the application under test.
-
-            The default is determined by examining the application's manifest.
+          description: The java package for the application under test. The default is determined by examining the application's manifest.
           type: string
         scenarioLabels:
-          description: >-
-            The list of scenario labels that should be run during the test.
-
-            The scenario labels should map to labels defined in the application's
-
-            manifest. For example, player_experience and
-
-            com.google.test.loops.player_experience add all of the loops labeled in the
-
-            manifest with the com.google.test.loops.player_experience name to the
-
-            execution.
-
-            Scenarios can also be specified in the scenarios field.
+          description: The list of scenario labels that should be run during the test. The scenario labels should map to labels defined in the application's manifest. For example, player_experience and com.google.test.loops.player_experience add all of the loops labeled in the manifest with the com.google.test.loops.player_experience name to the execution. Scenarios can also be specified in the scenarios field.
           items:
             type: string
           type: array
         scenarios:
-          description: >-
-            The list of scenarios that should be run during the test.
-
-            The default is all test loops, derived from the application's
-
-            manifest.
+          description: The list of scenarios that should be run during the test. The default is all test loops, derived from the application's manifest.
           items:
             format: int32
             type: integer
@@ -837,43 +595,28 @@ components:
       description: A version of the Android OS.
       properties:
         apiLevel:
-          description: >-
-            The API level for this Android version.
-
-            Examples: 18, 19.
+          description: "The API level for this Android version. Examples: 18, 19."
           format: int32
           type: integer
         codeName:
-          description: >-
-            The code name for this Android version.
-
-            Examples: "JellyBean", "KitKat".
+          description: 'The code name for this Android version. Examples: "JellyBean", "KitKat".'
           type: string
         distribution:
           $ref: "#/components/schemas/Distribution"
           description: Market share for this version.
         id:
-          description: >-
-            An opaque id for this Android version.
-
-            Use this id to invoke the TestExecutionService.
+          description: An opaque id for this Android version. Use this id to invoke the TestExecutionService.
           type: string
         releaseDate:
           $ref: "#/components/schemas/Date"
           description: The date this Android version became available in the market.
         tags:
-          description: >-
-            Tags for this dimension.
-
-            Examples: "default", "preview", "deprecated".
+          description: 'Tags for this dimension. Examples: "default", "preview", "deprecated".'
           items:
             type: string
           type: array
         versionString:
-          description: >-
-            A string representing this version of the Android OS.
-
-            Examples: "4.3", "4.4".
+          description: 'A string representing this version of the Android OS. Examples: "4.3", "4.4".'
           type: string
       type: object
     Apk:
@@ -883,26 +626,17 @@ components:
           $ref: "#/components/schemas/FileReference"
           description: The path to an APK to be installed on the device before the test begins.
         packageName:
-          description: >-
-            The java package for the APK to be installed.
-
-            Value is determined by examining the application's manifest.
+          description: The java package for the APK to be installed. Value is determined by examining the application's manifest.
           type: string
       type: object
     ApkDetail:
-      description: >-
-        Android application details based on application manifest and apk archive
-
-        contents.
+      description: Android application details based on application manifest and apk archive contents.
       properties:
         apkManifest:
           $ref: "#/components/schemas/ApkManifest"
       type: object
     ApkManifest:
-      description: >-
-        An Android app manifest. See
-
-        http://developer.android.com/guide/topics/manifest/manifest-intro.html
+      description: An Android app manifest. See http://developer.android.com/guide/topics/manifest/manifest-intro.html
       properties:
         applicationLabel:
           description: User-readable name for the application.
@@ -920,10 +654,7 @@ components:
           format: int32
           type: integer
         packageName:
-          description: >-
-            Full Java-style package name for this application, e.g.
-
-            "com.example.foo".
+          description: Full Java-style package name for this application, e.g. "com.example.foo".
           type: string
         targetSdkVersion:
           description: Specifies the API Level on which the application is designed to run.
@@ -931,14 +662,7 @@ components:
           type: integer
       type: object
     AppBundle:
-      description: >-
-        An Android App Bundle file format, containing a BundleConfig.pb file,
-
-        a base module directory, zero or more dynamic feature module directories.
-
-        <p>See https://developer.android.com/guide/app-bundle/build for guidance on
-
-        building App Bundles.
+      description: An Android App Bundle file format, containing a BundleConfig.pb file, a base module directory, zero or more dynamic feature module directories. See https://developer.android.com/guide/app-bundle/build for guidance on building App Bundles.
       properties:
         bundleLocation:
           $ref: "#/components/schemas/FileReference"
@@ -948,12 +672,7 @@ components:
       description: Response containing the current state of the specified test matrix.
       properties:
         testState:
-          description: >-
-            The current rolled-up state of the test matrix.
-
-            If this state is already final, then the cancelation request will
-
-            have no effect.
+          description: The current rolled-up state of the test matrix. If this state is already final, then the cancelation request will have no effect.
           enum:
             - TEST_STATE_UNSPECIFIED
             - VALIDATING
@@ -981,10 +700,7 @@ components:
           type: string
       type: object
     ClientInfoDetail:
-      description: >-
-        Key-value pair of detailed information about the client which invoked the
-
-        test. Examples: {'Version', '1.0'}, {'Release Track', 'BETA'}.
+      description: "Key-value pair of detailed information about the client which invoked the test. Examples: {'Version', '1.0'}, {'Release Track', 'BETA'}."
       properties:
         key:
           description: Required. The key of detailed client information.
@@ -994,46 +710,18 @@ components:
           type: string
       type: object
     Date:
-      description: >-
-        Represents a whole or partial calendar date, e.g. a birthday. The time of day
-
-        and time zone are either specified elsewhere or are not significant. The date
-
-        is relative to the Proleptic Gregorian Calendar. This can represent:
-
-
-        * A full date, with non-zero year, month and day values
-
-        * A month and day value, with a zero year, e.g. an anniversary
-
-        * A year on its own, with zero month and day values
-
-        * A year and month value, with a zero day, e.g. a credit card expiration date
-
-
-        Related types are google.type.TimeOfDay and `google.protobuf.Timestamp`.
+      description: "Represents a whole or partial calendar date, e.g. a birthday. The time of day and time zone are either specified elsewhere or are not significant. The date is relative to the Proleptic Gregorian Calendar. This can represent: * A full date, with non-zero year, month and day values * A month and day value, with a zero year, e.g. an anniversary * A year on its own, with zero month and day values * A year and month value, with a zero day, e.g. a credit card expiration date Related types are google.type.TimeOfDay and `google.protobuf.Timestamp`."
       properties:
         day:
-          description: >-
-            Day of month. Must be from 1 to 31 and valid for the year and month, or 0
-
-            if specifying a year by itself or a year and month where the day is not
-
-            significant.
+          description: Day of month. Must be from 1 to 31 and valid for the year and month, or 0 if specifying a year by itself or a year and month where the day is not significant.
           format: int32
           type: integer
         month:
-          description: >-
-            Month of year. Must be from 1 to 12, or 0 if specifying a year without a
-
-            month and day.
+          description: Month of year. Must be from 1 to 12, or 0 if specifying a year without a month and day.
           format: int32
           type: integer
         year:
-          description: >-
-            Year of date. Must be from 1 to 9999, or 0 if specifying a date without
-
-            a year.
+          description: Year of date. Must be from 1 to 9999, or 0 if specifying a date without a year.
           format: int32
           type: integer
       type: object
@@ -1075,16 +763,10 @@ components:
           type: array
       type: object
     Distribution:
-      description: >-
-        Data about the relative number of devices running a
-
-        given configuration of the Android platform.
+      description: Data about the relative number of devices running a given configuration of the Android platform.
       properties:
         marketShare:
-          description: >-
-            Output only. The estimated fraction (0-1) of the total market with this
-
-            configuration.
+          description: Output only. The estimated fraction (0-1) of the total market with this configuration.
           format: double
           type: number
         measurementTime:
@@ -1107,10 +789,7 @@ components:
       properties:
         androidDeviceList:
           $ref: "#/components/schemas/AndroidDeviceList"
-          description: >-
-            A list of Android devices; the test will be run only on the specified
-
-            devices.
+          description: A list of Android devices; the test will be run only on the specified devices.
         androidMatrix:
           $ref: "#/components/schemas/AndroidMatrix"
           description: A matrix of Android devices.
@@ -1132,12 +811,7 @@ components:
       description: A reference to a file, used for user inputs.
       properties:
         gcsPath:
-          description: >-
-            A path to a file in Google Cloud Storage.
-
-            Example: gs://build-app-1414623860166/app%40debug-unaligned.apk
-
-            These paths are expected to be url encoded (percent encoding)
+          description: "A path to a file in Google Cloud Storage. Example: gs://build-app-1414623860166/app%40debug-unaligned.apk These paths are expected to be url encoded (percent encoding)"
           type: string
       type: object
     GetApkDetailsResponse:
@@ -1148,82 +822,47 @@ components:
           description: Details of the Android APK.
       type: object
     GoogleAuto:
-      description: >-
-        Enables automatic Google account login.
-
-        If set, the service automatically generates a Google test account and adds
-
-        it to the device, before executing the test. Note that test accounts might be
-
-        reused.
-
-        Many applications show their full set of functionalities when an account is
-
-        present on the device. Logging into the device with these generated accounts
-
-        allows testing more functionalities.
+      description: Enables automatic Google account login. If set, the service automatically generates a Google test account and adds it to the device, before executing the test. Note that test accounts might be reused. Many applications show their full set of functionalities when an account is present on the device. Logging into the device with these generated accounts allows testing more functionalities.
       properties: {}
       type: object
     GoogleCloudStorage:
       description: A storage location within Google cloud storage (GCS).
       properties:
         gcsPath:
-          description: >-
-            Required. The path to a directory in GCS that will
-
-            eventually contain the results for this test.
-
-            The requesting user must have write access on the bucket in the supplied
-
-            path.
+          description: Required. The path to a directory in GCS that will eventually contain the results for this test. The requesting user must have write access on the bucket in the supplied path.
           type: string
       type: object
     IntentFilter:
-      description: >-
-        The <intent-filter> section of an <activity> tag.
-
-        https://developer.android.com/guide/topics/manifest/intent-filter-element.html
+      description: The section of an tag. https://developer.android.com/guide/topics/manifest/intent-filter-element.html
       properties:
         actionNames:
-          description: The android:name value of the <action> tag.
+          description: The android:name value of the tag.
           items:
             type: string
           type: array
         categoryNames:
-          description: The android:name value of the <category> tag.
+          description: The android:name value of the tag.
           items:
             type: string
           type: array
         mimeType:
-          description: The android:mimeType value of the <data> tag.
+          description: The android:mimeType value of the tag.
           type: string
       type: object
     IosDevice:
       description: A single iOS device.
       properties:
         iosModelId:
-          description: >-
-            Required. The id of the iOS device to be used.
-
-            Use the TestEnvironmentDiscoveryService to get supported options.
+          description: Required. The id of the iOS device to be used. Use the TestEnvironmentDiscoveryService to get supported options.
           type: string
         iosVersionId:
-          description: >-
-            Required. The id of the iOS major software version to be used.
-
-            Use the TestEnvironmentDiscoveryService to get supported options.
+          description: Required. The id of the iOS major software version to be used. Use the TestEnvironmentDiscoveryService to get supported options.
           type: string
         locale:
-          description: >-
-            Required. The locale the test device used for testing.
-
-            Use the TestEnvironmentDiscoveryService to get supported options.
+          description: Required. The locale the test device used for testing. Use the TestEnvironmentDiscoveryService to get supported options.
           type: string
         orientation:
-          description: >-
-            Required. How the device is oriented during the test.
-
-            Use the TestEnvironmentDiscoveryService to get supported options.
+          description: Required. How the device is oriented during the test. Use the TestEnvironmentDiscoveryService to get supported options.
           type: string
       type: object
     IosDeviceCatalog:
@@ -1258,18 +897,10 @@ components:
           type: array
       type: object
     IosModel:
-      description: >-
-        A description of an iOS device tests may be run on.
-
-        Next tag: 13
+      description: "A description of an iOS device tests may be run on. Next tag: 13"
       properties:
         deviceCapabilities:
-          description: >-
-            Device capabilities.
-
-            Copied from
-
-            https://developer.apple.com/library/archive/documentation/DeviceInformation/Reference/iOSDeviceCompatibility/DeviceCompatibilityMatrix/DeviceCompatibilityMatrix.html
+          description: Device capabilities. Copied from https://developer.apple.com/library/archive/documentation/DeviceInformation/Reference/iOSDeviceCompatibility/DeviceCompatibilityMatrix/DeviceCompatibilityMatrix.html
           items:
             type: string
           type: array
@@ -1282,16 +913,10 @@ components:
             - WEARABLE
           type: string
         id:
-          description: >-
-            The unique opaque id for this model.
-
-            Use this for invoking the TestExecutionService.
+          description: The unique opaque id for this model. Use this for invoking the TestExecutionService.
           type: string
         name:
-          description: >-
-            The human-readable name for this device model.
-
-            Examples: "iPhone 4s", "iPad Mini 2".
+          description: 'The human-readable name for this device model. Examples: "iPhone 4s", "iPad Mini 2".'
           type: string
         screenDensity:
           description: Screen density in DPI.
@@ -1311,10 +936,7 @@ components:
             type: string
           type: array
         tags:
-          description: >-
-            Tags for this dimension.
-
-            Examples: "default", "preview", "deprecated".
+          description: 'Tags for this dimension. Examples: "default", "preview", "deprecated".'
           items:
             type: string
           type: array
@@ -1334,12 +956,7 @@ components:
           type: array
       type: object
     IosTestLoop:
-      description: >-
-        A test of an iOS application that implements one or more game loop scenarios.
-
-        This test type accepts an archived application (.ipa file) and a list of
-
-        integer scenarios that will be executed on the app sequentially.
+      description: A test of an iOS application that implements one or more game loop scenarios. This test type accepts an archived application (.ipa file) and a list of integer scenarios that will be executed on the app sequentially.
       properties:
         appBundleId:
           description: Output only. The bundle id for the application under test.
@@ -1348,10 +965,7 @@ components:
           $ref: "#/components/schemas/FileReference"
           description: Required. The .ipa of the application to test.
         scenarios:
-          description: >-
-            The list of scenarios that should be run during the test. Defaults to the
-
-            single scenario 0 if unspecified.
+          description: The list of scenarios that should be run during the test. Defaults to the single scenario 0 if unspecified.
           items:
             format: int32
             type: integer
@@ -1361,37 +975,21 @@ components:
       description: A description of how to set up an iOS device prior to running the test.
       properties:
         networkProfile:
-          description: >-
-            The network traffic profile used for running the test.
-
-            Available network profiles can be queried by using the
-
-            NETWORK_CONFIGURATION environment type when calling
-
-            TestEnvironmentDiscoveryService.GetTestEnvironmentCatalog.
+          description: The network traffic profile used for running the test. Available network profiles can be queried by using the NETWORK_CONFIGURATION environment type when calling TestEnvironmentDiscoveryService.GetTestEnvironmentCatalog.
           type: string
       type: object
     IosVersion:
       description: An iOS version.
       properties:
         id:
-          description: >-
-            An opaque id for this iOS version.
-
-            Use this id to invoke the TestExecutionService.
+          description: An opaque id for this iOS version. Use this id to invoke the TestExecutionService.
           type: string
         majorVersion:
-          description: >-
-            An integer representing the major iOS version.
-
-            Examples: "8", "9".
+          description: 'An integer representing the major iOS version. Examples: "8", "9".'
           format: int32
           type: integer
         minorVersion:
-          description: >-
-            An integer representing the minor iOS version.
-
-            Examples: "1", "2".
+          description: 'An integer representing the minor iOS version. Examples: "1", "2".'
           format: int32
           type: integer
         supportedXcodeVersionIds:
@@ -1400,67 +998,29 @@ components:
             type: string
           type: array
         tags:
-          description: >-
-            Tags for this dimension.
-
-            Examples: "default", "preview", "deprecated".
+          description: 'Tags for this dimension. Examples: "default", "preview", "deprecated".'
           items:
             type: string
           type: array
       type: object
     IosXcTest:
-      description: >-
-        A test of an iOS application that uses the XCTest framework.
-
-        Xcode supports the option to "build for testing", which generates an
-
-        .xctestrun file that contains a test specification (arguments, test methods,
-
-        etc). This test type accepts a zip file containing the .xctestrun file and
-
-        the corresponding contents of the Build/Products directory that contains all
-
-        the binaries needed to run the tests.
+      description: A test of an iOS application that uses the XCTest framework. Xcode supports the option to "build for testing", which generates an .xctestrun file that contains a test specification (arguments, test methods, etc). This test type accepts a zip file containing the .xctestrun file and the corresponding contents of the Build/Products directory that contains all the binaries needed to run the tests.
       properties:
         appBundleId:
           description: Output only. The bundle id for the application under test.
           type: string
         testSpecialEntitlements:
-          description: >-
-            The option to test special app entitlements. Setting this would re-sign the
-
-            app having special entitlements with an explicit application-identifier.
-
-            Currently supports testing aps-environment entitlement.
+          description: The option to test special app entitlements. Setting this would re-sign the app having special entitlements with an explicit application-identifier. Currently supports testing aps-environment entitlement.
           type: boolean
         testsZip:
           $ref: "#/components/schemas/FileReference"
-          description: >-
-            Required. The .zip containing the .xctestrun file and the contents of the
-
-            DerivedData/Build/Products directory.
-
-            The .xctestrun file in this zip is ignored if the xctestrun field is
-
-            specified.
+          description: Required. The .zip containing the .xctestrun file and the contents of the DerivedData/Build/Products directory. The .xctestrun file in this zip is ignored if the xctestrun field is specified.
         xcodeVersion:
-          description: >-
-            The Xcode version that should be used for the test.
-
-            Use the TestEnvironmentDiscoveryService to get supported options.
-
-            Defaults to the latest Xcode version Firebase Test Lab supports.
+          description: The Xcode version that should be used for the test. Use the TestEnvironmentDiscoveryService to get supported options. Defaults to the latest Xcode version Firebase Test Lab supports.
           type: string
         xctestrun:
           $ref: "#/components/schemas/FileReference"
-          description: >-
-            An .xctestrun file that will override the .xctestrun file in the
-
-            tests zip. Because the .xctestrun file contains environment variables along
-
-            with test methods to run and/or ignore, this can be useful for sharding
-
-            tests. Default is taken from the tests zip.
+          description: An .xctestrun file that will override the .xctestrun file in the tests zip. Because the .xctestrun file contains environment variables along with test methods to run and/or ignore, this can be useful for sharding tests. Default is taken from the tests zip.
       type: object
     LauncherActivityIntent:
       description: Specifies an intent that starts the main launcher activity.
@@ -1470,52 +1030,25 @@ components:
       description: A location/region designation for language.
       properties:
         id:
-          description: >-
-            The id for this locale.
-
-            Example: "en_US".
+          description: 'The id for this locale. Example: "en_US".'
           type: string
         name:
-          description: >-
-            A human-friendly name for this language/locale.
-
-            Example: "English".
+          description: 'A human-friendly name for this language/locale. Example: "English".'
           type: string
         region:
-          description: >-
-            A human-friendly string representing the region for this
-
-            locale. Example: "United States". Not present for every locale.
+          description: 'A human-friendly string representing the region for this locale. Example: "United States". Not present for every locale.'
           type: string
         tags:
-          description: >-
-            Tags for this dimension.
-
-            Example: "default".
+          description: 'Tags for this dimension. Example: "default".'
           items:
             type: string
           type: array
       type: object
     ManualSharding:
-      description: >-
-        Shards test cases into the specified groups of packages, classes, and/or
-
-        methods.
-
-
-        With manual sharding enabled, specifying test targets via
-
-        environment_variables or in InstrumentationTest is invalid.
+      description: Shards test cases into the specified groups of packages, classes, and/or methods. With manual sharding enabled, specifying test targets via environment_variables or in InstrumentationTest is invalid.
       properties:
         testTargetsForShard:
-          description: >-
-            Required. Group of packages, classes, and/or test methods to be run for
-
-            each shard. When any physical devices are selected,  the number of
-
-            test_targets_for_shard must be >= 1 and <= 50. When no physical devices are
-
-            selected, the number must be >= 1 and <= 250.
+          description: Required. Group of packages, classes, and/or test methods to be run for each shard. When any physical devices are selected, the number of test_targets_for_shard must be >= 1 and <= 50. When no physical devices are selected, the number must be >= 1 and <= 250.
           items:
             $ref: "#/components/schemas/TestTargetsForShard"
           type: array
@@ -1546,38 +1079,20 @@ components:
           $ref: "#/components/schemas/FileReference"
           description: Required. Opaque Binary Blob (OBB) file(s) to install on the device.
         obbFileName:
-          description: >-
-            Required. OBB file name which must conform to the format as specified by
-
-            Android
-
-            e.g. [main|patch].0300110.com.example.android.obb
-
-            which will be installed into
-              \<shared-storage\>/Android/obb/\<package-name\>/
-            on the device.
+          description: Required. OBB file name which must conform to the format as specified by Android e.g. [main|patch].0300110.com.example.android.obb which will be installed into \/Android/obb/\/ on the device.
           type: string
       type: object
     Orientation:
       description: Screen orientation of the device.
       properties:
         id:
-          description: >-
-            The id for this orientation.
-
-            Example: "portrait".
+          description: 'The id for this orientation. Example: "portrait".'
           type: string
         name:
-          description: >-
-            A human-friendly name for this orientation.
-
-            Example: "portrait".
+          description: 'A human-friendly name for this orientation. Example: "portrait".'
           type: string
         tags:
-          description: >-
-            Tags for this dimension.
-
-            Example: "default".
+          description: 'Tags for this dimension. Example: "default".'
           items:
             type: string
           type: array
@@ -1586,12 +1101,7 @@ components:
       description: The currently provided software environment on the devices under test.
       properties:
         orchestratorVersion:
-          description: >-
-            A string representing the current version of Android Test
-
-            Orchestrator that is provided by TestExecutionService.
-
-            Example: "1.0.2 beta".
+          description: 'A string representing the current version of Android Test Orchestrator that is provided by TestExecutionService. Example: "1.0.2 beta".'
           type: string
       type: object
     RegularFile:
@@ -1601,38 +1111,7 @@ components:
           $ref: "#/components/schemas/FileReference"
           description: Required. The source file.
         devicePath:
-          description: >-
-            Required. Where to put the content on the device. Must be an absolute,
-
-            allowlisted path. If the file exists, it will be replaced.
-
-            The following device-side directories and any of their subdirectories are
-
-            allowlisted:
-
-            <p>${EXTERNAL_STORAGE}, /sdcard, or /storage</p>
-
-            <p>${ANDROID_DATA}/local/tmp, or /data/local/tmp</p>
-
-            <p>Specifying a path outside of these directory trees is invalid.
-
-
-            <p> The paths /sdcard and /data will be made available and treated as
-
-            implicit path substitutions. E.g. if /sdcard on a particular device does
-
-            not map to external storage, the system will replace it with the external
-
-            storage path prefix for that device and copy the file there.
-
-
-            <p> It is strongly advised to use the <a href=
-
-            "http://developer.android.com/reference/android/os/Environment.html">
-
-            Environment API</a> in app and test code to access files on the device in a
-
-            portable way.
+          description: "Required. Where to put the content on the device. Must be an absolute, allowlisted path. If the file exists, it will be replaced. The following device-side directories and any of their subdirectories are allowlisted: ${EXTERNAL_STORAGE}, /sdcard, or /storage ${ANDROID_DATA}/local/tmp, or /data/local/tmp Specifying a path outside of these directory trees is invalid. The paths /sdcard and /data will be made available and treated as implicit path substitutions. E.g. if /sdcard on a particular device does not map to external storage, the system will replace it with the external storage path prefix for that device and copy the file there. It is strongly advised to use the Environment API in app and test code to access files on the device in a portable way."
           type: string
       type: object
     ResultStorage:
@@ -1649,25 +1128,13 @@ components:
           description: Output only. The tool results execution that results are written to.
         toolResultsHistory:
           $ref: "#/components/schemas/ToolResultsHistory"
-          description: >-
-            The tool results history that contains the tool results execution that
-
-            results are written to.
-
-
-            If not provided, the service will choose an appropriate value.
+          description: The tool results history that contains the tool results execution that results are written to. If not provided, the service will choose an appropriate value.
       type: object
     RoboDirective:
-      description: >-
-        Directs Robo to interact with a specific UI element if it is encountered
-
-        during the crawl. Currently, Robo can perform text entry or element click.
+      description: Directs Robo to interact with a specific UI element if it is encountered during the crawl. Currently, Robo can perform text entry or element click.
       properties:
         actionType:
-          description: >-
-            Required. The type of action that Robo should perform on the specified
-
-            element.
+          description: Required. The type of action that Robo should perform on the specified element.
           enum:
             - ACTION_TYPE_UNSPECIFIED
             - SINGLE_CLICK
@@ -1675,23 +1142,10 @@ components:
             - IGNORE
           type: string
         inputText:
-          description: >-
-            The text that Robo is directed to set. If left empty, the directive will be
-
-            treated as a CLICK on the element matching the resource_name.
+          description: The text that Robo is directed to set. If left empty, the directive will be treated as a CLICK on the element matching the resource_name.
           type: string
         resourceName:
-          description: >-
-            Required. The android resource name of the target UI element.
-
-            For example,
-               in Java: R.string.foo
-               in xml: @string/foo
-            Only the "foo" part is needed.
-
-            Reference doc:
-
-            https://developer.android.com/guide/topics/resources/accessing-resources.html
+          description: 'Required. The android resource name of the target UI element. For example, in Java: R.string.foo in xml: @string/foo Only the "foo" part is needed. Reference doc: https://developer.android.com/guide/topics/resources/accessing-resources.html'
           type: string
       type: object
     RoboStartingIntent:
@@ -1728,10 +1182,7 @@ components:
       properties:
         manualSharding:
           $ref: "#/components/schemas/ManualSharding"
-          description: >-
-            Shards test cases into the specified groups of packages, classes, and/or
-
-            methods.
+          description: Shards test cases into the specified groups of packages, classes, and/or methods.
         uniformSharding:
           $ref: "#/components/schemas/UniformSharding"
           description: Uniformly shards test cases given a total number of shards.
@@ -1740,10 +1191,7 @@ components:
       description: A starting intent specified by an action, uri, and categories.
       properties:
         action:
-          description: >-
-            Action name.
-
-            Required for START_ACTIVITY.
+          description: Action name. Required for START_ACTIVITY.
           type: string
         categories:
           description: Intent categories to set on the intent.
@@ -1757,10 +1205,7 @@ components:
     SystraceSetup:
       properties:
         durationSeconds:
-          description: >-
-            Systrace duration in seconds.
-
-            Should be between 1 and 30 seconds. 0 disables systrace.
+          description: Systrace duration in seconds. Should be between 1 and 30 seconds. 0 disables systrace.
           format: int32
           type: integer
       type: object
@@ -1768,21 +1213,10 @@ components:
       description: Additional details about the progress of the running test.
       properties:
         errorMessage:
-          description: >-
-            Output only. If the TestState is ERROR, then this string will contain
-
-            human-readable details about the error.
+          description: Output only. If the TestState is ERROR, then this string will contain human-readable details about the error.
           type: string
         progressMessages:
-          description: >-
-            Output only. Human-readable, detailed descriptions of the test's progress.
-
-            For example: "Provisioning a device", "Starting Test".
-
-
-            During the course of execution new data may be appended
-
-            to the end of progress_messages.
+          description: "Output only. Human-readable, detailed descriptions of the test's progress. For example: \"Provisioning a device\", \"Starting Test\". During the course of execution new data may be appended to the end of progress_messages."
           items:
             type: string
           type: array
@@ -1825,10 +1259,7 @@ components:
           $ref: "#/components/schemas/Shard"
           description: Output only. Details about the shard.
         state:
-          description: >-
-            Output only. Indicates the current progress of the test execution
-
-            (e.g., FINISHED).
+          description: Output only. Indicates the current progress of the test execution (e.g., FINISHED).
           enum:
             - TEST_STATE_UNSPECIFIED
             - VALIDATING
@@ -1857,12 +1288,7 @@ components:
           description: Output only. Where the results for this execution are written.
       type: object
     TestMatrix:
-      description: >-
-        TestMatrix captures all details about a test. It contains the environment
-
-        configuration, test specification, test executions and overall state and
-
-        outcome.
+      description: TestMatrix captures all details about a test. It contains the environment configuration, test specification, test executions and overall state and outcome.
       properties:
         clientInfo:
           $ref: "#/components/schemas/ClientInfo"
@@ -1871,22 +1297,11 @@ components:
           $ref: "#/components/schemas/EnvironmentMatrix"
           description: Required. The devices the tests are being executed on.
         flakyTestAttempts:
-          description: >-
-            The number of times a TestExecution should be re-attempted if one or more
-
-            of its test cases fail for any reason.
-
-            The maximum number of reruns allowed is 10.
-
-
-            Default is 0, which implies no reruns.
+          description: The number of times a TestExecution should be re-attempted if one or more of its test cases fail for any reason. The maximum number of reruns allowed is 10. Default is 0, which implies no reruns.
           format: int32
           type: integer
         invalidMatrixDetails:
-          description: >-
-            Output only. Describes why the matrix is considered invalid.
-
-            Only useful for matrices in the INVALID state.
+          description: Output only. Describes why the matrix is considered invalid. Only useful for matrices in the INVALID state.
           enum:
             - INVALID_MATRIX_DETAILS_UNSPECIFIED
             - DETAILS_UNAVAILABLE
@@ -1925,10 +1340,7 @@ components:
             - INVALID_APK_PREVIEW_SDK
           type: string
         outcomeSummary:
-          description: >-
-            Output Only. The overall outcome of the test.
-
-            Only set when the test matrix state is FINISHED.
+          description: Output Only. The overall outcome of the test. Only set when the test matrix state is FINISHED.
           enum:
             - OUTCOME_SUMMARY_UNSPECIFIED
             - SUCCESS
@@ -1958,10 +1370,7 @@ components:
             - INVALID
           type: string
         testExecutions:
-          description: >-
-            Output only. The list of test executions that the service creates for
-
-            this matrix.
+          description: Output only. The list of test executions that the service creates for this matrix.
           items:
             $ref: "#/components/schemas/TestExecution"
           type: array
@@ -1983,29 +1392,12 @@ components:
           $ref: "#/components/schemas/Account"
           description: The device will be logged in on this account for the duration of the test.
         additionalApks:
-          description: >-
-            APKs to install in addition to those being directly tested.
-
-            Currently capped at 100.
+          description: APKs to install in addition to those being directly tested. Currently capped at 100.
           items:
             $ref: "#/components/schemas/Apk"
           type: array
         directoriesToPull:
-          description: >-
-            List of directories on the device to upload to GCS at the end of the test;
-
-            they must be absolute paths under /sdcard, /storage or /data/local/tmp.
-
-            Path names are restricted to characters a-z A-Z 0-9 _ - . + and /
-
-
-            Note: The paths /sdcard and /data will be made available and treated as
-
-            implicit path substitutions. E.g. if /sdcard on a particular device does
-
-            not map to external storage, the system will replace it with the external
-
-            storage path prefix for that device.
+          description: "List of directories on the device to upload to GCS at the end of the test; they must be absolute paths under /sdcard, /storage or /data/local/tmp. Path names are restricted to characters a-z A-Z 0-9 _ - . + and / Note: The paths /sdcard and /data will be made available and treated as implicit path substitutions. E.g. if /sdcard on a particular device does not map to external storage, the system will replace it with the external storage path prefix for that device."
           items:
             type: string
           type: array
@@ -2013,10 +1405,7 @@ components:
           description: Whether to prevent all runtime permissions to be granted at app install
           type: boolean
         environmentVariables:
-          description: >-
-            Environment variables to set for the test (only applicable for
-
-            instrumentation tests).
+          description: Environment variables to set for the test (only applicable for instrumentation tests).
           items:
             $ref: "#/components/schemas/EnvironmentVariable"
           type: array
@@ -2026,25 +1415,11 @@ components:
             $ref: "#/components/schemas/DeviceFile"
           type: array
         networkProfile:
-          description: >-
-            The network traffic profile used for running the test.
-
-            Available network profiles can be queried by using the
-
-            NETWORK_CONFIGURATION environment type when calling
-
-            TestEnvironmentDiscoveryService.GetTestEnvironmentCatalog.
+          description: The network traffic profile used for running the test. Available network profiles can be queried by using the NETWORK_CONFIGURATION environment type when calling TestEnvironmentDiscoveryService.GetTestEnvironmentCatalog.
           type: string
         systrace:
           $ref: "#/components/schemas/SystraceSetup"
-          description: >-
-            Systrace configuration for the run.
-
-            If set a systrace will be taken, starting on test start and lasting for the
-
-            configured duration. The systrace file thus obtained is put in the results
-
-            bucket together with the other artifacts from the run.
+          description: Systrace configuration for the run. If set a systrace will be taken, starting on test start and lasting for the configured duration. The systrace file thus obtained is put in the results bucket together with the other artifacts from the run.
       type: object
     TestSpecification:
       description: A description of how to run the test.
@@ -2075,17 +1450,9 @@ components:
           description: An iOS XCTest, via an .xctestrun file.
         testSetup:
           $ref: "#/components/schemas/TestSetup"
-          description: >-
-            Test setup requirements for Android e.g. files to install, bootstrap
-
-            scripts.
+          description: Test setup requirements for Android e.g. files to install, bootstrap scripts.
         testTimeout:
-          description: >-
-            Max time a test execution is allowed to run before it is
-
-            automatically cancelled.
-
-            The default value is 5 min.
+          description: Max time a test execution is allowed to run before it is automatically cancelled. The default value is 5 min.
           format: google-duration
           type: string
       type: object
@@ -2093,25 +1460,13 @@ components:
       description: Test targets for a shard.
       properties:
         testTargets:
-          description: >-
-            Group of packages, classes, and/or test methods to be run for each shard.
-
-            The targets need to be specified in AndroidJUnitRunner argument format. For
-
-            example, “package com.my.packages” “class com.my.package.MyClass”.
-
-
-            The number of shard_test_targets must be greater than 0.
+          description: Group of packages, classes, and/or test methods to be run for each shard. The targets need to be specified in AndroidJUnitRunner argument format. For example, "package com.my.packages" "class com.my.package.MyClass". The number of shard_test_targets must be greater than 0.
           items:
             type: string
           type: array
       type: object
     ToolResultsExecution:
-      description: >-
-        Represents a tool results execution resource.
-
-
-        This has the results of a TestMatrix.
+      description: Represents a tool results execution resource. This has the results of a TestMatrix.
       properties:
         executionId:
           description: Output only. A tool results execution ID.
@@ -2134,11 +1489,7 @@ components:
           type: string
       type: object
     ToolResultsStep:
-      description: >-
-        Represents a tool results step resource.
-
-
-        This has the results of a TestExecution.
+      description: Represents a tool results step resource. This has the results of a TestExecution.
       properties:
         executionId:
           description: Output only. A tool results execution ID.
@@ -2178,23 +1529,10 @@ components:
           type: number
       type: object
     UniformSharding:
-      description: >-
-        Uniformly shards test cases given a total number of shards.
-
-
-        For Instrumentation test, it will be translated to “-e numShard” “-e
-
-        shardIndex” AndroidJUnitRunner arguments. With uniform sharding enabled,
-
-        specifying these sharding arguments via environment_variables is invalid.
+      description: Uniformly shards test cases given a total number of shards. For Instrumentation test, it will be translated to "-e numShard" "-e shardIndex" AndroidJUnitRunner arguments. With uniform sharding enabled, specifying these sharding arguments via environment_variables is invalid.
       properties:
         numShards:
-          description: >-
-            Required. Total number of shards. When any physical devices are selected,
-
-            the number must be >= 1 and <= 50. When no physical devices are selected,
-
-            the number must be >= 1 and <= 250.
+          description: Required. Total number of shards. When any physical devices are selected, the number must be >= 1 and <= 50. When no physical devices are selected, the number must be >= 1 and <= 250.
           format: int32
           type: integer
       type: object
@@ -2202,18 +1540,12 @@ components:
       description: An Xcode version that an iOS version is compatible with.
       properties:
         tags:
-          description: >-
-            Tags for this Xcode version.
-
-            Example: "default".
+          description: 'Tags for this Xcode version. Example: "default".'
           items:
             type: string
           type: array
         version:
-          description: >-
-            The id for this version.
-
-            Example: "9.2".
+          description: 'The id for this version. Example: "9.2".'
           type: string
       type: object
   securitySchemes:

@@ -33,8 +33,8 @@ info:
 externalDocs:
   url: https://developers.google.com/admin-sdk/alertcenter/
 tags:
-  - name: alerts
   - name: v1beta1
+  - name: alerts
 paths:
   /v1beta1/alerts:
     get:
@@ -81,17 +81,17 @@ paths:
       tags:
         - alerts
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
   "/v1beta1/alerts/{alertId}":
     delete:
       description: Marks the specified alert for deletion. An alert that has been marked for deletion is removed from Alert Center after 30 days. Marking an alert for deletion has no effect on an alert which has already been marked for deletion. Attempting to mark a nonexistent alert for deletion results in a `NOT_FOUND` error.
@@ -152,17 +152,17 @@ paths:
       tags:
         - alerts
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
   "/v1beta1/alerts/{alertId}/feedback":
     get:
       description: Lists all the feedback for an alert. Attempting to list feedbacks for a non-existent alert returns `NOT_FOUND` error.
@@ -199,17 +199,17 @@ paths:
       tags:
         - alerts
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
     post:
       description: Creates new feedback for an alert. Attempting to create a feedback for a non-existent alert returns `NOT_FOUND` error. Attempting to create a feedback for an alert that is marked for deletion returns `FAILED_PRECONDITION' error.
       operationId: alertcenter.alerts.feedback.create
@@ -275,30 +275,30 @@ paths:
       tags:
         - alerts
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
   "/v1beta1/alerts/{alertId}:undelete":
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
     post:
       description: Restores, or "undeletes", an alert that was marked for deletion within the past 30 days. Attempting to undelete an alert which was marked for deletion over 30 days ago (which has been removed from the Alert Center database) or a nonexistent alert returns a `NOT_FOUND` error. Attempting to undelete an alert which has not been marked for deletion has no effect.
       operationId: alertcenter.alerts.undelete
@@ -330,17 +330,17 @@ paths:
         - alerts
   /v1beta1/alerts:batchDelete:
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
     post:
       description: Performs batch delete operation on alerts.
       operationId: alertcenter.alerts.batchDelete
@@ -365,17 +365,17 @@ paths:
         - alerts
   /v1beta1/alerts:batchUndelete:
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
     post:
       description: Performs batch undelete operation on alerts.
       operationId: alertcenter.alerts.batchUndelete
@@ -423,17 +423,17 @@ paths:
       tags:
         - v1beta1
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
     patch:
       description: Updates the customer-level settings.
       operationId: alertcenter.updateSettings

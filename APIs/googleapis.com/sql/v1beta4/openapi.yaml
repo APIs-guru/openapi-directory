@@ -1,6 +1,6 @@
 openapi: 3.0.0
 servers:
-  - url: https://www.googleapis.com/
+  - url: https://sqladmin.googleapis.com/
 info:
   contact:
     name: Google
@@ -33,15 +33,15 @@ info:
 externalDocs:
   url: https://developers.google.com/cloud-sql/
 tags:
-  - name: flags
   - name: backupRuns
-  - name: databases
-  - name: tiers
-  - name: instances
+  - name: sslCerts
+  - name: flags
   - name: projects
   - name: users
-  - name: sslCerts
+  - name: tiers
+  - name: databases
   - name: operations
+  - name: instances
 paths:
   /sql/v1beta4/flags:
     get:
@@ -75,17 +75,17 @@ paths:
       tags:
         - flags
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
   "/sql/v1beta4/projects/{project}/instances":
     get:
       description: Lists instances under a given project.
@@ -150,17 +150,17 @@ paths:
       tags:
         - instances
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
     post:
       description: Creates a new Cloud SQL instance.
       operationId: sql.instances.insert
@@ -267,17 +267,17 @@ paths:
       tags:
         - instances
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
     patch:
       description: >-
         Updates settings of a Cloud SQL instance.
@@ -364,17 +364,17 @@ paths:
         - instances
   "/sql/v1beta4/projects/{project}/instances/{instance}/addServerCa":
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
     post:
       description: >-
         Add a new trusted Certificate Authority (CA) version for the specified
@@ -470,17 +470,17 @@ paths:
       tags:
         - backupRuns
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
     post:
       description: >-
         Creates a new backup run on demand. This method is applicable only to
@@ -610,30 +610,30 @@ paths:
       tags:
         - backupRuns
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
   "/sql/v1beta4/projects/{project}/instances/{instance}/clone":
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
     post:
       description: >-
         Creates a Cloud SQL instance as a clone of the source instance. Using this
@@ -681,17 +681,17 @@ paths:
         - instances
   "/sql/v1beta4/projects/{project}/instances/{instance}/createEphemeral":
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
     post:
       description: >-
         Generates a short-lived X509 certificate containing the provided public key
@@ -774,17 +774,17 @@ paths:
       tags:
         - databases
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
     post:
       description: >-
         Inserts a resource containing information about a database inside a Cloud
@@ -912,17 +912,17 @@ paths:
       tags:
         - databases
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
     patch:
       description: >-
         Partially updates a resource containing information about a database inside
@@ -1021,17 +1021,17 @@ paths:
         - databases
   "/sql/v1beta4/projects/{project}/instances/{instance}/demoteMaster":
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
     post:
       description: >-
         Demotes the stand-alone instance to be a Cloud SQL read replica for an
@@ -1076,17 +1076,17 @@ paths:
         - instances
   "/sql/v1beta4/projects/{project}/instances/{instance}/export":
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
     post:
       description: >-
         Exports data from a Cloud SQL instance to a Cloud Storage bucket as a SQL
@@ -1127,17 +1127,17 @@ paths:
         - instances
   "/sql/v1beta4/projects/{project}/instances/{instance}/failover":
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
     post:
       description: >-
         Failover the instance to its failover replica instance. Using this
@@ -1182,17 +1182,17 @@ paths:
         - instances
   "/sql/v1beta4/projects/{project}/instances/{instance}/import":
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
     post:
       description: >-
         Imports data into a Cloud SQL instance from a SQL dump  or CSV file in
@@ -1276,30 +1276,30 @@ paths:
       tags:
         - instances
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
   "/sql/v1beta4/projects/{project}/instances/{instance}/promoteReplica":
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
     post:
       description: >-
         Promotes the read replica instance to be a stand-alone Cloud SQL instance.
@@ -1339,17 +1339,17 @@ paths:
         - instances
   "/sql/v1beta4/projects/{project}/instances/{instance}/rescheduleMaintenance":
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
     post:
       description: Reschedules the maintenance on the given instance.
       operationId: sql.projects.instances.rescheduleMaintenance
@@ -1391,17 +1391,17 @@ paths:
         - projects
   "/sql/v1beta4/projects/{project}/instances/{instance}/resetSslConfig":
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
     post:
       description: >-
         Deletes all client certificates and generates a new server SSL certificate
@@ -1441,17 +1441,17 @@ paths:
         - instances
   "/sql/v1beta4/projects/{project}/instances/{instance}/restart":
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
     post:
       description: Restarts a Cloud SQL instance.
       operationId: sql.instances.restart
@@ -1488,17 +1488,17 @@ paths:
         - instances
   "/sql/v1beta4/projects/{project}/instances/{instance}/restoreBackup":
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
     post:
       description: >-
         Restores a backup of a Cloud SQL instance. Using this operation might cause
@@ -1543,17 +1543,17 @@ paths:
         - instances
   "/sql/v1beta4/projects/{project}/instances/{instance}/rotateServerCa":
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
     post:
       description: >-
         Rotates the server certificate to one signed by the Certificate Authority
@@ -1632,17 +1632,17 @@ paths:
       tags:
         - sslCerts
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
     post:
       description: >-
         Creates an SSL certificate and returns it along with the private key and
@@ -1777,35 +1777,35 @@ paths:
       tags:
         - sslCerts
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
   "/sql/v1beta4/projects/{project}/instances/{instance}/startExternalSync":
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
     post:
       description: Start External master migration.
       operationId: sql.projects.instances.startExternalSync
       parameters:
-        - description: ID of the project that contains the first generation instance.
+        - description: ID of the project that contains the instance.
           in: path
           name: project
           required: true
@@ -1846,17 +1846,17 @@ paths:
         - projects
   "/sql/v1beta4/projects/{project}/instances/{instance}/startReplica":
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
     post:
       description: Starts the replication in the read replica instance.
       operationId: sql.instances.startReplica
@@ -1893,17 +1893,17 @@ paths:
         - instances
   "/sql/v1beta4/projects/{project}/instances/{instance}/stopReplica":
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
     post:
       description: Stops the replication in the read replica instance.
       operationId: sql.instances.stopReplica
@@ -1940,17 +1940,17 @@ paths:
         - instances
   "/sql/v1beta4/projects/{project}/instances/{instance}/truncateLog":
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
     post:
       description: Truncate MySQL general and slow query log tables
       operationId: sql.instances.truncateLog
@@ -2070,17 +2070,17 @@ paths:
       tags:
         - users
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
     post:
       description: Creates a new user in a Cloud SQL instance.
       operationId: sql.users.insert
@@ -2171,17 +2171,17 @@ paths:
         - users
   "/sql/v1beta4/projects/{project}/instances/{instance}/verifyExternalSyncSettings":
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
     post:
       description: Verify External master external sync settings.
       operationId: sql.projects.instances.verifyExternalSyncSettings
@@ -2281,17 +2281,17 @@ paths:
       tags:
         - operations
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
   "/sql/v1beta4/projects/{project}/operations/{operation}":
     get:
       description: Retrieves an instance operation that has been performed on an instance.
@@ -2328,17 +2328,17 @@ paths:
       tags:
         - operations
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
   "/sql/v1beta4/projects/{project}/tiers":
     get:
       description: >-
@@ -2374,17 +2374,17 @@ paths:
       tags:
         - tiers
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
 components:
   parameters:
     _.xgafv:
@@ -2480,7 +2480,7 @@ components:
           description: Optional. A label to identify this entry.
           type: string
         value:
-          description: The whitelisted value for the access control list.
+          description: The allowlisted value for the access control list.
           type: string
       type: object
     ApiWarning:
@@ -2675,7 +2675,7 @@ components:
           description: >-
             Binary log coordinates, if specified, identify the position up to which the
 
-            source instance should be cloned. If not specified, the source instance is
+            source instance is cloned. If not specified, the source instance is
 
             cloned up to the most recent binary log coordinates.
         destinationInstanceName:
@@ -2739,7 +2739,7 @@ components:
           description: >-
             The name of the flag. These flags are passed at instance startup, so
 
-            include both server options and system variables for MySQL. Flags should be
+            include both server options and system variables for MySQL. Flags are
 
             specified with underscores, not hyphens. For more information, see <a
 
@@ -2749,7 +2749,7 @@ components:
           type: string
         value:
           description: >-
-            The value of the flag. Booleans should be set to <b>on</b> for true
+            The value of the flag. Booleans are set to <b>on</b> for true
 
             and <b>off</b> for false. This field must be omitted if the flag
 
@@ -2786,7 +2786,7 @@ components:
           description: >-
             The current disk usage of the instance in bytes. This property has been
 
-            deprecated. Users should use the
+            deprecated. Use the
 
             "cloudsql.googleapis.com/database/disk/bytes_used" metric in Cloud
 
@@ -3091,15 +3091,15 @@ components:
           description: PEM representation of the trusted CA's x509 certificate.
           type: string
         clientCertificate:
-          description: PEM representation of the slave's x509 certificate.
+          description: PEM representation of the replica's x509 certificate.
           type: string
         clientKey:
           description: >-
-            PEM representation of the slave's private key. The corresponsing public key
+            PEM representation of the replica's private key. The corresponsing public
 
-            is encoded in the client's certificate. The format of the slave's private
+            key is encoded in the client's certificate. The format of the replica's
 
-            key can be either PKCS #1 or PKCS #8.
+            private key can be either PKCS #1 or PKCS #8.
           type: string
         kind:
           description: This is always <b>sql#demoteMasterMysqlReplicaConfiguration</b>.
@@ -3303,7 +3303,7 @@ components:
           description: >-
             This is the name of the flag. Flag names always use underscores, not
 
-            hyphens, e.g. <b>max_allowed_packet</b>
+            hyphens, for example: <b>max_allowed_packet</b>
           type: string
         requiresRestart:
           description: >-
@@ -3529,14 +3529,14 @@ components:
           description: >-
             The list of external networks that are allowed to connect to the instance
 
-            using the IP. In 'CIDR' notation, also known as 'slash' notation (e.g.
+            using the IP. In 'CIDR' notation, also known as 'slash' notation (for
 
-            <b>192.168.100.0/24</b>).
+            example: <b>192.168.100.0/24</b>).
           items:
             $ref: "#/components/schemas/AclEntry"
           type: array
         ipv4Enabled:
-          description: Whether the instance should be assigned an IP address or not.
+          description: Whether the instance is assigned a public IP address or not.
           type: boolean
         privateNetwork:
           description: >-
@@ -3549,7 +3549,7 @@ components:
             be updated, but it cannot be removed after it is set.
           type: string
         requireSsl:
-          description: Whether SSL connections over IP should be enforced or not.
+          description: Whether SSL connections over IP are enforced or not.
           type: boolean
       type: object
     IpMapping:
@@ -3590,9 +3590,9 @@ components:
       type: object
     LocationPreference:
       description: >-
-        Preferred location. This specifies where a Cloud SQL instance should
+        Preferred location. This specifies where a Cloud SQL instance
 
-        preferably be located, either in a specific Compute Engine zone, or
+        is located, either in a specific Compute Engine zone, or
 
         co-located with an App Engine application. Note that if the preferred
 
@@ -3611,16 +3611,16 @@ components:
           type: string
         zone:
           description: >-
-            The preferred Compute Engine zone (e.g. us-central1-a, us-central1-b,
+            The preferred Compute Engine zone (for example: us-central1-a,
 
-            etc.).
+            us-central1-b, etc.).
           type: string
       type: object
     MaintenanceWindow:
       description: >-
-        Maintenance window. This specifies when a v2 Cloud SQL instance should
+        Maintenance window. This specifies when a Cloud SQL instance
 
-        preferably be restarted for system maintenance purposes.
+        is restarted for system maintenance purposes.
       properties:
         day:
           description: day of week (1-7), starting on Monday.
@@ -3655,13 +3655,13 @@ components:
           description: PEM representation of the trusted CA's x509 certificate.
           type: string
         clientCertificate:
-          description: PEM representation of the slave's x509 certificate.
+          description: PEM representation of the replica's x509 certificate.
           type: string
         clientKey:
           description: >-
-            PEM representation of the slave's private key. The corresponsing public key
+            PEM representation of the replica's private key. The corresponsing public
 
-            is encoded in the client's certificate.
+            key is encoded in the client's certificate.
           type: string
         connectRetryInterval:
           description: Seconds to wait between connect retries. MySQL's default is 60 seconds.
@@ -3669,15 +3669,15 @@ components:
           type: integer
         dumpFilePath:
           description: >-
-            Path to a SQL dump file in Google Cloud Storage from which the slave
+            Path to a SQL dump file in Google Cloud Storage from which the replica
 
             instance is to be created. The URI is in the form gs://bucketName/fileName.
 
             Compressed gzip files (.gz) are also supported.
 
-            Dumps should have the binlog co-ordinates from which replication should
+            Dumps have the binlog co-ordinates from which replication
 
-            begin. This can be accomplished by setting --master-data to 1 when using
+            begins. This can be accomplished by setting --master-data to 1 when using
 
             mysqldump.
           type: string
@@ -3711,13 +3711,13 @@ components:
           description: PEM representation of the trusted CA's x509 certificate.
           type: string
         clientCertificate:
-          description: PEM representation of the slave's x509 certificate.
+          description: PEM representation of the replica's x509 certificate.
           type: string
         clientKey:
           description: >-
-            PEM representation of the slave's private key. The corresponsing public key
+            PEM representation of the replica's private key. The corresponsing public
 
-            is encoded in the client's certificate.
+            key is encoded in the client's certificate.
           type: string
         dumpFilePath:
           description: The dump file to create the Cloud SQL replica.
@@ -4227,6 +4227,8 @@ components:
             - INSUFFICIENT_MAX_WORKER_PROCESSES
             - UNSUPPORTED_EXTENSIONS
             - INVALID_RDS_LOGICAL_REPLICATION
+            - INVALID_LOGGING_SETUP
+            - INVALID_DB_PARAM
           type: string
       type: object
     SqlInstancesRescheduleMaintenanceRequestBody:

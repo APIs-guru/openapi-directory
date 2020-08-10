@@ -5,6 +5,7 @@ info:
   contact:
     name: Google
     url: https://google.com
+    x-twitter: youtube
   description: The Gmail Postmaster API is a RESTful API that provides programmatic access to email traffic metrics (like spam reports, delivery errors etc) otherwise available through the Gmail Postmaster Tools UI currently.
   license:
     name: Creative Commons Attribution 3.0
@@ -12,6 +13,11 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Gmail Postmaster Tools API
   version: v1beta1
+  x-apisguru-categories:
+    - analytics
+    - media
+  x-logo:
+    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
     - format: google
       url: https://gmailpostmastertools.googleapis.com/$discovery/rest?version=v1beta1
@@ -53,17 +59,17 @@ paths:
       tags:
         - domains
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
   "/v1beta1/{name}":
     get:
       description: Get traffic statistics for a domain on a specific date. Returns PERMISSION_DENIED if user does not have permission to access TrafficStats for the domain.
@@ -90,17 +96,17 @@ paths:
       tags:
         - domains
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
   "/v1beta1/{parent}/trafficStats":
     get:
       description: List traffic statistics for all available days. Returns PERMISSION_DENIED if user does not have permission to access TrafficStats for the domain.
@@ -167,17 +173,17 @@ paths:
       tags:
         - domains
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
 components:
   parameters:
     _.xgafv:

@@ -21,24 +21,20 @@ info:
   x-logo:
     url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
-    - converter:
-        url: https://github.com/lucybot/api-spec-converter
-        version: 2.7.31
-      format: google
-      url: https://www.googleapis.com/discovery/v1/apis/adsensehost/v4.1/rest
+    - format: google
+      url: https://adsensehost.googleapis.com/$discovery/rest?version=v4.1
       version: v1
-  x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: adsensehost
 externalDocs:
   url: https://developers.google.com/adsense/host/
 tags:
+  - name: accounts
+  - name: customchannels
+  - name: urlchannels
+  - name: associationsessions
   - name: adclients
   - name: reports
-  - name: associationsessions
-  - name: urlchannels
-  - name: customchannels
-  - name: accounts
 paths:
   /accounts:
     get:
@@ -70,12 +66,12 @@ paths:
       tags:
         - accounts
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/prettyPrint"
   "/accounts/{accountId}":
     get:
@@ -103,12 +99,12 @@ paths:
       tags:
         - accounts
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/prettyPrint"
   "/accounts/{accountId}/adclients":
     get:
@@ -148,12 +144,12 @@ paths:
       tags:
         - accounts
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/prettyPrint"
   "/accounts/{accountId}/adclients/{adClientId}":
     get:
@@ -187,12 +183,12 @@ paths:
       tags:
         - accounts
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/prettyPrint"
   "/accounts/{accountId}/adclients/{adClientId}/adunits":
     get:
@@ -243,12 +239,12 @@ paths:
       tags:
         - accounts
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/prettyPrint"
     patch:
       description: Update the supplied ad unit in the specified publisher AdSense account. This method supports patch semantics.
@@ -435,12 +431,12 @@ paths:
       tags:
         - accounts
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/prettyPrint"
   "/accounts/{accountId}/adclients/{adClientId}/adunits/{adUnitId}/adcode":
     get:
@@ -489,12 +485,12 @@ paths:
       tags:
         - accounts
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/prettyPrint"
   "/accounts/{accountId}/reports":
     get:
@@ -589,12 +585,12 @@ paths:
       tags:
         - accounts
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/prettyPrint"
   /adclients:
     get:
@@ -628,12 +624,12 @@ paths:
       tags:
         - adclients
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/prettyPrint"
   "/adclients/{adClientId}":
     get:
@@ -661,12 +657,12 @@ paths:
       tags:
         - adclients
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/prettyPrint"
   "/adclients/{adClientId}/customchannels":
     get:
@@ -706,12 +702,12 @@ paths:
       tags:
         - customchannels
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/prettyPrint"
     patch:
       description: Update a custom channel in the host AdSense account. This method supports patch semantics.
@@ -868,12 +864,12 @@ paths:
       tags:
         - customchannels
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/prettyPrint"
   "/adclients/{adClientId}/urlchannels":
     get:
@@ -913,12 +909,12 @@ paths:
       tags:
         - urlchannels
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/prettyPrint"
     post:
       description: Add a new URL channel to the host AdSense account.
@@ -981,12 +977,12 @@ paths:
       tags:
         - urlchannels
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/prettyPrint"
   /associationsessions/start:
     get:
@@ -1045,12 +1041,12 @@ paths:
       tags:
         - associationsessions
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/prettyPrint"
   /associationsessions/verify:
     get:
@@ -1078,12 +1074,12 @@ paths:
       tags:
         - associationsessions
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/prettyPrint"
   /reports:
     get:
@@ -1172,12 +1168,12 @@ paths:
       tags:
         - reports
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/prettyPrint"
 components:
   parameters:

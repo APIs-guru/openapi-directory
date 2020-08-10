@@ -33,22 +33,22 @@ info:
 externalDocs:
   url: https://developers.google.com/android/work/play/emm-api
 tags:
+  - name: serviceaccountkeys
   - name: enterprises
+  - name: users
+  - name: permissions
   - name: storelayoutpages
+  - name: installs
+  - name: grouplicenseusers
   - name: managedconfigurationsforuser
-  - name: managedconfigurationsfordevice
   - name: entitlements
   - name: devices
-  - name: grouplicenseusers
-  - name: managedconfigurationssettings
-  - name: grouplicenses
-  - name: permissions
   - name: webapps
-  - name: storelayoutclusters
-  - name: installs
-  - name: serviceaccountkeys
-  - name: users
+  - name: managedconfigurationssettings
   - name: products
+  - name: grouplicenses
+  - name: managedconfigurationsfordevice
+  - name: storelayoutclusters
 paths:
   /androidenterprise/v1/enterprises:
     get:
@@ -77,29 +77,29 @@ paths:
         - enterprises
     parameters:
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/_.xgafv"
   /androidenterprise/v1/enterprises/acknowledgeNotificationSet:
     parameters:
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/_.xgafv"
     post:
       description: Acknowledges notifications that were received from Enterprises.PullNotificationSet to prevent subsequent calls from returning the same notifications.
       operationId: androidenterprise.enterprises.acknowledgeNotificationSet
@@ -122,16 +122,16 @@ paths:
   /androidenterprise/v1/enterprises/completeSignup:
     parameters:
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/_.xgafv"
     post:
       description: Completes the signup flow, by specifying the Completion token and Enterprise token. This request must not be called multiple times for a given Enterprise Token.
       operationId: androidenterprise.enterprises.completeSignup
@@ -163,16 +163,16 @@ paths:
   /androidenterprise/v1/enterprises/enroll:
     parameters:
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/_.xgafv"
     post:
       description: Enrolls an enterprise with the calling EMM.
       operationId: androidenterprise.enterprises.enroll
@@ -205,16 +205,16 @@ paths:
   /androidenterprise/v1/enterprises/pullNotificationSet:
     parameters:
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/_.xgafv"
     post:
       description: Pulls and returns a notification set for the enterprises associated with the service account authenticated for the request. The notification set may be empty if no notification are pending. A notification set returned needs to be acknowledged within 20 seconds by calling Enterprises.AcknowledgeNotificationSet, unless the notification set is empty. Notifications that are not acknowledged within the 20 seconds will eventually be included again in the response to another PullNotificationSet request, and those that are never acknowledged will ultimately be deleted according to the Google Cloud Platform Pub/Sub system policy. Multiple requests might be performed concurrently to retrieve notifications, in which case the pending notifications (if any) will be split among each caller, if any are pending. If no notifications are present, an empty notification list is returned. Subsequent requests may return more notifications once they become available.
       operationId: androidenterprise.enterprises.pullNotificationSet
@@ -244,16 +244,16 @@ paths:
   /androidenterprise/v1/enterprises/signupUrl:
     parameters:
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/_.xgafv"
     post:
       description: Generates a sign-up URL.
       operationId: androidenterprise.enterprises.generateSignupUrl
@@ -304,29 +304,29 @@ paths:
         - enterprises
     parameters:
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/_.xgafv"
   "/androidenterprise/v1/enterprises/{enterpriseId}/account":
     parameters:
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/_.xgafv"
     put:
       description: Sets the account that will be used to authenticate to the API as the enterprise.
       operationId: androidenterprise.enterprises.setAccount
@@ -359,16 +359,16 @@ paths:
   "/androidenterprise/v1/enterprises/{enterpriseId}/createWebToken":
     parameters:
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/_.xgafv"
     post:
       description: Returns a unique token to access an embeddable UI. To generate a web UI, pass the generated token into the managed Google Play javascript API. Each token may only be used to start one UI session. See the javascript API documentation for further information.
       operationId: androidenterprise.enterprises.createWebToken
@@ -425,16 +425,16 @@ paths:
         - grouplicenses
     parameters:
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/_.xgafv"
   "/androidenterprise/v1/enterprises/{enterpriseId}/groupLicenses/{groupLicenseId}":
     get:
       description: Retrieves details of an enterprise's group license for a product.
@@ -468,16 +468,16 @@ paths:
         - grouplicenses
     parameters:
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/_.xgafv"
   "/androidenterprise/v1/enterprises/{enterpriseId}/groupLicenses/{groupLicenseId}/users":
     get:
       description: Retrieves the IDs of the users who have been granted entitlements under the license.
@@ -511,16 +511,16 @@ paths:
         - grouplicenseusers
     parameters:
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/_.xgafv"
   "/androidenterprise/v1/enterprises/{enterpriseId}/products":
     get:
       description: Finds approved products that match a query, or all approved products if there is no query.
@@ -573,16 +573,16 @@ paths:
         - products
     parameters:
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/_.xgafv"
   "/androidenterprise/v1/enterprises/{enterpriseId}/products/{productId}":
     get:
       description: Retrieves details of a product for display to an enterprise admin.
@@ -621,16 +621,16 @@ paths:
         - products
     parameters:
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/_.xgafv"
   "/androidenterprise/v1/enterprises/{enterpriseId}/products/{productId}/appRestrictionsSchema":
     get:
       description: Retrieves the schema that defines the configurable properties for this product. All products have a schema, but this schema may be empty if no managed configurations have been defined. This schema can be used to populate a UI that allows an admin to configure the product. To apply a managed configuration based on the schema obtained using this API, see Managed Configurations through Play.
@@ -669,29 +669,29 @@ paths:
         - products
     parameters:
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/_.xgafv"
   "/androidenterprise/v1/enterprises/{enterpriseId}/products/{productId}/approve":
     parameters:
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/_.xgafv"
     post:
       description: " Approves the specified product and the relevant app permissions, if any. The maximum number of products that you can approve per enterprise customer is 1,000. To learn how to use managed Google Play to design and create a store layout to display approved products to your users, see Store Layout Design. "
       operationId: androidenterprise.products.approve
@@ -726,16 +726,16 @@ paths:
   "/androidenterprise/v1/enterprises/{enterpriseId}/products/{productId}/generateApprovalUrl":
     parameters:
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/_.xgafv"
     post:
       description: Generates a URL that can be rendered in an iframe to display the permissions (if any) of a product. An enterprise admin must view these permissions and accept them on behalf of their organization in order to approve that product. Admins should accept the displayed permissions by interacting with a separate UI element in the EMM console, which in turn should trigger the use of this URL as the approvalUrlInfo.approvalUrl property in a Products.approve call to approve the product. This URL can only be used to display permissions for up to 1 day.
       operationId: androidenterprise.products.generateApprovalUrl
@@ -804,16 +804,16 @@ paths:
         - managedconfigurationssettings
     parameters:
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/_.xgafv"
   "/androidenterprise/v1/enterprises/{enterpriseId}/products/{productId}/permissions":
     get:
       description: Retrieves the Android app permissions required by this app.
@@ -847,29 +847,29 @@ paths:
         - products
     parameters:
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/_.xgafv"
   "/androidenterprise/v1/enterprises/{enterpriseId}/products/{productId}/unapprove":
     parameters:
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/_.xgafv"
     post:
       description: Unapproves the specified product (and the relevant app permissions, if any)
       operationId: androidenterprise.products.unapprove
@@ -899,16 +899,16 @@ paths:
   "/androidenterprise/v1/enterprises/{enterpriseId}/sendTestPushNotification":
     parameters:
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/_.xgafv"
     post:
       description: Sends a test notification to validate the EMM integration with the Google Cloud Pub/Sub service for this enterprise.
       operationId: androidenterprise.enterprises.sendTestPushNotification
@@ -968,16 +968,16 @@ paths:
         - enterprises
     parameters:
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/_.xgafv"
   "/androidenterprise/v1/enterprises/{enterpriseId}/serviceAccountKeys":
     get:
       description: Lists all active credentials for the service account associated with this enterprise. Only the ID and key type are returned. The calling service account must have been retrieved by calling Enterprises.GetServiceAccount and must have been set as the enterprise service account by calling Enterprises.SetAccount.
@@ -1005,16 +1005,16 @@ paths:
         - serviceaccountkeys
     parameters:
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/_.xgafv"
     post:
       description: Generates new credentials for the service account associated with this enterprise. The calling service account must have been retrieved by calling Enterprises.GetServiceAccount and must have been set as the enterprise service account by calling Enterprises.SetAccount. Only the type of the key should be populated in the resource to be inserted.
       operationId: androidenterprise.serviceaccountkeys.insert
@@ -1073,16 +1073,16 @@ paths:
         - serviceaccountkeys
     parameters:
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/_.xgafv"
   "/androidenterprise/v1/enterprises/{enterpriseId}/storeLayout":
     get:
       description: Returns the store layout for the enterprise. If the store layout has not been set, returns "basic" as the store layout type and no homepage.
@@ -1110,16 +1110,16 @@ paths:
         - enterprises
     parameters:
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/_.xgafv"
     put:
       description: Sets the store layout for the enterprise. By default, storeLayoutType is set to "basic" and the basic store layout is enabled. The basic layout only contains apps approved by the admin, and that have been added to the available product set for a user (using the setAvailableProductSet call). Apps on the page are sorted in order of their product ID value. If you create a custom store layout (by setting storeLayoutType = "custom" and setting a homepage), the basic store layout is disabled.
       operationId: androidenterprise.enterprises.setStoreLayout
@@ -1176,16 +1176,16 @@ paths:
         - storelayoutpages
     parameters:
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/_.xgafv"
     post:
       description: Inserts a new store page.
       operationId: androidenterprise.storelayoutpages.insert
@@ -1274,16 +1274,16 @@ paths:
         - storelayoutpages
     parameters:
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/_.xgafv"
     put:
       description: Updates the content of a store page.
       operationId: androidenterprise.storelayoutpages.update
@@ -1352,16 +1352,16 @@ paths:
         - storelayoutclusters
     parameters:
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/_.xgafv"
     post:
       description: Inserts a new cluster in a page.
       operationId: androidenterprise.storelayoutclusters.insert
@@ -1468,16 +1468,16 @@ paths:
         - storelayoutclusters
     parameters:
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/_.xgafv"
     put:
       description: Updates a cluster.
       operationId: androidenterprise.storelayoutclusters.update
@@ -1522,16 +1522,16 @@ paths:
   "/androidenterprise/v1/enterprises/{enterpriseId}/unenroll":
     parameters:
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/_.xgafv"
     post:
       description: Unenrolls an enterprise from the calling EMM.
       operationId: androidenterprise.enterprises.unenroll
@@ -1585,16 +1585,16 @@ paths:
         - users
     parameters:
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/_.xgafv"
     post:
       description: Creates a new EMM-managed user. The Users resource passed in the body of the request should include an accountIdentifier and an accountType. If a corresponding user already exists with the same account identifier, the user will be updated with the resource. In this case only the displayName field can be changed.
       operationId: androidenterprise.users.insert
@@ -1683,16 +1683,16 @@ paths:
         - users
     parameters:
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/_.xgafv"
     put:
       description: Updates the details of an EMM-managed user. Can be used with EMM-managed users only (not Google managed users). Pass the new details in the Users resource in the request body. Only the displayName field can be changed. Other fields must either be unset or have the currently active value.
       operationId: androidenterprise.users.update
@@ -1731,16 +1731,16 @@ paths:
   "/androidenterprise/v1/enterprises/{enterpriseId}/users/{userId}/authenticationToken":
     parameters:
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/_.xgafv"
     post:
       description: Generates an authentication token which the device policy client can use to provision the given EMM-managed user account on a device. The generated token is single-use and expires after a few minutes. You can provision a maximum of 10 devices per user. This call only works with EMM-managed accounts.
       operationId: androidenterprise.users.generateAuthenticationToken
@@ -1804,16 +1804,16 @@ paths:
         - users
     parameters:
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/_.xgafv"
     put:
       description: Modifies the set of products that a user is entitled to access (referred to as *whitelisted* products). Only products that are approved or products that were previously approved (products with revoked approval) can be whitelisted.
       operationId: androidenterprise.users.setAvailableProductSet
@@ -1878,16 +1878,16 @@ paths:
         - users
     parameters:
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/_.xgafv"
   "/androidenterprise/v1/enterprises/{enterpriseId}/users/{userId}/devices":
     get:
       description: Retrieves the IDs of all of a user's devices.
@@ -1921,16 +1921,16 @@ paths:
         - devices
     parameters:
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/_.xgafv"
   "/androidenterprise/v1/enterprises/{enterpriseId}/users/{userId}/devices/{deviceId}":
     get:
       description: Retrieves the details of a device.
@@ -1970,16 +1970,16 @@ paths:
         - devices
     parameters:
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/_.xgafv"
     put:
       description: Updates the device policy
       operationId: androidenterprise.devices.update
@@ -2029,16 +2029,16 @@ paths:
   "/androidenterprise/v1/enterprises/{enterpriseId}/users/{userId}/devices/{deviceId}/forceReportUpload":
     parameters:
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/_.xgafv"
     post:
       description: Uploads a report containing any changes in app states on the device since the last report was generated. You can call this method up to 3 times every 24 hours for a given device. If you exceed the quota, then the Google Play EMM API returns HTTP 429 Too Many Requests.
       operationId: androidenterprise.devices.forceReportUpload
@@ -2110,16 +2110,16 @@ paths:
         - installs
     parameters:
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/_.xgafv"
   "/androidenterprise/v1/enterprises/{enterpriseId}/users/{userId}/devices/{deviceId}/installs/{installId}":
     delete:
       description: Requests to remove an app from a device. A call to get or list will still show the app as installed on the device until it is actually removed.
@@ -2203,16 +2203,16 @@ paths:
         - installs
     parameters:
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/_.xgafv"
     put:
       description: Requests to install the latest version of an app to a device. If the app is already installed, then it is updated to the latest version if necessary.
       operationId: androidenterprise.installs.update
@@ -2299,16 +2299,16 @@ paths:
         - managedconfigurationsfordevice
     parameters:
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/_.xgafv"
   "/androidenterprise/v1/enterprises/{enterpriseId}/users/{userId}/devices/{deviceId}/managedConfigurationsForDevice/{managedConfigurationForDeviceId}":
     delete:
       description: Removes a per-device managed configuration for an app for the specified device.
@@ -2392,16 +2392,16 @@ paths:
         - managedconfigurationsfordevice
     parameters:
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/_.xgafv"
     put:
       description: Adds or updates a per-device managed configuration for an app for the specified device.
       operationId: androidenterprise.managedconfigurationsfordevice.update
@@ -2488,16 +2488,16 @@ paths:
         - devices
     parameters:
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/_.xgafv"
     put:
       description: Sets whether a device's access to Google services is enabled or disabled. The device state takes effect only if enforcing EMM policies on Android devices is enabled in the Google Admin Console. Otherwise, the device state is ignored and all devices are allowed access to Google services. This is only supported for Google-managed users.
       operationId: androidenterprise.devices.setState
@@ -2572,16 +2572,16 @@ paths:
         - entitlements
     parameters:
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/_.xgafv"
   "/androidenterprise/v1/enterprises/{enterpriseId}/users/{userId}/entitlements/{entitlementId}":
     delete:
       description: Removes an entitlement to an app for a user.
@@ -2653,16 +2653,16 @@ paths:
         - entitlements
     parameters:
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/_.xgafv"
     put:
       description: Adds or updates an entitlement to an app for a user.
       operationId: androidenterprise.entitlements.update
@@ -2742,16 +2742,16 @@ paths:
         - managedconfigurationsforuser
     parameters:
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/_.xgafv"
   "/androidenterprise/v1/enterprises/{enterpriseId}/users/{userId}/managedConfigurationsForUser/{managedConfigurationForUserId}":
     delete:
       description: Removes a per-user managed configuration for an app for the specified user.
@@ -2823,16 +2823,16 @@ paths:
         - managedconfigurationsforuser
     parameters:
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/_.xgafv"
     put:
       description: Adds or updates the managed configuration settings for an app for the specified user. If you support the Managed configurations iframe, you can apply managed configurations to a user by specifying an mcmId and its associated configuration variables (if any) in the request. Alternatively, all EMMs can apply managed configurations by passing a list of managed properties.
       operationId: androidenterprise.managedconfigurationsforuser.update
@@ -2901,16 +2901,16 @@ paths:
         - webapps
     parameters:
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/_.xgafv"
     post:
       description: Creates a new web app for the enterprise.
       operationId: androidenterprise.webapps.insert
@@ -2999,16 +2999,16 @@ paths:
         - webapps
     parameters:
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/_.xgafv"
     put:
       description: Updates an existing web app.
       operationId: androidenterprise.webapps.update
@@ -3076,16 +3076,16 @@ paths:
         - permissions
     parameters:
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/_.xgafv"
 components:
   parameters:
     _.xgafv:

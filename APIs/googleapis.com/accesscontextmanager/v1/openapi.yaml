@@ -33,15 +33,12 @@ info:
 externalDocs:
   url: https://cloud.google.com/access-context-manager/docs/reference/rest/
 tags:
-  - name: accessPolicies
   - name: operations
+  - name: accessPolicies
 paths:
   /v1/accessPolicies:
     get:
-      description: >-
-        List all AccessPolicies under a
-
-        container.
+      description: List all AccessPolicies under a container.
       operationId: accesscontextmanager.accessPolicies.list
       parameters:
         - description: Number of AccessPolicy instances to include in the list. Default 100.
@@ -49,23 +46,12 @@ paths:
           name: pageSize
           schema:
             type: integer
-        - description: >-
-            Next page token for the next batch of AccessPolicy instances. Defaults to
-
-            the first page of results.
+        - description: Next page token for the next batch of AccessPolicy instances. Defaults to the first page of results.
           in: query
           name: pageToken
           schema:
             type: string
-        - description: >-
-            Required. Resource name for the container to list AccessPolicy instances
-
-            from.
-
-
-            Format:
-
-            `organizations/{org_id}`
+        - description: "Required. Resource name for the container to list AccessPolicy instances from. Format: `organizations/{org_id}`"
           in: query
           name: parent
           schema:
@@ -85,28 +71,19 @@ paths:
       tags:
         - accessPolicies
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
     post:
-      description: >-
-        Create an `AccessPolicy`. Fails if this organization already has a
-
-        `AccessPolicy`. The longrunning Operation will have a successful status
-
-        once the `AccessPolicy` has propagated to long-lasting storage.
-
-        Syntactic and basic semantic errors will be returned in `metadata` as a
-
-        BadRequest proto.
+      description: Create an `AccessPolicy`. Fails if this organization already has a `AccessPolicy`. The longrunning Operation will have a successful status once the `AccessPolicy` has propagated to long-lasting storage. Syntactic and basic semantic errors will be returned in `metadata` as a BadRequest proto.
       operationId: accesscontextmanager.accessPolicies.create
       requestBody:
         content:
@@ -129,17 +106,10 @@ paths:
         - accessPolicies
   "/v1/{name}":
     delete:
-      description: >-
-        Deletes a long-running operation. This method indicates that the client is
-
-        no longer interested in the operation result. It does not cancel the
-
-        operation. If the server doesn't support this method, it returns
-
-        `google.rpc.Code.UNIMPLEMENTED`.
-      operationId: accesscontextmanager.operations.delete
+      description: Delete an Access Level by resource name. The longrunning operation from this RPC will have a successful status once the Access Level has been removed from long-lasting storage.
+      operationId: accesscontextmanager.accessPolicies.accessLevels.delete
       parameters:
-        - description: The name of the operation resource to be deleted.
+        - description: "Required. Resource name for the Access Level. Format: `accessPolicies/{policy_id}/accessLevels/{access_level_id}`"
           in: path
           name: name
           required: true
@@ -150,7 +120,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Empty"
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
@@ -158,38 +128,20 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
-        - operations
+        - accessPolicies
     get:
-      description: >-
-        Lists operations that match the specified filter in the request. If the
-
-        server doesn't support this method, it returns `UNIMPLEMENTED`.
-
-
-        NOTE: the `name` binding allows API services to override the binding
-
-        to use different resource name schemes, such as `users/*/operations`. To
-
-        override the binding, API services can add a binding such as
-
-        `"/v1/{name=users/*}/operations"` to their service configuration.
-
-        For backwards compatibility, the default name includes the operations
-
-        collection id, however overriding users must ensure the name binding
-
-        is the parent resource, without the operations collection id.
-      operationId: accesscontextmanager.operations.list
+      description: Get an Access Level by resource name.
+      operationId: accesscontextmanager.accessPolicies.accessLevels.get
       parameters:
-        - description: The name of the operation's parent resource.
+        - description: "Required. Resource name for the Access Level. Format: `accessPolicies/{policy_id}/accessLevels/{access_level_id}`"
           in: path
           name: name
           required: true
           schema:
             type: string
-        - description: The standard list filter.
+        - description: Whether to return `BasicLevels` in the Cloud Common Expression Language rather than as `BasicLevels`. Defaults to AS_DEFINED, where Access Levels are returned as `BasicLevels` or `CustomLevels` based on how they were created. If set to CEL, all Access Levels are returned as `CustomLevels`. In the CEL case, `BasicLevels` are translated to equivalent `CustomLevels`.
           in: query
-          name: filter
+          name: accessLevelFormat
           schema:
             enum:
               - LEVEL_FORMAT_UNSPECIFIED
@@ -211,7 +163,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ListOperationsResponse"
+                $ref: "#/components/schemas/AccessLevel"
           description: Successful response
       security:
         - Oauth2:
@@ -219,38 +171,24 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
-        - operations
+        - accessPolicies
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
     patch:
-      description: >-
-        Update a Service Perimeter. The
-
-        longrunning operation from this RPC will have a successful status once the
-
-        changes to the Service Perimeter have
-
-        propagated to long-lasting storage. Service Perimeter containing
-
-        errors will result in an error response for the first error encountered.
-      operationId: accesscontextmanager.accessPolicies.servicePerimeters.patch
+      description: Update an Access Level. The longrunning operation from this RPC will have a successful status once the changes to the Access Level have propagated to long-lasting storage. Access Levels containing errors will result in an error response for the first error encountered.
+      operationId: accesscontextmanager.accessPolicies.accessLevels.patch
       parameters:
-        - description: >-
-            Required. Resource name for the ServicePerimeter.  The `short_name`
-
-            component must begin with a letter and only include alphanumeric and '_'.
-
-            Format: `accessPolicies/{policy_id}/servicePerimeters/{short_name}`
+        - description: "Required. Resource name for the Access Level. The `short_name` component must begin with a letter and only include alphanumeric and '_'. Format: `accessPolicies/{policy_id}/accessLevels/{short_name}`. The maximum length of the `short_name` component is 50 characters."
           in: path
           name: name
           required: true
@@ -265,7 +203,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ServicePerimeter"
+              $ref: "#/components/schemas/AccessLevel"
       responses:
         "200":
           content:
@@ -282,38 +220,19 @@ paths:
         - accessPolicies
   "/v1/{name}:cancel":
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
     post:
-      description: >-
-        Starts asynchronous cancellation on a long-running operation.  The server
-
-        makes a best effort to cancel the operation, but success is not
-
-        guaranteed.  If the server doesn't support this method, it returns
-
-        `google.rpc.Code.UNIMPLEMENTED`.  Clients can use
-
-        Operations.GetOperation or
-
-        other methods to check whether the cancellation succeeded or whether the
-
-        operation completed despite cancellation. On successful cancellation,
-
-        the operation is not deleted; instead, it becomes an operation with
-
-        an Operation.error value with a google.rpc.Status.code of 1,
-
-        corresponding to `Code.CANCELLED`.
+      description: Starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`. Clients can use Operations.GetOperation or other methods to check whether the cancellation succeeded or whether the operation completed despite cancellation. On successful cancellation, the operation is not deleted; instead, it becomes an operation with an Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.
       operationId: accesscontextmanager.operations.cancel
       parameters:
         - description: The name of the operation resource to be cancelled.
@@ -343,30 +262,16 @@ paths:
         - operations
   "/v1/{parent}/accessLevels":
     get:
-      description: >-
-        List all Access Levels for an access
-
-        policy.
+      description: List all Access Levels for an access policy.
       operationId: accesscontextmanager.accessPolicies.accessLevels.list
       parameters:
-        - description: >-
-            Required. Resource name for the access policy to list Access Levels from.
-
-
-            Format:
-
-            `accessPolicies/{policy_id}`
+        - description: "Required. Resource name for the access policy to list Access Levels from. Format: `accessPolicies/{policy_id}`"
           in: path
           name: parent
           required: true
           schema:
             type: string
-        - description: >-
-            Whether to return `BasicLevels` in the Cloud Common Expression language, as
-
-            `CustomLevels`, rather than as `BasicLevels`. Defaults to returning
-
-            `AccessLevels` in the format they were defined.
+        - description: Whether to return `BasicLevels` in the Cloud Common Expression language, as `CustomLevels`, rather than as `BasicLevels`. Defaults to returning `AccessLevels` in the format they were defined.
           in: query
           name: accessLevelFormat
           schema:
@@ -375,18 +280,12 @@ paths:
               - AS_DEFINED
               - CEL
             type: string
-        - description: >-
-            Number of Access Levels to include in
-
-            the list. Default 100.
+        - description: Number of Access Levels to include in the list. Default 100.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: >-
-            Next page token for the next batch of Access Level instances.
-
-            Defaults to the first page of results.
+        - description: Next page token for the next batch of Access Level instances. Defaults to the first page of results.
           in: query
           name: pageToken
           schema:
@@ -406,37 +305,22 @@ paths:
       tags:
         - accessPolicies
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
     post:
-      description: >-
-        Create an Access Level. The longrunning
-
-        operation from this RPC will have a successful status once the Access
-
-        Level has
-
-        propagated to long-lasting storage. Access Levels containing
-
-        errors will result in an error response for the first error encountered.
+      description: Create an Access Level. The longrunning operation from this RPC will have a successful status once the Access Level has propagated to long-lasting storage. Access Levels containing errors will result in an error response for the first error encountered.
       operationId: accesscontextmanager.accessPolicies.accessLevels.create
       parameters:
-        - description: >-
-            Required. Resource name for the access policy which owns this Access
-
-            Level.
-
-
-            Format: `accessPolicies/{policy_id}`
+        - description: "Required. Resource name for the access policy which owns this Access Level. Format: `accessPolicies/{policy_id}`"
           in: path
           name: parent
           required: true
@@ -463,51 +347,22 @@ paths:
         - accessPolicies
   "/v1/{parent}/accessLevels:replaceAll":
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
     post:
-      description: >-
-        Replace all existing Access Levels in an Access
-
-        Policy with
-
-        the Access Levels provided. This
-
-        is done atomically. The longrunning operation from this RPC will have a
-
-        successful status once all replacements have propagated to long-lasting
-
-        storage. Replacements containing errors will result in an error response
-
-        for the first error encountered.  Replacement will be cancelled on error,
-
-        existing Access Levels will not be
-
-        affected. Operation.response field will contain
-
-        ReplaceAccessLevelsResponse. Removing Access Levels contained in existing
-
-        Service Perimeters will result in
-
-        error.
+      description: Replace all existing Access Levels in an Access Policy with the Access Levels provided. This is done atomically. The longrunning operation from this RPC will have a successful status once all replacements have propagated to long-lasting storage. Replacements containing errors will result in an error response for the first error encountered. Replacement will be cancelled on error, existing Access Levels will not be affected. Operation.response field will contain ReplaceAccessLevelsResponse. Removing Access Levels contained in existing Service Perimeters will result in error.
       operationId: accesscontextmanager.accessPolicies.accessLevels.replaceAll
       parameters:
-        - description: >-
-            Required. Resource name for the access policy which owns these
-
-            Access Levels.
-
-
-            Format: `accessPolicies/{policy_id}`
+        - description: "Required. Resource name for the access policy which owns these Access Levels. Format: `accessPolicies/{policy_id}`"
           in: path
           name: parent
           required: true
@@ -534,36 +389,21 @@ paths:
         - accessPolicies
   "/v1/{parent}/servicePerimeters":
     get:
-      description: >-
-        List all Service Perimeters for an
-
-        access policy.
+      description: List all Service Perimeters for an access policy.
       operationId: accesscontextmanager.accessPolicies.servicePerimeters.list
       parameters:
-        - description: >-
-            Required. Resource name for the access policy to list Service Perimeters from.
-
-
-            Format:
-
-            `accessPolicies/{policy_id}`
+        - description: "Required. Resource name for the access policy to list Service Perimeters from. Format: `accessPolicies/{policy_id}`"
           in: path
           name: parent
           required: true
           schema:
             type: string
-        - description: >-
-            Number of Service Perimeters to include
-
-            in the list. Default 100.
+        - description: Number of Service Perimeters to include in the list. Default 100.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: >-
-            Next page token for the next batch of Service Perimeter instances.
-
-            Defaults to the first page of results.
+        - description: Next page token for the next batch of Service Perimeter instances. Defaults to the first page of results.
           in: query
           name: pageToken
           schema:
@@ -583,37 +423,22 @@ paths:
       tags:
         - accessPolicies
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
     post:
-      description: >-
-        Create a Service Perimeter. The
-
-        longrunning operation from this RPC will have a successful status once the
-
-        Service Perimeter has
-
-        propagated to long-lasting storage. Service Perimeters containing
-
-        errors will result in an error response for the first error encountered.
+      description: Create a Service Perimeter. The longrunning operation from this RPC will have a successful status once the Service Perimeter has propagated to long-lasting storage. Service Perimeters containing errors will result in an error response for the first error encountered.
       operationId: accesscontextmanager.accessPolicies.servicePerimeters.create
       parameters:
-        - description: >-
-            Required. Resource name for the access policy which owns this Service
-
-            Perimeter.
-
-
-            Format: `accessPolicies/{policy_id}`
+        - description: "Required. Resource name for the access policy which owns this Service Perimeter. Format: `accessPolicies/{policy_id}`"
           in: path
           name: parent
           required: true
@@ -640,53 +465,22 @@ paths:
         - accessPolicies
   "/v1/{parent}/servicePerimeters:commit":
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
     post:
-      description: >-
-        Commit the dry-run spec for all the Service Perimeters in an
-
-        Access Policy.
-
-        A commit operation on a Service Perimeter involves copying its `spec` field
-
-        to that Service Perimeter's `status` field. Only Service Perimeters with
-
-        `use_explicit_dry_run_spec` field set to true are affected by a commit
-
-        operation. The longrunning operation from this RPC will have a successful
-
-        status once the dry-run specs for all the Service Perimeters have been
-
-        committed. If a commit fails, it will cause the longrunning operation to
-
-        return an error response and the entire commit operation will be cancelled.
-
-        When successful, Operation.response field will contain
-
-        CommitServicePerimetersResponse. The `dry_run` and the `spec` fields will
-
-        be cleared after a successful commit operation.
+      description: Commit the dry-run spec for all the Service Perimeters in an Access Policy. A commit operation on a Service Perimeter involves copying its `spec` field to that Service Perimeter's `status` field. Only Service Perimeters with `use_explicit_dry_run_spec` field set to true are affected by a commit operation. The longrunning operation from this RPC will have a successful status once the dry-run specs for all the Service Perimeters have been committed. If a commit fails, it will cause the longrunning operation to return an error response and the entire commit operation will be cancelled. When successful, Operation.response field will contain CommitServicePerimetersResponse. The `dry_run` and the `spec` fields will be cleared after a successful commit operation.
       operationId: accesscontextmanager.accessPolicies.servicePerimeters.commit
       parameters:
-        - description: >-
-            Required. Resource name for the parent Access Policy which owns all
-
-            Service Perimeters in scope for
-
-            the commit operation.
-
-
-            Format: `accessPolicies/{policy_id}`
+        - description: "Required. Resource name for the parent Access Policy which owns all Service Perimeters in scope for the commit operation. Format: `accessPolicies/{policy_id}`"
           in: path
           name: parent
           required: true
@@ -713,47 +507,22 @@ paths:
         - accessPolicies
   "/v1/{parent}/servicePerimeters:replaceAll":
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
     post:
-      description: >-
-        Replace all existing Service Perimeters in an
-
-        Access Policy
-
-        with the Service Perimeters provided.
-
-        This is done atomically. The longrunning operation from this
-
-        RPC will have a successful status once all replacements have propagated to
-
-        long-lasting storage. Replacements containing errors will result in an
-
-        error response for the first error encountered. Replacement will be
-
-        cancelled on error, existing Service Perimeters will not be
-
-        affected. Operation.response field will contain
-
-        ReplaceServicePerimetersResponse.
+      description: Replace all existing Service Perimeters in an Access Policy with the Service Perimeters provided. This is done atomically. The longrunning operation from this RPC will have a successful status once all replacements have propagated to long-lasting storage. Replacements containing errors will result in an error response for the first error encountered. Replacement will be cancelled on error, existing Service Perimeters will not be affected. Operation.response field will contain ReplaceServicePerimetersResponse.
       operationId: accesscontextmanager.accessPolicies.servicePerimeters.replaceAll
       parameters:
-        - description: >-
-            Required. Resource name for the access policy which owns these
-
-            Service Perimeters.
-
-
-            Format: `accessPolicies/{policy_id}`
+        - description: "Required. Resource name for the access policy which owns these Service Perimeters. Format: `accessPolicies/{policy_id}`"
           in: path
           name: parent
           required: true
@@ -855,12 +624,7 @@ components:
         type: string
   schemas:
     AccessLevel:
-      description: >-
-        An `AccessLevel` is a label that can be applied to requests to Google Cloud
-
-        services, along with a list of requirements necessary for the label to be
-
-        applied.
+      description: An `AccessLevel` is a label that can be applied to requests to Google Cloud services, along with a list of requirements necessary for the label to be applied.
       properties:
         basic:
           $ref: "#/components/schemas/BasicLevel"
@@ -872,54 +636,23 @@ components:
           description: Description of the `AccessLevel` and its use. Does not affect behavior.
           type: string
         name:
-          description: >-
-            Required. Resource name for the Access Level. The `short_name` component
-
-            must begin with a letter and only include alphanumeric and '_'. Format:
-
-            `accessPolicies/{policy_id}/accessLevels/{short_name}`. The maximum length
-
-            of the `short_name` component is 50 characters.
+          description: "Required. Resource name for the Access Level. The `short_name` component must begin with a letter and only include alphanumeric and '_'. Format: `accessPolicies/{policy_id}/accessLevels/{short_name}`. The maximum length of the `short_name` component is 50 characters."
           type: string
         title:
           description: Human readable title. Must be unique within the Policy.
           type: string
       type: object
     AccessPolicy:
-      description: >-
-        `AccessPolicy` is a container for `AccessLevels` (which define the necessary
-
-        attributes to use Google Cloud services) and `ServicePerimeters` (which
-
-        define regions of services able to freely pass data within a perimeter). An
-
-        access policy is globally visible within an organization, and the
-
-        restrictions it specifies apply to all projects within an organization.
+      description: "`AccessPolicy` is a container for `AccessLevels` (which define the necessary attributes to use Google Cloud services) and `ServicePerimeters` (which define regions of services able to freely pass data within a perimeter). An access policy is globally visible within an organization, and the restrictions it specifies apply to all projects within an organization."
       properties:
         etag:
-          description: >-
-            Output only. An opaque identifier for the current version of the
-
-            `AccessPolicy`. This will always be a strongly validated etag, meaning that
-
-            two Access Polices will be identical if and only if their etags are
-
-            identical. Clients should not expect this to be in any specific format.
+          description: Output only. An opaque identifier for the current version of the `AccessPolicy`. This will always be a strongly validated etag, meaning that two Access Polices will be identical if and only if their etags are identical. Clients should not expect this to be in any specific format.
           type: string
         name:
-          description: >-
-            Output only. Resource name of the `AccessPolicy`. Format:
-
-            `accessPolicies/{policy_id}`
+          description: "Output only. Resource name of the `AccessPolicy`. Format: `accessPolicies/{policy_id}`"
           type: string
         parent:
-          description: >-
-            Required. The parent of this `AccessPolicy` in the Cloud Resource
-
-            Hierarchy. Currently immutable once created. Format:
-
-            `organizations/{organization_id}`
+          description: "Required. The parent of this `AccessPolicy` in the Cloud Resource Hierarchy. Currently immutable once created. Format: `organizations/{organization_id}`"
           type: string
         title:
           description: Required. Human readable title. Does not affect behavior.
@@ -929,16 +662,7 @@ components:
       description: "`BasicLevel` is an `AccessLevel` using a set of recommended features."
       properties:
         combiningFunction:
-          description: >-
-            How the `conditions` list should be combined to determine if a request is
-
-            granted this `AccessLevel`. If AND is used, each `Condition` in
-
-            `conditions` must be satisfied for the `AccessLevel` to be applied. If OR
-
-            is used, at least one `Condition` in `conditions` must be satisfied for the
-
-            `AccessLevel` to be applied. Default behavior is AND.
+          description: How the `conditions` list should be combined to determine if a request is granted this `AccessLevel`. If AND is used, each `Condition` in `conditions` must be satisfied for the `AccessLevel` to be applied. If OR is used, at least one `Condition` in `conditions` must be satisfied for the `AccessLevel` to be applied. Default behavior is AND.
           enum:
             - AND
             - OR
@@ -954,163 +678,63 @@ components:
       properties: {}
       type: object
     CommitServicePerimetersRequest:
-      description: >-
-        A request to commit dry-run specs in all Service Perimeters belonging to
-
-        an Access Policy.
+      description: A request to commit dry-run specs in all Service Perimeters belonging to an Access Policy.
       properties:
         etag:
-          description: >-
-            Optional. The etag for the version of the Access Policy that this
-
-            commit operation is to be performed on. If, at the time of commit, the
-
-            etag for the Access Policy stored in Access Context Manager is different
-
-            from the specified etag, then the commit operation will not be performed
-
-            and the call will fail. This field is not required. If etag is not
-
-            provided, the operation will be performed as if a valid etag is provided.
+          description: Optional. The etag for the version of the Access Policy that this commit operation is to be performed on. If, at the time of commit, the etag for the Access Policy stored in Access Context Manager is different from the specified etag, then the commit operation will not be performed and the call will fail. This field is not required. If etag is not provided, the operation will be performed as if a valid etag is provided.
           type: string
       type: object
     CommitServicePerimetersResponse:
-      description: >-
-        A response to CommitServicePerimetersRequest. This will be put inside of
-
-        Operation.response field.
+      description: A response to CommitServicePerimetersRequest. This will be put inside of Operation.response field.
       properties:
         servicePerimeters:
-          description: >-
-            List of all the Service Perimeter instances in
-
-            the Access Policy.
+          description: List of all the Service Perimeter instances in the Access Policy.
           items:
             $ref: "#/components/schemas/ServicePerimeter"
           type: array
       type: object
     Condition:
-      description: >-
-        A condition necessary for an `AccessLevel` to be granted. The Condition is an
-
-        AND over its fields. So a Condition is true if: 1) the request IP is from one
-
-        of the listed subnetworks AND 2) the originating device complies with the
-
-        listed device policy AND 3) all listed access levels are granted AND 4) the
-
-        request was sent at a time allowed by the DateTimeRestriction.
+      description: "A condition necessary for an `AccessLevel` to be granted. The Condition is an AND over its fields. So a Condition is true if: 1) the request IP is from one of the listed subnetworks AND 2) the originating device complies with the listed device policy AND 3) all listed access levels are granted AND 4) the request was sent at a time allowed by the DateTimeRestriction."
       properties:
         devicePolicy:
           $ref: "#/components/schemas/DevicePolicy"
-          description: >-
-            Device specific restrictions, all restrictions must hold for the
-
-            Condition to be true. If not specified, all devices are allowed.
+          description: Device specific restrictions, all restrictions must hold for the Condition to be true. If not specified, all devices are allowed.
         ipSubnetworks:
-          description: >-
-            CIDR block IP subnetwork specification. May be IPv4 or IPv6. Note that for
-
-            a CIDR IP address block, the specified IP address portion must be properly
-
-            truncated (i.e. all the host bits must be zero) or the input is considered
-
-            malformed. For example, "192.0.2.0/24" is accepted but "192.0.2.1/24" is
-
-            not. Similarly, for IPv6, "2001:db8::/32" is accepted whereas
-
-            "2001:db8::1/32" is not. The originating IP of a request must be in one of
-
-            the listed subnets in order for this Condition to be true. If empty, all IP
-
-            addresses are allowed.
+          description: CIDR block IP subnetwork specification. May be IPv4 or IPv6. Note that for a CIDR IP address block, the specified IP address portion must be properly truncated (i.e. all the host bits must be zero) or the input is considered malformed. For example, "192.0.2.0/24" is accepted but "192.0.2.1/24" is not. Similarly, for IPv6, "2001:db8::/32" is accepted whereas "2001:db8::1/32" is not. The originating IP of a request must be in one of the listed subnets in order for this Condition to be true. If empty, all IP addresses are allowed.
           items:
             type: string
           type: array
         members:
-          description: >-
-            The request must be made by one of the provided user or service
-
-            accounts. Groups are not supported.
-
-            Syntax:
-
-            `user:{emailid}`
-
-            `serviceAccount:{emailid}`
-
-            If not specified, a request may come from any user.
+          description: "The request must be made by one of the provided user or service accounts. Groups are not supported. Syntax: `user:{emailid}` `serviceAccount:{emailid}` If not specified, a request may come from any user."
           items:
             type: string
           type: array
         negate:
-          description: >-
-            Whether to negate the Condition. If true, the Condition becomes a NAND over
-
-            its non-empty fields, each field must be false for the Condition overall to
-
-            be satisfied. Defaults to false.
+          description: Whether to negate the Condition. If true, the Condition becomes a NAND over its non-empty fields, each field must be false for the Condition overall to be satisfied. Defaults to false.
           type: boolean
         regions:
-          description: >-
-            The request must originate from one of the provided countries/regions.
-
-            Must be valid ISO 3166-1 alpha-2 codes.
+          description: The request must originate from one of the provided countries/regions. Must be valid ISO 3166-1 alpha-2 codes.
           items:
             type: string
           type: array
         requiredAccessLevels:
-          description: >-
-            A list of other access levels defined in the same `Policy`, referenced by
-
-            resource name. Referencing an `AccessLevel` which does not exist is an
-
-            error. All access levels listed must be granted for the Condition
-
-            to be true. Example:
-
-            "`accessPolicies/MY_POLICY/accessLevels/LEVEL_NAME"`
+          description: 'A list of other access levels defined in the same `Policy`, referenced by resource name. Referencing an `AccessLevel` which does not exist is an error. All access levels listed must be granted for the Condition to be true. Example: "`accessPolicies/MY_POLICY/accessLevels/LEVEL_NAME"`'
           items:
             type: string
           type: array
       type: object
     CustomLevel:
-      description: >-
-        `CustomLevel` is an `AccessLevel` using the Cloud Common Expression Language
-
-        to represent the necessary conditions for the level to apply to a request.
-
-        See CEL spec at: https://github.com/google/cel-spec
+      description: "`CustomLevel` is an `AccessLevel` using the Cloud Common Expression Language to represent the necessary conditions for the level to apply to a request. See CEL spec at: https://github.com/google/cel-spec"
       properties:
         expr:
           $ref: "#/components/schemas/Expr"
           description: Required. A Cloud CEL expression evaluating to a boolean.
       type: object
     DevicePolicy:
-      description: >-
-        `DevicePolicy` specifies device specific restrictions necessary to acquire a
-
-        given access level. A `DevicePolicy` specifies requirements for requests from
-
-        devices to be granted access levels, it does not do any enforcement on the
-
-        device. `DevicePolicy` acts as an AND over all specified fields, and each
-
-        repeated field is an OR over its elements. Any unset fields are ignored. For
-
-        example, if the proto is { os_type : DESKTOP_WINDOWS, os_type :
-
-        DESKTOP_LINUX, encryption_status: ENCRYPTED}, then the DevicePolicy will be
-
-        true for requests originating from encrypted Linux desktops and encrypted
-
-        Windows desktops.
+      description: "`DevicePolicy` specifies device specific restrictions necessary to acquire a given access level. A `DevicePolicy` specifies requirements for requests from devices to be granted access levels, it does not do any enforcement on the device. `DevicePolicy` acts as an AND over all specified fields, and each repeated field is an OR over its elements. Any unset fields are ignored. For example, if the proto is { os_type : DESKTOP_WINDOWS, os_type : DESKTOP_LINUX, encryption_status: ENCRYPTED}, then the DevicePolicy will be true for requests originating from encrypted Linux desktops and encrypted Windows desktops."
       properties:
         allowedDeviceManagementLevels:
-          description: >-
-            Allowed device management levels, an empty list allows all management
-
-            levels.
+          description: Allowed device management levels, an empty list allows all management levels.
           items:
             enum:
               - MANAGEMENT_UNSPECIFIED
@@ -1141,91 +765,27 @@ components:
           description: Whether the device needs to be corp owned.
           type: boolean
         requireScreenlock:
-          description: >-
-            Whether or not screenlock is required for the DevicePolicy to be true.
-
-            Defaults to `false`.
+          description: Whether or not screenlock is required for the DevicePolicy to be true. Defaults to `false`.
           type: boolean
       type: object
     Empty:
-      description: >-
-        A generic empty message that you can re-use to avoid defining duplicated
-
-        empty messages in your APIs. A typical example is to use it as the request
-
-        or the response type of an API method. For instance:
-
-            service Foo {
-              rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);
-            }
-
-        The JSON representation for `Empty` is empty JSON object `{}`.
+      description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`."
       properties: {}
       type: object
     Expr:
-      description: >-
-        Represents a textual expression in the Common Expression Language (CEL)
-
-        syntax. CEL is a C-like expression language. The syntax and semantics of CEL
-
-        are documented at https://github.com/google/cel-spec.
-
-
-        Example (Comparison):
-
-            title: "Summary size limit"
-            description: "Determines if a summary is less than 100 chars"
-            expression: "document.summary.size() < 100"
-
-        Example (Equality):
-
-            title: "Requestor is owner"
-            description: "Determines if requestor is the document owner"
-            expression: "document.owner == request.auth.claims.email"
-
-        Example (Logic):
-
-            title: "Public documents"
-            description: "Determine whether the document should be publicly visible"
-            expression: "document.type != 'private' && document.type != 'internal'"
-
-        Example (Data Manipulation):
-
-            title: "Notification string"
-            description: "Create a notification string with a timestamp."
-            expression: "'New message received at ' + string(document.create_time)"
-
-        The exact variables and functions that may be referenced within an expression
-
-        are determined by the service that evaluates it. See the service
-
-        documentation for additional information.
+      description: "Represents a textual expression in the Common Expression Language (CEL) syntax. CEL is a C-like expression language. The syntax and semantics of CEL are documented at https://github.com/google/cel-spec. Example (Comparison): title: \"Summary size limit\" description: \"Determines if a summary is less than 100 chars\" expression: \"document.summary.size() < 100\" Example (Equality): title: \"Requestor is owner\" description: \"Determines if requestor is the document owner\" expression: \"document.owner == request.auth.claims.email\" Example (Logic): title: \"Public documents\" description: \"Determine whether the document should be publicly visible\" expression: \"document.type != 'private' && document.type != 'internal'\" Example (Data Manipulation): title: \"Notification string\" description: \"Create a notification string with a timestamp.\" expression: \"'New message received at ' + string(document.create_time)\" The exact variables and functions that may be referenced within an expression are determined by the service that evaluates it. See the service documentation for additional information."
       properties:
         description:
-          description: >-
-            Optional. Description of the expression. This is a longer text which
-
-            describes the expression, e.g. when hovered over it in a UI.
+          description: Optional. Description of the expression. This is a longer text which describes the expression, e.g. when hovered over it in a UI.
           type: string
         expression:
-          description: >-
-            Textual representation of an expression in Common Expression Language
-
-            syntax.
+          description: Textual representation of an expression in Common Expression Language syntax.
           type: string
         location:
-          description: >-
-            Optional. String indicating the location of the expression for error
-
-            reporting, e.g. a file name and a position in the file.
+          description: Optional. String indicating the location of the expression for error reporting, e.g. a file name and a position in the file.
           type: string
         title:
-          description: >-
-            Optional. Title for the expression, i.e. a short string describing
-
-            its purpose. This can be used e.g. in UIs which allow to enter the
-
-            expression.
+          description: Optional. Title for the expression, i.e. a short string describing its purpose. This can be used e.g. in UIs which allow to enter the expression.
           type: string
       type: object
     ListAccessLevelsResponse:
@@ -1237,10 +797,7 @@ components:
             $ref: "#/components/schemas/AccessLevel"
           type: array
         nextPageToken:
-          description: >-
-            The pagination token to retrieve the next page of results. If the value is
-
-            empty, no further results remain.
+          description: The pagination token to retrieve the next page of results. If the value is empty, no further results remain.
           type: string
       type: object
     ListAccessPoliciesResponse:
@@ -1252,10 +809,7 @@ components:
             $ref: "#/components/schemas/AccessPolicy"
           type: array
         nextPageToken:
-          description: >-
-            The pagination token to retrieve the next page of results. If the value is
-
-            empty, no further results remain.
+          description: The pagination token to retrieve the next page of results. If the value is empty, no further results remain.
           type: string
       type: object
     ListOperationsResponse:
@@ -1274,10 +828,7 @@ components:
       description: A response to `ListServicePerimetersRequest`.
       properties:
         nextPageToken:
-          description: >-
-            The pagination token to retrieve the next page of results. If the value is
-
-            empty, no further results remain.
+          description: The pagination token to retrieve the next page of results. If the value is empty, no further results remain.
           type: string
         servicePerimeters:
           description: List of the Service Perimeter instances.
@@ -1286,18 +837,10 @@ components:
           type: array
       type: object
     Operation:
-      description: >-
-        This resource represents a long-running operation that is the result of a
-
-        network API call.
+      description: This resource represents a long-running operation that is the result of a network API call.
       properties:
         done:
-          description: >-
-            If the value is `false`, it means the operation is still in progress.
-
-            If `true`, the operation is completed, and either `error` or `response` is
-
-            available.
+          description: If the value is `false`, it means the operation is still in progress. If `true`, the operation is completed, and either `error` or `response` is available.
           type: boolean
         error:
           $ref: "#/components/schemas/Status"
@@ -1305,54 +848,22 @@ components:
         metadata:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
-          description: >-
-            Service-specific metadata associated with the operation.  It typically
-
-            contains progress information and common metadata such as create time.
-
-            Some services might not provide such metadata.  Any method that returns a
-
-            long-running operation should document the metadata type, if any.
+          description: Service-specific metadata associated with the operation. It typically contains progress information and common metadata such as create time. Some services might not provide such metadata. Any method that returns a long-running operation should document the metadata type, if any.
           type: object
         name:
-          description: >-
-            The server-assigned name, which is only unique within the same service that
-
-            originally returns it. If you use the default HTTP mapping, the
-
-            `name` should be a resource name ending with `operations/{unique_id}`.
+          description: The server-assigned name, which is only unique within the same service that originally returns it. If you use the default HTTP mapping, the `name` should be a resource name ending with `operations/{unique_id}`.
           type: string
         response:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
-          description: >-
-            The normal response of the operation in case of success.  If the original
-
-            method returns no data on success, such as `Delete`, the response is
-
-            `google.protobuf.Empty`.  If the original method is standard
-
-            `Get`/`Create`/`Update`, the response should be the resource.  For other
-
-            methods, the response should have the type `XxxResponse`, where `Xxx`
-
-            is the original method name.  For example, if the original method name
-
-            is `TakeSnapshot()`, the inferred response type is
-
-            `TakeSnapshotResponse`.
+          description: The normal response of the operation in case of success. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.
           type: object
       type: object
     OsConstraint:
       description: A restriction on the OS type and version of devices making requests.
       properties:
         minimumVersion:
-          description: >-
-            The minimum allowed OS version. If not set, any version of this OS
-
-            satisfies the constraint. Format: `"major.minor.patch"`.
-
-            Examples: `"10.5.301"`, `"9.2.1"`.
+          description: 'The minimum allowed OS version. If not set, any version of this OS satisfies the constraint. Format: `"major.minor.patch"`. Examples: `"10.5.301"`, `"9.2.1"`.'
           type: string
         osType:
           description: Required. The allowed OS type.
@@ -1366,52 +877,23 @@ components:
             - IOS
           type: string
         requireVerifiedChromeOs:
-          description: >-
-            Only allows requests from devices with a verified Chrome OS.
-
-            Verifications includes requirements that the device is enterprise-managed,
-
-            conformant to domain policies, and the caller has permission to call
-
-            the API targeted by the request.
+          description: Only allows requests from devices with a verified Chrome OS. Verifications includes requirements that the device is enterprise-managed, conformant to domain policies, and the caller has permission to call the API targeted by the request.
           type: boolean
       type: object
     ReplaceAccessLevelsRequest:
-      description: >-
-        A request to replace all existing Access Levels in an Access Policy with
-
-        the Access Levels provided. This is done atomically.
+      description: A request to replace all existing Access Levels in an Access Policy with the Access Levels provided. This is done atomically.
       properties:
         accessLevels:
-          description: >-
-            Required. The desired Access Levels that should
-
-            replace all existing Access Levels in the
-
-            Access Policy.
+          description: Required. The desired Access Levels that should replace all existing Access Levels in the Access Policy.
           items:
             $ref: "#/components/schemas/AccessLevel"
           type: array
         etag:
-          description: >-
-            Optional. The etag for the version of the Access Policy that this
-
-            replace operation is to be performed on. If, at the time of replace, the
-
-            etag for the Access Policy stored in Access Context Manager is different
-
-            from the specified etag, then the replace operation will not be performed
-
-            and the call will fail. This field is not required. If etag is not
-
-            provided, the operation will be performed as if a valid etag is provided.
+          description: Optional. The etag for the version of the Access Policy that this replace operation is to be performed on. If, at the time of replace, the etag for the Access Policy stored in Access Context Manager is different from the specified etag, then the replace operation will not be performed and the call will fail. This field is not required. If etag is not provided, the operation will be performed as if a valid etag is provided.
           type: string
       type: object
     ReplaceAccessLevelsResponse:
-      description: >-
-        A response to ReplaceAccessLevelsRequest. This will be put inside of
-
-        Operation.response field.
+      description: A response to ReplaceAccessLevelsRequest. This will be put inside of Operation.response field.
       properties:
         accessLevels:
           description: List of the Access Level instances.
@@ -1420,41 +902,19 @@ components:
           type: array
       type: object
     ReplaceServicePerimetersRequest:
-      description: >-
-        A request to replace all existing Service Perimeters in an Access Policy
-
-        with the Service Perimeters provided. This is done atomically.
+      description: A request to replace all existing Service Perimeters in an Access Policy with the Service Perimeters provided. This is done atomically.
       properties:
         etag:
-          description: >-
-            Optional. The etag for the version of the Access Policy that this
-
-            replace operation is to be performed on. If, at the time of replace, the
-
-            etag for the Access Policy stored in Access Context Manager is different
-
-            from the specified etag, then the replace operation will not be performed
-
-            and the call will fail. This field is not required. If etag is not
-
-            provided, the operation will be performed as if a valid etag is provided.
+          description: Optional. The etag for the version of the Access Policy that this replace operation is to be performed on. If, at the time of replace, the etag for the Access Policy stored in Access Context Manager is different from the specified etag, then the replace operation will not be performed and the call will fail. This field is not required. If etag is not provided, the operation will be performed as if a valid etag is provided.
           type: string
         servicePerimeters:
-          description: >-
-            Required. The desired Service Perimeters that should
-
-            replace all existing Service Perimeters in the
-
-            Access Policy.
+          description: Required. The desired Service Perimeters that should replace all existing Service Perimeters in the Access Policy.
           items:
             $ref: "#/components/schemas/ServicePerimeter"
           type: array
       type: object
     ReplaceServicePerimetersResponse:
-      description: >-
-        A response to ReplaceServicePerimetersRequest. This will be put inside of
-
-        Operation.response field.
+      description: A response to ReplaceServicePerimetersRequest. This will be put inside of Operation.response field.
       properties:
         servicePerimeters:
           description: List of the Service Perimeter instances.
@@ -1463,145 +923,48 @@ components:
           type: array
       type: object
     ServicePerimeter:
-      description: >-
-        `ServicePerimeter` describes a set of Google Cloud resources which can freely
-
-        import and export data amongst themselves, but not export outside of the
-
-        `ServicePerimeter`. If a request with a source within this `ServicePerimeter`
-
-        has a target outside of the `ServicePerimeter`, the request will be blocked.
-
-        Otherwise the request is allowed. There are two types of Service Perimeter -
-
-        Regular and Bridge. Regular Service Perimeters cannot overlap, a single
-
-        Google Cloud project can only belong to a single regular Service Perimeter.
-
-        Service Perimeter Bridges can contain only Google Cloud projects as members,
-
-        a single Google Cloud project may belong to multiple Service Perimeter
-
-        Bridges.
+      description: "`ServicePerimeter` describes a set of Google Cloud resources which can freely import and export data amongst themselves, but not export outside of the `ServicePerimeter`. If a request with a source within this `ServicePerimeter` has a target outside of the `ServicePerimeter`, the request will be blocked. Otherwise the request is allowed. There are two types of Service Perimeter - Regular and Bridge. Regular Service Perimeters cannot overlap, a single Google Cloud project can only belong to a single regular Service Perimeter. Service Perimeter Bridges can contain only Google Cloud projects as members, a single Google Cloud project may belong to multiple Service Perimeter Bridges."
       properties:
         description:
-          description: >-
-            Description of the `ServicePerimeter` and its use. Does not affect
-
-            behavior.
+          description: Description of the `ServicePerimeter` and its use. Does not affect behavior.
           type: string
         name:
-          description: >-
-            Required. Resource name for the ServicePerimeter.  The `short_name`
-
-            component must begin with a letter and only include alphanumeric and '_'.
-
-            Format: `accessPolicies/{policy_id}/servicePerimeters/{short_name}`
+          description: "Required. Resource name for the ServicePerimeter. The `short_name` component must begin with a letter and only include alphanumeric and '_'. Format: `accessPolicies/{policy_id}/servicePerimeters/{short_name}`"
           type: string
         perimeterType:
-          description: >-
-            Perimeter type indicator. A single project is
-
-            allowed to be a member of single regular perimeter, but multiple service
-
-            perimeter bridges. A project cannot be a included in a perimeter bridge
-
-            without being included in regular perimeter. For perimeter bridges,
-
-            the restricted service list as well as access level lists must be
-
-            empty.
+          description: Perimeter type indicator. A single project is allowed to be a member of single regular perimeter, but multiple service perimeter bridges. A project cannot be a included in a perimeter bridge without being included in regular perimeter. For perimeter bridges, the restricted service list as well as access level lists must be empty.
           enum:
             - PERIMETER_TYPE_REGULAR
             - PERIMETER_TYPE_BRIDGE
           type: string
         spec:
           $ref: "#/components/schemas/ServicePerimeterConfig"
-          description: >-
-            Proposed (or dry run) ServicePerimeter configuration. This configuration
-
-            allows to specify and test ServicePerimeter configuration without enforcing
-
-            actual access restrictions. Only allowed to be set when the
-
-            "use_explicit_dry_run_spec" flag is set.
+          description: Proposed (or dry run) ServicePerimeter configuration. This configuration allows to specify and test ServicePerimeter configuration without enforcing actual access restrictions. Only allowed to be set when the "use_explicit_dry_run_spec" flag is set.
         status:
           $ref: "#/components/schemas/ServicePerimeterConfig"
-          description: >-
-            Current ServicePerimeter configuration. Specifies sets of resources,
-
-            restricted services and access levels that determine perimeter
-
-            content and boundaries.
+          description: Current ServicePerimeter configuration. Specifies sets of resources, restricted services and access levels that determine perimeter content and boundaries.
         title:
           description: Human readable title. Must be unique within the Policy.
           type: string
         useExplicitDryRunSpec:
-          description: >-
-            Use explicit dry run spec flag. Ordinarily, a dry-run spec implicitly
-
-            exists  for all Service Perimeters, and that spec is identical to the
-
-            status for those Service Perimeters. When this flag is set, it inhibits the
-
-            generation of the implicit spec, thereby allowing the user to explicitly
-
-            provide a configuration ("spec") to use in a dry-run version of the Service
-
-            Perimeter. This allows the user to test changes to the enforced config
-
-            ("status") without actually enforcing them. This testing is done through
-
-            analyzing the differences between currently enforced and suggested
-
-            restrictions. use_explicit_dry_run_spec must bet set to True if any of the
-
-            fields in the spec are set to non-default values.
+          description: Use explicit dry run spec flag. Ordinarily, a dry-run spec implicitly exists for all Service Perimeters, and that spec is identical to the status for those Service Perimeters. When this flag is set, it inhibits the generation of the implicit spec, thereby allowing the user to explicitly provide a configuration ("spec") to use in a dry-run version of the Service Perimeter. This allows the user to test changes to the enforced config ("status") without actually enforcing them. This testing is done through analyzing the differences between currently enforced and suggested restrictions. use_explicit_dry_run_spec must bet set to True if any of the fields in the spec are set to non-default values.
           type: boolean
       type: object
     ServicePerimeterConfig:
-      description: >-
-        `ServicePerimeterConfig` specifies a set of Google Cloud resources that
-
-        describe specific Service Perimeter configuration.
+      description: "`ServicePerimeterConfig` specifies a set of Google Cloud resources that describe specific Service Perimeter configuration."
       properties:
         accessLevels:
-          description: >-
-            A list of `AccessLevel` resource names that allow resources within the
-
-            `ServicePerimeter` to be accessed from the internet. `AccessLevels` listed
-
-            must be in the same policy as this `ServicePerimeter`. Referencing a
-
-            nonexistent `AccessLevel` is a syntax error. If no `AccessLevel` names are
-
-            listed, resources within the perimeter can only be accessed via Google
-
-            Cloud calls with request origins within the perimeter. Example:
-
-            `"accessPolicies/MY_POLICY/accessLevels/MY_LEVEL"`.
-
-            For Service Perimeter Bridge, must be empty.
+          description: 'A list of `AccessLevel` resource names that allow resources within the `ServicePerimeter` to be accessed from the internet. `AccessLevels` listed must be in the same policy as this `ServicePerimeter`. Referencing a nonexistent `AccessLevel` is a syntax error. If no `AccessLevel` names are listed, resources within the perimeter can only be accessed via Google Cloud calls with request origins within the perimeter. Example: `"accessPolicies/MY_POLICY/accessLevels/MY_LEVEL"`. For Service Perimeter Bridge, must be empty.'
           items:
             type: string
           type: array
         resources:
-          description: >-
-            A list of Google Cloud resources that are inside of the service perimeter.
-
-            Currently only projects are allowed. Format: `projects/{project_number}`
+          description: "A list of Google Cloud resources that are inside of the service perimeter. Currently only projects are allowed. Format: `projects/{project_number}`"
           items:
             type: string
           type: array
         restrictedServices:
-          description: >-
-            Google Cloud services that are subject to the Service Perimeter
-
-            restrictions. For example, if `storage.googleapis.com` is specified, access
-
-            to the storage buckets inside the perimeter must meet the perimeter's
-
-            access restrictions.
+          description: Google Cloud services that are subject to the Service Perimeter restrictions. For example, if `storage.googleapis.com` is specified, access to the storage buckets inside the perimeter must meet the perimeter's access restrictions.
           items:
             type: string
           type: array
@@ -1610,62 +973,33 @@ components:
           description: Configuration for APIs allowed within Perimeter.
       type: object
     Status:
-      description: >-
-        The `Status` type defines a logical error model that is suitable for
-
-        different programming environments, including REST APIs and RPC APIs. It is
-
-        used by [gRPC](https://github.com/grpc). Each `Status` message contains
-
-        three pieces of data: error code, error message, and error details.
-
-
-        You can find out more about this error model and how to work with it in the
-
-        [API Design Guide](https://cloud.google.com/apis/design/errors).
+      description: "The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors)."
       properties:
         code:
           description: The status code, which should be an enum value of google.rpc.Code.
           format: int32
           type: integer
         details:
-          description: >-
-            A list of messages that carry the error details.  There is a common set of
-
-            message types for APIs to use.
+          description: A list of messages that carry the error details. There is a common set of message types for APIs to use.
           items:
             additionalProperties:
               description: Properties of the object. Contains field @type with type URL.
             type: object
           type: array
         message:
-          description: >-
-            A developer-facing error message, which should be in English. Any
-
-            user-facing error message should be localized and sent in the
-
-            google.rpc.Status.details field, or localized by the client.
+          description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.
           type: string
       type: object
     VpcAccessibleServices:
-      description: >-
-        Specifies how APIs are allowed to communicate within the Service
-
-        Perimeter.
+      description: Specifies how APIs are allowed to communicate within the Service Perimeter.
       properties:
         allowedServices:
-          description: >-
-            The list of APIs usable within the Service Perimeter. Must be empty
-
-            unless 'enable_restriction' is True.
+          description: The list of APIs usable within the Service Perimeter. Must be empty unless 'enable_restriction' is True. You can specify a list of individual services, as well as include the 'RESTRICTED-SERVICES' value, which automatically includes all of the services protected by the perimeter.
           items:
             type: string
           type: array
         enableRestriction:
-          description: >-
-            Whether to restrict API calls within the Service Perimeter to the list of
-
-            APIs specified in 'allowed_services'.
+          description: Whether to restrict API calls within the Service Perimeter to the list of APIs specified in 'allowed_services'.
           type: boolean
       type: object
   securitySchemes:

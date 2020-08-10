@@ -94,17 +94,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
     patch:
       description: >-
         Updates the metadata and configuration of a specific Redis instance.
@@ -212,17 +212,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
   "/v1beta1/{name}/operations":
     get:
       description: >-
@@ -282,30 +282,30 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
   "/v1beta1/{name}:cancel":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
     post:
       description: >-
         Starts asynchronous cancellation on a long-running operation.  The server
@@ -351,17 +351,17 @@ paths:
         - projects
   "/v1beta1/{name}:export":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
     post:
       description: >-
         Export Redis instance data into a Redis RDB format file in Cloud Storage.
@@ -405,17 +405,17 @@ paths:
         - projects
   "/v1beta1/{name}:failover":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
     post:
       description: >-
         Initiates a failover of the master node to current replica node for a
@@ -453,17 +453,17 @@ paths:
         - projects
   "/v1beta1/{name}:import":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
     post:
       description: >-
         Import a Redis RDB snapshot file from Cloud Storage into a Redis instance.
@@ -511,17 +511,17 @@ paths:
         - projects
   "/v1beta1/{name}:upgrade":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
     post:
       description: >-
         Upgrades Redis instance to the newer Redis version specified in the
@@ -625,17 +625,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
     post:
       description: >-
         Creates a Redis instance based on the specified tier and memory size.

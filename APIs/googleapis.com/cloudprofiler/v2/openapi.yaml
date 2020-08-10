@@ -37,26 +37,19 @@ tags:
 paths:
   "/v2/{name}":
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/key"
     patch:
-      description: >-
-        UpdateProfile updates the profile bytes and labels on the profile resource
-
-        created in the online mode. Updating the bytes for profiles created in the
-
-        offline mode is currently not supported: the profile content must be
-
-        provided at the time of the profile creation.
+      description: "UpdateProfile updates the profile bytes and labels on the profile resource created in the online mode. Updating the bytes for profiles created in the offline mode is currently not supported: the profile content must be provided at the time of the profile creation."
       operationId: cloudprofiler.projects.profiles.patch
       parameters:
         - description: Output only. Opaque, server-assigned, unique ID for this profile.
@@ -65,14 +58,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: >-
-            Field mask used to specify the fields to be overwritten. Currently only
-
-            profile_bytes and labels fields are supported by UpdateProfile, so only
-
-            those fields can be specified in the mask. When no mask is provided, all
-
-            fields are overwritten.
+        - description: Field mask used to specify the fields to be overwritten. Currently only profile_bytes and labels fields are supported by UpdateProfile, so only those fields can be specified in the mask. When no mask is provided, all fields are overwritten.
           in: query
           name: updateMask
           schema:
@@ -106,42 +92,19 @@ paths:
         - projects
   "/v2/{parent}/profiles":
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/key"
     post:
-      description: >-
-        CreateProfile creates a new profile resource in the online mode.
-
-
-        The server ensures that the new profiles are created at a constant rate per
-
-        deployment, so the creation request may hang for some time until the next
-
-        profile session is available.
-
-
-        The request may fail with ABORTED error if the creation is not available
-
-        within ~1m, the response will indicate the duration of the backoff the
-
-        client should take before attempting creating a profile again. The backoff
-
-        duration is returned in google.rpc.RetryInfo extension on the response
-
-        status. To a gRPC client, the extension will be return as a
-
-        binary-serialized proto in the trailing metadata item named
-
-        "google.rpc.retryinfo-bin".
+      description: CreateProfile creates a new profile resource in the online mode. The server ensures that the new profiles are created at a constant rate per deployment, so the creation request may hang for some time until the next profile session is available. The request may fail with ABORTED error if the creation is not available within ~1m, the response will indicate the duration of the backoff the client should take before attempting creating a profile again. The backoff duration is returned in google.rpc.RetryInfo extension on the response status. To a gRPC client, the extension will be return as a binary-serialized proto in the trailing metadata item named "google.rpc.retryinfo-bin".
       operationId: cloudprofiler.projects.profiles.create
       parameters:
         - description: Parent project to create the profile in.
@@ -179,24 +142,19 @@ paths:
         - projects
   "/v2/{parent}/profiles:createOffline":
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/key"
     post:
-      description: >-
-        CreateOfflineProfile creates a new profile resource in the offline mode.
-
-        The client provides the profile to create along with the profile bytes, the
-
-        server records it.
+      description: CreateOfflineProfile creates a new profile resource in the offline mode. The client provides the profile to create along with the profile bytes, the server records it.
       operationId: cloudprofiler.projects.profiles.createOffline
       parameters:
         - description: Parent project to create the profile in.
@@ -309,14 +267,7 @@ components:
         type: string
   schemas:
     CreateProfileRequest:
-      description: >-
-        CreateProfileRequest describes a profile resource online creation request.
-
-        The deployment field must be populated. The profile_type specifies the list
-
-        of profile types supported by the agent. The creation call will hang until a
-
-        profile of one of these types needs to be collected.
+      description: CreateProfileRequest describes a profile resource online creation request. The deployment field must be populated. The profile_type specifies the list of profile types supported by the agent. The creation call will hang until a profile of one of these types needs to be collected.
       properties:
         deployment:
           $ref: "#/components/schemas/Deployment"
@@ -342,50 +293,13 @@ components:
         labels:
           additionalProperties:
             type: string
-          description: >-
-            Labels identify the deployment within the user universe and same target.
-
-            Validation regex for label names: `^[a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?$`.
-
-            Value for an individual label must be <= 512 bytes, the total
-
-            size of all label names and values must be <= 1024 bytes.
-
-
-            Label named "language" can be used to record the programming language of
-
-            the profiled deployment. The standard choices for the value include "java",
-
-            "go", "python", "ruby", "nodejs", "php", "dotnet".
-
-
-            For deployments running on Google Cloud Platform, "zone" or "region" label
-
-            should be present describing the deployment location. An example of a zone
-
-            is "us-central1-a", an example of a region is "us-central1" or
-
-            "us-central".
+          description: 'Labels identify the deployment within the user universe and same target. Validation regex for label names: `^[a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?$`. Value for an individual label must be <= 512 bytes, the total size of all label names and values must be <= 1024 bytes. Label named "language" can be used to record the programming language of the profiled deployment. The standard choices for the value include "java", "go", "python", "ruby", "nodejs", "php", "dotnet". For deployments running on Google Cloud Platform, "zone" or "region" label should be present describing the deployment location. An example of a zone is "us-central1-a", an example of a region is "us-central1" or "us-central".'
           type: object
         projectId:
-          description: >-
-            Project ID is the ID of a cloud project.
-
-            Validation regex: `^a-z{4,61}[a-z0-9]$`.
+          description: "Project ID is the ID of a cloud project. Validation regex: `^a-z{4,61}[a-z0-9]$`."
           type: string
         target:
-          description: >-
-            Target is the service name used to group related deployments:
-
-            * Service name for GAE Flex / Standard.
-
-            * Cluster and container name for GKE.
-
-            * User-specified string for direct GCE profiling (e.g. Java).
-
-            * Job name for Dataflow.
-
-            Validation regex: `^[a-z]([-a-z0-9_.]{0,253}[a-z0-9])?$`.
+          description: "Target is the service name used to group related deployments: * Service name for GAE Flex / Standard. * Cluster and container name for GKE. * User-specified string for direct GCE profiling (e.g. Java). * Job name for Dataflow. Validation regex: `^[a-z]([-a-z0-9_.]{0,253}[a-z0-9])?$`."
           type: string
       type: object
     Profile:
@@ -395,47 +309,23 @@ components:
           $ref: "#/components/schemas/Deployment"
           description: Deployment this profile corresponds to.
         duration:
-          description: >-
-            Duration of the profiling session.
-
-            Input (for the offline mode) or output (for the online mode).
-
-            The field represents requested profiling duration. It may slightly differ
-
-            from the effective profiling duration, which is recorded in the profile
-
-            data, in case the profiling can't be stopped immediately (e.g. in case
-
-            stopping the profiling is handled asynchronously).
+          description: Duration of the profiling session. Input (for the offline mode) or output (for the online mode). The field represents requested profiling duration. It may slightly differ from the effective profiling duration, which is recorded in the profile data, in case the profiling can't be stopped immediately (e.g. in case stopping the profiling is handled asynchronously).
           format: google-duration
           type: string
         labels:
           additionalProperties:
             type: string
-          description: >-
-            Input only. Labels associated to this specific profile. These labels will
-
-            get merged with the deployment labels for the final data set.  See
-
-            documentation on deployment labels for validation rules and limits.
+          description: Input only. Labels associated to this specific profile. These labels will get merged with the deployment labels for the final data set. See documentation on deployment labels for validation rules and limits.
           type: object
         name:
           description: Output only. Opaque, server-assigned, unique ID for this profile.
           type: string
         profileBytes:
-          description: >-
-            Input only. Profile bytes, as a gzip compressed serialized proto, the
-
-            format is https://github.com/google/pprof/blob/master/proto/profile.proto.
+          description: Input only. Profile bytes, as a gzip compressed serialized proto, the format is https://github.com/google/pprof/blob/master/proto/profile.proto.
           format: byte
           type: string
         profileType:
-          description: >-
-            Type of profile.
-
-            For offline mode, this must be specified when creating the profile. For
-
-            online mode it is assigned and returned by the server.
+          description: Type of profile. For offline mode, this must be specified when creating the profile. For online mode it is assigned and returned by the server.
           enum:
             - PROFILE_TYPE_UNSPECIFIED
             - CPU

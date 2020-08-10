@@ -37,26 +37,10 @@ tags:
 paths:
   "/v1/{name}":
     delete:
-      description: >-
-        Deletes a model version.
-
-
-        Each model can have multiple versions deployed and in use at any given
-
-        time. Use this method to remove a single version.
-
-
-        Note: You cannot delete the version that is set as the default version
-
-        of the model unless it is the only remaining version.
-      operationId: ml.projects.models.versions.delete
+      description: Deletes a trial.
+      operationId: ml.projects.locations.studies.trials.delete
       parameters:
-        - description: >-
-            Required. The name of the version. You can get the names of all the
-
-            versions of a model by calling
-
-            projects.models.versions.list.
+        - description: Required. The trial name.
           in: path
           name: name
           required: true
@@ -67,7 +51,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GoogleLongrunning__Operation"
+                $ref: "#/components/schemas/GoogleProtobuf__Empty"
           description: Successful response
       security:
         - Oauth2:
@@ -77,15 +61,10 @@ paths:
       tags:
         - projects
     get:
-      description: >-
-        Gets the latest state of a long-running operation.  Clients can use this
-
-        method to poll the operation result at intervals as recommended by the API
-
-        service.
-      operationId: ml.projects.operations.get
+      description: Gets a trial.
+      operationId: ml.projects.locations.studies.trials.get
       parameters:
-        - description: The name of the operation resource.
+        - description: Required. The trial name.
           in: path
           name: name
           required: true
@@ -96,7 +75,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GoogleLongrunning__Operation"
+                $ref: "#/components/schemas/GoogleCloudMlV1__Trial"
           description: Successful response
       security:
         - Oauth2:
@@ -110,17 +89,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
     patch:
       description: >-
         Updates the specified Version resource.
@@ -250,30 +229,30 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
   "/v1/{name}:addMeasurement":
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
     post:
       description: >-
         Adds a measurement of the objective metrics to a trial. This measurement
@@ -308,17 +287,17 @@ paths:
         - projects
   "/v1/{name}:cancel":
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
     post:
       description: >-
         Starts asynchronous cancellation on a long-running operation.  The server
@@ -340,7 +319,7 @@ paths:
         an Operation.error value with a google.rpc.Status.code of 1,
 
         corresponding to `Code.CANCELLED`.
-      operationId: ml.projects.operations.cancel
+      operationId: ml.projects.locations.operations.cancel
       parameters:
         - description: The name of the operation resource to be cancelled.
           in: path
@@ -369,17 +348,17 @@ paths:
         - projects
   "/v1/{name}:checkEarlyStoppingState":
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
     post:
       description: >-
         Checks  whether a trial should stop or not. Returns a
@@ -418,17 +397,17 @@ paths:
         - projects
   "/v1/{name}:complete":
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
     post:
       description: Marks a trial as complete.
       operationId: ml.projects.locations.studies.trials.complete
@@ -460,17 +439,17 @@ paths:
         - projects
   "/v1/{name}:explain":
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
     post:
       description: >-
         Performs explanation on the data in the request.
@@ -541,30 +520,30 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
   "/v1/{name}:predict":
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
     post:
       description: >-
         Performs online prediction on the data in the request.
@@ -604,17 +583,17 @@ paths:
         - projects
   "/v1/{name}:setDefault":
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
     post:
       description: >-
         Designates a version to be the default for the model.
@@ -664,17 +643,17 @@ paths:
         - projects
   "/v1/{name}:stop":
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
     post:
       description: Stops a trial.
       operationId: ml.projects.locations.studies.trials.stop
@@ -786,17 +765,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
     post:
       description: Creates a training or a batch prediction job.
       operationId: ml.projects.jobs.create
@@ -883,17 +862,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
   "/v1/{parent}/models":
     get:
       description: >-
@@ -964,17 +943,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
     post:
       description: >-
         Creates a model which will later contain one or more versions.
@@ -1041,17 +1020,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
     post:
       description: Creates a study.
       operationId: ml.projects.locations.studies.create
@@ -1118,17 +1097,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
     post:
       description: Adds a user provided trial to a study.
       operationId: ml.projects.locations.studies.trials.create
@@ -1160,17 +1139,17 @@ paths:
         - projects
   "/v1/{parent}/trials:suggest":
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
     post:
       description: >-
         Adds one or more trials to a study, with parameter values
@@ -1281,17 +1260,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
     post:
       description: >-
         Creates a new version of a model from a trained TensorFlow model.
@@ -1394,30 +1373,30 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
   "/v1/{resource}:setIamPolicy":
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
     post:
       description: >-
         Sets the access control policy on the specified resource. Replaces any
@@ -1458,17 +1437,17 @@ paths:
         - projects
   "/v1/{resource}:testIamPermissions":
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
     post:
       description: >-
         Returns permissions that a caller has on the specified resource.
@@ -2207,7 +2186,7 @@ components:
 
             of the model's fully differentiable structure. Refer to this paper for
 
-            more details: http://proceedings.mlr.press/v70/sundararajan17a.html
+            more details: https://arxiv.org/abs/1703.01365
         sampledShapleyAttribution:
           $ref: "#/components/schemas/GoogleCloudMlV1__SampledShapleyAttribution"
           description: >-
@@ -3604,24 +3583,22 @@ components:
           type: string
         network:
           description: >-
-            Optional. The full name of the Google Compute Engine
+            Optional. The full name of the [Compute Engine network](/vpc/docs/vpc) to which the
 
-            [network](/compute/docs/networks-and-firewalls#networks) to which the Job
+            Job is peered. For example, `projects/12345/global/networks/myVPC`. The
 
-            is peered. For example, projects/12345/global/networks/myVPC. Format is of
+            format of this field is `projects/{project}/global/networks/{network}`,
 
-            the form projects/{project}/global/networks/{network}. Where {project} is a
+            where {project} is a project number (like `12345`) and {network} is network
 
-            project number, as in '12345', and {network} is network name.".
+            name.
 
 
             Private services access must already be configured for the network. If left
 
-            unspecified, the Job is not peered with any network. Learn more -
+            unspecified, the Job is not peered with any network. [Learn about using VPC
 
-            Connecting Job to user network over private
-
-            IP.
+            Network Peering.](/ai-platform/training/docs/vpc-peering).
           type: string
         packageUris:
           description: >-
@@ -3756,11 +3733,24 @@ components:
           description: Optional. Scheduling options for a training job.
         serviceAccount:
           description: >-
-            Optional. Specifies the service account for workload run-as account.
+            Optional. The email address of a service account to use when running the
 
-            Users submitting jobs must have act-as permission on this run-as account.
+            training appplication. You must have the `iam.serviceAccounts.actAs`
 
-            If not specified, then CMLE P4SA will be used by default.
+            permission for the specified service account. In addition, the AI Platform
+
+            Training Google-managed service account must have the
+
+            `roles/iam.serviceAccountAdmin` role for the specified service account.
+
+            [Learn more about configuring a service
+
+            account.](/ai-platform/training/docs/custom-service-account)
+
+
+            If not specified, the AI Platform Training Google-managed service account
+
+            is used by default.
           type: string
         useChiefInTfConfig:
           description: >-

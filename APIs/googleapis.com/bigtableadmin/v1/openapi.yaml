@@ -5,6 +5,7 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
+    x-twitter: youtube
   description: Administer your Cloud Bigtable tables and instances.
   license:
     name: Creative Commons Attribution 3.0
@@ -12,6 +13,13 @@ info:
   termsOfService: 'https://developers.google.com/terms/'
   title: Cloud Bigtable Admin API
   version: v1
+  x-apiClientRegistration:
+    url: 'https://console.developers.google.com'
+  x-apisguru-categories:
+    - analytics
+    - media
+  x-logo:
+    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
   x-origin:
     - format: google
       url: 'https://bigtableadmin.googleapis.com/$discovery/rest?version=v1'
@@ -333,6 +341,23 @@ components:
           description: |-
             Required. The unique name of the project in which to create the new instance.
             Values are of the form `projects/{project}`.
+          type: string
+      type: object
+    FailureTrace:
+      description: Added to the error payload.
+      properties:
+        frames:
+          items:
+            $ref: '#/components/schemas/Frame'
+          type: array
+      type: object
+    Frame:
+      properties:
+        targetName:
+          type: string
+        workflowGuid:
+          type: string
+        zoneId:
           type: string
       type: object
     Instance:

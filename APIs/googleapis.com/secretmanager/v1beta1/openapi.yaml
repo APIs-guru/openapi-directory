@@ -65,10 +65,23 @@ paths:
       tags:
         - projects
     get:
-      description: Gets information about a location.
-      operationId: secretmanager.projects.locations.get
+      description: >-
+        Gets metadata for a SecretVersion.
+
+
+        `projects/*/secrets/*/versions/latest` is an alias to the `latest`
+
+        SecretVersion.
+      operationId: secretmanager.projects.secrets.versions.get
       parameters:
-        - description: Resource name for the location.
+        - description: >-
+            Required. The resource name of the SecretVersion in the format
+
+            `projects/*/secrets/*/versions/*`.
+
+            `projects/*/secrets/*/versions/latest` is an alias to the `latest`
+
+            SecretVersion.
           in: path
           name: name
           required: true
@@ -79,7 +92,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Location"
+                $ref: "#/components/schemas/SecretVersion"
           description: Successful response
       security:
         - Oauth2:
@@ -89,17 +102,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
     patch:
       description: Updates metadata of an existing Secret.
       operationId: secretmanager.projects.secrets.patch
@@ -175,17 +188,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
   "/v1beta1/{name}:access":
     get:
       description: >-
@@ -221,30 +234,30 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
   "/v1beta1/{name}:destroy":
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: >-
         Destroys a SecretVersion.
@@ -287,17 +300,17 @@ paths:
         - projects
   "/v1beta1/{name}:disable":
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: >-
         Disables a SecretVersion.
@@ -338,17 +351,17 @@ paths:
         - projects
   "/v1beta1/{name}:enable":
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: >-
         Enables a SecretVersion.
@@ -434,17 +447,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: Creates a new Secret containing no SecretVersions.
       operationId: secretmanager.projects.secrets.create
@@ -542,30 +555,30 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
   "/v1beta1/{parent}:addVersion":
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: >-
         Creates a new SecretVersion containing secret data and attaches
@@ -658,30 +671,30 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
   "/v1beta1/{resource}:setIamPolicy":
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: >-
         Sets the access control policy on the specified secret. Replaces any
@@ -724,17 +737,17 @@ paths:
         - projects
   "/v1beta1/{resource}:testIamPermissions":
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: >-
         Returns permissions that a caller has for the specified secret.

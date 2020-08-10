@@ -33,9 +33,9 @@ info:
 externalDocs:
   url: https://cloud.google.com/access-approval/docs
 tags:
+  - name: organizations
   - name: projects
   - name: folders
-  - name: organizations
 paths:
   "/v1beta1/{name}":
     delete:
@@ -51,7 +51,7 @@ paths:
         hierarchy, then Access Approval will still be enabled at this level as
 
         the settings are inherited.
-      operationId: accessapproval.organizations.deleteAccessApprovalSettings
+      operationId: accessapproval.folders.deleteAccessApprovalSettings
       parameters:
         - description: Name of the AccessApprovalSettings to delete.
           in: path
@@ -72,10 +72,10 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
-        - organizations
+        - folders
     get:
       description: Gets an approval request. Returns NOT_FOUND if the request does not exist.
-      operationId: accessapproval.organizations.approvalRequests.get
+      operationId: accessapproval.folders.approvalRequests.get
       parameters:
         - description: Name of the approval request to retrieve.
           in: path
@@ -96,25 +96,25 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
-        - organizations
+        - folders
     parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
     patch:
       description: >-
         Updates the settings associated with a project, folder, or organization.
 
         Settings to update are determined by the value of field_mask.
-      operationId: accessapproval.organizations.updateAccessApprovalSettings
+      operationId: accessapproval.folders.updateAccessApprovalSettings
       parameters:
         - description: >-
             The resource name of the settings. Format is one of:
@@ -159,20 +159,20 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
-        - organizations
+        - folders
   "/v1beta1/{name}:approve":
     parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: >-
         Approves a request and returns the updated ApprovalRequest.
@@ -181,7 +181,7 @@ paths:
         Returns NOT_FOUND if the request does not exist. Returns
 
         FAILED_PRECONDITION if the request exists but is not in a pending state.
-      operationId: accessapproval.organizations.approvalRequests.approve
+      operationId: accessapproval.folders.approvalRequests.approve
       parameters:
         - description: Name of the approval request to approve.
           in: path
@@ -207,20 +207,20 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
-        - organizations
+        - folders
   "/v1beta1/{name}:dismiss":
     parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: >-
         Dismisses a request. Returns the updated ApprovalRequest.
@@ -239,7 +239,7 @@ paths:
         Returns FAILED_PRECONDITION if the request exists but is not in a pending
 
         state.
-      operationId: accessapproval.organizations.approvalRequests.dismiss
+      operationId: accessapproval.folders.approvalRequests.dismiss
       parameters:
         - description: Name of the ApprovalRequest to dismiss.
           in: path
@@ -265,7 +265,7 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
-        - organizations
+        - folders
   "/v1beta1/{parent}/approvalRequests":
     get:
       description: >-
@@ -274,7 +274,7 @@ paths:
         Approval requests can be filtered by state (pending, active, dismissed).
 
         The order is reverse chronological.
-      operationId: accessapproval.organizations.approvalRequests.list
+      operationId: accessapproval.folders.approvalRequests.list
       parameters:
         - description: >-
             The parent resource. This may be "projects/{project_id}",
@@ -325,19 +325,19 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
-        - organizations
+        - folders
     parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
 components:
   parameters:
     _.xgafv:

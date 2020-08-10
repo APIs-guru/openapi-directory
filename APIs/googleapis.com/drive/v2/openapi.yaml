@@ -238,6 +238,11 @@ paths:
           name: includeItemsFromAllDrives
           schema:
             type: boolean
+        - description: Specifies which additional view's permissions to include in the response. Only 'published' is supported.
+          in: query
+          name: includePermissionsForView
+          schema:
+            type: string
         - description: Whether to include changes outside the My Drive hierarchy in the result. When set to false, changes to files such as those in the Application Data folder or shared files which have not been added to My Drive are omitted from the result.
           in: query
           name: includeSubscribed
@@ -442,6 +447,11 @@ paths:
           name: includeItemsFromAllDrives
           schema:
             type: boolean
+        - description: Specifies which additional view's permissions to include in the response. Only 'published' is supported.
+          in: query
+          name: includePermissionsForView
+          schema:
+            type: string
         - description: Whether to include changes outside the My Drive hierarchy in the result. When set to false, changes to files such as those in the Application Data folder or shared files which have not been added to My Drive are omitted from the result.
           in: query
           name: includeSubscribed
@@ -943,6 +953,11 @@ paths:
           name: includeItemsFromAllDrives
           schema:
             type: boolean
+        - description: Specifies which additional view's permissions to include in the response. Only 'published' is supported.
+          in: query
+          name: includePermissionsForView
+          schema:
+            type: string
         - description: Deprecated use includeItemsFromAllDrives instead.
           in: query
           name: includeTeamDriveItems
@@ -1061,6 +1076,11 @@ paths:
           name: enforceSingleParent
           schema:
             type: boolean
+        - description: Specifies which additional view's permissions to include in the response. Only 'published' is supported.
+          in: query
+          name: includePermissionsForView
+          schema:
+            type: string
         - description: Whether to attempt OCR on .jpg, .png, .gif, or .pdf uploads.
           in: query
           name: ocr
@@ -1263,6 +1283,11 @@ paths:
           name: acknowledgeAbuse
           schema:
             type: boolean
+        - description: Specifies which additional view's permissions to include in the response. Only 'published' is supported.
+          in: query
+          name: includePermissionsForView
+          schema:
+            type: string
         - description: This parameter is deprecated and has no function.
           in: query
           name: projection
@@ -1362,6 +1387,11 @@ paths:
           name: enforceSingleParent
           schema:
             type: boolean
+        - description: Specifies which additional view's permissions to include in the response. Only 'published' is supported.
+          in: query
+          name: includePermissionsForView
+          schema:
+            type: string
         - description: Determines the behavior in which modifiedDate is updated. This overrides setModifiedDate.
           in: query
           name: modifiedDateBehavior
@@ -1498,6 +1528,11 @@ paths:
           name: enforceSingleParent
           schema:
             type: boolean
+        - description: Specifies which additional view's permissions to include in the response. Only 'published' is supported.
+          in: query
+          name: includePermissionsForView
+          schema:
+            type: string
         - description: Determines the behavior in which modifiedDate is updated. This overrides setModifiedDate.
           in: query
           name: modifiedDateBehavior
@@ -2181,6 +2216,11 @@ paths:
           name: enforceSingleParent
           schema:
             type: boolean
+        - description: Specifies which additional view's permissions to include in the response. Only 'published' is supported.
+          in: query
+          name: includePermissionsForView
+          schema:
+            type: string
         - description: Whether to attempt OCR on .jpg, .png, .gif, or .pdf uploads.
           in: query
           name: ocr
@@ -2518,6 +2558,11 @@ paths:
           in: path
           name: fileId
           required: true
+          schema:
+            type: string
+        - description: Specifies which additional view's permissions to include in the response. Only 'published' is supported.
+          in: query
+          name: includePermissionsForView
           schema:
             type: string
         - description: The maximum number of permissions to return per page. When not set for files in a shared drive, at most 100 results will be returned. When not set for files that are not in a shared drive, the entire list will be returned.
@@ -3488,6 +3533,11 @@ paths:
           required: true
           schema:
             type: string
+        - description: Specifies which additional view's permissions to include in the response. Only 'published' is supported.
+          in: query
+          name: includePermissionsForView
+          schema:
+            type: string
         - description: Whether the requesting application supports both My Drives and shared drives.
           in: query
           name: supportsAllDrives
@@ -3547,6 +3597,11 @@ paths:
           required: true
           schema:
             type: string
+        - description: Specifies which additional view's permissions to include in the response. Only 'published' is supported.
+          in: query
+          name: includePermissionsForView
+          schema:
+            type: string
         - description: Whether the requesting application supports both My Drives and shared drives.
           in: query
           name: supportsAllDrives
@@ -3600,6 +3655,11 @@ paths:
           in: path
           name: fileId
           required: true
+          schema:
+            type: string
+        - description: Specifies which additional view's permissions to include in the response. Only 'published' is supported.
+          in: query
+          name: includePermissionsForView
           schema:
             type: string
         - description: Whether the requesting application supports both My Drives and shared drives.
@@ -3662,6 +3722,11 @@ paths:
           name: acknowledgeAbuse
           schema:
             type: boolean
+        - description: Specifies which additional view's permissions to include in the response. Only 'published' is supported.
+          in: query
+          name: includePermissionsForView
+          schema:
+            type: string
         - description: This parameter is deprecated and has no function.
           in: query
           name: projection
@@ -5766,6 +5831,9 @@ components:
           type: string
         value:
           description: The email address or domain name for the entity. This is used during inserts and is not populated in responses. When making a drive.permissions.insert request, exactly one of the id or value fields must be specified unless the permission type is anyone, in which case both id and value are ignored.
+          type: string
+        view:
+          description: Indicates the view for this permission. Only populated for permissions that belong to a view. published is the only supported value.
           type: string
         withLink:
           description: Whether the link is required for this permission.

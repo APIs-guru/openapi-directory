@@ -50,17 +50,17 @@ paths:
       tags:
         - violatingSites
     parameters:
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
   "/v1/{name}":
     get:
       description: Gets a site's Abusive Experience Report summary.
@@ -82,17 +82,17 @@ paths:
       tags:
         - sites
     parameters:
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
 components:
   parameters:
     _.xgafv:

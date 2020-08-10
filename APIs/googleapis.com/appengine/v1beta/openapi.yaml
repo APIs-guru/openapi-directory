@@ -37,24 +37,19 @@ tags:
 paths:
   /v1beta/apps:
     parameters:
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
     post:
-      description: >-
-        Creates an App Engine application for a Google Cloud Platform project. Required fields:
-
-        id - The ID of the target Cloud Platform project.
-
-        location - The region (https://cloud.google.com/appengine/docs/locations) where you want the App Engine application located.For more information about App Engine applications, see Managing Projects, Applications, and Billing (https://cloud.google.com/appengine/docs/standard/python/console/).
+      description: "Creates an App Engine application for a Google Cloud Platform project. Required fields: id - The ID of the target Cloud Platform project. location - The region (https://cloud.google.com/appengine/docs/locations) where you want the App Engine application located.For more information about App Engine applications, see Managing Projects, Applications, and Billing (https://cloud.google.com/appengine/docs/standard/python/console/)."
       operationId: appengine.apps.create
       requestBody:
         content:
@@ -109,24 +104,19 @@ paths:
       tags:
         - apps
     parameters:
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
     patch:
-      description: >-
-        Updates the specified Application resource. You can update the following fields:
-
-        auth_domain - Google authentication domain for controlling user access to the application.
-
-        default_cookie_expiration - Cookie expiration policy for the application.
+      description: "Updates the specified Application resource. You can update the following fields: auth_domain - Google authentication domain for controlling user access to the application. default_cookie_expiration - Cookie expiration policy for the application."
       operationId: appengine.apps.patch
       parameters:
         - description: "Part of `name`. Name of the Application resource to update. Example: apps/myapp."
@@ -211,17 +201,17 @@ paths:
       tags:
         - apps
     parameters:
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
     post:
       description: Uploads the specified SSL certificate.
       operationId: appengine.apps.authorizedCertificates.create
@@ -329,17 +319,17 @@ paths:
       tags:
         - apps
     parameters:
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
     patch:
       description: Updates the specified SSL certificate. To renew a certificate and maintain its existing domain mappings, update certificate_data with a new certificate. The new certificate must be applicable to the same domains as the original certificate. The certificate display_name may also be updated.
       operationId: appengine.apps.authorizedCertificates.patch
@@ -424,17 +414,17 @@ paths:
       tags:
         - apps
     parameters:
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
   "/v1beta/apps/{appsId}/domainMappings":
     get:
       description: Lists the domain mappings on an application.
@@ -479,17 +469,17 @@ paths:
       tags:
         - apps
     parameters:
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
     post:
       description: Maps a domain to an application. A user must be authorized to administer a domain in order to map it to an application. For a list of available authorized domains, see AuthorizedDomains.ListAuthorizedDomains.
       operationId: appengine.apps.domainMappings.create
@@ -598,17 +588,17 @@ paths:
       tags:
         - apps
     parameters:
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
     patch:
       description: Updates the specified domain mapping. To map an SSL certificate to a domain mapping, update certificate_id to point to an AuthorizedCertificate resource. A user must be authorized to administer the associated domain in order to update a DomainMapping resource.
       operationId: appengine.apps.domainMappings.patch
@@ -698,17 +688,17 @@ paths:
       tags:
         - apps
     parameters:
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
     post:
       description: Creates a firewall rule for the application.
       operationId: appengine.apps.firewall.ingressRules.create
@@ -808,17 +798,17 @@ paths:
       tags:
         - apps
     parameters:
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
     patch:
       description: Updates the specified firewall rule.
       operationId: appengine.apps.firewall.ingressRules.patch
@@ -861,17 +851,17 @@ paths:
         - apps
   "/v1beta/apps/{appsId}/firewall/ingressRules:batchUpdate":
     parameters:
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
     post:
       description: Replaces the entire firewall ruleset in one bulk operation. This overrides and replaces the rules of an existing firewall with the new rules.If the final rule does not match traffic with the '*' wildcard IP range, then an "allow all" rule is explicitly added to the end of the list.
       operationId: appengine.apps.firewall.ingressRules.batchUpdate
@@ -950,17 +940,17 @@ paths:
       tags:
         - apps
     parameters:
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
   "/v1beta/apps/{appsId}/locations/{locationsId}":
     get:
       description: Gets information about a location.
@@ -1001,17 +991,17 @@ paths:
       tags:
         - apps
     parameters:
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
   "/v1beta/apps/{appsId}/operations":
     get:
       description: "Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns UNIMPLEMENTED.NOTE: the name binding allows API services to override the binding to use different resource name schemes, such as users/*/operations. To override the binding, API services can add a binding such as \"/v1/{name=users/*}/operations\" to their service configuration. For backwards compatibility, the default name includes the operations collection id, however overriding users must ensure the name binding is the parent resource, without the operations collection id."
@@ -1061,17 +1051,17 @@ paths:
       tags:
         - apps
     parameters:
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
   "/v1beta/apps/{appsId}/operations/{operationsId}":
     get:
       description: Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
@@ -1112,17 +1102,17 @@ paths:
       tags:
         - apps
     parameters:
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
   "/v1beta/apps/{appsId}/services":
     get:
       description: Lists all the services in the application.
@@ -1167,17 +1157,17 @@ paths:
       tags:
         - apps
     parameters:
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
   "/v1beta/apps/{appsId}/services/{servicesId}":
     delete:
       description: Deletes the specified service and all enclosed versions.
@@ -1248,17 +1238,17 @@ paths:
       tags:
         - apps
     parameters:
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
     patch:
       description: Updates the configuration of the specified service.
       operationId: appengine.apps.services.patch
@@ -1362,17 +1352,17 @@ paths:
       tags:
         - apps
     parameters:
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
     post:
       description: Deploys code and resource files to a new version.
       operationId: appengine.apps.services.versions.create
@@ -1498,50 +1488,19 @@ paths:
       tags:
         - apps
     parameters:
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
     patch:
-      description: >-
-        Updates the specified Version resource. You can specify the following fields depending on the App Engine environment and type of scaling that the version resource uses:Standard environment
-
-        instance_class (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1beta/apps.services.versions#Version.FIELDS.instance_class)automatic scaling in the standard environment:
-
-        automatic_scaling.min_idle_instances (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1beta/apps.services.versions#Version.FIELDS.automatic_scaling)
-
-        automatic_scaling.max_idle_instances (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1beta/apps.services.versions#Version.FIELDS.automatic_scaling)
-
-        automaticScaling.standard_scheduler_settings.max_instances (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1beta/apps.services.versions#StandardSchedulerSettings)
-
-        automaticScaling.standard_scheduler_settings.min_instances (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1beta/apps.services.versions#StandardSchedulerSettings)
-
-        automaticScaling.standard_scheduler_settings.target_cpu_utilization (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1beta/apps.services.versions#StandardSchedulerSettings)
-
-        automaticScaling.standard_scheduler_settings.target_throughput_utilization (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1beta/apps.services.versions#StandardSchedulerSettings)basic scaling or manual scaling in the standard environment:
-
-        serving_status (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1beta/apps.services.versions#Version.FIELDS.serving_status)
-
-        manual_scaling.instances (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1beta/apps.services.versions#manualscaling)Flexible environment
-
-        serving_status (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1beta/apps.services.versions#Version.FIELDS.serving_status)automatic scaling in the flexible environment:
-
-        automatic_scaling.min_total_instances (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1beta/apps.services.versions#Version.FIELDS.automatic_scaling)
-
-        automatic_scaling.max_total_instances (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1beta/apps.services.versions#Version.FIELDS.automatic_scaling)
-
-        automatic_scaling.cool_down_period_sec (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1beta/apps.services.versions#Version.FIELDS.automatic_scaling)
-
-        automatic_scaling.cpu_utilization.target_utilization (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1beta/apps.services.versions#Version.FIELDS.automatic_scaling)manual scaling in the flexible environment:
-
-        manual_scaling.instances (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1beta/apps.services.versions#manualscaling)
+      description: "Updates the specified Version resource. You can specify the following fields depending on the App Engine environment and type of scaling that the version resource uses:Standard environment instance_class (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1beta/apps.services.versions#Version.FIELDS.instance_class)automatic scaling in the standard environment: automatic_scaling.min_idle_instances (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1beta/apps.services.versions#Version.FIELDS.automatic_scaling) automatic_scaling.max_idle_instances (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1beta/apps.services.versions#Version.FIELDS.automatic_scaling) automaticScaling.standard_scheduler_settings.max_instances (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1beta/apps.services.versions#StandardSchedulerSettings) automaticScaling.standard_scheduler_settings.min_instances (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1beta/apps.services.versions#StandardSchedulerSettings) automaticScaling.standard_scheduler_settings.target_cpu_utilization (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1beta/apps.services.versions#StandardSchedulerSettings) automaticScaling.standard_scheduler_settings.target_throughput_utilization (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1beta/apps.services.versions#StandardSchedulerSettings)basic scaling or manual scaling in the standard environment: serving_status (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1beta/apps.services.versions#Version.FIELDS.serving_status) manual_scaling.instances (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1beta/apps.services.versions#manualscaling)Flexible environment serving_status (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1beta/apps.services.versions#Version.FIELDS.serving_status)automatic scaling in the flexible environment: automatic_scaling.min_total_instances (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1beta/apps.services.versions#Version.FIELDS.automatic_scaling) automatic_scaling.max_total_instances (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1beta/apps.services.versions#Version.FIELDS.automatic_scaling) automatic_scaling.cool_down_period_sec (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1beta/apps.services.versions#Version.FIELDS.automatic_scaling) automatic_scaling.cpu_utilization.target_utilization (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1beta/apps.services.versions#Version.FIELDS.automatic_scaling)manual scaling in the flexible environment: manual_scaling.instances (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1beta/apps.services.versions#manualscaling)"
       operationId: appengine.apps.services.versions.patch
       parameters:
         - description: "Part of `name`. Name of the resource to update. Example: apps/myapp/services/default/versions/1."
@@ -1642,17 +1601,17 @@ paths:
       tags:
         - apps
     parameters:
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
   "/v1beta/apps/{appsId}/services/{servicesId}/versions/{versionsId}/instances/{instancesId}":
     delete:
       description: Stops a running instance.The instance might be automatically recreated based on the scaling settings of the version. For more information, see "How Instances are Managed" (standard environment (https://cloud.google.com/appengine/docs/standard/python/how-instances-are-managed) | flexible environment (https://cloud.google.com/appengine/docs/flexible/python/how-instances-are-managed)).To ensure that instances are not re-created and avoid getting billed, you can stop all instances within the target version by changing the serving status of the version to STOPPED with the apps.services.versions.patch (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions/patch) method.
@@ -1747,30 +1706,30 @@ paths:
       tags:
         - apps
     parameters:
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
   "/v1beta/apps/{appsId}/services/{servicesId}/versions/{versionsId}/instances/{instancesId}:debug":
     parameters:
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
     post:
       description: Enables debugging on a VM instance. This allows you to use the SSH command to connect to the virtual machine where the instance lives. While in "debug mode", the instance continues to serve live traffic. You should delete the instance when you are done debugging and then allow the system to take over and determine if another instance should be started.Only applicable for instances in App Engine flexible environment.
       operationId: appengine.apps.services.versions.instances.debug
@@ -1820,17 +1779,17 @@ paths:
         - apps
   "/v1beta/apps/{appsId}:repair":
     parameters:
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
     post:
       description: Recreates the required App Engine features for the specified App Engine application, for example a Cloud Storage bucket or App Engine service account. Use this method if you receive an error message about a missing feature, for example, Error retrieving the App Engine service account. If you have deleted your App Engine service account, this will not be able to recreate it. Instead, you should attempt to use the IAM undelete API if possible at https://cloud.google.com/iam/reference/rest/v1/projects.serviceAccounts/undelete?apix_params=%7B"name"%3A"projects%2F-%2FserviceAccounts%2Funique_id"%2C"resource"%3A%7B%7D%7D . If the deletion was recent, the numeric ID can be found in the Cloud Console Activity Log.
       operationId: appengine.apps.repair
@@ -2179,10 +2138,10 @@ components:
       description: An SSL certificate obtained from a certificate authority.
       properties:
         privateKey:
-          description: "Unencrypted PEM encoded RSA private key. This field is set once on certificate creation and then encrypted. The key size must be 2048 bits or fewer. Must include the header and footer. Example: <pre> -----BEGIN RSA PRIVATE KEY----- <unencrypted_key_value> -----END RSA PRIVATE KEY----- </pre> @InputOnly"
+          description: "Unencrypted PEM encoded RSA private key. This field is set once on certificate creation and then encrypted. The key size must be 2048 bits or fewer. Must include the header and footer. Example: -----BEGIN RSA PRIVATE KEY----- -----END RSA PRIVATE KEY----- @InputOnly"
           type: string
         publicCertificate:
-          description: "PEM encoded x.509 public key certificate. This field is set once on certificate creation. Must include the header and footer. Example: <pre> -----BEGIN CERTIFICATE----- <certificate_value> -----END CERTIFICATE----- </pre>"
+          description: "PEM encoded x.509 public key certificate. This field is set once on certificate creation. Must include the header and footer. Example: -----BEGIN CERTIFICATE----- -----END CERTIFICATE----- "
           type: string
       type: object
     CloudBuildOptions:
@@ -2261,12 +2220,7 @@ components:
       description: Request message for Instances.DebugInstance.
       properties:
         sshKey:
-          description: >-
-            Public SSH key to add to the instance. Examples:
-
-            [USERNAME]:ssh-rsa [KEY_VALUE] [USERNAME]
-
-            [USERNAME]:ssh-rsa [KEY_VALUE] google-ssh {"userName":"[USERNAME]","expireOn":"[EXPIRE_TIME]"}For more information, see Adding and Removing SSH Keys (https://cloud.google.com/compute/docs/instances/adding-removing-ssh-keys).
+          description: 'Public SSH key to add to the instance. Examples: [USERNAME]:ssh-rsa [KEY_VALUE] [USERNAME] [USERNAME]:ssh-rsa [KEY_VALUE] google-ssh {"userName":"[USERNAME]","expireOn":"[EXPIRE_TIME]"}For more information, see Adding and Removing SSH Keys (https://cloud.google.com/compute/docs/instances/adding-removing-ssh-keys).'
           type: string
       type: object
     Deployment:
@@ -2329,14 +2283,7 @@ components:
           description: SSL configuration for this domain. If unconfigured, this domain will not serve with SSL.
       type: object
     Empty:
-      description: >-
-        A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance:
-
-        service Foo {
-          rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);
-        }
-
-        The JSON representation for Empty is empty JSON object {}.
+      description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for Empty is empty JSON object {}."
       properties: {}
       type: object
     EndpointsApiService:
@@ -2405,7 +2352,7 @@ components:
           description: The SHA1 hash of the file, in hex.
           type: string
         sourceUrl:
-          description: URL source to use to fetch this file. Must be a URL to a resource in Google Cloud Storage in the form 'http(s)://storage.googleapis.com/<bucket>/<object>'.
+          description: URL source to use to fetch this file. Must be a URL to a resource in Google Cloud Storage in the form 'http(s)://storage.googleapis.com//'.
           type: string
       type: object
     FirewallRule:
@@ -2426,7 +2373,7 @@ components:
           format: int32
           type: integer
         sourceRange:
-          description: 'IP address or range, defined using CIDR notation, of requests that this rule applies to. You can use the wildcard character "*" to match all IPs equivalent to "0/0" and "::/0" together. Examples: 192.168.1.1 or 192.168.0.0/16 or 2001:db8::/32  or 2001:0db8:0000:0042:0000:8a2e:0370:7334.<p>Truncation will be silently performed on addresses which are not properly truncated. For example, 1.2.3.4/24 is accepted as the same address as 1.2.3.0/24. Similarly, for IPv6, 2001:db8::1/32 is accepted as the same address as 2001:db8::/32.'
+          description: 'IP address or range, defined using CIDR notation, of requests that this rule applies to. You can use the wildcard character "*" to match all IPs equivalent to "0/0" and "::/0" together. Examples: 192.168.1.1 or 192.168.0.0/16 or 2001:db8::/32 or 2001:0db8:0000:0042:0000:8a2e:0370:7334. Truncation will be silently performed on addresses which are not properly truncated. For example, 1.2.3.4/24 is accepted as the same address as 1.2.3.0/24. Similarly, for IPv6, 2001:db8::1/32 is accepted as the same address as 2001:db8::/32.'
           type: string
       type: object
     HealthCheck:
@@ -2694,10 +2641,7 @@ components:
         labels:
           additionalProperties:
             type: string
-          description: >
-            Cross-service attributes for the location. For example
-
-            {"cloud.googleapis.com/region": "us-east1"}
+          description: 'Cross-service attributes for the location. For example {"cloud.googleapis.com/region": "us-east1"} '
           type: object
         locationId:
           description: 'The canonical id for this location. For example: "us-east1".'
@@ -2766,14 +2710,7 @@ components:
           description: Enable session affinity. Only applicable in the App Engine flexible environment.
           type: boolean
         subnetworkName:
-          description: >-
-            Google Cloud Platform sub-network where the virtual machines are created. Specify the short name, not the resource path.If a subnetwork name is specified, a network name will also be required unless it is for the default network.
-
-            If the network that the instance is being created in is a Legacy network, then the IP address is allocated from the IPv4Range.
-
-            If the network that the instance is being created in is an auto Subnet Mode Network, then only network name should be specified (not the subnetwork_name) and the IP address is created from the IPCidrRange of the subnetwork that exists in that zone for that network.
-
-            If the network that the instance is being created in is a custom Subnet Mode Network, then the subnetwork_name must be specified and the IP address is created from the IPCidrRange of the subnetwork.If specified, the subnetwork must exist in the same region as the App Engine flexible environment application.
+          description: Google Cloud Platform sub-network where the virtual machines are created. Specify the short name, not the resource path.If a subnetwork name is specified, a network name will also be required unless it is for the default network. If the network that the instance is being created in is a Legacy network, then the IP address is allocated from the IPv4Range. If the network that the instance is being created in is an auto Subnet Mode Network, then only network name should be specified (not the subnetwork_name) and the IP address is created from the IPCidrRange of the subnetwork that exists in that zone for that network. If the network that the instance is being created in is a custom Subnet Mode Network, then the subnetwork_name must be specified and the IP address is created from the IPCidrRange of the subnetwork.If specified, the subnetwork must exist in the same region as the App Engine flexible environment application.
           type: string
       type: object
     NetworkUtilization:
@@ -2986,6 +2923,9 @@ components:
           description: Disk size (GB) needed.
           format: double
           type: number
+        kmsKeyReference:
+          description: The name of the encryption key that is stored in Google Cloud KMS. Only should be used by Cloud Composer to encrypt the vm disk
+          type: string
         memoryGb:
           description: Memory (GB) needed.
           format: double
@@ -3259,12 +3199,7 @@ components:
             type: string
           type: array
         instanceClass:
-          description: >-
-            Instance class that is used to run this version. Valid values are:
-
-            AutomaticScaling: F1, F2, F4, F4_1G
-
-            ManualScaling or BasicScaling: B1, B2, B4, B8, B4_1GDefaults to F1 for AutomaticScaling and B1 for ManualScaling or BasicScaling.
+          description: "Instance class that is used to run this version. Valid values are: AutomaticScaling: F1, F2, F4, F4_1G ManualScaling or BasicScaling: B1, B2, B4, B8, B4_1GDefaults to F1 for AutomaticScaling and B1 for ManualScaling or BasicScaling."
           type: string
         libraries:
           description: Configuration for third-party Python runtime libraries that are required by the application.Only returned in GET requests if view=FULL is set.
@@ -3296,7 +3231,7 @@ components:
           description: "Desired runtime. Example: python27."
           type: string
         runtimeApiVersion:
-          description: The version of the API in the given runtime environment. Please see the app.yaml reference for valid values at https://cloud.google.com/appengine/docs/standard/<language>/config/appref
+          description: The version of the API in the given runtime environment. Please see the app.yaml reference for valid values at https://cloud.google.com/appengine/docs/standard//config/appref
           type: string
         runtimeChannel:
           description: The channel of the runtime to use. Only available for some runtimes. Defaults to the default channel.
@@ -3358,7 +3293,7 @@ components:
           format: int32
           type: integer
         sourceUrl:
-          description: URL of the zip file to deploy from. Must be a URL to a resource in Google Cloud Storage in the form 'http(s)://storage.googleapis.com/<bucket>/<object>'.
+          description: URL of the zip file to deploy from. Must be a URL to a resource in Google Cloud Storage in the form 'http(s)://storage.googleapis.com//'.
           type: string
       type: object
   securitySchemes:

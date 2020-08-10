@@ -103,17 +103,17 @@ paths:
       tags:
         - users
     parameters:
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/upload_protocol"
     patch:
       description: >-
         Updates an SSH public key and returns the profile information. This method
@@ -203,30 +203,30 @@ paths:
       tags:
         - users
     parameters:
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/upload_protocol"
   "/v1/{parent}:importSshPublicKey":
     parameters:
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
       description: >-
         Adds an SSH public key and returns the profile information. Default POSIX

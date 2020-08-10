@@ -8055,6 +8055,41 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
+    patch:
+      description: Updates a report. This method supports patch semantics.
+      operationId: dfareporting.reports.patch
+      parameters:
+        - description: The DFA user profile ID.
+          in: path
+          name: profileId
+          required: true
+          schema:
+            type: string
+        - description: The ID of the report.
+          in: path
+          name: reportId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Report"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Report"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/dfareporting
+          Oauth2c:
+            - https://www.googleapis.com/auth/dfareporting
+      tags:
+        - reports
     put:
       description: Updates a report.
       operationId: dfareporting.reports.update

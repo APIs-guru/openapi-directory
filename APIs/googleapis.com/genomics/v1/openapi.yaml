@@ -37,13 +37,7 @@ tags:
 paths:
   "/v1/{name}":
     get:
-      description: >-
-        Lists operations that match the specified filter in the request.
-
-        Authorization requires the following [Google IAM](https://cloud.google.com/iam) permission&#58;
-
-
-        * `genomics.operations.list`
+      description: "Lists operations that match the specified filter in the request. Authorization requires the following [Google IAM](https://cloud.google.com/iam) permission: * `genomics.operations.list`"
       operationId: genomics.operations.list
       parameters:
         - description: The name of the operation's parent resource.
@@ -52,47 +46,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: >-
-            A string for filtering Operations.
-
-            In v2alpha1, the following filter fields are supported&#58;
-
-
-            * createTime&#58; The time this job was created
-
-            * events&#58; The set of event (names) that have occurred while running
-              the pipeline.  The &#58; operator can be used to determine if a
-              particular event has occurred.
-            * error&#58; If the pipeline is running, this value is NULL.  Once the
-              pipeline finishes, the value is the standard Google error code.
-            * labels.key or labels."key with space" where key is a label key.
-
-            * done&#58; If the pipeline is running, this value is false. Once the
-              pipeline finishes, the value is true.
-
-            In v1 and v1alpha2, the following filter fields are supported&#58;
-
-
-            * projectId&#58; Required. Corresponds to
-              OperationMetadata.projectId.
-            * createTime&#58; The time this job was created, in seconds from the
-              [epoch](http://en.wikipedia.org/wiki/Unix_time). Can use `>=` and/or `<=`
-              operators.
-            * status&#58; Can be `RUNNING`, `SUCCESS`, `FAILURE`, or `CANCELED`. Only
-              one status may be specified.
-            * labels.key where key is a label key.
-
-
-            Examples&#58;
-
-
-            * `projectId = my-project AND createTime >= 1432140000`
-
-            * `projectId = my-project AND createTime >= 1432140000 AND createTime <= 1432150000 AND status = RUNNING`
-
-            * `projectId = my-project AND labels.color = *`
-
-            * `projectId = my-project AND labels.color = red`
+        - description: 'A string for filtering Operations. In v2alpha1, the following filter fields are supported: * createTime: The time this job was created * events: The set of event (names) that have occurred while running the pipeline. The : operator can be used to determine if a particular event has occurred. * error: If the pipeline is running, this value is NULL. Once the pipeline finishes, the value is the standard Google error code. * labels.key or labels."key with space" where key is a label key. * done: If the pipeline is running, this value is false. Once the pipeline finishes, the value is true. In v1 and v1alpha2, the following filter fields are supported: * projectId: Required. Corresponds to OperationMetadata.projectId. * createTime: The time this job was created, in seconds from the [epoch](http://en.wikipedia.org/wiki/Unix_time). Can use `>=` and/or `<=` operators. * status: Can be `RUNNING`, `SUCCESS`, `FAILURE`, or `CANCELED`. Only one status may be specified. * labels.key where key is a label key. Examples: * `projectId = my-project AND createTime >= 1432140000` * `projectId = my-project AND createTime >= 1432140000 AND createTime <= 1432150000 AND status = RUNNING` * `projectId = my-project AND labels.color = *` * `projectId = my-project AND labels.color = red`'
           in: query
           name: filter
           schema:
@@ -127,47 +81,31 @@ paths:
         - operations
     parameters:
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
   "/v1/{name}:cancel":
     parameters:
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
     post:
-      description: >-
-        Starts asynchronous cancellation on a long-running operation.
-
-        The server makes a best effort to cancel the operation, but success is not
-
-        guaranteed. Clients may use Operations.GetOperation
-
-        or Operations.ListOperations
-
-        to check whether the cancellation succeeded or the operation completed
-
-        despite cancellation.
-
-        Authorization requires the following [Google IAM](https://cloud.google.com/iam) permission&#58;
-
-
-        * `genomics.operations.cancel`
+      description: "Starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. Clients may use Operations.GetOperation or Operations.ListOperations to check whether the cancellation succeeded or the operation completed despite cancellation. Authorization requires the following [Google IAM](https://cloud.google.com/iam) permission: * `genomics.operations.cancel`"
       operationId: genomics.operations.cancel
       parameters:
         - description: The name of the operation resource to be cancelled.
@@ -280,10 +218,7 @@ components:
       properties: {}
       type: object
     ComputeEngine:
-      description: >-
-        Describes a Compute Engine resource that is being managed by a running
-
-        pipeline.
+      description: Describes a Compute Engine resource that is being managed by a running pipeline.
       properties:
         diskNames:
           description: The names of the disks that were created for this pipeline.
@@ -301,12 +236,7 @@ components:
           type: string
       type: object
     ContainerKilledEvent:
-      description: >-
-        An event generated when a container is forcibly terminated by the
-
-        worker. Currently, this only occurs when the container outlives the
-
-        timeout specified by the user.
+      description: An event generated when a container is forcibly terminated by the worker. Currently, this only occurs when the container outlives the timeout specified by the user.
       properties:
         actionId:
           description: The numeric ID of the action that started the container.
@@ -321,25 +251,13 @@ components:
           format: int32
           type: integer
         ipAddress:
-          description: >-
-            The public IP address that can be used to connect to the container. This
-
-            field is only populated when at least one port mapping is present. If the
-
-            instance was created with a private address, this field will be empty even
-
-            if port mappings exist.
+          description: The public IP address that can be used to connect to the container. This field is only populated when at least one port mapping is present. If the instance was created with a private address, this field will be empty even if port mappings exist.
           type: string
         portMappings:
           additionalProperties:
             format: int32
             type: integer
-          description: >-
-            The container-to-host port mappings installed for this container. This
-
-            set will contain any ports exposed using the `PUBLISH_EXPOSED_PORTS` flag
-
-            as well as any specified in the `Action` definition.
+          description: The container-to-host port mappings installed for this container. This set will contain any ports exposed using the `PUBLISH_EXPOSED_PORTS` flag as well as any specified in the `Action` definition.
           type: object
       type: object
     ContainerStoppedEvent:
@@ -354,75 +272,30 @@ components:
           format: int32
           type: integer
         stderr:
-          description: >-
-            The tail end of any content written to standard error by the container.
-
-            If the content emits large amounts of debugging noise or contains
-
-            sensitive information, you can prevent the content from being printed by
-
-            setting the `DISABLE_STANDARD_ERROR_CAPTURE` flag.
-
-
-            Note that only a small amount of the end of the stream is captured here.
-
-            The entire stream is stored in the `/google/logs` directory mounted into
-
-            each action, and can be copied off the machine as described elsewhere.
+          description: The tail end of any content written to standard error by the container. If the content emits large amounts of debugging noise or contains sensitive information, you can prevent the content from being printed by setting the `DISABLE_STANDARD_ERROR_CAPTURE` flag. Note that only a small amount of the end of the stream is captured here. The entire stream is stored in the `/google/logs` directory mounted into each action, and can be copied off the machine as described elsewhere.
           type: string
       type: object
     DelayedEvent:
-      description: >-
-        An event generated whenever a resource limitation or transient error
-
-        delays execution of a pipeline that was otherwise ready to run.
+      description: An event generated whenever a resource limitation or transient error delays execution of a pipeline that was otherwise ready to run.
       properties:
         cause:
-          description: >-
-            A textual description of the cause of the delay. The string can change
-
-            without notice because it is often generated by another service (such as
-
-            Compute Engine).
+          description: A textual description of the cause of the delay. The string can change without notice because it is often generated by another service (such as Compute Engine).
           type: string
         metrics:
-          description: >-
-            If the delay was caused by a resource shortage, this field lists the
-
-            Compute Engine metrics that are preventing this operation from running
-
-            (for example, `CPUS` or `INSTANCES`). If the particular metric is not
-
-            known, a single `UNKNOWN` metric will be present.
+          description: If the delay was caused by a resource shortage, this field lists the Compute Engine metrics that are preventing this operation from running (for example, `CPUS` or `INSTANCES`). If the particular metric is not known, a single `UNKNOWN` metric will be present.
           items:
             type: string
           type: array
       type: object
     Empty:
-      description: >-
-        A generic empty message that you can re-use to avoid defining duplicated
-
-        empty messages in your APIs. A typical example is to use it as the request
-
-        or the response type of an API method. For instance:
-
-            service Foo {
-              rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);
-            }
-
-        The JSON representation for `Empty` is empty JSON object `{}`.
+      description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`."
       properties: {}
       type: object
     Event:
       description: Carries information about events that occur during pipeline execution.
       properties:
         description:
-          description: >-
-            A human-readable description of the event. Note that these strings can
-
-            change at any time without notice. Any application logic must use the
-
-            information in the `details` field.
+          description: A human-readable description of the event. Note that these strings can change at any time without notice. Any application logic must use the information in the `details` field.
           type: string
         details:
           additionalProperties:
@@ -435,10 +308,7 @@ components:
           type: string
       type: object
     FailedEvent:
-      description: >-
-        An event generated when the execution of a pipeline has failed. Note
-
-        that other events can continue to occur after this event.
+      description: An event generated when the execution of a pipeline has failed. Note that other events can continue to occur after this event.
       properties:
         cause:
           description: The human-readable description of the cause of the failure.
@@ -478,18 +348,10 @@ components:
           type: array
       type: object
     Operation:
-      description: >-
-        This resource represents a long-running operation that is the result of a
-
-        network API call.
+      description: This resource represents a long-running operation that is the result of a network API call.
       properties:
         done:
-          description: >-
-            If the value is `false`, it means the operation is still in progress.
-
-            If `true`, the operation is completed, and either `error` or `response` is
-
-            available.
+          description: If the value is `false`, it means the operation is still in progress. If `true`, the operation is completed, and either `error` or `response` is available.
           type: boolean
         error:
           $ref: "#/components/schemas/Status"
@@ -500,7 +362,7 @@ components:
           description: An OperationMetadata or Metadata object. This will always be returned with the Operation.
           type: object
         name:
-          description: The server-assigned name, which is only unique within the same service that originally returns it. For example&#58; `operations/CJHU7Oi_ChDrveSpBRjfuL-qzoWAgEw`
+          description: "The server-assigned name, which is only unique within the same service that originally returns it. For example: `operations/CJHU7Oi_ChDrveSpBRjfuL-qzoWAgEw`"
           type: string
         response:
           additionalProperties:
@@ -515,10 +377,7 @@ components:
           description: Required description of event.
           type: string
         endTime:
-          description: >-
-            Optional time of when event finished. An event can have a start time and no
-
-            finish time. If an event has a finish time, there must be a start time.
+          description: Optional time of when event finished. An event can have a start time and no finish time. If an event has a finish time, there must be a start time.
           format: google-datetime
           type: string
         startTime:
@@ -530,10 +389,7 @@ components:
       description: Metadata describing an Operation.
       properties:
         clientId:
-          description: >-
-            This field is deprecated. Use `labels` instead. Optionally provided by the
-
-            caller when submitting the request that creates the operation.
+          description: This field is deprecated. Use `labels` instead. Optionally provided by the caller when submitting the request that creates the operation.
           type: string
         createTime:
           description: The time at which the job was submitted to the Genomics service.
@@ -544,22 +400,14 @@ components:
           format: google-datetime
           type: string
         events:
-          description: >-
-            Optional event messages that were generated during the job's execution.
-
-            This also contains any warnings that were generated during import
-
-            or export.
+          description: Optional event messages that were generated during the job's execution. This also contains any warnings that were generated during import or export.
           items:
             $ref: "#/components/schemas/OperationEvent"
           type: array
         labels:
           additionalProperties:
             type: string
-          description: >-
-            Optionally provided by the caller when submitting the request that creates
-
-            the operation.
+          description: Optionally provided by the caller when submitting the request that creates the operation.
           type: object
         projectId:
           description: The Google Cloud Project in which the job is scoped.
@@ -567,12 +415,7 @@ components:
         request:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
-          description: >-
-            The original request that started the operation. Note that this will be in
-
-            current version of the API. If the operation was started with v1beta2 API
-
-            and a GetOperation is performed on v1 API, a v1 request will be returned.
+          description: The original request that started the operation. Note that this will be in current version of the API. If the operation was started with v1beta2 API and a GetOperation is performed on v1 API, a v1 request will be returned.
           type: object
         runtimeMetadata:
           additionalProperties:
@@ -599,71 +442,36 @@ components:
           type: string
       type: object
     RunPipelineResponse:
-      description: >-
-        The response to the RunPipeline method, returned in the operation's result
-
-        field on success.
+      description: The response to the RunPipeline method, returned in the operation's result field on success.
       properties: {}
       type: object
     RuntimeMetadata:
-      description: >-
-        Runtime metadata that will be populated in the
-
-        runtimeMetadata
-
-        field of the Operation associated with a RunPipeline execution.
+      description: Runtime metadata that will be populated in the runtimeMetadata field of the Operation associated with a RunPipeline execution.
       properties:
         computeEngine:
           $ref: "#/components/schemas/ComputeEngine"
           description: Execution information specific to Google Compute Engine.
       type: object
     Status:
-      description: >-
-        The `Status` type defines a logical error model that is suitable for
-
-        different programming environments, including REST APIs and RPC APIs. It is
-
-        used by [gRPC](https://github.com/grpc). Each `Status` message contains
-
-        three pieces of data: error code, error message, and error details.
-
-
-        You can find out more about this error model and how to work with it in the
-
-        [API Design Guide](https://cloud.google.com/apis/design/errors).
+      description: "The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors)."
       properties:
         code:
           description: The status code, which should be an enum value of google.rpc.Code.
           format: int32
           type: integer
         details:
-          description: >-
-            A list of messages that carry the error details.  There is a common set of
-
-            message types for APIs to use.
+          description: A list of messages that carry the error details. There is a common set of message types for APIs to use.
           items:
             additionalProperties:
               description: Properties of the object. Contains field @type with type URL.
             type: object
           type: array
         message:
-          description: >-
-            A developer-facing error message, which should be in English. Any
-
-            user-facing error message should be localized and sent in the
-
-            google.rpc.Status.details field, or localized by the client.
+          description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.
           type: string
       type: object
     UnexpectedExitStatusEvent:
-      description: >-
-        An event generated when the execution of a container results in a
-
-        non-zero exit status that was not otherwise ignored. Execution will
-
-        continue, but only actions that are flagged as `ALWAYS_RUN` will be
-
-        executed. Other actions will be skipped.
+      description: An event generated when the execution of a container results in a non-zero exit status that was not otherwise ignored. Execution will continue, but only actions that are flagged as `ALWAYS_RUN` will be executed. Other actions will be skipped.
       properties:
         actionId:
           description: The numeric ID of the action that started the container.
@@ -675,10 +483,7 @@ components:
           type: integer
       type: object
     WorkerAssignedEvent:
-      description: >-
-        An event generated after a worker VM has been assigned to run the
-
-        pipeline.
+      description: An event generated after a worker VM has been assigned to run the pipeline.
       properties:
         instance:
           description: The worker's instance name.
@@ -691,10 +496,7 @@ components:
           type: string
       type: object
     WorkerReleasedEvent:
-      description: >-
-        An event generated when the worker VM that was assigned to the pipeline
-
-        has been released (deleted).
+      description: An event generated when the worker VM that was assigned to the pipeline has been released (deleted).
       properties:
         instance:
           description: The worker's instance name.

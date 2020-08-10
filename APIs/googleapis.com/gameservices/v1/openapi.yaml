@@ -5,6 +5,7 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
+    x-twitter: youtube
   description: Deploy and manage infrastructure for global multiplayer gaming experiences.
   license:
     name: Creative Commons Attribution 3.0
@@ -12,6 +13,13 @@ info:
   termsOfService: 'https://developers.google.com/terms/'
   title: Game Services API
   version: v1
+  x-apiClientRegistration:
+    url: 'https://console.developers.google.com'
+  x-apisguru-categories:
+    - analytics
+    - media
+  x-logo:
+    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
   x-origin:
     - format: google
       url: 'https://gameservices.googleapis.com/$discovery/rest?version=v1'
@@ -74,16 +82,16 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/oauth_token'
     patch:
       description: Patches a game server deployment.
@@ -165,16 +173,16 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/oauth_token'
   '/v1/{name}/operations':
     get:
@@ -217,16 +225,16 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/oauth_token'
   '/v1/{name}/rollout':
     get:
@@ -254,16 +262,16 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/oauth_token'
     patch:
       description: 'Patches a single game server deployment rollout. The method will not return an error if the update does not affect any existing realms. For example - if the default_game_server_config is changed but all existing realms use the override, that is valid. Similarly, if a non existing realm is explicitly called out in game_server_config_overrides field, that will also not result in an error.'
@@ -301,16 +309,16 @@ paths:
         - projects
   '/v1/{name}/rollout:preview':
     parameters:
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/oauth_token'
     patch:
       description: Previews the game server deployment rollout. This API does not mutate the rollout resource.
@@ -353,16 +361,16 @@ paths:
         - projects
   '/v1/{name}:cancel':
     parameters:
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/oauth_token'
     post:
       description: 'Starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. If the server doesn''t support this method, it returns `google.rpc.Code.UNIMPLEMENTED`. Clients can use Operations.GetOperation or other methods to check whether the cancellation succeeded or whether the operation completed despite cancellation. On successful cancellation, the operation is not deleted; instead, it becomes an operation with an Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.'
@@ -395,16 +403,16 @@ paths:
         - projects
   '/v1/{name}:fetchDeploymentState':
     parameters:
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/oauth_token'
     post:
       description: 'Retrieves information about the current state of the game server deployment. Gathers all the Agones fleets and Agones autoscalers, including fleets running an older version of the game server deployment.'
@@ -466,29 +474,29 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/oauth_token'
   '/v1/{name}:previewUpdate':
     parameters:
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/oauth_token'
     patch:
       description: Previews updating a GameServerCluster.
@@ -575,16 +583,16 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/oauth_token'
     post:
       description: 'Creates a new game server config in a given project, location, and game server deployment. Game server configs are immutable, and are not applied until referenced in the game server deployment rollout resource.'
@@ -666,16 +674,16 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/oauth_token'
     post:
       description: Creates a new game server cluster in a given project and location.
@@ -713,16 +721,16 @@ paths:
         - projects
   '/v1/{parent}/gameServerClusters:previewCreate':
     parameters:
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/oauth_token'
     post:
       description: Previews creation of a new game server cluster in a given project and location.
@@ -809,16 +817,16 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/oauth_token'
     post:
       description: Creates a new game server deployment in a given project and location.
@@ -900,16 +908,16 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/oauth_token'
     post:
       description: Creates a new realm in a given project and location.
@@ -976,29 +984,29 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/oauth_token'
   '/v1/{resource}:setIamPolicy':
     parameters:
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/oauth_token'
     post:
       description: 'Sets the access control policy on the specified resource. Replaces any existing policy. Can return `NOT_FOUND`, `INVALID_ARGUMENT`, and `PERMISSION_DENIED` errors.'
@@ -1031,16 +1039,16 @@ paths:
         - projects
   '/v1/{resource}:testIamPermissions':
     parameters:
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/oauth_token'
     post:
       description: 'Returns permissions that a caller has on the specified resource. If the resource does not exist, this will return an empty set of permissions, not a `NOT_FOUND` error. Note: This operation is designed to be used for building permission-aware UIs and command-line tools, not for authorization checking. This operation may "fail open" without warning.'
@@ -1433,6 +1441,7 @@ components:
         createTime:
           description: Output only. The creation time.
           format: google-datetime
+          readOnly: true
           type: string
         description:
           description: Human readable description of the cluster.
@@ -1451,6 +1460,7 @@ components:
         updateTime:
           description: Output only. The last-modified time.
           format: google-datetime
+          readOnly: true
           type: string
       type: object
     GameServerClusterConnectionInfo:
@@ -1469,6 +1479,7 @@ components:
         createTime:
           description: Output only. The creation time.
           format: google-datetime
+          readOnly: true
           type: string
         description:
           description: The description of the game server config.
@@ -1494,6 +1505,7 @@ components:
         updateTime:
           description: Output only. The last-modified time.
           format: google-datetime
+          readOnly: true
           type: string
       type: object
     GameServerConfigOverride:
@@ -1512,6 +1524,7 @@ components:
         createTime:
           description: Output only. The creation time.
           format: google-datetime
+          readOnly: true
           type: string
         description:
           description: Human readable description of the game server delpoyment.
@@ -1530,6 +1543,7 @@ components:
         updateTime:
           description: Output only. The last-modified time.
           format: google-datetime
+          readOnly: true
           type: string
       type: object
     GameServerDeploymentRollout:
@@ -1538,6 +1552,7 @@ components:
         createTime:
           description: Output only. The creation time.
           format: google-datetime
+          readOnly: true
           type: string
         defaultGameServerConfig:
           description: 'The default game server config is applied to all realms unless overridden in the rollout. For example, `projects/my-project/locations/global/gameServerDeployments/my-game/configs/my-config`.'
@@ -1556,6 +1571,7 @@ components:
         updateTime:
           description: Output only. The last-modified time.
           format: google-datetime
+          readOnly: true
           type: string
       type: object
     GkeClusterReference:
@@ -1730,42 +1746,52 @@ components:
       properties:
         apiVersion:
           description: Output only. API version used to start the operation.
+          readOnly: true
           type: string
         createTime:
           description: Output only. The time the operation was created.
           format: google-datetime
+          readOnly: true
           type: string
         endTime:
           description: Output only. The time the operation finished running.
           format: google-datetime
+          readOnly: true
           type: string
         operationStatus:
           additionalProperties:
             $ref: '#/components/schemas/OperationStatus'
           description: 'Output only. Operation status for Game Services API operations. Operation status is in the form of key-value pairs where keys are resource IDs and the values show the status of the operation. In case of failures, the value includes an error code and error message.'
+          readOnly: true
           type: object
         requestedCancellation:
           description: 'Output only. Identifies whether the user has requested cancellation of the operation. Operations that have successfully been cancelled have Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.'
+          readOnly: true
           type: boolean
         statusMessage:
           description: 'Output only. Human-readable status of the operation, if any.'
+          readOnly: true
           type: string
         target:
           description: Output only. Server-defined resource path for the target of the operation.
+          readOnly: true
           type: string
         unreachable:
           description: Output only. List of Locations that could not be reached.
           items:
             type: string
+          readOnly: true
           type: array
         verb:
           description: Output only. Name of the verb executed by the operation.
+          readOnly: true
           type: string
       type: object
     OperationStatus:
       properties:
         done:
           description: Output only. Whether the operation is done or still in progress.
+          readOnly: true
           type: boolean
         errorCode:
           description: The error code in case of failures.
@@ -1869,6 +1895,7 @@ components:
         createTime:
           description: Output only. The creation time.
           format: google-datetime
+          readOnly: true
           type: string
         description:
           description: Human readable description of the realm.
@@ -1890,6 +1917,7 @@ components:
         updateTime:
           description: Output only. The last-modified time.
           format: google-datetime
+          readOnly: true
           type: string
       type: object
     RealmSelector:

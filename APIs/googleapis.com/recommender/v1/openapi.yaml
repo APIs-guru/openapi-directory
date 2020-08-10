@@ -37,13 +37,10 @@ tags:
 paths:
   "/v1/{name}":
     get:
-      description: >-
-        Gets the requested recommendation. Requires the recommender.*.get
-
-        IAM permission for the specified recommender.
-      operationId: recommender.projects.locations.recommenders.recommendations.get
+      description: Gets the requested insight. Requires the recommender.*.get IAM permission for the specified insight type.
+      operationId: recommender.projects.locations.insightTypes.insights.get
       parameters:
-        - description: Required. Name of the recommendation.
+        - description: Required. Name of the insight.
           in: path
           name: name
           required: true
@@ -54,7 +51,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GoogleCloudRecommenderV1Recommendation"
+                $ref: "#/components/schemas/GoogleCloudRecommenderV1Insight"
           description: Successful response
       security:
         - Oauth2:
@@ -64,42 +61,32 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
   "/v1/{name}:markAccepted":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
     post:
-      description: >-
-        Marks the Insight State as Accepted. Users can use this method to
-
-        indicate to the Recommender API that they have applied some action based
-
-        on the insight. This stops the insight content from being updated.
-
-
-        MarkInsightAccepted can be applied to insights in ACTIVE state. Requires
-
-        the recommender.*.update IAM permission for the specified insight.
+      description: Marks the Insight State as Accepted. Users can use this method to indicate to the Recommender API that they have applied some action based on the insight. This stops the insight content from being updated. MarkInsightAccepted can be applied to insights in ACTIVE state. Requires the recommender.*.update IAM permission for the specified insight.
       operationId: recommender.projects.locations.insightTypes.insights.markAccepted
       parameters:
         - description: Required. Name of the insight.
@@ -129,36 +116,19 @@ paths:
         - projects
   "/v1/{name}:markClaimed":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
     post:
-      description: >-
-        Marks the Recommendation State as Claimed. Users can use this method to
-
-        indicate to the Recommender API that they are starting to apply the
-
-        recommendation themselves. This stops the recommendation content from being
-
-        updated. Associated insights are frozen and placed in the ACCEPTED state.
-
-
-        MarkRecommendationClaimed can be applied to recommendations in CLAIMED,
-
-        SUCCEEDED, FAILED, or ACTIVE state.
-
-
-        Requires the recommender.*.update IAM permission for the specified
-
-        recommender.
+      description: Marks the Recommendation State as Claimed. Users can use this method to indicate to the Recommender API that they are starting to apply the recommendation themselves. This stops the recommendation content from being updated. Associated insights are frozen and placed in the ACCEPTED state. MarkRecommendationClaimed can be applied to recommendations in CLAIMED, SUCCEEDED, FAILED, or ACTIVE state. Requires the recommender.*.update IAM permission for the specified recommender.
       operationId: recommender.projects.locations.recommenders.recommendations.markClaimed
       parameters:
         - description: Required. Name of the recommendation.
@@ -188,38 +158,19 @@ paths:
         - projects
   "/v1/{name}:markFailed":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
     post:
-      description: >-
-        Marks the Recommendation State as Failed. Users can use this method to
-
-        indicate to the Recommender API that they have applied the recommendation
-
-        themselves, and the operation failed. This stops the recommendation content
-
-        from being updated. Associated insights are frozen and placed in the
-
-        ACCEPTED state.
-
-
-        MarkRecommendationFailed can be applied to recommendations in ACTIVE,
-
-        CLAIMED, SUCCEEDED, or FAILED state.
-
-
-        Requires the recommender.*.update IAM permission for the specified
-
-        recommender.
+      description: Marks the Recommendation State as Failed. Users can use this method to indicate to the Recommender API that they have applied the recommendation themselves, and the operation failed. This stops the recommendation content from being updated. Associated insights are frozen and placed in the ACCEPTED state. MarkRecommendationFailed can be applied to recommendations in ACTIVE, CLAIMED, SUCCEEDED, or FAILED state. Requires the recommender.*.update IAM permission for the specified recommender.
       operationId: recommender.projects.locations.recommenders.recommendations.markFailed
       parameters:
         - description: Required. Name of the recommendation.
@@ -249,38 +200,19 @@ paths:
         - projects
   "/v1/{name}:markSucceeded":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
     post:
-      description: >-
-        Marks the Recommendation State as Succeeded. Users can use this method to
-
-        indicate to the Recommender API that they have applied the recommendation
-
-        themselves, and the operation was successful. This stops the recommendation
-
-        content from being updated. Associated insights are frozen and placed in
-
-        the ACCEPTED state.
-
-
-        MarkRecommendationSucceeded can be applied to recommendations in ACTIVE,
-
-        CLAIMED, SUCCEEDED, or FAILED state.
-
-
-        Requires the recommender.*.update IAM permission for the specified
-
-        recommender.
+      description: Marks the Recommendation State as Succeeded. Users can use this method to indicate to the Recommender API that they have applied the recommendation themselves, and the operation was successful. This stops the recommendation content from being updated. Associated insights are frozen and placed in the ACCEPTED state. MarkRecommendationSucceeded can be applied to recommendations in ACTIVE, CLAIMED, SUCCEEDED, or FAILED state. Requires the recommender.*.update IAM permission for the specified recommender.
       operationId: recommender.projects.locations.recommenders.recommendations.markSucceeded
       parameters:
         - description: Required. Name of the recommendation.
@@ -310,59 +242,26 @@ paths:
         - projects
   "/v1/{parent}/insights":
     get:
-      description: >-
-        Lists insights for a Cloud project. Requires the recommender.*.list IAM
-
-        permission for the specified insight type.
+      description: Lists insights for a Cloud project. Requires the recommender.*.list IAM permission for the specified insight type.
       operationId: recommender.projects.locations.insightTypes.insights.list
       parameters:
-        - description: >-
-            Required. The container resource on which to execute the request.
-
-            Acceptable formats:
-
-
-            1.
-
-            "projects/[PROJECT_NUMBER]/locations/[LOCATION]/insightTypes/[INSIGHT_TYPE_ID]",
-
-
-            LOCATION here refers to GCP Locations:
-
-            https://cloud.google.com/about/locations/
+        - description: 'Required. The container resource on which to execute the request. Acceptable formats: 1. "projects/[PROJECT_NUMBER]/locations/[LOCATION]/insightTypes/[INSIGHT_TYPE_ID]", LOCATION here refers to GCP Locations: https://cloud.google.com/about/locations/'
           in: path
           name: parent
           required: true
           schema:
             type: string
-        - description: >-
-            Optional. Filter expression to restrict the insights returned. Supported
-
-            filter fields: state
-
-            Eg: `state:"DISMISSED" or state:"ACTIVE"
+        - description: 'Optional. Filter expression to restrict the insights returned. Supported filter fields: state Eg: `state:"DISMISSED" or state:"ACTIVE"'
           in: query
           name: filter
           schema:
             type: string
-        - description: >-
-            Optional. The maximum number of results to return from this request.  Non-positive
-
-            values are ignored. If not specified, the server will determine the number
-
-            of results to return.
+        - description: Optional. The maximum number of results to return from this request. Non-positive values are ignored. If not specified, the server will determine the number of results to return.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: >-
-            Optional. If present, retrieves the next batch of results from the preceding call to
-
-            this method. `page_token` must be the value of `next_page_token` from the
-
-            previous response. The values of other method parameters must be identical
-
-            to those in the previous call.
+        - description: Optional. If present, retrieves the next batch of results from the preceding call to this method. `page_token` must be the value of `next_page_token` from the previous response. The values of other method parameters must be identical to those in the previous call.
           in: query
           name: pageToken
           schema:
@@ -382,72 +281,39 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
   "/v1/{parent}/recommendations":
     get:
-      description: >-
-        Lists recommendations for a Cloud project. Requires the recommender.*.list
-
-        IAM permission for the specified recommender.
+      description: Lists recommendations for a Cloud project. Requires the recommender.*.list IAM permission for the specified recommender.
       operationId: recommender.projects.locations.recommenders.recommendations.list
       parameters:
-        - description: >-
-            Required. The container resource on which to execute the request.
-
-            Acceptable formats:
-
-
-            1.
-
-            "projects/[PROJECT_NUMBER]/locations/[LOCATION]/recommenders/[RECOMMENDER_ID]",
-
-
-            LOCATION here refers to GCP Locations:
-
-            https://cloud.google.com/about/locations/
+        - description: 'Required. The container resource on which to execute the request. Acceptable formats: 1. "projects/[PROJECT_NUMBER]/locations/[LOCATION]/recommenders/[RECOMMENDER_ID]", LOCATION here refers to GCP Locations: https://cloud.google.com/about/locations/'
           in: path
           name: parent
           required: true
           schema:
             type: string
-        - description: >-
-            Filter expression to restrict the recommendations returned. Supported
-
-            filter fields: state_info.state
-
-            Eg: `state_info.state:"DISMISSED" or state_info.state:"FAILED"
+        - description: 'Filter expression to restrict the recommendations returned. Supported filter fields: state_info.state Eg: `state_info.state:"DISMISSED" or state_info.state:"FAILED"'
           in: query
           name: filter
           schema:
             type: string
-        - description: >-
-            Optional. The maximum number of results to return from this request.  Non-positive
-
-            values are ignored. If not specified, the server will determine the number
-
-            of results to return.
+        - description: Optional. The maximum number of results to return from this request. Non-positive values are ignored. If not specified, the server will determine the number of results to return.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: >-
-            Optional. If present, retrieves the next batch of results from the preceding call to
-
-            this method. `page_token` must be the value of `next_page_token` from the
-
-            previous response. The values of other method parameters must be identical
-
-            to those in the previous call.
+        - description: Optional. If present, retrieves the next batch of results from the preceding call to this method. `page_token` must be the value of `next_page_token` from the previous response. The values of other method parameters must be identical to those in the previous call.
           in: query
           name: pageToken
           schema:
@@ -467,17 +333,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
 components:
   parameters:
     _.xgafv:
@@ -559,12 +425,7 @@ components:
       properties:
         cost:
           $ref: "#/components/schemas/GoogleTypeMoney"
-          description: >-
-            An approximate projection on amount saved or amount incurred. Negative cost
-
-            units indicate cost savings and positive cost units indicate increase.
-
-            See google.type.Money documentation for positive/negative units.
+          description: An approximate projection on amount saved or amount incurred. Negative cost units indicate cost savings and positive cost units indicate increase. See google.type.Money documentation for positive/negative units.
         duration:
           description: Duration for which this cost applies.
           format: google-duration
@@ -587,10 +448,7 @@ components:
           description: Use with CategoryType.COST
       type: object
     GoogleCloudRecommenderV1Insight:
-      description: >-
-        An insight along with the information used to derive the insight. The insight
-
-        may have associated recomendations as well.
+      description: An insight along with the information used to derive the insight. The insight may have associated recomendations as well.
       properties:
         associatedRecommendations:
           description: Recommendations derived from this insight.
@@ -609,22 +467,13 @@ components:
         content:
           additionalProperties:
             description: Properties of the object.
-          description: >-
-            A struct of custom fields to explain the insight.
-
-            Example: "grantedPermissionsCount": "1000"
+          description: 'A struct of custom fields to explain the insight. Example: "grantedPermissionsCount": "1000"'
           type: object
         description:
-          description: >-
-            Free-form human readable summary in English. The maximum length is 500
-
-            characters.
+          description: Free-form human readable summary in English. The maximum length is 500 characters.
           type: string
         etag:
-          description: >-
-            Fingerprint of the Insight. Provides optimistic locking when updating
-
-            states.
+          description: Fingerprint of the Insight. Provides optimistic locking when updating states.
           type: string
         insightSubtype:
           description: Insight subtype. Insight content schema will be stable for a given subtype.
@@ -637,12 +486,7 @@ components:
           description: Name of the insight.
           type: string
         observationPeriod:
-          description: >-
-            Observation period that led to the insight. The source data used to
-
-            generate the insight ends at last_refresh_time and begins at
-
-            (last_refresh_time - observation_period).
+          description: Observation period that led to the insight. The source data used to generate the insight ends at last_refresh_time and begins at (last_refresh_time - observation_period).
           format: google-duration
           type: string
         stateInfo:
@@ -658,10 +502,7 @@ components:
       description: Reference to an associated recommendation.
       properties:
         recommendation:
-          description: >-
-            Recommendation resource name, e.g.
-
-            projects/[PROJECT_NUMBER]/locations/[LOCATION]/recommenders/[RECOMMENDER_ID]/recommendations/[RECOMMENDATION_ID]
+          description: Recommendation resource name, e.g. projects/[PROJECT_NUMBER]/locations/[LOCATION]/recommenders/[RECOMMENDER_ID]/recommendations/[RECOMMENDATION_ID]
           type: string
       type: object
     GoogleCloudRecommenderV1InsightStateInfo:
@@ -690,20 +531,14 @@ components:
             $ref: "#/components/schemas/GoogleCloudRecommenderV1Insight"
           type: array
         nextPageToken:
-          description: >-
-            A token that can be used to request the next page of results. This field is
-
-            empty if there are no additional results.
+          description: A token that can be used to request the next page of results. This field is empty if there are no additional results.
           type: string
       type: object
     GoogleCloudRecommenderV1ListRecommendationsResponse:
       description: Response to the `ListRecommendations` method.
       properties:
         nextPageToken:
-          description: >-
-            A token that can be used to request the next page of results. This field is
-
-            empty if there are no additional results.
+          description: A token that can be used to request the next page of results. This field is empty if there are no additional results.
           type: string
         recommendations:
           description: The set of recommendations for the `parent` resource.
@@ -720,10 +555,7 @@ components:
         stateMetadata:
           additionalProperties:
             type: string
-          description: >-
-            Optional. State properties user wish to include with this state.  Full replace of the
-
-            current state_metadata.
+          description: Optional. State properties user wish to include with this state. Full replace of the current state_metadata.
           type: object
       type: object
     GoogleCloudRecommenderV1MarkRecommendationClaimedRequest:
@@ -735,14 +567,7 @@ components:
         stateMetadata:
           additionalProperties:
             type: string
-          description: >-
-            State properties to include with this state. Overwrites any existing
-
-            `state_metadata`.
-
-            Keys must match the regex /^a-z0-9{0,62}$/.
-
-            Values must match the regex /^[a-zA-Z0-9_./-]{0,255}$/.
+          description: State properties to include with this state. Overwrites any existing `state_metadata`. Keys must match the regex /^a-z0-9{0,62}$/. Values must match the regex /^[a-zA-Z0-9_./-]{0,255}$/.
           type: object
       type: object
     GoogleCloudRecommenderV1MarkRecommendationFailedRequest:
@@ -754,14 +579,7 @@ components:
         stateMetadata:
           additionalProperties:
             type: string
-          description: >-
-            State properties to include with this state. Overwrites any existing
-
-            `state_metadata`.
-
-            Keys must match the regex /^a-z0-9{0,62}$/.
-
-            Values must match the regex /^[a-zA-Z0-9_./-]{0,255}$/.
+          description: State properties to include with this state. Overwrites any existing `state_metadata`. Keys must match the regex /^a-z0-9{0,62}$/. Values must match the regex /^[a-zA-Z0-9_./-]{0,255}$/.
           type: object
       type: object
     GoogleCloudRecommenderV1MarkRecommendationSucceededRequest:
@@ -773,162 +591,59 @@ components:
         stateMetadata:
           additionalProperties:
             type: string
-          description: >-
-            State properties to include with this state. Overwrites any existing
-
-            `state_metadata`.
-
-            Keys must match the regex /^a-z0-9{0,62}$/.
-
-            Values must match the regex /^[a-zA-Z0-9_./-]{0,255}$/.
+          description: State properties to include with this state. Overwrites any existing `state_metadata`. Keys must match the regex /^a-z0-9{0,62}$/. Values must match the regex /^[a-zA-Z0-9_./-]{0,255}$/.
           type: object
       type: object
     GoogleCloudRecommenderV1Operation:
-      description: >-
-        Contains an operation for a resource loosely based on the JSON-PATCH format
-
-        with support for:
-
-
-        * Custom filters for describing partial array patch.
-
-        * Extended path values for describing nested arrays.
-
-        * Custom fields for describing the resource for which the operation is being
-          described.
-        * Allows extension to custom operations not natively supported by RFC6902.
-
-        See https://tools.ietf.org/html/rfc6902 for details on the original RFC.
+      description: "Contains an operation for a resource loosely based on the JSON-PATCH format with support for: * Custom filters for describing partial array patch. * Extended path values for describing nested arrays. * Custom fields for describing the resource for which the operation is being described. * Allows extension to custom operations not natively supported by RFC6902. See https://tools.ietf.org/html/rfc6902 for details on the original RFC."
       properties:
         action:
-          description: >-
-            Type of this operation. Contains one of 'and', 'remove', 'replace', 'move',
-
-            'copy', 'test' and custom operations. This field is case-insensitive and
-
-            always populated.
+          description: Type of this operation. Contains one of 'and', 'remove', 'replace', 'move', 'copy', 'test' and custom operations. This field is case-insensitive and always populated.
           type: string
         path:
-          description: >-
-            Path to the target field being operated on. If the operation is at the
-
-            resource level, then path should be "/". This field is always populated.
+          description: Path to the target field being operated on. If the operation is at the resource level, then path should be "/". This field is always populated.
           type: string
         pathFilters:
           additionalProperties: {}
-          description: >-
-            Set of filters to apply if `path` refers to array elements or nested array
-
-            elements in order to narrow down to a single unique element that is being
-
-            tested/modified.
-
-            This is intended to be an exact match per filter. To perform advanced
-
-            matching, use path_value_matchers.
-
-
-            * Example: {
-              "/versions/*/name" : "it-123"
-              "/versions/*/targetSize/percent": 20
-             }
-            * Example: {
-              "/bindings/*/role": "roles/admin"
-              "/bindings/*/condition" : null
-             }
-            * Example: {
-              "/bindings/*/role": "roles/admin"
-              "/bindings/*/members/*" : ["x@google.com", "y@google.com"]
-             }
-            When both path_filters and path_value_matchers are set, an implicit AND
-
-            must be performed.
+          description: 'Set of filters to apply if `path` refers to array elements or nested array elements in order to narrow down to a single unique element that is being tested/modified. This is intended to be an exact match per filter. To perform advanced matching, use path_value_matchers. * Example: { "/versions/*/name" : "it-123" "/versions/*/targetSize/percent": 20 } * Example: { "/bindings/*/role": "roles/admin" "/bindings/*/condition" : null } * Example: { "/bindings/*/role": "roles/admin" "/bindings/*/members/*" : ["x@google.com", "y@google.com"] } When both path_filters and path_value_matchers are set, an implicit AND must be performed.'
           type: object
         pathValueMatchers:
           additionalProperties:
             $ref: "#/components/schemas/GoogleCloudRecommenderV1ValueMatcher"
-          description: >-
-            Similar to path_filters, this contains set of filters to apply if `path`
-
-            field referes to array elements. This is meant to support value matching
-
-            beyond exact match. To perform exact match, use path_filters.
-
-            When both path_filters and path_value_matchers are set, an implicit AND
-
-            must be performed.
+          description: Similar to path_filters, this contains set of filters to apply if `path` field referes to array elements. This is meant to support value matching beyond exact match. To perform exact match, use path_filters. When both path_filters and path_value_matchers are set, an implicit AND must be performed.
           type: object
         resource:
-          description: >-
-            Contains the fully qualified resource name. This field is always populated.
-
-            ex: //cloudresourcemanager.googleapis.com/projects/foo.
+          description: "Contains the fully qualified resource name. This field is always populated. ex: //cloudresourcemanager.googleapis.com/projects/foo."
           type: string
         resourceType:
-          description: >-
-            Type of GCP resource being modified/tested. This field is always populated.
-
-            Example: cloudresourcemanager.googleapis.com/Project,
-
-            compute.googleapis.com/Instance
+          description: "Type of GCP resource being modified/tested. This field is always populated. Example: cloudresourcemanager.googleapis.com/Project, compute.googleapis.com/Instance"
           type: string
         sourcePath:
-          description: >-
-            Can be set with action 'copy' or 'move' to indicate the source field within
-
-            resource or source_resource, ignored if provided for other operation types.
+          description: Can be set with action 'copy' or 'move' to indicate the source field within resource or source_resource, ignored if provided for other operation types.
           type: string
         sourceResource:
-          description: >-
-            Can be set with action 'copy' to copy resource configuration across
-
-            different resources of the same type. Example: A resource clone can be
-
-            done via action = 'copy', path = "/", from = "/",
-
-            source_resource = <source> and resource_name = <target>.
-
-            This field is empty for all other values of `action`.
+          description: "Can be set with action 'copy' to copy resource configuration across different resources of the same type. Example: A resource clone can be done via action = 'copy', path = \"/\", from = \"/\", source_resource = and resource_name = . This field is empty for all other values of `action`."
           type: string
         value:
-          description: >-
-            Value for the `path` field. Will be set for actions:'add'/'replace'.
-
-            Maybe set for action: 'test'. Either this or `value_matcher` will be set
-
-            for 'test' operation. An exact match must be performed.
+          description: "Value for the `path` field. Will be set for actions:'add'/'replace'. Maybe set for action: 'test'. Either this or `value_matcher` will be set for 'test' operation. An exact match must be performed."
         valueMatcher:
           $ref: "#/components/schemas/GoogleCloudRecommenderV1ValueMatcher"
-          description: >-
-            Can be set for action 'test' for advanced matching for the value of
-
-            'path' field. Either this or `value` will be set for 'test' operation.
+          description: Can be set for action 'test' for advanced matching for the value of 'path' field. Either this or `value` will be set for 'test' operation.
       type: object
     GoogleCloudRecommenderV1OperationGroup:
       description: Group of operations that need to be performed atomically.
       properties:
         operations:
-          description: >-
-            List of operations across one or more resources that belong to this group.
-
-            Loosely based on RFC6902 and should be performed in the order they appear.
+          description: List of operations across one or more resources that belong to this group. Loosely based on RFC6902 and should be performed in the order they appear.
           items:
             $ref: "#/components/schemas/GoogleCloudRecommenderV1Operation"
           type: array
       type: object
     GoogleCloudRecommenderV1Recommendation:
-      description: >-
-        A recommendation along with a suggested action. E.g., a rightsizing
-
-        recommendation for an underutilized VM, IAM role recommendations, etc
+      description: A recommendation along with a suggested action. E.g., a rightsizing recommendation for an underutilized VM, IAM role recommendations, etc
       properties:
         additionalImpact:
-          description: >-
-            Optional set of additional impact that this recommendation may have when
-
-            trying to optimize for the primary category. These may be positive
-
-            or negative.
+          description: Optional set of additional impact that this recommendation may have when trying to optimize for the primary category. These may be positive or negative.
           items:
             $ref: "#/components/schemas/GoogleCloudRecommenderV1Impact"
           type: array
@@ -941,22 +656,13 @@ components:
           $ref: "#/components/schemas/GoogleCloudRecommenderV1RecommendationContent"
           description: Content of the recommendation describing recommended changes to resources.
         description:
-          description: >-
-            Free-form human readable summary in English. The maximum length is 500
-
-            characters.
+          description: Free-form human readable summary in English. The maximum length is 500 characters.
           type: string
         etag:
-          description: >-
-            Fingerprint of the Recommendation. Provides optimistic locking when
-
-            updating states.
+          description: Fingerprint of the Recommendation. Provides optimistic locking when updating states.
           type: string
         lastRefreshTime:
-          description: >-
-            Last time this recommendation was refreshed by the system that created it
-
-            in the first place.
+          description: Last time this recommendation was refreshed by the system that created it in the first place.
           format: google-datetime
           type: string
         name:
@@ -964,26 +670,9 @@ components:
           type: string
         primaryImpact:
           $ref: "#/components/schemas/GoogleCloudRecommenderV1Impact"
-          description: >-
-            The primary impact that this recommendation can have while trying to
-
-            optimize for one category.
+          description: The primary impact that this recommendation can have while trying to optimize for one category.
         recommenderSubtype:
-          description: >-
-            Contains an identifier for a subtype of recommendations produced for the
-
-            same recommender. Subtype is a function of content and impact, meaning a
-
-            new subtype might be added when significant changes to `content` or
-
-            `primary_impact.category` are introduced. See the Recommenders section
-
-            to see a list of subtypes for a given Recommender.
-
-
-            Examples:
-              For recommender = "google.iam.policy.Recommender",
-              recommender_subtype can be one of "REMOVE_ROLE"/"REPLACE_ROLE"
+          description: 'Contains an identifier for a subtype of recommendations produced for the same recommender. Subtype is a function of content and impact, meaning a new subtype might be added when significant changes to `content` or `primary_impact.category` are introduced. See the Recommenders section to see a list of subtypes for a given Recommender. Examples: For recommender = "google.iam.policy.Recommender", recommender_subtype can be one of "REMOVE_ROLE"/"REPLACE_ROLE"'
           type: string
         stateInfo:
           $ref: "#/components/schemas/GoogleCloudRecommenderV1RecommendationStateInfo"
@@ -993,12 +682,7 @@ components:
       description: Contains what resources are changing and how they are changing.
       properties:
         operationGroups:
-          description: >-
-            Operations to one or more Google Cloud resources grouped in such a way
-
-            that, all operations within one group are expected to be performed
-
-            atomically and in an order.
+          description: Operations to one or more Google Cloud resources grouped in such a way that, all operations within one group are expected to be performed atomically and in an order.
           items:
             $ref: "#/components/schemas/GoogleCloudRecommenderV1OperationGroup"
           type: array
@@ -1007,10 +691,7 @@ components:
       description: Reference to an associated insight.
       properties:
         insight:
-          description: >-
-            Insight resource name, e.g.
-
-            projects/[PROJECT_NUMBER]/locations/[LOCATION]/insightTypes/[INSIGHT_TYPE_ID]/insights/[INSIGHT_ID]
+          description: Insight resource name, e.g. projects/[PROJECT_NUMBER]/locations/[LOCATION]/insightTypes/[INSIGHT_TYPE_ID]/insights/[INSIGHT_ID]
           type: string
       type: object
     GoogleCloudRecommenderV1RecommendationStateInfo:
@@ -1036,12 +717,7 @@ components:
       description: Contains various matching options for values for a GCP resource field.
       properties:
         matchesPattern:
-          description: >-
-            To be used for full regex matching. The regular expression is using the
-
-            Google RE2 syntax (https://github.com/google/re2/wiki/Syntax), so to be
-
-            used with RE2::FullMatch
+          description: To be used for full regex matching. The regular expression is using the Google RE2 syntax (https://github.com/google/re2/wiki/Syntax), so to be used with RE2::FullMatch
           type: string
       type: object
     GoogleTypeMoney:
@@ -1051,25 +727,11 @@ components:
           description: The 3-letter currency code defined in ISO 4217.
           type: string
         nanos:
-          description: >-
-            Number of nano (10^-9) units of the amount.
-
-            The value must be between -999,999,999 and +999,999,999 inclusive.
-
-            If `units` is positive, `nanos` must be positive or zero.
-
-            If `units` is zero, `nanos` can be positive, zero, or negative.
-
-            If `units` is negative, `nanos` must be negative or zero.
-
-            For example $-1.75 is represented as `units`=-1 and `nanos`=-750,000,000.
+          description: Number of nano (10^-9) units of the amount. The value must be between -999,999,999 and +999,999,999 inclusive. If `units` is positive, `nanos` must be positive or zero. If `units` is zero, `nanos` can be positive, zero, or negative. If `units` is negative, `nanos` must be negative or zero. For example $-1.75 is represented as `units`=-1 and `nanos`=-750,000,000.
           format: int32
           type: integer
         units:
-          description: >-
-            The whole units of the amount.
-
-            For example if `currencyCode` is `"USD"`, then 1 unit is one US dollar.
+          description: The whole units of the amount. For example if `currencyCode` is `"USD"`, then 1 unit is one US dollar.
           format: int64
           type: string
       type: object

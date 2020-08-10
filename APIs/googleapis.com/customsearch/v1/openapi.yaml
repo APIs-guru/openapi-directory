@@ -21,13 +21,9 @@ info:
   x-logo:
     url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
-    - converter:
-        url: https://github.com/lucybot/api-spec-converter
-        version: 2.7.31
-      format: google
-      url: https://www.googleapis.com/discovery/v1/apis/customsearch/v1/rest
+    - format: google
+      url: https://customsearch.googleapis.com/$discovery/rest?version=v1
       version: v1
-  x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: customsearch
 externalDocs:
@@ -255,17 +251,17 @@ paths:
       tags:
         - cse
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
   /customsearch/v1/siterestrict:
     get:
       description: Returns metadata about the search performed, metadata about the engine used for the search, and the search results. Uses a small set of url patterns.
@@ -486,17 +482,17 @@ paths:
       tags:
         - cse
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
 components:
   parameters:
     _.xgafv:

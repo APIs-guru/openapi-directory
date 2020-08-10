@@ -5,6 +5,7 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
+    x-twitter: youtube
   description: The cloud asset API manages the history and inventory of cloud resources.
   license:
     name: Creative Commons Attribution 3.0
@@ -12,6 +13,13 @@ info:
   termsOfService: 'https://developers.google.com/terms/'
   title: Cloud Asset API
   version: v1p5beta1
+  x-apiClientRegistration:
+    url: 'https://console.developers.google.com'
+  x-apisguru-categories:
+    - analytics
+    - media
+  x-logo:
+    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
   x-origin:
     - format: google
       url: 'https://cloudasset.googleapis.com/$discovery/rest?version=v1p5beta1'
@@ -122,16 +130,16 @@ paths:
         - assets
     parameters:
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/quotaUser'
 components:
   parameters:
     _.xgafv:
@@ -1141,7 +1149,9 @@ components:
         allowedServices:
           description: |-
             The list of APIs usable within the Service Perimeter. Must be empty
-            unless 'enable_restriction' is True.
+            unless 'enable_restriction' is True. You can specify a list of individual
+            services, as well as include the 'RESTRICTED-SERVICES' value, which
+            automatically includes all of the services protected by the perimeter.
           items:
             type: string
           type: array

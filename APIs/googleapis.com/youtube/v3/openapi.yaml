@@ -33,52 +33,52 @@ info:
 externalDocs:
   url: https://developers.google.com/youtube/
 tags:
-  - name: channelSections
-  - name: videos
-  - name: commentThreads
-  - name: liveBroadcasts
-  - name: sponsors
-  - name: videoAbuseReportReasons
-  - name: liveChatMessages
-  - name: activities
-  - name: videoCategories
-  - name: thumbnails
-  - name: subscriptions
-  - name: captions
-  - name: i18nRegions
-  - name: channelBanners
   - name: watermarks
-  - name: abuseReports
-  - name: guideCategories
-  - name: channels
-  - name: thirdPartyLinks
-  - name: comments
-  - name: liveChatBans
-  - name: liveStreams
-  - name: i18nLanguages
-  - name: liveChatModerators
-  - name: search
-  - name: superChatEvents
-  - name: playlistItems
-  - name: membershipsLevels
-  - name: youtube
-  - name: members
-  - name: playlists
   - name: tests
+  - name: abuseReports
+  - name: channels
+  - name: thumbnails
+  - name: playlistItems
+  - name: sponsors
+  - name: videos
+  - name: subscriptions
+  - name: guideCategories
+  - name: superChatEvents
+  - name: youtube
+  - name: captions
+  - name: liveChatMessages
+  - name: thirdPartyLinks
+  - name: search
+  - name: activities
+  - name: channelBanners
+  - name: videoAbuseReportReasons
+  - name: comments
+  - name: playlists
+  - name: channelSections
+  - name: liveChatModerators
+  - name: commentThreads
+  - name: i18nLanguages
+  - name: liveChatBans
+  - name: members
+  - name: liveBroadcasts
+  - name: videoCategories
+  - name: liveStreams
+  - name: i18nRegions
+  - name: membershipsLevels
 paths:
   /youtube/v3/abuseReports:
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
     post:
       description: Inserts a new resource into this collection.
       operationId: youtube.abuseReports.insert
@@ -188,17 +188,17 @@ paths:
       tags:
         - activities
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
   /youtube/v3/captions:
     delete:
       description: Deletes a resource.
@@ -291,17 +291,17 @@ paths:
       tags:
         - captions
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
     post:
       description: Inserts a new resource into this collection.
       operationId: youtube.captions.insert
@@ -458,30 +458,30 @@ paths:
       tags:
         - captions
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
   /youtube/v3/channelBanners/insert:
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
     post:
       description: Inserts a new resource into this collection.
       operationId: youtube.channelBanners.insert
@@ -637,17 +637,17 @@ paths:
       tags:
         - channelSections
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
     post:
       description: Inserts a new resource into this collection.
       operationId: youtube.channelSections.insert
@@ -845,17 +845,17 @@ paths:
       tags:
         - channels
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
     put:
       description: Updates an existing resource.
       operationId: youtube.channels.update
@@ -998,17 +998,17 @@ paths:
       tags:
         - commentThreads
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
     post:
       description: Inserts a new resource into this collection.
       operationId: youtube.commentThreads.insert
@@ -1157,17 +1157,17 @@ paths:
       tags:
         - comments
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
     post:
       description: Inserts a new resource into this collection.
       operationId: youtube.comments.insert
@@ -1236,17 +1236,17 @@ paths:
         - comments
   /youtube/v3/comments/markAsSpam:
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
     post:
       description: Expresses the caller's opinion that one or more comments should be flagged as spam.
       operationId: youtube.comments.markAsSpam
@@ -1273,17 +1273,17 @@ paths:
         - comments
   /youtube/v3/comments/setModerationStatus:
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
     post:
       description: Sets the moderation status of one or more comments.
       operationId: youtube.comments.setModerationStatus
@@ -1384,17 +1384,17 @@ paths:
       tags:
         - guideCategories
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
   /youtube/v3/i18nLanguages:
     get:
       description: Retrieves a list of resources, possibly filtered.
@@ -1441,17 +1441,17 @@ paths:
       tags:
         - i18nLanguages
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
   /youtube/v3/i18nRegions:
     get:
       description: Retrieves a list of resources, possibly filtered.
@@ -1498,17 +1498,17 @@ paths:
       tags:
         - i18nRegions
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
   /youtube/v3/infocards:
     get:
       description: Retrieves all infocards for a given video.
@@ -1557,17 +1557,17 @@ paths:
       tags:
         - youtube
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
     post:
       description: "Updates infocards for a given video. Note: * If the card id is not provided, a new card will be created. * If the card id is provided, that card will be updated. * Existing cards will be discarded if they're not included in the request."
       operationId: youtube.youtube.v3.infocards
@@ -1745,17 +1745,17 @@ paths:
       tags:
         - liveBroadcasts
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
     post:
       description: Inserts a new stream for the authenticated user.
       operationId: youtube.liveBroadcasts.insert
@@ -1852,17 +1852,17 @@ paths:
         - liveBroadcasts
   /youtube/v3/liveBroadcasts/bind:
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
     post:
       description: Bind a broadcast to a stream.
       operationId: youtube.liveBroadcasts.bind
@@ -1918,17 +1918,17 @@ paths:
         - liveBroadcasts
   /youtube/v3/liveBroadcasts/control:
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
     post:
       description: "Slate and recording control of the live broadcast. Support actions: slate on/off, recording start/stop/pause/resume. Design doc: goto/yt-api-liveBroadcast-control"
       operationId: youtube.liveBroadcasts.control
@@ -1994,17 +1994,17 @@ paths:
         - liveBroadcasts
   /youtube/v3/liveBroadcasts/transition:
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
     post:
       description: Transition a broadcast to a given status.
       operationId: youtube.liveBroadcasts.transition
@@ -2089,17 +2089,17 @@ paths:
       tags:
         - liveChatBans
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
     post:
       description: Inserts a new resource into this collection.
       operationId: youtube.liveChatBans.insert
@@ -2224,17 +2224,17 @@ paths:
       tags:
         - liveChatMessages
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
     post:
       description: Inserts a new resource into this collection.
       operationId: youtube.liveChatMessages.insert
@@ -2349,17 +2349,17 @@ paths:
       tags:
         - liveChatModerators
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
     post:
       description: Inserts a new resource into this collection.
       operationId: youtube.liveChatModerators.insert
@@ -2501,17 +2501,17 @@ paths:
       tags:
         - liveStreams
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
     post:
       description: Inserts a new stream for the authenticated user.
       operationId: youtube.liveStreams.insert
@@ -2681,17 +2681,17 @@ paths:
       tags:
         - members
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
   /youtube/v3/membershipsLevels:
     get:
       description: Retrieves a list of all pricing levels offered by a creator to the fans.
@@ -2738,17 +2738,17 @@ paths:
       tags:
         - membershipsLevels
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
   /youtube/v3/playlistItems:
     delete:
       description: Deletes a resource.
@@ -2856,17 +2856,17 @@ paths:
       tags:
         - playlistItems
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
     post:
       description: Inserts a new resource into this collection.
       operationId: youtube.playlistItems.insert
@@ -3077,17 +3077,17 @@ paths:
       tags:
         - playlists
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
     post:
       description: Inserts a new resource into this collection.
       operationId: youtube.playlists.insert
@@ -3439,17 +3439,17 @@ paths:
       tags:
         - search
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
   /youtube/v3/sponsors:
     get:
       description: Retrieves a list of sponsors that match the request criteria for a channel.
@@ -3507,17 +3507,17 @@ paths:
       tags:
         - sponsors
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
   /youtube/v3/subscriptions:
     delete:
       description: Deletes a resource.
@@ -3650,17 +3650,17 @@ paths:
       tags:
         - subscriptions
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
     post:
       description: Inserts a new resource into this collection.
       operationId: youtube.subscriptions.insert
@@ -3755,30 +3755,30 @@ paths:
       tags:
         - superChatEvents
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
   /youtube/v3/tests:
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
     post:
       description: POST method.
       operationId: youtube.tests.insert
@@ -3882,17 +3882,17 @@ paths:
       tags:
         - thirdPartyLinks
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
     post:
       description: Inserts a new resource into this collection.
       operationId: youtube.thirdPartyLinks.insert
@@ -3951,17 +3951,17 @@ paths:
         - thirdPartyLinks
   /youtube/v3/thumbnails/set:
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
     post:
       description: As this is not an insert in a strict sense (it supports uploading/setting of a thumbnail for multiple videos, which doesn't result in creation of a single resource), I use a custom verb here.
       operationId: youtube.thumbnails.set
@@ -4045,17 +4045,17 @@ paths:
       tags:
         - videoAbuseReportReasons
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
   /youtube/v3/videoCategories:
     get:
       description: Retrieves a list of resources, possibly filtered.
@@ -4115,17 +4115,17 @@ paths:
       tags:
         - videoCategories
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
   /youtube/v3/videos:
     delete:
       description: Deletes a resource.
@@ -4269,17 +4269,17 @@ paths:
       tags:
         - videos
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
     post:
       description: Inserts a new resource into this collection.
       operationId: youtube.videos.insert
@@ -4735,30 +4735,30 @@ paths:
       tags:
         - videos
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
   /youtube/v3/videos/rate:
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
     post:
       description: Adds a like or dislike rating to a video or removes a rating from a video.
       operationId: youtube.videos.rate
@@ -4797,17 +4797,17 @@ paths:
         - videos
   /youtube/v3/videos/reportAbuse:
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
     post:
       description: Report abuse for a video.
       operationId: youtube.videos.reportAbuse
@@ -4842,17 +4842,17 @@ paths:
         - videos
   /youtube/v3/watermarks/set:
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
     post:
       description: Allows upload of watermark image and setting it for a channel.
       operationId: youtube.watermarks.set
@@ -4902,17 +4902,17 @@ paths:
         - watermarks
   /youtube/v3/watermarks/unset:
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
     post:
       description: Allows removal of channel watermark.
       operationId: youtube.watermarks.unset
@@ -9360,6 +9360,7 @@ components:
         assignable:
           type: boolean
         channelId:
+          default: UCBR8-60-B28hp2BmDPdntcQ
           description: The YouTube channel that created the video category.
           type: string
         title:

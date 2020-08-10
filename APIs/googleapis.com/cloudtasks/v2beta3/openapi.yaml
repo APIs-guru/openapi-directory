@@ -129,17 +129,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
     patch:
       description: >-
         Updates a queue.
@@ -269,30 +269,30 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
   "/v2beta3/{name}:pause":
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: >-
         Pauses the queue.
@@ -339,17 +339,17 @@ paths:
         - projects
   "/v2beta3/{name}:purge":
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: >-
         Purges a queue by deleting all of its tasks.
@@ -393,17 +393,17 @@ paths:
         - projects
   "/v2beta3/{name}:resume":
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: >-
         Resume a queue.
@@ -461,17 +461,17 @@ paths:
         - projects
   "/v2beta3/{name}:run":
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: >-
         Forces a task to run now.
@@ -639,17 +639,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: >-
         Creates a queue.
@@ -822,17 +822,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: >-
         Creates a task and adds it to a queue.
@@ -877,17 +877,17 @@ paths:
         - projects
   "/v2beta3/{resource}:getIamPolicy":
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: >-
         Gets the access control policy for a Queue.
@@ -937,17 +937,17 @@ paths:
         - projects
   "/v2beta3/{resource}:setIamPolicy":
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: >-
         Sets the access control policy for a Queue. Replaces any existing
@@ -1000,17 +1000,17 @@ paths:
         - projects
   "/v2beta3/{resource}:testIamPermissions":
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: >-
         Returns permissions that a caller has on a Queue.

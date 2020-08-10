@@ -21,28 +21,24 @@ info:
   x-logo:
     url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
-    - converter:
-        url: https://github.com/lucybot/api-spec-converter
-        version: 2.7.31
-      format: google
-      url: https://www.googleapis.com/discovery/v1/apis/adsense/v1.4/rest
+    - format: google
+      url: https://adsense.googleapis.com/$discovery/rest?version=v1.4
       version: v1
-  x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: adsense
 externalDocs:
   url: https://developers.google.com/adsense/management/
 tags:
-  - name: urlchannels
+  - name: payments
   - name: alerts
-  - name: adunits
   - name: savedadstyles
-  - name: reports
   - name: metadata
   - name: customchannels
-  - name: adclients
-  - name: payments
+  - name: urlchannels
+  - name: adunits
   - name: accounts
+  - name: adclients
+  - name: reports
 paths:
   /accounts:
     get:
@@ -80,13 +76,13 @@ paths:
       tags:
         - accounts
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/userIp"
   "/accounts/{accountId}":
     get:
       description: Get information about the selected AdSense account.
@@ -122,13 +118,13 @@ paths:
       tags:
         - accounts
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/userIp"
   "/accounts/{accountId}/adclients":
     get:
       description: List all ad clients in the specified account.
@@ -171,13 +167,13 @@ paths:
       tags:
         - accounts
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/userIp"
   "/accounts/{accountId}/adclients/{adClientId}/adcode":
     get:
       description: Get Auto ad code for a given ad client.
@@ -214,13 +210,13 @@ paths:
       tags:
         - accounts
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/userIp"
   "/accounts/{accountId}/adclients/{adClientId}/adunits":
     get:
       description: List all ad units in the specified ad client for the specified account.
@@ -274,13 +270,13 @@ paths:
       tags:
         - accounts
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/userIp"
   "/accounts/{accountId}/adclients/{adClientId}/adunits/{adUnitId}":
     get:
       description: Gets the specified ad unit in the specified ad client for the specified account.
@@ -323,13 +319,13 @@ paths:
       tags:
         - accounts
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/userIp"
   "/accounts/{accountId}/adclients/{adClientId}/adunits/{adUnitId}/adcode":
     get:
       description: Get ad code for the specified ad unit.
@@ -372,13 +368,13 @@ paths:
       tags:
         - accounts
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/userIp"
   "/accounts/{accountId}/adclients/{adClientId}/adunits/{adUnitId}/customchannels":
     get:
       description: List all custom channels which the specified ad unit belongs to.
@@ -433,13 +429,13 @@ paths:
       tags:
         - accounts
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/userIp"
   "/accounts/{accountId}/adclients/{adClientId}/customchannels":
     get:
       description: List all custom channels in the specified ad client for the specified account.
@@ -488,13 +484,13 @@ paths:
       tags:
         - accounts
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/userIp"
   "/accounts/{accountId}/adclients/{adClientId}/customchannels/{customChannelId}":
     get:
       description: Get the specified custom channel from the specified ad client for the specified account.
@@ -537,13 +533,13 @@ paths:
       tags:
         - accounts
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/userIp"
   "/accounts/{accountId}/adclients/{adClientId}/customchannels/{customChannelId}/adunits":
     get:
       description: List all ad units in the specified custom channel.
@@ -603,13 +599,13 @@ paths:
       tags:
         - accounts
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/userIp"
   "/accounts/{accountId}/adclients/{adClientId}/urlchannels":
     get:
       description: List all URL channels in the specified ad client for the specified account.
@@ -658,13 +654,13 @@ paths:
       tags:
         - accounts
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/userIp"
   "/accounts/{accountId}/alerts":
     get:
       description: List the alerts for the specified AdSense account.
@@ -700,13 +696,13 @@ paths:
       tags:
         - accounts
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/userIp"
   "/accounts/{accountId}/alerts/{alertId}":
     delete:
       description: Dismiss (delete) the specified alert from the specified publisher AdSense account.
@@ -735,13 +731,13 @@ paths:
       tags:
         - accounts
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/userIp"
   "/accounts/{accountId}/payments":
     get:
       description: List the payments for the specified AdSense account.
@@ -772,13 +768,13 @@ paths:
       tags:
         - accounts
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/userIp"
   "/accounts/{accountId}/reports":
     get:
       description: Generate an AdSense report based on the report request sent in the query parameters. Returns the result as JSON; to retrieve output in CSV format specify "alt=csv" as a query parameter.
@@ -886,13 +882,13 @@ paths:
       tags:
         - accounts
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/userIp"
   "/accounts/{accountId}/reports/saved":
     get:
       description: List all saved reports in the specified AdSense account.
@@ -935,13 +931,13 @@ paths:
       tags:
         - accounts
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/userIp"
   "/accounts/{accountId}/reports/{savedReportId}":
     get:
       description: Generate an AdSense report based on the saved report ID sent in the query parameters.
@@ -997,13 +993,13 @@ paths:
       tags:
         - accounts
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/userIp"
   "/accounts/{accountId}/savedadstyles":
     get:
       description: List all saved ad styles in the specified account.
@@ -1046,13 +1042,13 @@ paths:
       tags:
         - accounts
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/userIp"
   "/accounts/{accountId}/savedadstyles/{savedAdStyleId}":
     get:
       description: List a specific saved ad style for the specified account.
@@ -1089,13 +1085,13 @@ paths:
       tags:
         - accounts
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/userIp"
   /adclients:
     get:
       description: List all ad clients in this AdSense account.
@@ -1132,13 +1128,13 @@ paths:
       tags:
         - adclients
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/userIp"
   "/adclients/{adClientId}/adunits":
     get:
       description: List all ad units in the specified ad client for this AdSense account.
@@ -1186,13 +1182,13 @@ paths:
       tags:
         - adunits
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/userIp"
   "/adclients/{adClientId}/adunits/{adUnitId}":
     get:
       description: Gets the specified ad unit in the specified ad client.
@@ -1229,13 +1225,13 @@ paths:
       tags:
         - adunits
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/userIp"
   "/adclients/{adClientId}/adunits/{adUnitId}/adcode":
     get:
       description: Get ad code for the specified ad unit.
@@ -1272,13 +1268,13 @@ paths:
       tags:
         - adunits
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/userIp"
   "/adclients/{adClientId}/adunits/{adUnitId}/customchannels":
     get:
       description: List all custom channels which the specified ad unit belongs to.
@@ -1327,13 +1323,13 @@ paths:
       tags:
         - adunits
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/userIp"
   "/adclients/{adClientId}/customchannels":
     get:
       description: List all custom channels in the specified ad client for this AdSense account.
@@ -1376,13 +1372,13 @@ paths:
       tags:
         - customchannels
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/userIp"
   "/adclients/{adClientId}/customchannels/{customChannelId}":
     get:
       description: Get the specified custom channel from the specified ad client.
@@ -1419,13 +1415,13 @@ paths:
       tags:
         - customchannels
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/userIp"
   "/adclients/{adClientId}/customchannels/{customChannelId}/adunits":
     get:
       description: List all ad units in the specified custom channel.
@@ -1479,13 +1475,13 @@ paths:
       tags:
         - customchannels
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/userIp"
   "/adclients/{adClientId}/urlchannels":
     get:
       description: List all URL channels in the specified ad client for this AdSense account.
@@ -1528,13 +1524,13 @@ paths:
       tags:
         - urlchannels
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/userIp"
   /alerts:
     get:
       description: List the alerts for this AdSense account.
@@ -1564,13 +1560,13 @@ paths:
       tags:
         - alerts
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/userIp"
   "/alerts/{alertId}":
     delete:
       description: Dismiss (delete) the specified alert from the publisher's AdSense account.
@@ -1593,13 +1589,13 @@ paths:
       tags:
         - alerts
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/userIp"
   /metadata/dimensions:
     get:
       description: List the metadata for the dimensions available to this AdSense account.
@@ -1623,13 +1619,13 @@ paths:
       tags:
         - metadata
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/userIp"
   /metadata/metrics:
     get:
       description: List the metadata for the metrics available to this AdSense account.
@@ -1653,13 +1649,13 @@ paths:
       tags:
         - metadata
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/userIp"
   /payments:
     get:
       description: List the payments for this AdSense account.
@@ -1683,13 +1679,13 @@ paths:
       tags:
         - payments
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/userIp"
   /reports:
     get:
       description: Generate an AdSense report based on the report request sent in the query parameters. Returns the result as JSON; to retrieve output in CSV format specify "alt=csv" as a query parameter.
@@ -1800,13 +1796,13 @@ paths:
       tags:
         - reports
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/userIp"
   /reports/saved:
     get:
       description: List all saved reports in this AdSense account.
@@ -1843,13 +1839,13 @@ paths:
       tags:
         - reports
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/userIp"
   "/reports/{savedReportId}":
     get:
       description: Generate an AdSense report based on the saved report ID sent in the query parameters.
@@ -1899,13 +1895,13 @@ paths:
       tags:
         - reports
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/userIp"
   /savedadstyles:
     get:
       description: List all saved ad styles in the user's account.
@@ -1942,13 +1938,13 @@ paths:
       tags:
         - savedadstyles
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/userIp"
   "/savedadstyles/{savedAdStyleId}":
     get:
       description: Get a specific saved ad style from the user's account.
@@ -1979,13 +1975,13 @@ paths:
       tags:
         - savedadstyles
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/userIp"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/userIp"
 components:
   parameters:
     alt:

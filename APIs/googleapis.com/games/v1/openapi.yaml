@@ -23,29 +23,25 @@ info:
   x-logo:
     url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
-    - converter:
-        url: https://github.com/lucybot/api-spec-converter
-        version: 2.7.31
-      format: google
-      url: https://www.googleapis.com/discovery/v1/apis/games/v1/rest
+    - format: google
+      url: https://games.googleapis.com/$discovery/rest?version=v1
       version: v1
-  x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: games
 externalDocs:
   url: https://developers.google.com/games/
 tags:
-  - name: achievementDefinitions
-  - name: revisions
+  - name: events
   - name: players
   - name: stats
-  - name: applications
-  - name: leaderboards
-  - name: events
+  - name: revisions
+  - name: achievements
   - name: metagame
   - name: snapshots
+  - name: achievementDefinitions
+  - name: applications
   - name: scores
-  - name: achievements
+  - name: leaderboards
 paths:
   /games/v1/achievements:
     get:
@@ -88,29 +84,29 @@ paths:
         - achievementDefinitions
     parameters:
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
   /games/v1/achievements/updateMultiple:
     parameters:
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Updates multiple achievements for the currently authenticated player.
       operationId: games.achievements.updateMultiple
@@ -136,16 +132,16 @@ paths:
   "/games/v1/achievements/{achievementId}/increment":
     parameters:
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: >-
         Increments the steps of the achievement with the given ID for the currently
@@ -192,16 +188,16 @@ paths:
   "/games/v1/achievements/{achievementId}/reveal":
     parameters:
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: >-
         Sets the state of the achievement with the given ID to
@@ -232,16 +228,16 @@ paths:
   "/games/v1/achievements/{achievementId}/setStepsAtLeast":
     parameters:
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: >-
         Sets the steps for the currently authenticated player towards unlocking an
@@ -282,16 +278,16 @@ paths:
   "/games/v1/achievements/{achievementId}/unlock":
     parameters:
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Unlocks this achievement for the currently authenticated player.
       operationId: games.achievements.unlock
@@ -319,16 +315,16 @@ paths:
   /games/v1/applications/played:
     parameters:
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: >-
         Indicate that the currently authenticated user is playing your
@@ -394,16 +390,16 @@ paths:
         - applications
     parameters:
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
   "/games/v1/applications/{applicationId}/verify":
     get:
       description: >-
@@ -434,16 +430,16 @@ paths:
         - applications
     parameters:
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
   /games/v1/eventDefinitions:
     get:
       description: Returns a list of the event definitions in this application.
@@ -485,16 +481,16 @@ paths:
         - events
     parameters:
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
   /games/v1/events:
     get:
       description: >-
@@ -539,16 +535,16 @@ paths:
         - events
     parameters:
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: >-
         Records a batch of changes to the number of times events have occurred for
@@ -621,29 +617,29 @@ paths:
         - leaderboards
     parameters:
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
   /games/v1/leaderboards/scores:
     parameters:
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Submits multiple scores to leaderboards.
       operationId: games.scores.submitMultiple
@@ -704,29 +700,29 @@ paths:
         - leaderboards
     parameters:
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
   "/games/v1/leaderboards/{leaderboardId}/scores":
     parameters:
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Submits a score to the specified leaderboard.
       operationId: games.scores.submit
@@ -852,16 +848,16 @@ paths:
         - scores
     parameters:
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
   "/games/v1/leaderboards/{leaderboardId}/window/{collection}":
     get:
       description: Lists the scores in a leaderboard around (and including) a player's score.
@@ -951,16 +947,16 @@ paths:
         - scores
     parameters:
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
   /games/v1/metagameConfig:
     get:
       description: Return the metagame configuration data for the calling application.
@@ -981,16 +977,16 @@ paths:
         - metagame
     parameters:
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
   "/games/v1/players/me/players/{collection}":
     get:
       description: Get the collection of players for the currently authenticated user.
@@ -1042,16 +1038,16 @@ paths:
         - players
     parameters:
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
   "/games/v1/players/{playerId}":
     get:
       description: >-
@@ -1090,16 +1086,16 @@ paths:
         - players
     parameters:
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
   "/games/v1/players/{playerId}/achievements":
     get:
       description: >-
@@ -1166,16 +1162,16 @@ paths:
         - achievements
     parameters:
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
   "/games/v1/players/{playerId}/categories/{collection}":
     get:
       description: >-
@@ -1238,16 +1234,16 @@ paths:
         - metagame
     parameters:
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
   "/games/v1/players/{playerId}/leaderboards/{leaderboardId}/scores/{timeSpan}":
     get:
       description: >-
@@ -1343,16 +1339,16 @@ paths:
         - scores
     parameters:
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
   "/games/v1/players/{playerId}/snapshots":
     get:
       description: >-
@@ -1410,16 +1406,16 @@ paths:
         - snapshots
     parameters:
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
   /games/v1/revisions/check:
     get:
       description: Checks whether the games client is out of date.
@@ -1456,16 +1452,16 @@ paths:
         - revisions
     parameters:
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
   "/games/v1/snapshots/{snapshotId}":
     get:
       description: Retrieves the metadata for a given snapshot ID.
@@ -1502,16 +1498,16 @@ paths:
         - snapshots
     parameters:
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
   /games/v1/stats:
     get:
       description: >-
@@ -1535,16 +1531,16 @@ paths:
         - stats
     parameters:
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
 components:
   parameters:
     _.xgafv:

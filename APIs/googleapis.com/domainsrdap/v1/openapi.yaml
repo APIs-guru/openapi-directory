@@ -33,12 +33,12 @@ info:
 externalDocs:
   url: https://developers.google.com/domains/rdap/
 tags:
-  - name: autnum
   - name: nameserver
-  - name: ip
-  - name: v1
   - name: entity
   - name: domain
+  - name: ip
+  - name: v1
+  - name: autnum
 paths:
   "/v1/autnum/{autnumId}":
     get:
@@ -60,16 +60,16 @@ paths:
       tags:
         - autnum
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/fields"
   "/v1/domain/{domainName}":
     get:
@@ -92,16 +92,16 @@ paths:
       tags:
         - domain
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/fields"
   /v1/domains:
     get:
@@ -117,16 +117,16 @@ paths:
       tags:
         - v1
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/fields"
   /v1/entities:
     get:
@@ -142,16 +142,16 @@ paths:
       tags:
         - v1
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/fields"
   "/v1/entity/{entityId}":
     get:
@@ -173,16 +173,16 @@ paths:
       tags:
         - entity
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/fields"
   /v1/help:
     get:
@@ -198,16 +198,16 @@ paths:
       tags:
         - v1
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/fields"
   /v1/ip:
     get:
@@ -223,16 +223,16 @@ paths:
       tags:
         - v1
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/fields"
   "/v1/ip/{ipId}/{ipId1}":
     get:
@@ -259,16 +259,16 @@ paths:
       tags:
         - ip
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/fields"
   "/v1/nameserver/{nameserverId}":
     get:
@@ -290,16 +290,16 @@ paths:
       tags:
         - nameserver
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/fields"
   /v1/nameservers:
     get:
@@ -315,16 +315,16 @@ paths:
       tags:
         - v1
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/fields"
 components:
   parameters:

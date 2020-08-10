@@ -5,6 +5,7 @@ info:
   contact:
     name: Google
     url: https://google.com
+    x-twitter: youtube
   description: Allows external bidders to manage their RTB integration with Google. This includes managing bidder endpoints, QPS quotas, configuring what ad inventory to receive via pretargeting, submitting creatives for verification, and accessing creative metadata such as approval status.
   license:
     name: Creative Commons Attribution 3.0
@@ -12,6 +13,11 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Real-time Bidding API
   version: v1
+  x-apisguru-categories:
+    - analytics
+    - media
+  x-logo:
+    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
     - format: google
       url: https://realtimebidding.googleapis.com/$discovery/rest?version=v1
@@ -21,8 +27,8 @@ info:
 externalDocs:
   url: https://developers.google.com/authorized-buyers/apis/realtimebidding/reference/rest/
 tags:
-  - name: buyers
   - name: bidders
+  - name: buyers
 paths:
   "/v1/{name}":
     get:
@@ -59,17 +65,17 @@ paths:
       tags:
         - buyers
     parameters:
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
     patch:
       description: Updates a creative.
       operationId: realtimebidding.buyers.creatives.patch
@@ -135,17 +141,17 @@ paths:
         - buyers
   "/v1/{name}:close":
     parameters:
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: Change the status of a user list to CLOSED. This prevents new users from being added to the user list.
       operationId: realtimebidding.buyers.userLists.close
@@ -201,30 +207,30 @@ paths:
       tags:
         - buyers
     parameters:
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
   "/v1/{name}:open":
     parameters:
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: Change the status of a user list to OPEN. This allows new users to be added to the user list.
       operationId: realtimebidding.buyers.userLists.open
@@ -257,7 +263,7 @@ paths:
   "/v1/{parent}/creatives":
     get:
       description: Lists creatives.
-      operationId: realtimebidding.bidders.creatives.list
+      operationId: realtimebidding.buyers.creatives.list
       parameters:
         - description: "Required. Name of the parent buyer that owns the creatives. The pattern for this resource is either `buyers/{buyerAccountId}` or `bidders/{bidderAccountId}`. For `buyers/{buyerAccountId}`, the `buyerAccountId` can be one of the following: 1. The ID of the buyer that is accessing their own creatives. 2. The ID of the child seat buyer under a bidder account. So for listing creatives pertaining to the child seat buyer (`456`) under bidder account (`123`), you would use the pattern: `buyers/456`. 3. The ID of the bidder itself. So for listing creatives pertaining to bidder (`123`), you would use `buyers/123`. If you want to access all creatives pertaining to both the bidder and all of its child seat accounts, you would use `bidders/{bidderAccountId}`, e.g., for all creatives pertaining to bidder (`123`), use `bidders/123`."
           in: path
@@ -302,19 +308,19 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/realtime-bidding
       tags:
-        - bidders
+        - buyers
     parameters:
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: Creates a creative.
       operationId: realtimebidding.buyers.creatives.create
@@ -346,17 +352,17 @@ paths:
         - buyers
   "/v1/{parent}/creatives:watch":
     parameters:
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: Watches all creatives pertaining to a bidder. It is sufficient to invoke this endpoint once per bidder. A Pub/Sub topic will be created and notifications will be pushed to the topic when any of the bidder's creatives change status. All of the bidder's service accounts will have access to read from the topic. Subsequent invocations of this method will return the existing Pub/Sub configuration.
       operationId: realtimebidding.bidders.creatives.watch
@@ -422,17 +428,17 @@ paths:
       tags:
         - buyers
     parameters:
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: Create a new user list.
       operationId: realtimebidding.buyers.userLists.create

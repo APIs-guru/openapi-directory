@@ -23,37 +23,33 @@ info:
   x-logo:
     url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
-    - converter:
-        url: https://github.com/lucybot/api-spec-converter
-        version: 2.7.31
-      format: google
-      url: https://www.googleapis.com/discovery/v1/apis/gamesManagement/v1management/rest
+    - format: google
+      url: https://gamesmanagement.googleapis.com/$discovery/rest?version=v1management
       version: v1
-  x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: gamesManagement
 externalDocs:
   url: https://developers.google.com/games/
 tags:
   - name: scores
-  - name: applications
   - name: players
-  - name: achievements
   - name: events
+  - name: applications
+  - name: achievements
 paths:
   /games/v1management/achievements/reset:
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: >-
         Resets all achievements for the currently authenticated player for your
@@ -78,17 +74,17 @@ paths:
         - achievements
   /games/v1management/achievements/resetAllForAllPlayers:
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: >-
         Resets all draft achievements for all players. This method is only
@@ -107,17 +103,17 @@ paths:
         - achievements
   /games/v1management/achievements/resetMultipleForAllPlayers:
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: >-
         Resets achievements with the given IDs for all players. This method is only
@@ -143,17 +139,17 @@ paths:
         - achievements
   "/games/v1management/achievements/{achievementId}/reset":
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: >-
         Resets the achievement with the given ID for the currently authenticated
@@ -185,17 +181,17 @@ paths:
         - achievements
   "/games/v1management/achievements/{achievementId}/resetForAllPlayers":
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: >-
         Resets the achievement with the given ID for all players. This method is
@@ -265,17 +261,17 @@ paths:
       tags:
         - applications
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
   "/games/v1management/applications/{applicationId}/players/hidden/{playerId}":
     delete:
       description: >-
@@ -310,17 +306,17 @@ paths:
       tags:
         - players
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: >-
         Hide the given player's leaderboard scores from the given application. This
@@ -355,17 +351,17 @@ paths:
         - players
   /games/v1management/events/reset:
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: >-
         Resets all player progress on all events for the currently authenticated
@@ -386,17 +382,17 @@ paths:
         - events
   /games/v1management/events/resetAllForAllPlayers:
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: >-
         Resets all draft events for all players. This method is only available to
@@ -415,17 +411,17 @@ paths:
         - events
   /games/v1management/events/resetMultipleForAllPlayers:
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: >-
         Resets events with the given IDs for all players. This method is only
@@ -451,17 +447,17 @@ paths:
         - events
   "/games/v1management/events/{eventId}/reset":
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: >-
         Resets all player progress on the event with the given ID for the currently
@@ -489,17 +485,17 @@ paths:
         - events
   "/games/v1management/events/{eventId}/resetForAllPlayers":
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: >-
         Resets the event with the given ID for all players. This method is only
@@ -527,17 +523,17 @@ paths:
         - events
   "/games/v1management/leaderboards/{leaderboardId}/scores/reset":
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: >-
         Resets scores for the leaderboard with the given ID for the currently
@@ -569,17 +565,17 @@ paths:
         - scores
   "/games/v1management/leaderboards/{leaderboardId}/scores/resetForAllPlayers":
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: >-
         Resets scores for the leaderboard with the given ID for all players. This
@@ -607,17 +603,17 @@ paths:
         - scores
   /games/v1management/scores/reset:
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: >-
         Resets all scores for all leaderboards for the currently authenticated
@@ -642,17 +638,17 @@ paths:
         - scores
   /games/v1management/scores/resetAllForAllPlayers:
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: >-
         Resets scores for all draft leaderboards for all players. This method is
@@ -671,17 +667,17 @@ paths:
         - scores
   /games/v1management/scores/resetMultipleForAllPlayers:
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: >-
         Resets scores for the leaderboards with the given IDs for all players. This

@@ -34,21 +34,21 @@ externalDocs:
   url: https://cloud.google.com/vision/
 tags:
   - name: images
-  - name: projects
   - name: files
+  - name: projects
 paths:
   /v1p2beta1/files:annotate:
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/oauth_token"
     post:
       description: >-
@@ -90,16 +90,16 @@ paths:
         - files
   /v1p2beta1/files:asyncBatchAnnotate:
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/oauth_token"
     post:
       description: >-
@@ -140,16 +140,16 @@ paths:
         - files
   /v1p2beta1/images:annotate:
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/oauth_token"
     post:
       description: Run image detection and annotation for a batch of images.
@@ -179,16 +179,16 @@ paths:
         - images
   /v1p2beta1/images:asyncBatchAnnotate:
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/oauth_token"
     post:
       description: >-
@@ -233,16 +233,16 @@ paths:
         - images
   "/v1p2beta1/{parent}/files:annotate":
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/oauth_token"
     post:
       description: >-
@@ -258,7 +258,7 @@ paths:
         file provided and perform detection and annotation for each image
 
         extracted.
-      operationId: vision.projects.locations.files.annotate
+      operationId: vision.projects.files.annotate
       parameters:
         - description: >-
             Optional. Target project and location to make a call.
@@ -306,16 +306,16 @@ paths:
         - projects
   "/v1p2beta1/{parent}/files:asyncBatchAnnotate":
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/oauth_token"
     post:
       description: >-
@@ -330,7 +330,7 @@ paths:
         `Operation.metadata` contains `OperationMetadata` (metadata).
 
         `Operation.response` contains `AsyncBatchAnnotateFilesResponse` (results).
-      operationId: vision.projects.locations.files.asyncBatchAnnotate
+      operationId: vision.projects.files.asyncBatchAnnotate
       parameters:
         - description: >-
             Optional. Target project and location to make a call.
@@ -378,16 +378,16 @@ paths:
         - projects
   "/v1p2beta1/{parent}/images:annotate":
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/oauth_token"
     post:
       description: Run image detection and annotation for a batch of images.
@@ -439,16 +439,16 @@ paths:
         - projects
   "/v1p2beta1/{parent}/images:asyncBatchAnnotate":
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/oauth_token"
     post:
       description: >-

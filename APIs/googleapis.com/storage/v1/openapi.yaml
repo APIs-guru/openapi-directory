@@ -3649,8 +3649,8 @@ components:
                         format: date
                         type: string
                       customTimeBefore:
-                        description: A timestamp in RFC 3339 format. This condition is satisfied when the custom time on an object is before this timestamp.
-                        format: date-time
+                        description: A date in RFC 3339 format with only the date part (for instance, "2013-01-15"). This condition is satisfied when the custom time on an object is before this date in UTC.
+                        format: date
                         type: string
                       daysSinceCustomTime:
                         description: Number of days elapsed since the user-specified timestamp set on an object. The condition is satisfied if the days elapsed is at least this number. If no custom timestamp is specified on an object, the condition does not apply.
@@ -3672,8 +3672,8 @@ components:
                           type: string
                         type: array
                       noncurrentTimeBefore:
-                        description: A timestamp in RFC 3339 format. This condition is satisfied when the noncurrent time on an object is before this timestamp. This condition is relevant only for versioned objects.
-                        format: date-time
+                        description: A date in RFC 3339 format with only the date part (for instance, "2013-01-15"). This condition is satisfied when the noncurrent time on an object is before this date in UTC. This condition is relevant only for versioned objects.
+                        format: date
                         type: string
                       numNewerVersions:
                         description: Relevant only for versioned objects. If the value is N, this condition is satisfied when there are at least N versions (including the live version) newer than this version of the object.

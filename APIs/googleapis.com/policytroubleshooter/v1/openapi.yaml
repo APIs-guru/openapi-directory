@@ -37,17 +37,17 @@ tags:
 paths:
   /v1/iam:troubleshoot:
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
     post:
       description: Checks whether a member has a specific permission for a specific resource, and explains why the member does or does not have that permission.
       operationId: policytroubleshooter.iam.troubleshoot

@@ -33,8 +33,8 @@ info:
 externalDocs:
   url: https://cloud.google.com/asset-inventory/docs/quickstart
 tags:
-  - name: v1
   - name: operations
+  - name: v1
   - name: feeds
 paths:
   "/v1/{name}":
@@ -101,17 +101,17 @@ paths:
       tags:
         - feeds
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
     patch:
       description: Updates an asset feed configuration.
       operationId: cloudasset.feeds.patch
@@ -184,17 +184,17 @@ paths:
       tags:
         - feeds
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: >-
         Creates a feed in a parent project/folder/organization to listen to its
@@ -326,30 +326,30 @@ paths:
       tags:
         - v1
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
   "/v1/{parent}:exportAssets":
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: >-
         Exports assets with time and resource types to a given Cloud Storage
@@ -519,17 +519,17 @@ paths:
       tags:
         - v1
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
   "/v1/{scope}:searchAllResources":
     get:
       description: >-
@@ -691,17 +691,17 @@ paths:
       tags:
         - v1
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
 components:
   parameters:
     _.xgafv:
@@ -1407,6 +1407,13 @@ components:
             == true") will only publish Asset deletions. Other fields of `Expr` are
 
             optional.
+
+
+            See our [user
+
+            guide](https://cloud.google.com/asset-inventory/docs/monitoring-asset-changes#feed_with_condition)
+
+            for detailed instructions.
         contentType:
           description: >-
             Asset content type. If not specified, no content but the asset name and
@@ -2312,7 +2319,11 @@ components:
           description: >-
             The list of APIs usable within the Service Perimeter. Must be empty
 
-            unless 'enable_restriction' is True.
+            unless 'enable_restriction' is True. You can specify a list of individual
+
+            services, as well as include the 'RESTRICTED-SERVICES' value, which
+
+            automatically includes all of the services protected by the perimeter.
           items:
             type: string
           type: array

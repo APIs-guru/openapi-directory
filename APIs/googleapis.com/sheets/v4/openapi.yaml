@@ -37,15 +37,15 @@ tags:
 paths:
   /v4/spreadsheets:
     parameters:
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
     post:
@@ -173,15 +173,15 @@ paths:
       tags:
         - spreadsheets
     parameters:
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
   "/v4/spreadsheets/{spreadsheetId}/developerMetadata/{metadataId}":
@@ -229,28 +229,28 @@ paths:
       tags:
         - spreadsheets
     parameters:
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
   "/v4/spreadsheets/{spreadsheetId}/developerMetadata:search":
     parameters:
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
     post:
@@ -301,15 +301,15 @@ paths:
         - spreadsheets
   "/v4/spreadsheets/{spreadsheetId}/sheets/{sheetId}:copyTo":
     parameters:
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
     post:
@@ -455,15 +455,15 @@ paths:
       tags:
         - spreadsheets
     parameters:
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
     put:
@@ -570,15 +570,15 @@ paths:
         - spreadsheets
   "/v4/spreadsheets/{spreadsheetId}/values/{range}:append":
     parameters:
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
     post:
@@ -709,15 +709,15 @@ paths:
         - spreadsheets
   "/v4/spreadsheets/{spreadsheetId}/values/{range}:clear":
     parameters:
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
     post:
@@ -772,15 +772,15 @@ paths:
         - spreadsheets
   "/v4/spreadsheets/{spreadsheetId}/values:batchClear":
     parameters:
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
     post:
@@ -829,15 +829,15 @@ paths:
         - spreadsheets
   "/v4/spreadsheets/{spreadsheetId}/values:batchClearByDataFilter":
     parameters:
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
     post:
@@ -986,28 +986,28 @@ paths:
       tags:
         - spreadsheets
     parameters:
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
   "/v4/spreadsheets/{spreadsheetId}/values:batchGetByDataFilter":
     parameters:
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
     post:
@@ -1056,15 +1056,15 @@ paths:
         - spreadsheets
   "/v4/spreadsheets/{spreadsheetId}/values:batchUpdate":
     parameters:
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
     post:
@@ -1113,15 +1113,15 @@ paths:
         - spreadsheets
   "/v4/spreadsheets/{spreadsheetId}/values:batchUpdateByDataFilter":
     parameters:
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
     post:
@@ -1170,15 +1170,15 @@ paths:
         - spreadsheets
   "/v4/spreadsheets/{spreadsheetId}:batchUpdate":
     parameters:
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
     post:
@@ -1254,15 +1254,15 @@ paths:
         - spreadsheets
   "/v4/spreadsheets/{spreadsheetId}:getByDataFilter":
     parameters:
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
     post:

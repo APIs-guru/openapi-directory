@@ -33,9 +33,9 @@ info:
 externalDocs:
   url: https://cloud.google.com/speech-to-text/docs/quickstart-protocol
 tags:
-  - name: projects
-  - name: operations
   - name: speech
+  - name: operations
+  - name: projects
 paths:
   /v1p1beta1/operations:
     get:
@@ -95,17 +95,17 @@ paths:
       tags:
         - operations
     parameters:
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
   "/v1p1beta1/operations/{name}":
     get:
       description: >-
@@ -137,30 +137,30 @@ paths:
       tags:
         - operations
     parameters:
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
   /v1p1beta1/speech:longrunningrecognize:
     parameters:
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
     post:
       description: >-
         Performs asynchronous speech recognition: receive results via the
@@ -196,17 +196,17 @@ paths:
         - speech
   /v1p1beta1/speech:recognize:
     parameters:
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
     post:
       description: >-
         Performs synchronous speech recognition: receive results after all audio
@@ -263,17 +263,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
   "/v1p1beta1/{name}/operations":
     get:
       description: >-
@@ -333,17 +333,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
 components:
   parameters:
     _.xgafv:

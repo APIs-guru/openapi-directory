@@ -92,17 +92,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: >-
         Creates a cluster, consisting of the specified number and type of Google
@@ -309,17 +309,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
     put:
       description: Updates the settings for a specific cluster.
       operationId: container.projects.zones.clusters.update
@@ -378,17 +378,17 @@ paths:
         - projects
   "/v1beta1/projects/{projectId}/zones/{zone}/clusters/{clusterId}/addons":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: Sets the addons for a specific cluster.
       operationId: container.projects.zones.clusters.addons
@@ -447,17 +447,17 @@ paths:
         - projects
   "/v1beta1/projects/{projectId}/zones/{zone}/clusters/{clusterId}/legacyAbac":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: Enables or disables the ABAC authorization mechanism on a cluster.
       operationId: container.projects.zones.clusters.legacyAbac
@@ -516,17 +516,17 @@ paths:
         - projects
   "/v1beta1/projects/{projectId}/zones/{zone}/clusters/{clusterId}/locations":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: >-
         Sets the locations for a specific cluster.
@@ -592,17 +592,17 @@ paths:
         - projects
   "/v1beta1/projects/{projectId}/zones/{zone}/clusters/{clusterId}/logging":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: Sets the logging service for a specific cluster.
       operationId: container.projects.zones.clusters.logging
@@ -661,17 +661,17 @@ paths:
         - projects
   "/v1beta1/projects/{projectId}/zones/{zone}/clusters/{clusterId}/master":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: Updates the master for a specific cluster.
       operationId: container.projects.zones.clusters.master
@@ -730,17 +730,17 @@ paths:
         - projects
   "/v1beta1/projects/{projectId}/zones/{zone}/clusters/{clusterId}/monitoring":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: Sets the monitoring service for a specific cluster.
       operationId: container.projects.zones.clusters.monitoring
@@ -858,17 +858,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: Creates a node pool for a cluster.
       operationId: container.projects.zones.clusters.nodePools.create
@@ -1067,30 +1067,30 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
   "/v1beta1/projects/{projectId}/zones/{zone}/clusters/{clusterId}/nodePools/{nodePoolId}/autoscaling":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: Sets the autoscaling settings of a specific node pool.
       operationId: container.projects.zones.clusters.nodePools.autoscaling
@@ -1158,17 +1158,17 @@ paths:
         - projects
   "/v1beta1/projects/{projectId}/zones/{zone}/clusters/{clusterId}/nodePools/{nodePoolId}/setManagement":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: Sets the NodeManagement options for a node pool.
       operationId: container.projects.zones.clusters.nodePools.setManagement
@@ -1236,17 +1236,17 @@ paths:
         - projects
   "/v1beta1/projects/{projectId}/zones/{zone}/clusters/{clusterId}/nodePools/{nodePoolId}/setSize":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: Sets the size for a specific node pool.
       operationId: container.projects.zones.clusters.nodePools.setSize
@@ -1314,17 +1314,17 @@ paths:
         - projects
   "/v1beta1/projects/{projectId}/zones/{zone}/clusters/{clusterId}/nodePools/{nodePoolId}/update":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: Updates the version and/or image type of a specific node pool.
       operationId: container.projects.zones.clusters.nodePools.update
@@ -1392,17 +1392,17 @@ paths:
         - projects
   "/v1beta1/projects/{projectId}/zones/{zone}/clusters/{clusterId}/nodePools/{nodePoolId}:rollback":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: >-
         Rolls back a previously Aborted or Failed NodePool upgrade.
@@ -1473,17 +1473,17 @@ paths:
         - projects
   "/v1beta1/projects/{projectId}/zones/{zone}/clusters/{clusterId}/resourceLabels":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: Sets labels on a cluster.
       operationId: container.projects.zones.clusters.resourceLabels
@@ -1542,17 +1542,17 @@ paths:
         - projects
   "/v1beta1/projects/{projectId}/zones/{zone}/clusters/{clusterId}:completeIpRotation":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: Completes master IP rotation.
       operationId: container.projects.zones.clusters.completeIpRotation
@@ -1611,17 +1611,17 @@ paths:
         - projects
   "/v1beta1/projects/{projectId}/zones/{zone}/clusters/{clusterId}:setMaintenancePolicy":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: Sets the maintenance policy for a cluster.
       operationId: container.projects.zones.clusters.setMaintenancePolicy
@@ -1673,17 +1673,17 @@ paths:
         - projects
   "/v1beta1/projects/{projectId}/zones/{zone}/clusters/{clusterId}:setMasterAuth":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: >-
         Sets master auth materials. Currently supports changing the admin password
@@ -1747,17 +1747,17 @@ paths:
         - projects
   "/v1beta1/projects/{projectId}/zones/{zone}/clusters/{clusterId}:setNetworkPolicy":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: Enables or disables Network Policy for a cluster.
       operationId: container.projects.zones.clusters.setNetworkPolicy
@@ -1816,17 +1816,17 @@ paths:
         - projects
   "/v1beta1/projects/{projectId}/zones/{zone}/clusters/{clusterId}:startIpRotation":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: Starts master IP rotation.
       operationId: container.projects.zones.clusters.startIpRotation
@@ -1937,17 +1937,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
   "/v1beta1/projects/{projectId}/zones/{zone}/operations/{operationId}":
     get:
       description: Gets the specified operation.
@@ -2009,30 +2009,30 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
   "/v1beta1/projects/{projectId}/zones/{zone}/operations/{operationId}:cancel":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: Cancels the specified operation.
       operationId: container.projects.zones.operations.cancel
@@ -2141,17 +2141,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
   "/v1beta1/{name}":
     delete:
       description: Deletes a node pool from a cluster.
@@ -2221,40 +2221,30 @@ paths:
       tags:
         - projects
     get:
-      description: Retrieves the requested node pool.
-      operationId: container.projects.locations.clusters.nodePools.get
+      description: Gets the specified operation.
+      operationId: container.projects.locations.operations.get
       parameters:
         - description: >-
-            The name (project, location, cluster, node pool id) of the node pool to
+            The name (project, location, operation id) of the operation to get.
 
-            get. Specified in the format
-
-            `projects/*/locations/*/clusters/*/nodePools/*`.
+            Specified in the format `projects/*/locations/*/operations/*`.
           in: path
           name: name
           required: true
           schema:
             type: string
         - description: >-
-            Required. Deprecated. The name of the cluster.
+            Required. Deprecated. The server-assigned `name` of the operation.
 
             This field has been deprecated and replaced by the name field.
           in: query
-          name: clusterId
-          schema:
-            type: string
-        - description: >-
-            Required. Deprecated. The name of the node pool.
-
-            This field has been deprecated and replaced by the name field.
-          in: query
-          name: nodePoolId
+          name: operationId
           schema:
             type: string
         - description: >-
             Required. Deprecated. The Google Developers Console [project ID or project
 
-            number](https://developers.google.com/console/help/new/#projectnumber).
+            number](https://support.google.com/cloud/answer/6158840).
 
             This field has been deprecated and replaced by the name field.
           in: query
@@ -2278,7 +2268,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/NodePool"
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
@@ -2288,17 +2278,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
     put:
       description: Updates the version and/or image type of a specific node pool.
       operationId: container.projects.locations.clusters.nodePools.update
@@ -2384,30 +2374,30 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
   "/v1beta1/{name}:cancel":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: Cancels the specified operation.
       operationId: container.projects.locations.operations.cancel
@@ -2442,17 +2432,17 @@ paths:
         - projects
   "/v1beta1/{name}:completeIpRotation":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: Completes master IP rotation.
       operationId: container.projects.locations.clusters.completeIpRotation
@@ -2487,17 +2477,17 @@ paths:
         - projects
   "/v1beta1/{name}:rollback":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: >-
         Rolls back a previously Aborted or Failed NodePool upgrade.
@@ -2537,17 +2527,17 @@ paths:
         - projects
   "/v1beta1/{name}:setAddons":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: Sets the addons for a specific cluster.
       operationId: container.projects.locations.clusters.setAddons
@@ -2582,17 +2572,17 @@ paths:
         - projects
   "/v1beta1/{name}:setAutoscaling":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: Sets the autoscaling settings of a specific node pool.
       operationId: container.projects.locations.clusters.nodePools.setAutoscaling
@@ -2629,17 +2619,17 @@ paths:
         - projects
   "/v1beta1/{name}:setLegacyAbac":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: Enables or disables the ABAC authorization mechanism on a cluster.
       operationId: container.projects.locations.clusters.setLegacyAbac
@@ -2674,17 +2664,17 @@ paths:
         - projects
   "/v1beta1/{name}:setLocations":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: >-
         Sets the locations for a specific cluster.
@@ -2726,17 +2716,17 @@ paths:
         - projects
   "/v1beta1/{name}:setLogging":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: Sets the logging service for a specific cluster.
       operationId: container.projects.locations.clusters.setLogging
@@ -2771,17 +2761,17 @@ paths:
         - projects
   "/v1beta1/{name}:setMaintenancePolicy":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: Sets the maintenance policy for a cluster.
       operationId: container.projects.locations.clusters.setMaintenancePolicy
@@ -2818,17 +2808,17 @@ paths:
         - projects
   "/v1beta1/{name}:setManagement":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: Sets the NodeManagement options for a node pool.
       operationId: container.projects.locations.clusters.nodePools.setManagement
@@ -2865,17 +2855,17 @@ paths:
         - projects
   "/v1beta1/{name}:setMasterAuth":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: >-
         Sets master auth materials. Currently supports changing the admin password
@@ -2915,17 +2905,17 @@ paths:
         - projects
   "/v1beta1/{name}:setMonitoring":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: Sets the monitoring service for a specific cluster.
       operationId: container.projects.locations.clusters.setMonitoring
@@ -2960,17 +2950,17 @@ paths:
         - projects
   "/v1beta1/{name}:setNetworkPolicy":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: Enables or disables Network Policy for a cluster.
       operationId: container.projects.locations.clusters.setNetworkPolicy
@@ -3005,17 +2995,17 @@ paths:
         - projects
   "/v1beta1/{name}:setResourceLabels":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: Sets labels on a cluster.
       operationId: container.projects.locations.clusters.setResourceLabels
@@ -3050,17 +3040,17 @@ paths:
         - projects
   "/v1beta1/{name}:setSize":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: Sets the size for a specific node pool.
       operationId: container.projects.locations.clusters.nodePools.setSize
@@ -3097,17 +3087,17 @@ paths:
         - projects
   "/v1beta1/{name}:startIpRotation":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: Starts master IP rotation.
       operationId: container.projects.locations.clusters.startIpRotation
@@ -3142,17 +3132,17 @@ paths:
         - projects
   "/v1beta1/{name}:updateMaster":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: Updates the master for a specific cluster.
       operationId: container.projects.locations.clusters.updateMaster
@@ -3222,17 +3212,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
   "/v1beta1/{parent}/aggregated/usableSubnetworks":
     get:
       description: Lists subnetworks that can be used for creating clusters in a project.
@@ -3294,17 +3284,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
   "/v1beta1/{parent}/clusters":
     get:
       description: >-
@@ -3361,17 +3351,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: >-
         Creates a cluster, consisting of the specified number and type of Google
@@ -3459,17 +3449,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
   "/v1beta1/{parent}/locations":
     get:
       description: Fetches locations that offer Google Kubernetes Engine.
@@ -3499,17 +3489,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
   "/v1beta1/{parent}/nodePools":
     get:
       description: Lists the node pools for a cluster.
@@ -3569,17 +3559,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: Creates a node pool for a cluster.
       operationId: container.projects.locations.clusters.nodePools.create
@@ -3667,17 +3657,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
 components:
   parameters:
     _.xgafv:
@@ -3895,9 +3885,9 @@ components:
 
             friendly names of CPU platforms, such as
 
-            <code>minCpuPlatform: &quot;Intel Haswell&quot;</code> or
+            `minCpuPlatform: "Intel Haswell"` or
 
-            <code>minCpuPlatform: &quot;Intel Sandy Bridge&quot;</code>. For more
+            `minCpuPlatform: "Intel Sandy Bridge"`. For more
 
             information, read [how to specify min CPU
 
@@ -5503,7 +5493,7 @@ components:
 
             of the API unaware of some fields won't accidentally remove other fields).
 
-            Make a <code>get()</code> request to the cluster to get the current
+            Make a `get()` request to the cluster to get the current
 
             resource version and include it with requests to set the policy.
           type: string
@@ -5814,33 +5804,34 @@ components:
             The metadata key/value pairs assigned to instances in the cluster.
 
 
-            Keys must conform to the regexp [a-zA-Z0-9-_]+ and be less than 128 bytes
+            Keys must conform to the regexp `[a-zA-Z0-9-_]+` and be less than 128 bytes
 
             in length. These are reflected as part of a URL in the metadata server.
 
             Additionally, to avoid ambiguity, keys must not conflict with any other
 
             metadata keys for the project or be one of the reserved keys:
-             "cluster-location"
-             "cluster-name"
-             "cluster-uid"
-             "configure-sh"
-             "containerd-configure-sh"
-             "enable-oslogin"
-             "gci-ensure-gke-docker"
-             "gci-metrics-enabled"
-             "gci-update-strategy"
-             "instance-template"
-             "kube-env"
-             "startup-script"
-             "user-data"
-             "disable-address-manager"
-             "windows-startup-script-ps1"
-             "common-psm1"
-             "k8s-node-setup-psm1"
-             "install-ssh-psm1"
-             "user-profile-psm1"
-             "serial-port-logging-enable"
+             - "cluster-location"
+             - "cluster-name"
+             - "cluster-uid"
+             - "configure-sh"
+             - "containerd-configure-sh"
+             - "enable-oslogin"
+             - "gci-ensure-gke-docker"
+             - "gci-metrics-enabled"
+             - "gci-update-strategy"
+             - "instance-template"
+             - "kube-env"
+             - "startup-script"
+             - "user-data"
+             - "disable-address-manager"
+             - "windows-startup-script-ps1"
+             - "common-psm1"
+             - "k8s-node-setup-psm1"
+             - "install-ssh-psm1"
+             - "user-profile-psm1"
+             - "serial-port-logging-enable"
+
             Values are free-form strings, and only have meaning as interpreted by
 
             the image running in the instance. The only restriction placed on them is
@@ -5858,9 +5849,9 @@ components:
 
             friendly names of CPU platforms, such as
 
-            <code>minCpuPlatform: &quot;Intel Haswell&quot;</code> or
+            `minCpuPlatform: "Intel Haswell"` or
 
-            <code>minCpuPlatform: &quot;Intel Sandy Bridge&quot;</code>. For more
+            `minCpuPlatform: "Intel Sandy Bridge"`. For more
 
             information, read [how to specify min CPU
 
@@ -6393,30 +6384,49 @@ components:
 
 
             For example, to have something repeat every weekday, you'd use:
-              <code>FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR</code>
+
+            `FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR`
+
+
             To repeat some window daily (equivalent to the DailyMaintenanceWindow):
-              <code>FREQ=DAILY</code>
+
+            `FREQ=DAILY`
+
+
             For the first weekend of every month:
-              <code>FREQ=MONTHLY;BYSETPOS=1;BYDAY=SA,SU</code>
+
+            `FREQ=MONTHLY;BYSETPOS=1;BYDAY=SA,SU`
+
+
             This specifies how frequently the window starts. Eg, if you wanted to have
 
             a 9-5 UTC-4 window every weekday, you'd use something like:
 
-            <code>
-              start time = 2019-01-01T09:00:00-0400
-              end time = 2019-01-01T17:00:00-0400
-              recurrence = FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR
-            </code>
+            ```
+
+            start time = 2019-01-01T09:00:00-0400
+
+            end time = 2019-01-01T17:00:00-0400
+
+            recurrence = FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR
+
+            ```
+
 
             Windows can span multiple days. Eg, to make the window encompass every
 
             weekend from midnight Saturday till the last minute of Sunday UTC:
 
-            <code>
-              start time = 2019-01-05T00:00:00Z
-              end time = 2019-01-07T23:59:00Z
-              recurrence = FREQ=WEEKLY;BYDAY=SA
-            </code>
+            ```
+
+            start time = 2019-01-05T00:00:00Z
+
+            end time = 2019-01-07T23:59:00Z
+
+            recurrence = FREQ=WEEKLY;BYDAY=SA
+
+            ```
+
 
             Note the start and end time's specific dates are largely arbitrary except
 
@@ -6698,7 +6708,7 @@ components:
 
             labels. You must always provide an up-to-date fingerprint hash when
 
-            updating or changing labels. Make a <code>get()</code> request to the
+            updating or changing labels. Make a `get()` request to the
 
             resource to get the latest fingerprint.
           type: string

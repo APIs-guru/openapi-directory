@@ -87,17 +87,17 @@ paths:
       tags:
         - apps
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: Uploads the specified SSL certificate.
       operationId: appengine.apps.authorizedCertificates.create
@@ -205,17 +205,17 @@ paths:
       tags:
         - apps
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
     patch:
       description: Updates the specified SSL certificate. To renew a certificate and maintain its existing domain mappings, update certificate_data with a new certificate. The new certificate must be applicable to the same domains as the original certificate. The certificate display_name may also be updated.
       operationId: appengine.apps.authorizedCertificates.patch
@@ -300,17 +300,17 @@ paths:
       tags:
         - apps
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
   "/v1alpha/apps/{appsId}/domainMappings":
     get:
       description: Lists the domain mappings on an application.
@@ -355,17 +355,17 @@ paths:
       tags:
         - apps
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: Maps a domain to an application. A user must be authorized to administer a domain in order to map it to an application. For a list of available authorized domains, see AuthorizedDomains.ListAuthorizedDomains.
       operationId: appengine.apps.domainMappings.create
@@ -479,17 +479,17 @@ paths:
       tags:
         - apps
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
     patch:
       description: Updates the specified domain mapping. To map an SSL certificate to a domain mapping, update certificate_id to point to an AuthorizedCertificate resource. A user must be authorized to administer the associated domain in order to update a DomainMapping resource.
       operationId: appengine.apps.domainMappings.patch
@@ -584,17 +584,17 @@ paths:
       tags:
         - apps
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
   "/v1alpha/apps/{appsId}/locations/{locationsId}":
     get:
       description: Gets information about a location.
@@ -635,17 +635,17 @@ paths:
       tags:
         - apps
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
   "/v1alpha/apps/{appsId}/operations":
     get:
       description: "Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns UNIMPLEMENTED.NOTE: the name binding allows API services to override the binding to use different resource name schemes, such as users/*/operations. To override the binding, API services can add a binding such as \"/v1/{name=users/*}/operations\" to their service configuration. For backwards compatibility, the default name includes the operations collection id, however overriding users must ensure the name binding is the parent resource, without the operations collection id."
@@ -695,17 +695,17 @@ paths:
       tags:
         - apps
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
   "/v1alpha/apps/{appsId}/operations/{operationsId}":
     get:
       description: Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
@@ -746,17 +746,17 @@ paths:
       tags:
         - apps
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
 components:
   parameters:
     _.xgafv:
@@ -884,10 +884,10 @@ components:
       description: An SSL certificate obtained from a certificate authority.
       properties:
         privateKey:
-          description: "Unencrypted PEM encoded RSA private key. This field is set once on certificate creation and then encrypted. The key size must be 2048 bits or fewer. Must include the header and footer. Example: <pre> -----BEGIN RSA PRIVATE KEY----- <unencrypted_key_value> -----END RSA PRIVATE KEY----- </pre> @InputOnly"
+          description: "Unencrypted PEM encoded RSA private key. This field is set once on certificate creation and then encrypted. The key size must be 2048 bits or fewer. Must include the header and footer. Example: -----BEGIN RSA PRIVATE KEY----- -----END RSA PRIVATE KEY----- @InputOnly"
           type: string
         publicCertificate:
-          description: "PEM encoded x.509 public key certificate. This field is set once on certificate creation. Must include the header and footer. Example: <pre> -----BEGIN CERTIFICATE----- <certificate_value> -----END CERTIFICATE----- </pre>"
+          description: "PEM encoded x.509 public key certificate. This field is set once on certificate creation. Must include the header and footer. Example: -----BEGIN CERTIFICATE----- -----END CERTIFICATE----- "
           type: string
       type: object
     CreateVersionMetadataV1:
@@ -930,14 +930,7 @@ components:
           description: SSL configuration for this domain. If unconfigured, this domain will not serve with SSL.
       type: object
     Empty:
-      description: >-
-        A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance:
-
-        service Foo {
-          rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);
-        }
-
-        The JSON representation for Empty is empty JSON object {}.
+      description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for Empty is empty JSON object {}."
       properties: {}
       type: object
     ListAuthorizedCertificatesResponse:
@@ -1009,10 +1002,7 @@ components:
         labels:
           additionalProperties:
             type: string
-          description: >
-            Cross-service attributes for the location. For example
-
-            {"cloud.googleapis.com/region": "us-east1"}
+          description: 'Cross-service attributes for the location. For example {"cloud.googleapis.com/region": "us-east1"} '
           type: object
         locationId:
           description: 'The canonical id for this location. For example: "us-east1".'

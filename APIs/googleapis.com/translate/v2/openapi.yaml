@@ -36,8 +36,8 @@ externalDocs:
   url: https://code.google.com/apis/language/translate/v2/getting_started.html
 tags:
   - name: detections
-  - name: translations
   - name: languages
+  - name: translations
 paths:
   /v2:
     get:
@@ -125,18 +125,18 @@ paths:
       tags:
         - translations
     parameters:
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/bearer_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/pp"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
     post:
       description: Translates input text, returning translated text.
@@ -201,18 +201,18 @@ paths:
       tags:
         - detections
     parameters:
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/bearer_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/pp"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
     post:
       description: Detects the language of text within a request.
@@ -277,18 +277,18 @@ paths:
       tags:
         - languages
     parameters:
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/bearer_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/pp"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
 components:
   parameters:
