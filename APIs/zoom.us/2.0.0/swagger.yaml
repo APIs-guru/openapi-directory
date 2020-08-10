@@ -1,4 +1,4 @@
-swagger: "2.0"
+swagger: '2.0'
 schemes:
   - https
 host: api.zoom.us
@@ -7,26 +7,26 @@ info:
   contact:
     email: developer@zoom.us
     name: Zoom Developers
-    url: https://developer.zoom.us/
+    url: 'https://developer.zoom.us/'
     x-twitter: zoom_us
   description: API Description
   license:
     name: MIT
-    url: https://opensource.org/licenses/MIT
+    url: 'https://opensource.org/licenses/MIT'
   title: Zoom API
   version: 2.0.0
   x-apisguru-categories:
     - telecom
   x-logo:
-    url: https://twitter.com/zoom_us/profile_image?size=original
+    url: 'https://twitter.com/zoom_us/profile_image?size=original'
   x-origin:
     - format: swagger
-      url: https://raw.githubusercontent.com/zoom/api/master/openapi.v2.json
-      version: "2.0"
+      url: 'https://raw.githubusercontent.com/zoom/api/master/openapi.v2.json'
+      version: '2.0'
   x-providerName: zoom.us
 externalDocs:
   description: Zoom API Documentation
-  url: https://zoom.github.io/api
+  url: 'https://zoom.github.io/api'
 consumes:
   - application/json
   - multipart/form-data
@@ -83,8 +83,8 @@ parameters:
       - Zoom
       - SSO
   Mc:
-    default: "false"
-    description: "Query mc "
+    default: 'false'
+    description: 'Query mc '
     in: query
     name: mc
     type: string
@@ -95,13 +95,13 @@ parameters:
     required: true
     type: integer
   MeetingId4Metrics:
-    description: The meeting ID or meeting UUID. If given meeting ID, will take the last meeting instance.
+    description: 'The meeting ID or meeting UUID. If given meeting ID, will take the last meeting instance.'
     in: path
     name: meetingId
     required: true
     type: string
   MeetingId4Recording:
-    description: The meeting ID or meeting UUID. If given meeting ID, will take the last meeting instance.
+    description: 'The meeting ID or meeting UUID. If given meeting ID, will take the last meeting instance.'
     in: path
     name: meetingId
     required: true
@@ -301,8 +301,8 @@ parameters:
     required: false
     type: boolean
   Trash:
-    default: "false"
-    description: "Query trash "
+    default: false
+    description: 'Query trash '
     in: query
     name: trash
     type: boolean
@@ -325,7 +325,7 @@ parameters:
     required: true
     type: integer
   WebinarId4Metrics:
-    description: The webinar ID or webinar UUID. If given webinar ID, will take the last webinar instance.
+    description: 'The webinar ID or webinar UUID. If given webinar ID, will take the last webinar instance.'
     in: path
     name: webinarId
     required: true
@@ -401,13 +401,13 @@ paths:
       description: List all the sub accounts under the master account
       operationId: accounts
       parameters:
-        - $ref: "#/parameters/PageSize"
-        - $ref: "#/parameters/PageNumber"
+        - $ref: '#/parameters/PageSize'
+        - $ref: '#/parameters/PageNumber'
       responses:
-        "200":
+        '200':
           description: Account list returned
           schema:
-            $ref: "#/definitions/AccountList"
+            $ref: '#/definitions/AccountList'
       summary: List sub accounts
       tags:
         - Accounts
@@ -420,9 +420,9 @@ paths:
           name: body
           required: true
           schema:
-            $ref: "#/definitions/Account"
+            $ref: '#/definitions/Account'
       responses:
-        "201":
+        '201':
           description: Account Created
           headers:
             Content-Location:
@@ -442,21 +442,21 @@ paths:
               owner_id:
                 description: Account Owner ID
                 type: string
-        "409":
+        '409':
           description: Account with that email already exists
       summary: Create a sub account
       tags:
         - Accounts
-  "/accounts/{accountId}":
+  '/accounts/{accountId}':
     delete:
       description: Disassociate a sub account from the master account. This will leave the account intact but the sub account will not longer be associated with the master account.
       operationId: accountDisassociate
       parameters:
-        - $ref: "#/parameters/AccountId"
+        - $ref: '#/parameters/AccountId'
       responses:
-        "204":
+        '204':
           description: Account deleted
-        "404":
+        '404':
           description: Account not found
       summary: Disassociate an account
       tags:
@@ -465,9 +465,9 @@ paths:
       description: Retrieve a sub account under the master account. <aside>Your account must be a master account and have this privilege to read sub accounts. Zoom only assigns this privilege to trusted partners</aside>.
       operationId: account
       parameters:
-        - $ref: "#/parameters/AccountId"
+        - $ref: '#/parameters/AccountId'
       responses:
-        "200":
+        '200':
           description: Account object returned
           schema:
             properties:
@@ -479,7 +479,7 @@ paths:
                 description: Account ID
                 type: string
               options:
-                $ref: "#/definitions/AccountOptions"
+                $ref: '#/definitions/AccountOptions'
               owner_email:
                 description: Account Owner email
                 type: string
@@ -489,23 +489,23 @@ paths:
               vanity_url:
                 description: Account Vanity URL
                 type: string
-        "404":
+        '404':
           description: User not found
       summary: Retrieve a sub account
       tags:
         - Accounts
-  "/accounts/{accountId}/billing":
+  '/accounts/{accountId}/billing':
     get:
       description: Retrieve billing information for a sub account under the master account
       operationId: accountBilling
       parameters:
-        - $ref: "#/parameters/AccountId"
+        - $ref: '#/parameters/AccountId'
       responses:
-        "200":
+        '200':
           description: Account billing contact information returned
           schema:
-            $ref: "#/definitions/BillingContactRequired"
-        "404":
+            $ref: '#/definitions/BillingContactRequired'
+        '404':
           description: Account not found
       summary: Retrieve billing information for a sub account
       tags:
@@ -514,67 +514,67 @@ paths:
       description: Update billing information for a sub account under the master account <aside>Only for the sub account which is a paid account and paid by master account</aside>
       operationId: accountBillingUpdate
       parameters:
-        - $ref: "#/parameters/AccountId"
+        - $ref: '#/parameters/AccountId'
         - in: body
           name: body
           required: true
           schema:
-            $ref: "#/definitions/BillingContact"
+            $ref: '#/definitions/BillingContact'
       responses:
-        "204":
+        '204':
           description: Account billing contact information updated
-        "404":
+        '404':
           description: Account not found
       summary: Update billing information for a sub account
       tags:
         - Billing
-  "/accounts/{accountId}/managed_domains":
+  '/accounts/{accountId}/managed_domains':
     get:
       description: Retrieve a sub account's managed domains under the master account
       operationId: accountManagedDomain
       parameters:
-        - $ref: "#/parameters/AccountId"
+        - $ref: '#/parameters/AccountId'
       responses:
-        "200":
+        '200':
           description: Account managed domains returned
           schema:
-            $ref: "#/definitions/DomainsList"
-        "404":
+            $ref: '#/definitions/DomainsList'
+        '404':
           description: Account not found
       summary: Retrieve a sub account's managed domains
       tags:
         - Accounts
-  "/accounts/{accountId}/options":
+  '/accounts/{accountId}/options':
     patch:
       description: Update a sub account's options under the master account
       operationId: accountOptionsUpdate
       parameters:
-        - $ref: "#/parameters/AccountId"
+        - $ref: '#/parameters/AccountId'
         - in: body
           name: body
           required: true
           schema:
-            $ref: "#/definitions/AccountOptions"
+            $ref: '#/definitions/AccountOptions'
       responses:
-        "204":
+        '204':
           description: Account options updated
-        "404":
+        '404':
           description: Account not found
       summary: Update a sub account's options
       tags:
         - Accounts
-  "/accounts/{accountId}/plans":
+  '/accounts/{accountId}/plans':
     get:
       description: Retrieve plan information for a sub account under the master account  <aside>Only for the sub account which is paid by master account</aside>
       operationId: accountPlans
       parameters:
-        - $ref: "#/parameters/AccountId"
+        - $ref: '#/parameters/AccountId'
       responses:
-        "200":
+        '200':
           description: Account plans returned
           schema:
-            $ref: "#/definitions/AccountPlans"
-        "404":
+            $ref: '#/definitions/AccountPlans'
+        '404':
           description: Account not fond
       summary: Retrieve plan information for a sub account
       tags:
@@ -583,7 +583,7 @@ paths:
       description: Subscribe plans for a sub account of the master account <aside>Can only subscribe plans for the sub account which is a free account and paid by master account</aside>
       operationId: accountPlanCreate
       parameters:
-        - $ref: "#/parameters/AccountId"
+        - $ref: '#/parameters/AccountId'
         - in: body
           name: body
           required: true
@@ -591,30 +591,30 @@ paths:
             allOf:
               - properties:
                   contact:
-                    $ref: "#/definitions/BillingContactRequired"
+                    $ref: '#/definitions/BillingContactRequired'
                 type: object
-              - $ref: "#/definitions/AccountPlans"
+              - $ref: '#/definitions/AccountPlans'
       responses:
-        "201":
+        '201':
           description: Account plans updated
           schema:
-            $ref: "#/definitions/AccountPlans"
+            $ref: '#/definitions/AccountPlans'
       summary: Subscribe plans for a sub account
       tags:
         - Billing
-  "/accounts/{accountId}/plans/addons":
+  '/accounts/{accountId}/plans/addons':
     post:
       description: Add an additional plan for sub account <aside>Can only add an Additional plan for the sub account which is a paid account and paid by master account</aside>
       operationId: accountPlanAddonCreate
       parameters:
-        - $ref: "#/parameters/AccountId"
+        - $ref: '#/parameters/AccountId'
         - in: body
           name: body
           required: true
           schema:
-            $ref: "#/definitions/AccountPlanRequired"
+            $ref: '#/definitions/AccountPlanRequired'
       responses:
-        "201":
+        '201':
           description: Account plans updated
       summary: Add an additional plan for sub account
       tags:
@@ -623,47 +623,47 @@ paths:
       description: Update an additional plan for sub account<aside>Can only update an Additional plan for the sub account which is a paid account and paid by master account</aside>
       operationId: accountPlanAddonUpdate
       parameters:
-        - $ref: "#/parameters/AccountId"
+        - $ref: '#/parameters/AccountId'
         - in: body
           name: body
           required: true
           schema:
-            $ref: "#/definitions/AccountPlanRequired"
+            $ref: '#/definitions/AccountPlanRequired'
       responses:
-        "204":
+        '204':
           description: Account plans updated
       summary: Update an additional plan for sub account
       tags:
         - Billing
-  "/accounts/{accountId}/plans/base":
+  '/accounts/{accountId}/plans/base':
     put:
       description: Update a base plan for a sub account <aside>Can only update a base plan for the sub account which is a paid account and paid by master account</aside>
       operationId: accountPlanBaseUpdate
       parameters:
-        - $ref: "#/parameters/AccountId"
+        - $ref: '#/parameters/AccountId'
         - in: body
           name: body
           required: true
           schema:
-            $ref: "#/definitions/AccountPlanBaseRequired"
+            $ref: '#/definitions/AccountPlanBaseRequired'
       responses:
-        "204":
+        '204':
           description: Account plans updated
       summary: Update a base plan for a sub account
       tags:
         - Billing
-  "/accounts/{accountId}/settings":
+  '/accounts/{accountId}/settings':
     get:
       description: Retrieve a sub account's settings under the master account
       operationId: accountSettings
       parameters:
-        - $ref: "#/parameters/AccountId"
+        - $ref: '#/parameters/AccountId'
       responses:
-        "200":
+        '200':
           description: Account settings returned
           schema:
-            $ref: "#/definitions/AccountSettings"
-        "404":
+            $ref: '#/definitions/AccountSettings'
+        '404':
           description: Account not found
       summary: Retrieve a sub account's settings
       tags:
@@ -672,16 +672,16 @@ paths:
       description: Update a sub account's settings under the master account
       operationId: accountSettingsUpdate
       parameters:
-        - $ref: "#/parameters/AccountId"
+        - $ref: '#/parameters/AccountId'
         - in: body
           name: body
           required: true
           schema:
-            $ref: "#/definitions/AccountSettings"
+            $ref: '#/definitions/AccountSettings'
       responses:
-        "204":
+        '204':
           description: Account settings updated
-        "404":
+        '404':
           description: Account not found
       summary: Update a sub account's settings
       tags:
@@ -692,10 +692,10 @@ paths:
       operationId: groups
       parameters: []
       responses:
-        "200":
+        '200':
           description: List of groups returned
           schema:
-            $ref: "#/definitions/GroupList"
+            $ref: '#/definitions/GroupList'
       summary: List groups
       tags:
         - Groups
@@ -712,7 +712,7 @@ paths:
                 description: Group name
                 type: string
       responses:
-        "201":
+        '201':
           description: Group created
           headers:
             Content-Location:
@@ -732,16 +732,16 @@ paths:
       summary: Create a group
       tags:
         - Groups
-  "/groups/{groupId}":
+  '/groups/{groupId}':
     delete:
       description: Delete a group under your account
       operationId: groupDelete
       parameters:
-        - $ref: "#/parameters/GroupId"
+        - $ref: '#/parameters/GroupId'
       responses:
-        "204":
+        '204':
           description: Group deleted
-        "404":
+        '404':
           description: Group not found
       summary: Delete a group
       tags:
@@ -750,9 +750,9 @@ paths:
       description: Retrieve a group under your account
       operationId: group
       parameters:
-        - $ref: "#/parameters/GroupId"
+        - $ref: '#/parameters/GroupId'
       responses:
-        "200":
+        '200':
           description: Group object returned
           schema:
             allOf:
@@ -760,8 +760,8 @@ paths:
                   id:
                     description: Group ID
                     type: string
-              - $ref: "#/definitions/Group"
-        "404":
+              - $ref: '#/definitions/Group'
+        '404':
           description: Group not found
       summary: Retrieve a group
       tags:
@@ -770,7 +770,7 @@ paths:
       description: Update a group under your account
       operationId: groupUpdate
       parameters:
-        - $ref: "#/parameters/GroupId"
+        - $ref: '#/parameters/GroupId'
         - in: body
           name: body
           required: true
@@ -780,27 +780,27 @@ paths:
                 description: Group name. Must be unique in one account. Character length is less than 128.
                 type: string
       responses:
-        "204":
+        '204':
           description: Group updated
-        "404":
+        '404':
           description: Group not found
       summary: Update a group
       tags:
         - Groups
-  "/groups/{groupId}/members":
+  '/groups/{groupId}/members':
     get:
       description: List a group's members under your account
       operationId: groupMembers
       parameters:
-        - $ref: "#/parameters/GroupId"
-        - $ref: "#/parameters/PageSize"
-        - $ref: "#/parameters/PageNumber"
+        - $ref: '#/parameters/GroupId'
+        - $ref: '#/parameters/PageSize'
+        - $ref: '#/parameters/PageNumber'
       responses:
-        "200":
+        '200':
           description: Group member list returned
           schema:
-            $ref: "#/definitions/GroupMemberList"
-        "404":
+            $ref: '#/definitions/GroupMemberList'
+        '404':
           description: Group not found
       summary: List a group's members
       tags:
@@ -809,7 +809,7 @@ paths:
       description: Add members to a group under your account
       operationId: groupMembersCreate
       parameters:
-        - $ref: "#/parameters/GroupId"
+        - $ref: '#/parameters/GroupId'
         - in: body
           name: body
           required: true
@@ -820,7 +820,7 @@ paths:
                 items:
                   properties:
                     email:
-                      description: User email. If ID given, email is ignored.
+                      description: 'User email. If ID given, email is ignored.'
                       type: string
                     id:
                       description: User ID
@@ -828,7 +828,7 @@ paths:
                 maximum: 30
                 type: array
       responses:
-        "201":
+        '201':
           description: Member added
           schema:
             properties:
@@ -837,22 +837,22 @@ paths:
                 type: string
               ids:
                 type: string
-        "404":
+        '404':
           description: Group not found
       summary: Add group members
       tags:
         - Groups
-  "/groups/{groupId}/members/{memberId}":
+  '/groups/{groupId}/members/{memberId}':
     delete:
       description: Delete a member from a group under your account
       operationId: groupMembersDelete
       parameters:
-        - $ref: "#/parameters/GroupId"
-        - $ref: "#/parameters/MemberId"
+        - $ref: '#/parameters/GroupId'
+        - $ref: '#/parameters/MemberId'
       responses:
-        "204":
+        '204':
           description: Group member deleted
-        "404":
+        '404':
           description: Group or Group member not found
       summary: Delete a group member
       tags:
@@ -863,10 +863,10 @@ paths:
       operationId: deviceList
       parameters: []
       responses:
-        "200":
+        '200':
           description: List of H.323/SIP Devices returned.
           schema:
-            $ref: "#/definitions/DeviceList"
+            $ref: '#/definitions/DeviceList'
       summary: List H.323/SIP Devices.
       tags:
         - Devices
@@ -879,9 +879,9 @@ paths:
           name: body
           required: true
           schema:
-            $ref: "#/definitions/Device"
+            $ref: '#/definitions/Device'
       responses:
-        "201":
+        '201':
           description: H.323/SIP Device created
           headers:
             Content-Location:
@@ -893,20 +893,20 @@ paths:
                   id:
                     description: Device ID
                     type: string
-              - $ref: "#/definitions/Device"
+              - $ref: '#/definitions/Device'
       summary: Create a H.323/SIP Device
       tags:
         - Devices
-  "/h323/devices/{deviceId}":
+  '/h323/devices/{deviceId}':
     delete:
       description: Delete a H.323/SIP Device on your Zoom account
       operationId: deviceDelete
       parameters:
-        - $ref: "#/parameters/DeviceId"
+        - $ref: '#/parameters/DeviceId'
       responses:
-        "204":
+        '204':
           description: H.323/SIP Device deleted
-        "404":
+        '404':
           description: H.323/SIP Device not found
       summary: Delete a H.323/SIP Device
       tags:
@@ -915,16 +915,16 @@ paths:
       description: Update a H.323/SIP Device on your Zoom account
       operationId: deviceUpdate
       parameters:
-        - $ref: "#/parameters/DeviceId"
+        - $ref: '#/parameters/DeviceId'
         - in: body
           name: body
           required: true
           schema:
-            $ref: "#/definitions/Device"
+            $ref: '#/definitions/Device'
       responses:
-        "204":
+        '204':
           description: H.323/SIP Device updated
-        "404":
+        '404':
           description: H.323/SIP Device not found
       summary: Update a H.323/SIP Device
       tags:
@@ -934,12 +934,12 @@ paths:
       description: Retrieve IM Chat sessions for a specified period <aside>This API only supports oauth2.</aside>
       operationId: imChatSessions
       parameters:
-        - $ref: "#/parameters/FromDate"
-        - $ref: "#/parameters/ToDate"
-        - $ref: "#/parameters/PageSize"
-        - $ref: "#/parameters/NextPageToken"
+        - $ref: '#/parameters/FromDate'
+        - $ref: '#/parameters/ToDate'
+        - $ref: '#/parameters/PageSize'
+        - $ref: '#/parameters/NextPageToken'
       responses:
-        "200":
+        '200':
           description: Archived IM Chat sessions Returned
           schema:
             allOf:
@@ -952,7 +952,7 @@ paths:
                     description: End date
                     format: date
                     type: string
-              - $ref: "#/definitions/PaginationToken4IMChat"
+              - $ref: '#/definitions/PaginationToken4IMChat'
               - properties:
                   sessions:
                     description: Array of session objects
@@ -975,18 +975,18 @@ paths:
       summary: Retrieve IM Chat sessions
       tags:
         - IM Chat
-  "/im/chat/sessions/{sessionId}":
+  '/im/chat/sessions/{sessionId}':
     get:
       description: Retrieve IM Chat messages for a specified period <aside>This API only supports oauth2.</aside>
       operationId: imChatMessages
       parameters:
-        - $ref: "#/parameters/SessionId"
-        - $ref: "#/parameters/FromDate"
-        - $ref: "#/parameters/ToDate"
-        - $ref: "#/parameters/PageSize"
-        - $ref: "#/parameters/NextPageToken"
+        - $ref: '#/parameters/SessionId'
+        - $ref: '#/parameters/FromDate'
+        - $ref: '#/parameters/ToDate'
+        - $ref: '#/parameters/PageSize'
+        - $ref: '#/parameters/NextPageToken'
       responses:
-        "200":
+        '200':
           description: Archived IM Chat messages Returned
           schema:
             allOf:
@@ -1002,7 +1002,7 @@ paths:
                     description: End date
                     format: date
                     type: string
-              - $ref: "#/definitions/PaginationToken4IMChat"
+              - $ref: '#/definitions/PaginationToken4IMChat'
               - properties:
                   messages:
                     description: Array of session objects
@@ -1035,10 +1035,10 @@ paths:
       operationId: imGroups
       parameters: []
       responses:
-        "200":
+        '200':
           description: List of IM Groups returned
           schema:
-            $ref: "#/definitions/IMGroupList"
+            $ref: '#/definitions/IMGroupList'
       summary: List IM Groups
       tags:
         - IM Groups
@@ -1052,7 +1052,7 @@ paths:
           schema:
             properties:
               name:
-                description: Group name, must be unique in one account
+                description: 'Group name, must be unique in one account'
                 maxLength: 128
                 type: string
               search_by_account:
@@ -1062,7 +1062,7 @@ paths:
                 description: Members can search others in the same email domain
                 type: boolean
               search_by_ma_account:
-                description: Members can search others under same master account, including all sub accounts
+                description: 'Members can search others under same master account, including all sub accounts'
                 type: boolean
               type:
                 default: normal
@@ -1077,7 +1077,7 @@ paths:
                   - All people in the account can see the group and members automatically
                   - Nobody can see the group or search members except the members in the group
       responses:
-        "201":
+        '201':
           description: IM Group created
           headers:
             Content-Location:
@@ -1098,7 +1098,7 @@ paths:
                 description: Members can search others in the same email domain
                 type: boolean
               search_by_ma_account:
-                description: Members can search others under same master account, including all sub accounts
+                description: 'Members can search others under same master account, including all sub accounts'
                 type: boolean
               total_members:
                 description: Group member count
@@ -1106,16 +1106,16 @@ paths:
       summary: Create an IM Group
       tags:
         - IM Groups
-  "/im/groups/{groupId}":
+  '/im/groups/{groupId}':
     delete:
       description: Delete an IM Group under your account
       operationId: imGroupDelete
       parameters:
-        - $ref: "#/parameters/GroupId"
+        - $ref: '#/parameters/GroupId'
       responses:
-        "204":
+        '204':
           description: IM Group deleted
-        "404":
+        '404':
           description: IM Group not found
       summary: Delete an IM Group
       tags:
@@ -1124,9 +1124,9 @@ paths:
       description: Retrieve an IM Group under your account
       operationId: imGroup
       parameters:
-        - $ref: "#/parameters/GroupId"
+        - $ref: '#/parameters/GroupId'
       responses:
-        "200":
+        '200':
           description: IM Group object returned
           schema:
             allOf:
@@ -1134,8 +1134,8 @@ paths:
                   id:
                     description: Group ID
                     type: string
-              - $ref: "#/definitions/IMGroup"
-        "404":
+              - $ref: '#/definitions/IMGroup'
+        '404':
           description: IM Group not found
       summary: Retrieve an IM Group
       tags:
@@ -1144,14 +1144,14 @@ paths:
       description: Update an IM Group under your account
       operationId: imGroupUpdate
       parameters:
-        - $ref: "#/parameters/GroupId"
+        - $ref: '#/parameters/GroupId'
         - in: body
           name: body
           required: true
           schema:
             properties:
               name:
-                description: Group name, must be unique in one account
+                description: 'Group name, must be unique in one account'
                 maxLength: 128
                 type: string
               search_by_account:
@@ -1161,7 +1161,7 @@ paths:
                 description: Members can search others in the same email domain
                 type: boolean
               search_by_ma_account:
-                description: Members can search others under same master account, including all sub accounts
+                description: 'Members can search others under same master account, including all sub accounts'
                 type: boolean
               type:
                 description: IM Group type
@@ -1175,27 +1175,27 @@ paths:
                   - All people in the account can see the group and members automatically
                   - Nobody can see the group or search members except the members in the group
       responses:
-        "204":
+        '204':
           description: IM Group updated
-        "404":
+        '404':
           description: IM Group not found
       summary: Update an IM Group
       tags:
         - IM Groups
-  "/im/groups/{groupId}/members":
+  '/im/groups/{groupId}/members':
     get:
       description: List an IM Group's members under your account
       operationId: imGroupMembers
       parameters:
-        - $ref: "#/parameters/GroupId"
-        - $ref: "#/parameters/PageSize"
-        - $ref: "#/parameters/PageNumber"
+        - $ref: '#/parameters/GroupId'
+        - $ref: '#/parameters/PageSize'
+        - $ref: '#/parameters/PageNumber'
       responses:
-        "200":
+        '200':
           description: IM Group member list returned
           schema:
-            $ref: "#/definitions/GroupMemberList"
-        "404":
+            $ref: '#/definitions/GroupMemberList'
+        '404':
           description: IM Group not found
       summary: List an IM Group's members
       tags:
@@ -1204,7 +1204,7 @@ paths:
       description: Add members to an IM Group under your account
       operationId: imGroupMembersCreate
       parameters:
-        - $ref: "#/parameters/GroupId"
+        - $ref: '#/parameters/GroupId'
         - in: body
           name: body
           required: true
@@ -1215,7 +1215,7 @@ paths:
                 items:
                   properties:
                     email:
-                      description: User email. If ID given, email is ignored.
+                      description: 'User email. If ID given, email is ignored.'
                       type: string
                     id:
                       description: User ID
@@ -1223,7 +1223,7 @@ paths:
                 maximum: 10
                 type: array
       responses:
-        "201":
+        '201':
           description: Member added
           schema:
             properties:
@@ -1232,37 +1232,37 @@ paths:
                 type: string
               ids:
                 type: string
-        "404":
+        '404':
           description: IM Group not found
       summary: Add IM Group members
       tags:
         - IM Groups
-  "/im/groups/{groupId}/members/{memberId}":
+  '/im/groups/{groupId}/members/{memberId}':
     delete:
       description: Delete a member from an IM Group under your account
       operationId: imGroupMembersDelete
       parameters:
-        - $ref: "#/parameters/GroupId"
-        - $ref: "#/parameters/MemberId"
+        - $ref: '#/parameters/GroupId'
+        - $ref: '#/parameters/MemberId'
       responses:
-        "204":
+        '204':
           description: IM Group member deleted
-        "404":
+        '404':
           description: IM Group or IM Group member not found
       summary: Delete an IM Group member
       tags:
         - IM Groups
-  "/meetings/{meetingId}":
+  '/meetings/{meetingId}':
     delete:
       description: Delete a meeting
       operationId: meetingDelete
       parameters:
-        - $ref: "#/parameters/MeetingId"
-        - $ref: "#/parameters/OccurrenceId"
+        - $ref: '#/parameters/MeetingId'
+        - $ref: '#/parameters/OccurrenceId'
       responses:
-        "204":
+        '204':
           description: Meeting deleted
-        "404":
+        '404':
           description: Meeting not found
       summary: Delete a meeting
       tags:
@@ -1271,9 +1271,9 @@ paths:
       description: Retrieve a meeting's details
       operationId: meeting
       parameters:
-        - $ref: "#/parameters/MeetingId"
+        - $ref: '#/parameters/MeetingId'
       responses:
-        "200":
+        '200':
           description: Meeting object returned
           schema:
             allOf:
@@ -1282,14 +1282,14 @@ paths:
                     description: ID of the user set as host of meeting
                     type: string
                   id:
-                    description: Meeting ID, also know as meeting number
+                    description: 'Meeting ID, also know as meeting number'
                     type: string
                   uuid:
                     description: Meeting unique ID
                     type: string
                 type: object
-              - $ref: "#/definitions/MeetingInfo"
-        "404":
+              - $ref: '#/definitions/MeetingInfo'
+        '404':
           description: Meeting not found
       summary: Retrieve a meeting
       tags:
@@ -1298,7 +1298,7 @@ paths:
       description: Update a meeting's details
       operationId: meetingUpdate
       parameters:
-        - $ref: "#/parameters/MeetingId"
+        - $ref: '#/parameters/MeetingId'
         - description: Meeting
           in: body
           name: body
@@ -1310,99 +1310,99 @@ paths:
                     description: Email or userId if you want to schedule meeting for another user.
                     type: string
                 type: object
-              - $ref: "#/definitions/MeetingUpdate"
+              - $ref: '#/definitions/MeetingUpdate'
       responses:
-        "204":
+        '204':
           description: Meeting Updated
-        "404":
+        '404':
           description: Meeting not found
       summary: Update a meeting
       tags:
         - Meetings
-  "/meetings/{meetingId}/invitation":
+  '/meetings/{meetingId}/invitation':
     get:
       description: Retrieve a meeting invitation
       operationId: meetingInvitation
       parameters:
-        - $ref: "#/parameters/MeetingId"
+        - $ref: '#/parameters/MeetingId'
       responses:
-        "200":
+        '200':
           description: Meeting invitation Returned
           schema:
-            $ref: "#/definitions/MeetingInvitation"
+            $ref: '#/definitions/MeetingInvitation'
       summary: Retrieve meeting invitation
       tags:
         - Meetings
-  "/meetings/{meetingId}/livestream":
+  '/meetings/{meetingId}/livestream':
     patch:
       description: Update a meeting's live stream
       operationId: meetingLiveStreamUpdate
       parameters:
-        - $ref: "#/parameters/MeetingId"
+        - $ref: '#/parameters/MeetingId'
         - description: Meeting
           in: body
           name: body
           required: true
           schema:
-            $ref: "#/definitions/MeetingLiveStream"
+            $ref: '#/definitions/MeetingLiveStream'
       responses:
-        "204":
+        '204':
           description: Meeting live stream Updated
-        "404":
+        '404':
           description: Meeting not found
       summary: Update a meeting live stream
       tags:
         - Meetings
-  "/meetings/{meetingId}/livestream/status":
+  '/meetings/{meetingId}/livestream/status':
     patch:
       description: Update a meeting's live stream status
       operationId: meetingLiveStreamStatusUpdate
       parameters:
-        - $ref: "#/parameters/MeetingId"
+        - $ref: '#/parameters/MeetingId'
         - description: Meeting
           in: body
           name: body
           required: true
           schema:
-            $ref: "#/definitions/MeetingLiveStreamStatus"
+            $ref: '#/definitions/MeetingLiveStreamStatus'
       responses:
-        "204":
+        '204':
           description: Meeting live stream Updated
-        "404":
+        '404':
           description: Meeting not found
       summary: Update a meeting live stream status
       tags:
         - Meetings
-  "/meetings/{meetingId}/polls":
+  '/meetings/{meetingId}/polls':
     get:
       description: List polls of a meeting
       operationId: meetingPolls
       parameters:
-        - $ref: "#/parameters/MeetingId"
+        - $ref: '#/parameters/MeetingId'
       responses:
-        "200":
+        '200':
           description: List polls of a Meeting  returned
           schema:
-            $ref: "#/definitions/PollList"
-        "404":
+            $ref: '#/definitions/PollList'
+        '404':
           description: Meeting not found
-      summary: "List a meeting's polls "
+      summary: 'List a meeting''s polls '
       tags:
         - Meetings
     post:
       description: Create a poll for a meeting
       operationId: meetingPollCreate
       parameters:
-        - $ref: "#/parameters/MeetingId"
+        - $ref: '#/parameters/MeetingId'
         - description: Meeting poll object
           in: body
           name: body
           required: true
           schema:
             allOf:
-              - $ref: "#/definitions/Poll"
+              - $ref: '#/definitions/Poll'
       responses:
-        "201":
+        '201':
           description: Meeting Poll Created
           headers:
             Content-Location:
@@ -1428,27 +1428,27 @@ paths:
                       - Poll ended
                       - Poll is sharing
                 type: object
-              - $ref: "#/definitions/Poll"
-        "404":
+              - $ref: '#/definitions/Poll'
+        '404':
           description: Meeting not found
       summary: Create a meeting's poll
       tags:
         - Meetings
-  "/meetings/{meetingId}/polls/{pollId}":
+  '/meetings/{meetingId}/polls/{pollId}':
     delete:
       description: Delete a meeting's Poll
       operationId: meetingPollDelete
       parameters:
-        - $ref: "#/parameters/MeetingId"
+        - $ref: '#/parameters/MeetingId'
         - description: The poll ID
           in: path
           name: pollId
           required: true
           type: string
       responses:
-        "204":
+        '204':
           description: Meeting Poll deleted
-        "404":
+        '404':
           description: Meeting Poll not found
       summary: Delete a meeting's Poll
       tags:
@@ -1457,14 +1457,14 @@ paths:
       description: Retrieve a meeting's poll
       operationId: meetingPollGet
       parameters:
-        - $ref: "#/parameters/MeetingId"
+        - $ref: '#/parameters/MeetingId'
         - description: The poll ID
           in: path
           name: pollId
           required: true
           type: string
       responses:
-        "200":
+        '200':
           description: Meeting Poll object returned
           schema:
             allOf:
@@ -1486,8 +1486,8 @@ paths:
                       - Poll ended
                       - Poll is sharing
                 type: object
-              - $ref: "#/definitions/Poll"
-        "404":
+              - $ref: '#/definitions/Poll'
+        '404':
           description: Meeting Poll not found
       summary: Retrieve a meeting's poll
       tags:
@@ -1496,7 +1496,7 @@ paths:
       description: Update a meeting's poll
       operationId: meetingPollUpdate
       parameters:
-        - $ref: "#/parameters/MeetingId"
+        - $ref: '#/parameters/MeetingId'
         - description: The poll ID
           in: path
           name: pollId
@@ -1508,26 +1508,26 @@ paths:
           required: true
           schema:
             allOf:
-              - $ref: "#/definitions/Poll"
+              - $ref: '#/definitions/Poll'
       responses:
-        "204":
+        '204':
           description: Meeting Poll Updated
-        "404":
+        '404':
           description: Meeting Poll not found
       summary: Update a meeting's poll
       tags:
         - Meetings
-  "/meetings/{meetingId}/recordings":
+  '/meetings/{meetingId}/recordings':
     delete:
       description: Delete a meeting's recordings
       operationId: recordingDelete
       parameters:
-        - $ref: "#/parameters/MeetingId4Recording"
-        - $ref: "#/parameters/RecordingDeleteAction"
+        - $ref: '#/parameters/MeetingId4Recording'
+        - $ref: '#/parameters/RecordingDeleteAction'
       responses:
-        "204":
+        '204':
           description: Meeting recording deleted
-        "404":
+        '404':
           description: Meeting recording not found
       summary: Delete a meeting's recordings
       tags:
@@ -1536,30 +1536,30 @@ paths:
       description: Retrieve a meeting’s all recordings
       operationId: recordingGet
       parameters:
-        - $ref: "#/parameters/MeetingId4Recording"
+        - $ref: '#/parameters/MeetingId4Recording'
       responses:
-        "200":
+        '200':
           description: Recording object returned
           schema:
             allOf:
-              - $ref: "#/definitions/RecordingMeeting"
-        "404":
+              - $ref: '#/definitions/RecordingMeeting'
+        '404':
           description: Meeting recording not found
       summary: Retrieve a meeting’s all recordings
       tags:
         - Cloud Recording
-  "/meetings/{meetingId}/recordings/settings":
+  '/meetings/{meetingId}/recordings/settings':
     get:
       description: Retrieve a meeting recording's settings
       operationId: recordingSettingUpdate
       parameters:
-        - $ref: "#/parameters/MeetingId4Recording"
+        - $ref: '#/parameters/MeetingId4Recording'
       responses:
-        "200":
+        '200':
           description: Meeting recording settings returned
           schema:
-            $ref: "#/definitions/RecordingSettings"
-        "404":
+            $ref: '#/definitions/RecordingSettings'
+        '404':
           description: Meeting recording not found
       summary: Retrieve a meeting recording's settings
       tags:
@@ -1568,27 +1568,27 @@ paths:
       description: Update a meeting recording's settings
       operationId: recordingSettingsUpdate
       parameters:
-        - $ref: "#/parameters/MeetingId4Recording"
+        - $ref: '#/parameters/MeetingId4Recording'
         - description: Meeting recording Settings
           in: body
           name: body
           required: true
           schema:
-            $ref: "#/definitions/RecordingSettings"
+            $ref: '#/definitions/RecordingSettings'
       responses:
-        "204":
+        '204':
           description: Meeting recording setting's updated
-        "404":
+        '404':
           description: Meeting recording not found
       summary: Update a meeting recording's settings
       tags:
         - Cloud Recording
-  "/meetings/{meetingId}/recordings/status":
+  '/meetings/{meetingId}/recordings/status':
     put:
       description: Recover a meeting's recordings
       operationId: recordingStatusUpdate
       parameters:
-        - $ref: "#/parameters/MeetingId4Recording"
+        - $ref: '#/parameters/MeetingId4Recording'
         - in: body
           name: body
           required: true
@@ -1601,36 +1601,36 @@ paths:
                 x-enum-descriptions:
                   - recover meeting recording
       responses:
-        "204":
+        '204':
           description: Meeting recording recover
-        "404":
+        '404':
           description: Meeting recording not found
       summary: Recover a meeting's recordings
       tags:
         - Cloud Recording
-  "/meetings/{meetingId}/recordings/{recordingId}":
+  '/meetings/{meetingId}/recordings/{recordingId}':
     delete:
       description: Delete one meeting recording file
       operationId: recordingDeleteOne
       parameters:
-        - $ref: "#/parameters/MeetingId4Recording"
-        - $ref: "#/parameters/RecordingId"
-        - $ref: "#/parameters/RecordingDeleteAction"
+        - $ref: '#/parameters/MeetingId4Recording'
+        - $ref: '#/parameters/RecordingId'
+        - $ref: '#/parameters/RecordingDeleteAction'
       responses:
-        "204":
+        '204':
           description: Meeting recording file deleted
-        "404":
+        '404':
           description: Meeting recording file not found
       summary: Delete one meeting recording file
       tags:
         - Cloud Recording
-  "/meetings/{meetingId}/recordings/{recordingId}/status":
+  '/meetings/{meetingId}/recordings/{recordingId}/status':
     put:
       description: Recover a single recording
       operationId: recordingStatusUpdateOne
       parameters:
-        - $ref: "#/parameters/MeetingId4Recording"
-        - $ref: "#/parameters/RecordingId"
+        - $ref: '#/parameters/MeetingId4Recording'
+        - $ref: '#/parameters/RecordingId'
         - in: body
           name: body
           required: true
@@ -1643,29 +1643,29 @@ paths:
                 x-enum-descriptions:
                   - recover meeting recording
       responses:
-        "204":
+        '204':
           description: Meeting recording recover
-        "404":
+        '404':
           description: Meeting recording not found
       summary: Recover a single recording
       tags:
         - Cloud Recording
-  "/meetings/{meetingId}/registrants":
+  '/meetings/{meetingId}/registrants':
     get:
       description: List registrants of a meeting
       operationId: meetingRegistrants
       parameters:
-        - $ref: "#/parameters/MeetingId"
-        - $ref: "#/parameters/OccurrenceId"
-        - $ref: "#/parameters/RegistrantStatus"
-        - $ref: "#/parameters/PageSize"
-        - $ref: "#/parameters/PageNumber"
+        - $ref: '#/parameters/MeetingId'
+        - $ref: '#/parameters/OccurrenceId'
+        - $ref: '#/parameters/RegistrantStatus'
+        - $ref: '#/parameters/PageSize'
+        - $ref: '#/parameters/PageNumber'
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/MeetingRegistrantList"
-        "404":
+            $ref: '#/definitions/MeetingRegistrantList'
+        '404':
           description: Meeting not found
       summary: List a meeting's registrants
       tags:
@@ -1674,7 +1674,7 @@ paths:
       description: Register a participant for a meeting
       operationId: meetingRegistrantCreate
       parameters:
-        - $ref: "#/parameters/MeetingId"
+        - $ref: '#/parameters/MeetingId'
         - description: Occurrence IDs. You can find these with the meeting get API. Multiple values separated by comma.
           in: query
           name: occurrence_ids
@@ -1683,9 +1683,9 @@ paths:
           name: body
           required: true
           schema:
-            $ref: "#/definitions/MeetingRegistrant"
+            $ref: '#/definitions/MeetingRegistrant'
       responses:
-        "201":
+        '201':
           description: Registration created
           schema:
             properties:
@@ -1706,37 +1706,37 @@ paths:
                 description: Topic
                 type: string
             type: object
-        "404":
+        '404':
           description: Meeting not found
       summary: Add a meeting registrant
       tags:
         - Meetings
-  "/meetings/{meetingId}/registrants/status":
+  '/meetings/{meetingId}/registrants/status':
     put:
       description: Update a meeting registrant's status
       operationId: meetingRegistrantStatus
       parameters:
-        - $ref: "#/parameters/MeetingId"
-        - $ref: "#/parameters/OccurrenceId"
+        - $ref: '#/parameters/MeetingId'
+        - $ref: '#/parameters/OccurrenceId'
         - in: body
           name: body
           required: true
           schema:
-            $ref: "#/definitions/RegistrantStatus"
+            $ref: '#/definitions/RegistrantStatus'
       responses:
-        "204":
+        '204':
           description: Registrant status updated
-        "404":
+        '404':
           description: Meeting or Registrant not found
       summary: Update a meeting registrant's status
       tags:
         - Meetings
-  "/meetings/{meetingId}/status":
+  '/meetings/{meetingId}/status':
     put:
       description: Update a meeting's status
       operationId: meetingStatus
       parameters:
-        - $ref: "#/parameters/MeetingId"
+        - $ref: '#/parameters/MeetingId'
         - in: body
           name: body
           required: true
@@ -1749,22 +1749,22 @@ paths:
                 x-enum-descriptions:
                   - end a meeting
       responses:
-        "204":
+        '204':
           description: Meeting updated
-        "404":
+        '404':
           description: Meeting not found
       summary: Update a meeting's status
       tags:
         - Meetings
   /metrics/crc:
     get:
-      description: Get CRC Port usage hour by hour for a specified time period <aside class='notice'>We will report a maximum of one month. For example, if "from" is set to "2017-08-05" and "to" is "2017-10-10" we will adjust "from" to "2017-09-10"</aside>.
+      description: 'Get CRC Port usage hour by hour for a specified time period <aside class=''notice''>We will report a maximum of one month. For example, if "from" is set to "2017-08-05" and "to" is "2017-10-10" we will adjust "from" to "2017-09-10"</aside>.'
       operationId: dashboardCRC
       parameters:
-        - $ref: "#/parameters/FromDate"
-        - $ref: "#/parameters/ToDate"
+        - $ref: '#/parameters/FromDate'
+        - $ref: '#/parameters/ToDate'
       responses:
-        "200":
+        '200':
           description: CRC Usage returned
           schema:
             allOf:
@@ -1803,12 +1803,12 @@ paths:
       description: Retrieve metrics of Zoom IM
       operationId: dashboardIM
       parameters:
-        - $ref: "#/parameters/FromDate"
-        - $ref: "#/parameters/ToDate"
-        - $ref: "#/parameters/PageSize"
-        - $ref: "#/parameters/NextPageToken"
+        - $ref: '#/parameters/FromDate'
+        - $ref: '#/parameters/ToDate'
+        - $ref: '#/parameters/PageSize'
+        - $ref: '#/parameters/NextPageToken'
       responses:
-        "200":
+        '200':
           description: IM setails returned
           schema:
             allOf:
@@ -1821,7 +1821,7 @@ paths:
                     description: End date for this report
                     format: date
                     type: string
-              - $ref: "#/definitions/PaginationToken"
+              - $ref: '#/definitions/PaginationToken'
               - properties:
                   users:
                     items:
@@ -1876,13 +1876,13 @@ paths:
       description: List live meetings or past meetings for a specified period
       operationId: dashboardMeetings
       parameters:
-        - $ref: "#/parameters/MeetingTypePast"
-        - $ref: "#/parameters/FromDate"
-        - $ref: "#/parameters/ToDate"
-        - $ref: "#/parameters/PageSize"
-        - $ref: "#/parameters/NextPageToken"
+        - $ref: '#/parameters/MeetingTypePast'
+        - $ref: '#/parameters/FromDate'
+        - $ref: '#/parameters/ToDate'
+        - $ref: '#/parameters/PageSize'
+        - $ref: '#/parameters/NextPageToken'
       responses:
-        "200":
+        '200':
           description: Meetings Returned
           schema:
             allOf:
@@ -1895,46 +1895,46 @@ paths:
                     description: End date for this report
                     format: date
                     type: string
-              - $ref: "#/definitions/PaginationToken"
+              - $ref: '#/definitions/PaginationToken'
               - properties:
                   meetings:
                     description: Array of meeting objects
                     items:
-                      $ref: "#/definitions/MeetingMetric"
+                      $ref: '#/definitions/MeetingMetric'
                     type: array
       summary: List meetings
       tags:
         - Dashboards
-  "/metrics/meetings/{meetingId}":
+  '/metrics/meetings/{meetingId}':
     get:
       description: Retrieve live or past meetings detail
       operationId: dashboardMeetingDetail
       parameters:
-        - $ref: "#/parameters/MeetingId4Metrics"
-        - $ref: "#/parameters/MeetingTypePast3"
+        - $ref: '#/parameters/MeetingId4Metrics'
+        - $ref: '#/parameters/MeetingTypePast3'
       responses:
-        "200":
+        '200':
           description: Meeting Returned
           schema:
-            $ref: "#/definitions/MeetingMetric"
+            $ref: '#/definitions/MeetingMetric'
       summary: Retrieve meeting detail
       tags:
         - Dashboards
-  "/metrics/meetings/{meetingId}/participants":
+  '/metrics/meetings/{meetingId}/participants':
     get:
       description: Retrieve live or past meetings participants
       operationId: dashboardMeetingParticipants
       parameters:
-        - $ref: "#/parameters/MeetingId4Metrics"
-        - $ref: "#/parameters/MeetingTypePast3"
-        - $ref: "#/parameters/PageSize"
-        - $ref: "#/parameters/NextPageToken"
+        - $ref: '#/parameters/MeetingId4Metrics'
+        - $ref: '#/parameters/MeetingTypePast3'
+        - $ref: '#/parameters/PageSize'
+        - $ref: '#/parameters/NextPageToken'
       responses:
-        "200":
+        '200':
           description: Meeting Participants Returned
           schema:
             allOf:
-              - $ref: "#/definitions/PaginationToken"
+              - $ref: '#/definitions/PaginationToken'
               - properties:
                   participants:
                     description: Array of user objects
@@ -2013,38 +2013,38 @@ paths:
       summary: Retrieve meeting participants
       tags:
         - Dashboards
-  "/metrics/meetings/{meetingId}/participants/qos":
+  '/metrics/meetings/{meetingId}/participants/qos':
     get:
       description: Retrieve list of live or past meetings participants quality of service
       operationId: dashboardMeetingParticipantsQOS
       parameters:
-        - $ref: "#/parameters/MeetingId4Metrics"
-        - $ref: "#/parameters/MeetingTypePast2"
-        - $ref: "#/parameters/PageSize4Qos"
-        - $ref: "#/parameters/NextPageToken"
+        - $ref: '#/parameters/MeetingId4Metrics'
+        - $ref: '#/parameters/MeetingTypePast2'
+        - $ref: '#/parameters/PageSize4Qos'
+        - $ref: '#/parameters/NextPageToken'
       responses:
-        "200":
+        '200':
           description: Meeting Participants Returned
           schema:
-            $ref: "#/definitions/QOSParticipantList"
+            $ref: '#/definitions/QOSParticipantList'
       summary: List meeting participants QOS
       tags:
         - Dashboards
-  "/metrics/meetings/{meetingId}/participants/sharing":
+  '/metrics/meetings/{meetingId}/participants/sharing':
     get:
       description: Retrieve sharing/recording details of live or past meetings participant
       operationId: dashboardMeetingParticipantShare
       parameters:
-        - $ref: "#/parameters/MeetingId4Metrics"
-        - $ref: "#/parameters/MeetingTypePast2"
-        - $ref: "#/parameters/PageSize"
-        - $ref: "#/parameters/PageToken"
+        - $ref: '#/parameters/MeetingId4Metrics'
+        - $ref: '#/parameters/MeetingTypePast2'
+        - $ref: '#/parameters/PageSize'
+        - $ref: '#/parameters/PageToken'
       responses:
-        "200":
+        '200':
           description: Meeting Participants Returned
           schema:
             allOf:
-              - $ref: "#/definitions/PaginationToken"
+              - $ref: '#/definitions/PaginationToken'
               - properties:
                   participants:
                     description: Array of participants
@@ -2077,19 +2077,19 @@ paths:
       summary: Retrieve sharing/recording details of meeting participant
       tags:
         - Dashboards
-  "/metrics/meetings/{meetingId}/participants/{participantId}/qos":
+  '/metrics/meetings/{meetingId}/participants/{participantId}/qos':
     get:
       description: Retrieve live or past meetings participant quality of service
       operationId: dashboardMeetingParticipantQOS
       parameters:
-        - $ref: "#/parameters/MeetingId4Metrics"
-        - $ref: "#/parameters/ParticipantId"
-        - $ref: "#/parameters/MeetingTypePast2"
+        - $ref: '#/parameters/MeetingId4Metrics'
+        - $ref: '#/parameters/ParticipantId'
+        - $ref: '#/parameters/MeetingTypePast2'
       responses:
-        "200":
+        '200':
           description: Meeting Participant QOS Returned
           schema:
-            $ref: "#/definitions/QOSParticipant"
+            $ref: '#/definitions/QOSParticipant'
       summary: Retrieve meeting participant QOS
       tags:
         - Dashboards
@@ -2098,13 +2098,13 @@ paths:
       description: List live webinars or past webinars for a specified period
       operationId: dashboardWebinars
       parameters:
-        - $ref: "#/parameters/WebinarTypePast"
-        - $ref: "#/parameters/FromDate"
-        - $ref: "#/parameters/ToDate"
-        - $ref: "#/parameters/PageSize"
-        - $ref: "#/parameters/NextPageToken"
+        - $ref: '#/parameters/WebinarTypePast'
+        - $ref: '#/parameters/FromDate'
+        - $ref: '#/parameters/ToDate'
+        - $ref: '#/parameters/PageSize'
+        - $ref: '#/parameters/NextPageToken'
       responses:
-        "200":
+        '200':
           description: Meetings Returned
           schema:
             allOf:
@@ -2117,46 +2117,46 @@ paths:
                     description: End date for this report
                     format: date
                     type: string
-              - $ref: "#/definitions/PaginationToken"
+              - $ref: '#/definitions/PaginationToken'
               - properties:
                   webinars:
                     description: Array of webinar objects
                     items:
-                      $ref: "#/definitions/WebinarMetric"
+                      $ref: '#/definitions/WebinarMetric'
                     type: array
       summary: List webinars
       tags:
         - Dashboards
-  "/metrics/webinars/{webinarId}":
+  '/metrics/webinars/{webinarId}':
     get:
       description: Retrieve live  or past webinars detail
       operationId: dashboardWebinarDetail
       parameters:
-        - $ref: "#/parameters/WebinarId4Metrics"
-        - $ref: "#/parameters/WebinarTypePast2"
+        - $ref: '#/parameters/WebinarId4Metrics'
+        - $ref: '#/parameters/WebinarTypePast2'
       responses:
-        "200":
+        '200':
           description: Webinar Returned
           schema:
-            $ref: "#/definitions/WebinarMetric"
+            $ref: '#/definitions/WebinarMetric'
       summary: Retrieve webinar detail
       tags:
         - Dashboards
-  "/metrics/webinars/{webinarId}/participants":
+  '/metrics/webinars/{webinarId}/participants':
     get:
       description: Retrieve live or past webinar participants
       operationId: dashboardWebinarParticipants
       parameters:
-        - $ref: "#/parameters/WebinarId4Metrics"
-        - $ref: "#/parameters/WebinarTypePast2"
-        - $ref: "#/parameters/PageSize"
-        - $ref: "#/parameters/NextPageToken"
+        - $ref: '#/parameters/WebinarId4Metrics'
+        - $ref: '#/parameters/WebinarTypePast2'
+        - $ref: '#/parameters/PageSize'
+        - $ref: '#/parameters/NextPageToken'
       responses:
-        "200":
+        '200':
           description: Webinar Participants Returned
           schema:
             allOf:
-              - $ref: "#/definitions/PaginationToken"
+              - $ref: '#/definitions/PaginationToken'
               - properties:
                   participants:
                     description: Array of user objects
@@ -2235,38 +2235,38 @@ paths:
       summary: Retrieve webinar participants
       tags:
         - Dashboards
-  "/metrics/webinars/{webinarId}/participants/qos":
+  '/metrics/webinars/{webinarId}/participants/qos':
     get:
       description: Retrieve list of live or past webinar participants quality of service
       operationId: dashboardWebinarParticipantsQOS
       parameters:
-        - $ref: "#/parameters/WebinarId4Metrics"
-        - $ref: "#/parameters/WebinarTypePast2"
-        - $ref: "#/parameters/PageSize4Qos"
-        - $ref: "#/parameters/NextPageToken"
+        - $ref: '#/parameters/WebinarId4Metrics'
+        - $ref: '#/parameters/WebinarTypePast2'
+        - $ref: '#/parameters/PageSize4Qos'
+        - $ref: '#/parameters/NextPageToken'
       responses:
-        "200":
+        '200':
           description: Webinar Participants Returned
           schema:
-            $ref: "#/definitions/QOSParticipantList"
+            $ref: '#/definitions/QOSParticipantList'
       summary: List webinar participant QOS
       tags:
         - Dashboards
-  "/metrics/webinars/{webinarId}/participants/sharing":
+  '/metrics/webinars/{webinarId}/participants/sharing':
     get:
       description: Retrieve sharing/recording details of live or past webinar participant
       operationId: dashboardWebinarParticipantShare
       parameters:
-        - $ref: "#/parameters/WebinarId4Metrics"
-        - $ref: "#/parameters/WebinarTypePast2"
-        - $ref: "#/parameters/PageSize"
-        - $ref: "#/parameters/PageToken"
+        - $ref: '#/parameters/WebinarId4Metrics'
+        - $ref: '#/parameters/WebinarTypePast2'
+        - $ref: '#/parameters/PageSize'
+        - $ref: '#/parameters/PageToken'
       responses:
-        "200":
+        '200':
           description: Webinar Participants Returned
           schema:
             allOf:
-              - $ref: "#/definitions/PaginationToken"
+              - $ref: '#/definitions/PaginationToken'
               - properties:
                   participants:
                     description: Array of participants
@@ -2299,19 +2299,19 @@ paths:
       summary: Retrieve sharing/recording details of webinar participant
       tags:
         - Dashboards
-  "/metrics/webinars/{webinarId}/participants/{participantId}/qos":
+  '/metrics/webinars/{webinarId}/participants/{participantId}/qos':
     get:
       description: Retrieve live or past webinar participant quality of service
       operationId: dashboardWebinarParticipantQOS
       parameters:
-        - $ref: "#/parameters/WebinarId4Metrics"
-        - $ref: "#/parameters/ParticipantId"
-        - $ref: "#/parameters/WebinarTypePast2"
+        - $ref: '#/parameters/WebinarId4Metrics'
+        - $ref: '#/parameters/ParticipantId'
+        - $ref: '#/parameters/WebinarTypePast2'
       responses:
-        "200":
+        '200':
           description: Webinar Participant QOS Returned
           schema:
-            $ref: "#/definitions/QOSParticipant"
+            $ref: '#/definitions/QOSParticipant'
       summary: Retrieve webinar participant QOS
       tags:
         - Dashboards
@@ -2320,35 +2320,35 @@ paths:
       description: List all zoom rooms on account
       operationId: dashboardZoomRooms
       parameters:
-        - $ref: "#/parameters/PageSize"
-        - $ref: "#/parameters/PageNumber"
+        - $ref: '#/parameters/PageSize'
+        - $ref: '#/parameters/PageNumber'
       responses:
-        "200":
+        '200':
           description: List of Zoom Rooms returned
           schema:
-            $ref: "#/definitions/ZoomRoomList"
+            $ref: '#/definitions/ZoomRoomList'
       summary: List Zoom Rooms
       tags:
         - Dashboards
-  "/metrics/zoomrooms/{zoomroomId}":
+  '/metrics/zoomrooms/{zoomroomId}':
     get:
       description: Retrieve zoom room on account
       operationId: dashboardZoomRoom
       parameters:
-        - $ref: "#/parameters/ZoomRoomId"
-        - $ref: "#/parameters/FromDate"
-        - $ref: "#/parameters/ToDate"
-        - $ref: "#/parameters/PageSize"
-        - $ref: "#/parameters/PageNumber"
+        - $ref: '#/parameters/ZoomRoomId'
+        - $ref: '#/parameters/FromDate'
+        - $ref: '#/parameters/ToDate'
+        - $ref: '#/parameters/PageSize'
+        - $ref: '#/parameters/PageNumber'
       responses:
-        "200":
+        '200':
           description: Zoom Room returned
           schema:
             allOf:
-              - $ref: "#/definitions/ZoomRoom"
+              - $ref: '#/definitions/ZoomRoom'
               - properties:
                   live_meeting:
-                    $ref: "#/definitions/MeetingMetric"
+                    $ref: '#/definitions/MeetingMetric'
                   past_meetings:
                     allOf:
                       - properties:
@@ -2360,41 +2360,41 @@ paths:
                             description: End date for this report
                             format: date
                             type: string
-                      - $ref: "#/definitions/PaginationToken"
+                      - $ref: '#/definitions/PaginationToken'
                       - properties:
                           meetings:
                             description: Array of meeting objects
                             items:
-                              $ref: "#/definitions/MeetingMetric"
+                              $ref: '#/definitions/MeetingMetric'
                             type: array
                     type: object
       summary: Retrieve Zoom Room
       tags:
         - Dashboards
-  "/past_meetings/{meetingId}/instances":
+  '/past_meetings/{meetingId}/instances':
     get:
       description: List of ended meeting instances
       operationId: pastMeetings
       parameters:
-        - $ref: "#/parameters/MeetingId"
+        - $ref: '#/parameters/MeetingId'
       responses:
-        "200":
+        '200':
           description: List of ended meeting instances
           schema:
-            $ref: "#/definitions/MeetingInstances"
-        "404":
+            $ref: '#/definitions/MeetingInstances'
+        '404':
           description: Meeting not found
       summary: List of ended meeting instances
       tags:
         - Meetings
-  "/past_meetings/{meetingUUID}":
+  '/past_meetings/{meetingUUID}':
     get:
       description: Retrieve ended meeting details
       operationId: pastMeetingDetails
       parameters:
-        - $ref: "#/parameters/MeetingUUID"
+        - $ref: '#/parameters/MeetingUUID'
       responses:
-        "200":
+        '200':
           description: Meeting detail Returned
           schema:
             properties:
@@ -2437,25 +2437,25 @@ paths:
                 description: Meeting UUID
                 format: uuid
                 type: string
-        "404":
+        '404':
           description: Meeting not found
       summary: Retrieve past meeting details
       tags:
         - Meetings
-  "/past_meetings/{meetingUUID}/participants":
+  '/past_meetings/{meetingUUID}/participants':
     get:
       description: Retrieve ended meeting participants
       operationId: pastMeetingParticipants
       parameters:
-        - $ref: "#/parameters/MeetingUUID"
-        - $ref: "#/parameters/PageSize"
-        - $ref: "#/parameters/NextPageToken"
+        - $ref: '#/parameters/MeetingUUID'
+        - $ref: '#/parameters/PageSize'
+        - $ref: '#/parameters/NextPageToken'
       responses:
-        "200":
+        '200':
           description: Meeting Participants Report Returned
           schema:
             allOf:
-              - $ref: "#/definitions/PaginationToken"
+              - $ref: '#/definitions/PaginationToken'
               - properties:
                   participants:
                     description: Array of meeting participant objects
@@ -2469,23 +2469,23 @@ paths:
                           description: Participant display name
                           type: string
                     type: array
-        "404":
+        '404':
           description: Meeting not found
       summary: Retrieve past meeting participants
       tags:
         - Meetings
-  "/past_webinars/{webinarId}/instances":
+  '/past_webinars/{webinarId}/instances':
     get:
       description: List of ended webinar instances
       operationId: pastWebinars
       parameters:
-        - $ref: "#/parameters/WebinarId"
+        - $ref: '#/parameters/WebinarId'
       responses:
-        "200":
+        '200':
           description: List of ended webinar instances
           schema:
-            $ref: "#/definitions/WebinarInstances"
-        "404":
+            $ref: '#/definitions/WebinarInstances'
+        '404':
           description: Webinar not found
       summary: List of ended webinar instances
       tags:
@@ -2495,10 +2495,10 @@ paths:
       description: Retrieve cloud recording usage report for a specified period. You can only get cloud recording reports for the most recent period of 6 months. The date gap between from and to dates should be smaller or equal to 30 days.
       operationId: reportCloudRecording
       parameters:
-        - $ref: "#/parameters/FromDate"
-        - $ref: "#/parameters/ToDate"
+        - $ref: '#/parameters/FromDate'
+        - $ref: '#/parameters/ToDate'
       responses:
-        "200":
+        '200':
           description: Cloud Recording Report Returned
           schema:
             allOf:
@@ -2526,14 +2526,14 @@ paths:
                         usage:
                           type: string
                     type: array
-        "300":
+        '300':
           description: Only provide report in recent 6 months
       summary: Retrieve cloud recording usage report
       tags:
         - Reports
   /report/daily:
     get:
-      description: Retrieve daily report for one month, can only get daily report for recent 6 months
+      description: 'Retrieve daily report for one month, can only get daily report for recent 6 months'
       operationId: reportDaily
       parameters:
         - description: Year for this report
@@ -2545,7 +2545,7 @@ paths:
           name: month
           type: integer
       responses:
-        "200":
+        '200':
           description: Daily Report Returned
           schema:
             properties:
@@ -2579,14 +2579,14 @@ paths:
       summary: Retrieve daily report
       tags:
         - Reports
-  "/report/meetings/{meetingId}":
+  '/report/meetings/{meetingId}':
     get:
       description: Retrieve ended meeting details report
       operationId: reportMeetingDetails
       parameters:
-        - $ref: "#/parameters/MeetingId4Metrics"
+        - $ref: '#/parameters/MeetingId4Metrics'
       responses:
-        "200":
+        '200':
           description: Meeting detail Returned
           schema:
             properties:
@@ -2637,25 +2637,25 @@ paths:
                 description: Meeting UUID
                 format: uuid
                 type: string
-        "404":
+        '404':
           description: Meeting not found
       summary: Retrieve meeting details report
       tags:
         - Reports
-  "/report/meetings/{meetingId}/participants":
+  '/report/meetings/{meetingId}/participants':
     get:
       description: Retrieve ended meeting participants report
       operationId: reportMeetingParticipants
       parameters:
-        - $ref: "#/parameters/MeetingId4Metrics"
-        - $ref: "#/parameters/PageSize"
-        - $ref: "#/parameters/NextPageToken"
+        - $ref: '#/parameters/MeetingId4Metrics'
+        - $ref: '#/parameters/PageSize'
+        - $ref: '#/parameters/NextPageToken'
       responses:
-        "200":
+        '200':
           description: Meeting Participants Report Returned
           schema:
             allOf:
-              - $ref: "#/definitions/PaginationToken"
+              - $ref: '#/definitions/PaginationToken'
               - properties:
                   participants:
                     description: Array of meeting participant objects
@@ -2689,19 +2689,19 @@ paths:
                           description: Participant ID
                           type: string
                     type: array
-        "404":
+        '404':
           description: Meeting not found
       summary: Retrieve meeting participants report
       tags:
         - Reports
-  "/report/meetings/{meetingId}/polls":
+  '/report/meetings/{meetingId}/polls':
     get:
       description: Retrieve ended meeting polls report
       operationId: reportMeetingPolls
       parameters:
-        - $ref: "#/parameters/MeetingId4Metrics"
+        - $ref: '#/parameters/MeetingId4Metrics'
       responses:
-        "200":
+        '200':
           description: Meeting Polls Report Returned
           schema:
             properties:
@@ -2738,7 +2738,7 @@ paths:
                 description: Meeting UUID
                 format: uuid
                 type: string
-        "404":
+        '404':
           description: Meeting not found
       summary: Retrieve meeting polls report
       tags:
@@ -2748,8 +2748,7 @@ paths:
       description: Retrieve telephone report for a specified period <aside>Toll Report option would be removed.</aside>.
       operationId: reportTelephone
       parameters:
-        - default: 1
-          description: Audio type
+        - description: Audio type
           enum:
             - 1
           in: query
@@ -2757,12 +2756,12 @@ paths:
           type: string
           x-enum-descriptions:
             - Toll-free Call-in & Call-out
-        - $ref: "#/parameters/FromDate"
-        - $ref: "#/parameters/ToDate"
-        - $ref: "#/parameters/PageSize"
-        - $ref: "#/parameters/PageNumber"
+        - $ref: '#/parameters/FromDate'
+        - $ref: '#/parameters/ToDate'
+        - $ref: '#/parameters/PageSize'
+        - $ref: '#/parameters/PageNumber'
       responses:
-        "200":
+        '200':
           description: Telephone Report Returned
           schema:
             allOf:
@@ -2775,7 +2774,7 @@ paths:
                     description: End date for this report
                     format: date
                     type: string
-              - $ref: "#/definitions/Pagination"
+              - $ref: '#/definitions/Pagination'
               - properties:
                   telephony_usage:
                     description: Array of telephony objects
@@ -2838,12 +2837,12 @@ paths:
           x-enum-descriptions:
             - Active hosts
             - Inactive hosts
-        - $ref: "#/parameters/FromDate"
-        - $ref: "#/parameters/ToDate"
-        - $ref: "#/parameters/PageSize"
-        - $ref: "#/parameters/PageNumber"
+        - $ref: '#/parameters/FromDate'
+        - $ref: '#/parameters/ToDate'
+        - $ref: '#/parameters/PageSize'
+        - $ref: '#/parameters/PageNumber'
       responses:
-        "200":
+        '200':
           description: Active/Inactive Hosts Report Returned
           schema:
             allOf:
@@ -2856,7 +2855,7 @@ paths:
                     description: End date for this report
                     format: date
                     type: string
-              - $ref: "#/definitions/Pagination"
+              - $ref: '#/definitions/Pagination'
               - properties:
                   total_meeting_minutes:
                     description: Number of meeting minutes for this range
@@ -2900,18 +2899,18 @@ paths:
       summary: Retrieve hosts report
       tags:
         - Reports
-  "/report/users/{userId}/meetings":
+  '/report/users/{userId}/meetings':
     get:
       description: Retrieve ended meetings report for a specified period
       operationId: reportMeetings
       parameters:
-        - $ref: "#/parameters/UserId"
-        - $ref: "#/parameters/FromDate"
-        - $ref: "#/parameters/ToDate"
-        - $ref: "#/parameters/PageSize"
-        - $ref: "#/parameters/NextPageToken"
+        - $ref: '#/parameters/UserId'
+        - $ref: '#/parameters/FromDate'
+        - $ref: '#/parameters/ToDate'
+        - $ref: '#/parameters/PageSize'
+        - $ref: '#/parameters/NextPageToken'
       responses:
-        "200":
+        '200':
           description: Active/Inactive Hosts Report Returned
           schema:
             allOf:
@@ -2924,7 +2923,7 @@ paths:
                     description: End date for this report
                     format: date
                     type: string
-              - $ref: "#/definitions/PaginationToken"
+              - $ref: '#/definitions/PaginationToken'
               - properties:
                   meetings:
                     description: Array of meeting objects
@@ -2967,19 +2966,19 @@ paths:
                           format: uuid
                           type: string
                     type: array
-        "404":
+        '404':
           description: User not found
       summary: Retrieve meetings report
       tags:
         - Reports
-  "/report/webinars/{webinarId}":
+  '/report/webinars/{webinarId}':
     get:
       description: Retrieve ended webinar details report
       operationId: reportWebinarDetails
       parameters:
-        - $ref: "#/parameters/WebinarId4Metrics"
+        - $ref: '#/parameters/WebinarId4Metrics'
       responses:
-        "200":
+        '200':
           description: Webinar detail Returned
           schema:
             properties:
@@ -3030,25 +3029,25 @@ paths:
                 description: Meeting UUID
                 format: uuid
                 type: string
-        "404":
+        '404':
           description: Webinar not found
       summary: Retrieve webinar details report
       tags:
         - Reports
-  "/report/webinars/{webinarId}/participants":
+  '/report/webinars/{webinarId}/participants':
     get:
       description: Retrieve ended webinar participants report
       operationId: reportWebinarParticipants
       parameters:
-        - $ref: "#/parameters/WebinarId4Metrics"
-        - $ref: "#/parameters/PageSize"
-        - $ref: "#/parameters/NextPageToken"
+        - $ref: '#/parameters/WebinarId4Metrics'
+        - $ref: '#/parameters/PageSize'
+        - $ref: '#/parameters/NextPageToken'
       responses:
-        "200":
+        '200':
           description: Meeting Participants Report Returned
           schema:
             allOf:
-              - $ref: "#/definitions/PaginationToken"
+              - $ref: '#/definitions/PaginationToken'
               - properties:
                   participants:
                     description: Array of webinar participant objects
@@ -3082,19 +3081,19 @@ paths:
                           description: Participant ID
                           type: string
                     type: array
-        "404":
+        '404':
           description: Webinar not found
       summary: Retrieve webinar participants report
       tags:
         - Reports
-  "/report/webinars/{webinarId}/polls":
+  '/report/webinars/{webinarId}/polls':
     get:
       description: Retrieve ended webinar polls report
       operationId: reportWebinarPolls
       parameters:
-        - $ref: "#/parameters/WebinarId4Metrics"
+        - $ref: '#/parameters/WebinarId4Metrics'
       responses:
-        "200":
+        '200':
           description: Webinar Polls Report Returned
           schema:
             properties:
@@ -3131,19 +3130,19 @@ paths:
                 description: Webinar UUID
                 format: uuid
                 type: string
-        "404":
+        '404':
           description: Webinar not found
       summary: Retrieve webinar polls report
       tags:
         - Reports
-  "/report/webinars/{webinarId}/qa":
+  '/report/webinars/{webinarId}/qa':
     get:
       description: Retrieve ended webinar Q&A report
       operationId: reportWebinarQA
       parameters:
-        - $ref: "#/parameters/WebinarId4Metrics"
+        - $ref: '#/parameters/WebinarId4Metrics'
       responses:
-        "200":
+        '200':
           description: Webinar Q&A Report Returned
           schema:
             properties:
@@ -3180,7 +3179,7 @@ paths:
                 description: Webinar UUID
                 format: uuid
                 type: string
-        "404":
+        '404':
           description: Webinar not found
       summary: Retrieve webinar Q&A report
       tags:
@@ -3191,7 +3190,7 @@ paths:
       operationId: tsp
       parameters: []
       responses:
-        "200":
+        '200':
           description: TSP account detail returned
           schema:
             properties:
@@ -3202,7 +3201,7 @@ paths:
                       description: Country Code
                       type: string
                     number:
-                      description: Dial-in number, length is less than 16
+                      description: 'Dial-in number, length is less than 16'
                       type: string
                     type:
                       type: string
@@ -3233,7 +3232,7 @@ paths:
                 description: 3rd party audio conferencing provider
                 type: string
       responses:
-        "204":
+        '204':
           description: TSP Account updated
       summary: Update account's TSP information
       tags:
@@ -3256,13 +3255,13 @@ paths:
             - users with active status
             - users with inactive status
             - users with pending status
-        - $ref: "#/parameters/PageSize"
-        - $ref: "#/parameters/PageNumber"
+        - $ref: '#/parameters/PageSize'
+        - $ref: '#/parameters/PageNumber'
       responses:
-        "200":
+        '200':
           description: User list returned
           schema:
-            $ref: "#/definitions/UserList"
+            $ref: '#/definitions/UserList'
       summary: List Users
       tags:
         - Users
@@ -3288,7 +3287,7 @@ paths:
                   - User will get an email sent from Zoom. There is a confirmation link in this email. User will then need to click this link to activate their account to the Zoom service. The user can set or change their password in Zoom. <br/>.
                   - This action is provided for enterprise customer who has a managed domain. This feature is disabled by default because of the security risk involved in creating a user who does not belong to your domain without notifying the user. <br/>
                   - This action is provided for API partner only. User created in this way has no password and is not able to log into the Zoom web site or client. <br/>
-                  - This action is provided for enabled "Pre-provisioning SSO User" option. User created in this way has no password. If it is not a basic user, will generate a Personal Vanity URL using user name (no domain) of the provisioning email. If user name or pmi is invalid or occupied, will use random number/random personal vanity URL. <br/>
+                  - 'This action is provided for enabled "Pre-provisioning SSO User" option. User created in this way has no password. If it is not a basic user, will generate a Personal Vanity URL using user name (no domain) of the provisioning email. If user name or pmi is invalid or occupied, will use random number/random personal vanity URL. <br/>'
               user_info:
                 properties:
                   email:
@@ -3325,7 +3324,7 @@ paths:
               - action
             type: object
       responses:
-        "201":
+        '201':
           description: User Created
           headers:
             Content-Location:
@@ -3358,7 +3357,7 @@ paths:
                   - basic
                   - pro
                   - corp
-        "409":
+        '409':
           description: User with that email already exists
       summary: Create a user
       tags:
@@ -3374,7 +3373,7 @@ paths:
           required: true
           type: string
       responses:
-        "200":
+        '200':
           description: Success
           schema:
             properties:
@@ -3394,7 +3393,7 @@ paths:
           required: true
           type: string
       responses:
-        "200":
+        '200':
           description: Success
           schema:
             properties:
@@ -3414,7 +3413,7 @@ paths:
           required: true
           type: string
       responses:
-        "200":
+        '200':
           description: Success
           schema:
             properties:
@@ -3423,12 +3422,12 @@ paths:
       summary: Verify a user's zpk (Deprecated
       tags:
         - Users
-  "/users/{userId}":
+  '/users/{userId}':
     delete:
       description: Delete a user on your account
       operationId: userDelete
       parameters:
-        - $ref: "#/parameters/UserId"
+        - $ref: '#/parameters/UserId'
         - default: disassociate
           description: Delete action type
           enum:
@@ -3440,14 +3439,14 @@ paths:
           x-enum-descriptions:
             - Disassociate a user
             - Permanently delete a user
-        - $ref: "#/parameters/TransferEmail"
-        - $ref: "#/parameters/TransferMeeting"
-        - $ref: "#/parameters/TransferWebinar"
-        - $ref: "#/parameters/TransferRecording"
+        - $ref: '#/parameters/TransferEmail'
+        - $ref: '#/parameters/TransferMeeting'
+        - $ref: '#/parameters/TransferWebinar'
+        - $ref: '#/parameters/TransferRecording'
       responses:
-        "204":
+        '204':
           description: User deleted
-        "404":
+        '404':
           description: User not found
       summary: Delete a user
       tags:
@@ -3456,10 +3455,10 @@ paths:
       description: Retrieve a user on your account
       operationId: user
       parameters:
-        - $ref: "#/parameters/UserId"
-        - $ref: "#/parameters/LoginType"
+        - $ref: '#/parameters/UserId'
+        - $ref: '#/parameters/LoginType'
       responses:
-        "200":
+        '200':
           description: User object returned
           schema:
             allOf:
@@ -3467,7 +3466,7 @@ paths:
                   id:
                     description: User ID
                     type: string
-              - $ref: "#/definitions/User"
+              - $ref: '#/definitions/User'
               - properties:
                   account_id:
                     type: string
@@ -3495,7 +3494,7 @@ paths:
                     type: string
                   verified:
                     type: integer
-        "404":
+        '404':
           description: User not found
       summary: Retrieve a user
       tags:
@@ -3504,31 +3503,31 @@ paths:
       description: Update a user on your account
       operationId: userUpdate
       parameters:
-        - $ref: "#/parameters/UserId"
+        - $ref: '#/parameters/UserId'
         - description: User
           in: body
           name: body
           required: true
           schema:
-            $ref: "#/definitions/UserUpdate"
+            $ref: '#/definitions/UserUpdate'
       responses:
-        "204":
+        '204':
           description: User updated
-        "404":
+        '404':
           description: User not found
       summary: Update a user
       tags:
         - Users
-  "/users/{userId}/assistants":
+  '/users/{userId}/assistants':
     delete:
       description: Delete all of a user'sassitants
       operationId: userAssistantsDelete
       parameters:
-        - $ref: "#/parameters/UserId"
+        - $ref: '#/parameters/UserId'
       responses:
-        "204":
+        '204':
           description: Assitants deleted
-        "404":
+        '404':
           description: User not found
       summary: Delete a user's assistants
       tags:
@@ -3537,13 +3536,13 @@ paths:
       description: List a user's assistants
       operationId: userAssistants
       parameters:
-        - $ref: "#/parameters/UserId"
+        - $ref: '#/parameters/UserId'
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/UserAssistantsList"
-        "404":
+            $ref: '#/definitions/UserAssistantsList'
+        '404':
           description: User not found
       summary: List a user's assistants
       tags:
@@ -3552,15 +3551,15 @@ paths:
       description: Add assistants to a user
       operationId: userAssistantCreate
       parameters:
-        - $ref: "#/parameters/UserId"
+        - $ref: '#/parameters/UserId'
         - description: User assistant
           in: body
           name: body
           required: true
           schema:
-            $ref: "#/definitions/UserAssistantsList"
+            $ref: '#/definitions/UserAssistantsList'
       responses:
-        "201":
+        '201':
           description: Assitant Added
           headers:
             Content-Location:
@@ -3574,36 +3573,36 @@ paths:
               ids:
                 description: User ID
                 type: string
-        "404":
+        '404':
           description: User not found
       summary: Add assistants
       tags:
         - Users
-  "/users/{userId}/assistants/{assistantId}":
+  '/users/{userId}/assistants/{assistantId}':
     delete:
       description: Delete one of a user's assistants
       operationId: userAssistantDelete
       parameters:
-        - $ref: "#/parameters/UserId"
+        - $ref: '#/parameters/UserId'
         - description: Assistant's ID
           in: path
           name: assistantId
           required: true
           type: string
       responses:
-        "204":
+        '204':
           description: Assitant deleted
-        "404":
+        '404':
           description: User or Assistant not found
       summary: Delete a user's assistant
       tags:
         - Users
-  "/users/{userId}/email":
+  '/users/{userId}/email':
     put:
       description: Update a user's email
       operationId: userEmailUpdate
       parameters:
-        - $ref: "#/parameters/UserId"
+        - $ref: '#/parameters/UserId'
         - description: User email
           in: body
           name: body
@@ -3617,37 +3616,37 @@ paths:
               - email
             type: object
       responses:
-        "204":
+        '204':
           description: email updated
-        "404":
+        '404':
           description: User not found
       summary: Update a user's email
       tags:
         - Users
-  "/users/{userId}/meetings":
+  '/users/{userId}/meetings':
     get:
       description: List meetings for a user
       operationId: meetings
       parameters:
-        - $ref: "#/parameters/UserId"
-        - $ref: "#/parameters/MeetingType"
-        - $ref: "#/parameters/PageSize"
-        - $ref: "#/parameters/PageNumber"
+        - $ref: '#/parameters/UserId'
+        - $ref: '#/parameters/MeetingType'
+        - $ref: '#/parameters/PageSize'
+        - $ref: '#/parameters/PageNumber'
       responses:
-        "200":
+        '200':
           description: List of Meeting objects returned
           schema:
-            $ref: "#/definitions/MeetingList"
-        "404":
+            $ref: '#/definitions/MeetingList'
+        '404':
           description: User not found
       summary: List meetings
       tags:
         - Meetings
     post:
-      description: Create a meeting for a user <aside>The expiration time of start_url is two hours. But for API users, the expiration time is 90 days.</aside>
+      description: 'Create a meeting for a user <aside>The expiration time of start_url is two hours. But for API users, the expiration time is 90 days.</aside>'
       operationId: meetingCreate
       parameters:
-        - $ref: "#/parameters/UserId"
+        - $ref: '#/parameters/UserId'
         - description: Meeting object
           in: body
           name: body
@@ -3659,9 +3658,9 @@ paths:
                     description: Email or userId if you want to schedule meeting for another user.
                     type: string
                 type: object
-              - $ref: "#/definitions/Meeting"
+              - $ref: '#/definitions/Meeting'
       responses:
-        "201":
+        '201':
           description: Meeting Created
           headers:
             Content-Location:
@@ -3674,44 +3673,44 @@ paths:
                     description: ID of the user set as host of meeting
                     type: string
                   id:
-                    description: Meeting ID, also known as meeting number
+                    description: 'Meeting ID, also known as meeting number'
                     type: string
                   uuid:
                     description: Meeting unique ID
                     type: string
                 type: object
-              - $ref: "#/definitions/MeetingInfo"
-        "404":
+              - $ref: '#/definitions/MeetingInfo'
+        '404':
           description: User not found
       summary: Create a meeting
       tags:
         - Meetings
-  "/users/{userId}/pac":
+  '/users/{userId}/pac':
     get:
       description: List user's PAC accounts
       operationId: userPACs
       parameters:
-        - $ref: "#/parameters/UserId"
+        - $ref: '#/parameters/UserId'
       responses:
-        "200":
+        '200':
           description: PAC Account list returned
           schema:
             properties:
               tsp_accounts:
                 items:
-                  $ref: "#/definitions/PAC"
+                  $ref: '#/definitions/PAC'
                 type: array
-        "404":
+        '404':
           description: User not found
       summary: List user's PAC accounts
       tags:
         - PAC
-  "/users/{userId}/password":
+  '/users/{userId}/password':
     put:
       description: Update a user's password
       operationId: userPassword
       parameters:
-        - $ref: "#/parameters/UserId"
+        - $ref: '#/parameters/UserId'
         - description: User password
           in: body
           name: body
@@ -3719,91 +3718,91 @@ paths:
           schema:
             properties:
               password:
-                description: User’s password. Character length is less than 32,
+                description: 'User’s password. Character length is less than 32,'
                 minimum: 8
                 type: string
             required:
               - password
             type: object
       responses:
-        "204":
+        '204':
           description: Password updated
-        "404":
+        '404':
           description: User not found
       summary: Update a user's password
       tags:
         - Users
-  "/users/{userId}/permissions":
+  '/users/{userId}/permissions':
     get:
       description: Retrieve a user's permissions
       operationId: userPermission
       parameters:
-        - $ref: "#/parameters/UserId"
+        - $ref: '#/parameters/UserId'
       responses:
-        "200":
+        '200':
           description: User permissions returned
           schema:
-            $ref: "#/definitions/UserPermissions"
-        "404":
+            $ref: '#/definitions/UserPermissions'
+        '404':
           description: User not found
       summary: Retrieve a user's permissions
       tags:
         - Users
-  "/users/{userId}/picture":
+  '/users/{userId}/picture':
     post:
       description: Upload a user's profile picture
       operationId: userPicture
       parameters:
-        - $ref: "#/parameters/UserId"
-        - description: User picture file, must be a jpg/jpeg file
+        - $ref: '#/parameters/UserId'
+        - description: 'User picture file, must be a jpg/jpeg file'
           in: formData
           name: pic_file
           required: true
           type: file
       responses:
-        "201":
+        '201':
           description: Picture Uploaded
           headers:
             Content-Location:
               description: Location of user's picture
               type: string
-        "404":
+        '404':
           description: User not found
       summary: Upload a user's picture
       tags:
         - Users
-  "/users/{userId}/recordings":
+  '/users/{userId}/recordings':
     get:
       description: List all the recordings
       operationId: recordingsList
       parameters:
-        - $ref: "#/parameters/UserId"
-        - $ref: "#/parameters/FromDate"
-        - $ref: "#/parameters/ToDate"
-        - $ref: "#/parameters/PageSize"
-        - $ref: "#/parameters/NextPageToken"
-        - $ref: "#/parameters/Mc"
-        - $ref: "#/parameters/Trash"
+        - $ref: '#/parameters/UserId'
+        - $ref: '#/parameters/FromDate'
+        - $ref: '#/parameters/ToDate'
+        - $ref: '#/parameters/PageSize'
+        - $ref: '#/parameters/NextPageToken'
+        - $ref: '#/parameters/Mc'
+        - $ref: '#/parameters/Trash'
       responses:
-        "200":
+        '200':
           description: List of Recording objects returned
           schema:
-            $ref: "#/definitions/RecordingMeetingList"
-        "404":
+            $ref: '#/definitions/RecordingMeetingList'
+        '404':
           description: User not found
       summary: List all the recordings
       tags:
         - Cloud Recording
-  "/users/{userId}/schedulers":
+  '/users/{userId}/schedulers':
     delete:
       description: Delete all of a user'schedulers
       operationId: userSchedulersDelete
       parameters:
-        - $ref: "#/parameters/UserId"
+        - $ref: '#/parameters/UserId'
       responses:
-        "204":
+        '204':
           description: Schedulers deleted.
-        "404":
+        '404':
           description: User not found
       summary: Delete a user's schedulers
       tags:
@@ -3812,49 +3811,49 @@ paths:
       description: List a user's schedulers
       operationId: userSchedulers
       parameters:
-        - $ref: "#/parameters/UserId"
+        - $ref: '#/parameters/UserId'
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/UserSchedulersList"
-        "404":
+            $ref: '#/definitions/UserSchedulersList'
+        '404':
           description: User not found
       summary: List a user's schedulers
       tags:
         - Users
-  "/users/{userId}/schedulers/{schedulerId}":
+  '/users/{userId}/schedulers/{schedulerId}':
     delete:
       description: Delete one of a user's schedulers
       operationId: userSchedulerDelete
       parameters:
-        - $ref: "#/parameters/UserId"
+        - $ref: '#/parameters/UserId'
         - description: Scheduler's ID
           in: path
           name: schedulerId
           required: true
           type: string
       responses:
-        "204":
+        '204':
           description: Scheduler deleted.
-        "404":
+        '404':
           description: User or Scheduler not found
       summary: Delete a user's scheduler
       tags:
         - Users
-  "/users/{userId}/settings":
+  '/users/{userId}/settings':
     get:
       description: Retrieve a user's settings
       operationId: userSettings
       parameters:
-        - $ref: "#/parameters/UserId"
-        - $ref: "#/parameters/LoginType"
+        - $ref: '#/parameters/UserId'
+        - $ref: '#/parameters/LoginType'
       responses:
-        "200":
+        '200':
           description: User settings returned
           schema:
-            $ref: "#/definitions/UserSettings"
-        "404":
+            $ref: '#/definitions/UserSettings'
+        '404':
           description: User not found
       summary: Retrieve a user's settings
       tags:
@@ -3863,27 +3862,27 @@ paths:
       description: Update a user's settings
       operationId: userSettingsUpdate
       parameters:
-        - $ref: "#/parameters/UserId"
+        - $ref: '#/parameters/UserId'
         - description: User Settings
           in: body
           name: body
           required: true
           schema:
-            $ref: "#/definitions/UserSettingsUpdate"
+            $ref: '#/definitions/UserSettingsUpdate'
       responses:
-        "204":
+        '204':
           description: User setting's updated
-        "404":
+        '404':
           description: User not found
       summary: Update a user's settings
       tags:
         - Users
-  "/users/{userId}/status":
+  '/users/{userId}/status':
     put:
       description: Update a user's status
       operationId: userStatus
       parameters:
-        - $ref: "#/parameters/UserId"
+        - $ref: '#/parameters/UserId'
         - description: User status
           in: body
           name: body
@@ -3904,23 +3903,23 @@ paths:
               - action
             type: object
       responses:
-        "204":
+        '204':
           description: Status updated
-        "404":
+        '404':
           description: User not found
       summary: Update a user's status
       tags:
         - Users
-  "/users/{userId}/token":
+  '/users/{userId}/token':
     delete:
       description: Revoke a user's SSO token
       operationId: userSSOTokenDelete
       parameters:
-        - $ref: "#/parameters/UserId"
+        - $ref: '#/parameters/UserId'
       responses:
-        "204":
+        '204':
           description: Token deleted
-        "404":
+        '404':
           description: User not found
       summary: Revoke a user's SSO token
       tags:
@@ -3929,7 +3928,7 @@ paths:
       description: Retrieve a user's token
       operationId: userToken
       parameters:
-        - $ref: "#/parameters/UserId"
+        - $ref: '#/parameters/UserId'
         - description: User token type
           enum:
             - token
@@ -3941,36 +3940,36 @@ paths:
           x-enum-descriptions:
             - Used for starting meeting with client SDK.
             - Used for generating the start meeting url. (Deprecated)
-            - Used for generating the start meeting url. The expiration time is two hours. For API users, the expiration time is 90 days.
+            - 'Used for generating the start meeting url. The expiration time is two hours. For API users, the expiration time is 90 days.'
       responses:
-        "200":
+        '200':
           description: Token returned
           schema:
             properties:
               token:
                 description: User ID
                 type: string
-        "404":
+        '404':
           description: User not found
       summary: Retrieve a user's token
       tags:
         - Users
-  "/users/{userId}/tsp":
+  '/users/{userId}/tsp':
     get:
       description: List user's TSP accounts
       operationId: userTSPs
       parameters:
-        - $ref: "#/parameters/UserId"
+        - $ref: '#/parameters/UserId'
       responses:
-        "200":
+        '200':
           description: TSP Account list returned
           schema:
             properties:
               tsp_accounts:
                 items:
-                  $ref: "#/definitions/TSP"
+                  $ref: '#/definitions/TSP'
                 type: array
-        "404":
+        '404':
           description: User not found
       summary: List user's TSP accounts
       tags:
@@ -3979,30 +3978,30 @@ paths:
       description: Add a user's TSP account
       operationId: userTSPCreate
       parameters:
-        - $ref: "#/parameters/UserId"
+        - $ref: '#/parameters/UserId'
         - description: TSP Account
           in: body
           name: body
           required: true
           schema:
-            $ref: "#/definitions/TSP"
+            $ref: '#/definitions/TSP'
       responses:
-        "201":
+        '201':
           description: TSP Account added
           schema:
-            $ref: "#/definitions/TSP"
+            $ref: '#/definitions/TSP'
       summary: Add a user's TSP account
       tags:
         - TSP
-  "/users/{userId}/tsp/{tspId}":
+  '/users/{userId}/tsp/{tspId}':
     delete:
       description: Delete a user's TSP account
       operationId: userTSPDelete
       parameters:
-        - $ref: "#/parameters/UserId"
-        - $ref: "#/parameters/TSPId"
+        - $ref: '#/parameters/UserId'
+        - $ref: '#/parameters/TSPId'
       responses:
-        "204":
+        '204':
           description: TSP Account deleted
       summary: Delete a user's TSP account
       tags:
@@ -4011,13 +4010,13 @@ paths:
       description: Retrieve a user's TSP account
       operationId: userTSP
       parameters:
-        - $ref: "#/parameters/UserId"
-        - $ref: "#/parameters/TSPId"
+        - $ref: '#/parameters/UserId'
+        - $ref: '#/parameters/TSPId'
       responses:
-        "200":
+        '200':
           description: TSP Account returned
           schema:
-            $ref: "#/definitions/TSP"
+            $ref: '#/definitions/TSP'
       summary: Retrieve a user's TSP account
       tags:
         - TSP
@@ -4025,51 +4024,51 @@ paths:
       description: Update a user's TSP account
       operationId: userTSPUpdate
       parameters:
-        - $ref: "#/parameters/UserId"
-        - $ref: "#/parameters/TSPId"
+        - $ref: '#/parameters/UserId'
+        - $ref: '#/parameters/TSPId'
         - description: TSP Account
           in: body
           name: body
           required: true
           schema:
-            $ref: "#/definitions/TSP"
+            $ref: '#/definitions/TSP'
       responses:
-        "204":
+        '204':
           description: TSP Account updated
       summary: Update a TSP account
       tags:
         - TSP
-  "/users/{userId}/webinars":
+  '/users/{userId}/webinars':
     get:
       description: List webinars for a user
       operationId: webinars
       parameters:
-        - $ref: "#/parameters/UserId"
-        - $ref: "#/parameters/PageSize"
-        - $ref: "#/parameters/PageNumber"
+        - $ref: '#/parameters/UserId'
+        - $ref: '#/parameters/PageSize'
+        - $ref: '#/parameters/PageNumber'
       responses:
-        "200":
+        '200':
           description: List of Webinar objects returned
           schema:
-            $ref: "#/definitions/WebinarList"
-        "404":
+            $ref: '#/definitions/WebinarList'
+        '404':
           description: User not found
       summary: List webinars
       tags:
         - Webinars
     post:
-      description: Create a webinar for a user <aside>The expiration time of start_url is two hours. But for API users, the expiration time is 90 days.</aside>
+      description: 'Create a webinar for a user <aside>The expiration time of start_url is two hours. But for API users, the expiration time is 90 days.</aside>'
       operationId: webinarCreate
       parameters:
-        - $ref: "#/parameters/UserId"
+        - $ref: '#/parameters/UserId'
         - description: User
           in: body
           name: body
           required: true
           schema:
-            $ref: "#/definitions/Webinar"
+            $ref: '#/definitions/Webinar'
       responses:
-        "201":
+        '201':
           description: Webinar Created
           headers:
             Content-Location:
@@ -4082,14 +4081,14 @@ paths:
                     description: ID of the user set as host of Webinar
                     type: string
                   id:
-                    description: Webinar ID, also known as Webinar number
+                    description: 'Webinar ID, also known as Webinar number'
                     type: string
                   uuid:
                     description: Webinar unique ID
                     type: string
                 type: object
-              - $ref: "#/definitions/WebinarInfo"
-        "404":
+              - $ref: '#/definitions/WebinarInfo'
+        '404':
           description: User not found
       summary: Create a webinar
       tags:
@@ -4100,10 +4099,10 @@ paths:
       operationId: trackingfieldList
       parameters: []
       responses:
-        "200":
+        '200':
           description: List of Tracking Fields returned.
           schema:
-            $ref: "#/definitions/TrackingFieldList"
+            $ref: '#/definitions/TrackingFieldList'
       summary: List Tracking Fields.
       tags:
         - TrackingField
@@ -4116,9 +4115,9 @@ paths:
           name: body
           required: true
           schema:
-            $ref: "#/definitions/TrackingField"
+            $ref: '#/definitions/TrackingField'
       responses:
-        "201":
+        '201':
           description: Tracking Field created
           headers:
             Content-Location:
@@ -4130,11 +4129,11 @@ paths:
                   id:
                     description: Tracking Field ID
                     type: string
-              - $ref: "#/definitions/TrackingField"
+              - $ref: '#/definitions/TrackingField'
       summary: Create a Tracking Field
       tags:
         - TrackingField
-  "/v2/tracking_fields/{fieldId}":
+  '/v2/tracking_fields/{fieldId}':
     delete:
       description: Delete a Tracking Field on your Zoom account
       operationId: trackingfieldDelete
@@ -4145,9 +4144,9 @@ paths:
           required: true
           type: string
       responses:
-        "204":
+        '204':
           description: Tracking Field deleted
-        "404":
+        '404':
           description: Tracking Field not found
       summary: Delete a Tracking Field
       tags:
@@ -4162,7 +4161,7 @@ paths:
           required: true
           type: string
       responses:
-        "200":
+        '200':
           description: Tracking Field object returned
           schema:
             allOf:
@@ -4170,8 +4169,8 @@ paths:
                   id:
                     description: Tracking Field ID
                     type: string
-              - $ref: "#/definitions/TrackingField"
-        "404":
+              - $ref: '#/definitions/TrackingField'
+        '404':
           description: Tracking Field not found
       summary: Retrieve a tracking field
       tags:
@@ -4189,11 +4188,11 @@ paths:
           name: body
           required: true
           schema:
-            $ref: "#/definitions/TrackingField"
+            $ref: '#/definitions/TrackingField'
       responses:
-        "204":
+        '204':
           description: Tracking Field updated
-        "404":
+        '404':
           description: Tracking Field not found
       summary: Update a Tracking Field
       tags:
@@ -4204,11 +4203,11 @@ paths:
       operationId: webhooks
       parameters: []
       responses:
-        "200":
+        '200':
           description: List of Webhook objects returned
           schema:
-            $ref: "#/definitions/WebhookList"
-        "404":
+            $ref: '#/definitions/WebhookList'
+        '404':
           description: Webhook not found
       summary: List webhooks
       tags:
@@ -4222,9 +4221,9 @@ paths:
           name: body
           required: true
           schema:
-            $ref: "#/definitions/Webhook"
+            $ref: '#/definitions/Webhook'
       responses:
-        "201":
+        '201':
           description: Webhook Created
           headers:
             Content-Location:
@@ -4236,13 +4235,13 @@ paths:
                   webhook_id:
                     description: Webhook Id
                     type: string
-              - $ref: "#/definitions/Webhook"
+              - $ref: '#/definitions/Webhook'
               - properties:
                   created_at:
                     description: Webhook create time
                     format: date-time
                     type: string
-        "404":
+        '404':
           description: Account not found
       summary: Create a webhook
       tags:
@@ -4268,23 +4267,23 @@ paths:
             required:
               - version
       responses:
-        "204":
+        '204':
           description: Webhook Subscribe version update
-        "404":
+        '404':
           description: Webhook Subscribe not found
       summary: Switch webhook version
       tags:
         - Webhooks
-  "/webhooks/{webhookId}":
+  '/webhooks/{webhookId}':
     delete:
       description: Delete a webhook
       operationId: webhookDelete
       parameters:
-        - $ref: "#/parameters/WebhookId"
+        - $ref: '#/parameters/WebhookId'
       responses:
-        "204":
+        '204':
           description: Webhook deleted
-        "404":
+        '404':
           description: Webhook not found
       summary: Delete a webhook
       tags:
@@ -4293,9 +4292,9 @@ paths:
       description: Retrieve a webhook
       operationId: webhook
       parameters:
-        - $ref: "#/parameters/WebhookId"
+        - $ref: '#/parameters/WebhookId'
       responses:
-        "200":
+        '200':
           description: Webhook object returned
           schema:
             allOf:
@@ -4303,13 +4302,13 @@ paths:
                   webhook_id:
                     description: Webhook Id
                     type: string
-              - $ref: "#/definitions/Webhook"
+              - $ref: '#/definitions/Webhook'
               - properties:
                   created_at:
                     description: Webhook create time
                     format: date-time
                     type: string
-        "404":
+        '404':
           description: Webinar not found
       summary: Retrieve a webhook
       tags:
@@ -4318,32 +4317,32 @@ paths:
       description: Update a webhook
       operationId: webhookUpdate
       parameters:
-        - $ref: "#/parameters/WebhookId"
+        - $ref: '#/parameters/WebhookId'
         - description: Webhook
           in: body
           name: body
           required: true
           schema:
-            $ref: "#/definitions/WebhookUpdate"
+            $ref: '#/definitions/WebhookUpdate'
       responses:
-        "204":
+        '204':
           description: Webhook Updated
-        "404":
+        '404':
           description: Webhook not found
       summary: Update a webhook
       tags:
         - Webhooks
-  "/webinars/{webinarId}":
+  '/webinars/{webinarId}':
     delete:
       description: Delete a webinar
       operationId: webinarDelete
       parameters:
-        - $ref: "#/parameters/WebinarId"
-        - $ref: "#/parameters/OccurrenceId"
+        - $ref: '#/parameters/WebinarId'
+        - $ref: '#/parameters/OccurrenceId'
       responses:
-        "204":
+        '204':
           description: Webinar deleted
-        "404":
+        '404':
           description: Webinar not found
       summary: Delete a webinar
       tags:
@@ -4352,9 +4351,9 @@ paths:
       description: Retrieve a webinar
       operationId: webinar
       parameters:
-        - $ref: "#/parameters/WebinarId"
+        - $ref: '#/parameters/WebinarId'
       responses:
-        "200":
+        '200':
           description: Webinar object returned
           schema:
             allOf:
@@ -4363,14 +4362,14 @@ paths:
                     description: ID of the user set as host of webinar
                     type: string
                   id:
-                    description: Webinar ID, also know as webinar number
+                    description: 'Webinar ID, also know as webinar number'
                     type: string
                   uuid:
                     description: Webinar unique ID
                     type: string
                 type: object
-              - $ref: "#/definitions/WebinarInfo"
-        "404":
+              - $ref: '#/definitions/WebinarInfo'
+        '404':
           description: Webinar not found
       summary: Retrieve a webinar
       tags:
@@ -4379,31 +4378,31 @@ paths:
       description: Update a webinar
       operationId: webinarUpdate
       parameters:
-        - $ref: "#/parameters/WebinarId"
+        - $ref: '#/parameters/WebinarId'
         - description: Webinar
           in: body
           name: body
           required: true
           schema:
-            $ref: "#/definitions/WebinarUpdate"
+            $ref: '#/definitions/WebinarUpdate'
       responses:
-        "204":
+        '204':
           description: Webinar Updated
-        "404":
+        '404':
           description: Webinar not found
       summary: Update a webinar
       tags:
         - Webinars
-  "/webinars/{webinarId}/panelists":
+  '/webinars/{webinarId}/panelists':
     delete:
       description: Remove all panelists from a webinar
       operationId: webinarPanelistsDelete
       parameters:
-        - $ref: "#/parameters/WebinarId"
+        - $ref: '#/parameters/WebinarId'
       responses:
-        "204":
+        '204':
           description: Panelists removed
-        "404":
+        '404':
           description: Webinar not found
       summary: Remove a webinar's panelists
       tags:
@@ -4412,13 +4411,13 @@ paths:
       description: List panelists for a webinar
       operationId: webinarPanelists
       parameters:
-        - $ref: "#/parameters/WebinarId"
+        - $ref: '#/parameters/WebinarId'
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/WebinarPanelistList"
-        "404":
+            $ref: '#/definitions/WebinarPanelistList'
+        '404':
           description: Webinar not found
       summary: List a webinar's panelists
       tags:
@@ -4427,14 +4426,14 @@ paths:
       description: Add panelist to webinar
       operationId: webinarPanelistCreate
       parameters:
-        - $ref: "#/parameters/WebinarId"
+        - $ref: '#/parameters/WebinarId'
         - in: body
           name: body
           required: true
           schema:
-            $ref: "#/definitions/WebinarPanelist"
+            $ref: '#/definitions/WebinarPanelist'
       responses:
-        "201":
+        '201':
           description: Panelist created
           schema:
             properties:
@@ -4445,60 +4444,60 @@ paths:
                 description: Join URL for this panelist
                 type: string
             type: object
-        "404":
+        '404':
           description: Webinar not found
       summary: Add a webinar panelist
       tags:
         - Webinars
-  "/webinars/{webinarId}/panelists/{panelistId}":
+  '/webinars/{webinarId}/panelists/{panelistId}':
     delete:
       description: Remove a panelist from a webinar
       operationId: webinarPanelistDelete
       parameters:
-        - $ref: "#/parameters/WebinarId"
+        - $ref: '#/parameters/WebinarId'
         - description: The panelist ID
           in: path
           name: panelistId
           required: true
           type: integer
       responses:
-        "204":
+        '204':
           description: Panelists removed
-        "404":
+        '404':
           description: Webinar or Panelist not found
       summary: Remove a webinar panelist
       tags:
         - Webinars
-  "/webinars/{webinarId}/polls":
+  '/webinars/{webinarId}/polls':
     get:
       description: List polls of a webinar
       operationId: webinarPolls
       parameters:
-        - $ref: "#/parameters/WebinarId"
+        - $ref: '#/parameters/WebinarId'
       responses:
-        "200":
+        '200':
           description: List polls of a Webinar  returned
           schema:
-            $ref: "#/definitions/PollList"
-        "404":
+            $ref: '#/definitions/PollList'
+        '404':
           description: Webinar not found
-      summary: "List a webinar's polls "
+      summary: 'List a webinar''s polls '
       tags:
         - Webinars
     post:
       description: Create a poll for a webinar
       operationId: webinarPollCreate
       parameters:
-        - $ref: "#/parameters/WebinarId"
+        - $ref: '#/parameters/WebinarId'
         - description: Webinar poll object
           in: body
           name: body
           required: true
           schema:
             allOf:
-              - $ref: "#/definitions/Poll"
+              - $ref: '#/definitions/Poll'
       responses:
-        "201":
+        '201':
           description: Webinar Poll Created
           headers:
             Content-Location:
@@ -4524,27 +4523,27 @@ paths:
                       - Poll ended
                       - Poll is sharing
                 type: object
-              - $ref: "#/definitions/Poll"
-        "404":
+              - $ref: '#/definitions/Poll'
+        '404':
           description: Webinar not found
       summary: Create a webinar's poll
       tags:
         - Webinars
-  "/webinars/{webinarId}/polls/{pollId}":
+  '/webinars/{webinarId}/polls/{pollId}':
     delete:
       description: Delete a webinar's Poll
       operationId: webinarPollDelete
       parameters:
-        - $ref: "#/parameters/WebinarId"
+        - $ref: '#/parameters/WebinarId'
         - description: The poll ID
           in: path
           name: pollId
           required: true
           type: string
       responses:
-        "204":
+        '204':
           description: Webinar Poll deleted
-        "404":
+        '404':
           description: Webinar Poll not found
       summary: Delete a webinar's Poll
       tags:
@@ -4553,14 +4552,14 @@ paths:
       description: Retrieve a webinar's poll
       operationId: webinarPollGet
       parameters:
-        - $ref: "#/parameters/WebinarId"
+        - $ref: '#/parameters/WebinarId'
         - description: The poll ID
           in: path
           name: pollId
           required: true
           type: string
       responses:
-        "200":
+        '200':
           description: Webinar Poll object returned
           schema:
             allOf:
@@ -4582,8 +4581,8 @@ paths:
                       - Poll ended
                       - Poll is sharing
                 type: object
-              - $ref: "#/definitions/Poll"
-        "404":
+              - $ref: '#/definitions/Poll'
+        '404':
           description: Webinar Poll not found
       summary: Retrieve a webinar's poll
       tags:
@@ -4592,7 +4591,7 @@ paths:
       description: Update a webinar's poll
       operationId: webinarPollUpdate
       parameters:
-        - $ref: "#/parameters/WebinarId"
+        - $ref: '#/parameters/WebinarId'
         - description: The poll ID
           in: path
           name: pollId
@@ -4604,31 +4603,31 @@ paths:
           required: true
           schema:
             allOf:
-              - $ref: "#/definitions/Poll"
+              - $ref: '#/definitions/Poll'
       responses:
-        "204":
+        '204':
           description: Webinar Poll Updated
-        "404":
+        '404':
           description: Webinar Poll not found
       summary: Update a webinar's poll
       tags:
         - Webinars
-  "/webinars/{webinarId}/registrants":
+  '/webinars/{webinarId}/registrants':
     get:
       description: List registrants for a webinar
       operationId: webinarRegistrants
       parameters:
-        - $ref: "#/parameters/WebinarId"
-        - $ref: "#/parameters/OccurrenceId"
-        - $ref: "#/parameters/RegistrantStatus"
-        - $ref: "#/parameters/PageSize"
-        - $ref: "#/parameters/PageNumber"
+        - $ref: '#/parameters/WebinarId'
+        - $ref: '#/parameters/OccurrenceId'
+        - $ref: '#/parameters/RegistrantStatus'
+        - $ref: '#/parameters/PageSize'
+        - $ref: '#/parameters/PageNumber'
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/WebinarRegistrantList"
-        "404":
+            $ref: '#/definitions/WebinarRegistrantList'
+        '404':
           description: Webinar not found
       summary: List a webinar's registrants
       tags:
@@ -4637,8 +4636,8 @@ paths:
       description: Add a registrant for a webinar
       operationId: webinarRegistrantCreate
       parameters:
-        - $ref: "#/parameters/WebinarId"
-        - description: Occurrence IDs, could get this value from Webinar Get API. Multiple value separated by comma.
+        - $ref: '#/parameters/WebinarId'
+        - description: 'Occurrence IDs, could get this value from Webinar Get API. Multiple value separated by comma.'
           in: query
           name: occurrence_ids
           type: string
@@ -4646,9 +4645,9 @@ paths:
           name: body
           required: true
           schema:
-            $ref: "#/definitions/WebinarRegistrant"
+            $ref: '#/definitions/WebinarRegistrant'
       responses:
-        "201":
+        '201':
           description: Registration created
           schema:
             properties:
@@ -4669,18 +4668,18 @@ paths:
                 description: Topic
                 type: string
             type: object
-        "404":
+        '404':
           description: Webinar not found
       summary: Add a webinar registrant
       tags:
         - Webinars
-  "/webinars/{webinarId}/registrants/status":
+  '/webinars/{webinarId}/registrants/status':
     put:
       description: Update a webinar registrant's status
       operationId: webinarRegistrantStatus
       parameters:
-        - $ref: "#/parameters/WebinarId"
-        - $ref: "#/parameters/OccurrenceId"
+        - $ref: '#/parameters/WebinarId'
+        - $ref: '#/parameters/OccurrenceId'
         - in: body
           name: body
           required: true
@@ -4709,19 +4708,19 @@ paths:
             required:
               - action
       responses:
-        "204":
+        '204':
           description: Registrant status updated
-        "404":
+        '404':
           description: Webinar or Registrant not found
       summary: Update a webinar registrant's status
       tags:
         - Webinars
-  "/webinars/{webinarId}/status":
+  '/webinars/{webinarId}/status':
     put:
       description: Update a webinar's status
       operationId: webinarStatus
       parameters:
-        - $ref: "#/parameters/WebinarId"
+        - $ref: '#/parameters/WebinarId'
         - in: body
           name: body
           required: true
@@ -4734,16 +4733,16 @@ paths:
                 x-enum-descriptions:
                   - end a webinar
       responses:
-        "204":
+        '204':
           description: Webinar updated
-        "404":
+        '404':
           description: Webinar not found
       summary: Update a webinar's status
       tags:
         - Webinars
 definitions:
   Account:
-    description: The account object represents an account on zoom. The person who created the account, or who the account was created for, is referred to as the account owner. You can read more about the Zoom account structure <a href='https://developer.zoom.us/blog/a-brief-look-at-zoom-account-structures/' target='_blank'>here</a>.
+    description: 'The account object represents an account on zoom. The person who created the account, or who the account was created for, is referred to as the account owner. You can read more about the Zoom account structure <a href=''https://developer.zoom.us/blog/a-brief-look-at-zoom-account-structures/'' target=''_blank''>here</a>.'
     properties:
       email:
         description: User's email address
@@ -4755,7 +4754,7 @@ definitions:
         description: User's last name
         type: string
       options:
-        $ref: "#/definitions/AccountOptions"
+        $ref: '#/definitions/AccountOptions'
       password:
         description: User's password
         minimum: 8
@@ -4768,8 +4767,8 @@ definitions:
     type: object
   AccountList:
     allOf:
-      - $ref: "#/definitions/Pagination"
-      - $ref: "#/definitions/AccountListItem"
+      - $ref: '#/definitions/Pagination'
+      - $ref: '#/definitions/AccountListItem'
     description: List of Accounts
     title: Account List
     type: object
@@ -4814,7 +4813,7 @@ definitions:
     description: Account options object
     properties:
       meeting_connectors:
-        description: Meeting Connector, multiple values separated by comma
+        description: 'Meeting Connector, multiple values separated by comma'
         type: string
       pay_mode:
         default: master
@@ -4827,7 +4826,7 @@ definitions:
           - Master account holder pays
           - Sub account holder pays
       room_connectors:
-        description: Virtual Room Connector, multiple value separated by comma
+        description: 'Virtual Room Connector, multiple value separated by comma'
         type: string
       share_mc:
         default: false
@@ -4845,17 +4844,17 @@ definitions:
         description: Account plan number of hosts
         type: integer
       type:
-        description: Account <a href="#plans">plan type</a>
+        description: 'Account <a href="#plans">plan type</a>'
         type: string
     type: object
   AccountPlanBaseRequired:
     description: Account base plan object
     properties:
       hosts:
-        description: Account base plan number of hosts. For a Pro Plan, please select a value between 1 and 9. For a Business Plan, please select a value between 10 and 49. For a Education Plan, please select a value between 20 and 149. For a Free Trial Plan, please select a value between 1 and 9999.
+        description: 'Account base plan number of hosts. For a Pro Plan, please select a value between 1 and 9. For a Business Plan, please select a value between 10 and 49. For a Education Plan, please select a value between 20 and 149. For a Free Trial Plan, please select a value between 1 and 9999.'
         type: integer
       type:
-        description: Account base <a href="#plans">plan type</a>
+        description: 'Account base <a href="#plans">plan type</a>'
         type: string
     required:
       - type
@@ -4868,7 +4867,7 @@ definitions:
         description: Account plan number of hosts
         type: integer
       type:
-        description: Account <a href="#plans">plan type</a>
+        description: 'Account <a href="#plans">plan type</a>'
         type: string
     required:
       - type
@@ -4878,68 +4877,68 @@ definitions:
     description: Account Plans object
     properties:
       plan_audio:
-        description: Additional Audio Conferencing <a href="#plans">plan type</a>
+        description: 'Additional Audio Conferencing <a href="#plans">plan type</a>'
         properties:
           callout_countries:
-            description: Call-out countries, multiple value separated by comma
+            description: 'Call-out countries, multiple value separated by comma'
             type: string
           ddi_numbers:
             description: Dedicated Dial-In Numbers
             type: integer
           premium_countries:
-            description: Premium countries, multiple value separated by comma
+            description: 'Premium countries, multiple value separated by comma'
             type: string
           tollfree_countries:
-            description: Toll-free countries, multiple value separated by comma
+            description: 'Toll-free countries, multiple value separated by comma'
             type: string
           type:
-            description: Additional Audio Conferencing <a href="#plans">plan type</a>
+            description: 'Additional Audio Conferencing <a href="#plans">plan type</a>'
             type: string
         type: object
       plan_base:
-        $ref: "#/definitions/AccountPlanBaseRequired"
+        $ref: '#/definitions/AccountPlanBaseRequired'
       plan_large_meeting:
         description: Additional Large Meeting Plans
         items:
-          $ref: "#/definitions/AccountPlan"
+          $ref: '#/definitions/AccountPlan'
         type: array
       plan_recording:
         description: Additional Cloud Recording Plan
         type: string
       plan_room_connector:
-        $ref: "#/definitions/AccountPlan"
+        $ref: '#/definitions/AccountPlan'
       plan_webinar:
         description: Additional Webinar Plans
         items:
-          $ref: "#/definitions/AccountPlan"
+          $ref: '#/definitions/AccountPlan'
         type: array
       plan_zoom_rooms:
-        $ref: "#/definitions/AccountPlan"
+        $ref: '#/definitions/AccountPlan'
     type: object
   AccountSettings:
     properties:
       email_notification:
-        $ref: "#/definitions/AccountSettingsEmailNotification"
+        $ref: '#/definitions/AccountSettingsEmailNotification'
       feature:
-        $ref: "#/definitions/AccountSettingsFeature"
+        $ref: '#/definitions/AccountSettingsFeature'
       in_meeting:
-        $ref: "#/definitions/AccountSettingsInMeeting"
+        $ref: '#/definitions/AccountSettingsInMeeting'
       integration:
-        $ref: "#/definitions/AccountSettingsIntegration"
+        $ref: '#/definitions/AccountSettingsIntegration'
       recording:
-        $ref: "#/definitions/AccountSettingsRecording"
+        $ref: '#/definitions/AccountSettingsRecording'
       schedule_meting:
-        $ref: "#/definitions/AccountSettingsScheduleMeeting"
+        $ref: '#/definitions/AccountSettingsScheduleMeeting'
       security:
-        $ref: "#/definitions/AccountSettingsSecurity"
+        $ref: '#/definitions/AccountSettingsSecurity'
       telephony:
-        $ref: "#/definitions/AccountSettingsTelephony"
+        $ref: '#/definitions/AccountSettingsTelephony'
       zoom_rooms:
-        $ref: "#/definitions/AccountSettingsZoomRooms"
+        $ref: '#/definitions/AccountSettingsZoomRooms'
     title: Account settings
     type: object
   AccountSettingsEmailNotification:
-    description: "Account Settings: Notification"
+    description: 'Account Settings: Notification'
     properties:
       alternative_host_reminder:
         description: Notify when an alternative host is set or removed from a meeting
@@ -4958,7 +4957,7 @@ definitions:
         type: boolean
     type: object
   AccountSettingsFeature:
-    description: "Account Settings: Feature"
+    description: 'Account Settings: Feature'
     properties:
       meeting_capacity:
         default: 100
@@ -4966,7 +4965,7 @@ definitions:
         type: integer
     type: object
   AccountSettingsInMeeting:
-    description: "Account Settings: In Meeting"
+    description: 'Account Settings: In Meeting'
     properties:
       alert_guest_join:
         description: Identify guest participants in the meeting/webinar
@@ -4996,7 +4995,7 @@ definitions:
         description: Automatically save all in-meeting chats so that hosts do not need to manually save the text of the chat after the meeting starts
         type: boolean
       breakout_room:
-        description: Allow host to split meeting participants into separate, smaller rooms
+        description: 'Allow host to split meeting participants into separate, smaller rooms'
         type: boolean
       chat:
         description: Allow meeting participants to send a message visible to all participants
@@ -5033,7 +5032,7 @@ definitions:
         description: Allow another user to take control of your camera during a meeting
         type: boolean
       feedback:
-        description: Add a Feedback tab to the Windows Settings or Mac Preferences dialog, and also enable users to provide feedback to Zoom at the end of the meeting
+        description: 'Add a Feedback tab to the Windows Settings or Mac Preferences dialog, and also enable users to provide feedback to Zoom at the end of the meeting'
         type: boolean
       file_transfer:
         description: Hosts and participants can send files through the in-meeting chat
@@ -5054,14 +5053,14 @@ definitions:
         description: Add 'Polls' to the meeting controls.
         type: boolean
       ports_range:
-        default: ""
-        description: Listening ports range, separated by comma (ex 55,56). The ports range must be between 1 to 65535.
+        default: ''
+        description: 'Listening ports range, separated by comma (ex 55,56). The ports range must be between 1 to 65535.'
         type: string
       post_meeting_feedback:
         description: Display a thumbs up/down survey at the end of each meeting
         type: boolean
       private_chat:
-        description: Allow meeting participants to send a private 1:1 message to another participants
+        description: 'Allow meeting participants to send a private 1:1 message to another participants'
         type: boolean
       remote_control:
         description: Allow users to request remote control
@@ -5098,7 +5097,7 @@ definitions:
         type: boolean
     type: object
   AccountSettingsIntegration:
-    description: "Account Settings: Integration"
+    description: 'Account Settings: Integration'
     properties:
       box:
         description: Enables users who join a meeting from their mobile device to share content from their Box account
@@ -5120,7 +5119,7 @@ definitions:
         type: boolean
     type: object
   AccountSettingsRecording:
-    description: "Account Settings: Recording"
+    description: 'Account Settings: Recording'
     properties:
       account_user_access_recording:
         description: Cloud recordings are only accessible to account members. People outside of your organization cannot open links that provide access to cloud recordings.
@@ -5174,7 +5173,7 @@ definitions:
         type: boolean
     type: object
   AccountSettingsScheduleMeeting:
-    description: "Account Settings: Schedule Meeting"
+    description: 'Account Settings: Schedule Meeting'
     properties:
       audio_type:
         default: both
@@ -5216,7 +5215,7 @@ definitions:
         type: boolean
     type: object
   AccountSettingsSecurity:
-    description: "Account Settings: Security"
+    description: 'Account Settings: Security'
     properties:
       admin_change_name_pic:
         description: Only account administrators can change user's username and picture
@@ -5229,7 +5228,7 @@ definitions:
         type: boolean
     type: object
   AccountSettingsTelephony:
-    description: "Account Settings: Telephony"
+    description: 'Account Settings: Telephony'
     properties:
       audio_conference_info:
         description: 3rd party audio conference info
@@ -5239,7 +5238,7 @@ definitions:
         type: boolean
     type: object
   AccountSettingsZoomRooms:
-    description: "Account Settings: Zoom Rooms"
+    description: 'Account Settings: Zoom Rooms'
     properties:
       auto_start_stop_scheduled_meetings:
         description: Automatic start/stop for scheduled meetings
@@ -5362,7 +5361,7 @@ definitions:
     description: DateTime Object
     properties:
       from:
-        description: Start Date,
+        description: 'Start Date,'
         format: date
         type: string
       to:
@@ -5377,13 +5376,13 @@ definitions:
         description: Device encryption
         enum:
           - auto
-          - yes
-          - no
+          - 'yes'
+          - 'no'
         type: string
         x-enum-descriptions:
           - auto
-          - yes
-          - no
+          - 'yes'
+          - 'no'
       ip:
         description: Device Ip
         type: string
@@ -5409,7 +5408,7 @@ definitions:
     type: object
   DeviceList:
     allOf:
-      - $ref: "#/definitions/Pagination"
+      - $ref: '#/definitions/Pagination'
       - properties:
           devices:
             description: List of H.323/SIP Device objects
@@ -5419,7 +5418,7 @@ definitions:
                     id:
                       description: Device ID
                       type: string
-                - $ref: "#/definitions/Device"
+                - $ref: '#/definitions/Device'
             type: array
     description: List of H.323/SIP Devices
     title: H.323/SIP Device List
@@ -5464,7 +5463,7 @@ definitions:
                 id:
                   description: Group ID
                   type: string
-            - $ref: "#/definitions/Group"
+            - $ref: '#/definitions/Group'
         type: array
       total_records:
         description: Total records
@@ -5491,19 +5490,19 @@ definitions:
     type: object
   GroupMemberList:
     allOf:
-      - $ref: "#/definitions/Pagination"
+      - $ref: '#/definitions/Pagination'
       - properties:
           members:
             description: List of Group member objects
             items:
-              $ref: "#/definitions/GroupMember"
+              $ref: '#/definitions/GroupMember'
             type: array
     description: List of Group Members
     title: Group Member List
     type: object
   IMGroup:
     allOf:
-      - $ref: "#/definitions/Group"
+      - $ref: '#/definitions/Group'
       - properties:
           search_by_account:
             description: Members can search others under same account
@@ -5512,7 +5511,7 @@ definitions:
             description: Members can search others in the same email domain
             type: boolean
           search_by_ma_account:
-            description: Members can search others under same master account, including all sub accounts
+            description: 'Members can search others under same master account, including all sub accounts'
             type: boolean
           type:
             default: normal
@@ -5530,7 +5529,7 @@ definitions:
     type: object
   IMGroupList:
     allOf:
-      - $ref: "#/definitions/Pagination"
+      - $ref: '#/definitions/Pagination'
       - properties:
           groups:
             description: List of Group objects
@@ -5540,14 +5539,14 @@ definitions:
                     id:
                       description: IM Group ID
                       type: string
-                - $ref: "#/definitions/IMGroup"
+                - $ref: '#/definitions/IMGroup'
             type: array
     description: List of IM Groups
     title: IM Group List
     type: object
   Meeting:
     allOf:
-      - $ref: "#/definitions/Session"
+      - $ref: '#/definitions/Session'
     description: Meeting object
     type: object
   MeetingInfo:
@@ -5570,12 +5569,12 @@ definitions:
         description: Join url
         type: string
       occurrences:
-        $ref: "#/definitions/Occurrences"
+        $ref: '#/definitions/Occurrences'
       password:
         description: Meeting password
         type: string
       settings:
-        $ref: "#/definitions/MeetingSettings"
+        $ref: '#/definitions/MeetingSettings'
       start_time:
         description: Meeting start time
         format: date-time
@@ -5645,7 +5644,7 @@ definitions:
     type: object
   MeetingList:
     allOf:
-      - $ref: "#/definitions/Pagination"
+      - $ref: '#/definitions/Pagination'
       - properties:
           meetings:
             description: List of Meeting objects
@@ -5663,7 +5662,7 @@ definitions:
                       description: ID of the user set as host of meeting
                       type: string
                     id:
-                      description: Meeting ID, also know as meeting number
+                      description: 'Meeting ID, also know as meeting number'
                       type: string
                     join_url:
                       description: Join url
@@ -5756,25 +5755,25 @@ definitions:
         format: date-time
         type: string
       has_3rd_party_audio:
-        description: ""
+        description: ''
         type: boolean
       has_pstn:
-        description: ""
+        description: ''
         type: boolean
       has_recording:
-        description: ""
+        description: ''
         type: boolean
       has_screen_share:
-        description: ""
+        description: ''
         type: boolean
       has_sip:
-        description: ""
+        description: ''
         type: boolean
       has_video:
-        description: ""
+        description: ''
         type: boolean
       has_voip:
-        description: ""
+        description: ''
         type: boolean
       host:
         description: User display name
@@ -5803,18 +5802,18 @@ definitions:
     type: object
   MeetingRecordingRegistrantList:
     allOf:
-      - $ref: "#/definitions/RecordingRegistrantList"
+      - $ref: '#/definitions/RecordingRegistrantList'
     description: List of meeting recording registrant
     title: Registration List
     type: object
   MeetingRegistrant:
     allOf:
-      - $ref: "#/definitions/Registrant"
+      - $ref: '#/definitions/Registrant'
     description: Meeting registrant
     type: object
   MeetingRegistrantList:
     allOf:
-      - $ref: "#/definitions/RegistrantList"
+      - $ref: '#/definitions/RegistrantList'
     description: List of Users
     title: Registration List
     type: object
@@ -5917,7 +5916,7 @@ definitions:
     type: object
   MeetingUpdate:
     allOf:
-      - $ref: "#/definitions/SessionUpdate"
+      - $ref: '#/definitions/SessionUpdate'
     description: Meeting object
     type: object
   Occurrence:
@@ -5940,7 +5939,7 @@ definitions:
   Occurrences:
     description: Array of occurrence objects
     items:
-      $ref: "#/definitions/Occurrence"
+      $ref: '#/definitions/Occurrence'
     type: array
   PAC:
     description: List of PAC Accounts
@@ -5956,11 +5955,8 @@ definitions:
               description: Country Code
               type: string
             number:
-              description: Dial-in number, length is less than 16
+              description: 'Dial-in number, length is less than 16'
               type: string
-        required:
-          - number
-          - country
         type: array
       global_dial_in_numbers:
         description: List of Global Dial In Numbers
@@ -5970,17 +5966,14 @@ definitions:
               description: Country Code
               type: string
             number:
-              description: Dial-in number, length is less than 16
+              description: 'Dial-in number, length is less than 16'
               type: string
-        required:
-          - number
-          - country
         type: array
       listen_only_password:
-        description: Listen-Only Password, numeric value, length is less than 6
+        description: 'Listen-Only Password, numeric value, length is less than 6'
         type: string
       participant_password:
-        description: Participant Password, numeric value, length is less than 6
+        description: 'Participant Password, numeric value, length is less than 6'
         type: string
     title: PAC Accounts List
     type: object
@@ -6025,11 +6018,11 @@ definitions:
     description: Pagination Object
     properties:
       next_page_token:
-        description: Next page token, used to paginate through large result sets. A next page token will be returned whenever the set of available result list exceeds page size. The expiration period is 15 minutes.
+        description: 'Next page token, used to paginate through large result sets. A next page token will be returned whenever the set of available result list exceeds page size. The expiration period is 15 minutes.'
         type: string
       page_size:
         default: 30
-        description: "The amount of records returns within a single API call. "
+        description: 'The amount of records returns within a single API call. '
         maximum: 300
         type: integer
     type: object
@@ -6074,7 +6067,7 @@ definitions:
                 id:
                   description: Panelist's ID
                   type: string
-            - $ref: "#/definitions/Panelist"
+            - $ref: '#/definitions/Panelist'
             - properties:
                 join_url:
                   description: Join url
@@ -6139,7 +6132,7 @@ definitions:
                         - Poll started
                         - Poll ended
                         - Poll is sharing
-                - $ref: "#/definitions/Poll"
+                - $ref: '#/definitions/Poll'
             type: array
           total_records:
             description: The number of all records available across pages
@@ -6210,13 +6203,13 @@ definitions:
         description: User quality of service
         properties:
           as_input:
-            $ref: "#/definitions/QOSVideo"
+            $ref: '#/definitions/QOSVideo'
           as_output:
-            $ref: "#/definitions/QOSVideo"
+            $ref: '#/definitions/QOSVideo'
           audio_input:
-            $ref: "#/definitions/QOSAudio"
+            $ref: '#/definitions/QOSAudio'
           audio_output:
-            $ref: "#/definitions/QOSAudio"
+            $ref: '#/definitions/QOSAudio'
           cpu_usage:
             properties:
               system_max_cpu_usage:
@@ -6236,9 +6229,9 @@ definitions:
             format: date-time
             type: string
           video_input:
-            $ref: "#/definitions/QOSVideo"
+            $ref: '#/definitions/QOSVideo'
           video_output:
-            $ref: "#/definitions/QOSVideo"
+            $ref: '#/definitions/QOSVideo'
         type: object
       version:
         description: Participant version
@@ -6247,19 +6240,19 @@ definitions:
     type: object
   QOSParticipantList:
     allOf:
-      - $ref: "#/definitions/PaginationToken4Qos"
+      - $ref: '#/definitions/PaginationToken4Qos'
       - properties:
           participants:
             description: Array of user objects
             items:
-              $ref: "#/definitions/QOSParticipant"
+              $ref: '#/definitions/QOSParticipant'
             type: array
     description: Participant QOS List
     title: Participant QOS List
     type: object
   QOSVideo:
     allOf:
-      - $ref: "#/definitions/QOSAudio"
+      - $ref: '#/definitions/QOSAudio'
       - properties:
           frame_rate:
             description: Frame Rate
@@ -6289,7 +6282,7 @@ definitions:
         description: The recording file ID.Response in general query.
         type: string
       meeting_id:
-        description: "The meeting ID. "
+        description: 'The meeting ID. '
         type: string
       play_url:
         description: The recording file play url. Response in general query.
@@ -6314,7 +6307,7 @@ definitions:
             description: List of Recording file
             items:
               allOf:
-                - $ref: "#/definitions/Recording"
+                - $ref: '#/definitions/Recording'
             title: Recording file List
             type: array
     description: List of Recording file
@@ -6333,7 +6326,7 @@ definitions:
             description: ID of the user set as host of meeting
             type: string
           id:
-            description: Meeting ID, also know as meeting number
+            description: 'Meeting ID, also know as meeting number'
             type: string
           recording_count:
             description: Recording count
@@ -6351,19 +6344,19 @@ definitions:
           uuid:
             description: Meeting unique ID
             type: string
-      - $ref: "#/definitions/RecordingList"
+      - $ref: '#/definitions/RecordingList'
     description: The recording meeting object
     type: object
   RecordingMeetingList:
     allOf:
-      - $ref: "#/definitions/DateTime"
-      - $ref: "#/definitions/PaginationToken"
+      - $ref: '#/definitions/DateTime'
+      - $ref: '#/definitions/PaginationToken'
       - properties:
           meetings:
             description: List of Recording
             items:
               allOf:
-                - $ref: "#/definitions/RecordingMeeting"
+                - $ref: '#/definitions/RecordingMeeting'
             title: Recording List
             type: array
     description: List of Recording
@@ -6371,7 +6364,7 @@ definitions:
     type: object
   RecordingRegistrantList:
     allOf:
-      - $ref: "#/definitions/Pagination"
+      - $ref: '#/definitions/Pagination'
       - properties:
           registrants:
             description: List of Registrant objects
@@ -6380,7 +6373,7 @@ definitions:
                 - properties:
                     id:
                       type: string
-                - $ref: "#/definitions/MeetingRegistrant"
+                - $ref: '#/definitions/MeetingRegistrant'
             type: array
     description: List of Recording Registration
     title: Recording Registration List
@@ -6452,7 +6445,7 @@ definitions:
     description: Recurrence object
     properties:
       end_date_time:
-        description: Select a date the meeting will occur before it is canceled.. Should be UTC time, such as 2017-11-25T12:00:00Z. (Cannot be used with "end_times".)
+        description: 'Select a date the meeting will occur before it is canceled.. Should be UTC time, such as 2017-11-25T12:00:00Z. (Cannot be used with "end_times".)'
         format: date-time
         type: string
       end_times:
@@ -6464,7 +6457,7 @@ definitions:
         description: Day of the month for the meeting to be scheduled. The value range is from 1 to 31.
         type: integer
       monthly_week:
-        description: Week for which the meeting should recur each month,
+        description: 'Week for which the meeting should recur each month,'
         enum:
           - -1
           - 1
@@ -6498,7 +6491,7 @@ definitions:
           - Friday
           - Saturday
       repeat_interval:
-        description: At which interval should the meeting repeat? For a daily meeting, max of 90 days. For a weekly meeting, max of 12 weeks. For a monthly meeting, max of 3 months.
+        description: 'At which interval should the meeting repeat? For a daily meeting, max of 90 days. For a weekly meeting, max of 12 weeks. For a monthly meeting, max of 3 months.'
         type: integer
       type:
         description: Recurrence meeting type
@@ -6512,7 +6505,7 @@ definitions:
           - Weekly
           - Monthly
       weekly_days:
-        description: Days of the week the meeting should repeat, multiple values separated by comma
+        description: 'Days of the week the meeting should repeat, multiple values separated by comma'
         enum:
           - 1
           - 2
@@ -6549,7 +6542,7 @@ definitions:
       custom_questions:
         description: Custom Questions
         items:
-          $ref: "#/definitions/CustomQuestion"
+          $ref: '#/definitions/CustomQuestion'
         type: array
       email:
         description: A valid email address
@@ -6573,10 +6566,10 @@ definitions:
           - 21-50
           - 51-100
           - 101-500
-          - 500-1,000
-          - 1,001-5,000
-          - 5,001-10,000
-          - More than 10,000
+          - '500-1,000'
+          - '1,001-5,000'
+          - '5,001-10,000'
+          - 'More than 10,000'
         type: string
       org:
         description: Organization
@@ -6614,7 +6607,7 @@ definitions:
     type: object
   RegistrantList:
     allOf:
-      - $ref: "#/definitions/Pagination"
+      - $ref: '#/definitions/Pagination'
       - properties:
           registrants:
             description: List of Registrant objects
@@ -6623,7 +6616,7 @@ definitions:
                 - properties:
                     id:
                       type: string
-                - $ref: "#/definitions/MeetingRegistrant"
+                - $ref: '#/definitions/MeetingRegistrant'
                 - properties:
                     create_time:
                       format: date-time
@@ -6673,18 +6666,18 @@ definitions:
         description: Meeting duration (minutes). Used for scheduled meetings only
         type: integer
       password:
-        description: "Password to join the meeting. Password may only contain the following characters: [a-z A-Z 0-9 @ - _ *]. Max of 10 characters."
+        description: 'Password to join the meeting. Password may only contain the following characters: [a-z A-Z 0-9 @ - _ *]. Max of 10 characters.'
         type: string
       recurrence:
-        $ref: "#/definitions/Recurrence"
+        $ref: '#/definitions/Recurrence'
       settings:
-        $ref: "#/definitions/MeetingSettings"
+        $ref: '#/definitions/MeetingSettings'
       start_time:
-        description: Meeting start time. When using a format like "yyyy-MM-dd'T'HH:mm:ss'Z'", always use GMT time. When using a format like "yyyy-MM-dd'T'HH:mm:ss", you should use local time and you will need to specify the time zone. Only used for scheduled meetings and recurring meetings with fixed time.
+        description: 'Meeting start time. When using a format like "yyyy-MM-dd''T''HH:mm:ss''Z''", always use GMT time. When using a format like "yyyy-MM-dd''T''HH:mm:ss", you should use local time and you will need to specify the time zone. Only used for scheduled meetings and recurring meetings with fixed time.'
         format: date-time
         type: string
       timezone:
-        description: Timezone to format start_time. For example, "America/Los_Angeles". For scheduled meetings only. Please reference our [timezone](#timezones) list for supported timezones and their formats.
+        description: 'Timezone to format start_time. For example, "America/Los_Angeles". For scheduled meetings only. Please reference our [timezone](#timezones) list for supported timezones and their formats.'
         type: string
       topic:
         description: Meeting topic
@@ -6725,23 +6718,23 @@ definitions:
         description: Meeting duration (minutes). Used for scheduled meetings only
         type: integer
       password:
-        description: "Password to join the meeting. Password may only contain the following characters: [a-z A-Z 0-9 @ - _ *]. Max of 10 characters."
+        description: 'Password to join the meeting. Password may only contain the following characters: [a-z A-Z 0-9 @ - _ *]. Max of 10 characters.'
         type: string
       recurrence:
-        $ref: "#/definitions/Recurrence"
+        $ref: '#/definitions/Recurrence'
       settings:
         allOf:
-          - $ref: "#/definitions/MeetingSettings"
+          - $ref: '#/definitions/MeetingSettings'
           - properties:
               registrants_confirmation_email:
                 description: Send confirmation Email to Registrants
                 type: boolean
       start_time:
-        description: Meeting start time. When using a format like "yyyy-MM-dd'T'HH:mm:ss'Z'", always use GMT time. When using a format like "yyyy-MM-dd'T'HH:mm:ss", you should use local time and you will need to specify the time zone. Only used for scheduled meetings and recurring meetings with fixed time.
+        description: 'Meeting start time. When using a format like "yyyy-MM-dd''T''HH:mm:ss''Z''", always use GMT time. When using a format like "yyyy-MM-dd''T''HH:mm:ss", you should use local time and you will need to specify the time zone. Only used for scheduled meetings and recurring meetings with fixed time.'
         format: date-time
         type: string
       timezone:
-        description: Timezone to format start_time. For example, "America/Los_Angeles". For scheduled meetings only. Please reference our [timezone](#timezones) list for supported timezones and their formats.
+        description: 'Timezone to format start_time. For example, "America/Los_Angeles". For scheduled meetings only. Please reference our [timezone](#timezones) list for supported timezones and their formats.'
         type: string
       topic:
         description: Meeting topic
@@ -6782,18 +6775,18 @@ definitions:
         description: Webinar duration (minutes). Used for scheduled webinar only
         type: integer
       password:
-        description: "Webinar password. Password may only contain the following characters: [a-z A-Z 0-9 @ - _ *]. Max of 10 characters."
+        description: 'Webinar password. Password may only contain the following characters: [a-z A-Z 0-9 @ - _ *]. Max of 10 characters.'
         type: string
       recurrence:
-        $ref: "#/definitions/Recurrence"
+        $ref: '#/definitions/Recurrence'
       settings:
-        $ref: "#/definitions/WebinarSettings"
+        $ref: '#/definitions/WebinarSettings'
       start_time:
-        description: Webinar start time, in the format "yyyy-MM-dd'T'HH:mm:ss'Z'", should be GMT time. In the format "yyyy-MM-dd'T'HH:mm:ss", should be local time, need to specify the time zone. Only used for scheduled webinar and recurring webinar with fixed time.
+        description: 'Webinar start time, in the format "yyyy-MM-dd''T''HH:mm:ss''Z''", should be GMT time. In the format "yyyy-MM-dd''T''HH:mm:ss", should be local time, need to specify the time zone. Only used for scheduled webinar and recurring webinar with fixed time.'
         format: date-time
         type: string
       timezone:
-        description: Timezone to format start_time. For example, "America/Los_Angeles". For scheduled meetings only. Please reference our [timezone](#timezones) list for supported timezones and their formats.
+        description: 'Timezone to format start_time. For example, "America/Los_Angeles". For scheduled meetings only. Please reference our [timezone](#timezones) list for supported timezones and their formats.'
         type: string
       topic:
         description: Webinar topic
@@ -6832,23 +6825,23 @@ definitions:
         description: Webinar duration (minutes). Used for scheduled webinar only
         type: integer
       password:
-        description: "Webinar password. Password may only contain the following characters: [a-z A-Z 0-9 @ - _ *]. Max of 10 characters."
+        description: 'Webinar password. Password may only contain the following characters: [a-z A-Z 0-9 @ - _ *]. Max of 10 characters.'
         type: string
       recurrence:
-        $ref: "#/definitions/Recurrence"
+        $ref: '#/definitions/Recurrence'
       settings:
         allOf:
-          - $ref: "#/definitions/WebinarSettings"
+          - $ref: '#/definitions/WebinarSettings'
           - properties:
               registrants_confirmation_email:
                 description: Send confirmation Email to Registrants
                 type: boolean
       start_time:
-        description: Webinar start time, in the format "yyyy-MM-dd'T'HH:mm:ss'Z'", should be GMT time. In the format "yyyy-MM-dd'T'HH:mm:ss", should be local time, need to specify the time zone. Only used for scheduled webinar and recurring webinar with fixed time.
+        description: 'Webinar start time, in the format "yyyy-MM-dd''T''HH:mm:ss''Z''", should be GMT time. In the format "yyyy-MM-dd''T''HH:mm:ss", should be local time, need to specify the time zone. Only used for scheduled webinar and recurring webinar with fixed time.'
         format: date-time
         type: string
       timezone:
-        description: Timezone to format start_time. For example, "America/Los_Angeles". For scheduled meetings only. Please reference our [timezone](#timezones) list for supported timezones and their formats.
+        description: 'Timezone to format start_time. For example, "America/Los_Angeles". For scheduled meetings only. Please reference our [timezone](#timezones) list for supported timezones and their formats.'
         type: string
       topic:
         description: Webinar topic
@@ -6881,7 +6874,7 @@ definitions:
     description: List of TSP Accounts
     properties:
       conference_code:
-        description: Conference code, numeric value, length is less than 16.
+        description: 'Conference code, numeric value, length is less than 16.'
         maxLength: 16
         minLength: 1
         type: string
@@ -6894,11 +6887,11 @@ definitions:
               maxLength: 6
               type: string
             country_label:
-              description: Country Label, if passed, will display in place of code.
+              description: 'Country Label, if passed, will display in place of code.'
               maxLength: 10
               type: string
             number:
-              description: Dial-in number, length is less than 16.
+              description: 'Dial-in number, length is less than 16.'
               maxLength: 16
               minLength: 1
               type: string
@@ -6913,11 +6906,9 @@ definitions:
                 - Toll number <br/>
                 - Toll free number <br/>
                 - Media link phone number <br/>
-        required:
-          - number
         type: array
       leader_pin:
-        description: Leader PIN, numeric value, length is less than 16.
+        description: 'Leader PIN, numeric value, length is less than 16.'
         maxLength: 16
         minLength: 1
         type: string
@@ -6959,7 +6950,7 @@ definitions:
                     id:
                       description: ID of Tracking Field
                       type: string
-                - $ref: "#/definitions/TrackingField"
+                - $ref: '#/definitions/TrackingField'
             type: array
     description: Tracking Field List
     title: Tracking Field List
@@ -7021,7 +7012,7 @@ definitions:
         items:
           properties:
             email:
-              description: User email address. Must have id or email, if given id, the email is ignored.
+              description: 'User email address. Must have id or email, if given id, the email is ignored.'
               type: string
             id:
               description: User ID
@@ -7032,7 +7023,7 @@ definitions:
     type: object
   UserList:
     allOf:
-      - $ref: "#/definitions/Pagination"
+      - $ref: '#/definitions/Pagination'
       - properties:
           users:
             description: List of User objects
@@ -7042,7 +7033,7 @@ definitions:
                     id:
                       description: User ID
                       type: string
-                - $ref: "#/definitions/User"
+                - $ref: '#/definitions/User'
                 - properties:
                     group_ids:
                       items:
@@ -7057,7 +7048,7 @@ definitions:
     title: User List
     type: object
   UserPermissions:
-    description: ""
+    description: ''
     properties:
       permissions:
         description: List of user permissions
@@ -7085,21 +7076,21 @@ definitions:
   UserSettings:
     properties:
       email_notification:
-        $ref: "#/definitions/UserSettingsEmailNotification"
+        $ref: '#/definitions/UserSettingsEmailNotification'
       feature:
-        $ref: "#/definitions/UserSettingsFeature"
+        $ref: '#/definitions/UserSettingsFeature'
       in_meeting:
-        $ref: "#/definitions/UserSettingsInMeeting"
+        $ref: '#/definitions/UserSettingsInMeeting'
       recording:
-        $ref: "#/definitions/UserSettingsRecording"
+        $ref: '#/definitions/UserSettingsRecording'
       schedule_meeting:
-        $ref: "#/definitions/UserSettingsScheduleMeeting"
+        $ref: '#/definitions/UserSettingsScheduleMeeting'
       telephony:
-        $ref: "#/definitions/UserSettingsTelephony"
+        $ref: '#/definitions/UserSettingsTelephony'
     title: User settings
     type: object
   UserSettingsEmailNotification:
-    description: ""
+    description: ''
     properties:
       alternative_host_reminder:
         default: false
@@ -7113,10 +7104,10 @@ definitions:
         default: false
         description: When attendees join meeting before host
         type: boolean
-    title: "User settings: Notification settings"
+    title: 'User settings: Notification settings'
     type: object
   UserSettingsFeature:
-    description: ""
+    description: ''
     properties:
       cn_meeting:
         description: CN meeting feature
@@ -7128,7 +7119,7 @@ definitions:
         description: Large meting feature
         type: boolean
       large_meeting_capacity:
-        description: Large meeting capacity, can be 100, 200, 300 or 500, depends on if having related large meeting capacity plan subscription or not
+        description: 'Large meeting capacity, can be 100, 200, 300 or 500, depends on if having related large meeting capacity plan subscription or not'
         type: integer
       meeting_capacity:
         description: User’s meeting capacity
@@ -7137,18 +7128,18 @@ definitions:
         description: Webinar feature
         type: boolean
       webinar_capacity:
-        description: Webinar capacity, can be 100, 500, 1000, 3000, 5000 or 10000, depends on if having related webinar capacity plan subscription or not
+        description: 'Webinar capacity, can be 100, 500, 1000, 3000, 5000 or 10000, depends on if having related webinar capacity plan subscription or not'
         type: integer
-    title: "User settings: Feature settings"
+    title: 'User settings: Feature settings'
     type: object
   UserSettingsFeatureUpdate:
-    description: ""
+    description: ''
     properties:
       large_meeting:
         description: Large meting feature
         type: boolean
       large_meeting_capacity:
-        description: Large meeting capacity, can be 100, 200, 300 or 500, depends on if having related large meeting capacity plan subscription or not
+        description: 'Large meeting capacity, can be 100, 200, 300 or 500, depends on if having related large meeting capacity plan subscription or not'
         type: integer
       meeting_capacity:
         description: User’s meeting capacity
@@ -7157,12 +7148,12 @@ definitions:
         description: Webinar feature
         type: boolean
       webinar_capacity:
-        description: Webinar capacity, can be 100, 500, 1000, 3000, 5000 or 10000, depends on if having related webinar capacity plan subscription or not
+        description: 'Webinar capacity, can be 100, 500, 1000, 3000, 5000 or 10000, depends on if having related webinar capacity plan subscription or not'
         type: integer
-    title: "User settings: Feature settings"
+    title: 'User settings: Feature settings'
     type: object
   UserSettingsInMeeting:
-    description: ""
+    description: ''
     properties:
       allow_live_streaming:
         description: Allow live streaming
@@ -7209,7 +7200,6 @@ definitions:
         description: End-to-end encryption
         type: boolean
       entry_exit_chime:
-        default: a''
         description: Play sound on join/leave
         enum:
           - host
@@ -7274,17 +7264,16 @@ definitions:
       workplace_by_facebook:
         description: Workplace by facebook
         type: boolean
-    title: "User settings: Meeting settings"
+    title: 'User settings: Meeting settings'
     type: object
   UserSettingsRecording:
-    description: ""
+    description: ''
     properties:
       auto_delete_cmr:
         default: false
         description: Auto delete cloud recordings
         type: boolean
       auto_delete_cmr_days:
-        default: false
         description: A specified number of days of auto delete cloud recordings
         maximum: 60
         minimum: 1
@@ -7331,10 +7320,10 @@ definitions:
         default: false
         description: Show timestamp on video
         type: boolean
-    title: "User settings: Recording settings"
+    title: 'User settings: Recording settings'
     type: object
   UserSettingsScheduleMeeting:
-    description: ""
+    description: ''
     properties:
       audio_type:
         default: voip
@@ -7365,13 +7354,13 @@ definitions:
       pstn_password_protected:
         description: Generate and require password for participants joining by phone
         type: boolean
-    title: "User settings: Meeting settings"
+    title: 'User settings: Meeting settings'
     type: object
   UserSettingsTelephony:
-    description: ""
+    description: ''
     properties:
       audio_conference_info:
-        default: ""
+        default: ''
         description: 3rd party audio conference info
         maxLength: 2048
         type: string
@@ -7381,22 +7370,22 @@ definitions:
       third_party_audio:
         description: 3rd party audio conference
         type: boolean
-    title: "User settings: Meeting settings"
+    title: 'User settings: Meeting settings'
     type: object
   UserSettingsUpdate:
     properties:
       email_notification:
-        $ref: "#/definitions/UserSettingsEmailNotification"
+        $ref: '#/definitions/UserSettingsEmailNotification'
       feature:
-        $ref: "#/definitions/UserSettingsFeatureUpdate"
+        $ref: '#/definitions/UserSettingsFeatureUpdate'
       in_meeting:
-        $ref: "#/definitions/UserSettingsInMeeting"
+        $ref: '#/definitions/UserSettingsInMeeting'
       recording:
-        $ref: "#/definitions/UserSettingsRecording"
+        $ref: '#/definitions/UserSettingsRecording'
       schedule_meeting:
-        $ref: "#/definitions/UserSettingsScheduleMeeting"
+        $ref: '#/definitions/UserSettingsScheduleMeeting'
       telephony:
-        $ref: "#/definitions/UserSettingsTelephony"
+        $ref: '#/definitions/UserSettingsTelephony'
     title: User settings
     type: object
   UserUpdate:
@@ -7406,14 +7395,14 @@ definitions:
         description: Kaltura User Id
         type: string
       dept:
-        description: Department for user profile, use for report
+        description: 'Department for user profile, use for report'
         type: string
       first_name:
         description: User's first name. Cannot contain more than 5 Chinese words.
         maxLength: 64
         type: string
       host_key:
-        description: Host Key, should be 6-digit number
+        description: 'Host Key, should be 6-digit number'
         maxLength: 6
         minLength: 6
         type: string
@@ -7425,12 +7414,12 @@ definitions:
         maxLength: 64
         type: string
       pmi:
-        description: Personal Meeting ID,length must be 10
+        description: 'Personal Meeting ID,length must be 10'
         maxLength: 10
         minLength: 10
         type: string
       timezone:
-        description: The time zone id for user profile. For this parameter value please refer to the id value in [timezone](#timezones) list.
+        description: 'The time zone id for user profile. For this parameter value please refer to the id value in [timezone](#timezones) list.'
         format: date-time
         type: string
       type:
@@ -7453,7 +7442,7 @@ definitions:
         type: string
     type: object
   Webhook:
-    description: Webhook base object, only available for version 2 webhook
+    description: 'Webhook base object, only available for version 2 webhook'
     properties:
       auth_password:
         description: Webhook auth password
@@ -7482,7 +7471,7 @@ definitions:
           - The meeting has started.
           - The meeting has ended.
           - Attendee has joined a meeting before the host.
-          - Host hasn’t launched the meeting, attendee is waiting.
+          - 'Host hasn’t launched the meeting, attendee is waiting.'
           - All the Cloud Recordings have completed processing and is available.
           - Participant has joined the meeting.
           - Participant has leaved the meeting.
@@ -7512,7 +7501,7 @@ definitions:
                     webhook_id:
                       description: Webhook Id
                       type: string
-                - $ref: "#/definitions/Webhook"
+                - $ref: '#/definitions/Webhook'
                 - properties:
                     created_at:
                       description: Webhook create time
@@ -7552,7 +7541,7 @@ definitions:
           - The meeting has started.
           - The meeting has ended.
           - Attendee has joined a meeting before the host.
-          - Host hasn’t launched the meeting, attendee is waiting.
+          - 'Host hasn’t launched the meeting, attendee is waiting.'
           - All the Cloud Recordings has completed processing and is available.
           - Participant has joined the meeting.
           - Participant has leaved the meeting.
@@ -7565,7 +7554,7 @@ definitions:
     type: object
   Webinar:
     allOf:
-      - $ref: "#/definitions/SessionWebinar"
+      - $ref: '#/definitions/SessionWebinar'
     description: Webinar object
     type: object
   WebinarInfo:
@@ -7585,9 +7574,9 @@ definitions:
         description: Join url
         type: string
       occurrences:
-        $ref: "#/definitions/Occurrences"
+        $ref: '#/definitions/Occurrences'
       settings:
-        $ref: "#/definitions/WebinarSettings"
+        $ref: '#/definitions/WebinarSettings'
       start_time:
         description: Webinar start time
         format: date-time
@@ -7647,7 +7636,7 @@ definitions:
     type: object
   WebinarList:
     allOf:
-      - $ref: "#/definitions/Pagination"
+      - $ref: '#/definitions/Pagination'
       - properties:
           webinars:
             description: List of Webinar objects
@@ -7665,7 +7654,7 @@ definitions:
                       description: ID of the user set as host of webinar
                       type: string
                     id:
-                      description: Webinar ID, also know as webinar number
+                      description: 'Webinar ID, also know as webinar number'
                       type: string
                     join_url:
                       description: Join url
@@ -7709,25 +7698,25 @@ definitions:
         format: date-time
         type: string
       has_3rd_party_audio:
-        description: ""
+        description: ''
         type: boolean
       has_pstn:
-        description: ""
+        description: ''
         type: boolean
       has_recording:
-        description: ""
+        description: ''
         type: boolean
       has_screen_share:
-        description: ""
+        description: ''
         type: boolean
       has_sip:
-        description: ""
+        description: ''
         type: boolean
       has_video:
-        description: ""
+        description: ''
         type: boolean
       has_voip:
-        description: ""
+        description: ''
         type: boolean
       host:
         description: User display name
@@ -7761,23 +7750,23 @@ definitions:
         description: List of Panelist objects
         items:
           allOf:
-            - $ref: "#/definitions/Panelist"
+            - $ref: '#/definitions/Panelist'
         maximum: 30
         type: array
     type: object
   WebinarPanelistList:
     allOf:
-      - $ref: "#/definitions/PanelistList"
+      - $ref: '#/definitions/PanelistList'
     description: Webinar panelist
     type: object
   WebinarRegistrant:
     allOf:
-      - $ref: "#/definitions/Registrant"
+      - $ref: '#/definitions/Registrant'
     description: Webianr registrant
     type: object
   WebinarRegistrantList:
     allOf:
-      - $ref: "#/definitions/RegistrantList"
+      - $ref: '#/definitions/RegistrantList'
     description: List of Users
     title: Registration List
     type: object
@@ -7869,7 +7858,7 @@ definitions:
     type: object
   WebinarUpdate:
     allOf:
-      - $ref: "#/definitions/SessionWebinarUpdate"
+      - $ref: '#/definitions/SessionWebinarUpdate'
     description: Webinar object
     type: object
   ZoomRoom:
@@ -7912,12 +7901,12 @@ definitions:
     type: object
   ZoomRoomList:
     allOf:
-      - $ref: "#/definitions/Pagination"
+      - $ref: '#/definitions/Pagination'
       - properties:
           zoom_rooms:
             description: Array of Zoom Rooms
             items:
-              $ref: "#/definitions/ZoomRoom"
+              $ref: '#/definitions/ZoomRoom'
             type: array
     description: Zoom Room List
     title: Zoom Room List

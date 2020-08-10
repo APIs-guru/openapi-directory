@@ -1,21 +1,16 @@
-swagger: "2.0"
-schemes:
-  - https
-host: api.shorten.rest
+openapi: 3.0.0
+servers:
+  - url: 'https://api.shorten.rest'
 info:
-  description: >-
+  description: |-
     ## Introduction
-
 
 
     The Shorten.rest API allows you to programmatically create short URLs (an &apos;alias&apos;) for longer URL (a &apos;destination&apos;).
 
-
     Each alias you create can be used to redirect the end user (person clicking on the link) to one or more destination URLs
 
-
     A default destination is always set and specific destinations can be set to redirect the end user to preferred destinations based on the user&apos;s geographical location (country) and device Operating System.
-
 
     In order to use the Shorten.Rest URL Shortening API you can choose to bind your own branded domain, sub-domain or to use our default domain - Short.FYI 
 
@@ -34,9 +29,7 @@ info:
 
      | OS  | Country  | Destination |
     | :------------: |:---------------:| -----|
-
     | iOS      |  | YourDestination.com/ios |
-
     |       | US        |   YourDestination.com/usa | 
 
      Shorten.rest will choose the YourDestination.com/ios url as the most suitable destination.
@@ -73,26 +66,21 @@ info:
   x-apisguru-categories:
     - developer_tools
   x-logo:
-    backgroundColor: rgb(236, 236, 236)
-    href: https://shorten.rest
-    url: https://docs.shorten.rest/assets/logo.png/assets/logo.png
+    backgroundColor: 'rgb(236, 236, 236)'
+    href: 'https://shorten.rest'
+    url: 'https://docs.shorten.rest/assets/logo.png/assets/logo.png'
   x-origin:
-    - format: swagger
-      url: https://docs.shorten.rest/swagger.json
-      version: "2.0"
+    - format: openapi
+      url: 'https://docs.shorten.rest/swagger.json'
+      version: '3.0'
   x-providerName: shorten.rest
 externalDocs:
   description: Visit main site
-  url: https://shorten.rest
-securityDefinitions:
-  ApiKeyAuth:
-    in: header
-    name: x-api-key
-    type: apiKey
+  url: 'https://shorten.rest'
 tags:
-  - description: "**Operations:** Create, Get, Update, Delete, Get List"
+  - description: '**Operations:** Create, Get, Update, Delete, Get List'
     name: Alias
-  - description: "**Operations:** Get List"
+  - description: '**Operations:** Get List'
     name: Click
 paths:
   /aliases:
@@ -100,23 +88,23 @@ paths:
       description: Deletes a single alias by providing alias and domain. If no domain is provided the API will search for the matching alias within the Short.fyi domain
       operationId: DeleteAlias
       parameters:
-        - default: short.fyi
-          description: domain which alias belongs to (string without `http/https` or `/`)
+        - description: domain which alias belongs to (string without `http/https` or `/`)
           example: your.domain.com
           in: query
           name: domainName
           required: false
-          type: string
+          schema:
+            default: short.fyi
+            type: string
         - description: alias (without `/` at the beginning)
           example: aBcDe012
           in: query
           name: aliasName
           required: true
-          type: string
-      produces:
-        - application/json
+          schema:
+            type: string
       responses:
-        "200":
+        '200':
           description: Empty response
       security:
         - ApiKeyAuth: []
@@ -127,72 +115,77 @@ paths:
       description: Get detailed information for a single alias by providing its alias and domain name
       operationId: GetAlias
       parameters:
-        - default: short.fyi
-          description: domain which alias belongs to (string without `http/https` or `/`)
+        - description: domain which alias belongs to (string without `http/https` or `/`)
           example: your.domain.com
           in: query
           name: domainName
           required: false
-          type: string
+          schema:
+            default: short.fyi
+            type: string
         - description: alias value (without `/` at the beginning)
           example: aBcDe012
           in: query
           name: aliasName
           required: true
-          type: string
-      produces:
-        - application/json
-      responses:
-        "200":
-          description: Alias model or **null**
           schema:
-            $ref: "#/definitions/AliasModel"
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AliasModel'
+          description: Alias model or **null**
       security:
         - ApiKeyAuth: []
       summary: Get alias
       tags:
         - Alias
     post:
-      description: >-
+      description: |-
         This POST method creates a new alias under a specified domain. If no domain is specified in the request the alias will be attached to the default domain Short.fyi 
 
          **NOTE:** You can override the domain level Meta Tags and Tracking Snippets by specifying them for each URL. Any variables you add to a specific URL will always override domain level settings.
       operationId: CreateAlias
       parameters:
-        - default: short.fyi
-          description: domain which alias will belong to (string without `http/https` or `/`)
+        - description: domain which alias will belong to (string without `http/https` or `/`)
           example: your.domain.com
           in: query
           name: domainName
           required: false
-          type: string
-        - default: "@rnd"
-          description: alias (without `/` at the beginning)
+          schema:
+            default: short.fyi
+            type: string
+        - description: alias (without `/` at the beginning)
           example: aBcDe012
           in: query
           name: aliasName
           required: false
-          type: string
-        - description: alias properties
-          in: body
-          name: alias
-          required: true
           schema:
-            $ref: "#/definitions/CreateAliasModel"
-      produces:
-        - application/json
+            default: '@rnd'
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAliasModel'
+        description: alias properties
+        required: true
       responses:
-        "200":
-          description: Response contains aliasName, domainName and full generated short link
-          schema:
-            $ref: "#/definitions/CreateAliasResponseModel"
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateAliasResponseModel'
+          description: 'Response contains aliasName, domainName and full generated short link'
       security:
         - ApiKeyAuth: []
       summary: Create alias
       tags:
         - Alias
     put:
-      description: >-
+      description: |-
         Update a single short URL by providing its alias and domain as a parameter, and the data you wish to update in the body of the request. If no domain is provided you will receive the alias found attached to the Short.fyi domain (if it exists and is linked to your account!)
 
          ### NOTE: 
@@ -204,29 +197,30 @@ paths:
          ( *** ) The method updates only the specified properties so if there was no change in one of them you don't have to send it.
       operationId: UpdateAlias
       parameters:
-        - default: short.fyi
-          description: domain which alias belongs to (string without `http/https` or `/`)
+        - description: domain which alias belongs to (string without `http/https` or `/`)
           example: your.domain.com
           in: query
           name: domainName
           required: false
-          type: string
+          schema:
+            default: short.fyi
+            type: string
         - description: alias (without `/` at the beginning)
           example: aBcDe012
           in: query
           name: aliasName
           required: true
-          type: string
-        - description: alias properties you wish to be updated
-          in: body
-          name: alias
-          required: true
           schema:
-            $ref: "#/definitions/CreateAliasModel"
-      produces:
-        - application/json
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAliasModel'
+        description: alias properties you wish to be updated
+        required: true
       responses:
-        "200":
+        '200':
           description: Empty response
       security:
         - ApiKeyAuth: []
@@ -235,7 +229,7 @@ paths:
         - Alias
   /aliases/all:
     get:
-      description: >-
+      description: |-
         Obtain a list of all alias names associated with your account and given domain. Result array is in descending order by creation date. 
 
          If no domain is specified you will receive a list of all the alias names you have created using the Short.fyi domain. 
@@ -243,34 +237,37 @@ paths:
          If there are more results than the limit for the request the response will return you a value in lastId property you can specify it in the continueFrom query parameter to get the next batch of records.
       operationId: GetAliases
       parameters:
-        - default: short.fyi
-          description: The domain name to get the aliases for (string without `http/https` or `/`)
+        - description: The domain name to get the aliases for (string without `http/https` or `/`)
           example: your.domain.com
           in: query
           name: domainName
           required: false
-          type: string
+          schema:
+            default: short.fyi
+            type: string
         - description: An ID returned by a previous query to continue aliases retrieval (see lastId in response)
-          example: "1588788835614657618"
+          example: '1588788835614657618'
           in: query
           name: continueFrom
           required: false
-          type: string
-        - default: 1000
-          description: Number of results to return per request
+          schema:
+            type: string
+        - description: Number of results to return per request
           example: 100
           in: query
-          maximum: 1000
-          minimum: 1
           name: limit
-          type: integer
-      produces:
-        - application/json
-      responses:
-        "200":
-          description: returns Array of aliases with lastId
           schema:
-            $ref: "#/definitions/GetAliasesModel"
+            default: 1000
+            maximum: 1000
+            minimum: 1
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAliasesModel'
+          description: returns Array of aliases with lastId
       security:
         - ApiKeyAuth: []
       summary: Get aliases by domain
@@ -278,187 +275,195 @@ paths:
         - Alias
   /clicks:
     get:
-      description: >-
+      description: |-
         Retrieve the raw click data for your account. Clicks are retrieved by creation date in descending order. 
 
          If there are more results than the limit for the request the response will return you a value in lastId property you can specify it in the continueFrom query parameter to get the next batch of records.
       operationId: GetClicks
       parameters:
         - description: An ID returned by a previous query to continue clicks retrieval (see lastId in response)
-          example: "1588788835614657618"
+          example: '1588788835614657618'
           in: query
           name: continueFrom
           required: false
-          type: string
-        - default: 1000
-          description: Number of results to return per request
+          schema:
+            type: string
+        - description: Number of results to return per request
           example: 100
           in: query
-          maximum: 1000
-          minimum: 1
           name: limit
-          type: integer
-      produces:
-        - application/json
-      responses:
-        "200":
-          description: returns Array of Click models, also returns lastId
           schema:
-            $ref: "#/definitions/GetClicksModel"
+            default: 1000
+            maximum: 1000
+            minimum: 1
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetClicksModel'
+          description: 'returns Array of Click models, also returns lastId'
       security:
         - ApiKeyAuth: []
       summary: Get clicks
       tags:
         - Click
-definitions:
-  AliasModel:
-    properties:
-      createdAt:
-        example: 1595845801514
-        format: int64
-        type: integer
-      destinations:
-        items:
-          $ref: "#/definitions/DestinationModel"
-        type: array
-      domainName:
-        example: your.domain.com
-        type: string
-      metatags:
-        items:
-          $ref: "#/definitions/MetaTagModel"
-        type: array
-      name:
-        example: aBcDe012
-        type: string
-      snippets:
-        items:
-          $ref: "#/definitions/SnippetModel"
-        type: array
-      updatedAt:
-        example: 1595845801514
-        format: int64
-        type: integer
-    required:
-      - name
-    type: object
-  ClickModel:
-    properties:
-      alias:
-        type: string
-      aliasId:
-        type: string
-      browser:
-        type: string
-      country:
-        type: string
-      createdAt:
-        format: int64
-        type: integer
-      destination:
-        type: string
-      domain:
-        type: string
-      os:
-        type: string
-      referrer:
-        type: string
-      userAgent:
-        type: string
-    type: object
-  CreateAliasModel:
-    properties:
-      destinations:
-        items:
-          $ref: "#/definitions/DestinationModel"
-        type: array
-      metatags:
-        items:
-          $ref: "#/definitions/MetaTagModel"
-        type: array
-      snippets:
-        items:
-          $ref: "#/definitions/SnippetModel"
-        type: array
-    type: object
-  CreateAliasResponseModel:
-    properties:
-      aliasName:
-        example: aBcDe012
-        type: string
-      domainName:
-        example: your.domain.com
-        type: string
-      shortUrl:
-        example: https://your.domain.com/aBcDe012
-        type: string
-    type: object
-  DestinationModel:
-    properties:
-      country:
-        description: ISO alpha-2 [country code](//en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
-        type: string
-      os:
-        description: Please check the [supported OS list](#tag/OperatingSystems)
-        type: string
-      url:
-        type: string
-    required:
-      - url
-    type: object
-  GetAliasModel:
-    additionalProperties:
-      $ref: "#/definitions/CreateAliasModel"
-    properties:
-      createdAt:
-        format: int64
-        type: integer
-      domainName:
-        example: your.domain.com
-        type: string
-      name:
-        type: string
-      updatedAt:
-        format: int64
-        type: integer
-    type: object
-  GetAliasesModel:
-    properties:
-      aliases:
-        items:
+components:
+  schemas:
+    AliasModel:
+      properties:
+        createdAt:
+          example: 1595845801514
+          format: int64
+          type: integer
+        destinations:
+          items:
+            $ref: '#/components/schemas/DestinationModel'
+          type: array
+        domainName:
+          example: your.domain.com
           type: string
-        type: array
-      lastId:
-        type: string
-    type: object
-  GetClicksModel:
-    properties:
-      clicks:
-        items:
-          $ref: "#/definitions/ClickModel"
-        type: array
-      lastId:
-        type: string
-    type: object
-  MetaTagModel:
-    properties:
-      content:
-        type: string
-      name:
-        type: string
-    required:
-      - name
-      - content
-    type: object
-  SnippetModel:
-    properties:
-      id:
-        description: Please check the [supported snippets list](#tag/Snippets)
-        type: string
-      parameters:
-        additionalProperties:
+        metatags:
+          items:
+            $ref: '#/components/schemas/MetaTagModel'
+          type: array
+        name:
+          example: aBcDe012
           type: string
-        type: object
-    required:
-      - id
-    type: object
+        snippets:
+          items:
+            $ref: '#/components/schemas/SnippetModel'
+          type: array
+        updatedAt:
+          example: 1595845801514
+          format: int64
+          type: integer
+      required:
+        - name
+      type: object
+    ClickModel:
+      properties:
+        alias:
+          type: string
+        aliasId:
+          type: string
+        browser:
+          type: string
+        country:
+          type: string
+        createdAt:
+          format: int64
+          type: integer
+        destination:
+          type: string
+        domain:
+          type: string
+        os:
+          type: string
+        referrer:
+          type: string
+        userAgent:
+          type: string
+      type: object
+    CreateAliasModel:
+      properties:
+        destinations:
+          items:
+            $ref: '#/components/schemas/DestinationModel'
+          type: array
+        metatags:
+          items:
+            $ref: '#/components/schemas/MetaTagModel'
+          type: array
+        snippets:
+          items:
+            $ref: '#/components/schemas/SnippetModel'
+          type: array
+      type: object
+    CreateAliasResponseModel:
+      properties:
+        aliasName:
+          example: aBcDe012
+          type: string
+        domainName:
+          example: your.domain.com
+          type: string
+        shortUrl:
+          example: 'https://your.domain.com/aBcDe012'
+          type: string
+      type: object
+    DestinationModel:
+      properties:
+        country:
+          description: 'ISO alpha-2 [country code](//en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)'
+          type: string
+        os:
+          description: 'Please check the [supported OS list](#tag/OperatingSystems)'
+          type: string
+        url:
+          type: string
+      required:
+        - url
+      type: object
+    GetAliasModel:
+      additionalProperties:
+        $ref: '#/components/schemas/CreateAliasModel'
+      properties:
+        createdAt:
+          format: int64
+          type: integer
+        domainName:
+          example: your.domain.com
+          type: string
+        name:
+          type: string
+        updatedAt:
+          format: int64
+          type: integer
+      type: object
+    GetAliasesModel:
+      properties:
+        aliases:
+          items:
+            type: string
+          type: array
+        lastId:
+          type: string
+      type: object
+    GetClicksModel:
+      properties:
+        clicks:
+          items:
+            $ref: '#/components/schemas/ClickModel'
+          type: array
+        lastId:
+          type: string
+      type: object
+    MetaTagModel:
+      properties:
+        content:
+          type: string
+        name:
+          type: string
+      required:
+        - name
+        - content
+      type: object
+    SnippetModel:
+      properties:
+        id:
+          description: 'Please check the [supported snippets list](#tag/Snippets)'
+          type: string
+        parameters:
+          additionalProperties:
+            type: string
+          type: object
+      required:
+        - id
+      type: object
+  securitySchemes:
+    ApiKeyAuth:
+      in: header
+      name: x-api-key
+      type: apiKey

@@ -883,13 +883,12 @@ function fixSpec(swagger, errors) {
         });
         break;
       case 'OBJECT_MISSING_REQUIRED_PROPERTY_DEFINITION':
-        if (_.isUndefined(value.properties))
-          break;
-
+        //if (_.isUndefined(value.properties))
+        //  break;
         newValue = _.clone(value);
         newValue.required = [];
         _.each(value.required, function (name) {
-          if (!_.isUndefined(value.properties[name]))
+          if (value.properties && !_.isUndefined(value.properties[name]))
             newValue.required.push(name);
         });
         if (_.isEmpty(newValue.required))
