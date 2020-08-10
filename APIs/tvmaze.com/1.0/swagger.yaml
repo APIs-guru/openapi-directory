@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
   - http
@@ -6,22 +6,23 @@ host: api.tvmaze.com
 basePath: /v1
 info:
   contact:
-    url: 'http://www.tvmaze.com'
-  description: |
+    url: http://www.tvmaze.com
+  description: >
     Access to the user API is only possible for users with a [premium](http://www.tvmaze.com/premium) account. A user can only access their own user data.
 
+
     Authentication uses HTTP Basic. Use the TVmaze username as authentication username, and the TVmaze API key as authentication password. Your API key can be found on your [dashboard](http://www.tvmaze.com/dashboard). To try out these API calls from this page, click the "Authorize" button on top and input your credentials.
-  title: TVmaze user
-  version: '1.0'
+  title: TVmaze user API
+  version: "1.0"
   x-apisguru-categories:
     - media
   x-logo:
-    backgroundColor: '#FFFFFF'
-    url: 'https://twitter.com/tvmaze/profile_image?size=original'
+    backgroundColor: "#FFFFFF"
+    url: https://twitter.com/tvmaze/profile_image?size=original
   x-origin:
     - format: swagger
-      url: 'http://static.tvmaze.com/apidoc/v1.yaml'
-      version: '2.0'
+      url: http://static.tvmaze.com/apidoc/v1.yaml
+      version: "2.0"
   x-providerName: tvmaze.com
 consumes:
   - application/json
@@ -33,6 +34,259 @@ securityDefinitions:
 security:
   - usertoken: []
 paths:
+  /auth/poll:
+    post:
+      description: >
+        Using the token acquired in the `start` endpoint, you can start polling this endpoint once every 10 seconds.
+
+
+        When the user has confirmed the authentication request on their end, this endpoint will return the user's API key that you can use in subsequent authenticated endpoints. Note that it'll do so only once, subsequent requests after the initial 200 response will return a 404.
+
+
+        For as long as the user did not yet confirm their authentication request, this endpoint will return a 403.
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            properties:
+              token:
+                required: true
+                type: string
+            type: object
+      responses:
+        "200":
+          description: The user confirmed the authentication request
+          schema:
+            properties:
+              apikey:
+                description: The user's API key
+                type: string
+              username:
+                description: The user's username
+                type: string
+            type: object
+        "403":
+          description: The authentication request was not confirmed yet
+        "404":
+          description: The authentication request was not found
+        "429":
+          description: You are polling too quickly, please back off
+      summary: Poll whether an authentication request was confirmed
+      tags:
+        - auth
+  /auth/start:
+    post:
+      description: >
+        If you want to access the TVmaze API on behalf of a user without querying them for their password, use this endpoint.
+
+
+        To get started, send a POST request containing the user's email address. The response will contain a `token`, which you can use as input to the `poll` endpoint. The user will receive an email prompting them to confirm the authentication request.
+
+
+        Alternatively, if you expect the user to be logged in to TVmaze on the device they are currently interacting with, you can set `email_confirmation` to false and redirect them to the `confirm_url` URL. If they are logged in to TVmaze, they will be able to confirm the authentication request instantly.
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            properties:
+              email:
+                description: The user's email address
+                required: true
+                type: string
+              email_confirmation:
+                default: true
+                description: Whether to email the user a confirmation link
+                required: true
+                type: boolean
+            type: object
+      responses:
+        "200":
+          description: The authentication request was succesfully started
+          schema:
+            properties:
+              confirm_url:
+                description: URL where the user can confirm the authentication request
+                type: string
+              token:
+                description: Authentication token to use in the `poll` endpoint
+                type: string
+            type: object
+        "401":
+          description: The email address was found, but not confirmed
+        "404":
+          description: The email address was not found
+        "429":
+          description: You are starting authentication requests too quickly, please back off
+      summary: Start an authentication request
+      tags:
+        - auth
+  /auth/validate:
+    get:
+      description: If the credentials supplied as HTTP basic are valid, the user's level of premium - if any - is returned.
+      responses:
+        "200":
+          description: The supplied credentials are valid
+          schema:
+            properties:
+              premium:
+                description: The user's premium level; 1 for Bronze, 2 for Silver, 3 for Gold; or 0 for none
+                type: integer
+            type: object
+        "401":
+          description: The supplied credentials are not valid
+      summary: Validate your authentication credentials
+      tags:
+        - auth
+  /scrobble/episodes:
+    post:
+      description: This endpoint can be used by all users, even without premium
+      parameters:
+        - in: body
+          name: episodes
+          schema:
+            items:
+              properties:
+                episode_id:
+                  description: The TVmaze episode ID
+                  type: integer
+                marked_at:
+                  description: Epoch timestamp for when the user watched the episode, or 0 for unknown.
+                  type: integer
+                type:
+                  $ref: "#/definitions/MarkType"
+              type: object
+            type: array
+      responses:
+        "200":
+          description: All episodes were succesfully marked
+          schema:
+            $ref: "#/definitions/BulkResponse"
+        "207":
+          description: Some episodes were succesfully marked, but there are errors
+          schema:
+            $ref: "#/definitions/BulkResponse"
+        "422":
+          description: None of the episodes were succesfully marked
+          schema:
+            $ref: "#/definitions/BulkResponse"
+      summary: Mark episodes as acquired or watched based on their IDs
+      tags:
+        - scrobbling
+  "/scrobble/episodes/{episode_id}":
+    parameters:
+      - in: path
+        name: episode_id
+        required: true
+        type: integer
+    put:
+      description: This endpoint can be used by all users, even without premium
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: "#/definitions/MarkedEpisode"
+      responses:
+        "200":
+          description: this episode is now marked
+          schema:
+            $ref: "#/definitions/MarkedEpisode"
+        "404":
+          description: this episode does not exist
+        "422":
+          description: invalid input data
+      summary: Mark an episode as acquired or watched based on its ID
+      tags:
+        - scrobbling
+  /scrobble/shows:
+    post:
+      description: >
+        To specify a show, supply either `tvmaze_id`, `thetvdb_id` or `imdb_id`. To specify an episode, supply either both `season` and `episode`, or `airdate`.
+
+
+        This endpoint can be used by all users, even without premium.
+      parameters:
+        - description: The show's TVmaze ID
+          in: query
+          name: tvmaze_id
+          type: integer
+        - description: The show's TheTVDB ID
+          in: query
+          name: thetvdb_id
+          type: integer
+        - description: The show's IMDB ID
+          in: query
+          name: imdb_id
+          type: integer
+        - in: body
+          name: episodes
+          schema:
+            items:
+              properties:
+                airdate:
+                  description: The episode airdate
+                  format: date
+                  type: string
+                episode:
+                  description: The episode number
+                  type: integer
+                marked_at:
+                  description: Epoch timestamp for when the user watched the episode, or 0 for unknown.
+                  type: integer
+                season:
+                  description: The season number
+                  type: integer
+                type:
+                  $ref: "#/definitions/MarkType"
+              type: object
+            type: array
+      responses:
+        "200":
+          description: All episodes were succesfully marked
+          schema:
+            $ref: "#/definitions/BulkResponse"
+        "207":
+          description: Some episodes were succesfully marked, but there are errors
+          schema:
+            $ref: "#/definitions/BulkResponse"
+        "422":
+          description: None of the episodes were succesfully marked
+          schema:
+            $ref: "#/definitions/BulkResponse"
+      summary: Mark episodes within a show as acquired or watched based on their attributes
+      tags:
+        - scrobbling
+  "/scrobble/shows/{show_id}":
+    get:
+      description: This endpoint can be used by all users, even without premium
+      responses:
+        "200":
+          description: An array of marked episodes
+          schema:
+            items:
+              $ref: "#/definitions/MarkedEpisode"
+            type: array
+      summary: List watched and acquired episodes for a show
+      tags:
+        - scrobbling
+    parameters:
+      - description: ID of the target show
+        in: path
+        name: show_id
+        required: true
+        type: integer
+      - $ref: "#/definitions/MarkType"
+        in: query
+        name: type
+        required: false
+      - description: Embed full episode info
+        enum:
+          - episode
+        in: query
+        name: embed
+        required: false
+        type: string
   /user/episodes:
     get:
       parameters:
@@ -42,32 +296,32 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: An array of marked episodes
           schema:
             items:
-              $ref: '#/definitions/MarkedEpisode'
+              $ref: "#/definitions/MarkedEpisode"
             type: array
       summary: List the marked episodes
       tags:
         - marked episodes
-  '/user/episodes/{episode_id}':
+  "/user/episodes/{episode_id}":
     delete:
       responses:
-        '200':
+        "200":
           description: the episode is now unmarked
-        '404':
+        "404":
           description: this episode was not marked
       summary: Unmark an episode
       tags:
         - marked episodes
     get:
       responses:
-        '200':
+        "200":
           description: The marked episode
           schema:
-            $ref: '#/definitions/MarkedEpisode'
-        '404':
+            $ref: "#/definitions/MarkedEpisode"
+        "404":
           description: This episode is not marked
       summary: Check if an episode is marked
       tags:
@@ -83,15 +337,15 @@ paths:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/MarkedEpisode'
+            $ref: "#/definitions/MarkedEpisode"
       responses:
-        '200':
+        "200":
           description: this episode is now marked
           schema:
-            $ref: '#/definitions/MarkedEpisode'
-        '404':
+            $ref: "#/definitions/MarkedEpisode"
+        "404":
           description: this episode does not exist
-        '422':
+        "422":
           description: invalid input data
       summary: Mark an episode
       tags:
@@ -107,32 +361,32 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: An array of followed networks
           schema:
             items:
-              $ref: '#/definitions/NetworkFollow'
+              $ref: "#/definitions/NetworkFollow"
             type: array
       summary: List the followed networks
       tags:
         - followed networks
-  '/user/follows/networks/{network_id}':
+  "/user/follows/networks/{network_id}":
     delete:
       responses:
-        '200':
+        "200":
           description: the network is now unfollowed
-        '404':
+        "404":
           description: this network was not followed
       summary: Unfollow a network
       tags:
         - followed networks
     get:
       responses:
-        '200':
+        "200":
           description: The followed network
           schema:
-            $ref: '#/definitions/NetworkFollow'
-        '404':
+            $ref: "#/definitions/NetworkFollow"
+        "404":
           description: this network is not followed
       summary: Check if a network is followed
       tags:
@@ -144,11 +398,11 @@ paths:
         type: integer
     put:
       responses:
-        '200':
+        "200":
           description: this network is now followed
           schema:
-            $ref: '#/definitions/NetworkFollow'
-        '404':
+            $ref: "#/definitions/NetworkFollow"
+        "404":
           description: this network does not exist
       summary: Follow a network
       tags:
@@ -164,32 +418,32 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: An array of followed people
           schema:
             items:
-              $ref: '#/definitions/PersonFollow'
+              $ref: "#/definitions/PersonFollow"
             type: array
       summary: List the followed people
       tags:
         - followed people
-  '/user/follows/people/{person_id}':
+  "/user/follows/people/{person_id}":
     delete:
       responses:
-        '200':
+        "200":
           description: the person is now unfollowed
-        '404':
+        "404":
           description: this person was not followed
       summary: Unfollow a person
       tags:
         - followed people
     get:
       responses:
-        '200':
+        "200":
           description: The followed person
           schema:
-            $ref: '#/definitions/PersonFollow'
-        '404':
+            $ref: "#/definitions/PersonFollow"
+        "404":
           description: this person is not followed
       summary: Check if a person is followed
       tags:
@@ -201,11 +455,11 @@ paths:
         type: integer
     put:
       responses:
-        '200':
+        "200":
           description: this person is now followed
           schema:
-            $ref: '#/definitions/PersonFollow'
-        '404':
+            $ref: "#/definitions/PersonFollow"
+        "404":
           description: this person does not exist
       summary: Follow a person
       tags:
@@ -221,32 +475,32 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: An array of followed shows
           schema:
             items:
-              $ref: '#/definitions/ShowFollow'
+              $ref: "#/definitions/ShowFollow"
             type: array
       summary: List the followed shows
       tags:
         - followed shows
-  '/user/follows/shows/{show_id}':
+  "/user/follows/shows/{show_id}":
     delete:
       responses:
-        '200':
+        "200":
           description: The show is now unfollowed
-        '404':
+        "404":
           description: This show was not followed
       summary: Unfollow a show
       tags:
         - followed shows
     get:
       responses:
-        '200':
+        "200":
           description: The followed show
           schema:
-            $ref: '#/definitions/ShowFollow'
-        '404':
+            $ref: "#/definitions/ShowFollow"
+        "404":
           description: This show is not followed
       summary: Check if a show is followed
       tags:
@@ -258,11 +512,11 @@ paths:
         type: integer
     put:
       responses:
-        '200':
+        "200":
           description: This show is now followed
           schema:
-            $ref: '#/definitions/ShowFollow'
-        '404':
+            $ref: "#/definitions/ShowFollow"
+        "404":
           description: This show does not exist
       summary: Follow a show
       tags:
@@ -278,32 +532,32 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: An array of followed webchannels
           schema:
             items:
-              $ref: '#/definitions/WebchannelFollow'
+              $ref: "#/definitions/WebchannelFollow"
             type: array
       summary: List the followed webchannels
       tags:
         - followed webchannels
-  '/user/follows/webchannels/{webchannel_id}':
+  "/user/follows/webchannels/{webchannel_id}":
     delete:
       responses:
-        '200':
+        "200":
           description: the webchannel is now unfollowed
-        '404':
+        "404":
           description: this webchannel was not followed
       summary: Unfollow a webchannel
       tags:
         - followed webchannels
     get:
       responses:
-        '200':
+        "200":
           description: The followed webchannel
           schema:
-            $ref: '#/definitions/WebchannelFollow'
-        '404':
+            $ref: "#/definitions/WebchannelFollow"
+        "404":
           description: this webchannel is not followed
       summary: Check if a webchannel is followed
       tags:
@@ -315,11 +569,11 @@ paths:
         type: integer
     put:
       responses:
-        '200':
+        "200":
           description: this webchannel is now followed
           schema:
-            $ref: '#/definitions/WebchannelFollow'
-        '404':
+            $ref: "#/definitions/WebchannelFollow"
+        "404":
           description: this webchannel does not exist
       summary: Follow a webchannel
       tags:
@@ -327,11 +581,11 @@ paths:
   /user/tags:
     get:
       responses:
-        '200':
+        "200":
           description: An array of tags
           schema:
             items:
-              $ref: '#/definitions/Tag'
+              $ref: "#/definitions/Tag"
             type: array
       summary: List all tags
       tags:
@@ -341,18 +595,18 @@ paths:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/Tag'
+            $ref: "#/definitions/Tag"
       responses:
-        '200':
+        "200":
           description: The newly created tag
           schema:
-            $ref: '#/definitions/Tag'
-        '422':
+            $ref: "#/definitions/Tag"
+        "422":
           description: invalid input data
       summary: Create a new tag
       tags:
         - tagged shows
-  '/user/tags/{tag_id}':
+  "/user/tags/{tag_id}":
     delete:
       parameters:
         - in: path
@@ -360,9 +614,9 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: The tag was deleted
-        '404':
+        "404":
           description: The tag does not exist
       summary: Delete a specific tag
       tags:
@@ -376,18 +630,20 @@ paths:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/Tag'
+            $ref: "#/definitions/Tag"
       responses:
-        '200':
+        "200":
           description: The tag was updated
           schema:
-            $ref: '#/definitions/Tag'
-        '404':
+            $ref: "#/definitions/Tag"
+        "404":
           description: The tag does not exist
+        "422":
+          description: The tag could not be updated
       summary: Update a specific tag
       tags:
         - tagged shows
-  '/user/tags/{tag_id}/shows':
+  "/user/tags/{tag_id}/shows":
     get:
       parameters:
         - in: path
@@ -402,18 +658,18 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: A list of tagged shows
           schema:
             items:
-              $ref: '#/definitions/TagInstance'
+              $ref: "#/definitions/TagInstance"
             type: array
-        '404':
+        "404":
           description: The tag does not exist
       summary: List all shows under this tag
       tags:
         - tagged shows
-  '/user/tags/{tag_id}/shows/{show_id}':
+  "/user/tags/{tag_id}/shows/{show_id}":
     delete:
       parameters:
         - in: path
@@ -425,9 +681,9 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: The show was untagged
-        '404':
+        "404":
           description: The show was not tagged
       summary: Untag a show
       tags:
@@ -443,11 +699,11 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: The show was tagged
           schema:
-            $ref: '#/definitions/TagInstance'
-        '404':
+            $ref: "#/definitions/TagInstance"
+        "404":
           description: The show or tag does not exist
       summary: Tag a show
       tags:
@@ -455,32 +711,32 @@ paths:
   /user/votes/episodes:
     get:
       responses:
-        '200':
+        "200":
           description: An array of episode votes
           schema:
             items:
-              $ref: '#/definitions/EpisodeVote'
+              $ref: "#/definitions/EpisodeVote"
             type: array
       summary: List the episodes voted for
       tags:
         - voted episodes
-  '/user/votes/episodes/{episode_id}':
+  "/user/votes/episodes/{episode_id}":
     delete:
       responses:
-        '200':
+        "200":
           description: The episode vote is now removed
-        '404':
+        "404":
           description: This episode was not voted for
       summary: Remove an episode vote
       tags:
         - voted episodes
     get:
       responses:
-        '200':
+        "200":
           description: The episode vote
           schema:
-            $ref: '#/definitions/EpisodeVote'
-        '404':
+            $ref: "#/definitions/EpisodeVote"
+        "404":
           description: This episode is not voted for
       summary: Check if an episode is voted for
       tags:
@@ -495,13 +751,13 @@ paths:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/EpisodeVote'
+            $ref: "#/definitions/EpisodeVote"
       responses:
-        '200':
+        "200":
           description: This episode is now voted for
           schema:
-            $ref: '#/definitions/EpisodeVote'
-        '404':
+            $ref: "#/definitions/EpisodeVote"
+        "404":
           description: This episode does not exist
       summary: Vote for an episode
       tags:
@@ -517,32 +773,32 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: An array of show votes
           schema:
             items:
-              $ref: '#/definitions/ShowVote'
+              $ref: "#/definitions/ShowVote"
             type: array
       summary: List the shows voted for
       tags:
         - voted shows
-  '/user/votes/shows/{show_id}':
+  "/user/votes/shows/{show_id}":
     delete:
       responses:
-        '200':
+        "200":
           description: The show vote is now removed
-        '404':
+        "404":
           description: This show was not voted for
       summary: Remove a show vote
       tags:
         - voted shows
     get:
       responses:
-        '200':
+        "200":
           description: The show vote
           schema:
-            $ref: '#/definitions/ShowVote'
-        '404':
+            $ref: "#/definitions/ShowVote"
+        "404":
           description: This show is not voted for
       summary: Check if a show is voted for
       tags:
@@ -558,18 +814,41 @@ paths:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/ShowVote'
+            $ref: "#/definitions/ShowVote"
       responses:
-        '200':
+        "200":
           description: This show is now voted for
           schema:
-            $ref: '#/definitions/ShowVote'
-        '404':
+            $ref: "#/definitions/ShowVote"
+        "404":
           description: This show does not exist
       summary: Vote for a show
       tags:
         - voted shows
 definitions:
+  BulkResponse:
+    description: A list of responses to your bulk input, ordered the same as your input
+    items:
+      properties:
+        code:
+          description: The HTTP code that corresponds to this item
+          required: true
+          type: integer
+        errors:
+          description: A list of validation errors for this item (in case of error)
+          type: object
+        input:
+          description: The request data that belonged to this response (in case of error)
+          type: object
+        message:
+          description: A human-readable error message (in case of error)
+          type: string
+        result:
+          description: The resulting created/updated object (in case of success)
+          type: object
+    type: array
+  Episode:
+    type: object
   EpisodeVote:
     properties:
       episode_id:
@@ -585,21 +864,28 @@ definitions:
         readOnly: true
         type: integer
     type: object
+  MarkType:
+    description: 0 for watched, 1 for acquired, 2 for skipped
+    enum:
+      - 0
+      - 1
+      - 2
+    type: integer
   MarkedEpisode:
     properties:
+      _embedded:
+        properties:
+          episode:
+            $ref: "#/definitions/Episode"
+        type: object
       episode_id:
         readOnly: true
         type: integer
       marked_at:
-        description: 'Epoch timestamp for when the user watched the episode, or 0 for unknown.'
+        description: Epoch timestamp for when the user watched the episode, or 0 for unknown.
         type: integer
       type:
-        description: '0 for watched, 1 for acquired, 2 for skipped'
-        enum:
-          - 0
-          - 1
-          - 2
-        type: integer
+        $ref: "#/definitions/MarkType"
     type: object
   Network:
     type: object
@@ -608,7 +894,7 @@ definitions:
       _embedded:
         properties:
           network:
-            $ref: '#/definitions/Network'
+            $ref: "#/definitions/Network"
         type: object
       network_id:
         type: integer
@@ -620,7 +906,7 @@ definitions:
       _embedded:
         properties:
           person:
-            $ref: '#/definitions/Person'
+            $ref: "#/definitions/Person"
         type: object
       person_id:
         type: integer
@@ -632,7 +918,7 @@ definitions:
       _embedded:
         properties:
           show:
-            $ref: '#/definitions/Show'
+            $ref: "#/definitions/Show"
         type: object
       show_id:
         type: integer
@@ -665,7 +951,7 @@ definitions:
       _embedded:
         properties:
           show:
-            $ref: '#/definitions/Show'
+            $ref: "#/definitions/Show"
         type: object
       show_id:
         type: integer
@@ -677,7 +963,7 @@ definitions:
       _embedded:
         properties:
           webchannel:
-            $ref: '#/definitions/Webchannel'
+            $ref: "#/definitions/Webchannel"
         type: object
       webchannel_id:
         type: integer

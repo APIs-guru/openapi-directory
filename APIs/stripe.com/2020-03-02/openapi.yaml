@@ -368,6 +368,12 @@ paths:
                           type: boolean
                       title: capability_param
                       type: object
+                    fpx_payments:
+                      properties:
+                        requested:
+                          type: boolean
+                      title: capability_param
+                      type: object
                     jcb_payments:
                       properties:
                         requested:
@@ -542,7 +548,7 @@ paths:
                   description: Three-letter ISO currency code representing the default currency for the account. This must be a currency that [Stripe supports in the account's country](https://stripe.com/docs/payouts).
                   type: string
                 email:
-                  description: Email address of the account representative. For Standard accounts, this is used to ask them to claim their Stripe account. For Custom accounts, this only makes the account easier to identify to platforms; Stripe does not email the account representative.
+                  description: The email address of the account holder. This is only to make the account easier to identify to you. Stripe will never directly email Custom accounts.
                   type: string
                 expand:
                   description: Specifies which fields in the response should be expanded.
@@ -551,7 +557,7 @@ paths:
                     type: string
                   type: array
                 external_account:
-                  description: A card or bank account to attach to the account. You can provide either a token, like the ones returned by [Stripe.js](https://stripe.com/docs/stripe.js), or a dictionary, as documented in the `external_account` parameter for [bank account](https://stripe.com/docs/api#account_create_bank_account) creation. <br><br>By default, providing an external account sets it as the new default external account for its currency, and deletes the old default if one exists. To add additional external accounts without replacing the existing default for the currency, use the bank account or card creation API.
+                  description: A card or bank account to attach to the account for receiving [payouts](https://stripe.com/docs/connect/payouts) (you won’t be able to use it for top-ups). You can provide either a token, like the ones returned by [Stripe.js](https://stripe.com/docs/stripe.js), or a dictionary, as documented in the `external_account` parameter for [bank account](https://stripe.com/docs/api#account_create_bank_account) creation. <br><br>By default, providing an external account sets it as the new default external account for its currency, and deletes the old default if one exists. To add additional external accounts without replacing the existing default for the currency, use the bank account or card creation API.
                   maxLength: 5000
                   type: string
                   x-stripeBypassValidation: true
@@ -3485,6 +3491,12 @@ paths:
                           type: boolean
                       title: capability_param
                       type: object
+                    fpx_payments:
+                      properties:
+                        requested:
+                          type: boolean
+                      title: capability_param
+                      type: object
                     jcb_payments:
                       properties:
                         requested:
@@ -3663,7 +3675,7 @@ paths:
                   description: Three-letter ISO currency code representing the default currency for the account. This must be a currency that [Stripe supports in the account's country](https://stripe.com/docs/payouts).
                   type: string
                 email:
-                  description: "The email address of the account holder. For Custom accounts, this is only to make the account easier to identify to you: Stripe will never directly email your users."
+                  description: The email address of the account holder. This is only to make the account easier to identify to you. Stripe will never directly email Custom accounts.
                   type: string
                 expand:
                   description: Specifies which fields in the response should be expanded.
@@ -3672,7 +3684,7 @@ paths:
                     type: string
                   type: array
                 external_account:
-                  description: A card or bank account to attach to the account. You can provide either a token, like the ones returned by [Stripe.js](https://stripe.com/docs/stripe.js), or a dictionary, as documented in the `external_account` parameter for [bank account](https://stripe.com/docs/api#account_create_bank_account) creation. <br><br>By default, providing an external account sets it as the new default external account for its currency, and deletes the old default if one exists. To add additional external accounts without replacing the existing default for the currency, use the bank account or card creation API.
+                  description: A card or bank account to attach to the account for receiving [payouts](https://stripe.com/docs/connect/payouts) (you won’t be able to use it for top-ups). You can provide either a token, like the ones returned by [Stripe.js](https://stripe.com/docs/stripe.js), or a dictionary, as documented in the `external_account` parameter for [bank account](https://stripe.com/docs/api#account_create_bank_account) creation. <br><br>By default, providing an external account sets it as the new default external account for its currency, and deletes the old default if one exists. To add additional external accounts without replacing the existing default for the currency, use the bank account or card creation API.
                   maxLength: 5000
                   type: string
                   x-stripeBypassValidation: true
@@ -3956,7 +3968,7 @@ paths:
                   title: tos_acceptance_specs
                   type: object
                 type:
-                  description: The type of Stripe account to create. Currently must be `custom`, as only [Custom accounts](https://stripe.com/docs/connect/custom-accounts) may be created via the API.
+                  description: The type of Stripe account to create. May be one of `custom`, `express` or `standard`.
                   enum:
                     - custom
                     - express
@@ -4239,6 +4251,12 @@ paths:
                           type: boolean
                       title: capability_param
                       type: object
+                    fpx_payments:
+                      properties:
+                        requested:
+                          type: boolean
+                      title: capability_param
+                      type: object
                     jcb_payments:
                       properties:
                         requested:
@@ -4413,7 +4431,7 @@ paths:
                   description: Three-letter ISO currency code representing the default currency for the account. This must be a currency that [Stripe supports in the account's country](https://stripe.com/docs/payouts).
                   type: string
                 email:
-                  description: Email address of the account representative. For Standard accounts, this is used to ask them to claim their Stripe account. For Custom accounts, this only makes the account easier to identify to platforms; Stripe does not email the account representative.
+                  description: The email address of the account holder. This is only to make the account easier to identify to you. Stripe will never directly email Custom accounts.
                   type: string
                 expand:
                   description: Specifies which fields in the response should be expanded.
@@ -4422,7 +4440,7 @@ paths:
                     type: string
                   type: array
                 external_account:
-                  description: A card or bank account to attach to the account. You can provide either a token, like the ones returned by [Stripe.js](https://stripe.com/docs/stripe.js), or a dictionary, as documented in the `external_account` parameter for [bank account](https://stripe.com/docs/api#account_create_bank_account) creation. <br><br>By default, providing an external account sets it as the new default external account for its currency, and deletes the old default if one exists. To add additional external accounts without replacing the existing default for the currency, use the bank account or card creation API.
+                  description: A card or bank account to attach to the account for receiving [payouts](https://stripe.com/docs/connect/payouts) (you won’t be able to use it for top-ups). You can provide either a token, like the ones returned by [Stripe.js](https://stripe.com/docs/stripe.js), or a dictionary, as documented in the `external_account` parameter for [bank account](https://stripe.com/docs/api#account_create_bank_account) creation. <br><br>By default, providing an external account sets it as the new default external account for its currency, and deletes the old default if one exists. To add additional external accounts without replacing the existing default for the currency, use the bank account or card creation API.
                   maxLength: 5000
                   type: string
                   x-stripeBypassValidation: true
@@ -10125,6 +10143,9 @@ paths:
             schema:
               additionalProperties: false
               properties:
+                allow_promotion_codes:
+                  description: Enables user redeemable promotion codes.
+                  type: boolean
                 billing_address_collection:
                   description: Specify whether Checkout should collect the customer's billing address.
                   enum:
@@ -10181,9 +10202,9 @@ paths:
                   type: array
                 line_items:
                   description: >-
-                    A list of items the customer is purchasing. Use this parameter to pass one-time or recurring [prices](https://stripe.com/docs/api/prices).
+                    A list of items the customer is purchasing. Use this parameter to pass one-time or recurring [Prices](https://stripe.com/docs/api/prices).
 
-                    One-time prices in `subscription` mode will be on the initial invoice only.
+                    One-time Prices in `subscription` mode will be on the initial invoice only.
 
 
                     There is a maximum of 100 line items, however it is recommended to
@@ -10309,6 +10330,8 @@ paths:
                     - sv
                     - tr
                     - zh
+                    - zh-HK
+                    - zh-TW
                   type: string
                   x-stripeBypassValidation: true
                 metadata:
@@ -11185,6 +11208,9 @@ paths:
         content:
           application/x-www-form-urlencoded:
             encoding:
+              applies_to:
+                explode: true
+                style: deepObject
               expand:
                 explode: true
                 style: deepObject
@@ -11197,6 +11223,18 @@ paths:
                 amount_off:
                   description: A positive integer representing the amount to subtract from an invoice total (required if `percent_off` is not passed).
                   type: integer
+                applies_to:
+                  description: A hash containing directions for what this Coupon will apply discounts to.
+                  properties:
+                    products:
+                      items:
+                        maxLength: 5000
+                        type: string
+                      type: array
+                  required:
+                    - products
+                  title: applies_to_params
+                  type: object
                 currency:
                   description: Three-letter [ISO code for the currency](https://stripe.com/docs/currencies) of the `amount_off` parameter (required if `amount_off` is passed).
                   type: string
@@ -12491,6 +12529,10 @@ paths:
                     maxLength: 5000
                     type: string
                   type: array
+                promotion_code:
+                  description: The API ID of a promotion code to apply to the customer. The customer will have a discount applied on all recurring payments. Charges you create through the API will not have the discount.
+                  maxLength: 5000
+                  type: string
                 shipping:
                   anyOf:
                     - properties:
@@ -12957,6 +12999,10 @@ paths:
                     maxLength: 5000
                     type: string
                   type: array
+                promotion_code:
+                  description: The API ID of a promotion code to apply to the customer. The customer will have a discount applied on all recurring payments. Charges you create through the API will not have the discount.
+                  maxLength: 5000
+                  type: string
                 shipping:
                   anyOf:
                     - properties:
@@ -15213,7 +15259,7 @@ paths:
                         type: object
                       quantity:
                         type: integer
-                    title: one_time_price_and_quantity
+                    title: add_invoice_item_entry
                     type: object
                   type: array
                 application_fee_percent:
@@ -15296,7 +15342,7 @@ paths:
                                 type: integer
                             required:
                               - usage_gte
-                            title: billing_thresholds_param
+                            title: item_billing_thresholds_param
                             type: object
                           - enum:
                               - ""
@@ -15305,9 +15351,6 @@ paths:
                         additionalProperties:
                           type: string
                         type: object
-                      plan:
-                        maxLength: 5000
-                        type: string
                       price:
                         maxLength: 5000
                         type: string
@@ -15405,6 +15448,10 @@ paths:
                         - ""
                       type: string
                   description: Specifies an interval for how often to bill for any pending invoice items. It is analogous to calling [Create an invoice](https://stripe.com/docs/api#create_invoice) for the given subscription at the specified interval.
+                promotion_code:
+                  description: The API ID of a promotion code to apply to this subscription. A promotion code applied to a subscription will only affect invoices created for that particular subscription.
+                  maxLength: 5000
+                  type: string
                 prorate:
                   description: This field has been renamed to `proration_behavior`. `prorate=true` can be replaced with `proration_behavior=create_prorations` and `prorate=false` can be replaced with `proration_behavior=none`.
                   type: boolean
@@ -15668,7 +15715,7 @@ paths:
                         type: object
                       quantity:
                         type: integer
-                    title: one_time_price_and_quantity
+                    title: add_invoice_item_entry
                     type: object
                   type: array
                 application_fee_percent:
@@ -15754,7 +15801,7 @@ paths:
                                 type: integer
                             required:
                               - usage_gte
-                            title: billing_thresholds_param
+                            title: item_billing_thresholds_param
                             type: object
                           - enum:
                               - ""
@@ -15774,9 +15821,6 @@ paths:
                           - enum:
                               - ""
                             type: string
-                      plan:
-                        maxLength: 5000
-                        type: string
                       price:
                         maxLength: 5000
                         type: string
@@ -15894,6 +15938,10 @@ paths:
                         - ""
                       type: string
                   description: Specifies an interval for how often to bill for any pending invoice items. It is analogous to calling [Create an invoice](https://stripe.com/docs/api#create_invoice) for the given subscription at the specified interval.
+                promotion_code:
+                  description: The promotion code to apply to this subscription. A promotion code applied to a subscription will only affect invoices created for that particular subscription.
+                  maxLength: 5000
+                  type: string
                 prorate:
                   description: This field has been renamed to `proration_behavior`. `prorate=true` can be replaced with `proration_behavior=create_prorations` and `prorate=false` can be replaced with `proration_behavior=none`.
                   type: boolean
@@ -16179,7 +16227,7 @@ paths:
                     type: string
                   type: array
                 type:
-                  description: Type of the tax ID, one of `eu_vat`, `br_cnpj`, `br_cpf`, `nz_gst`, `au_abn`, `in_gst`, `no_vat`, `za_vat`, `ch_vat`, `mx_rfc`, `sg_uen`, `ru_inn`, `ca_bn`, `hk_br`, `es_cif`, `tw_vat`, `th_vat`, `jp_cn`, `li_uid`, `my_itn`, `us_ein`, `kr_brn`, `ca_qst`, `my_sst`, `sg_gst`, `ae_trn`, `cl_tin`, `sa_vat`, `id_npwp`, or `my_frp`
+                  description: Type of the tax ID, one of `ae_trn`, `au_abn`, `br_cnpj`, `br_cpf`, `ca_bn`, `ca_qst`, `ch_vat`, `cl_tin`, `es_cif`, `eu_vat`, `hk_br`, `id_npwp`, `in_gst`, `jp_cn`, `kr_brn`, `li_uid`, `mx_rfc`, `my_frp`, `my_itn`, `my_sst`, `no_vat`, `nz_gst`, `ru_inn`, `sa_vat`, `sg_gst`, `sg_uen`, `th_vat`, `tw_vat`, `us_ein`, or `za_vat`
                   enum:
                     - ae_trn
                     - au_abn
@@ -17753,6 +17801,9 @@ paths:
         content:
           application/x-www-form-urlencoded:
             encoding:
+              discounts:
+                explode: true
+                style: deepObject
               expand:
                 explode: true
                 style: deepObject
@@ -17788,6 +17839,23 @@ paths:
                 discountable:
                   description: Controls whether discounts apply to this invoice item. Defaults to false for prorations or negative invoice items, and true for all other invoice items.
                   type: boolean
+                discounts:
+                  anyOf:
+                    - items:
+                        properties:
+                          coupon:
+                            maxLength: 5000
+                            type: string
+                          discount:
+                            maxLength: 5000
+                            type: string
+                        title: discounts_data_param
+                        type: object
+                      type: array
+                    - enum:
+                        - ""
+                      type: string
+                  description: The coupons to redeem into discounts for the invoice item or invoice line item.
                 expand:
                   description: Specifies which fields in the response should be expanded.
                   items:
@@ -17826,7 +17894,7 @@ paths:
                   maxLength: 5000
                   type: string
                 price_data:
-                  description: Data used to generate a new price object inline.
+                  description: Data used to generate a new [Price](https://stripe.com/docs/api/prices) object inline.
                   properties:
                     currency:
                       type: string
@@ -17973,6 +18041,9 @@ paths:
         content:
           application/x-www-form-urlencoded:
             encoding:
+              discounts:
+                explode: true
+                style: deepObject
               expand:
                 explode: true
                 style: deepObject
@@ -18001,6 +18072,23 @@ paths:
                 discountable:
                   description: Controls whether discounts apply to this invoice item. Defaults to false for prorations or negative invoice items, and true for all other invoice items. Cannot be set to true for prorations.
                   type: boolean
+                discounts:
+                  anyOf:
+                    - items:
+                        properties:
+                          coupon:
+                            maxLength: 5000
+                            type: string
+                          discount:
+                            maxLength: 5000
+                            type: string
+                        title: discounts_data_param
+                        type: object
+                      type: array
+                    - enum:
+                        - ""
+                      type: string
+                  description: The coupons & existing discounts which apply to the invoice item or invoice line item. Item discounts are applied before invoice discounts. Pass an empty string to remove previously-defined discounts.
                 expand:
                   description: Specifies which fields in the response should be expanded.
                   items:
@@ -18035,7 +18123,7 @@ paths:
                   maxLength: 5000
                   type: string
                 price_data:
-                  description: Data used to generate a new price object inline.
+                  description: Data used to generate a new [Price](https://stripe.com/docs/api/prices) object inline.
                   properties:
                     currency:
                       type: string
@@ -18266,6 +18354,9 @@ paths:
               default_tax_rates:
                 explode: true
                 style: deepObject
+              discounts:
+                explode: true
+                style: deepObject
               expand:
                 explode: true
                 style: deepObject
@@ -18335,6 +18426,23 @@ paths:
                   description: An arbitrary string attached to the object. Often useful for displaying to users. Referenced as 'memo' in the Dashboard.
                   maxLength: 1500
                   type: string
+                discounts:
+                  anyOf:
+                    - items:
+                        properties:
+                          coupon:
+                            maxLength: 5000
+                            type: string
+                          discount:
+                            maxLength: 5000
+                            type: string
+                        title: discounts_data_param
+                        type: object
+                      type: array
+                    - enum:
+                        - ""
+                      type: string
+                  description: The coupons to redeem into discounts for the invoice. If not specified, inherits the discount from the invoice's customer. Pass an empty string to avoid inheriting any discounts.
                 due_date:
                   description: The date on which payment for this invoice is due. Valid only for invoices where `collection_method=send_invoice`.
                   format: unix-time
@@ -18425,6 +18533,27 @@ paths:
             maxLength: 5000
             type: string
           style: form
+        - explode: true
+          in: query
+          name: discounts
+          required: false
+          schema:
+            anyOf:
+              - items:
+                  properties:
+                    coupon:
+                      maxLength: 5000
+                      type: string
+                    discount:
+                      maxLength: 5000
+                      type: string
+                  title: discounts_data_param
+                  type: object
+                type: array
+              - enum:
+                  - ""
+                type: string
+          style: deepObject
         - description: Specifies which fields in the response should be expanded.
           explode: true
           in: query
@@ -18453,6 +18582,22 @@ paths:
                   type: string
                 discountable:
                   type: boolean
+                discounts:
+                  anyOf:
+                    - items:
+                        properties:
+                          coupon:
+                            maxLength: 5000
+                            type: string
+                          discount:
+                            maxLength: 5000
+                            type: string
+                        title: discounts_data_param
+                        type: object
+                      type: array
+                    - enum:
+                        - ""
+                      type: string
                 invoiceitem:
                   maxLength: 5000
                   type: string
@@ -18605,7 +18750,7 @@ paths:
                           type: integer
                       required:
                         - usage_gte
-                      title: billing_thresholds_param
+                      title: item_billing_thresholds_param
                       type: object
                     - enum:
                         - ""
@@ -18625,9 +18770,6 @@ paths:
                     - enum:
                         - ""
                       type: string
-                plan:
-                  maxLength: 5000
-                  type: string
                 price:
                   maxLength: 5000
                   type: string
@@ -18791,6 +18933,27 @@ paths:
             maxLength: 5000
             type: string
           style: form
+        - explode: true
+          in: query
+          name: discounts
+          required: false
+          schema:
+            anyOf:
+              - items:
+                  properties:
+                    coupon:
+                      maxLength: 5000
+                      type: string
+                    discount:
+                      maxLength: 5000
+                      type: string
+                  title: discounts_data_param
+                  type: object
+                type: array
+              - enum:
+                  - ""
+                type: string
+          style: deepObject
         - description: A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
           in: query
           name: ending_before
@@ -18827,6 +18990,22 @@ paths:
                   type: string
                 discountable:
                   type: boolean
+                discounts:
+                  anyOf:
+                    - items:
+                        properties:
+                          coupon:
+                            maxLength: 5000
+                            type: string
+                          discount:
+                            maxLength: 5000
+                            type: string
+                        title: discounts_data_param
+                        type: object
+                      type: array
+                    - enum:
+                        - ""
+                      type: string
                 invoiceitem:
                   maxLength: 5000
                   type: string
@@ -18994,7 +19173,7 @@ paths:
                           type: integer
                       required:
                         - usage_gte
-                      title: billing_thresholds_param
+                      title: item_billing_thresholds_param
                       type: object
                     - enum:
                         - ""
@@ -19014,9 +19193,6 @@ paths:
                     - enum:
                         - ""
                       type: string
-                plan:
-                  maxLength: 5000
-                  type: string
                 price:
                   maxLength: 5000
                   type: string
@@ -19295,6 +19471,9 @@ paths:
               default_tax_rates:
                 explode: true
                 style: deepObject
+              discounts:
+                explode: true
+                style: deepObject
               expand:
                 explode: true
                 style: deepObject
@@ -19367,6 +19546,23 @@ paths:
                   description: An arbitrary string attached to the object. Often useful for displaying to users. Referenced as 'memo' in the Dashboard.
                   maxLength: 1500
                   type: string
+                discounts:
+                  anyOf:
+                    - items:
+                        properties:
+                          coupon:
+                            maxLength: 5000
+                            type: string
+                          discount:
+                            maxLength: 5000
+                            type: string
+                        title: discounts_data_param
+                        type: object
+                      type: array
+                    - enum:
+                        - ""
+                      type: string
+                  description: The discounts that will apply to the invoice. Pass an empty string to remove previously-defined discounts.
                 due_date:
                   description: The date on which payment for this invoice is due. Only valid for invoices where `collection_method=send_invoice`. This field can only be updated on `draft` invoices.
                   format: unix-time
@@ -20537,7 +20733,7 @@ paths:
                   description: The cardholder's phone number. This will be transformed to [E.164](https://en.wikipedia.org/wiki/E.164) if it is not provided in that format already.
                   type: string
                 spending_controls:
-                  description: Spending rules that give you control over how your cardholders can make charges. Refer to our [authorizations](https://stripe.com/docs/issuing/purchases/authorizations) documentation for more details.
+                  description: Rules that control spending across this cardholder's cards. Refer to our [documentation](https://stripe.com/docs/issuing/controls/spending-controls) for more details.
                   properties:
                     allowed_categories:
                       items:
@@ -21660,7 +21856,7 @@ paths:
                   description: The cardholder's phone number.
                   type: string
                 spending_controls:
-                  description: Spending rules that give you some control over how your cards can be used. Refer to our [authorizations](https://stripe.com/docs/issuing/purchases/authorizations) documentation for more details.
+                  description: Rules that control spending across this cardholder's cards. Refer to our [documentation](https://stripe.com/docs/issuing/controls/spending-controls) for more details.
                   properties:
                     allowed_categories:
                       items:
@@ -22852,7 +23048,7 @@ paths:
                   title: shipping_specs
                   type: object
                 spending_controls:
-                  description: Spending rules that give you some control over how your cards can be used. Refer to our [authorizations](https://stripe.com/docs/issuing/purchases/authorizations) documentation for more details.
+                  description: Rules that control spending for this card. Refer to our [documentation](https://stripe.com/docs/issuing/controls/spending-controls) for more details.
                   properties:
                     allowed_categories:
                       items:
@@ -23882,7 +24078,7 @@ paths:
                       type: string
                   description: Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
                 spending_controls:
-                  description: Spending rules that give you some control over how your cards can be used. Refer to our [authorizations](https://stripe.com/docs/issuing/purchases/authorizations) documentation for more details.
+                  description: Rules that control spending for this card. Refer to our [documentation](https://stripe.com/docs/issuing/controls/spending-controls) for more details.
                   properties:
                     allowed_categories:
                       items:
@@ -26577,6 +26773,10 @@ paths:
 
                     property on the PaymentIntent.
                   properties:
+                    alipay:
+                      properties: {}
+                      title: param
+                      type: object
                     au_becs_debit:
                       properties:
                         account_number:
@@ -26720,6 +26920,7 @@ paths:
                       type: object
                     type:
                       enum:
+                        - alipay
                         - au_becs_debit
                         - bacs_debit
                         - bancontact
@@ -26738,6 +26939,14 @@ paths:
                 payment_method_options:
                   description: Payment-method-specific configuration for this PaymentIntent.
                   properties:
+                    alipay:
+                      anyOf:
+                        - properties: {}
+                          title: payment_method_options_param
+                          type: object
+                        - enum:
+                            - ""
+                          type: string
                     bancontact:
                       anyOf:
                         - properties:
@@ -27099,6 +27308,10 @@ paths:
 
                     property on the PaymentIntent.
                   properties:
+                    alipay:
+                      properties: {}
+                      title: param
+                      type: object
                     au_becs_debit:
                       properties:
                         account_number:
@@ -27242,6 +27455,7 @@ paths:
                       type: object
                     type:
                       enum:
+                        - alipay
                         - au_becs_debit
                         - bacs_debit
                         - bancontact
@@ -27260,6 +27474,14 @@ paths:
                 payment_method_options:
                   description: Payment-method-specific configuration for this PaymentIntent.
                   properties:
+                    alipay:
+                      anyOf:
+                        - properties: {}
+                          title: payment_method_options_param
+                          type: object
+                        - enum:
+                            - ""
+                          type: string
                     bancontact:
                       anyOf:
                         - properties:
@@ -27771,6 +27993,10 @@ paths:
 
                     property on the PaymentIntent.
                   properties:
+                    alipay:
+                      properties: {}
+                      title: param
+                      type: object
                     au_becs_debit:
                       properties:
                         account_number:
@@ -27914,6 +28140,7 @@ paths:
                       type: object
                     type:
                       enum:
+                        - alipay
                         - au_becs_debit
                         - bacs_debit
                         - bancontact
@@ -27932,6 +28159,14 @@ paths:
                 payment_method_options:
                   description: Payment-method-specific configuration for this PaymentIntent.
                   properties:
+                    alipay:
+                      anyOf:
+                        - properties: {}
+                          title: payment_method_options_param
+                          type: object
+                        - enum:
+                            - ""
+                          type: string
                     bancontact:
                       anyOf:
                         - properties:
@@ -28233,6 +28468,9 @@ paths:
         content:
           application/x-www-form-urlencoded:
             encoding:
+              alipay:
+                explode: true
+                style: deepObject
               au_becs_debit:
                 explode: true
                 style: deepObject
@@ -28278,6 +28516,11 @@ paths:
             schema:
               additionalProperties: false
               properties:
+                alipay:
+                  description: If this is an `Alipay` PaymentMethod, this hash contains details about the Alipay payment method.
+                  properties: {}
+                  title: param
+                  type: object
                 au_becs_debit:
                   description: If this is an `au_becs_debit` PaymentMethod, this hash contains details about the bank account.
                   properties:
@@ -28477,6 +28720,7 @@ paths:
                 type:
                   description: The type of the PaymentMethod. An additional hash is included on the PaymentMethod with a name matching this value. It contains additional information specific to the PaymentMethod type.
                   enum:
+                    - alipay
                     - au_becs_debit
                     - bacs_debit
                     - bancontact
@@ -29257,7 +29501,7 @@ paths:
                 $ref: "#/components/schemas/error"
           description: Error response.
     post:
-      description: <p>You can create plans using the API, or in the Stripe <a href="https://dashboard.stripe.com/products">Dashboard</a>.</p>
+      description: <p>You can now model subscriptions more flexibly using the <a href="#prices">Prices API</a>. It replaces the Plans API and is backwards compatible to simplify your migration.</p>
       operationId: PostPlans
       requestBody:
         content:
@@ -29570,7 +29814,7 @@ paths:
                   maxLength: 5000
                   type: string
                 product:
-                  description: The product the plan belongs to. Note that after updating, statement descriptors and line items of the plan in active subscriptions will be affected.
+                  description: The product the plan belongs to. This cannot be changed once it has been used in a subscription or subscription schedule.
                   maxLength: 5000
                   type: string
                 trial_period_days:
@@ -29792,7 +30036,7 @@ paths:
               additionalProperties: false
               properties:
                 active:
-                  description: Whether the price is currently active. Defaults to `true`.
+                  description: Whether the price can be used for new purchases. Defaults to `true`.
                   type: boolean
                 billing_scheme:
                   description: Describes how to compute the price per period. Either `per_unit` or `tiered`. `per_unit` indicates that the fixed amount (specified in `unit_amount` or `unit_amount_decimal`) will be charged per unit in `quantity` (for prices with `usage_type=licensed`), or per unit of total usage (for prices with `usage_type=metered`). `tiered` indicates that the unit pricing will be computed using a tiering strategy as defined using the `tiers` and `tiers_mode` attributes.
@@ -30023,7 +30267,7 @@ paths:
               additionalProperties: false
               properties:
                 active:
-                  description: Whether the price is currently active. Defaults to `true`.
+                  description: Whether the price can be used for new purchases. Defaults to `true`.
                   type: boolean
                 expand:
                   description: Specifies which fields in the response should be expanded.
@@ -30570,6 +30814,326 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/product"
+          description: Successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Error response.
+  /v1/promotion_codes:
+    get:
+      description: <p>Returns a list of your promotion codes.</p>
+      operationId: GetPromotionCodes
+      parameters:
+        - description: Filter promotion codes by whether they are active.
+          in: query
+          name: active
+          required: false
+          schema:
+            type: boolean
+          style: form
+        - description: Only return promotion codes that have this case-insensitive code.
+          in: query
+          name: code
+          required: false
+          schema:
+            maxLength: 5000
+            type: string
+          style: form
+        - description: Only return promotion codes for this coupon.
+          in: query
+          name: coupon
+          required: false
+          schema:
+            maxLength: 5000
+            type: string
+          style: form
+        - description: A filter on the list, based on the object `created` field. The value can be a string with an integer Unix timestamp, or it can be a dictionary with a number of different query options.
+          explode: true
+          in: query
+          name: created
+          required: false
+          schema:
+            anyOf:
+              - properties:
+                  gt:
+                    type: integer
+                  gte:
+                    type: integer
+                  lt:
+                    type: integer
+                  lte:
+                    type: integer
+                title: range_query_specs
+                type: object
+              - type: integer
+          style: deepObject
+        - description: Only return promotion codes that are restricted to this customer.
+          in: query
+          name: customer
+          required: false
+          schema:
+            maxLength: 5000
+            type: string
+          style: form
+        - description: A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+          in: query
+          name: ending_before
+          required: false
+          schema:
+            maxLength: 5000
+            type: string
+          style: form
+        - description: Specifies which fields in the response should be expanded.
+          explode: true
+          in: query
+          name: expand
+          required: false
+          schema:
+            items:
+              maxLength: 5000
+              type: string
+            type: array
+          style: deepObject
+        - description: A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+          style: form
+        - description: A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+          in: query
+          name: starting_after
+          required: false
+          schema:
+            maxLength: 5000
+            type: string
+          style: form
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            encoding: {}
+            schema:
+              additionalProperties: false
+              properties: {}
+              type: object
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                description: ""
+                properties:
+                  data:
+                    items:
+                      $ref: "#/components/schemas/promotion_code"
+                    type: array
+                  has_more:
+                    description: True if this list has another page of items after this one that can be fetched.
+                    type: boolean
+                  object:
+                    description: String representing the object's type. Objects of the same type share the same value. Always has the value `list`.
+                    enum:
+                      - list
+                    type: string
+                  url:
+                    description: The URL where this list can be accessed.
+                    maxLength: 5000
+                    pattern: ^/v1/promotion_codes
+                    type: string
+                required:
+                  - data
+                  - has_more
+                  - object
+                  - url
+                type: object
+                x-expandableFields:
+                  - data
+          description: Successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Error response.
+    post:
+      description: <p>A promotion code points to a coupon. You can optionally restrict the code to a specific customer, redemption limit, and expiration date.</p>
+      operationId: PostPromotionCodes
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            encoding:
+              expand:
+                explode: true
+                style: deepObject
+              metadata:
+                explode: true
+                style: deepObject
+              restrictions:
+                explode: true
+                style: deepObject
+            schema:
+              additionalProperties: false
+              properties:
+                active:
+                  description: Whether the promotion code is currently active.
+                  type: boolean
+                code:
+                  description: The customer-facing code. Regardless of case, this code must be unique across all active promotion codes for a specific customer. If left blank, we will generate one automatically.
+                  maxLength: 5000
+                  type: string
+                coupon:
+                  description: The coupon for this promotion code.
+                  maxLength: 5000
+                  type: string
+                customer:
+                  description: The customer that this promotion code can be used by. If not set, the promotion code can be used by all customers.
+                  maxLength: 5000
+                  type: string
+                expand:
+                  description: Specifies which fields in the response should be expanded.
+                  items:
+                    maxLength: 5000
+                    type: string
+                  type: array
+                expires_at:
+                  description: The timestamp at which this promotion code will expire. If the coupon has specified a `redeems_by`, then this value cannot be after the coupon's `redeems_by`.
+                  format: unix-time
+                  type: integer
+                max_redemptions:
+                  description: A positive integer specifying the number of times the promotion code can be redeemed. If the coupon has specified a `max_redemptions`, then this value cannot be greater than the coupon's `max_redemptions`.
+                  type: integer
+                metadata:
+                  additionalProperties:
+                    type: string
+                  description: Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
+                  type: object
+                restrictions:
+                  description: Settings that restrict the redemption of the promotion code.
+                  properties:
+                    first_time_transaction:
+                      type: boolean
+                    minimum_amount:
+                      type: integer
+                    minimum_amount_currency:
+                      type: string
+                  title: restrictions_params
+                  type: object
+              required:
+                - coupon
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/promotion_code"
+          description: Successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Error response.
+  "/v1/promotion_codes/{promotion_code}":
+    get:
+      description: <p>Retrieves the promotion code with the given ID.</p>
+      operationId: GetPromotionCodesPromotionCode
+      parameters:
+        - description: Specifies which fields in the response should be expanded.
+          explode: true
+          in: query
+          name: expand
+          required: false
+          schema:
+            items:
+              maxLength: 5000
+              type: string
+            type: array
+          style: deepObject
+        - in: path
+          name: promotion_code
+          required: true
+          schema:
+            maxLength: 5000
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            encoding: {}
+            schema:
+              additionalProperties: false
+              properties: {}
+              type: object
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/promotion_code"
+          description: Successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Error response.
+    post:
+      description: <p>Updates the specified promotion code by setting the values of the parameters passed. Most fields are, by design, not editable.</p>
+      operationId: PostPromotionCodesPromotionCode
+      parameters:
+        - in: path
+          name: promotion_code
+          required: true
+          schema:
+            maxLength: 5000
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            encoding:
+              expand:
+                explode: true
+                style: deepObject
+              metadata:
+                explode: true
+                style: deepObject
+            schema:
+              additionalProperties: false
+              properties:
+                active:
+                  description: Whether the promotion code is currently active. A promotion code can only be reactivated when the coupon is still valid and the promotion code is otherwise redeemable.
+                  type: boolean
+                expand:
+                  description: Specifies which fields in the response should be expanded.
+                  items:
+                    maxLength: 5000
+                    type: string
+                  type: array
+                metadata:
+                  anyOf:
+                    - additionalProperties:
+                        type: string
+                      type: object
+                    - enum:
+                        - ""
+                      type: string
+                  description: Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
+              type: object
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/promotion_code"
           description: Successful response.
         default:
           content:
@@ -35364,7 +35928,7 @@ paths:
                           type: integer
                       required:
                         - usage_gte
-                      title: billing_thresholds_param
+                      title: item_billing_thresholds_param
                       type: object
                     - enum:
                         - ""
@@ -35396,16 +35960,12 @@ paths:
                     - pending_if_incomplete
                   type: string
                   x-stripeBypassValidation: true
-                plan:
-                  description: The identifier of the plan to add to the subscription.
-                  maxLength: 5000
-                  type: string
                 price:
                   description: The ID of the price object.
                   maxLength: 5000
                   type: string
                 price_data:
-                  description: Data used to generate a new price object inline.
+                  description: Data used to generate a new [Price](https://stripe.com/docs/api/prices) object inline.
                   properties:
                     currency:
                       type: string
@@ -35635,7 +36195,7 @@ paths:
                           type: integer
                       required:
                         - usage_gte
-                      title: billing_thresholds_param
+                      title: item_billing_thresholds_param
                       type: object
                     - enum:
                         - ""
@@ -35674,16 +36234,12 @@ paths:
                     - pending_if_incomplete
                   type: string
                   x-stripeBypassValidation: true
-                plan:
-                  description: The identifier of the new plan for this subscription item.
-                  maxLength: 5000
-                  type: string
                 price:
                   description: The ID of the price object.
                   maxLength: 5000
                   type: string
                 price_data:
-                  description: Data used to generate a new price object inline.
+                  description: Data used to generate a new [Price](https://stripe.com/docs/api/prices) object inline.
                   properties:
                     currency:
                       type: string
@@ -36245,7 +36801,7 @@ paths:
                               type: object
                             quantity:
                               type: integer
-                          title: one_time_price_and_quantity
+                          title: add_invoice_item_entry
                           type: object
                         type: array
                       application_fee_percent:
@@ -36308,14 +36864,11 @@ paths:
                                       type: integer
                                   required:
                                     - usage_gte
-                                  title: billing_thresholds_param
+                                  title: item_billing_thresholds_param
                                   type: object
                                 - enum:
                                     - ""
                                   type: string
-                            plan:
-                              maxLength: 5000
-                              type: string
                             price:
                               maxLength: 5000
                               type: string
@@ -36594,7 +37147,7 @@ paths:
                               type: object
                             quantity:
                               type: integer
-                          title: one_time_price_and_quantity
+                          title: add_invoice_item_entry
                           type: object
                         type: array
                       application_fee_percent:
@@ -36661,14 +37214,11 @@ paths:
                                       type: integer
                                   required:
                                     - usage_gte
-                                  title: billing_thresholds_param
+                                  title: item_billing_thresholds_param
                                   type: object
                                 - enum:
                                     - ""
                                   type: string
-                            plan:
-                              maxLength: 5000
-                              type: string
                             price:
                               maxLength: 5000
                               type: string
@@ -36984,14 +37534,6 @@ paths:
           schema:
             type: integer
           style: form
-        - description: The ID of the plan whose subscriptions will be retrieved.
-          in: query
-          name: plan
-          required: false
-          schema:
-            maxLength: 5000
-            type: string
-          style: form
         - description: Filter for subscriptions that contain this recurring price ID.
           in: query
           name: price
@@ -37139,7 +37681,7 @@ paths:
                         type: object
                       quantity:
                         type: integer
-                    title: one_time_price_and_quantity
+                    title: add_invoice_item_entry
                     type: object
                   type: array
                 application_fee_percent:
@@ -37226,7 +37768,7 @@ paths:
                                 type: integer
                             required:
                               - usage_gte
-                            title: billing_thresholds_param
+                            title: item_billing_thresholds_param
                             type: object
                           - enum:
                               - ""
@@ -37235,9 +37777,6 @@ paths:
                         additionalProperties:
                           type: string
                         type: object
-                      plan:
-                        maxLength: 5000
-                        type: string
                       price:
                         maxLength: 5000
                         type: string
@@ -37335,6 +37874,10 @@ paths:
                         - ""
                       type: string
                   description: Specifies an interval for how often to bill for any pending invoice items. It is analogous to calling [Create an invoice](https://stripe.com/docs/api#create_invoice) for the given subscription at the specified interval.
+                promotion_code:
+                  description: The API ID of a promotion code to apply to this subscription. A promotion code applied to a subscription will only affect invoices created for that particular subscription.
+                  maxLength: 5000
+                  type: string
                 prorate:
                   description: This field has been renamed to `proration_behavior`. `prorate=true` can be replaced with `proration_behavior=create_prorations` and `prorate=false` can be replaced with `proration_behavior=none`.
                   type: boolean
@@ -37579,7 +38122,7 @@ paths:
                         type: object
                       quantity:
                         type: integer
-                    title: one_time_price_and_quantity
+                    title: add_invoice_item_entry
                     type: object
                   type: array
                 application_fee_percent:
@@ -37665,7 +38208,7 @@ paths:
                                 type: integer
                             required:
                               - usage_gte
-                            title: billing_thresholds_param
+                            title: item_billing_thresholds_param
                             type: object
                           - enum:
                               - ""
@@ -37685,9 +38228,6 @@ paths:
                           - enum:
                               - ""
                             type: string
-                      plan:
-                        maxLength: 5000
-                        type: string
                       price:
                         maxLength: 5000
                         type: string
@@ -37805,6 +38345,10 @@ paths:
                         - ""
                       type: string
                   description: Specifies an interval for how often to bill for any pending invoice items. It is analogous to calling [Create an invoice](https://stripe.com/docs/api#create_invoice) for the given subscription at the specified interval.
+                promotion_code:
+                  description: The promotion code to apply to this subscription. A promotion code applied to a subscription will only affect invoices created for that particular subscription.
+                  maxLength: 5000
+                  type: string
                 prorate:
                   description: This field has been renamed to `proration_behavior`. `prorate=true` can be replaced with `proration_behavior=create_prorations` and `prorate=false` can be replaced with `proration_behavior=none`.
                   type: boolean
@@ -41526,6 +42070,13 @@ components:
             - inactive
             - pending
           type: string
+        fpx_payments:
+          description: The status of the FPX payments capability of the account, or whether the account can directly process FPX charges.
+          enum:
+            - active
+            - inactive
+            - pending
+          type: string
         jcb_payments:
           description: The status of the JCB payments capability of the account, or whether the account (Japan only) can directly process JCB credit card charges in JPY currency.
           enum:
@@ -43562,6 +44113,10 @@ components:
 
         Related guide: [Checkout Server Quickstart](https://stripe.com/docs/payments/checkout/api).
       properties:
+        allow_promotion_codes:
+          description: Enables user redeemable promotion codes.
+          nullable: true
+          type: boolean
         amount_subtotal:
           description: Total of all items before discounts or taxes are applied.
           nullable: true
@@ -43709,6 +44264,8 @@ components:
             - sv
             - tr
             - zh
+            - zh-HK
+            - zh-TW
           nullable: true
           type: string
           x-stripeBypassValidation: true
@@ -44038,6 +44595,8 @@ components:
           description: Amount (in the `currency` specified) that will be taken off the subtotal of any invoices for this customer.
           nullable: true
           type: integer
+        applies_to:
+          $ref: "#/components/schemas/coupon_applies_to"
         created:
           description: Time at which the object was created. Measured in seconds since the Unix epoch.
           format: unix-time
@@ -44110,8 +44669,23 @@ components:
         - valid
       title: Coupon
       type: object
-      x-expandableFields: []
+      x-expandableFields:
+        - applies_to
       x-resourceId: coupon
+    coupon_applies_to:
+      description: ""
+      properties:
+        products:
+          description: A list of product IDs this coupon applies to
+          items:
+            maxLength: 5000
+            type: string
+          type: array
+      required:
+        - products
+      title: CouponAppliesTo
+      type: object
+      x-expandableFields: []
     credit_note:
       description: >-
         Issue a credit note to adjust an invoice's amount after the invoice is finalized.
@@ -44134,10 +44708,12 @@ components:
             - maxLength: 5000
               type: string
             - $ref: "#/components/schemas/customer"
+            - $ref: "#/components/schemas/deleted_customer"
           description: ID of the customer.
           x-expansionResources:
             oneOf:
               - $ref: "#/components/schemas/customer"
+              - $ref: "#/components/schemas/deleted_customer"
         customer_balance_transaction:
           anyOf:
             - maxLength: 5000
@@ -44149,8 +44725,13 @@ components:
             oneOf:
               - $ref: "#/components/schemas/customer_balance_transaction"
         discount_amount:
-          description: The integer amount in **%s** representing the amount of the discount that was credited.
+          description: The integer amount in **%s** representing the total amount of discount that was credited.
           type: integer
+        discount_amounts:
+          description: The aggregate amounts calculated per discount for all line items.
+          items:
+            $ref: "#/components/schemas/discounts_resource_discount_amount"
+          type: array
         id:
           description: Unique identifier for the object.
           maxLength: 5000
@@ -44250,7 +44831,7 @@ components:
             - void
           type: string
         subtotal:
-          description: The integer amount in **%s** representing the amount of the credit note, excluding tax and discount.
+          description: The integer amount in **%s** representing the amount of the credit note, excluding tax and invoice level discounts.
           type: integer
         tax_amounts:
           description: The aggregate amounts calculated per tax rate for all line items.
@@ -44258,7 +44839,7 @@ components:
             $ref: "#/components/schemas/credit_note_tax_amount"
           type: array
         total:
-          description: The integer amount in **%s** representing the total amount of the credit note, including tax and discount.
+          description: The integer amount in **%s** representing the total amount of the credit note, including tax and all discount.
           type: integer
         type:
           description: Type of this credit note, one of `pre_payment` or `post_payment`. A `pre_payment` credit note means it was issued when the invoice was open. A `post_payment` credit note means it was issued when the invoice was paid.
@@ -44295,6 +44876,7 @@ components:
       x-expandableFields:
         - customer
         - customer_balance_transaction
+        - discount_amounts
         - invoice
         - lines
         - refund
@@ -44314,6 +44896,11 @@ components:
         discount_amount:
           description: The integer amount in **%s** representing the discount being credited for this line item.
           type: integer
+        discount_amounts:
+          description: The amount of discount calculated per discount for this line item
+          items:
+            $ref: "#/components/schemas/discounts_resource_discount_amount"
+          type: array
         id:
           description: Unique identifier for the object.
           maxLength: 5000
@@ -44371,6 +44958,7 @@ components:
       title: CreditNoteLineItem
       type: object
       x-expandableFields:
+        - discount_amounts
         - tax_amounts
         - tax_rates
       x-resourceId: credit_note_line_item
@@ -44984,22 +45572,74 @@ components:
     deleted_discount:
       description: ""
       properties:
+        coupon:
+          $ref: "#/components/schemas/coupon"
+        customer:
+          anyOf:
+            - maxLength: 5000
+              type: string
+            - $ref: "#/components/schemas/customer"
+            - $ref: "#/components/schemas/deleted_customer"
+          description: The ID of the customer associated with this discount.
+          nullable: true
+          x-expansionResources:
+            oneOf:
+              - $ref: "#/components/schemas/customer"
+              - $ref: "#/components/schemas/deleted_customer"
         deleted:
           description: Always true for a deleted object
           enum:
             - true
           type: boolean
+        id:
+          description: The ID of the discount object. Discounts cannot be fetched by ID. Use `expand[]=discounts` in API calls to expand discount IDs in an array.
+          maxLength: 5000
+          type: string
+        invoice:
+          description: The invoice that the discount's coupon was applied to, if it was applied directly to a particular invoice.
+          maxLength: 5000
+          nullable: true
+          type: string
+        invoice_item:
+          description: The invoice item `id` (or invoice line item `id` for invoice line items of type='subscription') that the discount's coupon was applied to, if it was applied directly to a particular invoice item or invoice line item.
+          maxLength: 5000
+          nullable: true
+          type: string
         object:
           description: String representing the object's type. Objects of the same type share the same value.
           enum:
             - discount
           type: string
+        promotion_code:
+          anyOf:
+            - maxLength: 5000
+              type: string
+            - $ref: "#/components/schemas/promotion_code"
+          description: The promotion code applied to create this discount.
+          nullable: true
+          x-expansionResources:
+            oneOf:
+              - $ref: "#/components/schemas/promotion_code"
+        start:
+          description: Date that the coupon was applied.
+          format: unix-time
+          type: integer
+        subscription:
+          description: The subscription that this coupon is applied to, if it is applied to a particular subscription.
+          maxLength: 5000
+          nullable: true
+          type: string
       required:
+        - coupon
         - deleted
         - object
+        - start
       title: DeletedDiscount
       type: object
-      x-expandableFields: []
+      x-expandableFields:
+        - coupon
+        - customer
+        - promotion_code
       x-resourceId: deleted_discount
     deleted_external_account:
       anyOf:
@@ -45443,11 +46083,35 @@ components:
           format: unix-time
           nullable: true
           type: integer
+        id:
+          description: The ID of the discount object. Discounts cannot be fetched by ID. Use `expand[]=discounts` in API calls to expand discount IDs in an array.
+          maxLength: 5000
+          type: string
+        invoice:
+          description: The invoice that the discount's coupon was applied to, if it was applied directly to a particular invoice.
+          maxLength: 5000
+          nullable: true
+          type: string
+        invoice_item:
+          description: The invoice item `id` (or invoice line item `id` for invoice line items of type='subscription') that the discount's coupon was applied to, if it was applied directly to a particular invoice item or invoice line item.
+          maxLength: 5000
+          nullable: true
+          type: string
         object:
           description: String representing the object's type. Objects of the same type share the same value.
           enum:
             - discount
           type: string
+        promotion_code:
+          anyOf:
+            - maxLength: 5000
+              type: string
+            - $ref: "#/components/schemas/promotion_code"
+          description: The promotion code applied to create this discount.
+          nullable: true
+          x-expansionResources:
+            oneOf:
+              - $ref: "#/components/schemas/promotion_code"
         start:
           description: Date that the coupon was applied.
           format: unix-time
@@ -45466,7 +46130,32 @@ components:
       x-expandableFields:
         - coupon
         - customer
+        - promotion_code
       x-resourceId: discount
+    discounts_resource_discount_amount:
+      description: ""
+      properties:
+        amount:
+          description: The amount, in %s, of the discount.
+          type: integer
+        discount:
+          anyOf:
+            - maxLength: 5000
+              type: string
+            - $ref: "#/components/schemas/discount"
+            - $ref: "#/components/schemas/deleted_discount"
+          description: The discount that was applied to get this discount amount.
+          x-expansionResources:
+            oneOf:
+              - $ref: "#/components/schemas/discount"
+              - $ref: "#/components/schemas/deleted_discount"
+      required:
+        - amount
+        - discount
+      title: DiscountsResourceDiscountAmount
+      type: object
+      x-expandableFields:
+        - discount
     dispute:
       description: >-
         A dispute occurs when a customer questions your charge with their card issuer.
@@ -46563,6 +47252,20 @@ components:
             - $ref: "#/components/schemas/discount"
           description: Describes the current discount applied to this invoice, if there is one.
           nullable: true
+        discounts:
+          description: The discounts applied to the invoice. Line item discounts are applied before invoice discounts. Use `expand[]=discounts` to expand each discount.
+          items:
+            anyOf:
+              - maxLength: 5000
+                type: string
+              - $ref: "#/components/schemas/discount"
+              - $ref: "#/components/schemas/deleted_discount"
+            x-expansionResources:
+              oneOf:
+                - $ref: "#/components/schemas/discount"
+                - $ref: "#/components/schemas/deleted_discount"
+          nullable: true
+          type: array
         due_date:
           description: The date on which payment for this invoice is due. This value will be `null` for invoices where `collection_method=charge_automatically`.
           format: unix-time
@@ -46712,7 +47415,7 @@ components:
           description: Only set for upcoming invoices that preview prorations. The time used to calculate prorations.
           type: integer
         subtotal:
-          description: Total of all subscriptions, invoice items, and prorations on the invoice before any discount or tax is applied.
+          description: Total of all subscriptions, invoice items, and prorations on the invoice before any invoice level discount or tax is applied. Item discounts are already incorporated
           type: integer
         tax:
           description: The amount of tax on this invoice. This is the sum of all the tax amounts on this invoice.
@@ -46727,6 +47430,12 @@ components:
         total:
           description: Total after discounts and taxes.
           type: integer
+        total_discount_amounts:
+          description: The aggregate amounts calculated per discount across all line items.
+          items:
+            $ref: "#/components/schemas/discounts_resource_discount_amount"
+          nullable: true
+          type: array
         total_tax_amounts:
           description: The aggregate amounts calculated per tax rate for all line items.
           items:
@@ -46777,11 +47486,13 @@ components:
         - default_source
         - default_tax_rates
         - discount
+        - discounts
         - lines
         - payment_intent
         - status_transitions
         - subscription
         - threshold_reason
+        - total_discount_amounts
         - total_tax_amounts
         - transfer_data
       x-resourceId: invoice
@@ -46984,6 +47695,18 @@ components:
         discountable:
           description: If true, discounts will apply to this invoice item. Always false for prorations.
           type: boolean
+        discounts:
+          description: The discounts which apply to the invoice item. Item discounts are applied before invoice discounts. Use `expand[]=discounts` to expand each discount.
+          items:
+            anyOf:
+              - maxLength: 5000
+                type: string
+              - $ref: "#/components/schemas/discount"
+            x-expansionResources:
+              oneOf:
+                - $ref: "#/components/schemas/discount"
+          nullable: true
+          type: array
         id:
           description: Unique identifier for the object.
           maxLength: 5000
@@ -47014,11 +47737,6 @@ components:
           type: string
         period:
           $ref: "#/components/schemas/invoice_line_item_period"
-        plan:
-          anyOf:
-            - $ref: "#/components/schemas/plan"
-          description: If the invoice item is a proration, the plan of the subscription that the proration was computed for.
-          nullable: true
         price:
           anyOf:
             - $ref: "#/components/schemas/price"
@@ -47076,9 +47794,9 @@ components:
       type: object
       x-expandableFields:
         - customer
+        - discounts
         - invoice
         - period
-        - plan
         - price
         - subscription
         - tax_rates
@@ -47548,7 +48266,7 @@ components:
         spending_controls:
           anyOf:
             - $ref: "#/components/schemas/issuing_cardholder_authorization_controls"
-          description: Spending rules that give you some control over how this cardholder's cards can be used. Refer to our [authorizations](https://stripe.com/docs/issuing/purchases/authorizations) documentation for more details.
+          description: Rules that control spending across this cardholder's cards. Refer to our [documentation](https://stripe.com/docs/issuing/controls/spending-controls) for more details.
           nullable: true
         status:
           description: Specifies whether to permit authorizations on this cardholder's cards.
@@ -47999,7 +48717,7 @@ components:
       description: ""
       properties:
         allowed_categories:
-          description: Array of strings containing [categories](https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category) of authorizations permitted on this card.
+          description: Array of strings containing [categories](https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category) of authorizations to allow. All other categories will be blocked. Cannot be set with `blocked_categories`.
           items:
             enum:
               - ac_refrigeration_repair
@@ -48294,7 +49012,7 @@ components:
           nullable: true
           type: array
         blocked_categories:
-          description: Array of strings containing [categories](https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category) of authorizations to always decline on this card.
+          description: Array of strings containing [categories](https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category) of authorizations to decline. All other categories will be allowed. Cannot be set with `allowed_categories`.
           items:
             enum:
               - ac_refrigeration_repair
@@ -48589,13 +49307,13 @@ components:
           nullable: true
           type: array
         spending_limits:
-          description: Limit the spending with rules based on time intervals and categories.
+          description: Limit spending with amount-based rules.
           items:
             $ref: "#/components/schemas/issuing_card_spending_limit"
           nullable: true
           type: array
         spending_limits_currency:
-          description: Currency for the amounts within spending_limits. Locked to the currency of the card.
+          description: Currency of the amounts within `spending_limits`. Always the same as the currency of the card.
           nullable: true
           type: string
       title: IssuingCardAuthorizationControls
@@ -48671,10 +49389,10 @@ components:
       description: ""
       properties:
         amount:
-          description: Maximum amount allowed to spend per time interval.
+          description: Maximum amount allowed to spend per interval.
           type: integer
         categories:
-          description: Array of strings containing [categories](https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category) on which to apply the spending limit. Leave this blank to limit all charges.
+          description: Array of strings containing [categories](https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category) this limit applies to. Omitting this field will apply the limit to all categories.
           items:
             enum:
               - ac_refrigeration_repair
@@ -48969,7 +49687,7 @@ components:
           nullable: true
           type: array
         interval:
-          description: The time interval or event with which to apply this spending limit towards.
+          description: Interval (or event) to which the amount applies.
           enum:
             - all_time
             - daily
@@ -48999,7 +49717,7 @@ components:
       description: ""
       properties:
         allowed_categories:
-          description: Array of strings containing [categories](https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category) of authorizations permitted on this cardholder's cards.
+          description: Array of strings containing [categories](https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category) of authorizations to allow. All other categories will be blocked. Cannot be set with `blocked_categories`.
           items:
             enum:
               - ac_refrigeration_repair
@@ -49294,7 +50012,7 @@ components:
           nullable: true
           type: array
         blocked_categories:
-          description: Array of strings containing [categories](https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category) of authorizations to always decline on this cardholder's cards.
+          description: Array of strings containing [categories](https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category) of authorizations to decline. All other categories will be allowed. Cannot be set with `allowed_categories`.
           items:
             enum:
               - ac_refrigeration_repair
@@ -49589,13 +50307,13 @@ components:
           nullable: true
           type: array
         spending_limits:
-          description: Limit the spending with rules based on time intervals and categories.
+          description: Limit spending with amount-based rules that apply across this cardholder's cards.
           items:
             $ref: "#/components/schemas/issuing_cardholder_spending_limit"
           nullable: true
           type: array
         spending_limits_currency:
-          description: Currency for the amounts within spending_limits.
+          description: Currency of the amounts within `spending_limits`.
           nullable: true
           type: string
       title: IssuingCardholderAuthorizationControls
@@ -49721,10 +50439,10 @@ components:
       description: ""
       properties:
         amount:
-          description: Maximum amount allowed to spend per time interval.
+          description: Maximum amount allowed to spend per interval.
           type: integer
         categories:
-          description: Array of strings containing [categories](https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category) on which to apply the spending limit. Leave this blank to limit all charges.
+          description: Array of strings containing [categories](https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category) this limit applies to. Omitting this field will apply the limit to all categories.
           items:
             enum:
               - ac_refrigeration_repair
@@ -50019,7 +50737,7 @@ components:
           nullable: true
           type: array
         interval:
-          description: The time interval or event with which to apply this spending limit towards.
+          description: Interval (or event) to which the amount applies.
           enum:
             - all_time
             - daily
@@ -50552,9 +51270,27 @@ components:
           maxLength: 5000
           nullable: true
           type: string
+        discount_amounts:
+          description: The amount of discount calculated per discount for this line item.
+          items:
+            $ref: "#/components/schemas/discounts_resource_discount_amount"
+          nullable: true
+          type: array
         discountable:
           description: If true, discounts will apply to this line item. Always false for prorations.
           type: boolean
+        discounts:
+          description: The discounts applied to the invoice line item. Line item discounts are applied before invoice discounts. Use `expand[]=discounts` to expand each discount.
+          items:
+            anyOf:
+              - maxLength: 5000
+                type: string
+              - $ref: "#/components/schemas/discount"
+            x-expansionResources:
+              oneOf:
+                - $ref: "#/components/schemas/discount"
+          nullable: true
+          type: array
         id:
           description: Unique identifier for the object.
           maxLength: 5000
@@ -50579,11 +51315,6 @@ components:
           type: string
         period:
           $ref: "#/components/schemas/invoice_line_item_period"
-        plan:
-          anyOf:
-            - $ref: "#/components/schemas/plan"
-          description: The plan of the subscription, if the line item is a subscription or a proration.
-          nullable: true
         price:
           anyOf:
             - $ref: "#/components/schemas/price"
@@ -50637,8 +51368,9 @@ components:
       title: InvoiceLineItem
       type: object
       x-expandableFields:
+        - discount_amounts
+        - discounts
         - period
-        - plan
         - price
         - tax_amounts
         - tax_rates
@@ -51250,6 +51982,12 @@ components:
       title: PackageDimensions
       type: object
       x-expandableFields: []
+    payment_flows_private_payment_methods_alipay:
+      description: ""
+      properties: {}
+      title: PaymentFlowsPrivatePaymentMethodsAlipay
+      type: object
+      x-expandableFields: []
     payment_flows_private_payment_methods_alipay_details:
       description: ""
       properties:
@@ -51575,6 +52313,8 @@ components:
     payment_intent_next_action:
       description: ""
       properties:
+        alipay_handle_redirect:
+          $ref: "#/components/schemas/payment_intent_next_action_alipay_handle_redirect"
         redirect_to_url:
           $ref: "#/components/schemas/payment_intent_next_action_redirect_to_url"
         type:
@@ -51589,7 +52329,34 @@ components:
       title: PaymentIntentNextAction
       type: object
       x-expandableFields:
+        - alipay_handle_redirect
         - redirect_to_url
+    payment_intent_next_action_alipay_handle_redirect:
+      description: ""
+      properties:
+        native_data:
+          description: The native data to be used with Alipay SDK you must redirect your customer to in order to authenticate the payment in an Android App.
+          maxLength: 5000
+          nullable: true
+          type: string
+        native_url:
+          description: The native URL you must redirect your customer to in order to authenticate the payment in an iOS App.
+          maxLength: 5000
+          nullable: true
+          type: string
+        return_url:
+          description: If the customer does not exit their browser while authenticating, they will be redirected to this specified URL after completion.
+          maxLength: 5000
+          nullable: true
+          type: string
+        url:
+          description: The URL you must redirect your customer to in order to authenticate the payment.
+          maxLength: 5000
+          nullable: true
+          type: string
+      title: PaymentIntentNextActionAlipayHandleRedirect
+      type: object
+      x-expandableFields: []
     payment_intent_next_action_redirect_to_url:
       description: ""
       properties:
@@ -51609,6 +52376,8 @@ components:
     payment_intent_payment_method_options:
       description: ""
       properties:
+        alipay:
+          $ref: "#/components/schemas/payment_method_options_alipay"
         bancontact:
           $ref: "#/components/schemas/payment_method_options_bancontact"
         card:
@@ -51616,6 +52385,7 @@ components:
       title: PaymentIntentPaymentMethodOptions
       type: object
       x-expandableFields:
+        - alipay
         - bancontact
         - card
     payment_intent_payment_method_options_card:
@@ -51668,6 +52438,8 @@ components:
 
         Related guides: [Payment Methods](https://stripe.com/docs/payments/payment-methods) and [More Payment Scenarios](https://stripe.com/docs/payments/more-payment-scenarios).
       properties:
+        alipay:
+          $ref: "#/components/schemas/payment_flows_private_payment_methods_alipay"
         au_becs_debit:
           $ref: "#/components/schemas/payment_method_au_becs_debit"
         bacs_debit:
@@ -51729,6 +52501,7 @@ components:
         type:
           description: The type of the PaymentMethod. An additional hash is included on the PaymentMethod with a name matching this value. It contains additional information specific to the PaymentMethod type.
           enum:
+            - alipay
             - au_becs_debit
             - bacs_debit
             - bancontact
@@ -51746,12 +52519,12 @@ components:
         - created
         - id
         - livemode
-        - metadata
         - object
         - type
       title: PaymentMethod
       type: object
       x-expandableFields:
+        - alipay
         - au_becs_debit
         - bacs_debit
         - bancontact
@@ -52494,6 +53267,15 @@ components:
     payment_method_details_card_present_receipt:
       description: ""
       properties:
+        account_type:
+          description: The type of account being debited or credited
+          enum:
+            - checking
+            - credit
+            - prepaid
+            - unknown
+          type: string
+          x-stripeBypassValidation: true
         application_cryptogram:
           description: EMV tag 9F26, cryptogram generated by the integrated circuit chip.
           maxLength: 5000
@@ -52870,9 +53652,13 @@ components:
       description: ""
       properties:
         account_type:
-          description: For Interac transactions - the source account type of the funds
-          maxLength: 5000
+          description: The type of account being debited or credited
+          enum:
+            - checking
+            - savings
+            - unknown
           type: string
+          x-stripeBypassValidation: true
         application_cryptogram:
           description: EMV tag 9F26, cryptogram generated by the integrated circuit chip.
           maxLength: 5000
@@ -53134,6 +53920,12 @@ components:
       description: ""
       properties: {}
       title: payment_method_interac_present
+      type: object
+      x-expandableFields: []
+    payment_method_options_alipay:
+      description: ""
+      properties: {}
+      title: payment_method_options_alipay
       type: object
       x-expandableFields: []
     payment_method_options_bancontact:
@@ -54340,6 +55132,107 @@ components:
       x-expandableFields:
         - package_dimensions
       x-resourceId: product
+    promotion_code:
+      description: >-
+        A Promotion Code represents a customer-redeemable code for a coupon. It can be used to
+
+        create multiple codes for a single coupon.
+      properties:
+        active:
+          description: Whether the promotion code is currently active. A promotion code is only active if the coupon is also valid.
+          type: boolean
+        code:
+          description: The customer-facing code. Regardless of case, this code must be unique across all active promotion codes for each customer.
+          maxLength: 5000
+          type: string
+        coupon:
+          $ref: "#/components/schemas/coupon"
+        created:
+          description: Time at which the object was created. Measured in seconds since the Unix epoch.
+          format: unix-time
+          type: integer
+        customer:
+          anyOf:
+            - maxLength: 5000
+              type: string
+            - $ref: "#/components/schemas/customer"
+            - $ref: "#/components/schemas/deleted_customer"
+          description: The customer that this promotion code can be used by.
+          nullable: true
+          x-expansionResources:
+            oneOf:
+              - $ref: "#/components/schemas/customer"
+              - $ref: "#/components/schemas/deleted_customer"
+        expires_at:
+          description: Date at which the promotion code can no longer be redeemed.
+          format: unix-time
+          nullable: true
+          type: integer
+        id:
+          description: Unique identifier for the object.
+          maxLength: 5000
+          type: string
+        livemode:
+          description: Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+          type: boolean
+        max_redemptions:
+          description: Maximum number of times this promotion code can be redeemed.
+          nullable: true
+          type: integer
+        metadata:
+          additionalProperties:
+            maxLength: 500
+            type: string
+          description: Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+          type: object
+        object:
+          description: String representing the object's type. Objects of the same type share the same value.
+          enum:
+            - promotion_code
+          type: string
+        restrictions:
+          $ref: "#/components/schemas/promotion_codes_resource_restrictions"
+        times_redeemed:
+          description: Number of times this promotion code has been used.
+          type: integer
+      required:
+        - active
+        - code
+        - coupon
+        - created
+        - id
+        - livemode
+        - metadata
+        - object
+        - restrictions
+        - times_redeemed
+      title: PromotionCode
+      type: object
+      x-expandableFields:
+        - coupon
+        - customer
+        - restrictions
+      x-resourceId: promotion_code
+    promotion_codes_resource_restrictions:
+      description: ""
+      properties:
+        first_time_transaction:
+          description: A Boolean indicating if the Promotion Code should only be redeemed for Customers without any successful payments or invoices
+          type: boolean
+        minimum_amount:
+          description: Minimum amount required to redeem this Promotion Code into a Coupon (e.g., a purchase must be $100 or more to work).
+          nullable: true
+          type: integer
+        minimum_amount_currency:
+          description: Three-letter [ISO code](https://stripe.com/docs/currencies) for minimum_amount
+          maxLength: 5000
+          nullable: true
+          type: string
+      required:
+        - first_time_transaction
+      title: PromotionCodesResourceRestrictions
+      type: object
+      x-expandableFields: []
     radar.early_fraud_warning:
       description: >-
         An early fraud warning indicates that the card issuer has notified us that a
@@ -57030,11 +57923,6 @@ components:
             - $ref: "#/components/schemas/subscriptions_resource_pending_update"
           description: If specified, [pending updates](https://stripe.com/docs/billing/subscriptions/pending-updates) that will be applied to the subscription once the `latest_invoice` has been paid.
           nullable: true
-        plan:
-          anyOf:
-            - $ref: "#/components/schemas/plan"
-          description: Hash describing the plan the customer is subscribed to. Only set if the subscription contains a single plan.
-          nullable: true
         quantity:
           description: The quantity of the plan to which the customer is subscribed. For example, if your plan is $10/user/month, and your customer has 5 users, you could pass 5 as the quantity to have the customer charged $50 (5 x $10) monthly. Only set if the subscription contains a single plan.
           nullable: true
@@ -57125,7 +58013,6 @@ components:
         - pending_invoice_item_interval
         - pending_setup_intent
         - pending_update
-        - plan
         - schedule
         - transfer_data
       x-resourceId: subscription
@@ -57172,8 +58059,6 @@ components:
           enum:
             - subscription_item
           type: string
-        plan:
-          $ref: "#/components/schemas/plan"
         price:
           $ref: "#/components/schemas/price"
         quantity:
@@ -57194,14 +58079,12 @@ components:
         - id
         - metadata
         - object
-        - plan
         - price
         - subscription
       title: SubscriptionItem
       type: object
       x-expandableFields:
         - billing_thresholds
-        - plan
         - price
         - tax_rates
       x-resourceId: subscription_item
@@ -57386,17 +58269,6 @@ components:
             - $ref: "#/components/schemas/subscription_item_billing_thresholds"
           description: Define thresholds at which an invoice will be sent, and the related subscription advanced to a new billing period
           nullable: true
-        plan:
-          anyOf:
-            - maxLength: 5000
-              type: string
-            - $ref: "#/components/schemas/plan"
-            - $ref: "#/components/schemas/deleted_plan"
-          description: ID of the plan to which the customer should be subscribed.
-          x-expansionResources:
-            oneOf:
-              - $ref: "#/components/schemas/plan"
-              - $ref: "#/components/schemas/deleted_plan"
         price:
           anyOf:
             - maxLength: 5000
@@ -57419,13 +58291,11 @@ components:
           nullable: true
           type: array
       required:
-        - plan
         - price
       title: SubscriptionScheduleConfigurationItem
       type: object
       x-expandableFields:
         - billing_thresholds
-        - plan
         - price
         - tax_rates
     subscription_schedule_current_phase:
@@ -57748,6 +58618,7 @@ components:
               type: string
             - $ref: "#/components/schemas/customer"
           description: ID of the customer.
+          nullable: true
           x-expansionResources:
             oneOf:
               - $ref: "#/components/schemas/customer"
@@ -57803,16 +58674,17 @@ components:
           maxLength: 5000
           type: string
         verification:
-          $ref: "#/components/schemas/tax_id_verification"
+          anyOf:
+            - $ref: "#/components/schemas/tax_id_verification"
+          description: Tax ID verification information.
+          nullable: true
       required:
         - created
-        - customer
         - id
         - livemode
         - object
         - type
         - value
-        - verification
       title: tax_id
       type: object
       x-expandableFields:

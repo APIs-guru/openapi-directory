@@ -1045,6 +1045,13 @@ paths:
           name: outcomes
           required: false
           type: string
+        - default: ""
+          description: >
+            If user_state is set, only posts matching the state specified will be returned.  Only one state may be passed and it must be one of the following: viewed, replied, bookmarked <br><br> NOTE: This option will only work with oauth requests.
+          in: query
+          name: user_state
+          required: false
+          type: string
       produces:
         - application/json
       responses:
@@ -1552,6 +1559,13 @@ paths:
           name: outcomes
           required: false
           type: string
+        - default: ""
+          description: >
+            If user_state is set, only posts matching the state specified will be returned.  Only one state may be passed and it must be one of the following: viewed, replied, bookmarked <br><br> NOTE: This option will only work with oauth requests.
+          in: query
+          name: user_state
+          required: false
+          type: string
       produces:
         - application/json
       responses:
@@ -1738,6 +1752,45 @@ paths:
       summary: Update a post
       tags:
         - posts
+  "/posts/{post_id}/bookmark":
+    delete:
+      operationId: delete_bookmark
+      parameters:
+        - in: path
+          name: post_id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: Bookmark deleted.
+        "404":
+          description: Post not found.
+      summary: Delete a post bookmark
+      tags:
+        - posts
+    put:
+      consumes:
+        - multipart/form-data
+      operationId: bookmark_post
+      parameters:
+        - in: path
+          name: post_id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: The post has been bookmarked.
+        "403":
+          description: The user doesn't have permission to view the post.
+        "404":
+          description: Post not found.
+      summary: Bookmark a post
+      tags:
+        - posts
   "/posts/{post_id}/display":
     get:
       description: >
@@ -1770,6 +1823,9 @@ paths:
               author_wanted_count:
                 description: Count of wanted posts made by the post author in the last 90 days.
                 type: integer
+              bookmarked:
+                description: Whether or not the current user has bookmarked this post.  Will be null for api key requests and for the current users' posts.
+                type: boolean
               feedback:
                 description: Feedback the current user has left on the post author.
                 items:
@@ -1784,9 +1840,15 @@ paths:
                 type: array
               post:
                 $ref: "#/definitions/Post"
+              replied:
+                description: Whether or not the current user has replied to this post.  Will be null for api key requests and for the current users' posts.
+                type: boolean
               user_can_reply:
                 description: >
                   Whether or not the current user (if any) can reply to this post. Unverified users cannot reply to posts until they verify their account.
+                type: boolean
+              viewed:
+                description: Whether or not the current user has previously viewed this post.  Will be null for api key requests and for the current users' posts.
                 type: boolean
             type: object
         "403":
@@ -2715,6 +2777,13 @@ paths:
           name: outcomes
           required: false
           type: string
+        - default: ""
+          description: >
+            If user_state is set, only posts matching the state specified will be returned.  Only one state may be passed and it must be one of the following: viewed, replied, bookmarked <br><br> NOTE: This option will only work with oauth requests.
+          in: query
+          name: user_state
+          required: false
+          type: string
       produces:
         - application/json
       responses:
@@ -2857,6 +2926,13 @@ paths:
             A comma separated list of the post outcomes to return.  The available post outcomes are: satisfied, withdrawn <br /><br /> There are also a couple special values that can be passed.  If set to an empty string (the default), only posts that are not satisfied and not withdrawn are returned. If set to 'all', all posts will be returned no matter what outcome the posts have.
           in: query
           name: outcomes
+          required: false
+          type: string
+        - default: ""
+          description: >
+            If user_state is set, only posts matching the state specified will be returned.  Only one state may be passed and it must be one of the following: viewed, replied, bookmarked <br><br> NOTE: This option will only work with oauth requests.
+          in: query
+          name: user_state
           required: false
           type: string
       produces:

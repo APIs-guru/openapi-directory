@@ -1,29 +1,30 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
-host: developer.opto22.com
 basePath: /api
 info:
   contact:
     email: developer@opto22.com
     name: Opto 22
-    url: 'http://developer.opto22.com'
+    url: http://developer.opto22.com
     x-twitter: opto22
-  description: |
+  description: >
     #### Revised: 2019-11-21
 
+
     ### Overview
+
     groov View Public API revision 1.
-  title: groov View Public
+  title: groov View Public API
   version: R4.2a
   x-apisguru-categories:
     - iot
   x-logo:
-    url: 'https://twitter.com/opto22/profile_image?size=original'
+    url: https://twitter.com/opto22/profile_image?size=original
   x-origin:
     - format: swagger
-      url: 'http://developer.opto22.com/static/generated/groov-rest-api/swagger.yaml'
-      version: '2.0'
+      url: http://developer.opto22.com/static/generated/groov-rest-api/swagger.yaml
+      version: "2.0"
   x-providerName: opto22.com
   x-serviceName: groov
 consumes:
@@ -50,10 +51,10 @@ paths:
       description: Get information about groov View. No authorization required.
       operationId: groovInfo
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/groovInfo'
+            $ref: "#/definitions/groovInfo"
       tags:
         - info
   /v1/data-store/devices:
@@ -61,26 +62,26 @@ paths:
       description: List devices available in the data store. Authorized for admins and editors.
       operationId: listDevices
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/dataStoreDevice'
+              $ref: "#/definitions/dataStoreDevice"
             type: array
       security:
         - api_key: []
       tags:
         - data-store
-  '/v1/data-store/devices/{id}/tags':
+  "/v1/data-store/devices/{id}/tags":
     get:
       description: List tags of the given device. Authorized for admins and editors.
       operationId: listDeviceTags
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/tagDefinition'
+              $ref: "#/definitions/tagDefinition"
             type: array
       security:
         - api_key: []
@@ -101,31 +102,31 @@ paths:
         required: true
         schema:
           items:
-            $ref: '#/definitions/tagReference'
+            $ref: "#/definitions/tagReference"
           type: array
     post:
       description: Read selected tags from the data store. Authorized for admins and editors.
       operationId: batchReadTags
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/tagValue'
+              $ref: "#/definitions/tagValue"
             type: array
       security:
         - api_key: []
       tags:
         - data-store
-  '/v1/data-store/read/{id}':
+  "/v1/data-store/read/{id}":
     get:
       description: Read the current value of a single tag. Authorized for admins and editors.
       operationId: readTag
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/tagValue'
+            $ref: "#/definitions/tagValue"
       security:
         - api_key: []
       tags:
@@ -156,17 +157,17 @@ paths:
       description: List all data store tags defined in the project. Authorized for admins and editors.
       operationId: listAllTags
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/tagDefinition'
+              $ref: "#/definitions/tagDefinition"
             type: array
       security:
         - api_key: []
       tags:
         - data-store
-  '/v1/data-store/write/{id}':
+  "/v1/data-store/write/{id}":
     parameters:
       - description: ID of the tag to write.
         format: int64
@@ -174,13 +175,13 @@ paths:
         name: id
         required: true
         type: number
-      - description: 'Value to write to the tag. Must be a string, number, or boolean.'
+      - description: Value to write to the tag. Must be a string, number, or boolean.
         in: query
         name: value
         required: true
         type: string
       - default: 0
-        description: 'For array tags, the index to write the value to.'
+        description: For array tags, the index to write the value to.
         format: int32
         in: query
         name: index
@@ -190,10 +191,10 @@ paths:
       description: Writes a new value to the given tag. Authorized for admins and editors.
       operationId: writeTag
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/tagValue'
+            $ref: "#/definitions/tagValue"
       security:
         - api_key: []
       tags:
@@ -217,7 +218,7 @@ paths:
           required: false
           type: string
         - default: 0
-          description: 'The earliest time to include in the log. Value is milliseconds since January 1, 1970 UTC.'
+          description: The earliest time to include in the log. Value is milliseconds since January 1, 1970 UTC.
           format: int64
           in: query
           name: last-timestamp
@@ -228,7 +229,7 @@ paths:
           name: filter
           type: string
       responses:
-        '200':
+        "200":
           description: Downloaded log file.
           schema:
             format: binary
@@ -256,7 +257,7 @@ paths:
           required: false
           type: string
         - default: 0
-          description: 'The earliest time to include in the log. Value is milliseconds since January 1, 1970 UTC.'
+          description: The earliest time to include in the log. Value is milliseconds since January 1, 1970 UTC.
           format: int64
           in: query
           name: last-timestamp
@@ -267,7 +268,7 @@ paths:
           name: filter
           type: string
       responses:
-        '200':
+        "200":
           description: Downloaded log file.
           schema:
             format: binary
@@ -278,13 +279,13 @@ paths:
         - logging
   /whoami:
     get:
-      description: 'Get information about the user you are authenticated as. Authorized for admins, editors, operators, and kiosk.'
+      description: Get information about the user you are authenticated as. Authorized for admins, editors, operators, and kiosk.
       operationId: whoAmI
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/User'
+            $ref: "#/definitions/User"
       security:
         - api_key: []
       tags:
@@ -322,7 +323,7 @@ definitions:
     type: object
   booleanArrayValue:
     allOf:
-      - $ref: '#/definitions/tagValue'
+      - $ref: "#/definitions/tagValue"
       - properties:
           value:
             items:
@@ -333,7 +334,7 @@ definitions:
         type: object
   booleanValue:
     allOf:
-      - $ref: '#/definitions/tagValue'
+      - $ref: "#/definitions/tagValue"
       - properties:
           value:
             type: boolean
@@ -342,7 +343,7 @@ definitions:
         type: object
   dataStoreDevice:
     allOf:
-      - $ref: '#/definitions/device'
+      - $ref: "#/definitions/device"
       - properties:
           id:
             format: int64
@@ -365,7 +366,7 @@ definitions:
     type: object
   errorValue:
     allOf:
-      - $ref: '#/definitions/tagValue'
+      - $ref: "#/definitions/tagValue"
       - properties:
           errorCode:
             type: string
@@ -377,7 +378,7 @@ definitions:
         type: object
   floatArrayValue:
     allOf:
-      - $ref: '#/definitions/tagValue'
+      - $ref: "#/definitions/tagValue"
       - properties:
           value:
             items:
@@ -389,7 +390,7 @@ definitions:
         type: object
   floatValue:
     allOf:
-      - $ref: '#/definitions/tagValue'
+      - $ref: "#/definitions/tagValue"
       - properties:
           value:
             format: float
@@ -407,7 +408,7 @@ definitions:
         description: The groov Admin version number if running on a groov hardware box
         type: string
       groovBoxDescription:
-        description: 'The groov box type (GROOV-AT1, GROOV-AR1, or GRV-EPIC-PR1)'
+        description: The groov box type (GROOV-AT1, GROOV-AR1, or GRV-EPIC-PR1)
         type: string
       groovNodeRedVersion:
         description: The node red version number if running on a GROOV-AR1 which has node red installed
@@ -419,10 +420,10 @@ definitions:
         description: True if running on a groov hardware box which has been setup or true if running on groov Server for Windows
         type: boolean
       isLicenseValid:
-        description: 'True if a license is installed, valid, and not expired'
+        description: True if a license is installed, valid, and not expired
         type: boolean
       licenseType:
-        description: 'The license type (NONE, MAINTENANCE_EXPIRED, or VALID)'
+        description: The license type (NONE, MAINTENANCE_EXPIRED, or VALID)
         type: string
       minimumApiVersion:
         description: The minimum supported API version number
@@ -448,6 +449,8 @@ definitions:
     required:
       - isGroovBox
       - isGroovBoxSetup
+      - isCoreInUse
+      - isOpcUaInUse
       - isLicenseValid
       - licenseType
       - trialPeriodExpiration
@@ -463,7 +466,7 @@ definitions:
     type: object
   integerArrayValue:
     allOf:
-      - $ref: '#/definitions/tagValue'
+      - $ref: "#/definitions/tagValue"
       - properties:
           value:
             items:
@@ -475,7 +478,7 @@ definitions:
         type: object
   integerValue:
     allOf:
-      - $ref: '#/definitions/tagValue'
+      - $ref: "#/definitions/tagValue"
       - properties:
           value:
             format: int64
@@ -485,7 +488,7 @@ definitions:
         type: object
   stringArrayValue:
     allOf:
-      - $ref: '#/definitions/tagValue'
+      - $ref: "#/definitions/tagValue"
       - properties:
           value:
             items:
@@ -496,7 +499,7 @@ definitions:
         type: object
   stringValue:
     allOf:
-      - $ref: '#/definitions/tagValue'
+      - $ref: "#/definitions/tagValue"
       - properties:
           value:
             type: string
@@ -536,7 +539,7 @@ definitions:
   tagReference:
     properties:
       count:
-        description: 'For array tags, the number of elements to read, starting at index.'
+        description: For array tags, the number of elements to read, starting at index.
         format: int32
         type: number
       id:
@@ -544,7 +547,7 @@ definitions:
         format: int64
         type: number
       index:
-        description: 'For array tags, the index to start reading at.'
+        description: For array tags, the index to start reading at.
         format: int32
         type: number
     required:

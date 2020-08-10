@@ -1,24 +1,25 @@
-swagger: '2.0'
-schemes:
-  - https
+swagger: "2.0"
 host: api.postmarkapp.com
 basePath: /
 info:
-  description: |
+  description: >
     Postmark makes sending and receiving email
+
     incredibly easy. The Account-level API allows users to
+
     configure all Servers, Domains, and Sender Signatures associated
+
     with an Account.
-  title: Postmark Account-level
+  title: Postmark Account-level API
   version: 0.9.0
   x-apisguru-categories:
     - email
   x-logo:
-    url: 'https://pbs.twimg.com/profile_images/879295889185157120/ZYlwxzeY_400x400.jpg'
+    url: https://pbs.twimg.com/profile_images/879295889185157120/ZYlwxzeY_400x400.jpg
   x-origin:
     - format: swagger
-      url: 'https://postmarkapp.com/swagger/account.yml'
-      version: '2.0'
+      url: https://postmarkapp.com/swagger/account.yml
+      version: "2.0"
   x-providerName: postmarkapp.com
   x-serviceName: account
 consumes:
@@ -26,11 +27,11 @@ consumes:
 produces:
   - application/json
 responses:
-  '422':
+  "422":
     description: An error was generated due to incorrect use of the API. See the Message associated with this response for more information.
     schema:
-      $ref: '#/definitions/StandardPostmarkResponse'
-  '500':
+      $ref: "#/definitions/StandardPostmarkResponse"
+  "500":
     description: Indicates an internal server error occurred.
 paths:
   /domains:
@@ -56,14 +57,14 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/DomainListingResults'
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+            $ref: "#/definitions/DomainListingResults"
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: List Domains
       tags:
         - Domains API
@@ -78,20 +79,20 @@ paths:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/DomainCreationModel'
+            $ref: "#/definitions/DomainCreationModel"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/DomainExtendedInformation'
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+            $ref: "#/definitions/DomainExtendedInformation"
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Create a Domain
       tags:
         - Domains API
-  '/domains/{domainid}':
+  "/domains/{domainid}":
     delete:
       operationId: deleteDomain
       parameters:
@@ -106,14 +107,14 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/StandardPostmarkResponse'
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+            $ref: "#/definitions/StandardPostmarkResponse"
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Delete a Domain
       tags:
         - Domains API
@@ -131,14 +132,14 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/DomainExtendedInformation'
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+            $ref: "#/definitions/DomainExtendedInformation"
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Get a Domain
       tags:
         - Domains API
@@ -158,26 +159,30 @@ paths:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/DomainEditingModel'
+            $ref: "#/definitions/DomainEditingModel"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/DomainExtendedInformation'
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+            $ref: "#/definitions/DomainExtendedInformation"
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Update a Domain
       tags:
         - Domains API
-  '/domains/{domainid}/rotatedkim':
+  "/domains/{domainid}/rotatedkim":
     post:
-      description: |
+      description: >
         Creates a new DKIM key to replace your current key. Until the DNS entries are confirmed,
+
         the new values will be in the `DKIMPendingHost` and `DKIMPendingTextValue` fields.
+
         After the new DKIM value is verified in DNS, the pending values will migrate to
+
         `DKIMTextValue` and `DKIMPendingTextValue` and Postmark will begin to sign emails
+
         with the new DKIM key.
       operationId: rotateDKIMKeyForDomain
       parameters:
@@ -192,18 +197,18 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/DKIMRotationResponse'
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+            $ref: "#/definitions/DKIMRotationResponse"
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Rotate DKIM Key
       tags:
         - Domains API
-  '/domains/{domainid}/verifydkim':
+  "/domains/{domainid}/verifydkim":
     put:
       operationId: requestDkimVerificationForDomain
       parameters:
@@ -218,18 +223,18 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/DomainExtendedInformation'
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+            $ref: "#/definitions/DomainExtendedInformation"
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Request DNS Verification for DKIM
       tags:
         - Domains API
-  '/domains/{domainid}/verifyreturnpath':
+  "/domains/{domainid}/verifyreturnpath":
     put:
       operationId: requestReturnPathVerificationForDomain
       parameters:
@@ -244,18 +249,18 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/DomainExtendedInformation'
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+            $ref: "#/definitions/DomainExtendedInformation"
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Request DNS Verification for Return-Path
       tags:
         - Domains API
-  '/domains/{domainid}/verifyspf':
+  "/domains/{domainid}/verifyspf":
     post:
       operationId: requestSPFVerificationForDomain
       parameters:
@@ -270,14 +275,14 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/DomainSPFResult'
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+            $ref: "#/definitions/DomainSPFResult"
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Request DNS Verification for SPF
       tags:
         - Domains API
@@ -304,14 +309,14 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/SenderListingResults'
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+            $ref: "#/definitions/SenderListingResults"
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: List Sender Signatures
       tags:
         - Sender Signatures API
@@ -326,20 +331,20 @@ paths:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/SenderSignatureCreationModel'
+            $ref: "#/definitions/SenderSignatureCreationModel"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/SenderSignatureExtendedInformation'
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+            $ref: "#/definitions/SenderSignatureExtendedInformation"
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Create a Sender Signature
       tags:
         - Sender Signatures API
-  '/senders/{signatureid}':
+  "/senders/{signatureid}":
     delete:
       operationId: deleteSenderSignature
       parameters:
@@ -354,14 +359,14 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/StandardPostmarkResponse'
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+            $ref: "#/definitions/StandardPostmarkResponse"
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Delete a Sender Signature
       tags:
         - Sender Signatures API
@@ -379,14 +384,14 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/SenderSignatureExtendedInformation'
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+            $ref: "#/definitions/SenderSignatureExtendedInformation"
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Get a Sender Signature
       tags:
         - Sender Signatures API
@@ -406,26 +411,30 @@ paths:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/SenderSignatureEditingModel'
+            $ref: "#/definitions/SenderSignatureEditingModel"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/SenderSignatureExtendedInformation'
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+            $ref: "#/definitions/SenderSignatureExtendedInformation"
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Update a Sender Signature
       tags:
         - Sender Signatures API
-  '/senders/{signatureid}/requestnewdkim':
+  "/senders/{signatureid}/requestnewdkim":
     post:
-      description: |
+      description: >
         Requests a new DKIM key to be created. Until the DNS entries are confirmed,
+
         the new values will be in the `DKIMPendingHost` and `DKIMPendingTextValue` fields.
+
         After the new DKIM value is verified in DNS, the pending values will migrate to
+
         `DKIMTextValue` and `DKIMPendingTextValue` and Postmark will begin to sign emails
+
         with the new DKIM key.
       operationId: requestNewDKIMKeyForSenderSignature
       parameters:
@@ -440,18 +449,18 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/StandardPostmarkResponse'
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+            $ref: "#/definitions/StandardPostmarkResponse"
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Request a new DKIM Key
       tags:
         - Sender Signatures API
-  '/senders/{signatureid}/resend':
+  "/senders/{signatureid}/resend":
     post:
       operationId: resendSenderSignatureConfirmationEmail
       parameters:
@@ -466,18 +475,18 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/StandardPostmarkResponse'
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+            $ref: "#/definitions/StandardPostmarkResponse"
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Resend Signature Confirmation Email
       tags:
         - Sender Signatures API
-  '/senders/{signatureid}/verifyspf':
+  "/senders/{signatureid}/verifyspf":
     post:
       operationId: requestSPFVerificationForSenderSignature
       parameters:
@@ -492,14 +501,14 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/SenderSignatureExtendedInformation'
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+            $ref: "#/definitions/SenderSignatureExtendedInformation"
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Request DNS Verification for SPF
       tags:
         - Sender Signatures API
@@ -527,14 +536,14 @@ paths:
           name: name
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ServerListingResponse'
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+            $ref: "#/definitions/ServerListingResponse"
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: List servers
       tags:
         - Server Management API
@@ -549,20 +558,20 @@ paths:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/CreateServerPayload'
+            $ref: "#/definitions/CreateServerPayload"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ExtendedServerInfo'
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+            $ref: "#/definitions/ExtendedServerInfo"
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Create a Server
       tags:
         - Server Management API
-  '/servers/{serverid}':
+  "/servers/{serverid}":
     delete:
       operationId: deleteServer
       parameters:
@@ -577,12 +586,12 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Delete a Server
       tags:
         - Server Management API
@@ -600,14 +609,14 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ExtendedServerInfo'
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+            $ref: "#/definitions/ExtendedServerInfo"
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Get a Server
       tags:
         - Server Management API
@@ -627,16 +636,16 @@ paths:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/EditServerPayload'
+            $ref: "#/definitions/EditServerPayload"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ExtendedServerInfo'
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+            $ref: "#/definitions/ExtendedServerInfo"
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Edit a Server
       tags:
         - Server Management API
@@ -653,22 +662,22 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/TemplatesPushModel'
+            $ref: "#/definitions/TemplatesPushModel"
       responses:
-        '200':
+        "200":
           description: ok
           schema:
-            $ref: '#/definitions/TemplatesPushResponse'
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+            $ref: "#/definitions/TemplatesPushResponse"
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Push templates from one server to another
       tags:
         - Templates API
 definitions:
   CreateServerPayload:
-    description: ''
+    description: ""
     properties:
       BounceHookUrl:
         type: string
@@ -704,7 +713,7 @@ definitions:
       TrackOpens:
         type: boolean
   DKIMRotationResponse:
-    description: ''
+    description: ""
     properties:
       DKIMHost:
         type: string
@@ -732,19 +741,19 @@ definitions:
       WeakDKIM:
         type: boolean
   DomainCreationModel:
-    description: ''
+    description: ""
     properties:
       Name:
         type: string
       ReturnPathDomain:
         type: string
   DomainEditingModel:
-    description: ''
+    description: ""
     properties:
       ReturnPathDomain:
         type: string
   DomainExtendedInformation:
-    description: ''
+    description: ""
     properties:
       DKIMHost:
         type: string
@@ -784,7 +793,7 @@ definitions:
       WeakDKIM:
         type: boolean
   DomainInformation:
-    description: ''
+    description: ""
     properties:
       DKIMVerified:
         type: boolean
@@ -800,16 +809,16 @@ definitions:
       WeakDKIM:
         type: boolean
   DomainListingResults:
-    description: ''
+    description: ""
     properties:
       Domains:
         items:
-          $ref: '#/definitions/DomainInformation'
+          $ref: "#/definitions/DomainInformation"
         type: array
       TotalCount:
         type: integer
   DomainSPFResult:
-    description: ''
+    description: ""
     properties:
       SPFHost:
         type: string
@@ -818,7 +827,7 @@ definitions:
       SPFVerified:
         type: boolean
   EditServerPayload:
-    description: ''
+    description: ""
     properties:
       BounceHookUrl:
         type: string
@@ -854,7 +863,7 @@ definitions:
       TrackOpens:
         type: boolean
   ExtendedServerInfo:
-    description: ''
+    description: ""
     properties:
       ApiTokens:
         items:
@@ -902,16 +911,16 @@ definitions:
       TrackOpens:
         type: boolean
   SenderListingResults:
-    description: ''
+    description: ""
     properties:
       SenderSignatures:
         items:
-          $ref: '#/definitions/SenderSignatureInformation'
+          $ref: "#/definitions/SenderSignatureInformation"
         type: array
       TotalCount:
         type: integer
   SenderSignatureCreationModel:
-    description: ''
+    description: ""
     properties:
       FromEmail:
         format: email
@@ -924,7 +933,7 @@ definitions:
       ReturnPathDomain:
         type: string
   SenderSignatureEditingModel:
-    description: ''
+    description: ""
     properties:
       Name:
         type: string
@@ -934,7 +943,7 @@ definitions:
       ReturnPathDomain:
         type: string
   SenderSignatureExtendedInformation:
-    description: ''
+    description: ""
     properties:
       Confirmed:
         type: boolean
@@ -984,7 +993,7 @@ definitions:
       WeakDKIM:
         type: boolean
   SenderSignatureInformation:
-    description: ''
+    description: ""
     properties:
       Confirmed:
         type: boolean
@@ -1006,7 +1015,7 @@ definitions:
     properties:
       Servers:
         items:
-          $ref: '#/definitions/ExtendedServerInfo'
+          $ref: "#/definitions/ExtendedServerInfo"
         type: array
       TotalCount:
         type: integer
@@ -1018,7 +1027,7 @@ definitions:
       Message:
         type: string
   TemplatesPushModel:
-    description: ''
+    description: ""
     properties:
       DestinationServerId:
         type: integer
@@ -1027,7 +1036,7 @@ definitions:
       SourceServerId:
         type: integer
   TemplatesPushResponse:
-    description: ''
+    description: ""
     properties:
       Templates:
         items:

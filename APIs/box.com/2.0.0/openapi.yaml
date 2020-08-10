@@ -3435,18 +3435,19 @@ paths:
                             have been invited to the folder (`collaborators`).
 
 
-                            This field defaults to the `default` access level,
+                            If not set, this field defaults to the access level specified
 
-                            which is the access level as specified by the
+                            by the enterprise admin. To create a shared link with this
 
-                            enterprise admin.
+                            default setting pass the `shared_link` object with
+
+                            no `access` field, for example `{ "shared_link": {} }`.
 
 
                             The `company` access level is only available to paid
 
                             accounts.
                           enum:
-                            - default
                             - open
                             - company
                             - collaborators
@@ -7241,18 +7242,19 @@ paths:
                             have been invited to the folder (`collaborators`).
 
 
-                            This field defaults to the `default` access level,
+                            If not set, this field defaults to the access level specified
 
-                            which is the access level as specified by the
+                            by the enterprise admin. To create a shared link with this
 
-                            enterprise admin.
+                            default setting pass the `shared_link` object with
+
+                            no `access` field, for example `{ "shared_link": {} }`.
 
 
                             The `company` access level is only available to paid
 
                             accounts.
                           enum:
-                            - default
                             - open
                             - company
                             - collaborators
@@ -8887,7 +8889,10 @@ paths:
       x-box-tag: folder_watermarks
   /group_memberships:
     post:
-      description: Creates a group membership
+      description: >-
+        Creates a group membership. Only users with
+
+        admin-level permissions will be able to use this API.
       operationId: post_group_memberships
       parameters:
         - description: >-
@@ -9001,7 +9006,12 @@ paths:
       x-box-tag: memberships
   "/group_memberships/{group_membership_id}":
     delete:
-      description: Deletes a specific group membership.
+      description: >-
+        Deletes a specific group membership. Only admins of this
+
+        group or users with admin-level permissions will be able to
+
+        use this API.
       operationId: delete_group_memberships_id
       parameters:
         - description: The ID of the group membership.
@@ -9028,7 +9038,12 @@ paths:
         - Group memberships
       x-box-tag: memberships
     get:
-      description: Retrieves a specific group membership.
+      description: >-
+        Retrieves a specific group membership. Only admins of this
+
+        group or users with admin-level permissions will be able to
+
+        use this API.
       operationId: get_group_memberships_id
       parameters:
         - description: The ID of the group membership.
@@ -9085,7 +9100,12 @@ paths:
         - Group memberships
       x-box-tag: memberships
     put:
-      description: Updates a user's group membership.
+      description: >-
+        Updates a user's group membership. Only admins of this
+
+        group or users with admin-level permissions will be able to
+
+        use this API.
       operationId: put_group_memberships_id
       parameters:
         - description: The ID of the group membership.
@@ -9427,7 +9447,10 @@ paths:
       x-box-tag: groups
   "/groups/{group_id}":
     delete:
-      description: Permanently deletes a group.
+      description: >-
+        Permanently deletes a group. Only users with
+
+        admin-level permissions will be able to use this API.
       operationId: delete_groups_id
       parameters:
         - description: The ID of the group.
@@ -9454,7 +9477,12 @@ paths:
         - Groups
       x-box-tag: groups
     get:
-      description: Retrieves information about a group.
+      description: >-
+        Retrieves information about a group. Only members of this
+
+        group or users with admin-level permissions will be able to
+
+        use this API.
       operationId: get_groups_id
       parameters:
         - description: The ID of the group.
@@ -9511,7 +9539,12 @@ paths:
         - Groups
       x-box-tag: groups
     put:
-      description: Updates a specific group.
+      description: >-
+        Updates a specific group. Only admins of this
+
+        group or users with admin-level permissions will be able to
+
+        use this API.
       operationId: put_groups_id
       parameters:
         - description: The ID of the group.
@@ -9742,9 +9775,11 @@ paths:
   "/groups/{group_id}/memberships":
     get:
       description: >-
-        Retrieves all the members for a group. The user
+        Retrieves all the members for a group. Only members of this
 
-        must have admin permissions to inspect enterprise's groups.
+        group or users with admin-level permissions will be able to
+
+        use this API.
       operationId: get_groups_id_memberships
       parameters:
         - description: The ID of the group.
@@ -15567,11 +15602,11 @@ paths:
   "/users/{user_id}/memberships":
     get:
       description: >-
-        Retrieves all the groups for a user. The user making
+        Retrieves all the groups for a user. Only members of this
 
-        an API call must have admin permissions to inspect the
+        group or users with admin-level permissions will be able to
 
-        enterprise's groups.
+        use this API.
       operationId: get_users_id_memberships
       parameters:
         - description: The ID of the user.
@@ -16501,14 +16536,14 @@ paths:
                     download_url: https://dl.boxcloud.com/2.0/zip_downloads/29l00nfxDyHOt7RphI9zT_w==nDnZEDjY2S8iEWWCHEEiptFxwoWojjlibZjJ6geuE5xnXENDTPxzgbks_yY=/content
                     expires_at: 2020-07-22T11:26:08Z
                     name_conflicts:
-                      - download_name: 3aa6a7.pdf
-                        id: 12345
-                        original_name: Report.pdf
-                        type: file
-                      - download_name: 5d53f2.pdf
-                        id: 34325
-                        original_name: Report.pdf
-                        type: file
+                      - - download_name: 3aa6a7.pdf
+                          id: 12345
+                          original_name: Report.pdf
+                          type: file
+                        - download_name: 5d53f2.pdf
+                          id: 34325
+                          original_name: Report.pdf
+                          type: file
                     status_url: https://api.box.com/2.0/zip_downloads/29l00nfxDyHOt7RphI9zT_w==nDnZEDjY2S8iEWWCHEEiptFxwoWojjlibZjJ6geuE5xnXENDTPxzgbks_yY=/status
               schema:
                 $ref: "#/components/schemas/ZipDownload"
@@ -18564,7 +18599,7 @@ components:
 
                     be `null` or have a timestamp in the past.
               nullable: true
-            metadata2:
+            metadata:
               allOf:
                 - additionalProperties:
                     additionalProperties:
@@ -21386,7 +21421,11 @@ components:
           description: >-
             Specifies the template used in the query. Must be in the form
 
-            `scope.templateKey`.
+            `scope.templateKey`. Not all templates can be used in this field,
+
+            most notably the built-in, Box-provided classification templates
+
+            can not be used in a query.
           example: enterprise_123456.someTemplate
           type: string
         limit:
@@ -24995,6 +25034,19 @@ components:
         Represents a successful request to create a `zip` archive of a list of files
 
         and folders.
+      example:
+        download_url: https://dl.boxcloud.com/2.0/zip_downloads/29l00nfxDyHOt7RphI9zT_w==nDnZEDjY2S8iEWWCHEEiptFxwoWojjlibZjJ6geuE5xnXENDTPxzgbks_yY=/content
+        expires_at: 2020-07-22T11:26:08Z
+        name_conflicts:
+          - - download_name: 3aa6a7.pdf
+              id: "12345"
+              original_name: Report.pdf
+              type: file
+            - download_name: 5d53f2.pdf
+              id: "34325"
+              original_name: Report.pdf
+              type: file
+        status_url: https://api.box.com/2.0/zip_downloads/29l00nfxDyHOt7RphI9zT_w==nDnZEDjY2S8iEWWCHEEiptFxwoWojjlibZjJ6geuE5xnXENDTPxzgbks_yY=/status
       properties:
         download_url:
           description: >-
@@ -25052,37 +25104,40 @@ components:
             will always be a multiple of 2.
           items:
             description: >-
-              In individual conflict that occurred when trying to create the archive.
+              An individual conflict that occurred when trying to create the archive.
 
-              This objects provides the type and identifier of the original item, as
+              This includes an array of 2 objects, each containing the original name
 
-              well as a mapping between its original name and it's new name as it will
+              and the renamed filename of a file or folder for which the names
 
-              appear in the archive.
-            properties:
-              download_name:
-                description: >-
-                  The new name of this item as it will appear in the
+              conflicted.
+            items:
+              description: A file or folder for which a conflict was encountered, This object provides the type and identifier of the original item, as well as a mapping between its original name and it's new name as it will appear in the archive.
+              properties:
+                download_name:
+                  description: >-
+                    The new name of this item as it will appear in the
 
-                  downloaded `zip` archive.
-                example: 3aa6a7.pdf
-                type: string
-              id:
-                description: The identifier of the item
-                example: "12345"
-                type: string
-              original_name:
-                description: The original name of this item
-                example: Report.pdf
-                type: string
-              type:
-                description: The type of this item
-                enum:
-                  - file
-                  - folder
-                example: file
-                type: string
-            type: object
+                    downloaded `zip` archive.
+                  example: 3aa6a7.pdf
+                  type: string
+                id:
+                  description: The identifier of the item
+                  example: "12345"
+                  type: string
+                original_name:
+                  description: The original name of this item
+                  example: Report.pdf
+                  type: string
+                type:
+                  description: The type of this item
+                  enum:
+                    - file
+                    - folder
+                  example: file
+                  type: string
+              type: object
+            type: array
           type: array
         status_url:
           description: >-

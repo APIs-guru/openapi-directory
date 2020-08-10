@@ -48,6 +48,26 @@ paths:
           name: active
           schema:
             type: boolean
+        - $ref: "#/components/parameters/paginate_limit1"
+        - $ref: "#/components/parameters/paginate_page1"
+        - $ref: "#/components/parameters/paginate_enabled1"
+        - $ref: "#/components/parameters/sort_by1"
+        - $ref: "#/components/parameters/sort_order1"
+        - $ref: "#/components/parameters/parameter1"
+        - $ref: "#/components/parameters/parameter2"
+        - $ref: "#/components/parameters/parameter3"
+        - $ref: "#/components/parameters/parameter4"
+        - description: Populate location
+          in: query
+          name: include_location
+          schema:
+            type: boolean
+        - description: Populate evses
+          in: query
+          name: include_evses
+          schema:
+            type: boolean
+        - $ref: "#/components/parameters/include_organization1"
       responses:
         "200":
           description: Success
@@ -107,6 +127,21 @@ paths:
           required: true
           schema:
             type: string
+        - description: Populate location
+          in: query
+          name: include_location
+          schema:
+            type: boolean
+        - description: Populate evses
+          in: query
+          name: include_evses
+          schema:
+            type: boolean
+        - description: Populate organization
+          in: query
+          name: include_organization
+          schema:
+            type: boolean
       responses:
         "200":
           description: Success
@@ -149,15 +184,17 @@ paths:
         - Charge Stations
   "/v1/chargestations/{id}/connectors":
     get:
-      description: Get Connectors data filtered by ChargeStation
+      description: Get connectors data filtered by chargeStation
       operationId: getChargeStationConnectors
       parameters:
-        - description: The ChargeStation id that connectors need to be fetched for
+        - description: The chargeStation id that connectors need to be fetched for
           in: path
           name: id
           required: true
           schema:
             type: string
+        - $ref: "#/components/parameters/include_evse1"
+        - $ref: "#/components/parameters/include_organization1"
       responses:
         "200":
           description: Success
@@ -167,6 +204,24 @@ paths:
     get:
       description: Get Commands data
       operationId: getCommands
+      parameters:
+        - $ref: "#/components/parameters/paginate_limit1"
+        - $ref: "#/components/parameters/paginate_page1"
+        - $ref: "#/components/parameters/paginate_enabled1"
+        - $ref: "#/components/parameters/sort_by1"
+        - $ref: "#/components/parameters/sort_order1"
+        - $ref: "#/components/parameters/parameter1"
+        - $ref: "#/components/parameters/parameter2"
+        - $ref: "#/components/parameters/parameter3"
+        - $ref: "#/components/parameters/parameter4"
+        - $ref: "#/components/parameters/include_chargestation1"
+        - $ref: "#/components/parameters/include_driver1"
+        - description: Populate transaction
+          in: query
+          name: include_transaction
+          schema:
+            type: boolean
+        - $ref: "#/components/parameters/include_organization1"
       responses:
         "200":
           description: Success
@@ -215,13 +270,9 @@ paths:
                 chargestation:
                   type: string
                 connector:
-                  minimum: 1
-                  type: integer
-                evdriver:
                   type: string
-                evse:
-                  minimum: 1
-                  type: integer
+                driver:
+                  type: string
                 token:
                   type: string
               type: object
@@ -255,7 +306,7 @@ paths:
               properties:
                 chargestation:
                   type: string
-                evdriver:
+                driver:
                   type: string
                 transaction:
                   type: string
@@ -281,15 +332,11 @@ paths:
                 chargestation:
                   type: string
                 connector:
-                  minimum: 1
-                  type: integer
+                  type: string
+                driver:
+                  type: string
                 endDate:
                   type: string
-                evdriver:
-                  type: string
-                evse:
-                  minimum: 1
-                  type: integer
                 token:
                   type: string
               type: object
@@ -357,11 +404,7 @@ paths:
                 chargestation:
                   type: string
                 connector:
-                  minimum: 1
-                  type: integer
-                evse:
-                  minimum: 1
-                  type: integer
+                  type: string
               type: object
         required: true
       responses:
@@ -386,6 +429,16 @@ paths:
     get:
       description: Get Configurations data
       operationId: getConfigurations
+      parameters:
+        - $ref: "#/components/parameters/paginate_limit1"
+        - $ref: "#/components/parameters/paginate_page1"
+        - $ref: "#/components/parameters/paginate_enabled1"
+        - $ref: "#/components/parameters/sort_by1"
+        - $ref: "#/components/parameters/sort_order1"
+        - $ref: "#/components/parameters/parameter1"
+        - $ref: "#/components/parameters/parameter2"
+        - $ref: "#/components/parameters/parameter3"
+        - $ref: "#/components/parameters/parameter4"
       responses:
         "200":
           description: Success
@@ -442,8 +495,20 @@ paths:
         - Configurations
   /v1/connectors:
     get:
-      description: Get Connectors data
+      description: Get connectors data
       operationId: getConnectors
+      parameters:
+        - $ref: "#/components/parameters/paginate_limit1"
+        - $ref: "#/components/parameters/paginate_page1"
+        - $ref: "#/components/parameters/paginate_enabled1"
+        - $ref: "#/components/parameters/sort_by1"
+        - $ref: "#/components/parameters/sort_order1"
+        - $ref: "#/components/parameters/parameter1"
+        - $ref: "#/components/parameters/parameter2"
+        - $ref: "#/components/parameters/parameter3"
+        - $ref: "#/components/parameters/parameter4"
+        - $ref: "#/components/parameters/include_evse1"
+        - $ref: "#/components/parameters/include_organization1"
       responses:
         "200":
           description: Success
@@ -490,15 +555,25 @@ paths:
         - Connectors
   "/v1/connectors/{id}":
     get:
-      description: Get one Connector data
+      description: Get one connector data
       operationId: getConnector
       parameters:
-        - description: ID of Connector that needs to be fetched
+        - description: ID of connector that needs to be fetched
           in: path
           name: id
           required: true
           schema:
             type: string
+        - description: Populate evse
+          in: query
+          name: include_evse
+          schema:
+            type: boolean
+        - description: Populate organization
+          in: query
+          name: include_organization
+          schema:
+            type: boolean
       responses:
         "200":
           description: Success
@@ -508,7 +583,7 @@ paths:
       description: Update connector parameters
       operationId: patchConnector
       parameters:
-        - description: ID of Connector that needs to be updated
+        - description: ID of connector that needs to be updated
           in: path
           name: id
           required: true
@@ -530,7 +605,7 @@ paths:
                 type:
                   type: string
               type: object
-        description: Include Connector properties to update here
+        description: Include connector properties to update here
         required: true
       responses:
         "201":
@@ -560,6 +635,26 @@ paths:
           name: active
           schema:
             type: boolean
+        - $ref: "#/components/parameters/paginate_limit1"
+        - $ref: "#/components/parameters/paginate_page1"
+        - $ref: "#/components/parameters/paginate_enabled1"
+        - $ref: "#/components/parameters/sort_by1"
+        - $ref: "#/components/parameters/sort_order1"
+        - $ref: "#/components/parameters/parameter1"
+        - $ref: "#/components/parameters/parameter2"
+        - $ref: "#/components/parameters/parameter3"
+        - $ref: "#/components/parameters/parameter4"
+        - description: Populate tokens
+          in: query
+          name: include_tokens
+          schema:
+            type: boolean
+        - description: Populate group
+          in: query
+          name: include_group
+          schema:
+            type: boolean
+        - $ref: "#/components/parameters/include_organization1"
       responses:
         "200":
           content:
@@ -674,6 +769,21 @@ paths:
           required: true
           schema:
             type: string
+        - description: Populate tokens
+          in: query
+          name: include_tokens
+          schema:
+            type: boolean
+        - description: Populate group
+          in: query
+          name: include_group
+          schema:
+            type: boolean
+        - description: Populate organization
+          in: query
+          name: include_organization
+          schema:
+            type: boolean
       responses:
         "200":
           description: Success
@@ -753,6 +863,17 @@ paths:
     get:
       description: Get Locations data
       operationId: getLocations
+      parameters:
+        - $ref: "#/components/parameters/paginate_limit1"
+        - $ref: "#/components/parameters/paginate_page1"
+        - $ref: "#/components/parameters/paginate_enabled1"
+        - $ref: "#/components/parameters/sort_by1"
+        - $ref: "#/components/parameters/sort_order1"
+        - $ref: "#/components/parameters/parameter1"
+        - $ref: "#/components/parameters/parameter2"
+        - $ref: "#/components/parameters/parameter3"
+        - $ref: "#/components/parameters/parameter4"
+        - $ref: "#/components/parameters/include_organization1"
       responses:
         "200":
           description: Success
@@ -762,6 +883,21 @@ paths:
     get:
       description: Get Organizations data
       operationId: getOrganizations
+      parameters:
+        - $ref: "#/components/parameters/paginate_limit1"
+        - $ref: "#/components/parameters/paginate_page1"
+        - $ref: "#/components/parameters/paginate_enabled1"
+        - $ref: "#/components/parameters/sort_by1"
+        - $ref: "#/components/parameters/sort_order1"
+        - $ref: "#/components/parameters/parameter1"
+        - $ref: "#/components/parameters/parameter2"
+        - $ref: "#/components/parameters/parameter3"
+        - $ref: "#/components/parameters/parameter4"
+        - description: Populate locations
+          in: query
+          name: include_locations
+          schema:
+            type: boolean
       responses:
         "200":
           description: Success
@@ -778,6 +914,11 @@ paths:
           required: true
           schema:
             type: string
+        - description: Populate locations
+          in: query
+          name: include_locations
+          schema:
+            type: boolean
       responses:
         "200":
           description: Success
@@ -874,6 +1015,18 @@ paths:
     get:
       description: Get Reservations data
       operationId: getReservations
+      parameters:
+        - $ref: "#/components/parameters/paginate_limit1"
+        - $ref: "#/components/parameters/paginate_page1"
+        - $ref: "#/components/parameters/paginate_enabled1"
+        - $ref: "#/components/parameters/sort_by1"
+        - $ref: "#/components/parameters/sort_order1"
+        - $ref: "#/components/parameters/parameter1"
+        - $ref: "#/components/parameters/parameter2"
+        - $ref: "#/components/parameters/parameter3"
+        - $ref: "#/components/parameters/parameter4"
+        - $ref: "#/components/parameters/include_chargestation1"
+        - $ref: "#/components/parameters/include_organization1"
       responses:
         "200":
           description: Success
@@ -890,6 +1043,16 @@ paths:
           required: true
           schema:
             type: string
+        - description: Populate chargestation
+          in: query
+          name: include_chargestation
+          schema:
+            type: boolean
+        - description: Populate organization
+          in: query
+          name: include_organization
+          schema:
+            type: boolean
       responses:
         "200":
           description: Success
@@ -913,9 +1076,9 @@ paths:
                 connector:
                   minimum: 1
                   type: integer
-                endDate:
+                driver:
                   type: string
-                evdriver:
+                endDate:
                   type: string
                 evse:
                   minimum: 1
@@ -962,18 +1125,8 @@ paths:
             enum:
               - count
             type: string
-        - description: Date as ISO String
-          in: query
-          name: from
-          required: true
-          schema:
-            type: string
-        - description: Date as ISO String
-          in: query
-          name: to
-          required: true
-          schema:
-            type: string
+        - $ref: "#/components/parameters/parameter3"
+        - $ref: "#/components/parameters/parameter4"
       responses:
         "200":
           description: Success
@@ -985,6 +1138,18 @@ paths:
     get:
       description: Get Tokens data
       operationId: getTokens
+      parameters:
+        - $ref: "#/components/parameters/paginate_limit1"
+        - $ref: "#/components/parameters/paginate_page1"
+        - $ref: "#/components/parameters/paginate_enabled1"
+        - $ref: "#/components/parameters/sort_by1"
+        - $ref: "#/components/parameters/sort_order1"
+        - $ref: "#/components/parameters/parameter1"
+        - $ref: "#/components/parameters/parameter2"
+        - $ref: "#/components/parameters/parameter3"
+        - $ref: "#/components/parameters/parameter4"
+        - $ref: "#/components/parameters/include_driver1"
+        - $ref: "#/components/parameters/include_organization1"
       responses:
         "200":
           content:
@@ -1022,7 +1187,7 @@ paths:
                     - telegram
                     - sms
                   type: string
-                evdriver:
+                driver:
                   type: string
                 physicalId:
                   type: string
@@ -1031,7 +1196,7 @@ paths:
               required:
                 - active
                 - physicalId
-                - evdriver
+                - driver
                 - channel
               type: object
         description: Include token properties to create here
@@ -1081,6 +1246,16 @@ paths:
           required: true
           schema:
             type: string
+        - description: Populate driver
+          in: query
+          name: include_driver
+          schema:
+            type: boolean
+        - description: Populate organization
+          in: query
+          name: include_organization
+          schema:
+            type: boolean
       responses:
         "200":
           description: Success
@@ -1111,7 +1286,7 @@ paths:
                     - telegram
                     - sms
                   type: string
-                evdriver:
+                driver:
                   type: string
                 physicalId:
                   type: string
@@ -1144,48 +1319,42 @@ paths:
       description: Get all transactions
       operationId: getTransactions
       parameters:
-        - description: Number of results per page
+        - description: Started to get only active transactions
           in: query
-          name: limit
+          name: status
           schema:
-            default: 10
-            maximum: 100
-            minimum: 1
-            type: integer
-        - description: Sort data by this key
-          in: query
-          name: sortBy
-          schema:
+            enum:
+              - Started
+              - Ended
             type: string
-        - description: The queried page index.
+        - $ref: "#/components/parameters/paginate_limit1"
+        - $ref: "#/components/parameters/paginate_page1"
+        - $ref: "#/components/parameters/paginate_enabled1"
+        - $ref: "#/components/parameters/sort_by1"
+        - $ref: "#/components/parameters/sort_order1"
+        - $ref: "#/components/parameters/parameter1"
+        - $ref: "#/components/parameters/parameter2"
+        - $ref: "#/components/parameters/parameter3"
+        - $ref: "#/components/parameters/parameter4"
+        - $ref: "#/components/parameters/include_chargestation1"
+        - $ref: "#/components/parameters/include_evse1"
+        - description: Populate connector
           in: query
-          name: page
+          name: include_connector
           schema:
-            type: string
-        - description: True to sort ascending (default is false - descending)
-          in: query
-          name: sortAscending
-          schema:
-            default: false
             type: boolean
-        - description: True to get only active transactions
+        - $ref: "#/components/parameters/include_driver1"
+        - description: Populate token
           in: query
-          name: onlyActive
+          name: include_token
           schema:
-            default: false
             type: boolean
-        - description: Date as ISO String
+        - description: Populate reservation
           in: query
-          name: from
-          required: true
+          name: include_reservation
           schema:
-            type: string
-        - description: Date as ISO String
-          in: query
-          name: to
-          required: true
-          schema:
-            type: string
+            type: boolean
+        - $ref: "#/components/parameters/include_organization1"
       responses:
         "200":
           content:
@@ -1220,9 +1389,39 @@ paths:
           required: true
           schema:
             type: string
-        - description: Return Driver Info based on Identification Method used for this transaction
+        - description: Populate chargestation
           in: query
-          name: driver
+          name: include_chargestation
+          schema:
+            type: boolean
+        - description: Populate evse
+          in: query
+          name: include_evse
+          schema:
+            type: boolean
+        - description: Populate connector
+          in: query
+          name: include_connector
+          schema:
+            type: boolean
+        - description: Populate driver
+          in: query
+          name: include_driver
+          schema:
+            type: boolean
+        - description: Populate token
+          in: query
+          name: include_token
+          schema:
+            type: boolean
+        - description: Populate reservation
+          in: query
+          name: include_reservation
+          schema:
+            type: boolean
+        - description: Populate organization
+          in: query
+          name: include_organization
           schema:
             type: boolean
       responses:
@@ -1233,6 +1432,98 @@ paths:
       tags:
         - Transactions
 components:
+  parameters:
+    include_chargestation1:
+      description: Populate chargestation
+      in: query
+      name: include_chargestation
+      schema:
+        type: boolean
+    include_driver1:
+      description: Populate driver
+      in: query
+      name: include_driver
+      schema:
+        type: boolean
+    include_evse1:
+      description: Populate evse
+      in: query
+      name: include_evse
+      schema:
+        type: boolean
+    include_organization1:
+      description: Populate organization
+      in: query
+      name: include_organization
+      schema:
+        type: boolean
+    paginate_enabled1:
+      description: Enable pagination
+      in: query
+      name: paginate_enabled
+      schema:
+        default: true
+        type: boolean
+    paginate_limit1:
+      description: Number of results per page
+      in: query
+      name: paginate_limit
+      schema:
+        default: 20
+        maximum: 1000
+        minimum: 1
+        type: integer
+    paginate_page1:
+      description: The queried page index
+      in: query
+      name: paginate_page
+      schema:
+        type: string
+    parameter1:
+      description: Date as ISO String
+      in: query
+      name: createdAt[$gte]
+      schema:
+        format: date-time
+        type: string
+    parameter2:
+      description: Date as ISO String
+      in: query
+      name: createdAt[$lte]
+      schema:
+        format: date-time
+        type: string
+    parameter3:
+      description: Date as ISO String
+      in: query
+      name: updatedAt[$gte]
+      schema:
+        format: date-time
+        type: string
+    parameter4:
+      description: Date as ISO String
+      in: query
+      name: updatedAt[$lte]
+      schema:
+        format: date-time
+        type: string
+    sort_by1:
+      description: Sort data by this key
+      in: query
+      name: sort_by
+      schema:
+        default: createdAt
+        type: string
+    sort_order1:
+      description: asc to sort ascending (default is desc - descending)
+      in: query
+      name: sort_order
+      schema:
+        default: desc
+        enum:
+          - desc
+          - asc
+        type: string
   schemas:
     schema1:
       properties:
@@ -1294,7 +1585,7 @@ components:
       type: oauth2
 x-explorer-enabled: true
 x-github-repo: rsafaya-edrv/edrv-api
-x-github-sha: df5aa5f0d5bd2b84c4ed31c52f5ffdaf5e46c60f
+x-github-sha: 835ffdaf49a9b7b058821c7e2767f43efef84cae
 x-proxy-enabled: true
 x-samples-enabled: true
 x-samples-languages:

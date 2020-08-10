@@ -46,6 +46,13 @@ parameters:
     name: limit
     required: false
     type: integer
+  LocaleParam:
+    description: Locale code of the translation
+    format: string
+    in: query
+    name: locale
+    required: false
+    type: string
   LoginParam:
     description: API OAuth login.
     format: string
@@ -1379,38 +1386,6 @@ paths:
       summary: Create a new Order History Entry.
       tags:
         - Orders
-  "/orders/{id}/shipping.json":
-    put:
-      description: "Only 'name' and 'amount' are available for update.<br/>Use the JSON format:<br/>'{ \"shipping\": {\"name\": \"Shipping Service Name\", \"amount\": \"1000.00\"}}'<br/>or in CURL:<br/>curl -X PUT -d '{ \"shipping\": {\"name\": \"Shipping Service Name\", \"amount\": \"1000.00\"}}' \"https://610d738f.ngrok.io/api/v1/orders/{id}/shipping.json?login=storecode&authtoken=XXXXX\" -H \"Content-Type:application/json\" "
-      parameters:
-        - $ref: "#/parameters/LoginParam"
-        - $ref: "#/parameters/AuthtokenParam"
-        - description: Id of the Order
-          format: int32
-          in: path
-          name: id
-          required: true
-          type: integer
-        - description: Order Shipping parameters to change
-          in: body
-          name: body
-          required: true
-          schema:
-            $ref: "#/definitions/OrderShippingEdit"
-      responses:
-        "200":
-          description: OK
-          schema:
-            items:
-              $ref: "#/definitions/Order"
-            type: array
-        "404":
-          description: Order Not Found.
-          schema:
-            $ref: "#/definitions/NotFound"
-      summary: Modify an existing Order's shipping method name and amount.
-      tags:
-        - Orders
   /payment_methods.json:
     get:
       parameters:
@@ -1456,6 +1431,7 @@ paths:
         - $ref: "#/parameters/AuthtokenParam"
         - $ref: "#/parameters/LimitParam"
         - $ref: "#/parameters/PageParam"
+        - $ref: "#/parameters/LocaleParam"
       responses:
         "200":
           description: OK
@@ -1470,6 +1446,7 @@ paths:
       parameters:
         - $ref: "#/parameters/LoginParam"
         - $ref: "#/parameters/AuthtokenParam"
+        - $ref: "#/parameters/LocaleParam"
         - description: Product parameters.
           in: body
           name: body
@@ -1492,6 +1469,7 @@ paths:
         - $ref: "#/parameters/LoginParam"
         - $ref: "#/parameters/AuthtokenParam"
         - $ref: "#/parameters/ProductIDParam"
+        - $ref: "#/parameters/LocaleParam"
       responses:
         "200":
           description: OK
@@ -1511,6 +1489,7 @@ paths:
       parameters:
         - $ref: "#/parameters/LoginParam"
         - $ref: "#/parameters/AuthtokenParam"
+        - $ref: "#/parameters/LocaleParam"
         - description: Category ID of the Product used as filter
           format: int32
           in: path
@@ -1536,6 +1515,7 @@ paths:
       parameters:
         - $ref: "#/parameters/LoginParam"
         - $ref: "#/parameters/AuthtokenParam"
+        - $ref: "#/parameters/LocaleParam"
         - description: Category ID of the Product used as filter
           format: int32
           in: path
@@ -1572,6 +1552,7 @@ paths:
       parameters:
         - $ref: "#/parameters/LoginParam"
         - $ref: "#/parameters/AuthtokenParam"
+        - $ref: "#/parameters/LocaleParam"
         - description: Query for the Product
           format: string
           in: query
@@ -1597,6 +1578,7 @@ paths:
       parameters:
         - $ref: "#/parameters/LoginParam"
         - $ref: "#/parameters/AuthtokenParam"
+        - $ref: "#/parameters/LocaleParam"
         - description: Status of the Product used as filter
           enum:
             - available
@@ -1625,6 +1607,7 @@ paths:
       parameters:
         - $ref: "#/parameters/LoginParam"
         - $ref: "#/parameters/AuthtokenParam"
+        - $ref: "#/parameters/LocaleParam"
         - description: Status of the Product used as filter
           enum:
             - available
@@ -1668,6 +1651,7 @@ paths:
       parameters:
         - $ref: "#/parameters/LoginParam"
         - $ref: "#/parameters/AuthtokenParam"
+        - $ref: "#/parameters/LocaleParam"
         - description: ID of the Product
           format: int32
           in: path
@@ -1691,6 +1675,7 @@ paths:
         - $ref: "#/parameters/LoginParam"
         - $ref: "#/parameters/AuthtokenParam"
         - $ref: "#/parameters/ProductIDParam"
+        - $ref: "#/parameters/LocaleParam"
         - description: Product parameters to change
           in: body
           name: body
@@ -2730,7 +2715,51 @@ paths:
       summary: Retrieve all Store's Shipping Methods.
       tags:
         - Shipping Methods
+    post:
+      parameters:
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
+        - description: Shipping Method parameters.
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/ShippingMethodCreate"
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/ShippingMethod"
+        "404":
+          description: ShippingMethod Not Found.
+          schema:
+            $ref: "#/definitions/NotFound"
+      summary: Creates a Shipping Method.
+      tags:
+        - Shipping Methods
   "/shipping_methods/{id}.json":
+    delete:
+      parameters:
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
+        - description: Id of the Shipping Method
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "404":
+          description: Shipping Method Not Found.
+          schema:
+            $ref: "#/definitions/NotFound"
+      summary: Delete an existing Shipping Method.
+      tags:
+        - Shipping Methods
     get:
       parameters:
         - $ref: "#/parameters/LoginParam"
@@ -2751,6 +2780,36 @@ paths:
           schema:
             $ref: "#/definitions/NotFound"
       summary: Retrieve a single Shipping Method.
+      tags:
+        - Shipping Methods
+    put:
+      parameters:
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
+        - description: Id of the Shipping Method
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: Shipping Method parameters.
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/ShippingMethodCreate"
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: "#/definitions/ShippingMethod"
+            type: array
+        "404":
+          description: Shipping Method Not Found.
+          schema:
+            $ref: "#/definitions/NotFound"
+      summary: Update a Shipping Method.
       tags:
         - Shipping Methods
   /store/info.json:
@@ -3448,6 +3507,14 @@ definitions:
         items:
           $ref: "#/definitions/OrderProduct"
         type: array
+      shipment_status:
+        description: Status of the Order Shipping
+        enum:
+          - requested
+          - in_transit
+          - delivered
+          - failed
+        type: string
       shipping_method_id:
         description: Shipping method e.g. Royal Mail
         format: int32
@@ -3665,20 +3732,6 @@ definitions:
         description: False if tax is not included on product price
         type: boolean
     type: object
-  OrderShippingEdit:
-    properties:
-      shipping:
-        $ref: "#/definitions/OrderShippingEditFields"
-    type: object
-  OrderShippingEditFields:
-    properties:
-      amount:
-        description: Price of the Order Shipping
-        format: float
-        type: number
-      name:
-        description: Shipping Method Name
-        type: string
   OrderShippingTax:
     properties:
       country:
@@ -4252,14 +4305,54 @@ definitions:
       shipping_method:
         $ref: "#/definitions/ShippingMethodFields"
     type: object
+  ShippingMethodCreate:
+    properties:
+      callback_url:
+        description: URL that receives the shipping data and returns rates
+        type: string
+      city:
+        description: City/Municipality name of origin
+        type: string
+      fetch_services_url:
+        description: URL that returns available shipping services
+        type: string
+      name:
+        description: Name of the Shipping Method
+        type: string
+      postal:
+        description: Postal/Zipcode of origin
+        type: string
+      state:
+        description: State/Region code of origin
+        type: string
+    type: object
   ShippingMethodFields:
     properties:
+      callback_url:
+        description: URL that receives the shipping data and returns rates
+        type: string
+      city:
+        description: City/Municipality name of origin
+        type: string
+      fetch_services_url:
+        description: URL that returns available shipping services
+        type: string
       id:
         description: Unique identifier of the Shipping Method
         format: int32
         type: integer
       name:
         description: Name of the Shipping Method
+        type: string
+      postal:
+        description: Postal/Zipcode of origin
+        type: string
+      services:
+        items:
+          $ref: "#/definitions/ShippingService"
+        type: array
+      state:
+        description: State/Region code of origin
         type: string
       type:
         description: Type of the Shipping Method
@@ -4271,6 +4364,20 @@ definitions:
           - chilexpress
           - flat
           - ups
+          - external
+        type: string
+    type: object
+  ShippingService:
+    properties:
+      id:
+        description: Unique identifier of the Shipping Service
+        format: int32
+        type: integer
+      name:
+        description: Name of the Shipping Service
+        type: string
+      service_code:
+        description: Code of the Shipping Service
         type: string
     type: object
   StatusInvalid:

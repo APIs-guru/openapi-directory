@@ -181,9 +181,9 @@ paths:
   /getDealers:
     get:
       description: >-
-        Premium. Dealership information in a given zip code using the first 4 digits. Returns name, address, state, zipCode.
+        Premium. Dealership information in a given zip code using the first 4 digits. Returns name, address, state, zipCode, and IDs.
 
-        For example a call with the zip code 92701 would return dealers in the range [92700, 92709]
+        For example a call with the zip code 92701 would return dealers with zip codes in the range [92700, 92709]
       operationId: getDealers_getDealers_get
       parameters:
         - in: query
@@ -212,6 +212,85 @@ paths:
                 $ref: "#/components/schemas/HTTPValidationError"
           description: Validation Error
       summary: Premium. Dealers in a zip code.
+      tags:
+        - Dealership Data
+        - Premium
+  /getDealersByID:
+    get:
+      description: >-
+        Premium. Dealership information using the internal ID. Returns name, address, state, zipCode, and ID for a single dealer in the same format as the /getDealers endpoint.
+
+        Dealer IDs are generally retrieved via the /getDealers or /getDealersByRegion endpoints.
+      operationId: getDealers_getDealersByID_get
+      parameters:
+        - in: query
+          name: jwt
+          required: true
+          schema:
+            title: Jwt
+            type: string
+        - in: query
+          name: dealerID
+          required: true
+          schema:
+            title: Dealerid
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericResponse"
+          description: Successful Response
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTPValidationError"
+          description: Validation Error
+      summary: Premium. Dealers by ID
+      tags:
+        - Dealership Data
+        - Premium
+  /getDealersByRegion:
+    get:
+      description: Premium. Dealership information in a given region. Returns name, address, state, zipCode, and IDs. Results are paginated with up to 30 results per page.
+      operationId: getDealers_getDealersByRegion_get
+      parameters:
+        - in: query
+          name: jwt
+          required: true
+          schema:
+            title: Jwt
+            type: string
+        - in: query
+          name: regionName
+          required: false
+          schema:
+            default: REGION_STATE_CA
+            title: Regionname
+            type: string
+        - in: query
+          name: page
+          required: false
+          schema:
+            default: 1
+            title: Page
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericResponse"
+          description: Successful Response
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTPValidationError"
+          description: Validation Error
+      summary: Premium. Dealers in a region.
       tags:
         - Dealership Data
         - Premium
@@ -474,6 +553,123 @@ paths:
       summary: Stats on ask price of new vehicles
       tags:
         - Pricing Data
+  /listings:
+    get:
+      description: >-
+        Returns a dealer's listings over the last 45 days by dealer ID. The ID can be found by calling the /getDealers endpoint. 
+
+        Listing keys are: vin, askPrice, msrp, isNew, firstSeen, lastSeen, modelName, brandName.
+
+        Results are paginated in chunks of up to 20 vehicles. Prices are in the dealer's local currency (generally USD).
+      operationId: getListingsByDealer_listings_get
+      parameters:
+        - in: query
+          name: jwt
+          required: true
+          schema:
+            title: Jwt
+            type: string
+        - in: query
+          name: dealerID
+          required: true
+          schema:
+            title: Dealerid
+            type: integer
+        - in: query
+          name: page
+          required: false
+          schema:
+            default: 1
+            title: Page
+            type: integer
+        - in: query
+          name: newCars
+          required: false
+          schema:
+            default: true
+            title: Newcars
+            type: boolean
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericResponse"
+          description: Successful Response
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTPValidationError"
+          description: Validation Error
+      summary: Listings by Dealer ID
+      tags:
+        - Vehicle Data
+  /listingsByRegion:
+    get:
+      description: >-
+        Returns a dealer's listings over up to the last 45 days by dealer ID. The ID can be found by calling the /getDealers endpoint. 
+
+        Listing keys are: vin, askPrice, msrp, isNew, firstSeen, lastSeen, modelName, brandName.
+
+        Results are paginated in chunks of up to 20 vehicles. Prices are in the dealer's local currency (generally USD).
+      operationId: getListingsByRegion_listingsByRegion_get
+      parameters:
+        - in: query
+          name: jwt
+          required: true
+          schema:
+            title: Jwt
+            type: string
+        - in: query
+          name: regionName
+          required: true
+          schema:
+            title: Regionname
+            type: string
+        - in: query
+          name: modelName
+          required: true
+          schema:
+            title: Modelname
+            type: string
+        - in: query
+          name: daysBack
+          required: false
+          schema:
+            default: 45
+            title: Daysback
+            type: integer
+        - in: query
+          name: page
+          required: false
+          schema:
+            default: 1
+            title: Page
+            type: integer
+        - in: query
+          name: newCars
+          required: false
+          schema:
+            default: true
+            title: Newcars
+            type: boolean
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericResponse"
+          description: Successful Response
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTPValidationError"
+          description: Validation Error
+      summary: Listings by Dealer ID
+      tags:
+        - Vehicle Data
   /regionDailySales:
     get:
       description: >-

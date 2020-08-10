@@ -250,6 +250,7 @@ paths:
   /message/send:
     post:
       description: Sends an SMS message
+      operationId: sendMessage
       parameters:
         - description: Message properties
           in: body

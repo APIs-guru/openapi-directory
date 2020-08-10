@@ -38,45 +38,37 @@ paths:
 
         \r
 
-        <p>Returns next train arrival information for one or more
-        stations. Will return\r
+        <p>Returns next train arrival information for one or more stations. Will return\r
 
-        an empty set of results when no predictions are available. Use
-        <span class=\r
+        an empty set of results when no predictions are available. Use <span class=\r
 
-        \"text-info\">All</span> for the StationCodes parameter to
-        return predictions for\r
+        \"text-info\">All</span> for the StationCodes parameter to return predictions for\r
 
         all stations.</p>\r
 
         \r
 
-        <p>For terminal stations (e.g.: Greenbelt, Shady Grove, etc.),
-        predictions may\r
+        <p>For terminal stations (e.g.: Greenbelt, Shady Grove, etc.), predictions may\r
 
         be displayed twice.</p>\r
 
         \r
 
-        <p>Some stations have two platforms (e.g.: Gallery Place, Fort
-        Totten, L'Enfant\r
+        <p>Some stations have two platforms (e.g.: Gallery Place, Fort Totten, L'Enfant\r
 
-        Plaza, and Metro Center). To retrieve complete predictions for
-        these stations,\r
+        Plaza, and Metro Center). To retrieve complete predictions for these stations,\r
 
         be sure to pass in both StationCodes.</p>\r
 
         \r
 
-        <p>For trains with no passengers, the DestinationName will be
-        <span class=\r
+        <p>For trains with no passengers, the DestinationName will be <span class=\r
 
         \"text-info\">No Passenger</span>.</p>\r
 
         \r
 
-        <p>Next train arrival information is refreshed once every 20 to
-        30 seconds approximately.</p>\r
+        <p>Next train arrival information is refreshed once every 20 to 30 seconds approximately.</p>\r
 
         \r
 
@@ -162,8 +154,7 @@ paths:
 
         \r
 
-        <td>Abbreviated version of the final destination for a train.
-        This\r
+        <td>Abbreviated version of the final destination for a train. This\r
 
         is similar to what is displayed on the signs at stations.</td>\r
 
@@ -177,8 +168,7 @@ paths:
 
         \r
 
-        <td>Destination station code. Can be NULL. Use this value in
-        other\r
+        <td>Destination station code. Can be NULL. Use this value in other\r
 
         rail-related APIs to retrieve data about a station.</td>\r
 
@@ -192,8 +182,7 @@ paths:
 
         \r
 
-        <td>When DestinationCode is populated, this is the full name of
-        the\r
+        <td>When DestinationCode is populated, this is the full name of the\r
 
         destination station, as shown on the WMATA website.</td>\r
 
@@ -207,8 +196,7 @@ paths:
 
         \r
 
-        <td>Denotes the track this train is on, but does not
-        necessarily\r
+        <td>Denotes the track this train is on, but does not necessarily\r
 
         equate to Track 1 or Track 2. With the exception of terminal\r
 
@@ -226,11 +214,9 @@ paths:
 
         \r
 
-        <td>Two-letter abbreviation for the line (e.g.: RD, BL, YL, OR,
-        GR,\r
+        <td>Two-letter abbreviation for the line (e.g.: RD, BL, YL, OR, GR,\r
 
-        or SV). May also be blank or <span class=\"text-info\">No</span>
-        for\r
+        or SV). May also be blank or <span class=\"text-info\">No</span> for\r
 
         trains with no passengers.</td>\r
 
@@ -246,11 +232,9 @@ paths:
 
         <td>Station code for where the train is arriving. Useful when\r
 
-        passing in <span class=\"text-info\">All</span> as the
-        StationCodes\r
+        passing in <span class=\"text-info\">All</span> as the StationCodes\r
 
-        parameter. Use this value in other rail-related APIs to
-        retrieve\r
+        parameter. Use this value in other rail-related APIs to retrieve\r
 
         data about a station.</td>\r
 
@@ -264,8 +248,7 @@ paths:
 
         \r
 
-        <td>Full name of the station where the train is arriving.
-        Useful\r
+        <td>Full name of the station where the train is arriving. Useful\r
 
         when passing in <span class=\"text-info\">All</span> as the\r
 
@@ -281,8 +264,7 @@ paths:
 
         \r
 
-        <td>Minutes until arrival. Can be a numeric value, <span
-        class=\r
+        <td>Minutes until arrival. Can be a numeric value, <span class=\r
 
         \"text-info\">ARR</span> (arriving), <span class=\r
 
@@ -300,8 +282,7 @@ paths:
       operationId: 547636a6f918230da8553640
       parameters:
         - default: B03
-          description: Comma-separated list of station codes.  For all predictions, use
-            "All".
+          description: Comma-separated list of station codes.  For all predictions, use "All".
           enum:
             - B03
             - All
@@ -395,45 +376,37 @@ paths:
 
         \r
 
-        <p>Returns next train arrival information for one or more
-        stations. Will return\r
+        <p>Returns next train arrival information for one or more stations. Will return\r
 
-        an empty set of results when no predictions are available. Use
-        <span class=\r
+        an empty set of results when no predictions are available. Use <span class=\r
 
-        \"text-info\">All</span> for the StationCodes parameter to
-        return predictions for\r
+        \"text-info\">All</span> for the StationCodes parameter to return predictions for\r
 
         all stations.</p>\r
 
         \r
 
-        <p>For terminal stations (e.g.: Greenbelt, Shady Grove, etc.),
-        predictions may\r
+        <p>For terminal stations (e.g.: Greenbelt, Shady Grove, etc.), predictions may\r
 
         be displayed twice.</p>\r
 
         \r
 
-        <p>Some stations have two platforms (e.g.: Gallery Place, Fort
-        Totten, L'Enfant\r
+        <p>Some stations have two platforms (e.g.: Gallery Place, Fort Totten, L'Enfant\r
 
-        Plaza, and Metro Center). To retrieve complete predictions for
-        these stations,\r
+        Plaza, and Metro Center). To retrieve complete predictions for these stations,\r
 
         be sure to pass in both StationCodes.</p>\r
 
         \r
 
-        <p>For trains with no passengers, the DestinationName will be
-        <span class=\r
+        <p>For trains with no passengers, the DestinationName will be <span class=\r
 
         \"text-info\">No Passenger</span>.</p>\r
 
         \r
 
-        <p>Next train arrival information is refreshed once every 20 to
-        30 seconds approximately.</p>\r
+        <p>Next train arrival information is refreshed once every 20 to 30 seconds approximately.</p>\r
 
         \r
 
@@ -519,8 +492,7 @@ paths:
 
         \r
 
-        <td>Abbreviated version of the final destination for a train.
-        This\r
+        <td>Abbreviated version of the final destination for a train. This\r
 
         is similar to what is displayed on the signs at stations.</td>\r
 
@@ -534,8 +506,7 @@ paths:
 
         \r
 
-        <td>Destination station code. Can be NULL. Use this value in
-        other\r
+        <td>Destination station code. Can be NULL. Use this value in other\r
 
         rail-related APIs to retrieve data about a station.</td>\r
 
@@ -549,8 +520,7 @@ paths:
 
         \r
 
-        <td>When DestinationCode is populated, this is the full name of
-        the\r
+        <td>When DestinationCode is populated, this is the full name of the\r
 
         destination station, as shown on the WMATA website.</td>\r
 
@@ -564,8 +534,7 @@ paths:
 
         \r
 
-        <td>Denotes the track this train is on, but does not
-        necessarily\r
+        <td>Denotes the track this train is on, but does not necessarily\r
 
         equate to Track 1 or Track 2. With the exception of terminal\r
 
@@ -583,11 +552,9 @@ paths:
 
         \r
 
-        <td>Two-letter abbreviation for the line (e.g.: RD, BL, YL, OR,
-        GR,\r
+        <td>Two-letter abbreviation for the line (e.g.: RD, BL, YL, OR, GR,\r
 
-        or SV). May also be blank or <span class=\"text-info\">No</span>
-        for\r
+        or SV). May also be blank or <span class=\"text-info\">No</span> for\r
 
         trains with no passengers.</td>\r
 
@@ -603,11 +570,9 @@ paths:
 
         <td>Station code for where the train is arriving. Useful when\r
 
-        passing in <span class=\"text-info\">All</span> as the
-        StationCodes\r
+        passing in <span class=\"text-info\">All</span> as the StationCodes\r
 
-        parameter. Use this value in other rail-related APIs to
-        retrieve\r
+        parameter. Use this value in other rail-related APIs to retrieve\r
 
         data about a station.</td>\r
 
@@ -621,8 +586,7 @@ paths:
 
         \r
 
-        <td>Full name of the station where the train is arriving.
-        Useful\r
+        <td>Full name of the station where the train is arriving. Useful\r
 
         when passing in <span class=\"text-info\">All</span> as the\r
 
@@ -638,8 +602,7 @@ paths:
 
         \r
 
-        <td>Minutes until arrival. Can be a numeric value, <span
-        class=\r
+        <td>Minutes until arrival. Can be a numeric value, <span class=\r
 
         \"text-info\">ARR</span> (arriving), <span class=\r
 
@@ -657,8 +620,7 @@ paths:
       operationId: 547636a6f918230da855363f
       parameters:
         - default: B03
-          description: Comma-separated list of station codes.  For all predictions, use
-            "All".
+          description: Comma-separated list of station codes.  For all predictions, use "All".
           enum:
             - B03
             - All

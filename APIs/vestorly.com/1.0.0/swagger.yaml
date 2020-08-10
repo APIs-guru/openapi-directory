@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: staging.vestorly.com
@@ -9,34 +9,34 @@ info:
   description: Vestorly Developers API
   license:
     name: MIT
-  termsOfService: 'http://www.vestorly.com/terms/'
-  title: Vestorly
+  termsOfService: http://www.vestorly.com/terms/
+  title: Vestorly API
   version: 1.0.0
   x-apisguru-categories:
     - marketing
   x-logo:
-    backgroundColor: '#252832'
-    url: 'http://d1sva73gxwx496.cloudfront.net/images/homepage/logo-white-92827ba4.png'
+    backgroundColor: "#252832"
+    url: http://d1sva73gxwx496.cloudfront.net/images/homepage/logo-white-92827ba4.png
   x-origin:
     - format: swagger
-      url: 'http://developers.vestorly.com/v2/swagger.json'
-      version: '2.0'
+      url: http://developers.vestorly.com/v2/swagger.json
+      version: "2.0"
   x-providerName: vestorly.com
-externalDocs:
-  description: Find more info here
-  url: 'https://developers.vestorly.com'
 securityDefinitions:
   access_token:
-    authorizationUrl: 'https://dev.vestorly.com/oauth/authorize'
+    authorizationUrl: https://dev.vestorly.com/oauth/authorize
     flow: implicit
     scopes:
       default: read and write data to your account
     type: oauth2
 tags:
   - description: Vestorly API docs
+    externalDocs:
+      description: Find more info here
+      url: https://developers.vestorly.com
     name: api docs
 paths:
-  '/advisors/{id}':
+  "/advisors/{id}":
     get:
       description: Returns a single advisor given their ID
       operationId: findAdvisorByID
@@ -57,10 +57,10 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Advisor response
           schema:
-            $ref: '#/definitions/Advisor'
+            $ref: "#/definitions/Advisor"
       security:
         - access_token:
             - default
@@ -97,10 +97,10 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: Response
           schema:
-            $ref: '#/definitions/ArticlePhrases'
+            $ref: "#/definitions/ArticlePhrases"
       security:
         - access_token:
             - default
@@ -143,16 +143,16 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Response
           schema:
-            $ref: '#/definitions/Articles'
+            $ref: "#/definitions/Articles"
       security:
         - access_token:
             - default
       tags:
         - articles
-  '/articles/{id}':
+  "/articles/{id}":
     get:
       description: Returns a single article
       operationId: findArticleByID
@@ -174,10 +174,10 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Article response
           schema:
-            $ref: '#/definitions/Articleresponse'
+            $ref: "#/definitions/Articleresponse"
       security:
         - access_token:
             - default
@@ -199,10 +199,10 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Response
           schema:
-            $ref: '#/definitions/CustomFeedFilters'
+            $ref: "#/definitions/CustomFeedFilters"
       security:
         - access_token:
             - default
@@ -227,20 +227,20 @@ paths:
           name: custom_feed_filter
           required: true
           schema:
-            $ref: '#/definitions/CustomFeedFilterInput'
+            $ref: "#/definitions/CustomFeedFilterInput"
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Custom Feed Filter response
           schema:
-            $ref: '#/definitions/CustomFeedFilterresponse'
+            $ref: "#/definitions/CustomFeedFilterresponse"
       security:
         - access_token:
             - default
       tags:
         - custom_feed_filters
-  '/custom_feed_filters/{id}':
+  "/custom_feed_filters/{id}":
     delete:
       description: Deletes the Category's filter
       operationId: deleteCustomFeedFilter
@@ -263,10 +263,10 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Custom Feed Filter response
           schema:
-            $ref: '#/definitions/CustomFeedFilterresponse'
+            $ref: "#/definitions/CustomFeedFilterresponse"
       security:
         - access_token:
             - default
@@ -293,10 +293,10 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Custom Feed Filter response
           schema:
-            $ref: '#/definitions/CustomFeedFilterresponse'
+            $ref: "#/definitions/CustomFeedFilterresponse"
       security:
         - access_token:
             - default
@@ -326,14 +326,14 @@ paths:
           name: custom_feed_filter
           required: true
           schema:
-            $ref: '#/definitions/CustomFeedFilterInput'
+            $ref: "#/definitions/CustomFeedFilterInput"
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Custom Feed Filter response
           schema:
-            $ref: '#/definitions/CustomFeedFilterresponse'
+            $ref: "#/definitions/CustomFeedFilterresponse"
       security:
         - access_token:
             - default
@@ -355,10 +355,10 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Response
           schema:
-            $ref: '#/definitions/CustomFeeds'
+            $ref: "#/definitions/CustomFeeds"
       security:
         - access_token:
             - default
@@ -383,20 +383,20 @@ paths:
           name: custom_feed
           required: true
           schema:
-            $ref: '#/definitions/CustomFeedInput'
+            $ref: "#/definitions/CustomFeedInput"
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Custom Feed response
           schema:
-            $ref: '#/definitions/CustomFeedresponse'
+            $ref: "#/definitions/CustomFeedresponse"
       security:
         - access_token:
             - default
       tags:
         - custom_feeds
-  '/custom_feeds/{id}':
+  "/custom_feeds/{id}":
     delete:
       description: Deletes a new Category
       operationId: deleteCustomFeed
@@ -419,10 +419,10 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Custom Feed response
           schema:
-            $ref: '#/definitions/CustomFeedresponse'
+            $ref: "#/definitions/CustomFeedresponse"
       security:
         - access_token:
             - default
@@ -449,10 +449,10 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Custom Feed response
           schema:
-            $ref: '#/definitions/CustomFeedresponse'
+            $ref: "#/definitions/CustomFeedresponse"
       security:
         - access_token:
             - default
@@ -482,20 +482,20 @@ paths:
           name: custom_feed
           required: true
           schema:
-            $ref: '#/definitions/CustomFeedInput'
+            $ref: "#/definitions/CustomFeedInput"
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Custom Feed response
           schema:
-            $ref: '#/definitions/CustomFeedresponse'
+            $ref: "#/definitions/CustomFeedresponse"
       security:
         - access_token:
             - default
       tags:
         - custom_feeds
-  '/custom_feeds/{id}/articles':
+  "/custom_feeds/{id}/articles":
     get:
       description: Returns Articles by Category
       operationId: findCustomFeedArticles
@@ -542,16 +542,16 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Response
           schema:
-            $ref: '#/definitions/Articles'
+            $ref: "#/definitions/Articles"
       security:
         - access_token:
             - default
       tags:
         - custom_feed_articles
-  '/custom_feeds/{id}/duplicates':
+  "/custom_feeds/{id}/duplicates":
     post:
       description: Duplicates Category
       operationId: duplicateCustomFeed
@@ -572,10 +572,10 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Custom Feed response
           schema:
-            $ref: '#/definitions/CustomFeedresponse'
+            $ref: "#/definitions/CustomFeedresponse"
       security:
         - access_token:
             - default
@@ -597,10 +597,10 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Event response
           schema:
-            $ref: '#/definitions/Events'
+            $ref: "#/definitions/Events"
       security:
         - access_token:
             - default
@@ -625,18 +625,18 @@ paths:
           name: event
           required: true
           schema:
-            $ref: '#/definitions/EventInput'
+            $ref: "#/definitions/EventInput"
       responses:
-        '200':
+        "200":
           description: Event response
           schema:
-            $ref: '#/definitions/Eventcreateresponse'
+            $ref: "#/definitions/Eventcreateresponse"
       security:
         - access_token:
             - default
       tags:
         - events
-  '/events/{id}':
+  "/events/{id}":
     get:
       description: Returns a single event if the user has access
       operationId: findEventByID
@@ -657,10 +657,10 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Event response
           schema:
-            $ref: '#/definitions/Eventresponse'
+            $ref: "#/definitions/Eventresponse"
       security:
         - access_token:
             - default
@@ -683,10 +683,10 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Group response
           schema:
-            $ref: '#/definitions/Groups'
+            $ref: "#/definitions/Groups"
       security:
         - access_token:
             - default
@@ -712,20 +712,20 @@ paths:
           name: group
           required: true
           schema:
-            $ref: '#/definitions/GroupInput'
+            $ref: "#/definitions/GroupInput"
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: group response
           schema:
-            $ref: '#/definitions/Groupresponse'
+            $ref: "#/definitions/Groupresponse"
       security:
         - access_token:
             - default
       tags:
         - groups
-  '/groups/{id}':
+  "/groups/{id}":
     delete:
       description: Deletes a Group
       operationId: deleteGroup
@@ -749,10 +749,10 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: group response
           schema:
-            $ref: '#/definitions/Groupresponse'
+            $ref: "#/definitions/Groupresponse"
       security:
         - access_token:
             - default
@@ -780,10 +780,10 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Group response
           schema:
-            $ref: '#/definitions/Groupresponse'
+            $ref: "#/definitions/Groupresponse"
       security:
         - access_token:
             - default
@@ -813,14 +813,14 @@ paths:
           name: group
           required: true
           schema:
-            $ref: '#/definitions/GroupInput'
+            $ref: "#/definitions/GroupInput"
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: group response
           schema:
-            $ref: '#/definitions/Groupresponse'
+            $ref: "#/definitions/Groupresponse"
       security:
         - access_token:
             - default
@@ -842,10 +842,10 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: member event response
           schema:
-            $ref: '#/definitions/MemberEvents'
+            $ref: "#/definitions/MemberEvents"
       security:
         - access_token:
             - default
@@ -867,10 +867,10 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: member reports response
           schema:
-            $ref: '#/definitions/MemberReports'
+            $ref: "#/definitions/MemberReports"
       security:
         - access_token:
             - default
@@ -903,10 +903,10 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: Member response
           schema:
-            $ref: '#/definitions/Members'
+            $ref: "#/definitions/Members"
       security:
         - access_token:
             - default
@@ -931,18 +931,18 @@ paths:
           name: member
           required: true
           schema:
-            $ref: '#/definitions/Member'
+            $ref: "#/definitions/Member"
       responses:
-        '200':
+        "200":
           description: member response
           schema:
-            $ref: '#/definitions/Memberresponse'
+            $ref: "#/definitions/Memberresponse"
       security:
         - access_token:
             - default
       tags:
         - members
-  '/members/{id}':
+  "/members/{id}":
     get:
       description: Returns a single member
       operationId: findMemberByID
@@ -965,10 +965,10 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Member response
           schema:
-            $ref: '#/definitions/Memberresponse'
+            $ref: "#/definitions/Memberresponse"
       security:
         - access_token:
             - default
@@ -1000,12 +1000,12 @@ paths:
           name: member
           required: true
           schema:
-            $ref: '#/definitions/Member'
+            $ref: "#/definitions/Member"
       responses:
-        '200':
+        "200":
           description: Member response
           schema:
-            $ref: '#/definitions/Memberresponse'
+            $ref: "#/definitions/Memberresponse"
       security:
         - access_token:
             - default
@@ -1027,16 +1027,16 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: newsletter settings response
           schema:
-            $ref: '#/definitions/NewsletterSettings'
+            $ref: "#/definitions/NewsletterSettings"
       security:
         - access_token:
             - default
       tags:
         - newsletter_settings
-  '/newsletter_settings/{id}':
+  "/newsletter_settings/{id}":
     get:
       description: Returns a single newsletter settings if the user has access
       operationId: findNewsletterSettingsByID
@@ -1057,10 +1057,10 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: newsletting setting response
           schema:
-            $ref: '#/definitions/Newslettersettingresponse'
+            $ref: "#/definitions/Newslettersettingresponse"
       security:
         - access_token:
             - default
@@ -1090,12 +1090,12 @@ paths:
           name: newsletter_setting
           required: true
           schema:
-            $ref: '#/definitions/NewsletterSettingsInput'
+            $ref: "#/definitions/NewsletterSettingsInput"
       responses:
-        '200':
+        "200":
           description: newsletter settings response
           schema:
-            $ref: '#/definitions/Newslettersettingresponse'
+            $ref: "#/definitions/Newslettersettingresponse"
       security:
         - access_token:
             - default
@@ -1117,16 +1117,16 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Newsletter response
           schema:
-            $ref: '#/definitions/Newsletters'
+            $ref: "#/definitions/Newsletters"
       security:
         - access_token:
             - default
       tags:
         - newsletters
-  '/newsletters/{id}':
+  "/newsletters/{id}":
     get:
       description: Get a newsletter by ID
       operationId: getNewsletterByID
@@ -1147,10 +1147,10 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Newsletter response
           schema:
-            $ref: '#/definitions/Newsletterresponse'
+            $ref: "#/definitions/Newsletterresponse"
       security:
         - access_token:
             - default
@@ -1180,12 +1180,12 @@ paths:
           name: newsletter
           required: true
           schema:
-            $ref: '#/definitions/NewsletterInput'
+            $ref: "#/definitions/NewsletterInput"
       responses:
-        '200':
+        "200":
           description: Newsletter response
           schema:
-            $ref: '#/definitions/Newsletterresponse'
+            $ref: "#/definitions/Newsletterresponse"
       security:
         - access_token:
             - default
@@ -1222,10 +1222,10 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: posts response
           schema:
-            $ref: '#/definitions/Posts'
+            $ref: "#/definitions/Posts"
       security:
         - access_token:
             - default
@@ -1250,18 +1250,18 @@ paths:
           name: post
           required: true
           schema:
-            $ref: '#/definitions/PostInput'
+            $ref: "#/definitions/PostInput"
       responses:
-        '200':
+        "200":
           description: posts response
           schema:
-            $ref: '#/definitions/Postresponse'
+            $ref: "#/definitions/Postresponse"
       security:
         - access_token:
             - default
       tags:
         - posts
-  '/posts/{id}':
+  "/posts/{id}":
     get:
       description: Query all posts
       operationId: getPostByID
@@ -1282,10 +1282,10 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: post response
           schema:
-            $ref: '#/definitions/Postresponse'
+            $ref: "#/definitions/Postresponse"
       security:
         - access_token:
             - default
@@ -1315,12 +1315,12 @@ paths:
           name: post
           required: true
           schema:
-            $ref: '#/definitions/Post'
+            $ref: "#/definitions/Post"
       responses:
-        '200':
+        "200":
           description: post response
           schema:
-            $ref: '#/definitions/Postresponse'
+            $ref: "#/definitions/Postresponse"
       security:
         - access_token:
             - default
@@ -1342,10 +1342,10 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Response
           schema:
-            $ref: '#/definitions/SeedCustomFeeds'
+            $ref: "#/definitions/SeedCustomFeeds"
       security:
         - access_token:
             - default
@@ -1370,20 +1370,20 @@ paths:
           name: seed_custom_feed
           required: true
           schema:
-            $ref: '#/definitions/SeedCustomFeedInput'
+            $ref: "#/definitions/SeedCustomFeedInput"
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Seed Custom Feed response
           schema:
-            $ref: '#/definitions/SeedCustomFeedresponse'
+            $ref: "#/definitions/SeedCustomFeedresponse"
       security:
         - access_token:
             - default
       tags:
         - seed_custom_feeds
-  '/seed_custom_feeds/{id}':
+  "/seed_custom_feeds/{id}":
     delete:
       description: Deletes a Category keywords
       operationId: deleteSeedCustomFeed
@@ -1406,10 +1406,10 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Seed Custom Feed response
           schema:
-            $ref: '#/definitions/SeedCustomFeedresponse'
+            $ref: "#/definitions/SeedCustomFeedresponse"
       security:
         - access_token:
             - default
@@ -1436,10 +1436,10 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Seed Custom Feed response
           schema:
-            $ref: '#/definitions/SeedCustomFeedresponse'
+            $ref: "#/definitions/SeedCustomFeedresponse"
       security:
         - access_token:
             - default
@@ -1469,14 +1469,14 @@ paths:
           name: seed_custom_feed
           required: true
           schema:
-            $ref: '#/definitions/SeedCustomFeedInput'
+            $ref: "#/definitions/SeedCustomFeedInput"
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Seed Custom Feed response
           schema:
-            $ref: '#/definitions/SeedCustomFeedresponse'
+            $ref: "#/definitions/SeedCustomFeedresponse"
       security:
         - access_token:
             - default
@@ -1500,13 +1500,13 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Response
           schema:
-            $ref: '#/definitions/Session'
+            $ref: "#/definitions/Session"
       tags:
         - sessions
-  '/sessions/{id}':
+  "/sessions/{id}":
     delete:
       description: Logout of the vestorly platform
       operationId: logout
@@ -1522,10 +1522,10 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: You have successfully logged out of the vestorly platform
           schema:
-            $ref: '#/definitions/SessionLogoutResponse'
+            $ref: "#/definitions/SessionLogoutResponse"
       tags:
         - sessions
   /sources:
@@ -1544,10 +1544,10 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: source response
           schema:
-            $ref: '#/definitions/Sources'
+            $ref: "#/definitions/Sources"
       security:
         - access_token:
             - default
@@ -1572,18 +1572,18 @@ paths:
           name: source
           required: true
           schema:
-            $ref: '#/definitions/SourceInput'
+            $ref: "#/definitions/SourceInput"
       responses:
-        '200':
+        "200":
           description: source response
           schema:
-            $ref: '#/definitions/Sourceresponse'
+            $ref: "#/definitions/Sourceresponse"
       security:
         - access_token:
             - default
       tags:
         - sources
-  '/sources/{id}':
+  "/sources/{id}":
     get:
       description: Get Source By ID
       operationId: getSourceByID
@@ -1604,10 +1604,10 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: source response
           schema:
-            $ref: '#/definitions/Sourceresponse'
+            $ref: "#/definitions/Sourceresponse"
       security:
         - access_token:
             - default
@@ -1637,12 +1637,12 @@ paths:
           name: source
           required: true
           schema:
-            $ref: '#/definitions/SourceInput'
+            $ref: "#/definitions/SourceInput"
       responses:
-        '200':
+        "200":
           description: source response
           schema:
-            $ref: '#/definitions/Sourceresponse'
+            $ref: "#/definitions/Sourceresponse"
       security:
         - access_token:
             - default
@@ -1709,12 +1709,12 @@ definitions:
   Advisorresponse:
     properties:
       advisor:
-        $ref: '#/definitions/Advisor'
+        $ref: "#/definitions/Advisor"
   Advisors:
     properties:
       advisors:
         items:
-          $ref: '#/definitions/Advisor'
+          $ref: "#/definitions/Advisor"
         type: array
   Article:
     properties:
@@ -1782,22 +1782,22 @@ definitions:
   ArticlePhraseresponse:
     properties:
       article_phrase:
-        $ref: '#/definitions/ArticlePhrase'
+        $ref: "#/definitions/ArticlePhrase"
   ArticlePhrases:
     properties:
       article_phrases:
         items:
-          $ref: '#/definitions/ArticlePhrase'
+          $ref: "#/definitions/ArticlePhrase"
         type: array
   Articleresponse:
     properties:
       article:
-        $ref: '#/definitions/Article'
+        $ref: "#/definitions/Article"
   Articles:
     properties:
       articles:
         items:
-          $ref: '#/definitions/Article'
+          $ref: "#/definitions/Article"
         type: array
   CustomFeed:
     properties:
@@ -1860,12 +1860,12 @@ definitions:
   CustomFeedFilterresponse:
     properties:
       custom_feed_filter:
-        $ref: '#/definitions/CustomFeedFilter'
+        $ref: "#/definitions/CustomFeedFilter"
   CustomFeedFilters:
     properties:
       custom_feed_filters:
         items:
-          $ref: '#/definitions/CustomFeedFilter'
+          $ref: "#/definitions/CustomFeedFilter"
         type: array
   CustomFeedInput:
     properties:
@@ -1898,12 +1898,12 @@ definitions:
   CustomFeedresponse:
     properties:
       custom_feed:
-        $ref: '#/definitions/CustomFeed'
+        $ref: "#/definitions/CustomFeed"
   CustomFeeds:
     properties:
       custom_feeds:
         items:
-          $ref: '#/definitions/CustomFeed'
+          $ref: "#/definitions/CustomFeed"
         type: array
   Event:
     properties:
@@ -1914,7 +1914,7 @@ definitions:
       created_at:
         type: string
       event_content:
-        $ref: '#/definitions/EventContent'
+        $ref: "#/definitions/EventContent"
       original_url:
         type: string
       originator_email:
@@ -1953,6 +1953,7 @@ definitions:
       - _id
       - type
       - original_url
+      - orginator_email
       - subject_email
   EventContent:
     properties:
@@ -1978,7 +1979,7 @@ definitions:
       created_at:
         type: string
       event_content:
-        $ref: '#/definitions/EventContent'
+        $ref: "#/definitions/EventContent"
       original_url:
         type: string
       originator_email:
@@ -2016,20 +2017,24 @@ definitions:
     required:
       - type
       - original_url
+      - orginator_email
       - subject_email
+      - advisor_email
+      - originator_group_name
+      - newsletter
   Eventcreateresponse:
     properties:
       meta:
-        $ref: '#/definitions/Meta'
+        $ref: "#/definitions/Meta"
   Eventresponse:
     properties:
       event:
-        $ref: '#/definitions/Event'
+        $ref: "#/definitions/Event"
   Events:
     properties:
       events:
         items:
-          $ref: '#/definitions/Event'
+          $ref: "#/definitions/Event"
         type: array
   Features:
     properties:
@@ -2088,12 +2093,12 @@ definitions:
   Groupresponse:
     properties:
       group:
-        $ref: '#/definitions/Group'
+        $ref: "#/definitions/Group"
   Groups:
     properties:
       groups:
         items:
-          $ref: '#/definitions/Group'
+          $ref: "#/definitions/Group"
         type: array
   Member:
     properties:
@@ -2238,11 +2243,11 @@ definitions:
     properties:
       member_events:
         items:
-          $ref: '#/definitions/MemberEvent'
+          $ref: "#/definitions/MemberEvent"
         type: array
       members:
         items:
-          $ref: '#/definitions/TruncatedMember'
+          $ref: "#/definitions/TruncatedMember"
         type: array
   MemberReport:
     properties:
@@ -2267,20 +2272,20 @@ definitions:
     properties:
       member_reports:
         items:
-          $ref: '#/definitions/MemberReport'
+          $ref: "#/definitions/MemberReport"
         type: array
   Memberresponse:
     properties:
       member:
-        $ref: '#/definitions/Member'
+        $ref: "#/definitions/Member"
   Members:
     properties:
       members:
         items:
-          $ref: '#/definitions/Member'
+          $ref: "#/definitions/Member"
         type: array
       meta:
-        $ref: '#/definitions/Meta'
+        $ref: "#/definitions/Meta"
       more_results:
         type: boolean
   Meta:
@@ -2304,6 +2309,9 @@ definitions:
       unique_click_count:
         format: int64
         type: integer
+    required:
+      - id
+      - name
   NewsletterInput:
     properties:
       click_count:
@@ -2319,6 +2327,8 @@ definitions:
       unique_click_count:
         format: int64
         type: integer
+    required:
+      - name
   NewsletterSetting:
     properties:
       _id:
@@ -2391,26 +2401,26 @@ definitions:
     properties:
       newsletter_settings:
         items:
-          $ref: '#/definitions/NewsletterSetting'
+          $ref: "#/definitions/NewsletterSetting"
         type: array
   NewsletterSettingsInput:
     properties:
       newsletter_setting:
-        $ref: '#/definitions/NewsletterSetting'
+        $ref: "#/definitions/NewsletterSetting"
   Newsletterresponse:
     properties:
       newsletter:
-        $ref: '#/definitions/Newsletter'
+        $ref: "#/definitions/Newsletter"
   Newsletters:
     properties:
       newsletters:
         items:
-          $ref: '#/definitions/Newsletter'
+          $ref: "#/definitions/Newsletter"
         type: array
   Newslettersettingresponse:
     properties:
       newsletter_setting:
-        $ref: '#/definitions/NewsletterSetting'
+        $ref: "#/definitions/NewsletterSetting"
   OrgSetting:
     properties:
       _id:
@@ -2525,6 +2535,9 @@ definitions:
         type: string
       video_id:
         type: string
+    required:
+      - id
+      - name
   PostInput:
     properties:
       advisor_id:
@@ -2608,20 +2621,21 @@ definitions:
       video_id:
         type: string
     required:
+      - name
       - title
   Postrequest:
     properties:
       post:
-        $ref: '#/definitions/PostInput'
+        $ref: "#/definitions/PostInput"
   Postresponse:
     properties:
       post:
-        $ref: '#/definitions/Post'
+        $ref: "#/definitions/Post"
   Posts:
     properties:
       posts:
         items:
-          $ref: '#/definitions/Post'
+          $ref: "#/definitions/Post"
         type: array
   SeedCustomFeed:
     properties:
@@ -2645,6 +2659,7 @@ definitions:
         type: string
     required:
       - _id
+      - label
   SeedCustomFeedInput:
     properties:
       article_id:
@@ -2668,23 +2683,23 @@ definitions:
   SeedCustomFeedresponse:
     properties:
       seed_custom_feed:
-        $ref: '#/definitions/SeedCustomFeed'
+        $ref: "#/definitions/SeedCustomFeed"
   SeedCustomFeeds:
     properties:
       seed_custom_feeds:
         items:
-          $ref: '#/definitions/SeedCustomFeed'
+          $ref: "#/definitions/SeedCustomFeed"
         type: array
   Session:
     properties:
       _id:
         type: string
       current_user:
-        $ref: '#/definitions/User'
+        $ref: "#/definitions/User"
       new_user:
         type: boolean
       settings:
-        $ref: '#/definitions/Settings'
+        $ref: "#/definitions/Settings"
       vestorly-auth:
         type: string
   SessionLogoutResponse:
@@ -2702,13 +2717,13 @@ definitions:
       disclosure:
         type: string
       feature:
-        $ref: '#/definitions/Features'
+        $ref: "#/definitions/Features"
       name:
         type: string
       orgsetting:
-        $ref: '#/definitions/OrgSetting'
+        $ref: "#/definitions/OrgSetting"
       personalsetting:
-        $ref: '#/definitions/PersonalSettings'
+        $ref: "#/definitions/PersonalSettings"
       picture_url:
         type: string
       slug:
@@ -2759,12 +2774,12 @@ definitions:
   Sourceresponse:
     properties:
       source:
-        $ref: '#/definitions/Source'
+        $ref: "#/definitions/Source"
   Sources:
     properties:
       sources:
         items:
-          $ref: '#/definitions/Source'
+          $ref: "#/definitions/Source"
         type: array
   TruncatedMember:
     properties:

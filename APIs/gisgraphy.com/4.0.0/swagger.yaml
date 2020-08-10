@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - http
   - https
@@ -7,26 +7,27 @@ basePath: /
 info:
   contact:
     name: davidmasclet@gisgraphy.com
-  description: |
+  description: >
     Since 2006, [Gisgraphy](http://www.gisgraphy.com) is a free, open source framework that offers the possibility to do geolocalisation and geocoding via Java APIs or REST webservices. Because geocoding is nothing without data, it provides an easy to use importer that will automatically download and import the necessary (free) data to your local database ([OpenStreetMap](http://www.openstreetmap.org/), [Geonames](http://www.geonames.org/) and [Quattroshapes](http://www.quattroshapes.com/): more than 100 million entries). You can also add your own data with the Web interface or the importer connectors provided. Gisgraphy is production ready, and has been designed to be scalable(load balanced), performant and used in other languages than just java : results can be output in XML, JSON, PHP, Python, Ruby, YAML, GeoRSS, and Atom. One of the most popular GPS tracking System (OpenGTS) also includes a Gisgraphy client...Gisgraphy is a framework. As a result it's flexible and powerful enough to be used in a lot of different use cases. [read more](http://www.gisgraphy.com)
+
 
 
     if you use the premium servers, you can use the api key to test the webservices
   license:
     name: LGPL license V3.
-    url: 'http://www.gisgraphy.com/license.html'
-  termsOfService: 'http://www.gisgraphy.com/free-access.htm'
+    url: http://www.gisgraphy.com/license.html
+  termsOfService: http://www.gisgraphy.com/free-access.htm | https://premium.gisgraphy.com/terms
   title: Gisgraphy webservices
   version: 4.0.0
   x-apisguru-categories:
     - location
   x-logo:
-    backgroundColor: '#FFFFFF'
-    url: 'https://twitter.com/gisgraphy/profile_image?size=original'
+    backgroundColor: "#FFFFFF"
+    url: https://twitter.com/gisgraphy/profile_image?size=original
   x-origin:
     - format: swagger
-      url: 'http://www.gisgraphy.com/documentation/gisgraphy-swagger.json'
-      version: '2.0'
+      url: http://www.gisgraphy.com/documentation/gisgraphy-swagger.json
+      version: "2.0"
   x-providerName: gisgraphy.com
 securityDefinitions:
   api_key:
@@ -36,7 +37,7 @@ securityDefinitions:
 paths:
   /addressparser/parse:
     get:
-      description: 'The address parser and address standardizer, are part of the Gisgraphy project (free open source worldwide geocoder). Address parsing is the process of dividing a single address string into its individual component parts. Please visit [http://www.address-parser.net](http://www.address-parser.net) for more details '
+      description: "The address parser and address standardizer, are part of the Gisgraphy project (free open source worldwide geocoder). Address parsing is the process of dividing a single address string into its individual component parts. Please visit [http://www.address-parser.net](http://www.address-parser.net) for more details "
       operationId: addressparsing
       parameters:
         - description: A postal address.
@@ -62,25 +63,25 @@ paths:
           name: format
           required: false
           type: string
-        - description: 'The callback method name (optional), use to wrap the content into a (alphanumeric) Javascript method. Works only for script output formats (JSON, PHP, Ruby, Python)'
+        - description: The callback method name (optional), use to wrap the content into a (alphanumeric) Javascript method. Works only for script output formats (JSON, PHP, Ruby, Python)
           in: query
           name: callback
           required: false
           type: string
-        - default: false
-          description: 'indents the results.Default to false. Possible values are true or false (or on when used with the rest service. If you use a checkbox in a web form, to indent the results, the value will be ''on'' or ''off'', so for a simple use : the value of indent can be ''true'' or ''on'''
+        - default: "false"
+          description: "indents the results.Default to false. Possible values are true or false (or on when used with the rest service. If you use a checkbox in a web form, to indent the results, the value will be 'on' or 'off', so for a simple use : the value of indent can be 'true' or 'on'"
           in: query
           name: indent
           required: false
           type: boolean
-        - default: false
-          description: 'Whether the address should be standardized after parsing, the value will be ''on'' or ''off'', so for a simple use : the value of indent can be ''true'' or ''on'''
+        - default: "false"
+          description: "Whether the address should be standardized after parsing, the value will be 'on' or 'off', so for a simple use : the value of indent can be 'true' or 'on'"
           in: query
           name: standardize
           required: false
           type: boolean
-        - default: false
-          description: 'UNUSED YET. Whether the address should be geocoded after parsing, the value will be ''on'' or ''off'', so for a simple use : the value of indent can be ''true'' or ''on'''
+        - default: "false"
+          description: "UNUSED YET. Whether the address should be geocoded after parsing, the value will be 'on' or 'off', so for a simple use : the value of indent can be 'true' or 'on'"
           in: query
           name: geocode
           required: false
@@ -93,19 +94,19 @@ paths:
         - application/yaml
         - application/python
       responses:
-        '200':
+        "200":
           description: Sucessfully processed
           schema:
-            $ref: '#/definitions/AddressResultsDto'
-        '401':
-          description: 'Need auth. The API key parameter is missing or wrong, or doesn''t correspond to any subscriptions'
-        '403':
+            $ref: "#/definitions/AddressResultsDto"
+        "401":
+          description: Need auth. The API key parameter is missing or wrong, or doesn't correspond to any subscriptions
+        "403":
           description: Unhauthorize (auth will change nothing).Your IP is not allowed.
-        '412':
-          description: 'Missing parameter. Some parameters required for the webservices ar missing, please consult documentation'
-        '429':
+        "412":
+          description: Missing parameter. Some parameters required for the webservices ar missing, please consult documentation
+        "429":
           description: Too many requests. You exceed the authorized rate
-        '500':
+        "500":
           description: Internal error
       security:
         - api_key: []
@@ -114,26 +115,26 @@ paths:
         - addressparser - standardizer
   /fulltext/search:
     get:
-      description: 'The full text service allows you to search for features / places / street and do autocompletion . you can : Specify one or more words search on part of the name (auto completion / suggestion) Search for text or zip code Specify a GPS restriction (promote nearest, not sorted but has an impact on the score), Limit the results to a specific Language, Country, place type, Paginate the results, Specify the output verbosity, Tells if you want the output to be indented, Tells that all words are required or not, The search is case insensitive, use synonyms (Saint/st, ..), separator characters stripping, ...'
+      description: "The full text service allows you to search for features / places / street and do autocompletion . you can : Specify one or more words search on part of the name (auto completion / suggestion) Search for text or zip code Specify a GPS restriction (promote nearest, not sorted but has an impact on the score), Limit the results to a specific Language, Country, place type, Paginate the results, Specify the output verbosity, Tells if you want the output to be indented, Tells that all words are required or not, The search is case insensitive, use synonyms (Saint/st, ..), separator characters stripping, ..."
       operationId: fulltxtsearch
       parameters:
-        - description: 'The searched text : The text for the query can be a zip code, a string or one or more strings'
+        - description: "The searched text : The text for the query can be a zip code, a string or one or more strings"
           in: query
           name: q
           required: true
           type: string
-        - default: false
+        - default: "false"
           description: Whether the fulltext engine should considers all the words specified as required. Defaults to false (since v 4.0). possible values are true|false (or 'on' when used with the rest service)
           in: query
           name: allwordsrequired
           required: true
           type: boolean
-        - description: 'The spellchecking (optional) : whether some suggestions should be provided if no results are found'
+        - description: "The spellchecking (optional) : whether some suggestions should be provided if no results are found"
           in: query
           name: spellchecking
           required: false
           type: string
-        - description: 'The latitude (north-south) for the location point to search around. The value is a floating number, between -90 and +90. It uses GPS coordinates'
+        - description: The latitude (north-south) for the location point to search around. The value is a floating number, between -90 and +90. It uses GPS coordinates
           format: double
           in: query
           name: lat
@@ -152,13 +153,13 @@ paths:
           name: radius
           required: false
           type: number
-        - default: false
-          description: 'If this parameter is set then it will search in part of the names of the street, place,.... It allow you to do auto completion auto suggestion. See the Gisgraphy leaflet plugin for more details. The JSON format will be forced if this parameter is true. See auto completion / suggestions engine for more details'
+        - default: "false"
+          description: If this parameter is set then it will search in part of the names of the street, place,.... It allow you to do auto completion auto suggestion. See the Gisgraphy leaflet plugin for more details. The JSON format will be forced if this parameter is true. See auto completion / suggestions engine for more details
           in: query
           name: suggest
           type: boolean
         - default: MEDIUM
-          description: 'The output style verbosity (optional) : Determines the output verbosity. 4 styles are available'
+          description: "The output style verbosity (optional) : Determines the output verbosity. 4 styles are available"
           enum:
             - SHORT
             - MEDIUM
@@ -167,12 +168,12 @@ paths:
           in: query
           name: style
           type: string
-        - description: 'limit the search to the specified ISO 3166 country code. Default : search in all countries'
+        - description: "limit the search to the specified ISO 3166 country code. Default : search in all countries"
           in: query
           name: country
           required: false
           type: string
-        - description: 'The language code (optional) : The iso 639 Alpha2 or alpha3 Language Code. Some properties such as the AlternateName AdmNames and countryname belong to a certain language code. The language parameter can limit the output of those fields to a certain language (it only apply when style parameter=''style'') : If the language code does not exists or is not specified, properties with all the languages are retrieved If it exists, the properties with the specified language code, are retrieved'
+        - description: "The language code (optional) : The iso 639 Alpha2 or alpha3 Language Code. Some properties such as the AlternateName AdmNames and countryname belong to a certain language code. The language parameter can limit the output of those fields to a certain language (it only apply when style parameter='style') : If the language code does not exists or is not specified, properties with all the languages are retrieved If it exists, the properties with the specified language code, are retrieved"
           in: query
           name: lang
           required: false
@@ -193,26 +194,26 @@ paths:
           required: false
           type: string
         - default: 1
-          description: 'The first pagination index. Numbered from 1. If the number is < 1 or not specified, it will be set to the default value : 1'
+          description: "The first pagination index. Numbered from 1. If the number is < 1 or not specified, it will be set to the default value : 1"
           format: int32
           in: query
           name: from
           required: false
           type: integer
         - default: 10
-          description: 'The last pagination index. if < 1 or not specified, it will be set to startindex + 10. Max = 10 (can be changed)'
+          description: The last pagination index. if < 1 or not specified, it will be set to startindex + 10. Max = 10 (can be changed)
           format: int32
           in: query
           name: to
           required: false
           type: integer
-        - description: 'The callback method name (optional), use to wrap the content into a (alphanumeric) Javascript method. Works only for script output formats (JSON, PHP, Ruby, Python)'
+        - description: The callback method name (optional), use to wrap the content into a (alphanumeric) Javascript method. Works only for script output formats (JSON, PHP, Ruby, Python)
           in: query
           name: callback
           required: false
           type: string
-        - default: false
-          description: 'indents the results.Default to false. Possible values are true or false (or on when used with the rest service. If you use a checkbox in a web form, to indent the results, the value will be ''on'' or ''off'', so for a simple use : the value of indent can be ''true'' or ''on'''
+        - default: "false"
+          description: "indents the results.Default to false. Possible values are true or false (or on when used with the rest service. If you use a checkbox in a web form, to indent the results, the value will be 'on' or 'off', so for a simple use : the value of indent can be 'true' or 'on'"
           in: query
           name: indent
           required: false
@@ -226,19 +227,19 @@ paths:
         - application/python
         - text/plain
       responses:
-        '200':
+        "200":
           description: Sucessfully processed
           schema:
-            $ref: '#/definitions/FulltextResultsDto'
-        '401':
-          description: 'Need auth. The API key parameter is missing or wrong, or doesn''t correspond to any subscriptions'
-        '403':
+            $ref: "#/definitions/FulltextResultsDto"
+        "401":
+          description: Need auth. The API key parameter is missing or wrong, or doesn't correspond to any subscriptions
+        "403":
           description: Unhauthorize (auth will change nothing).Your IP is not allowed.
-        '412':
-          description: 'Missing parameter. Some parameters required for the webservices ar missing, please consult documentation'
-        '429':
+        "412":
+          description: Missing parameter. Some parameters required for the webservices ar missing, please consult documentation
+        "429":
           description: Too many requests. You exceed the authorized rate
-        '500':
+        "500":
           description: Internal error
       security:
         - api_key: []
@@ -247,10 +248,10 @@ paths:
         - fulltext - autocomplete
   /geocoding/geocode:
     get:
-      description: 'The Gisgraphy geocoding service allows you to transform postal addresses or other descriptions (a street, a city, a postal code, a country, or a combination) of a location into a (latitude, longitude) coordinate.'
+      description: The Gisgraphy geocoding service allows you to transform postal addresses or other descriptions (a street, a city, a postal code, a country, or a combination) of a location into a (latitude, longitude) coordinate.
       operationId: geocode
       parameters:
-        - description: 'A postal address, structured or not, a street, a city, a postal code, a country, or a combination.'
+        - description: A postal address, structured or not, a street, a city, a postal code, a country, or a combination.
           in: query
           name: address
           required: true
@@ -260,7 +261,7 @@ paths:
           name: country
           required: false
           type: string
-        - description: 'Whether the given address is a postal address. default to false. In other words, if the address follow the specification or if it is a well-formed address as it was written on an envelope. This parameter will enable the parsing of the address by the address parser before geocoding, this way, the relevance will be better because because if parsing is successful, we will know the meaning of each word. Note that you can also specify each field if you already know them.'
+        - description: Whether the given address is a postal address. default to false. In other words, if the address follow the specification or if it is a well-formed address as it was written on an envelope. This parameter will enable the parsing of the address by the address parser before geocoding, this way, the relevance will be better because because if parsing is successful, we will know the meaning of each word. Note that you can also specify each field if you already know them.
           in: query
           name: postal
           required: false
@@ -279,26 +280,26 @@ paths:
           required: false
           type: string
         - default: 1
-          description: 'The first pagination index. Numbered from 1. If the number is < 1 or not specified, it will be set to the default value : 1'
+          description: "The first pagination index. Numbered from 1. If the number is < 1 or not specified, it will be set to the default value : 1"
           format: int32
           in: query
           name: from
           required: false
           type: integer
         - default: 10
-          description: 'The last pagination index. if < 1 or not specified, it will be set to startindex + 10. Max = 10 (can be changed)'
+          description: The last pagination index. if < 1 or not specified, it will be set to startindex + 10. Max = 10 (can be changed)
           format: int32
           in: query
           name: to
           required: false
           type: integer
-        - description: 'The callback method name (optional), use to wrap the content into a (alphanumeric) Javascript method. Works only for script output formats (JSON, PHP, Ruby, Python)'
+        - description: The callback method name (optional), use to wrap the content into a (alphanumeric) Javascript method. Works only for script output formats (JSON, PHP, Ruby, Python)
           in: query
           name: callback
           required: false
           type: string
-        - default: false
-          description: 'indents the results. Possible values are true or false (or on when used with the rest service. If you use a checkbox in a web form, to indent the results, the value will be ''on'' or ''off'', so for a simple use : the value of indent can be ''true'' or ''on'''
+        - default: "false"
+          description: "indents the results. Possible values are true or false (or on when used with the rest service. If you use a checkbox in a web form, to indent the results, the value will be 'on' or 'off', so for a simple use : the value of indent can be 'true' or 'on'"
           in: query
           name: indent
           required: false
@@ -311,19 +312,19 @@ paths:
         - application/yaml
         - application/python
       responses:
-        '200':
+        "200":
           description: Sucessfully processed
           schema:
-            $ref: '#/definitions/AddressResultsDto'
-        '401':
-          description: 'Need auth. The API key parameter is missing or wrong, or doesn''t correspond to any subscriptions'
-        '403':
+            $ref: "#/definitions/AddressResultsDto"
+        "401":
+          description: Need auth. The API key parameter is missing or wrong, or doesn't correspond to any subscriptions
+        "403":
           description: Unhauthorize (auth will change nothing).Your IP is not allowed.
-        '412':
-          description: 'Missing parameter. Some parameters required for the webservices ar missing, please consult documentation'
-        '429':
+        "412":
+          description: Missing parameter. Some parameters required for the webservices ar missing, please consult documentation
+        "429":
           description: Too many requests. You exceed the authorized rate
-        '500':
+        "500":
           description: Internal error
       security:
         - api_key: []
@@ -332,10 +333,10 @@ paths:
         - geocoding
   /geoloc/search:
     get:
-      description: 'The geolocalisation service allows to search for features around a earth location. you can Specify GPS position, Limit the results to a specific place type (e.g : search all monuments around a point), Limit the results to a specified radius, Paginate the results, Tells if you want the output to be indented (currently, applies only for XML, not JSON for performance reasons. May change in next version)'
+      description: "The geolocalisation service allows to search for features around a earth location. you can Specify GPS position, Limit the results to a specific place type (e.g : search all monuments around a point), Limit the results to a specified radius, Paginate the results, Tells if you want the output to be indented (currently, applies only for XML, not JSON for performance reasons. May change in next version)"
       operationId: geoloc
       parameters:
-        - description: 'The latitude (north-south) for the location point to search around. The value is a floating number, between -90 and +90. It uses GPS coordinates'
+        - description: The latitude (north-south) for the location point to search around. The value is a floating number, between -90 and +90. It uses GPS coordinates
           format: double
           in: query
           name: lat
@@ -355,7 +356,7 @@ paths:
           required: false
           type: number
         - default: true
-          description: 'Whether (or not) we want the distance field to be output. This option is useful to improve the performance if we don''t care about the distance (e.g : we search for name). Of course, the results won''t be sorted by distance. If you use a checkbox in a form to indent the results, the value will be ''on'' or ''off'', so to simplify the use : the value for the web service can be ''true'' or ''on'''
+          description: "Whether (or not) we want the distance field to be output. This option is useful to improve the performance if we don't care about the distance (e.g : we search for name). Of course, the results won't be sorted by distance. If you use a checkbox in a form to indent the results, the value will be 'on' or 'off', so to simplify the use : the value for the web service can be 'true' or 'on'"
           in: query
           name: distance
           required: false
@@ -379,26 +380,26 @@ paths:
           required: false
           type: string
         - default: 1
-          description: 'The first pagination index. Numbered from 1. If the number is < 1 or not specified, it will be set to the default value : 1'
+          description: "The first pagination index. Numbered from 1. If the number is < 1 or not specified, it will be set to the default value : 1"
           format: int32
           in: query
           name: from
           required: false
           type: integer
         - default: 10
-          description: 'The last pagination index. if < 1 or not specified, it will be set to startindex + 10. Max = 10 (can be changed)'
+          description: The last pagination index. if < 1 or not specified, it will be set to startindex + 10. Max = 10 (can be changed)
           format: int32
           in: query
           name: to
           required: false
           type: integer
-        - description: 'The callback method name (optional), use to wrap the content into a (alphanumeric) Javascript method. Works only for script output formats (JSON, PHP, Ruby, Python)'
+        - description: The callback method name (optional), use to wrap the content into a (alphanumeric) Javascript method. Works only for script output formats (JSON, PHP, Ruby, Python)
           in: query
           name: callback
           required: false
           type: string
-        - default: false
-          description: 'indents the results.Default to false. Possible values are true or false (or on when used with the rest service. If you use a checkbox in a web form, to indent the results, the value will be ''on'' or ''off'', so for a simple use : the value of indent can be ''true'' or ''on'''
+        - default: "false"
+          description: "indents the results.Default to false. Possible values are true or false (or on when used with the rest service. If you use a checkbox in a web form, to indent the results, the value will be 'on' or 'off', so for a simple use : the value of indent can be 'true' or 'on'"
           in: query
           name: indent
           required: false
@@ -412,19 +413,19 @@ paths:
         - application/python
         - text/plain
       responses:
-        '200':
+        "200":
           description: Sucessfully processed
           schema:
-            $ref: '#/definitions/GeolocResultsDto'
-        '401':
-          description: 'Need auth. The API key parameter is missing or wrong, or doesn''t correspond to any subscriptions'
-        '403':
+            $ref: "#/definitions/GeolocResultsDto"
+        "401":
+          description: Need auth. The API key parameter is missing or wrong, or doesn't correspond to any subscriptions
+        "403":
           description: Unhauthorize (auth will change nothing).Your IP is not allowed.
-        '412':
-          description: 'Missing parameter. Some parameters required for the webservices ar missing, please consult documentation'
-        '429':
+        "412":
+          description: Missing parameter. Some parameters required for the webservices ar missing, please consult documentation
+        "429":
           description: Too many requests. You exceed the authorized rate
-        '500':
+        "500":
           description: Internal error
       security:
         - api_key: []
@@ -436,7 +437,7 @@ paths:
       description: The Reverse geocoding service allows to search for an address for a given GPS position.
       operationId: reversegeocode
       parameters:
-        - description: 'The latitude (north-south) for the location point to search around. The value is a floating number, between -90 and +90. It uses GPS coordinates'
+        - description: The latitude (north-south) for the location point to search around. The value is a floating number, between -90 and +90. It uses GPS coordinates
           format: double
           in: query
           name: lat
@@ -462,26 +463,26 @@ paths:
           required: false
           type: string
         - default: 1
-          description: 'The first pagination index. Numbered from 1. If the number is < 1 or not specified, it will be set to the default value : 1'
+          description: "The first pagination index. Numbered from 1. If the number is < 1 or not specified, it will be set to the default value : 1"
           format: int32
           in: query
           name: from
           required: false
           type: integer
         - default: 10
-          description: 'The last pagination index. if < 1 or not specified, it will be set to startindex + 10. Max = 10 (can be changed)'
+          description: The last pagination index. if < 1 or not specified, it will be set to startindex + 10. Max = 10 (can be changed)
           format: int32
           in: query
           name: to
           required: false
           type: integer
-        - description: 'The callback method name (optional), use to wrap the content into a (alphanumeric) Javascript method. Works only for script output formats (JSON, PHP, Ruby, Python)'
+        - description: The callback method name (optional), use to wrap the content into a (alphanumeric) Javascript method. Works only for script output formats (JSON, PHP, Ruby, Python)
           in: query
           name: callback
           required: false
           type: string
-        - default: false
-          description: 'indents the results. Possible values are true or false (or on when used with the rest service. If you use a checkbox in a web form, to indent the results, the value will be ''on'' or ''off'', so for a simple use : the value of indent can be ''true'' or ''on'''
+        - default: "false"
+          description: "indents the results. Possible values are true or false (or on when used with the rest service. If you use a checkbox in a web form, to indent the results, the value will be 'on' or 'off', so for a simple use : the value of indent can be 'true' or 'on'"
           in: query
           name: indent
           required: false
@@ -495,19 +496,19 @@ paths:
         - application/python
         - text/plain
       responses:
-        '200':
+        "200":
           description: Sucessfully processed
           schema:
-            $ref: '#/definitions/AddressResultsDto'
-        '401':
-          description: 'Need auth. The API key parameter is missing or wrong, or doesn''t correspond to any subscriptions'
-        '403':
+            $ref: "#/definitions/AddressResultsDto"
+        "401":
+          description: Need auth. The API key parameter is missing or wrong, or doesn't correspond to any subscriptions
+        "403":
           description: Unhauthorize (auth will change nothing).Your IP is not allowed.
-        '412':
-          description: 'Missing parameter. Some parameters required for the webservices ar missing, please consult documentation'
-        '429':
+        "412":
+          description: Missing parameter. Some parameters required for the webservices ar missing, please consult documentation
+        "429":
           description: Too many requests. You exceed the authorized rate
-        '500':
+        "500":
           description: Internal error
       security:
         - api_key: []
@@ -516,10 +517,10 @@ paths:
         - reversegeocoding
   /street/find:
     get:
-      description: 'The street service allows you to search for street by GPS position. You can : Specify GPS position, Give the beginning or a part of the name of the street (useful for autocompletion), Limit search to a specific type (e.g : Pedestrian, highway, residential, ... 25 types available), Limit search to a specified radius, Limit search to one way streets,'
+      description: "The street service allows you to search for street by GPS position. You can : Specify GPS position, Give the beginning or a part of the name of the street (useful for autocompletion), Limit search to a specific type (e.g : Pedestrian, highway, residential, ... 25 types available), Limit search to a specified radius, Limit search to one way streets,"
       operationId: streetsearch
       parameters:
-        - description: 'The latitude (north-south) for the location point to search around. The value is a floating number, between -90 and +90. It uses GPS coordinates'
+        - description: The latitude (north-south) for the location point to search around. The value is a floating number, between -90 and +90. It uses GPS coordinates
           format: double
           in: query
           name: lat
@@ -538,14 +539,14 @@ paths:
           name: radius
           required: false
           type: number
-        - default: false
-          description: 'whether the street should be a oneWay street (optional) : limit the search to the street that are one way street. If you use a checkbox in a form to indent the results, the value will be ''on'' or ''off'', so to simplify the use : the value for the web service can be ''true'' or ''on'''
+        - default: "false"
+          description: "whether the street should be a oneWay street (optional) : limit the search to the street that are one way street. If you use a checkbox in a form to indent the results, the value will be 'on' or 'off', so to simplify the use : the value for the web service can be 'true' or 'on'"
           in: query
           name: oneway
           required: false
           type: boolean
         - default: true
-          description: 'Whether (or not) we want the distance field to be output. This option is useful to improve the performance if we don''t care about the distance (e.g : we search for name). Of course, the results won''t be sorted by distance. If you use a checkbox in a form to indent the results, the value will be ''on'' or ''off'', so to simplify the use : the value for the web service can be ''true'' or ''on'''
+          description: "Whether (or not) we want the distance field to be output. This option is useful to improve the performance if we don't care about the distance (e.g : we search for name). Of course, the results won't be sorted by distance. If you use a checkbox in a form to indent the results, the value will be 'on' or 'off', so to simplify the use : the value for the web service can be 'true' or 'on'"
           in: query
           name: distance
           required: false
@@ -569,26 +570,26 @@ paths:
           required: false
           type: string
         - default: 1
-          description: 'The first pagination index. Numbered from 1. If the number is < 1 or not specified, it will be set to the default value : 1'
+          description: "The first pagination index. Numbered from 1. If the number is < 1 or not specified, it will be set to the default value : 1"
           format: int32
           in: query
           name: from
           required: false
           type: integer
         - default: 10
-          description: 'The last pagination index. if < 1 or not specified, it will be set to startindex + 10. Max = 10 (can be changed)'
+          description: The last pagination index. if < 1 or not specified, it will be set to startindex + 10. Max = 10 (can be changed)
           format: int32
           in: query
           name: to
           required: false
           type: integer
-        - description: 'The callback method name (optional), use to wrap the content into a (alphanumeric) Javascript method. Works only for script output formats (JSON, PHP, Ruby, Python)'
+        - description: The callback method name (optional), use to wrap the content into a (alphanumeric) Javascript method. Works only for script output formats (JSON, PHP, Ruby, Python)
           in: query
           name: callback
           required: false
           type: string
-        - default: false
-          description: 'indents the results. Possible values are true or false (or on when used with the rest service. If you use a checkbox in a web form, to indent the results, the value will be ''on'' or ''off'', so for a simple use : the value of indent can be ''true'' or ''on'''
+        - default: "false"
+          description: "indents the results. Possible values are true or false (or on when used with the rest service. If you use a checkbox in a web form, to indent the results, the value will be 'on' or 'off', so for a simple use : the value of indent can be 'true' or 'on'"
           in: query
           name: indent
           required: false
@@ -602,19 +603,19 @@ paths:
         - application/python
         - text/plain
       responses:
-        '200':
+        "200":
           description: Sucessfully processed
           schema:
-            $ref: '#/definitions/StreetSearchResultsDto'
-        '401':
-          description: 'Need auth. The API key parameter is missing or wrong, or doesn''t correspond to any subscriptions'
-        '403':
+            $ref: "#/definitions/StreetSearchResultsDto"
+        "401":
+          description: Need auth. The API key parameter is missing or wrong, or doesn't correspond to any subscriptions
+        "403":
           description: Unhauthorize (auth will change nothing).Your IP is not allowed.
-        '412':
-          description: 'Missing parameter. Some parameters required for the webservices ar missing, please consult documentation'
-        '429':
+        "412":
+          description: Missing parameter. Some parameters required for the webservices ar missing, please consult documentation
+        "429":
           description: Too many requests. You exceed the authorized rate
-        '500':
+        "500":
           description: Internal error
       security:
         - api_key: []
@@ -625,13 +626,13 @@ definitions:
   Address:
     properties:
       POBox:
-        description: 'Post office box, Boite postale, Casilla de Correo,...'
+        description: Post office box, Boite postale, Casilla de Correo,...
         type: string
       POBoxAgency:
-        description: 'Agency where the office box, Boite postale, Casilla de Correo is'
+        description: Agency where the office box, Boite postale, Casilla de Correo is
         type: string
       POBoxInfo:
-        description: 'extra info on post office box, Boite postale, Casilla de Correo,..'
+        description: extra info on post office box, Boite postale, Casilla de Correo,..
         type: string
       adm1NameAlternatesLocalized:
         additionalProperties:
@@ -646,10 +647,10 @@ definitions:
           type: array
         type: object
       block:
-        description: 'The block in an address (Brasilia only) the block in austria, singapore,... address'
+        description: The block in an address (Brasilia only) the block in austria, singapore,... address
         type: string
       city:
-        description: 'The city or locality, a small town or village name sometimes is included in an address when the Delivery Point is outside the boundary of the main Post Town that serves it.'
+        description: The city or locality, a small town or village name sometimes is included in an address when the Delivery Point is outside the boundary of the main Post Town that serves it.
         type: string
       citySubdivision:
         description: A sub division of a city
@@ -673,20 +674,20 @@ definitions:
         description: The countrycode given in the request
         type: string
       dependentLocality:
-        description: '''Sub'' city atached to a big city'
+        description: "'Sub' city atached to a big city"
         type: string
       distance:
         description: The distance of the address for the given parameter location in the query
         format: double
         type: number
       district:
-        description: 'The district, mainly use for Russia'
+        description: The district, mainly use for Russia
         type: string
       extraInfo:
-        description: 'Informations on floor, unit, and sometimes POBOX,...'
+        description: Informations on floor, unit, and sometimes POBOX,...
         type: string
       floor:
-        description: 'The floor in an address, not a floor number in a unit (Brasilia only)'
+        description: The floor in an address, not a floor number in a unit (Brasilia only)
         type: string
       geocodinglevel:
         enum:
@@ -698,7 +699,7 @@ definitions:
           - COUNTRY
         type: string
       houseNumber:
-        description: 'Official number assigned to an address by the municipality, several languages supported'
+        description: Official number assigned to an address by the municipality, several languages supported
         type: string
       houseNumberInfo:
         description: All information that give extra information on the house number
@@ -719,7 +720,7 @@ definitions:
         description: Lote in Brazilian address
         type: string
       name:
-        description: 'Name of the place, it is null in case of address but filled if common place. Name is different than recipient name'
+        description: Name of the place, it is null in case of address but filled if common place. Name is different than recipient name
         type: string
       nameAlternatesLocalized:
         additionalProperties:
@@ -758,7 +759,7 @@ definitions:
         description: The sector in an address (Brasilia only)
         type: string
       state:
-        description: 'The state or county when applicable, can be fullname or abbreviation'
+        description: The state or county when applicable, can be fullname or abbreviation
         type: string
       streetName:
         description: The official name of the street or the ordinal number
@@ -773,10 +774,10 @@ definitions:
         description: The type of the intersection street
         type: string
       suiteNumber:
-        description: 'Informations on the unit, mainly used and filled by standardizer'
+        description: Informations on the unit, mainly used and filled by standardizer
         type: string
       suiteType:
-        description: 'Informations on the unit, mainly used and filled by standardizer'
+        description: Informations on the unit, mainly used and filled by standardizer
         type: string
       ward:
         description: Ward in japanese address
@@ -798,11 +799,11 @@ definitions:
         format: int32
         type: integer
       parsedAddress:
-        $ref: '#/definitions/Address'
+        $ref: "#/definitions/Address"
         description: the parsed address
       result:
         items:
-          $ref: '#/definitions/Address'
+          $ref: "#/definitions/Address"
         type: array
   FulltextResultsDto:
     properties:
@@ -823,7 +824,7 @@ definitions:
         type: integer
       result:
         items:
-          $ref: '#/definitions/SolrResponseDto'
+          $ref: "#/definitions/SolrResponseDto"
         type: array
       resultsSize:
         description: how many results are return
@@ -836,7 +837,7 @@ definitions:
         format: int64
         type: integer
       error:
-        description: 'A String only present if an error occured (e.g : empty Latitude or longitude)'
+        description: "A String only present if an error occured (e.g : empty Latitude or longitude)"
         type: string
       numFound:
         description: The number of results display with this query (it takes the pagination into account)
@@ -844,7 +845,7 @@ definitions:
         type: integer
       result:
         items:
-          $ref: '#/definitions/GisFeatureDistance'
+          $ref: "#/definitions/GisFeatureDistance"
         type: array
   GisFeatureDistance:
     properties:
@@ -941,13 +942,13 @@ definitions:
         format: int32
         type: integer
       isIn:
-        description: 'Information of the city where the street / POI is (depends on openstreetmap ''is_in'' field), the city in general (only for placetype street)'
+        description: Information of the city where the street / POI is (depends on openstreetmap 'is_in' field), the city in general (only for placetype street)
         type: string
       isInAdm:
-        description: 'Information of the administration division where the street / POI is. '
+        description: "Information of the administration division where the street / POI is. "
         type: string
       isInPlace:
-        description: 'Information of the place where the street / POI is (quarter, common place). Generally a place at a lower level than city'
+        description: Information of the place where the street / POI is (quarter, common place). Generally a place at a lower level than city
         type: string
       isInZip:
         description: Information of the zipcode where the street / POI is"
@@ -1010,16 +1011,16 @@ definitions:
         description: the type of the street
         type: string
       timezone:
-        description: 'The time zone (e.g : Europe/Paris)'
+        description: "The time zone (e.g : Europe/Paris)"
         type: string
       tld:
-        description: 'top-level domain name, (last part of an Internet domain name) of the country'
+        description: top-level domain name, (last part of an Internet domain name) of the country
         type: string
       yahoo_map_url:
         description: The URL to get the location on Yahoo Map
         type: string
       zipCodes:
-        description: 'The zipcodes (only for city and city subdivision), one node by zipcode'
+        description: The zipcodes (only for city and city subdivision), one node by zipcode
         items:
           type: string
         type: array
@@ -1121,7 +1122,7 @@ definitions:
         description: NOT USED YET
         type: string
       fully_qualified_name:
-        description: 'A name of the form : (adm1Name et adm2Name are printed) Paris, Département de Ville-De-Paris, Ile-De-France, (FR)'
+        description: "A name of the form : (adm1Name et adm2Name are printed) Paris, Département de Ville-De-Paris, Ile-De-France, (FR)"
         type: string
       google_map_url:
         description: The URL to get the location on Google Map
@@ -1133,16 +1134,16 @@ definitions:
       house_numbers:
         description: a list of all the house numbers sorted and their coordinates (only for placetype street)
         items:
-          $ref: '#/definitions/HouseNumberDto'
+          $ref: "#/definitions/HouseNumberDto"
         type: array
       is_in:
-        description: 'Information on the city where the street / POI is (depends on OpenStreetMap ''is_in'' field), the city in general (only for placetype street)'
+        description: Information on the city where the street / POI is (depends on OpenStreetMap 'is_in' field), the city in general (only for placetype street)
         type: string
       is_in_adm:
         description: Information of the administration division where the street / POI is.
         type: string
       is_in_place:
-        description: 'Information on the place where the street / POI is (quater, common place). Generally a place at a lower level than city'
+        description: Information on the place where the street / POI is (quater, common place). Generally a place at a lower level than city
         type: string
       is_in_zip:
         description: Information of the zipcode where the street / POI is (often fill for placetype street)
@@ -1164,7 +1165,7 @@ definitions:
         format: double
         type: number
       level:
-        description: 'Level of the Adm 1 , 2, 3, or 4(only for Adm placetype)'
+        description: Level of the Adm 1 , 2, 3, or 4(only for Adm placetype)
         format: int32
         type: integer
       lng:
@@ -1196,7 +1197,7 @@ definitions:
         description: The URL to get the location on OpenStreetMap.org
         type: string
       phone_prefix:
-        description: 'The phone prefix of the country. e.g : +33 .(only for country placetype)'
+        description: "The phone prefix of the country. e.g : +33 .(only for country placetype)"
         type: string
       placetype:
         description: The place Type of the Feature
@@ -1206,7 +1207,7 @@ definitions:
         format: int32
         type: integer
       postal_code_mask:
-        description: 'The mask that postal codes should verify. e.g : ##### (only for country placetype)'
+        description: "The mask that postal codes should verify. e.g : ##### (only for country placetype)"
         type: string
       postal_code_regex:
         description: The regular expression that postal codes should verify (only for country placetype)
@@ -1224,7 +1225,7 @@ definitions:
         description: The type of the street (only for placetype street)
         type: string
       timezone:
-        description: 'The timezone (e.g :Europe/Paris).'
+        description: The timezone (e.g :Europe/Paris).
         type: string
       tld:
         description: Top level domain of the country (only for country placetype)
@@ -1249,17 +1250,17 @@ definitions:
         description: NOT USED YET
         type: string
       gid:
-        description: 'Unique id of the street, it is unique between GeoNames and OpenStreetMap'
+        description: Unique id of the street, it is unique between GeoNames and OpenStreetMap
         format: int64
         type: integer
       isIn:
-        description: 'Information on the city where the street is (depends on OpenStreetMap ''is_in'' field), the city in general'
+        description: Information on the city where the street is (depends on OpenStreetMap 'is_in' field), the city in general
         type: string
       isInAdm:
         description: Information of the administration division where the street is.
         type: string
       isInPlace:
-        description: 'Information on the place where the street is (quater, common place). Generally a place at a lower level than city'
+        description: Information on the place where the street is (quater, common place). Generally a place at a lower level than city
         type: string
       isInZip:
         description: Information of the zipcode where the street / POI is (often fill for placetype street)
@@ -1296,7 +1297,7 @@ definitions:
         format: int64
         type: integer
       error:
-        description: 'A String only present if an error occured (e.g : empty Latitude or longitude)'
+        description: "A String only present if an error occured (e.g : empty Latitude or longitude)"
         type: string
       numFound:
         description: The number of results display with this query (it takes the pagination into account)
@@ -1304,5 +1305,5 @@ definitions:
         type: integer
       result:
         items:
-          $ref: '#/definitions/StreetDistance'
+          $ref: "#/definitions/StreetDistance"
         type: array

@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - http
 host: api.axesso.de
@@ -8,31 +8,30 @@ info:
   description: Use this api to fetch information to Amazon products and more.
   license:
     name: Apache 2.0
-    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: ""
   title: Axesso Api
   version: 1.0.0
   x-apisguru-categories:
     - ecommerce
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/Axesso/axesso-java-client/master/swagger/axessor_api_def_swagger.yaml'
-      version: '2.0'
+      url: https://raw.githubusercontent.com/Axesso/axesso-java-client/master/swagger/axessor_api_def_swagger.yaml
+      version: "2.0"
   x-providerName: axesso.de
 externalDocs:
   description: Find out more about Swagger
-  url: 'http://api-doc.axesso.de/'
-produces:
-  - application/json
+  url: http://api-doc.axesso.de/
 tags:
   - description: APIs for request on Amazon
     externalDocs:
       description: Find out more
-      url: 'http://api.axesso.de/'
+      url: http://api.axesso.de/
     name: amz
 paths:
   /amz/amazon-lookup-buy-recommendations:
     get:
-      description: ''
+      description: ""
       operationId: requestBuyRecommendation
       parameters:
         - description: The url of the requested product.
@@ -40,23 +39,25 @@ paths:
           name: url
           required: true
           type: string
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
-            $ref: '#/definitions/BuyRecommendationResponse'
-        '400':
+            $ref: "#/definitions/BuyRecommendationResponse"
+        "400":
           description: Bad Request - Missing parameter
-        '404':
+        "404":
           description: Not Found - Product not Found
-        '406':
+        "406":
           description: Not Acceptable - Wrong parameter
       summary: request buy recommendations to a given product
       tags:
         - amz
   /amz/amazon-lookup-product:
     get:
-      description: ''
+      description: ""
       operationId: requestProduct
       parameters:
         - description: The url of the requested product.
@@ -69,16 +70,18 @@ paths:
           name: size
           required: false
           type: string
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
-            $ref: '#/definitions/ProductDetailsResponse'
-        '400':
+            $ref: "#/definitions/ProductDetailsResponse"
+        "400":
           description: Bad Request - Missing parameter
-        '404':
+        "404":
           description: Not Found - Product not Found
-        '406':
+        "406":
           description: Not Acceptable - Wrong parameter
       security: []
       summary: lookup product information
@@ -86,7 +89,7 @@ paths:
         - amz
   /amz/amazon-search-by-keyword:
     get:
-      description: ''
+      description: ""
       operationId: keywordSearch
       parameters:
         - description: keyword to search
@@ -104,19 +107,21 @@ paths:
           in: query
           name: sortBy
           type: string
-        - default: 20
+        - default: "20"
           description: number of the results (max 20)
           in: query
           name: numberOfProducts
           type: integer
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
-            $ref: '#/definitions/KeywordSearchResponse'
-        '400':
+            $ref: "#/definitions/KeywordSearchResponse"
+        "400":
           description: Bad Request - Missing parameter
-        '404':
+        "404":
           description: Not Found - Product not Found
       security: []
       summary: fetch results auf a keyword search on Amazon
@@ -124,13 +129,15 @@ paths:
         - amz
   /amz/sort-options:
     get:
-      description: ''
+      description: ""
       operationId: sortOptions
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
-            $ref: '#/definitions/SortOptionResponse'
+            $ref: "#/definitions/SortOptionResponse"
       summary: request available sort options to use in keyword search
       tags:
         - amz
@@ -200,7 +207,7 @@ definitions:
       price:
         type: number
       priceSaving:
-        example: 'You Save: $59,58 (43%)'
+        example: "You Save: $59,58 (43%)"
         type: string
       priceShippingInformation:
         example: free

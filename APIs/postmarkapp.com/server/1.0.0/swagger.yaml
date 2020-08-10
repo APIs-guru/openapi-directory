@@ -1,22 +1,21 @@
-swagger: '2.0'
-schemes:
-  - https
+swagger: "2.0"
 host: api.postmarkapp.com
 basePath: /
 info:
-  description: |
+  description: >
     Postmark makes sending and receiving email
+
     incredibly easy.
-  title: Postmark
+  title: Postmark API
   version: 1.0.0
   x-apisguru-categories:
     - email
   x-logo:
-    url: 'https://pbs.twimg.com/profile_images/879295889185157120/ZYlwxzeY_400x400.jpg'
+    url: https://pbs.twimg.com/profile_images/879295889185157120/ZYlwxzeY_400x400.jpg
   x-origin:
     - format: swagger
-      url: 'https://postmarkapp.com/swagger/server.yml'
-      version: '2.0'
+      url: https://postmarkapp.com/swagger/server.yml
+      version: "2.0"
   x-providerName: postmarkapp.com
   x-serviceName: server
 consumes:
@@ -24,11 +23,11 @@ consumes:
 produces:
   - application/json
 responses:
-  '422':
+  "422":
     description: An error was generated due to incorrect use of the API. See the Message associated with this response for more information.
     schema:
-      $ref: '#/definitions/StandardPostmarkResponse'
-  '500':
+      $ref: "#/definitions/StandardPostmarkResponse"
+  "500":
     description: Indicates an internal server error occurred.
 paths:
   /bounces:
@@ -106,14 +105,14 @@ paths:
           name: fromdate
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/BounceSearchResponse'
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+            $ref: "#/definitions/BounceSearchResponse"
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Get bounces
       tags:
         - Bounces API
@@ -127,20 +126,20 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
               type: string
             type: array
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Get bounced tags
       tags:
         - Bounces API
-  '/bounces/{bounceid}':
+  "/bounces/{bounceid}":
     get:
       operationId: getSingleBounce
       parameters:
@@ -156,18 +155,18 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/BounceInfoResponse'
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+            $ref: "#/definitions/BounceInfoResponse"
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Get a single bounce
       tags:
         - Bounces API
-  '/bounces/{bounceid}/activate':
+  "/bounces/{bounceid}/activate":
     put:
       operationId: activateBounce
       parameters:
@@ -183,18 +182,18 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/BounceActivationResponse'
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+            $ref: "#/definitions/BounceActivationResponse"
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Activate a bounce
       tags:
         - Bounces API
-  '/bounces/{bounceid}/dump':
+  "/bounces/{bounceid}/dump":
     get:
       parameters:
         - description: The token associated with the Server on which this request will operate.
@@ -209,14 +208,14 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/BounceDumpResponse'
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+            $ref: "#/definitions/BounceDumpResponse"
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Get bounce dump
       tags:
         - Bounces API
@@ -230,14 +229,14 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/DeliveryStatsResponse'
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+            $ref: "#/definitions/DeliveryStatsResponse"
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Get delivery stats
       tags:
         - Bounces API
@@ -253,16 +252,16 @@ paths:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/SendEmailRequest'
+            $ref: "#/definitions/SendEmailRequest"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/SendEmailResponse'
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+            $ref: "#/definitions/SendEmailResponse"
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Send a single email
       tags:
         - Sending API
@@ -278,16 +277,16 @@ paths:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/SendEmailBatchRequest'
+            $ref: "#/definitions/SendEmailBatchRequest"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/SendEmailBatchResponse'
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+            $ref: "#/definitions/SendEmailBatchResponse"
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Send a batch of emails
       tags:
         - Sending API
@@ -304,16 +303,16 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/SendEmailTemplatedBatchRequest'
+            $ref: "#/definitions/SendEmailTemplatedBatchRequest"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/SendEmailBatchResponse'
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+            $ref: "#/definitions/SendEmailBatchResponse"
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Send a batch of email using templates.
       tags:
         - Sending API
@@ -331,16 +330,16 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/EmailWithTemplateRequest'
+            $ref: "#/definitions/EmailWithTemplateRequest"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/SendEmailResponse'
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+            $ref: "#/definitions/SendEmailResponse"
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Send an email using a Template
       tags:
         - Sending API
@@ -386,7 +385,7 @@ paths:
           in: query
           name: tag
           type: string
-        - description: 'Filter by status (`blocked`, `processed`, `queued`, `failed`, `scheduled`)'
+        - description: Filter by status (`blocked`, `processed`, `queued`, `failed`, `scheduled`)
           enum:
             - blocked
             - processed
@@ -407,18 +406,18 @@ paths:
           name: fromdate
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/InboundSearchResponse'
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+            $ref: "#/definitions/InboundSearchResponse"
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Inbound message search
       tags:
         - Messages API
-  '/messages/inbound/{messageid}/bypass':
+  "/messages/inbound/{messageid}/bypass":
     put:
       operationId: bypassRulesForInboundMessage
       parameters:
@@ -433,18 +432,18 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/StandardPostmarkResponse'
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+            $ref: "#/definitions/StandardPostmarkResponse"
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Bypass rules for a blocked inbound message
       tags:
         - Messages API
-  '/messages/inbound/{messageid}/details':
+  "/messages/inbound/{messageid}/details":
     get:
       operationId: getInboundMessageDetails
       parameters:
@@ -459,18 +458,18 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/InboundMessageFullDetailsResponse'
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+            $ref: "#/definitions/InboundMessageFullDetailsResponse"
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Inbound message details
       tags:
         - Messages API
-  '/messages/inbound/{messageid}/retry':
+  "/messages/inbound/{messageid}/retry":
     put:
       operationId: retryInboundMessageProcessing
       parameters:
@@ -485,14 +484,14 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/StandardPostmarkResponse'
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+            $ref: "#/definitions/StandardPostmarkResponse"
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Retry a failed inbound message for processing
       tags:
         - Messages API
@@ -547,14 +546,14 @@ paths:
           name: fromdate
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/OutboundSearchResponse'
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+            $ref: "#/definitions/OutboundSearchResponse"
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Outbound message search
       tags:
         - Messages API
@@ -577,7 +576,7 @@ paths:
           name: offset
           required: true
           type: integer
-        - description: 'Filter by To, Cc, Bcc'
+        - description: Filter by To, Cc, Bcc
           in: query
           name: recipient
           required: false
@@ -587,69 +586,69 @@ paths:
           name: tag
           required: false
           type: string
-        - description: 'Filter by client name, i.e. Outlook, Gmail'
+        - description: Filter by client name, i.e. Outlook, Gmail
           in: query
           name: client_name
           required: false
           type: string
-        - description: 'Filter by company, i.e. Microsoft, Apple, Google'
+        - description: Filter by company, i.e. Microsoft, Apple, Google
           in: query
           name: client_company
           required: false
           type: string
-        - description: 'Filter by client family, i.e. OS X, Chrome'
+        - description: Filter by client family, i.e. OS X, Chrome
           in: query
           name: client_family
           required: false
           type: string
-        - description: 'Filter by full OS name and specific version, i.e. OS X 10.9 Mavericks, Windows 7'
+        - description: Filter by full OS name and specific version, i.e. OS X 10.9 Mavericks, Windows 7
           in: query
           name: os_name
           required: false
           type: string
-        - description: 'Filter by kind of OS used without specific version, i.e. OS X, Windows'
+        - description: Filter by kind of OS used without specific version, i.e. OS X, Windows
           in: query
           name: os_family
           required: false
           type: string
-        - description: 'Filter by company which produced the OS, i.e. Apple Computer, Inc., Microsoft Corporation'
+        - description: Filter by company which produced the OS, i.e. Apple Computer, Inc., Microsoft Corporation
           in: query
           name: os_company
           required: false
           type: string
-        - description: 'Filter by platform, i.e. webmail, desktop, mobile'
+        - description: Filter by platform, i.e. webmail, desktop, mobile
           in: query
           name: platform
           required: false
           type: string
-        - description: 'Filter by country messages were opened in, i.e. Denmark, Russia'
+        - description: Filter by country messages were opened in, i.e. Denmark, Russia
           in: query
           name: country
           required: false
           type: string
-        - description: 'Filter by full name of region messages were opened in, i.e. Moscow, New York'
+        - description: Filter by full name of region messages were opened in, i.e. Moscow, New York
           in: query
           name: region
           required: false
           type: string
-        - description: 'Filter by full name of region messages were opened in, i.e. Moscow, New York'
+        - description: Filter by full name of region messages were opened in, i.e. Moscow, New York
           in: query
           name: city
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/MessageClickSearchResponse'
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+            $ref: "#/definitions/MessageClickSearchResponse"
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Clicks for a all messages
       tags:
         - Messages API
-  '/messages/outbound/clicks/{messageid}':
+  "/messages/outbound/clicks/{messageid}":
     get:
       operationId: getClicksForSingleOutboundMessage
       parameters:
@@ -679,14 +678,14 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/MessageClickSearchResponse'
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+            $ref: "#/definitions/MessageClickSearchResponse"
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Retrieve Message Clicks
       tags:
         - Messages API
@@ -709,7 +708,7 @@ paths:
           name: offset
           required: true
           type: integer
-        - description: 'Filter by To, Cc, Bcc'
+        - description: Filter by To, Cc, Bcc
           in: query
           name: recipient
           required: false
@@ -719,69 +718,69 @@ paths:
           name: tag
           required: false
           type: string
-        - description: 'Filter by client name, i.e. Outlook, Gmail'
+        - description: Filter by client name, i.e. Outlook, Gmail
           in: query
           name: client_name
           required: false
           type: string
-        - description: 'Filter by company, i.e. Microsoft, Apple, Google'
+        - description: Filter by company, i.e. Microsoft, Apple, Google
           in: query
           name: client_company
           required: false
           type: string
-        - description: 'Filter by client family, i.e. OS X, Chrome'
+        - description: Filter by client family, i.e. OS X, Chrome
           in: query
           name: client_family
           required: false
           type: string
-        - description: 'Filter by full OS name and specific version, i.e. OS X 10.9 Mavericks, Windows 7'
+        - description: Filter by full OS name and specific version, i.e. OS X 10.9 Mavericks, Windows 7
           in: query
           name: os_name
           required: false
           type: string
-        - description: 'Filter by kind of OS used without specific version, i.e. OS X, Windows'
+        - description: Filter by kind of OS used without specific version, i.e. OS X, Windows
           in: query
           name: os_family
           required: false
           type: string
-        - description: 'Filter by company which produced the OS, i.e. Apple Computer, Inc., Microsoft Corporation'
+        - description: Filter by company which produced the OS, i.e. Apple Computer, Inc., Microsoft Corporation
           in: query
           name: os_company
           required: false
           type: string
-        - description: 'Filter by platform, i.e. webmail, desktop, mobile'
+        - description: Filter by platform, i.e. webmail, desktop, mobile
           in: query
           name: platform
           required: false
           type: string
-        - description: 'Filter by country messages were opened in, i.e. Denmark, Russia'
+        - description: Filter by country messages were opened in, i.e. Denmark, Russia
           in: query
           name: country
           required: false
           type: string
-        - description: 'Filter by full name of region messages were opened in, i.e. Moscow, New York'
+        - description: Filter by full name of region messages were opened in, i.e. Moscow, New York
           in: query
           name: region
           required: false
           type: string
-        - description: 'Filter by full name of region messages were opened in, i.e. Moscow, New York'
+        - description: Filter by full name of region messages were opened in, i.e. Moscow, New York
           in: query
           name: city
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/MessageOpenSearchResponse'
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+            $ref: "#/definitions/MessageOpenSearchResponse"
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Opens for all messages
       tags:
         - Messages API
-  '/messages/outbound/opens/{messageid}':
+  "/messages/outbound/opens/{messageid}":
     get:
       operationId: getOpensForSingleOutboundMessage
       parameters:
@@ -811,18 +810,18 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/MessageOpenSearchResponse'
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+            $ref: "#/definitions/MessageOpenSearchResponse"
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Retrieve Message Opens
       tags:
         - Messages API
-  '/messages/outbound/{messageid}/details':
+  "/messages/outbound/{messageid}/details":
     get:
       operationId: getOutboundMessageDetails
       parameters:
@@ -837,18 +836,18 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/OutboundMessageDetailsResponse'
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+            $ref: "#/definitions/OutboundMessageDetailsResponse"
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Outbound message details
       tags:
         - Messages API
-  '/messages/outbound/{messageid}/dump':
+  "/messages/outbound/{messageid}/dump":
     get:
       operationId: getOutboundMessageDump
       parameters:
@@ -863,14 +862,14 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/OutboundMessageDumpResponse'
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+            $ref: "#/definitions/OutboundMessageDumpResponse"
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Outbound message dump
       tags:
         - Messages API
@@ -884,14 +883,14 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ServerConfigurationResponse'
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+            $ref: "#/definitions/ServerConfigurationResponse"
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Get Server Configuration
       tags:
         - Server Configuration API
@@ -907,16 +906,16 @@ paths:
           in: body
           name: body
           schema:
-            $ref: '#/definitions/EditServerConfigurationRequest'
+            $ref: "#/definitions/EditServerConfigurationRequest"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ServerConfigurationResponse'
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+            $ref: "#/definitions/ServerConfigurationResponse"
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Edit Server Configuration
       tags:
         - Server Configuration API
@@ -944,14 +943,14 @@ paths:
           name: todate
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/OutboundOverviewStatsResponse'
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+            $ref: "#/definitions/OutboundOverviewStatsResponse"
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Get outbound overview
       tags:
         - Stats API
@@ -979,7 +978,7 @@ paths:
           name: todate
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
@@ -1005,10 +1004,10 @@ paths:
                 type: integer
               Transient:
                 type: integer
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Get bounce counts
       tags:
         - Stats API
@@ -1036,14 +1035,14 @@ paths:
           name: todate
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/DynamicResponse'
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+            $ref: "#/definitions/DynamicResponse"
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Get click counts
       tags:
         - Stats API
@@ -1071,14 +1070,14 @@ paths:
           name: todate
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             type: object
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Get browser usage by family
       tags:
         - Stats API
@@ -1106,14 +1105,14 @@ paths:
           name: todate
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/DynamicResponse'
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+            $ref: "#/definitions/DynamicResponse"
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Get clicks by body location
       tags:
         - Stats API
@@ -1141,14 +1140,14 @@ paths:
           name: todate
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/DynamicResponse'
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+            $ref: "#/definitions/DynamicResponse"
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Get browser plaform usage
       tags:
         - Stats API
@@ -1176,7 +1175,7 @@ paths:
           name: todate
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
@@ -1194,10 +1193,10 @@ paths:
                 type: integer
               Unique:
                 type: integer
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Get email open counts
       tags:
         - Stats API
@@ -1225,13 +1224,13 @@ paths:
           name: todate
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               Days:
                 items:
-                  $ref: '#/definitions/DynamicResponse'
+                  $ref: "#/definitions/DynamicResponse"
                 type: array
               Desktop:
                 type: integer
@@ -1241,10 +1240,10 @@ paths:
                 type: integer
               WebMail:
                 type: integer
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Get email client usage
       tags:
         - Stats API
@@ -1272,7 +1271,7 @@ paths:
           name: todate
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
@@ -1298,10 +1297,10 @@ paths:
                 type: integer
               WebMail:
                 type: integer
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Get email platform usage
       tags:
         - Stats API
@@ -1329,14 +1328,14 @@ paths:
           name: todate
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/SentCountsResponse'
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+            $ref: "#/definitions/SentCountsResponse"
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Get sent counts
       tags:
         - Stats API
@@ -1364,7 +1363,7 @@ paths:
           name: todate
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
@@ -1378,10 +1377,10 @@ paths:
                 type: array
               SpamComplaint:
                 type: integer
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Get spam complaints
       tags:
         - Stats API
@@ -1409,7 +1408,7 @@ paths:
           name: todate
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
@@ -1423,10 +1422,10 @@ paths:
                 type: array
               Tracked:
                 type: integer
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Get tracked email counts
       tags:
         - Stats API
@@ -1452,14 +1451,14 @@ paths:
           required: true
           type: number
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/TemplateListingResponse'
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+            $ref: "#/definitions/TemplateListingResponse"
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Get the Templates associated with this Server
       tags:
         - Templates API
@@ -1474,16 +1473,16 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/CreateTemplateRequest'
+            $ref: "#/definitions/CreateTemplateRequest"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/TemplateRecordResponse'
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+            $ref: "#/definitions/TemplateRecordResponse"
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Create a Template
       tags:
         - Templates API
@@ -1499,20 +1498,20 @@ paths:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/TemplateValidationRequest'
+            $ref: "#/definitions/TemplateValidationRequest"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/TemplateValidationResponse'
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+            $ref: "#/definitions/TemplateValidationResponse"
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Test Template Content
       tags:
         - Templates API
-  '/templates/{templateIdOrAlias}':
+  "/templates/{templateIdOrAlias}":
     delete:
       operationId: deleteTemplate
       parameters:
@@ -1527,14 +1526,14 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/TemplateDetailResponse'
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+            $ref: "#/definitions/TemplateDetailResponse"
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Delete a Template
       tags:
         - Templates API
@@ -1552,14 +1551,14 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/TemplateDetailResponse'
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+            $ref: "#/definitions/TemplateDetailResponse"
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Get a Template
       tags:
         - Templates API
@@ -1580,16 +1579,16 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/EditTemplateRequest'
+            $ref: "#/definitions/EditTemplateRequest"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/TemplateRecordResponse'
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+            $ref: "#/definitions/TemplateRecordResponse"
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Update a Template
       tags:
         - Templates API
@@ -1613,7 +1612,7 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
@@ -1628,10 +1627,10 @@ paths:
                 type: array
               TotalCount:
                 type: integer
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: List inbound rule triggers
       tags:
         - Inbound Rules API
@@ -1646,9 +1645,9 @@ paths:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/CreateInboundRuleRequest'
+            $ref: "#/definitions/CreateInboundRuleRequest"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
@@ -1656,14 +1655,14 @@ paths:
                 type: integer
               Rule:
                 type: string
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Create an inbound rule trigger
       tags:
         - Inbound Rules API
-  '/triggers/inboundrules/{triggerid}':
+  "/triggers/inboundrules/{triggerid}":
     delete:
       operationId: deleteInboundRule
       parameters:
@@ -1678,14 +1677,14 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/StandardPostmarkResponse'
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+            $ref: "#/definitions/StandardPostmarkResponse"
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Delete a single trigger
       tags:
         - Inbound Rules API
@@ -1703,12 +1702,12 @@ definitions:
         type: string
   AttachmentCollection:
     items:
-      $ref: '#/definitions/Attachment'
+      $ref: "#/definitions/Attachment"
     type: array
   BounceActivationResponse:
     properties:
       Bounce:
-        $ref: '#/definitions/BounceInfoResponse'
+        $ref: "#/definitions/BounceInfoResponse"
       Message:
         type: string
   BounceCountElement:
@@ -1759,16 +1758,16 @@ definitions:
       TypeCode:
         type: integer
   BounceSearchResponse:
-    description: ''
+    description: ""
     properties:
       Bounces:
         items:
-          $ref: '#/definitions/BounceInfoResponse'
+          $ref: "#/definitions/BounceInfoResponse"
         type: array
       TotalCount:
         type: integer
   CreateInboundRuleRequest:
-    description: ''
+    description: ""
     properties:
       Rule:
         format: email
@@ -1777,7 +1776,7 @@ definitions:
     description: The contents required for creating a new template.
     properties:
       Alias:
-        description: 'The optional string identifier for referring to this Template (numbers, letters, and ''.'', ''-'', ''_'' characters, starts with a letter).'
+        description: The optional string identifier for referring to this Template (numbers, letters, and '.', '-', '_' characters, starts with a letter).
         type: string
       HtmlBody:
         description: The HTML template definition for this Template.
@@ -1795,11 +1794,11 @@ definitions:
       - Name
       - Subject
   DeliveryStatsResponse:
-    description: ''
+    description: ""
     properties:
       Bounces:
         items:
-          $ref: '#/definitions/BounceCountElement'
+          $ref: "#/definitions/BounceCountElement"
         type: array
       InactiveMails:
         type: integer
@@ -1853,7 +1852,7 @@ definitions:
     description: The contents required for creating a new template.
     properties:
       Alias:
-        description: 'The optional string identifier for referring to this Template (numbers, letters, and ''.'', ''-'', ''_'' characters, starts with a letter).'
+        description: The optional string identifier for referring to this Template (numbers, letters, and '.', '-', '_' characters, starts with a letter).
         type: string
       HtmlBody:
         description: The HTML template definition for this Template.
@@ -1867,8 +1866,10 @@ definitions:
       TextBody:
         description: The Text template definition for this Template.
         type: string
+    required:
+      - TemplateId
   EmailNameAddressPair:
-    description: ''
+    description: ""
     properties:
       Email:
         type: string
@@ -1877,7 +1878,7 @@ definitions:
   EmailWithTemplateRequest:
     properties:
       Attachments:
-        $ref: '#/definitions/AttachmentCollection'
+        $ref: "#/definitions/AttachmentCollection"
       Bcc:
         format: email
         type: string
@@ -1888,7 +1889,7 @@ definitions:
         format: email
         type: string
       Headers:
-        $ref: '#/definitions/HeaderCollection'
+        $ref: "#/definitions/HeaderCollection"
       InlineCss:
         default: true
         type: boolean
@@ -1908,7 +1909,7 @@ definitions:
         format: email
         type: string
       TrackLinks:
-        description: 'Replace links in content to enable "click tracking" stats. Default is ''null'', which uses the server''s LinkTracking setting''.'
+        description: Replace links in content to enable "click tracking" stats. Default is 'null', which uses the server's LinkTracking setting'.
         enum:
           - None
           - HtmlAndText
@@ -1925,12 +1926,12 @@ definitions:
       - To
       - From
   ExtendedMessageClickEventInformation:
-    description: ''
+    description: ""
     properties:
       ClickLocation:
         type: string
       Client:
-        description: ''
+        description: ""
         properties:
           Company:
             type: string
@@ -1981,10 +1982,10 @@ definitions:
       UserAgent:
         type: string
   ExtendedMessageOpenEventInformation:
-    description: ''
+    description: ""
     properties:
       Client:
-        description: ''
+        description: ""
         properties:
           Company:
             type: string
@@ -2036,25 +2037,25 @@ definitions:
         type: string
   HeaderCollection:
     items:
-      $ref: '#/definitions/MessageHeader'
+      $ref: "#/definitions/MessageHeader"
     type: array
   InboundMessageDetail:
-    description: ''
+    description: ""
     properties:
       Attachments:
-        $ref: '#/definitions/AttachmentCollection'
+        $ref: "#/definitions/AttachmentCollection"
       Cc:
         type: string
       CcFull:
         items:
-          $ref: '#/definitions/EmailNameAddressPair'
+          $ref: "#/definitions/EmailNameAddressPair"
         type: array
       Date:
         type: string
       From:
         type: string
       FromFull:
-        description: ''
+        description: ""
         properties:
           Email:
             type: string
@@ -2080,26 +2081,26 @@ definitions:
         type: string
       ToFull:
         items:
-          $ref: '#/definitions/EmailNameAddressPair'
+          $ref: "#/definitions/EmailNameAddressPair"
         type: array
   InboundMessageFullDetailsResponse:
     properties:
       Attachments:
-        $ref: '#/definitions/AttachmentCollection'
+        $ref: "#/definitions/AttachmentCollection"
       BlockedReason:
         type: string
       Cc:
         type: string
       CcFull:
         items:
-          $ref: '#/definitions/EmailNameAddressPair'
+          $ref: "#/definitions/EmailNameAddressPair"
         type: array
       Date:
         type: string
       From:
         type: string
       FromFull:
-        description: ''
+        description: ""
         properties:
           Email:
             type: string
@@ -2108,7 +2109,7 @@ definitions:
       FromName:
         type: string
       Headers:
-        $ref: '#/definitions/HeaderCollection'
+        $ref: "#/definitions/HeaderCollection"
       HtmlBody:
         type: string
       MailboxHash:
@@ -2131,14 +2132,14 @@ definitions:
         type: string
       ToFull:
         items:
-          $ref: '#/definitions/EmailNameAddressPair'
+          $ref: "#/definitions/EmailNameAddressPair"
         type: array
   InboundSearchResponse:
-    description: ''
+    description: ""
     properties:
       InboundMessages:
         items:
-          $ref: '#/definitions/InboundMessageDetail'
+          $ref: "#/definitions/InboundMessageDetail"
         type: array
       TotalCount:
         type: integer
@@ -2146,12 +2147,12 @@ definitions:
     properties:
       Clicks:
         items:
-          $ref: '#/definitions/ExtendedMessageClickEventInformation'
+          $ref: "#/definitions/ExtendedMessageClickEventInformation"
         type: array
       TotalCount:
         type: integer
   MessageEventDetails:
-    description: ''
+    description: ""
     properties:
       Details:
         properties:
@@ -2185,22 +2186,22 @@ definitions:
     properties:
       Opens:
         items:
-          $ref: '#/definitions/ExtendedMessageOpenEventInformation'
+          $ref: "#/definitions/ExtendedMessageOpenEventInformation"
         type: array
       TotalCount:
         type: integer
   OutboundMessageDetail:
-    description: ''
+    description: ""
     properties:
       Attachments:
-        $ref: '#/definitions/AttachmentCollection'
+        $ref: "#/definitions/AttachmentCollection"
       Bcc:
         items:
-          $ref: '#/definitions/EmailNameAddressPair'
+          $ref: "#/definitions/EmailNameAddressPair"
         type: array
       Cc:
         items:
-          $ref: '#/definitions/EmailNameAddressPair'
+          $ref: "#/definitions/EmailNameAddressPair"
         type: array
       From:
         type: string
@@ -2221,7 +2222,7 @@ definitions:
         type: string
       To:
         items:
-          $ref: '#/definitions/EmailNameAddressPair'
+          $ref: "#/definitions/EmailNameAddressPair"
         type: array
       TrackLinks:
         enum:
@@ -2235,16 +2236,16 @@ definitions:
   OutboundMessageDetailsResponse:
     properties:
       Attachments:
-        $ref: '#/definitions/AttachmentCollection'
+        $ref: "#/definitions/AttachmentCollection"
       Bcc:
         items:
-          $ref: '#/definitions/EmailNameAddressPair'
+          $ref: "#/definitions/EmailNameAddressPair"
         type: array
       Body:
         type: string
       Cc:
         items:
-          $ref: '#/definitions/EmailNameAddressPair'
+          $ref: "#/definitions/EmailNameAddressPair"
         type: array
       From:
         type: string
@@ -2252,7 +2253,7 @@ definitions:
         type: string
       MessageEvents:
         items:
-          $ref: '#/definitions/MessageEventDetails'
+          $ref: "#/definitions/MessageEventDetails"
         type: array
       MessageID:
         type: string
@@ -2273,7 +2274,7 @@ definitions:
         type: string
       To:
         items:
-          $ref: '#/definitions/EmailNameAddressPair'
+          $ref: "#/definitions/EmailNameAddressPair"
         type: array
       TrackLinks:
         enum:
@@ -2290,7 +2291,7 @@ definitions:
         description: Raw source of message. If no dump is available this will return an empty string.
         type: string
   OutboundOverviewStatsResponse:
-    description: ''
+    description: ""
     properties:
       BounceRate:
         type: integer
@@ -2325,26 +2326,26 @@ definitions:
       WithPlatformRecorded:
         type: integer
   OutboundSearchResponse:
-    description: ''
+    description: ""
     properties:
       Messages:
         items:
-          $ref: '#/definitions/OutboundMessageDetail'
+          $ref: "#/definitions/OutboundMessageDetail"
         type: array
       TotalCount:
         type: integer
   SendEmailBatchRequest:
     items:
-      $ref: '#/definitions/SendEmailRequest'
+      $ref: "#/definitions/SendEmailRequest"
     type: array
   SendEmailBatchResponse:
     items:
-      $ref: '#/definitions/SendEmailResponse'
+      $ref: "#/definitions/SendEmailResponse"
     type: array
   SendEmailRequest:
     properties:
       Attachments:
-        $ref: '#/definitions/AttachmentCollection'
+        $ref: "#/definitions/AttachmentCollection"
       Bcc:
         description: Bcc recipient email address. Multiple addresses are comma seperated. Max 50.
         type: string
@@ -2355,7 +2356,7 @@ definitions:
         description: The sender email address. Must have a registered and confirmed Sender Signature.
         type: string
       Headers:
-        $ref: '#/definitions/HeaderCollection'
+        $ref: "#/definitions/HeaderCollection"
       HtmlBody:
         description: If no TextBody specified HTML email message
         type: string
@@ -2375,7 +2376,7 @@ definitions:
         description: Recipient email address. Multiple addresses are comma seperated. Max 50.
         type: string
       TrackLinks:
-        description: 'Replace links in content to enable "click tracking" stats. Default is ''null'', which uses the server''s LinkTracking setting''.'
+        description: Replace links in content to enable "click tracking" stats. Default is 'null', which uses the server's LinkTracking setting'.
         enum:
           - None
           - HtmlAndText
@@ -2403,7 +2404,7 @@ definitions:
     properties:
       Messages:
         items:
-          $ref: '#/definitions/EmailWithTemplateRequest'
+          $ref: "#/definitions/EmailWithTemplateRequest"
         type: array
   SentCountsResponse:
     description: The result of a get sent counts operation.
@@ -2512,7 +2513,7 @@ definitions:
       Templates API:
         description: Basic information for each Template returned from the query.
         items:
-          $ref: '#/definitions/TemplateRecordResponse'
+          $ref: "#/definitions/TemplateRecordResponse"
         type: array
       TotalCount:
         description: The total number of Templates API associated with this server.
@@ -2543,31 +2544,39 @@ definitions:
   TemplateValidationRequest:
     properties:
       HtmlBody:
-        description: |
+        description: >
           The html body content to validate. Must be specified if Subject or
+
           TextBody are not. See our template language documentation for more
+
           information on the syntax for this field.
         type: string
       InlineCssForHtmlTestRender:
         default: true
-        description: |
+        description: >
           When HtmlBody is specified, the test render will have style blocks
+
           inlined as style attributes on matching html elements. You may disable
+
           the css inlining behavior by passing false for this parameter.
         type: boolean
       Subject:
-        description: |
+        description: >
           The subject content to validate. Must be specified if HtmlBody or
+
           TextBody are not. See our template language documentation for more
+
           information on the syntax for this field.
         type: string
       TestRenderModel:
         description: The model to be used when rendering test content.
         type: object
       TextBody:
-        description: |
+        description: >
           The text body content to validate. Must be specified if HtmlBody or
+
           Subject are not. See our template language documentation for more
+
           information on the syntax for this field.
         type: string
   TemplateValidationResponse:
@@ -2575,13 +2584,13 @@ definitions:
       AllContentIsValid:
         type: boolean
       HtmlBody:
-        $ref: '#/definitions/TemplateValidationResult'
+        $ref: "#/definitions/TemplateValidationResult"
       Subject:
-        $ref: '#/definitions/TemplateValidationResult'
+        $ref: "#/definitions/TemplateValidationResult"
       SuggestedTemplateModel:
         type: object
       TextBody:
-        $ref: '#/definitions/TemplateValidationResult'
+        $ref: "#/definitions/TemplateValidationResult"
   TemplateValidationResult:
     properties:
       ContentIsValid:
@@ -2590,5 +2599,5 @@ definitions:
         type: string
       ValidationErrors:
         items:
-          $ref: '#/definitions/TemplateValidationError'
+          $ref: "#/definitions/TemplateValidationError"
         type: array

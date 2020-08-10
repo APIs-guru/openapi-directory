@@ -8,9 +8,7 @@ info:
     name: William Hill Labs
     url: http://developer.williamhill.com
     x-twitter: WilliamHill
-  description: The William Hill SportsData REST API is a collection of GET methods
-    to provide William Hill product data such as sport, competition, event,
-    market and selection data (including prices).
+  description: The William Hill SportsData REST API is a collection of GET methods to provide William Hill product data such as sport, competition, event, market and selection data (including prices).
   title: SportsData API
   version: "2"
   x-apisguru-categories:
@@ -30,8 +28,7 @@ produces:
 parameters:
   param_active:
     default: yes
-    description: Specify whether only active entities should be returned, according
-      to the William Hill definition of active
+    description: Specify whether only active entities should be returned, according to the William Hill definition of active
     in: query
     name: isPublished
     pattern: (yes|no|all|YES|NO|ALL)
@@ -47,8 +44,7 @@ parameters:
     type: string
     x-eg: l7xxa54460c573b5497c9b24b505xxxxxxxx
   param_channel:
-    description: Specify a channel filter and only results from that channel will be
-      returned
+    description: Specify a channel filter and only results from that channel will be returned
     in: query
     name: channel
     pattern: ^[A-Z]{1}$
@@ -85,9 +81,7 @@ parameters:
     type: array
     x-eg: OB_TY1, OB_TY2
   param_culture:
-    description: Code used to return responses in language other than English,
-      acceptable values are
-      de-DE|es-ES|fr-FR|nn-NO|fi-FI|ru-RU|pt-PT|hu-HU|sl-SL|ga-IE|en-CA|sr-Latn|sv-SE|el=GR|zh-CHS|it-IT|zh-CHT|cs-CZ|de-AT|ja-JP|pl-PL|da-DK|ro-RO|nl-NL|tr-TR
+    description: Code used to return responses in language other than English, acceptable values are de-DE|es-ES|fr-FR|nn-NO|fi-FI|ru-RU|pt-PT|hu-HU|sl-SL|ga-IE|en-CA|sr-Latn|sv-SE|el=GR|zh-CHS|it-IT|zh-CHT|cs-CZ|de-AT|ja-JP|pl-PL|da-DK|ro-RO|nl-NL|tr-TR
     in: query
     name: culture
     required: false
@@ -163,9 +157,7 @@ parameters:
     x-eg: id,name,status
   param_headlinesummary:
     default: false
-    description: Return only headline markets (Markets with the lowest display
-      order) Either 1 InPlay and 1 Pre-Match, or the amount specified in
-      marketCount, if available. Markets and Outcomes will be returned.
+    description: Return only headline markets (Markets with the lowest display order) Either 1 InPlay and 1 Pre-Match, or the amount specified in marketCount, if available. Markets and Outcomes will be returned.
     in: query
     name: headlineSummary
     required: false
@@ -204,8 +196,7 @@ parameters:
     x-eg: "true"
   param_includeEmpty:
     default: true
-    description: When declared as false it should exclude markets and events that
-      have no selections / markets
+    description: When declared as false it should exclude markets and events that have no selections / markets
     in: query
     name: includeEmpty
     required: false
@@ -227,21 +218,14 @@ parameters:
     type: integer
     x-eg: "20"
   param_locale:
-    description: Code used to select a set of top bets settings, default is "whapi"
-      which allows events set in far future to be included, setting the value to
-      "en-GB" will activate english sportsbook settings, mirroring top bets on
-      the website, which restricts events returned to those taking place in next
-      36 hours. Acceptable values (not all heve their own settings - if none
-      currently available for that locale - en-GB will be used) are
-      de-DE|whapi|en-GB|es-ES|fr-FR|nn-NO|fi-FI|ru-RU|pt-PT|hu-HU|sl-SL|ga-IE|en-CA|sr-Latn|sv-SE|el=GR|zh-CHS|it-IT|zh-CHT|cs-CZ|de-AT|ja-JP|pl-PL|da-DK|ro-RO|nl-NL|tr-TR
+    description: Code used to select a set of top bets settings, default is "whapi" which allows events set in far future to be included, setting the value to "en-GB" will activate english sportsbook settings, mirroring top bets on the website, which restricts events returned to those taking place in next 36 hours. Acceptable values (not all heve their own settings - if none currently available for that locale - en-GB will be used) are de-DE|whapi|en-GB|es-ES|fr-FR|nn-NO|fi-FI|ru-RU|pt-PT|hu-HU|sl-SL|ga-IE|en-CA|sr-Latn|sv-SE|el=GR|zh-CHS|it-IT|zh-CHT|cs-CZ|de-AT|ja-JP|pl-PL|da-DK|ro-RO|nl-NL|tr-TR
     in: query
     name: Locale
     required: false
     type: string
     x-eg: de-DE
   param_marketChannel:
-    description: Specify a channel filter and only results from that channel will be
-      returned
+    description: Specify a channel filter and only results from that channel will be returned
     in: query
     name: marketChannel
     pattern: ^[A-Z]{1}$
@@ -250,10 +234,7 @@ parameters:
     x-eg: I
   param_marketCount:
     default: 1
-    description: Specify the number of markets to return when requesting
-      headlineSummary. This count of InPlay and Pre-Match markets will be
-      returned.For example, when specifying 1, 1 In Play and 1 Pre Match market
-      will be returned.
+    description: Specify the number of markets to return when requesting headlineSummary. This count of InPlay and Pre-Match markets will be returned.For example, when specifying 1, 1 In Play and 1 Pre Match market will be returned.
     in: query
     maximum: 3
     minimum: 1
@@ -313,8 +294,7 @@ parameters:
     x-eg: OB_MA1, OB_MA2
   param_marketPublished:
     default: yes
-    description: Specify whether only active entities should be returned, according
-      to the William Hill definition of active
+    description: Specify whether only active entities should be returned, according to the William Hill definition of active
     in: query
     name: marketPublished
     pattern: (yes|no|all|YES|NO|ALL)
@@ -336,8 +316,7 @@ parameters:
     type: string
     x-eg: MR
   param_marketStatus:
-    description: Specify a status to filter results by. This is currently A (active)
-      or S (suspended)
+    description: Specify a status to filter results by. This is currently A (active) or S (suspended)
     in: query
     name: marketStatus
     pattern: (A|S)
@@ -353,8 +332,7 @@ parameters:
     type: integer
     x-eg: "10"
   param_selectionChannel:
-    description: Specify a channel filter and only results from that channel will be
-      returned
+    description: Specify a channel filter and only results from that channel will be returned
     in: query
     name: selectionChannel
     pattern: ^[A-Z]{1}$
@@ -363,8 +341,7 @@ parameters:
     x-eg: I
   param_selectionPublished:
     default: yes
-    description: Specify whether only active entities should be returned, according
-      to the William Hill definition of active
+    description: Specify whether only active entities should be returned, according to the William Hill definition of active
     in: query
     name: selectionPublished
     pattern: (yes|no|all)
@@ -372,8 +349,7 @@ parameters:
     type: string
     x-eg: yes
   param_selectionStatus:
-    description: Specify a status to filter results by. This is currently A (active)
-      or S (suspended)
+    description: Specify a status to filter results by. This is currently A (active) or S (suspended)
     in: query
     name: selectionStatus
     pattern: (A|S)
@@ -389,16 +365,14 @@ parameters:
     x-eg: "true"
   param_sort:
     default: id,asc
-    description: "The field to order the response by, followed by the order. For
-      example: name,desc"
+    description: "The field to order the response by, followed by the order. For example: name,desc"
     in: query
     name: sort
     required: false
     type: string
     x-eg: name,desc
   param_sortName:
-    description: The market sort code used to further filter event results. Please
-      note this can only be used with event id(s).
+    description: The market sort code used to further filter event results. Please note this can only be used with event id(s).
     in: query
     name: sortName
     required: false
@@ -426,8 +400,7 @@ parameters:
     type: array
     x-eg: OB_SP1, OB_SP2
   param_status:
-    description: Specify a status to filter results by. This is currently A (active)
-      or S (suspended)
+    description: Specify a status to filter results by. This is currently A (active) or S (suspended)
     in: query
     name: status
     pattern: (A|S)
@@ -435,8 +408,7 @@ parameters:
     type: string
     x-eg: A
   param_topBetEventId:
-    description: The event ID to retrieve top bet information for. Multiple events
-      up to 5 may be used
+    description: The event ID to retrieve top bet information for. Multiple events up to 5 may be used
     in: query
     name: param_topBetEventId
     pattern: ^(OB_EV\d{1,7})$
@@ -466,7 +438,7 @@ paths:
         "200":
           description: Success
           examples:
-            application/json: |
+            application/json: >
               {
                "competitions": [
                {
@@ -481,7 +453,7 @@ paths:
         "400":
           description: Incorrect or Missing Parameter
           examples:
-            application/json: |
+            application/json: >
               {
                "errors" : [
                {
@@ -496,7 +468,7 @@ paths:
         "404":
           description: No data found for request
           examples:
-            application/json: |
+            application/json: >
               {
                "errors" : [
                {
@@ -514,9 +486,7 @@ paths:
         - 0
   "/classes/{classId}/events/":
     get:
-      description: Retrieves a list of events for a given class id.
-        'includeAllDescendants' parameter should be accompanied with 'date'
-        filter or one of 'dateFrom' and 'dateTo' filters.
+      description: Retrieves a list of events for a given class id. 'includeAllDescendants' parameter should be accompanied with 'date' filter or one of 'dateFrom' and 'dateTo' filters.
       operationId: getEventsForClass
       parameters:
         - $ref: "#/parameters/param_apiKey"
@@ -555,8 +525,9 @@ paths:
         "200":
           description: Success
           examples:
-            application/json: |
+            application/json: >
               {
+
               "events": [
                {
                "id": "OB_EV2828",
@@ -577,13 +548,14 @@ paths:
                "startDateTime": "2016-01-01T00:00:00"
                }
               ]
+
               }
           schema:
             $ref: "#/definitions/eventsWrapper"
         "400":
           description: Incorrect or Missing Parameter
           examples:
-            application/json: |
+            application/json: >
               {
                "errors" : [
                {
@@ -598,7 +570,7 @@ paths:
         "404":
           description: No data found for request
           examples:
-            application/json: |
+            application/json: >
               {
                "errors" : [
                {
@@ -629,7 +601,7 @@ paths:
         "200":
           description: Success
           examples:
-            application/json: |
+            application/json: >
               {
                "id": "OB_TY1733",
                "name": "Manchester Senior Cup",
@@ -640,7 +612,7 @@ paths:
         "400":
           description: Incorrect or Missing Parameter
           examples:
-            application/json: |
+            application/json: >
               {
                "errors" : [
                {
@@ -655,7 +627,7 @@ paths:
         "404":
           description: No data found for request
           examples:
-            application/json: |
+            application/json: >
               {
                "errors" : [
                {
@@ -673,10 +645,7 @@ paths:
         - 0
   "/competitions/{competitionId}/events/":
     get:
-      description: Retrieves a list of events for a given competition id.
-        'headlineSummary' and includeAllDescendants parameters should be
-        accompanied with 'date' filter or one of 'dateFrom' and 'dateTo'
-        filters.
+      description: Retrieves a list of events for a given competition id. 'headlineSummary' and includeAllDescendants parameters should be accompanied with 'date' filter or one of 'dateFrom' and 'dateTo' filters.
       operationId: getEventsForCompetition
       parameters:
         - $ref: "#/parameters/param_apiKey"
@@ -716,8 +685,9 @@ paths:
         "200":
           description: Success
           examples:
-            application/json: |
+            application/json: >
               {
+
               "events": [
                {
                "id": "OB_EV2828",
@@ -738,13 +708,14 @@ paths:
                "startDateTime": "2016-01-01T00:00:00"
                }
               ]
+
               }
           schema:
             $ref: "#/definitions/eventsWrapper"
         "400":
           description: Incorrect or Missing Parameter
           examples:
-            application/json: |
+            application/json: >
               {
                "errors" : [
                {
@@ -759,7 +730,7 @@ paths:
         "404":
           description: No data found for request
           examples:
-            application/json: |
+            application/json: >
               {
                "errors" : [
                {
@@ -799,7 +770,7 @@ paths:
         "200":
           description: Success
           examples:
-            application/json: |
+            application/json: >
               {
                "marketgroups": [
                {
@@ -829,7 +800,7 @@ paths:
         "400":
           description: Incorrect or Missing Parameter
           examples:
-            application/json: |
+            application/json: >
               {
                "errors" : [
                {
@@ -844,7 +815,7 @@ paths:
         "404":
           description: No data found for request
           examples:
-            application/json: |
+            application/json: >
               {
                "errors" : [
                {
@@ -862,8 +833,7 @@ paths:
         - 0
   "/competitions/{competitionId}/marketsByGroupid":
     get:
-      description: Retrieves a list of events/markets/selections where markets within
-        said event match selected sort/groupId
+      description: Retrieves a list of events/markets/selections where markets within said event match selected sort/groupId
       operationId: getMarketsByGroupId
       parameters:
         - $ref: "#/parameters/param_apiKey"
@@ -877,7 +847,7 @@ paths:
         "200":
           description: Success
           examples:
-            application/json: |
+            application/json: >
               {
                "events": [
 
@@ -901,7 +871,7 @@ paths:
         "400":
           description: Incorrect or Missing Parameter
           examples:
-            application/json: |
+            application/json: >
               {
                "errors" : [
                {
@@ -916,7 +886,7 @@ paths:
         "404":
           description: No data found for request
           examples:
-            application/json: |
+            application/json: >
               {
                "errors" : [
                {
@@ -927,8 +897,7 @@ paths:
               }
           schema:
             $ref: "#/definitions/errorsWrapper"
-      summary: Retrieves a list of events/markets/selections where markets within said
-        event match selected sort/groupId
+      summary: Retrieves a list of events/markets/selections where markets within said event match selected sort/groupId
       tags:
         - sportsdata
       x-canReturnErrors:
@@ -968,7 +937,7 @@ paths:
         "200":
           description: Success
           examples:
-            application/json: |
+            application/json: >
               {
                "events": [
                {
@@ -1000,7 +969,7 @@ paths:
         "400":
           description: Incorrect or Missing Parameter
           examples:
-            application/json: |
+            application/json: >
               {
                "errors" : [
                {
@@ -1015,7 +984,7 @@ paths:
         "404":
           description: No data found for request
           examples:
-            application/json: |
+            application/json: >
               {
                "errors" : [
                {
@@ -1060,7 +1029,7 @@ paths:
         "200":
           description: Success
           examples:
-            application/json: |
+            application/json: >
               {
                "events": [
                {
@@ -1092,7 +1061,7 @@ paths:
         "400":
           description: Incorrect or Missing Parameter
           examples:
-            application/json: |
+            application/json: >
               {
                "errors" : [
                {
@@ -1107,7 +1076,7 @@ paths:
         "404":
           description: No data found for request
           examples:
-            application/json: |
+            application/json: >
               {
                "errors" : [
                {
@@ -1167,7 +1136,7 @@ paths:
         "400":
           description: Incorrect or Missing Parameter
           examples:
-            application/json: |
+            application/json: >
               {
                "errors" : [
                {
@@ -1182,7 +1151,7 @@ paths:
         "404":
           description: No data found for request
           examples:
-            application/json: |
+            application/json: >
               {
                "errors" : [
                {
@@ -1200,9 +1169,7 @@ paths:
         - 0
   "/events/{eventId}/markets/":
     get:
-      description: Retrieves one or more specific markets. Markets with Live at the
-        end are always In-Play markets. However, not ALL In-Play markets have
-        Live at the end of the market name.
+      description: Retrieves one or more specific markets. Markets with Live at the end are always In-Play markets. However, not ALL In-Play markets have Live at the end of the market name.
       operationId: getMarkets
       parameters:
         - $ref: "#/parameters/param_apiKey"
@@ -1227,7 +1194,7 @@ paths:
         "200":
           description: Success
           examples:
-            application/json: |
+            application/json: >
               {
                "markets": [
                {
@@ -1247,7 +1214,7 @@ paths:
         "400":
           description: Incorrect or Missing Parameter
           examples:
-            application/json: |
+            application/json: >
               {
                "errors" : [
                {
@@ -1262,7 +1229,7 @@ paths:
         "404":
           description: No data found for request
           examples:
-            application/json: |
+            application/json: >
               {
                "errors" : [
                {
@@ -1298,7 +1265,7 @@ paths:
         "200":
           description: Success
           examples:
-            application/json: |
+            application/json: >
               {
                "selections": [
                {
@@ -1321,7 +1288,7 @@ paths:
         "400":
           description: Incorrect or Missing Parameter
           examples:
-            application/json: |
+            application/json: >
               {
                "errors" : [
                {
@@ -1336,7 +1303,7 @@ paths:
         "404":
           description: No data found for request
           examples:
-            application/json: |
+            application/json: >
               {
                "errors" : [
                {
@@ -1370,7 +1337,7 @@ paths:
         "200":
           description: Success
           examples:
-            application/json: |
+            application/json: >
               {
                "sports": [
                {
@@ -1388,7 +1355,7 @@ paths:
         "400":
           description: Incorrect or Missing Parameter
           examples:
-            application/json: |
+            application/json: >
               {
                "errors" : [
                {
@@ -1403,7 +1370,7 @@ paths:
         "404":
           description: No data found for request
           examples:
-            application/json: |
+            application/json: >
               {
                "errors" : [
                {
@@ -1441,7 +1408,7 @@ paths:
         "200":
           description: Success
           examples:
-            application/json: |
+            application/json: >
               {
                "classes": [
                {
@@ -1456,7 +1423,7 @@ paths:
         "400":
           description: Incorrect or Missing Parameter
           examples:
-            application/json: |
+            application/json: >
               {
                "errors" : [
                {
@@ -1471,7 +1438,7 @@ paths:
         "404":
           description: No data found for request
           examples:
-            application/json: |
+            application/json: >
               {
                "errors" : [
                {
@@ -1509,7 +1476,7 @@ paths:
         "200":
           description: Success
           examples:
-            application/json: |
+            application/json: >
               {
                "competitions": [
                {
@@ -1524,7 +1491,7 @@ paths:
         "400":
           description: Incorrect or Missing Parameter
           examples:
-            application/json: |
+            application/json: >
               {
                "errors" : [
                {
@@ -1539,7 +1506,7 @@ paths:
         "404":
           description: No data found for request
           examples:
-            application/json: |
+            application/json: >
               {
                "errors" : [
                {
@@ -1575,7 +1542,7 @@ paths:
         "200":
           description: Success
           examples:
-            application/json: |
+            application/json: >
               {
                bets:
                {
@@ -1799,7 +1766,7 @@ paths:
         "500":
           description: "Server Error: Something went wrong"
           examples:
-            application/json: |
+            application/json: >
               {
                "errors" : 
                [
@@ -1905,8 +1872,7 @@ definitions:
         type: number
         x-eg: "3"
       colour:
-        description: The colour of the horse (There are 5 colours. b = Bay. bl = Black.
-          br = Brown. ch = Chestnut. gr = Grey)
+        description: The colour of the horse (There are 5 colours. b = Bay. bl = Black. br = Brown. ch = Chestnut. gr = Grey)
         type: string
         x-eg: bl
       drawNumber:
@@ -1914,11 +1880,7 @@ definitions:
         type: number
         x-eg: "4"
       formGuide:
-        description: "The form of a horse is a record of significant events, mainly its
-          performance in previous races. For example: The value 874-1 means that
-          the horse finished 8th, then 7th in the next race, then 4th, hyphen
-          here means he did not finish in the race, and was 1st in the last race
-          he was running in."
+        description: "The form of a horse is a record of significant events, mainly its performance in previous races. For example: The value 874-1 means that the horse finished 8th, then 7th in the next race, then 4th, hyphen here means he did not finish in the race, and was 1st in the last race he was running in."
         type: string
         x-eg: 4-2711
       id:
@@ -1936,18 +1898,13 @@ definitions:
       overview:
         description: Additional information about the horse's performance
         type: string
-        x-eg: Good pedigree; took him five times to click but won his Lingfield novice
-          nicely in the end and duly confirmed himself progressive by following
-          up at Newmarket, again over 7f (good ground); pace was true there so
-          form looks okay and rates a danger to all off 6lb higher.
+        x-eg: Good pedigree; took him five times to click but won his Lingfield novice nicely in the end and duly confirmed himself progressive by following up at Newmarket, again over 7f (good ground); pace was true there so form looks okay and rates a danger to all off 6lb higher.
       ownerName:
         description: The name of the horses owner(s)
         type: string
         x-eg: Sheikh Mohammed Obaid Al Maktoum
       rating:
-        description: The rating of the horse which is defined by a rating provider. It
-          represents the horse's performance (the higher the rating, the better
-          the horse is)
+        description: The rating of the horse which is defined by a rating provider. It represents the horse's performance (the higher the rating, the better the horse is)
         type: string
         x-eg: "98"
       sex:
@@ -1955,8 +1912,7 @@ definitions:
         type: string
         x-eg: M
       silkImageUrl:
-        description: The URL for the image that represents the 'silk' (Coathing pattern)
-          worn by the jockey.
+        description: The URL for the image that represents the 'silk' (Coathing pattern) worn by the jockey.
         type: string
         x-eg: http://whdn.williamhill.com/content/sportsbook/silks/55336.gif
       trainerName:
@@ -2117,8 +2073,7 @@ definitions:
         format: integer
         type: number
       channels:
-        description: A channel indicates where an entry can be accessed. Its made up of
-          a string containing a number of characters
+        description: A channel indicates where an entry can be accessed. Its made up of a string containing a number of characters
         type: string
       description:
         description: Additional market information
@@ -2131,24 +2086,21 @@ definitions:
         type: boolean
       eachWayFactorDen:
         description: >-
-          Where each way terms are stored with the bet, this holds the
-          denominator for the each way
+          Where each way terms are stored with the bet, this holds the denominator for the each way
 
           factor. For example, if the each way terms are: 5 places pay ¼, this value will be 4
         format: integer
         type: number
       eachWayFactorNum:
         description: >-
-          Where each way terms are stored with the bet, this holds the numerator
-          for the each way
+          Where each way terms are stored with the bet, this holds the numerator for the each way
 
           factor. For example, if the each way terms are: 5 places pay ¼, this value will be 1
         format: integer
         type: number
       eachWayPlaces:
         description: >-
-          Where each way terms are stored with the bet, this holds the number of
-          places paid. For
+          Where each way terms are stored with the bet, this holds the number of places paid. For
 
           example, if the each way terms are: 5 places pay ¼, this value will be 5
         format: integer
@@ -2173,14 +2125,11 @@ definitions:
         format: integer
         type: number
       hcapValue:
-        description: This value indicates the current handicap set on the Event Market,
-          assuming it has a handicap type.
+        description: This value indicates the current handicap set on the Event Market, assuming it has a handicap type.
         format: integer
         type: number
       id:
-        description: ID (e.g. OB_MA{id} (e.g. OB_MA1), OB_SP (Sport), OB_CL (Class),
-          OB_TY (Competition / type), OB_EV (event) OB_MA (Market), OB_OU
-          (Selection / outcome)
+        description: ID (e.g. OB_MA{id} (e.g. OB_MA1), OB_SP (Sport), OB_CL (Class), OB_TY (Competition / type), OB_EV (event) OB_MA (Market), OB_OU (Selection / outcome)
         type: string
       isInPlayMarket:
         description: Is this an in-play market
@@ -2425,12 +2374,10 @@ definitions:
     type: object
 x-customerrors:
   - code: 20101
-    message: Cannot have includeAllDescendants active without the headlineSummary
-      parameter. Too much data to be returned.
+    message: Cannot have includeAllDescendants active without the headlineSummary parameter. Too much data to be returned.
     status: 400
   - code: 20102
-    message: headlineSummary parameter must be accompanied with 'date' filter or one
-      of 'dateFrom' and 'dateTo' filters.
+    message: headlineSummary parameter must be accompanied with 'date' filter or one of 'dateFrom' and 'dateTo' filters.
     status: 400
 x-docchapters:
   - fieldSelection
