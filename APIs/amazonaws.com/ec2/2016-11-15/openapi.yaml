@@ -35054,25 +35054,6 @@ paths:
           description: The ID of the subnet.
           schema:
             type: string
-        - name: MapCustomerOwnedIpOnLaunch
-          in: query
-          required: false
-          description: '<p>Specify <code>true</code> to indicate that network interfaces attached to instances created in the specified subnet should be assigned a customer-owned IPv4 address.</p> <p>When this value is <code>true</code>, you must specify the customer-owned IP pool using <code>CustomerOwnedIpv4Pool</code>.</p>'
-          schema:
-            type: object
-            properties:
-              Value:
-                xml:
-                  name: value
-                $ref: '#/components/schemas/Boolean'
-                description: The attribute value. The valid values are <code>true</code> or <code>false</code>.
-            description: Describes a value for a resource attribute that is a Boolean value.
-        - name: CustomerOwnedIpv4Pool
-          in: query
-          required: false
-          description: <p>The customer-owned IPv4 address pool associated with the subnet.</p> <p>You must set this value when you specify <code>true</code> for <code>MapCustomerOwnedIpOnLaunch</code>.</p>
-          schema:
-            type: string
         - name: Action
           in: query
           required: true
@@ -68711,12 +68692,6 @@ components:
             name: subnetId
           $ref: '#/components/schemas/SubnetId'
           description: The ID of the subnet.
-        MapCustomerOwnedIpOnLaunch:
-          $ref: '#/components/schemas/AttributeBooleanValue'
-          description: '<p>Specify <code>true</code> to indicate that network interfaces attached to instances created in the specified subnet should be assigned a customer-owned IPv4 address.</p> <p>When this value is <code>true</code>, you must specify the customer-owned IP pool using <code>CustomerOwnedIpv4Pool</code>.</p>'
-        CustomerOwnedIpv4Pool:
-          $ref: '#/components/schemas/CoipPoolId'
-          description: <p>The customer-owned IPv4 address pool associated with the subnet.</p> <p>You must set this value when you specify <code>true</code> for <code>MapCustomerOwnedIpOnLaunch</code>.</p>
     TrafficMirrorNetworkServiceList:
       type: array
       items:

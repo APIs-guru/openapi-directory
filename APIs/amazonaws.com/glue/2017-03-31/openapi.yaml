@@ -6222,7 +6222,7 @@ paths:
   /#X-Amz-Target=AWSGlue.ResumeWorkflowRun:
     post:
       operationId: ResumeWorkflowRun
-      description: Restarts any completed nodes in a workflow run and resumes the run execution.
+      description: Restarts selected nodes of a previous partially completed workflow run and resumes the workflow run. The selected nodes and all nodes that are downstream from the selected nodes are run.
       responses:
         '200':
           description: Success
@@ -9083,6 +9083,9 @@ components:
         Tags:
           $ref: '#/components/schemas/TagsMap'
           description: The tags to be used with this workflow.
+        MaxConcurrentRuns:
+          $ref: '#/components/schemas/NullableInteger'
+          description: 'You can use this parameter to prevent unwanted multiple updates to data, to control costs, or in some cases, to prevent exceeding the maximum number of concurrent runs of any of the component jobs. If you leave this parameter blank, there is no limit to the number of concurrent workflow runs.'
     DeleteClassifierResponse:
       type: object
       properties: {}
@@ -10705,7 +10708,7 @@ components:
           description: The ID of the workflow run to resume.
         NodeIds:
           $ref: '#/components/schemas/NodeIdList'
-          description: A list of the node IDs for the nodes you want to restart. The nodes that are to be restarted must have an execution attempt in the original run.
+          description: A list of the node IDs for the nodes you want to restart. The nodes that are to be restarted must have a run attempt in the original run.
     ConcurrentRunsExceededException: {}
     IllegalWorkflowStateException: {}
     SearchTablesResponse:
@@ -11387,6 +11390,9 @@ components:
         DefaultRunProperties:
           $ref: '#/components/schemas/WorkflowRunProperties'
           description: A collection of properties to be used as part of each execution of the workflow.
+        MaxConcurrentRuns:
+          $ref: '#/components/schemas/NullableInteger'
+          description: 'You can use this parameter to prevent unwanted multiple updates to data, to control costs, or in some cases, to prevent exceeding the maximum number of concurrent runs of any of the component jobs. If you leave this parameter blank, there is no limit to the number of concurrent workflow runs.'
     NameString:
       type: string
       minLength: 1
@@ -12258,7 +12264,7 @@ components:
           description: 'The name of the job whose <code>JobRuns</code> this condition applies to, and on which this trigger waits.'
         State:
           $ref: '#/components/schemas/JobRunState'
-          description: 'The condition state. Currently, the values supported are <code>SUCCEEDED</code>, <code>STOPPED</code>, <code>TIMEOUT</code>, and <code>FAILED</code>.'
+          description: 'The condition state. Currently, the only job states that a trigger can listen for are <code>SUCCEEDED</code>, <code>STOPPED</code>, <code>FAILED</code>, and <code>TIMEOUT</code>. The only crawler states that a trigger can listen for are <code>SUCCEEDED</code>, <code>FAILED</code>, and <code>CANCELLED</code>.'
         CrawlerName:
           $ref: '#/components/schemas/NameString'
           description: The name of the crawler to which this condition applies.
@@ -13535,7 +13541,7 @@ components:
           description: The date and time that this job run completed.
         JobRunState:
           $ref: '#/components/schemas/JobRunState'
-          description: The current state of the job run.
+          description: 'The current state of the job run. For more information about the statuses of jobs that have terminated abnormally, see <a href="https://docs.aws.amazon.com/glue/latest/dg/job-run-statuses.html">AWS Glue Job Run Statuses</a>.'
         Arguments:
           $ref: '#/components/schemas/GenericMap'
           description: '<p>The job arguments associated with this run. For this job run, they replace the default arguments set in the job definition itself.</p> <p>You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes.</p> <p>For information about how to specify and consume your own job arguments, see the <a href="https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html">Calling AWS Glue APIs in Python</a> topic in the developer guide.</p> <p>For information about the key-value pairs that AWS Glue consumes to set up your job, see the <a href="https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html">Special Parameters Used by AWS Glue</a> topic in the developer guide.</p>'
@@ -13971,6 +13977,9 @@ components:
         Graph:
           $ref: '#/components/schemas/WorkflowGraph'
           description: The graph representing all the AWS Glue components that belong to the workflow as nodes and directed connections between them as edges.
+        MaxConcurrentRuns:
+          $ref: '#/components/schemas/NullableInteger'
+          description: 'You can use this parameter to prevent unwanted multiple updates to data, to control costs, or in some cases, to prevent exceeding the maximum number of concurrent runs of any of the component jobs. If you leave this parameter blank, there is no limit to the number of concurrent workflow runs.'
       description: A workflow represents a flow in which AWS Glue components should be executed to complete a logical task.
     WorkflowRun:
       type: object
@@ -13996,6 +14005,9 @@ components:
         Status:
           $ref: '#/components/schemas/WorkflowRunStatus'
           description: The status of the workflow run.
+        ErrorMessage:
+          $ref: '#/components/schemas/ErrorString'
+          description: 'This error message describes any error that may have occurred in starting the workflow run. Currently the only error message is "Concurrent runs exceeded for workflow: <code>foo</code>."'
         Statistics:
           $ref: '#/components/schemas/WorkflowRunStatistics'
           description: The statistics of the run.
@@ -14812,6 +14824,7 @@ components:
         - COMPLETED
         - STOPPING
         - STOPPED
+        - ERROR
     WorkflowRunStatistics:
       type: object
       properties:
