@@ -614,7 +614,7 @@ paths:
   /2015-03-31/event-source-mappings/:
     post:
       operationId: CreateEventSourceMapping
-      description: '<p>Creates a mapping between an event source and an AWS Lambda function. Lambda reads items from the event source and triggers the function.</p> <p>For details about each event source type, see the following topics.</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html">Using AWS Lambda with Amazon DynamoDB</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html">Using AWS Lambda with Amazon Kinesis</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html">Using AWS Lambda with Amazon SQS</a> </p> </li> </ul> <p>The following error handling options are only available for stream sources (DynamoDB and Kinesis):</p> <ul> <li> <p> <code>BisectBatchOnFunctionError</code> - If the function returns an error, split the batch in two and retry.</p> </li> <li> <p> <code>DestinationConfig</code> - Send discarded records to an Amazon SQS queue or Amazon SNS topic.</p> </li> <li> <p> <code>MaximumRecordAgeInSeconds</code> - Discard records older than the specified age.</p> </li> <li> <p> <code>MaximumRetryAttempts</code> - Discard records after the specified number of retries.</p> </li> <li> <p> <code>ParallelizationFactor</code> - Process multiple batches from each shard concurrently.</p> </li> </ul>'
+      description: '<p>Creates a mapping between an event source and an AWS Lambda function. Lambda reads items from the event source and triggers the function.</p> <p>For details about each event source type, see the following topics.</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html">Using AWS Lambda with Amazon DynamoDB</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html">Using AWS Lambda with Amazon Kinesis</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html">Using AWS Lambda with Amazon SQS</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html">Using AWS Lambda with Amazon MSK</a> </p> </li> </ul> <p>The following error handling options are only available for stream sources (DynamoDB and Kinesis):</p> <ul> <li> <p> <code>BisectBatchOnFunctionError</code> - If the function returns an error, split the batch in two and retry.</p> </li> <li> <p> <code>DestinationConfig</code> - Send discarded records to an Amazon SQS queue or Amazon SNS topic.</p> </li> <li> <p> <code>MaximumRecordAgeInSeconds</code> - Discard records older than the specified age. Default -1 (infinite). Minimum 60. Maximum 604800.</p> </li> <li> <p> <code>MaximumRetryAttempts</code> - Discard records after the specified number of retries. Default -1 (infinite). Minimum 0. Maximum 10000. When infinite, failed records will be retried until the record expires.</p> </li> <li> <p> <code>ParallelizationFactor</code> - Process multiple batches from each shard concurrently.</p> </li> </ul>'
       responses:
         '202':
           description: Success
@@ -664,7 +664,7 @@ paths:
                 - FunctionName
               properties:
                 EventSourceArn:
-                  description: <p>The Amazon Resource Name (ARN) of the event source.</p> <ul> <li> <p> <b>Amazon Kinesis</b> - The ARN of the data stream or a stream consumer.</p> </li> <li> <p> <b>Amazon DynamoDB Streams</b> - The ARN of the stream.</p> </li> <li> <p> <b>Amazon Simple Queue Service</b> - The ARN of the queue.</p> </li> </ul>
+                  description: <p>The Amazon Resource Name (ARN) of the event source.</p> <ul> <li> <p> <b>Amazon Kinesis</b> - The ARN of the data stream or a stream consumer.</p> </li> <li> <p> <b>Amazon DynamoDB Streams</b> - The ARN of the stream.</p> </li> <li> <p> <b>Amazon Simple Queue Service</b> - The ARN of the queue.</p> </li> <li> <p> <b>Amazon Managed Streaming for Apache Kafka</b> - The ARN of the cluster.</p> </li> </ul>
                   type: string
                   pattern: 'arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\-])+:([a-z]{2}(-gov)?-[a-z]+-\d{1})?:(\d{12})?:(.*)'
                 FunctionName:
@@ -674,10 +674,10 @@ paths:
                   minLength: 1
                   maxLength: 140
                 Enabled:
-                  description: Disables the event source mapping to pause polling and invocation.
+                  description: 'If true, the event source mapping is active. Set to false to pause polling and invocation.'
                   type: boolean
                 BatchSize:
-                  description: '<p>The maximum number of items to retrieve in a single batch.</p> <ul> <li> <p> <b>Amazon Kinesis</b> - Default 100. Max 10,000.</p> </li> <li> <p> <b>Amazon DynamoDB Streams</b> - Default 100. Max 1,000.</p> </li> <li> <p> <b>Amazon Simple Queue Service</b> - Default 10. Max 10.</p> </li> </ul>'
+                  description: '<p>The maximum number of items to retrieve in a single batch.</p> <ul> <li> <p> <b>Amazon Kinesis</b> - Default 100. Max 10,000.</p> </li> <li> <p> <b>Amazon DynamoDB Streams</b> - Default 100. Max 1,000.</p> </li> <li> <p> <b>Amazon Simple Queue Service</b> - Default 10. Max 10.</p> </li> <li> <p> <b>Amazon Managed Streaming for Apache Kafka</b> - Default 100. Max 10,000.</p> </li> </ul>'
                   type: integer
                   minimum: 1
                   maximum: 10000
@@ -692,7 +692,7 @@ paths:
                   minimum: 1
                   maximum: 10
                 StartingPosition:
-                  description: The position in a stream from which to start reading. Required for Amazon Kinesis and Amazon DynamoDB Streams sources. <code>AT_TIMESTAMP</code> is only supported for Amazon Kinesis streams.
+                  description: 'The position in a stream from which to start reading. Required for Amazon Kinesis, Amazon DynamoDB, and Amazon MSK Streams sources. <code>AT_TIMESTAMP</code> is only supported for Amazon Kinesis streams.'
                   type: string
                   enum:
                     - TRIM_HORIZON
@@ -713,18 +713,25 @@ paths:
                       $ref: '#/components/schemas/OnFailure'
                       description: The destination configuration for failed invocations.
                 MaximumRecordAgeInSeconds:
-                  description: (Streams) The maximum age of a record that Lambda sends to a function for processing.
+                  description: (Streams) Discard records older than the specified age. The default value is infinite (-1).
                   type: integer
-                  minimum: 60
+                  minimum: -1
                   maximum: 604800
                 BisectBatchOnFunctionError:
                   description: '(Streams) If the function returns an error, split the batch in two and retry.'
                   type: boolean
                 MaximumRetryAttempts:
-                  description: (Streams) The maximum number of times to retry when the function returns an error.
+                  description: '(Streams) Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records will be retried until the record expires.'
                   type: integer
-                  minimum: 0
+                  minimum: -1
                   maximum: 10000
+                Topics:
+                  description: ' (MSK) The name of the Kafka topic. '
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Topic'
+                  minItems: 1
+                  maxItems: 1
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -771,7 +778,7 @@ paths:
         - name: EventSourceArn
           in: query
           required: false
-          description: <p>The Amazon Resource Name (ARN) of the event source.</p> <ul> <li> <p> <b>Amazon Kinesis</b> - The ARN of the data stream or a stream consumer.</p> </li> <li> <p> <b>Amazon DynamoDB Streams</b> - The ARN of the stream.</p> </li> <li> <p> <b>Amazon Simple Queue Service</b> - The ARN of the queue.</p> </li> </ul>
+          description: <p>The Amazon Resource Name (ARN) of the event source.</p> <ul> <li> <p> <b>Amazon Kinesis</b> - The ARN of the data stream or a stream consumer.</p> </li> <li> <p> <b>Amazon DynamoDB Streams</b> - The ARN of the stream.</p> </li> <li> <p> <b>Amazon Simple Queue Service</b> - The ARN of the queue.</p> </li> <li> <p> <b>Amazon Managed Streaming for Apache Kafka</b> - The ARN of the cluster.</p> </li> </ul>
           schema:
             type: string
             pattern: 'arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\-])+:([a-z]{2}(-gov)?-[a-z]+-\d{1})?:(\d{12})?:(.*)'
@@ -1294,7 +1301,7 @@ paths:
             type: string
     put:
       operationId: UpdateEventSourceMapping
-      description: '<p>Updates an event source mapping. You can change the function that AWS Lambda invokes, or pause invocation and resume later from the same location.</p> <p>The following error handling options are only available for stream sources (DynamoDB and Kinesis):</p> <ul> <li> <p> <code>BisectBatchOnFunctionError</code> - If the function returns an error, split the batch in two and retry.</p> </li> <li> <p> <code>DestinationConfig</code> - Send discarded records to an Amazon SQS queue or Amazon SNS topic.</p> </li> <li> <p> <code>MaximumRecordAgeInSeconds</code> - Discard records older than the specified age.</p> </li> <li> <p> <code>MaximumRetryAttempts</code> - Discard records after the specified number of retries.</p> </li> <li> <p> <code>ParallelizationFactor</code> - Process multiple batches from each shard concurrently.</p> </li> </ul>'
+      description: '<p>Updates an event source mapping. You can change the function that AWS Lambda invokes, or pause invocation and resume later from the same location.</p> <p>The following error handling options are only available for stream sources (DynamoDB and Kinesis):</p> <ul> <li> <p> <code>BisectBatchOnFunctionError</code> - If the function returns an error, split the batch in two and retry.</p> </li> <li> <p> <code>DestinationConfig</code> - Send discarded records to an Amazon SQS queue or Amazon SNS topic.</p> </li> <li> <p> <code>MaximumRecordAgeInSeconds</code> - Discard records older than the specified age. Default -1 (infinite). Minimum 60. Maximum 604800.</p> </li> <li> <p> <code>MaximumRetryAttempts</code> - Discard records after the specified number of retries. Default -1 (infinite). Minimum 0. Maximum 10000. When infinite, failed records will be retried until the record expires.</p> </li> <li> <p> <code>ParallelizationFactor</code> - Process multiple batches from each shard concurrently.</p> </li> </ul>'
       responses:
         '202':
           description: Success
@@ -1359,10 +1366,10 @@ paths:
                   minLength: 1
                   maxLength: 140
                 Enabled:
-                  description: Disables the event source mapping to pause polling and invocation.
+                  description: 'If true, the event source mapping is active. Set to false to pause polling and invocation.'
                   type: boolean
                 BatchSize:
-                  description: '<p>The maximum number of items to retrieve in a single batch.</p> <ul> <li> <p> <b>Amazon Kinesis</b> - Default 100. Max 10,000.</p> </li> <li> <p> <b>Amazon DynamoDB Streams</b> - Default 100. Max 1,000.</p> </li> <li> <p> <b>Amazon Simple Queue Service</b> - Default 10. Max 10.</p> </li> </ul>'
+                  description: '<p>The maximum number of items to retrieve in a single batch.</p> <ul> <li> <p> <b>Amazon Kinesis</b> - Default 100. Max 10,000.</p> </li> <li> <p> <b>Amazon DynamoDB Streams</b> - Default 100. Max 1,000.</p> </li> <li> <p> <b>Amazon Simple Queue Service</b> - Default 10. Max 10.</p> </li> <li> <p> <b>Amazon Managed Streaming for Apache Kafka</b> - Default 100. Max 10,000.</p> </li> </ul>'
                   type: integer
                   minimum: 1
                   maximum: 10000
@@ -1382,17 +1389,17 @@ paths:
                       $ref: '#/components/schemas/OnFailure'
                       description: The destination configuration for failed invocations.
                 MaximumRecordAgeInSeconds:
-                  description: (Streams) The maximum age of a record that Lambda sends to a function for processing.
+                  description: (Streams) Discard records older than the specified age. The default value is infinite (-1).
                   type: integer
-                  minimum: 60
+                  minimum: -1
                   maximum: 604800
                 BisectBatchOnFunctionError:
                   description: '(Streams) If the function returns an error, split the batch in two and retry.'
                   type: boolean
                 MaximumRetryAttempts:
-                  description: (Streams) The maximum number of times to retry when the function returns an error.
+                  description: '(Streams) Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records will be retried until the record expires.'
                   type: integer
-                  minimum: 0
+                  minimum: -1
                   maximum: 10000
                 ParallelizationFactor:
                   description: (Streams) The number of batches to process from each shard concurrently.
@@ -4073,6 +4080,9 @@ components:
         DestinationConfig:
           $ref: '#/components/schemas/DestinationConfig'
           description: (Streams) An Amazon SQS queue or Amazon SNS topic destination for discarded records.
+        Topics:
+          $ref: '#/components/schemas/Topics'
+          description: ' (MSK) The name of the Kafka topic. '
         MaximumRecordAgeInSeconds:
           $ref: '#/components/schemas/MaximumRecordAgeInSeconds'
           description: (Streams) The maximum age of a record that Lambda sends to a function for processing.
@@ -4097,6 +4107,11 @@ components:
           $ref: '#/components/schemas/DestinationArn'
           description: The Amazon Resource Name (ARN) of the destination resource.
       description: A destination for events that failed processing.
+    Topic:
+      type: string
+      pattern: '^[^.]([a-zA-Z0-9\-_.]+)'
+      minLength: 1
+      maxLength: 249
     FunctionConfiguration:
       type: object
       example:
@@ -5065,12 +5080,18 @@ components:
       description: A configuration object that specifies the destination of an event after Lambda processes it.
     MaximumRecordAgeInSeconds:
       type: integer
-      minimum: 60
+      minimum: -1
       maximum: 604800
     MaximumRetryAttemptsEventSourceMapping:
       type: integer
-      minimum: 0
+      minimum: -1
       maximum: 10000
+    Topics:
+      type: array
+      items:
+        $ref: '#/components/schemas/Topic'
+      minItems: 1
+      maxItems: 1
     CreateEventSourceMappingRequest:
       type: object
       required:
@@ -5080,16 +5101,16 @@ components:
       properties:
         EventSourceArn:
           $ref: '#/components/schemas/Arn'
-          description: <p>The Amazon Resource Name (ARN) of the event source.</p> <ul> <li> <p> <b>Amazon Kinesis</b> - The ARN of the data stream or a stream consumer.</p> </li> <li> <p> <b>Amazon DynamoDB Streams</b> - The ARN of the stream.</p> </li> <li> <p> <b>Amazon Simple Queue Service</b> - The ARN of the queue.</p> </li> </ul>
+          description: <p>The Amazon Resource Name (ARN) of the event source.</p> <ul> <li> <p> <b>Amazon Kinesis</b> - The ARN of the data stream or a stream consumer.</p> </li> <li> <p> <b>Amazon DynamoDB Streams</b> - The ARN of the stream.</p> </li> <li> <p> <b>Amazon Simple Queue Service</b> - The ARN of the queue.</p> </li> <li> <p> <b>Amazon Managed Streaming for Apache Kafka</b> - The ARN of the cluster.</p> </li> </ul>
         FunctionName:
           $ref: '#/components/schemas/FunctionName'
           description: '<p>The name of the Lambda function.</p> <p class="title"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>MyFunction</code>.</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:MyFunction</code>.</p> </li> <li> <p> <b>Version or Alias ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:MyFunction:PROD</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:MyFunction</code>.</p> </li> </ul> <p>The length constraint applies only to the full ARN. If you specify only the function name, it''s limited to 64 characters in length.</p>'
         Enabled:
           $ref: '#/components/schemas/Enabled'
-          description: Disables the event source mapping to pause polling and invocation.
+          description: 'If true, the event source mapping is active. Set to false to pause polling and invocation.'
         BatchSize:
           $ref: '#/components/schemas/BatchSize'
-          description: '<p>The maximum number of items to retrieve in a single batch.</p> <ul> <li> <p> <b>Amazon Kinesis</b> - Default 100. Max 10,000.</p> </li> <li> <p> <b>Amazon DynamoDB Streams</b> - Default 100. Max 1,000.</p> </li> <li> <p> <b>Amazon Simple Queue Service</b> - Default 10. Max 10.</p> </li> </ul>'
+          description: '<p>The maximum number of items to retrieve in a single batch.</p> <ul> <li> <p> <b>Amazon Kinesis</b> - Default 100. Max 10,000.</p> </li> <li> <p> <b>Amazon DynamoDB Streams</b> - Default 100. Max 1,000.</p> </li> <li> <p> <b>Amazon Simple Queue Service</b> - Default 10. Max 10.</p> </li> <li> <p> <b>Amazon Managed Streaming for Apache Kafka</b> - Default 100. Max 10,000.</p> </li> </ul>'
         MaximumBatchingWindowInSeconds:
           $ref: '#/components/schemas/MaximumBatchingWindowInSeconds'
           description: '(Streams) The maximum amount of time to gather records before invoking the function, in seconds.'
@@ -5098,7 +5119,7 @@ components:
           description: (Streams) The number of batches to process from each shard concurrently.
         StartingPosition:
           $ref: '#/components/schemas/EventSourcePosition'
-          description: The position in a stream from which to start reading. Required for Amazon Kinesis and Amazon DynamoDB Streams sources. <code>AT_TIMESTAMP</code> is only supported for Amazon Kinesis streams.
+          description: 'The position in a stream from which to start reading. Required for Amazon Kinesis, Amazon DynamoDB, and Amazon MSK Streams sources. <code>AT_TIMESTAMP</code> is only supported for Amazon Kinesis streams.'
         StartingPositionTimestamp:
           $ref: '#/components/schemas/Date'
           description: 'With <code>StartingPosition</code> set to <code>AT_TIMESTAMP</code>, the time from which to start reading.'
@@ -5107,13 +5128,16 @@ components:
           description: (Streams) An Amazon SQS queue or Amazon SNS topic destination for discarded records.
         MaximumRecordAgeInSeconds:
           $ref: '#/components/schemas/MaximumRecordAgeInSeconds'
-          description: (Streams) The maximum age of a record that Lambda sends to a function for processing.
+          description: (Streams) Discard records older than the specified age. The default value is infinite (-1).
         BisectBatchOnFunctionError:
           $ref: '#/components/schemas/BisectBatchOnFunctionError'
           description: '(Streams) If the function returns an error, split the batch in two and retry.'
         MaximumRetryAttempts:
           $ref: '#/components/schemas/MaximumRetryAttemptsEventSourceMapping'
-          description: (Streams) The maximum number of times to retry when the function returns an error.
+          description: '(Streams) Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records will be retried until the record expires.'
+        Topics:
+          $ref: '#/components/schemas/Topics'
+          description: ' (MSK) The name of the Kafka topic. '
     RoleArn:
       type: string
       pattern: 'arn:(aws[a-zA-Z-]*)?:iam::\d{12}:role/?[a-zA-Z_0-9+=,.@\-_/]+'
@@ -5816,10 +5840,10 @@ components:
           description: '<p>The name of the Lambda function.</p> <p class="title"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>MyFunction</code>.</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:MyFunction</code>.</p> </li> <li> <p> <b>Version or Alias ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:MyFunction:PROD</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:MyFunction</code>.</p> </li> </ul> <p>The length constraint applies only to the full ARN. If you specify only the function name, it''s limited to 64 characters in length.</p>'
         Enabled:
           $ref: '#/components/schemas/Enabled'
-          description: Disables the event source mapping to pause polling and invocation.
+          description: 'If true, the event source mapping is active. Set to false to pause polling and invocation.'
         BatchSize:
           $ref: '#/components/schemas/BatchSize'
-          description: '<p>The maximum number of items to retrieve in a single batch.</p> <ul> <li> <p> <b>Amazon Kinesis</b> - Default 100. Max 10,000.</p> </li> <li> <p> <b>Amazon DynamoDB Streams</b> - Default 100. Max 1,000.</p> </li> <li> <p> <b>Amazon Simple Queue Service</b> - Default 10. Max 10.</p> </li> </ul>'
+          description: '<p>The maximum number of items to retrieve in a single batch.</p> <ul> <li> <p> <b>Amazon Kinesis</b> - Default 100. Max 10,000.</p> </li> <li> <p> <b>Amazon DynamoDB Streams</b> - Default 100. Max 1,000.</p> </li> <li> <p> <b>Amazon Simple Queue Service</b> - Default 10. Max 10.</p> </li> <li> <p> <b>Amazon Managed Streaming for Apache Kafka</b> - Default 100. Max 10,000.</p> </li> </ul>'
         MaximumBatchingWindowInSeconds:
           $ref: '#/components/schemas/MaximumBatchingWindowInSeconds'
           description: '(Streams) The maximum amount of time to gather records before invoking the function, in seconds.'
@@ -5828,13 +5852,13 @@ components:
           description: (Streams) An Amazon SQS queue or Amazon SNS topic destination for discarded records.
         MaximumRecordAgeInSeconds:
           $ref: '#/components/schemas/MaximumRecordAgeInSeconds'
-          description: (Streams) The maximum age of a record that Lambda sends to a function for processing.
+          description: (Streams) Discard records older than the specified age. The default value is infinite (-1).
         BisectBatchOnFunctionError:
           $ref: '#/components/schemas/BisectBatchOnFunctionError'
           description: '(Streams) If the function returns an error, split the batch in two and retry.'
         MaximumRetryAttempts:
           $ref: '#/components/schemas/MaximumRetryAttemptsEventSourceMapping'
-          description: (Streams) The maximum number of times to retry when the function returns an error.
+          description: '(Streams) Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records will be retried until the record expires.'
         ParallelizationFactor:
           $ref: '#/components/schemas/ParallelizationFactor'
           description: (Streams) The number of batches to process from each shard concurrently.
