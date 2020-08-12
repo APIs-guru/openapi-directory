@@ -818,6 +818,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
+        '483':
+          description: ConcurrentAccessException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentAccessException'
       requestBody:
         required: true
         content:
@@ -869,6 +875,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
+        '483':
+          description: ConcurrentAccessException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentAccessException'
       requestBody:
         required: true
         content:
@@ -1132,6 +1144,9 @@ components:
         tags:
           $ref: '#/components/schemas/TagList'
           description: An array of key-value pairs that will be associated with the new AWS Cloud9 development environment.
+        connectionType:
+          $ref: '#/components/schemas/ConnectionType'
+          description: The connection type used for connecting to an Amazon EC2 environment.
     BadRequestException: {}
     ConflictException: {}
     NotFoundException: {}
@@ -1346,6 +1361,7 @@ components:
         Tags:
           $ref: '#/components/schemas/TagList'
           description: The list of tags to add to the given AWS Cloud9 development environment.
+    ConcurrentAccessException: {}
     UntagResourceResponse:
       type: object
       properties: {}
@@ -1425,6 +1441,11 @@ components:
     ClientRequestToken:
       type: string
       pattern: '[\x20-\x7E]{10,128}'
+    ConnectionType:
+      type: string
+      enum:
+        - CONNECT_SSH
+        - CONNECT_SSM
     EnvironmentName:
       type: string
       minLength: 1
@@ -1536,6 +1557,9 @@ components:
         type:
           $ref: '#/components/schemas/EnvironmentType'
           description: '<p>The type of environment. Valid values include the following:</p> <ul> <li> <p> <code>ec2</code>: An Amazon Elastic Compute Cloud (Amazon EC2) instance connects to the environment.</p> </li> <li> <p> <code>ssh</code>: Your own server connects to the environment.</p> </li> </ul>'
+        connectionType:
+          $ref: '#/components/schemas/ConnectionType'
+          description: The connection type used for connecting to an Amazon EC2 environment.
         arn:
           $ref: '#/components/schemas/String'
           description: The Amazon Resource Name (ARN) of the environment.

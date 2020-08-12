@@ -3574,7 +3574,7 @@ components:
           description: ' A unique identifier for the request. If you don''t set the client request token, Amazon Comprehend generates one.'
         LanguageCode:
           $ref: '#/components/schemas/LanguageCode'
-          description: ' The language of the input documents. All documents must be in the same language. Only English ("en") is currently supported. '
+          description: ' You can specify any of the following languages supported by Amazon Comprehend: English ("en"), Spanish ("es"), French ("fr"), Italian ("it"), German ("de"), or Portuguese ("pt"). All documents must be in the same language.'
         VolumeKmsKeyId:
           $ref: '#/components/schemas/KmsKeyId'
           description: '<p>ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt data on the storage volume attached to the ML compute instance(s) that process the analysis job. The VolumeKmsKeyId can be either of the following formats:</p> <ul> <li> <p>KMS Key ID: <code>"1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> <li> <p>Amazon Resource Name (ARN) of a KMS Key: <code>"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> </ul>'
@@ -4781,7 +4781,7 @@ components:
       properties:
         EntityTypes:
           $ref: '#/components/schemas/EntityTypesList'
-          description: The entity types in the input data for an entity recognizer. A maximum of 12 entity types can be used at one time to train an entity recognizer.
+          description: The entity types in the input data for an entity recognizer. A maximum of 25 entity types can be used at one time to train an entity recognizer.
         Documents:
           $ref: '#/components/schemas/EntityRecognizerDocuments'
           description: S3 location of the documents folder for an entity recognizer

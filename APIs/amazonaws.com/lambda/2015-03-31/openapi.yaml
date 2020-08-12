@@ -883,6 +883,7 @@ paths:
                     - nodejs10.x
                     - nodejs12.x
                     - java8
+                    - java8.al2
                     - java11
                     - python2.7
                     - python3.6
@@ -897,6 +898,7 @@ paths:
                     - ruby2.5
                     - ruby2.7
                     - provided
+                    - provided.al2
                 Role:
                   description: The Amazon Resource Name (ARN) of the function's execution role.
                   type: string
@@ -2461,6 +2463,7 @@ paths:
                     - nodejs10.x
                     - nodejs12.x
                     - java8
+                    - java8.al2
                     - java11
                     - python2.7
                     - python3.6
@@ -2475,6 +2478,7 @@ paths:
                     - ruby2.5
                     - ruby2.7
                     - provided
+                    - provided.al2
                 DeadLetterConfig:
                   description: 'The <a href="https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#dlq">dead-letter queue</a> for failed asynchronous invocations.'
                   type: object
@@ -3053,6 +3057,7 @@ paths:
               - nodejs10.x
               - nodejs12.x
               - java8
+              - java8.al2
               - java11
               - python2.7
               - python3.6
@@ -3067,6 +3072,7 @@ paths:
               - ruby2.5
               - ruby2.7
               - provided
+              - provided.al2
         - name: LayerName
           in: path
           required: true
@@ -3232,6 +3238,7 @@ paths:
               - nodejs10.x
               - nodejs12.x
               - java8
+              - java8.al2
               - java11
               - python2.7
               - python3.6
@@ -3246,6 +3253,7 @@ paths:
               - ruby2.5
               - ruby2.7
               - provided
+              - provided.al2
         - name: Marker
           in: query
           required: false
@@ -4789,6 +4797,7 @@ components:
         - nodejs10.x
         - nodejs12.x
         - java8
+        - java8.al2
         - java11
         - python2.7
         - python3.6
@@ -4803,6 +4812,7 @@ components:
         - ruby2.5
         - ruby2.7
         - provided
+        - provided.al2
     Concurrency:
       type: object
       example:

@@ -1715,6 +1715,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: OperationNotSupportedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationNotSupportedException'
       requestBody:
         required: true
         content:
@@ -3773,6 +3779,9 @@ components:
     WorkspaceCreationProperties:
       type: object
       properties:
+        EnableWorkDocs:
+          $ref: '#/components/schemas/BooleanObject'
+          description: '<p>Indicates whether Amazon WorkDocs is enabled for your WorkSpaces.</p> <note> <p>If WorkDocs is already enabled for a WorkSpaces directory and you disable it, new WorkSpaces launched in the directory will not have WorkDocs enabled. However, WorkDocs remains enabled for any existing WorkSpaces, unless you either disable users'' access to WorkDocs or you delete the WorkDocs site. To disable users'' access to WorkDocs, see <a href="https://docs.aws.amazon.com/workdocs/latest/adminguide/inactive-user.html">Disabling Users</a> in the <i>Amazon WorkDocs Administration Guide</i>. To delete a WorkDocs site, see <a href="https://docs.aws.amazon.com/workdocs/latest/adminguide/manage-sites.html">Deleting a Site</a> in the <i>Amazon WorkDocs Administration Guide</i>.</p> <p>If you enable WorkDocs on a directory that already has existing WorkSpaces, the existing WorkSpaces and any new WorkSpaces that are launched in the directory will have WorkDocs enabled.</p> </note>'
         EnableInternetAccess:
           $ref: '#/components/schemas/BooleanObject'
           description: Indicates whether internet access is enabled for your WorkSpaces.
@@ -4020,7 +4029,7 @@ components:
           description: The error code that is returned if the WorkSpace cannot be created.
         ComputerName:
           $ref: '#/components/schemas/ComputerName'
-          description: 'The name of the WorkSpace, as seen by the operating system.'
+          description: 'The name of the WorkSpace, as seen by the operating system. The format of this name varies. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/launch-workspaces-tutorials.html"> Launch a WorkSpace</a>. '
         VolumeEncryptionKey:
           $ref: '#/components/schemas/VolumeEncryptionKey'
           description: The symmetric AWS KMS customer master key (CMK) used to encrypt data stored on your WorkSpace. Amazon WorkSpaces does not support asymmetric CMKs.

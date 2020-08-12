@@ -680,7 +680,7 @@ paths:
         - name: x-amzn-iot-principal
           in: header
           required: true
-          description: '<p>The principal.</p> <p>If the principal is a certificate, specify the certificate ARN. If the principal is an Amazon Cognito identity, specify the identity ID.</p>'
+          description: '<p>The principal.</p> <p>Valid principals are CertificateArn (arn:aws:iot:<i>region</i>:<i>accountId</i>:cert/<i>certificateId</i>), thingGroupArn (arn:aws:iot:<i>region</i>:<i>accountId</i>:thinggroup/<i>groupName</i>) and CognitoId (<i>region</i>:<i>id</i>).</p>'
           schema:
             type: string
   '/security-profiles/{securityProfileName}/targets#securityProfileTargetArn':
@@ -1498,6 +1498,116 @@ paths:
             type: string
             minLength: 1
             maxLength: 2048
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /audit/suppressions/create:
+    post:
+      operationId: CreateAuditSuppression
+      description: ' Creates a Device Defender audit suppression. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateAuditSuppressionResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: ResourceAlreadyExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceAlreadyExistsException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '484':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - checkName
+                - resourceIdentifier
+                - clientRequestToken
+              properties:
+                checkName:
+                  description: 'An audit check name. Checks must be enabled for your account. (Use <code>DescribeAccountAuditConfiguration</code> to see the list of all checks, including those that are enabled or use <code>UpdateAccountAuditConfiguration</code> to select which checks are enabled.)'
+                  type: string
+                resourceIdentifier:
+                  description: Information that identifies the noncompliant resource.
+                  type: object
+                  properties:
+                    deviceCertificateId:
+                      $ref: '#/components/schemas/CertificateId'
+                      description: The ID of the certificate attached to the resource.
+                    caCertificateId:
+                      $ref: '#/components/schemas/CertificateId'
+                      description: The ID of the CA certificate used to authorize the certificate.
+                    cognitoIdentityPoolId:
+                      $ref: '#/components/schemas/CognitoIdentityPoolId'
+                      description: The ID of the Amazon Cognito identity pool.
+                    clientId:
+                      $ref: '#/components/schemas/ClientId'
+                      description: The client ID.
+                    policyVersionIdentifier:
+                      $ref: '#/components/schemas/PolicyVersionIdentifier'
+                      description: The version of the policy associated with the resource.
+                    account:
+                      $ref: '#/components/schemas/AwsAccountId'
+                      description: The account with which the resource is associated.
+                    iamRoleArn:
+                      $ref: '#/components/schemas/RoleArn'
+                      description: The ARN of the IAM role that has overly permissive actions.
+                    roleAliasArn:
+                      $ref: '#/components/schemas/RoleAliasArn'
+                      description: The ARN of the role alias that has overly permissive actions.
+                expirationDate:
+                  description: ' The epoch timestamp in seconds at which this suppression expires. '
+                  type: string
+                  format: date-time
+                suppressIndefinitely:
+                  description: ' Indicates whether a suppression should exist indefinitely or not. '
+                  type: boolean
+                description:
+                  description: ' The description of the audit suppression. '
+                  type: string
+                  pattern: '[\p{Graph}\x20]*'
+                  maxLength: 1000
+                clientRequestToken:
+                  description: ' The epoch timestamp in seconds at which this suppression expires. '
+                  type: string
+                  pattern: '^[a-zA-Z0-9-_]+$'
+                  minLength: 1
+                  maxLength: 64
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3381,7 +3491,7 @@ paths:
   '/mitigationactions/actions/{actionName}':
     post:
       operationId: CreateMitigationAction
-      description: Defines an action that can be applied to audit findings by using StartAuditMitigationActionsTask. Each mitigation action can apply only one type of change.
+      description: 'Defines an action that can be applied to audit findings by using StartAuditMitigationActionsTask. Only certain types of mitigation actions can be applied to specific check names. For more information, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/device-defender-mitigation-actions.html">Mitigation actions</a>. Each mitigation action can apply only one type of change.'
       responses:
         '200':
           description: Success
@@ -7133,6 +7243,85 @@ paths:
                   type: object
                   additionalProperties:
                     $ref: '#/components/schemas/AuditCheckConfiguration'
+  /audit/suppressions/delete:
+    post:
+      operationId: DeleteAuditSuppression
+      description: ' Deletes a Device Defender audit suppression. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteAuditSuppressionResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - checkName
+                - resourceIdentifier
+              properties:
+                checkName:
+                  description: 'An audit check name. Checks must be enabled for your account. (Use <code>DescribeAccountAuditConfiguration</code> to see the list of all checks, including those that are enabled or use <code>UpdateAccountAuditConfiguration</code> to select which checks are enabled.)'
+                  type: string
+                resourceIdentifier:
+                  description: Information that identifies the noncompliant resource.
+                  type: object
+                  properties:
+                    deviceCertificateId:
+                      $ref: '#/components/schemas/CertificateId'
+                      description: The ID of the certificate attached to the resource.
+                    caCertificateId:
+                      $ref: '#/components/schemas/CertificateId'
+                      description: The ID of the CA certificate used to authorize the certificate.
+                    cognitoIdentityPoolId:
+                      $ref: '#/components/schemas/CognitoIdentityPoolId'
+                      description: The ID of the Amazon Cognito identity pool.
+                    clientId:
+                      $ref: '#/components/schemas/ClientId'
+                      description: The client ID.
+                    policyVersionIdentifier:
+                      $ref: '#/components/schemas/PolicyVersionIdentifier'
+                      description: The version of the policy associated with the resource.
+                    account:
+                      $ref: '#/components/schemas/AwsAccountId'
+                      description: The account with which the resource is associated.
+                    iamRoleArn:
+                      $ref: '#/components/schemas/RoleArn'
+                      description: The ARN of the IAM role that has overly permissive actions.
+                    roleAliasArn:
+                      $ref: '#/components/schemas/RoleAliasArn'
+                      description: The ARN of the role alias that has overly permissive actions.
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/cacertificate/{caCertificateId}':
     delete:
       operationId: DeleteCACertificate
@@ -8589,6 +8778,91 @@ paths:
                   pattern: '^[a-zA-Z0-9-_]+$'
                   minLength: 1
                   maxLength: 64
+  /audit/suppressions/describe:
+    post:
+      operationId: DescribeAuditSuppression
+      description: ' Gets information about a Device Defender audit suppression. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeAuditSuppressionResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - checkName
+                - resourceIdentifier
+              properties:
+                checkName:
+                  description: 'An audit check name. Checks must be enabled for your account. (Use <code>DescribeAccountAuditConfiguration</code> to see the list of all checks, including those that are enabled or use <code>UpdateAccountAuditConfiguration</code> to select which checks are enabled.)'
+                  type: string
+                resourceIdentifier:
+                  description: Information that identifies the noncompliant resource.
+                  type: object
+                  properties:
+                    deviceCertificateId:
+                      $ref: '#/components/schemas/CertificateId'
+                      description: The ID of the certificate attached to the resource.
+                    caCertificateId:
+                      $ref: '#/components/schemas/CertificateId'
+                      description: The ID of the CA certificate used to authorize the certificate.
+                    cognitoIdentityPoolId:
+                      $ref: '#/components/schemas/CognitoIdentityPoolId'
+                      description: The ID of the Amazon Cognito identity pool.
+                    clientId:
+                      $ref: '#/components/schemas/ClientId'
+                      description: The client ID.
+                    policyVersionIdentifier:
+                      $ref: '#/components/schemas/PolicyVersionIdentifier'
+                      description: The version of the policy associated with the resource.
+                    account:
+                      $ref: '#/components/schemas/AwsAccountId'
+                      description: The account with which the resource is associated.
+                    iamRoleArn:
+                      $ref: '#/components/schemas/RoleArn'
+                      description: The ARN of the IAM role that has overly permissive actions.
+                    roleAliasArn:
+                      $ref: '#/components/schemas/RoleAliasArn'
+                      description: The ARN of the role alias that has overly permissive actions.
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/audit/tasks/{taskId}':
     get:
       operationId: DescribeAuditTask
@@ -9237,7 +9511,7 @@ paths:
               type: object
               properties:
                 principal:
-                  description: The principal.
+                  description: 'The principal. Valid principals are CertificateArn (arn:aws:iot:<i>region</i>:<i>accountId</i>:cert/<i>certificateId</i>), thingGroupArn (arn:aws:iot:<i>region</i>:<i>accountId</i>:thinggroup/<i>groupName</i>) and CognitoId (<i>region</i>:<i>id</i>).'
                   type: string
                 cognitoIdentityPoolId:
                   description: The Cognito identity pool ID.
@@ -9934,7 +10208,7 @@ paths:
         - name: target
           in: path
           required: true
-          description: The group or principal for which the policies will be listed.
+          description: 'The group or principal for which the policies will be listed. Valid principals are CertificateArn (arn:aws:iot:<i>region</i>:<i>accountId</i>:cert/<i>certificateId</i>), thingGroupArn (arn:aws:iot:<i>region</i>:<i>accountId</i>:thinggroup/<i>groupName</i>) and CognitoId (<i>region</i>:<i>id</i>).'
           schema:
             type: string
         - name: recursive
@@ -9995,7 +10269,19 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalFailureException'
-      parameters: []
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
       requestBody:
         required: true
         content:
@@ -10056,6 +10342,9 @@ paths:
                   description: 'A filter to limit results to those found before the specified time. You must specify either the startTime and endTime or the taskId, but not both.'
                   type: string
                   format: date-time
+                listSuppressedFindings:
+                  description: ' Boolean flag indicating whether only the suppressed findings or the unsuppressed findings should be listed. If this parameter isn''t provided, the response will list both suppressed and unsuppressed findings. '
+                  type: boolean
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -10234,6 +10523,105 @@ paths:
           schema:
             type: string
             format: date-time
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /audit/suppressions/list:
+    post:
+      operationId: ListAuditSuppressions
+      description: ' Lists your Device Defender audit listings. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListAuditSuppressionsResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                checkName:
+                  description: 'An audit check name. Checks must be enabled for your account. (Use <code>DescribeAccountAuditConfiguration</code> to see the list of all checks, including those that are enabled or use <code>UpdateAccountAuditConfiguration</code> to select which checks are enabled.)'
+                  type: string
+                resourceIdentifier:
+                  description: Information that identifies the noncompliant resource.
+                  type: object
+                  properties:
+                    deviceCertificateId:
+                      $ref: '#/components/schemas/CertificateId'
+                      description: The ID of the certificate attached to the resource.
+                    caCertificateId:
+                      $ref: '#/components/schemas/CertificateId'
+                      description: The ID of the CA certificate used to authorize the certificate.
+                    cognitoIdentityPoolId:
+                      $ref: '#/components/schemas/CognitoIdentityPoolId'
+                      description: The ID of the Amazon Cognito identity pool.
+                    clientId:
+                      $ref: '#/components/schemas/ClientId'
+                      description: The client ID.
+                    policyVersionIdentifier:
+                      $ref: '#/components/schemas/PolicyVersionIdentifier'
+                      description: The version of the policy associated with the resource.
+                    account:
+                      $ref: '#/components/schemas/AwsAccountId'
+                      description: The account with which the resource is associated.
+                    iamRoleArn:
+                      $ref: '#/components/schemas/RoleArn'
+                      description: The ARN of the IAM role that has overly permissive actions.
+                    roleAliasArn:
+                      $ref: '#/components/schemas/RoleAliasArn'
+                      description: The ARN of the role alias that has overly permissive actions.
+                ascendingOrder:
+                  description: ' Determines whether suppressions are listed in ascending order by expiration date or not. If parameter isn''t provided, <code>ascendingOrder=true</code>. '
+                  type: boolean
+                nextToken:
+                  description: ' The token for the next set of results. '
+                  type: string
+                maxResults:
+                  description: ' The maximum number of results to return at one time. The default is 25. '
+                  type: integer
+                  minimum: 1
+                  maximum: 250
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -11498,7 +11886,7 @@ paths:
         - name: x-amzn-iot-principal
           in: header
           required: true
-          description: The principal.
+          description: 'The principal. Valid principals are CertificateArn (arn:aws:iot:<i>region</i>:<i>accountId</i>:cert/<i>certificateId</i>), thingGroupArn (arn:aws:iot:<i>region</i>:<i>accountId</i>:thinggroup/<i>groupName</i>) and CognitoId (<i>region</i>:<i>id</i>).'
           schema:
             type: string
         - name: marker
@@ -12634,7 +13022,7 @@ paths:
   /things:
     get:
       operationId: ListThings
-      description: 'Lists your things. Use the <b>attributeName</b> and <b>attributeValue</b> parameters to filter your things. For example, calling <code>ListThings</code> with attributeName=Color and attributeValue=Red retrieves all things in the registry that contain an attribute <b>Color</b> with the value <b>Red</b>. '
+      description: '<p>Lists your things. Use the <b>attributeName</b> and <b>attributeValue</b> parameters to filter your things. For example, calling <code>ListThings</code> with attributeName=Color and attributeValue=Red retrieves all things in the registry that contain an attribute <b>Color</b> with the value <b>Red</b>. </p> <note> <p>You will not be charged for calling this API if an <code>Access denied</code> error is returned. You will also not be charged if no attributes or pagination token was provided in request and no pagination token and no results were returned.</p> </note>'
       responses:
         '200':
           description: Success
@@ -14087,7 +14475,7 @@ paths:
                 - authInfos
               properties:
                 principal:
-                  description: The principal.
+                  description: 'The principal. Valid principals are CertificateArn (arn:aws:iot:<i>region</i>:<i>accountId</i>:cert/<i>certificateId</i>), thingGroupArn (arn:aws:iot:<i>region</i>:<i>accountId</i>:thinggroup/<i>groupName</i>) and CognitoId (<i>region</i>:<i>id</i>).'
                   type: string
                 cognitoIdentityPoolId:
                   description: The Cognito identity pool ID.
@@ -14395,10 +14783,107 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /audit/suppressions/update:
+    patch:
+      operationId: UpdateAuditSuppression
+      description: ' Updates a Device Defender audit suppression. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateAuditSuppressionResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - checkName
+                - resourceIdentifier
+              properties:
+                checkName:
+                  description: 'An audit check name. Checks must be enabled for your account. (Use <code>DescribeAccountAuditConfiguration</code> to see the list of all checks, including those that are enabled or use <code>UpdateAccountAuditConfiguration</code> to select which checks are enabled.)'
+                  type: string
+                resourceIdentifier:
+                  description: Information that identifies the noncompliant resource.
+                  type: object
+                  properties:
+                    deviceCertificateId:
+                      $ref: '#/components/schemas/CertificateId'
+                      description: The ID of the certificate attached to the resource.
+                    caCertificateId:
+                      $ref: '#/components/schemas/CertificateId'
+                      description: The ID of the CA certificate used to authorize the certificate.
+                    cognitoIdentityPoolId:
+                      $ref: '#/components/schemas/CognitoIdentityPoolId'
+                      description: The ID of the Amazon Cognito identity pool.
+                    clientId:
+                      $ref: '#/components/schemas/ClientId'
+                      description: The client ID.
+                    policyVersionIdentifier:
+                      $ref: '#/components/schemas/PolicyVersionIdentifier'
+                      description: The version of the policy associated with the resource.
+                    account:
+                      $ref: '#/components/schemas/AwsAccountId'
+                      description: The account with which the resource is associated.
+                    iamRoleArn:
+                      $ref: '#/components/schemas/RoleArn'
+                      description: The ARN of the IAM role that has overly permissive actions.
+                    roleAliasArn:
+                      $ref: '#/components/schemas/RoleAliasArn'
+                      description: The ARN of the role alias that has overly permissive actions.
+                expirationDate:
+                  description: ' The expiration date (epoch timestamp in seconds) that you want the suppression to adhere to. '
+                  type: string
+                  format: date-time
+                suppressIndefinitely:
+                  description: ' Indicates whether a suppression should exist indefinitely or not. '
+                  type: boolean
+                description:
+                  description: ' The description of the audit suppression. '
+                  type: string
+                  pattern: '[\p{Graph}\x20]*'
+                  maxLength: 1000
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/certificates/{certificateId}#newStatus':
     put:
       operationId: UpdateCertificate
-      description: '<p>Updates the status of the specified certificate. This operation is idempotent.</p> <p>Moving a certificate from the ACTIVE state (including REVOKED) will not disconnect currently connected devices, but these devices will be unable to reconnect.</p> <p>The ACTIVE state is required to authenticate devices connecting to AWS IoT using a certificate.</p>'
+      description: '<p>Updates the status of the specified certificate. This operation is idempotent.</p> <p>Certificates must be in the ACTIVE state to authenticate devices that use a certificate to connect to AWS IoT.</p> <p>Within a few minutes of updating a certificate from the ACTIVE state to any other state, AWS IoT disconnects all devices that used that certificate to connect. Devices cannot use a certificate that is not in the ACTIVE state to reconnect.</p>'
       responses:
         '200':
           description: Success
@@ -14719,6 +15204,42 @@ components:
       properties: {}
     InternalException: {}
     ConflictingResourceUpdateException: {}
+    CreateAuditSuppressionResponse:
+      type: object
+      properties: {}
+    CertificateId:
+      type: string
+      pattern: '(0x)?[a-fA-F0-9]+'
+      minLength: 64
+      maxLength: 64
+    CognitoIdentityPoolId:
+      type: string
+    ClientId:
+      type: string
+    PolicyVersionIdentifier:
+      type: object
+      properties:
+        policyName:
+          $ref: '#/components/schemas/PolicyName'
+          description: The name of the policy.
+        policyVersionId:
+          $ref: '#/components/schemas/PolicyVersionId'
+          description: The ID of the version of the policy associated with the resource.
+      description: Information about the version of the policy associated with the resource.
+    AwsAccountId:
+      type: string
+      pattern: '[0-9]+'
+      minLength: 12
+      maxLength: 12
+    RoleArn:
+      type: string
+      minLength: 20
+      maxLength: 2048
+    RoleAliasArn:
+      type: string
+      minLength: 1
+      maxLength: 2048
+    ResourceAlreadyExistsException: {}
     CreateAuthorizerResponse:
       type: object
       properties:
@@ -14743,7 +15264,6 @@ components:
           $ref: '#/components/schemas/TagValue'
           description: The tag's value.
       description: A set of key/value pairs that are used to manage the resource.
-    ResourceAlreadyExistsException: {}
     CreateBillingGroupResponse:
       type: object
       properties:
@@ -14856,10 +15376,6 @@ components:
         description:
           $ref: '#/components/schemas/JobDescription'
           description: The job description.
-    RoleArn:
-      type: string
-      minLength: 20
-      maxLength: 2048
     ExpiresInSec:
       type: integer
       minimum: 60
@@ -15378,6 +15894,9 @@ components:
     DeleteAccountAuditConfigurationResponse:
       type: object
       properties: {}
+    DeleteAuditSuppressionResponse:
+      type: object
+      properties: {}
     DeleteAuthorizerResponse:
       type: object
       properties: {}
@@ -15486,6 +16005,22 @@ components:
         actionsDefinition:
           $ref: '#/components/schemas/MitigationActionList'
           description: Specifies the mitigation actions and their parameters that are applied as part of this task.
+    DescribeAuditSuppressionResponse:
+      type: object
+      properties:
+        checkName:
+          $ref: '#/components/schemas/AuditCheckName'
+        resourceIdentifier:
+          $ref: '#/components/schemas/ResourceIdentifier'
+        expirationDate:
+          $ref: '#/components/schemas/Timestamp'
+          description: ' The epoch timestamp in seconds at which this suppression expires. '
+        suppressIndefinitely:
+          $ref: '#/components/schemas/SuppressIndefinitely'
+          description: ' Indicates whether a suppression should exist indefinitely or not. '
+        description:
+          $ref: '#/components/schemas/AuditDescription'
+          description: ' The description of the audit suppression. '
     DescribeAuditTaskResponse:
       type: object
       properties:
@@ -16097,34 +16632,6 @@ components:
         nextToken:
           $ref: '#/components/schemas/NextToken'
           description: 'A token that can be used to retrieve the next set of results, or <code>null</code> if there are no additional results.'
-    CertificateId:
-      type: string
-      pattern: '(0x)?[a-fA-F0-9]+'
-      minLength: 64
-      maxLength: 64
-    CognitoIdentityPoolId:
-      type: string
-    ClientId:
-      type: string
-    PolicyVersionIdentifier:
-      type: object
-      properties:
-        policyName:
-          $ref: '#/components/schemas/PolicyName'
-          description: The name of the policy.
-        policyVersionId:
-          $ref: '#/components/schemas/PolicyVersionId'
-          description: The ID of the version of the policy associated with the resource.
-      description: Information about the version of the policy associated with the resource.
-    AwsAccountId:
-      type: string
-      pattern: '[0-9]+'
-      minLength: 12
-      maxLength: 12
-    RoleAliasArn:
-      type: string
-      minLength: 1
-      maxLength: 2048
     ListAuditMitigationActionsExecutionsResponse:
       type: object
       properties:
@@ -16143,6 +16650,15 @@ components:
         nextToken:
           $ref: '#/components/schemas/NextToken'
           description: The token for the next set of results.
+    ListAuditSuppressionsResponse:
+      type: object
+      properties:
+        suppressions:
+          $ref: '#/components/schemas/AuditSuppressionList'
+          description: ' List of audit suppressions. '
+        nextToken:
+          $ref: '#/components/schemas/NextToken'
+          description: ' A token that can be used to retrieve the next set of results, or <code>null</code> if there are no additional results. '
     ListAuditTasksResponse:
       type: object
       properties:
@@ -16427,7 +16943,7 @@ components:
           description: The thing groups.
         nextToken:
           $ref: '#/components/schemas/NextToken'
-          description: 'The token used to get the next set of results, or <b>null</b> if there are no additional results.'
+          description: The token used to get the next set of results. Will not be returned if operation has returned all results.
     ListThingGroupsForThingResponse:
       type: object
       properties:
@@ -16473,7 +16989,7 @@ components:
           description: The thing types.
         nextToken:
           $ref: '#/components/schemas/NextToken'
-          description: 'The token for the next set of results, or <b>null</b> if there are no additional results.'
+          description: The token for the next set of results. Will not be returned if operation has returned all results.
       description: The output for the ListThingTypes operation.
     ListThingsResponse:
       type: object
@@ -16483,7 +16999,7 @@ components:
           description: The things.
         nextToken:
           $ref: '#/components/schemas/NextToken'
-          description: 'The token used to get the next set of results, or <b>null</b> if there are no additional results.'
+          description: The token used to get the next set of results. Will not be returned if operation has returned all results.
       description: The output from the ListThings operation.
     ListThingsInBillingGroupResponse:
       type: object
@@ -16493,7 +17009,7 @@ components:
           description: A list of things in the billing group.
         nextToken:
           $ref: '#/components/schemas/NextToken'
-          description: 'The token used to get the next set of results, or <b>null</b> if there are no additional results.'
+          description: The token used to get the next set of results. Will not be returned if operation has returned all results.
     ListThingsInThingGroupResponse:
       type: object
       properties:
@@ -16778,6 +17294,9 @@ components:
           $ref: '#/components/schemas/Enabled'
           description: True if this audit check is enabled for this account.
       description: Which audit checks are enabled and disabled for this account.
+    UpdateAuditSuppressionResponse:
+      type: object
+      properties: {}
     UpdateAuthorizerResponse:
       type: object
       properties:
@@ -17701,6 +18220,8 @@ components:
       type: integer
     NonCompliantResourcesCount:
       type: integer
+    SuppressedNonCompliantResourcesCount:
+      type: integer
     ErrorCode:
       type: string
     ErrorMessage:
@@ -17721,6 +18242,9 @@ components:
         nonCompliantResourcesCount:
           $ref: '#/components/schemas/NonCompliantResourcesCount'
           description: The number of resources that were found noncompliant during the check.
+        suppressedNonCompliantResourcesCount:
+          $ref: '#/components/schemas/SuppressedNonCompliantResourcesCount'
+          description: ' Describes how many of the non-compliant resources created during the evaluation of an audit check were marked as suppressed. '
         errorCode:
           $ref: '#/components/schemas/ErrorCode'
           description: The code of any error encountered when this check is performed during this audit. One of "INSUFFICIENT_PERMISSIONS" or "AUDIT_CHECK_DISABLED".
@@ -17738,6 +18262,10 @@ components:
         $ref: '#/components/schemas/ReasonForNonComplianceCode'
       minItems: 1
       maxItems: 25
+    AuditDescription:
+      type: string
+      pattern: '[\p{Graph}\x20]*'
+      maxLength: 1000
     AuditDetails:
       type: object
       additionalProperties:
@@ -17775,6 +18303,8 @@ components:
       type: string
     ReasonForNonComplianceCode:
       type: string
+    IsSuppressed:
+      type: boolean
     AuditFinding:
       type: object
       properties:
@@ -17808,6 +18338,9 @@ components:
         reasonForNonComplianceCode:
           $ref: '#/components/schemas/ReasonForNonComplianceCode'
           description: A code that indicates the reason that the resource was noncompliant.
+        isSuppressed:
+          $ref: '#/components/schemas/IsSuppressed'
+          description: ' Indicates whether the audit finding was suppressed or not during reporting. '
       description: The findings (results) of the audit.
     AuditFindings:
       type: array
@@ -17943,6 +18476,60 @@ components:
       type: string
       enum:
         - SNS
+    ResourceIdentifier:
+      type: object
+      properties:
+        deviceCertificateId:
+          $ref: '#/components/schemas/CertificateId'
+          description: The ID of the certificate attached to the resource.
+        caCertificateId:
+          $ref: '#/components/schemas/CertificateId'
+          description: The ID of the CA certificate used to authorize the certificate.
+        cognitoIdentityPoolId:
+          $ref: '#/components/schemas/CognitoIdentityPoolId'
+          description: The ID of the Amazon Cognito identity pool.
+        clientId:
+          $ref: '#/components/schemas/ClientId'
+          description: The client ID.
+        policyVersionIdentifier:
+          $ref: '#/components/schemas/PolicyVersionIdentifier'
+          description: The version of the policy associated with the resource.
+        account:
+          $ref: '#/components/schemas/AwsAccountId'
+          description: The account with which the resource is associated.
+        iamRoleArn:
+          $ref: '#/components/schemas/RoleArn'
+          description: The ARN of the IAM role that has overly permissive actions.
+        roleAliasArn:
+          $ref: '#/components/schemas/RoleAliasArn'
+          description: The ARN of the role alias that has overly permissive actions.
+      description: Information that identifies the noncompliant resource.
+    SuppressIndefinitely:
+      type: boolean
+    AuditSuppression:
+      type: object
+      required:
+        - checkName
+        - resourceIdentifier
+      properties:
+        checkName:
+          $ref: '#/components/schemas/AuditCheckName'
+        resourceIdentifier:
+          $ref: '#/components/schemas/ResourceIdentifier'
+        expirationDate:
+          $ref: '#/components/schemas/Timestamp'
+          description: ' The expiration date (epoch timestamp in seconds) that you want the suppression to adhere to. '
+        suppressIndefinitely:
+          $ref: '#/components/schemas/SuppressIndefinitely'
+          description: ' Indicates whether a suppression should exist indefinitely or not. '
+        description:
+          $ref: '#/components/schemas/AuditDescription'
+          description: ' The description of the audit suppression. '
+      description: ' Filters out specific findings of a Device Defender audit. '
+    AuditSuppressionList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AuditSuppression'
     AuditTaskStatus:
       type: string
       enum:
@@ -18687,6 +19274,30 @@ components:
       type: integer
     Count:
       type: integer
+    CreateAuditSuppressionRequest:
+      type: object
+      required:
+        - checkName
+        - resourceIdentifier
+        - clientRequestToken
+      title: CreateAuditSuppressionRequest
+      properties:
+        checkName:
+          $ref: '#/components/schemas/AuditCheckName'
+        resourceIdentifier:
+          $ref: '#/components/schemas/ResourceIdentifier'
+        expirationDate:
+          $ref: '#/components/schemas/Timestamp'
+          description: ' The epoch timestamp in seconds at which this suppression expires. '
+        suppressIndefinitely:
+          $ref: '#/components/schemas/SuppressIndefinitely'
+          description: ' Indicates whether a suppression should exist indefinitely or not. '
+        description:
+          $ref: '#/components/schemas/AuditDescription'
+          description: ' The description of the audit suppression. '
+        clientRequestToken:
+          $ref: '#/components/schemas/ClientRequestToken'
+          description: ' The epoch timestamp in seconds at which this suppression expires. '
     TagList:
       type: array
       items:
@@ -19461,6 +20072,17 @@ components:
       type: boolean
     DeleteAlertTargets:
       type: boolean
+    DeleteAuditSuppressionRequest:
+      type: object
+      required:
+        - checkName
+        - resourceIdentifier
+      title: DeleteAuditSuppressionRequest
+      properties:
+        checkName:
+          $ref: '#/components/schemas/AuditCheckName'
+        resourceIdentifier:
+          $ref: '#/components/schemas/ResourceIdentifier'
     DeleteAuthorizerRequest:
       type: object
       title: DeleteAuthorizerRequest
@@ -19630,6 +20252,17 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/MitigationAction'
+    DescribeAuditSuppressionRequest:
+      type: object
+      required:
+        - checkName
+        - resourceIdentifier
+      title: DescribeAuditSuppressionRequest
+      properties:
+        checkName:
+          $ref: '#/components/schemas/AuditCheckName'
+        resourceIdentifier:
+          $ref: '#/components/schemas/ResourceIdentifier'
     DescribeAuditTaskRequest:
       type: object
       title: DescribeAuditTaskRequest
@@ -20304,7 +20937,7 @@ components:
       properties:
         principal:
           $ref: '#/components/schemas/Principal'
-          description: The principal.
+          description: 'The principal. Valid principals are CertificateArn (arn:aws:iot:<i>region</i>:<i>accountId</i>:cert/<i>certificateId</i>), thingGroupArn (arn:aws:iot:<i>region</i>:<i>accountId</i>:thinggroup/<i>groupName</i>) and CognitoId (<i>region</i>:<i>id</i>).'
         cognitoIdentityPoolId:
           $ref: '#/components/schemas/CognitoIdentityPoolId'
           description: The Cognito identity pool ID.
@@ -20852,34 +21485,8 @@ components:
       type: object
       title: ListAttachedPoliciesRequest
       properties: {}
-    ResourceIdentifier:
-      type: object
-      properties:
-        deviceCertificateId:
-          $ref: '#/components/schemas/CertificateId'
-          description: The ID of the certificate attached to the resource.
-        caCertificateId:
-          $ref: '#/components/schemas/CertificateId'
-          description: The ID of the CA certificate used to authorize the certificate.
-        cognitoIdentityPoolId:
-          $ref: '#/components/schemas/CognitoIdentityPoolId'
-          description: The ID of the Amazon Cognito identity pool.
-        clientId:
-          $ref: '#/components/schemas/ClientId'
-          description: The client ID.
-        policyVersionIdentifier:
-          $ref: '#/components/schemas/PolicyVersionIdentifier'
-          description: The version of the policy associated with the resource.
-        account:
-          $ref: '#/components/schemas/AwsAccountId'
-          description: The account with which the resource is associated.
-        iamRoleArn:
-          $ref: '#/components/schemas/RoleArn'
-          description: The ARN of the IAM role that has overly permissive actions.
-        roleAliasArn:
-          $ref: '#/components/schemas/RoleAliasArn'
-          description: The ARN of the role alias that has overly permissive actions.
-      description: Information that identifies the noncompliant resource.
+    ListSuppressedFindings:
+      type: boolean
     ListAuditFindingsRequest:
       type: object
       title: ListAuditFindingsRequest
@@ -20905,6 +21512,9 @@ components:
         endTime:
           $ref: '#/components/schemas/Timestamp'
           description: 'A filter to limit results to those found before the specified time. You must specify either the startTime and endTime or the taskId, but not both.'
+        listSuppressedFindings:
+          $ref: '#/components/schemas/ListSuppressedFindings'
+          description: ' Boolean flag indicating whether only the suppressed findings or the unsuppressed findings should be listed. If this parameter isn''t provided, the response will list both suppressed and unsuppressed findings. '
     ListAuditMitigationActionsExecutionsRequest:
       type: object
       title: ListAuditMitigationActionsExecutionsRequest
@@ -20913,6 +21523,23 @@ components:
       type: object
       title: ListAuditMitigationActionsTasksRequest
       properties: {}
+    ListAuditSuppressionsRequest:
+      type: object
+      title: ListAuditSuppressionsRequest
+      properties:
+        checkName:
+          $ref: '#/components/schemas/AuditCheckName'
+        resourceIdentifier:
+          $ref: '#/components/schemas/ResourceIdentifier'
+        ascendingOrder:
+          $ref: '#/components/schemas/AscendingOrder'
+          description: ' Determines whether suppressions are listed in ascending order by expiration date or not. If parameter isn''t provided, <code>ascendingOrder=true</code>. '
+        nextToken:
+          $ref: '#/components/schemas/NextToken'
+          description: ' The token for the next set of results. '
+        maxResults:
+          $ref: '#/components/schemas/MaxResults'
+          description: ' The maximum number of results to return at one time. The default is 25. '
     ListAuditTasksRequest:
       type: object
       title: ListAuditTasksRequest
@@ -21971,7 +22598,7 @@ components:
       properties:
         principal:
           $ref: '#/components/schemas/Principal'
-          description: The principal.
+          description: 'The principal. Valid principals are CertificateArn (arn:aws:iot:<i>region</i>:<i>accountId</i>:cert/<i>certificateId</i>), thingGroupArn (arn:aws:iot:<i>region</i>:<i>accountId</i>:thinggroup/<i>groupName</i>) and CognitoId (<i>region</i>:<i>id</i>).'
         cognitoIdentityPoolId:
           $ref: '#/components/schemas/CognitoIdentityPoolId'
           description: The Cognito identity pool ID.
@@ -22192,6 +22819,26 @@ components:
         auditCheckConfigurations:
           $ref: '#/components/schemas/AuditCheckConfigurations'
           description: '<p>Specifies which audit checks are enabled and disabled for this account. Use <code>DescribeAccountAuditConfiguration</code> to see the list of all checks, including those that are currently enabled.</p> <p>Some data collection might start immediately when certain checks are enabled. When a check is disabled, any data collected so far in relation to the check is deleted.</p> <p>You cannot disable a check if it is used by any scheduled audit. You must first delete the check from the scheduled audit or delete the scheduled audit itself.</p> <p>On the first call to <code>UpdateAccountAuditConfiguration</code>, this parameter is required and must specify at least one enabled check.</p>'
+    UpdateAuditSuppressionRequest:
+      type: object
+      required:
+        - checkName
+        - resourceIdentifier
+      title: UpdateAuditSuppressionRequest
+      properties:
+        checkName:
+          $ref: '#/components/schemas/AuditCheckName'
+        resourceIdentifier:
+          $ref: '#/components/schemas/ResourceIdentifier'
+        expirationDate:
+          $ref: '#/components/schemas/Timestamp'
+          description: ' The expiration date (epoch timestamp in seconds) that you want the suppression to adhere to. '
+        suppressIndefinitely:
+          $ref: '#/components/schemas/SuppressIndefinitely'
+          description: ' Indicates whether a suppression should exist indefinitely or not. '
+        description:
+          $ref: '#/components/schemas/AuditDescription'
+          description: ' The description of the audit suppression. '
     UpdateAuthorizerRequest:
       type: object
       title: UpdateAuthorizerRequest

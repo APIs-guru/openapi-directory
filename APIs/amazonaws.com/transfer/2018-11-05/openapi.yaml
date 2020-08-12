@@ -3,7 +3,7 @@ info:
   version: '2018-11-05'
   x-release: v4
   title: AWS Transfer Family
-  description: 'AWS Transfer Family is a fully managed service that enables the transfer of files over the the File Transfer Protocol (FTP), File Transfer Protocol over SSL (FTPS), or Secure Shell (SSH) File Transfer Protocol (SFTP) directly into and out of Amazon Simple Storage Service (Amazon S3). AWS helps you seamlessly migrate your file transfer workflows to AWS Transfer Family by integrating with existing authentication systems, and providing DNS routing with Amazon Route 53 so nothing changes for your customers and partners, or their applications. With your data in Amazon S3, you can use it with AWS services for processing, analytics, machine learning, and archiving. Getting started with AWS Transfer Family is easy since there is no infrastructure to buy and set up.'
+  description: 'AWS Transfer Family is a fully managed service that enables the transfer of files over the File Transfer Protocol (FTP), File Transfer Protocol over SSL (FTPS), or Secure Shell (SSH) File Transfer Protocol (SFTP) directly into and out of Amazon Simple Storage Service (Amazon S3). AWS helps you seamlessly migrate your file transfer workflows to AWS Transfer Family by integrating with existing authentication systems, and providing DNS routing with Amazon Route 53 so nothing changes for your customers and partners, or their applications. With your data in Amazon S3, you can use it with AWS services for processing, analytics, machine learning, and archiving. Getting started with AWS Transfer Family is easy since there is no infrastructure to buy and set up.'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -417,6 +417,63 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=TransferService.DescribeSecurityPolicy:
+    post:
+      operationId: DescribeSecurityPolicy
+      description: 'Describes the security policy that is attached to your file transfer protocol-enabled server. The response contains a description of the security policy''s properties. For more information about security policies, see <a href="https://docs.aws.amazon.com/transfer/latest/userguide/security-policies.html">Working with security policies</a>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeSecurityPolicyResponse'
+        '480':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '481':
+          description: InternalServiceError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceError'
+        '482':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeSecurityPolicyRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - TransferService.DescribeSecurityPolicy
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=TransferService.DescribeServer:
     post:
       operationId: DescribeServer
@@ -592,6 +649,75 @@ paths:
             type: string
             enum:
               - TransferService.ImportSshPublicKey
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=TransferService.ListSecurityPolicies:
+    post:
+      operationId: ListSecurityPolicies
+      description: Lists the security policies that are attached to your file transfer protocol-enabled servers.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListSecurityPoliciesResponse'
+        '480':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '481':
+          description: InternalServiceError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceError'
+        '482':
+          description: InvalidNextTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidNextTokenException'
+        '483':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListSecurityPoliciesRequest'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - TransferService.ListSecurityPolicies
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1325,7 +1451,10 @@ components:
           description: Allows the service to write your users' activity to your Amazon CloudWatch logs for monitoring and auditing purposes.
         Protocols:
           $ref: '#/components/schemas/Protocols'
-          description: '<p>Specifies the file transfer protocol or protocols over which your file transfer protocol client can connect to your server''s endpoint. The available protocols are:</p> <ul> <li> <p> <code>SFTP</code> (Secure Shell (SSH) File Transfer Protocol): File transfer over SSH</p> </li> <li> <p> <code>FTPS</code> (File Transfer Protocol Secure): File transfer with TLS encryption</p> </li> <li> <p> <code>FTP</code> (File Transfer Protocol): Unencrypted file transfer</p> </li> </ul> <note> <p>If you select <code>FTPS</code>, you must choose a certificate stored in AWS Certificate Manager (ACM) which will be used to identify your server when clients connect to it over FTPS.</p> <p>If <code>Protocol</code> includes either <code>FTP</code> or <code>FTPS</code>, then the <code>EndpointType</code> must be <code>VPC</code> and the <code>IdentityProviderType</code> must be <code>API_GATEWAY</code>.</p> <p>If <code>Protocol</code> includes <code>FTP</code>, then <code>AddressAllocationIds</code> cannot be associated.</p> <p>If <code>Protocol</code> is set only to <code>SFTP</code>, the <code>EndpointType</code> can be set to <code>PUBLIC</code> and the <code>IdentityProviderType</code> can be set to <code>SERVICE_MANAGED</code>.</p> </note>'
+          description: '<p>Specifies the file transfer protocol or protocols over which your file transfer protocol client can connect to your server''s endpoint. The available protocols are:</p> <ul> <li> <p> <code>SFTP</code> (Secure Shell (SSH) File Transfer Protocol): File transfer over SSH</p> </li> <li> <p> <code>FTPS</code> (File Transfer Protocol Secure): File transfer with TLS encryption</p> </li> <li> <p> <code>FTP</code> (File Transfer Protocol): Unencrypted file transfer</p> </li> </ul> <note> <p>If you select <code>FTPS</code>, you must choose a certificate stored in AWS Certificate Manager (ACM) which will be used to identify your file transfer protocol-enabled server when clients connect to it over FTPS.</p> <p>If <code>Protocol</code> includes either <code>FTP</code> or <code>FTPS</code>, then the <code>EndpointType</code> must be <code>VPC</code> and the <code>IdentityProviderType</code> must be <code>API_GATEWAY</code>.</p> <p>If <code>Protocol</code> includes <code>FTP</code>, then <code>AddressAllocationIds</code> cannot be associated.</p> <p>If <code>Protocol</code> is set only to <code>SFTP</code>, the <code>EndpointType</code> can be set to <code>PUBLIC</code> and the <code>IdentityProviderType</code> can be set to <code>SERVICE_MANAGED</code>.</p> </note>'
+        SecurityPolicyName:
+          $ref: '#/components/schemas/SecurityPolicyName'
+          description: Specifies the name of the security policy that is attached to the server.
         Tags:
           $ref: '#/components/schemas/Tags'
           description: Key-value pairs that can be used to group and search for file transfer protocol-enabled servers.
@@ -1363,7 +1492,7 @@ components:
           description: 'The type of landing directory (folder) you want your users'' home directory to be when they log into the file transfer protocol-enabled server. If you set it to <code>PATH</code>, the user will see the absolute Amazon S3 bucket paths as is in their file transfer protocol clients. If you set it <code>LOGICAL</code>, you will need to provide mappings in the <code>HomeDirectoryMappings</code> for how you want to make Amazon S3 paths visible to your users.'
         HomeDirectoryMappings:
           $ref: '#/components/schemas/HomeDirectoryMappings'
-          description: '<p>Logical directory mappings that specify what Amazon S3 paths and keys should be visible to your user and how you want to make them visible. You will need to specify the "<code>Entry</code>" and "<code>Target</code>" pair, where <code>Entry</code> shows how the path is made visible and <code>Target</code> is the actual Amazon S3 path. If you only specify a target, it will be displayed as is. You will need to also make sure that your IAM role provides access to paths in <code>Target</code>. The following is an example.</p> <p> <code>''[ "/bucket2/documentation", { "Entry": "your-personal-report.pdf", "Target": "/bucket3/customized-reports/${transfer:UserName}.pdf" } ]''</code> </p> <p>In most cases, you can use this value instead of the scope-down policy to lock your user down to the designated home directory ("chroot"). To do this, you can set <code>Entry</code> to ''/'' and set <code>Target</code> to the HomeDirectory parameter value.</p> <note> <p>If the target of a logical directory entry does not exist in Amazon S3, the entry will be ignored. As a workaround, you can use the Amazon S3 api to create 0 byte objects as place holders for your directory. If using the CLI, use the <code>s3api</code> call instead of <code>s3</code> so you can use the put-object operation. For example, you use the following: <code>aws s3api put-object --bucket bucketname --key path/to/folder/</code>. Make sure that the end of the key name ends in a ''/'' for it to be considered a folder.</p> </note>'
+          description: '<p>Logical directory mappings that specify what Amazon S3 paths and keys should be visible to your user and how you want to make them visible. You will need to specify the "<code>Entry</code>" and "<code>Target</code>" pair, where <code>Entry</code> shows how the path is made visible and <code>Target</code> is the actual Amazon S3 path. If you only specify a target, it will be displayed as is. You will need to also make sure that your IAM role provides access to paths in <code>Target</code>. The following is an example.</p> <p> <code>''[ "/bucket2/documentation", { "Entry": "your-personal-report.pdf", "Target": "/bucket3/customized-reports/${transfer:UserName}.pdf" } ]''</code> </p> <p>In most cases, you can use this value instead of the scope-down policy to lock your user down to the designated home directory ("chroot"). To do this, you can set <code>Entry</code> to ''/'' and set <code>Target</code> to the HomeDirectory parameter value.</p> <note> <p>If the target of a logical directory entry does not exist in Amazon S3, the entry will be ignored. As a workaround, you can use the Amazon S3 API to create 0 byte objects as place holders for your directory. If using the CLI, use the <code>s3api</code> call instead of <code>s3</code> so you can use the put-object operation. For example, you use the following: <code>aws s3api put-object --bucket bucketname --key path/to/folder/</code>. Make sure that the end of the key name ends in a ''/'' for it to be considered a folder.</p> </note>'
         Policy:
           $ref: '#/components/schemas/Policy'
           description: '<p>A scope-down policy for your user so you can use the same IAM role across multiple users. This policy scopes down user access to portions of their Amazon S3 bucket. Variables that you can use inside this policy include <code>${Transfer:UserName}</code>, <code>${Transfer:HomeDirectory}</code>, and <code>${Transfer:HomeBucket}</code>.</p> <note> <p>For scope-down policies, AWS Transfer Family stores the policy as a JSON blob, instead of the Amazon Resource Name (ARN) of the policy. You save the policy as a JSON blob and pass it in the <code>Policy</code> argument.</p> <p>For an example of a scope-down policy, see <a href="https://docs.aws.amazon.com/transfer/latest/userguide/users.html#users-policies-scope-down">Creating a scope-down policy</a>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html">AssumeRole</a> in the <i>AWS Security Token Service API Reference</i>.</p> </note>'
@@ -1381,7 +1510,7 @@ components:
           description: Key-value pairs that can be used to group and search for users. Tags are metadata attached to users for any purpose.
         UserName:
           $ref: '#/components/schemas/UserName'
-          description: 'A unique string that identifies a user and is associated with a file transfer protocol-enabled server as specified by the <code>ServerId</code>. This user name must be a minimum of 3 and a maximum of 32 characters long. The following are valid characters: a-z, A-Z, 0-9, underscore, and hyphen. The user name can''t start with a hyphen.'
+          description: 'A unique string that identifies a user and is associated with a file transfer protocol-enabled server as specified by the <code>ServerId</code>. This user name must be a minimum of 3 and a maximum of 100 characters long. The following are valid characters: a-z, A-Z, 0-9, underscore ''_'', hyphen ''-'', period ''.'', and at sign ''@''. The user name can''t start with a hyphen, period, and at sign.'
     ResourceNotFoundException: {}
     DeleteServerRequest:
       type: object
@@ -1422,6 +1551,23 @@ components:
         UserName:
           $ref: '#/components/schemas/UserName'
           description: A unique string that identifies a user that is being deleted from a file transfer protocol-enabled server.
+    DescribeSecurityPolicyResponse:
+      type: object
+      required:
+        - SecurityPolicy
+      properties:
+        SecurityPolicy:
+          $ref: '#/components/schemas/DescribedSecurityPolicy'
+          description: An array containing the properties of the security policy.
+    DescribeSecurityPolicyRequest:
+      type: object
+      required:
+        - SecurityPolicyName
+      title: DescribeSecurityPolicyRequest
+      properties:
+        SecurityPolicyName:
+          $ref: '#/components/schemas/SecurityPolicyName'
+          description: Specifies the name of the security policy that is attached to the server.
     DescribeServerResponse:
       type: object
       required:
@@ -1498,6 +1644,28 @@ components:
         UserName:
           $ref: '#/components/schemas/UserName'
           description: The name of the user account that is assigned to one or more file transfer protocol-enabled servers.
+    ListSecurityPoliciesResponse:
+      type: object
+      required:
+        - SecurityPolicyNames
+      properties:
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+          description: 'When you can get additional results from the <code>ListSecurityPolicies</code> operation, a <code>NextToken</code> parameter is returned in the output. In a following command, you can pass in the <code>NextToken</code> parameter to continue listing security policies.'
+        SecurityPolicyNames:
+          $ref: '#/components/schemas/SecurityPolicyNames'
+          description: An array of security policies that were listed.
+    ListSecurityPoliciesRequest:
+      type: object
+      title: ListSecurityPoliciesRequest
+      properties:
+        MaxResults:
+          $ref: '#/components/schemas/MaxResults'
+          description: Specifies the number of security policies to return as a response to the <code>ListSecurityPolicies</code> query.
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+          description: 'When additional results are obtained from the <code>ListSecurityPolicies</code> command, a <code>NextToken</code> parameter is returned in the output. You can then pass the <code>NextToken</code> parameter in a subsequent command to continue listing additional security policies.'
+    InvalidNextTokenException: {}
     ListServersResponse:
       type: object
       required:
@@ -1518,8 +1686,7 @@ components:
           description: Specifies the number of file transfer protocol-enabled servers to return as a response to the <code>ListServers</code> query.
         NextToken:
           $ref: '#/components/schemas/NextToken'
-          description: 'When additional results are obtained from the<code>ListServers</code> command, a <code>NextToken</code> parameter is returned in the output. You can then pass the <code>NextToken</code> parameter in a subsequent command to continue listing additional file transfer protocol-enabled servers.'
-    InvalidNextTokenException: {}
+          description: 'When additional results are obtained from the <code>ListServers</code> command, a <code>NextToken</code> parameter is returned in the output. You can then pass the <code>NextToken</code> parameter in a subsequent command to continue listing additional file transfer protocol-enabled servers.'
     ListTagsForResourceResponse:
       type: object
       properties:
@@ -1696,6 +1863,9 @@ components:
         Protocols:
           $ref: '#/components/schemas/Protocols'
           description: '<p>Specifies the file transfer protocol or protocols over which your file transfer protocol client can connect to your server''s endpoint. The available protocols are:</p> <ul> <li> <p>Secure Shell (SSH) File Transfer Protocol (SFTP): File transfer over SSH</p> </li> <li> <p>File Transfer Protocol Secure (FTPS): File transfer with TLS encryption</p> </li> <li> <p>File Transfer Protocol (FTP): Unencrypted file transfer</p> </li> </ul> <note> <p>If you select <code>FTPS</code>, you must choose a certificate stored in AWS Certificate Manager (ACM) which will be used to identify your server when clients connect to it over FTPS.</p> <p>If <code>Protocol</code> includes either <code>FTP</code> or <code>FTPS</code>, then the <code>EndpointType</code> must be <code>VPC</code> and the <code>IdentityProviderType</code> must be <code>API_GATEWAY</code>.</p> <p>If <code>Protocol</code> includes <code>FTP</code>, then <code>AddressAllocationIds</code> cannot be associated.</p> <p>If <code>Protocol</code> is set only to <code>SFTP</code>, the <code>EndpointType</code> can be set to <code>PUBLIC</code> and the <code>IdentityProviderType</code> can be set to <code>SERVICE_MANAGED</code>.</p> </note>'
+        SecurityPolicyName:
+          $ref: '#/components/schemas/SecurityPolicyName'
+          description: Specifies the name of the security policy that is attached to the server.
         ServerId:
           $ref: '#/components/schemas/ServerId'
           description: A system-assigned unique identifier for a file transfer protocol-enabled server instance that the user account is assigned to.
@@ -1728,7 +1898,7 @@ components:
           description: 'The type of landing directory (folder) you want your users'' home directory to be when they log into the file transfer protocol-enabled server. If you set it to <code>PATH</code>, the user will see the absolute Amazon S3 bucket paths as is in their file transfer protocol clients. If you set it <code>LOGICAL</code>, you will need to provide mappings in the <code>HomeDirectoryMappings</code> for how you want to make Amazon S3 paths visible to your users.'
         HomeDirectoryMappings:
           $ref: '#/components/schemas/HomeDirectoryMappings'
-          description: '<p>Logical directory mappings that specify what Amazon S3 paths and keys should be visible to your user and how you want to make them visible. You will need to specify the "<code>Entry</code>" and "<code>Target</code>" pair, where <code>Entry</code> shows how the path is made visible and <code>Target</code> is the actual Amazon S3 path. If you only specify a target, it will be displayed as is. You will need to also make sure that your IAM role provides access to paths in <code>Target</code>. The following is an example.</p> <p> <code>''[ "/bucket2/documentation", { "Entry": "your-personal-report.pdf", "Target": "/bucket3/customized-reports/${transfer:UserName}.pdf" } ]''</code> </p> <p>In most cases, you can use this value instead of the scope-down policy to lock your user down to the designated home directory ("chroot"). To do this, you can set <code>Entry</code> to ''/'' and set <code>Target</code> to the HomeDirectory parameter value.</p> <note> <p>If the target of a logical directory entry does not exist in Amazon S3, the entry will be ignored. As a workaround, you can use the Amazon S3 api to create 0 byte objects as place holders for your directory. If using the CLI, use the <code>s3api</code> call instead of <code>s3</code> so you can use the put-object operation. For example, you use the following: <code>aws s3api put-object --bucket bucketname --key path/to/folder/</code>. Make sure that the end of the key name ends in a / for it to be considered a folder.</p> </note>'
+          description: '<p>Logical directory mappings that specify what Amazon S3 paths and keys should be visible to your user and how you want to make them visible. You will need to specify the "<code>Entry</code>" and "<code>Target</code>" pair, where <code>Entry</code> shows how the path is made visible and <code>Target</code> is the actual Amazon S3 path. If you only specify a target, it will be displayed as is. You will need to also make sure that your IAM role provides access to paths in <code>Target</code>. The following is an example.</p> <p> <code>''[ "/bucket2/documentation", { "Entry": "your-personal-report.pdf", "Target": "/bucket3/customized-reports/${transfer:UserName}.pdf" } ]''</code> </p> <p>In most cases, you can use this value instead of the scope-down policy to lock your user down to the designated home directory ("chroot"). To do this, you can set <code>Entry</code> to ''/'' and set <code>Target</code> to the HomeDirectory parameter value.</p> <note> <p>If the target of a logical directory entry does not exist in Amazon S3, the entry will be ignored. As a workaround, you can use the Amazon S3 API to create 0 byte objects as place holders for your directory. If using the CLI, use the <code>s3api</code> call instead of <code>s3</code> so you can use the put-object operation. For example, you use the following: <code>aws s3api put-object --bucket bucketname --key path/to/folder/</code>. Make sure that the end of the key name ends in a / for it to be considered a folder.</p> </note>'
         Policy:
           $ref: '#/components/schemas/Policy'
           description: '<p>Allows you to supply a scope-down policy for your user so you can use the same IAM role across multiple users. The policy scopes down user access to portions of your Amazon S3 bucket. Variables you can use inside this policy include <code>${Transfer:UserName}</code>, <code>${Transfer:HomeDirectory}</code>, and <code>${Transfer:HomeBucket}</code>.</p> <note> <p>For scope-down policies, AWS Transfer Family stores the policy as a JSON blob, instead of the Amazon Resource Name (ARN) of the policy. You save the policy as a JSON blob and pass it in the <code>Policy</code> argument.</p> <p>For an example of a scope-down policy, see <a href="https://docs.aws.amazon.com/transfer/latest/userguide/users.html#users-policies-scope-down">Creating a scope-down policy</a>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html">AssumeRole</a> in the <i>AWS Security Token Service API Reference</i>.</p> </note>'
@@ -1740,7 +1910,7 @@ components:
           description: A system-assigned unique identifier for a file transfer protocol-enabled server instance that the user account is assigned to.
         UserName:
           $ref: '#/components/schemas/UserName'
-          description: 'A unique string that identifies a user and is associated with a file transfer protocol-enabled server as specified by the <code>ServerId</code>. This is the string that will be used by your user when they log in to your server. This user name is a minimum of 3 and a maximum of 32 characters long. The following are valid characters: a-z, A-Z, 0-9, underscore, and hyphen. The user name can''t start with a hyphen.'
+          description: 'A unique string that identifies a user and is associated with a file transfer protocol-enabled server as specified by the <code>ServerId</code>. This user name must be a minimum of 3 and a maximum of 100 characters long. The following are valid characters: a-z, A-Z, 0-9, underscore ''_'', hyphen ''-'', period ''.'', and at sign ''@''. The user name can''t start with a hyphen, period, and at sign.'
     AddressAllocationId:
       type: string
     AddressAllocationIds:
@@ -1808,6 +1978,10 @@ components:
         $ref: '#/components/schemas/Protocol'
       minItems: 1
       maxItems: 3
+    SecurityPolicyName:
+      type: string
+      pattern: TransferSecurityPolicy-.+
+      maxLength: 100
     Tags:
       type: array
       items:
@@ -1843,9 +2017,9 @@ components:
       maxLength: 2048
     UserName:
       type: string
-      pattern: '^[a-zA-Z0-9_][a-zA-Z0-9_-]{2,31}$'
+      pattern: '^[\w][\w@.-]{2,99}$'
       minLength: 3
-      maxLength: 32
+      maxLength: 100
     DateImported:
       type: string
       format: date-time
@@ -1854,6 +2028,30 @@ components:
       pattern: '^key-[0-9a-f]{17}$'
       minLength: 21
       maxLength: 21
+    DescribedSecurityPolicy:
+      type: object
+      required:
+        - SecurityPolicyName
+      properties:
+        Fips:
+          $ref: '#/components/schemas/Fips'
+          description: Specifies whether this policy enables Federal Information Processing Standards (FIPS).
+        SecurityPolicyName:
+          $ref: '#/components/schemas/SecurityPolicyName'
+          description: Specifies the name of the security policy that is attached to the server.
+        SshCiphers:
+          $ref: '#/components/schemas/SecurityPolicyOptions'
+          description: Specifies the enabled Secure Shell (SSH) cipher encryption algorithms in the security policy that is attached to the server.
+        SshKexs:
+          $ref: '#/components/schemas/SecurityPolicyOptions'
+          description: Specifies the enabled SSH key exchange (KEX) encryption algorithms in the security policy that is attached to the server.
+        SshMacs:
+          $ref: '#/components/schemas/SecurityPolicyOptions'
+          description: Specifies the enabled SSH message authentication code (MAC) encryption algorithms in the security policy that is attached to the server.
+        TlsCiphers:
+          $ref: '#/components/schemas/SecurityPolicyOptions'
+          description: Specifies the enabled Transport Layer Security (TLS) cipher encryption algorithms in the security policy that is attached to the server.
+      description: 'Describes the properties of a security policy that was specified. For more information about security policies, see <a href="https://docs.aws.amazon.com/transfer/latest/userguide/security-policies.html">Working with security policies</a>.'
     DescribedServer:
       type: object
       required:
@@ -1861,7 +2059,7 @@ components:
       properties:
         Arn:
           $ref: '#/components/schemas/Arn'
-          description: Specifies the unique Amazon Resource Name (ARN) for a file transfer protocol-enabled server to be described.
+          description: Specifies the unique Amazon Resource Name (ARN) of the file transfer protocol-enabled server.
         Certificate:
           $ref: '#/components/schemas/Certificate'
           description: Specifies the ARN of the AWS Certificate Manager (ACM) certificate. Required when <code>Protocols</code> is set to <code>FTPS</code>.
@@ -1886,6 +2084,9 @@ components:
         Protocols:
           $ref: '#/components/schemas/Protocols'
           description: '<p>Specifies the file transfer protocol or protocols over which your file transfer protocol client can connect to your server''s endpoint. The available protocols are:</p> <ul> <li> <p> <code>SFTP</code> (Secure Shell (SSH) File Transfer Protocol): File transfer over SSH</p> </li> <li> <p> <code>FTPS</code> (File Transfer Protocol Secure): File transfer with TLS encryption</p> </li> <li> <p> <code>FTP</code> (File Transfer Protocol): Unencrypted file transfer</p> </li> </ul>'
+        SecurityPolicyName:
+          $ref: '#/components/schemas/SecurityPolicyName'
+          description: Specifies the name of the security policy that is attached to the server.
         ServerId:
           $ref: '#/components/schemas/ServerId'
           description: Specifies the unique system-assigned identifier for a file transfer protocol-enabled server that you instantiate.
@@ -1898,7 +2099,7 @@ components:
         UserCount:
           $ref: '#/components/schemas/UserCount'
           description: Specifies the number of users that are assigned to a file transfer protocol-enabled server you specified with the <code>ServerId</code>.
-      description: 'Describes the properties of a file transfer protocol-enabled server that was specified. Information returned includes the following: the server Amazon Resource Name (ARN), the certificate ARN (if the FTPS protocol was selected), the endpoint type and details, the authentication configuration and type, the logging role, the file transfer protocol or protocols, the server ID and state, and assigned tags or metadata.'
+      description: Describes the properties of a file transfer protocol-enabled server that was specified.
     DescribedUser:
       type: object
       required:
@@ -1931,7 +2132,13 @@ components:
         UserName:
           $ref: '#/components/schemas/UserName'
           description: Specifies the name of the user that was requested to be described. User names are used for authentication purposes. This is the string that will be used by your user when they log in to your file transfer protocol-enabled server.
-      description: Returns properties of the user that you want to describe.
+      description: Describes the properties of a user that was specified.
+    Fips:
+      type: boolean
+    SecurityPolicyOptions:
+      type: array
+      items:
+        $ref: '#/components/schemas/SecurityPolicyOption'
     HostKeyFingerprint:
       type: string
     State:
@@ -1982,7 +2189,7 @@ components:
         Target:
           $ref: '#/components/schemas/MapTarget'
           description: Represents the map target that is used in a <code>HomeDirectorymapEntry</code>.
-      description: Represents an object that contains entries and a targets for <code>HomeDirectoryMappings</code>.
+      description: Represents an object that contains entries and targets for <code>HomeDirectoryMappings</code>.
     Url:
       type: string
       maxLength: 255
@@ -1994,6 +2201,10 @@ components:
       type: string
       minLength: 1
       maxLength: 6144
+    SecurityPolicyNames:
+      type: array
+      items:
+        $ref: '#/components/schemas/SecurityPolicyName'
     ListedServers:
       type: array
       items:
@@ -2069,6 +2280,9 @@ components:
         - FTPS
     Response:
       type: string
+    SecurityPolicyOption:
+      type: string
+      maxLength: 50
     SourceIp:
       type: string
       pattern: '^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$'
