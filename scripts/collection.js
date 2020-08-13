@@ -323,7 +323,7 @@ async function validateCollection(dir, command) {
         }
         else {
           if (command.fix) {
-            util.saveSwagger(swagger);
+            util.saveSwagger(swagger, true);
           }
         }
       });
