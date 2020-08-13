@@ -7,24 +7,23 @@ info:
     name: Twitter Developers
     url: https://developer.twitter.com/
     x-twitter: twitter
-  description: API Reference — Labs v2
+  description: API Reference — v2
   license:
     name: Twitter Developer Agreement and Policy
     url: https://developer.twitter.com/en/developer-terms/agreement-and-policy.html
   termsOfService: https://developer.twitter.com/en/developer-terms/agreement-and-policy.html
-  title: Tweets and Users
-  version: "2.9"
+  title: Early Access
+  version: "2.0"
   x-apisguru-categories:
     - social
   x-logo:
     url: https://twitter.com/twitter/profile_image?size=original
   x-origin:
     - format: openapi
-      url: https://api.twitter.com/labs/2/openapi.json
+      url: https://api.twitter.com/2/openapi.json
       version: "3.0"
-  x-preferred: true
   x-providerName: twitter.com
-  x-serviceName: labs
+  x-serviceName: current
 externalDocs:
   description: Find out more about Swagger
   url: http://swagger.io
@@ -32,25 +31,25 @@ tags:
   - description: Miscellaneous endpoints for general API functionality
     externalDocs:
       description: Find out more
-      url: https://developer.twitter.com/en/docs/labs
+      url: https://developer.twitter.com/en/docs/twitter-api
     name: General
-  - description: APIs related to Recent Search
+  - description: APIs related to Search
     externalDocs:
       description: Find out more
-      url: https://developer.twitter.com/en/docs/labs/recent-search/overview
+      url: https://developer.twitter.com/en/docs/twitter-api/tweets/search
     name: Search
   - description: APIs related to Tweets
     externalDocs:
       description: Find out more
-      url: https://developer.twitter.com/en/docs/labs/tweets-and-users/overview
+      url: https://developer.twitter.com/en/docs/twitter-api/tweets/lookup
     name: Tweets
   - description: APIs related to Users
     externalDocs:
       description: Find out more
-      url: https://developer.twitter.com/en/docs/labs/tweets-and-users/overview
+      url: https://developer.twitter.com/en/docs/twitter-api/users/lookup
     name: Users
 paths:
-  /labs/2/openapi.json:
+  /2/openapi.json:
     get:
       description: Full open api spec in JSON format. (See https://github.com/OAI/OpenAPI-Specification/blob/master/README.md)
       operationId: getOpenApiSpec
@@ -60,12 +59,12 @@ paths:
           content:
             application/json:
               schema:
-                type: string
+                type: object
           description: The request was successful
       summary: Returns the open api spec document.
       tags:
         - General
-  /labs/2/tweets:
+  /2/tweets:
     get:
       description: Returns a variety of information about the Tweet specified by the requested ID
       operationId: findTweetsById
@@ -97,10 +96,36 @@ paths:
           description: The request was successful
         default:
           $ref: "#/components/responses/HttpErrorResponse"
+      security:
+        - BearerToken: []
+          UserToken: []
       summary: Returns hydrated Tweet objects
       tags:
         - Tweets
-  /labs/2/tweets/search:
+  /2/tweets/sample/stream:
+    get:
+      description: Streams a deterministic 1% of public tweets.
+      operationId: sampleStream
+      parameters:
+        - $ref: "#/components/parameters/TweetExpansionsParameter"
+        - $ref: "#/components/parameters/TweetFieldsParameter"
+        - $ref: "#/components/parameters/UserFieldsParameter"
+        - $ref: "#/components/parameters/MediaFieldsParameter"
+        - $ref: "#/components/parameters/PlaceFieldsParameter"
+        - $ref: "#/components/parameters/PollFieldsParameter"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StreamingTweet"
+          description: The request was successful. Successful responses will return a stream of individual JSON Tweet payloads.
+        default:
+          $ref: "#/components/responses/HttpErrorResponse"
+      summary: Streams a deterministic 1% of public tweets.
+      tags:
+        - Tweets
+  /2/tweets/search/recent:
     get:
       description: Returns Tweets from the last 7 days that match a search query.
       operationId: tweetsRecentSearch
@@ -170,11 +195,102 @@ paths:
           description: Tweets recent search response
         default:
           $ref: "#/components/responses/HttpErrorResponse"
+      security:
+        - BearerToken: []
       summary: Returns Tweets from the last 7 days that match a search query.
       tags:
         - Search
         - Tweets
-  "/labs/2/tweets/{id}":
+  /2/tweets/search/stream:
+    get:
+      description: Streams tweets matching a user's active rule set.
+      operationId: searchStream
+      parameters:
+        - $ref: "#/components/parameters/TweetExpansionsParameter"
+        - $ref: "#/components/parameters/TweetFieldsParameter"
+        - $ref: "#/components/parameters/UserFieldsParameter"
+        - $ref: "#/components/parameters/MediaFieldsParameter"
+        - $ref: "#/components/parameters/PlaceFieldsParameter"
+        - $ref: "#/components/parameters/PollFieldsParameter"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FilteredStreamingTweet"
+          description: The request was successful. Successful responses will return a stream of individual JSON Tweet payloads.
+        default:
+          $ref: "#/components/responses/HttpErrorResponse"
+      summary: Streams tweets matching a user's active rule set.
+      tags:
+        - Tweets
+  /2/tweets/search/stream/rules:
+    get:
+      description: Returns rules from a user's active rule set. Users can fetch all of their rules or a subset, specified by the provided rule ids.
+      operationId: getRules
+      parameters:
+        - description: A comma-separated list of Rule IDs.
+          in: query
+          name: ids
+          required: false
+          schema:
+            items:
+              $ref: "#/components/schemas/RuleId"
+            type: array
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    items:
+                      $ref: "#/components/schemas/Rule"
+                    type: array
+                  meta:
+                    $ref: "#/components/schemas/RulesResponseMetadata"
+                required:
+                  - data
+                  - meta
+                type: object
+          description: The request was successful
+        default:
+          $ref: "#/components/responses/HttpErrorResponse"
+      summary: Returns rules from a user's active rule set.
+      tags:
+        - Rules
+        - Tweets
+    post:
+      description: Add or delete rules from a user's active rule set. Users can provide unique, optionally tagged rules to add. Users can delete their entire rule set or a subset specified by rule ids or values.
+      operationId: addOrDeleteRules
+      parameters:
+        - description: Dry Run can be used with both the add and delete action, with the expected result given, but without actually taking any action in the system (meaning the end state will always be as it was when the request was submitted). This is particularly useful to validate rule changes.
+          in: query
+          name: dry_run
+          required: false
+          schema:
+            type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AddOrDeleteRulesRequest"
+        description: ""
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AddOrDeleteRulesResponse"
+          description: The request was successful
+        default:
+          $ref: "#/components/responses/HttpErrorResponse"
+      summary: Add or delete rules from a user's active rule set.
+      tags:
+        - Rules
+        - Tweets
+  "/2/tweets/{id}":
     get:
       description: Returns a variety of information about the Tweet specified by the requested ID
       operationId: findTweetById
@@ -200,47 +316,13 @@ paths:
           description: The request was successful
         default:
           $ref: "#/components/responses/HttpErrorResponse"
+      security:
+        - BearerToken: []
+          UserToken: []
       summary: Returns hydrated Tweet objects
       tags:
         - Tweets
-  "/labs/2/tweets/{id}/hidden":
-    put:
-      description: Tweet ID in the path is that of the reply to hide or unhide.
-      operationId: hideReplyById
-      parameters:
-        - description: The ID of the reply that you want to hide or unhide.
-          in: path
-          name: id
-          required: true
-          schema:
-            $ref: "#/components/schemas/TweetID"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              properties:
-                hidden:
-                  type: boolean
-              type: object
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                properties:
-                  data:
-                    properties:
-                      hidden:
-                        type: boolean
-                    type: object
-                type: object
-          description: A successful response. The reply has been hidden or unhidden.
-        default:
-          $ref: "#/components/responses/HttpErrorResponse"
-      summary: Hides or unhides a reply to an owned conversation.
-      tags:
-        - Tweets
-  /labs/2/users:
+  /2/users:
     get:
       description: This endpoint returns information about users. Specify users by their ID.
       operationId: findUsersById
@@ -260,9 +342,6 @@ paths:
         - $ref: "#/components/parameters/UserExpansionsParameter"
         - $ref: "#/components/parameters/TweetFieldsParameter"
         - $ref: "#/components/parameters/UserFieldsParameter"
-        - $ref: "#/components/parameters/MediaFieldsParameter"
-        - $ref: "#/components/parameters/PlaceFieldsParameter"
-        - $ref: "#/components/parameters/PollFieldsParameter"
       responses:
         "200":
           content:
@@ -272,10 +351,13 @@ paths:
           description: The request was successful
         default:
           $ref: "#/components/responses/HttpErrorResponse"
+      security:
+        - BearerToken: []
+          UserToken: []
       summary: Return details for the specified users
       tags:
         - Users
-  /labs/2/users/by:
+  /2/users/by:
     get:
       description: This endpoint returns information about users. Specify users by their username.
       operationId: findUsersByUsername
@@ -295,9 +377,6 @@ paths:
         - $ref: "#/components/parameters/UserExpansionsParameter"
         - $ref: "#/components/parameters/TweetFieldsParameter"
         - $ref: "#/components/parameters/UserFieldsParameter"
-        - $ref: "#/components/parameters/MediaFieldsParameter"
-        - $ref: "#/components/parameters/PlaceFieldsParameter"
-        - $ref: "#/components/parameters/PollFieldsParameter"
       responses:
         "200":
           content:
@@ -307,10 +386,13 @@ paths:
           description: The request was successful
         default:
           $ref: "#/components/responses/HttpErrorResponse"
+      security:
+        - BearerToken: []
+          UserToken: []
       summary: Return details for the specified users
       tags:
         - Users
-  "/labs/2/users/by/username/{username}":
+  "/2/users/by/username/{username}":
     get:
       description: This endpoint returns information about a user. Specify user by username.
       operationId: findUserByUsername
@@ -324,9 +406,6 @@ paths:
         - $ref: "#/components/parameters/UserExpansionsParameter"
         - $ref: "#/components/parameters/TweetFieldsParameter"
         - $ref: "#/components/parameters/UserFieldsParameter"
-        - $ref: "#/components/parameters/MediaFieldsParameter"
-        - $ref: "#/components/parameters/PlaceFieldsParameter"
-        - $ref: "#/components/parameters/PollFieldsParameter"
       responses:
         "200":
           content:
@@ -336,10 +415,13 @@ paths:
           description: The request was successful
         default:
           $ref: "#/components/responses/HttpErrorResponse"
+      security:
+        - BearerToken: []
+          UserToken: []
       summary: Return details for the specified users
       tags:
         - Users
-  "/labs/2/users/{id}":
+  "/2/users/{id}":
     get:
       description: This endpoint returns information about a user. Specify user by ID.
       operationId: findUserById
@@ -353,9 +435,6 @@ paths:
         - $ref: "#/components/parameters/UserExpansionsParameter"
         - $ref: "#/components/parameters/TweetFieldsParameter"
         - $ref: "#/components/parameters/UserFieldsParameter"
-        - $ref: "#/components/parameters/MediaFieldsParameter"
-        - $ref: "#/components/parameters/PlaceFieldsParameter"
-        - $ref: "#/components/parameters/PollFieldsParameter"
       responses:
         "200":
           content:
@@ -365,6 +444,9 @@ paths:
           description: The request was successful
         default:
           $ref: "#/components/responses/HttpErrorResponse"
+      security:
+        - BearerToken: []
+          UserToken: []
       summary: Return details for the specified users
       tags:
         - Users
@@ -378,7 +460,8 @@ components:
       required: false
       schema:
         description: The list of fields you can display for a Media object.
-        example: created_at
+        example:
+          - url
         items:
           enum:
             - media_key
@@ -494,6 +577,7 @@ components:
             - non_public_metrics
             - promoted_metrics
             - organic_metrics
+            - conversation_id
           type: string
         minItems: 1
         type: array
@@ -556,17 +640,49 @@ components:
             $ref: "#/components/schemas/Problem"
       description: The request has failed.
   schemas:
+    AddOrDeleteRulesRequest:
+      oneOf:
+        - $ref: "#/components/schemas/AddRulesRequest"
+        - $ref: "#/components/schemas/DeleteRulesRequest"
+      type: object
+    AddOrDeleteRulesResponse:
+      oneOf:
+        - $ref: "#/components/schemas/AddRulesResponse"
+        - $ref: "#/components/schemas/DeleteRulesResponse"
+      type: object
+    AddRulesRequest:
+      properties:
+        add:
+          items:
+            $ref: "#/components/schemas/RuleNoId"
+          type: array
+      required:
+        - add
+      type: object
+    AddRulesResponse:
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/Rule"
+          type: array
+        meta:
+          $ref: "#/components/schemas/RulesResponseMetadata"
+      required:
+        - data
+        - meta
+      type: object
     AnimatedGif:
       allOf:
         - $ref: "#/components/schemas/CommonMediaFields"
-      properties:
-        preview_image_url:
-          format: uri
-          type: string
-        type:
-          enum:
-            - animated_gif
-          type: string
+        - properties:
+            preview_image_url:
+              format: uri
+              type: string
+            type:
+              enum:
+                - animated_gif
+              type: string
+          type: object
       type: object
     CashtagEntity:
       allOf:
@@ -580,26 +696,36 @@ components:
       required:
         - tag
       type: object
+    ClientDisconnectedProblem:
+      allOf:
+        - $ref: "#/components/schemas/ProblemFields"
+        - properties:
+            type:
+              enum:
+                - https://api.twitter.com/2/problems/client-disconnected
+              type: string
+      description: Your client has gone away.
+      type: object
     ClientForbiddenProblem:
       allOf:
         - $ref: "#/components/schemas/ProblemFields"
+        - properties:
+            reason:
+              enum:
+                - official-client-forbidden
+                - client-not-enrolled
+              type: string
+            registration_url:
+              format: uri
+              type: string
+            type:
+              enum:
+                - https://api.twitter.com/2/problems/client-forbidden
+              type: string
+          type: object
       description: A problem that indicates your client is forbidden from making this request.
-      properties:
-        reason:
-          enum:
-            - official-client-forbidden
-            - client-not-enrolled
-          type: string
-        registration_url:
-          format: uri
-          type: string
-        type:
-          enum:
-            - https://api.twitter.com/labs/2/problems/client-forbidden
-          type: string
       type: object
     CommonMediaFields:
-      description: This contains the list of the fields that are common to all media returned.
       properties:
         height:
           $ref: "#/components/schemas/MediaHeight"
@@ -607,6 +733,20 @@ components:
           $ref: "#/components/schemas/MediaKey"
         width:
           $ref: "#/components/schemas/MediaWidth"
+    ConnectionExceptionProblem:
+      allOf:
+        - $ref: "#/components/schemas/ProblemFields"
+        - properties:
+            connection_issue:
+              enum:
+                - TooManyConnections
+                - ProvisioningSubscription
+              type: string
+            type:
+              enum:
+                - https://api.twitter.com/2/problems/streaming-connection
+              type: string
+      description: A problem that indicates something is wrong with the connection
       type: object
     ContextAnnotation:
       description: Annotation inferred from the tweet text.
@@ -654,31 +794,60 @@ components:
     CountryCode:
       pattern: ^[A-Z]{2}$
       type: string
+    DeleteRulesRequest:
+      properties:
+        ids:
+          items:
+            $ref: "#/components/schemas/RuleId"
+          type: array
+        values:
+          items:
+            $ref: "#/components/schemas/RuleValue"
+          type: array
+      type: object
+    DeleteRulesResponse:
+      properties:
+        meta:
+          $ref: "#/components/schemas/RulesResponseMetadata"
+      required:
+        - meta
+      type: object
     DisallowedResourceProblem:
       allOf:
         - $ref: "#/components/schemas/ProblemFields"
+        - properties:
+            resource_id:
+              type: string
+            resource_type:
+              enum:
+                - tweet
+                - media
+              type: string
+            section:
+              enum:
+                - data
+                - includes
+              type: string
+            type:
+              enum:
+                - https://api.twitter.com/2/problems/disallowed-resource
+              type: string
+          required:
+            - resource_id
+            - resource_type
+            - section
+          type: object
       description: A problem that indicates that the resource requested violates the precepts of this API.
-      properties:
-        resource_id:
-          type: string
-        resource_type:
-          enum:
-            - tweet
-            - media
-          type: string
-        section:
-          enum:
-            - data
-            - includes
-          type: string
-        type:
-          enum:
-            - https://api.twitter.com/labs/2/problems/disallowed-resource
-          type: string
-      required:
-        - resource_id
-        - resource_type
-        - section
+      type: object
+    DuplicateRuleProblem:
+      allOf:
+        - $ref: "#/components/schemas/ProblemFields"
+        - properties:
+            type:
+              enum:
+                - https://api.twitter.com/2/problems/duplicate-rules
+              type: string
+      description: The rule you have submitted is a duplicate.
       type: object
     EntityIndices:
       description: Represent a boundary range (start and end index) for a recognized entity (for example a hashtag or a mention). `start` must be smaller than `end`.
@@ -733,6 +902,68 @@ components:
           minItems: 1
           type: array
       type: object
+    FieldUnauthorizedProblem:
+      allOf:
+        - $ref: "#/components/schemas/ProblemFields"
+        - properties:
+            field:
+              type: string
+            resource_type:
+              enum:
+                - tweet
+                - media
+              type: string
+            section:
+              enum:
+                - data
+                - includes
+              type: string
+            type:
+              enum:
+                - https://api.twitter.com/2/problems/not-authorized-for-field
+              type: string
+          required:
+            - resource_type
+            - field
+            - section
+          type: object
+      description: A problem that indicates that you are not allowed to see a particular field on a Tweet, User, etc.
+      type: object
+    FilteredStreamingTweet:
+      description: A tweet or error that can be returned by the streaming tweet API
+      oneOf:
+        - description: The values returned with a successful streamed tweet. Includes the user provided rules that the tweet matched.
+          properties:
+            data:
+              $ref: "#/components/schemas/Tweet"
+            includes:
+              $ref: "#/components/schemas/Expansions"
+            matching_rules:
+              description: The list of rules which matched the tweet
+              items:
+                properties:
+                  id:
+                    $ref: "#/components/schemas/RuleId"
+                  tag:
+                    description: The user-supplied tag assigned to the rule which matched
+                    type: string
+                required:
+                  - id
+                type: object
+              type: array
+          required:
+            - data
+            - matching_rules
+          type: object
+        - properties:
+            errors:
+              items:
+                $ref: "#/components/schemas/Problem"
+              type: array
+          required:
+            - errors
+          type: object
+      type: object
     FullTextEntities:
       properties:
         cashtags:
@@ -759,16 +990,17 @@ components:
     GenericProblem:
       allOf:
         - $ref: "#/components/schemas/ProblemFields"
+        - properties:
+            status:
+              type: integer
+            type:
+              enum:
+                - about:blank
+              type: string
+          required:
+            - status
+          type: object
       description: A generic problem with no additional information beyond that provided by the HTTP status code.
-      properties:
-        status:
-          type: integer
-        type:
-          enum:
-            - about:blank
-          type: string
-      required:
-        - status
     Geo:
       properties:
         bbox:
@@ -814,25 +1046,35 @@ components:
     InvalidRequestProblem:
       allOf:
         - $ref: "#/components/schemas/ProblemFields"
-      description: A problem that indicates this request is invalid.
-      properties:
-        errors:
-          items:
-            properties:
-              message:
-                type: string
-              parameters:
-                additionalProperties:
-                  items:
+        - properties:
+            errors:
+              items:
+                properties:
+                  message:
                     type: string
-                  type: array
+                  parameters:
+                    additionalProperties:
+                      items:
+                        type: string
+                      type: array
+                    type: object
                 type: object
-            type: object
-          type: array
-        type:
-          enum:
-            - https://api.twitter.com/labs/2/problems/invalid-request
-          type: string
+              type: array
+            type:
+              enum:
+                - https://api.twitter.com/2/problems/invalid-request
+              type: string
+          type: object
+      description: A problem that indicates this request is invalid.
+    InvalidRuleProblem:
+      allOf:
+        - $ref: "#/components/schemas/ProblemFields"
+        - properties:
+            type:
+              enum:
+                - https://api.twitter.com/2/problems/invalid-rules
+              type: string
+      description: The rule you have submitted is invalid.
       type: object
     Media:
       discriminator:
@@ -845,8 +1087,12 @@ components:
         - $ref: "#/components/schemas/Photo"
         - $ref: "#/components/schemas/Video"
         - $ref: "#/components/schemas/AnimatedGif"
+      properties:
+        type:
+          type: string
       required:
         - type
+      type: object
     MediaHeight:
       description: The height of the media in pixels
       minimum: 0
@@ -871,17 +1117,40 @@ components:
       required:
         - username
       type: object
+    OperationalDisconnectProblem:
+      allOf:
+        - $ref: "#/components/schemas/ProblemFields"
+        - properties:
+            disconnect_type:
+              enum:
+                - OperationalDisconnect
+                - UpstreamOperationalDisconnect
+                - ForceDisconnect
+                - UpstreamUncleanDisconnect
+                - SlowReader
+                - InternalError
+                - PackageUpgraded
+                - PackageDowngraded
+                - ClientApplicationStateDegraded
+              type: string
+            type:
+              enum:
+                - https://api.twitter.com/2/problems/operational-disconnect
+              type: string
+      description: You have been disconnected for operational reasons.
+      type: object
     Photo:
       allOf:
         - $ref: "#/components/schemas/CommonMediaFields"
-      properties:
-        type:
-          enum:
-            - photo
-          type: string
-        url:
-          format: uri
-          type: string
+        - properties:
+            type:
+              enum:
+                - photo
+              type: string
+            url:
+              format: uri
+              type: string
+          type: object
       type: object
     Place:
       properties:
@@ -991,13 +1260,20 @@ components:
       discriminator:
         mapping:
           about:blank: "#/components/schemas/GenericProblem"
-          https://api.twitter.com/labs/2/problems/client-forbidden: "#/components/schemas/ClientForbiddenProblem"
-          https://api.twitter.com/labs/2/problems/disallowed-resource: "#/components/schemas/DisallowedResourceProblem"
-          https://api.twitter.com/labs/2/problems/invalid-request: "#/components/schemas/InvalidRequestProblem"
-          https://api.twitter.com/labs/2/problems/not-authorized-for-resource: "#/components/schemas/ResourceUnauthorizedProblem"
-          https://api.twitter.com/labs/2/problems/resource-not-found: "#/components/schemas/ResourceNotFoundProblem"
-          https://api.twitter.com/labs/2/problems/unsupported-authentication: "#/components/schemas/UnsupportedAuthenticationProblem"
-          https://api.twitter.com/labs/2/problems/usage-capped: "#/components/schemas/UsageCapExceededProblem"
+          https://api.twitter.com/2/problems/client-disconnected: "#/components/schemas/ClientDisconnectedProblem"
+          https://api.twitter.com/2/problems/client-forbidden: "#/components/schemas/ClientForbiddenProblem"
+          https://api.twitter.com/2/problems/disallowed-resource: "#/components/schemas/DisallowedResourceProblem"
+          https://api.twitter.com/2/problems/duplicate-rules: "#/components/schemas/DuplicateRuleProblem"
+          https://api.twitter.com/2/problems/invalid-request: "#/components/schemas/InvalidRequestProblem"
+          https://api.twitter.com/2/problems/invalid-rules: "#/components/schemas/InvalidRuleProblem"
+          https://api.twitter.com/2/problems/not-authorized-for-field: "#/components/schemas/FieldUnauthorizedProblem"
+          https://api.twitter.com/2/problems/not-authorized-for-resource: "#/components/schemas/ResourceUnauthorizedProblem"
+          https://api.twitter.com/2/problems/operational-disconnect: "#/components/schemas/OperationalDisconnectProblem"
+          https://api.twitter.com/2/problems/resource-not-found: "#/components/schemas/ResourceNotFoundProblem"
+          https://api.twitter.com/2/problems/rule-cap: "#/components/schemas/RulesCapProblem"
+          https://api.twitter.com/2/problems/streaming-connection: "#/components/schemas/ConnectionExceptionProblem"
+          https://api.twitter.com/2/problems/unsupported-authentication: "#/components/schemas/UnsupportedAuthenticationProblem"
+          https://api.twitter.com/2/problems/usage-capped: "#/components/schemas/UsageCapExceededProblem"
         propertyName: type
       oneOf:
         - $ref: "#/components/schemas/GenericProblem"
@@ -1005,73 +1281,161 @@ components:
         - $ref: "#/components/schemas/ClientForbiddenProblem"
         - $ref: "#/components/schemas/ResourceNotFoundProblem"
         - $ref: "#/components/schemas/ResourceUnauthorizedProblem"
+        - $ref: "#/components/schemas/FieldUnauthorizedProblem"
         - $ref: "#/components/schemas/DisallowedResourceProblem"
         - $ref: "#/components/schemas/UnsupportedAuthenticationProblem"
         - $ref: "#/components/schemas/UsageCapExceededProblem"
+        - $ref: "#/components/schemas/ConnectionExceptionProblem"
+        - $ref: "#/components/schemas/ClientDisconnectedProblem"
+        - $ref: "#/components/schemas/OperationalDisconnectProblem"
+        - $ref: "#/components/schemas/RulesCapProblem"
+        - $ref: "#/components/schemas/InvalidRuleProblem"
+        - $ref: "#/components/schemas/DuplicateRuleProblem"
+      properties:
+        type:
+          type: string
+      required:
+        - type
     ProblemFields:
       properties:
         detail:
           type: string
         title:
           type: string
-        type:
-          format: uri
-          type: string
       required:
-        - type
         - title
         - detail
       type: object
     ResourceNotFoundProblem:
       allOf:
         - $ref: "#/components/schemas/ProblemFields"
+        - properties:
+            parameter:
+              minLength: 1
+              type: string
+            resource_type:
+              enum:
+                - user
+                - tweet
+                - media
+              type: string
+            type:
+              enum:
+                - https://api.twitter.com/2/problems/resource-not-found
+              type: string
+            value:
+              description: Value will match the schema of the field.
+          required:
+            - parameter
+            - value
+            - resource_type
       description: A problem that indicates that a given Tweet, User, etc. does not exist.
-      properties:
-        parameter:
-          minLength: 1
-          type: string
-        resource_type:
-          enum:
-            - user
-            - tweet
-            - media
-          type: string
-        type:
-          enum:
-            - https://api.twitter.com/labs/2/problems/resource-not-found
-          type: string
-        value:
-          description: Value will match the schema of the field.
-      required:
-        - parameter
-        - value
-        - resource_type
-      type: object
     ResourceUnauthorizedProblem:
       allOf:
         - $ref: "#/components/schemas/ProblemFields"
+        - properties:
+            parameter:
+              type: string
+            resource_type:
+              enum:
+                - tweet
+                - media
+              type: string
+            section:
+              enum:
+                - data
+                - includes
+              type: string
+            type:
+              enum:
+                - https://api.twitter.com/2/problems/not-authorized-for-resource
+              type: string
+            value:
+              type: string
+          required:
+            - value
+            - resource_type
+            - section
+            - parameter
+          type: object
       description: A problem that indicates you are not allowed to see a particular Tweet, User, etc.
+      type: object
+    Rule:
       properties:
-        resource_id:
-          type: string
-        resource_type:
-          enum:
-            - tweet
-            - media
-          type: string
-        section:
-          enum:
-            - data
-            - includes
-          type: string
-        type:
-          enum:
-            - https://api.twitter.com/labs/2/problems/not-authorized-for-resource
-          type: string
+        id:
+          $ref: "#/components/schemas/RuleId"
+        tag:
+          $ref: "#/components/schemas/RuleTag"
+        value:
+          $ref: "#/components/schemas/RuleValue"
       required:
-        - resource_id
-        - resource_type
-        - section
+        - value
+      type: object
+    RuleId:
+      description: Unique identifier of this rule.
+      example: "120897978112909812"
+      pattern: ^[0-9]{1,19}$
+      type: string
+    RuleNoId:
+      properties:
+        tag:
+          $ref: "#/components/schemas/RuleTag"
+        value:
+          $ref: "#/components/schemas/RuleValue"
+      required:
+        - value
+      type: object
+    RuleTag:
+      description: A tag meant for the labeling of user provided rules.
+      example: Non-retweeted coffee tweets
+      type: string
+    RuleValue:
+      description: The filterlang value of the rule.
+      example: coffee -is:retweet
+      type: string
+    RulesCapProblem:
+      allOf:
+        - $ref: "#/components/schemas/ProblemFields"
+        - properties:
+            type:
+              enum:
+                - https://api.twitter.com/2/problems/rule-cap
+              type: string
+      description: You have exceeded the maximum number of rules.
+      type: object
+    RulesRequestSummary:
+      oneOf:
+        - properties:
+            created:
+              format: int32
+              type: integer
+            not_created:
+              format: int32
+              type: integer
+          required:
+            - created
+            - not_created
+          type: object
+        - properties:
+            deleted:
+              format: int32
+              type: integer
+            not_deleted:
+              format: int32
+              type: integer
+          required:
+            - deleted
+            - not_deleted
+          type: object
+      type: object
+    RulesResponseMetadata:
+      properties:
+        sent:
+          type: string
+        summary:
+          $ref: "#/components/schemas/RulesRequestSummary"
+      required:
+        - sent
       type: object
     SingleTweetLookupResponse:
       properties:
@@ -1096,6 +1460,19 @@ components:
           type: array
         includes:
           $ref: "#/components/schemas/Expansions"
+      type: object
+    StreamingTweet:
+      description: A tweet or error that can be returned by the streaming tweet API.
+      oneOf:
+        - $ref: "#/components/schemas/SingleTweetLookupResponse"
+        - properties:
+            errors:
+              items:
+                $ref: "#/components/schemas/Problem"
+              type: array
+          required:
+            - errors
+          type: object
       type: object
     Tweet:
       example:
@@ -1127,6 +1504,8 @@ components:
             $ref: "#/components/schemas/ContextAnnotation"
           minItems: 1
           type: array
+        conversation_id:
+          $ref: "#/components/schemas/TweetID"
         created_at:
           description: Creation time of the Tweet.
           format: date-time
@@ -1155,12 +1534,6 @@ components:
               description: Number of times this Tweet has been viewed.
               format: int32
               type: integer
-            url_link_clicks:
-              description: Number of times links in this Tweet have been clicked.
-              type: integer
-            user_profile_clicks:
-              description: Number of times the user's profile from this Tweet has been clicked.
-              type: integer
           type: object
         organic_metrics:
           description: Organic nonpublic engagement metrics for the Tweet at the time of the request.
@@ -1177,18 +1550,11 @@ components:
             retweet_count:
               description: Number of times this Tweet has been Retweeted.
               type: integer
-            url_link_clicks:
-              description: Number of times links in this Tweet have been clicked.
-              type: integer
-            user_profile_clicks:
-              description: Number of times the user's profile from this Tweet has been clicked.
-              type: integer
           required:
             - impression_count
             - retweet_count
             - reply_count
             - like_count
-            - user_profile_clicks
           type: object
         possibly_sensitive:
           description: Indicates if this Tweet contains URLs marked as sensitive, for example content suitable for mature audiences.
@@ -1211,12 +1577,6 @@ components:
             retweet_count:
               description: Number of times this Tweet has been Retweeted.
               format: int32
-              type: integer
-            url_link_clicks:
-              description: Number of times links in this Tweet have been clicked.
-              type: integer
-            user_profile_clicks:
-              description: Number of times the user's profile from this Tweet has been clicked.
               type: integer
           type: object
         public_metrics:
@@ -1392,12 +1752,13 @@ components:
     UnsupportedAuthenticationProblem:
       allOf:
         - $ref: "#/components/schemas/ProblemFields"
+        - properties:
+            type:
+              enum:
+                - https://api.twitter.com/2/problems/unsupported-authentication
+              type: string
+          type: object
       description: A problem that indicates that the authentication used is not supported.
-      properties:
-        type:
-          enum:
-            - https://api.twitter.com/labs/2/problems/unsupported-authentication
-          type: string
       type: object
     UrlEntity:
       allOf:
@@ -1407,22 +1768,23 @@ components:
     UsageCapExceededProblem:
       allOf:
         - $ref: "#/components/schemas/ProblemFields"
+        - properties:
+            period:
+              enum:
+                - Daily
+                - Monthly
+              type: string
+            scope:
+              enum:
+                - Account
+                - Product
+              type: string
+            type:
+              enum:
+                - https://api.twitter.com/2/problems/usage-capped
+              type: string
+          type: object
       description: A problem that indicates that a usage cap has been exceeded.
-      properties:
-        period:
-          enum:
-            - Daily
-            - Monthly
-          type: string
-        scope:
-          enum:
-            - Account
-            - Product
-          type: string
-        type:
-          enum:
-            - https://api.twitter.com/labs/2/problems/usage-capped
-          type: string
       type: object
     User:
       description: The Twitter User object
@@ -1552,102 +1914,110 @@ components:
     Video:
       allOf:
         - $ref: "#/components/schemas/CommonMediaFields"
-      properties:
-        duration_ms:
-          type: integer
-        non_public_metrics:
-          description: Nonpublic engagement metrics for the Media at the time of the request.
-          properties:
-            playback_0_count:
-              description: Number of users who made it through 0% of the video.
-              format: int32
+        - properties:
+            duration_ms:
               type: integer
-            playback_100_count:
-              description: Number of users who made it through 100% of the video.
-              format: int32
-              type: integer
-            playback_25_count:
-              description: Number of users who made it through 25% of the video.
-              format: int32
-              type: integer
-            playback_50_count:
-              description: Number of users who made it through 50% of the video.
-              format: int32
-              type: integer
-            playback_75_count:
-              description: Number of users who made it through 75% of the video.
-              format: int32
-              type: integer
+            non_public_metrics:
+              description: Nonpublic engagement metrics for the Media at the time of the request.
+              properties:
+                playback_0_count:
+                  description: Number of users who made it through 0% of the video.
+                  format: int32
+                  type: integer
+                playback_100_count:
+                  description: Number of users who made it through 100% of the video.
+                  format: int32
+                  type: integer
+                playback_25_count:
+                  description: Number of users who made it through 25% of the video.
+                  format: int32
+                  type: integer
+                playback_50_count:
+                  description: Number of users who made it through 50% of the video.
+                  format: int32
+                  type: integer
+                playback_75_count:
+                  description: Number of users who made it through 75% of the video.
+                  format: int32
+                  type: integer
+              type: object
+            organic_metrics:
+              description: Organic nonpublic engagement metrics for the Media at the time of the request.
+              properties:
+                playback_0_count:
+                  description: Number of users who made it through 0% of the video.
+                  format: int32
+                  type: integer
+                playback_100_count:
+                  description: Number of users who made it through 100% of the video.
+                  format: int32
+                  type: integer
+                playback_25_count:
+                  description: Number of users who made it through 25% of the video.
+                  format: int32
+                  type: integer
+                playback_50_count:
+                  description: Number of users who made it through 50% of the video.
+                  format: int32
+                  type: integer
+                playback_75_count:
+                  description: Number of users who made it through 75% of the video.
+                  format: int32
+                  type: integer
+                view_count:
+                  description: Number of times this video has been viewed.
+                  format: int32
+                  type: integer
+              type: object
+            preview_image_url:
+              format: uri
+              type: string
+            promoted_metrics:
+              description: Promoted nonpublic engagement metrics for the Media at the time of the request.
+              properties:
+                playback_0_count:
+                  description: Number of users who made it through 0% of the video.
+                  format: int32
+                  type: integer
+                playback_100_count:
+                  description: Number of users who made it through 100% of the video.
+                  format: int32
+                  type: integer
+                playback_25_count:
+                  description: Number of users who made it through 25% of the video.
+                  format: int32
+                  type: integer
+                playback_50_count:
+                  description: Number of users who made it through 50% of the video.
+                  format: int32
+                  type: integer
+                playback_75_count:
+                  description: Number of users who made it through 75% of the video.
+                  format: int32
+                  type: integer
+                view_count:
+                  description: Number of times this video has been viewed.
+                  format: int32
+                  type: integer
+              type: object
+            public_metrics:
+              description: Engagement metrics for the Media at the time of the request.
+              properties:
+                view_count:
+                  description: Number of times this video has been viewed.
+                  format: int32
+                  type: integer
+              type: object
+            type:
+              enum:
+                - video
+              type: string
           type: object
-        organic_metrics:
-          description: Organic nonpublic engagement metrics for the Media at the time of the request.
-          properties:
-            playback_0_count:
-              description: Number of users who made it through 0% of the video.
-              format: int32
-              type: integer
-            playback_100_count:
-              description: Number of users who made it through 100% of the video.
-              format: int32
-              type: integer
-            playback_25_count:
-              description: Number of users who made it through 25% of the video.
-              format: int32
-              type: integer
-            playback_50_count:
-              description: Number of users who made it through 50% of the video.
-              format: int32
-              type: integer
-            playback_75_count:
-              description: Number of users who made it through 75% of the video.
-              format: int32
-              type: integer
-            view_count:
-              description: Number of times this video has been viewed.
-              format: int32
-              type: integer
-          type: object
-        preview_image_url:
-          format: uri
-          type: string
-        promoted_metrics:
-          description: Promoted nonpublic engagement metrics for the Media at the time of the request.
-          properties:
-            playback_0_count:
-              description: Number of users who made it through 0% of the video.
-              format: int32
-              type: integer
-            playback_100_count:
-              description: Number of users who made it through 100% of the video.
-              format: int32
-              type: integer
-            playback_25_count:
-              description: Number of users who made it through 25% of the video.
-              format: int32
-              type: integer
-            playback_50_count:
-              description: Number of users who made it through 50% of the video.
-              format: int32
-              type: integer
-            playback_75_count:
-              description: Number of users who made it through 75% of the video.
-              format: int32
-              type: integer
-            view_count:
-              description: Number of times this video has been viewed.
-              format: int32
-              type: integer
-          type: object
-        public_metrics:
-          description: Engagement metrics for the Media at the time of the request.
-          properties:
-            view_count:
-              description: Number of times this video has been viewed.
-              format: int32
-              type: integer
-          type: object
-        type:
-          enum:
-            - video
-          type: string
       type: object
+  securitySchemes:
+    BearerToken:
+      scheme: bearer
+      type: http
+    UserToken:
+      scheme: OAuth
+      type: http
