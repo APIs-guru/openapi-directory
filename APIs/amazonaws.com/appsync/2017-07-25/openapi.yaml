@@ -1059,7 +1059,7 @@ paths:
                   minLength: 1
                   maxLength: 65536
                 requestMappingTemplate:
-                  description: <p>The mapping template to be used for requests.</p> <p>A resolver uses a request mapping template to convert a GraphQL expression into a format that a data source can understand. Mapping templates are written in Apache Velocity Template Language (VTL).</p>
+                  description: '<p>The mapping template to be used for requests.</p> <p>A resolver uses a request mapping template to convert a GraphQL expression into a format that a data source can understand. Mapping templates are written in Apache Velocity Template Language (VTL).</p> <p>VTL request mapping templates are optional when using a Lambda data source. For all other data sources, VTL request and response mapping templates are required.</p>'
                   type: string
                   minLength: 1
                   maxLength: 65536
@@ -1103,7 +1103,7 @@ paths:
                       description: <p>The TTL in seconds for a resolver that has caching enabled.</p> <p>Valid values are between 1 and 3600 seconds.</p>
                     cachingKeys:
                       $ref: '#/components/schemas/CachingKeys'
-                      description: <p>The caching keys for a resolver that has caching enabled.</p> <p>Valid values are entries from the <code>$context.identity</code> and <code>$context.arguments</code> maps.</p>
+                      description: '<p>The caching keys for a resolver that has caching enabled.</p> <p>Valid values are entries from the <code>$context.arguments</code>, <code>$context.source</code>, and <code>$context.identity</code> maps.</p>'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2258,7 +2258,7 @@ paths:
                   minLength: 1
                   maxLength: 65536
                 requestMappingTemplate:
-                  description: The new request mapping template.
+                  description: '<p>The new request mapping template.</p> <p>A resolver uses a request mapping template to convert a GraphQL expression into a format that a data source can understand. Mapping templates are written in Apache Velocity Template Language (VTL).</p> <p>VTL request mapping templates are optional when using a Lambda data source. For all other data sources, VTL request and response mapping templates are required.</p>'
                   type: string
                   minLength: 1
                   maxLength: 65536
@@ -2302,7 +2302,7 @@ paths:
                       description: <p>The TTL in seconds for a resolver that has caching enabled.</p> <p>Valid values are between 1 and 3600 seconds.</p>
                     cachingKeys:
                       $ref: '#/components/schemas/CachingKeys'
-                      description: <p>The caching keys for a resolver that has caching enabled.</p> <p>Valid values are entries from the <code>$context.identity</code> and <code>$context.arguments</code> maps.</p>
+                      description: '<p>The caching keys for a resolver that has caching enabled.</p> <p>Valid values are entries from the <code>$context.arguments</code>, <code>$context.source</code>, and <code>$context.identity</code> maps.</p>'
   '/v1/apis/{apiId}/types/{typeName}':
     delete:
       operationId: DeleteType
@@ -3772,7 +3772,7 @@ components:
           description: <p>The TTL in seconds for a resolver that has caching enabled.</p> <p>Valid values are between 1 and 3600 seconds.</p>
         cachingKeys:
           $ref: '#/components/schemas/CachingKeys'
-          description: <p>The caching keys for a resolver that has caching enabled.</p> <p>Valid values are entries from the <code>$context.identity</code> and <code>$context.arguments</code> maps.</p>
+          description: '<p>The caching keys for a resolver that has caching enabled.</p> <p>Valid values are entries from the <code>$context.arguments</code>, <code>$context.source</code>, and <code>$context.identity</code> maps.</p>'
       description: The caching configuration for a resolver that has caching enabled.
     CreateApiCacheRequest:
       type: object
@@ -4162,7 +4162,7 @@ components:
           description: The name of the data source for which the resolver is being created.
         requestMappingTemplate:
           $ref: '#/components/schemas/MappingTemplate'
-          description: <p>The mapping template to be used for requests.</p> <p>A resolver uses a request mapping template to convert a GraphQL expression into a format that a data source can understand. Mapping templates are written in Apache Velocity Template Language (VTL).</p>
+          description: '<p>The mapping template to be used for requests.</p> <p>A resolver uses a request mapping template to convert a GraphQL expression into a format that a data source can understand. Mapping templates are written in Apache Velocity Template Language (VTL).</p> <p>VTL request mapping templates are optional when using a Lambda data source. For all other data sources, VTL request and response mapping templates are required.</p>'
         responseMappingTemplate:
           $ref: '#/components/schemas/MappingTemplate'
           description: The mapping template to be used for responses from the data source.
@@ -4548,7 +4548,7 @@ components:
           description: The new data source name.
         requestMappingTemplate:
           $ref: '#/components/schemas/MappingTemplate'
-          description: The new request mapping template.
+          description: '<p>The new request mapping template.</p> <p>A resolver uses a request mapping template to convert a GraphQL expression into a format that a data source can understand. Mapping templates are written in Apache Velocity Template Language (VTL).</p> <p>VTL request mapping templates are optional when using a Lambda data source. For all other data sources, VTL request and response mapping templates are required.</p>'
         responseMappingTemplate:
           $ref: '#/components/schemas/MappingTemplate'
           description: The new response mapping template.

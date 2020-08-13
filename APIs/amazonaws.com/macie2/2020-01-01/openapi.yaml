@@ -366,7 +366,7 @@ paths:
                       $ref: '#/components/schemas/Scoping'
                       description: The property- and tag-based conditions that determine which objects to include or exclude from the analysis.
                 samplingPercentage:
-                  description: 'The sampling depth, as a percentage, to apply when processing objects. This value determines the percentage of eligible objects that the job analyzes. If the value is less than 100, Amazon Macie randomly selects the objects to analyze, up to the specified percentage.'
+                  description: 'The sampling depth, as a percentage, to apply when processing objects. This value determines the percentage of eligible objects that the job analyzes. If this value is less than 100, Amazon Macie selects the objects to analyze at random, up to the specified percentage, and analyzes all the data in those objects.'
                   type: integer
                 scheduleFrequency:
                   description: Specifies the recurrence pattern for running a classification job.
@@ -462,12 +462,12 @@ paths:
                   description: '<p>A custom description of the custom data identifier. The description can contain as many as 512 characters.</p> <p>We strongly recommend that you avoid including any sensitive data in the description of a custom data identifier. Other users of your account might be able to see the identifier''s description, depending on the actions that they''re allowed to perform in Amazon Macie.</p>'
                   type: string
                 ignoreWords:
-                  description: 'An array that lists specific character sequences (ignore words) to exclude from the results. If the text matched by the regular expression is the same as any string in this array, Amazon Macie ignores it. The array can contain as many as 10 ignore words. Each ignore word can contain 4 - 90 characters.'
+                  description: 'An array that lists specific character sequences (ignore words) to exclude from the results. If the text matched by the regular expression is the same as any string in this array, Amazon Macie ignores it. The array can contain as many as 10 ignore words. Each ignore word can contain 4 - 90 characters. Ignore words are case sensitive.'
                   type: array
                   items:
                     $ref: '#/components/schemas/__string'
                 keywords:
-                  description: 'An array that lists specific character sequences (keywords), one of which must be within proximity (maximumMatchDistance) of the regular expression to match. The array can contain as many as 50 keywords. Each keyword can contain 4 - 90 characters.'
+                  description: 'An array that lists specific character sequences (keywords), one of which must be within proximity (maximumMatchDistance) of the regular expression to match. The array can contain as many as 50 keywords. Each keyword can contain 4 - 90 characters. Keywords aren''t case sensitive.'
                   type: array
                   items:
                     $ref: '#/components/schemas/__string'
@@ -3742,12 +3742,12 @@ paths:
                 - sampleText
               properties:
                 ignoreWords:
-                  description: 'An array that lists specific character sequences (ignore words) to exclude from the results. If the text matched by the regular expression is the same as any string in this array, Amazon Macie ignores it. The array can contain as many as 10 ignore words. Each ignore word can contain 4 - 90 characters.'
+                  description: 'An array that lists specific character sequences (ignore words) to exclude from the results. If the text matched by the regular expression is the same as any string in this array, Amazon Macie ignores it. The array can contain as many as 10 ignore words. Each ignore word can contain 4 - 90 characters. Ignore words are case sensitive.'
                   type: array
                   items:
                     $ref: '#/components/schemas/__string'
                 keywords:
-                  description: 'An array that lists specific character sequences (keywords), one of which must be within proximity (maximumMatchDistance) of the regular expression to match. The array can contain as many as 50 keywords. Each keyword can contain 4 - 90 characters.'
+                  description: 'An array that lists specific character sequences (keywords), one of which must be within proximity (maximumMatchDistance) of the regular expression to match. The array can contain as many as 50 keywords. Each keyword can contain 4 - 90 characters. Keywords aren''t case sensitive.'
                   type: array
                   items:
                     $ref: '#/components/schemas/__string'
@@ -4149,7 +4149,7 @@ components:
           description: 'The S3 buckets that the job is configured to analyze, and the scope of that analysis.'
         samplingPercentage:
           $ref: '#/components/schemas/__integer'
-          description: 'The sampling depth, as a percentage, that the job applies when it processes objects.'
+          description: 'The sampling depth, as a percentage, that determines the number of objects that the job processes.'
         scheduleFrequency:
           $ref: '#/components/schemas/JobScheduleFrequency'
           description: 'The recurrence pattern for running the job. If the job is configured to run only once, this value is null.'
@@ -4242,10 +4242,10 @@ components:
           description: The unique identifier for the custom data identifier.
         ignoreWords:
           $ref: '#/components/schemas/__listOf__string'
-          description: 'An array that lists specific character sequences (ignore words) to exclude from the results. If the text matched by the regular expression is the same as any string in this array, Amazon Macie ignores it.'
+          description: 'An array that lists specific character sequences (ignore words) to exclude from the results. If the text matched by the regular expression is the same as any string in this array, Amazon Macie ignores it. Ignore words are case sensitive.'
         keywords:
           $ref: '#/components/schemas/__listOf__string'
-          description: 'An array that lists specific character sequences (keywords), one of which must be within proximity (maximumMatchDistance) of the regular expression to match.'
+          description: 'An array that lists specific character sequences (keywords), one of which must be within proximity (maximumMatchDistance) of the regular expression to match. Keywords aren''t case sensitive.'
         maximumMatchDistance:
           $ref: '#/components/schemas/__integer'
           description: The maximum number of characters that can exist between text that matches the regex pattern and the character sequences specified by the keywords array. Macie includes or excludes a result based on the proximity of a keyword to text that matches the regex pattern.
@@ -5041,13 +5041,13 @@ components:
           description: 'The S3 buckets that contain the objects to analyze, and the scope of that analysis.'
         samplingPercentage:
           $ref: '#/components/schemas/__integer'
-          description: 'The sampling depth, as a percentage, to apply when processing objects. This value determines the percentage of eligible objects that the job analyzes. If the value is less than 100, Amazon Macie randomly selects the objects to analyze, up to the specified percentage.'
+          description: 'The sampling depth, as a percentage, to apply when processing objects. This value determines the percentage of eligible objects that the job analyzes. If this value is less than 100, Amazon Macie selects the objects to analyze at random, up to the specified percentage, and analyzes all the data in those objects.'
         scheduleFrequency:
           $ref: '#/components/schemas/JobScheduleFrequency'
           description: 'The recurrence pattern for running the job. To run the job only once, don''t specify a value for this property and set the value of the jobType property to ONE_TIME.'
         tags:
           $ref: '#/components/schemas/TagMap'
-          description: <p>A map of key-value pairs that specifies the tags to associate with the job.</p> <p>A job can have a maximum of 50 tags. Each tag consists of a required tag key and an associated tag value. The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256 characters.</p>
+          description: <p>A map of key-value pairs that specifies the tags to associate with the job.</p> <p>A job can have a maximum of 50 tags. Each tag consists of a tag key and an associated tag value. The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256 characters.</p>
     CreateCustomDataIdentifierRequest:
       type: object
       title: CreateCustomDataIdentifierRequest
@@ -5060,10 +5060,10 @@ components:
           description: '<p>A custom description of the custom data identifier. The description can contain as many as 512 characters.</p> <p>We strongly recommend that you avoid including any sensitive data in the description of a custom data identifier. Other users of your account might be able to see the identifier''s description, depending on the actions that they''re allowed to perform in Amazon Macie.</p>'
         ignoreWords:
           $ref: '#/components/schemas/__listOf__string'
-          description: 'An array that lists specific character sequences (ignore words) to exclude from the results. If the text matched by the regular expression is the same as any string in this array, Amazon Macie ignores it. The array can contain as many as 10 ignore words. Each ignore word can contain 4 - 90 characters.'
+          description: 'An array that lists specific character sequences (ignore words) to exclude from the results. If the text matched by the regular expression is the same as any string in this array, Amazon Macie ignores it. The array can contain as many as 10 ignore words. Each ignore word can contain 4 - 90 characters. Ignore words are case sensitive.'
         keywords:
           $ref: '#/components/schemas/__listOf__string'
-          description: 'An array that lists specific character sequences (keywords), one of which must be within proximity (maximumMatchDistance) of the regular expression to match. The array can contain as many as 50 keywords. Each keyword can contain 4 - 90 characters.'
+          description: 'An array that lists specific character sequences (keywords), one of which must be within proximity (maximumMatchDistance) of the regular expression to match. The array can contain as many as 50 keywords. Each keyword can contain 4 - 90 characters. Keywords aren''t case sensitive.'
         maximumMatchDistance:
           $ref: '#/components/schemas/__integer'
           description: The maximum number of characters that can exist between text that matches the regex pattern and the character sequences specified by the keywords array. Macie includes or excludes a result based on the proximity of a keyword to text that matches the regex pattern. The distance can be 1 - 300 characters. The default value is 50.
@@ -5075,7 +5075,7 @@ components:
           description: The regular expression (<i>regex</i>) that defines the pattern to match. The expression can contain as many as 512 characters.
         tags:
           $ref: '#/components/schemas/TagMap'
-          description: <p>A map of key-value pairs that specifies the tags to associate with the custom data identifier.</p> <p>A custom data identifier can have a maximum of 50 tags. Each tag consists of a required tag key and an associated tag value. The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256 characters.</p>
+          description: <p>A map of key-value pairs that specifies the tags to associate with the custom data identifier.</p> <p>A custom data identifier can have a maximum of 50 tags. Each tag consists of a tag key and an associated tag value. The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256 characters.</p>
     FindingsFilterAction:
       type: string
       enum:
@@ -5117,7 +5117,7 @@ components:
           description: 'The position of the filter in the list of saved filters on the Amazon Macie console. This value also determines the order in which the filter is applied to findings, relative to other filters that are also applied to the findings.'
         tags:
           $ref: '#/components/schemas/TagMap'
-          description: <p>A map of key-value pairs that specifies the tags to associate with the filter.</p> <p>A findings filter can have a maximum of 50 tags. Each tag consists of a required tag key and an associated tag value. The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256 characters.</p>
+          description: <p>A map of key-value pairs that specifies the tags to associate with the filter.</p> <p>A findings filter can have a maximum of 50 tags. Each tag consists of a tag key and an associated tag value. The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256 characters.</p>
     CreateInvitationsRequest:
       type: object
       required:
@@ -5148,7 +5148,7 @@ components:
           description: The details for the account to associate with the master account.
         tags:
           $ref: '#/components/schemas/TagMap'
-          description: <p>A map of key-value pairs that specifies the tags to associate with the account in Amazon Macie.</p> <p>An account can have a maximum of 50 tags. Each tag consists of a required tag key and an associated tag value. The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256 characters.</p>
+          description: <p>A map of key-value pairs that specifies the tags to associate with the account in Amazon Macie.</p> <p>An account can have a maximum of 50 tags. Each tag consists of a tag key and an associated tag value. The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256 characters.</p>
     __listOfFindingType:
       type: array
       items:
@@ -5897,7 +5897,7 @@ components:
           description: 'A property-based condition that defines a property, operator, and one or more values for including or excluding an object from the job.'
         tagScopeTerm:
           $ref: '#/components/schemas/TagScopeTerm'
-          description: A tag-based condition that defines the operator and a tag key or tag keys and values for including or excluding an object from the job.
+          description: ' <p>A tag-based condition that defines an operator and a tag key and value for including or excluding an object from the job.</p>'
       description: Specifies a property- or tag-based condition that defines criteria for including or excluding objects from a classification job.
     __listOfJobScopeTerm:
       type: array
@@ -6312,7 +6312,7 @@ components:
       properties:
         tags:
           $ref: '#/components/schemas/TagMap'
-          description: <p>A map of key-value pairs that specifies the tags to associate with the resource.</p> <p>A resource can have a maximum of 50 tags. Each tag consists of a required tag key and an associated tag value. The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256 characters.</p>
+          description: <p>A map of key-value pairs that specifies the tags to associate with the resource.</p> <p>A resource can have a maximum of 50 tags. Each tag consists of a tag key and an associated tag value. The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256 characters.</p>
     __listOfTagValuePair:
       type: array
       items:
@@ -6341,10 +6341,10 @@ components:
       properties:
         ignoreWords:
           $ref: '#/components/schemas/__listOf__string'
-          description: 'An array that lists specific character sequences (ignore words) to exclude from the results. If the text matched by the regular expression is the same as any string in this array, Amazon Macie ignores it. The array can contain as many as 10 ignore words. Each ignore word can contain 4 - 90 characters.'
+          description: 'An array that lists specific character sequences (ignore words) to exclude from the results. If the text matched by the regular expression is the same as any string in this array, Amazon Macie ignores it. The array can contain as many as 10 ignore words. Each ignore word can contain 4 - 90 characters. Ignore words are case sensitive.'
         keywords:
           $ref: '#/components/schemas/__listOf__string'
-          description: 'An array that lists specific character sequences (keywords), one of which must be within proximity (maximumMatchDistance) of the regular expression to match. The array can contain as many as 50 keywords. Each keyword can contain 4 - 90 characters.'
+          description: 'An array that lists specific character sequences (keywords), one of which must be within proximity (maximumMatchDistance) of the regular expression to match. The array can contain as many as 50 keywords. Each keyword can contain 4 - 90 characters. Keywords aren''t case sensitive.'
         maximumMatchDistance:
           $ref: '#/components/schemas/__integer'
           description: The maximum number of characters that can exist between text that matches the regex pattern and the character sequences specified by the keywords array. Macie includes or excludes a result based on the proximity of a keyword to text that matches the regex pattern. The distance can be 1 - 300 characters. The default value is 50.

@@ -1,0 +1,1033 @@
+openapi: 3.0.0
+info:
+  version: '2019-09-01'
+  x-release: v4
+  title: Braket
+  description: The Amazon Braket API Reference provides information about the operations and structures supported in Amazon Braket.
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: braket
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/braket-2019-09-01.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-driver: external
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://docs.aws.amazon.com/braket/'
+servers:
+  - url: 'http://braket.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The Braket multi-region endpoint
+  - url: 'https://braket.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The Braket multi-region endpoint
+  - url: 'http://braket.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Braket endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://braket.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Braket endpoint for China (Beijing) and China (Ningxia)
+paths:
+  '/quantum-task/{quantumTaskArn}/cancel':
+    put:
+      operationId: CancelQuantumTask
+      description: Cancels the specified task.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CancelQuantumTaskResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+        '485':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: quantumTaskArn
+          in: path
+          required: true
+          description: The ARN of the task to cancel.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 256
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - clientToken
+              properties:
+                clientToken:
+                  description: The client token associated with the request.
+                  type: string
+                  minLength: 1
+                  maxLength: 64
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /quantum-task:
+    post:
+      operationId: CreateQuantumTask
+      description: Creates a quantum task.
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateQuantumTaskResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: DeviceOfflineException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeviceOfflineException'
+        '483':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+        '484':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '485':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - action
+                - clientToken
+                - deviceArn
+                - outputS3Bucket
+                - outputS3KeyPrefix
+                - shots
+              properties:
+                action:
+                  description: The action associated with the task.
+                  type: string
+                clientToken:
+                  description: The client token associated with the request.
+                  type: string
+                  minLength: 1
+                  maxLength: 64
+                deviceArn:
+                  description: The ARN of the device to run the task on.
+                  type: string
+                  minLength: 1
+                  maxLength: 256
+                deviceParameters:
+                  description: The parameters for the device to run the task on.
+                  type: string
+                  minLength: 1
+                  maxLength: 2048
+                outputS3Bucket:
+                  description: The S3 bucket to store task result files in.
+                  type: string
+                  minLength: 3
+                  maxLength: 63
+                outputS3KeyPrefix:
+                  description: The key prefix for the location in the S3 bucket to store task results in.
+                  type: string
+                  minLength: 1
+                  maxLength: 1024
+                shots:
+                  description: The number of shots to use for the task.
+                  type: integer
+                  minimum: 0
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/device/{deviceArn}':
+    get:
+      operationId: GetDevice
+      description: Retrieves the devices available in Amazon Braket.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDeviceResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: deviceArn
+          in: path
+          required: true
+          description: The ARN of the device to retrieve.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 256
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/quantum-task/{quantumTaskArn}':
+    get:
+      operationId: GetQuantumTask
+      description: Retrieves the specified quantum task.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetQuantumTaskResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: quantumTaskArn
+          in: path
+          required: true
+          description: the ARN of the task to retrieve.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 256
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /devices:
+    post:
+      operationId: SearchDevices
+      description: Searches for devices using the specified filters.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchDevicesResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - filters
+              properties:
+                filters:
+                  description: The filter values to use to search for a device.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/SearchDevicesFilter'
+                  minItems: 0
+                  maxItems: 10
+                maxResults:
+                  description: The maximum number of results to return in the response.
+                  type: integer
+                  minimum: 1
+                  maximum: 100
+                nextToken:
+                  description: A token used for pagination of results returned in the response. Use the token returned from the previous request continue results where the previous request ended.
+                  type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /quantum-tasks:
+    post:
+      operationId: SearchQuantumTasks
+      description: Searches for tasks that match the specified filter values.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchQuantumTasksResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - filters
+              properties:
+                filters:
+                  description: Array of <code>SearchQuantumTasksFilter</code> objects.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/SearchQuantumTasksFilter'
+                  minItems: 0
+                  maxItems: 10
+                maxResults:
+                  description: Maximum number of results to return in the response.
+                  type: integer
+                  minimum: 1
+                  maximum: 100
+                nextToken:
+                  description: A token used for pagination of results returned in the response. Use the token returned from the previous request continue results where the previous request ended.
+                  type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  parameters:
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4
+  schemas:
+    CancelQuantumTaskResponse:
+      type: object
+      required:
+        - cancellationStatus
+        - quantumTaskArn
+      properties:
+        cancellationStatus:
+          $ref: '#/components/schemas/CancellationStatus'
+          description: The status of the cancellation request.
+        quantumTaskArn:
+          $ref: '#/components/schemas/QuantumTaskArn'
+          description: The ARN of the task.
+    ResourceNotFoundException: {}
+    AccessDeniedException: {}
+    ConflictException: {}
+    ThrottlingException: {}
+    InternalServiceException: {}
+    ValidationException: {}
+    CreateQuantumTaskResponse:
+      type: object
+      required:
+        - quantumTaskArn
+      properties:
+        quantumTaskArn:
+          $ref: '#/components/schemas/QuantumTaskArn'
+          description: The ARN of the task created by the request.
+    DeviceOfflineException: {}
+    ServiceQuotaExceededException: {}
+    GetDeviceResponse:
+      type: object
+      required:
+        - deviceArn
+        - deviceCapabilities
+        - deviceName
+        - deviceStatus
+        - deviceType
+        - providerName
+      properties:
+        deviceArn:
+          $ref: '#/components/schemas/DeviceArn'
+          description: The ARN of the device.
+        deviceCapabilities:
+          $ref: '#/components/schemas/JsonValue'
+          description: Details about the capabilities of the device.
+        deviceName:
+          $ref: '#/components/schemas/String'
+          description: The name of the device.
+        deviceStatus:
+          $ref: '#/components/schemas/DeviceStatus'
+          description: The status of the device.
+        deviceType:
+          $ref: '#/components/schemas/DeviceType'
+          description: The type of the device.
+        providerName:
+          $ref: '#/components/schemas/String'
+          description: The name of the partner company for the device.
+    GetQuantumTaskResponse:
+      type: object
+      required:
+        - createdAt
+        - deviceArn
+        - deviceParameters
+        - outputS3Bucket
+        - outputS3Directory
+        - quantumTaskArn
+        - shots
+        - status
+      properties:
+        createdAt:
+          $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+          description: The time at which the task was created.
+        deviceArn:
+          $ref: '#/components/schemas/DeviceArn'
+          description: The ARN of the device the task was run on.
+        deviceParameters:
+          $ref: '#/components/schemas/JsonValue'
+          description: The parameters for the device on which the task ran.
+        endedAt:
+          $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+          description: The time at which the task ended.
+        failureReason:
+          $ref: '#/components/schemas/String'
+          description: The reason that a task failed.
+        outputS3Bucket:
+          $ref: '#/components/schemas/String'
+          description: The S3 bucket where task results are stored.
+        outputS3Directory:
+          $ref: '#/components/schemas/String'
+          description: The folder in the S3 bucket where task results are stored.
+        quantumTaskArn:
+          $ref: '#/components/schemas/QuantumTaskArn'
+          description: The ARN of the task.
+        shots:
+          $ref: '#/components/schemas/Long'
+          description: The number of shots used in the task.
+        status:
+          $ref: '#/components/schemas/QuantumTaskStatus'
+          description: The status of the task.
+    SearchDevicesResponse:
+      type: object
+      required:
+        - devices
+      properties:
+        devices:
+          $ref: '#/components/schemas/DeviceSummaryList'
+          description: An array of <code>DeviceSummary</code> objects for devices that match the specified filter values.
+        nextToken:
+          $ref: '#/components/schemas/String'
+          description: 'A token used for pagination of results, or null if there are no additional results. Use the token value in a subsequent request to continue results where the previous request ended.'
+    SearchDevicesFilter:
+      type: object
+      required:
+        - name
+        - values
+      properties:
+        name:
+          $ref: '#/components/schemas/SearchDevicesFilternameString'
+          description: The name to use to filter results.
+        values:
+          $ref: '#/components/schemas/SearchDevicesFiltervaluesString256List'
+          description: The values to use to filter results.
+      description: The filter to use for searching devices.
+    SearchQuantumTasksResponse:
+      type: object
+      required:
+        - quantumTasks
+      properties:
+        nextToken:
+          $ref: '#/components/schemas/String'
+          description: 'A token used for pagination of results, or null if there are no additional results. Use the token value in a subsequent request to continue results where the previous request ended.'
+        quantumTasks:
+          $ref: '#/components/schemas/QuantumTaskSummaryList'
+          description: An array of <code>QuantumTaskSummary</code> objects for tasks that match the specified filters.
+    SearchQuantumTasksFilter:
+      type: object
+      required:
+        - name
+        - operator
+        - values
+      properties:
+        name:
+          $ref: '#/components/schemas/String64'
+          description: The name of the device used for the task.
+        operator:
+          $ref: '#/components/schemas/SearchQuantumTasksFilterOperator'
+          description: An operator to use in the filter.
+        values:
+          $ref: '#/components/schemas/SearchQuantumTasksFiltervaluesString256List'
+          description: The values to use for the filter.
+      description: A filter to use to search for tasks.
+    String64:
+      type: string
+      minLength: 1
+      maxLength: 64
+    QuantumTaskArn:
+      type: string
+      minLength: 1
+      maxLength: 256
+    CancelQuantumTaskRequest:
+      type: object
+      required:
+        - clientToken
+      title: CancelQuantumTaskRequest
+      properties:
+        clientToken:
+          $ref: '#/components/schemas/String64'
+          description: The client token associated with the request.
+    CancellationStatus:
+      type: string
+      enum:
+        - CANCELLED
+        - CANCELLING
+    JsonValue:
+      type: string
+    DeviceArn:
+      type: string
+      minLength: 1
+      maxLength: 256
+    CreateQuantumTaskRequestdeviceParametersJsonValue:
+      type: string
+      minLength: 1
+      maxLength: 2048
+    CreateQuantumTaskRequestoutputS3BucketString:
+      type: string
+      minLength: 3
+      maxLength: 63
+    CreateQuantumTaskRequestoutputS3KeyPrefixString:
+      type: string
+      minLength: 1
+      maxLength: 1024
+    CreateQuantumTaskRequestshotsLong:
+      type: integer
+      minimum: 0
+    CreateQuantumTaskRequest:
+      type: object
+      required:
+        - action
+        - clientToken
+        - deviceArn
+        - outputS3Bucket
+        - outputS3KeyPrefix
+        - shots
+      title: CreateQuantumTaskRequest
+      properties:
+        action:
+          $ref: '#/components/schemas/JsonValue'
+          description: The action associated with the task.
+        clientToken:
+          $ref: '#/components/schemas/String64'
+          description: The client token associated with the request.
+        deviceArn:
+          $ref: '#/components/schemas/DeviceArn'
+          description: The ARN of the device to run the task on.
+        deviceParameters:
+          $ref: '#/components/schemas/CreateQuantumTaskRequestdeviceParametersJsonValue'
+          description: The parameters for the device to run the task on.
+        outputS3Bucket:
+          $ref: '#/components/schemas/CreateQuantumTaskRequestoutputS3BucketString'
+          description: The S3 bucket to store task result files in.
+        outputS3KeyPrefix:
+          $ref: '#/components/schemas/CreateQuantumTaskRequestoutputS3KeyPrefixString'
+          description: The key prefix for the location in the S3 bucket to store task results in.
+        shots:
+          $ref: '#/components/schemas/CreateQuantumTaskRequestshotsLong'
+          description: The number of shots to use for the task.
+    DeviceStatus:
+      type: string
+      enum:
+        - QPU
+        - SIMULATOR
+    String:
+      type: string
+    DeviceType:
+      type: string
+      enum:
+        - OFFLINE
+        - ONLINE
+    DeviceSummary:
+      type: object
+      required:
+        - deviceArn
+        - deviceName
+        - deviceStatus
+        - deviceType
+        - providerName
+      properties:
+        deviceArn:
+          $ref: '#/components/schemas/DeviceArn'
+          description: The ARN of the device.
+        deviceName:
+          $ref: '#/components/schemas/String'
+          description: The name of the device.
+        deviceStatus:
+          $ref: '#/components/schemas/DeviceStatus'
+          description: The status of the device.
+        deviceType:
+          $ref: '#/components/schemas/DeviceType'
+          description: The type of the device.
+        providerName:
+          $ref: '#/components/schemas/String'
+          description: The provider of the device.
+      description: Includes information about the device.
+    DeviceSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DeviceSummary'
+    GetDeviceRequest:
+      type: object
+      title: GetDeviceRequest
+      properties: {}
+    GetQuantumTaskRequest:
+      type: object
+      title: GetQuantumTaskRequest
+      properties: {}
+    SyntheticTimestamp_date_time:
+      type: string
+      format: date-time
+    Long:
+      type: integer
+    QuantumTaskStatus:
+      type: string
+      enum:
+        - CANCELLED
+        - CANCELLING
+        - COMPLETED
+        - CREATED
+        - FAILED
+        - QUEUED
+        - RUNNING
+    QuantumTaskSummary:
+      type: object
+      required:
+        - createdAt
+        - deviceArn
+        - outputS3Bucket
+        - outputS3Directory
+        - quantumTaskArn
+        - shots
+        - status
+      properties:
+        createdAt:
+          $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+          description: The time at which the task was created.
+        deviceArn:
+          $ref: '#/components/schemas/DeviceArn'
+          description: The ARN of the device the task ran on.
+        endedAt:
+          $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+          description: The time at which the task finished.
+        outputS3Bucket:
+          $ref: '#/components/schemas/String'
+          description: The S3 bucket where the task result file is stored..
+        outputS3Directory:
+          $ref: '#/components/schemas/String'
+          description: The folder in the S3 bucket where the task result file is stored.
+        quantumTaskArn:
+          $ref: '#/components/schemas/QuantumTaskArn'
+          description: The ARN of the task.
+        shots:
+          $ref: '#/components/schemas/Long'
+          description: The shots used for the task.
+        status:
+          $ref: '#/components/schemas/QuantumTaskStatus'
+          description: The status of the task.
+      description: Includes information about a quantum task.
+    QuantumTaskSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/QuantumTaskSummary'
+    SearchDevicesFilternameString:
+      type: string
+      minLength: 1
+      maxLength: 64
+    SearchDevicesFiltervaluesString256List:
+      type: array
+      items:
+        $ref: '#/components/schemas/String256'
+      minItems: 1
+      maxItems: 10
+    String256:
+      type: string
+      minLength: 1
+      maxLength: 256
+    SearchDevicesRequestfiltersSearchDevicesFilterList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SearchDevicesFilter'
+      minItems: 0
+      maxItems: 10
+    SearchDevicesRequestmaxResultsInteger:
+      type: integer
+      minimum: 1
+      maximum: 100
+    SearchDevicesRequest:
+      type: object
+      required:
+        - filters
+      title: SearchDevicesRequest
+      properties:
+        filters:
+          $ref: '#/components/schemas/SearchDevicesRequestfiltersSearchDevicesFilterList'
+          description: The filter values to use to search for a device.
+        maxResults:
+          $ref: '#/components/schemas/SearchDevicesRequestmaxResultsInteger'
+          description: The maximum number of results to return in the response.
+        nextToken:
+          $ref: '#/components/schemas/String'
+          description: A token used for pagination of results returned in the response. Use the token returned from the previous request continue results where the previous request ended.
+    SearchQuantumTasksFilterOperator:
+      type: string
+      enum:
+        - BETWEEN
+        - EQUAL
+        - GT
+        - GTE
+        - LT
+        - LTE
+    SearchQuantumTasksFiltervaluesString256List:
+      type: array
+      items:
+        $ref: '#/components/schemas/String256'
+      minItems: 1
+      maxItems: 10
+    SearchQuantumTasksRequestfiltersSearchQuantumTasksFilterList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SearchQuantumTasksFilter'
+      minItems: 0
+      maxItems: 10
+    SearchQuantumTasksRequestmaxResultsInteger:
+      type: integer
+      minimum: 1
+      maximum: 100
+    SearchQuantumTasksRequest:
+      type: object
+      required:
+        - filters
+      title: SearchQuantumTasksRequest
+      properties:
+        filters:
+          $ref: '#/components/schemas/SearchQuantumTasksRequestfiltersSearchQuantumTasksFilterList'
+          description: Array of <code>SearchQuantumTasksFilter</code> objects.
+        maxResults:
+          $ref: '#/components/schemas/SearchQuantumTasksRequestmaxResultsInteger'
+          description: Maximum number of results to return in the response.
+        nextToken:
+          $ref: '#/components/schemas/String'
+          description: A token used for pagination of results returned in the response. Use the token returned from the previous request continue results where the previous request ended.
+security:
+  - hmac: []
